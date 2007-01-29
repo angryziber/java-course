@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<questions>
+	<question>
+		<text>What does JVM stand for?</text>
+		<answer correct="true">Java Virtual Machine</answer>
+	</question>
+	<question>
+		<text>Which of the following allows compilation of Java programs?</text>
+		<answer correct="true">JDK</answer>
+		<answer>JRE</answer>
+		<answer>both</answer>
+		<answer>none</answer>
+	</question>
+	<question>
+		<text>Instances of which class(es) are not immutable?</text>
+		<answer>String</answer>
+		<answer>Date</answer>
+		<answer correct="true">Calendar</answer>
+		<answer>Integer</answer>
+		<answer correct="true">HashMap</answer>
+		<answer>Boolean</answer>
+	</question>
+	<question>
+		<text>What is the largest positive int value in Java?</text>
+		<answer>2^32</answer>
+		<answer>2^31</answer>
+		<answer>2^30-1</answer>
+		<answer>2^64</answer>
+		<answer correct="true">2^31-1</answer>
+		<answer>2^63</answer>
+		<answer>2^63+1</answer>
+	</question>
+	<question>
+		<text>Which of the following access modifiers allow access to the base class members from the derived class if they are in the same package?</text>
+		<answer>private</answer>
+		<answer correct="true">default</answer>
+		<answer correct="true">protected</answer>
+		<answer correct="true">public</answer>
+	</question>
+	<question>
+		<text>Which of the following are valid definitions of the main method?</text>
+		<answer correct="true">public static void main(String[] a)</answer>
+		<answer>private static int main(String[] a)</answer>
+		<answer>public final int main(String[] a)</answer>
+		<answer>public final void main(String[] a)</answer>
+		<answer correct="true">public static void main(String ... a)</answer>
+	</question>
+	<question>
+		<text>What does final mean in declaration of a class?</text>
+		<answer>the class is immutable</answer>
+		<answer correct="true">the class cannot be extended</answer>
+		<answer>there exists only a single instance of the class</answer>
+		<answer>the class cannot be instantiated</answer>
+	</question>
+	<question>
+		<text>What does abstract mean in declaration of a class?</text>
+		<answer>the class is immutable</answer>
+		<answer>the class cannot be extended</answer>
+		<answer>there exists only a single instance of the class</answer>
+		<answer correct="true">the class cannot be instantiated</answer>
+	</question>
+	<question>
+		<text>What is a "singleton" class?</text>
+		<answer>the class is immutable</answer>
+		<answer>the class cannot be extended</answer>
+		<answer correct="true">there exists only a single instance of the class</answer>
+		<answer>the class cannot be instantiated</answer>
+	</question>
+	<question>
+		<text>What is the substitute of C++/Pascal virtual keyword in Java?</text>
+		<answer>abstract</answer>
+		<answer>final</answer>
+		<answer>polymorphic</answer>
+		<answer>virtual exists in Java</answer>
+		<answer correct="true">none</answer>
+	</question>
+	<question>
+		<text>Which of the following is not a part of OOP?</text>
+		<answer correct="true">Multitasking</answer>
+		<answer>Information hiding</answer>
+		<answer>Polymorphism</answer>
+		<answer correct="true">Type checking</answer>
+	</question>
+	<question>
+		<text>Programming without inheritance</text>
+		<answer>is programming with abstract data types</answer>
+		<answer>is not object oriented</answer>
+		<answer correct="true">can be object oriented</answer>
+		<answer>none of the above</answer>
+	</question>
+	<question>
+		<text>Which of the following is a correct (according to the code convention) Java method name?</text>
+		<answer>HelloWorld</answer>
+		<answer correct="true">helloWorld</answer>
+		<answer>hello_world</answer>
+		<answer>Hello_World</answer>
+	</question>
+	<question>
+		<text>How are Java applications embedded in web pages called? (plural)</text>
+		<answer correct="true">Applets</answer>
+	</question>
+	<question>
+		<text>How are server-side Java applications called? (plural)</text>
+		<answer correct="true">Servlets</answer>
+	</question>
+	<question>
+		<text>What is the synchronized keyword used for?</text>
+		<answer>to allow methods to run in parallel in multiple threads</answer>
+		<answer correct="true">to synchronize access to shared resources from multiple threads</answer>
+		<answer>to synchronize read/write operations on class instance members</answer>
+		<answer>to prevent deadlocks</answer>
+		<answer>it doesn't exist</answer>
+	</question>
+	<question>
+		<text>In OOP, data and functions common to all objects of a certain kind are defined in a</text>
+		<answer correct="true">class</answer>
+		<answer>method</answer>
+		<answer>variable</answer>
+		<answer>function</answer>
+	</question>
+	<question>
+		<text>From which parts does the floating point values consist?</text>
+		<answer correct="true">sign</answer>
+		<answer correct="true">exponent</answer>
+		<answer>number of fractional bits</answer>
+		<answer>integer part</answer>
+		<answer correct="true">mantissa</answer>
+		<answer>none of the above</answer>
+	</question>
+	<question>
+		<text>Which of the following are valid Java array definitions?</text>
+		<answer correct="true">int[] a = {1, 2, 3};</answer>
+		<answer correct="true">int a[] = {1, 2, 3};</answer>
+		<answer>int a[3] = {1, 2, 3};</answer>
+		<answer correct="true">int[] a = new int[] {1, 2, 3};</answer>
+		<answer>int a[3] = new int[] {1, 2, 3};</answer>
+		<answer>int[] a = new int[3] {1, 2, 3};</answer>
+	</question>
+	<question>
+		<text>Classes with methods that are declared but not implemented are called</text>
+		<answer>virtual classes</answer>
+		<answer correct="true">abstract classes</answer>
+		<answer>friend classes</answer>
+		<answer>base classes</answer>
+		<answer>package local classes</answer>
+	</question>
+	<question>
+		<text>What is the base class of NullPointerException?</text>
+		<answer>Exception</answer>
+		<answer correct="true">RuntimeException</answer>
+		<answer>Throwable</answer>
+		<answer>Error</answer>
+		<answer>none of the above</answer>
+	</question>
+	<question>
+		<text>How to destroy an object in Java?</text>
+		<answer>by calling the destructor</answer>
+		<answer>using the 'delete' keyword</answer>
+		<answer>by manually calling the garbage collector</answer>
+		<answer correct="true">by removing all references to it</answer>
+		<answer>by calling the 'finalize' method</answer>
+	</question>
+	<question>
+		<text>What of the following doesn't exist in Java?</text>
+		<answer correct="true">virtual keyword</answer>
+		<answer>static methods</answer>
+		<answer correct="true">operator overloading</answer>
+		<answer correct="true">pointers</answer>
+		<answer>references</answer>
+		<answer>packages</answer>
+		<answer correct="true">namespaces</answer>
+		<answer correct="true">functions</answer>
+	</question>
+	<question>
+		<text>Which of the following collections doesn't allow duplicate elements?</text>
+		<answer>List</answer>
+		<answer correct="true">Set</answer>
+		<answer>Map</answer>
+		<answer>Queue</answer>
+		<answer>Bag</answer>
+	</question>
+	<question>
+		<text>What is a recursive function/method?</text>
+		<answer correct="true">it calls itself directly</answer>
+		<answer correct="true">it calls itself transitively</answer>
+		<answer>it does not terminate</answer>
+		<answer>it is a library function</answer>
+		<answer>it is included in-line</answer>
+		<answer>it is forbidden in Java</answer>
+	</question>
+	<question>
+		<text>Which situation is called a deadlock?</text>
+		<answer>when a file is locked by one process and cannot be accessed by others</answer>
+		<answer correct="true">when two or more threads wait for each other</answer>
+		<answer>when one thread has locked multiple resources</answer>
+	</question>
+	<question>
+		<text>How is the Java database access API called? (4 letters)</text>
+		<answer correct="true">JDBC</answer>
+	</question>
+	<question>
+		<text>Which of the following constructs is not an iteration (i.e. loop) construct?</text>
+		<answer correct="true">if</answer>
+		<answer>while</answer>
+		<answer>for</answer>
+		<answer correct="true">switch</answer>
+		<answer>do</answer>
+	</question>
+</questions>
