@@ -1,4 +1,4 @@
-package t020543;
+package net.azib.java.students.t020543;
 
 /**
  * HelloWorld
