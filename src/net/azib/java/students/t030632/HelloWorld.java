@@ -7,6 +7,6 @@ package net.azib.java.students.t030632;
  */
 public class HelloWorld {
 	public static void main(String[] args) {
-		System.out.println("Hello, My Java World!");
+		System.out.println("Hello, My Happy Java  World!");
 	}
 }
