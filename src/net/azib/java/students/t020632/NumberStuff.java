@@ -14,8 +14,9 @@ public class NumberStuff {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		NumberStuff.b = 7;
-		System.out.println(NumberStuff2.accessMe);
+		Dog dog = new Dog();
+		
+		System.out.println(dog.name);
 	}
 
 }
