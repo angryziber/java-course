@@ -16,20 +16,20 @@ public class NumberStuff {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Dog dog = new Dog();
+		Dog dog = new Dog("Rex");
 		Boolean b = new Boolean(true);
 		char c = 'a';
 		BigDecimal bd = new BigDecimal("1.025");
 		BigDecimal bd2 = BigDecimal.TEN;
 		String s = "aa";
-
+		
 		Integer n = 1;
 		n++;
 		System.out.println(n);
 		
 		System.out.println(bd .add(bd2));
 		System.out.println(1 > 2 ? "false" : "true");
-		System.out.println(s instanceof String);
+		System.out.println(dog.getName());
 	}
 
 }
