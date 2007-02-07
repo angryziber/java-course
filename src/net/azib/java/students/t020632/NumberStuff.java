@@ -15,6 +15,8 @@ public class NumberStuff {
 	 */
 	public static void main(String[] args) {
 		Dog dog = new Dog();
+		Boolean b = new Boolean(true);
+		char c = 'a';
 		
 		System.out.println(dog.name);
 	}
