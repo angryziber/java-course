@@ -6,5 +6,22 @@ package net.azib.java.students.t050209;
  * @author t050209
  */
 public class Dog {
-  public String name = "unknown";
+  private String name;
+  private Byte age = 1;
+  
+  public String getName() {
+	  return name;
+  }
+  
+  public void GrowUp() {
+	  age = age++;
+  }
+  
+  public Dog(String name) {           /*konstruktor*/
+	  this.name = name;
+  }
+
+  public Dog(Byte age) {           /*konstruktor*/
+	  this.age = age;
+  }
 }

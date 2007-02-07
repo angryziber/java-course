@@ -17,7 +17,7 @@ public class NumberStaff {
 	 */
 	public static void main(String[] args) {
 		/*Dog on muutuja tüüp, dog - muutuja tüüp*/
-		Dog dog = new Dog();
+		Dog dog = new Dog("Pitsu");
 		/* Dog dog;
 		   dog = new Dog(); */
 		
@@ -30,7 +30,7 @@ public class NumberStaff {
 		/*final int hello = 7;*/ /* ei saa väärtust muuta */
 	    /*System.out.println(NUmber2Stuff.accessMe); *//* sysout + ctrl + space*/
 		/*System.out.println(HELLO);*/
-		System.out.println(dog.name);
+		System.out.println(dog.getName());
 		System.out.println(Integer.MAX_VALUE);
 		System.out.println(Integer.parseInt("123", 16)); /*Hex -> dec*/ 
 	    
