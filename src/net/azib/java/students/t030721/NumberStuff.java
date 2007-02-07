@@ -16,8 +16,8 @@ public class NumberStuff {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Dog dog = new Dog();
-		System.out.println(dog);
+		Dog dog = new Dog("Pitsu", (byte)3);
+		System.out.println(dog.getName());
 		Boolean b = new Boolean(true);
 		char c = 'る';
 		char d = '業';
