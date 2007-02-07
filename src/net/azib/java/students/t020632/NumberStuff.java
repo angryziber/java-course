@@ -1,5 +1,7 @@
 package net.azib.java.students.t020632;
 
+import java.math.BigDecimal;
+
 /**
  * NumberStuff
  *
@@ -17,8 +19,11 @@ public class NumberStuff {
 		Dog dog = new Dog();
 		Boolean b = new Boolean(true);
 		char c = 'a';
+		BigDecimal bd = new BigDecimal("1.025");
+		BigDecimal bd2 = BigDecimal.TEN;
 		
-		System.out.println(Integer.parseInt("123"));
+		System.out.println(bd .add(bd2));
+		System.out.println(128 >> 1);
 	}
 
 }
