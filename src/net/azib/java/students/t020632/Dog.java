@@ -13,6 +13,12 @@ public class Dog {
 		this.name = name;
 	}
 	
+	public Dog(String name, byte age){
+		this.name = name;
+		this.age = age;
+	}
+	
+	
 	public byte growUp(){
 		age++; 
 		
