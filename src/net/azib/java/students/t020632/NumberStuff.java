@@ -18,7 +18,7 @@ public class NumberStuff {
 		Boolean b = new Boolean(true);
 		char c = 'a';
 		
-		System.out.println(dog.name);
+		System.out.println(Integer.parseInt("123"));
 	}
 
 }
