@@ -6,5 +6,14 @@ package net.azib.java.students.t020632;
  * @author t020632
  */
 public class Dog {
-	public String name = "unknown";
+	private String name;
+	
+	public Dog(String name){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
 }
