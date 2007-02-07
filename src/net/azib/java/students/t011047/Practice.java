@@ -6,13 +6,16 @@ package net.azib.java.students.t011047;
  * @author t011047
  */
 public class Practice {
+	
+	static int b = 100;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int a = 7;
-		a = 3;
+		final int hello = 7;
+		System.out.println(hello);
+		System.out.println(Practice.b);
 	}
 
 }
