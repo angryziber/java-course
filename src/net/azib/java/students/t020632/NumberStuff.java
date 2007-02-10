@@ -18,10 +18,13 @@ public class NumberStuff {
 	public static void main(String[] args) {
 		Dog dog = new Dog("Rex");
 		Boolean b = new Boolean(true);
-		char c = 'a';
+		
+		System.out.println("b: " + b);
+		
 		BigDecimal bd = new BigDecimal("1.025");
 		BigDecimal bd2 = BigDecimal.TEN;
 		String s = "aa";
+		System.out.println("s: " + s + "bd: " + bd + "bd2: " + bd2);
 		
 		Integer n = 1;
 		n++;
