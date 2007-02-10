@@ -21,7 +21,6 @@ public class Dog {
 	
 	public byte growUp(){
 		age++; 
-		
 		return age;
 	}
 	
