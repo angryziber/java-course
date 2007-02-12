@@ -5,7 +5,7 @@ package net.azib.java.simple;
  *
  * @author anton
  */
-public class AccessorStuff {
+public class Accessors {
 	protected int accessMe = 5;
 	private static int dontAccessMe;
 	MegaClass m = new MegaClass();

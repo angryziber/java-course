@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  *
  * @author anton
  */
-public class NumberStuff {
+public class Numbers {
 	
 	/**
 	 * @param args
