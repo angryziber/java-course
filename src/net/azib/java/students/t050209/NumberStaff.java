@@ -21,7 +21,7 @@ public class NumberStaff {
 		/* Dog dog;
 		   dog = new Dog(); */
 		
-		Boolean d = new Boolean(true);
+		//Boolean d = new Boolean(true);
 		
 		char c = '\u0050';
 		System.out.println(c);

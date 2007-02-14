@@ -5,23 +5,33 @@ package net.azib.java.students.t050209;
  *
  * @author t050209
  */
-public class Dog {
-  private String name;
-  private Byte age = 1;
-  
-  public String getName() {
-	  return name;
-  }
-  
-  public void GrowUp() {
-	  age = age++;
-  }
-  
-  public Dog(String name) {           /*konstruktor*/
-	  this.name = name;
-  }
+public class Dog extends Animal {
 
-  public Dog(Byte age) {           /*konstruktor*/
-	  this.age = age;
-  }
+	public Dog(String name) { /* ctrl + 1 abil */
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Dog(byte age) {
+		super(age);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public String getName() {
+		return "Dog: " + super.getName(); /* lihtsalt name ei saa, sest private. vaja sel juhul protected*/
+	}
+
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Dog";
+	}
+
+/*	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "I am dog, " + super.toString();
+	}*/
+	
+	
 }
