@@ -6,7 +6,13 @@ package net.azib.java.students.t020632;
  * @author t020632
  */
 public class AssertionTest {
-
+	
+	public static void doSomething(int ... ints){
+		for(int value : ints){
+			System.out.println(value);
+		}
+	}
+	
 	/**
 	 * @param args
 	 */
@@ -17,7 +23,8 @@ public class AssertionTest {
 		assert args.length == 1 : "Not enough command - line parameters given";
 		System.out.println("parameter: "+ args[0]);
 		
-		System.out.printf("%d", i);
+		System.out.printf("%d \n", i);
+		doSomething(1);
 	}
 
 }
