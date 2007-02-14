@@ -18,11 +18,17 @@ public class Fibonacci {
 		BigInteger b = new BigInteger("1");
 		BigInteger c = new BigInteger("1");
 		int i;
+		BigInteger [] m = new BigInteger[100];
 		
 		for(i = 3; i<=100; c = a.add(b), b = c, a = b, i++ ){
+			m[i-1] = c;
 			if(i == 100){
 					System.out.println(c);
 			}
+		}
+		
+		for(BigInteger bi : m){
+			System.out.println(bi);
 		}
 		
 
