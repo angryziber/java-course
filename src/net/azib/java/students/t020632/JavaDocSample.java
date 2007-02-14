@@ -3,13 +3,15 @@ package net.azib.java.students.t020632;
 /**
  * A class to show how to use JavaDoc in Java
  *
+ * @version 1.0
  * @author t020632
  */
 public class JavaDocSample {
 	
 	/**
 	 *  Displays hello to the user
-	 *  @param name user's name 
+	 *  @param name user's name
+	 *  @deprecated please use {@link System#out} method {@link PrintStream#println()} directly
 	 */
 	
 	private static void displayHello(String name){
