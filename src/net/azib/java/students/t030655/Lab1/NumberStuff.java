@@ -1,6 +1,10 @@
-package net.azib.java.students.t030655;
+package net.azib.java.students.t030655.Lab1;
 
-import java.math.BigDecimal;
+import net.azib.java.students.t030655.Lab2.Animal;
+import net.azib.java.students.t030655.Lab2.Dog;
+
+
+// import java.math.BigDecimal;
 
 /**
  * NumberStuff
@@ -17,7 +21,7 @@ public class NumberStuff {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Dog d = new Dog("Pontu", (byte)1);
+		Animal d = new Dog("Pontu", (byte)1);
 		System.out.println(d.getName());
 	}
 

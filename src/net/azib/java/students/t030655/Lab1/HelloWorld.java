@@ -1,4 +1,4 @@
-package net.azib.java.students.t030655;
+package net.azib.java.students.t030655.Lab1;
 
 /**
  * HelloWorld
