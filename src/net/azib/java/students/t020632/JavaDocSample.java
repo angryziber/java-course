@@ -1,5 +1,8 @@
 package net.azib.java.students.t020632;
 
+import java.io.PrintStream;
+import java.util.Date;
+
 /**
  * A class to show how to use JavaDoc in Java
  *
@@ -25,6 +28,9 @@ public class JavaDocSample {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		displayHello("Myself");
+		new Date();
+		
+		
 	}
 
 }
