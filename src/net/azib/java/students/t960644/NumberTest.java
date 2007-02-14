@@ -1,6 +1,6 @@
 package net.azib.java.students.t960644;
 
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 
 /**
  * NumberTest
@@ -26,7 +26,7 @@ public class NumberTest {
 		System.out.println(db.add(db2));
 		byte[] b = new byte[] {4,10,20};
 		System.out.println();*/
-		Dog d = new Dog("Nupi",(byte)5);
+		Animal d = new Dog("Nupi",(byte)5);
 		System.out.println(d.getName());
 		System.out.println(d.getAge());
 		

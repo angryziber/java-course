@@ -5,23 +5,35 @@ package net.azib.java.students.t960644;
  *
  * @author t960644
  */
-public class Dog {
-	private String name;
-	private byte age;
-	public String getName(){
-		return name;
+public class Dog extends Animal implements Comparable<Dog>{
+
+	public Dog(String name) {
+		super(name);
 	}
-	public Dog(String name ) {
-		this.name = name;
+	public Dog(String name, byte age) {
+		super(name, age);
 	}
-	public Dog(String name, byte age ) {
-		this.name = name;
-		this.age = age;
+	public String getName() {
+		return "Dog: "+super.getName();
 	}
-	public byte getAge() {
-		return age;
+/*	@Override
+	public String toString() {
+		return "I am Dog, "+super.toString();
+	}*/
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Dog";
 	}
-	public void growUp(byte age) {	
-		this.age++;
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(Dog o) {
+		// TODO Auto-generated method stub
+		return getName().compareTo(o.getName());
 	}
+	
+	
+	
 }
