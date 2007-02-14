@@ -5,32 +5,28 @@ package net.azib.java.students.t050657;
  *
  * @author t050657
  */
-public class Dog {
-	private int age;
-	private String name = "unknown";
-	
+public class Dog extends Animal {
+
 	public Dog(String name) {
-		this.name = name;
+		super(name);
 	}
-	
+
 	public Dog(String name, int age) {
-		this.name = name;
-		this.age = age;
+		super(name, age);
 	}
-	
-	public String getName() {
-		return this.name;
+
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t050657.Animal#toString()
+	 */
+	@Override
+	public String getType() {
+		return "Dog";
 	}
-	
-	public int getAge() {
-		return this.age;
-	}
-	
-	public void growUp() {
-		this.age++;
-	}
-	
-	public String toString() {
-		return this.name + ", " + this.age + " years"; 
+	@Override
+	public boolean equals(Object other) {
+		if(other == null || !(other instanceof Dog))
+			return false;
+		Dog dog = (Dog) other;
+		return this.getName() == dog.getName();
 	}
 }
