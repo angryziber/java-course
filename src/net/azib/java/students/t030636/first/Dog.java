@@ -43,8 +43,8 @@ public class Dog extends Animal implements Comparable<Dog> {
 		return this.getName().equals(otherDog.getName());
 	}
 
-	@Override
-	public int compareTo(Dog o) {
-		return getName().compareTo(o.getName());
-	}
+//	@Override
+//	public int compareTo(Dog o) {
+//		return getName().compareTo(o.getName());
+//	}
 }
