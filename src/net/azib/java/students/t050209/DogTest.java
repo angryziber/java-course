@@ -7,7 +7,7 @@ package net.azib.java.students.t050209;
  */
 public class DogTest {
 	public static void main(String[] args) {
-		Dog dog = new Dog("Pitsu");
+		Animal dog = new Dog("Pitsu");
 		System.out.println(dog.getName());
 		
 		Animal animal = new Dog("Pitsu");
@@ -16,5 +16,9 @@ public class DogTest {
 		Object object = new Dog("Pitsu");
 		System.out.println(((Animal)object).getName());
 		System.out.println(object);
+		
+		Comparable dog1 = new Dog("Pitsu");
+		Comparable dog2 = new Dog("Pitsu"); // = dog1 annab true
+		System.out.println("koerade võrdlemine " + dog1.equals(dog2));
 	}
 }

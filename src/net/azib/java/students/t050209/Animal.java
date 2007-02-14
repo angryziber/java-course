@@ -33,6 +33,21 @@ public abstract class Animal {
 		return "I am " + getType() + ", my name is " + name + 
 		       ", I am " + age + " years old";
 	}
-	  
+
+	public boolean equals(Object other) {
+		if (other == null || !(other instanceof Animal))
+			return false;
+		
+		return this.getName().equals(((Animal)other).getName()) &&
+			   this.getClass() == other.getClass();
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return getName().hashCode() + getClass().hashCode();
+	}
+	
+	
 	  
 }

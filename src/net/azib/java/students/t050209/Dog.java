@@ -5,7 +5,13 @@ package net.azib.java.students.t050209;
  *
  * @author t050209
  */
-public class Dog extends Animal {
+public class Dog extends Animal implements Comparable<Dog>{
+
+	@Override
+	public int compareTo(Dog o) {
+		// TODO Auto-generated method stub
+		return getName().compareTo(o.getName());
+	}
 
 	public Dog(String name) { /* ctrl + 1 abil */
 		super(name);
@@ -25,13 +31,5 @@ public class Dog extends Animal {
 	public String getType() {
 		// TODO Auto-generated method stub
 		return "Dog";
-	}
-
-/*	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "I am dog, " + super.toString();
-	}*/
-	
-	
+	}	
 }
