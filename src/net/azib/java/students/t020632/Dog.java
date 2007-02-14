@@ -25,6 +25,30 @@ public class Dog extends Animal{
 	}
 	
 	
+	
+	public String getName(){
+		return "Dog " + super.getName();
+	}
+	
+
+
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t020632.Animal#getType()
+	 */
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Dog";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(Animal o) {
+		// TODO Auto-generated method stub
+		return getName().compareTo(o.getName());
+	}
 
 	
 }
