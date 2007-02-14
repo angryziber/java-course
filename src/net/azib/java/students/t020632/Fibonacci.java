@@ -20,7 +20,7 @@ public class Fibonacci {
 		int i;
 		BigInteger [] m = new BigInteger[100];
 		
-		for(i = 3; i<=100; c = a.add(b), b = c, a = b, i++ ){
+		for(i = 2; i<=100; c = a.add(b), a = b, b = c, i++ ){
 			m[i-1] = c;
 			if(i == 100){
 					System.out.println(c);
