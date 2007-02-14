@@ -4,7 +4,7 @@
  * modified: 07.02.2007
  */
 
-package net.azib.java.students.t030636;
+package net.azib.java.students.t030636.first;
 
 public class HelloWorld {
 	

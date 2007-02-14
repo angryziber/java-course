@@ -1,4 +1,4 @@
-package net.azib.java.students.t030636;
+package net.azib.java.students.t030636.first;
 
 import java.math.BigDecimal;
 
