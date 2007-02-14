@@ -39,4 +39,12 @@ public abstract class Animal {
 	public final String toString() {
 		return "I am " + getType() + ", my name is " + name + ", I am " + age + " years old";
 	}
+
+	@Override
+	public boolean equals(Object other) {
+		if(other == null || !(other instanceof Animal))
+			return false;
+	
+		return this.getName().equals(((Animal)other).getName()) && this.getClass() == other.getClass();
+	}
 }
