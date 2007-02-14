@@ -5,29 +5,30 @@ package net.azib.java.simple;
  *
  * @author anton
  */
-public class Dog {
-	private String name;
-	private byte age;
+public class Dog extends Animal implements Comparable<Dog> {
 
-	public String getName() {
-		return name;
-	}
-	
-	public void growUp() {
-		age++;
-	}
-	
-	public byte getAge() {
-		return age;
-	}
-	
 	public Dog(String name) {
-		this.name  = name;
+		super(name);
 	}
 
 	public Dog(String name, byte age) {
-		this.name = name;
-		this.age = age;
+		super(name, age);
 	}
+	
+	public String getName() {
+		return "Dog: " + super.getName();
+	}
+	
+	@Override
+	public String getType() {
+		return "Dog";
+	}
+
+	@Override
+	public int compareTo(Dog o) {
+		return getName().compareTo(o.getName());
+	}
+	
+	
 	
 }
