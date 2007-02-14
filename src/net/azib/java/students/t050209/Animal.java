@@ -5,7 +5,7 @@ package net.azib.java.students.t050209;
  *
  * @author t050209
  */
-public abstract class Animal {
+public abstract class Animal{
 	  private String name;
 	  private byte age = 1;
 	  

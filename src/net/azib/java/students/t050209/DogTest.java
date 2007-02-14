@@ -17,8 +17,9 @@ public class DogTest {
 		System.out.println(((Animal)object).getName());
 		System.out.println(object);
 		
-		Comparable dog1 = new Dog("Pitsu");
-		Comparable dog2 = new Dog("Pitsu"); // = dog1 annab true
+		Object dog1 = new Dog("Pitsu");
+		Object dog2 = new Dog("Pitsu"); // = dog1 annab true
 		System.out.println("koerade võrdlemine " + dog1.equals(dog2));
+		System.out.println(dog1 instanceof Comparable);
 	}
 }
