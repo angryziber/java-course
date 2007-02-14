@@ -7,7 +7,7 @@ package net.azib.java.students.t020556;
  */
 public class Dog 
 	extends Animal
-	implements Comparable
+	implements Comparable<Dog>
 {
 
 	/**
@@ -36,7 +36,7 @@ public class Dog
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-	public int compareTo(Object o) {
+	public int compareTo(Dog o) {
 		if(this.getClass() == o.getClass()){
 			return 0;
 		}
