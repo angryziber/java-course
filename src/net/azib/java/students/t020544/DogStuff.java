@@ -12,27 +12,23 @@ public class DogStuff {
 	 */
 	public static void main(String[] args) {
 
-		Dog dobermanDeik = new Dog("Deik", (byte) 3, "Doberman", "Somebody");
+		Dog dobermanDeik = new Dog("Deik", (byte) 3);
 
-		System.out.println("Name:" + dobermanDeik.getName() + ";  Age:" + dobermanDeik.getAge() + ";  Breed:"
-				+ dobermanDeik.getBreed() + ";  Owner:" + dobermanDeik.getOwner());
+		System.out.println("Name:" + dobermanDeik.getName() + ";  Age:" + dobermanDeik.getAge() + ";");
 
 		for (int i = 0; i < 4; i++) {
 			dobermanDeik.growUp();
 		}
-		System.out.println(dobermanDeik.getName() + " " + dobermanDeik.getAge() + " " + dobermanDeik.getBreed() + " "
-				+ dobermanDeik.getOwner());
+		System.out.println(dobermanDeik.getName() + " " + dobermanDeik.getAge() + " ;");
 
-		Dog dobermanRex = new Dog("Rex", (byte) 0, "Doberman", "Somebody");
+		Dog dobermanRex = new Dog("Rex", (byte) 0);
 
-		System.out.println(dobermanRex.getName() + " " + dobermanRex.getAge() + " " + dobermanRex.getBreed() + " "
-				+ dobermanRex.getOwner());
+		System.out.println(dobermanRex.getName() + " " + dobermanRex.getAge() + "; ");
 
 		for (int i = 0; i < 4; i++) {
 			dobermanRex.growUp();
 		}
-		System.out.println(dobermanRex.getName() + " " + dobermanRex.getAge() + " " + dobermanRex.getBreed() + " "
-				+ dobermanRex.getOwner());
+		System.out.println(dobermanRex.getName() + " " + dobermanRex.getAge() + " ;");
 
 	}
 }

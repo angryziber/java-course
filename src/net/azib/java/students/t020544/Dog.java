@@ -6,7 +6,7 @@ package net.azib.java.students.t020544;
  * @author Julija Kondratjeva
  */
 public class Dog {
-	private String name, breed, owner;
+	private String name;
 	private byte age;
 
 	public String getName() {
@@ -21,19 +21,15 @@ public class Dog {
 		return age;
 	}
 
-	public String getBreed() {
-		return breed;
+	public Dog(byte age) {
+		this.age = age;
+
 	}
 
-	public String getOwner() {
-		return owner;
-	}
-
-	public Dog(String name, byte age, String breed, String owner) {
+	public Dog(String name, byte age) {
 		this.name = name;
 		this.age = age;
-		this.breed = breed;
-		this.owner = owner;
+
 	}
 
 }
