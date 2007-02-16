@@ -17,13 +17,13 @@ public class Factorial {
 		
 		BigInteger bi = new BigInteger("1");
 		BigInteger bi1 = new BigInteger("1");
-		BigInteger bi2 = new BigInteger("2");
+		BigInteger bi2 = new BigInteger("1");
 		int i = 1; 
 	
 		
-		while( i < 100){
+		while( i <= 100){
 			bi1 = bi1.multiply(bi2);
-			bi2.add(bi);
+			bi2 = bi2.add(bi);
 			i++;
 		}
 		
