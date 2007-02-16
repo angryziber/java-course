@@ -1,31 +1,24 @@
 package net.azib.java.students.t020544;
 
-import java.math.BigInteger;
-
+import java.io.IOException;
 /**
  * Fibonacci
  * 
  * @author Julija Kondratjeva
  */
 public class Fibonacci {
-
+	
 	/**
 	 * @param args
+	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception, IOException {
 
-		BigInteger rezult = BigInteger.ZERO;
-		BigInteger firstNumber = BigInteger.ONE;
-		BigInteger secondNumber = BigInteger.ZERO;
-
-		for (int i = 0; i < 100; i++) {
-			rezult = firstNumber.add(secondNumber);
-			firstNumber = secondNumber;
-			secondNumber = rezult;
-
-		}
-
-		System.out.println(rezult);
+		FibonacciCalc f = new FibonacciCalc();
+        int usersNumber = f.getNumberFromUser();
+		System.out.println(f.fibonacciNumber(usersNumber));
+		
 	}
 
 }
