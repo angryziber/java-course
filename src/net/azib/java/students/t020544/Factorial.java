@@ -22,10 +22,11 @@ public class Factorial {
 		BigInteger[] factorial = new BigInteger[104];
 		factorial[0] = BigInteger.ONE;
 		factorial[1] = BigInteger.ONE;
-		factorial[2] = factorial[1].add(BigInteger.ONE);
+	
 		GetDataFromUser f = new GetDataFromUser();
 		int n = f.getNumberFromUser();
-
+ 
+		
 		if (n < 0) {
 			System.out.println("Factorial doesn't exist. Number You enter should be greater then zero");
 
