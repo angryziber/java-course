@@ -5,31 +5,19 @@ package net.azib.java.students.t020544;
  * 
  * @author Julija Kondratjeva
  */
-public class Dog {
-	private String name;
-	private byte age;
+public class Dog extends Animal{
 
-	public String getName() {
-		return name;
-	}
-
-	public void growUp() {
-		age++;
-	}
-
-	public byte getAge() {
-		return age;
-	}
-
+	/**
+	 * @param name
+	 * @param age
+	 */
 	public Dog(byte age) {
-		this.age = age;
-
+		super(age);
 	}
-
+	
 	public Dog(String name, byte age) {
-		this.name = name;
-		this.age = age;
-
+		super(name, age);
 	}
+
 
 }

@@ -37,7 +37,7 @@ public class WeightCalculator {
 		}
 
 		else {
-			for (int i = 1; i < 9; i++) {
+			for (int i = 1; i < planets.length; i++) {
 				System.out.println("For " + m + " kg weight on " + planets[i] + " is " + planets[i].surfaceWeight(m) + " N.");
 
 			}
