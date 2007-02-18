@@ -32,9 +32,15 @@ public class WeightCalculator {
 		System.out.println("The program calculates weight on Solar System's planets.");
 		double m = getWeight();
 
-		for (int i = 1; i < 9; i++) {
-			System.out.println("For " + m + " kg weight on " + planets[i] + " is " + planets[i].surfaceWeight(m) + " N.");
+		if (m < 0) {
+			System.out.println("Answer doesn't exist. Mass > 0.");
 		}
 
+		else {
+			for (int i = 1; i < 9; i++) {
+				System.out.println("For " + m + " kg weight on " + planets[i] + " is " + planets[i].surfaceWeight(m) + " N.");
+
+			}
+		}
 	}
 }
