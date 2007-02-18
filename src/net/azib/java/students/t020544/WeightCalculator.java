@@ -1,0 +1,40 @@
+package net.azib.java.students.t020544;
+
+import net.azib.java.simple.Planet;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+/**
+ * WeightCalculator
+ * 
+ * @author Julija Kondratjeva
+ */
+public class WeightCalculator {
+
+	public static double getWeight() throws Exception, IOException {
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("For what mass do You want to know the answer?");
+		double weight = Double.parseDouble(in.readLine());
+		return weight;
+	}
+
+	/**
+	 * @param args
+	 * @throws Exception
+	 * @throws IOException
+	 */
+	public static void main(String[] args) throws IOException, Exception {
+
+		Planet[] planets = Planet.values();
+		System.out.println("The program calculates weight on Solar System's planets.");
+		double m = getWeight();
+
+		for (int i = 1; i < 9; i++) {
+			System.out.println("For " + m + " kg weight on " + planets[i] + " is " + planets[i].surfaceWeight(m) + " N.");
+		}
+
+	}
+}

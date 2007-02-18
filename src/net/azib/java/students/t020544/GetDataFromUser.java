@@ -19,7 +19,7 @@ public class GetDataFromUser {
 		int userNumber = Integer.parseInt(in.readLine());
 		return userNumber;
 	}
-
+	
 	
 
 }
