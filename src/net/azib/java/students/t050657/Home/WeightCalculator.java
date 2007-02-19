@@ -1,3 +1,5 @@
+package net.azib.java.students.t050657.Home;
+
 /**
  * WeightCalculator
  * @author t050657

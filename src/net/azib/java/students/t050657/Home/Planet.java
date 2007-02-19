@@ -1,3 +1,4 @@
+package net.azib.java.students.t050657.Home;
 
 public enum Planet {
     MERCURY (3.303e+23, 2.4397e6),
