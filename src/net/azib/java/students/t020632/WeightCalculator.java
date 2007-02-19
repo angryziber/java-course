@@ -13,16 +13,17 @@ public class WeightCalculator {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		if (args.length == 0) {
+			System.out.println("Please provide weight of the body on Earth as a command-line argument");
+			return;
+		}
+		
 		String stringWeight = args[0];
-		Planet [] planets = Planet.values();
 		int weight = Integer.parseInt(stringWeight);
-		int i = 0;
 		double m = weight/Planet.EARTH.surfaceGravity();
 		
-		while(i < planets.length){
-			System.out.println("Weight on "+ planets[i] + " is " + planets[i].surfaceWeight(m));
-			i++;
+		for (Planet planet : Planet.values()) {
+			System.out.println("Weight on "+ planet + " is " + planet.surfaceWeight(m));
 		}
 		
 
