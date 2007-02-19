@@ -1,5 +1,8 @@
 package net.azib.java.students.t030675;
 
+import net.azib.java.simple.Planet;
+import net.azib.java.simple.Season;
+
 /**
  * EnumTest
  *
@@ -11,7 +14,6 @@ public class EnumTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println(Season.WINTER.next());
 		System.out.println(Planet.EARTH.surfaceWeight(100));
 	}

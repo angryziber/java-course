@@ -1,5 +1,7 @@
 package net.azib.java.students.t050657.Home;
 
+import net.azib.java.simple.Planet;
+
 /**
  * WeightCalculator
  * @author t050657
