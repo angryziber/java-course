@@ -13,7 +13,7 @@ public class MyRunnable {
 		System.out.println("Runnable finished" );
 	}
 	
-	public static void main(){
+	public static void main(String [] args){
 		
 		Runnable r =  new Runnable(){
 			public void run(){
