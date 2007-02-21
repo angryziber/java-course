@@ -18,8 +18,8 @@ public class DuplicateRemoverImp implements DuplicateRemover {
 	 */
 	@Override
 	public String[] removeDuplicateStrings(String[] array) {
-		Set set = new LinkedHashSet(Arrays.asList(array));
-		return null;
+		Set<String> set = new LinkedHashSet<String>(Arrays.asList(array));
+		return set.toArray(new String[0]);
 	}
 
 }
