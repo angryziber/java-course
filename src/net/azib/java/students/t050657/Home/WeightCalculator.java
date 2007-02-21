@@ -5,7 +5,6 @@ import net.azib.java.simple.Planet;
 /**
  * WeightCalculator
  * @author t050657
- *
  */
 public class WeightCalculator {
 
