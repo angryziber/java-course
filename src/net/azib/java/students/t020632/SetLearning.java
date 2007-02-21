@@ -1,7 +1,11 @@
 package net.azib.java.students.t020632;
 
-import java.util.Set;
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * SetLearning
@@ -14,13 +18,19 @@ public class SetLearning {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Set set = new HashSet();
-		set.add("a");
-		set.add("b");
-		set.add("c");
+		List c = new ArrayList(Arrays.asList(new String [] {"a", "b", "z", "c", "z"}));
+		c.add("w");
 		
-		for(Object o : set){
+		System.out.println(c.lastIndexOf("z"));
+		
+		for(Object o : c){
 			System.out.println(o);
+		}
+		
+		Map<String, String> map = new HashMap(System.getProperties());
+		
+		for(Map.Entry<String, String> me : map.entrySet()){
+			System.out.println(me.getKey() + " = " + me.getValue());
 		}
 		
 
