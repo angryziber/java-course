@@ -13,28 +13,26 @@ import java.util.Set;
  */
 public class DuplicateRemovalImpl implements DuplicateRemover {
 
-	/**
-	 * @param args
-	 */
+	
 	
 
 	/* (non-Javadoc)
 	 * @see net.azib.java.collections.DuplicateRemover#removeDuplicateStrings(java.lang.String[])
 	 */
 	public String[] removeDuplicateStrings(String[] array) {
-		Set set = new LinkedHashSet(/*Arrays.asList(array)*/);
-		for(String s: array){
-			set.add(s);
-		}
-		int i = set.size();
-		String []strings = new String[i];
-		i=0;
-		for(Object o : set){
-			strings[i]= o.toString();
-			i++;
-		}
+		Set <String>set = new LinkedHashSet(Arrays.asList(array));
+//		for(String s: array){
+//			set.add(s);
+//		}
+//		int i = set.size();
+//		String []strings = new String[i];
+//		i=0;
+//		for(Object o : set){
+//			strings[i]= o.toString();
+//			i++;
+//		}
 //		strings = (String[])set.toArray();
-		return strings;
+		return set.toArray(new String[0]);
 	}
 
 }
