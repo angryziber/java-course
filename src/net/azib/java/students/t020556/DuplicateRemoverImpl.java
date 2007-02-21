@@ -3,14 +3,8 @@ package net.azib.java.students.t020556;
 import net.azib.java.collections.DuplicateRemover;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.TreeSet;
-
-import com.sun.xml.internal.stream.Entity;
-import com.sun.xml.internal.ws.wsdl.parser.Message;
-
 /**
  * DuplicateRemoverImpl implements DuplicateRemover
  *
