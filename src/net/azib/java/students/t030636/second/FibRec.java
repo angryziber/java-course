@@ -21,7 +21,7 @@ public class FibRec {
 	
 	
 	public static void main(String[] args) {
-		int n = 16;
+		int n = 10;
 		System.out.println(Fib(n));
 	}
 
