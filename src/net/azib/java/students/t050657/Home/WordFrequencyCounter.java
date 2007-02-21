@@ -8,7 +8,9 @@ import java.util.TreeMap;
  */
 public class WordFrequencyCounter {
 	
-	public static void main(String[] args) {
+package net.azib.java.students.t050657.Home;	
+	
+public static void main(String[] args) {
 		
 		String text = "The String class represents character strings. " +
 				"All string literals in Java programs, such as abc, " +
@@ -35,5 +37,5 @@ public class WordFrequencyCounter {
 			System.out.println(me.getKey() + " = " + me.getValue() + " times");
 		}
 		
-	}
+}
 }
