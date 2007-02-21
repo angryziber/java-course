@@ -27,7 +27,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 	@Override
 	public String[] removeDuplicateStrings(String[] array) {
 		Set<String> set = new LinkedHashSet<String>(Arrays.asList(array));
-		return set.toArray(new String[0]);
+		return set.toArray(new String[set.size()]);
 	}
 
 }
