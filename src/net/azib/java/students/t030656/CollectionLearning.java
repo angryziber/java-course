@@ -3,7 +3,9 @@ package net.azib.java.students.t030656;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * SetLearning
@@ -21,5 +23,10 @@ public class CollectionLearning {
 			System.out.println(e);
 		}
 		
+		Map<String, String> map = new HashMap(System.getProperties());
+		
+		for(Map.Entry<String, String> me: map.entrySet()){
+			System.out.println(me.getKey() + "=" + me.getValue());
+		}
 	}
 }
