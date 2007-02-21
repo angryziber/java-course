@@ -12,15 +12,20 @@ public class ExceptionGame {
 	 */
 	public static void main(String[] args) {
 		byte[] b = new byte[] {0, 1};	
-		processByteArray(b);
+		try {
+			processByteArray(b);
+		}
+		catch (Exception e) {
+			System.out.println(e.getCause());
+		}
 	} // end main
 
 	/**
 	 * @param b
 	 */
-	private static void processByteArray(byte[] b) {
+	private static void processByteArray(byte[] b){
 		try{
-			System.out.println("Inside try block string: " + (b[0] + b[1]));
+			System.out.println("Inside try block string: " + (b[0] + b[2]));
 			//throw new IllegalStateException("method end");
 		}
 		catch(ArrayIndexOutOfBoundsException e){
@@ -31,6 +36,7 @@ public class ExceptionGame {
 		}
 		catch(Exception e){
 			System.out.println("Unexpected error: " + e);
+			throw new RuntimeException("Unexpected error", e);
 		}
 		finally{
 			System.out.println("The End!");
