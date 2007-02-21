@@ -1,3 +1,5 @@
+package net.azib.java.students.t050657.Home;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -6,11 +8,9 @@ import java.util.TreeMap;
  * @author t050657
  *
  */
-public class WordFrequencyCounter {
+public class WordFrequencyCounter {	
 	
-package net.azib.java.students.t050657.Home;	
-	
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		
 		String text = "The String class represents character strings. " +
 				"All string literals in Java programs, such as abc, " +
@@ -37,5 +37,5 @@ public static void main(String[] args) {
 			System.out.println(me.getKey() + " = " + me.getValue() + " times");
 		}
 		
-}
+	}
 }
