@@ -22,5 +22,9 @@ public class PropertiesLearning {
 			Object key = i.next();
 			System.out.println(key);
 		}	
+		
+		for(Object key: c){
+			System.out.println(key);
+		}
 	}
 }
