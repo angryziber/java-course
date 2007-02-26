@@ -22,7 +22,7 @@ public class CollectionLearning {
 	//System.out.println(col);
 	;
 	
-	Map<String,String> map = new HashMap (System.getProperties())
+	Map<String,String> map = new HashMap (System.getProperties());
 	
 	for (Map.Entry<String, String> me: map.entrySet()){
 		System.out.println(me.getKey());
