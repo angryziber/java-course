@@ -1,7 +1,5 @@
 package net.azib.java.students.t050657.Home;
 
-import net.azib.java.collections.DuplicateRemover;
-
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,7 +9,10 @@ import java.util.Set;
  *
  * @author t050657
  */
-public class DublicateRemoverImpl implements DuplicateRemover {
+public class DublicateRemoverImpl {
+	
+	// NOTE: this class doesn't implement the DuplicateRemover interface
+	// why? probably it should be deleted.
 
 	/**
 	 * @param args
