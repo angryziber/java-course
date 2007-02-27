@@ -1,4 +1,4 @@
-package net.azib.java.lessons.misc;
+package net.azib.java.lessons.enums;
 
 public enum Planet {
     MERCURY (3.303e+23, 2.4397e6),

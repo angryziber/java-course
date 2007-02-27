@@ -1,6 +1,6 @@
 package net.azib.java.students.t020544;
 
-import net.azib.java.lessons.misc.Planet;
+import net.azib.java.lessons.enums.Planet;
 
 import java.io.BufferedReader;
 import java.io.IOException;

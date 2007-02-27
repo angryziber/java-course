@@ -1,7 +1,7 @@
 package net.azib.java.students.t030675;
 
-import net.azib.java.lessons.misc.Planet;
-import net.azib.java.lessons.misc.Season;
+import net.azib.java.lessons.enums.Planet;
+import net.azib.java.lessons.enums.Season;
 
 /**
  * EnumTest

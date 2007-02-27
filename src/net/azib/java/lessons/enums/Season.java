@@ -1,4 +1,4 @@
-package net.azib.java.lessons.misc;
+package net.azib.java.lessons.enums;
 
 public enum Season {
 	WINTER,

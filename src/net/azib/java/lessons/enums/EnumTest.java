@@ -1,4 +1,5 @@
-package net.azib.java.lessons.misc;
+package net.azib.java.lessons.enums;
+
 
 /**
  * EnumTest

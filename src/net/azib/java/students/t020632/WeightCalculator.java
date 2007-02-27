@@ -1,6 +1,6 @@
 package net.azib.java.students.t020632;
 
-import net.azib.java.lessons.misc.Planet;
+import net.azib.java.lessons.enums.Planet;
 
 /**
  * WeightCalculator
