@@ -1,4 +1,4 @@
-package net.azib.java.collections;
+package net.azib.java.lessons.collections;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;

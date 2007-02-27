@@ -1,4 +1,4 @@
-package net.azib.java.collections;
+package net.azib.java.lessons.collections;
 
 /**
  * An interface for a task in the 4th lesson for practicing with Set.

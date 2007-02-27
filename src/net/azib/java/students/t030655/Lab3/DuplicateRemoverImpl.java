@@ -1,6 +1,6 @@
 package net.azib.java.students.t030655.Lab3;
 
-import net.azib.java.collections.DuplicateRemover;
+import net.azib.java.lessons.collections.DuplicateRemover;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -15,7 +15,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 
 
 	/* (non-Javadoc)
-	 * @see net.azib.java.collections.DuplicateRemover#removeDuplicateStrings(java.lang.String[])
+	 * @see net.azib.java.lessons.collections.DuplicateRemover#removeDuplicateStrings(java.lang.String[])
 	 */
 	@Override
 	public String[] removeDuplicateStrings(String[] array) {

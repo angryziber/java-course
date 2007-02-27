@@ -1,6 +1,6 @@
 package net.azib.java.students.t030636.hometasks;
 
-import net.azib.java.collections.DuplicateRemover;
+import net.azib.java.lessons.collections.DuplicateRemover;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;

@@ -1,6 +1,6 @@
 package net.azib.java.students.t050657.Home;
 
-import net.azib.java.simple.Planet;
+import net.azib.java.lessons.misc.Planet;
 
 /**
  * WeightCalculator
