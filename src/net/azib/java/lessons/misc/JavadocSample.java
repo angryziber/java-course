@@ -6,7 +6,7 @@ import java.math.BigInteger;
 /**
  * A class to show how to use <i>javadoc</i> in Java.
  *
- * @version $Id: $
+ * @version 1.0
  * @author anton
  */
 public class JavadocSample {
