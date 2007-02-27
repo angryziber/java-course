@@ -2,7 +2,6 @@ package net.azib.java.lessons.misc;
 
 import java.io.PrintStream;
 import java.math.BigInteger;
-import java.util.Date;
 
 /**
  * A class to show how to use <i>javadoc</i> in Java.

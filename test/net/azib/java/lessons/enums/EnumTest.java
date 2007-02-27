@@ -1,5 +1,7 @@
 package net.azib.java.lessons.enums;
 
+import net.azib.java.lessons.enums.Planet;
+
 
 /**
  * EnumTest

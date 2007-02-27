@@ -13,8 +13,8 @@ public class PropertiesTest {
 	public static void main(String[] args) {
 		Properties sysprops = System.getProperties();
 		
-		Collection c = sysprops.keySet();
-		for (Iterator i = c.iterator(); i.hasNext(); ) {
+		Collection<Object> c = sysprops.keySet();
+		for (Iterator<Object> i = c.iterator(); i.hasNext(); ) {
 			Object key = i.next();
 			System.out.println(key);
 		}

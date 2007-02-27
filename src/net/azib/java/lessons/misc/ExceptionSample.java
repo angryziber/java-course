@@ -5,7 +5,7 @@ package net.azib.java.lessons.misc;
  *
  * @author anton
  */
-public class ExceptionGame {
+public class ExceptionSample {
 
 	public static void main(String[] args) {
 		byte[] b = new byte[] {0};

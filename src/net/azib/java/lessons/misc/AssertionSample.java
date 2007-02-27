@@ -5,7 +5,7 @@ package net.azib.java.lessons.misc;
  *
  * @author anton
  */
-public class AssertionTest {
+public class AssertionSample {
 	
 	public static void doSomething(Object ... ints) {
 		//assert ints.length >= 1;

@@ -1,13 +1,12 @@
 package net.azib.java.lessons.misc;
 
-import java.io.Serializable;
 
 /**
  * Animal
  *
  * @author anton
  */
-public abstract class Animal implements Serializable {
+public abstract class Animal {
 	private String name;
 	private byte age;
 
