@@ -2,7 +2,7 @@ package net.azib.java.students.t030675;
 
 
 
-public class Dog extends Animal implements Comparable<Dog>{
+public class Dog extends Animal implements Comparable<Dog>, IAnimal{
 
 	public Dog(String name) {
 		super(name);
@@ -14,10 +14,16 @@ public class Dog extends Animal implements Comparable<Dog>{
 
 
 
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030675.IAnimal#getName()
+	 */
 	public String getName() {
 		return "Pjos" + super.getName();
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030675.IAnimal#getType()
+	 */
 	public String getType(){
 		return "Dog";
 	}
