@@ -6,10 +6,13 @@ package net.azib.java.lessons.misc;
  *
  * @author anton
  */
-public abstract class Animal {
+public abstract class Animal implements IAnimal {
 	private String name;
 	private byte age;
 
+	/* (non-Javadoc)
+	 * @see net.azib.java.lessons.misc.IAnimal#getName()
+	 */
 	public String getName() {
 		return name;
 	}
@@ -18,6 +21,9 @@ public abstract class Animal {
 		age++;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.lessons.misc.IAnimal#getAge()
+	 */
 	public byte getAge() {
 		return age;
 	}
@@ -31,6 +37,9 @@ public abstract class Animal {
 		this.age = age;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.lessons.misc.IAnimal#getType()
+	 */
 	public abstract String getType();
 
 	@Override
@@ -44,7 +53,7 @@ public abstract class Animal {
 		if (other == null || !(other instanceof Animal))
 			return false;
 		
-		return this.getName().equals(((Animal)other).getName()) &&
+		return this.getName().equals(((IAnimal)other).getName()) &&
 				this.getClass() == other.getClass();
 	}
 
