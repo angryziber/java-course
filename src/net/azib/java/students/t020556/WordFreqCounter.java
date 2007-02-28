@@ -28,8 +28,10 @@ public class WordFreqCounter {
 			val = val == null ? 1 : val + 1;
 			strMap.put(str, val);
 		}
-		
-		System.out.println(strMap.toString());
+
+		for(Map.Entry<String, Integer> e : strMap.entrySet()){
+			System.out.println(e);
+		}
 	}
 
 }
