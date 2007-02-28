@@ -12,7 +12,7 @@ public class Concantenator {
 	 * @return
 	 */
 	public String concanate(String strA, String strB){
-		return strA += strB;
+		return strA += strB + "a";
 	} 
 
 }
