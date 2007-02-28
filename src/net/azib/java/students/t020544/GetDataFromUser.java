@@ -15,7 +15,7 @@ public class GetDataFromUser {
 	public int getNumberFromUser() throws Exception, IOException {
 		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("For what number do You want to know the answer?");
+		System.out.println("For what number do You want to know an answer?");
 		int userNumber = Integer.parseInt(in.readLine());
 		return userNumber;
 	}

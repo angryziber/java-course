@@ -12,8 +12,11 @@ public class DogStuff {
 	 */
 	public static void main(String[] args) {
 
+		
 		Dog dobermanDeik = new Dog("Deik", (byte) 3);
-
+		
+		dobermanDeik.testInstanceMethod();
+		//Animal.testInstanceMethod();
 		System.out.println("Name:" + dobermanDeik.getName() + ";  Age:" + dobermanDeik.getAge() + ";");
 
 		for (int i = 0; i < 4; i++) {

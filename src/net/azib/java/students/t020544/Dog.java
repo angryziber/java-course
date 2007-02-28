@@ -18,6 +18,12 @@ public class Dog extends Animal{
 	public Dog(String name, byte age) {
 		super(name, age);
 	}
+	@Override
+	public void testInstanceMethod() {
+        System.out.println("The instance method in Dog.");
+    }
+	
+	
 
 
 }

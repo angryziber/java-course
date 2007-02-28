@@ -18,15 +18,13 @@ public class Factorial {
 	public static void main(String[] args) throws IOException, Exception {
 
 		System.out.println("The program calculates factorial.");
-
+		
 		BigInteger[] factorial = new BigInteger[104];
 		factorial[0] = BigInteger.ONE;
 		factorial[1] = BigInteger.ONE;
-	
 		GetDataFromUser f = new GetDataFromUser();
 		int n = f.getNumberFromUser();
- 
-		
+				
 		if (n < 0) {
 			System.out.println("Factorial doesn't exist. Number You enter should be greater then zero");
 
