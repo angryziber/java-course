@@ -1,19 +1,25 @@
-package net.azib.java.students.t030655.Lab2;
+package net.azib.java.students.t030655.Lab2ja4;
 
 /**
  * Animal
  *
  * @author t030655
  */
-public abstract class Animal {
+public abstract class Animal implements IAnimal {
 	private String name;
 	private byte age;
 
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030655.Lab2.IAnimal#getName()
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030655.Lab2.IAnimal#getAge()
+	 */
 	public byte getAge() {
 		return age;
 	}
@@ -38,6 +44,9 @@ public abstract class Animal {
 		// TODO Auto-generated method stub
 	}
 
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030655.Lab2.IAnimal#getType()
+	 */
 	public abstract String getType();
 	
 	@Override
@@ -51,7 +60,7 @@ public abstract class Animal {
 		if(other == null || !(other instanceof Animal))
 			return false;
 	
-		return this.getName().equals(((Animal)other).getName()) &&
+		return this.getName().equals(((IAnimal)other).getName()) &&
 				this.getClass() == other.getClass();
 	}
 	

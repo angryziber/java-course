@@ -1,4 +1,4 @@
-package net.azib.java.students.t030655.Lab2;
+package net.azib.java.students.t030655.Lab2ja4;
 
 import java.math.BigInteger;
 

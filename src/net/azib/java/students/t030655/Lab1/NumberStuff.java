@@ -1,7 +1,7 @@
 package net.azib.java.students.t030655.Lab1;
 
-import net.azib.java.students.t030655.Lab2.Animal;
-import net.azib.java.students.t030655.Lab2.Dog;
+import net.azib.java.students.t030655.Lab2ja4.Animal;
+import net.azib.java.students.t030655.Lab2ja4.Dog;
 
 
 // import java.math.BigDecimal;
