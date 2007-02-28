@@ -25,10 +25,12 @@ public class WeightCalculator {
 	 * @param args
 	 * @throws Exception
 	 * @throws IOException
+	 * @throws Exception
+	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException, Exception {
 
-		Planet[] planets = Planet.values();
+//		Planet[] planets = Planet.values();
 		System.out.println("The program calculates weight on Solar System's planets.");
 		double m = getWeight();
 
@@ -37,10 +39,13 @@ public class WeightCalculator {
 		}
 
 		else {
-			for (int i = 1; i < planets.length; i++) {
-				System.out.println("For " + m + " kg weight on " + planets[i] + " is " + planets[i].surfaceWeight(m) + " N.");
+			 for (Planet planets : Planet.values()) {
+//			for (int i = 1; i < planets.length; i++) {
+				System.out.println("For " + m + " kg weight on " + planets+ " is " + (int) planets.surfaceWeight(m)
+						+ " N.");
 
 			}
+
 		}
 	}
 }
