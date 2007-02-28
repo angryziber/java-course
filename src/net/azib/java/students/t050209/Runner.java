@@ -27,7 +27,7 @@ public class Runner {
 		  }
 	  };
 	  
-	  Runner runner = new Runner();
+	  /*Runner runner = new Runner();*/
 	  
 	  new Runner().runSomething(runnable1);
 	  new Runner().runSomething(runnable2);

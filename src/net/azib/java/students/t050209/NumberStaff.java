@@ -17,7 +17,7 @@ public class NumberStaff {
 	 */
 	public static void main(String[] args) {
 		/*Dog on muutuja tüüp, dog - muutuja tüüp*/
-		Animal dog = new Dog("Pitsu");
+		Ianimal dog = new Dog("Pitsu");
 		/* Dog dog;
 		   dog = new Dog(); */
 		

@@ -5,11 +5,14 @@ package net.azib.java.students.t050209;
  *
  * @author t050209
  */
-public abstract class Animal{
+public abstract class Animal implements Ianimal{
 	  private String name;
 	  private byte age = 1;
 	  
-	  public String getName() {
+	  /* (non-Javadoc)
+	 * @see net.azib.java.students.t050209.Ianimal#getName()
+	 */
+	public String getName() {
 		  return name;
 	  }
 	  
@@ -25,7 +28,10 @@ public abstract class Animal{
 		  this.age = age;
 	  }
 	  
-	  public abstract String getType();
+	  /* (non-Javadoc)
+	 * @see net.azib.java.students.t050209.Ianimal#getType()
+	 */
+	public abstract String getType();
 
 	@Override
 	public final String toString() {
@@ -38,7 +44,7 @@ public abstract class Animal{
 		if (other == null || !(other instanceof Animal))
 			return false;
 		
-		return this.getName().equals(((Animal)other).getName()) &&
+		return this.getName().equals(((Ianimal)other).getName()) &&
 			   this.getClass() == other.getClass();
 	}
 
