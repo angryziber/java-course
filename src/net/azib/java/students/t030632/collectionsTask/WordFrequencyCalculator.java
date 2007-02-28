@@ -21,7 +21,7 @@ public class WordFrequencyCalculator {
 	public void calculateWordFrequency(String[] strings) {
 		TreeMap<String, Integer> map = new TreeMap<String, Integer>();
 		for (String str : strings){
-			if(map.containsValue(str)){
+			if(map.containsKey(str)){
 				map.put(str, (map.get(str))+1);
 			}else{
 				map.put(str, 1);
@@ -30,7 +30,7 @@ public class WordFrequencyCalculator {
 		}
 		
 		for (Map.Entry <String, Integer> me : map.entrySet() ){
-			System.out.println(me.getKey()+" esineb "+me.getValue()+" korda.");
+			System.out.println(me.getKey()+" esineb "+me.getValue()+" kord(a).");
 		}
 	}
 }
