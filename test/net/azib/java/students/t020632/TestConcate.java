@@ -1,5 +1,10 @@
 package net.azib.java.students.t020632;
 
+import static org.junit.Assert.*;
+import org.junit.Before;
+
+import org.junit.Test;
+
 /**
  * TestConcate
  *
@@ -10,12 +15,25 @@ public class TestConcate {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	
+	private Concatenator020632 c;
+	
+	@Before
+	public void setUp(){
+		c = new Concatenator020632();
+	}
+	
+	@Test
+	public void testConcat() {
 		
-		Concatenator020632 c = new Concatenator020632();
-		
-		assert "abc123".equals(c.concate("abc", "123")) : "concate() fails";
+		assertEquals("concate() fails", "abc123", c.concate("abc", "123"));
 
+	}
+	
+	@Test
+	public void testname() throws Exception {
+		
+		assertEquals("abc", c.concate("abc", null));
 	}
 
 }
