@@ -2,6 +2,8 @@ package net.azib.java.students.t030632.unitTestStudy;
 
 import static org.junit.Assert.*;
 
+import net.azib.java.lessons.misc.Concatenator;
+
 import org.junit.Test;
 
 /**

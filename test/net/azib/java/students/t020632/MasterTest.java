@@ -3,6 +3,8 @@ package net.azib.java.students.t020632;
 import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
 
+import net.azib.java.lessons.misc.IAnimal;
+
 import org.junit.Test;
 
 /**
