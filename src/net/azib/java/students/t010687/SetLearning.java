@@ -1,9 +1,7 @@
 package net.azib.java.students.t010687;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * SetLearning

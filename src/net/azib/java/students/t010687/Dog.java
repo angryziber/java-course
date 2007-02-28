@@ -51,7 +51,7 @@ public class Dog extends Animal implements Comparable<Dog> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-	public int compareTo(Animal o) {
+	public int compareTo(IAnimal o) {
 		return getName().compareTo(o.getName());
 	}
 

@@ -5,7 +5,7 @@ package net.azib.java.students.t010687;
  *
  * @author t010687
  */
-public abstract class Animal {
+public abstract class Animal implements IAnimal {
 	public String name;
 	private int age;
 	public Animal (String AnimalName){
@@ -16,10 +16,16 @@ public abstract class Animal {
 		name = AnimalName;	
 		age = Age;
 	}
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t010687.IAnimal#getName()
+	 */
 	public String getName(){
 		return name;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t010687.IAnimal#getAge()
+	 */
 	public int getAge(){
 		return age;
 	}
@@ -36,7 +42,7 @@ public abstract class Animal {
 	 * @param o
 	 * @return
 	 */
-	public int compareTo(Animal o) {
+	public int compareTo(IAnimal o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

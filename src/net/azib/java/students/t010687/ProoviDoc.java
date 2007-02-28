@@ -1,7 +1,6 @@
 package net.azib.java.students.t010687;
 
 import java.io.PrintStream;
-//import java.util.Date;
 
 
 /**
