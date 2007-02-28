@@ -5,12 +5,10 @@ package net.azib.java.students.t020556;
  *
  * @author t020556
  */
-public abstract class Animal {
+public abstract class Animal implements IAnimal {
 	protected String name = "stray";
 	protected byte age = 1;
-	/**
-	 * @return the name
-	 */
+
 	public String getName() {
 		return name;
 	}
@@ -20,8 +18,8 @@ public abstract class Animal {
 	public void setName(String name) {
 		this.name = name;
 	}
-	/**
-	 * @return the age
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t020556.IAnimal#getAge()
 	 */
 	public byte getAge() {
 		return age;
