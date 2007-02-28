@@ -6,7 +6,7 @@ package net.azib.java.students.t050657;
  * @author t050657
  */
 
-public abstract class Animal {
+public abstract class Animal implements IAnimal {
 	private int age;
 	private String name = "unknown";
 	
@@ -19,16 +19,25 @@ public abstract class Animal {
 		this.age = age;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t050657.IAnimal#getName()
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
 	abstract public String getType();
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t050657.IAnimal#getAge()
+	 */
 	public int getAge() {
 		return this.age;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t050657.IAnimal#growUp()
+	 */
 	public void growUp() {
 		this.age++;
 	}

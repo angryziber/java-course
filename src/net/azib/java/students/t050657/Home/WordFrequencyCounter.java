@@ -6,7 +6,6 @@ import java.util.TreeMap;
 /**
  * WordFrequencyCounter
  * @author t050657
- *
  */
 public class WordFrequencyCounter {	
 	
@@ -33,7 +32,7 @@ public class WordFrequencyCounter {
 			}
 		}
 		
-		for(Map.Entry me : map.entrySet()) {
+		for(Map.Entry<String, Integer> me : map.entrySet()) {
 			System.out.println(me.getKey() + " = " + me.getValue() + " times");
 		}
 		

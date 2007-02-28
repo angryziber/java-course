@@ -22,6 +22,7 @@ public class Dog extends Animal {
 	public String getType() {
 		return "Dog";
 	}
+	
 	@Override
 	public boolean equals(Object other) {
 		if(other == null || !(other instanceof Dog))
