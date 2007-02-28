@@ -5,7 +5,7 @@ package net.azib.java.students.t020632;
  *
  * @author t020632
  */
-public abstract class Animal implements Comparable<Animal> {
+public abstract class Animal implements Comparable<Animal>, IAnimal {
 	private String name;
 	private byte age;
 	
@@ -24,14 +24,23 @@ public abstract class Animal implements Comparable<Animal> {
 		return age;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t020632.IAnimal#getName()
+	 */
 	public String getName(){
 		return name;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t020632.IAnimal#getAge()
+	 */
 	public byte getAge(){
 		return age;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t020632.IAnimal#getType()
+	 */
 	public abstract String getType();
 	
 	public final String toString(){
@@ -42,7 +51,7 @@ public abstract class Animal implements Comparable<Animal> {
 		if(other == null || ! (other instanceof Animal))
 			return false;
 		
-		return this.getName().equals(((Animal)other).getName()) && this.getClass() == other.getClass();
+		return this.getName().equals(((IAnimal)other).getName()) && this.getClass() == other.getClass();
 	}
 
 	/* (non-Javadoc)
