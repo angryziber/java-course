@@ -34,4 +34,5 @@ public class ConcatenatorTest {
 		assertEquals(null, c.concatenate(null, null));
 
 	}
+
 }
