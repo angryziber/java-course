@@ -44,30 +44,31 @@ public class HelloWord {
 		
 		DoSomething[0].run();
 		DoSomething[1].run();
-		
-		//boolean z = true;
-		//Boolean f = new Boolean(true);
-		
-		//final int opa = 7;
-		//Dog dog = new Dog("Kutsa");
-		//char c = 'd';
-		//char d = '\u0020';
-			/*	
-		BigDecimal db = new BigDecimal("1.025");
-		BigDecimal db2 = BigDecimal.TEN ;
-		db2.add(db);
-		System.out.println(db2.add(db));
-		//System.out.println(dog.name);
-		//System.out.println(Integer.parseInt("1AF", 16));
-		//String XX = "JamaLugu";
-		//System.out.println(XX);
-		 
-		 */
 
 	}
 }
 
 
+
+
+//boolean z = true;
+//Boolean f = new Boolean(true);
+
+//final int opa = 7;
+//Dog dog = new Dog("Kutsa");
+//char c = 'd';
+//char d = '\u0020';
+	/*	
+BigDecimal db = new BigDecimal("1.025");
+BigDecimal db2 = BigDecimal.TEN ;
+db2.add(db);
+System.out.println(db2.add(db));
+//System.out.println(dog.name);
+//System.out.println(Integer.parseInt("1AF", 16));
+//String XX = "JamaLugu";
+//System.out.println(XX);
+ 
+ */
 
 
 
