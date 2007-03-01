@@ -11,9 +11,8 @@ public class WordFrequencyCalculator {
 		String[] splitText = inputString.split("\\s"); 				//separate string into array of strings(words)
 		
 		for (String word : splitText) { 			//loop - for every word in the text
-			if (map.containsKey(word)){				//the word already exists in the map
+			if (map.containsKey(word))				//the word already exists in the map
 				map.put(word, map.get(word) + 1);	//increment the value
-			}
 			else
 				map.put(word, 1);					//first time we have seen this word
 		}
@@ -22,7 +21,7 @@ public class WordFrequencyCalculator {
 				
 		for (Map.Entry<String, Integer> m : map.entrySet()) {			//loop - for every entry in the map
 			outputTable = outputTable +"The word - " + m.getKey() 
-			+ " - occurred in the text " +  m.getValue()  +" times!" 	//add a line to the output string(word + frequency)
+			+ " - occurred in the text " +  m.getValue()  + " times!" 	//add a line to the output string(word + frequency)
 			+ System.getProperty("line.separator");
 		}
 		return outputTable;	//output the lines in a string
@@ -34,7 +33,7 @@ public class WordFrequencyCalculator {
 			+ "— 1.3 sec faster than the Elise R";
 		
 		WordFrequencyCalculator calculate = new WordFrequencyCalculator();
-		System.out.println(calculate.outputFrequencyTable(text)); //output the string returned by frequency calculator
+		System.out.println(calculate.outputFrequencyTable(text)); //output the string returned by frequency calculator method
 	}
 
 }

@@ -5,10 +5,13 @@ package net.azib.java.students.t030636.first;
  *
  * @author t030636
  */
-public abstract class Animal {
+public abstract class Animal implements IAnimal {
 	private String name ;
 	private byte age;
 
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030636.first.IAnimal#getAge()
+	 */
 	public byte getAge() {
 		return age;
 	}
@@ -17,6 +20,9 @@ public abstract class Animal {
 		age++ ;
 	}
 
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030636.first.IAnimal#getName()
+	 */
 	public String getName() {
 		return name;
 	}
@@ -35,6 +41,9 @@ public abstract class Animal {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030636.first.IAnimal#getType()
+	 */
 	public abstract String getType();
 	
 	@Override

@@ -13,12 +13,12 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 		Set<String> set = new LinkedHashSet<String>(Arrays.asList(string));
 		return set.toArray(new String[set.size()]);
 	}
+	
 	public static void main(String[] args) {
 		String[] strings = {"ufo", "mina", "ufo", "teie", "tore", "ufo", "teie"};
 		DuplicateRemoverImpl remover = new DuplicateRemoverImpl();
 		
 		for(String string : remover.removeDuplicateStrings(strings))
 			System.out.println(string);
-		
-		}
+	}
 }
