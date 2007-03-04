@@ -7,7 +7,7 @@ package net.azib.java.students.t020632;
  */
 public class ExceptionGame {
 	public static void main(String [] args){
-		byte [] b = new byte [] {0};
+		// byte [] b = new byte [] {0};
 		processByteArray(null);
 	}
 	
