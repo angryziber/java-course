@@ -21,6 +21,7 @@ public class CopyFile {
 	 * For doing it become necessary to write analyzer to build right path from many pieces. 
 	 * It make small programm much complicate.
 	 * 
+	 * ****** PROBLEM PARTLY SOLVED ******
 	 * The second problem that I tried to read and write to file by lines.
 	 * It causes problems with encodings. Tried to add Unicode new line symbol to end of each line 
 	 * and set charset, but also don't work. 
@@ -39,7 +40,7 @@ public class CopyFile {
 	}
 	
 	public static void copyFile(String from, String to) {
-		char newLine = '\u2424';
+		String lineEnd =  System.getProperty("line.separator");
 		long start = System.currentTimeMillis();
 		
 		BufferedReader reader = null;
@@ -56,16 +57,10 @@ public class CopyFile {
 			reader = new BufferedReader(new FileReader(from));
 			writer = new BufferedWriter(new FileWriter(to));
 			
-			int c;
-			while( (c = reader.read()) >= 0 ) 
-				writer.write((char)c);
-
-			/*
 			while(reader.ready()) {
-				writer.write(reader.readLine());
-				writer.write(newLine);
+				writer.write(reader.readLine() + lineEnd);
 			}
-			*/
+			
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("File to copy not found!");
