@@ -10,7 +10,7 @@ import org.junit.Test;
 /**
  * FibonacciTest
  * 
- * @author Julija Kondratjeva
+ * @author Julija
  */
 public class FibonacciTest {
 
@@ -30,8 +30,14 @@ public class FibonacciTest {
 	 */
 	@Test
 	public void testCalculateFibonacciNumber() {
-		
-		assertEquals("testCalculateFibonacciNumber(100) failed", "354224848179261915075", f.calculateFibonacciNumber(100).toString());
+
+		assertEquals("testCalculateFibonacciNumber(100) failed", "354224848179261915075", f.calculateFibonacciNumber(100)
+				.toString());
 		assertEquals("testCalculateFibonacciNumber(10) failed", BigInteger.valueOf(55), f.calculateFibonacciNumber(10));
+	}
+
+	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	public void testException() {
+		f.calculateFibonacciNumber(-10);
 	}
 }
