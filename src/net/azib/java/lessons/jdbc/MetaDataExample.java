@@ -20,7 +20,7 @@ public class MetaDataExample {
 		connection = DriverManager.getConnection(url, user, password);
 	}
 
-	public void f() throws SQLException {
+	public void discover() throws SQLException {
 		DatabaseMetaData metadata = connection.getMetaData();
 		System.out.println(metadata);
 		System.out.println("Database: " + metadata.getDatabaseProductName() + " " + metadata.getDatabaseProductVersion());
@@ -42,10 +42,15 @@ public class MetaDataExample {
 		rs.close();
 	}
 
+	public void releaseConnection() throws SQLException{
+		connection.close();
+	}
+	
 	public static void main(String[] args) throws Exception {
 		MetaDataExample mde = new MetaDataExample();
 		mde.initializeConnection("jdbc:derby:c:\\eclipse\\myderby", "test", "test");
-		mde.f();
+		mde.discover();
+		mde.releaseConnection();
 	}
 
 }
