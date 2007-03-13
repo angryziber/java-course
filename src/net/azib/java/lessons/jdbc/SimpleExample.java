@@ -23,17 +23,20 @@ public class SimpleExample {
 	}
 
 	public List<Person> makeQuery() throws SQLException {
-		List<Person> list = new ArrayList<Person>(); 
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery("select * from test");
-
+		List<Person> list = extractData(resultSet); 
+		resultSet.close();
+		statement.close();
+		return list;
+	}
+	
+	public List<Person> extractData(ResultSet resultSet) throws SQLException{
+		List<Person> list = new ArrayList<Person>(); 
 		while (resultSet.next()) {
 			list.add(new Person(resultSet.getString("name"), 
 					resultSet.getInt("age"), resultSet.getString("gender")));
 		}
-		resultSet.next();
-		statement.close();
-		
 		return list;
 	}
 	
@@ -58,12 +61,5 @@ public class SimpleExample {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		SimpleExample se = new SimpleExample();
-		se.initializeConnection("jdbc:derby:c:\\eclipse\\myderby", "test", "test");
-		List<Person> list = se.makeQuery();
-		se.releaseConnection();
-		
-		System.out.println(list);
-	}
+	
 }
