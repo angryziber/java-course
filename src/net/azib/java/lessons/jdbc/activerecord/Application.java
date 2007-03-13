@@ -8,8 +8,11 @@ package net.azib.java.lessons.jdbc.activerecord;
 public class Application {
 
 	public void runApplication(){
-		ActiveRecord ar = ActiveRecord.create();
+        // assume we retrieve the object from db here
+		ActiveRecord ar = ActiveRecord.create(); 
+		// update the object 
 		ar.setId("blah");
+		// update row in database
 		ar.save();
 	}
 	
