@@ -1,4 +1,4 @@
-connect 'jdbc:derby:../../myderby;create=true;user=test;password=test';
+connect 'jdbc:derby:c:\\eclipse\\myderby;create=true;user=test;password=test';
 
 drop table test;
 
