@@ -3,10 +3,10 @@ package net.azib.java.students.t050209;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+//import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringReader;
+//import java.io.StringReader;
 
 /**
  * ReadDataFromFile
