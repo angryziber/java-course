@@ -4,6 +4,7 @@ import java.text.ChoiceFormat;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -38,6 +39,9 @@ public class Formatting {
 		ChoiceFormat cf = new ChoiceFormat(new double[]{0,1,2},
 				new String[]{"zero message", "one message", "many messages"});
 		System.out.println("You have " + cf.format(2));
+		
+		DateFormat df2 = new SimpleDateFormat("dd.MM.yy");
+		System.out.println(df2.format(new Date()));
 	}
 
 }
