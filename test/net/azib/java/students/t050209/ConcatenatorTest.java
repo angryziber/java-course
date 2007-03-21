@@ -3,7 +3,7 @@ package net.azib.java.students.t050209;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
+//import org.junit.BeforeClass;
 import org.junit.Test;
 
 /*import junit.framework.TestCase;  JUnit 3 jaoks*/
