@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringReader;
 
 
 
@@ -20,14 +21,17 @@ public class Streamikatsetus {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException{
-		String filename = ".classpath";
-		InputStream is = new FileInputStream(filename);
-		Reader reader = new InputStreamReader(is, "UTF-8");
-		while(reader.ready()){
-			System.out.print((char)reader.read());	
+		//String filename = ".classpath";
+		//InputStream is = new FileInputStream(filename);
+		//Reader reader = new InputStreamReader(is, "UTF-8");
+	/*	
+		StringReader = new StringReader("helloo");
+		char c;
+		while((c = (char) reader.read()) != -1){
+			System.out.print(c);	
 		}
 		System.out.println();
-		reader.close();
+		reader.close();*/
 	}
 
 }
