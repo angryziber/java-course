@@ -1,5 +1,6 @@
 package net.azib.java.students.t050209;
 
+import java.text.ChoiceFormat;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 //import java.util.Locale;
@@ -30,6 +31,9 @@ public class Formatting {
 		System.out.println(df.format(new Date()));
 		System.out.println(df.format(cal.getTime()));
 
+		ChoiceFormat cf = new ChoiceFormat(new double[] {0, 1, 2 },
+				new String[] {"zero", "one", "many"});
+		System.out.println("You have " + cf.format(5) + " messages");
 	}
 
 }
