@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public class Serialization {
 
-	public static class Dog implements Serializable {
+	public static class Dog implements Serializable, Cloneable {
 		/** serialVersionUID */
 		private static final long serialVersionUID = 1;
 		private transient String name = "Nupi";
@@ -53,6 +53,7 @@ public class Serialization {
 		
 		Dog clone = (Dog) dog.clone();
 		System.out.println(dog.name == copy.name);
+		System.out.println(dog.name == clone.name);
 	}
 
 }
