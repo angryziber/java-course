@@ -12,9 +12,5 @@
 	<classpathentry kind="lib" path="lib/stringtemplate.jar"/>
 	<classpathentry kind="lib" path="lib/easymock.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/eclipse/plugins/org.apache.derby.core_10.2.2/derby.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse/plugins/org.apache.derby.core_10.2.2/derbyclient.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse/plugins/org.apache.derby.core_10.2.2/derbytools.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse/plugins/org.apache.derby.core_10.2.2/derbynet.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
