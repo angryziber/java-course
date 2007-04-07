@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<project name="dechatlon" default="copy" basedir=".">
+	
+	<property name="svndir" value="C:/Documents and Settings/Boriss/workspace/java/src/net/azib/java/students/t050657/homework"/>
+	
+	<target name="copy">
+		<copy todir="${svndir}">
+			<fileset dir="${basedir}" >
+				<exclude name="view/**"/>
+			</fileset>
+		</copy>
+	</target>
+	
+</project>
