@@ -10,7 +10,7 @@ import java.net.Socket;
  *
  * @author anton
  */
-public class SimpleWebServer {
+public class SimpleWebServer implements Runnable {
 	
 	/** Prototype of a RequestHandler implementation. Cloned for handling of each request. */
 	private RequestHandler requestHandlerPrototype;
