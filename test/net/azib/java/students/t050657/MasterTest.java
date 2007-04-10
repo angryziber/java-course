@@ -3,6 +3,9 @@ package net.azib.java.students.t050657;
 import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
 
+import net.azib.java.students.t050657.Class.IAnimal;
+import net.azib.java.students.t050657.Class.Master;
+
 import org.junit.Test;
 
 /**

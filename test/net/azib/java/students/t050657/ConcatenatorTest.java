@@ -2,6 +2,8 @@ package net.azib.java.students.t050657;
 
 import static org.junit.Assert.*;
 
+import net.azib.java.students.t050657.Class.Concatenator;
+
 import org.junit.Before;
 import org.junit.Test;
 
