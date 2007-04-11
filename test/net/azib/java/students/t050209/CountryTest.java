@@ -34,6 +34,13 @@ public class CountryTest {
 	public void testValid() throws Exception {
 		//Validator v = new Validator(new InputStreamReader(get));
 		//v.useXMLSchema(true);
-		assertXMLValid(xml);
+		//assertXMLValid(xml);
 	}
+	
+	@Test
+	public void testXPath() throws Exception {
+	//	assertXpathEvaluatesTo("Estonia", "/country/name", "xml");
+	}
+	
+	
 }
