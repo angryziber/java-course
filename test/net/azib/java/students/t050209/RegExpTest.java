@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author t050209
  */
 public class RegExpTest {
-	@Test
+	@Test  /// ctrl+tühik
 	public void testMatches() throws Exception {
 		assertTrue("dog".matches("[a-z]{3}"));
 	}
