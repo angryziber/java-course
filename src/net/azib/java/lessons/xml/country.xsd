@@ -10,7 +10,6 @@
 		<xs:sequence>
 			<xs:element name="name" type="xs:string"/>
 			<xs:element name="population" type="xs:decimal"/>
-			<xs:element name="date" type="xs:date"/>
             <xs:element name="code" type="countryCodeType"/>
         </xs:sequence>
   </xs:complexType>
