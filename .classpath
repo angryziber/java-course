@@ -12,6 +12,8 @@
 	<classpathentry kind="lib" path="lib/stringtemplate.jar"/>
 	<classpathentry kind="lib" path="lib/easymock.jar"/>
 	<classpathentry kind="lib" path="lib/xmlunit.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="lib/commons-digester.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
