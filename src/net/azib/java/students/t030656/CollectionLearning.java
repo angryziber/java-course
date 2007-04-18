@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class CollectionLearning {
 	public static void main(String[] args){
-		List c = new ArrayList(Arrays.asList(new String[] {"a", "b", "z", "x", "z"}));
+		List<String> c = new ArrayList<String>(Arrays.asList(new String[] {"a", "b", "z", "x", "z"}));
 		
 		c.add("m");
 		
