@@ -1,6 +1,5 @@
 package net.azib.java.students.t030656;
 
-import java.util.Locale;
 
 /**
  * Locales
