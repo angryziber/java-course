@@ -25,15 +25,14 @@ public class DiggesterTest {
 		
 		digester.addObjectCreate("bookstore/book", Book.class);
 		digester.addSetNext("bookstore/book", "addBook", "net.azib.java.students.t050657.Home.Book");
-		digester.addSetNext("book/author", "addAuthor", "java.lang.String");
-		
+				
 		digester.addSetNestedProperties("bookstore/book", "book", "title");
-		digester.addSetNestedProperties("bookstore/book", "book", "author");
+		digester.addCallMethod("bookstore/book/author", "addAuthor", 0);
 		digester.addSetNestedProperties("bookstore/book", "book", "year");
 		digester.addSetNestedProperties("bookstore/book", "book", "price");
 		
-		digester.addSetProperties("bookstore/book", "category", "book");
-		digester.addSetProperties("bookstore/book", "lang", "book");
+		digester.addSetProperties("bookstore/book", "category", "category");
+		digester.addSetProperties("bookstore/book/title", "lang", "lang");
 
 		Bookstore store = (Bookstore) digester.parse(in);
 		for(Book book : store.books) {
