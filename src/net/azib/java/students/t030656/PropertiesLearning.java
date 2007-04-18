@@ -16,9 +16,9 @@ public class PropertiesLearning {
 	public static void main(String[] args) {
 		Properties sysprops = System.getProperties();
 		
-		Collection c = sysprops.keySet();
+		Collection<Object> c = sysprops.keySet();
 		
-		for(Iterator i = c.iterator(); i.hasNext(); ){
+		for(Iterator<Object> i = c.iterator(); i.hasNext(); ){
 			Object key = i.next();
 			System.out.println(key);
 		}	
