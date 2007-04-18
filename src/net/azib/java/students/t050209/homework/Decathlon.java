@@ -1,5 +1,7 @@
 package net.azib.java.students.t050209.homework;
 
+
+import java.lang.*;
 /**
  * Decathlon
  *
@@ -9,8 +11,7 @@ public class Decathlon {
 
 	public static double handleUserInteraction() throws Exception{
 		HandleDecathlonIO value = new HandleDecathlonIO();		
-		double userValue = value.getUserInsertedValue();
-		return userValue;
+		return value.getUserInsertedValue();
 	}
 	
 	public static byte selectDataInputType() throws Exception{
@@ -29,6 +30,11 @@ public class Decathlon {
 		HandleDecathlonIO result = new HandleDecathlonIO();
 		System.out.println(result.manualInsertionSequence());
 	}
+	
+	public static void fileSequence() {
+		HandleDecathlonIO result = new HandleDecathlonIO();
+		result.readFromFileSequence();
+	}
 		
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -39,7 +45,7 @@ public class Decathlon {
 			break;
 		
 		case 2:
-			//insertDataPath
+			fileSequence();
 			break;
 			
 		case 3:
