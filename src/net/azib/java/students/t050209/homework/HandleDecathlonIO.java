@@ -68,6 +68,13 @@ public class HandleDecathlonIO {
 		return value;		
 	}
 	
+	private static void nameInsertion() throws IOException {
+		//TODO - is validation needed?
+		
+		System.out.print("Insert sportsman name: ");
+		userData[0] = getUserInsertedString();		
+	}
+	
 	private static void dateOfBirthInsertion() throws IOException{
 		Boolean validData = false;
 		String dateOfBirthTempString;
@@ -113,13 +120,10 @@ public class HandleDecathlonIO {
 	}
 	
 	public static int manualInsertionSequence() throws Exception, IOException {
+//		TODO data validation, possibility to cancel operations
 		int overallResult = 0;
-		
-		//TODO data validation, possibility to cancel operations
-		
-		System.out.print("Insert sportsman name: ");
-		userData[0] = getUserInsertedString();
-		
+				
+		nameInsertion();
 		dateOfBirthInsertion();		
 		countryCodeInsertion();
 		
