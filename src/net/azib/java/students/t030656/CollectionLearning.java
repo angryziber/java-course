@@ -21,7 +21,7 @@ public class CollectionLearning {
 		for(Object e: c){
 			System.out.println(e);
 		}
-		
+		                    
 		Map<String, String> map = new HashMap(System.getProperties());
 		
 		for(Map.Entry<String, String> me: map.entrySet()){
