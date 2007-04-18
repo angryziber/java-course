@@ -53,6 +53,7 @@ public class Decathlon {
 			break;
 			
 		default:
+			//ignore?
 			break;
 		}
 		//compute

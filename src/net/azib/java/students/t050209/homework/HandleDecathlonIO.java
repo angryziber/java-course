@@ -91,8 +91,7 @@ public class HandleDecathlonIO {
 			catch(ParseException e) {
 				System.out.println("Inserted date of birth in wrong format. Must be xx.xx.xxxx");
 				validData = false;
-		    }
-			
+		    }			
 	    } while (validData == false);
 		
 		userData[1] = dateOfBirthTempString;
@@ -113,29 +112,71 @@ public class HandleDecathlonIO {
 			else{
 				System.out.println("Inserted country code in wrong format. Must be XX");
 				validData = false;
-		    }
-						
+		    }						
 	    } while (validData == false);
-        userData[2] = countryCodeTempString;
+        
+		userData[2] = countryCodeTempString;
 	}
 	
-	public static int manualInsertionSequence() throws Exception, IOException {
-//		TODO data validation, possibility to cancel operations
-		int overallResult = 0;
-				
-		nameInsertion();
-		dateOfBirthInsertion();		
-		countryCodeInsertion();
+	private static int dataInsertion() throws IOException{
+		Boolean validData      = false;
+		int     overallResult  = 0;
+		double	convertedRslt  = 0;
+		String  dataTempString;
 		
-		for (int i = 0; i < 10; i++)
-		{
-			System.out.print("Insert " + questionStrings[i] +" result (format x.xx): ");
-			userResults[i] = getUserInsertedValue();
+		for (int i = 0; i < 10; i++) {
+			
+			do{
+			
+				System.out.print("Insert " + questionStrings[i] + " result");
+				dataTempString = getUserInsertedString();		
+			
+				if(dataTempString.matches("[0-9]:[0-9]{2}\\x2E[0-9]")){
+					convertedRslt = (dataTempString.charAt(0) - '0') * 60 + 
+									(dataTempString.charAt(2) - '0') * 10 +
+									(dataTempString.charAt(3) - '0') +
+									(dataTempString.charAt(5) - '0') / 10;
+					validData = true;
+				}
+				else if(dataTempString.matches("[0-9]:[0-9]{2}\\x2E[0-9]{2}")){
+					convertedRslt = (dataTempString.charAt(0) - '0') * 60 + 
+									(dataTempString.charAt(2) - '0') * 10 +
+									(dataTempString.charAt(3) - '0') +
+									(dataTempString.charAt(5) - '0') / 10 +
+									(dataTempString.charAt(6) - '0') / 100;
+					validData = true;
+				}
+				else if (dataTempString.matches("[0-9]{2}\\x2E[0-9]{2}") || 
+						 dataTempString.matches("[0-9]{2}\\x2E[0-9]")    ||
+						 dataTempString.matches("[0-9]\\x2E[0-9]{2}")    ||
+						 dataTempString.matches("[0-9]\\x2E[0-9]")		 ||
+						 dataTempString.matches("[0-9]{2}")          ||
+						 dataTempString.matches("[0-9]")){
+					convertedRslt = Double.parseDouble(dataTempString);
+					validData = true;
+				}
+				else{
+					System.out.println("Inserted result in wrong format. Must be XX.XX or X:XX.XX");
+					validData = false;
+				}
+						
+			} while (validData == false);
+			
 			overallResult = overallResult + 
-					        DecathlonPoints.values()[i].eventPoints(userResults[i]);
+		    				DecathlonPoints.values()[i].eventPoints(userResults[i]);
+			userResults[i] = convertedRslt;//getUserInsertedValue();
 		}
 		
 		return overallResult;
+	}	
+	
+	public static int manualInsertionSequence() throws Exception, IOException {
+//		TODO data validation, possibility to cancel operations
+				
+		nameInsertion();
+		dateOfBirthInsertion();		
+		countryCodeInsertion();		
+		return dataInsertion();
 	}
 	
 	public static void readFromFileSequence() {
