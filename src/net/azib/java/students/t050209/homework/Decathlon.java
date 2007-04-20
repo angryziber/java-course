@@ -27,8 +27,12 @@ public class Decathlon {
 	}
 	
 	public static void insertValuesManually() throws Exception{
-		HandleDecathlonIO result = new HandleDecathlonIO();
-		System.out.println(result.manualInsertionSequence());
+		HandleDecathlonIO sequence = new HandleDecathlonIO();
+		sequence.nameInsertion();
+		sequence.dateOfBirthInsertion();
+		sequence.countryCodeInsertion();
+		
+		System.out.println(sequence.dataInsertion());
 	}
 	
 	public static void fileSequence() {

@@ -68,18 +68,18 @@ public class HandleDecathlonIO {
 		return value;		
 	}
 	
-	private static void nameInsertion() throws IOException {
+	public void nameInsertion() throws IOException {
 		//TODO - is validation needed?
 		
 		System.out.print("Insert sportsman name: ");
 		userData[0] = getUserInsertedString();		
 	}
 	
-	private static void dateOfBirthInsertion() throws IOException{
+	public void dateOfBirthInsertion() throws IOException{
 		Boolean validData = false;
 		String dateOfBirthTempString;
 		do {
-			System.out.print("Insert date of birth (format DD.MM.YEAR): ");
+			System.out.print("Insert date of birth (format DD.MM.YYYY): ");
 			dateOfBirthTempString = getUserInsertedString();
 			
 			try{
@@ -89,7 +89,7 @@ public class HandleDecathlonIO {
 		        validData = true;
 			}
 			catch(ParseException e) {
-				System.out.println("Inserted date of birth in wrong format. Must be xx.xx.xxxx");
+				System.out.println("Inserted date of birth in wrong format. Must be dd.mm.yyyy");
 				validData = false;
 		    }			
 	    } while (validData == false);
@@ -97,7 +97,7 @@ public class HandleDecathlonIO {
 		userData[1] = dateOfBirthTempString;
 	}
 	
-	private static void countryCodeInsertion() throws IOException{
+	public void countryCodeInsertion() throws IOException{
 		Boolean validData = false;
 		String countryCodeTempString;
 		
@@ -118,7 +118,7 @@ public class HandleDecathlonIO {
 		userData[2] = countryCodeTempString;
 	}
 	
-	private static int dataInsertion() throws IOException{
+	public int dataInsertion() throws IOException{
 		Boolean validData      = false;
 		int     overallResult  = 0;
 		double	convertedRslt  = 0;
@@ -126,6 +126,7 @@ public class HandleDecathlonIO {
 		
 		for (int i = 0; i < 10; i++) {
 			
+			//TODO try catch sequence - if field event, then... else ...
 			do{
 			
 				System.out.print("Insert " + questionStrings[i] + " result");
@@ -166,18 +167,9 @@ public class HandleDecathlonIO {
 		    				DecathlonPoints.values()[i].eventPoints(userResults[i]);
 			userResults[i] = convertedRslt;//getUserInsertedValue();
 		}
-		
+				
 		return overallResult;
 	}	
-	
-	public static int manualInsertionSequence() throws Exception, IOException {
-//		TODO data validation, possibility to cancel operations
-				
-		nameInsertion();
-		dateOfBirthInsertion();		
-		countryCodeInsertion();		
-		return dataInsertion();
-	}
 	
 	public static void readFromFileSequence() {
 		String s;
