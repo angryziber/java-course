@@ -33,6 +33,8 @@ public enum DecathlonPoints {
 	        this.FIELD_EVENT = FIELD_EVENT;
 	    }
 	    
+	    //TODO - add some time to running events, convert meters to centimeters
+	    
 	    public int runningEventsPoints(double performance) {
 	        return (int)(A * Math.pow((B - performance), C));
 	    }
@@ -46,4 +48,10 @@ public enum DecathlonPoints {
 	    			 	 fieldEventsPoints(performance) * FIELD_EVENT);
 	    }
 	    
+	    public boolean checkIfRunningEvent(){
+	    	if (this.RUNNING_EVENT == 1)
+	    		return true;
+	    	else
+	    		return false;
+	    }
 }
