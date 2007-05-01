@@ -1,7 +1,5 @@
 package net.azib.java.students.t030647;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 

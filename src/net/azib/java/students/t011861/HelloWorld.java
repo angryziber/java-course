@@ -1,5 +1,5 @@
 package net.azib.java.students.t011861;
-import java.util.*;
+import java.util.Date;
 public class HelloWorld {
 	public static void main(String[] arg) {
 		System.out.println("Hello World! TÖÖTAB");

@@ -1,6 +1,5 @@
 package net.azib.java.lessons.text;
 
-import java.util.Locale;
 
 /**
  * Locales

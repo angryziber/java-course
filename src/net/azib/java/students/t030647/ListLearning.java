@@ -1,9 +1,7 @@
 package net.azib.java.students.t030647;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * ListLearning

@@ -1,11 +1,10 @@
 package net.azib.java.students.t020632;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * SetLearning

@@ -1,7 +1,7 @@
 package net.azib.java.students.t011861;
-import java.util.Properties;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Properties;
 /**
  * PropertiesTest
  *

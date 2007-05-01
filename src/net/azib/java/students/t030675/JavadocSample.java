@@ -2,7 +2,6 @@ package net.azib.java.students.t030675;
 
 import java.io.PrintStream;
 import java.math.BigInteger;
-import java.util.Iterator;
 
 /**
  * A class to show how to use <i>javadoc</i> in Java

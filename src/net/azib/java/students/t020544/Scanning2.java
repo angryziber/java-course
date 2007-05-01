@@ -1,8 +1,6 @@
 package net.azib.java.students.t020544;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.ChoiceFormat;
 import java.util.Scanner;
 

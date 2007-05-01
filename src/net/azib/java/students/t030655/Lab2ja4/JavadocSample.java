@@ -1,5 +1,7 @@
 package net.azib.java.students.t030655.Lab2ja4;
 
+import java.io.PrintStream;
+
 //import java.util.Date;
 
 /**

@@ -1,8 +1,5 @@
 package net.azib.java.lessons.patterns;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Executor

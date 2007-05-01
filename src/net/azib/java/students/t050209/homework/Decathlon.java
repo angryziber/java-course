@@ -2,10 +2,6 @@ package net.azib.java.students.t050209.homework;
 
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-
-import java.lang.*;
-import java.util.Locale;
 /**
  * Decathlon
  *

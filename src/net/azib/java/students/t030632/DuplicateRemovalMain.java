@@ -1,6 +1,5 @@
 package net.azib.java.students.t030632;
 
-import net.azib.java.students.t030632.DuplicateRemovalImpl;
 
 /**
  * DuplicateRemovalMain

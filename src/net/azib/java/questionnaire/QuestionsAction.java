@@ -1,12 +1,12 @@
 package net.azib.java.questionnaire;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import net.azib.java.questionnaire.Servlet.Redirect;
 import net.azib.java.questionnaire.Servlet.RequestParameters;
 import net.azib.java.questionnaire.Servlet.Result;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.jdom.Document;

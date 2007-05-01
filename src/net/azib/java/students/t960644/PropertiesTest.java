@@ -1,7 +1,6 @@
 package net.azib.java.students.t960644;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Properties;
 
 /**

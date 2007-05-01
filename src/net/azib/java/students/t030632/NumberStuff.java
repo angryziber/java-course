@@ -1,8 +1,5 @@
 package net.azib.java.students.t030632;
 
-import java.math.BigDecimal;
-
-import sun.awt.image.PixelConverter.Bgrx;
 
 /**
  * NumberStaff

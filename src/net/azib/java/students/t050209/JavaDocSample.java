@@ -1,6 +1,6 @@
 package net.azib.java.students.t050209;
 
-import java.io.PrintStream; /*ctrl+shift+m printstreami peal*/
+import java.io.PrintStream;
 import java.math.BigInteger;
 
 /**

@@ -1,6 +1,5 @@
 package net.azib.java.students.t030675;
 
-import java.math.BigDecimal;
 
 
 /**

@@ -1,6 +1,5 @@
 package net.azib.java.students.t050657.Class;
 
-import java.awt.Choice;
 import java.text.ChoiceFormat;
 import java.text.DateFormat;
 import java.text.NumberFormat;

@@ -5,9 +5,8 @@ package net.azib.java.students.t960644;
  *
  * @author Lembit
  */
-import java.text.ChoiceFormat;
-import java.text.NumberFormat;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

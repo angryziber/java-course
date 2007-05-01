@@ -1,6 +1,5 @@
 package net.azib.java.lessons.logging;
 
-import java.net.URL;
 import java.util.logging.Logger;
 
 /**

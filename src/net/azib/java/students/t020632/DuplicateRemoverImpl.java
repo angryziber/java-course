@@ -1,9 +1,10 @@
 package net.azib.java.students.t020632;
 
 import net.azib.java.lessons.collections.DuplicateRemover;
+
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.Arrays;
 
 /**
  * DuplicateRemoverImpl

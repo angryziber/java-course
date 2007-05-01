@@ -5,7 +5,6 @@ package net.azib.java.students.t030675;
  *
  * @author t030675
  */
-import java.util.Locale;
 
 
 public class Locales {

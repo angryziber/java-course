@@ -2,7 +2,6 @@ package net.azib.java.students.t030632.enumTask;
 
 import net.azib.java.lessons.enums.Planet;
 
-
 import java.util.Scanner;
 
 /**

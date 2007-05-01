@@ -2,8 +2,6 @@ package net.azib.java.students.t030721;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 
