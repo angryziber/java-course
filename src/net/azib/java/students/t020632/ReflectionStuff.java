@@ -1,8 +1,7 @@
 package net.azib.java.students.t020632;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
+
+import sun.util.calendar.BaseCalendar.Date;
 
 /**
  * ReflectionStuff
@@ -11,8 +10,14 @@ import java.util.Arrays;
  */
 public class ReflectionStuff {
 	
-	public static void main(String [] args){
-		Class<String> clazz = String.class;
+	public static void main(String [] args) throws ClassNotFoundException{
+		
+
+		
+		// Class<String> clazz = String.class;
+		// Class clazz = Class.forName("java.lang.String");
+		/*
+		Class clazz = "".getClass();
 		
 		for(Method m: clazz.getDeclaredMethods()){
 			if(Modifier.isPrivate(m.getModifiers())){
@@ -20,5 +25,6 @@ public class ReflectionStuff {
 				System.out.println(Arrays.toString(m.getParameterTypes()));
 			}
 		}
+		*/
 	}
 }
