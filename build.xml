@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<project name="HelloAnt" default="sayHello" basedir=".">
+   <property name="text.hello" value="Hello, Ant!"/>
+	
+   <property name="java.jar" file="jar_filename.txt"/>
+   
+   <target name="sayHello" if="text.hello">
+     <echo>${text.hello}</echo>
+   </target>
+	
+   <target name="compile" depends="sayHello">
+     <javac srcdir="src" destdir="bin"/>
+   </target>
+	
+   <target name="package">
+   		<jar destfile="${java.jar}">
+   			<fileset dir="bin"/>
+   		</jar>
+   </target>
+</project>
