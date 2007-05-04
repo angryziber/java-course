@@ -1,6 +1,5 @@
 package net.azib.java.students.t020556.beans;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
