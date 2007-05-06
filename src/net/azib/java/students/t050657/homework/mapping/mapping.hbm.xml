@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+          
+<hibernate-mapping>
+	
+	<class name="Athlet">
+		<id name="id">
+			<generator class="increment"/>
+		</id>
+		<property name="name"/>
+		<property name="dateOfBirth" type="timestamp" column="dob"/>
+		<property name="countryCode" column="country_code"/>
+		<!--	??? WHAT HERE ???  
+		<component name="result" class="Result">
+			<map name="results" >
+		</component>
+		-->
+	</class>
+	
+	<class name="Competition">
+		<id name="id">
+			<generator class="increment"/>
+		</id>
+		<property name="countryCode" column="country_code"/>
+		<property name="eventDate" type="timestamp" column="date"/>
+		<property name="description"/>
+		<set name="athlets" table="results">
+			<key column="competition_id"/>
+            <many-to-many class="Athlet" column="athlet_id"/>
+		</set>
+	</class>
+	
+</hibernate-mapping>

@@ -1,14 +1,13 @@
-package net.azib.java.students.t050657.homework.src;
+package net.azib.java.students.t050657.homework.src.model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Results{
+public class Result{
 	
-	private Map<DecathlonCoeficient, Double> results = new HashMap<DecathlonCoeficient, Double>();
+	private Map<DecathlonCoeficient, Double> results;
 	
-	public Results() {
+	public Result() {
 		
 	}
 	
@@ -21,7 +20,7 @@ public class Results{
 		}
 	}
 	
-	public void setResult(DecathlonCoeficient decCoef, double result) {
+	private void setResult(DecathlonCoeficient decCoef, double result) {
 		double points = decCoef.evalPoints(result);
 		results.put(decCoef, points);
 	}
@@ -36,7 +35,7 @@ public class Results{
 	public double getFinalScore() throws InsufficientResultsException {
 		if(results.size() != DecathlonCoeficient.EVENT_QUANT) {
 			throw new InsufficientResultsException("Not all results were added, " +
-					"can't calculate final score");
+					                               "can't calculate final score");
 		}
 		double result = 0;
 		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
@@ -45,7 +44,47 @@ public class Results{
 		return result;
 	}
 
-	public Map<DecathlonCoeficient, Double> getResults() {
-		return results;
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Result)) {
+			return false;
+		}
+		
+		Result res = (Result) obj;
+		
+		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
+			Double thisRes = null;
+			Double resRes = null;
+			
+			try {
+				thisRes = this.getResult(decCoef);
+			}
+			catch (InsufficientResultsException e) {
+				try {
+					resRes = res.getResult(decCoef);
+				}
+				catch (InsufficientResultsException ex) {
+					// Both results are not setted. They are equals
+				}
+				finally {
+					if(thisRes != resRes)
+						return false;
+				}
+			}				
+				
+			try {
+				resRes = res.getResult(decCoef);
+			}
+			catch (InsufficientResultsException e) {
+				//ignore
+			}			
+			
+			if (thisRes != resRes) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
+
 }

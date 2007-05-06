@@ -6,9 +6,7 @@
 	
 	<target name="copy">
 		<copy todir="${svndir}">
-			<fileset dir="${basedir}" >
-				<exclude name="view/**"/>
-			</fileset>
+			<fileset dir="${basedir}"/>
 		</copy>
 	</target>
 	

@@ -9,7 +9,7 @@
 	
 		<!-- Database connection settings -->
 	    <property name="connection.driver_class">com.mysql.jbdc.Driver</property>
-        <property name="connection.url">jdbc:mysql//srv.azib.net</property>
+        <property name="connection.url">jdbc:mysql://srv.azib.net/decathlon</property>
         <property name="connection.username">java</property>
         <property name="connection.password">java</property>
         
@@ -17,8 +17,7 @@
         <property name="show_sql">true</property>
         
         <!-- Mapping resources below -->
-        <mapping resource="mapping/Athlet.hbm.xml"/>
-        <mapping resource="mapping/Competition.hbm.xml"/>
+        <mapping resource="mapping/mapping.hbm.xml"/>
         
 	</session-factory>
 	

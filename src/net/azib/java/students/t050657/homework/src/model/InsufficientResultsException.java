@@ -1,4 +1,4 @@
-package net.azib.java.students.t050657.homework.src;
+package net.azib.java.students.t050657.homework.src.model;
 
 public class InsufficientResultsException extends Exception {
 	
@@ -6,5 +6,9 @@ public class InsufficientResultsException extends Exception {
 	
 	InsufficientResultsException(String msg){
 		super(msg);
+	}
+	
+	InsufficientResultsException(){
+		super();
 	}
 }
