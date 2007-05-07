@@ -1,15 +1,19 @@
 package net.azib.java.students.t020556.homework;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import sun.security.jca.GetInstance;
 
 /**
- * <b>DechatlonEvent</b> class which contains enumerations to dechtlon events. Events divide into 
+ * DechatlonEvent class which contains enumerations to dechtlon events. Events divide into 
  * two categories: Running and Field events.
  *
  * @author Agu Aarna
@@ -19,7 +23,7 @@ public final class DechatlonEvent {
 	
 	/**
 	 * 
-	 * <b>RUNNING</b> enum represents dechatlon running events
+	 * RUNNING enum represents dechatlon running events
 	 *
 	 * @author Agu Aarna
 	 * @version 1
@@ -34,6 +38,7 @@ public final class DechatlonEvent {
 		private double constA;
 		private double constB;
 		private double constC;
+		private DateFormat timeFormatter = new SimpleDateFormat("mm:ss.SS");
 		
 		//logger
 		private Logger LOG = Logger.getLogger(this.getClass().getName());
@@ -54,22 +59,53 @@ public final class DechatlonEvent {
 			this.constC = constC;
 		}
 		
-		public double calculatePoints(String time){
+		/**
+		 * calculatePoints calculates dechatlon ponints according to the provided result in the
+		 * parameter field
+		 * @author Agu Aarna
+		 * 
+		 * @param result - the time value from which to calculate the results. Only minute, second
+		 * and millisecond fields will be examined
+		 * 
+		 * @version 1
+		 */
+		public double calculatePoints(Date result){
+			Calendar cal = new GregorianCalendar();
+			cal.setTime(result);
+			BigDecimal timeInSeconds = 
+				new BigDecimal((double)cal.get(Calendar.MILLISECOND) / 100 + 
+				cal.get(Calendar.MINUTE) * 60 + 
+				cal.get(Calendar.SECOND));
+			
+			return constA * (constB - timeInSeconds) ^ constC;
+		}
+		
+		/**
+		 * calculatePoints calculates dechatlon ponints according to the provided result in the
+		 * parameter field
+		 * @author Agu Aarna
+		 * 
+		 * @param result - the time value from which to calculate the results; overloads 
+		 * calculatePoints(Date). The result has to be in a format "mm:ss.SS".
+		 * 
+		 * @version 1
+		 */
+		public double calculatePoints(String result){
 			try {
-				Date timeFormatted = DateFormat.getInstance().parse(time);
-				timeFormatted.getSeconds();
+				Date timeFormatted = timeFormatter.parse(result);
+				return calculatePoints(timeFormatted);
 			}
 			catch (ParseException e) {
 				LOG.log(
-					Level.SEVERE, "Unable to parse time string " + time + " for the event " + this, e);
+					Level.SEVERE, "Unable to parse time string " + result + " for the event " + this, e);
 			}
-			return 0.001;
+			return 0;
 		}
 	}
 	
 	/**
 	 * 
-	 * <b>FIELD</b> enum represents dechatlon field events
+	 * FIELD enum represents dechatlon field events
 	 *
 	 * @author Agu Aarna
 	 * @version 1
