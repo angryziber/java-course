@@ -40,6 +40,7 @@ public class DecathlonEventTest {
 			runningEvent.calculatePoints("0:" + timeShort) == runningEvent.calculatePoints(timeShort));
 		assertTrue(
 			runningEvent.calculatePoints(timeLong) == runningEvent.calculatePoints(now));
+		assertEquals(runningEvent.getName(), "1500m race");
 	}
 
 	@Test
@@ -48,6 +49,7 @@ public class DecathlonEventTest {
 			fieldEvent.calculatePoints("53.45") == fieldEvent.calculatePoints(53.45));
 		assertTrue(
 			fieldEvent.calculatePoints("0007.3") == fieldEvent.calculatePoints(7.3));		
+		assertEquals(fieldEvent.getName(), "discus throw");
 	}
 
 }
