@@ -16,8 +16,8 @@ import org.junit.Test;
  */
 public class DecathlonEventTest {
 	
-	public DecathlonEvent.Running runningEvent = DecathlonEvent.Running.A_1500_M;
-	public DecathlonEvent.Field fieldEvent = DecathlonEvent.Field.DISCUS_THROW;
+	public DecathlonEvent runningEvent = DecathlonEvent.A_1500_M;
+	public DecathlonEvent fieldEvent = DecathlonEvent.DISCUS_THROW;
 	
 	@Test
 	public void testCalculateRunningPoints(){
@@ -49,7 +49,10 @@ public class DecathlonEventTest {
 			fieldEvent.calculatePoints("53.45") == fieldEvent.calculatePoints(53.45));
 		assertTrue(
 			fieldEvent.calculatePoints("0007.3") == fieldEvent.calculatePoints(7.3));		
-		assertEquals(fieldEvent.getName(), "discus throw");
 	}
 
+	@Test
+	public void testName(){
+		assertEquals(fieldEvent.getName(), "discus throw");
+	}
 }
