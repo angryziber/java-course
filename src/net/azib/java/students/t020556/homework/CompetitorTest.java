@@ -7,8 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
-
+import org.junit.Before;
 import org.junit.Test;
 
 
@@ -35,6 +34,7 @@ public class CompetitorTest {
 	}
 
 	@Test
+	@Before
 	public void testName() {
 		String name = "Василий Пупкин";
 		
@@ -55,15 +55,16 @@ public class CompetitorTest {
 	}
 	
 	@Test
-	public void testEvents() throws Exception {
-		for(DecathlonEvent.Field field : DecathlonEvent.Field.values()){
-			comp.setEventResult(field, field.calculatePoints("100.4"));			
-		}
+	public void testResultValid() throws Exception {
+		for(DecathlonEvent field : DecathlonEvent.values())
+			comp.put(field, field.calculatePoints("10.4"));			
 		
-		Map<DecathlonEvent.Field, Double> m = comp.getFieldEventMap();
-		for(Map.Entry<DecathlonEvent.Field, Double> entry : m.entrySet()){
-			assertNotNull(entry.getKey().getName());
-			assertTrue(entry.getValue() > 0);
-		}
+		assertTrue(comp.getFinalResult() > 1000);
+		
+		Competitor comp2 = new Competitor(comp.clone());
+		comp.remove(DecathlonEvent.A_100_M);
+		
+		assertTrue(comp.getFinalResult() == 0);
+		assertTrue(comp.compareTo(comp2) < 0);
 	}
 }
