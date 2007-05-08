@@ -30,15 +30,16 @@ public final class DecathlonEvent {
 	 * @version 1
 	 */
 	public enum Running{
-		A_100_M(25.437, 18, 1.81),
-		A_400_M(1.53775, 82, 1.81),
-		A_110_M_HURDLE(5.74352, 28.5, 1.92),
-		A_1500_M(0.03768, 480, 1.85);
+		A_100_M(25.437, 18, 1.81, "100m race"),
+		A_400_M(1.53775, 82, 1.81, "400m race"),
+		A_110_M_HURDLE(5.74352, 28.5, 1.92, "110m hurdle"),
+		A_1500_M(0.03768, 480, 1.85, "1500m race");
 
 		//private constants
 		private double constA;
 		private double constB;
 		private double constC;
+		private String name;
 		private DateFormat timeFormatterLong = new SimpleDateFormat("mm:ss.SS");
 		private NumberFormat timeFormatterShort = NumberFormat.getInstance(Locale.US);
 		
@@ -55,10 +56,11 @@ public final class DecathlonEvent {
 		 * 
 		 * @version 1
 		 */
-		Running(double constA, double constB, double constC){
+		Running(double constA, double constB, double constC, String name){
 			this.constA = constA;
 			this.constB = constB;
 			this.constC = constC;
+			this.name = name;
 		}
 		
 		/**
@@ -136,6 +138,13 @@ public final class DecathlonEvent {
 		private double calculatePoints(double resultTime){
 			return constA * Math.pow(constB - resultTime, constC);
 		}
+
+		/**
+		 * @return the name
+		 */
+		public String getName() {
+			return name;
+		}
 	}
 	
 	/**
@@ -147,17 +156,18 @@ public final class DecathlonEvent {
 	 * @version 1
 	 */
 	public enum Field{
-		LONG_JUMP(0.14354, 220, 1.40),
-		SHOT_PUT(51.39, 1.5, 1.05),
-		HIGH_JUMP(0.8465, 75, 1.42),
-		DISCUS_THROW(12.91, 4.0, 1.1),
-		POLE_VAULT(0.2797, 100, 1.35),
-		JAVELIN_THROW(10.14, 7.0, 1.08);
+		LONG_JUMP(0.14354, 220, 1.40, "long jump"),
+		SHOT_PUT(51.39, 1.5, 1.05, "shot put"),
+		HIGH_JUMP(0.8465, 75, 1.42, "high jump"),
+		DISCUS_THROW(12.91, 4.0, 1.1, "discus throw"),
+		POLE_VAULT(0.2797, 100, 1.35, "pole voult"),
+		JAVELIN_THROW(10.14, 7.0, 1.08, "javelin throw");
 		
 		//private constants
 		private double constA;
 		private double constB;
 		private double constC;
+		private String name;
 		private NumberFormat formatter = NumberFormat.getInstance(Locale.US);
 		
 		//logger
@@ -173,10 +183,11 @@ public final class DecathlonEvent {
 		 * 
 		 * @version 1
 		 */
-		Field(double constA, double constB, double constC){
+		Field(double constA, double constB, double constC, String name){
 			this.constA = constA;
 			this.constB = constB;
 			this.constC = constC;
+			this.name = name;
 		}
 		
 		/**
@@ -221,6 +232,13 @@ public final class DecathlonEvent {
 				
 			//return points
 			return constA * Math.pow(resultLength - constB, constC);
+		}
+
+		/**
+		 * @return the name
+		 */
+		public String getName() {
+			return name;
 		}
 	}
 }
