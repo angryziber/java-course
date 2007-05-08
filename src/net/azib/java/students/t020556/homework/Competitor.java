@@ -1,6 +1,6 @@
 package net.azib.java.students.t020556.homework;
 
-import java.nio.charset.Charset;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,9 +30,6 @@ public class Competitor {
 	private Calendar dateOfBirth = null;
 	private Locale locale = null;
 
-	//functional members
-	private Charset charset = Charset.forName("UTF-8");
-	
 	//logger
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
 
@@ -198,10 +195,16 @@ public class Competitor {
 	 * @version 1
 	 */
 	public void setName(String name) {
-		if(name == null)
+		if(name == null){
 			LOG.warning("Unable to set a given name: " + name);
-		else
-			this.name = charset.encode(name).toString();
+			return;
+		}
+		try {
+			this.name = new String(name.getBytes("UTF-16"), "UTF-16");
+		}
+		catch (UnsupportedEncodingException e) {
+			LOG.log(Level.SEVERE, "Unable to decode string \"" + name + "\" to UTF-8.", e);
+		}
 	}
 	
 	
