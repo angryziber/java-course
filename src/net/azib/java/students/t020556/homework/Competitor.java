@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,13 +18,13 @@ import java.util.logging.Logger;
  * 
  * @version 1
  */
-public class Competitor {
-	//data members
-	private Map<DecathlonEvent.Running, Double> runningEvents = 
-		new EnumMap<DecathlonEvent.Running, Double>(DecathlonEvent.Running.class);
-	private Map<DecathlonEvent.Field, Double> fieldEvents = 
-		new EnumMap<DecathlonEvent.Field, Double>(DecathlonEvent.Field.class);
+public class Competitor 
+	extends EnumMap<DecathlonEvent, Double>
+	implements Comparable{
 	
+	/** serialVersionUID */
+	private static final long serialVersionUID = 3512693074923315896L;
+
 	private String name = null;
 	private Calendar dateOfBirth = null;
 	private Locale locale = null;
@@ -34,54 +33,25 @@ public class Competitor {
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
 
 	/**
-	 * setEventResult method sets the competitor event result
-	 * 
-	 * @author Agu Aarna
-	 * 
-	 * @param fieldEvent - specifies an event
-	 * @param result - specifies the event's result of the competitor
-	 * 
-	 * @version 1
-	 */
-	public void setEventResult(DecathlonEvent.Running event, double result){
-		runningEvents.put(event, result);
-	}
-	
-	/**
-	 * setEventResult method sets the competitor event result
-	 * 
-	 * @author Agu Aarna
-	 * 
-	 * @param fieldEvent - specifies an event
-	 * @param result - specifies the event's result of the competitor
-	 * 
-	 * @version 1
-	 */
-	public void setEventResult(DecathlonEvent.Field event, double result){
-		fieldEvents.put(event, result);
-	}
-	
-	/**
-	 * getRunningEventMap method returns the results of runnning events as a Map
-	 * 
-	 * @author Agu Aarna
-	 * 
-	 * @param fieldEvent - specifies an event
-	 * @param result - specifies the event's result of the competitor
-	 */
-	public Map<DecathlonEvent.Running, Double> getRunningEventMap(){
-		return runningEvents;
-	}
-	
-	/**
-	 * getFieldEventMap method returns the results of field events as a Map
+	 * the constructor
 	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @version 1
 	 */
-	public Map<DecathlonEvent.Field, Double> getFieldEventMap(){
-		return fieldEvents;
+	public Competitor() {
+		super(DecathlonEvent.class);
+	}
+
+	/**
+	 * the constructor
+	 * 
+	 * @author Agu Aarna
+	 * 
+	 * @version 1
+	 */
+	public Competitor(EnumMap<DecathlonEvent, Double> map) {
+		super(map);
 	}
 
 	/**
@@ -207,5 +177,53 @@ public class Competitor {
 		}
 	}
 	
+	/**
+	 * getFinalResult method returns the the final result of the copetitor. If for some reason
+	 * a particular event result is missing, the method terminates returning 0
+	 * 
+	 * @author Agu Aarna
+	 * 
+	 * @param competitor to compare to
+	 * 
+	 * @version 1
+	 */
+	public double getFinalResult() {
+		double result = 0;
+		
+		//first handle running
+		for(DecathlonEvent event : DecathlonEvent.values()){
+			Double d = this.get(event);
+			if(d == null){
+				LOG.warning(
+					"Missing " + this.name + "'s event points for event " + event.getName() + "!");
+				return 0;
+			}
+			
+			result += d;
+		}
+		return result;
+	}
 	
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 * 
+	 * @author Agu Aarna
+	 * 
+	 * @param competitor to compare to
+	 * 
+	 * @version 1
+	 */
+	@Override
+	public int compareTo(Object o) {
+		if(!(o instanceof Competitor))
+			return -1;
+		
+		double d = this.getFinalResult() - ((Competitor)o).getFinalResult();
+		
+		if (d < 0)
+			return -1;
+		else if (d > 0)
+			return 1;
+		return 0;
+	}
 }
