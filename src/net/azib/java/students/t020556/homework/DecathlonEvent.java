@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -19,228 +18,139 @@ import java.text.SimpleDateFormat;
  * 
  * @version 1
  */
-public final class DecathlonEvent {
+public enum DecathlonEvent {
+	//running events
+	A_100_M(25.437, 18, 1.81, "100m race", false),
+	A_400_M(1.53775, 82, 1.81, "400m race", false),
+	A_110_M_HURDLE(5.74352, 28.5, 1.92, "110m hurdle", false),
+	A_1500_M(0.03768, 480, 1.85, "1500m race", false),
+	
+	//field events
+	LONG_JUMP(0.14354, 220, 1.40, "long jump", true),
+	SHOT_PUT(51.39, 1.5, 1.05, "shot put", true),
+	HIGH_JUMP(0.8465, 75, 1.42, "high jump", true),
+	DISCUS_THROW(12.91, 4.0, 1.1, "discus throw", true),
+	POLE_VAULT(0.2797, 100, 1.35, "pole voult", true),
+	JAVELIN_THROW(10.14, 7.0, 1.08, "javelin throw", true);
+
+	//private constants
+	private double constA;
+	private double constB;
+	private double constC;
+	private String name;
+	private boolean isFieldEvent;
+	private DateFormat timeFormatter = new SimpleDateFormat("mm:ss.SS");
+	private NumberFormat numberFormatter = NumberFormat.getInstance(Locale.US);
+	
+	//logger
+	private Logger LOG = Logger.getLogger(this.getClass().getName());
 	
 	/**
-	 * 
-	 * RUNNING enum represents dechatlon running events
-	 *
+	 * The consructor
 	 * @author Agu Aarna
+	 * 
+	 * @param constA - the A constant of the dechatlon points calculation equasion
+	 * @param constB - the B constant of the dechatlon points calculation equasion
+	 * @param constC - the C constant of the dechatlon points calculation equasion
+	 * @param name - specifies the name of the event in human readable format
+	 * @param isFieldEvent - specifies if the event is a field event or a running event
 	 * 
 	 * @version 1
 	 */
-	public enum Running{
-		A_100_M(25.437, 18, 1.81, "100m race"),
-		A_400_M(1.53775, 82, 1.81, "400m race"),
-		A_110_M_HURDLE(5.74352, 28.5, 1.92, "110m hurdle"),
-		A_1500_M(0.03768, 480, 1.85, "1500m race");
-
-		//private constants
-		private double constA;
-		private double constB;
-		private double constC;
-		private String name;
-		private DateFormat timeFormatterLong = new SimpleDateFormat("mm:ss.SS");
-		private NumberFormat timeFormatterShort = NumberFormat.getInstance(Locale.US);
-		
-		//logger
-		private Logger LOG = Logger.getLogger(this.getClass().getName());
-		
-		/**
-		 * The consructor
-		 * @author Agu Aarna
-		 * 
-		 * @param constA - the A constant of the dechatlon points calculation equasion
-		 * @param constB - the B constant of the dechatlon points calculation equasion
-		 * @param constC - the C constant of the dechatlon points calculation equasion
-		 * 
-		 * @version 1
-		 */
-		Running(double constA, double constB, double constC, String name){
-			this.constA = constA;
-			this.constB = constB;
-			this.constC = constC;
-			this.name = name;
-		}
-		
-		/**
-		 * calculatePoints calculates dechatlon ponints according to the provided result in the
-		 * parameter field
-		 * @author Agu Aarna
-		 * 
-		 * @param resultTime - the time value from which to calculate the results; overloads 
-		 * calculatePoints(Date). The result has to be in a format "mm:ss.SS" or "ss.SS".
-		 * 
-		 * @version 1
-		 */
-		public double calculatePoints(String resultTime){
-			if(resultTime == null){
-				LOG.severe("Passed argument was null! Unable to colculate points!");
-				return 0;
-			}
-			//first try date
-			try {
-				return calculatePoints(timeFormatterLong.parse(resultTime));
-			}
-			catch (ParseException e) {
-				LOG.warning( "Unable to parse time string \"" + resultTime + 
-					"\" for the event " + this + ". Parsing by number...");
-			}
-			
-			//then try decimal number
-			try {
-				return calculatePoints(timeFormatterShort.parse(resultTime).doubleValue());
-			}
-			catch (ParseException e) {
-				LOG.log(
-						Level.SEVERE, "Unable to parse time string \"" + 
-						resultTime + "\" for the event " + this, e);
-				return 0;
-			}
-		}
-
-		/**
-		 * calculatePoints calculates dechatlon ponints according to the provided result in the
-		 * parameter field
-		 * @author Agu Aarna
-		 * 
-		 * @param resultTime - the time value from which to calculate the results. Only minute, second
-		 * and millisecond fields will be examined
-		 * 
-		 * @version 1
-		 */
-		public double calculatePoints(Date resultTime){
-			if(resultTime == null){
-				LOG.severe("Passed argument was null! Unable to colculate points!");
-				return 0;
-			}
-
-			Calendar cal = new GregorianCalendar();
-			cal.setTime(resultTime);
-			double points =
-				(double)cal.get(Calendar.MILLISECOND) / 100 + 
-				cal.get(Calendar.MINUTE) * 60 + 
-				cal.get(Calendar.SECOND);
-			
-			//return points
-			return calculatePoints(points); 
-		}
-		
-		/**
-		 * calculatePoints calculates dechatlon ponints according to the provided result in the
-		 * parameter field
-		 * @author Agu Aarna
-		 * 
-		 * @param resultTime - the time value in seconds from which to calculate the results
-		 * 
-		 * @version 1
-		 */
-		private double calculatePoints(double resultTime){
-			return constA * Math.pow(constB - resultTime, constC);
-		}
-
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
-		}
+	DecathlonEvent(
+		double constA, double constB, double constC, String name, boolean isFieldEvent
+		){
+		this.constA = constA;
+		this.constB = constB;
+		this.constC = constC;
+		this.name = name;
+		this.isFieldEvent = isFieldEvent;
 	}
 	
 	/**
-	 * 
-	 * FIELD enum represents dechatlon field events
-	 *
+	 * calculatePoints calculates dechatlon ponints according to the provided result in the
+	 * parameter field
 	 * @author Agu Aarna
+	 * 
+	 * @param result - the time value from which to calculate the results; overloads 
+	 * calculatePoints(Date). The result has to be in a format "mm:ss.SS" or "ss.SS".
 	 * 
 	 * @version 1
 	 */
-	public enum Field{
-		LONG_JUMP(0.14354, 220, 1.40, "long jump"),
-		SHOT_PUT(51.39, 1.5, 1.05, "shot put"),
-		HIGH_JUMP(0.8465, 75, 1.42, "high jump"),
-		DISCUS_THROW(12.91, 4.0, 1.1, "discus throw"),
-		POLE_VAULT(0.2797, 100, 1.35, "pole voult"),
-		JAVELIN_THROW(10.14, 7.0, 1.08, "javelin throw");
-		
-		//private constants
-		private double constA;
-		private double constB;
-		private double constC;
-		private String name;
-		private NumberFormat formatter = NumberFormat.getInstance(Locale.US);
-		
-		//logger
-		private Logger LOG = Logger.getLogger(this.getClass().getName());
-
-		/**
-		 * The consructor
-		 * @author Agu Aarna
-		 * 
-		 * @param constA - the A constant of the dechatlon points calculation equasion
-		 * @param constB - the B constant of the dechatlon points calculation equasion
-		 * @param constC - the C constant of the dechatlon points calculation equasion
-		 * 
-		 * @version 1
-		 */
-		Field(double constA, double constB, double constC, String name){
-			this.constA = constA;
-			this.constB = constB;
-			this.constC = constC;
-			this.name = name;
+	public double calculatePoints(String result){
+		if(result == null){
+			LOG.severe("Passed argument was null! Unable to colculate points!");
+			return 0;
 		}
-		
-		/**
-		 * calculatePoints calculates dechatlon ponints according to the provided result in the
-		 * parameter field
-		 * @author Agu Aarna
-		 * 
-		 * @param resultLength - the length value in meters from which to calculate the results.
-		 * 
-		 * @version 1
-		 */
-		public double calculatePoints(String resultLength){
-			if(resultLength == null){
-				LOG.severe("Passed argument was null! Unable to colculate points!");
-				return 0;
-			}
-
+		for(int i = 0; i < 2; i++){
 			try {
-				return calculatePoints(formatter.parse(resultLength).doubleValue());
+				if(!isFieldEvent && i < 1)
+					return calculatePoints(timeFormatter.parse(result));
+				return calculatePoints(numberFormatter.parse(result).doubleValue());
 			}
 			catch (ParseException e) {
-				LOG.log(
-						Level.SEVERE, "Unable to parse length string \"" + 
-						resultLength + "\" for the event " + this, e);
-				return 0;
+				LOG.warning("Unable to parse result string \"" + result + 
+					"\" for the event " + this);
 			}
 		}
+		return 0;
+	}
 
-		/**
-		 * calculatePoints calculates dechatlon ponints according to the provided result in the
-		 * parameter field
-		 * @author Agu Aarna
-		 * 
-		 * @param resultLength - the length value in meters from which to calculate the results
-		 * 
-		 * @version 1
-		 */
-		public double calculatePoints(double resultLength){
-			//handle high_jump separately
-			if(	this == DecathlonEvent.Field.HIGH_JUMP ||
-				this == DecathlonEvent.Field.LONG_JUMP ||
-				this == DecathlonEvent.Field.POLE_VAULT)
-				resultLength *= 100;
-				
-			//return points
-			return constA * Math.pow(resultLength - constB, constC);
+	/**
+	 * calculatePoints calculates dechatlon ponints according to the provided result in the
+	 * parameter field
+	 * @author Agu Aarna
+	 * 
+	 * @param resultTime - the time value from which to calculate the results. Only minute, second
+	 * and millisecond fields will be examined
+	 * 
+	 * @version 1
+	 */
+	public double calculatePoints(Date resultTime){
+		if(resultTime == null || this.isFieldEvent){
+			LOG.severe("Passed argument was invalid! Unable to calculate points!");
+			return 0;
 		}
 
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(resultTime);
+		double points =
+			(double)cal.get(Calendar.MILLISECOND) / 100 + 
+			cal.get(Calendar.MINUTE) * 60 + 
+			cal.get(Calendar.SECOND);
+		
+		//return points
+		return calculatePoints(points); 
+	}
+		
+	/**
+	 * calculatePoints calculates dechatlon ponints according to the provided result in the
+	 * parameter field
+	 * @author Agu Aarna
+	 * 
+	 * @param result - the time value in seconds from which to calculate the results
+	 * 
+	 * @version 1
+	 */
+	public double calculatePoints(double result){
+		if(isFieldEvent){
+			if(	this == HIGH_JUMP ||
+				this == LONG_JUMP ||
+				this == POLE_VAULT)
+				result *= 100;
+
+			result -= constB;
 		}
+		else
+			result = constB - result;
+		
+		return constA * Math.pow(result, constC);
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 }
