@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
  * two categories: Running and Field events.
  *
  * @author Agu Aarna
+ * 
  * @version 1
  */
 public final class DecathlonEvent {
@@ -25,6 +26,7 @@ public final class DecathlonEvent {
 	 * RUNNING enum represents dechatlon running events
 	 *
 	 * @author Agu Aarna
+	 * 
 	 * @version 1
 	 */
 	public enum Running{
@@ -141,6 +143,7 @@ public final class DecathlonEvent {
 	 * FIELD enum represents dechatlon field events
 	 *
 	 * @author Agu Aarna
+	 * 
 	 * @version 1
 	 */
 	public enum Field{
