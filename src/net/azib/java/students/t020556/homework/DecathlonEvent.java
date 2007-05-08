@@ -227,7 +227,9 @@ public final class DecathlonEvent {
 		 */
 		public double calculatePoints(double resultLength){
 			//handle high_jump separately
-			if(this == DecathlonEvent.Field.HIGH_JUMP)
+			if(	this == DecathlonEvent.Field.HIGH_JUMP ||
+				this == DecathlonEvent.Field.LONG_JUMP ||
+				this == DecathlonEvent.Field.POLE_VAULT)
 				resultLength *= 100;
 				
 			//return points

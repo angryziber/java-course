@@ -62,7 +62,8 @@ public class CompetitorTest {
 		
 		Map<DecathlonEvent.Field, Double> m = comp.getFieldEventMap();
 		for(Map.Entry<DecathlonEvent.Field, Double> entry : m.entrySet()){
-			System.out.println(entry.getKey().getName() + " = " +entry.getValue());
+			assertNotNull(entry.getKey().getName());
+			assertTrue(entry.getValue() > 0);
 		}
 	}
 }
