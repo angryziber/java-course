@@ -21,7 +21,7 @@ public enum EventInfo {
 	/**
 	 * Following three fields represents constants for
 	 * calculating the score of the event. Each event has
-	 * different values for constants
+	 * different values for those constants
 	 */
 	private final float A;
 	private final float B;
