@@ -40,7 +40,21 @@ public class AthleteResults implements Comparable<AthleteResults>{
 		return event;
 	}
 	
-	public int calculate(Event event){
+	public int calculateScore(){
+		int score = 0;
+		int i = 0;
+		Event event;
+		
+		while(i < events.size()){
+			event = events.get(i);
+			score = score + this.calculateEvent(event);
+			i++;
+		}
+		
+		return score;
+	}
+	
+	public int calculateEvent(Event event){
 		int score;
 		
 		score = event.calculate();
@@ -69,6 +83,14 @@ public class AthleteResults implements Comparable<AthleteResults>{
 	
 	public int getPosition(){
 		return position;
+	}
+	
+	public void setScore(int score){
+		this.totalScore = score;
+	}
+	
+	public void setPosition(int pos){
+		this.position = pos;
 	}
 
 	public int compareTo(AthleteResults a) {
