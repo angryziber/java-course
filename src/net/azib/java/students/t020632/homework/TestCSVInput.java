@@ -16,7 +16,7 @@ public class TestCSVInput {
 	
 	@Before
 	public void setUp() throws Exception {
-		input = new CSVInput("C:/test.csv");
+		input = new CSVInput("H:/test.csv");
 	}
 	
 	@Test
