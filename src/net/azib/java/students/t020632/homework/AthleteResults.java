@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * AthleteResults
+ * AthleteResults represents decathlon event results for 
+ * one athlete. Contains information about the athlete and
+ * set of events representing the results and scores.
  *
  * @author Marek Soobik t020632
  */
@@ -28,11 +30,23 @@ public class AthleteResults implements Comparable<AthleteResults>{
 		this.country = country;
 	}
 	
-	
+	/**
+	 * Adds event to the list of results
+	 * 
+	 * @param event
+	 */
 	public void addEvent(Event event){
 		events.add(event);
 	}
 	
+	
+	/**
+	 * Creates new event object which holds information about
+	 * the event and the result
+	 * 
+	 * @param eventInfo
+	 * @return	created Event object
+	 */
 	public Event createEvent(EventInfo eventInfo){
 		Event event = null;
 		
@@ -40,6 +54,12 @@ public class AthleteResults implements Comparable<AthleteResults>{
 		return event;
 	}
 	
+	/**
+	 * Calculates score for all the events completed during the 
+	 * competition
+	 * 
+	 * @return	Sum of the scores of all the events
+	 */
 	public int calculateScore(){
 		int score = 0;
 		int i = 0;
@@ -54,6 +74,12 @@ public class AthleteResults implements Comparable<AthleteResults>{
 		return score;
 	}
 	
+	/**
+	 * Calculates score for one specific event
+	 * 
+	 * @param event
+	 * @return	Score of the event
+	 */
 	public int calculateEvent(Event event){
 		int score;
 		
@@ -92,7 +118,14 @@ public class AthleteResults implements Comparable<AthleteResults>{
 	public void setPosition(int pos){
 		this.position = pos;
 	}
-
+	
+	/**
+	 * Compares two AthleteResults objects. Returns positive
+	 * integer if this AthleteResults object has better score
+	 * than compared AthleteResults object and negative integer 
+	 * if this object has worse score. If both scores are equal
+	 * number 0 is returned.
+	 */
 	public int compareTo(AthleteResults a) {
 		return this.getScore() - a.getScore();  
 	}
