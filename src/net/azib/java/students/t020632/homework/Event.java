@@ -3,7 +3,7 @@ package net.azib.java.students.t020632.homework;
 /**
  * Event is a class which represents one decathlon event
  *
- * @author Marek
+ * @author Marek Soobik t020632
  */
 public class Event {
 	
