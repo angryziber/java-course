@@ -17,10 +17,27 @@ public enum EventInfo {
 	JAVELIN_THROW 		(10.14F, 7.0F, 1.08F, "m", "fieldEvent"),
 	RUN_1500M 			(0.03768F, 480.0F, 1.85F, "sec", "runningEvent");
 	
+	
+	/**
+	 * Following three fields represents constants for
+	 * calculating the score of the event. Each event has
+	 * different values for constants
+	 */
 	private final float A;
 	private final float B;
 	private final float C;
+	
+	/**
+	 *  Field units represents units the result for the 
+	 *  event is measured. Result could be measured in 
+	 *  seconds (sec), meters (m) or centimeters (cm)
+	 */
 	private String units;
+	
+	/**
+	 * Field type shows the event type. There are two types of
+	 * events: running events and field events.
+	 */
 	private String type;
 	
 	private EventInfo(float A, float B, float C, String units, String type){
