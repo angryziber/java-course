@@ -3,7 +3,8 @@ package net.azib.java.students.t020632.homework;
 
 /**
  * RunningEventCalculator is used to calculate score for
- * running events (100m, 400m, 100m hurdles and 1500m)
+ * running events (100m, 400m, 100m hurdles and 1500m).
+ * This calculator is singleton object.
  *
  * @author Marek Soobik
  */
@@ -15,6 +16,12 @@ public class RunningEventCalculator implements EventCalculator{
 		
 	}
 	
+	/**
+	 * Creates new RunningEventCalculator object or
+	 * returns old object
+	 * 
+	 * @return
+	 */
 	public static RunningEventCalculator getCalculator(){
 		
 		if(calculator == null){
@@ -24,6 +31,9 @@ public class RunningEventCalculator implements EventCalculator{
 		return calculator;
 	}
 	
+	/**
+	 * Calculates score for the event
+	 */
 	public int calculate(EventInfo info, float result){
 		
 		int score = 0;
