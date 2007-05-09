@@ -74,7 +74,24 @@ public class DecathlonCompetiton {
 	 * Sets rank for each athlete
 	 */
 	public void setAthletePositions(){
+		int i = 0;
+		int pos = 1;
+		AthleteResults result;
 		
+		while(i < athletes.size()){
+			result = athletes.get(i);
+			if(i == 0){
+				result.setPosition(pos);
+			}
+			else{
+				if((result.getScore() - athletes.get(i-1).getScore()) < 0)
+					result.setPosition(pos);
+				else
+					result.setPosition(athletes.get(i-1).getPosition());
+			}
+			i++;
+			pos++;
+		}
 	}
 	
 	
