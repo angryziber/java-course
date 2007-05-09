@@ -29,6 +29,9 @@ public class Competitor
 	private String encoding = "UTF16";
 	private Calendar dateOfBirth = null;
 	private Locale locale = null;
+	
+	//base result string array
+	private String[] results;
 
 	//logger
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
@@ -215,9 +218,9 @@ public class Competitor
 	 * @version 1
 	 */
 	@Override
-	public int compareTo(Object o) {
+	public int compareTo(Object o){
 		if(!(o instanceof Competitor))
-			return -1;
+			throw new ClassCastException("Object not instance of Competitor");
 		
 		double d = this.getFinalResult() - ((Competitor)o).getFinalResult();
 		
@@ -226,5 +229,35 @@ public class Competitor
 		else if (d > 0)
 			return 1;
 		return 0;
+	}
+
+	/**
+	 * @return the results
+	 */
+	public String[] getResults() {
+		return results;
+	}
+
+	/**
+	 * setResults method sets the results array internally
+	 * 
+	 * @author Agu Aarna
+	 * 
+	 * @param results the results to set. The results have to be in the exact order of the
+	 * enumerations defined in {@link net.azib.java.students.t020556.homework.DecathlonEvent}
+	 */
+	public void setResults(String[] results) {
+		if(DecathlonEvent.values().length == results.length){
+			this.results = results;
+			initMap();
+		}
+		else
+			LOG.severe("Results array element count does not match the decathlon event count!");
+	}
+	
+	private void initMap(){
+		int i = 0;
+		for(DecathlonEvent field : DecathlonEvent.values())
+			this.put(field, field.calculatePoints(this.results[i++]));
 	}
 }
