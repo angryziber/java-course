@@ -12,11 +12,11 @@ import java.util.*;
 public class DatabaseInput implements Input {
 
 	private String connection;
-	private int competition;
+	//private int competition;
 	
 	
 	public DatabaseInput(int comp, String con){
-		competition = comp;
+		//competition = comp;
 		connection = con;
 	}
 	
@@ -39,7 +39,8 @@ public class DatabaseInput implements Input {
 			
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
-			Connection con = DriverManager.getConnection("jdbc:mysql://srv.azib.net:3306/decathlon", properties);
+			Connection con = DriverManager.getConnection(connection, properties);
+			//Connection con = DriverManager.getConnection("jdbc:mysql://srv.azib.net:3306/decathlon", properties);
 			
 			Statement selectStatement = con.createStatement();
 			
