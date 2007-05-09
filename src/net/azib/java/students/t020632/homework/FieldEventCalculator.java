@@ -3,7 +3,8 @@ package net.azib.java.students.t020632.homework;
 /**
  * FieldEventCalculator is used to calculate scores for 
  * non-running events (Long Jump, Shot Put, High Jump,
- * Discus Throw, Pole Vault and Javelin Throw)
+ * Discus Throw, Pole Vault and Javelin Throw). 
+ * FieldEventCalculator is a singleton.
  * 
  *
  * @author Marek Soobik
@@ -16,6 +17,12 @@ public class FieldEventCalculator implements EventCalculator {
 		
 	}
 	
+	/**
+	 * Creates new FieldEventCalculator object or returns
+	 * old object.
+	 * 
+	 * @return
+	 */
 	public static FieldEventCalculator getCalculator(){
 		
 		if(calculator == null){
@@ -25,6 +32,9 @@ public class FieldEventCalculator implements EventCalculator {
 		return calculator;
 	}
 	
+	/**
+	 * Calculates score for the event
+	 */
 	public int calculate(EventInfo info, float result) {
 			
 		int score = 0;
