@@ -7,6 +7,13 @@ package net.azib.java.students.t020632.homework;
  */
 public class EventFactory {
 	
+	/**
+	 * Creates Event object according to the EventInfo object.
+	 * Also appropriate calculator is created for the event.
+	 * 
+	 * @param eventInfo
+	 * @return	Created Event object
+	 */
 	public Event createEvent(EventInfo eventInfo){
 		Event event = null;
 		EventCalculator calculator = null;
