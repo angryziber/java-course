@@ -25,7 +25,7 @@ public class DecathlonResultFileReader
 
 	//stream
 	private FileInputStream input;
-	
+		
 	/** 
 	 * @author Agu Aarna
 	 * 
@@ -34,6 +34,11 @@ public class DecathlonResultFileReader
 	 * @version 1
 	 */
 	public PriorityQueue<Competitor> readResults() {
+		if(input == null){
+			LOG.severe("Input stream not set, unable to read results");
+			return null;
+		}
+		
 		BufferedReader reader = null;
 		PriorityQueue<Competitor> compQ = new PriorityQueue<Competitor>();
 		try {
