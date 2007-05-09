@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,9 @@ public class DecathlonResultFileReader
 	private FileInputStream input;
 		
 	/** 
+	 * readResults method reads the results from the given stream. The stream is not closed 
+	 * or handled in any way, so the caller must do these operations itself
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @see net.azib.java.students.t020556.homework.IDechatlonResultReader#readResults()
@@ -48,7 +53,7 @@ public class DecathlonResultFileReader
 			while((line = reader.readLine()) != null){
 				compQ.add(createCompetitor(line));
 			}
-			
+			return compQ;
 		}
 		catch (UnsupportedEncodingException e) {
 			LOG.warning("Unsupported encoding " + encoding);
@@ -56,15 +61,7 @@ public class DecathlonResultFileReader
 		catch (IOException e) {
 			LOG.log(Level.WARNING, "Reading interrupted", e);
 		}
-		finally{
-			try {
-				reader.close();
-				return compQ;
-			}
-			catch (IOException e) {
-				// should not happen
-			}
-		}
+
 		return null;
 	}
 	
@@ -72,14 +69,15 @@ public class DecathlonResultFileReader
 		String[] results = args.split(",");
 		
 		Competitor comp = new Competitor();
-		comp.setName(results[0]);
+		comp.setName(results[0].trim());
 		comp.setDateOfBirth(results[1]);
 		comp.setLocale(results[2]);
 		
-		int i = 3;
-		for(DecathlonEvent event : DecathlonEvent.values()){
-			comp.put(event, event.calculatePoints(results[i++]));
-		}
+		ArrayList<String> resList = new ArrayList<String>(Arrays.asList(results));
+		for(int i = 0; i < 3; i++)
+			resList.remove(0);
+		resList.toArray(results);
+		comp.setResults(Arrays.copyOf(results, 10));
 		
 		return comp;
 	}
@@ -93,7 +91,7 @@ public class DecathlonResultFileReader
 	 * @version 1
 	 */
 	public void setStream(InputStream in) {
-		if (in instanceof FileInputStream)
+		if(in != null && in instanceof FileInputStream)
 			this.input = (FileInputStream) in;			
 		else
 			LOG.log(
