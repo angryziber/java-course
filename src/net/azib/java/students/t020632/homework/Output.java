@@ -3,7 +3,8 @@ package net.azib.java.students.t020632.homework;
 import java.util.List;
 
 /**
- * Output
+ * Output is a interface which defines write() method
+ * that is used to write results into output 
  *
  * @author Marek Soobik t020632
  */
