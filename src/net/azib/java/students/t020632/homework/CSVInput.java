@@ -38,10 +38,10 @@ public class CSVInput implements Input {
 	}
 	
 	public void parseLine(String s){
-		AthleteResults result;
-		String name;
-		String date;
-		String country;
+		//AthleteResults result;
+		//String name;
+		//String date;
+		//String country;
 		String [] values;
 		
 		values = s.split(",");
