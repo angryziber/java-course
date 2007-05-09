@@ -26,6 +26,7 @@ public class Competitor
 	private static final long serialVersionUID = 3512693074923315896L;
 
 	private String name = null;
+	private String encoding = "UTF16";
 	private Calendar dateOfBirth = null;
 	private Locale locale = null;
 
@@ -170,10 +171,10 @@ public class Competitor
 			return;
 		}
 		try {
-			this.name = new String(name.getBytes("UTF-16"), "UTF-16");
+			this.name = new String(name.getBytes(encoding), encoding);
 		}
 		catch (UnsupportedEncodingException e) {
-			LOG.log(Level.SEVERE, "Unable to decode string \"" + name + "\" to UTF-8.", e);
+			LOG.log(Level.SEVERE, "Unable to decode string \"" + name + "\" to " + encoding, e);
 		}
 	}
 	
