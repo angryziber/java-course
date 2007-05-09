@@ -19,20 +19,18 @@ import java.text.SimpleDateFormat;
  * @version 1
  */
 public enum DecathlonEvent {
-	//running events
+	//events
 	A_100_M(25.437, 18, 1.81, "100m race", false),
-	A_400_M(1.53775, 82, 1.81, "400m race", false),
-	A_110_M_HURDLE(5.74352, 28.5, 1.92, "110m hurdle", false),
-	A_1500_M(0.03768, 480, 1.85, "1500m race", false),
-	
-	//field events
 	LONG_JUMP(0.14354, 220, 1.40, "long jump", true),
 	SHOT_PUT(51.39, 1.5, 1.05, "shot put", true),
 	HIGH_JUMP(0.8465, 75, 1.42, "high jump", true),
+	A_400_M(1.53775, 82, 1.81, "400m race", false),
+	A_110_M_HURDLE(5.74352, 28.5, 1.92, "110m hurdle", false),
 	DISCUS_THROW(12.91, 4.0, 1.1, "discus throw", true),
 	POLE_VAULT(0.2797, 100, 1.35, "pole voult", true),
-	JAVELIN_THROW(10.14, 7.0, 1.08, "javelin throw", true);
-
+	JAVELIN_THROW(10.14, 7.0, 1.08, "javelin throw", true),
+	A_1500_M(0.03768, 480, 1.85, "1500m race", false);
+	
 	//private constants
 	private double constA;
 	private double constB;
