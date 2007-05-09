@@ -17,10 +17,21 @@ public class Event {
 		calculator = ec;
 	}
 	
+	/**
+	 * Sets result for the event
+	 * 
+	 * @param result
+	 */
 	public void setResult(float result){
 		this.result = result;
 	}
 	
+	
+	/**
+	 * Calculates score for this event
+	 * 
+	 * @return
+	 */
 	public int calculate(){
 		int score = 0;
 		
