@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Marek Soobik t020632
  */
-public class AthleteResults implements Comparable{
+public class AthleteResults implements Comparable<AthleteResults>{
 	private EventFactory eventFactory;
 	private List<Event> events;
 	
@@ -66,15 +66,14 @@ public class AthleteResults implements Comparable{
 	public int getScore(){
 		return totalScore;
 	}
+	
+	public int getPosition(){
+		return position;
+	}
 
-	public int compareTo(Object o) throws ClassCastException{
-		if(!(o instanceof AthleteResults))
-			throw new ClassCastException();
-		
-		AthleteResults a = (AthleteResults)o;
+	public int compareTo(AthleteResults a) {
 		return this.getScore() - a.getScore();  
 	}
-	
 	
 	
 }
