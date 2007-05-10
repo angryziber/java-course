@@ -225,9 +225,9 @@ public class Competitor
 		double d = this.getFinalResult() - ((Competitor)o).getFinalResult();
 		
 		if (d < 0)
-			return -1;
-		else if (d > 0)
 			return 1;
+		else if (d > 0)
+			return -1;
 		return 0;
 	}
 
