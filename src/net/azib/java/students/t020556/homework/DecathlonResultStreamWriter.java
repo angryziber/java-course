@@ -98,7 +98,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	}
 
 	/**
-	 * setFormat method specifies in which way data is printed to the stream
+	 * setFormat method specifies in which way data is printed to the stream; Default is CSV 
 	 * 
 	 * @author Agu Aarna
 	 * 
