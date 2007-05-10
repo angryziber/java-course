@@ -29,7 +29,7 @@ public class CompetitorTest {
 	 */
 	@Test
 	public void testDateOfBirth() throws ParseException {
-		DateFormat df = new SimpleDateFormat("mm.dd.yyyy");
+		DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 		String dobFormatted = "01.01.1980";
 		Date dob = df.parse(dobFormatted);
 		
@@ -97,6 +97,6 @@ public class CompetitorTest {
 		comp.remove(DecathlonEvent.RACE_100M);
 		
 		assertTrue(comp.getFinalResult() == 0);
-		assertTrue(comp.compareTo(comp2) < 0);
+		assertTrue(comp.compareTo(comp2) > 0);
 	}
 }
