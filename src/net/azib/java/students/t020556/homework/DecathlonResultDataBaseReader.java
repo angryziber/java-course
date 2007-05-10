@@ -32,6 +32,9 @@ public class DecathlonResultDataBaseReader implements IDechatlonResultReader {
 		ResultSet results = readRaw();
 		PriorityQueue<Competitor> compQ = new PriorityQueue<Competitor>();
 		try {
+			if(results == null)
+				throw new SQLException("No results set");
+
 			while(results.next())
 				compQ.add(createCompetitor(results));
 			return compQ;
@@ -90,7 +93,11 @@ public class DecathlonResultDataBaseReader implements IDechatlonResultReader {
 	}
 	
 	private ResultSet readRaw(){
+		
 		try {
+			if(connection == null)
+				throw new SQLException("No connection set");
+			
 			Statement st = connection.createStatement();
 			String Query = 
 				"SELECT A.name, A.dob, A.country_code, R.* " +
@@ -112,6 +119,9 @@ public class DecathlonResultDataBaseReader implements IDechatlonResultReader {
 	 */
 	public void releaseConnection(){
 		try {
+			if(connection == null)
+				throw new SQLException("No connection set");
+
 			connection.close();
 		}
 		catch (SQLException e) {
