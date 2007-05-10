@@ -16,6 +16,8 @@ public class ConsoleOutput implements Output {
 		
 		AthleteResults result;
 		
+		System.out.print("Place \t");
+		System.out.print("Score \t");
 		System.out.print("Name \t\t");
 		System.out.print("Date Of Birth \t");
 		System.out.print("Country \t");
@@ -32,6 +34,8 @@ public class ConsoleOutput implements Output {
 		
 		while(!results.isEmpty()){
 			result = results.remove(0);
+			System.out.print(result.getPosition() + "\t");
+			System.out.print(result.getScore() + "\t");
 			System.out.print(result.getName() + "\t");
 			System.out.print(result.getDateOfBirth() + "\t");
 			System.out.print(result.getCountry() + "\t");
