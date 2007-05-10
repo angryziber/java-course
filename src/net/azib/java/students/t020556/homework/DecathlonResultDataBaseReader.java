@@ -29,7 +29,16 @@ public class DecathlonResultDataBaseReader implements IDechatlonResultReader {
 	 * @version 1
 	 */
 	public PriorityQueue<Competitor> readResults() {
-		// TODO Auto-generated method stub
+		ResultSet results = readRaw();
+		PriorityQueue<Competitor> compQ = new PriorityQueue<Competitor>();
+		try {
+			while(results.next())
+				compQ.add(createCompetitor(results));
+			return compQ;
+		}
+		catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Unable to move forward in the obtained results", e);
+		}
 		return null;
 	}
 	
@@ -58,15 +67,35 @@ public class DecathlonResultDataBaseReader implements IDechatlonResultReader {
 		}
 	}
 	
-	public String readRaw(){
+	private Competitor createCompetitor(ResultSet rs){
+		try {
+			Competitor comp = new Competitor();
+			comp.setName(rs.getString("name"));
+			comp.setDateOfBirth(rs.getDate("dob"));
+			comp.setLocale(rs.getString("country_code"));
+			
+			String[] results = new String[10];
+			int i = 0;
+			for(DecathlonEvent event : DecathlonEvent.values()){
+				results[i++] = rs.getFloat(event.name().toLowerCase()) + "";
+			}
+			
+			comp.setResults(results);
+			return comp;			
+		}
+		catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Failed to extract results from a resultset", e);
+		}
+		return null;
+	}
+	
+	private ResultSet readRaw(){
 		try {
 			Statement st = connection.createStatement();
-			ResultSet result = st.executeQuery("SELECT name FROM athletes");
-			StringBuilder sb = new StringBuilder();
-			while(result.next())
-				sb.append(result.getString("name") + " ");
-			
-			return sb.toString();
+			String Query = 
+				"SELECT A.name, A.dob, A.country_code, R.* " +
+				"FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id";
+			return st.executeQuery(Query);
 		}
 		catch (SQLException e) {
 			LOG.log(Level.SEVERE, "Unable to query data from database", e);
