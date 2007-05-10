@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * @author Agu Aarna
  */
 public class DecathlonResultStreamReader 
-	implements IDechatlonResultReader {
+	implements IDecathlonResultReader {
 
 	//logger
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
@@ -34,7 +34,7 @@ public class DecathlonResultStreamReader
 	 * 
 	 * @author Agu Aarna
 	 * 
-	 * @see net.azib.java.students.t020556.homework.IDechatlonResultReader#readResults()
+	 * @see net.azib.java.students.t020556.homework.IDecathlonResultReader#readResults()
 	 * 
 	 * @version 1
 	 */
