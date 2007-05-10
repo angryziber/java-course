@@ -1,14 +1,19 @@
 package net.azib.java.students.t020556.homework;
 
-import java.io.OutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.PriorityQueue;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
+import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
  * DecathlonResultXmlWriter
@@ -43,42 +48,60 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 			Element xmlComp = xmlDoc.createElement("Competitor");
 			
 			//place
-			Element node = xmlDoc.createElement("Place");
-			node.appendChild(xmlDoc.createTextNode("" + (i++)));
-			xmlComp.appendChild(node);
+			xmlComp.appendChild(createNode("Place", "" + (i++), xmlDoc));
 			
 			//name
-			node = xmlDoc.createElement("Name");
-			node.appendChild(xmlDoc.createTextNode(comp.getName()));
-			xmlComp.appendChild(node);
+			xmlComp.appendChild(createNode("Name", comp.getName(), xmlDoc));
 
 			//Date of birth
-			node = xmlDoc.createElement("DateOfBirth");
-			node.appendChild(xmlDoc.createTextNode(formatter.format(comp.getDateOfBirth())));
-			xmlComp.appendChild(node);
+			xmlComp.appendChild(
+				createNode("DateOfBirth", formatter.format(comp.getDateOfBirth()), xmlDoc));
 
 			//Locale
-			node = xmlDoc.createElement("Country");
-			node.appendChild(xmlDoc.createTextNode(comp.getLocale().getCountry()));
-			xmlComp.appendChild(node);
+			xmlComp.appendChild(createNode("Country", comp.getLocale().getCountry(), xmlDoc));
 			
 			//score
-			node = xmlDoc.createElement("Score");
-			node.appendChild(xmlDoc.createTextNode("" + Math.round(comp.getFinalResult())));
-			xmlComp.appendChild(node);
+			xmlComp.appendChild(
+				createNode("Score", "" + Math.round(comp.getFinalResult()), xmlDoc));
 			
 			//results
 			String[] results = comp.getResults();
 			int j = 0;
 			for(DecathlonEvent field : DecathlonEvent.values()){
-				node = xmlDoc.createElement(field.name());
-				node.appendChild(xmlDoc.createTextNode(results[j++]));
-				xmlComp.appendChild(node);
+				xmlComp.appendChild(createNode(field.name(), results[j++], xmlDoc));
 			}
 			root.appendChild(xmlComp);			
 		}
 		
-		
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(fName);
+			OutputFormat of = new OutputFormat("XML", "UTF-8", true);
+			
+			XMLSerializer ser = new XMLSerializer(fos, of);
+			ser.asDOMSerializer();
+			ser.serialize(xmlDoc);
+		}
+		catch (FileNotFoundException e) {
+			LOG.log(Level.SEVERE, "Error working with file " + fName, e);
+		}
+		catch (IOException e) {
+			LOG.log(Level.SEVERE, "Error with IO!", e);
+		}
+		finally{
+			try {
+				fos.close();
+			}
+			catch (IOException e) {
+				//shouldn't happen
+			}
+		}		
+	}
+	
+	private Element createNode(String name, String value, Document creater){
+		Element node = creater.createElement(name);
+		node.appendChild(creater.createTextNode(value));
+		return node;
 	}
 	
 	/**
