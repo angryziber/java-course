@@ -19,6 +19,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 
 	//logger
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
+
 	private boolean isCSVFormat = true;
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -86,6 +87,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	/**
 	 * setStream method obtains the stream but does not handle it's state in any way
 	 * so the stream has to be closed by the caller
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @param out - output stream to write data to
