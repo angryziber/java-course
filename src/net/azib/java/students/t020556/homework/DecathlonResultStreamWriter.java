@@ -3,6 +3,7 @@ package net.azib.java.students.t020556.homework;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	//logger
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
 	private boolean isCSVFormat = true;
+	private SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
 	/* (non-Javadoc)
 	 * @see net.azib.java.students.t020556.homework.IDecathlonResultWriter#
@@ -58,6 +60,12 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 		
 		//name
 		sb.append(comp.getName()).append(separator);
+		
+		//date of birth
+		sb.append(formatter.format(comp.getDateOfBirth())).append(separator);
+		
+		//locale
+		sb.append(comp.getLocale().getISO3Country());
 		
 		//score
 		sb.append(Math.round(comp.getFinalResult()));
