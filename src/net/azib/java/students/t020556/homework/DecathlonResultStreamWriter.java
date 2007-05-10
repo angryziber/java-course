@@ -39,6 +39,11 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 		}
 		
 		PriorityQueue<Competitor> compQ = reader.readResults();
+		if(compQ == null){
+			LOG.severe("Unable to read results from reader!");
+			return;
+		}
+		
 		Competitor comp = null;
 		try {
 			PrintStream ps;
