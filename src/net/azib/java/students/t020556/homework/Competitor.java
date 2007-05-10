@@ -102,7 +102,7 @@ public class Competitor
 	 */
 	public void setDateOfBirth(String dateOfBirth) {
 		try {
-			Date date = (new SimpleDateFormat("dd.mm.yyyy")).parse(dateOfBirth);
+			Date date = (new SimpleDateFormat("dd.MM.yyyy")).parse(dateOfBirth);
 			createDateOfBirth(date);
 		}
 		catch (ParseException e) {
