@@ -94,7 +94,7 @@ public class CompetitorTest {
 		assertTrue(comp.getFinalResult() > 1000);
 		
 		Competitor comp2 = new Competitor(comp.clone());
-		comp.remove(DecathlonEvent.A_100_M);
+		comp.remove(DecathlonEvent.RACE_100M);
 		
 		assertTrue(comp.getFinalResult() == 0);
 		assertTrue(comp.compareTo(comp2) < 0);
