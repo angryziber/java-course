@@ -1,6 +1,5 @@
 package net.azib.java.students.t020556.homework;
 
-import java.io.InputStream;
 import java.util.PriorityQueue;
 
 /**
@@ -20,13 +19,4 @@ public interface IDechatlonResultReader {
 	 * @version 1
 	 */
 	public PriorityQueue<Competitor> readResults();
-
-	/**
-	 * setStream sets the input stream internally
-	 *
-	 * @author Agu Aarna
-	 * 
-	 * @version 1
-	 */
-	public void setStream(InputStream in);
 }
