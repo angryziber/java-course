@@ -18,6 +18,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 
 	//logger
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
+	private boolean isCSVFormat = true;
 
 	/* (non-Javadoc)
 	 * @see net.azib.java.students.t020556.homework.IDecathlonResultWriter#
@@ -41,8 +42,9 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 			PrintStream ps;
 			ps = new PrintStream(out, true, "UTF8");
 			int i = 1;
+			String separator = isCSVFormat ? "," : " ";
 			while((comp = compQ.poll()) != null)
-				ps.println((i++) + ") " +generateLine(comp));
+				ps.println((i++) + separator + generateLine(comp));
 		}
 		catch (UnsupportedEncodingException e) {
 			// shouldn't happen
@@ -52,16 +54,17 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	
 	private String generateLine(Competitor comp){
 		StringBuilder sb = new StringBuilder();
+		char separator = isCSVFormat ? ',' : '\t';
 		
 		//name
-		sb.append(comp.getName()).append("\t");
+		sb.append(comp.getName()).append(separator);
 		
 		//score
-		sb.append(Math.round(comp.getFinalResult())).append("\t");
+		sb.append(Math.round(comp.getFinalResult()));
 		
 		//results
 		for(String result : comp.getResults()){
-			sb.append(result).append("\t");
+			sb.append(separator).append(result);
 		}
 		
 		return sb.toString();
@@ -72,7 +75,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	 * so the stream has to be closed by the caller
 	 * @author Agu Aarna
 	 * 
-	 * @param out
+	 * @param out - output stream to write data to
 	 * 
 	 * @version 1
 	 */
@@ -84,5 +87,33 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 		}
 		
 		this.out = out;
+	}
+
+	/**
+	 * setFormat method specifies in which way data is printed to the stream
+	 * 
+	 * @author Agu Aarna
+	 * 
+	 * @param CSVFormat - <b>false</b> will print human readable format; <b>true</b> 
+	 * will print CSV format
+	 * 
+	 * @version 1
+	 */
+	public void setFormat(boolean CSVFormat){
+		isCSVFormat = CSVFormat;
+	}
+
+	/**
+	 * getFormat method specifies in which way data is printed to the stream
+	 * 
+	 * @author Agu Aarna
+	 * 
+	 * @return <b>false</b> will print human readable format; <b>true</b> 
+	 * will print CSV format
+	 * 
+	 * @version 1
+	 */
+	public boolean getFormat(){
+		return isCSVFormat;
 	}
 }
