@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author Agu Aarna
  */
-public class DecathlonResultDataBaseReader implements IDechatlonResultReader {
+public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 
 	private Connection connection;
 	
@@ -24,7 +24,7 @@ public class DecathlonResultDataBaseReader implements IDechatlonResultReader {
 	/**
 	 * @author Agu Aarna
 	 * 
-	 * @see net.azib.java.students.t020556.homework.IDechatlonResultReader#readResults()
+	 * @see net.azib.java.students.t020556.homework.IDecathlonResultReader#readResults()
 	 * 
 	 * @version 1
 	 */
