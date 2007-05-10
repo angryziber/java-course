@@ -2,7 +2,9 @@ package net.azib.java.students.t020632.homework;
 
 
 /**
- * UnitsConverter
+ * UnitsConverter converts result to correct units. For example
+ * 1500m result is given in following form: minutes:seconds.hundredths,
+ * but to calculate score the result should be given in seconds
  *
  * @author Marek Soobik t020632
  */
@@ -22,6 +24,13 @@ public class UnitsConverter {
 		return converter;
 	}
 	
+	/**
+	 * Converts event result to correct units
+	 * 
+	 * @param eventInfo
+	 * @param result
+	 * @return
+	 */
 	public float convert(EventInfo eventInfo, String result){
 		float convertedResult = 0;
 		char dot = '.';
@@ -80,7 +89,6 @@ public class UnitsConverter {
 				}
 				
 			}
-			
 			try{
 				
 			}
@@ -88,7 +96,6 @@ public class UnitsConverter {
 				System.out.println("Result " + result + " is not correct" + e.getMessage());
 			}
 		}
-		
 		
 		return convertedResult;
 	}
