@@ -18,7 +18,7 @@ import org.junit.Test;
  */
 public class DecathlonEventTest {
 	
-	public DecathlonEvent runningEvent = DecathlonEvent.A_1500_M;
+	public DecathlonEvent runningEvent = DecathlonEvent.RACE_1500M;
 	public DecathlonEvent fieldEvent = DecathlonEvent.DISCUS_THROW;
 	
 	/**
