@@ -21,35 +21,58 @@ public class CSVInput implements Input {
 	
 	@Override
 	public List<AthleteResults> read() {
+		List<AthleteResults> results;
 		String s;
 		
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 			
 			while((s = in.readLine()) != null){
-				parseLine(s);
+				parseLine(s, results);
 			}
 		}
 		catch(Exception e){
 			System.out.println("File not found!\n Make sure you have entered correct path");
 		}
 		
-		return null;
+		return results;
 	}
 	
-	public void parseLine(String s){
-		//AthleteResults result;
-		//String name;
-		//String date;
-		//String country;
+	public void parseLine(String s, List<AthleteResults>results){
+		UnitsConverter converter;
+		AthleteResults result;
+		Event event;
+		String name;
+		String date;
+		String country;
 		String [] values;
 		
 		values = s.split(",");
 		
-		for(String str : values){
-			System.out.println(str);
+		if(values.length == 13){
+			name = values[0];
+			date = values[1];
+			country = values[2];
+			
+			result = new AthleteResults(name, date, country);
+			
+			int i = 3;
+			float fResult = 0.0F;
+			converter = UnitsConverter.getUnitsConverter();
+			
+			for(EventInfo eventInfo : EventInfo.values()){
+				event = result.createEvent(eventInfo);
+				fResult = converter.convert(eventInfo, values[i]);
+				event.setResult(fResult);
+				result.addEvent(event);
+				i++;
+			}
+			
+			results.add(result);
 		}
-		
+		else{
+			System.out.println("Input line is not in correct format!");
+		}
 	}
 
 }
