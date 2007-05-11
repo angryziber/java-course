@@ -2,9 +2,12 @@ package net.azib.java.students.t020556.homework.test;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.PriorityQueue;
 
 import net.azib.java.students.t020556.homework.Competitor;
@@ -24,24 +27,18 @@ public class DecathlonResultStreamReaderTest {
 	DecathlonResultStreamReader dfr = new DecathlonResultStreamReader();
 	FileInputStream in = null;
 
-	@After
-	public void tearDown(){
-		try {
-			in.close();
-		}
-		catch (IOException e) {
-			fail("Failed closing stream");
-		}
-	}
-	
 	@Before
 	public void setUp(){
-		String fName = "src\\net\\azib\\java\\students\\t020556\\homework\\test\\src.txt";
+		URL fUrl = DecathlonResultStreamReaderTest.class.getResource("src.txt");
 		try {
-			in = new FileInputStream(fName);
+			File f = new File(fUrl.toURI());
+			in = new FileInputStream(f.getAbsoluteFile());
 		}
 		catch (FileNotFoundException e) {
-			fail("File " + fName + " not found!");
+			fail("File " + fUrl + " not found!");
+		}
+		catch (URISyntaxException e) {
+			fail("URI syntax failure: " + fUrl);
 		}
 	}
 	
@@ -55,5 +52,15 @@ public class DecathlonResultStreamReaderTest {
 		PriorityQueue<Competitor> compQ = dfr.readResults(); 
 		assertNotNull(compQ);
 		assertNotNull(compQ.peek());
+	}
+	
+	@After
+	public void tearDown(){
+		try {
+			in.close();
+		}
+		catch (IOException e) {
+			fail("Failed closing stream");
+		}
 	}
 }
