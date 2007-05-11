@@ -3,6 +3,7 @@ package net.azib.java.students.t020632.homework;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,10 +19,8 @@ public class CSVInput implements Input {
 		this.path = path;
 	}
 	
-	
-	@Override
 	public List<AthleteResults> read() {
-		List<AthleteResults> results;
+		List<AthleteResults> results = new ArrayList<AthleteResults>();
 		String s;
 		
 		try{
