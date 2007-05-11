@@ -1,5 +1,7 @@
 package net.azib.java.students.t020556.homework;
 
+import java.util.PriorityQueue;
+
 /**
  * IDecathlonResultWriter
  *
@@ -15,4 +17,13 @@ public interface IDecathlonResultWriter {
 	 * @version 1
 	 */
 	public void writeResults(IDecathlonResultReader reader);
+
+	/**
+	 * @author Agu Aarna
+	 * 
+	 * @param compQ - a prioritized queue of competitors
+	 * 
+	 * @version 1
+	 */
+	public void writeResults(PriorityQueue<Competitor> compQ);
 }
