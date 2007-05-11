@@ -71,7 +71,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 		sb.append(formatter.format(comp.getDateOfBirth())).append(separator);
 		
 		//locale
-		sb.append(comp.getLocale().getISO3Country());
+		sb.append(comp.getLocale().toString().toUpperCase()).append(separator);
 		
 		//score
 		sb.append(Math.round(comp.getFinalResult()));
