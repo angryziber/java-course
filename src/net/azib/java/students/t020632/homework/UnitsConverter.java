@@ -49,17 +49,17 @@ public class UnitsConverter {
 			
 			int i = result.indexOf(colon);
 			
-			System.out.println(result);
+			//System.out.println(result);
 			
 			if(i == -1){
 				i = result.indexOf(dot);
 				
-				System.out.println(i);
-				System.out.println(result);
+				//System.out.println(i);
+				//System.out.println(result);
 				
 				if(i != -1){
 					try{
-						System.out.println(result.substring(0,i));
+						//System.out.println(result.substring(0,i));
 						convertedResult = Float.valueOf(result.substring(0,i)).floatValue();		
 						convertedResult = convertedResult + (Float.valueOf(result.substring(i+1,result.length())).floatValue())/100;
 					}
