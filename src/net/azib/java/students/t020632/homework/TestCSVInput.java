@@ -19,6 +19,7 @@ public class TestCSVInput {
 		input = new CSVInput("C:/Documents and Settings/Marek/Desktop/test.csv");
 	}
 	
+	
 	@Test
 	public void testname() throws Exception {
 		input.read();
