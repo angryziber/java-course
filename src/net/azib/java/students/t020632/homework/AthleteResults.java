@@ -103,7 +103,7 @@ public class AthleteResults implements Comparable<AthleteResults>{
 		str.append(country + " ");
 		
 		while(i < events.size()){
-			str.append(events.get(i) + " ");
+			str.append(events.get(i).getResult() + " ");
 			i++;
 		}
 		
