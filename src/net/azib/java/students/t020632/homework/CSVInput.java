@@ -1,8 +1,14 @@
 package net.azib.java.students.t020632.homework;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +27,10 @@ public class CSVInput implements Input {
 	
 	public List<AthleteResults> read() {
 		List<AthleteResults> results = new ArrayList<AthleteResults>();
-		String s;
+		String s = "";
 		
 		try{
-			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF8"));
 			
 			while((s = in.readLine()) != null){
 				parseLine(s, results);
@@ -33,6 +39,16 @@ public class CSVInput implements Input {
 		catch(Exception e){
 			System.out.println("File not found!\n Make sure you have entered correct path");
 		}
+		
+		try {
+	        Writer out = new BufferedWriter(new OutputStreamWriter(
+	            new FileOutputStream("out.txt"), "UTF8"));
+	        out.write(s);
+	        out.close();
+	    } catch (UnsupportedEncodingException e) {
+	    } catch (IOException e) {
+	    }
+
 		
 		return results;
 	}
