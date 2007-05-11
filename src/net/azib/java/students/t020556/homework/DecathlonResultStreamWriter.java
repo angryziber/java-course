@@ -23,7 +23,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	private boolean isCSVFormat = true;
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
-	/* (non-Javadoc)
+	/**
 	 * @see net.azib.java.students.t020556.homework.IDecathlonResultWriter#
 	 * 		writeResults(net.azib.java.students.t020556.homework.IDecathlonResultReader)
 	 */
@@ -39,30 +39,15 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 			return;
 		}
 		
-		PriorityQueue<Competitor> compQ = reader.readResults();
-		if(compQ == null){
-			LOG.severe("Unable to read results from reader!");
-			return;
-		}
-		
-		Competitor comp = null;
-		try {
-			PrintStream ps;
-			ps = new PrintStream(out, true, "UTF8");
-			int i = 1;
-			String separator = isCSVFormat ? "," : " ";
-			while((comp = compQ.poll()) != null)
-				ps.println((i++) + separator + generateLine(comp));
-		}
-		catch (UnsupportedEncodingException e) {
-			// shouldn't happen
-		}
-
+		writeResults(reader.readResults());
 	}
 	
 	private String generateLine(Competitor comp){
 		StringBuilder sb = new StringBuilder();
 		char separator = isCSVFormat ? ',' : '\t';
+		
+		//score
+		sb.append(Math.round(comp.getFinalResult()));
 		
 		//name
 		sb.append(comp.getName()).append(separator);
@@ -72,9 +57,6 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 		
 		//locale
 		sb.append(comp.getLocale().toString().toUpperCase()).append(separator);
-		
-		//score
-		sb.append(Math.round(comp.getFinalResult()));
 		
 		//results
 		for(String result : comp.getResults()){
@@ -130,5 +112,29 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	 */
 	public boolean getFormat(){
 		return isCSVFormat;
+	}
+
+	/**
+	 * @see net.azib.java.students.t020556.homework.IDecathlonResultWriter#
+	 * 		writeResults(java.util.PriorityQueue)
+	 */
+	public void writeResults(PriorityQueue<Competitor> compQ) {
+		if(compQ == null){
+			LOG.severe("Unable to read results from reader!");
+			return;
+		}
+		
+		Competitor comp = null;
+		try {
+			PrintStream ps;
+			ps = new PrintStream(out, true, "UTF8");
+			int i = 1;
+			String separator = isCSVFormat ? "," : " ";
+			while((comp = compQ.poll()) != null)
+				ps.println((i++) + separator + generateLine(comp));
+		}
+		catch (UnsupportedEncodingException e) {
+			// shouldn't happen
+		}
 	}
 }

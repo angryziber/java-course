@@ -53,58 +53,7 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 	 * 		(net.azib.java.students.t020556.homework.IDecathlonResultReader)
 	 */
 	public void writeResults(IDecathlonResultReader reader) {
-		FileOutputStream fos = null;
-		try {
-			//document
-			Document xmlDoc = 
-				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-
-			//root
-			Element root = xmlDoc.createElement(rootName);
-			xmlDoc.appendChild(root);
-			addCompetitors(reader.readResults(), xmlDoc, root);
-			
-			//xsl
-			ProcessingInstruction style = xmlDoc.createProcessingInstruction(
-					"xml-stylesheet", "type=\"text/xsl\" href=\"" + transformer + "\"");
-			root.getParentNode().insertBefore(style, root);
-
-			//output
-			fos = new FileOutputStream(createFileName(fileUrl));
-
-			Source src = new DOMSource(xmlDoc);
-			Result res = new StreamResult(fos);
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			transformer.setOutputProperty("indent", "yes");
-			
-			transformer.transform(src, res);
-		}
-		catch (FileNotFoundException e) {
-			LOG.log(Level.SEVERE, "Specified XML file not found", e);
-		}
-		catch (TransformerConfigurationException e) {
-			LOG.log(Level.SEVERE, "Error creating XML transformer!", e);
-		}
-		catch (TransformerFactoryConfigurationError e) {
-			LOG.log(Level.SEVERE, "Error creating XML transformer!", e);
-		}
-		catch (TransformerException e) {
-			LOG.log(Level.SEVERE, "Transformation failed!", e);
-		}
-		catch (ParserConfigurationException e) {
-			LOG.log(Level.SEVERE, "Unable to create document for XML generation!", e);
-		}
-		catch (NullPointerException e){
-			LOG.log(Level.SEVERE, "Null object referenced!", e);
-		}
-		finally{
-			try {
-				fos.close();
-			}
-			catch (IOException e) {
-				//shouldn't happen
-			}
-		}		
+		writeResults(reader.readResults());
 	}
 	
 	private Element createNode(String name, String value, Document creater){
@@ -232,6 +181,65 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 		}
 		catch (NullPointerException e){
 			LOG.log(Level.SEVERE, "Null object referenced!", e);
+		}
+	}
+
+	/**
+	 * @see net.azib.java.students.t020556.homework.IDecathlonResultWriter#
+	 * 		writeResults(java.util.PriorityQueue)
+	 */
+	public void writeResults(PriorityQueue<Competitor> compQ) {
+		FileOutputStream fos = null;
+		try {
+			//document
+			Document xmlDoc = 
+				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+
+			//root
+			Element root = xmlDoc.createElement(rootName);
+			xmlDoc.appendChild(root);
+			addCompetitors(compQ, xmlDoc, root);
+			
+			//xsl
+			ProcessingInstruction style = xmlDoc.createProcessingInstruction(
+					"xml-stylesheet", "type=\"text/xsl\" href=\"" + transformer + "\"");
+			root.getParentNode().insertBefore(style, root);
+
+			//output
+			fos = new FileOutputStream(createFileName(fileUrl));
+
+			Source src = new DOMSource(xmlDoc);
+			Result res = new StreamResult(fos);
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty("indent", "yes");
+			
+			transformer.transform(src, res);
+		}
+		catch (FileNotFoundException e) {
+			LOG.log(Level.SEVERE, "Specified XML file not found", e);
+		}
+		catch (TransformerConfigurationException e) {
+			LOG.log(Level.SEVERE, "Error creating XML transformer!", e);
+		}
+		catch (TransformerFactoryConfigurationError e) {
+			LOG.log(Level.SEVERE, "Error creating XML transformer!", e);
+		}
+		catch (TransformerException e) {
+			LOG.log(Level.SEVERE, "Transformation failed!", e);
+		}
+		catch (ParserConfigurationException e) {
+			LOG.log(Level.SEVERE, "Unable to create document for XML generation!", e);
+		}
+		catch (NullPointerException e){
+			LOG.log(Level.SEVERE, "Null object referenced!", e);
+		}
+		finally{
+			try {
+				fos.close();
+			}
+			catch (IOException e) {
+				//shouldn't happen
+			}
 		}
 	}
 }
