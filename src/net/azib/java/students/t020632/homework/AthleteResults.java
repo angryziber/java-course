@@ -87,6 +87,30 @@ public class AthleteResults implements Comparable<AthleteResults>{
 		return score;
 	}
 	
+	public void printResults(){
+		int i = 0;
+		StringBuffer str = new StringBuffer();
+		
+		if(position != 0){
+			str.append(position + " ");
+		}
+		if(totalScore != 0){
+			str.append(totalScore + " ");
+		}
+		
+		str.append(athleteName + " ");
+		str.append(dateOfBirth + " ");
+		str.append(country + " ");
+		
+		while(i < events.size()){
+			str.append(events.get(i) + " ");
+			i++;
+		}
+		
+		System.out.println(str);
+		
+	}
+	
 	public String getName(){
 		return athleteName;
 	}
