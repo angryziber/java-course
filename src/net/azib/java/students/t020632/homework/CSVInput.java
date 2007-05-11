@@ -67,6 +67,7 @@ public class CSVInput implements Input {
 				i++;
 			}
 			
+			result.printResults();
 			results.add(result);
 		}
 		else{
