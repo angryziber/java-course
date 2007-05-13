@@ -2,7 +2,6 @@ package net.azib.java.students.t020556.homework;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,7 +25,7 @@ public class DecathlonResultStreamReader
 	private String encoding = "UTF8";
 
 	//stream
-	private FileInputStream input;
+	private InputStream input;
 		
 	/** 
 	 * readResults method reads the results from the given stream. The stream is not closed 
@@ -91,7 +90,7 @@ public class DecathlonResultStreamReader
 	 */
 	public void setStream(InputStream in) {
 		if(in != null)
-			this.input = (FileInputStream) in;			
+			this.input = in;			
 		else
 			LOG.severe("Passed stream is not suitable for file reading");
 	}
