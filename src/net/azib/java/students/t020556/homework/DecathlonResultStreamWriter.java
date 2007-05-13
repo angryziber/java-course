@@ -47,7 +47,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 		char separator = isCSVFormat ? ',' : '\t';
 		
 		//score
-		sb.append(Math.round(comp.getFinalResult()));
+		sb.append(Math.round(comp.getFinalResult())).append(separator);
 		
 		//name
 		sb.append(comp.getName()).append(separator);
@@ -56,7 +56,7 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 		sb.append(formatter.format(comp.getDateOfBirth())).append(separator);
 		
 		//locale
-		sb.append(comp.getLocale().toString().toUpperCase()).append(separator);
+		sb.append(comp.getLocale().toString().toUpperCase());
 		
 		//results
 		for(String result : comp.getResults()){
@@ -124,13 +124,14 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 			return;
 		}
 		
+		PriorityQueue<Competitor> compQLocal = new PriorityQueue<Competitor>(compQ);
 		Competitor comp = null;
 		try {
 			PrintStream ps;
 			ps = new PrintStream(out, true, "UTF8");
 			int i = 1;
 			String separator = isCSVFormat ? "," : " ";
-			while((comp = compQ.poll()) != null)
+			while((comp = compQLocal.poll()) != null)
 				ps.println((i++) + separator + generateLine(comp));
 		}
 		catch (UnsupportedEncodingException e) {

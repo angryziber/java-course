@@ -38,7 +38,6 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 	//logger
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
 
-	private URL fileUrl = DecathlonResultXmlWriter.class.getResource("/");
 	private URL htmlTransformer = DecathlonResultXmlWriter.class.getResource("style.xsl");
 	private OutputStream out = null;
 	private boolean isXmlFormat = true;
@@ -76,9 +75,9 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 				transformer.setOutputProperty("indent", "yes");
 			}
 			else{
+				File xsl = new File(this.htmlTransformer.toURI());
 				transformer = TransformerFactory.newInstance().newTransformer(
-						new StreamSource(new FileInputStream(
-							createFileName(this.htmlTransformer))));
+						new StreamSource(new FileInputStream(xsl)));
 			}
 			
 			transformer.transform(src, res);
@@ -97,6 +96,12 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 		}
 		catch (NullPointerException e){
 			LOG.log(Level.SEVERE, "Null object referenced!", e);
+		}
+		catch (URISyntaxException e) {
+			LOG.log(
+				Level.SEVERE, 
+				"XSL transformer " + this.htmlTransformer + " file URI is malformed", 
+				e);
 		}
 	}
 
@@ -131,9 +136,10 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 			return;
 		}
 
+		PriorityQueue<Competitor> compQLocal = new PriorityQueue<Competitor>(compQ);
 		Competitor comp = null;
 		int i = 1;
-		while((comp = compQ.poll()) != null){
+		while((comp = compQLocal.poll()) != null){
 			Element xmlComp = creater.createElement("Competitor");
 			
 			//place
@@ -168,27 +174,6 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 		Element node = creater.createElement(name);
 		node.appendChild(creater.createTextNode(value));
 		return node;
-	}
-	
-	private String createFileName(URL fileURL){
-		try {
-			if(fileURL == null){
-				fileURL = DecathlonResultXmlWriter.class.getResource("/");
-			}
-			
-			File file = new File(fileUrl.toURI());
-			String fName = file.getPath();
-			if(file.isDirectory()){
-				fName += File.separator + "default.xml";
-				LOG.warning("No file set! Using default file name \"" + fName + "\"");
-			}
-			return fName;
-		}
-		catch (URISyntaxException e) {
-			LOG.log(Level.SEVERE, "Failed creating file name!", e);
-			return null;
-		}
-		
 	}
 	
 	/**
