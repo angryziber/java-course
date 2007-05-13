@@ -8,10 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.util.PriorityQueue;
-
-import org.mortbay.log.LogStream.STDERR;
 
 /**
  * Main
@@ -60,7 +57,6 @@ public class Main {
 		}
 		
 		parseArgs(args);
-		
 			
 		//first perform reading
 		PriorityQueue<Competitor> compQ = new PriorityQueue<Competitor>();
@@ -99,32 +95,12 @@ public class Main {
 		if(outFile != null)
 			writeCsvFile(compQ);
 		
-		if(outXFile != null || outHFile != null){
-			try {
-				dxw.setFile(outXFile.toURI().toURL());
-				dxw.writeResults(compQ);
-			}
-			catch (MalformedURLException e) {
-				System.err.println("Unable to parse uri for file " + outXFile.toURI());
-			}
+		if(outXFile != null){
+			writeTransformed(true, compQ);
 		}
 		
 		if(outHFile != null){
-			try {
-				fos = new FileOutputStream(outHFile.getAbsolutePath());
-				dxw.transform(fos);
-			}
-			catch (FileNotFoundException e) {
-				System.err.println("Unable to find file " + outHFile);
-			}
-			finally{
-				try {
-					fos.close();
-				}
-				catch (IOException e) {
-					//shouldn't happen
-				}
-			}
+			writeTransformed(false, compQ);
 		}
 		
 		if(outStd){
@@ -154,28 +130,53 @@ public class Main {
 		}
 	}
 	
+	private static void writeTransformed(boolean xmlFormat, PriorityQueue<Competitor> compQ){
+		FileOutputStream fos = null;
+		File file = null;
+		try {
+			file = xmlFormat ? outXFile : outHFile;
+			fos = new FileOutputStream(file.getAbsolutePath());
+			dxw.setFormat(xmlFormat);
+			dxw.setStream(fos);
+			dxw.writeResults(compQ);
+		}
+		catch (FileNotFoundException e) {
+			System.err.println("Unable to find file " + file);
+		}
+		finally{
+			try {
+				fos.close();
+			}
+			catch (IOException e) {
+				//shouldn't happen
+			}
+		}
+	}
+	
 	private static void parseArgs(String[] args){
 		StringBuilder sb = null;
 		for(int i = 0; i < args.length; i++){
 			if(args[i] == "d"){
 				accessDb = true;
 			}
-			else if(args[i] == "fi"){
-				inFile = new File(args[++i]);
+			else if(args[i] == "fi" && (++i) < args.length){
+				inFile = new File(args[i]);
+				if(!inFile.exists() || inFile.isDirectory())
+					inFile = null;
 			}
-			else if(args[i] == "i"){
+			else if(args[i] == "i" && (++i) < args.length){
 				if(sb == null)
 					sb = new StringBuilder();
-				sb.append(args[++i]).append("\n");
+				sb.append(args[i]).append("\n");
 			}
-			else if(args[i] == "fo"){
-				outFile = new File(args[++i]);
+			else if(args[i] == "fo" && (++i) < args.length){
+				outFile = new File(args[i]);
 			}
-			else if(args[i] == "xo"){
-				outXFile = new File(args[++i]);
+			else if(args[i] == "xo" && (++i) < args.length){
+				outXFile = new File(args[i]);
 			}
-			else if(args[i] == "ho"){
-				outHFile = new File(args[++i]);
+			else if(args[i] == "ho" && (++i) < args.length){
+				outHFile = new File(args[i]);
 			}
 			else if(args[i] == "o"){
 				outStd = true;
