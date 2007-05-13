@@ -68,10 +68,13 @@ public enum DecathlonEvent {
 	/**
 	 * calculatePoints calculates dechatlon ponints according to the provided result in the
 	 * parameter field
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @param result - the time value from which to calculate the results; overloads 
 	 * calculatePoints(Date). The result has to be in a format "mm:ss.SS" or "ss.SS".
+	 * 
+	 * @return the score given for the results
 	 * 
 	 * @version 1
 	 */
@@ -97,10 +100,13 @@ public enum DecathlonEvent {
 	/**
 	 * calculatePoints calculates dechatlon ponints according to the provided result in the
 	 * parameter field
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @param resultTime - the time value from which to calculate the results. Only minute, second
 	 * and millisecond fields will be examined
+	 * 
+	 * @return the score given for the results
 	 * 
 	 * @version 1
 	 */
@@ -124,9 +130,12 @@ public enum DecathlonEvent {
 	/**
 	 * calculatePoints calculates dechatlon ponints according to the provided result in the
 	 * parameter field
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @param result - the time value in seconds from which to calculate the results
+	 * 
+	 * @return the score given for the results
 	 * 
 	 * @version 1
 	 */
@@ -146,7 +155,9 @@ public enum DecathlonEvent {
 	}
 
 	/**
-	 * @return the name
+	 * getName method retrieves the event name in human readable format
+	 * 
+	 * @return the event name
 	 */
 	public String getName() {
 		return name;

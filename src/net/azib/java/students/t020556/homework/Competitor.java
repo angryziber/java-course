@@ -74,6 +74,8 @@ public class Competitor
 	}
 
 	/**
+	 * getDateOfBirth method gets the set date of birht of the copetitor
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @return the dateOfBirth
@@ -87,6 +89,10 @@ public class Competitor
 	}
 
 	/**
+	 * setDateOfBirth method sets the date of birht of the copetitor
+	 * 
+	 * @author Agu Aarna
+	 * 
 	 * @param dateOfBirth the dateOfBirth to set
 	 *
 	 * @version 1
@@ -96,6 +102,10 @@ public class Competitor
 	}
 
 	/**
+	 * setDateOfBirth method sets the date of birht of the copetitor
+	 * 
+	 * @author Agu Aarna
+	 * 
 	 * @param dateOfBirth the dateOfBirth to set
 	 *
 	 * @version 1
@@ -115,6 +125,8 @@ public class Competitor
 	}
 
 	/**
+	 * getLocale method retrieves the locale notation of the competitor
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @return the locale
@@ -126,6 +138,8 @@ public class Competitor
 	}
 
 	/**
+	 * setLocale method sets the competitor locale notation
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @param locale - the locale to set
@@ -140,6 +154,8 @@ public class Competitor
 	}
 
 	/**
+	 * setLocale method sets the competitor locale notation
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @param locale - the locale to set
@@ -151,6 +167,8 @@ public class Competitor
 	}
 
 	/**
+	 * getName method retrieves the competitor name
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @return the name
@@ -162,6 +180,8 @@ public class Competitor
 	}
 
 	/**
+	 * setName method sets the competitor name
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @param name the name to set
@@ -232,6 +252,9 @@ public class Competitor
 	}
 
 	/**
+	 * getResults mehtod retrieves the string array of event results ordered in the same fashion as
+	 * {@link net.azib.java.students.t020556.homework.DecathlonEvent}
+	 * 
 	 * @return the results
 	 */
 	public String[] getResults() {

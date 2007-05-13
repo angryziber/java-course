@@ -10,9 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * DecathlonResultDataBaseReader
+ * DecathlonResultDataBaseReader class provides functionality for reading decathlon results from a database
  *
  * @author Agu Aarna
+ * 
+ * @version 1
  */
 public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 
@@ -52,7 +54,7 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 	 * 
 	 * @param url - url to the database
 	 * @param user - user of the database
-	 * @param password - password of the database
+	 * @param password - password of the user
 	 * 
 	 * @version 1
 	 */

@@ -29,9 +29,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.ProcessingInstruction;
 
 /**
- * DecathlonResultXmlWriter
+ * DecathlonResultXmlWriter class provides functionality for writing decathlon results to an Xml or
+ * Html formatted file
  *
  * @author Agu Aarna
+ * 
+ * @version 1
  */
 public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 
@@ -46,6 +49,9 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
 	/**
+	 * writeResults method writes the results to the given stream. The stream is not closed 
+	 * or handled in any way, so the caller must do these operations itself
+	 * 
 	 * @see net.azib.java.students.t020556.homework.IDecathlonResultWriter#writeResults
 	 * 		(net.azib.java.students.t020556.homework.IDecathlonResultReader)
 	 */
@@ -190,7 +196,7 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 	}
 	
 	/**
-	 * with setFormat method you can specify the format of the output.
+	 * with this method you can specify the format of the output.
 	 * 
 	 * @author Agu Aarna
 	 * 

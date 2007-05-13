@@ -13,9 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * DecathlonResultStreamReader
+ * DecathlonResultStreamReader class provides functionality for reading decathlon results from a stream
  *
  * @author Agu Aarna
+ * 
+ * @version 1
  */
 public class DecathlonResultStreamReader 
 	implements IDecathlonResultReader {
@@ -85,6 +87,8 @@ public class DecathlonResultStreamReader
 	 * setStream sets the input stream internally
 	 *
 	 * @author Agu Aarna
+	 * 
+	 * @param in - the stream from which to read from
 	 * 
 	 * @version 1
 	 */

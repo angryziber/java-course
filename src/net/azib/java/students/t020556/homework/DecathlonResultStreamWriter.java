@@ -9,9 +9,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * DecathlonResultStreamWriter
+ * DecathlonResultStreamWriter class provides functionality for writing decathlon results to a stream
  *
- * @author agu
+ * @author Agu Aarna
+ * 
+ * @version 1
  */
 public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	
@@ -24,6 +26,9 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
 	/**
+	 * writeResults method writes the results to the given stream. The stream is not closed 
+	 * or handled in any way, so the caller must do these operations itself
+	 * 
 	 * @see net.azib.java.students.t020556.homework.IDecathlonResultWriter#
 	 * 		writeResults(net.azib.java.students.t020556.homework.IDecathlonResultReader)
 	 */
@@ -91,8 +96,11 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	 * 
 	 * @author Agu Aarna
 	 * 
-	 * @param CSVFormat - <b>false</b> will print human readable format; <b>true</b> 
-	 * will print CSV format
+	 * @param CSVFormat -  
+	 * 		<ul>
+	 * 			<li><b>true</b> - will print human readable format</li>
+	 * 			<li><b>false</b> - will print CSV format</li>
+	 * 		</ul>
 	 * 
 	 * @version 1
 	 */
@@ -105,8 +113,11 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 	 * 
 	 * @author Agu Aarna
 	 * 
-	 * @return <b>false</b> will print human readable format; <b>true</b> 
-	 * will print CSV format
+	 * @return 
+	 * 		<ul>
+	 * 			<li><b>true</b> - will print human readable format</li>
+	 * 			<li><b>false</b> - will print CSV format</li>
+	 * 		</ul>
 	 * 
 	 * @version 1
 	 */

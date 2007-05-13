@@ -11,9 +11,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.PriorityQueue;
 
 /**
- * Main
+ * Main application class. This class contains the main method which uses the predefined classes
  *
- * @author agu
+ * @author Agu Aarna
+ * 
+ * @version 1
  */
 public class Main {
 

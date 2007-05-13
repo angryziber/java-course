@@ -3,8 +3,7 @@ package net.azib.java.students.t020556.homework;
 import java.util.PriorityQueue;
 
 /**
- * IDecathlonResultReader interface exposes methods to read Dechatlon results in
- * a specific fashion
+ * IDecathlonResultReader interface exposes methods to read Dechatlon results in a specific fashion
  *
  * @author Agu Aarna
  * 
@@ -12,7 +11,7 @@ import java.util.PriorityQueue;
  */
 public interface IDecathlonResultReader {
 	/**
-	 * readResults reads the results from the specified stream
+	 * readResults reads the decathlon results according to interface implementation
 	 *
 	 * @author Agu Aarna
 	 * 
