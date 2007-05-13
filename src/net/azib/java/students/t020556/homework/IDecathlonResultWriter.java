@@ -1,5 +1,6 @@
 package net.azib.java.students.t020556.homework;
 
+import java.io.OutputStream;
 import java.util.PriorityQueue;
 
 /**
@@ -26,4 +27,13 @@ public interface IDecathlonResultWriter {
 	 * @version 1
 	 */
 	public void writeResults(PriorityQueue<Competitor> compQ);
+
+	/**
+	 * @author Agu Aarna
+	 * 
+	 * @param out - an output stream to which to write to
+	 * 
+	 * @version 1
+	 */
+	public void setStream(OutputStream out);
 }
