@@ -33,19 +33,19 @@ public class Main {
 	private static DecathlonResultXmlWriter dxw = new DecathlonResultXmlWriter();
 	
 	/**
-	 * @author Agu Aarna
-	 * 
 	 * main method
+	 * 
+	 * @author Agu Aarna
 	 * 
 	 * @param args -
 	 * 		<ul>
 	 * 		<li>[d] - reads results from database</li>
-	 * 		<li>[fi] "absolute_file_name" - reads results from a CSV file</li>
-	 * 		<li>[i] "CSV-formatted data" - reads CSV results from arguments</li>
+	 * 		<li>[fi] &lt;absolute_file_name&gt; - reads results from a CSV file</li>
+	 * 		<li>[i] &lt;CSV-formatted data&gt; - reads CSV results from arguments</li>
 	 * 
-	 * 		<li>[fo] "absolute_file_name" - writes results to file</li>
-	 * 		<li>[xo] "absolute_file_name" - writes results to xml file</li>
-	 * 		<li>[ho] "absolute_file_name" - writes results to html file</li>
+	 * 		<li>[fo] &lt;absolute_file_name&gt; - writes results to file</li>
+	 * 		<li>[xo] &lt;absolute_file_name&gt; - writes results to xml file</li>
+	 * 		<li>[ho] &lt;absolute_file_name&gt; - writes results to html file</li>
 	 * 		<li>[o] - writes results to stdout</li>
 	 * 		</ul>
 	 * 
@@ -107,7 +107,6 @@ public class Main {
 			dsw.setStream(System.out);
 			dsw.writeResults(compQ);
 		}
-		
 	}
 	
 	private static void writeCsvFile(PriorityQueue<Competitor> compQ){
