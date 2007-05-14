@@ -144,12 +144,17 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 
 		PriorityQueue<Competitor> compQLocal = new PriorityQueue<Competitor>(compQ);
 		Competitor comp = null;
+		Competitor compPrev = null;
 		int i = 1;
+		int j = 1;
 		while((comp = compQLocal.poll()) != null){
 			Element xmlComp = creater.createElement("Competitor");
 			
 			//place
-			xmlComp.appendChild(createNode("Place", "" + (i++), creater));
+			if(	compPrev != null && 
+				compPrev.getFinalResult() != comp.getFinalResult())
+				j = i;
+			xmlComp.appendChild(createNode("Place", "" + j, creater));
 			
 			//name
 			xmlComp.appendChild(createNode("Name", comp.getName(), creater));
@@ -168,11 +173,13 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 			
 			//results
 			String[] results = comp.getResults();
-			int j = 0;
 			for(DecathlonEvent field : DecathlonEvent.values()){
-				xmlComp.appendChild(createNode(field.name(), results[j++], creater));
+				xmlComp.appendChild(
+					createNode(field.name(), results[field.ordinal()], creater));
 			}
 			root.appendChild(xmlComp);	
+			compPrev = comp;
+			i++;
 		}		
 	}
 		
