@@ -58,7 +58,7 @@ public class Main {
 	 * @version 1
 	 */
 	public static void main(String[] args) {
-		if(args.length < 2){
+		if(args.length == 0){
 			printHelp();
 			return;
 		}
@@ -216,7 +216,7 @@ public class Main {
 	private static void printHelp(){
 		System.out.println("Unable to parse arguments. Available argument list:");
 		System.out.println();
-		System.out.println("[-d] - reads results from database");
+		System.out.println("[-di] - reads results from database");
 		System.out.println("[-fi] <absolute_file_name> - reads results from a CSV file");
 		System.out.println("[-i] \"<CSV-formatted_data>\" - reads CSV results from arguments");
 		System.out.println("\tNOTE that you can specify only one competitor data.");
