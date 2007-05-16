@@ -69,5 +69,13 @@ public class UserInput {
 		return outputOK;
 	}
 	
+	public Input getInput(){
+		return input;
+	}
+	
+	public Output getOutput(){
+		return output;
+	}
+	
 	
 }
