@@ -29,7 +29,7 @@ public class CSVOutput implements Output{
 		
 		try {
 	        Writer out = new BufferedWriter(new OutputStreamWriter(
-	            new FileOutputStream("C:/Documents and Settings/Marek/Desktop/out.txt"), "UTF8"));
+	            new FileOutputStream(path), "UTF8"));
 	        
 	        while(i < results.size()){
 				result = results.get(i);
