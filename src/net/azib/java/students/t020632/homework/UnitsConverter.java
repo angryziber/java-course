@@ -40,10 +40,15 @@ public class UnitsConverter {
 		if(type.equals("fieldEvent")){
 			try{
 				convertedResult = (float) Float.valueOf(result);
+				if(eventInfo.getUnits().equals("cm")){
+					convertedResult = convertedResult*100;
+					convertedResult = (int)convertedResult;
+				}
 			}
 			catch(NumberFormatException e){
 				System.out.println("Result " + result + " is not correct" + e.getMessage());
 			}
+			
 		}
 		else if(type.equals("runningEvent")){
 			
@@ -97,6 +102,7 @@ public class UnitsConverter {
 			}
 		}
 		
+		System.out.println(convertedResult);
 		return convertedResult;
 	}
 	
