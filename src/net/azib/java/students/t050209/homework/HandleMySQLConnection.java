@@ -66,7 +66,7 @@ public class HandleMySQLConnection {
 					try {
 						List<Double> results = new LinkedList<Double>();
 						for (int i = 0; i < 10; i++) {
-							results.add((double)resultSet.getFloat(i + 4));
+							results.add(resultSet.getDouble(i + 4));
 						}
 						sm.setSportsmanResults(results);
 					} catch (NumberFormatException e) {

@@ -35,10 +35,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/">
         <td><xsl:value-of select="Results/Run-400-m"/></td>
         <td><xsl:value-of select="Results/Hurdles"/></td>
         <td><xsl:value-of select="Results/Discus-throw"/></td>
-        <td><xsl:value-of select="Results/Pole-Vault"/></td>
+        <td><xsl:value-of select="Results/Pole-vault"/></td>
         <td><xsl:value-of select="Results/Javelin-throw"/></td>
         <td><xsl:value-of select="Results/Run-1500-m"/></td>
-        <td><xsl:value-of select="Overall-Result"/></td>
+        <td><xsl:value-of select="Overall-result"/></td>
       </tr>
       </xsl:for-each>
    </table>

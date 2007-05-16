@@ -372,6 +372,7 @@ public class HandleFileIO {
 	public static void handleHTMLOutput(List<Sportsman> sportsmanList){
 		String filePathHTML ="";
 		String filePathXML = "";
+		String filePathXSL = "";
 		
 		filePathHTML = "";
 		do {
@@ -403,8 +404,19 @@ public class HandleFileIO {
 			System.out.println("ParserConfigurationException in handleHTMLOutput");
 		}
 		
-		Source XMLSource = new StreamSource(filePathXML);				
-		Source XSLSource = new StreamSource("c:\\decathlon.xsl");		
+		Source XMLSource = new StreamSource(filePathXML);
+		
+		do {
+			System.out.println("To create HTML, insert the XSL file path!");
+			try{
+				filePathXSL = HandleDecathlonIO.insertFilePath();
+			}
+			catch (IOException e){
+				System.out.println("File path insertion error");
+			}			
+		} while (!filePathXSL.endsWith(".xsl"));
+		
+		Source XSLSource = new StreamSource(filePathXSL);		
 		
 		Result outPut = null;
 		try {
