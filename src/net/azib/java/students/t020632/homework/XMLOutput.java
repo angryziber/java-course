@@ -82,5 +82,9 @@ public class XMLOutput implements Output{
 	    }
 		
 	}
+	
+	public String getPath(){
+		return path;
+	}
 
 }
