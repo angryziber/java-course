@@ -1,14 +1,8 @@
 package net.azib.java.students.t020632.homework;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,16 +34,6 @@ public class CSVInput implements Input {
 			System.out.println("File not found!\n Make sure you have entered correct path");
 		}
 		
-		try {
-	        Writer out = new BufferedWriter(new OutputStreamWriter(
-	            new FileOutputStream("out.txt"), "UTF8"));
-	        out.write(s);
-	        out.close();
-	    } catch (UnsupportedEncodingException e) {
-	    } catch (IOException e) {
-	    }
-
-		
 		return results;
 	}
 	
@@ -61,8 +45,14 @@ public class CSVInput implements Input {
 		String date;
 		String country;
 		String [] values;
+		int i = 0;
 		
 		values = s.split(",");
+		
+		while(i < values.length){
+			values[i].trim();
+			i++;
+		}
 		
 		if(values.length == 13){
 			name = values[0];
@@ -71,7 +61,7 @@ public class CSVInput implements Input {
 			
 			result = new AthleteResults(name, date, country);
 			
-			int i = 3;
+			i = 3;
 			float fResult = 0.0F;
 			converter = UnitsConverter.getUnitsConverter();
 			
