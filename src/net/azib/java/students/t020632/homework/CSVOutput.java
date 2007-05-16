@@ -15,7 +15,11 @@ import java.util.List;
  */
 public class CSVOutput implements Output{
 
+	private String path;
 	
+	public CSVOutput(String path){
+		this.path = path;
+	}
 	
 	public void write(List<AthleteResults> results) {
 		String s = "";
