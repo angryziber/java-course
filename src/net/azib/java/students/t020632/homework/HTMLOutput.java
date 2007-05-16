@@ -24,9 +24,6 @@ public class HTMLOutput implements Output{
 	}
 	
 	public void write(List<AthleteResults> results) {
-		AthleteResults result;
-		int i = 0;
-		int j = 0;
 		String s;
 		
 		try {
