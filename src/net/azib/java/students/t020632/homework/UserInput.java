@@ -3,7 +3,7 @@ package net.azib.java.students.t020632.homework;
 /**
  * UserInput
  *
- * @author t020632
+ * @author Marek Soobik t020632
  */
 public class UserInput {
 	
