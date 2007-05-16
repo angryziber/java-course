@@ -404,7 +404,7 @@ public class HandleFileIO {
 		}
 		
 		Source XMLSource = new StreamSource(filePathXML);				
-		Source XSLSource = new StreamSource("decathlon.xsl");		
+		Source XSLSource = new StreamSource("c:\\decathlon.xsl");		
 		
 		Result outPut = null;
 		try {

@@ -5,7 +5,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/">
  <body>
    <h2>Decathlon</h2>
    <table border="1">
-     <tr bgcolor="0">
+     <tr bgcolor="FFFFFF">
        <th>Position</th>
        <th>Name</th>
        <th>DateOfBirth</th>
@@ -22,11 +22,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/">
        <th>Run1500m</th>
        <th>Score</th>
      </tr>
-     <xsl:for-each select="sportsmanlist/sportsman">
+     <xsl:for-each select="Sportsmen/Sportsman">
       <tr>
         <td><xsl:value-of select="Position"/></td>
         <td><xsl:value-of select="Name"/></td>
-        <td><xsl:value-of select="Date-Of-Birth"/></td>
+        <td><xsl:value-of select="Date-of-Birth"/></td>
         <td><xsl:value-of select="Country"/></td>
         <td><xsl:value-of select="Results/Run-100-m"/></td>
         <td><xsl:value-of select="Results/Long-jump"/></td>
@@ -35,10 +35,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/">
         <td><xsl:value-of select="Results/Run-400-m"/></td>
         <td><xsl:value-of select="Results/Hurdles"/></td>
         <td><xsl:value-of select="Results/Discus-throw"/></td>
-        <td><xsl:value-of select="Results/Pole-vault"/></td>
+        <td><xsl:value-of select="Results/Pole-Vault"/></td>
         <td><xsl:value-of select="Results/Javelin-throw"/></td>
         <td><xsl:value-of select="Results/Run-1500-m"/></td>
-        <td><xsl:value-of select="Overall-result"/></td>
+        <td><xsl:value-of select="Overall-Result"/></td>
       </tr>
       </xsl:for-each>
    </table>
