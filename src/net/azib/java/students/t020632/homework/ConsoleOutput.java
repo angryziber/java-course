@@ -13,6 +13,7 @@ public class ConsoleOutput implements Output {
 	public void write(List<AthleteResults> results) {
 		
 		int i = 0;
+		int j = 0;
 		
 		AthleteResults result;
 		
@@ -32,8 +33,8 @@ public class ConsoleOutput implements Output {
 		System.out.print("Javelin Throw \t");
 		System.out.println("1500m \t");
 		
-		while(!results.isEmpty()){
-			result = results.remove(0);
+		while(j < results.size()){
+			result = results.get(j);
 			System.out.print(result.getPosition() + "\t");
 			System.out.print(result.getScore() + "\t");
 			System.out.print(result.getName() + "\t");
@@ -44,6 +45,7 @@ public class ConsoleOutput implements Output {
 				System.out.print(result.getEvent(i).getResult() + "\t");
 				i++;
 			}
+			j++;
 			
 		}
 	}
