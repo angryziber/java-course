@@ -69,6 +69,7 @@ public class CSVInput implements Input {
 				event = result.createEvent(eventInfo);
 				fResult = converter.convert(eventInfo, values[i]);
 				event.setResult(fResult);
+				event.setResult(values[i]);
 				result.addEvent(event);
 				i++;
 			}
