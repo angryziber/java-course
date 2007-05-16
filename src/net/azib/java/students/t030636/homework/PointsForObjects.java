@@ -8,13 +8,19 @@ import java.util.Locale;
 
 /**
  * PointsForObjects
+ * 
+ * This class is for calculating points for a decathlon competition 
  *
  * @author Martin
  */
 public class PointsForObjects {
 
 	/**
-	 * @param args
+	 * This method will calculate decathlon results and put the athletes in the correct order.
+	 * Input is a String array, where every string is one competitors competition data. The string format:
+	 * "[Name]",[date-of-birth],[ISO country code],[100m],[longjump],...and so on for all 10 events. 
+	 * All results in the format [m.cm] or [min:sec] - leaving out the minute if under 60 sec 
+	 * @param inputAsString
 	 * @throws Exception 
 	 */
 	public ArrayList<Competitor> calculatePoints(String [] inputAsStrings) throws Exception {

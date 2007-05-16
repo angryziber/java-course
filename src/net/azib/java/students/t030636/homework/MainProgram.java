@@ -26,8 +26,10 @@ public class MainProgram {
 	 * @throws ParserConfigurationException 
 	 */
 	public static void main(String[] args) throws SAXException, NumberFormatException, IOException, TransformerException, ParserConfigurationException {
-	    System.out.println("Welcome to Decathlon points calculation\n\nChoose your input:");
-	    System.out.println("File input - press 1\nDatabase input - press 2\nConsole input - press 3");
+		DisplayInstructionFile di = new DisplayInstructionFile();
+		di.display("instructions.txt");
+//	    System.out.println("\nChoose your input:");
+//	    System.out.println("File input - press 1\nDatabase input - press 2\nConsole input - press 3");
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
 	    String [] read = null;
 	    int input1 = 0;
@@ -44,7 +46,7 @@ public class MainProgram {
 		}
 		switch (input1) {
 			case 1:
-				System.out.println("You have chosen the file input option\nPlease input the filename:");
+				System.out.println("You have chosen the file input option\nPlease input the filename (path):");
 				InputReader rf = new InputReader();
 				try {
 					read = rf.readFile(br.readLine());
@@ -70,8 +72,14 @@ public class MainProgram {
 					System.out.println("Can't connect to database");
 					System.exit(0);
 				}
-				System.out.println("Competition ID:");
-				int comp = Integer.parseInt(br.readLine());
+				try {
+					dbr.displayCompetitionsFromDatabase();
+				}
+				catch (SQLException e3) {
+					System.out.println("Can't read from database");
+					e3.printStackTrace();
+				}
+				String comp = br.readLine();
 				try {
 					read = dbr.readDatabase(comp);
 				}
@@ -119,7 +127,7 @@ public class MainProgram {
 		}
 		switch(input2){
 			case 1:
-				System.out.println("Insert filename for the output text file:");
+				System.out.println("Insert filename for the output text file (+path):");
 				String filenameTxt = br.readLine();
 				OutputWriter wf = new OutputWriter();
 				wf.writeToFile(filenameTxt, competitors);
@@ -129,13 +137,13 @@ public class MainProgram {
 				wc.writeToConsole(competitors);
 				break;
 			case 3:
-				System.out.println("Insert filename for the output XML file:");
+				System.out.println("Insert filename for the output XML file (+path):");
 				String filenameXml = br.readLine();
 				OutputWriter wxml = new OutputWriter();
 				wxml.writeToXML(filenameXml, competitors);
 				break;
 			case 4:
-				System.out.println("Insert filename for the output HTML file:");
+				System.out.println("Insert filename for the output HTML file (+path):");
 				String filenameHtml = br.readLine();
 				OutputWriter whtml = new OutputWriter();
 				whtml.writeToHTML(filenameHtml, competitors);

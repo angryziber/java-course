@@ -18,6 +18,7 @@ import com.sun.org.apache.xml.internal.serialize.*;
 
 /**
  * OutputWriter
+ * Writer class for decathlon reults
  *
  * @author Martin
  */

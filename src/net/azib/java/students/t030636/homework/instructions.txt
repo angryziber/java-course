@@ -1,0 +1,20 @@
+********************************************************************************************
+Hello! Welcome to decathlon point calculation program by Martin.
+
+There are 3 input and 4 output options.
+INPUTS: file, database and console (all in predefined format)
+OUTPUTS: file, console, XML and HTML 
+
+File and console input format:
+"[Name]",[date-of-birth],[ISO country code],[100m],[longjump],...and so on for all 10 events 
+all results in the format [m.cm] or [min:sec] - leaving out the minute if under 60 sec
+Example:
+"Siim Susi",01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72
+
+ENJOY!
+********************************************************************************************
+
+Choose your input:
+File input - press 1
+Database input - press 2
+Console input - press 3

@@ -23,13 +23,28 @@ public class DatabaseReader {
 		connection = DriverManager.getConnection(url, user, password);
 	}
 	
-	public String[] readDatabase(Integer competition) throws SQLException {
-		String query = "SELECT a.name, a.dob, a.country_code, r.race_100m, r.long_jump, r.shot_put, r.high_jump, r.race_400m, r.hurdles_110m, r.discus_throw, r.pole_vault, r.javelin_throw, r.race_1500m"
-			+ " FROM results AS r INNER JOIN athletes AS a ON a.id = r.athlete_id INNER JOIN competitions AS c on r.competition_id = c.id"
-			+ " WHERE c.id = " + competition.toString();
+	public void displayCompetitionsFromDatabase () throws SQLException {
+		String query = "SELECT c.description, c.id, c.date FROM competitions AS c";
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);
-		resultSet.first();
+//		resultSet.first();
+		System.out.println("Competitions currently in database:");
+		System.out.println("ID \tDescription");
+		while (resultSet.next()) {
+			System.out.println( resultSet.getString("id") + "\t" + resultSet.getString("description")+ " on " + resultSet.getDate("date")); 
+		}
+		System.out.println("\nTo use multiple ID's separate them with commas\nInsert the competition ID(s) to use:");
+		resultSet.close();
+		statement.close();	
+	}
+	
+	public String[] readDatabase(String competition) throws SQLException {
+		String query = "SELECT a.name, a.dob, a.country_code, r.race_100m, r.long_jump, r.shot_put, r.high_jump, r.race_400m, r.hurdles_110m, r.discus_throw, r.pole_vault, r.javelin_throw, r.race_1500m"
+			+ " FROM results AS r INNER JOIN athletes AS a ON a.id = r.athlete_id "
+			+ " WHERE r.competition_id = " + competition.replace(",", " OR ");
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(query);
+//		resultSet.first();
 		String [] list = extractData(resultSet); 
 		resultSet.close();
 		statement.close();
@@ -40,7 +55,7 @@ public class DatabaseReader {
 		List<String> list = new ArrayList<String>();
 		String line = null;
 		while (rs.next()) {
-			line = "\"" + rs.getString("name")+ "\"," + rs.getString("dob")+","+rs.getString("country_code");
+			line = "\"" + rs.getString("name")+ "\"," + rs.getDate("dob").toString().replace("-", ".")+","+rs.getString("country_code");
 			for (int i = 4 ; i<=13; i++){
 				
 				Float f  = rs.getFloat(i);

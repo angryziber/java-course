@@ -13,16 +13,16 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<th>Name</th>
 			<th>Country</th>
 			<th>Date of birth</th>
-			<th bgcolor="#6699FF">100m</th>
-			<th bgcolor="#6699FF">Long jump</th>
-			<th bgcolor="#6699FF">Shot put</th>
-			<th bgcolor="#6699FF">High jump</th>
-			<th bgcolor="#6699FF">400m</th>
-			<th bgcolor="#6699FF">110m hurdles</th>
-			<th bgcolor="#6699FF">Discus throw</th>
-			<th bgcolor="#6699FF">Pole vault</th>
-			<th bgcolor="#6699FF">Javelin throw</th>
-			<th bgcolor="#6699FF">1500m</th>
+			<th bgcolor="#6699FF">100m [sec]</th>
+			<th bgcolor="#6699FF">Long jump [m]</th>
+			<th bgcolor="#6699FF">Shot put [m]</th>
+			<th bgcolor="#6699FF">High jump [m]</th>
+			<th bgcolor="#6699FF">400m [(min:)sec]</th>
+			<th bgcolor="#6699FF">110m hurdles [sec]</th>
+			<th bgcolor="#6699FF">Discus throw [m]</th>
+			<th bgcolor="#6699FF">Pole vault [m]</th>
+			<th bgcolor="#6699FF">Javelin throw [m]</th>
+			<th bgcolor="#6699FF">1500m [min:sec]</th>
 		</tr>
 		<xsl:for-each select="DECATHLON/DECATHLETE">
 		<tr>
