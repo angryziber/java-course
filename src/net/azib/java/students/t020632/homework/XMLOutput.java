@@ -48,10 +48,12 @@ public class XMLOutput implements Output{
 					out.write("<name>" + s);
 					out.write("\t" + result.getName() + s);
 					out.write("</name>" + s);
-					out.write("<country>" + s);
+					out.write("<date of birth>" + s);
 					out.write("\t" + result.getDateOfBirth() + s);
-					out.write("</country>" + s);
+					out.write("</data of birth>" + s);
+					out.write("<country>" + s);
 					out.write("\t" + result.getCountry() + s);
+					out.write("</country>" + s);
 					
 					j = 0;
 					while(j < 10){
