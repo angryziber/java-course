@@ -38,6 +38,9 @@ public class RunningEventCalculator implements EventCalculator{
 		
 		int score = 0;
 		
+		if(result == 0.0F)
+			return 0;
+		
 		score = (int) (info.getA() * Math.pow((info.getB() - result), info.getC()));
 		
 		return score;
