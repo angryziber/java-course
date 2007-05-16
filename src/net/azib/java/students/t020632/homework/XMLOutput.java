@@ -16,9 +16,16 @@ import java.util.List;
 public class XMLOutput implements Output{
 	
 	private String path;
+	private String xslReference;
 	
 	public XMLOutput(String path){
 		this.path = path;
+		xslReference = null;
+	}
+	
+	public XMLOutput(String path, String xsl){
+		this.path = path;
+		xslReference = xsl;
 	}
 	
 	public void write(List<AthleteResults> results) {
@@ -34,6 +41,11 @@ public class XMLOutput implements Output{
 	        s = System.getProperty("line.separator");
 	        
 	        out.write("<?xml version='1.0' encoding='utf-8'?>" + s);
+	        
+	        if(xslReference != null){
+	        	out.write("<?xml-stylesheet type=\"text/xsl\" href=\"" + xslReference + "\"?>");
+	        }
+	        
 	        out.write("<decathlon event>" + s);
 	       
 	        while(i < results.size()){
