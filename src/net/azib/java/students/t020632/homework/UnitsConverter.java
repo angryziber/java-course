@@ -16,6 +16,11 @@ public class UnitsConverter {
 		
 	}
 	
+	/**
+	 * Creates UnotConverter object or returns old object
+	 * 
+	 * @return
+	 */
 	public static UnitsConverter getUnitsConverter(){
 		if(converter == null){
 			converter = new UnitsConverter();
