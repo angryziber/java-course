@@ -9,8 +9,8 @@ public class Event {
 	
 	private EventInfo eventInfo;
 	private EventCalculator calculator;
-	//private String result;
-	private float result;
+	private String result;
+	private float fResult;
 	private int score;
 	
 	public Event(EventInfo ei, EventCalculator ec){
@@ -24,6 +24,15 @@ public class Event {
 	 * @param result
 	 */
 	public void setResult(float result){
+		this.fResult = result;
+	}
+	
+	/**
+	 * Sets result for the event
+	 * 
+	 * @param result
+	 */
+	public void setResult(String result){
 		this.result = result;
 	}
 	
@@ -36,7 +45,7 @@ public class Event {
 	public int calculate(){
 		int score = 0;
 		
-		score = calculator.calculate(eventInfo, result);
+		score = calculator.calculate(eventInfo, fResult);
 		
 		return score;
 		
@@ -50,7 +59,11 @@ public class Event {
 		return calculator;
 	}
 	
-	public float getResult(){
+	public float getFResult(){
+		return fResult;
+	}
+	
+	public String getResult(){
 		return result;
 	}
 	
