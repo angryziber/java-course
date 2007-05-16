@@ -1,6 +1,8 @@
 package net.azib.java.students.t050209.homework;
 
 
+import net.azib.java.lessons.xml.Transformation;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -370,7 +372,6 @@ public class HandleFileIO {
 	public static void handleHTMLOutput(List<Sportsman> sportsmanList){
 		String filePathHTML ="";
 		String filePathXML = "";
-		String filePathXSL = "";
 		
 		filePathHTML = "";
 		do {
@@ -383,12 +384,10 @@ public class HandleFileIO {
 			}			
 		} while (!filePathHTML.endsWith(".html"));
 		
-		filePathXSL = filePathHTML.replace(".html", ".xsl");
 		filePathXML = filePathHTML.replace(".html", ".xml");
 		
 		try{
 			HandleDecathlonIO.createFile(filePathHTML);
-			HandleDecathlonIO.createFile(filePathXSL);
 			HandleDecathlonIO.createFile(filePathXML);
 		}
 		catch(Exception e){			
@@ -405,7 +404,7 @@ public class HandleFileIO {
 		}
 		
 		Source XMLSource = new StreamSource(filePathXML);				
-		Source XSLSource = new StreamSource(filePathXSL);		
+		Source XSLSource = new StreamSource("decathlon.xsl");		
 		
 		Result outPut = null;
 		try {
