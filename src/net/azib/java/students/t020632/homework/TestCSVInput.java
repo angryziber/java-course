@@ -36,7 +36,7 @@ public class TestCSVInput {
 			i++;
 		}
 		
-		output = new CSVOutput();
+		output = new CSVOutput("out.txt");
 		output.write(list);
 	}
 
