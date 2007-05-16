@@ -39,6 +39,7 @@ public class XMLOutput implements Output{
 	        while(i < results.size()){
 				result = results.get(i);
 				try {
+					out.write("<athlete>" + s);
 			        out.write("<place>" + s);
 					out.write("\t" + result.getPosition() + s);
 					out.write("</place>" + s);
@@ -65,6 +66,7 @@ public class XMLOutput implements Output{
 			    } 
 			    catch (IOException e) {
 			    }
+			    out.write("/<athlete>" + s);
 				i++;
 			}
 	        out.write("</decathlon event>");
