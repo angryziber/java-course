@@ -9,6 +9,7 @@ public class Event {
 	
 	private EventInfo eventInfo;
 	private EventCalculator calculator;
+	//private String result;
 	private float result;
 	private int score;
 	
