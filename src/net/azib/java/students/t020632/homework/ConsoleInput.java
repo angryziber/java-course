@@ -73,6 +73,12 @@ public class ConsoleInput implements Input{
 		}
 		else{
 			System.out.println("Input line is not in correct format!");
+			if(values.length > 13){
+				System.out.println("You have entered too much information");
+			}
+			else{
+				System.out.println("You have not entered all required information");
+			}
 		}
 	}
 	
