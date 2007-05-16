@@ -24,8 +24,8 @@ public class UserInput {
 			values = userString.split(" ");
 			
 			if(values.length == 2){
-				input = values[0];
-				output = values[1];
+				input = values[0].trim();
+				output = values[1].trim();
 				
 				if(parseInput(input) != true){
 					return "Input parameter is not correct!";
@@ -51,7 +51,7 @@ public class UserInput {
 	public boolean parseInput(String input){
 		boolean inputOK = false;
 		
-		if(input.equals("Console")){
+		if(input.toLowerCase().equals("console")){
 			this.input = new ConsoleInput();
 		}
 		
@@ -62,7 +62,7 @@ public class UserInput {
 	public boolean parseOutput(String output){
 		boolean outputOK = false;
 		
-		if(output.equals("Console")){
+		if(output.toLowerCase().equals("console")){
 			this.output = new ConsoleOutput();
 		}
 		
