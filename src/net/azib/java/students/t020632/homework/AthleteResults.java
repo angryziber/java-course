@@ -71,6 +71,8 @@ public class AthleteResults implements Comparable<AthleteResults>{
 			i++;
 		}
 		
+		totalScore = score;
+		
 		return score;
 	}
 	
