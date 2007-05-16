@@ -1,7 +1,8 @@
 package net.azib.java.students.t050209.homework;
 
-
-import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 /**
  * Decathlon
  *
@@ -9,66 +10,88 @@ import java.io.IOException;
  */
 public class Decathlon {
 
-	public static double handleUserInteraction() throws Exception{
-		HandleDecathlonIO value = new HandleDecathlonIO();		
-		return value.getUserInsertedValue();
-	}
-	
-	public static byte selectDataInputType() throws Exception{
-		byte result;
-		System.out.println("What do you want to do?");
-		System.out.println("- 1 Insert values manually");
-		System.out.println("- 2 Insert values from file");
-		System.out.println("- 3 Get values from Database");
-		
-		result = (byte)handleUserInteraction();
-		
-		return result;
-	}
-	
-	public static void insertValuesManually() throws Exception{
-		HandleDecathlonIO sequence = new HandleDecathlonIO();
-		sequence.nameInsertion();
-		sequence.dateOfBirthInsertion();
-		sequence.countryCodeInsertion();
-		sequence.dataInsertion();
-		//TODO - separate function for show result
-	}
-	
-	public static void fileSequence() throws IOException {
-		HandleDecathlonIO sequence = new HandleDecathlonIO();
-		sequence.readFromFileSequence();
-//		TODO - separate function for show result
-	}
-		
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub		
 		
-		switch(selectDataInputType()) {
-		case 1:
-			insertValuesManually();
-			//TODO - output path
-			break;
+		boolean validData = false;
+		List<Sportsman> sportsmanList = new LinkedList<Sportsman>();
 		
-		case 2:
-			fileSequence();
-//			TODO - output path
-			break;
+		while(validData == false){
+			try{
+				switch(HandleDecathlonIO.selectDataInputType()) {
+		
+				/* data is inserted through console*/
+				case 1:
+					sportsmanList = HandleConsoleIO.handleConsoleInput();
+					validData = true;
+					break;
+		
+				/* data is read from CSV file */
+				case 2:
+					sportsmanList = HandleFileIO.handleCSVInput();
+					validData = true;
+					break;
 			
-		case 3:
-			//initiateServerConnection
-//			TODO - output path
-			break;
+				/* data is read from database */
+				case 3:
+					sportsmanList = HandleMySQLConnection.handleMySQLConnection();
+					validData = true;
+					break;
 			
-		default:
-			//ignore?
-			break;
+				default:
+				/* illegal option */
+					System.out.println("Insert 1, 2 or 3!");
+					validData = false;
+					break;
+				}
+			}
+			catch (NumberFormatException nfe){
+				System.out.println("Number must be inserted!");
+				validData = false;
+			}
 		}
-		HandleDecathlonIO.showResultOnScreen();
-		//compute
-		//storeValuesIntoArray
-		//selectOutput
-		//initSysAgain
+		
+		validData = false; // set to false again
+		Collections.sort(sportsmanList);			
+		Collections.reverse(sportsmanList);
+		
+		while(validData == false){
+			try{
+				switch(HandleDecathlonIO.selectDataOutputType()) {
+				/* show data on screen (console) */
+				case 1:
+					HandleConsoleIO.handleConsoleOutput(sportsmanList);
+					validData = true;
+					break;
+		
+				/* write data to CSV file */
+				case 2:
+					HandleFileIO.handleCSVOutput(sportsmanList);
+					validData = true;
+					break;
+		
+				/* write data to XML file */
+				case 3:
+					HandleFileIO.handleXMLOutput(sportsmanList, false, null);
+					validData = true;
+					break;
+		
+				/* write data to HTML file */
+				case 4:
+					HandleFileIO.handleHTMLOutput(sportsmanList);
+					validData = true;
+					break;
+			
+				default:
+					System.out.println("Insert 1, 2, 3 or 4!");
+					validData = false;
+					break;
+				}
+			}
+			catch (NumberFormatException nfe){
+				System.out.println("Number must be inserted!");
+				validData = false;
+			}
+		}
 	}
 
 }

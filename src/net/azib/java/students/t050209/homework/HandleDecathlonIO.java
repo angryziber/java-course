@@ -2,15 +2,12 @@ package net.azib.java.students.t050209.homework;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.StringTokenizer;
 
 /**
  * HandleDecathlonIO
@@ -18,100 +15,10 @@ import java.util.StringTokenizer;
  * @author Kaupo Laan
  */
 public class HandleDecathlonIO {
-
-	public static String sportsmanName;
-	public static String countryCode;
-	public static String dateOfBirth;
 	
-	private static double run100mResult,
-						  longJumpResult,
-						  shotPutResult,
-						  highJumpResult,
-						  run400mResult,
-						  run110mHurdles,
-						  discusThrowResult,
-						  poleVaultResult,
-						  javelinThrowResult,
-						  run1500mResult;
-	
-	public static String userData[] = {sportsmanName,
-									   			   dateOfBirth,
-									   			   countryCode};
-	
-	public static double userResults[] = {run100mResult, 
-										  longJumpResult,
-										  shotPutResult,
-										  highJumpResult,
-										  run400mResult,
-										  run110mHurdles,
-										  discusThrowResult,
-										  poleVaultResult,
-										  javelinThrowResult,
-										  run1500mResult};
-	public static String questionStrings[] = {"100 meters",
-											  "long jump",
-											  "shot put",
-											  "high jump",
-											  "400 meters",
-											  "110 hurdles",
-											  "discus throw",
-											  "pole vault",
-											  "javelin throw",
-											  "1500 meters"};
-	
-	private static int calculateScore() {
-		int overallResult = 0;
-		
-		for (int i = 0; i < 10; i++){
-			overallResult = overallResult + 
-						DecathlonPoints.values()[i].eventPoints(userResults[i]);
-		}
-		
-		return overallResult;
-	}
-	
-	private static boolean fillUserResults( int i, String dataTempString) {
-		boolean validData;
-		
-		if (DecathlonPoints.values()[i].checkIfRunningEvent()){
-					
-			try{
-				DateFormat formatter = new SimpleDateFormat("mm:ss.SS");				
-				DateFormat finalFormatMinutes = new SimpleDateFormat("mm");
-				DateFormat finalFormatSeconds = new SimpleDateFormat("ss.SS");
-				
-				userResults[i] = Double.parseDouble(finalFormatMinutes.format(formatter.parse(dataTempString))) * 60 +
-								 Double.parseDouble(finalFormatSeconds.format(formatter.parse(dataTempString)));
-				validData = true;
-			}
-			catch (ParseException e){
-				try{
-					DateFormat formatter = new SimpleDateFormat("ss.SS");				
-					
-					userResults[i] = Double.parseDouble(formatter.format(formatter.parse(dataTempString)));
-					
-					validData = true;
-				}
-				catch(ParseException pe) {
-					System.out.println("Data in invalid format");
-					validData = false;
-				}
-			}
-		}
-		else{
-			try{
-				userResults[i] = Double.parseDouble(dataTempString);
-				validData = true;
-			}
-			catch (Exception e){
-				System.out.println("Data in invalid format");
-				validData = false;
-			}
-		}
-		
-		return validData;
-	}
-	
+	/**
+	 * Gets user inserted string and converts it to double 
+	 */
 	public static double getUserInsertedValue() throws Exception, IOException {
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -119,87 +26,20 @@ public class HandleDecathlonIO {
 		return value;
 	}
 	
+	/**
+	 * Gets user inserted string 
+	 */
 	public static String getUserInsertedString() throws IOException{
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		
-		//String str = in.readLine();
-		//String UTF8Str = new String(str.getBytes(),"UTF-8");		
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));		
 		String value = (String)in.readLine();
 		return value;		
 	}
 	
-	public void nameInsertion() throws IOException {
-		//TODO - is validation needed?
-		
-		System.out.print("Insert sportsman name: ");
-		userData[0] = getUserInsertedString();
-	}
-	
-	public void dateOfBirthInsertion() throws IOException{
-		//TODO - check if date is realistic
-		
-		Boolean validData = false;
-		String dateOfBirthTempString;
-		do {
-			System.out.print("Insert date of birth (format DD.MM.YYYY): ");
-			dateOfBirthTempString = getUserInsertedString();
-			
-			try{
-				DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");				
-		        userData[1] = formatter.format(formatter.parse(dateOfBirthTempString));
-		        validData = true;
-			}
-			catch(ParseException e) {
-				System.out.println("Inserted date of birth in wrong format. Must be dd.mm.yyyy");
-				validData = false;
-		    }			
-	    } while (validData == false);
-	}
-	
-	public void countryCodeInsertion() throws IOException{
-		Boolean validData = false;
-		String countryCodeTempString;
-		
-		//TODO check if valid country code getISOCountries
-		
-		do{
-			System.out.print("Insert country code (format XX): ");
-			countryCodeTempString = getUserInsertedString();
-					
-			if(countryCodeTempString.matches("[A-Z]{2}")) {
-				
-		        validData = true;
-			}
-			else{
-				System.out.println("Inserted country code in wrong format. Must be XX");
-				validData = false;
-		    }						
-	    } while (validData == false);
-        
-		userData[2] = countryCodeTempString;
-	}
-	
-	public void dataInsertion() throws IOException{
-		Boolean validData      = false;
-		double	convertedRslt  = 0;
-		String  dataTempString;
-		
-		for (int i = 0; i < 10; i++) {
-			
-			do{
-			
-				System.out.print("Insert " + questionStrings[i] + " result");
-				dataTempString = getUserInsertedString();
-				
-				validData = fillUserResults(i, dataTempString);						
-			} while (validData == false);
-			
-			/*overallResult = overallResult + 
-		    				DecathlonPoints.values()[i].eventPoints(userResults[i]);*/
-		}
-	}	
-		
-	public static String insertDataPath() throws IOException{
+	/**
+	 * Gets user inserted string and checks if the file exists.
+	 * If file doesn't exist, creates it.
+	 */
+	public static String insertFilePath() throws IOException{
 		Boolean validData      = false;
 		String pathTempString;
 		
@@ -214,11 +54,12 @@ public class HandleDecathlonIO {
 		        validData = true;
 			}
 			catch (IOException e) {
-				System.out.println("Cannot find the file specified");
-				validData = false;
+			    createFile(pathTempString);
+			    System.out.println("File created successfully.");
+				validData = true;
 			}
 			catch (NullPointerException e){
-				System.out.println("Cannot find the file specified");
+				System.out.println("NullPointerException in insertFilePath");
 				validData = false;
 			}
 		}while(validData == false);
@@ -226,60 +67,74 @@ public class HandleDecathlonIO {
 		return pathTempString;
 	}
 	
-	public static void readDataFromFile(String dataPath) {
-		boolean validData;
+	/**
+	 * Creates file 
+	 */
+	public static void createFile(String filePath) throws IOException{	
+		Reader reader = null;
 		try {
-			BufferedReader bufRdr  = new BufferedReader(new FileReader(dataPath));
-			String line = null;
-			int i = 0;
-			
-			while((line = bufRdr.readLine()) != null)
-			{
-				StringTokenizer st = new StringTokenizer(line,",");
-				while (st.hasMoreTokens())
-				{
-					if (i <= 2)
-						userData[i] = st.nextToken();
-					else if (i > 2 && i <= 13) {						
-						validData = fillUserResults(i - 3, st.nextToken());
-						if(validData == false){
-							System.out.println("Data invalid");
-							return;							
-						}
-					}
-					else
-						System.out.println("Data invalid");
-					i++;
-				}
-			} 
-//			close the file
-			bufRdr.close(); 
-	        	        
+			reader = new InputStreamReader(new BufferedInputStream(new FileInputStream(filePath)), "UTF-8");
+			reader.close();	        
+	        System.out.println("File " + filePath + " already exists!");
 		}
 		catch (IOException e) {
-			System.out.println("Data read failed");			
+			FileWriter fstream = new FileWriter(filePath);
+		    BufferedWriter out = new BufferedWriter(fstream);
+		    out.write("");
+		    out.close();
+		    System.out.println("File " + filePath + " created successfully.");
+		}
+		catch (NullPointerException e){
+			System.out.println("NullPointerException in insertFilePath");
 		}
 	}
 	
-	public static void readFromFileSequence() throws IOException{
-		readDataFromFile(insertDataPath());
+	/**
+	 * Lets the user choose data input method 
+	 */
+	public static byte selectDataInputType() throws Exception{
+		byte result = 0;
+		boolean value = false;
+		System.out.println("What do you want to do?");
+		System.out.println("- 1 Insert values manually through console");
+		System.out.println("- 2 Insert values from CSV file");
+		System.out.println("- 3 Get values from Database");
+		
+		while(value == false){
+			try{
+				result = (byte)getUserInsertedValue();
+				value = true;
+			}
+			catch(Error e) {
+				System.out.println("Insert number 1, 2 or 3!");
+				value = false;
+			}
+		}
+		return result;
 	}
 	
-	public static void writeDataToFile(String dataPath) {
-		//BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dataPath),"UTF8"));
-        //out.write("Василий Пупкин");
-        //out.close();
-        System.out.println("Written Process Completed.");
-	}
-
-	public static void showResultOnScreen() {
-		//TODO - convert seconds to x:xx.xx again
-		System.out.println(userData[0]);
-		System.out.println(userData[1]);
-		System.out.println(userData[2]);
-		for (int i = 0; i < 10; i++){
-			System.out.print(userResults[i] + ",");
+	/**
+	 * Lets the user choose data output method 
+	 */
+	public static byte selectDataOutputType() throws Exception{
+		byte result = 0;
+		boolean value = false;
+		System.out.println("Where do you want to see results?");
+		System.out.println("- 1 Console");
+		System.out.println("- 2 CSV file");
+		System.out.println("- 3 XML file");
+		System.out.println("- 4 HTML file");
+		
+		while(value == false){
+			try{
+				result = (byte)getUserInsertedValue();
+				value = true;
+			}
+			catch(Error e) {
+				value = false;
+				System.out.println("Insert number 1, 2, 3 or 4!");
+			}
 		}
-		System.out.println("\n" + calculateScore());
+		return result;
 	}
 }
