@@ -19,7 +19,7 @@ public class Event {
 	}
 	
 	/**
-	 * Sets result for the event
+	 * Sets result for the event as a float
 	 * 
 	 * @param result
 	 */
@@ -28,7 +28,7 @@ public class Event {
 	}
 	
 	/**
-	 * Sets result for the event
+	 * Sets result for the event as a string
 	 * 
 	 * @param result
 	 */
