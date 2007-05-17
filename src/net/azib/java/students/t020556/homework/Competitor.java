@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class Competitor 
 	extends EnumMap<DecathlonEvent, Double>
-	implements Comparable{
+	implements Comparable<Competitor>{
 	
 	/** serialVersionUID */
 	private static final long serialVersionUID = 3512693074923315896L;
@@ -238,11 +238,11 @@ public class Competitor
 	 * @version 1
 	 */
 	@Override
-	public int compareTo(Object o){
-		if(!(o instanceof Competitor))
-			throw new ClassCastException("Object not instance of Competitor");
+	public int compareTo(Competitor comp){
+		if(comp == null)
+			return -1;
 		
-		double d = this.getFinalResult() - ((Competitor)o).getFinalResult();
+		double d = this.getFinalResult() - comp.getFinalResult();
 		
 		if (d < 0)
 			return 1;
