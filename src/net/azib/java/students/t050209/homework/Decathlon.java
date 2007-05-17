@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Decathlon
+ * 
+ * This is program for computing decathlon scores.
  *
  * @author Kaupo Laan
  */
