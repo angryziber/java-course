@@ -40,14 +40,14 @@ public class Sportsman implements Comparable<Sportsman>{
 	/**
 	 * Sets the date of birth of current sportsman
 	 */
-	public void setSportsmanDayOfBirth(String dateOfBirth) {
+	public void setSportsmanDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
 	/**
 	 * Returns the date of birth of current sportsman
 	 */
-	public String getSportsmanDayOfBirth() {
+	public String getSportsmanDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -101,8 +101,8 @@ public class Sportsman implements Comparable<Sportsman>{
 		return overallResult;
 	}
 	
-	public int compareTo(Sportsman comp) {
-		return overallResult.compareTo(comp.overallResult);
+	public int compareTo(Sportsman sm) {
+		return overallResult.compareTo(sm.overallResult);
 	}
 }
 

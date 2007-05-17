@@ -60,7 +60,7 @@ public class HandleMySQLConnection {
 					Sportsman sm = new Sportsman();
 					
 					sm.setSportsmanName(resultSet.getString(1));
-					sm.setSportsmanDayOfBirth(resultSet.getString(2));
+					sm.setSportsmanDateOfBirth(resultSet.getString(2));
 					sm.setSportsmanCountry(resultSet.getString(3));
 					
 					try {

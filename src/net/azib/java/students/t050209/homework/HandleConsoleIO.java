@@ -237,7 +237,7 @@ public class HandleConsoleIO {
 				{
 					System.out.println("IOException error in date of birth insertion");
 				}
-				sportsman.setSportsmanDayOfBirth(userData[1]);
+				sportsman.setSportsmanDateOfBirth(userData[1]);
 				
 				// Sportsman country code insertion
 				try{

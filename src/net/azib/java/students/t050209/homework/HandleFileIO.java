@@ -117,7 +117,7 @@ public class HandleFileIO {
 					// Read sportsman date of birth
 					DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 					try{
-						sportsman.setSportsmanDayOfBirth((String)df.parse(st.nextToken()).toString());
+						sportsman.setSportsmanDateOfBirth((String)df.parse(st.nextToken()).toString());
 					}
 					catch(ParseException e){
 						System.out.println("Data in illegal format");
@@ -190,15 +190,13 @@ public class HandleFileIO {
 			int step = 1;
 			int lastScore = 0;
 
-			// Cycle over competitor list
 			for (Sportsman sm : sportsmanList) {
 				String outputString = new String();
 				String resultString = new String();
 
-				// If competitors have equal scores then add to shift
+				// find places for sportsmen
 				if (sm.overallResult.equals(lastScore))
 					step++;
-				// Else add shift to position and put shift to 1
 				else {
 					position += step;
 					step = 1;
@@ -270,12 +268,11 @@ public class HandleFileIO {
 		int step = 1;
 		int lastScore = 0;
 
-		// Cycle over competitor list
 		for (Sportsman sm : sportsmanList) {
-			// If competitors have equal scores then add to shift
+			
+			// find places for sportsmen
 			if (sm.overallResult.equals(lastScore))
 				step++;
-			// Else add shift to position and put shift to 1
 			else {
 				place = place + step;
 				step = 1;
