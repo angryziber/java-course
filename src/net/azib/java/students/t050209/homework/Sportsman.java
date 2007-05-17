@@ -3,8 +3,6 @@ package net.azib.java.students.t050209.homework;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 /**
  * Sportsman
  * 
@@ -17,8 +15,6 @@ import org.apache.log4j.Logger;
  * @author Kaupo Laan
  */
 public class Sportsman implements Comparable<Sportsman>{
-	
-	static Logger LOG = Logger.getLogger(Sportsman.class);
 	
 	String name = "";
 	String dateOfBirth = "";
@@ -60,7 +56,6 @@ public class Sportsman implements Comparable<Sportsman>{
 	 */
 	public void setSportsmanCountry(String counrty) {
 		this.country = counrty;
-		LOG.debug("Sportsman country is: " + country);
 	}
 
 	/**

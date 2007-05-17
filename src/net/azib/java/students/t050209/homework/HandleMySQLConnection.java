@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * HandleMySQLConnection
  *
- * @author kaupo
+ * @author Kaupo Laan
  */
 public class HandleMySQLConnection {
 	

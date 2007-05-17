@@ -3,17 +3,25 @@ package net.azib.java.students.t050209.homework;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
 /**
  * Decathlon
  *
  * @author Kaupo Laan
  */
 public class Decathlon {
-
+	
+	/**
+	 * Main function of the program.
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
-		
 		boolean validData = false;
 		List<Sportsman> sportsmanList = new LinkedList<Sportsman>();
+		
+		System.out.println("Program started.");
 		
 		while(validData == false){
 			try{
@@ -21,18 +29,21 @@ public class Decathlon {
 		
 				/* data is inserted through console*/
 				case 1:
+					System.out.println("Console input selected");
 					sportsmanList = HandleConsoleIO.handleConsoleInput();
 					validData = true;
 					break;
 		
 				/* data is read from CSV file */
 				case 2:
+					System.out.println("CSV input selected");
 					sportsmanList = HandleFileIO.handleCSVInput();
 					validData = true;
 					break;
 			
 				/* data is read from database */
 				case 3:
+					System.out.println("MySQL input selected");
 					sportsmanList = HandleMySQLConnection.handleMySQLConnection();
 					validData = true;
 					break;
@@ -92,6 +103,7 @@ public class Decathlon {
 				validData = false;
 			}
 		}
+		System.out.println("Program ended");
 	}
 
 }

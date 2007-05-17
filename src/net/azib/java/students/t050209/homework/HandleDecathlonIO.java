@@ -11,18 +11,35 @@ import java.io.Reader;
 
 /**
  * HandleDecathlonIO
+ * 
+ * Higher level of decathlon program input and output.
+ * Handles dialogue with user.
  *
  * @author Kaupo Laan
  */
 public class HandleDecathlonIO {
 	
 	/**
-	 * Gets user inserted string and converts it to double 
+	 * Gets user inserted string and converts it to double
+	 * 
+	 *  @throws IOException
 	 */
-	public static double getUserInsertedValue() throws Exception, IOException {
+	public static double getUserInsertedValue(){
 
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		double value = Double.parseDouble(in.readLine());
+		boolean validData = false;
+		double value = 0.0;
+		while(validData == false){
+			try{
+				BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+				value = Double.parseDouble(in.readLine());
+				validData = true;
+			}
+			catch (IOException e)
+			{
+				System.out.println("Inserted value must be number");
+				validData = false;
+			}
+		}
 		return value;
 	}
 	
@@ -38,6 +55,8 @@ public class HandleDecathlonIO {
 	/**
 	 * Gets user inserted string and checks if the file exists.
 	 * If file doesn't exist, creates it.
+	 * 
+	 * @throws IOException
 	 */
 	public static String insertFilePath() throws IOException{
 		Boolean validData      = false;

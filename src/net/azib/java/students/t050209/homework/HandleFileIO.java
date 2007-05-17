@@ -1,8 +1,6 @@
 package net.azib.java.students.t050209.homework;
 
 
-import net.azib.java.lessons.xml.Transformation;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -55,7 +53,7 @@ public class HandleFileIO {
 	 * @param dataTempString - user inserted string
 	 * 
 	 */
-	private static Double verifyUserResults( int i, String dataTempString) {
+	private static Double verifyUserResults(int i, String dataTempString) {
 		Double result = 0.0;
 		
 		if (DecathlonPoints.values()[i].checkIfRunningEvent()){					

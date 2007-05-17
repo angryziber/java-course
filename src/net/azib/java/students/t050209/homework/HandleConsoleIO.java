@@ -17,6 +17,7 @@ import java.util.Scanner;
  * @author Kaupo Laan
  */
 public class HandleConsoleIO {
+	
 	public static String sportsmanName;
 	public static String countryCode;
 	public static String dateOfBirth;
