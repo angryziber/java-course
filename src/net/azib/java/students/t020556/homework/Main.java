@@ -1,5 +1,6 @@
 package net.azib.java.students.t020556.homework;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +8,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.PriorityQueue;
 
 /**
@@ -100,9 +106,7 @@ public class Main {
 		}
 		
 		if(accessDb){
-			dbr.initConnection("jdbc:mysql://srv.azib.net/decathlon", "java", "java");
-			compQ.addAll(dbr.readResults());
-			dbr.releaseConnection();
+			readDataBase(compQ);
 		}
 		
 		//now write
@@ -142,7 +146,44 @@ public class Main {
 		}
 	}
 	
-	private static void writeTransformed(boolean xmlFormat, PriorityQueue<Competitor> compQ){
+	private static void readDataBase(PriorityQueue<Competitor> compQ){
+		//init
+		dbr.initConnection("jdbc:mysql://srv.azib.net/decathlon", "java", "java");
+		
+		try {
+			//read and display competitions
+			ResultSet rs = dbr.getCompetitions();
+			while (rs.next()) {
+				System.out.print(rs.getInt("id") + "\t");
+				System.out.println(rs.getString("description"));
+			}
+			
+			//read the user's choise
+			System.out.print("Choose from given decathlon competitions: ");
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			String line = br.readLine();
+			Number nr = NumberFormat.getInstance().parse(line);
+	
+			//read chosen competitions
+			dbr.setCompetitionId(nr);
+			compQ.addAll(dbr.readResults());
+		}
+		catch (SQLException e) {
+			System.err.println("Unable to access competitions collection!");
+		}
+		catch (IOException e) {
+			System.err.println("Failed reading the user's decathlon competition choise");
+		}
+		catch (ParseException e) {
+			System.err.println("Failed to parse the user's decathlon competition choise");
+		}
+		//release connection
+		dbr.releaseConnection();
+	}
+	
+	private static void writeTransformed(
+		boolean xmlFormat, PriorityQueue<Competitor> compQ){
+		
 		FileOutputStream fos = null;
 		File file = null;
 		try {
