@@ -10,7 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * DecathlonResultDataBaseReader class provides functionality for reading decathlon results from a database
+ * DecathlonResultDataBaseReader class provides functionality for reading decathlon 
+ * results from a database
  *
  * @author Agu Aarna
  * 
@@ -19,11 +20,22 @@ import java.util.logging.Logger;
 public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 
 	private Connection connection;
+	private Number competitionId = null;
 	
 	//logger
 	private Logger LOG = Logger.getLogger(this.getClass().getName());
 
 	/**
+	 * The method reads competition results according to the specified competition
+	 * identifier. 
+	 * 
+	 * (see:
+	 * 		{@link net.azib.java.students.t020556.homework.DecathlonResultDataBaseReader#
+	 * 			setCompetitionId(Number)}).
+	 * 
+	 * If no identifier is set, the reader will fetch the results from all the 
+	 * competitions specified in the database.
+	 * 
 	 * @author Agu Aarna
 	 * 
 	 * @see net.azib.java.students.t020556.homework.IDecathlonResultReader#readResults()
@@ -31,7 +43,7 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 	 * @version 1
 	 */
 	public PriorityQueue<Competitor> readResults() {
-		ResultSet results = readRaw();
+		ResultSet results = readRaw(competitionId);
 		PriorityQueue<Competitor> compQ = new PriorityQueue<Competitor>();
 		try {
 			if(results == null)
@@ -94,17 +106,25 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 		return null;
 	}
 	
-	private ResultSet readRaw(){
+	private ResultSet readRaw(Number eventNr){
 		
 		try {
 			if(connection == null)
 				throw new SQLException("No connection set");
 			
 			Statement st = connection.createStatement();
-			String Query = 
+			String query = 
 				"SELECT A.name, A.dob, A.country_code, R.* " +
 				"FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id";
-			return st.executeQuery(Query);
+			
+			if(eventNr != null && eventNr.intValue() > 0)
+				query += " WHERE competition_id = " + eventNr.intValue();
+			else
+				LOG.warning(
+					"Competition not specified correctly! Fetching results from " +
+					"all competitions.");
+			
+			return st.executeQuery(query);
 		}
 		catch (SQLException e) {
 			LOG.log(Level.SEVERE, "Unable to query data from database", e);
@@ -128,6 +148,48 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 		}
 		catch (SQLException e) {
 			LOG.log(Level.SEVERE, "Unable to close connection", e);
+		}
+	}
+
+	/**
+	 * setCompetitionId method sets the competition identifyer. It is needed 
+	 * when reading the results from the database. 
+	 * 
+	 * @author Agu Aarna
+	 * 
+	 * @param competitionId the competitionId to set
+	 * 
+	 * @version 1
+	 */
+	public void setCompetitionId(Number competitionId) {
+		this.competitionId = competitionId;
+	}
+	
+	/**
+	 * getCompetitions method exposes the registered competitions.
+	 * The competition identifier can be chosen from the given set
+	 * 
+	 * @author Agu Aarna
+	 * 
+	 * @return a set of registered competitions in the database
+	 * 
+	 * @version 1
+	 */
+	public ResultSet getCompetitions(){
+		
+		try {
+			if(connection == null)
+				throw new SQLException("No connection set");
+			
+			Statement st = connection.createStatement();
+			String query = 
+				"SELECT id, description FROM competitions ORDER BY id";
+			
+			return st.executeQuery(query);
+		}
+		catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Unable to query data from database", e);
+			return null;
 		}
 	}
 }
