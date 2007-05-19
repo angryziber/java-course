@@ -37,7 +37,6 @@ public class CommentBean extends Canvas implements Serializable {
 				int pos2 = getHeight(); 
 				int y_modifier = 10;
 				int x_modifier = 5;
-				int slow = 0;
 				while(true){
 					g.clearRect(0, 0, getWidth(), getHeight());
 					g.setFont(new Font("Arial", Font.BOLD, 25));
