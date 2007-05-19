@@ -12,12 +12,17 @@ import java.util.*;
 public class DatabaseInput implements Input {
 
 	private String connection;
-	//private int competition;
+	private int competition;
+	private String sql;
 	
 	
 	public DatabaseInput(int comp, String con){
-		//competition = comp;
+		competition = comp;
 		connection = con;
+		sql = "SELECT name, dob, a.country_code, race_100m, long_jump, shot_put, high_jump, race_400m, ";
+		sql = sql + "hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m ";
+		sql = sql + "FROM competitions AS c INNER JOIN (results AS r INNER JOIN athletes AS a ";
+		sql = sql + " ON r.athlete_id = a.id) ON r.competition_id = c.id WHERE c.id = " + competition;
 	}
 	
 	
@@ -40,29 +45,33 @@ public class DatabaseInput implements Input {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
 			Connection con = DriverManager.getConnection(connection, properties);
-			//Connection con = DriverManager.getConnection("jdbc:mysql://srv.azib.net:3306/decathlon", properties);
 			
 			Statement selectStatement = con.createStatement();
+			System.out.println(sql);
 			
 			
 			try{
-				ResultSet rs = selectStatement.executeQuery("SELECT * FROM competitions");
+				ResultSet rs = selectStatement.executeQuery(sql);
 				try{
 					eventInfos = EventInfo.values();
+					
 					while(rs.next()){
-						name = (String) rs.getObject(0);
-						date = (String) rs.getObject(1);
-						country = (String) rs.getObject(2);
+						name = (String) rs.getObject(1);
+						date = rs.getObject(2).toString();
+						country = (String) rs.getObject(3);
+						System.out.println(name + ", " + date + ", " + country);
 						result = new AthleteResults(name, date, country);
 						
-						for(int i = 0; i <= 9; i++){
-							info = eventInfos[i];
+						for(int i = 1; i <= 10; i++){
+							info = eventInfos[i-1];
 							event = result.createEvent(info);
 							event.setResult(rs.getFloat(3+i));
+							event.setResult(rs.getString(3+i));
 							result.addEvent(event);
-							results.add(result);
 							System.out.println(rs.getFloat(3+i));
 						}
+						
+						results.add(result);
 					}
 				}
 				finally{
