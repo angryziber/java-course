@@ -38,7 +38,8 @@ public class DecathlonCompetition {
 	 * @return 	List of AthleteResults
 	 */
 	public List<AthleteResults> readResults(){
-		return input.read();
+		athletes = input.read();
+		return athletes;
 	}
 	
 	/**
