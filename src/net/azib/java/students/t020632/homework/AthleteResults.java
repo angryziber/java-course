@@ -146,14 +146,14 @@ public class AthleteResults implements Comparable<AthleteResults>{
 	}
 	
 	/**
-	 * Compares two AthleteResults objects. Returns positive
+	 * Compares two AthleteResults objects. Returns negative
 	 * integer if this AthleteResults object has better score
-	 * than compared AthleteResults object and negative integer 
+	 * than compared AthleteResults object and positive integer 
 	 * if this object has worse score. If both scores are equal
 	 * number 0 is returned.
 	 */
 	public int compareTo(AthleteResults a) {
-		return this.getScore() - a.getScore();  
+		return a.getScore() - this.getScore();  
 	}
 	
 	
