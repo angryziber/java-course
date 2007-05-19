@@ -32,7 +32,7 @@ public class ConsoleInput implements Input{
 		return null;
 	}
 	
-	public void parseLine(String s, List<AthleteResults> results){
+	public boolean parseLine(String s, List<AthleteResults> results){
 		UnitsConverter converter;
 		AthleteResults result;
 		Event event;
@@ -79,7 +79,11 @@ public class ConsoleInput implements Input{
 			else{
 				System.out.println("You have not entered all required information");
 			}
+			
+			return false;
 		}
+		
+		return true;
 	}
 	
 	
