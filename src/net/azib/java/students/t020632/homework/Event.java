@@ -71,6 +71,4 @@ public class Event {
 		return this.score;
 	}
 	
-	
-	
 }
