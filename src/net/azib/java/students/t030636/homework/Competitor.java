@@ -31,7 +31,8 @@ public class Competitor implements Comparable<Object> {
 //		this.name = name;
 //	}
 	/**
-	 * Gets the competitors score
+	 * Gets the competitors score.
+	 * Returns an Integer value.
 	 * 
 	 */
 	public Integer getScore() {
@@ -79,7 +80,7 @@ public class Competitor implements Comparable<Object> {
 	/**
 	 * Compares the decathletes score to another decathlete
 	 * Returns pos. value if other competitors score is greater, and neg. value otherwise
-	 * @param anotherCompetitor decathlete to which the method compares
+	 * @param anotherCompetitor - decathlete to which to compare
 	 */
 	@Override
 	public int compareTo(Object anotherCompetitor) {
@@ -91,7 +92,7 @@ public class Competitor implements Comparable<Object> {
 	/**
 	 * Checks if another competitor has the same score
 	 * Returns true, if equal - otherwise false
-	 * @param o Object (expected another competitor)
+	 * @param o - Object (expected another competitor)
 	 */
 	@Override
 	public boolean equals(Object o) {

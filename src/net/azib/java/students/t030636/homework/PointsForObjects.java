@@ -19,11 +19,13 @@ public class PointsForObjects {
 	 * This method will calculate decathlon results and put the athletes in the correct order.
 	 * Input is a String array, where every string is one competitors competition data. The string format:
 	 * "[Name]",[date-of-birth],[ISO country code],[100m],[longjump],...and so on for all 10 events. 
-	 * All results in the format [m.cm] or [min:sec] - leaving out the minute if under 60 sec 
-	 * @param inputAsString
-	 * @throws Exception 
+	 * All results in the format [m.cm] or [min:sec] - leaving out the minute if under 60 sec.
+	 * The method returns a sorted ArrayList of Competitors. 
+	 * @param inputAsString - String array where there is one string for every competitior and the strings mus be in 
+	 * the predefined format.
+	 * 
 	 */
-	public ArrayList<Competitor> calculatePoints(String [] inputAsStrings) throws Exception {
+	public ArrayList<Competitor> calculatePoints(String [] inputAsStrings) {
 		
 		ArrayList <Competitor> competitors = new ArrayList<Competitor>(); 
 

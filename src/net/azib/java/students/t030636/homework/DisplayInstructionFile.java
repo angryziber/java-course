@@ -6,10 +6,24 @@ import java.io.Reader;
 
 /**
  * DisplayInstructionFile
+ * 
+ * Class that has a method which displays a text file's contents to the console
  *
  * @author Martin
+ * 
+ * @version 1.0
  */
 public class DisplayInstructionFile {
+	
+	/**
+	 * display method displays a text file's contents to the console
+	 *
+	 * @author Martin
+	 * 
+	 * @param filename - filename of the text file to display
+	 * 
+	 * @version 1.0
+	 */
 	
 	public void display(String filename) {
 			Reader reader = null;

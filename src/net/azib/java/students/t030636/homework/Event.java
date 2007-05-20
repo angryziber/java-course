@@ -1,7 +1,9 @@
 package net.azib.java.students.t030636.homework;
 
 /**
- * Events
+ * Events - Decathlon events
+ * This enum holds information about the decathlon events. Points calculation method is included
+ * in the enum. 
  *
  * @author Martin
  */
@@ -38,15 +40,13 @@ public enum Event {
 	public double second() { return second; };
 	public double third() { return third; };
 	public String unit() { return unit; };
-
-//	public int runningEventPoints(double time) {
-//		return (int) (first *  Math.pow((second - time), third)); 
-//	}
-//	
-//	public int fieldEventPoints(double dist) {
-//		return (int) (first *  Math.pow((dist - second), third));
-//	}
 	
+	/**
+	 * returnPointForTheEvent method returns an Integer value which is the points for the specified event. 
+	 * @param result - the result for the event - in meters (shot put, discus throw, javelin throw)
+	 * , centimeters (other filed events) or seconds (running events). 
+	 *  
+	 */
 	public int returnPointsForTheEvent(double result) {
 		if (this.ordinal() == 0 | this.ordinal() == 4 | this.ordinal() == 5 | this.ordinal() == 9) 
 			return (int) (first *  Math.pow((second - result), third));
