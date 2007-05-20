@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * TestEventFactory
+ * TestEventFactory is a tes class for EventFactory class
  *
  * @author Marek Soobik t020632
  */
@@ -22,12 +22,12 @@ public class TestEventFactory {
 	}
 
 	
-	@After
-	public void tearDown() throws Exception {
-		factory = null;
-	}
-	
-	
+	/**
+	 * Both running event and field event are created and
+	 * tested if they contain the right points calculator
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testname() throws Exception {
 		Event event;
@@ -38,9 +38,12 @@ public class TestEventFactory {
 				assertTrue(event.getCalculator() instanceof RunningEventCalculator);
 			else if(info.getType().equals("fieldEvent"))
 				assertTrue(event.getCalculator() instanceof FieldEventCalculator);
-		}
-		
+		}	
 	}
 	
-
+	@After
+	public void tearDown() throws Exception {
+		factory = null;
+	}
+	
 }
