@@ -1,7 +1,7 @@
 package net.azib.java.students.t020632.homework;
 
 /**
- * UserInput
+ * UserInput parses user input
  *
  * @author Marek Soobik t020632
  */
@@ -15,6 +15,11 @@ public class UserInput {
 		this.userString = userString;
 	}
 	
+	/**
+	 * Parses lines inserted by user
+	 * 
+	 * @return
+	 */
 	public String parseUserInput(){
 		String [] values;
 		String input;
@@ -22,18 +27,43 @@ public class UserInput {
 		
 		if(userString != null){
 			userString = userString.trim();
-			values = userString.split("\\s+");
+			if(userString.contains("\"")){
+				int i = 0;
+				values = new String [2];
+				
+				if(userString.charAt(0) == '"'){
+					i++;
+					while(userString.charAt(i) != '"'){
+						i++;
+					}
+					values[0] = userString.substring(1,i);
+					if(userString.substring(i+1, userString.length()).contains("\""))
+						values[1] = userString.substring(i+3, userString.length() -1);
+					else
+						values[1] = userString.substring(i+2, userString.length());
+				}
+				else{
+					while(userString.charAt(i) != ' '){
+						i++;
+					}
+					values[0] = userString.substring(0,i);
+					values[1] = userString.substring(i+2, userString.length() - 1);
+				}
+			}
+			else{
+				values = userString.split("\\s+");
+			}
 			
 			if(values.length == 2){
 				input = values[0].trim();
 				output = values[1].trim();
 				
 				if(parseInput(input) != true){
-					return "Input parameter is not correct!";
+					return "Input parameter " + input +  " is not correct!";
 				}
 				
 				if(parseOutput(output) != true){
-					return "Output parameter is not correct!";
+					return "Output parameter " + output + " is not correct!";
 				}
 				
 			}
@@ -49,6 +79,12 @@ public class UserInput {
 		return "Input OK";
 	}
 	
+	/**
+	 * Creates new Input object
+	 * 
+	 * @param 	input string
+	 * @return	boolean value indicating whether Input object is created or not
+	 */
 	public boolean parseInput(String input){
 		boolean inputOK = false;
 		
@@ -65,36 +101,39 @@ public class UserInput {
 			return true;
 		}
 		
+		System.out.println(input);
 		return inputOK;
 		
 	}
 	
+	
+	/**
+	 * Creates new Output object
+	 * 
+	 * @param 	output string
+	 * @return	boolean value indicating whether Output object is created or not
+	 */
 	public boolean parseOutput(String output){
 		
 		if(output.toLowerCase().equals("console")){
-			System.out.println("console");
+			//System.out.println("console");
 			this.output = new ConsoleOutput();
 			return true;
 		}
 		else if(output.toLowerCase().substring(output.length() - 3).equals("csv")){
 			this.output = new CSVOutput(output);
-			System.out.println(output.substring(output.length() - 3));
 			return true;
 		}
 		else if(output.toLowerCase().substring(output.length() - 3).equals("xml")){
 			this.output = new XMLOutput(output);
-			System.out.println(output.substring(output.length() - 3));
 			return true;
 		}
 		else if(output.toLowerCase().substring(output.length() - 3).equals("xsl")){
-			this.output = new CSVOutput(output);
-			System.out.println(output.substring(output.length() - 3));
+			this.output = new HTMLOutput(output);
 			return true;
 		}
-		System.out.println(output.substring(output.length() - 3));
-		System.out.println(output.substring(output.length() - 4));
 		
-		
+		//System.out.println(output);
 		return false;
 	}
 	
