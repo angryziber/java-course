@@ -33,6 +33,7 @@ public class XMLOutput implements Output{
 		int i = 0;
 		int j = 0;
 		String s;
+		String [] events = new String [] {"r_100m", "long_jump", "shot_put", "high_jump", "r_400m", "r_110m", "discus_throw", "pole_vault", "javelin_throw", "r_1500m"};
 		
 		try {
 	        Writer out = new BufferedWriter(new OutputStreamWriter(
@@ -40,48 +41,38 @@ public class XMLOutput implements Output{
 	        
 	        s = System.getProperty("line.separator");
 	        
-	        out.write("<?xml version='1.0' encoding='utf-8'?>" + s);
+	        out.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + s);
+	    
 	        
 	        if(xslReference != null){
 	        	out.write("<?xml-stylesheet type=\"text/xsl\" href=\"" + xslReference + "\"?>");
 	        }
 	        
-	        out.write("<decathlon event>" + s);
+	        out.write("<decathlon_event>" + s);
 	       
 	        while(i < results.size()){
 				result = results.get(i);
 				try {
 					out.write("<athlete>" + s);
-			        out.write("<place>" + s);
-					out.write("\t" + result.getPosition() + s);
-					out.write("</place>" + s);
-					out.write("<score>" + s);
-					out.write("\t" + result.getScore() + s);
-					out.write("</score>" + s);
-					out.write("<name>" + s);
-					out.write("\t" + result.getName() + s);
-					out.write("</name>" + s);
-					out.write("<date of birth>" + s);
-					out.write("\t" + result.getDateOfBirth() + s);
-					out.write("</data of birth>" + s);
-					out.write("<country>" + s);
-					out.write("\t" + result.getCountry() + s);
-					out.write("</country>" + s);
+					out.write("<place>"+ result.getPosition() + "</place>" +  s);
+					out.write("<score>" + result.getScore() + "</score>" +  s);
+					out.write("<name>" + result.getName() + "</name>" + s);
+					out.write("<date_of_birth>" + result.getDateOfBirth() + "</date_of_birth>" + s);
+					out.write("<country>" + result.getCountry() + "</country>" + s);
 					
 					j = 0;
 					while(j < 10){
-						out.write("<event>" + s);
-						out.write("\t" + result.getEvent(j).getResult() + s);
-						out.write("</event>" + s);
+						out.write("<" + events[j] + ">" + result.getEvent(j).getResult() + "</" + events[j] + ">" + s);
 						j++;
 					}
 			    } 
 			    catch (IOException e) {
 			    }
-			    out.write("/<athlete>" + s);
+			    out.write("</athlete>" + s);
 				i++;
 			}
-	        out.write("</decathlon event>");
+	        out.write("</decathlon_event>");
+
 	        
 	        try {
 		        out.close();
