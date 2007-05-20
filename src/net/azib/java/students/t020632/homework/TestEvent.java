@@ -9,7 +9,7 @@ import static org.junit.Assert
 .*;
 
 /**
- * TestEvent
+ * TestEvent is a test class for Event class
  *
  * @author Marek Soobik t020632
  */
@@ -25,6 +25,11 @@ public class TestEvent {
 	}
 
 	
+	/**
+	 * Tests whether the points calculation works correctly
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testCalculate() throws Exception {
 		float [] results = new float [] {9.77F, 895F, 23.12F, 245F, 43.18F, 12.91F, 74.08F, 615F, 98.48F, 206.0F};
@@ -39,13 +44,11 @@ public class TestEvent {
 			System.out.println(event.calculate());
 			i++;
 		}
-		
-		
-		
 	}
 	
 	@After
 	public void tearDown() throws Exception {
+		factory = null;
 	}
 
 }
