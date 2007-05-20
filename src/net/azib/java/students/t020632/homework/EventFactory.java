@@ -11,7 +11,7 @@ public class EventFactory {
 	 * Creates Event object according to the EventInfo object.
 	 * Also appropriate calculator is created for the event.
 	 * 
-	 * @param eventInfo
+	 * @param 	eventInfo
 	 * @return	Created Event object
 	 */
 	public Event createEvent(EventInfo eventInfo){
@@ -28,9 +28,6 @@ public class EventFactory {
 			event = new Event(eventInfo, calculator);
 		}
 		
-		
-		return event;
-		
+		return event;	
 	}
-	
 }
