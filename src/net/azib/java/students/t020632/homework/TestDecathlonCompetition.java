@@ -21,9 +21,11 @@ public class TestDecathlonCompetition {
 	Input input;
 	Output output;
 	
-	
-	String in = "C:/input.csv";
-	String out = "C:/results.xsl";
+	/**
+	 * Following files are also in net.azib.java.students.t020632.homework package
+	 */
+	String in = "input.csv";
+	String out = "results.xsl";
 	
 	@Before
 	public void setUp() throws Exception {
