@@ -20,7 +20,7 @@ public class TestCSVInput {
 	List<AthleteResults> list = new ArrayList<AthleteResults>();
 	CSVInput input;
 	CSVOutput output;
-	String path = "C:/Documents and Settings/Marek/Desktop/res.csv";
+	String path = "C:/result.csv";
 	
 	@Before
 	public void setUp() throws Exception {
