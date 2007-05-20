@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="C:/Documents and Settings/Marek/Desktop/results.xsl"?><decathlon_event>
+<athlete>
+<place>1</place>
+<score>8219</score>
+<name>Laurent Hernu</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m> 11.23</r_100m>
+<long_jump> 7.56</long_jump>
+<shot_put>  14.77</shot_put>
+<high_jump> 2.00</high_jump>
+<r_400m> 49.15</r_400m>
+<r_110m> 14.32</r_110m>
+<discus_throw> 47.14</discus_throw>
+<pole_vault> 5.02</pole_vault>
+<javelin_throw> 58.06</javelin_throw>
+<r_1500m> 4:44.06</r_1500m>
+</athlete>
+<athlete>
+<place>2</place>
+<score>8060</score>
+<name>Romain Barras</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m>  11.42</r_100m>
+<long_jump> 7.18</long_jump>
+<shot_put>  14.89</shot_put>
+<high_jump> 2.00</high_jump>
+<r_400m> 48.80</r_400m>
+<r_110m> 14.49</r_110m>
+<discus_throw>  42.67</discus_throw>
+<pole_vault> 4.62</pole_vault>
+<javelin_throw> 63.07</javelin_throw>
+<r_1500m> 4:26.77</r_1500m>
+</athlete>
+<athlete>
+<place>3</place>
+<score>7773</score>
+<name>Lionel Marceny</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m>  11.20</r_100m>
+<long_jump>  7.67</long_jump>
+<shot_put>  12.38</shot_put>
+<high_jump> 1.91</high_jump>
+<r_400m> 50.03</r_400m>
+<r_110m> 14.36</r_110m>
+<discus_throw>  40.25</discus_throw>
+<pole_vault> 4.82</pole_vault>
+<javelin_throw> 52.98</javelin_throw>
+<r_1500m> 4:32.86</r_1500m>
+</athlete>
+<athlete>
+<place>4</place>
+<score>7739</score>
+<name>Trond HĆøiby</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m>  11.62</r_100m>
+<long_jump>  6.88</long_jump>
+<shot_put>  14.53</shot_put>
+<high_jump> 1.97</high_jump>
+<r_400m> 50.93</r_400m>
+<r_110m> 15.42</r_110m>
+<discus_throw>  44.39</discus_throw>
+<pole_vault> 4.62</pole_vault>
+<javelin_throw> 64.67</javelin_throw>
+<r_1500m> 4:27.66</r_1500m>
+</athlete>
+<athlete>
+<place>5</place>
+<score>7638</score>
+<name>ļ»æBruno Lambese</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m>  11.39</r_100m>
+<long_jump>  7.11</long_jump>
+<shot_put>  14.93</shot_put>
+<high_jump> 2.00</high_jump>
+<r_400m> 50.87</r_400m>
+<r_110m> 14.99</r_110m>
+<discus_throw>  45.68</discus_throw>
+<pole_vault> 4.52</pole_vault>
+<javelin_throw> 51.71</javelin_throw>
+<r_1500m> 4:45.29</r_1500m>
+</athlete>
+<athlete>
+<place>6</place>
+<score>7630</score>
+<name>Eugene Martineau</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m>  11.34</r_100m>
+<long_jump>  7.21</long_jump>
+<shot_put>  12.36</shot_put>
+<high_jump> 1.94</high_jump>
+<r_400m> 50.02</r_400m>
+<r_110m> 15.41</r_110m>
+<discus_throw>  41.54</discus_throw>
+<pole_vault> 4.72</pole_vault>
+<javelin_throw> 61.27</javelin_throw>
+<r_1500m> 4:34.79</r_1500m>
+</athlete>
+<athlete>
+<place>7</place>
+<score>7581</score>
+<name>Philip McMulle</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m> 11.91</r_100m>
+<long_jump>  6.33</long_jump>
+<shot_put>  14.21</shot_put>
+<high_jump> 1.85</high_jump>
+<r_400m> 50.81</r_400m>
+<r_110m> 15.28</r_110m>
+<discus_throw>  50.35</discus_throw>
+<pole_vault> 4.92</pole_vault>
+<javelin_throw> 56.26</javelin_throw>
+<r_1500m> 4:21.41</r_1500m>
+</athlete>
+<athlete>
+<place>7</place>
+<score>7581</score>
+<name>Roland Schwarzl</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m> 11.91</r_100m>
+<long_jump>  6.33</long_jump>
+<shot_put>  14.21</shot_put>
+<high_jump> 1.85</high_jump>
+<r_400m> 50.81</r_400m>
+<r_110m> 15.28</r_110m>
+<discus_throw>  50.35</discus_throw>
+<pole_vault> 4.92</pole_vault>
+<javelin_throw> 56.26</javelin_throw>
+<r_1500m> 4:21.41</r_1500m>
+</athlete>
+<athlete>
+<place>9</place>
+<score>7523</score>
+<name>Michal Modelski</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m>  11.39</r_100m>
+<long_jump>  7.27</long_jump>
+<shot_put>  13.82</shot_put>
+<high_jump> 1.94</high_jump>
+<r_400m> 50.35</r_400m>
+<r_110m> 15.37</r_110m>
+<discus_throw>  38.22</discus_throw>
+<pole_vault> 4.82</pole_vault>
+<javelin_throw> 51.94</javelin_throw>
+<r_1500m> 4:37.24</r_1500m>
+</athlete>
+<athlete>
+<place>10</place>
+<score>6807</score>
+<name>Nikolai Tishchenko</name>
+<date_of_birth>29.02.1982</date_of_birth>
+<country>ZA</country>
+<r_100m>  11.31</r_100m>
+<long_jump>  7.59</long_jump>
+<shot_put>  13.29</shot_put>
+<high_jump> 1.94</high_jump>
+<r_400m> 54.11</r_400m>
+<r_110m> 14.55</r_110m>
+<discus_throw>  41.36</discus_throw>
+<pole_vault> 4.52</pole_vault>
+<javelin_throw> 52.46</javelin_throw>
+<r_1500m> 0</r_1500m>
+</athlete>
+</decathlon_event>
