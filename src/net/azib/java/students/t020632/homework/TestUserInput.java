@@ -20,7 +20,7 @@ public class TestUserInput {
 	UserInput user4;
 	String s1 = "console out.xml";
 	String s2 = "  database   out.csv ";
-	String s3 = "console out.html";
+	String s3 = "console out.xsl";
 	String s4 = "in.csv console";
 	
 	@Before
