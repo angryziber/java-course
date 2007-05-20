@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * DatabaseInput
+ * DatabaseInput reads results from database
  *
  * @author Marek Soobik t020632
  */
@@ -23,14 +23,21 @@ public class DatabaseInput implements Input {
 		connection = con;
 	}
 	
-	
+	/**
+	 * Reads results from database. After connecting database all competitions
+	 * found from database are showed to user. User has to pick one competition
+	 * which is included for the point calculation. Results are added to AthleteResults
+	 * list  
+	 */
 	public List<AthleteResults> read(){
 		
 		List<AthleteResults> results = new ArrayList<AthleteResults>();
 		AthleteResults result;
+		UnitsConverter converter;
 		EventInfo [] eventInfos;
 		EventInfo info;
 		Event event;
+		float fResult;
 		String name;
 		String date;
 		String country;
@@ -50,6 +57,7 @@ public class DatabaseInput implements Input {
 			
 			
 			try{
+				
 				ResultSet rs2 = selectStatement.executeQuery("SELECT * FROM competitions");
 				
 				System.out.println("id \t description");
@@ -70,7 +78,6 @@ public class DatabaseInput implements Input {
 				sql = sql + "FROM competitions AS c INNER JOIN (results AS r INNER JOIN athletes AS a ";
 				sql = sql + " ON r.athlete_id = a.id) ON r.competition_id = c.id WHERE c.id = " + competition;
 				
-				System.out.println(sql);
 				
 				ResultSet rs = selectStatement.executeQuery(sql);
 				try{
@@ -80,13 +87,16 @@ public class DatabaseInput implements Input {
 						name = (String) rs.getObject(1);
 						date = rs.getObject(2).toString();
 						country = (String) rs.getObject(3);
-						//System.out.println(name + ", " + date + ", " + country);
+		
 						result = new AthleteResults(name, date, country);
+						
+						converter = UnitsConverter.getUnitsConverter();
 						
 						for(int i = 1; i <= 10; i++){
 							info = eventInfos[i-1];
 							event = result.createEvent(info);
-							event.setResult(rs.getFloat(3+i));
+							fResult = converter.convert(info, rs.getString(3+i));
+							event.setResult(fResult);
 							event.setResult(rs.getString(3+i));
 							result.addEvent(event);
 							//System.out.println(rs.getFloat(3+i));
