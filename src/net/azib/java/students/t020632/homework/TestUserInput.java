@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * TestUserInput
+ * TestUserInput is a test class for UserInput
  *
  * @author Marek Soobik t020632
  */
@@ -31,6 +31,11 @@ public class TestUserInput {
 		user4 = new UserInput(s4);
 	}
 	
+	/**
+	 * Tests user inputs
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testUserInput() throws Exception {
 		assertEquals(user1.parseUserInput(), "Input OK");
