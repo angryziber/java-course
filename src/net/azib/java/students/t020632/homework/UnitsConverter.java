@@ -32,9 +32,9 @@ public class UnitsConverter {
 	/**
 	 * Converts event result to correct units
 	 * 
-	 * @param eventInfo
-	 * @param result
-	 * @return
+	 * @param 	eventInfo
+	 * @param 	result as a string
+	 * @return	converted result as a float
 	 */
 	public float convert(EventInfo eventInfo, String result){
 		float convertedResult = 0;
@@ -56,6 +56,16 @@ public class UnitsConverter {
 			
 		}
 		else if(type.equals("runningEvent")){
+			
+			if(!result.contains(":")){
+				try{
+					convertedResult = Float.valueOf(result);
+					return convertedResult;
+				}
+				catch(NumberFormatException e){
+					
+				}
+			}
 			
 			int i = result.indexOf(colon);
 			
