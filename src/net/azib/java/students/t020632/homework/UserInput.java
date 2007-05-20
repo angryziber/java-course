@@ -86,9 +86,9 @@ public class UserInput {
 			System.out.println(output.substring(output.length() - 3));
 			return true;
 		}
-		else if(output.toLowerCase().substring(output.length() - 4).equals("html")){
+		else if(output.toLowerCase().substring(output.length() - 3).equals("xsl")){
 			this.output = new CSVOutput(output);
-			System.out.println(output.substring(output.length() - 4));
+			System.out.println(output.substring(output.length() - 3));
 			return true;
 		}
 		System.out.println(output.substring(output.length() - 3));
