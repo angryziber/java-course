@@ -23,7 +23,8 @@ public class ConsoleInput implements Input{
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	    
 		try {
-			System.out.println("Type one athlete with results and then press enter. For example:");
+			System.out.println("Type one athlete with results and then press enter.");
+			System.out.println("Use comma as a delimiter! For example:");
 			System.out.println("\t Trond Høiby,29.02.1982,ZA,  11.62,  6.88,  14.53, 1.97, 50.93, 15.42,  44.39, 4.62, 64.67, 4:27.66");
 			while((s = in.readLine()) != null){
 				if(s.equals(""))
@@ -94,7 +95,7 @@ public class ConsoleInput implements Input{
 				System.out.println("You have entered too much information");
 			}
 			else{
-				System.out.println("You have not entered all required information");
+				System.out.println("You have not entered all required information or used comma as a delimiter");
 			}
 			
 			return false;
