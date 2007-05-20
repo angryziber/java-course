@@ -9,13 +9,17 @@ import java.io.Writer;
 import java.util.List;
 
 /**
- * HTMLOutput
+ * HTMLOutput writes output data into xml and xsl file.
  *
  * @author Marek Soobik t020632
  */
 public class HTMLOutput implements Output{
 	
 	private String path;
+	
+	/**
+	 * Variable xmlFile holds reference to the xml file 
+	 */
 	private Output xmlFile;
 	
 	public HTMLOutput(String path){
@@ -24,6 +28,10 @@ public class HTMLOutput implements Output{
 		System.out.println(path.substring(0, path.length() - 3) + "xml");
 	}
 	
+	
+	/**
+	 * Writes results into xml and xsl file.
+	 */
 	public void write(List<AthleteResults> results) {
 		String s;
 		
@@ -80,6 +88,8 @@ public class HTMLOutput implements Output{
 	        out.write("</table></body></html>" + s);
 	        out.write("</xsl:template>" + s);
 	        out.write("</xsl:stylesheet>" + s);
+	        
+	        System.out.println("Results have been written into file " + path.substring(0, path.length() - 3) + "xml");
 	        
 	        try {
 		        out.close();
