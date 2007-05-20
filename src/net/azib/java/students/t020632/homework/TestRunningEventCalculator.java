@@ -50,6 +50,11 @@ public class TestRunningEventCalculator {
 	}
 	
 	
+	/**
+	 * Test method for 100m run score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void test100m() throws Exception {
 		float result = 9.77F;
@@ -59,7 +64,11 @@ public class TestRunningEventCalculator {
 		
 	}
 	
-	
+	/**
+	 * Test method for 400m run score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void test400m() throws Exception {
 		float result = 43.18F;
@@ -68,6 +77,11 @@ public class TestRunningEventCalculator {
 		assertEquals(calc.calculate(run400m, 81.21F), 1);
 	}
 	
+	/**
+	 * Test method for 110m hurdles score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void test110m() throws Exception {
 		float result = 12.91F;
@@ -77,6 +91,11 @@ public class TestRunningEventCalculator {
 		
 	}
 	
+	/**
+	 * Test method for 1500m run score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void test1500m() throws Exception {
 		float result = 206.0F;
