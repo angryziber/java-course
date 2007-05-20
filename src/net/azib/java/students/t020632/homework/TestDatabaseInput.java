@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * TestDatabaseInput
+ * TestDatabaseInput is a test class for DatabaseInput
  *
  * @author Marek Soobik t020632
  */
@@ -28,6 +28,9 @@ public class TestDatabaseInput {
 		List<AthleteResults> results;
 		
 		results = input.read();
+		
+		if(results == null)
+			return;
 		
 		assertEquals(results.get(0).getName(), "Siim Susi");
 		assertEquals(results.get(0).getEvent(0).getResult(), "14.15");
