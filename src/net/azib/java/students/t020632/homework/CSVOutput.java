@@ -9,7 +9,7 @@ import java.io.Writer;
 import java.util.List;
 
 /**
- * CSVOutput
+ * CSVOutput writes results into csv file
  *
  * @author Marek Soobik t020632
  */
@@ -21,6 +21,9 @@ public class CSVOutput implements Output{
 		this.path = path;
 	}
 	
+	/**
+	 * Writes results to the csv file
+	 */
 	public void write(List<AthleteResults> results) {
 		String s = "";
 		int i = 0;
@@ -56,6 +59,8 @@ public class CSVOutput implements Output{
 				i++;
 			}
 	        
+	        System.out.println("Results have been written into file " + path);
+	        
 	        try {
 		        out.close();
 		    } 
@@ -63,7 +68,6 @@ public class CSVOutput implements Output{
 		    }
 	        catch (IOException e) {
 		    }
-	        
 	    }
 		catch (UnsupportedEncodingException e) {
 	    }
