@@ -9,7 +9,7 @@ import java.io.Writer;
 import java.util.List;
 
 /**
- * XMLOutput
+ * XMLOutput writes output data into xml file
  *
  * @author Marek Soobik t020632
  */
@@ -23,11 +23,20 @@ public class XMLOutput implements Output{
 		xslReference = null;
 	}
 	
+	/**
+	 * This constructor is called when xsl file is tied with xml file
+	 * 
+	 * @param path	xml file path
+	 * @param xsl	xsl file pah
+	 */
 	public XMLOutput(String path, String xsl){
 		this.path = path;
 		xslReference = xsl;
 	}
 	
+	/**
+	 * Writes results into xml file
+	 */
 	public void write(List<AthleteResults> results) {
 		AthleteResults result;
 		int i = 0;
@@ -72,6 +81,8 @@ public class XMLOutput implements Output{
 				i++;
 			}
 	        out.write("</decathlon_event>");
+	        
+	        System.out.println("Results have been written into file " + path);
 
 	        
 	        try {
@@ -87,7 +98,6 @@ public class XMLOutput implements Output{
 	    }
 		catch (IOException e) {
 	    }
-		
 	}
 	
 	public String getPath(){
