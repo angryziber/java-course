@@ -1,5 +1,7 @@
 package net.azib.java.students.t020632.homework;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.*;
 
@@ -19,10 +21,6 @@ public class DatabaseInput implements Input {
 	public DatabaseInput(int comp, String con){
 		competition = comp;
 		connection = con;
-		sql = "SELECT name, dob, a.country_code, race_100m, long_jump, shot_put, high_jump, race_400m, ";
-		sql = sql + "hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m ";
-		sql = sql + "FROM competitions AS c INNER JOIN (results AS r INNER JOIN athletes AS a ";
-		sql = sql + " ON r.athlete_id = a.id) ON r.competition_id = c.id WHERE c.id = " + competition;
 	}
 	
 	
@@ -36,6 +34,8 @@ public class DatabaseInput implements Input {
 		String name;
 		String date;
 		String country;
+		String id;
+		String description;
 		
 		try{
 			Properties properties = new Properties();
@@ -47,10 +47,31 @@ public class DatabaseInput implements Input {
 			Connection con = DriverManager.getConnection(connection, properties);
 			
 			Statement selectStatement = con.createStatement();
-			System.out.println(sql);
 			
 			
 			try{
+				ResultSet rs2 = selectStatement.executeQuery("SELECT * FROM competitions");
+				
+				System.out.println("id \t description");
+				while(rs2.next()){
+					id = rs2.getObject(1).toString();
+					description = (String) rs2.getObject(4);
+					System.out.println(id + "\t" + description);
+				}
+				
+				BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+				System.out.println("There are several competitions in the database");
+				System.out.println("Enter the id number for the competition!");
+				
+				competition = Integer.parseInt(in.readLine());
+				
+				sql = "SELECT name, dob, a.country_code, race_100m, long_jump, shot_put, high_jump, race_400m, ";
+				sql = sql + "hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m ";
+				sql = sql + "FROM competitions AS c INNER JOIN (results AS r INNER JOIN athletes AS a ";
+				sql = sql + " ON r.athlete_id = a.id) ON r.competition_id = c.id WHERE c.id = " + competition;
+				
+				System.out.println(sql);
+				
 				ResultSet rs = selectStatement.executeQuery(sql);
 				try{
 					eventInfos = EventInfo.values();
@@ -59,7 +80,7 @@ public class DatabaseInput implements Input {
 						name = (String) rs.getObject(1);
 						date = rs.getObject(2).toString();
 						country = (String) rs.getObject(3);
-						System.out.println(name + ", " + date + ", " + country);
+						//System.out.println(name + ", " + date + ", " + country);
 						result = new AthleteResults(name, date, country);
 						
 						for(int i = 1; i <= 10; i++){
@@ -68,7 +89,7 @@ public class DatabaseInput implements Input {
 							event.setResult(rs.getFloat(3+i));
 							event.setResult(rs.getString(3+i));
 							result.addEvent(event);
-							System.out.println(rs.getFloat(3+i));
+							//System.out.println(rs.getFloat(3+i));
 						}
 						
 						results.add(result);
