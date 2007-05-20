@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * TestConsoleInput
+ * TestConsoleInput is a test class for ConsoleInput class
  *
  * @author Marek Soobik t020632
  */
@@ -26,6 +26,13 @@ public class TestConsoleInput {
 		results = new ArrayList<AthleteResults>();
 	}
 	
+	
+	/**
+	 * Method parseLine() is tested. Both valid and invalid input string 
+	 * for parseLine() are tested.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testParseLine() throws Exception {
 		String correctLine = 	"Romain Barras,29.02.1982,ZA,  11.42, 7.18,  14.89, 2.00, 48.80, 14.49,  42.67, 4.62, 63.07, 4:26.77";
