@@ -39,12 +39,13 @@ public class Decathlon {
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			
 			System.out.println("*********************** Decathlon points computation **********************\n");
-			System.out.println("Enter parameters for input and output data separated by space character\n");
+			System.out.println("Enter parameters for input and output data separated by one space character\n");
 			System.out.println("For example, following command reads input data from csv file and prints output to console");
 			System.out.println("\t C:/results.csv console");
 			System.out.println("To read input data from database and write output to xml file, type:");
 			System.out.println("\t database \"C:/Documents and Settings/results.xml\"");
-			System.out.println("Valid file types for output are csv (for input also), xml and xsl (xml file is also created) ");
+			System.out.println("\nValid file types for output are csv (for input also), xml and xsl (xml file is also created) ");
+			System.out.println("If path contains spaces (like previous example) use quotation marks");
 			System.out.println("Make sure you use full paths!");
 		
 		
