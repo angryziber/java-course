@@ -61,6 +61,7 @@ public class DatabaseInput implements Input {
 				ResultSet rs2 = selectStatement.executeQuery("SELECT * FROM competitions");
 				
 				System.out.println("id \t description");
+				System.out.println("---------------------");
 				while(rs2.next()){
 					id = rs2.getObject(1).toString();
 					description = (String) rs2.getObject(4);
@@ -68,7 +69,7 @@ public class DatabaseInput implements Input {
 				}
 				
 				BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-				System.out.println("There are several competitions in the database");
+				System.out.println("\nThere are several competitions in the database.");
 				System.out.println("Enter the id number for the competition!");
 				
 				competition = Integer.parseInt(in.readLine());
