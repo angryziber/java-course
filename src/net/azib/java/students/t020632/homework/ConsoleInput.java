@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ConsoleInput
+ * ConsoleInput reads input data from console
  *
  * @author Marek Soobik t020632
  */
 public class ConsoleInput implements Input{
 
-	
+	/**
+	 * Reads input data from input stream.
+	 */
 	public List<AthleteResults> read() {
 		List<AthleteResults> results = new ArrayList<AthleteResults>();
 		String s;
@@ -21,9 +23,16 @@ public class ConsoleInput implements Input{
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	    
 		try {
+			System.out.println("Type one athlete with results and then press enter. For example:");
+			System.out.println("\t Trond Høiby,29.02.1982,ZA,  11.62,  6.88,  14.53, 1.97, 50.93, 15.42,  44.39, 4.62, 64.67, 4:27.66");
 			while((s = in.readLine()) != null){
+				if(s.equals(""))
+					break;
 				parseLine(s, results);
+				System.out.println("Type another line or press enter to finish");
 			}
+			System.out.println("Calculating points");
+			return results;
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -32,6 +41,14 @@ public class ConsoleInput implements Input{
 		return null;
 	}
 	
+	/**
+	 * Parses the input line which is written by user. Checks whether the input
+	 * is correct and adds data into AthleteResults list.
+	 * 
+	 * @param s			input string
+	 * @param results	AthleteResults list
+	 * @return			boolean value indicating wheter the input line was valid
+	 */
 	public boolean parseLine(String s, List<AthleteResults> results){
 		UnitsConverter converter;
 		AthleteResults result;
@@ -85,7 +102,5 @@ public class ConsoleInput implements Input{
 		
 		return true;
 	}
-	
-	
 
 }
