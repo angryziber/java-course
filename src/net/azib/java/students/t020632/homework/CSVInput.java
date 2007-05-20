@@ -7,18 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * CSVInput
+ * CSVInput reads input data from csv file
  *
  * @author Marek Soobik t020632
  */
 public class CSVInput implements Input {
 
+	// Path to the file
 	private String path;
 	
 	public CSVInput(String path){
 		this.path = path;
 	}
 	
+	/**
+	 * Reads input data from csv file
+	 */
 	public List<AthleteResults> read() {
 		List<AthleteResults> results = new ArrayList<AthleteResults>();
 		String s = "";
@@ -38,6 +42,12 @@ public class CSVInput implements Input {
 		return results;
 	}
 	
+	/**
+	 * Parses line from csv file. Results are added to AthleteResults list
+	 * 
+	 * @param s			parsed string
+	 * @param results	AthleteResults list
+	 */
 	public void parseLine(String s, List<AthleteResults>results){
 		UnitsConverter converter;
 		AthleteResults result;
