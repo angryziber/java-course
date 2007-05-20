@@ -31,7 +31,8 @@ public class CSVInput implements Input {
 			}
 		}
 		catch(Exception e){
-			System.out.println("File not found!\n Make sure you have entered correct path");
+			System.out.println("File " + path + " not found!\n Make sure you have entered correct path");
+			return null;
 		}
 		
 		return results;
@@ -74,7 +75,7 @@ public class CSVInput implements Input {
 				i++;
 			}
 			
-			result.printResults();
+			//result.printResults();
 			results.add(result);
 		}
 		else{
