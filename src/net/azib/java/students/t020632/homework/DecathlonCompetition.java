@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * DecathlonCompetiton calculates scores for all the 
  * athletes in the competition and writes results into
- * output.
+ * output. 
  *
  * @author Marek Soobik t020632
  */
@@ -23,13 +23,19 @@ public class DecathlonCompetition {
 	}
 	
 	/**
-	 * Processes one decathlon competition
+	 * Processes one decathlon competition. Reads input data,
+	 * calculates scores, sorts results in list, sets correct
+	 * places for the athletes and writes results into output.
 	 */
 	public void processCompetition(){
 		athletes = readResults();
-		calculateResults();
-		sortAthletes();
-		writeResults();
+		
+		if(athletes != null){
+			calculateResults();
+			sortAthletes();
+			setAthletePositions();
+			writeResults();
+		}
 	}
 	
 	/**
@@ -72,7 +78,8 @@ public class DecathlonCompetition {
 	}
 	
 	/**
-	 * Sets rank for each athlete
+	 * Sets rank for each athlete. If two athletes have equal scores then
+	 * they share the position.
 	 */
 	public void setAthletePositions(){
 		int i = 0;
