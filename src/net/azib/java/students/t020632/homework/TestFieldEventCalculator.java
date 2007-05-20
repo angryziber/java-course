@@ -56,7 +56,11 @@ public class TestFieldEventCalculator {
 		javelinThrow = EventInfo.JAVELIN_THROW;
 	}
 	
-	
+	/**
+	 * Test method for long jump score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testLongJump() throws Exception {
 		float result = 895F;
@@ -66,34 +70,55 @@ public class TestFieldEventCalculator {
 	}
 	
 	
+	/**
+	 * Test method for shot put score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testShotPut() throws Exception {
 		assertEquals(calc.calculate(shotPut, 23.12F), 1295);
 		assertEquals(calc.calculate(shotPut, 1.53F), 1);
 	}
 	
-	
+	/**
+	 * Test method for high jump score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testHighJump() throws Exception {
 		assertEquals(calc.calculate(highJump, 245F), 1244);
 		assertEquals(calc.calculate(highJump, 77F), 2);
 	}
 	
-	
+	/**
+	 * Test method for discus throw score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testDiscusThrow() throws Exception {
 		assertEquals(calc.calculate(discusThrow, 74.08F), 1383);
 		assertEquals(calc.calculate(discusThrow, 4.10F), 1);
 	}
 	
-	
+	/**
+	 * Test method for pole vault score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testPoleVault() throws Exception {
 		assertEquals(calc.calculate(poleVault, 615F), 1281);
 		assertEquals(calc.calculate(poleVault, 103F), 1);
 	}
 	
-	
+	/**
+	 * Test method for javelin throw score calculation
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testJavelinThrow() throws Exception {
 		assertEquals(calc.calculate(javelinThrow, 98.48F), 1331);
