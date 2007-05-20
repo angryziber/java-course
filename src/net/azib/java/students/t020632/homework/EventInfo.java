@@ -1,7 +1,7 @@
 package net.azib.java.students.t020632.homework;
 
 /**
- * EventInfo enum contains information for points calculation. 
+ * EventInfo enum contains information about events for the points calculation. 
  *
  * @author Marek Soobik t020632
  */
