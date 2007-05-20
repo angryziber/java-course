@@ -89,6 +89,9 @@ public class AthleteResults implements Comparable<AthleteResults>{
 		return score;
 	}
 	
+	/**
+	 * Prints results to the console
+	 */
 	public void printResults(){
 		int i = 0;
 		StringBuffer str = new StringBuffer();
