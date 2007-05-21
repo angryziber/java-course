@@ -31,12 +31,14 @@ public class Competitor<T> implements Comparable<T>{
 	private float javelinThrow;
 	private float race; /*seconds.milliseconds*/
 	private String [] results;
+	private String initialData;
 	
 	/**
 	 * 
 	 * @param competitorData
 	 */
 	public Competitor(String competitorData) {
+		initialData = competitorData;
 		parseResults(competitorData);
 		calculatePoints();
 	}
@@ -92,7 +94,13 @@ public class Competitor<T> implements Comparable<T>{
 			setPoleVault(Float.parseFloat(results[index++]));
 			setJavelinThrow(Float.parseFloat(results[index++]));
 			String[]raceS = results[index++].split(":");
-			setRace(Integer.parseInt(raceS[0])*60+Float.parseFloat(raceS[1]));
+			if(raceS.length<2){
+				setRace(Float.parseFloat(raceS[0]));
+			}else{
+				setRace(Integer.parseInt(raceS[0])*60+Float.parseFloat(raceS[1]));
+			}
+			
+			
 			
 		}
 		
@@ -335,5 +343,11 @@ public class Competitor<T> implements Comparable<T>{
 				results[11]).append(", ").append(
 				results[12]).append(". ");
 		return sb.toString();	
+	}
+	/**
+	 * @return the initialData
+	 */
+	public String getInitialData() {
+		return initialData;
 	}
 }

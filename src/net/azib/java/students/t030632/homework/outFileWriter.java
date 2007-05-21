@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * FileWriter
@@ -15,18 +18,23 @@ import java.util.List;
 public class outFileWriter {
 	
 	public outFileWriter(File fileName, List <Competitor> listofCompetitorstoWrite){
-		List places = new PlaceCalculator(listofCompetitorstoWrite).getPlaces();
+		Map<Integer, String> places = new PlaceCalculator(listofCompetitorstoWrite).getPlaces();
+//		List places = new PlaceCalculator(listofCompetitorstoWrite).getPlaces();
 		FileOutputStream outStream;
 		OutputStreamWriter outStreamWriter;
 		BufferedWriter outBufWriter;
+		Set <String> compsDataToWrite = new TreeSet<String>();
+		for(Competitor champ : listofCompetitorstoWrite){
+			compsDataToWrite.add(String.valueOf("("+places.get(champ.getPoints())+") "+champ));
+		}
 		try {
 			outStream = new FileOutputStream(fileName);
 			outStreamWriter = new OutputStreamWriter(outStream,"UTF8");
 			outBufWriter = new BufferedWriter(outStreamWriter);
 			/*PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName),""));*/
-			for(Competitor champ : listofCompetitorstoWrite){
-				outBufWriter.write(places.size() - places.indexOf(champ.getPoints())+") ");
-				outBufWriter.write(champ+"\n");
+			for(String data:compsDataToWrite){
+				outBufWriter.write(data+ System.getProperty("line.separator"));
+				
 			}
 			outBufWriter.close();
 		}
