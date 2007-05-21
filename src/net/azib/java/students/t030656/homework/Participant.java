@@ -1,9 +1,5 @@
 package net.azib.java.students.t030656.homework;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import sun.util.calendar.BaseCalendar.Date;
 
 
 /**
@@ -17,56 +13,40 @@ public class Participant {
 	private String dateOfBirth;
 	private String country;
 	private int points;
+	private double[] results = {0,0,0,0,0,0,0,0,0,0}; 
+
 	
 	
 	/**
 	 * constructor
 	 */
-	public Participant(String name, String country, String dateOfBirth,
-			double resRun100, double resLongJump, double resShotPut, 
-			double resHighJump, Date resRun400, double resRunHurdles,
-			double resDiscusThrow, double resPoleVault, double resJavelinThrow,
-			Date resRun1500) {
-		SimpleDateFormat sdfDateOfBirth = new SimpleDateFormat("dd.MM.yyyy");
-		SimpleDateFormat sdfResultTimes = new SimpleDateFormat("ss");
-		
-		System.out.println(sdfResultTimes.format(resRun400));
-	}
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
+	public Participant(String name, String country, String dateOfBirth, double[] results) {
 		this.name = name;
-	}
-	/**
-	 * @param points the points to set
-	 */
-	public void setPoints(int points) {
-		this.points = points;
-	}
-	/**
-	 * @param dateOfBirth the dateOfBirth to set
-	 */
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-	/**
-	 * @param country the country to set
-	 */
-	public void setCountry(String country) {
 		this.country = country;
+		this.results = results;
+		points = calcPoints();
+	}
+
+	/**
+	 * @return the points
+	 */
+	private int calcPoints() {
+		return Event.RUN100.getPoints(results[0]) +
+					Event.LONGJUMP.getPoints(results[1]) +
+					Event.SHOTPUT.getPoints(results[2]) +
+					Event.HIGHJUMP.getPoints(results[3]) +
+					Event.RUN400.getPoints(results[4]) +
+					Event.RUNHURDLES.getPoints(results[5]) +
+					Event.DISCUSTHROW.getPoints(results[6]) +
+					Event.POLEVAULT.getPoints(results[7]) +
+					Event.JAVELINTHROW.getPoints(results[8]) +
+					Event.RUN1500.getPoints(results[9]);
 	}
 	/**
-	 * @return the country
+	 * @return the points
 	 */
-	public String getCountry() {
-		return country;
-	}
-	/**
-	 * @return the dateOfBirth
-	 */
-	public String getDateOfBirth() {
-		return dateOfBirth;
+	public int getPoints() {
+		return points;
 	}
 	/**
 	 * @return the name
@@ -75,9 +55,21 @@ public class Participant {
 		return name;
 	}
 	/**
-	 * @return the points
+	 * @return the dateOfBirth
 	 */
-	public int getPoints() {
-		return points;
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+	/**
+	 * @return the country
+	 */
+	public String getCountry() {
+		return country;
+	}
+	/**
+	 * @return the results
+	 */
+	public double[] getResults() {
+		return results;
 	}
 }

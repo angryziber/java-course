@@ -21,7 +21,7 @@ public class Decathlon {
 		Scanner inScan = new Scanner(inStream);
 		
 		//welcome user
-		System.out.println("***[Decathlon]***");
+		System.out.println("***[Decaathlon]***");
 		System.out.println();
 		
 		while(Run == 1){

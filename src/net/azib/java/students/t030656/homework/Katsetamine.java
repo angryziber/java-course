@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Katsetamine
@@ -22,10 +21,9 @@ public class Katsetamine {
 			cal.setTime(df.parse(s));
 		}
 		catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        System.out.println(cal.get(Calendar.MINUTE));
-        System.out.println(cal.get(Calendar.SECOND));
+		int a = cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND);
+        System.out.println(a);
 	}
 }
