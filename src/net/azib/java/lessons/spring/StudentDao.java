@@ -5,9 +5,7 @@ package net.azib.java.lessons.spring;
  *
  * @author anton
  */
-public class StudentDao {
+public interface StudentDao {
 
-	public void getStudent(String studentCode) {
-		
-	}
+	public void getStudent(String studentCode);
 }
