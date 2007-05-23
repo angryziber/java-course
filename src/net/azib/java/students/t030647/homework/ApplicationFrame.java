@@ -224,15 +224,19 @@ public class ApplicationFrame extends JFrame implements ActionListener {
 						}
 						break;
 					case 3: //xml
-						new XmlCreator(new File("1.xml"), inputData.getData());
+						String filename = JOptionPane.showInputDialog(this, "Save file as", "championship.xml");
+						if (filename!=null) {
+							new XmlCreator(new File(filename), inputData.getData());
+						}
 						break;
 					case 4: //html
+						String filename = JOptionPane.showInputDialog(this, "Save file as", "championship.html");
 						File xmlFile = new File("1.xml");
 						//src\net\azib\java\students\t030647\homework
 						File xslFile = new File("src"+File.separator+"net"+File.separator+"azib"+File.separator
 								+"java"+File.separator+"students"+File.separator+"t030647"+
 								File.separator+"homework"+File.separator+"competition.xsl");
-						File htmlFile = new File("1.html");
+						File htmlFile = new File(filename);
 						XmlCreator xml = new XmlCreator(xmlFile, inputData.getData());
 						xml.CreateHTML(xmlFile, xslFile, htmlFile);
 						break;
