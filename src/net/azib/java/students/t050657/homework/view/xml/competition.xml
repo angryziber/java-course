@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="competition.xsl"?>
+
+<competitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xmlns:noNamespaceSchemaLocation="competition.xsd">
+
+	<competition  date="2005-12-01" countryCode="EE" description="Training in Tallinn">
+	
+		<athlet name="Василий Пупкин" dateOfBirth="1982-10-21" countryCode="UA">
+			<place>1</place>
+			<finalscore>2015.15</finalscore>
+			<event title="100 m sprint">13.43</event>
+			<event title="Long jump">4.35</event>
+			<event title="Shot put">8.64</event>
+			<event title="High jump">1.50</event>
+			<event title="400 m sprint">66.06</event>
+			<event title="110 m hurdles">19.05</event>
+			<event title="Discus throw">24.89</event>
+			<event title="Pole vault">2.20</event>
+			<event title="Javelin throw">33.48</event>
+			<event title="1500 m race">411.01</event> 
+		</athlet>
+		
+		<athlet name="Siim Susi" dateOfBirth="1976-01-01" countryCode="EE">
+			<place>2-3</place>
+			<finalscore>2184.15</finalscore>
+			<event title="100 m sprint">12.61</event>
+			<event title="Long jump">5.00</event>
+			<event title="Shot put">9.22</event>
+			<event title="High jump">1.50</event>
+			<event title="400 m sprint">59.39</event>
+			<event title="110 m hurdles">16.43</event>
+			<event title="Discus throw">21.60</event>
+			<event title="Pole vault">2.60</event>
+			<event title="Javelin throw">35.81</event>
+			<event title="1500 m race">325.72 </event>
+		</athlet>
+		
+		<athlet name="Szőrös Szűk" dateOfBirth="1972-04-03" countryCode="HU">
+			<place>2-3</place>
+			<finalscore>2184.15</finalscore>
+			<event title="100 m sprint">13.75</event>
+			<event title="Long jump">4.84</event>
+			<event title="Shot put">10.12</event>
+			<event title="High jump">1.50</event>
+			<event title="400 m sprint">68.44</event>
+			<event title="110 m hurdles">19.18</event>
+			<event title="Discus throw">30.85</event>
+			<event title="Pole vault">2.80</event>
+			<event title="Javelin throw">33.88</event>
+			<event title="1500 m race">382.75</event>
+		</athlet>
+		
+	</competition>
+	
+</competitions>
