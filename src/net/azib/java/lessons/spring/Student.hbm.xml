@@ -5,6 +5,11 @@
 	<class name="net.azib.java.lessons.spring.Student" table="users">
 		<id name="id" access="field"/>
 		<property name="name"/>
+		<property name="studentCode"/>
 	</class>
 	
+	<query name="Student.getByStudentCode">
+		from Student where studentCode = :studentCode
+	</query>
+		
 </hibernate-mapping>

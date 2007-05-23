@@ -13,14 +13,6 @@ public class Student {
 
 	private String name;
 
-	public String getStudentCode() {
-		return studentCode;
-	}
-
-	public void setStudentCode(String studentCode) {
-		this.studentCode = studentCode;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -28,6 +20,13 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public String getStudentCode() {
+		return studentCode;
+	}
+
+	public void setStudentCode(String studentCode) {
+		this.studentCode = studentCode;
+	}
 	
 }

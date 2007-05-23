@@ -2,10 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-               
-	<bean id="aStudent" class="net.azib.java.lessons.spring.Student">
-    	<property name="studentCode" value="t010203"/>
-    	<property name="name" value="Tanel Tamm"/>   
-    </bean>
        
+    <import resource="jdbc-beans.xml"/>
+    <import resource="hibernate-beans.xml"/>
+    
+    <!--           
+	<bean id="net.azib.java.lessons.spring.StudentDao" class="net.azib.java.lessons.spring.JdbcStudentDao" autowire="byType">
+		<property name="query" value="select name, studentCode from users where studentCode = ?"/>
+    </bean>
+    -->   
+       
+	<bean id="net.azib.java.lessons.spring.StudentDao" class="net.azib.java.lessons.spring.HibernateStudentDao" autowire="byType">
+    </bean>
+
 </beans>
