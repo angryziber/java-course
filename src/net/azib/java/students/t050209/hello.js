@@ -1,0 +1,3 @@
+function printHello() {
+print('hello')
+}
