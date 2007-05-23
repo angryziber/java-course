@@ -135,7 +135,7 @@ public class OutputWriter {
 		OutputFormat of = new OutputFormat("XML","UTF-8",true);
 		of.setIndent(1);
 		of.setIndenting(true);
-		of.setDoctype(null,"decathlon.dtd");
+		of.setDoctype(null,OutputWriter.class.getResource("decathlon.dtd").toString());
 		XMLSerializer serializer = new XMLSerializer(p,of);
 		// SAX2.0 ContentHandler.
 		ContentHandler hd = null;
