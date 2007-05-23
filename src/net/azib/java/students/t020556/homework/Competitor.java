@@ -26,7 +26,7 @@ public class Competitor
 	private static final long serialVersionUID = 3512693074923315896L;
 
 	private String name = null;
-	private String encoding = "UTF16";
+	private String encoding = "UTF8";
 	private Calendar dateOfBirth = null;
 	private Locale locale = null;
 	
