@@ -98,10 +98,21 @@ public class DatabaseReader {
 					f*=100;
 					f = (float) Math.round(f)/100;
 					if (f < 10) {
-						toAdd = minutes +":0"+ f.toString();						
+						toAdd = minutes +":0"+ f.toString();
+						if (toAdd.substring(toAdd.indexOf(".")).length()== 2)
+							toAdd = toAdd + "0";
+						else {
+							
+						}
 					}
 					else {
-						toAdd = minutes +":"+ f.toString();						
+						toAdd = minutes +":"+ f.toString();
+						if (toAdd.substring(toAdd.indexOf(".")).length()== 2)
+							toAdd = toAdd + "0";
+						else {
+							
+						}
+							 
 					}
 				}
 				else {

@@ -242,7 +242,8 @@ public class OutputWriter {
 	}
 	
 	/**
-	 * writeToXML method outputs the decathlon results to a HTML file.
+	 * writeToHTML method outputs the decathlon results to a HTML file.
+	 * Generates a temporaty file [currentTimeMillis]_mid.xml
 	 * 
 	 * @version 1.0
 	 * @param filename - filename for the output HTML file
@@ -250,9 +251,11 @@ public class OutputWriter {
 	 */
 	public void writeToHTML (String filename, ArrayList<Competitor> listToOutput) {
 		OutputWriter wxml = new OutputWriter();
-		wxml.writeToXML("mid.xml", listToOutput);
-
+		String mid_xml = Long.toString(System.currentTimeMillis())+ "_mid.xml";
+		File midfile = new File(mid_xml);
+		wxml.writeToXML(mid_xml, listToOutput);
 		DocumentBuilder db = null;
+
 		try {
 			db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		}
@@ -262,7 +265,7 @@ public class OutputWriter {
 		}
 		Document xml = null;
 		try {
-			xml = db.parse("mid.xml");
+			xml = db.parse(mid_xml);
 		}
 		catch (SAXException e) {
 			e.printStackTrace();
@@ -271,6 +274,9 @@ public class OutputWriter {
 		catch (IOException e) {
 			e.printStackTrace();
 			System.exit(0);
+		}
+		finally {
+			midfile.delete();
 		}
 		
 		Transformer t = null;
