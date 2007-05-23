@@ -22,7 +22,14 @@ public class InputReader {
 	 */
 	
 	public  String [] readFile(String filename) {
-		InputStream is = this.getClass().getResourceAsStream(filename);
+		FileInputStream is = null;
+		try {
+			is = new FileInputStream(filename);
+		}
+		catch (FileNotFoundException e1) {
+			System.out.println("File not found");
+			System.exit(0);
+		}
 		BufferedReader r = null;
 		try {
 			r = new BufferedReader( new InputStreamReader( is, "UTF8"));
