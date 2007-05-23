@@ -15,12 +15,19 @@ public class CompetitionData {
 	 * @param data 
 	 * @throws ParseException
 	 */
-	public void setData(String[] data) throws ParseException {
+	public boolean setData(String[] data) throws ParseException {
+		
+		boolean ok = true;
 		
 		participants = new Competitor[data.length];
 		for (int i =0 ; i < data.length; i++) {
-			participants[i] = new Competitor(data[i]);
+			participants[i] = new Competitor();
+			boolean ok2 = participants[i].setData(data[i]);
+			if (!ok2) return false;
+			System.out.println(ok2);
 		}
+		
+		return ok;
 		
 	}
 

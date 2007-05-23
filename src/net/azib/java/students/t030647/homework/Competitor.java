@@ -26,10 +26,10 @@ public class Competitor {
 	private Meter javelinThrow;
 	private DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 	
-	public Competitor(String inputData) throws ParseException {
+	public boolean setData(String inputData) throws ParseException {
 		String[] inp = inputData.split(",");
 		if (inp.length != 13) {
-			
+			return false;
 		}
 		else {
 			try {
@@ -51,8 +51,10 @@ public class Competitor {
 			}
 			catch (NumberFormatException e) {
 				e.printStackTrace();
+				return false;
 			}
 		}
+		return true;
 	}
 	
 	/**

@@ -167,7 +167,11 @@ public class ApplicationFrame extends JFrame implements ActionListener {
 					inputData = new CompetitionData();
 					String[] dat = data.split("\n");
 					try {
-						inputData.setData(dat);
+						boolean ok = inputData.setData(dat);
+						if (!ok) {
+							JOptionPane.showMessageDialog(this, "Incorrect data");
+							inputData = null;
+						}
 					}
 					catch (ParseException e2) {
 						e2.printStackTrace();
@@ -180,7 +184,12 @@ public class ApplicationFrame extends JFrame implements ActionListener {
 						currentDirectoryToOpen = fileSelector.getCurrentDirectoryToOpen();
 						//read file
 						try {
-							inputData.setData(readInput(fileSelector.getSelectedFile()));
+							boolean ok = inputData.setData(readInput(fileSelector.getSelectedFile()));
+							if (!ok) {
+								JOptionPane.showMessageDialog(this, "Incorrect data");
+								inputData = null;
+							}
+							
 						}
 						catch (ParseException e1) {
 							e1.printStackTrace();
@@ -190,7 +199,12 @@ public class ApplicationFrame extends JFrame implements ActionListener {
 				case 3: //MySQL
 					inputData = new CompetitionData();
 					try {
-						inputData.setData(new SqlQuery(database).getData());
+						boolean ok = inputData.setData(new SqlQuery(database).getData());
+						if (!ok) {
+							JOptionPane.showMessageDialog(this, "Incorrect data");
+							inputData = null;
+						}
+						
 					}
 					catch (ParseException e2) {
 						e2.printStackTrace();
@@ -224,21 +238,23 @@ public class ApplicationFrame extends JFrame implements ActionListener {
 						}
 						break;
 					case 3: //xml
-						String filename = JOptionPane.showInputDialog(this, "Save file as", "championship.xml");
-						if (filename!=null) {
-							new XmlCreator(new File(filename), inputData.getData());
+						String filenameXML = JOptionPane.showInputDialog(this, "Save file as", "championship.xml");
+						if (filenameXML!=null) {
+							new XmlCreator(new File(filenameXML), inputData.getData());
 						}
 						break;
 					case 4: //html
-						String filename = JOptionPane.showInputDialog(this, "Save file as", "championship.html");
-						File xmlFile = new File("1.xml");
-						//src\net\azib\java\students\t030647\homework
-						File xslFile = new File("src"+File.separator+"net"+File.separator+"azib"+File.separator
-								+"java"+File.separator+"students"+File.separator+"t030647"+
-								File.separator+"homework"+File.separator+"competition.xsl");
-						File htmlFile = new File(filename);
-						XmlCreator xml = new XmlCreator(xmlFile, inputData.getData());
-						xml.CreateHTML(xmlFile, xslFile, htmlFile);
+						String filenameHtml = JOptionPane.showInputDialog(this, "Save file as", "championship.html");
+						String name = filenameHtml.substring(0, filenameHtml.indexOf("."));
+						if (filenameHtml!= null) {
+							File xmlFile = new File(name+".xml");
+							File xslFile = new File("src"+File.separator+"net"+File.separator+"azib"+File.separator
+									+"java"+File.separator+"students"+File.separator+"t030647"+
+									File.separator+"homework"+File.separator+"competition.xsl");
+							File htmlFile = new File(filenameHtml);
+							XmlCreator xml = new XmlCreator(xmlFile, inputData.getData());
+							xml.CreateHTML(xmlFile, xslFile, htmlFile);
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(this, "Please, choose output value");
@@ -257,12 +273,18 @@ public class ApplicationFrame extends JFrame implements ActionListener {
 		}
 		else if (source.equals("From MySQL database")) {
 			Object[] competitions = getCompetitions();
-			String s = (String)JOptionPane.showInputDialog(this, "Please, choose competition:",
-			   "Competitions",JOptionPane.PLAIN_MESSAGE,null, competitions,"");
-			if (s != null) {
-				inputChoice = 3;
-				database = s;
+			if (competitions!= null) {
+				String s = (String)JOptionPane.showInputDialog(this, "Please, choose competition:",
+						   "Competitions",JOptionPane.PLAIN_MESSAGE,null, competitions,"");
+						if (s != null) {
+							inputChoice = 3;
+							database = s;
+						}	
 			}
+			else {
+				JOptionPane.showMessageDialog(this, "Connection problems");
+			}
+			
 		}
 		else if (source.equals("Console")) {
 			outputChoice = 1;
@@ -303,6 +325,7 @@ public class ApplicationFrame extends JFrame implements ActionListener {
 			  con.close();
 		}catch( Exception e ) {
 	      e.printStackTrace();
+	      return null;
 	    }
 		comp = al.toArray();
 		return comp;
@@ -327,26 +350,6 @@ public class ApplicationFrame extends JFrame implements ActionListener {
 	    } catch (UnsupportedEncodingException e) {
 	    } catch (IOException e) {
 	    }
-	    Reader reader = null;
-	    try {
-			reader = new InputStreamReader(new BufferedInputStream(new FileInputStream(file)), "UTF-8");
-			int c;
-			while ((c = reader.read()) != -1) 
-				System.out.print((char)c);
-			System.out.println();
-	    }
-		catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	    inputData = new String[inp.size()];
 	    inp.toArray(inputData);
 		return inputData;
