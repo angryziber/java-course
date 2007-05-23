@@ -1,30 +1,93 @@
 package net.azib.java.students.t050657.homework.src.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Result class represents the full row of results in decathlon competition
+ * Helps to contain, convert and calculate final score. 
+ *
+ * @author Boriss
+ */
+
 public class Result{
 	
-	private Map<DecathlonCoeficient, Double> results;
+	private Map<DecathlonCoeficient, Double> results = new HashMap<DecathlonCoeficient, Double>();
 	
+	/**
+	 * Class instance Constructor
+	 */
 	public Result() {
 		
 	}
 	
+	/**
+	 * Method to set row of results 
+	 * @param resultList should contain full row of results
+	 * @throws InsufficientResultsException is thrown, 
+	 * if resultList contains less or more that ten results 
+	 */
 	public void setResults(List<Double> resultList) throws InsufficientResultsException {
 		if(resultList.size() != DecathlonCoeficient.EVENT_QUANT) {
 			throw new InsufficientResultsException("Transferable list contains not enough results");
+		}
+		if(results.size() > 0) {
+			results.clear();
+			System.out.println("Cleared!");
 		}
 		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
 			setResult(decCoef, resultList.get(decCoef.ordinal()));
 		}
 	}
 	
-	private void setResult(DecathlonCoeficient decCoef, double result) {
-		double points = decCoef.evalPoints(result);
-		results.put(decCoef, points);
+	/**
+	 * Result map getter
+	 * @return map of row results, contains values that were setted (not converted results)
+	 */
+	public Map<DecathlonCoeficient, Double> getResults() {
+		return results;
 	}
 	
+	/**
+	 * Convert results to points
+	 * @return list of converted results 
+	 */
+	public List<Double> getConvertedResults(){
+		List<Double> list = new ArrayList<Double>();
+		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
+			double points = decCoef.evalPoints(results.get(decCoef));
+			list.add(points);
+		}
+		return list;
+	}
+	
+	/**
+	 * Convert result to points
+	 * @param decCoef represents event for computation
+	 * @return points getted for the event
+	 */
+	public Double getConvertedResult(DecathlonCoeficient decCoef) {
+		double res = ((int)(decCoef.evalPoints(results.get(decCoef))*100))/100;
+		return res;
+	}
+
+	/**
+	 * Add result to results. 
+	 * @param decCoef represents decathlon event
+	 * @param result that was shown in competition. It should be "clean" result, not converted points
+	 */
+	public void setResult(DecathlonCoeficient decCoef, double result) {
+		results.put(decCoef, result);
+	}
+	
+	/**
+	 * Result getter
+	 * @param decCoef represents decathlon event
+	 * @return result that was shown in competition.
+	 * @throws InsufficientResultsException is thrown, if result for requested competition were not added
+	 */
 	public double getResult(DecathlonCoeficient decCoef) throws InsufficientResultsException {
 		if(!results.containsKey(decCoef)) {
 			throw new InsufficientResultsException("Result for requested event wasn't added");
@@ -32,6 +95,11 @@ public class Result{
 		return results.get(decCoef);
 	}
 	
+	/**
+	 * Allows calculate final score for decathlon competition 
+	 * @return final score
+	 * @throws InsufficientResultsException is thrown, if not all ten results were inserted
+	 */
 	public double getFinalScore() throws InsufficientResultsException {
 		if(results.size() != DecathlonCoeficient.EVENT_QUANT) {
 			throw new InsufficientResultsException("Not all results were added, " +
@@ -39,11 +107,19 @@ public class Result{
 		}
 		double result = 0;
 		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
-			result += this.getResult(decCoef);
+			result += decCoef.evalPoints(this.getResult(decCoef));
 		}
+
 		return result;
 	}
 
+	/**
+	 * Indicates whether some other result is "equal to" this one.
+	 * All results contains in compares to the same decathlon event result in other result.
+	 * If each result is equal to another - objects are equal.
+	 * If two results were not setted to one decathlon event - objects are equal.
+	 * @return true, if results are equal, false otherwise 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof Result)) {
