@@ -64,7 +64,7 @@ public class InputReader {
 	}
 	
 	/**
-	 * readFile method reads the input data from the console and outputs a String array.
+	 * readFromConsole method reads the input data from the console and outputs a String array.
 	 * The String array can be later processed by the PointsForObjects class.
 	 * @see net.azib.java.students.t030636.homework.PointsForObjects#calculatePoints(String[])
 	 * @version 1.0
