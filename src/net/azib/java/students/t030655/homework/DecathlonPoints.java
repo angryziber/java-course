@@ -5,18 +5,18 @@ package net.azib.java.students.t030655.homework;
  *
  * @author Triin Nestor
  */
-public class Points {
-	int sprint100m;
-	int longJump;
-	int shotPut;
-	int highJump;
-	int sprint400m;
-	int hurdles110m;
-	int discusThrow;
-	int poleVault;
-	int javelinThrow;
-	int race1500m;
-	int totalPoints;
+public class DecathlonPoints {
+	private int sprint100m;
+	private int longJump;
+	private int shotPut;
+	private int highJump;
+	private int sprint400m;
+	private int hurdles110m;
+	private int discusThrow;
+	private int poleVault;
+	private int javelinThrow;
+	private int race1500m;
+	private int totalPoints;
 	
 	/**Sets 100m sprint points
 	 * 
