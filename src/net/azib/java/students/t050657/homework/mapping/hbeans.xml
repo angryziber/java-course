@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+       
+    <import resource="jdbc-beans.xml"/>
+    <import resource="hibernate-beans.xml"/>
+       
+	<bean id="net.azib.java.students.t050657.homework.src.Dao.CompetitionDao" 
+		  class="net.azib.java.students.t050657.homework.src.Dao.HibernateDao.CompetitionDaoBean" 
+		  autowire="byType"/>
+
+</beans>

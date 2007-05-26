@@ -1,8 +1,8 @@
 package net.azib.java.students.t050657.homework.src.model;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -14,7 +14,7 @@ public class Athlet implements Comparable<Athlet>{
 	
 	private Integer id;
 	private String name;
-	private Calendar dateOfBirth;
+	private Date dateOfBirth;
 	private String countryCode;
 	
 	private Result result;
@@ -36,7 +36,7 @@ public class Athlet implements Comparable<Athlet>{
 	 * @param dateOfBirth represents date of athlets birth	
 	 * @param countryCode which athlet represents
 	 */
-	public Athlet(final Integer id, final String name, final Calendar dateOfBirth, final String countryCode) {
+	public Athlet(final Integer id, final String name, final Date dateOfBirth, final String countryCode) {
 		this.id = id;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
@@ -79,7 +79,7 @@ public class Athlet implements Comparable<Athlet>{
 
 		if(!athlet.name.equals(this.name))
 			return false;
-		if(!athlet.dateOfBirth.getTime().equals(this.dateOfBirth.getTime()))
+		if(!(athlet.dateOfBirth.getTime() == this.dateOfBirth.getTime()))
 			return false;
 		if(!athlet.countryCode.equals(this.countryCode))
 			return false;
@@ -87,17 +87,17 @@ public class Athlet implements Comparable<Athlet>{
 		return true;
 	}
 
-	/**
-	 * Overriding Object's hashCode method.
-	 */
-	@Override
-	public int hashCode() {
-		int hash = 14;
-		hash += hash * Integer.parseInt(this.name);
-		hash += hash * Integer.parseInt(this.dateOfBirth.toString());
-		hash += hash * Integer.parseInt(this.countryCode);
-		return hash;
-	}
+//	/**
+//	 * Overriding Object's hashCode method.
+//	 */
+//	@Override
+//	public int hashCode() {
+//		int hash = 14;
+//		hash += hash * Integer.parseInt(this.name);
+//		hash += hash * Integer.parseInt(this.dateOfBirth.toString());
+//		hash += hash * Integer.parseInt(this.countryCode);
+//		return hash;
+//	}
 
 	/**
 	 * Method compare two athlets based on it's results (final scores).
@@ -143,20 +143,13 @@ public class Athlet implements Comparable<Athlet>{
 		}
 	}
 
-	/**
-	 * Setter method  
-	 * @param result to set
-	 */
-	public void setResult(final Result result) {
-		this.result = result;
-	}
 	
-	/**
-	 * Getter for result
-	 * @return result
-	 */
 	public Result getResult() {
 		return result;
+	}
+
+	public void setResult(Result result) {
+		this.result = result;
 	}
 
 	/**
@@ -171,16 +164,8 @@ public class Athlet implements Comparable<Athlet>{
 	 * Getter for date of birth
 	 * @return dateOfBirth
 	 */
-	public Calendar getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
-	}
-
-	/**
-	 * Getter for id
-	 * @return unique athlet id
-	 */
-	public Integer getId() {
-		return id;
 	}
 
 	/**
@@ -203,16 +188,8 @@ public class Athlet implements Comparable<Athlet>{
 	 * Setter for dateOfBirth
 	 * @param dateOfBirth to set
 	 */
-	public void setDateOfBirth(final Calendar dateOfBirth) {
+	public void setDateOfBirth(final Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
-	}
-	
-	/**
-	 * Setter for id
-	 * @param id to set
-	 */
-	public void setId(final Integer id) {
-		this.id = id;
 	}
 
 	/**

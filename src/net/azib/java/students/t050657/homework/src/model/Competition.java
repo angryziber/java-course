@@ -1,12 +1,11 @@
 package net.azib.java.students.t050657.homework.src.model;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -22,11 +21,11 @@ public class Competition {
 	
 	private Integer id;
 	private String countryCode;
-	private Calendar eventDate;
+	private Date eventDate;
 	private String description;
 	
 	private Set<Athlet> athlets = new TreeSet<Athlet>();
-	
+
 	/**
 	 * Concstructs new instance of competition
 	 */
@@ -41,7 +40,7 @@ public class Competition {
 	 * @param eventDate of competiton
 	 * @param description is a competition title
 	 */
-	public Competition(Integer id, String countryCode, Calendar eventDate, String description) {
+	public Competition(Integer id, String countryCode, Date eventDate, String description) {
 		this.id = id;
 		this.countryCode = countryCode;
 		this.eventDate = eventDate;
@@ -77,7 +76,7 @@ public class Competition {
 		
 		if(!comp.countryCode.equals(this.countryCode))
 			return false;
-		if(!comp.eventDate.getTime().equals(this.eventDate.getTime()))
+		if(!(comp.eventDate.getTime() == this.eventDate.getTime()))
 			return false;
 		if(!comp.description.equals(this.description))
 			return false;
@@ -118,19 +117,11 @@ public class Competition {
 			}
 		}
 	}
-
-	/**
-	 * Getter for athlets TreeSet
-	 * @return TreeSet of athlets
-	 */
-	public List<Athlet> getAthlets() {
-		List<Athlet> a = new ArrayList<Athlet>();
-		for(Athlet ath : athlets) {
-			a.add(ath);
-		}
-		return a;
+	
+	public Set<Athlet> getAthlets(){
+		return athlets;
 	}
-
+	
 	/**
 	 * Getter for countryCode
 	 * @return countryCode
@@ -151,35 +142,16 @@ public class Competition {
 	 * Getter for eventDate
 	 * @return eventDate
 	 */
-	public Calendar getEventDate() {
+	public Date getEventDate() {
 		return eventDate;
 	}
-
-	/**
-	 * Getter for unique id
-	 * @return id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
+	
 	/**
 	 * Setter for athlets
 	 * @param Set of athlets to set 
 	 */
-	public void setAthlets(SortedSet<Athlet> athlets) {
+	public void setAthlets(Set<Athlet> athlets) {
 		this.athlets = athlets;
-	}
-	
-	/**
-	 * Setter for athlets. Athlets that are equal aren't setted twice.
-	 * @param athletList contains athlets to add.
-	 */
-	public void setAthlets(List<Athlet> athletList) {
-		for(Athlet a : athletList) {
-			this.athlets.add(a);
-			System.out.println(a.getName());
-		}
 	}
 	
 	/**
@@ -202,16 +174,8 @@ public class Competition {
 	 * Setter for eventDate
 	 * @param eventDate to set
 	 */
-	public void setEventDate(Calendar eventDate) {
+	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
-	}
-	
-	/**
-	 * Setter for id
-	 * @param id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	
 	/**

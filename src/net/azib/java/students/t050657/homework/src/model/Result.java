@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class Result{
 	
+	private Integer id;
 	private Map<DecathlonCoeficient, Double> results = new HashMap<DecathlonCoeficient, Double>();
 	
 	/**
@@ -163,4 +164,83 @@ public class Result{
 		return true;
 	}
 
+	
+	// *********************** SMART SETTERS *************************//
+	/**
+	 * Setters for concrete competition
+	 * @param value to be inserted
+	 */
+	public void setRace100(Double value) {
+		results.put(DecathlonCoeficient.M_100, value);
+	}
+	
+	public void setLongJump(Double value) {
+		results.put(DecathlonCoeficient.LONG_JUMP, value);
+	}
+	
+	public void setShotPut(Double value) {
+		results.put(DecathlonCoeficient.SHOT_PUT, value);
+	}
+	
+	public void setHighJump(Double value) {
+		results.put(DecathlonCoeficient.HIGH_JUMP, value);
+	}
+	
+	public void setRace400(Double value) {
+		results.put(DecathlonCoeficient.M_400, value);
+	}
+	
+	public void setHurdles(Double value) {
+		results.put(DecathlonCoeficient.M_110_HURDLES, value);
+	}
+	
+	public void setDiscusThrow(Double value) {
+		results.put(DecathlonCoeficient.DISCUS_THROW, value);
+	}
+	
+	public void setPoleVault(Double value) {
+		results.put(DecathlonCoeficient.POLE_VAULT, value);
+	}
+	
+	public void setJavelinThrow(Double value) {
+		results.put(DecathlonCoeficient.JAVELIN_THROW, value);
+	}
+	
+	public void setRace1500(Double value) {
+		results.put(DecathlonCoeficient.M_1500, value);
+	}
+	
+	
+	//	 *********************** SMART GETTERS *************************//
+	public Double getRace100() {
+		return this.results.get(DecathlonCoeficient.M_100);
+	}
+	public Double getLongJump() {
+		return this.results.get(DecathlonCoeficient.LONG_JUMP);
+	}
+	public Double getShotPut() {
+		return this.results.get(DecathlonCoeficient.SHOT_PUT);
+	}
+	public Double getHighJump() {
+		return this.results.get(DecathlonCoeficient.HIGH_JUMP);
+	}
+	public Double getRace400() {
+		return this.results.get(DecathlonCoeficient.M_400);
+	}
+	public Double getHurdles() {
+		return this.results.get(DecathlonCoeficient.M_110_HURDLES);
+	}
+	public Double getDiscusThrow() {
+		return this.results.get(DecathlonCoeficient.DISCUS_THROW);
+	}
+	public Double getPoleVault() {
+		return this.results.get(DecathlonCoeficient.POLE_VAULT);
+	}
+	public Double getJavelinThrow() {
+		return this.results.get(DecathlonCoeficient.JAVELIN_THROW);
+	}
+	public Double getRace1500() {
+		return this.results.get(DecathlonCoeficient.M_1500);
+	}
+	
 }
