@@ -138,7 +138,7 @@ public class ConsoleHandler {
 			}else{
 				outputFile = new File(fileName+".csv");
 			}
-			new outFileWriter(outputFile, competitorsList);
+			new OutFileWriter(outputFile, competitorsList);
 			System.out.println("Rated results to "+outputFile.getAbsolutePath()+" file: ");
 			printExitOptions();
 			handleExit(scanner.nextLine());

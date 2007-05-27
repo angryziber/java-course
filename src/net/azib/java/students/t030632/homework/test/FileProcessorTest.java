@@ -45,8 +45,9 @@ public class FileProcessorTest {
 			e.printStackTrace();
 		}
 		List <Competitor> list =  new FileProcessor(testFile).getCompetitors();
+		testFile.delete();
 		assertEquals(2,list.size());
 		
-		testFile.delete();
+		
 	}
 }
