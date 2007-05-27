@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * FileWriter
+ * FileWriter writes sorted competitors list with results to the file.
  *
  * @author Toni
  */

@@ -10,12 +10,12 @@ import java.util.Locale;
 import sun.security.pkcs.ParsingException;
 
 /**
- * Competitor
- *
+ * Competitor<br>
+ * Calculates result from competitors results(parses result string). 
+ * Result string should be input data to constructor.
  * @author Toni
- * @param <T>
  */
-public class Competitor<T> implements Comparable<T>{
+public class Competitor{
 	private int points;
 	private String name;
 	private Date birthDate;
@@ -35,7 +35,7 @@ public class Competitor<T> implements Comparable<T>{
 	
 	/**
 	 * 
-	 * @param competitorData
+	 * @param competitorData string with results in csv view
 	 */
 	public Competitor(String competitorData) {
 		initialData = competitorData;
@@ -290,20 +290,6 @@ public class Competitor<T> implements Comparable<T>{
 	public float getSprint() {
 		return sprint;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 */
-	public int compareTo(T o) {
-		if(o==null){
-			throw new NullPointerException("can not compare to null object");
-			
-		}else{
-			if(((Competitor)o).getPoints() == getPoints()){return 0;}
-			else if(((Competitor)o).getPoints() < getPoints()){return 1;}
-			else if(((Competitor)o).getPoints() > getPoints()){return -1;} 
-		}
-		return 0;//unreachable statement
-	}
 	/**
 	 * 
 	 * @return
@@ -345,7 +331,7 @@ public class Competitor<T> implements Comparable<T>{
 		return sb.toString();	
 	}
 	/**
-	 * @return the initialData
+	 * @return initialData - string with initial results in csv format 
 	 */
 	public String getInitialData() {
 		return initialData;

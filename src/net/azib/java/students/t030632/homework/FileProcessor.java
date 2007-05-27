@@ -11,7 +11,7 @@ import java.util.List;
 
 
 /**
- * FileProcessor
+ * FileProcessor reads competitors results from csv file
  *
  * @author Toni
  */

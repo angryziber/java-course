@@ -3,7 +3,7 @@ package net.azib.java.students.t030632.homework;
 import java.io.InputStream;
 
 /**
- * DecathlonMain
+ * DecathlonMain runs application
  *
  * @author Toni
  */

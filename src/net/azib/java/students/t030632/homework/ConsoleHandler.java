@@ -17,7 +17,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * ConsoleHandler
+ * ConsoleHandler <br>
+ * Displays input/output options to console, handles data from console.
  *
  * @author Toni
  */

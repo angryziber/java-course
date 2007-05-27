@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 /**
- * SqlQuery
+ * SqlQuery - reads from selected competition competitors results from database.
  *
  * @author Toni
  */
@@ -82,7 +82,7 @@ public class SqlQuery {
 	}
 
 	/**
-	 * @return
+	 * @return competitors results in strings array (string represented in csv view)
 	 */
 	public String[] getData() {
 		

@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
 public class XmlCreator {
 	
 	/**
-	 * 
+	 * Creates xml File from sorted competitors list
 	 * @param xmlFile
 	 * @param competitorsList
 	 */
@@ -204,10 +204,10 @@ public class XmlCreator {
 		
 	}
 	/**
-	 * 
-	 * @param xmlFile
-	 * @param xsltFile
-	 * @param htmlFile
+	 * perfomrs xml data transformation to the specified html file (using defined style from xslt file)
+	 * @param xmlFile xml file
+	 * @param xsltFile xst Transformation file
+	 * @param htmlFile html file
 	 */
 	public void CreateHTML(File xmlFile, File xsltFile, File htmlFile) {
         try {

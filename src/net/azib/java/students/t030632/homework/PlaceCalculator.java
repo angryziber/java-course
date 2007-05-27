@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
- * PlaceCalculator
+ * PlaceCalculator calculates competitors places in the competition according to the results
  *
  * @author Toni
  */
@@ -54,6 +54,10 @@ public class PlaceCalculator {
 		
 
 	}
+	/**
+	 * 
+	 * @return map - key = points, value = place(s)  - if several athletes collected the same points they share places as "m-n"
+	 */
 	public Map<Integer,String> getPlaces(){
 		return placesMapWithDevider;
 	}
