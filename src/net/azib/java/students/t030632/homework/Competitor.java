@@ -314,7 +314,7 @@ public class Competitor{
 		String data = new String();
 		StringBuffer sb = new StringBuffer(data);
 		sb.append(data).append("Points: ").append(
-				getPoints()).append(": ").append(
+				getPoints()).append(", ").append(
 				getName()).append(", ").append(
 				sdf.format(getBirthDate())).append(", ").append(
 				getCountry().getDisplayCountry()).append(", ").append(

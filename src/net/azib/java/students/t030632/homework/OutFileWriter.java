@@ -25,7 +25,7 @@ public class OutFileWriter {
 		BufferedWriter outBufWriter;
 		Set <String> compsDataToWrite = new TreeSet<String>();
 		for(Competitor champ : listofCompetitorstoWrite){
-			compsDataToWrite.add(String.valueOf("("+places.get(champ.getPoints())+") "+champ));
+			compsDataToWrite.add(String.valueOf("("+places.get(champ.getPoints())+"), "+champ));
 		}
 		try {
 			outStream = new FileOutputStream(fileName);
