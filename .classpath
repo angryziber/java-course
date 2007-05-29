@@ -28,6 +28,7 @@
 	<classpathentry kind="lib" path="lib/commons-collections.jar"/>
 	<classpathentry kind="lib" path="lib/asm.jar"/>
 	<classpathentry kind="lib" path="lib/cglib.jar"/>
+	<classpathentry kind="lib" path="lib/robocode-stripped.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="SWT_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
