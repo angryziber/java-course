@@ -1,9 +1,6 @@
 package net.azib.java.students.t010687.homework;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-
-import javax.swing.JDialog;
 
 /**
  * ResultsOfTheAthlet
@@ -11,15 +8,15 @@ import javax.swing.JDialog;
  * @author Matu
  */
 public class ResultsOfTheAthlet extends Athlet{
-	private float Sprint_100m; //(sec)
-	private float LongJump;	//(m)
+	private float Sprint_100m;	//(sec)
+	private float LongJump;		//(m)
 	private float ShotPut;		//(m)
-	private float HighJump;	//(m)
+	private float HighJump;		//(m)
 	private float Sprint_400m;	//(min:sec)
-	private float Hurdles_110m;//(sec)
+	private float Hurdles_110m;	//(sec)
 	private float DiscusThrow;	//(m)
 	private float PoleVault;	//(m)
-	private float JavelinThrow;//(m)
+	private float JavelinThrow;	//(m)
 	private float Race_1500m;	//(min:sec)
 	
 	
@@ -160,7 +157,13 @@ public class ResultsOfTheAthlet extends Athlet{
 	 * @param race_1500m the race_1500m to set
 	 */
 	public void setRace_1500m(String race_1500m) {
-		Race_1500m = new Float(race_1500m);
+		String RaceData[] = race_1500m.split(":");
+		if (RaceData.length == 2){ 
+			Race_1500m = new Integer(RaceData[0])*60 + new Float(RaceData[1]);
+		}
+		else if  (RaceData.length == 1){ 
+			Race_1500m = new Float(RaceData[0]);		
+		}
 	}
 
 
