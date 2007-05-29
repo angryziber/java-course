@@ -2,60 +2,48 @@ package net.azib.java.students.t030630;
 
 /**
  * Dog
- *
+ * 
  * @author t030630
  */
-public class Dog {
-	private String name = "Bobik";
-	private byte age = 1;
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name
-	 */
-	public Dog(String name, byte age) {
-		super();
-		this.name = name;
-		this.age  = age;
-	}
+public class Dog extends Animal implements Comparable<Animal>, IAnimal {
 
 	/**
 	 * @param name
 	 */
 	public Dog(String name) {
-		super();
-		this.name = name;
+		super(name);
 	}
 
-	public void growUp(){
-		age++;
-	};
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
+	public Dog(String name, byte age) {
+		super(name, age);
 	}
 
-	/**
-	 * @return the age
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030630.IAnimal#getName()
 	 */
-	public byte getAge() {
-		return age;
+	public String getName() {
+		return super.getName();
 	}
 
-	/**
-	 * @param age the age to set
+	// @Override
+	// public String toString() {
+	// return super.toString();
+	// }
+
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t030630.IAnimal#getType()
 	 */
-	public void setAge(byte age) {
-		this.age = age;
+	@Override
+	public String getType() {
+		return "a dog";
 	}
-	
-	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(Animal o) {
+		// TODO Auto-generated method stub
+		return getName().compareTo(o.getName());
+	}
 }

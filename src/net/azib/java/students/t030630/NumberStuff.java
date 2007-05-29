@@ -14,12 +14,12 @@ public class NumberStuff {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Dog dog = new Dog("Rambo", (byte) 3);
+		Animal dog = new Dog("Rambo", (byte) 3);
 		System.out.println(dog.getName() + " " + dog.getAge());
 		dog.growUp();
 		dog.growUp();
 		System.out.println(dog.getName() + " " + dog.getAge());
-		Dog doggy = new Dog("Reks");
+		Animal doggy = new Dog("Reks");
 		doggy.growUp();
 		System.out.println(doggy.getName() + " " + doggy.getAge());
 	}
