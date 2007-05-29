@@ -2,7 +2,7 @@ package net.azib.java.students.t020632;
 
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXMLValid;
-import static org.custommonkey.xmlunit.XMLAssert.assertXpathEvaluatesTo;
+//import static org.custommonkey.xmlunit.XMLAssert.assertXpathEvaluatesTo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
