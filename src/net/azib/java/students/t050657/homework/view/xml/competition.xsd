@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<xs:element name="competitions"/>
+	<xs:element name="competition" type="Competition"/>
+	
+	<xs:complexType name="Competition">
+			<xs:sequence>
+				<xs:element name="athlet" type="Athlet" maxOccurs="unbounded"/>	
+			</xs:sequence>
+			<xs:attribute name="date" type="xs:date" use="required"/>
+			<xs:attribute name="countryCode" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[A-Z]{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="description" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="Athlet">
+		<xs:sequence>
+			<xs:element name="place" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="finalscore" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="event" type="Event" minOccurs="10" maxOccurs="10"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="dateOfBirth" type="xs:date" use="required"/>
+		<xs:attribute name="countryCode" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[A-Z]{2}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="Event">
+		<xs:complexContent> 
+      		<xs:restriction base="xs:decimal"/>
+   		</xs:complexContent>
+		<xs:attribute name="title" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+</xs:schema>
