@@ -20,9 +20,6 @@ import javax.swing.table.JTableHeader;
  * @author Matu
  */
 public class DecathlonDataFrm {
-    //JFrame frame = new JFrame("Managing Athlets Pers Info");
-    //JPanel panel = new JPanel();
-    //String col[] = {"First And Last Name","Date of birth","Country"};
     
     public DecathlonDataFrm(List <ResultsOfTheAthlet> ListWithDecathlonData){
     	JFrame frame = new JFrame("DECATHLON");
@@ -30,8 +27,6 @@ public class DecathlonDataFrm {
     	JTabbedPane tab = new JTabbedPane();
 		Panel panel = new Panel();
 		String colHeaders[] = {"AthletsName","DateOfBirth","Country"};
-		//String data[ListWithDecathlonData.size()][3] = new 
-		System.out.println(ListWithDecathlonData.size());
 		String data[][] = new String[ListWithDecathlonData.size()][3];
 		//for(ResultsOfTheAthlet Results : ListWithDecathlonData){
 		//we need counter for data[][]. There is no pint for For..each loop
@@ -40,15 +35,7 @@ public class DecathlonDataFrm {
 			data[j][1] = ListWithDecathlonData.get(j).getDateOfBirth();
 			data[j][2] = ListWithDecathlonData.get(j).getCountry();
 		}
-		//= new Array<String>(data[ListWithDecathlonData.size()][3])
-		//String data[][] = new[ListWithDecathlonData.size()][3] String();
-		
-		
-	    /*String data[][] = {{"100","Vinod","programmer","5000"},
-                {"101","Deepak","Content Writer","20000"},
-                {"102","Noor","Techniqual Writer","30000"},
-                {"104","Rinku","PHP programar","25000"}};
-	    */
+
 	    DefaultTableModel model = new DefaultTableModel(data,colHeaders);
 	    JTable table = new JTable(model);
 	    JTableHeader header = table.getTableHeader();
@@ -60,9 +47,33 @@ public class DecathlonDataFrm {
 
     	tab.add("AthletesCommonInfo", panel);
     	panel = new Panel();
-    	panel.add(new JButton("btn_CompetitionResults"));
-    	tab.add("CompetitionResults", panel);
+    	colHeaders = new String []{"AthletsName","Sprint100m(sec)","LongJump(m)",
+    	"ShotPut(m)","HighJump(m)","Sprint400m(min:sec)","Hurdles110m(sec)",
+    	"DiscusThrow(m)","PoleVault(m)","JavelinThrow(m)","Race1500m(min:sec)"};
+    	
+    	data = new String[ListWithDecathlonData.size()][11];
+    	for(int j = 0; j<ListWithDecathlonData.size(); j++){
+			data[j][0] = ListWithDecathlonData.get(j).getName();
+			data[j][1] = ListWithDecathlonData.get(j).getSprint_100m();
+			data[j][2] = ListWithDecathlonData.get(j).getLongJump();
+			data[j][3] = ListWithDecathlonData.get(j).getShotPut();
+			data[j][4] = ListWithDecathlonData.get(j).getHighJump();
+			data[j][5] = ListWithDecathlonData.get(j).getSprint_400m();
+			data[j][6] = ListWithDecathlonData.get(j).getHurdles_110m();
+			data[j][7] = ListWithDecathlonData.get(j).getDiscusThrow();
+			data[j][8] = ListWithDecathlonData.get(j).getPoleVault();
+			data[j][9] = ListWithDecathlonData.get(j).getJavelinThrow();
+			data[j][10] = ListWithDecathlonData.get(j).getRace_1500m();
+		}
+    	table = new JTable(new DefaultTableModel(data,colHeaders));
+    	table.setSize(1600, 1600);
+	    header = table.getTableHeader();
+	    header.setBackground(Color.yellow);
+
+    	tab.add("CompetitionResults", new JScrollPane(table));
     	frame.setSize(800,400);
     	frame.setVisible(true);
     }
-}
+    
+
+    }

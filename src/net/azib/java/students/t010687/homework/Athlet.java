@@ -1,5 +1,7 @@
 package net.azib.java.students.t010687.homework;
 
+import java.util.Date;
+
 /**
  * Athlet
  *
@@ -8,10 +10,7 @@ package net.azib.java.students.t010687.homework;
 public class Athlet {
 	private int id;
 	private String name;
-	//private String dob;//DateOfBirth;	//DD.MM.YYYY
-	//pivate String country_code;//Country;
-
-	private String DateOfBirth;
+	private String DateOfBirth;//YYYY-MM-DD
 	private String Country;
 	
 	public Athlet(){
@@ -25,9 +24,8 @@ public class Athlet {
 	public Athlet(String name, String dateOfBirth, String country) {
 		super();
 		this.name = name;
-		DateOfBirth = dateOfBirth;
+		setDateOfBirth(dateOfBirth);
 		Country = country;
-		//System.out.println(Name + DateOfBirth + Country);
 	}
 	/**
 	 * @return the name
@@ -51,7 +49,14 @@ public class Athlet {
 	 * @param dateOfBirth the dateOfBirth to set
 	 */
 	public void setDateOfBirth(String dateOfBirth) {
-		DateOfBirth = dateOfBirth;
+		String dobData[] = dateOfBirth.split(".");
+		System.out.println(dateOfBirth + dobData.length);
+		if (dobData.length == 3){
+			DateOfBirth = dobData[2] + "-" + dobData[1] + "-" + dobData[0];
+		}
+		else{
+			DateOfBirth = dateOfBirth;
+		}
 	}
 	/**
 	 * @return the country

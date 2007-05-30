@@ -85,7 +85,6 @@ public class ResultsOfTheAthlet extends Athlet{
 	 */
 	public String getSprint_400m() {
 		return new SimpleDateFormat("mm:ss.SS").format(Sprint_400m*1000).substring(0, 8);
-	    //String s = formatter.format(date);
 	}
 	/**
 	 * @param sprint_400m the sprint_400m to set
@@ -151,7 +150,7 @@ public class ResultsOfTheAthlet extends Athlet{
 	 * @return the race_1500m
 	 */
 	public String getRace_1500m() {
-		return ((Float)Race_1500m).toString();
+		return new SimpleDateFormat("mm:ss.SS").format(Race_1500m*1000).substring(0, 8);
 	}
 	/**
 	 * @param race_1500m the race_1500m to set

@@ -2,34 +2,16 @@ package net.azib.java.students.t010687.homework;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
-
-import javax.swing.Action;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 
 
@@ -58,29 +40,13 @@ public class ReadDataFromCSV implements ActionListener{
         	}       	
         	ParentFrm.dispose();
         	new DecathlonDataFrm(ListWithDechatlonInfo);
-        	
         }
-        //List <String[]> ListWithDechatlonInfo = parseCSVFile(file);//file.getPath()
-        //*********
-        //Action openAction = new OpenFileAction(ParentFrm, fc);
-        
-        // Create buttons for the actions
-        //JButton openButton = new JButton(openAction);
-        
-        //// Add the buttons to the frame and show the frame
-        ///ParentFrm.getContentPane().add(openButton, BorderLayout.NORTH);
-
-        //ParentFrm.pack();
-        //ParentFrm.setVisible(true);
-
     }
     public List <ResultsOfTheAthlet> parseCSVFile(File csvFile){ //String csvFileName
 		List<ResultsOfTheAthlet> ListWithDechatlonInfo = new ArrayList<ResultsOfTheAthlet>();//Arrays.asList(new String[] {"a", "b", "z", "x", "z"})
 		
 		try{// Read comma seperated file
 			BufferedReader csvReader;
-			//InputStreamReader reader = new InputStreamReader(new BufferedInputStream(new FileInputStream(csvFile)), "UTF-8");
-			//csvReader = new BufferedReader(new FileReader(csvFile));
 			//new BufferedInputStream(
 			csvReader = new BufferedReader(new InputStreamReader(new FileInputStream(csvFile), "UTF-8"));
 			String SpitedRowData[];

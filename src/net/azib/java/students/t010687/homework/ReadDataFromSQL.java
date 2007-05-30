@@ -22,12 +22,9 @@ public class ReadDataFromSQL implements ActionListener{
     public void actionPerformed(ActionEvent e){
     	BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("beans.xml", ReadDataFromSQL.class));
     	DecathlonDao dechatlonDao = (DecathlonDao) beanFactory.getBean(DecathlonDao.class.getName());
+    	
     	List<ResultsOfTheAthlet> Results = dechatlonDao.getCompetition_id(2);
     	ParentFrm.dispose();
-    	for(ResultsOfTheAthlet Result: Results){
-        	System.out.println(Result.getName());
-        	System.out.println(Result.getSprint_100m());   	
-        	System.out.println(Result.getSprint_400m());
-    	}
+    	new DecathlonDataFrm(Results);
     }
   }
