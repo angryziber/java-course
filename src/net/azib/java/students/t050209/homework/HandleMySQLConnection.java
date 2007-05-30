@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -96,8 +99,18 @@ public class HandleMySQLConnection {
 				while (resultSet.next()) {
 					Sportsman sm = new Sportsman();
 					
-					sm.setSportsmanName(resultSet.getString(1));
-					sm.setSportsmanDateOfBirth(resultSet.getString(2));
+					sm.setSportsmanName(resultSet.getString(1));					
+					
+					try{
+						DateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
+						DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+						
+						sm.setSportsmanDateOfBirth(formatter.format(dbFormat.parse(resultSet.getString(2))));
+					}
+					catch(ParseException e) {
+						System.out.println("Inserted date of birth in wrong format. Must be dd.mm.yyyy");
+				    }
+					
 					sm.setSportsmanCountry(resultSet.getString(3));
 					
 					try {

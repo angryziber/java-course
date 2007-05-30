@@ -281,7 +281,7 @@ public class HandleConsoleIO {
 		int position = 0;
 		int step = 1;
 		int lastScore = 0;
-		int i = 0;
+		byte i = 0;
 		
 		for (Sportsman sm : sportsmanList) {
 			
@@ -302,7 +302,7 @@ public class HandleConsoleIO {
 			for (Double res : sm.results){				// write sportsman results
 				System.out.print(questionStrings[i] + ": ");
 				System.out.print(res + " ");				
-				System.out.print(sm.calculateOneScore(i, res) + " ");
+				System.out.print(sm.calculateOneScore(i, res) + ", ");
 				i++;
 				if (i == 5)
 					System.out.println("");
