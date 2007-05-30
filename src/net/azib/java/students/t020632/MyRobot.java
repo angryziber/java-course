@@ -1,8 +1,9 @@
+package net.azib.java.students.t020632;
 
 /**
  * MyRobot
  *
- * @author Marek Soobik t020632
+ * @author t020632
  */
 
 import java.awt.Color;
