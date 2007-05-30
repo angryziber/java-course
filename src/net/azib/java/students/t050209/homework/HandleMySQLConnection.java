@@ -28,11 +28,16 @@ public class HandleMySQLConnection {
 	 * @param query - string, which contains all needed key-words to ask data from database
 	 */
 	public static List<Sportsman> handleMySQLConnection(){
+		int nofCompetitions = 0;
+		int value;
 		Connection connection = null;
+		String askCompetitions = "SELECT id, description, country_code, date " +
+								 "FROM competitions";
+		
 		String query = "SELECT name, dob, country_code, " +
 					   "race_100m, long_jump, shot_put, high_jump, race_400m, " +
 					   "hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m " +
-					   "FROM results a, athletes b WHERE a.athlete_id=b.id AND competition_id=2";
+					   "FROM results a, athletes b WHERE a.athlete_id=b.id AND competition_id=";
 		//String query = "SELECT name, dob, country_code " + "FROM athletes";
 		
 		List<Sportsman> sportsmanList = new LinkedList<Sportsman>();
@@ -51,9 +56,41 @@ public class HandleMySQLConnection {
 		catch (SQLException e) {
 		}
 		
-		try {
+		try {			
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
+			
+			ResultSet competitions = statement.executeQuery(askCompetitions);
+			try{
+				System.out.println("Choose competition");
+				while(competitions.next()){
+					System.out.println("- " + competitions.getInt(1) +
+									   " " + competitions.getString(2) +
+									   " (" + competitions.getString(3) + ")" +
+									   " " + competitions.getString(4));
+					nofCompetitions++;
+				}
+			}catch (SQLException e) {
+				if (connection != null) {
+					try {
+						// Try again
+						connection.rollback();
+					} catch (SQLException f) {
+						System.out.println("SQLException in handleMySQLConncetion");
+					}
+				}
+			} finally {
+				try {
+					competitions.close();
+				} catch (SQLException e) {
+					System.out.println("SQLException 2 in handleMySQLConncetion");
+				}
+			}
+			do{
+				value = (int)HandleDecathlonIO.getUserInsertedValue();
+			}
+			while(value < 1 && value > nofCompetitions);
+			
+			ResultSet resultSet = statement.executeQuery(query + value);
 			System.out.println("executed");
 			try {
 				while (resultSet.next()) {

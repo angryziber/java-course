@@ -281,6 +281,7 @@ public class HandleConsoleIO {
 		int position = 0;
 		int step = 1;
 		int lastScore = 0;
+		int i = 0;
 		
 		for (Sportsman sm : sportsmanList) {
 			
@@ -296,12 +297,20 @@ public class HandleConsoleIO {
 			System.out.print(position + " ");			// write sportsman position
 			System.out.print(sm.name + " ");			// write sportsman name
 			System.out.print(sm.dateOfBirth + " ");		// write sportman date of birth
-			System.out.print(sm.country + " ");			// write sportsman country
+			System.out.println(sm.country + " ");			// write sportsman country
 			
-			for (Double res : sm.results)				// write sportsman results
-				System.out.print(res + " ");
+			for (Double res : sm.results){				// write sportsman results
+				System.out.print(questionStrings[i] + ": ");
+				System.out.print(res + " ");				
+				System.out.print(sm.calculateOneScore(i, res) + " ");
+				i++;
+				if (i == 5)
+					System.out.println("");
+				if (i == 10)
+					i = 0;
+			}
 			
-			System.out.println(sm.overallResult);		// write sportsman overall result
+			System.out.println("Overall score: " + sm.overallResult + "\n");		// write sportsman overall result
 			
 			lastScore = sm.overallResult;				// remember last score, 
 														// so it is possible to serialize results

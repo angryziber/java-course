@@ -93,6 +93,12 @@ public class Sportsman implements Comparable<Sportsman>{
 			this.overallResult = overallResult;
 		}
 	}
+	
+	public int calculateOneScore(int i, Double res){
+		int score = 0;
+		score = DecathlonPoints.values()[i].eventPoints(res);
+		return score;
+	}
 
 	/**
 	 * Returns overall result of current sportsman
