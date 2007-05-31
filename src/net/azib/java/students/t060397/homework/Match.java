@@ -1,3 +1,5 @@
+package net.azib.java.students.t060397.homework;
+
 /***************************************************************************
  *   Copyright (C) 2007 by Margus Ernits   *
  *   Margus.Ernits@itcollege.ee   *
@@ -18,7 +20,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-package net.azib.java.students.t060397.homework;
+
 
 import java.awt.Graphics;
 import java.awt.Image;
