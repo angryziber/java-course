@@ -10,8 +10,9 @@ import java.util.List;
  */
 public class Competition{
 	
-	List<Participant> participants;
-	int numberOfParticipants;
+	private List<Participant> participants;
+	private int numberOfParticipants;
+	private String name;
 	/**
 	 * constructor 
 	 */
@@ -29,5 +30,29 @@ public class Competition{
 	public void addParticipant(Participant pa){
 		participants.add(pa);
 		setNumberOfParticipants();
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @return the participants
+	 */
+	public List<Participant> getParticipants() {
+		return participants;
+	}
+	/**
+	 * @return the numberOfParticipants
+	 */
+	public int getNumberOfParticipants() {
+		return numberOfParticipants;
 	}
 }

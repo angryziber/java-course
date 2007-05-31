@@ -1,6 +1,6 @@
 package net.azib.java.students.t030656.homework;
 
-import java.io.InputStream;
+import java.util.Scanner;
 
 /**
  * reader
@@ -8,15 +8,20 @@ import java.io.InputStream;
  * @author sprot
  */
 public class Reader {
-	InputStream inStream;
 	/**
 	 * constructor
 	 */
-	public Reader(InputStream inStream) {
-		this.inStream = inStream;
+	public Reader() {
 	}
 	
-	public void readFromScreen(){
-		System.out.println("Insert values");
+	static Competition readFromScreen(){
+		Competition comp = new Competition();
+		Scanner kbdIn = new Scanner(System.in);
+		System.out.print("Enter the competition name: ");  
+		comp.setName(kbdIn.nextLine());
+		
+		String pName;
+		
+		return comp;
 	}
 }

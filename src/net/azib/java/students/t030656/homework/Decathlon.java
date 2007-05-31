@@ -21,7 +21,7 @@ public class Decathlon {
 		Scanner inScan = new Scanner(inStream);
 		
 		//welcome user
-		System.out.println("***[Decaathlon]***");
+		System.out.println("***[Decathlon]***");
 		System.out.println();
 		
 		while(Run == 1){
@@ -76,7 +76,7 @@ public class Decathlon {
 				case 4:
 					break;
 				default:
-					System.out.println("Unknown input. Please try again.\n:");
+					System.out.print("Unknown input. Please try again.\n:");
 					break;
 			}
 		}
@@ -87,22 +87,25 @@ public class Decathlon {
 	 * @param inScan
 	 */
 	private static void getInput(Scanner inScan) {
-		
-		while(true){
+		boolean condition = true;
+		while(condition){
 			System.out.println("Which input you'd like to use?");
 			System.out.println("\t[1] Directly from keyboard");
 			System.out.println("\t[2] From CSV");
 			System.out.println("\t[3] From database\n");
+			System.out.print(":");
 			
 			switch(inScan.nextInt()){
 				case 1:
+					Reader.readFromScreen();
+					condition = false;
 					break;
 				case 2:
 					break;
 				case 3:
 					break;
 				default:
-					System.out.println("Unknown input. Please try again.\n:");
+					System.out.print("Unknown input. Please try again.\n:");
 					break;
 			}
 		}
