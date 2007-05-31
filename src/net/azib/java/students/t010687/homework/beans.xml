@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-       
-    <import resource="jdbc-beans.xml"/>
-    <import resource="hibernate-beans.xml"/>
-    
-    <!--           
-	<bean id="net.azib.java.students.t010687.homework.DechatlonDao" class="net.azib.java.students.t010687.homework.JdbcDechatlonDao" autowire="byType">
-		<property name="query" value="select name, competionID from users where ID = ?"/>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+           
+           
+   	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    	<property name="url" value="jdbc:mysql://srv.azib.net/decathlon"/>
+    	<property name="username" value="java"/>
+    	<property name="password" value="java"/>
     </bean>
-    -->   
+    
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="datasource"/>
+		<property name="mappingResources">
+			<list>
+				<value>net/azib/java/students/t010687/homework/Decathlon.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
        
 	<bean id="net.azib.java.students.t010687.homework.DecathlonDao" class="net.azib.java.students.t010687.homework.HibernateDecathlonDao" autowire="byType">
     </bean>

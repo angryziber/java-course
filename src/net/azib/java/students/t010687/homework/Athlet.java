@@ -1,17 +1,20 @@
 package net.azib.java.students.t010687.homework;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 
+
 /**
- * Athlet
+ * Athlete
  *
  * @author Matu
  */
 public class Athlet {
 	private int id;
 	private String name;
-	private String DateOfBirth;//YYYY-MM-DD
-	private String Country;
+	private Date dateOfBirth;
+	private String country;
 	
 	public Athlet(){
 		super();
@@ -25,7 +28,7 @@ public class Athlet {
 		super();
 		this.name = name;
 		setDateOfBirth(dateOfBirth);
-		Country = country;
+		this.country = country;
 	}
 	/**
 	 * @return the name
@@ -43,57 +46,29 @@ public class Athlet {
 	 * @return the dateOfBirth
 	 */
 	public String getDateOfBirth() {
-		return DateOfBirth;
+		return DateFormat.getDateInstance(DateFormat.MEDIUM).format(dateOfBirth);
 	}
 	/**
 	 * @param dateOfBirth the dateOfBirth to set
 	 */
 	public void setDateOfBirth(String dateOfBirth) {
-		String dobData[] = dateOfBirth.split(".");
-		System.out.println(dateOfBirth + dobData.length);
-		if (dobData.length == 3){
-			DateOfBirth = dobData[2] + "-" + dobData[1] + "-" + dobData[0];
+		try {
+			this.dateOfBirth = DateFormat.getDateInstance().parse(dateOfBirth);
 		}
-		else{
-			DateOfBirth = dateOfBirth;
+		catch (ParseException e) {
+			e.printStackTrace();
 		}
 	}
 	/**
 	 * @return the country
 	 */
 	public String getCountry() {
-		return Country;
+		return country;
 	}
 	/**
 	 * @param country the country to set
 	 */
 	public void setCountry(String country) {
-		Country = country;
+		this.country = country;
 	}
-	
-	/**
-	 * @return the dob
-	 *
-	public String getDob() {
-		return dob;
-	}
-	/**
-	 * @param dob the dob to set
-	 *
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-	/**
-	 * @return the country_code
-	 *
-	public String getCountry_code() {
-		return country_code;
-	}
-	/**
-	 * @param country_code the country_code to set
-	 *
-	public void setCountry_code(String country_code) {
-		this.country_code = country_code;
-	
-	}*/
 }

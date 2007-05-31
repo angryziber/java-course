@@ -1,11 +1,10 @@
 package net.azib.java.students.t010687.homework;
 import javax.swing.*;
-//import javax.swing.text.html.*;
-//import java.awt.*;
+
 //http://www.roseindia.net/java/example/java/swing/
 
 /**
- * Programm
+ * Program
  *
  * @author Matu
  */
