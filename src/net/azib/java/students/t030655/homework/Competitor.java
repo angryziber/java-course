@@ -11,6 +11,7 @@ import java.util.Locale;
  */
 public class Competitor implements Comparable<Competitor> {
 	private String info;
+	private String place = "";
 	private String name;
 	private String dateOfBirth;
 	private String country;
@@ -87,6 +88,10 @@ public class Competitor implements Comparable<Competitor> {
 		return points.totalPoints();
 	}
 	
+	public void setPlace (String position){
+		place = position;
+	}
+	
 	public String getName(){
 		return name;
 	}
@@ -108,7 +113,7 @@ public class Competitor implements Comparable<Competitor> {
 	}
 	
 	public String getString (){
-		info = totalPoints + "," + name + "," + dateOfBirth + "," + country;
+		info = place + totalPoints + "," + name + "," + dateOfBirth + "," + country;
 		for (int i=0; i<10; i++){
 			info = info + "," + results[i];
 		}		
@@ -119,7 +124,7 @@ public class Competitor implements Comparable<Competitor> {
 		if(competitor == null)
 			return -1;
 		
-		int value = this.totalPoints - competitor.getTotalPoints();
+		int value = totalPoints - competitor.getTotalPoints();
 		
 		if (value < 0)
 			return 1;
