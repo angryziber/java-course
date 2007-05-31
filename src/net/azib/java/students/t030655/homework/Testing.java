@@ -2,7 +2,7 @@ package net.azib.java.students.t030655.homework;
 
 //import java.io.FileInputStream;
 //import java.io.FileNotFoundException;
-//import java.util.PriorityQueue;
+import java.util.PriorityQueue;
 
 /**
  * Testing
@@ -65,7 +65,7 @@ public class Testing {
 //		DecathlonDatabaseReader databaseReader = new DecathlonDatabaseReader();
 //		databaseReader.setConnection("jdbc:mysql://srv.azib.net/decathlon", "java", "java");
 //		databaseReader.displayCompetitions();
-//		databaseReader.setCompetitionID(2);
+//		databaseReader.setCompetitionId(2);
 //		System.out.println("\nCompetition 2 selected, results are following:");
 //		PriorityQueue<Competitor> competitorsQueue =  databaseReader.readDatabase();
 //		PriorityQueue<Competitor> compQ = new PriorityQueue<Competitor>(competitorsQueue);
@@ -81,7 +81,7 @@ public class Testing {
 //		DecathlonDatabaseReader databaseReader = new DecathlonDatabaseReader();
 //		databaseReader.setConnection("jdbc:mysql://srv.azib.net/decathlon", "java", "java");
 //		databaseReader.displayCompetitions();
-//		databaseReader.setCompetitionID(2);
+//		databaseReader.setCompetitionId(2);
 //		System.out.println("\nCompetition 2 selected, results are following:");
 //		PriorityQueue<Competitor> competitorsQueue =  databaseReader.readDatabase();
 //		DecathlonOutputWriter obj = new DecathlonOutputWriter();
@@ -94,8 +94,28 @@ public class Testing {
 //			i++;
 //		}
 //		databaseReader.closeConnection();
-
 		
+		/*writeToConsole katsetus*/
+//		DecathlonDatabaseReader databaseReader = new DecathlonDatabaseReader();
+//		databaseReader.setConnection("jdbc:mysql://srv.azib.net/decathlon", "java", "java");
+//		databaseReader.displayCompetitions();
+//		databaseReader.setCompetitionId(2);
+//		System.out.println("\nCompetition 2 selected, results are following:");
+//		PriorityQueue<Competitor> competitorsQueue =  databaseReader.readDatabase();
+//		DecathlonOutputWriter writer = new DecathlonOutputWriter();
+//		writer.writeToConsole(competitorsQueue);
+//		databaseReader.closeConnection();
+		
+		/*writeToFile katsetus*/
+		DecathlonDatabaseReader databaseReader = new DecathlonDatabaseReader();
+		databaseReader.setConnection("jdbc:mysql://srv.azib.net/decathlon", "java", "java");
+		databaseReader.displayCompetitions();
+		databaseReader.setCompetitionId(2);
+		System.out.println("\nCompetition 2 selected, results are following:");
+		PriorityQueue<Competitor> competitorsQueue =  databaseReader.readDatabase();
+		DecathlonOutputWriter writer = new DecathlonOutputWriter();
+		writer.writeToFile("C:\\Documents and Settings\\qtrines.EEMEA\\My Documents\\Kool\\Java\\java\\src\\net\\azib\\java\\students\\t030655\\homework\\decathlonResults.txt", competitorsQueue);
+		databaseReader.closeConnection();
 	}
 
 }

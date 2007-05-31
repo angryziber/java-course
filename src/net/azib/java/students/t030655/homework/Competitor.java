@@ -104,16 +104,20 @@ public class Competitor implements Comparable<Competitor> {
 		return country;
 	}
 	
-	public double getResults(int i){
-		return results[i];
+	public double[] getResults(){
+		return results;
 	}
 	
 	public int getTotalPoints(){
 		return totalPoints;
 	}
 	
+	public String getPlace(){
+		return place;
+	}
+	
 	public String getString (){
-		info = place + totalPoints + "," + name + "," + dateOfBirth + "," + country;
+		info = place + "," + totalPoints + "," + name + "," + dateOfBirth + "," + country;
 		for (int i=0; i<10; i++){
 			info = info + "," + results[i];
 		}		
