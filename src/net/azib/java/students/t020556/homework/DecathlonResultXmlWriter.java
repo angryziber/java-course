@@ -144,43 +144,73 @@ public class DecathlonResultXmlWriter implements IDecathlonResultWriter {
 
 		PriorityQueue<Competitor> compQLocal = new PriorityQueue<Competitor>(compQ);
 		Competitor comp = null;
-		Competitor compPrev = null;
+		PriorityQueue<Competitor> compQEqual = new PriorityQueue<Competitor>();
 		int i = 1;
 		int j = 1;
+		Competitor compEq = null;
 		while((comp = compQLocal.poll()) != null){
-			Element xmlComp = creater.createElement("Competitor");
+			if(	compQEqual.size() > 0 && 
+				compQEqual.peek().getFinalResult() != comp.getFinalResult()){
+				
+				//print competitors
+				while((compEq = compQEqual.poll()) != null){
+					//competitor
+					Element competitor = createCompetitor(compEq, creater); 
+					
+					//place
+					String place = (i - j - 1 > 0) ? j + "-" + (i - 1) : j + "";
+					competitor.appendChild(createNode("Place", place, creater));
+
+					//append to trunk
+					root.appendChild(competitor);	
+				}
+				j = i;
+			}
+			
+			compQEqual.add(comp);
+			i++;
+		}
+		
+		//print remains
+		while((compEq = compQEqual.poll()) != null){
+			//competitor
+			Element competitor = createCompetitor(compEq, creater); 
 			
 			//place
-			if(	compPrev != null && 
-				compPrev.getFinalResult() != comp.getFinalResult())
-				j = i;
-			xmlComp.appendChild(createNode("Place", "" + j, creater));
-			
-			//name
-			xmlComp.appendChild(createNode("Name", comp.getName(), creater));
+			String place = (i - j - 1 > 0) ? j + "-" + (i - 1) : j + "";
+			competitor.appendChild(createNode("Place", place, creater));
 
-			//Date of birth
-			xmlComp.appendChild(
-				createNode("DateOfBirth", formatter.format(comp.getDateOfBirth()), creater));
+			//append to trunk
+			root.appendChild(competitor);	
+		}
+	}
+	
+	private Element createCompetitor(Competitor comp, Document creater){
+		Element xmlComp = creater.createElement("Competitor");
+		
+		//name
+		xmlComp.appendChild(createNode("Name", comp.getName(), creater));
 
-			//Locale
+		//Date of birth
+		xmlComp.appendChild(
+			createNode("DateOfBirth", formatter.format(comp.getDateOfBirth()), creater));
+
+		//Locale
+		xmlComp.appendChild(
+			createNode("Country", comp.getLocale().toString().toUpperCase(), creater));
+		
+		//score
+		xmlComp.appendChild(
+			createNode("Score", "" + Math.round(comp.getFinalResult()), creater));
+		
+		//results
+		String[] results = comp.getResults();
+		for(DecathlonEvent field : DecathlonEvent.values()){
 			xmlComp.appendChild(
-				createNode("Country", comp.getLocale().toString().toUpperCase(), creater));
-			
-			//score
-			xmlComp.appendChild(
-				createNode("Score", "" + Math.round(comp.getFinalResult()), creater));
-			
-			//results
-			String[] results = comp.getResults();
-			for(DecathlonEvent field : DecathlonEvent.values()){
-				xmlComp.appendChild(
-					createNode(field.name(), results[field.ordinal()], creater));
-			}
-			root.appendChild(xmlComp);	
-			compPrev = comp;
-			i++;
-		}		
+				createNode(field.name(), results[field.ordinal()], creater));
+		}
+		
+		return xmlComp;		
 	}
 		
 	private Element createNode(String name, String value, Document creater){

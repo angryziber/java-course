@@ -137,20 +137,34 @@ public class DecathlonResultStreamWriter implements IDecathlonResultWriter {
 		
 		PriorityQueue<Competitor> compQLocal = new PriorityQueue<Competitor>(compQ);
 		Competitor comp = null;
-		Competitor compPrev = null;
 		try {
 			PrintStream ps;
 			ps = new PrintStream(out, true, "UTF8");
 			int i = 1;
 			int j = 1;
 			String separator = isCSVFormat ? "," : " ";
+			PriorityQueue<Competitor> compQEqual = new PriorityQueue<Competitor>();
+			Competitor compEq = null;
 			while((comp = compQLocal.poll()) != null){
-				if(	compPrev != null && 
-					compPrev.getFinalResult() != comp.getFinalResult())
+				if(	compQEqual.size() > 0 && 
+					compQEqual.peek().getFinalResult() != comp.getFinalResult()){
+					
+					//print competitors
+					while((compEq = compQEqual.poll()) != null){
+						String place = (i - j - 1 > 0) ? j + "-" + (i - 1) : j + "";
+						ps.println(place + separator + generateLine(compEq));
+					}
 					j = i;
-				ps.println(j + separator + generateLine(comp));
-				compPrev = comp;
+				}
+				
+				compQEqual.add(comp);
 				i++;
+			}
+			
+			//print remains
+			while((compEq = compQEqual.poll()) != null){
+				String place = (i - j - 1 > 0) ? j + "-" + (i - 1) : j + "";
+				ps.println(place + separator + generateLine(compEq));
 			}
 		}
 		catch (UnsupportedEncodingException e) {
