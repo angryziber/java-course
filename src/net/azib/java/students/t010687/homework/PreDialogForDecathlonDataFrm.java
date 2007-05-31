@@ -10,11 +10,11 @@ import java.awt.event.*;
  *
  * @author Matu
  */
-public class PreDialogForAthletsDataFrm extends JDialog{
+public class PreDialogForDecathlonDataFrm extends JDialog{
 	/** serialVersionUID */
 	private static final long serialVersionUID = -3383891752642184013L;
 
-	public PreDialogForAthletsDataFrm(JFrame MyFrame) {
+	public PreDialogForDecathlonDataFrm(JFrame MyFrame) {
 		super(MyFrame,"DECATHLON: Please select the Data source:");
 	    addWindowListener(new WindowAdapter(){
 	            public void windowClosing(WindowEvent evt){

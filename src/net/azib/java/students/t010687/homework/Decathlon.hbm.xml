@@ -29,14 +29,20 @@
          	<property name="Race_1500m" column="race_1500m" type="float" access="field"/>
     	</joined-subclass>
 	</class>
+	<class name="net.azib.java.students.t010687.homework.Competition" table="competitions">
+		<id name="id" access="field"/>
+		<property name="country_code" column="country_code" type="string" access="field"/>
+		<property name="date" column="date" type="date" access="field"/>
+		<property name="description" column="description" type="string" access="field"/>
+	</class>
 	
 	<query name="Decathlon.getCompetition_id">
 		from ResultsOfTheAthlet where competition_id = :competition_id
 	</query>
-	<!--
-	<query name="Decathlon.getCountryCode">
-		from Athlet where country_code = :country_code
+	
+	<query name="Decathlon.getCompetitions">
+		from Competition where id > :zero
 	</query>
-	-->
+	
 		
 </hibernate-mapping>
