@@ -1,5 +1,6 @@
 package net.azib.java.students.t010687.homework;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 /**
@@ -20,7 +21,9 @@ public class Competition {
 	 */
 	@Override
 	public String toString() {
-		return country_code + " " + description;
+		return country_code + " " 
+		+ DateFormat.getDateInstance(DateFormat.MEDIUM).format(date) 
+		+ " " + description;
 	}
 
 	/**

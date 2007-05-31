@@ -71,4 +71,10 @@ public class Athlet {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
 }

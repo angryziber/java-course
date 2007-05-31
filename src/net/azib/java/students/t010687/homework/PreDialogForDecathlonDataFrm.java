@@ -1,6 +1,5 @@
 package net.azib.java.students.t010687.homework;
 
-//import javax.swing.text.html.*;
 
 import javax.swing.*;
 import java.awt.*;
