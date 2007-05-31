@@ -64,8 +64,9 @@ public class SumoApp extends Applet implements Runnable {
 		setBackground(Color.green);
 		board = new Dohjo();
 		board.init(with, height);
-		imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("net/azib/java/students/t060397/homework/images/websumobot.png")); 
-			//getImage(imageSrc, "net.azib.java.students.t060397.homework/images/websumobot.png");
+		imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("websumobot.png"));
+		//System.out.println("imageMyRobot "+imgMyRobot.toString());
+		//imgMyRobot = getImage(imageSrc,"net/azib/java/students/t060397/homework/images/websumobot.png");
 		imgYouRobot = getImage(imageSrc, "images/bot2.png");
 		board.setImages(imgMyRobot, imgYouRobot);
 
