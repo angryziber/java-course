@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 /**
  * DecathlonOutputWriter
  *
- * @author qtrines
+ * @author Triin Nestor
  */
 public class DecathlonOutputWriter {
 	
@@ -40,11 +40,11 @@ public class DecathlonOutputWriter {
 			k = i;
 			//inserting correct places to masPlaces
 			if (k == (j-1)){
-				masPlaces[k] =(i + 1) + ".";
+				masPlaces[k] =(i + 1) + ". ";
 			}
 			else{
 				for ( ; k<j; k++){
-					masPlaces[k] = (i + 1) + "-" + (i + 1 + count) + ".";
+					masPlaces[k] = (i + 1) + "-" + (i + 1 + count) + ". ";
 				}
 			}
 			if (count == 0){
@@ -108,7 +108,7 @@ public class DecathlonOutputWriter {
 
 	}
 	
-	public void writeToXml (PriorityQueue<Competitor> pq){
+	public void writeToXml (String filename, PriorityQueue<Competitor> pq){
 		
 	}
 	

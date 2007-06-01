@@ -23,7 +23,7 @@ public class DecathlonInputReader {
 				(new InputStreamReader(new BufferedInputStream(input), "UTF-8"));
 		}
 		catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Unsupported encoding!");
 			e.printStackTrace();
 		}
 	
@@ -31,11 +31,10 @@ public class DecathlonInputReader {
 		String line;
 		Competitor comp = null;
 		try {
-			while((line = reader.readLine()) != null){
+			while(((line = reader.readLine()) != null) && (!line.equalsIgnoreCase(""))){
 				comp = new Competitor();
 				comp.setCompetitor(line);
 				pqCompetitor.add(comp);
-//				System.out.println(comp.getString());
 			}
 				
 		}
@@ -43,8 +42,6 @@ public class DecathlonInputReader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 		return pqCompetitor;
 		
 	}

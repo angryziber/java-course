@@ -41,7 +41,7 @@ public class Competitor implements Comparable<Competitor> {
 					number1 = nf.parse(masTimeInfo[0]);
 				}
 				catch (ParseException e) {
-					// TODO Auto-generated catch block
+					//shouldn't happen
 					e.printStackTrace();
 				}
 				Number number2 = 0;
@@ -49,7 +49,7 @@ public class Competitor implements Comparable<Competitor> {
 					number2 = nf.parse(masTimeInfo[1]);
 				}
 				catch (ParseException e) {
-					// TODO Auto-generated catch block
+					//shouldn't happen
 					e.printStackTrace();
 				}
 				results[i-3]= 60.00*(number1.doubleValue()) + number2.doubleValue();
@@ -62,7 +62,7 @@ public class Competitor implements Comparable<Competitor> {
 					number = nf.parse(masInfo[i]);
 				}
 				catch (ParseException e) {
-					// TODO Auto-generated catch block
+					// shouldn't happen
 					e.printStackTrace();
 				}
 				results[i-3] = number.doubleValue();
@@ -117,7 +117,7 @@ public class Competitor implements Comparable<Competitor> {
 	}
 	
 	public String getString (){
-		info = place + "," + totalPoints + "," + name + "," + dateOfBirth + "," + country;
+		info = place + totalPoints + "," + name + "," + dateOfBirth + "," + country;
 		for (int i=0; i<10; i++){
 			info = info + "," + results[i];
 		}		

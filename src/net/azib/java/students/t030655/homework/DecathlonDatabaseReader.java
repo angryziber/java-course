@@ -12,7 +12,7 @@ import java.util.PriorityQueue;
 /**
  * DecathlonDatabaseReader
  *
- * @author qtrines
+ * @author Triin Nestor
  */
 public class DecathlonDatabaseReader {
 	private Connection connection;
