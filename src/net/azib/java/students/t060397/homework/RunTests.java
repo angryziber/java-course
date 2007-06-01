@@ -20,10 +20,11 @@ public class RunTests {
 	        //
 	        suite.addTestSuite(MatchTest.class);
 
+	        suite.addTestSuite(SumoAppTest.class);
 	        //
 	        // Another example test suite of tests.
 	        // 
-	        suite.addTest(SumAppTest.class);
+	       // suite.addTest("testInit");
 
 	        //
 	        // Add more tests here
