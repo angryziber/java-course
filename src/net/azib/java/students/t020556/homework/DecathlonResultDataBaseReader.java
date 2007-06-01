@@ -51,9 +51,9 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 
 			while(results.next())
 				compQ.add(createCompetitor(results));
-			
 		}
 		catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Unable to move forward in the obtained results", e);
 		}
 		try {
 			results.close();
