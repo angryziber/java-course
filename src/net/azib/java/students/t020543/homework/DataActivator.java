@@ -8,7 +8,7 @@ public class DataActivator {
 
 		DataAcessor db = new DataAcessor();
 		
-		db.initializeConnection("“jdbc:mysql://srv.azib.net:3306", "java", "java");
+		db.initializeConnection("jdbc:mysql://srv.azib.net:3306", "java", "java");
 		db.releaseConnection();
 		
 

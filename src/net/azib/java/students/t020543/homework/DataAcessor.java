@@ -13,6 +13,7 @@ public class DataAcessor {
 		Class.forName("com.mysql.jdbc.driver");
 
 		connection = DriverManager.getConnection(url, user, password);
+		//connection = DriverManager.getConnection();
 	}
 	
 	public void releaseConnection() throws SQLException{
