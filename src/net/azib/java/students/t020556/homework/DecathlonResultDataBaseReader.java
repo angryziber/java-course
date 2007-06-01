@@ -51,12 +51,17 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 
 			while(results.next())
 				compQ.add(createCompetitor(results));
-			return compQ;
+			
 		}
 		catch (SQLException e) {
-			LOG.log(Level.SEVERE, "Unable to move forward in the obtained results", e);
 		}
-		return null;
+		try {
+			results.close();
+		}
+		catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Unable to close obtained results", e);
+		}
+		return compQ;
 	}
 	
 	/**
@@ -107,12 +112,13 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 	}
 	
 	private ResultSet readRaw(Number eventNr){
-		
+		ResultSet rs = null;
+		Statement st = null;
 		try {
 			if(connection == null)
 				throw new SQLException("No connection set");
 			
-			Statement st = connection.createStatement();
+			st = connection.createStatement();
 			String query = 
 				"SELECT A.name, A.dob, A.country_code, R.* " +
 				"FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id";
@@ -124,12 +130,20 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 					"Competition not specified correctly! Fetching results from " +
 					"all competitions.");
 			
-			return st.executeQuery(query);
+			rs = st.executeQuery(query);
 		}
 		catch (SQLException e) {
 			LOG.log(Level.SEVERE, "Unable to query data from database", e);
-			return null;
 		}
+		
+		if(st != null)
+			try {
+				st.close();
+			}
+			catch (SQLException e) {
+				LOG.log(Level.SEVERE, "Unable to close created statement", e);
+			}
+		return rs;
 	}
 	
 	/**
