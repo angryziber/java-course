@@ -10,7 +10,7 @@ public class DataAcessor {
 	
 	public void initializeConnection(String url) throws Exception 
 	{
-		Class.forName("com.mysql.jdbc.driver");
+		Class.forName("com.mysql.jdbc.Driver");
 
 		connection = DriverManager.getConnection(url);
 		//connection = DriverManager.getConnection();
