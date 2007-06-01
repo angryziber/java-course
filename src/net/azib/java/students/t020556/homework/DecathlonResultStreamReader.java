@@ -66,6 +66,8 @@ public class DecathlonResultStreamReader
 	
 	private Competitor createCompetitor(String args){
 		String[] results = args.split(",");
+		if(results.length < 3)
+			return null;
 		
 		Competitor comp = new Competitor();
 		comp.setName(results[0].trim());
