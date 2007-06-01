@@ -8,11 +8,11 @@ public class DataAcessor {
 	
 	protected Connection connection;
 	
-	public void initializeConnection(String url, String user, String password) throws Exception 
+	public void initializeConnection(String url) throws Exception 
 	{
 		Class.forName("com.mysql.jdbc.driver");
 
-		connection = DriverManager.getConnection(url, user, password);
+		connection = DriverManager.getConnection(url);
 		//connection = DriverManager.getConnection();
 	}
 	
