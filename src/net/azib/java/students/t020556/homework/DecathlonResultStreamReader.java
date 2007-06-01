@@ -48,8 +48,7 @@ public class DecathlonResultStreamReader
 		BufferedReader reader = null;
 		PriorityQueue<Competitor> compQ = new PriorityQueue<Competitor>();
 		try {
-			reader = new 
-				BufferedReader(new InputStreamReader(new BufferedInputStream(input), encoding));
+			reader = new BufferedReader(new InputStreamReader(input, encoding));
 			String line;
 			while((line = reader.readLine()) != null){
 				compQ.add(createCompetitor(line));
