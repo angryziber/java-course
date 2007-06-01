@@ -30,9 +30,12 @@ import java.awt.Image;
  * @author marcus
  *
  */
-public class Robot {
+abstract public class Robot {
 	public Image img;
 	public String robotName;
+	
+	abstract public void run();
+	
 
 	
 	

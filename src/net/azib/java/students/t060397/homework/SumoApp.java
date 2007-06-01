@@ -21,12 +21,17 @@ package net.azib.java.students.t060397.homework;
 
 import java.applet.*;
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 
 public class SumoApp extends Applet implements Runnable {
 
 	private static final long serialVersionUID = 4458887497742408563L;
-
+	//private static final String RESOURCE_FILE = "resource.properties";
+	
+	/** Image URL from html */
+	private static final String IMG_URL = "imgurl";
+	
 	static int frame;
 
 	public static int DELAY;
@@ -56,16 +61,61 @@ public class SumoApp extends Applet implements Runnable {
 		animator.start();
 	}
 
+	private void getResources() throws IOException {
+		
+		/** Getting class file location 
+		final String clsAsResource = this.getName ().replace ('.', '/').concat (".class");
+		final String pd = getClass().getProtectionDomain().getCodeSource().toString();
+	//	final CodeSource cs = pd.getCodeSource ();
+		System.out.println("UUU :"+pd);
+		
+		java.util.Properties props = new java.util.Properties();
+		//String path = getClass().
+		String path = getClass().getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
+		System.out.println("Path :"+path);
+		java.io.FileInputStream fis = new java.io.FileInputStream(new java.io.File(path + File.separator + RESOURCE_FILE));
+		props.load(fis);
+		java.net.URL url = ClassLoader.getSystemResource(RESOURCE_FILE);
+		if (url != null) {
+			props.load(url.openStream());
+			System.out.println(props);
+		}
+		else {
+			throw new IOException("Can't open resurce file: " + RESOURCE_FILE);
+		}
+		*/
+		/** Print properties */
+		/*
+		Properties sysprops = System.getProperties();
+		Collection c = sysprops.keySet();	
+		
+		for (Object key : c) {
+			System.out.println("Key "+key +" Value "+ sysprops.get(key));
+		}*/
+		
+	}
 	public void init() {
+		
 		imageSrc = getCodeBase();
+		String imageSrcUrl = getParameter(IMG_URL);
+		
+		try{
+			getResources();
+	      
+	     
+		//SumoApp.getResourceAsStream("resource.properties");
+		}catch (IOException e){
+			
+			e.printStackTrace();
+		}
 		System.out.println("Codebase: "+ imageSrc);
 		setDelay();
 		setSize(with, height);
 		setBackground(Color.green);
 		board = new Dohjo();
 		board.init(with, height);
-		imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("websumobot.png"));
-		//System.out.println("imageMyRobot "+imgMyRobot.toString());
+		//imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("websumobot.png"));
+		imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("java-logo.gif"));
 		//imgMyRobot = getImage(imageSrc,"net/azib/java/students/t060397/homework/images/websumobot.png");
 		imgYouRobot = getImage(imageSrc, "images/bot2.png");
 		board.setImages(imgMyRobot, imgYouRobot);

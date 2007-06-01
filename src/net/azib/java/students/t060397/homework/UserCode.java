@@ -31,6 +31,9 @@ public class UserCode extends Robot {
 		g.drawString("YourRobot " + SumoApp.frame, 500, 100);
 		
 	}
+	public void run(){
+		
+	}
 
 	public void setImage(Image imgYouRobot) {
 		img = imgYouRobot;
