@@ -9,6 +9,7 @@ public class DataActivator {
 		DataAcessor db = new DataAcessor();
 		
 		db.initializeConnection("jdbc:mysql://srv.azib.net:3306/decathlon?user=java&password=java");
+		
 		db.releaseConnection();
 		
 
