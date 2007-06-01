@@ -1,6 +1,5 @@
 package net.azib.java.students.t020556.homework;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
