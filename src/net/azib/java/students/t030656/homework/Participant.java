@@ -1,10 +1,5 @@
 package net.azib.java.students.t030656.homework;
 
-import java.util.Calendar;
-
-
-
-
 /**
  * Participant
  *
@@ -13,23 +8,54 @@ import java.util.Calendar;
 public class Participant {
 	
 	private String name;
-	private Calendar dateOfBirth;
+	private String dateOfBirth;
 	private String country;
 	private int points;
-	private double[] results = {0,0,0,0,0,0,0,0,0,0}; 
+	private String[] strResults;
+	private double[] results;
 
 	
 	
 	/**
 	 * constructor
 	 */
-	public Participant(String name, String country, String dateOfBirth, double[] results) {
-		this.name = name;
+	public Participant () {
+		results = new double[10];
+		this.points = 0;
+	}
+	/**
+	 * @param country the country to set
+	 */
+	public void setCountry(String country) {
 		this.country = country;
-		this.results = results;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @param dateOfBirth the dateOfBirth to set
+	 */
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	/**
+	 * @param strResults the strResults to set
+	 */
+	public void setResults (String[] strResults) {
+		
+		if(strResults.length != 10){
+			throw new IllegalArgumentException();
+		}
+		this.strResults = strResults;
+		int i = 0;
+		for(String str : strResults){
+			results[i++] = Double.parseDouble(str);
+		}
 		points = calcPoints();
 	}
-
 	/**
 	 * @return the points
 	 */
@@ -60,7 +86,7 @@ public class Participant {
 	/**
 	 * @return the dateOfBirth
 	 */
-	public Calendar getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 	/**
@@ -70,9 +96,9 @@ public class Participant {
 		return country;
 	}
 	/**
-	 * @return the results
+	 * @return the strResults
 	 */
-	public double[] getResults() {
-		return results;
+	public String[] getStrResults() {
+		return strResults;
 	}
 }

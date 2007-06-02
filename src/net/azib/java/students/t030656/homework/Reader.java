@@ -24,26 +24,45 @@ public class Reader {
 	}
 	/**
 	 * Reads input from screen
-	 * @return Competition
+	 * @return
 	 */
 	static Competition readFromScreen(){
 		Competition comp = new Competition();
 		InputStream in = System.in;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		
+		while (true) {
+			try {
+				System.out.print("Enter the competition name: ");
+				comp.setName(reader.readLine());
+				break;
+			}
+			catch (IOException e) {
+				System.out.println("Wrong input. Try again!");
+			}
+		}
 		boolean b = true;
 		while (b) {
+			Participant par = new Participant();
+			par.setName(getParticipantName(reader));
+			par.setDateOfBirth(getParticipantDateOfBirth(reader));
+			par.setCountry(getParticipantCountry(reader));
 			while (true) {
-				try {
-					System.out.print("Enter the competition name: ");
-					comp.setName(reader.readLine());
+				try
+				{
+					par.setResults(getParticipantResults(reader));
 					break;
 				}
-				catch (IOException e) {
-					System.out.println("Wrong input. Try again!");
+				catch(NumberFormatException ex){
+					System.out.println("Wrong input. Not in correct format. Try again!");
+				}
+				catch(IllegalArgumentException ex){
+					System.out.println("Wrong number of results (less on greater than 10). Try again!");
+				}
+				catch(Exception ex){
+					ex.printStackTrace();
 				}
 			}
-			comp.addParticipant(new Participant(getParticipantName(reader), getParticipantCountry(reader), getParticipantDateOfBirth(reader), getParticipantResults(reader)));
+			comp.addParticipant(par);
 			b = askContinue(reader);
 		}		
 		return comp;
@@ -152,23 +171,18 @@ public class Reader {
 		}
 	}
 	
-	private static double[] getParticipantResults(BufferedReader reader){
+	private static String[] getParticipantResults(BufferedReader reader){
 		while (true) {
-			System.out.print("Enter the participants results.\n "
-					+ "delimiter results with coma (,). Coma should represented as dot (.) \n " + "like: 12.24,123.3: ");
-			double[] arrResult = new double[10];
-			int i = 0;
+			System.out.print("Enter the participants results.\n " +
+					"Delimiter results with coma (,). " +
+					"Coma should represented as dot (.) \n " + 
+					"like: 12.24,123.3: ");
 			try {
-				for (String str : reader.readLine().split(",")) {
-					arrResult[i++] = Double.parseDouble(str);
-				}
-				return arrResult;
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Wrong input. Try again");
+				String str = reader.readLine();
+				return str.split(",");
 			}
 			catch (IOException e) {
-				System.out.println("Wrong input. Try again");
+				System.out.println("Wrong input. Try again!");
 			}
 		}		
 	}
