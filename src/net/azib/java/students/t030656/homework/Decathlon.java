@@ -10,6 +10,8 @@ import java.util.Scanner;
  */
 public class Decathlon {
 
+	private static Competition competition;
+
 	/**
 	 * @param args
 	 */
@@ -97,7 +99,7 @@ public class Decathlon {
 			
 			switch(inScan.nextInt()){
 				case 1:
-					Reader.readFromScreen();
+					competition = Reader.readFromScreen();
 					condition = false;
 					break;
 				case 2:

@@ -1,5 +1,8 @@
 package net.azib.java.students.t030656.homework;
 
+import java.util.Calendar;
+
+
 
 
 /**
@@ -10,7 +13,7 @@ package net.azib.java.students.t030656.homework;
 public class Participant {
 	
 	private String name;
-	private String dateOfBirth;
+	private Calendar dateOfBirth;
 	private String country;
 	private int points;
 	private double[] results = {0,0,0,0,0,0,0,0,0,0}; 
@@ -57,7 +60,7 @@ public class Participant {
 	/**
 	 * @return the dateOfBirth
 	 */
-	public String getDateOfBirth() {
+	public Calendar getDateOfBirth() {
 		return dateOfBirth;
 	}
 	/**
