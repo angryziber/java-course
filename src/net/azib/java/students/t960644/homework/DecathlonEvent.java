@@ -1,5 +1,8 @@
 package net.azib.java.students.t960644.homework;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * DecathlonEvent
  * 
@@ -21,6 +24,10 @@ public enum DecathlonEvent {
 	private final double b;
 	private final double c;
 	private final String units;
+	private DecimalFormat RESULT_FORMAT = new DecimalFormat("0.00");
+	private SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("m:ss.SSS");
+	private SimpleDateFormat SHORT_TIME_FORMAT = new SimpleDateFormat("ss.SSS");
+
 
 	/**
 	 * @param a
@@ -57,5 +64,28 @@ public enum DecathlonEvent {
 			}
 		}
 		return (int)result;
+	}
+	/**
+	 * 
+	 * @param p performance result 
+	 * @return formatted result that can be used for various output options
+	 */
+	public String eventResultFormat(double p) {
+		if(units=="sec"){
+			if (p<60) {
+				return SHORT_TIME_FORMAT.format(p*1000);
+			}else{
+				return TIME_FORMAT.format(p*1000);
+			}
+		} else
+		{
+			return RESULT_FORMAT.format(p);
+		}
+	}
+	public static void main(String[] args) {
+		System.out.println(DecathlonEvent.RACE_100M.eventResultFormat(15.2));
+		System.out.println(DecathlonEvent.RACE_1500M.eventResultFormat(361.9));
+		System.out.println(DecathlonEvent.JAVELIN_THROW.eventResultFormat(62));
+		
 	}
 }
