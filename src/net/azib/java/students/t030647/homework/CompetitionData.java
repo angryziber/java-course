@@ -24,7 +24,6 @@ public class CompetitionData {
 			participants[i] = new Competitor();
 			boolean ok2 = participants[i].setData(data[i]);
 			if (!ok2) return false;
-			System.out.println(ok2);
 		}
 		
 		return ok;
