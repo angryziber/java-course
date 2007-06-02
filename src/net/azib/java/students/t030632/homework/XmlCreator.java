@@ -2,7 +2,9 @@ package net.azib.java.students.t030632.homework;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -48,15 +50,23 @@ public class XmlCreator {
             
             /*sorting competitors by place achieved in competition*/
             Map<Integer, String> places = new PlaceCalculator(competitorsList).getPlaces();
+            
             Set <String> sortingCompetitors = new TreeSet<String>();
             for(Competitor champ:competitorsList){
-            	sortingCompetitors.add(places.get(champ.getPoints())+"|"+champ.getInitialData());
+            	sortingCompetitors.add(champ.getPoints()+places.get(champ.getPoints())+"|"+champ.getInitialData());
+            }
+            List <String> sortingCompetitorsArray = new ArrayList<String>();
+            for(String data : sortingCompetitors){
+            	sortingCompetitorsArray.add(data);
             }
             List <Competitor> sortedCompetitorsList = new LinkedList<Competitor>();
-            for(String data : sortingCompetitors ){
-            	sortedCompetitorsList.add(new Competitor(data.substring(data.indexOf("|")+1)));
+            for(int i= sortingCompetitorsArray.size()-1; i>-1; i--
+            		/*String data : sortingCompetitors */){
+            	sortedCompetitorsList.add(new Competitor(sortingCompetitorsArray.get(i).substring(sortingCompetitorsArray.get(i).indexOf("|")+1)));
             }
-            
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(2);
+            nf.setMinimumFractionDigits(2);
             int man=0;// id of competitor
             for(Competitor champ:sortedCompetitorsList){
             /*for (int man = 0; man < pointsArray.length; man++) {*/
@@ -84,7 +94,7 @@ public class XmlCreator {
 
                 /*Place*/
                 Element place = doc.createElement("place");
-                place.appendChild(doc.createTextNode(places.get(champ.getPoints())));
+                place.appendChild(doc.createTextNode(String.valueOf(places.get(champ.getPoints()))+"."));
                 comper.appendChild(place);
 
                 
@@ -97,7 +107,7 @@ public class XmlCreator {
                 events.appendChild(eventSprint);
                 
                 Element resultSprint = doc.createElement("result");
-                resultSprint.appendChild(doc.createTextNode(String.valueOf(champ.getSprint()+" sec")));
+                resultSprint.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getSprint())+" sec")));
                 eventSprint.appendChild(resultSprint);
                 
                 /*2. Long Jump*/
@@ -106,7 +116,7 @@ public class XmlCreator {
                 events.appendChild(eventLongJump);
                 
                 Element resultLongJump = doc.createElement("result");
-                resultLongJump.appendChild(doc.createTextNode(String.valueOf(champ.getLongJump()+" m")));
+                resultLongJump.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getLongJump())+" m")));
                 eventLongJump.appendChild(resultLongJump);
                 
                 /*3. Shot Put*/
@@ -115,7 +125,7 @@ public class XmlCreator {
                 events.appendChild(eventShotPut);
                 
                 Element resultShotPut = doc.createElement("result");
-                resultShotPut.appendChild(doc.createTextNode(String.valueOf(champ.getShotPut()+" m")));
+                resultShotPut.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getShotPut())+" m")));
                 eventShotPut.appendChild(resultShotPut);
                 
                 /*4. High Jump*/
@@ -124,7 +134,7 @@ public class XmlCreator {
                 events.appendChild(eventHighJump);
                 
                 Element resultHighJump = doc.createElement("result");
-                resultHighJump.appendChild(doc.createTextNode(String.valueOf(champ.getHighJump()+" m")));
+                resultHighJump.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getHighJump())+" m")));
                 eventHighJump.appendChild(resultHighJump);
                 
                 /*5. 400m Sprint */
@@ -133,7 +143,7 @@ public class XmlCreator {
                 events.appendChild(eventLongSprint);
                 
                 Element resultLongSprint = doc.createElement("result");
-                resultLongSprint.appendChild(doc.createTextNode(String.valueOf(champ.getLongSprint()+" sec")));
+                resultLongSprint.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getLongSprint())+" sec")));
                 eventLongSprint.appendChild(resultLongSprint);
                 
                 /*6. 110m Hurdles */
@@ -142,7 +152,7 @@ public class XmlCreator {
                 events.appendChild(eventHurdles);
                 
                 Element resultHurdles = doc.createElement("result");
-                resultHurdles.appendChild(doc.createTextNode(String.valueOf(champ.getHurdles()+" sec")));
+                resultHurdles.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getHurdles())+" sec")));
                 eventHurdles.appendChild(resultHurdles);
                 
                 /*7. Discus Throw */
@@ -151,7 +161,7 @@ public class XmlCreator {
                 events.appendChild(eventDiscus);
                 
                 Element resultDiscus = doc.createElement("result");
-                resultDiscus.appendChild(doc.createTextNode(String.valueOf(champ.getDiscusThrow()+" m")));
+                resultDiscus.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getDiscusThrow())+" m")));
                 eventDiscus.appendChild(resultDiscus);
                 
                 /*8. Pole Vault */
@@ -160,7 +170,7 @@ public class XmlCreator {
                 events.appendChild(eventPole);
                 
                 Element resultPole = doc.createElement("result");
-                resultPole.appendChild(doc.createTextNode(String.valueOf(champ.getPoleVault()+" m")));
+                resultPole.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getPoleVault())+" m")));
                 eventPole.appendChild(resultPole);
                 
                 /*9. Javelin Throw */
@@ -169,7 +179,7 @@ public class XmlCreator {
                 events.appendChild(eventJavelin);
                 
                 Element resultJavelin = doc.createElement("result");
-                resultJavelin.appendChild(doc.createTextNode(String.valueOf(champ.getJavelinThrow()+" m")));
+                resultJavelin.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getJavelinThrow())+" m")));
                 eventJavelin.appendChild(resultJavelin);
                 
                 /*10. 1500m race*/
@@ -178,7 +188,7 @@ public class XmlCreator {
                 events.appendChild(eventRace);
                 
                 Element resultRace = doc.createElement("result");
-                resultRace.appendChild(doc.createTextNode(String.valueOf(champ.getRace()+" sec")));
+                resultRace.appendChild(doc.createTextNode(String.valueOf(nf.format(champ.getRace())+" sec")));
                 eventRace.appendChild(resultRace);
                 
             }
