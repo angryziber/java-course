@@ -1,7 +1,7 @@
 package net.azib.java.students.t030655.homework;
 
 /**
- * Points - This class saves points for every event and calculates total points
+ * DecathlonPoints - Class to save points for every event and calculate total points
  *
  * @author Triin Nestor
  */
@@ -18,19 +18,17 @@ public class DecathlonPoints {
 	private int race1500m;
 	private int totalPoints;
 	
-	/**Sets 100m sprint points
+	/**
+	 * Sets 100m sprint points
 	 * 
 	 * @param performance - event result in seconds
 	 */
 	public void setSprint100m (double performance){
 		sprint100m = (int) Decathlon.SPRINT_100M.points(performance);
 	}
-	
-//	public double getSprint100m(){
-//		return sprint100m;
-//	}
-	
-	/**Sets long jump points
+		
+	/**
+	 * Sets long jump points
 	 * 
 	 * @param performance - event result in meters
 	 */
@@ -38,7 +36,8 @@ public class DecathlonPoints {
 		longJump = (int) Decathlon.LONG_JUMP.points(performance);
 	}
 	
-	/**Sets shot put points
+	/**
+	 * Sets shot put points
 	 * 
 	 * @param performance - event result in meters
 	 */
@@ -46,7 +45,8 @@ public class DecathlonPoints {
 		shotPut = (int) Decathlon.SHOT_PUT.points(performance);
 	}
 	
-	/**Sets high jump points
+	/**
+	 * Sets high jump points
 	 * 
 	 * @param performance - event result in meters
 	 */
@@ -54,7 +54,8 @@ public class DecathlonPoints {
 		highJump = (int) Decathlon.HIGH_JUMP.points(performance);
 	}
 	
-	/**Sets 400m sprint points
+	/**
+	 * Sets 400m sprint points
 	 * 
 	 * @param performance - event result in seconds
 	 */
@@ -62,7 +63,8 @@ public class DecathlonPoints {
 		sprint400m = (int) Decathlon.SPRINT_400M.points(performance);
 	}
 	
-	/**Sets 110m hurdles points
+	/**
+	 * Sets 110m hurdles points
 	 * 
 	 * @param performance - event result in seconds
 	 */
@@ -70,7 +72,8 @@ public class DecathlonPoints {
 		hurdles110m = (int) Decathlon.HURDLES_110M.points(performance);
 	}
 	
-	/**Sets discus throw points
+	/**
+	 * Sets discus throw points
 	 * 
 	 * @param performance - event result in meters
 	 */
@@ -78,7 +81,8 @@ public class DecathlonPoints {
 		discusThrow = (int) Decathlon.DISCUS_THROW.points(performance);
 	}
 	
-	/**Sets pole vault points
+	/**
+	 * Sets pole vault points
 	 * 
 	 * @param performance - event result in meters
 	 */
@@ -86,7 +90,8 @@ public class DecathlonPoints {
 		poleVault = (int) Decathlon.POLE_VAULT.points(performance);
 	}
 	
-	/**Sets javelin throw points
+	/**
+	 * Sets javelin throw points
 	 * 
 	 * @param performance - event result in meters
 	 */
@@ -94,7 +99,8 @@ public class DecathlonPoints {
 		javelinThrow = (int) Decathlon.JAVELIN_THROW.points(performance);
 	}
 	
-	/**Sets 1500m race points
+	/**
+	 * Sets 1500m race points
 	 * 
 	 * @param performance - event result in seconds
 	 */
@@ -102,7 +108,8 @@ public class DecathlonPoints {
 		race1500m = (int) Decathlon.RACE_1500M.points(performance);
 	}
 	
-	/**Calculates total points
+	/**
+	 * Calculates total points
 	 * 
 	 * @return totalPoints - total points according to the points of events
 	 */

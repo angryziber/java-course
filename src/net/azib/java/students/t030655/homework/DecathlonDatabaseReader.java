@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
 ;
 
 /**
- * DecathlonDatabaseReader
+ * DecathlonDatabaseReader - Class to read decathlon data from database.
  *
  * @author Triin Nestor
  */
@@ -18,21 +18,32 @@ public class DecathlonDatabaseReader {
 	private Connection connection;
 	private int competitionId;
 	
+	/**
+	 * Sets connection with database.
+	 * 
+	 * @param url - url of database
+	 * @param user - username
+	 * @param password
+	 */
 	public void setConnection (String url, String user, String password){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(url, user, password);
 		}
 		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Loading drivers faild! No class found!");
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Unable to connect to database!");
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Displays competitions available from database to console.
+	 * 
+	 */
 	public void displayCompetitions (){
 		String query = "SELECT id, date, country_code, description FROM competitions";
 		Statement statement;
@@ -46,19 +57,29 @@ public class DecathlonDatabaseReader {
 				System.out.println(resultSet.getString("id") + "\t" + resultSet.getString("date") + "\t" + 
 						resultSet.getString("country_code") + "\t\t" + resultSet.getString("description"));
 			}
-//			resultSet.close();
-//			statement.close();
+			resultSet.close();
+			statement.close();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Connection failed!");
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Sets competition ID.
+	 * 
+	 * @param number - competition ID
+	 */
 	public void setCompetitionId (int number){
 		competitionId = number;
 	}
 	
+	/**
+	 * Method reads data from database.
+	 * 
+	 * @return PriorityQueue of competitors
+	 */
 	public PriorityQueue<Competitor> readDatabase (){
 		ResultSet results = selectResults();
 		PriorityQueue<Competitor> pqCompetitor = new PriorityQueue<Competitor>();
@@ -68,33 +89,59 @@ public class DecathlonDatabaseReader {
 			}
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Connection failed!");
+			e.printStackTrace();
+		}
+		try {
+			results.close();
+		}
+		catch (SQLException e) {
+			System.out.println("Unable to close statement!");
 			e.printStackTrace();
 		}
 		return pqCompetitor;
 	}
 	
+	/**
+	 * Selects results from database.
+	 * 
+	 * @return 
+	 */
 	private ResultSet selectResults (){
 		String query = "SELECT a.name, a.dob, a.country_code, r.race_100m, r.long_jump, " +
 				"r.shot_put, r.high_jump, r.race_400m, r.hurdles_110m, r.discus_throw, " +
 				"r.pole_vault, r.javelin_throw, r.race_1500m " + 
 				"FROM results AS r INNER JOIN athletes AS a ON r.athlete_id=a.id " + 
 				"WHERE r.competition_id=" + competitionId;
-		Statement statement;
+		Statement statement = null;
 		ResultSet resultSet;
 		try {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
+//			statement.close();
 			return resultSet;
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Connection failed!");
 			e.printStackTrace();
 		}
+//		try {
+//			statement.close();
+//		}
+//		catch (SQLException e) {
+//			System.out.println("Unable to close statement!");
+//			e.printStackTrace();
+//		}
 		return null;
 		
 	}
 	
+	/**
+	 * Creates competitor according to the data received from database.
+	 * 
+	 * @param rs - data from database
+	 * @return
+	 */
 	private Competitor createCompetitor (ResultSet rs){
 		String line = null;
 		try {
@@ -111,19 +158,23 @@ public class DecathlonDatabaseReader {
 			return competitor;
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Connection failed!");
 			e.printStackTrace();
 		}
 		return null;
 		
 	}
 	
+	/**
+	 * Closes database connection.
+	 * 
+	 */
 	public void closeConnection(){
 		try {
 			connection.close();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Unable to close connection!");
 			e.printStackTrace();
 		}
 	}

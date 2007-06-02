@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DecathlonResults>
+<Competitor>
+<Place>1.</Place>
+<Points>8001</Points>
+<Name>"Erki Nool"</Name>
+<DateOfBirth>1970-06-25</DateOfBirth>
+<Country>EE</Country>
+<Results>
+<Sprint100m>10.94</Sprint100m>
+<LongJump>7.83</LongJump>
+<ShotPut>12.48</ShotPut>
+<HighJump>2.0</HighJump>
+<Sprint400m>49.72</Sprint400m>
+<Hurdles110m>15.67</Hurdles110m>
+<DiscusThrow>38.3</DiscusThrow>
+<PoleVault>5.4</PoleVault>
+<JavelinThrow>55.84</JavelinThrow>
+<Race1500m>271.72</Race1500m>
+</Results>
+</Competitor>
+<Competitor>
+<Place>2.</Place>
+<Points>2889</Points>
+<Name>"Siim Susi"</Name>
+<DateOfBirth>1976-01-01</DateOfBirth>
+<Country>EE</Country>
+<Results>
+<Sprint100m>14.15</Sprint100m>
+<LongJump>3.98</LongJump>
+<ShotPut>10.0</ShotPut>
+<HighJump>1.45</HighJump>
+<Sprint400m>70.12</Sprint400m>
+<Hurdles110m>18.65</Hurdles110m>
+<DiscusThrow>29.15</DiscusThrow>
+<PoleVault>2.15</PoleVault>
+<JavelinThrow>32.67</JavelinThrow>
+<Race1500m>466.6</Race1500m>
+</Results>
+</Competitor>
+</DecathlonResults>

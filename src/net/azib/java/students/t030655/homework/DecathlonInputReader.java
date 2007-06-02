@@ -14,7 +14,13 @@ import java.util.PriorityQueue;
  * @author Triin Nestor
  */
 public class DecathlonInputReader {
-		
+	
+	/**
+	 * Reads from given input stream
+	 * 
+	 * @param input
+	 * @return
+	 */
 	public PriorityQueue<Competitor> readInputStream (InputStream input){
 		
 		BufferedReader reader = null;
@@ -35,11 +41,10 @@ public class DecathlonInputReader {
 				comp = new Competitor();
 				comp.setCompetitor(line);
 				pqCompetitor.add(comp);
-			}
-				
+			}				
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Reading failed!");
 			e.printStackTrace();
 		}
 		return pqCompetitor;

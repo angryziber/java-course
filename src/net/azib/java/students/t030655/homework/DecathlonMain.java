@@ -15,14 +15,18 @@ import java.util.PriorityQueue;
 public class DecathlonMain {
 
 	/**
+	 * Main method for decathlon points calculation.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		//displaying information
 		System.out.println("This program calculates decathlon points according to the results.\n" +
 				"Results can be read from comsole, CSV file or MyySQL database and \n" +
 				"calculated points and places can be written to console, CSV file, \n" +
 				"XML file and HTML file.\n");
+		
+		//input selection
 		System.out.println("Available input data sources: \n\t1 - console " +
 				"\n\t2 - CSV file \n\t3 - MySQL database \n\t0 - close program");
 		System.out.println("Please select input source (or exit): ");
@@ -37,15 +41,17 @@ public class DecathlonMain {
 			e.printStackTrace();
 		}
 		catch (IOException e) {
-			// shouldn't happen
+			System.out.println("Reading input failed!");
 			e.printStackTrace();
 		}
+		
+		//reading input
 		PriorityQueue<Competitor> competitorsQueue = new PriorityQueue<Competitor>();
 		switch (inputSource){
-			case (0): 
+			case 0: 
 				System.out.println("You have chosen to exit. Goodbye!");
 				return;
-			case (1): 
+			case 1: 
 				System.out.println("\nYou have chosen console input option!\n");
 				System.out.println("-----NB!-----\n" +
 						"Data must be inserted in CSV (comma-separated values)format!\n" +
@@ -60,35 +66,121 @@ public class DecathlonMain {
 				System.out.println("Please insert competitors data:");
 				DecathlonInputReader dataFromConsole = new DecathlonInputReader();
 				competitorsQueue.addAll(dataFromConsole.readInputStream(System.in));
-				System.out.println("Inserting is completed!");
-				for (Competitor comp : competitorsQueue){
-					System.out.println(comp.getString());
-				}
+				System.out.println("Inserting has been completed!");
 				break;
-			case (2): 
-				System.out.println("\nYou have chosen CSV file input option!\n\n" +
-						"Please insert file name with path:");
+			case 2: 
+				System.out.println("\nYou have chosen CSV file input option!\n");
+				System.out.println("Please insert file name with path:");
 				try {
 					String file = in.readLine();
 					FileInputStream inStream = new FileInputStream(file);
 					DecathlonInputReader dataFromFile = new DecathlonInputReader();
 					competitorsQueue.addAll(dataFromFile.readInputStream(inStream));
-					PriorityQueue<Competitor> pq = new PriorityQueue<Competitor>(competitorsQueue);
-					System.out.println(competitorsQueue.size());
-					System.out.println("File is read!");
-					Competitor comp = null;
-					int i = 0;
-					while ((comp = pq.poll())!= null){
-						System.out.println(comp.getString());
-						i++;
-					}
+					System.out.println("File has been read!");
 				}
 				catch (IOException e) {
-					//shouldn't happen
+					System.out.println("Reading input failed!");
 					e.printStackTrace();
 				}
 				break;
-			case (3): ;
+			case 3: 
+				System.out.println("\nYou have chosen MySQL database input option!\n");
+				String url = "jdbc:mysql://srv.azib.net/decathlon";
+				String word = "java";
+				DecathlonDatabaseReader dataFromDatabase = new DecathlonDatabaseReader();
+				dataFromDatabase.setConnection(url, word, word);
+				dataFromDatabase.displayCompetitions();
+				System.out.print("Please select one competition ID: ");
+				try {
+					int compId = Integer.parseInt(in.readLine());
+					dataFromDatabase.setCompetitionId(compId);
+				}
+				catch (IOException e) {
+					System.out.println("Reading input failed!");
+					e.printStackTrace();
+				}
+				competitorsQueue.addAll(dataFromDatabase.readDatabase());
+				System.out.println("Database is read!");
+				dataFromDatabase.closeConnection();
+				break;
+			default : 
+				System.out.println("Wrong selection! Please start again from the beginning.");
+				return;			
+		}
+		
+		//computation of places
+		Place place = new Place();
+		competitorsQueue = place.competitionResults(competitorsQueue);
+		
+		//output selection
+		System.out.println("\nResults can be written into:\n\t1 - console\n\t2 - CSV file\n" +
+				"\t3 - XML file\n\t4 - HTML file\n\t0 - close program");
+		System.out.println("Please select output destination (or exit):");
+		int outputDestination = 0;
+		try {
+			outputDestination = Integer.parseInt(in.readLine());
+		}
+		catch (NumberFormatException e) {
+			System.out.println("Wrong answer format! Please try again from the beginning.");
+			return;
+		}
+		catch (IOException e) {
+			System.out.println("Reading input failed!");
+			e.printStackTrace();
+		};
+		
+		//writing output
+		DecathlonOutputWriter outputWriter = new DecathlonOutputWriter();
+		switch(outputDestination){
+			case(0) : 
+				System.out.println("You have chosen to exit. Goodbye!");
+				return;
+			case(1) :
+				System.out.println("Competition results:\n");
+				outputWriter.writeToConsole(competitorsQueue);
+				break;
+			case(2) :
+				System.out.println("Please insert file name with path:");
+				String file = null;
+				try {
+					file = in.readLine();
+				}
+				catch (IOException e) {
+					System.out.println("Reading input failed!");
+					e.printStackTrace();
+				}
+				outputWriter.writeToFile(file, competitorsQueue);
+				System.out.println("Competition results have been written into specified file!");
+				break;
+			case(3) :
+				System.out.println("Please insert file name with path:");
+				String fileXml = null;
+				try {
+					fileXml = in.readLine();
+				}
+				catch (IOException e) {
+					System.out.println("Reading input failed!");
+					e.printStackTrace();
+				}
+				outputWriter.writeToXmlOrHtml(0, fileXml, competitorsQueue);
+				System.out.println("Competition results have been written into specified XML file!");
+				break;
+			case(4) :
+				System.out.println("Please insert file name with path:");
+				String fileHtml = null;
+				try {
+					fileHtml = in.readLine();
+				}
+				catch (IOException e) {
+					System.out.println("Reading input failed!");
+					e.printStackTrace();
+				}
+				outputWriter.writeToXmlOrHtml(1, fileHtml, competitorsQueue);
+				System.out.println("Competition results have been written into specified HTML file!");
+				break;
+			default : 
+				System.out.println("Wrong selection! Please start again from the beginning.");
+				return;
 		}
 		
 		

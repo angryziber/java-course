@@ -3,7 +3,6 @@ package net.azib.java.students.t030655.homework;
 /**
  * Decathlon - Enumeration for calculating points
  *
- * @version 1.0
  * @author Triin Nestor
  */
 public enum Decathlon {
@@ -29,36 +28,38 @@ public enum Decathlon {
 		this.C = c;
 	}
 	
-	/**calculation for Running Events according to the performance
+	/**
+	 * Calculation for Running Events according to the performance.
 	 * 
 	 * @param performance - event result in seconds
-	 * @return points for event
+	 * @return Points for event
 	 */
 	private double calcRunning (double performance){
 		return A*Math.pow((B-performance), C);
 	}
 	
-	/**calculations for Field Events according to the performance
+	/**
+	 * Calculations for Field Events according to the performance.
 	 * 
 	 * @param performance - event result in meters or centimeters depending on the event
-	 * @return points for event
+	 * @return Points for event
 	 */
 	private double calcField (double performance){
 		return A*Math.pow((performance-B), C);
 	}
 		
-	/**calculates the points for every branch of decathlon 
-	*according to the results
+	/**
+	* Calculates the points for every branch of decathlon according to the results.
 	*
 	* @param performance - event result in meters or seconds depending on the event
-	* @return points for event
+	* @return Points for event
 	*/
 	public double points (double performance){
 		switch (this){
 		case SPRINT_100M : 		return calcRunning(performance);
-		case SPRINT_400M : 		return calcRunning(performance); //needs performance in SEC
+		case SPRINT_400M : 		return calcRunning(performance);
 		case HURDLES_110M : 	return calcRunning(performance);
-		case RACE_1500M : 		return calcRunning(performance); //needs performance in SEC
+		case RACE_1500M : 		return calcRunning(performance);
 		case LONG_JUMP : 		return calcField(100*performance); //performance in centimeters
 		case HIGH_JUMP : 		return calcField(100*performance); //performance in centimeters
 		case POLE_VAULT : 		return calcField(100*performance); //performance in centimeters
