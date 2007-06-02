@@ -33,6 +33,7 @@ public class Decathlon {
 			getOutput(inScan);
 			//Quit?
 			Run =getQuit(inScan);
+			System.out.println("***[End Decathlon]***");
 		}
 
 	}
@@ -46,6 +47,7 @@ public class Decathlon {
 			System.out.println("Do you want to insert another competition?");
 			System.out.println("\t[1] Yes");
 			System.out.println("\t[2] No");
+			System.out.print(": ");
 			int cont = inScan.nextInt();
 			
 			if(cont == 1 || cont == 2){
@@ -60,16 +62,20 @@ public class Decathlon {
 	 * @param inScan
 	 */
 	private static void getOutput(Scanner inScan) {
-		while(true)
+		boolean condition = true;
+		while(condition)
 		{
 			System.out.println("Which ouput you'd like to use?");
 			System.out.println("\t[1] On screen");
 			System.out.println("\t[2] To CSV");
 			System.out.println("\t[3] To XML");
 			System.out.println("\t[4] To HTML");
+			System.out.print(": ");
 			
 			switch(inScan.nextInt()){
 				case 1:
+					Writer.writeToScreen(competition);
+					condition = false;
 					break;
 				case 2:
 					break;
@@ -95,7 +101,7 @@ public class Decathlon {
 			System.out.println("\t[1] Directly from keyboard");
 			System.out.println("\t[2] From CSV");
 			System.out.println("\t[3] From database\n");
-			System.out.print(":");
+			System.out.print(": ");
 			
 			switch(inScan.nextInt()){
 				case 1:

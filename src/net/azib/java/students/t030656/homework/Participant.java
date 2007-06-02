@@ -1,5 +1,11 @@
 package net.azib.java.students.t030656.homework;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * Participant
  *
@@ -52,7 +58,12 @@ public class Participant {
 		this.strResults = strResults;
 		int i = 0;
 		for(String str : strResults){
-			results[i++] = Double.parseDouble(str);
+			if(i == 0 || i == 4 || i == 5 || i == 9){
+				results[i++] = parseTime(str);
+			}
+			else{
+				results[i++] = Double.parseDouble(str);
+			}
 		}
 		points = calcPoints();
 	}
@@ -100,5 +111,29 @@ public class Participant {
 	 */
 	public String[] getStrResults() {
 		return strResults;
+	}
+	
+	private double parseTime (String strTime){
+		DateFormat df = new SimpleDateFormat("mm:ss.SS");
+	    DateFormat df2 = new SimpleDateFormat("ss.SS");
+	    Calendar cal = new GregorianCalendar();
+	    df.setLenient(false);
+	        
+	    try {
+	    	cal.setTime(df.parse(strTime));
+	    	return cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND) + 
+					(double)cal.get(Calendar.MILLISECOND)/100;
+	   	}
+	   	catch (ParseException e) {
+	   		try {
+	   			cal.setTime(df2.parse(strTime));
+	   			return cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND) + 
+	   				(double)cal.get(Calendar.MILLISECOND)/100;
+	   		}
+	   		catch (ParseException e1) {
+	   			System.out.println("Unsuported time format.");
+	   		}
+	   	}
+		return 0;
 	}
 }

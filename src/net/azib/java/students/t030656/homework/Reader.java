@@ -150,7 +150,7 @@ public class Reader {
 		while(true){
 			System.out.print("Insert another participant? \n" +
 				"[1] Yes\n" +
-				"[2] No\n " +
+				"[2] No\n" +
 				": ");
 			try {
 				switch(Integer.parseInt(reader.readLine())){
@@ -173,10 +173,10 @@ public class Reader {
 	
 	private static String[] getParticipantResults(BufferedReader reader){
 		while (true) {
-			System.out.print("Enter the participants results.\n " +
+			System.out.print("Enter the participants results.\n" +
 					"Delimiter results with coma (,). " +
-					"Coma should represented as dot (.) \n " + 
-					"like: 12.24,123.3: ");
+					"Coma should represented as dot (.) " + 
+					"like: 12.24,123.3\n: ");
 			try {
 				String str = reader.readLine();
 				return str.split(",");

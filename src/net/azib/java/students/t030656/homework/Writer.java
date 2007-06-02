@@ -24,6 +24,7 @@ public class Writer {
 			for(String str : p.getStrResults()){
 				System.out.print(str +"\t");
 			}
+			System.out.print(p.getPoints() + "\n");
 		}
 	}
 }
