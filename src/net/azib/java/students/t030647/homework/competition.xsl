@@ -13,51 +13,51 @@
             <body>
                 <h2>Decathlon Competition Results</h2>
                 <hr/>
-                <table>
-                    <tr>
-                        <td align="right" WIDTH="50">
+                <table border="1"  cellspacing="0" cellpadding="0">
+                    <tr align="center">
+                        <td align="center" WIDTH="25">
                             <b>Place</b>
                         </td>
-                        <td align="right" WIDTH="100">
+                        <td align="center" WIDTH="80">
                             <b>Total</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="120">
                             <b>Competitor</b>
                         </td>
-                        <td align="right" WIDTH="100">
+                        <td align="center" WIDTH="100">
                             <b>Birthday</b>
                         </td>
-                        <td align="right" WIDTH="100">
+                        <td align="center" WIDTH="80">
                             <b>Country</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>100 m</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>Long Jump</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>Shot Put</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>High Jump</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>400 m</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>110m Hurdles</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>Discus Throw</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>Pole Vault</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>Javelin Throw</b>
                         </td>
-                        <td align="right" WIDTH="80">
+                        <td align="center" WIDTH="80">
                             <b>1500 m</b>
                         </td>
                         
@@ -71,8 +71,8 @@
     ** "competitor" template
     *********************************************** *************-->
     <xsl:template match="Participant">
-        <tr>
-            <!--<td VALIGN="TOP" align="right" WIDTH="50">
+        <tr align="center">
+            <!--<td VALIGN="TOP" align="center" WIDTH="50">
                 <xsl:value-of select="@id"/>
             </td>
             -->
@@ -97,7 +97,7 @@
                 <br/>
             </td>
             <xsl:apply-templates select="Events"/>
-            <!--<td align="right" WIDTH="100">
+            <!--<td align="center" WIDTH="100">
                 <b>
                     <br/>
                     <xsl:value-of select="total"/>
@@ -111,7 +111,7 @@
     <xsl:template match="Events">
         <xsl:for-each select="event">
             <td WIDTH="80">
-                <div align="right">
+                <div align="center">
                     <xsl:value-of select="result"/>
                 </div>
             </td>
