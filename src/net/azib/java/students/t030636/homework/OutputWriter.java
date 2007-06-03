@@ -29,14 +29,14 @@ public class OutputWriter {
 	/**
 	 * writeToFile method outputs the decathlon results to a text file.
 	 * 
-	 * @version 1.0
+	 * @version 1.1
 	 * @param filename - filename for the output file
 	 * @param listToOutput - sorted ArrayList of competitors to output. 
 	 */
 	public void writeToFile (String filename, ArrayList<Competitor> listToOutput) {
-		int place = 1;
-		int previousPoints = 0;
-		int count = 0;
+//		int place = 1;
+//		int previousPoints = 0;
+		int index = 0;
 		FileOutputStream out = null;
 		try {
 			out = new FileOutputStream(filename);
@@ -54,31 +54,35 @@ public class OutputWriter {
 			System.exit(0);
 		}
 		for(Competitor c : listToOutput) {
-			if (c.score == previousPoints){ //previous score was the same
-				count ++;
-				place = place - count;
-				p.println(place + ". " +c.toString());
-				place = place + count + 1;
-			}
-			else { //previous score was different
-				count = 0;
-				p.println(place + ". " +c.toString());
-				place ++;
-			}
-			previousPoints = c.score;
+			index = listToOutput.indexOf(c);
+			PlacesForDecathletes pfd = new PlacesForDecathletes();
+			String [] s = pfd.returnArrayOfPlaces(listToOutput);
+			p.println(s[index] + ". " +c.toString());
+//			if (c.score == previousPoints){ //previous score was the same
+//				count ++;
+//				place = place - count;
+//				p.println(place + ". " +c.toString());
+//				place = place + count + 1;
+//			}
+//			else { //previous score was different
+//				count = 0;
+//				p.println(place + ". " +c.toString());
+//				place ++;
+//			}
+//			previousPoints = c.score;
 		}
 	}
 	
 	/**
 	 * writeToConsole method outputs the decathlon results to the console.
 	 * 
-	 * @version 1.0
+	 * @version 1.1
 	 * @param listToOutput - sorted ArrayList of competitors to output. 
 	 */
 	public void writeToConsole (ArrayList<Competitor> listToOutput) {
-		int place = 1;
-		int count = 0;
-		int previousPoints = 0;
+//		int place = 1;
+		int index = 0;
+//		int previousPoints = 0;
 		PrintStream p = null;
 		try {
 			p = new PrintStream(System.out,true,"UTF-8");
@@ -89,31 +93,38 @@ public class OutputWriter {
 		}
 		p.println("DECATHLON RESULTS:");
 		for(Competitor c : listToOutput) {
-			if (c.score == previousPoints){
-				count++;
-				place = place - count;
-				p.println(place + ". " +c.toString());
-				place = place + count+1;
-			}
-			else {
-				count = 0;
-				p.println(place + ". " +c.toString());
-				place ++;
-			}
-			previousPoints = c.score;
+			index = listToOutput.indexOf(c);
+			PlacesForDecathletes pfd = new PlacesForDecathletes();
+			String [] s = pfd.returnArrayOfPlaces(listToOutput);
+			p.println(s[index] + ". " +c.toString());
+//			if (c.score == previousPoints){
+//				count++;
+//				place = place - count;
+//				p.println(place + ". " +c.toString());
+//				place = place + count+1;
+//			}
+//			else {
+//				count = 0;
+//				p.println(place + ". " +c.toString());
+//				place ++;
+//			}
+//			previousPoints = c.score;
 		}
 	}
 	/**
 	 * writeToXML method outputs the decathlon results to a XML file.
 	 * 
-	 * @version 1.0
+	 * @version 1.1
 	 * @param filename - filename for the output XML file
 	 * @param listToOutput - sorted ArrayList of competitors to output. 
 	 */
 	public void writeToXML (String filename, ArrayList<Competitor> listToOutput) {
-		Integer place = 1;
-		Integer count = 0;
-		Integer previousPoints = 0;
+//		Integer place = 1;
+//		Integer count = 0;
+//		Integer previousPoints = 0;
+		int index = 0;
+		PlacesForDecathletes pfd = new PlacesForDecathletes();
+		String [] s = pfd.returnArrayOfPlaces(listToOutput);
 		FileOutputStream out = null;
 		try {
 			out = new FileOutputStream(filename);
@@ -148,31 +159,35 @@ public class OutputWriter {
 		}
 		try {
 			hd.startDocument();
+			
 			AttributesImpl atts = new AttributesImpl();
 
 			hd.startElement("","","DECATHLON",atts);
 			for(Competitor c : listToOutput) {
-				
+				index = listToOutput.indexOf(c);
 				atts.clear();
 				atts.addAttribute("", "", "NAME", "CDATA", c.name.replace("\"", ""));
 				hd.startElement("", "", "DECATHLETE", atts);
 				atts.clear();
 				
-				if (c.score.equals(previousPoints)){
-					count++;
-					place = place - count;
-						hd.startElement("", "", "PLACE", atts);
-						hd.characters(place.toString().toCharArray(), 0, place.toString().length());
-						hd.endElement("", "", "PLACE");
-					place = place + count +1;
-				}
-				else {
-					count = 0; 
-						hd.startElement("", "", "PLACE", atts);
-						hd.characters(place.toString().toCharArray(), 0, place.toString().length());
-						hd.endElement("", "", "PLACE");
-					place ++;
-				}
+				hd.startElement("", "", "PLACE", atts);
+				hd.characters(s[index].toCharArray(), 0, s[index].length());
+				hd.endElement("", "", "PLACE");
+//				if (c.score.equals(previousPoints)){
+//					count++;
+//					place = place - count;
+//						hd.startElement("", "", "PLACE", atts);
+//						hd.characters(place.toString().toCharArray(), 0, place.toString().length());
+//						hd.endElement("", "", "PLACE");
+//					place = place + count +1;
+//				}
+//				else {
+//					count = 0; 
+//						hd.startElement("", "", "PLACE", atts);
+//						hd.characters(place.toString().toCharArray(), 0, place.toString().length());
+//						hd.endElement("", "", "PLACE");
+//					place ++;
+//				}
 				hd.startElement("", "", "SCORE", atts);
 				hd.characters(c.score.toString().toCharArray(), 0, c.score.toString().length());
 				hd.endElement("", "", "SCORE");
@@ -229,7 +244,7 @@ public class OutputWriter {
 			hd.endElement("", "", "RESULTS");
 			hd.endElement("", "", "DECATHLETE");
 			
-			previousPoints = c.score;
+//			previousPoints = c.score;
 			}
 			hd.endElement("","","DECATHLON");
 			hd.endDocument();
