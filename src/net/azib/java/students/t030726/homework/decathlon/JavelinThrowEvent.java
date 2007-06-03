@@ -1,5 +1,9 @@
 package decathlon;
-
+/**
+ * Represents a javeling throwing event. Has constants initialized to correct values for this event
+ * @author Deniss Nikiforov
+ *
+ */
 public class JavelinThrowEvent extends FieldDecathlonEvent {
 	private final static double aParameter = 10.14;
 	private final static double bParameter = 7.0;
@@ -7,7 +11,6 @@ public class JavelinThrowEvent extends FieldDecathlonEvent {
 
 	public JavelinThrowEvent(double achievedResult) throws Exception {
 		super(achievedResult, aParameter, bParameter, cParameter);
-		// TODO Check measurements
 	}
 
 }

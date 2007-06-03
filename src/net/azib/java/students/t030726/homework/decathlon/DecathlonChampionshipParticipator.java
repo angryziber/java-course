@@ -1,8 +1,8 @@
 package decathlon;
 
 /**
- * 
- * @author NTAdmin
+ * Describes the participator properties.
+ * @author Deniss Nikiforov
  *
  */
 public class DecathlonChampionshipParticipator {
@@ -14,10 +14,18 @@ public class DecathlonChampionshipParticipator {
 		this.participatorCountryCode = participatorCountryCode;
 	}
 	
+	/**
+	 * A getter for the participator name
+	 * @return
+	 */
 	public String getParticipatorName() {
 		return this.participatorName;
 	}
 	
+	/**
+	 * A getter for the participator country code
+	 * @return
+	 */
 	public String getParticipatorCountryCode() {
 		return this.participatorCountryCode;
 	}

@@ -1,5 +1,10 @@
 package decathlon;
 
+/**
+ * A 100m sprint run. Has constants initialized for proper values for this event.
+ * @author Deniss Nikiforov
+ *
+ */
 public class HundredMeterSprint extends RunnerDecathlonEvent {
 	private final static double aParameter = 25.437;
 	private final static double bParameter = 18.0;

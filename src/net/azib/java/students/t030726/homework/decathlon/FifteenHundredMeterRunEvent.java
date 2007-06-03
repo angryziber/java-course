@@ -1,5 +1,10 @@
 package decathlon;
 
+/**
+ * A 1500m run event. Has constants, that are relevant for the formula for this type of event
+ * @author NTAdmin
+ *
+ */
 public class FifteenHundredMeterRunEvent extends RunnerDecathlonEvent {
 	private final static double aParameter = 0.03768;
 	private final static double bParameter = 480;

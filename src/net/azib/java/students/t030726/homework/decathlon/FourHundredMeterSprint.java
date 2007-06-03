@@ -1,5 +1,10 @@
 package decathlon;
 
+/**
+ * A 400m run representation. Has all constants defined, that are relevant for the calculation formula.
+ * @author NTAdmin
+ *
+ */
 public class FourHundredMeterSprint extends RunnerDecathlonEvent {
 	private final static double aParameter = 1.53775;
 	private final static double bParameter = 82;
