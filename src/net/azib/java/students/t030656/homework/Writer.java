@@ -31,11 +31,9 @@ import org.xml.sax.SAXException;
 public class Writer {
 
 	/**
-	 * construcotr
+	 * Outputs the results on the screen in similar but not the same format as csv.
+	 * @param Competition
 	 */
-	public Writer() {
-	}
-	
 	public static void writeToScreen(Competition comp){
 		try { 
 			BufferedWriter writer = 
@@ -75,6 +73,11 @@ public class Writer {
 		}
 		
 	}
+	/**
+	 * Writes the results into the csv formated file. Location of the future file is asked
+	 * from the user
+	 * @param comp
+	 */
 	public static void writeToFile(Competition comp){
 
 		String path = Reader.getPathToFile() + "\\" + Reader.getNameToFile() + ".csv";
@@ -115,7 +118,13 @@ public class Writer {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Writes the results into the xml file.
+	 * If the boolean value is true then results are converted into htm file. 
+	 * xml file is intermediate file and this will be deleted after conversion.
+	 * @param Competition comp
+	 * @param Boolean bConvertToHtml
+	 */
 	public static void writeToXML(Competition comp, boolean bConvertToHtml) {
 
 		String path = Reader.getPathToFile() + "\\" + Reader.getNameToFile();

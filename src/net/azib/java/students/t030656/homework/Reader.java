@@ -27,11 +27,6 @@ import java.util.Scanner;
 public class Reader {
 
 	/**
-	 * constructor
-	 */
-	public Reader() {
-	}
-	/**
 	 * Reads input from screen
 	 * @return
 	 */
@@ -116,6 +111,7 @@ public class Reader {
 	}
 
 	/**
+	 * Gets the participants date of birth from the stream reader.
 	 * @param reader
 	 * @return
 	 * @throws IOException
@@ -139,9 +135,11 @@ public class Reader {
 		}		
 	}
 	/**
-	 * @param reader
+	 * Extracts the participants date of birth from the string using given dateFormat.
+	 * Value is also validated.
+	 * @param String strDate
+	 * @param String format
 	 * @return
-	 * @throws IOException
 	 */
 	private static String getParticipantDateOfBirth(String strDate, String format){
 		try {
@@ -157,8 +155,10 @@ public class Reader {
 	}
 
 	/**
-	 * @param reader
-	 * @return
+	 * Gets the participants country code from the input stream.
+	 * The value is validated against locale country values.
+	 * @param BufferedReader reader
+	 * @return String
 	 * @throws IOException
 	 */
 	private static String getParticipantCountry(BufferedReader reader){
@@ -188,6 +188,11 @@ public class Reader {
 			
 		}		
 	}
+	/**
+	 * Extracts the country code from the string and validates the value
+	 * @param strCountry
+	 * @return
+	 */
 	private static String getParticipantCountry(String strCountry){
 		if (strCountry.matches("[A-Z]{2}")) {
 				/**
@@ -205,7 +210,11 @@ public class Reader {
 			return null;
 		}		
 	}
-	
+	/**
+	 * Does user want to insert another participant
+	 * @param reader
+	 * @return
+	 */
 	private static boolean askContinue(BufferedReader reader){
 		while(true){
 			System.out.print("Insert another participant? \n" +
@@ -231,6 +240,11 @@ public class Reader {
 		}
 	}
 	
+	/**
+	 * Gets the participants results from the string array
+	 * @param reader
+	 * @return
+	 */
 	private static String[] getParticipantResults(BufferedReader reader){
 		while (true) {
 			System.out.print("Enter the participants results.\n" +
@@ -246,7 +260,10 @@ public class Reader {
 			}
 		}		
 	}
-	
+	/**
+	 * Get the path for/to the file from user
+	 * @return
+	 */
 	public static String getPathToFile(){
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
@@ -334,6 +351,10 @@ public class Reader {
 			}
 		}
 	}
+	/**
+	 * Read competition results from the mySQL database.
+	 * @return
+	 */
 	public static Competition ReadFromSQL(){
 		String url = "jdbc:mysql://srv.azib.net:3306/decathlon";
 		Competition comp = new Competition();

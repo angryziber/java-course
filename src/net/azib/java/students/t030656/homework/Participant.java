@@ -20,7 +20,9 @@ public class Participant implements Comparable<Participant>{
 	private String[] strResults;
 	private double[] results;
 
-
+	/**
+	 * Enables List to sort Participant objects inside.
+	 */
     public int compareTo(Participant p) {
     	int i = 0;
     	if(p.getPoints() == points)

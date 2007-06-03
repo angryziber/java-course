@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Competition
- *
+ * Class that binds the contestants
  * @author sprot
  */
 public class Competition{
@@ -27,14 +27,18 @@ public class Competition{
 	private void setNumberOfParticipants() {
 		numberOfParticipants = participants.size();
 	}
-	
+	/**
+	 * Add new participant to the competition
+	 * After insertion the list is sorted
+	 * @param Participant
+	 */
 	public void addParticipant(Participant pa){
 		participants.add(pa);
 		setNumberOfParticipants();
 		Collections.sort(getParticipants());
 	}
 	/**
-	 * @param name the name to set
+	 * @param name
 	 */
 	public void setName(String name) {
 		this.name = name;
