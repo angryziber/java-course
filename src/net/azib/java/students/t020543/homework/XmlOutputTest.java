@@ -11,13 +11,13 @@ import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
-
+/*
 import decathlon.Athlete;
 import decathlon.Competitor;
 import decathlon.IAthlete;
 import decathlon.IOutput;
 import decathlon.XmlOutput;
-
+*/
 /**
  * Test for {@link XmlOutput} class
  * @author t020543
