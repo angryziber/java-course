@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
  *
  * @author Sprot
  */
-public class Participant {
+public class Participant implements Comparable<Participant>{
 	
 	private String name;
 	private String dateOfBirth;
@@ -20,8 +20,18 @@ public class Participant {
 	private String[] strResults;
 	private double[] results;
 
-	
-	
+
+    public int compareTo(Participant p) {
+    	int i = 0;
+    	if(p.getPoints() == points)
+    		i =  0;
+    	else if(p.getPoints() < points)
+    		i =  -1;
+    	else if(p.getPoints() > points)
+    		i =  1;
+    	
+    	return i;
+    }
 	/**
 	 * constructor
 	 */

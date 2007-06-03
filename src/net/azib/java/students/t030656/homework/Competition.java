@@ -1,6 +1,7 @@
 package net.azib.java.students.t030656.homework;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,6 +31,7 @@ public class Competition{
 	public void addParticipant(Participant pa){
 		participants.add(pa);
 		setNumberOfParticipants();
+		Collections.sort(getParticipants());
 	}
 	/**
 	 * @param name the name to set

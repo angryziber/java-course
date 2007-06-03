@@ -1,5 +1,6 @@
 package net.azib.java.students.t030656.homework;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -16,8 +17,7 @@ public class Decathlon {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		int Run = 1;
+
 		//input reader
 		InputStream inStream = System.in;
 		Scanner inScan = new Scanner(inStream);
@@ -25,15 +25,22 @@ public class Decathlon {
 		//welcome user
 		System.out.println("***[Decathlon]***");
 		System.out.println();
-		
-		while(Run == 1){
+		boolean run = true;
+		while(run){
 			//Get the input type
 			getInput(inScan);
 			//Get the output type
 			getOutput(inScan);
 			//Quit?
-			Run =getQuit(inScan);
+			run =getQuit(inScan);
 			System.out.println("***[End Decathlon]***");
+		}
+		try {
+			inStream.close();
+		}
+		catch (IOException e) {
+			System.out.println("Unable to close stram in main method");
+			e.printStackTrace();
 		}
 
 	}
@@ -42,18 +49,20 @@ public class Decathlon {
 	 * get the user choise
 	 * @param inScan
 	 */
-	private static int getQuit(Scanner inScan) {
+	private static boolean getQuit(Scanner inScan) {
 		while(true){
 			System.out.println("Do you want to insert another competition?");
 			System.out.println("\t[1] Yes");
 			System.out.println("\t[2] No");
 			System.out.print(": ");
-			int cont = inScan.nextInt();
-			
-			if(cont == 1 || cont == 2){
-				return cont;
+			switch(inScan.nextInt()){
+				case 1:
+					return true;
+				case 2:
+					return false;
+				default:
+					System.out.println("Unknown input. Please try again.\n:");
 			}
-			System.out.println("Unknown input. Please try again.\n:");
 		}
 	}
 
@@ -78,10 +87,16 @@ public class Decathlon {
 					condition = false;
 					break;
 				case 2:
+					Writer.writeToFile(competition);
+					condition = false;
 					break;
 				case 3:
+					Writer.writeToXML(competition, false);
+					condition = false;
 					break;
 				case 4:
+					Writer.writeToXML(competition, true);
+					condition = false;
 					break;
 				default:
 					System.out.print("Unknown input. Please try again.\n:");
@@ -91,7 +106,7 @@ public class Decathlon {
 	}
 
 	/**
-	 * get the user choise about input
+	 * get the user choise about input.
 	 * @param inScan
 	 */
 	private static void getInput(Scanner inScan) {
@@ -109,8 +124,12 @@ public class Decathlon {
 					condition = false;
 					break;
 				case 2:
+					competition = Reader.ReadFromCSV();
+					condition = false;
 					break;
 				case 3:
+					competition = Reader.ReadFromSQL();
+					condition = false;
 					break;
 				default:
 					System.out.print("Unknown input. Please try again.\n:");
@@ -118,5 +137,4 @@ public class Decathlon {
 			}
 		}
 	}
-
 }
