@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="net.azib.java.students.t060401.homework.decathlon.Competition" table="competitions">
+        <id name="id" column="ID"/>
+        <property name="countryCode" column="COUNTRY_CODE"/>
+        <property name="date" type="timestamp" column="DATE"/>
+		<property name="description" column="DESCRIPTION"/>
+    </class>
+</hibernate-mapping>
