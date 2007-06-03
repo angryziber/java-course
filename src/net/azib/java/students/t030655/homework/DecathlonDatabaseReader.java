@@ -118,20 +118,12 @@ public class DecathlonDatabaseReader {
 		try {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
-//			statement.close();
 			return resultSet;
 		}
 		catch (SQLException e) {
 			System.out.println("Connection failed!");
 			e.printStackTrace();
 		}
-//		try {
-//			statement.close();
-//		}
-//		catch (SQLException e) {
-//			System.out.println("Unable to close statement!");
-//			e.printStackTrace();
-//		}
 		return null;
 		
 	}
