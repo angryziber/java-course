@@ -19,7 +19,6 @@ public class Scanning {
 
 	public static void main(String[] args) throws IOException {
 		InputStream in = System.in;
-		
 		Scanner scanner = new Scanner(in);
 
 		System.out.println("How old are you?");

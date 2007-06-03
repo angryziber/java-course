@@ -16,11 +16,9 @@ public class HibernateDecathlonDao implements DecathlonDao {
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
-
-	public List<ResultsOfTheAthlet> getCompetition_id(int competition_id) {
+	public List<ResultsOfTheAthlet> getCompetition_id(int competition_id) {	
 		return (List<ResultsOfTheAthlet>) hibernateTemplate.findByNamedQueryAndNamedParam("Decathlon.getCompetition_id", "competition_id", competition_id);
 	}
-
 	public List<Competition> getCompetitions() {
 		return (List<Competition>) hibernateTemplate.findByNamedQueryAndNamedParam("Decathlon.getCompetitions", "zero", 0);
 	}

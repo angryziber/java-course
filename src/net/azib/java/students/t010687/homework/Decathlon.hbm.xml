@@ -17,16 +17,16 @@
 		<property name="country" column="country_code"/>
     	<joined-subclass name="net.azib.java.students.t010687.homework.ResultsOfTheAthlet" table="results">
          	<key column="athlete_id"/>
-         	<property name="Sprint_100m" column="race_100m" type="float" access="field"/>
-         	<property name="LongJump" column="long_jump" type="float" access="field"/>
-         	<property name="ShotPut" column="shot_put" type="float" access="field"/>
-         	<property name="HighJump" column="high_jump" type="float" access="field"/>
-         	<property name="Sprint_400m" column="race_400m" type="float" access="field"/>
-         	<property name="Hurdles_110m" column="hurdles_110m" type="float" access="field"/>
-         	<property name="DiscusThrow" column="discus_throw" type="float" access="field"/>
-         	<property name="PoleVault" column="pole_vault" type="float" access="field"/>
-         	<property name="JavelinThrow" column="javelin_throw" type="float" access="field"/>
-         	<property name="Race_1500m" column="race_1500m" type="float" access="field"/>
+         	<property name="sprint_100m" column="race_100m" type="float" access="field"/>
+         	<property name="longJump" column="long_jump" type="float" access="field"/>
+         	<property name="shotPut" column="shot_put" type="float" access="field"/>
+         	<property name="highJump" column="high_jump" type="float" access="field"/>
+         	<property name="sprint_400m" column="race_400m" type="float" access="field"/>
+         	<property name="hurdles_110m" column="hurdles_110m" type="float" access="field"/>
+         	<property name="discusThrow" column="discus_throw" type="float" access="field"/>
+         	<property name="poleVault" column="pole_vault" type="float" access="field"/>
+         	<property name="javelinThrow" column="javelin_throw" type="float" access="field"/>
+         	<property name="race_1500m" column="race_1500m" type="float" access="field"/>
     	</joined-subclass>
 	</class>
 	<class name="net.azib.java.students.t010687.homework.Competition" table="competitions">
