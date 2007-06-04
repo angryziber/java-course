@@ -11,6 +11,7 @@ public class JavelinThrowEvent extends FieldDecathlonEvent {
 
 	public JavelinThrowEvent(double achievedResult) throws Exception {
 		super(achievedResult, aParameter, bParameter, cParameter);
+		super.saveRawResult(String.valueOf(achievedResult));
 	}
 
 }

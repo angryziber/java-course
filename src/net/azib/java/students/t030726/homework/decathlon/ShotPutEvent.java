@@ -12,6 +12,7 @@ public class ShotPutEvent extends FieldDecathlonEvent {
 
 	public ShotPutEvent(double achievedResult) throws Exception {
 		super(achievedResult, aParameter, bParameter, cParameter);
+		super.saveRawResult(String.valueOf(achievedResult));
 	}
 
 }

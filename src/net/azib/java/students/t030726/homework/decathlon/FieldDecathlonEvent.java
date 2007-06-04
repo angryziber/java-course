@@ -37,6 +37,10 @@ public class FieldDecathlonEvent extends GenericDecathlonEvent {
 		return this.points;
 	}
 	
+	protected void saveRawResult(String result) {
+		super.setRawResult(String.valueOf(result));
+	}
+	
 	/**
 	 * Construtor for the Field Event. Takes all necessary parameters for the instantiation to make sense. No parameter can be omitted,
 	 * otherwise results cannot be calculated.

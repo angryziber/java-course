@@ -20,7 +20,7 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 	 * @throws Exception
 	 */
 	private double parseIncomingResult(String result) throws Exception {
-		double resultInSeconds = 0;
+		double resultInSeconds = 0.0;
 		try {
 			//If Number is passed in seconds (as for some events), this will not fail
 			resultInSeconds = Double.parseDouble(result);
@@ -32,7 +32,7 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 					throw new InvalidDataFormatException();
 				}
 				int minutes = Integer.parseInt(splitTime[0]);
-				int seconds = Integer.parseInt(splitTime[1]);
+				double seconds = Double.parseDouble(splitTime[1]);
 				resultInSeconds = minutes * 60 + seconds;
 				
 			} catch (Exception innerEx) {
@@ -99,6 +99,7 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 	 */
 	public RunnerDecathlonEvent(String achievedResult, double aParameter, double bParameter, double cParameter) throws Exception {
 		//We need to get seconds out of the incomming data
+		super.setRawResult(achievedResult);
 		this.timeResult = this.parseIncomingResult(achievedResult);
 		super.setAParameter(aParameter);
 		super.setBParameter(bParameter);

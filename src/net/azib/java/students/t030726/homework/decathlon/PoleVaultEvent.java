@@ -12,6 +12,7 @@ public class PoleVaultEvent extends FieldDecathlonEvent {
 
 	public PoleVaultEvent(double achievedResult) throws Exception {
 		super((100*achievedResult), aParameter, bParameter, cParameter);
+		super.saveRawResult(String.valueOf(achievedResult));
 	}
 
 }

@@ -11,6 +11,15 @@ public class GenericDecathlonEvent {
 	private double aParameter = 0.0;
 	private double bParameter = 0.0;
 	private double cParameter = 0.0;
+	private String rawResult = "";
+	
+	public String getRawResult() {
+		return this.rawResult;
+	}
+	
+	public void setRawResult(String result) {
+		this.rawResult = result;
+	}
 	
 	/**
 	 * A parameter is being set here (parameter from the points calculation formula)

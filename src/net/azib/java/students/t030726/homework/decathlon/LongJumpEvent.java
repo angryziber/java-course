@@ -13,6 +13,7 @@ public class LongJumpEvent extends FieldDecathlonEvent {
 	
 	public LongJumpEvent(double achievedResult) throws Exception {
 		super((100*achievedResult), aParameter, bParameter, cParameter);
+		super.saveRawResult(String.valueOf(achievedResult));
 	}
 
 }

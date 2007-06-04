@@ -1,103 +1,77 @@
-package keyboard;
+package input;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
-import decathlon.*;
+import java.util.Iterator;
+import java.util.Locale;
+
+import decathlon.DecathlonChampionship;
+import decathlon.DecathlonChampionshipParticipator;
+import decathlon.DiscusThrowEvent;
+import decathlon.FifteenHundredMeterRunEvent;
+import decathlon.FourHundredMeterSprint;
+import decathlon.HighJumpEvent;
+import decathlon.HundredAndTenMeterHurdlesEvent;
+import decathlon.HundredMeterSprint;
+import decathlon.InvalidDataFormatException;
+import decathlon.JavelinThrowEvent;
+import decathlon.LongJumpEvent;
+import decathlon.PoleVaultEvent;
+import decathlon.ShotPutEvent;
 
 /**
- * The main class for handling keyboard input. It acquires all input automatically and creates an arraylist of DecathlonChampionship objects 
+ * Class is responsible for keyboard input and abstraction for the input controller
  * @author Deniss Nikiforov
  *
  */
-public class KeyboardInputHandler {
-	//storage of the final result to allow multiple queries without recalculation
+public class KeyboardInput implements IInput {
 	private ArrayList finalResults = null;
-
-	public KeyboardInputHandler(BufferedReader br) throws IOException {
-		this.inputWizard(br);
-	}	
+	private Iterator mainIterator = null;
 	
 	/**
-	 * Asks the user for data to create a single DecathlonChampionship object. It asks for all information.
-	 * The code here is long and not optimal, but this is the price of handling keyboard input - the intermidiate variables are here for 
-	 * readability sake
-	 * @param BufferedReader br
-	 * @return DecathlonChampionship
-	 * @throws Exception
+	 * The parameter is here for unit tests. So we can pass something else and test the class independently from what the user enters
+	 * @param br
+	 * @throws IOException
 	 */
-	private DecathlonChampionship singleParticipatorInput(BufferedReader br) throws Exception {
-		String participatorName = null;
-		String participatorCountryCode = null;
-		HundredMeterSprint hundredSprint = null;
-		LongJumpEvent longJump = null;
-		ShotPutEvent shotPut = null;
-		HighJumpEvent highJump = null;
-		FourHundredMeterSprint fourHundredSprint = null;
-		HundredAndTenMeterHurdlesEvent hurdles = null;
-		DiscusThrowEvent discusThrow = null;
-		PoleVaultEvent poleVault = null;
-		JavelinThrowEvent javelinThrow = null;
-		FifteenHundredMeterRunEvent longRun = null;
-		DecathlonChampionship championship = null;
-		DecathlonChampionshipParticipator participator = null;
+	public KeyboardInput(BufferedReader br) throws IOException {
+		this.inputWizard(br);
+		this.mainIterator = this.finalResults.iterator();
+	}
+
+	/**
+	 * Attemps to parse the string date with a standard java function and checks if it fails
+	 * Germany is set here, as the time representation of dots and month/date position is also correct
+	 * @param dateOfBirth
+	 * @return
+	 */
+	private boolean isDateValid(String dateOfBirth) {
+		DateFormat df = DateFormat.getDateInstance(DateFormat.DATE_FIELD, Locale.GERMANY); //Germany is set to accept date formats like we have
 		
-		//General participator information
-		System.out.print("What is the name: ");
-		participatorName = br.readLine();
-		System.out.print("What is the country code: ");
-		participatorCountryCode = br.readLine();
-		if(participatorCountryCode.length() != 2) {
-			throw new InvalidDataFormatException();
+		try{
+			df.parse(dateOfBirth);
+		} catch (Exception ex) {
+			return false;
 		}
-		
-		//Event specific information
-		System.out.print("What is the time for 100 meter spring (s): ");
-		hundredSprint = new HundredMeterSprint(br.readLine());
-		
-		System.out.print("What is the long jump achievement (m): ");
-		longJump = new LongJumpEvent(Double.parseDouble(br.readLine()));
-		
-		System.out.print("What is the shot put event achievement(m): ");
-		shotPut = new ShotPutEvent(Double.parseDouble(br.readLine()));
-		
-		System.out.print("What is the high jump achievement(m): ");
-		highJump = new HighJumpEvent(Double.parseDouble(br.readLine()));
-		
-		System.out.print("What is the 400m spring achievement(min:sec): ");
-		fourHundredSprint = new FourHundredMeterSprint(br.readLine());
-		
-		System.out.print("What is the 110m with hurles achievement(min:sec): ");
-		hurdles = new HundredAndTenMeterHurdlesEvent(br.readLine());
-		
-		System.out.print("What is the discus throw achievement(m): ");
-		discusThrow = new DiscusThrowEvent(Double.parseDouble(br.readLine()));
-		
-		System.out.print("What is the pole vault achievement(m): ");
-		poleVault = new PoleVaultEvent(Double.parseDouble(br.readLine()));
-		
-		System.out.print("What is the javeling throw achievement(m): ");
-		javelinThrow = new JavelinThrowEvent(Double.parseDouble(br.readLine()));
-		
-		System.out.print("What is the 1500m run achievement(min:sec): ");
-		longRun = new FifteenHundredMeterRunEvent(br.readLine());
-		
-		//Ok, if we are here, that means there have been no problems with the input, we can construct objects now
-		participator = new DecathlonChampionshipParticipator(participatorName, participatorCountryCode);
-		championship = new DecathlonChampionship(participator);
-		
-		championship.setHundredMeterSprintData(hundredSprint);
-		championship.setLongJumpEventData(longJump);
-		championship.setShotPutEventData(shotPut);
-		championship.setHighJumpEventData(highJump);
-		championship.setFourHundredMeterSprintEventData(fourHundredSprint);
-		championship.setHundredAndTenMeterHurdlesEventData(hurdles);
-		championship.setDiscusThrowEventData(discusThrow);
-		championship.setPoleVaultEventData(poleVault);
-		championship.setJavelinThrowEventData(javelinThrow);
-		championship.setFifteenHundredMeterRunEventData(longRun);
-		
-		return championship;
+		return true;
+
+	}
+	
+	
+	/**
+	 * Gets the next element from the iterator
+	 */
+	public DecathlonChampionship getNext() throws InstantiationException, Exception {
+		DecathlonChampionship temp = (DecathlonChampionship)this.mainIterator.next();
+		return temp;
+	}
+
+	/**
+	 * Returns true if there is something else to read
+	 */
+	public boolean hasNext() {
+		return this.mainIterator.hasNext();
 	}
 	
 	/**
@@ -138,12 +112,94 @@ public class KeyboardInputHandler {
 		this.finalResults = list;
 		
 	}
-
+	
 	/**
-	 * Forwards the results produced by the inputWizard to the upper levels.
-	 * @return
+	 * Asks the user for data to create a single DecathlonChampionship object. It asks for all information.
+	 * The code here is long and not optimal, but this is the price of handling keyboard input - the intermidiate variables are here for 
+	 * readability sake
+	 * @param BufferedReader br
+	 * @return DecathlonChampionship
+	 * @throws Exception
 	 */
-	public ArrayList getAllResults() {
-		return this.finalResults;
+	private DecathlonChampionship singleParticipatorInput(BufferedReader br) throws Exception {
+		String participatorName = null;
+		String participatorDateOfBirth = null;
+		String participatorCountryCode = null;
+		HundredMeterSprint hundredSprint = null;
+		LongJumpEvent longJump = null;
+		ShotPutEvent shotPut = null;
+		HighJumpEvent highJump = null;
+		FourHundredMeterSprint fourHundredSprint = null;
+		HundredAndTenMeterHurdlesEvent hurdles = null;
+		DiscusThrowEvent discusThrow = null;
+		PoleVaultEvent poleVault = null;
+		JavelinThrowEvent javelinThrow = null;
+		FifteenHundredMeterRunEvent longRun = null;
+		DecathlonChampionship championship = null;
+		DecathlonChampionshipParticipator participator = null;
+		
+		
+		//General participator information
+		System.out.print("What is the name: ");
+		participatorName = br.readLine();
+		System.out.print("What is your birth date (dd.mm.yyyy):");
+		participatorDateOfBirth = br.readLine();
+		if(!this.isDateValid(participatorDateOfBirth)) {
+			throw new InvalidDataFormatException();
+		}
+		System.out.print("What is the country code: ");
+		participatorCountryCode = br.readLine();
+		if(participatorCountryCode.length() != 2) {
+			throw new InvalidDataFormatException();
+		}
+		
+		//Event specific information
+		System.out.print("What is the time for 100 meter spring (s): ");
+		hundredSprint = new HundredMeterSprint(br.readLine());
+		
+		System.out.print("What is the long jump achievement (m): ");
+		longJump = new LongJumpEvent(Double.parseDouble(br.readLine()));
+		
+		System.out.print("What is the shot put event achievement(m): ");
+		shotPut = new ShotPutEvent(Double.parseDouble(br.readLine()));
+		
+		System.out.print("What is the high jump achievement(m): ");
+		highJump = new HighJumpEvent(Double.parseDouble(br.readLine()));
+		
+		System.out.print("What is the 400m spring achievement(min:sec): ");
+		fourHundredSprint = new FourHundredMeterSprint(br.readLine());
+		
+		System.out.print("What is the 110m with hurles achievement(min:sec): ");
+		hurdles = new HundredAndTenMeterHurdlesEvent(br.readLine());
+		
+		System.out.print("What is the discus throw achievement(m): ");
+		discusThrow = new DiscusThrowEvent(Double.parseDouble(br.readLine()));
+		
+		System.out.print("What is the pole vault achievement(m): ");
+		poleVault = new PoleVaultEvent(Double.parseDouble(br.readLine()));
+		
+		System.out.print("What is the javeling throw achievement(m): ");
+		javelinThrow = new JavelinThrowEvent(Double.parseDouble(br.readLine()));
+		
+		System.out.print("What is the 1500m run achievement(min:sec): ");
+		longRun = new FifteenHundredMeterRunEvent(br.readLine());
+		
+		//Ok, if we are here, that means there have been no problems with the input, we can construct objects now
+		participator = new DecathlonChampionshipParticipator(participatorName, participatorCountryCode, participatorDateOfBirth);
+		championship = new DecathlonChampionship(participator);
+		
+		championship.setHundredMeterSprintData(hundredSprint);
+		championship.setLongJumpEventData(longJump);
+		championship.setShotPutEventData(shotPut);
+		championship.setHighJumpEventData(highJump);
+		championship.setFourHundredMeterSprintEventData(fourHundredSprint);
+		championship.setHundredAndTenMeterHurdlesEventData(hurdles);
+		championship.setDiscusThrowEventData(discusThrow);
+		championship.setPoleVaultEventData(poleVault);
+		championship.setJavelinThrowEventData(javelinThrow);
+		championship.setFifteenHundredMeterRunEventData(longRun);
+		
+		return championship;
 	}
+
 }

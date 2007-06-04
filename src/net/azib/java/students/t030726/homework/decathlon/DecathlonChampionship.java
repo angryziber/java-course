@@ -5,10 +5,11 @@ import java.lang.InstantiationException;
 /**
  * The main DTO object for the program. Contains all necessary information to produce output for a single participant.
  * Used in conjunction with arraylist.
+ * A championship by my definition here is a series of all decathlon events
  * @author NTAdmin
  *
  */
-public class DecathlonChampionship {
+public class DecathlonChampionship  implements Comparable {
 	private final int totalEvents = 10; 
 	private HundredMeterSprint hundredSprint = null;
 	private LongJumpEvent longJump = null;
@@ -20,13 +21,96 @@ public class DecathlonChampionship {
 	private PoleVaultEvent poleVault = null;
 	private JavelinThrowEvent javelinThrow = null;
 	private FifteenHundredMeterRunEvent longRun = null;
+	private String position = null;
 	
 	//Initialized event counter. Used to check whether everything is initialized prior to point computation
 	private int eventsInitialized = 0;
 	private DecathlonChampionshipParticipator participator = null;
 	
+	public String getHundredMeterSprintRawResult() throws InstantiationException {
+		if(this.hundredSprint == null) {
+			throw new InstantiationException();
+		}
+		return this.hundredSprint.getRawResult();
+	}
+	
+	public String getLongJumpRawResult() throws InstantiationException {
+		if(this.longJump == null) {
+			throw new InstantiationException();
+		}
+		return this.longJump.getRawResult();
+	}
+	
+	public String getShotPutRawResult() throws InstantiationException {
+		if(this.shotPut == null) {
+			throw new InstantiationException();
+		}
+		return this.shotPut.getRawResult();
+	}
+	
+	public String getHighJumpRawResult() throws InstantiationException {
+		if(this.highJump == null) {
+			throw new InstantiationException();
+		}
+		return this.highJump.getRawResult();
+	}
+	
+	public String getFourHundredMeterSprintRawResult() throws InstantiationException {
+		if(this.fourHundredSprint == null) {
+			throw new InstantiationException();
+		}
+		return this.fourHundredSprint.getRawResult();
+	}
+	
+	public String getHurdlesRawResult() throws InstantiationException {
+		if(this.hurdlesEvent == null) {
+			throw new InstantiationException();
+		}
+		return this.hurdlesEvent.getRawResult();
+	}
+	
+	public String getDiscusThrowRawResult() throws InstantiationException {
+		if(this.discusThrow == null) {
+			throw new InstantiationException();
+		}
+		return this.discusThrow.getRawResult();
+	}
+	
+	public String getPoleVaultRawResult() throws InstantiationException {
+		if(this.poleVault == null) {
+			throw new InstantiationException();
+		}
+		return this.poleVault.getRawResult();
+	}
+	
+	public String getJavelinThrowRawResult() throws InstantiationException {
+		if(this.javelinThrow == null) {
+			throw new InstantiationException();
+		}
+		return this.javelinThrow.getRawResult();
+	}
+	
+	public String getLongRunRawResult() throws InstantiationException {
+		if(this.longRun == null) {
+			throw new InstantiationException();
+		};
+		return this.longRun.getRawResult();
+	}
+	
+	
 	public DecathlonChampionship (DecathlonChampionshipParticipator participator) {
 		this.participator = participator;
+	}
+	
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	
+	public String getPosition() throws Exception {
+		if(this.position == null) {
+			throw new Exception();
+		}
+		return this.position;
 	}
 	
 	/**
@@ -199,5 +283,25 @@ public class DecathlonChampionship {
 		}
 		
 		return this.computeTotalPoints();
+	}
+
+	public int compareTo(Object arg0)  {
+		if(!(arg0 instanceof DecathlonChampionship)) {
+			 throw new ClassCastException("A DecathlonChampionship Object is Expected");
+		}
+		int otherResult = 0;
+		try {
+			otherResult = ((DecathlonChampionship) arg0).getPoints();
+		} catch (Exception ex) {
+			//Ok, we don't do anything here! Let it crash.
+		}
+		int myPoints = 0;
+		try {
+			myPoints = this.getPoints();
+		} catch (Exception ex) {
+			//Same as above, we ignore this
+		}
+		
+		return (myPoints - otherResult);
 	}
 }

@@ -14,6 +14,7 @@ public class HighJumpEvent extends FieldDecathlonEvent {
 	public HighJumpEvent(double achievedResult) throws Exception {
 		//Multiply by 100 to comply with the formula.
 		super((100*achievedResult), aParameter, bParameter, cParameter);
+		super.saveRawResult(String.valueOf(achievedResult));
 	}
 
 }

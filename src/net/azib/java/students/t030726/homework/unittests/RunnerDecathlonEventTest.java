@@ -109,11 +109,13 @@ public class RunnerDecathlonEventTest extends TestCase {
 	}
 
 	public void testRunnerDecathlonEventWithBadAchievedResult() {
+		RunnerDecathlonEvent sample = null;
 		try {
-			RunnerDecathlonEvent sample = new RunnerDecathlonEvent(" :12", this.sampleAParameter, this.sampleBParameter, this.sampleCParameter);
+			sample = new RunnerDecathlonEvent(" :12", this.sampleAParameter, this.sampleBParameter, this.sampleCParameter);
 		} catch (Exception ex) {
 			return;
 		}
+		assertTrue(sample instanceof RunnerDecathlonEvent);
 		fail("Invalid achieved result should trigger an exception");
 	}
 
