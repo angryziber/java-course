@@ -128,6 +128,12 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @param sprint_400m the sprint_400m to set
 	 */
+	public void setSprint_400m(float sprint_400m) {
+		this.sprint_400m = sprint_400m;
+	}
+	/**
+	 * @param sprint_400m the sprint_400m to set
+	 */
 	public void setSprint_400m(String sprint_400m) {
 		String RaceData[] = sprint_400m.split(":");		
 		try{
@@ -243,6 +249,12 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @param race_1500m the race_1500m to set
 	 */
+	public void setRace_1500m(float race_1500m) {
+		this.race_1500m = race_1500m;
+	}
+	/**
+	 * @param race_1500m the race_1500m to set
+	 */
 	public void setRace_1500m(String race_1500m) {
 		String RaceData[] = race_1500m.split(":");
 		try{
@@ -327,7 +339,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	    }
 	    public long getPoints(float areaResult) {
 	    	//Points = A*(B-P)C for Running Events
-	    	return Math.round(A * Math.pow(Type*(areaResult - B),C) - 0.5);
+	    	return areaResult != 0 ? Math.round(A * Math.pow(Type*(areaResult - B),C) - 0.5):0;
 	    }
 	}
 

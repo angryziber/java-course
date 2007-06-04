@@ -4,21 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Panel;
-import java.util.Arrays;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -27,18 +23,22 @@ import javax.swing.table.TableRowSorter;
  * @author Matu
  */
 public class DecathlonDataFrm {
+	private AthletesPersInfoModel athletesInfoMdl;
     private CompetResultsModel competResultsMdl;
+    private CompetPointsModel competPointsMdl;
+    
+    private List <ResultsOfTheAthlet> results;
     public DecathlonDataFrm(List <ResultsOfTheAthlet> ListWithDecathlonData){
     	Collections.sort(ListWithDecathlonData);
+    	results = ListWithDecathlonData;
     	JFrame frame = new JFrame("DECATHLON");
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	JTabbedPane tab = new JTabbedPane();
-		
+    	/////////////////////////
     	frame.add(tab, BorderLayout.CENTER);
     	tab.add("AthletesCommonInfo", panelWithAthletesCommonInfo(ListWithDecathlonData));
-    	
     	/////////////////////////
-    	competResultsMdl = new CompetResultsModel(ListWithDecathlonData);
+    	competResultsMdl = new CompetResultsModel();//ListWithDecathlonData
     	TableRowSorter <CompetResultsModel> resultsSorter = new TableRowSorter<CompetResultsModel>(competResultsMdl);//<CompetResultsModel> 
     	resultsSorter.setSortsOnUpdates(true);
     	resultsSorter.toggleSortOrder(0);
@@ -49,14 +49,11 @@ public class DecathlonDataFrm {
 	    table.getTableHeader().setBackground(Color.yellow);
     	tab.add("CompetitionResults", new JScrollPane(table));
     	/////////////////////////
-    	CompetPointsModel competPointsMdl = new CompetPointsModel(ListWithDecathlonData);
+    	competPointsMdl = new CompetPointsModel();//ListWithDecathlonData
     	TableRowSorter <CompetPointsModel> pointsSorter = new TableRowSorter<CompetPointsModel>(competPointsMdl);//<CompetResultsModel> 
     	pointsSorter.setSortsOnUpdates(true);
-    	pointsSorter.toggleSortOrder(11);
-    	pointsSorter.toggleSortOrder(11);
     	table = new JTable(competPointsMdl);
         table.setRowSorter(pointsSorter);
-        
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
 	    table.getTableHeader().setBackground(Color.yellow);
@@ -64,29 +61,58 @@ public class DecathlonDataFrm {
     	/////////////////////////
     	frame.setSize(1200,400);
     	frame.setVisible(true);
-    	
-    	//model.insertRow(table.getRowCount(),new String[]{"AthletsName","Sprint100m(sec)","LongJump(m)",
-        //	"ShotPut(m)","HighJump(m)","Sprint400m(min:sec)","Hurdles110m(sec)",
-        //	"DiscusThrow(m)","PoleVault(m)","JavelinThrow(m)","Race1500m(min:sec)"});
     }
     private Panel panelWithAthletesCommonInfo(List <ResultsOfTheAthlet>ListWithDecathlonData){
 		Panel panel = new Panel();
-		String colHeaders[] = {"AthletsName","DateOfBirth","Country"};
-		String data[][] = new String[ListWithDecathlonData.size()][3];
-		//for(ResultsOfTheAthlet Results : ListWithDecathlonData){
-		//we need counter for data[][]. There is no pint for For..each loop
-		for(int j = 0; j<ListWithDecathlonData.size(); j++){
-			data[j] = new String []{ListWithDecathlonData.get(j).getName(),
-			ListWithDecathlonData.get(j).getDateOfBirth(),
-			ListWithDecathlonData.get(j).getCountry()};
-		}
-
-	    DefaultTableModel model = new DefaultTableModel(data,colHeaders);
-	    JTable table = new JTable(model);
+		athletesInfoMdl = new AthletesPersInfoModel();
+    	TableRowSorter <AthletesPersInfoModel> athletesInfoSorter = new TableRowSorter<AthletesPersInfoModel>(athletesInfoMdl);
+    	athletesInfoSorter.setSortsOnUpdates(true);
+    	athletesInfoSorter.toggleSortOrder(0);
+    	JTable table =new JTable(athletesInfoMdl);
+        table.setRowSorter(athletesInfoSorter);
+        
+        //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        //table.setFillsViewportHeight(true);
 	    table.getTableHeader().setBackground(Color.yellow);
-	    JScrollPane pane = new JScrollPane(table);
-	    panel.add(pane);
-		return panel;	
+
+	    panel.add(new JScrollPane(table));
+	    JButton btn_InsertRow = new JButton("Add Athlete");
+	    btn_InsertRow.addActionListener(new AddRowForNewAthlete ());
+	    panel.add(btn_InsertRow);
+
+	    JButton btn_ToXML = new JButton("ExpoerToHTML");
+	    btn_ToXML.addActionListener(new ToXML());
+	    panel.add(btn_ToXML);
+	    
+	    return panel;	
+    }
+    class AddRowForNewAthlete implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {
+			ResultsOfTheAthlet	Results = new ResultsOfTheAthlet("XXXXXXXXXX", "01.01.1999", "NA");
+	    	Results.setSprint_100m(0);	//(sec)
+	    	Results.setLongJump(0);		//(m)
+	    	Results.setShotPut(0);		//(m)
+	    	Results.setHighJump(0);		//(m)
+	    	Results.setSprint_400m(0);	//(min:sec)
+	    	Results.setHurdles_110m(0);	//(sec)
+	    	Results.setDiscusThrow(0);	//(m)
+	    	Results.setPoleVault(0);	//(m)
+	    	Results.setJavelinThrow(0);	//(m)
+	    	Results.setRace_1500m(0);	
+	    	results.add(Results);
+	    	int newRowIndex = results.size()-1;
+	    	athletesInfoMdl.addRow(newRowIndex);
+			competResultsMdl.addRow(newRowIndex);
+			competPointsMdl.addRow(newRowIndex);
+		}
+    	
+    }
+    class ToXML implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {
+			Results2XML xx = new Results2XML(results);
+			xx.saveDataToHTMLFormat();
+		}
+    	
     }
     class CompetResultsModel extends AbstractTableModel {
         /** serialVersionUID */
@@ -94,25 +120,26 @@ public class DecathlonDataFrm {
 		public String[] columnNames = new String []{"AthletsName","Sprint100m(sec)","LongJump(m)",
             	"ShotPut(m)","HighJump(m)","Sprint400m(min:sec)","Hurdles110m(sec)",
             	"DiscusThrow(m)","PoleVault(m)","JavelinThrow(m)","Race1500m(min:sec)", "Points"};
-        public Object[][] data;
 
-        public CompetResultsModel(List <ResultsOfTheAthlet> Results) {
-        	data = new Object[Results.size()][0xD];
-         	for(int j = 0; j<Results.size(); j++){
-         		data[j]= new Object []{Results.get(j).getName(),
-     			Results.get(j).getSprint_100m(), Results.get(j).getLongJump(),
-     			Results.get(j).getShotPut(), Results.get(j).getHighJump(),
-     			Results.get(j).getSprint_400m(), Results.get(j).getHurdles_110m(),
-     			Results.get(j).getDiscusThrow(), Results.get(j).getPoleVault(),
-     			Results.get(j).getJavelinThrow(), Results.get(j).getRace_1500m(),
-     			Results.get(j).getPoints(), Results.get(j)};
-     		}
-        }
         public int getColumnCount() {return columnNames.length;}
-        public int getRowCount() {return data.length;}
+        public int getRowCount() {return results.size();}//return data == null ? 0 : data.length;}
         public String getColumnName(int col) {return columnNames[col];}
         public Object getValueAt(int row, int col) {
-            return data[row][col];
+        	switch(col){
+        	case 0:	return results.get(row).getName();
+    		case 1:	return results.get(row).getSprint_100m();
+    		case 2:	return results.get(row).getLongJump();
+    		case 3:	return results.get(row).getShotPut();         		
+    		case 4:	return results.get(row).getHighJump();         		
+    		case 5:	return results.get(row).getSprint_400m();         	
+    		case 6:	return results.get(row).getHurdles_110m();                 		
+    		case 7:	return results.get(row).getDiscusThrow();       		
+    		case 8:	return results.get(row).getPoleVault();   
+    		case 9:	return results.get(row).getJavelinThrow();              		
+    		case 10:return results.get(row).getRace_1500m();
+    		case 11:return results.get(row).getPoints();
+        	}
+        	return 0;
         }
         //public Class <Object> getColumnClass(int c) {
         //     return getValueAt(0, c).getClass();
@@ -125,53 +152,57 @@ public class DecathlonDataFrm {
             } else {
                 return true;
             }
+        } 
+        public  void addRow(int rowIndex){
+        	fireTableRowsInserted(rowIndex,rowIndex);
         }
-
         public void setValueAt(Object value, int row, int col) {
-        	ResultsOfTheAthlet Result = (ResultsOfTheAthlet)data[row][columnNames.length];
+        	//ResultsOfTheAthlet Result = (ResultsOfTheAthlet)data[row][columnNames.length];
         	switch(col){
         		case 1:
-        			Result.setSprint_100m((String)value);
-        			data[row][col] = Result.getSprint_100m();
+        			results.get(row).setSprint_100m((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;
         		case 2:
-        			Result.setLongJump((String)value);
-        			data[row][col] = Result.getLongJump();
+        			results.get(row).setLongJump((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;
         		case 3:
-        			Result.setShotPut((String)value);
-        			data[row][col] = Result.getShotPut();
+        			results.get(row).setShotPut((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;         		
         		case 4:
-        			Result.setHighJump((String)value);
-        			data[row][col] = Result.getHighJump();
+        			results.get(row).setHighJump((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;          		
         		case 5:
-        			Result.setSprint_400m((String)value);
-        			data[row][col] = Result.getSprint_400m();
+        			results.get(row).setSprint_400m((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;          	
         		case 6:
-        			Result.setHurdles_110m((String)value);
-        			data[row][col] = Result.getHurdles_110m();
+        			results.get(row).setHurdles_110m((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;                 		
         		case 7:
-        			Result.setDiscusThrow((String)value);
-        			data[row][col] = Result.getDiscusThrow();
+        			results.get(row).setDiscusThrow((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;          		
         		case 8:
-        			Result.setPoleVault((String)value);
-        			data[row][col] = Result.getPoleVault();
+        			results.get(row).setPoleVault((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;   
         		case 9:
-        			Result.setJavelinThrow((String)value);
-        			data[row][col] = Result.getJavelinThrow();
+        			results.get(row).setJavelinThrow((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
         			break;              		
         		case 10:
-    				Result.setRace_1500m((String)value);
-    				data[row][col] = Result.getJavelinThrow();
+        			results.get(row).setRace_1500m((String)value);
+        			competPointsMdl.fireTableRowsUpdated(row, row);
     				break;            		
         	}
-            fireTableCellUpdated(row, col);
+        	competPointsMdl.refreshAthletesRanks();
+        	fireTableCellUpdated(row, col);
+            fireTableCellUpdated(row, 11);
         }
     }
     class CompetPointsModel extends AbstractTableModel {
@@ -180,26 +211,13 @@ public class DecathlonDataFrm {
 		public String[] columnNames = new String []{"Rank", "AthletsName","Sprint100Points","LongJump(m)",
             	"ShotPut(m)","HighJump(m)","Sprint400m(min:sec)","Hurdles110m(sec)",
             	"DiscusThrow(m)","PoleVault(m)","JavelinThrow(m)","Race1500m(min:sec)", "Points"};
-        public Object[][] data;
-        private List <ResultsOfTheAthlet> Results;
-        public CompetPointsModel(List <ResultsOfTheAthlet> Results) {
-        	data = new Object[Results.size()][0xE];
-        	this.Results = Results;
-        	String AthletesRanks[] = getAthletesRanks();
-         	for(int j = 0; j<Results.size(); j++){
-         		data[j]= new Object []{AthletesRanks[j], Results.get(j).getName(),
-     			Results.get(j).getSprint_100mPoints(), Results.get(j).getLongJumpPoints(),
-     			Results.get(j).getShotPutPoints(), Results.get(j).getHighJumpPoints(),
-     			Results.get(j).getSprint_400mPoints(), Results.get(j).getHurdles_110mPoints(),
-     			Results.get(j).getDiscusThrowPoints(), Results.get(j).getPoleVaultPoints(),
-     			Results.get(j).getJavelinThrowPoints(), Results.get(j).getRace_1500mPoints(),
-     			Results.get(j).getPoints(), Results.get(j)};
-     		}
-        }
+		String AthletesRanks[];
+        public CompetPointsModel() {AthletesRanks = getAthletesRanks();}
         public String[] getAthletesRanks() {
+        	Collections.sort(results);
         	int newRank = 0;
-        	String Ranks[] = new String[Results.size()];
-        	for(int curRank= 0; curRank< Results.size(); curRank++){
+        	String Ranks[] = new String[results.size()];
+        	for(int curRank= 0; curRank< results.size(); curRank++){
         		newRank = setRank(curRank);
         		if (curRank==newRank){
         			Ranks[curRank] = ((Integer)(curRank+1)).toString();}
@@ -213,36 +231,90 @@ public class DecathlonDataFrm {
         	return Ranks; 
         }
         private int setRank(int curRank){
-        	if (curRank < Results.size() -1){
-        		System.out.println(curRank);
-        		if (Results.get(curRank).getPoints()> Results.get(curRank +1).getPoints()){
+        	if (curRank < results.size() -1){
+        		if (results.get(curRank).getPoints()> results.get(curRank +1).getPoints()){
         			return curRank;
         		}
-        		else {
-        			return setRank(curRank + 1);
-        		}
+        		else {return setRank(curRank + 1);}
         	}
         	else{return curRank;}
         }
         public int getColumnCount() {return columnNames.length;}
-        public int getRowCount() {return data.length;}
+        public int getRowCount() {return results.size();}
+        public String getColumnName(int col) {return columnNames[col];}
+        public  void addRow(int rowIndex){
+        	AthletesRanks = getAthletesRanks();
+        	fireTableRowsInserted(rowIndex,rowIndex);
+        }
+        public Object getValueAt(int row, int col) {
+            switch(col){
+            case 0:	return AthletesRanks[row];
+        	case 1:	return results.get(row).getName();
+    		case 2:	return results.get(row).getSprint_100mPoints();
+    		case 3:	return results.get(row).getLongJumpPoints();
+    		case 4:	return results.get(row).getShotPutPoints();         		
+    		case 5:	return results.get(row).getHighJumpPoints();         		
+    		case 6:	return results.get(row).getSprint_400mPoints();         	
+    		case 7:	return results.get(row).getHurdles_110mPoints();                 		
+    		case 8:	return results.get(row).getDiscusThrowPoints();       		
+    		case 9:	return results.get(row).getPoleVaultPoints();   
+    		case 10:return results.get(row).getJavelinThrowPoints();              		
+    		case 11:return results.get(row).getRace_1500mPoints();
+    		case 12:return results.get(row).getPoints();
+        	}
+        	return 0;
+        }
+        
+        public void refreshAthletesRanks(){
+        	AthletesRanks = getAthletesRanks();
+        	for(int i = 0;i<AthletesRanks.length;i++){
+        		fireTableCellUpdated(i, 0);
+        	}
+        }       
+        //Non editable
+        public boolean isCellEditable(int row, int col) {return false;}
+
+        public void setValueAt(Object value, int row, int col) {
+            fireTableCellUpdated(row, col);
+        }
+    }
+    class AthletesPersInfoModel extends AbstractTableModel {
+        /** serialVersionUID */
+		private static final long serialVersionUID = 1L;
+		public String[] columnNames = new String []{"AthletsName","DateOfBirth","Country"};
+
+        public int getColumnCount() {return columnNames.length;}
+        public int getRowCount() {return results.size();}//return data == null ? 0 : data.length;}
         public String getColumnName(int col) {return columnNames[col];}
         public Object getValueAt(int row, int col) {
-            return data[row][col];
+            //return data[row][col];
+        	switch(col){
+        	case 0:	return results.get(row).getName();
+    		case 1:	return results.get(row).getDateOfBirth();
+    		case 2:	return results.get(row).getCountry();
+        	}
+        	return 0;
         }
         //public Class <Object> getColumnClass(int c) {
         //     return getValueAt(0, c).getClass();
-        //}
-        public boolean isCellEditable(int row, int col) {
-        	//Non editable
-        	return false;
-        }
-
+        
+        //All cells are editable!
+        public boolean isCellEditable(int row, int col) {return true;} 
+        public  void addRow(int rowIndex){fireTableRowsInserted(rowIndex,rowIndex);}
         public void setValueAt(Object value, int row, int col) {
-        	ResultsOfTheAthlet Result = (ResultsOfTheAthlet)data[row][columnNames.length];
-        			Result.setSprint_100m((String)value);
-        			data[row][col] = Result.getSprint_100m();
-            fireTableCellUpdated(row, col);
+        	switch(col){
+        		case 0:
+        			results.get(row).setName((String)value);
+                	competResultsMdl.fireTableCellUpdated(row,0);
+                	competPointsMdl.fireTableCellUpdated(row,1);
+        		case 1:
+        			results.get(row).setDateOfBirth((String)value);
+        			break;
+        		case 2:
+        			results.get(row).setCountry((String)value);
+        			break;	
+        	}
+        	fireTableCellUpdated(row, col);
         }
     }
 }
