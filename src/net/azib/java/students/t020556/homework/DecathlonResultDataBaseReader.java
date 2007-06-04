@@ -56,7 +56,8 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 			LOG.log(Level.SEVERE, "Unable to move forward in the obtained results", e);
 		}
 		try {
-			results.close();
+			if(results != null)
+				results.close();
 		}
 		catch (SQLException e) {
 			LOG.log(Level.SEVERE, "Unable to close obtained results", e);
@@ -151,6 +152,7 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 				throw new SQLException("No connection set");
 
 			connection.close();
+			connection = null;
 		}
 		catch (SQLException e) {
 			LOG.log(Level.SEVERE, "Unable to close connection", e);
