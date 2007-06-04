@@ -1,6 +1,6 @@
 package net.azib.java.students.t960644.homework;
 
-import java.sql.Date;
+import java.io.PrintStream;
 
 /**
  * CSVOutput
@@ -9,17 +9,17 @@ import java.sql.Date;
  */
 public class CSVOutput {
 	
-	public void writeData(Competition competition) {
+	public void writeData(PrintStream out,Competition competition) {
 		for (Result r:competition.getResults()){
-			System.out.println(writeLine(r));
+			out.println(writeLine(r));
 		}
 	}
 	
 	protected StringBuffer writeLine(Result result) {
 		return new StringBuffer(result.getPosition()).append(",").
-		append(Integer.toString(result.calcResult())).append(",").
+			append(Integer.toString(result.calcResult())).append(",").
 			append(quotation(result.getAthlete().getName())).append(",").
-			append(result.getAthlete().getBorn().toString()).append(",").
+			append(result.getAthlete().getBirthDate()).append(",").
 			append(result.getAthlete().getCountryCode()).append(",").
 			append(DecathlonEvent.RACE_100M.eventResultFormat(result.getRace100())).append(",").
 			append(DecathlonEvent.LONG_JUMP.eventResultFormat(result.getLongJump())).append(",").
@@ -37,26 +37,4 @@ public class CSVOutput {
 		return new StringBuffer(src).insert(0,'"').append('"');
 	}
 	
-	public static void main(String[] args) {
-		CSVOutput co = new CSVOutput();
-		Result res = new Result();
-		Athlete a = new Athlete();
-		a.setName("Peeter Pauksoo");
-		a.setBorn(Date.valueOf("1950-05-01"));
-		a.setCountryCode("EE");
-		res.setAthlete(a);
-		res.setPosition("1");
-		res.setRace100(10.60);
-		res.setLongJump(7.63);
-		res.setShotPut(14.90);
-		res.setHighJump(2.03);
-		res.setRace400(46.23);
-		res.setHurdles110(14.40);
-		res.setDiscusThrow(43.40);
-		res.setPoleVault(5.40);
-		res.setJavelinThrow(67.01);
-		res.setRace1500(269.58);
-		System.out.println(co.writeLine(res));
-		
-	}
 }

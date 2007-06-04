@@ -46,5 +46,12 @@ public class DecathlonEventTest {
 		assertEquals(DecathlonEvent.RACE_1500M.eventResultFormat(361.9),"6:01.900");
 		assertEquals(DecathlonEvent.JAVELIN_THROW.eventResultFormat(62),"62.00");
 	}
+	@Test
+	public void testResultParse() throws Exception {
+		assertEquals(DecathlonEvent.JAVELIN_THROW.eventResultParse("14.7"),14.7);
+		assertEquals(DecathlonEvent.RACE_100M.eventResultParse("01:20.400"),80.4);
+		assertEquals(DecathlonEvent.RACE_400M.eventResultParse("20.4"),20.4);
+		assertEquals(DecathlonEvent.HURDLES_110M.eventResultParse("15"),15);		
+	}
 
 }

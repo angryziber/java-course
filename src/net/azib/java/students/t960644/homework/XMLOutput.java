@@ -2,20 +2,24 @@ package net.azib.java.students.t960644.homework;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.Date;
+import java.text.ParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
+//import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+//import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
  * XMLOutput
@@ -23,7 +27,7 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
  * @author Lembit
  */
 public class XMLOutput {
-	Document doc;
+	protected Document doc;
 
 	public void writeData(Competition competition) {
 		CreateDoc();
@@ -36,7 +40,7 @@ public class XMLOutput {
 		resElement.appendChild(writeElement("position",result.getPosition()));
 		resElement.appendChild(writeElement("score",Integer.toString(result.calcResult())));
 		resElement.appendChild(writeElement("athlete",result.getAthlete().getName()));
-		resElement.appendChild(writeElement("born",result.getAthlete().getBorn().toString()));
+		resElement.appendChild(writeElement("born",result.getAthlete().getBirthDate()));
 		resElement.appendChild(writeElement("country",result.getAthlete().getCountryCode()));
 		resElement.appendChild(writeElement("race-100m",DecathlonEvent.RACE_100M.eventResultFormat(result.getRace100())));
 		resElement.appendChild(writeElement("long-jump",DecathlonEvent.LONG_JUMP.eventResultFormat(result.getLongJump())));
@@ -47,7 +51,7 @@ public class XMLOutput {
 		resElement.appendChild(writeElement("discus-throw",DecathlonEvent.DISCUS_THROW.eventResultFormat(result.getDiscusThrow())));
 		resElement.appendChild(writeElement("pole-vault",DecathlonEvent.POLE_VAULT.eventResultFormat(result.getPoleVault())));
 		resElement.appendChild(writeElement("javelin-throw",DecathlonEvent.JAVELIN_THROW.eventResultFormat(result.getJavelinThrow())));
-		resElement.appendChild(writeElement("race-1500m",DecathlonEvent.RACE_1500M.eventResultFormat(result.getRace1500()*1000)));		
+		resElement.appendChild(writeElement("race-1500m",DecathlonEvent.RACE_1500M.eventResultFormat(result.getRace1500())));		
 		return resElement; 
 	}
 	
@@ -62,6 +66,8 @@ public class XMLOutput {
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			DOMImplementation domImplementation = docBuilder.getDOMImplementation();
 			doc = domImplementation.createDocument(null, "decathlon", null);
+			doc.insertBefore(doc.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"decathlon.xsl\""),doc.getDocumentElement());
+			
 		}
 		catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -72,64 +78,38 @@ public class XMLOutput {
 		Element rootElement = doc.getDocumentElement();
 		Element compElement = doc.createElement("competition");
 		rootElement.appendChild(compElement);
-		//compElement.appendChild(writeElement("description",competition.getDescription()));
-		//compElement.appendChild(writeElement("date",competition.getDate().toString()));
-		//compElement.appendChild(writeElement("location",competition.getCountryCode()));
-		
+		if (competition.getDescription()==null) {
+			compElement.appendChild(writeElement("description",competition.getDescription()));
+		}
+		if (!competition.getStringDate().isEmpty()) {
+			compElement.appendChild(writeElement("date",competition.getStringDate()));			
+		}
+		if (competition.getCountryCode()==null){
+			compElement.appendChild(writeElement("location",competition.getCountryCode()));
+		}
 		for (Result r:competition.getResults()) {
 			compElement.appendChild(writeLine(r));
 		}
 	}
 	public void printXML(OutputStream out) {
-		OutputFormat format = new OutputFormat(doc);
-		format.setIndenting(true);
-		format.setOmitXMLDeclaration(false); 
-		format.setOmitDocumentType(false);
-		
-
-		XMLSerializer serializer = new XMLSerializer(out, format);
-
+		 DOMSource domSource = new DOMSource(doc);
+		 StreamResult streamResult = new StreamResult(out);
+		 TransformerFactory tf = TransformerFactory.newInstance();
+		 Transformer serializer;
 		try {
-			serializer.serialize(doc);
+			serializer = tf.newTransformer();
+			serializer.setOutputProperty(OutputKeys.INDENT,"yes");
+			serializer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+			serializer.transform(domSource, streamResult);
 		}
-		catch (IOException e) {
+		catch (Exception e) {
+			// do nothing
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				out.flush();
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		XMLOutput xo = new XMLOutput();
-		Result res = new Result();
-		Athlete a = new Athlete();
-		a.setName("Peeter Pauksoo");
-		a.setBorn(Date.valueOf("1950-05-01"));
-		a.setCountryCode("EE");
-		res.setAthlete(a);
-		res.setPosition("1");
-		res.setRace100(10.60);
-		res.setLongJump(7.63);
-		res.setShotPut(14.90);
-		res.setHighJump(2.03);
-		res.setRace400(46.23);
-		res.setHurdles110(14.40);
-		res.setDiscusThrow(43.40);
-		res.setPoleVault(5.40);
-		res.setJavelinThrow(67.01);
-		res.setRace1500(269.58);
-		Competition c = new Competition();
-		c.setDate(Date.valueOf("2007-06-01"));
-		c.setCountryCode("EE");
-		c.setDescription("Kükametsa");
-		c.addAthlete(a);
-		c.addResult(res);
+		Competition c = OutputTest.singleCompetition();
 		xo.writeData(c);
 		try {
 			xo.printXML(new FileOutputStream("test.xml"));
@@ -137,7 +117,7 @@ public class XMLOutput {
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		//xo.printXML(System.out);
+		xo.printXML(System.out);
 	}
 
 }

@@ -1,7 +1,11 @@
 package net.azib.java.students.t960644.homework;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * DecathlonEvent
@@ -41,6 +45,7 @@ public enum DecathlonEvent {
 		this.b = b;
 		this.c = c;
 		this.units = units;
+		//RESULT_FORMAT.setDecimalFormatSymbols(newSymbols)
 	}
 	
 	public String units() {return units;}
@@ -82,10 +87,22 @@ public enum DecathlonEvent {
 			return RESULT_FORMAT.format(p);
 		}
 	}
-	public static void main(String[] args) {
-		System.out.println(DecathlonEvent.RACE_100M.eventResultFormat(15.2));
-		System.out.println(DecathlonEvent.RACE_1500M.eventResultFormat(361.9));
-		System.out.println(DecathlonEvent.JAVELIN_THROW.eventResultFormat(62));
+	public double eventResultParse(String src) throws ParseException {
+		if(units=="sec") {
+			if (src.contains(":")) {
+				return absoluteTime(TIME_FORMAT.parse(src));
+			} else {
+				return absoluteTime(SHORT_TIME_FORMAT.parse(src));
+				}
+		}else {
+			return Double.valueOf(src);
+		}
+			
+	}
+	protected double absoluteTime(Date src) {
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(src);
+		return (double)(cal.getTimeInMillis()+cal.get(Calendar.ZONE_OFFSET)+cal.get(Calendar.DST_OFFSET))/1000;
 		
 	}
 }

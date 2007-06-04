@@ -1,6 +1,9 @@
 package net.azib.java.students.t960644.homework;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +19,7 @@ public class Competition {
 	private Integer id;
 	private List<Athlete> athletes;
 	private List<Result> results;
+	protected SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.mm.yyyy");
 
 	public Competition() {
 		athletes = new ArrayList<Athlete>();
@@ -43,7 +47,13 @@ public class Competition {
 	public Date getDate() {
 		return date;
 	}
-
+	public String getStringDate() {
+		if (date==null) {
+			return "";
+		}else{
+			return DATE_FORMAT.format(date);	
+		}
+	}
 	/**
 	 * @param date
 	 *            the date to set
@@ -52,6 +62,9 @@ public class Competition {
 		this.date = date;
 	}
 
+	public void setDate(String date) throws ParseException {
+		this.date = DATE_FORMAT.parse(date);
+	}
 	/**
 	 * @return the description
 	 */
@@ -148,5 +161,11 @@ public class Competition {
 			}
 		}
 		return result;
+	}
+	public void sortResults(){
+		Collections.sort(results);
+		for (int i=0;i<results.size();i++) {
+			results.get(i).setPosition(Integer.toString(i+1));
+		}
 	}
 }

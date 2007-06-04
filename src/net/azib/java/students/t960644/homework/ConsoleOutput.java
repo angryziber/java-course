@@ -1,6 +1,6 @@
 package net.azib.java.students.t960644.homework;
 
-import java.sql.Date;
+import java.io.PrintStream;
 
 /**
  * ConsoleOutput
@@ -18,7 +18,7 @@ public class ConsoleOutput {
 		
 	}
 
-	public void writeData(Competition competition) {
+	public void writeData(PrintStream out,Competition competition) {
 		int posWidth = 3;
 		int nameWidth = 4;
 		for (Result r : competition.getResults()) {
@@ -26,16 +26,15 @@ public class ConsoleOutput {
 			posWidth = posWidth < r.getPosition().length() ? r.getPosition().length() : posWidth;
 		}
 		for (Result r : competition.getResults()) {
-			System.out.println(writeLine(posWidth,nameWidth,r));
+			out.println(writeLine(posWidth,nameWidth,r));
 		}
 	}
 
 	protected StringBuffer writeLine(int posWidth, int nameWidth, Result result) {
-
 		return padLeft(result.getPosition(), posWidth).
 		append(padLeft(Integer.toString(result.calcResult()),SCORE_WIDTH)).
 			append(padRight(result.getAthlete().getName(), nameWidth)).
-			append(padLeft(result.getAthlete().getBorn().toString(),DATE_WIDTH)).
+			append(padLeft(result.getAthlete().getBirthDate(),DATE_WIDTH)).
 			append(padLeft(result.getAthlete().getCountryCode(),COUNTRY_WIDTH)).
 			append(padLeft(DecathlonEvent.RACE_100M.eventResultFormat(result.getRace100()),RESULT_WIDTH)).
 			append(padLeft(DecathlonEvent.LONG_JUMP.eventResultFormat(result.getLongJump()),RESULT_WIDTH)).
@@ -65,25 +64,4 @@ public class ConsoleOutput {
 		return spaces(length - src.length()).insert(0, src).append("|");
 	}
 
-	public static void main(String[] args) {
-		ConsoleOutput co = new ConsoleOutput();
-		Result res = new Result();
-		Athlete a = new Athlete();
-		a.setName("Peeter Pauksoo");
-		a.setBorn(Date.valueOf("1950-05-01"));
-		a.setCountryCode("EE");
-		res.setAthlete(a);
-		res.setPosition("1");
-		res.setRace100(10.60);
-		res.setLongJump(7.63);
-		res.setShotPut(14.90);
-		res.setHighJump(2.03);
-		res.setRace400(46.23);
-		res.setHurdles110(14.40);
-		res.setDiscusThrow(43.40);
-		res.setPoleVault(5.40);
-		res.setJavelinThrow(67.01);
-		res.setRace1500(269.58);
-		System.out.println(co.writeLine(6,20,res));
-	}
 }

@@ -2,8 +2,6 @@ package net.azib.java.students.t960644.homework;
 
 import static org.junit.Assert.assertTrue;
 
-import java.sql.Date;
-
 import org.junit.Test;
 /**
  * ConsoleOutputTest
@@ -37,25 +35,9 @@ public class ConsoleOutputTest {
 	@Test
 	public void testWriteLine() throws Exception {
 		ConsoleOutput co = new ConsoleOutput();
-		Result res = new Result();
-		Athlete a = new Athlete();
-		a.setName("Peeter Pauksoo");
-		a.setBorn(Date.valueOf("1950-05-01"));
-		a.setCountryCode("EE");
-		res.setAthlete(a);
-		res.setPosition("1");
-		res.setRace100(10.60);
-		res.setLongJump(7.63);
-		res.setShotPut(14.90);
-		res.setHighJump(2.03);
-		res.setRace400(46.23);
-		res.setHurdles110(14.40);
-		res.setDiscusThrow(43.40);
-		res.setPoleVault(5.40);
-		res.setJavelinThrow(67.01);
-		res.setRace1500(269.58);
+		Result res = OutputTest.singleResult();
 		assertTrue(co.writeLine(5, 20, res).toString().
-				equals("     1|Peeter Pauksoo      |1950-05-01|EE| 8815| 10.60|  7.63| 14.90|  2.03|   46.23| 14.40| 43.40|  5.40| 67.01|4:29.580|"));
+				equals("     1|Peeter Hülss        |01.05.1986|EE| 8815|10.600|  7.63| 14.90|  2.03|  46.230|14.400| 43.40|  5.40| 67.01|4:29.580|"));
 		
 	}
 
