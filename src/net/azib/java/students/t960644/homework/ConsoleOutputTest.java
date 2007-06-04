@@ -36,8 +36,9 @@ public class ConsoleOutputTest {
 	public void testWriteLine() throws Exception {
 		ConsoleOutput co = new ConsoleOutput();
 		Result res = OutputTest.singleResult();
+		System.out.println(co.writeLine(5, 20, res));
 		assertTrue(co.writeLine(5, 20, res).toString().
-				equals("     1|Peeter Hülss        |01.05.1986|EE| 8815|10.600|  7.63| 14.90|  2.03|  46.230|14.400| 43.40|  5.40| 67.01|4:29.580|"));
+				equals("    1| 8815|Peeter Hülss        |01.05.1986|EE|10.600|  7.63| 14.90|  2.03|  46.230|14.400| 43.40|  5.40| 67.01|4:29.580|"));
 		
 	}
 

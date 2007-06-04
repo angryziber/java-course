@@ -47,13 +47,16 @@ public class Competition {
 	public Date getDate() {
 		return date;
 	}
+
 	public String getStringDate() {
-		if (date==null) {
+		if (date == null) {
 			return "";
-		}else{
-			return DATE_FORMAT.format(date);	
+		}
+		else {
+			return DATE_FORMAT.format(date);
 		}
 	}
+
 	/**
 	 * @param date
 	 *            the date to set
@@ -65,6 +68,7 @@ public class Competition {
 	public void setDate(String date) throws ParseException {
 		this.date = DATE_FORMAT.parse(date);
 	}
+
 	/**
 	 * @return the description
 	 */
@@ -148,9 +152,12 @@ public class Competition {
 
 	/**
 	 * 
-	 * @param name name to compare
-	 * @param born date of birth to compare
-	 * @param countryCode country code to compare
+	 * @param name
+	 *            name to compare
+	 * @param born
+	 *            date of birth to compare
+	 * @param countryCode
+	 *            country code to compare
 	 * @return if nothing found then null else Athlete
 	 */
 	public Athlete findAthleteByName(String name, Date born, String countryCode) {
@@ -162,10 +169,27 @@ public class Competition {
 		}
 		return result;
 	}
-	public void sortResults(){
+
+	public void sortResults() {
 		Collections.sort(results);
-		for (int i=0;i<results.size();i++) {
-			results.get(i).setPosition(Integer.toString(i+1));
+		Result result;
+		for (int i = 0; i < results.size(); i++) {
+			result = results.get(i);
+			if (i > 0 && result.compareTo(results.get(i - 1)) == 0) {
+				result.setPosition(results.get(i - 1).getPosition());
+			}
+			else {
+				result.setPosition(Integer.toString(i + 1));
+			}
+		}
+		for (int i = results.size() - 1; i >= 0; i--) {
+			result = results.get(i);
+			if (i < results.size() - 1 && result.compareTo(results.get(i + 1)) == 0) {
+				result.setPosition(results.get(i + 1).getPosition());
+			}
+			else if (Integer.parseInt(result.getPosition()) != i + 1) {
+				result.setPosition(result.getPosition() + "-" + Integer.toString(i + 1));
+			}
 		}
 	}
 }

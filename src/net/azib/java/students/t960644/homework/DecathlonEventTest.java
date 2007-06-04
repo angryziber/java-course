@@ -51,7 +51,6 @@ public class DecathlonEventTest {
 		assertEquals(DecathlonEvent.JAVELIN_THROW.eventResultParse("14.7"),14.7);
 		assertEquals(DecathlonEvent.RACE_100M.eventResultParse("01:20.400"),80.4);
 		assertEquals(DecathlonEvent.RACE_400M.eventResultParse("20.4"),20.4);
-		assertEquals(DecathlonEvent.HURDLES_110M.eventResultParse("15"),15);		
+		assertEquals(DecathlonEvent.HURDLES_110M.eventResultParse("15"),15.0);		
 	}
-
 }

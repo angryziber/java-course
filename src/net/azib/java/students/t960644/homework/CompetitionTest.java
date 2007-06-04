@@ -46,4 +46,17 @@ public class CompetitionTest {
 		comp.setDate("5.6.2000");
 		assertTrue(comp.getStringDate().equals("05.06.2000"));
 	}
+	@Test
+	public void testSortResults() throws Exception {
+		Competition comp = OutputTest.singleCompetition();
+		comp.addResult(OutputTest.singleResult());
+		comp.sortResults();
+		assertTrue(comp.getResults().get(0).getPosition().equals("1-2"));
+		assertTrue(comp.getResults().get(1).getPosition().equals("1-2"));
+		comp.addResult(OutputTest.singleResult());
+		comp.sortResults();
+		assertTrue(comp.getResults().get(0).getPosition().equals("1-3"));
+		assertTrue(comp.getResults().get(1).getPosition().equals("1-3"));
+		assertTrue(comp.getResults().get(2).getPosition().equals("1-3"));
+	}
 }

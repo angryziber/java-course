@@ -3,9 +3,8 @@ package net.azib.java.students.t960644.homework;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.Scanner;
+import java.util.Vector;
 
 /**
  * DecathlonEvent
@@ -89,20 +88,39 @@ public enum DecathlonEvent {
 	}
 	public double eventResultParse(String src) throws ParseException {
 		if(units=="sec") {
-			if (src.contains(":")) {
-				return absoluteTime(TIME_FORMAT.parse(src));
+			Vector<String> elem = readTimeElements(src);
+			if(elem.size()==0){
+				throw new ParseException("Empty string!",0);
 			} else {
-				return absoluteTime(SHORT_TIME_FORMAT.parse(src));
+				double res = 0;
+				String s;
+				for (int i = elem.size()-1;i>=0;i--) {
+					s = elem.elementAt(i);
+					//System.out.println(s);
+					res = res + Double.parseDouble(s)*Math.pow(60, elem.size()-1-i);
+					//System.out.println(Math.pow(60, elem.size()-1-i));
 				}
+				return res;				
+			}
 		}else {
 			return Double.valueOf(src);
 		}
 			
 	}
-	protected double absoluteTime(Date src) {
+	/*protected double absoluteTime(Date src) {
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(src);
 		return (double)(cal.getTimeInMillis()+cal.get(Calendar.ZONE_OFFSET)+cal.get(Calendar.DST_OFFSET))/1000;
 		
+	}*/
+	protected Vector<String> readTimeElements(String src) {
+		Vector<String> res = new Vector<String>();
+		Scanner sc = new Scanner(src).useDelimiter(":");
+		while (sc.hasNext()){
+			res.add(sc.next());
+		}
+		return res;
 	}
+	
+	
 }
