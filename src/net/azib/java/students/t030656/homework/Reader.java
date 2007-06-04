@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -122,16 +123,9 @@ public class Reader {
 		while (true) {
 			try {
 				System.out.print("Enter the participants date of birth (dd.mm.yyyy): ");
-				DateFormat df = new SimpleDateFormat("dd.mm.yyyy");
-		        df.setLenient(false);
-		        String strDate = reader.readLine();
-		        df.format(df.parse(strDate));
-				return strDate;
+				return getParticipantDateOfBirth(reader.readLine());
 			}
 			catch (IOException e) {
-				System.out.println("Wrong input. Try again!");
-			}
-			catch (ParseException e) {
 				System.out.println("Wrong input. Try again!");
 			}
 		}		
@@ -143,17 +137,22 @@ public class Reader {
 	 * @param String format
 	 * @return
 	 */
-	private static String getParticipantDateOfBirth(String strDate, String format){
-		try {
-				DateFormat df = new SimpleDateFormat(format);
-		        df.setLenient(false);
-		        df.format(df.parse(strDate));
-				return strDate;
+	private static String getParticipantDateOfBirth(String strDate){
+		ArrayList<DateFormat> arrDateFormat = new ArrayList<DateFormat>();
+		arrDateFormat.add(new SimpleDateFormat("yyyy-mm-dd"));
+		arrDateFormat.add(new SimpleDateFormat("dd.mm.yyyy"));
+		for(int i = 0; i< arrDateFormat.size(); i++)
+		{
+			try {
+			        arrDateFormat.get(i).format(arrDateFormat.get(i).parse(strDate));
+					return strDate;
+				}
+			catch (ParseException e) {
+					System.out.println("Wrong input.");
+					return null;
 			}
-		catch (ParseException e) {
-				System.out.println("Wrong input.");
-				return null;
-		}	
+		}
+		return null;
 	}
 
 	/**
@@ -332,7 +331,7 @@ public class Reader {
 					line.split(",");
 					Participant par = new Participant();
 					par.setName(mLine[0].substring(1, mLine[0].length()-1));
-					par.setDateOfBirth(getParticipantDateOfBirth(mLine[1], "dd.mm.yyyy"));
+					par.setDateOfBirth(getParticipantDateOfBirth(mLine[1]));
 					par.setCountry(getParticipantCountry(mLine[2]));
 					String[] result = new String[10];
 					for(int i = 0; i<10; i++){
@@ -386,7 +385,7 @@ public class Reader {
 			while (resultSet.next()) {
 				 Participant par = new Participant();
 				 par.setName(resultSet.getString("name"));
-				 par.setDateOfBirth(getParticipantDateOfBirth(resultSet.getString("dob"), "yyyy-mm-dd"));
+				 par.setDateOfBirth(getParticipantDateOfBirth(resultSet.getString("dob")));
 				 par.setCountry(getParticipantCountry(resultSet.getString("country_code")));
 				 String[] arrRes = new String[10];
 				 arrRes[0] = resultSet.getString("race_100m");
