@@ -1,4 +1,4 @@
-package net.azib.java.students.t030656.hometask;
+package net.azib.java.students.t030656.homework;
 
 import static org.junit.Assert.*;
 
