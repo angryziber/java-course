@@ -83,23 +83,29 @@ public class DecathlonDatabaseReader {
 	public PriorityQueue<Competitor> readDatabase (){
 		ResultSet results = selectResults();
 		PriorityQueue<Competitor> pqCompetitor = new PriorityQueue<Competitor>();
-		try {
-			while (results.next()){
-				pqCompetitor.add(createCompetitor(results));
+		if (results == null){
+			System.out.println("Database cannot be read!");
+			return null;
+		}
+		else{
+			try {
+				while (results.next()){
+					pqCompetitor.add(createCompetitor(results));
+				}
 			}
+			catch (SQLException e) {
+				System.out.println("Connection failed!");
+				e.printStackTrace();
+			}
+			try {
+				results.close();
+			}
+			catch (SQLException e) {
+				System.out.println("Unable to close statement!");
+				e.printStackTrace();
+			}
+			return pqCompetitor;
 		}
-		catch (SQLException e) {
-			System.out.println("Connection failed!");
-			e.printStackTrace();
-		}
-		try {
-			results.close();
-		}
-		catch (SQLException e) {
-			System.out.println("Unable to close statement!");
-			e.printStackTrace();
-		}
-		return pqCompetitor;
 	}
 	
 	/**
@@ -113,7 +119,7 @@ public class DecathlonDatabaseReader {
 				"r.pole_vault, r.javelin_throw, r.race_1500m " + 
 				"FROM results AS r INNER JOIN athletes AS a ON r.athlete_id=a.id " + 
 				"WHERE r.competition_id=" + competitionId;
-		Statement statement = null;
+		Statement statement;
 		ResultSet resultSet;
 		try {
 			statement = connection.createStatement();

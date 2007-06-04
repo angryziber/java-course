@@ -42,17 +42,21 @@ public class DecathlonOutputWriter {
 	public void writeToConsole (PriorityQueue<Competitor> pq){
 		PriorityQueue<Competitor> compQueue = new PriorityQueue<Competitor>(pq);
 		Competitor comp = null;
-		while ((comp = compQueue.poll()) != null){
-			System.out.println(comp.getPlace() + comp.getTotalPoints() + " points - " + comp.getName() + ", " + comp.getDateOfBirth() + ", " + comp.getCountry());
-			double[] results = new double[10];
-			results = comp.getResults();
-			System.out.print("Results:");
-			for (int i=0; i<10; i++){
-				System.out.print("  " + results[i]);	
-			}
-			System.out.println("\n");
+		if (compQueue.size() == 0){
+			System.out.println("There are no results available.");			
 		}
-		
+		else{
+			while ((comp = compQueue.poll()) != null){
+				System.out.println(comp.getPlace() + comp.getTotalPoints() + " points - " + comp.getName() + ", " + comp.getDateOfBirth() + ", " + comp.getCountry());
+				double[] results = new double[10];
+				results = comp.getResults();
+				System.out.print("Results:");
+				for (int i=0; i<10; i++){
+					System.out.print("  " + results[i]);	
+				}
+				System.out.println("\n");
+			}
+		}
 	}
 	
 	/**
