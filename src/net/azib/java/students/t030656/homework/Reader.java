@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Scanner;
+
 
 
 /**
@@ -361,11 +363,10 @@ public class Reader {
 //		input reader
 		InputStream inStream = System.in;
 		Scanner inScan = new Scanner(inStream);
-		Connection conn;
+		Connection conn = null;
 		try {
+            Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, "java", "java");
-		
-			
 			String query = "SELECT c.description, c.id FROM competitions AS c";
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
@@ -374,9 +375,7 @@ public class Reader {
 			while (resultSet.next()) {
 				System.out.println( "["+ resultSet.getString("id")+ "]" + "\t" + resultSet.getString("description")); 
 			}
-			resultSet.close();
-			statement.close();
-			
+		
 			System.out.println("Select competition by typing correct id");
 			int id = inScan.nextInt();
 			
@@ -408,6 +407,17 @@ public class Reader {
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				conn.close();
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return comp;
 	}

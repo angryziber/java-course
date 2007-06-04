@@ -10,51 +10,51 @@ public enum Event {
 	/**
 	 * Decathlon event: 100 m run.<br> Result in sec
 	 */
-	RUN100 (25.437, 18.0, 1.81, 1, true),
+	RUN100 (25.437, 18.0, 1.81,true),
 	/**
 	 * Decathlon event: Long jump.<br> Result in formula cm.
 	 * Input is in m. Constant = 0.01.  
 	 */
-	LONGJUMP (0.14354, 220, 1.40, 0.01,false),
+	LONGJUMP (0.14354, 220, 1.40,false),
 	/**
 	 * Decathlon event: Shot Put.<br> Result in m
 	 */
-	SHOTPUT (51.39, 1.5, 1.05, 1, false),
+	SHOTPUT (51.39, 1.5, 1.05,false),
 	/**
 	 * Decathlon event: High Jump.<br> Result in cm
 	 * Input is in m. Constant = 0.01.
 	 */
-	HIGHJUMP (0.8465, 75, 1.42, 0.01, false),
+	HIGHJUMP (0.8465, 75, 1.42,false),
 	/**
 	 * Decathlon event: run 400 m.<br> Result in sec
 	 */
-	RUN400 (1.53775, 82, 1.81, 1, true),
+	RUN400 (1.53775, 82, 1.81,true),
 	/**
 	 * Decathlon event: run 110 m Hurdles.<br> Result in sec
 	 */
-	RUNHURDLES (5.74352, 28.5, 1.92, 1, true),
+	RUNHURDLES (5.74352, 28.5, 1.92,true),
 	/**
 	 * Decathlon event: Discus throw.<br> Result in m
 	 */
-	DISCUSTHROW (12.91, 4.0, 1.1, 1, false),
+	DISCUSTHROW (12.91, 4.0, 1.1,false),
 	/**
 	 * Decathlon event: Pole Vault.<br> Result in cm
 	 * Input is in m. Constant = 0.01.
 	 */
-	POLEVAULT (0.2797, 100, 1.35, 0.01, false),
+	POLEVAULT (0.2797, 100, 1.35,false),
 	/**
 	 * Decathlon event: Javelin Throw<br> Result in m
 	 */
-	JAVELINTHROW ( 10.14, 7.0, 1.08, 1, false),
+	JAVELINTHROW ( 10.14, 7.0, 1.08,false),
 	/**
 	 * Decathlon event: run 1500 m.<br> Result in sec
 	 */
-	RUN1500 (0.03768, 480, 1.85, 1,true);
+	RUN1500 (0.03768, 480, 1.85,true);
 	
 	private final double dA;
 	private final double dB;
 	private final double dC;
-	private final double dConst;
+
 	/**
 	 * if bRun is true the event is running event. if false the event is field event
 	 */
@@ -67,12 +67,11 @@ public enum Event {
 	 * @param (double) dC
 	 * @return (double) points
 	 */
-	private Event(double dA, double dB, double dC, double dConst, boolean bRun)
+	private Event(double dA, double dB, double dC, boolean bRun)
 	{
 		this.dA = dA;
 		this.dB = dB;
 		this.dC = dC;
-		this.dConst = dConst;
 		this.bRun = bRun;
 	}
 	
@@ -90,7 +89,7 @@ public enum Event {
 	 */
 	private double calulateField(double dEventResult)
 	{
-		return dA * Math.pow(((dEventResult/dConst)-dB), dC);
+		return dA * Math.pow((dEventResult-dB), dC);
 	}
 	/**
 	 * Returns points according to the result and event

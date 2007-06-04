@@ -3,6 +3,7 @@ package net.azib.java.students.t030656.homework;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -126,26 +127,26 @@ public class Participant implements Comparable<Participant>{
 	}
 	
 	private double parseTime (String strTime){
-		DateFormat df = new SimpleDateFormat("mm:ss.SS");
-	    DateFormat df2 = new SimpleDateFormat("ss.SS");
+		ArrayList<DateFormat> arrDF = new ArrayList<DateFormat>();
+		arrDF.add(new SimpleDateFormat("mm:ss.SS"));
+		arrDF.add(new SimpleDateFormat("ss.SS"));
+		arrDF.add(new SimpleDateFormat("ss"));
+
 	    Calendar cal = new GregorianCalendar();
-	    df.setLenient(false);
-	        
-	    try {
-	    	cal.setTime(df.parse(strTime));
-	    	return cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND) + 
-					(double)cal.get(Calendar.MILLISECOND)/100;
-	   	}
-	   	catch (ParseException e) {
-	   		try {
-	   			cal.setTime(df2.parse(strTime));
-	   			return cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND) + 
-	   				(double)cal.get(Calendar.MILLISECOND)/100;
+
+	    for(int i = 0; i<arrDF.size(); i++)
+	    {
+	    	try {
+		    	cal.setTime(arrDF.get(i).parse(strTime));
+		    	return cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND) + 
+						(double)cal.get(Calendar.MILLISECOND)/100;
+		   	}
+	    	catch (ParseException e) {
+	    		if(i == arrDF.size()){
+	    			System.out.println("Unsuported time format.");
+	    		}
 	   		}
-	   		catch (ParseException e1) {
-	   			System.out.println("Unsuported time format.");
-	   		}
-	   	}
+	    }
 		return 0;
 	}
 }
