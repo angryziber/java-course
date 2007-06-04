@@ -135,14 +135,6 @@ public class DecathlonResultDataBaseReader implements IDecathlonResultReader {
 		catch (SQLException e) {
 			LOG.log(Level.SEVERE, "Unable to query data from database", e);
 		}
-		
-		if(st != null)
-			try {
-				st.close();
-			}
-			catch (SQLException e) {
-				LOG.log(Level.SEVERE, "Unable to close created statement", e);
-			}
 		return rs;
 	}
 	
