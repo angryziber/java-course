@@ -21,7 +21,7 @@ public class DecathlonDatabaseReaderTest {
 	 * 
 	 */
 	@Test
-	public static void testSetConnection(){
+	public void testSetConnection(){
 		dbReader.setConnection("jdbc:mysql://srv.azib.net/decathlon", "java", "java");
 		assertNotNull(dbReader.readDatabase());
 	}
