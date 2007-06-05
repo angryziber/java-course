@@ -1,10 +1,10 @@
 /**
  * 
  */
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
- * @author NTAdmin
+ * @author Deniss Nikiforov
  *
  */
 public interface IDecathlonEvent {

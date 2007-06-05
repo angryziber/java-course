@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * This class implements all functions specific to Field Decathlon Events. The formula is cpecific here

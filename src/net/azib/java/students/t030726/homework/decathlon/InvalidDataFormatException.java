@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * An exception, which is thrown when input is invalid (like negative time achieved, etc)

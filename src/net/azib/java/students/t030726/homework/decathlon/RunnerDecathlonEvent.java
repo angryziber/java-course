@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * This is a class, which implements all functionality, which is specific for running events. The time conversions (minutes:seconds to seconds)

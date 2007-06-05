@@ -1,4 +1,4 @@
-package output;
+package net.azib.java.students.t030726.homework.output;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
-import decathlon.DecathlonChampionship;
-import decathlon.RatedDecathlonCompetition;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 
 /**
  * Class is responsible for writing CSV formatted data into the CSV file.

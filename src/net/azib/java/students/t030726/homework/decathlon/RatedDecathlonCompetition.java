@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.Iterator;
  *
  */
 public class RatedDecathlonCompetition {
-	private ArrayList rawResults = new ArrayList(); //These are the incomming DecathlonChampionships
+	private ArrayList<DecathlonChampionship> rawResults = new ArrayList<DecathlonChampionship>(); //These are the incomming DecathlonChampionships
 	private int maxIndex = 0; //Maximum array index
 	private int currentIndex = 0;
 	private DecathlonChampionship[] sortedList = null; //This is the sorted list (sorting done by comparing the score)

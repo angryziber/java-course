@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * Representation of the Long Jump event. Multiplies the result by 100 to provide cm.

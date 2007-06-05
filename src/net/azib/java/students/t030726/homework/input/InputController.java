@@ -1,9 +1,9 @@
-package input;
+package net.azib.java.students.t030726.homework.input;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
 
 /**
  * The input controller class abstracts the lower-level operations and provides a common interface for all possible input methods.

@@ -1,6 +1,6 @@
-package def;
+package net.azib.java.students.t030726.homework.def;
 
-import input.InputController;
+import net.azib.java.students.t030726.homework.input.InputController;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,10 +8,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import output.OutputController;
+import net.azib.java.students.t030726.homework.output.OutputController;
 
-import decathlon.DecathlonChampionship;
-import decathlon.RatedDecathlonCompetition;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 
 public class Application {
 	
@@ -70,7 +70,7 @@ public class Application {
 	}
 	
 	private static ArrayList performFullConsoleRead() throws Exception {
-		ArrayList out = new ArrayList();
+		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
 		InputController inControl = new InputController(InputController.CONSOLE_INPUT);
 		while(inControl.hasNext()) {
 			out.add(inControl.getNext());
@@ -87,7 +87,7 @@ public class Application {
 	}
 	
 	private static ArrayList performFullCSVRead(String filePath) throws Exception {
-		ArrayList out = new ArrayList();
+		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
 		InputController inControl = new InputController(InputController.CSV_INPUT, filePath);
 		do {
 			try {
@@ -101,7 +101,7 @@ public class Application {
 	}
 	
 	private static ArrayList performFullDatabaseRead(String url, String username, String password, int competitionID) throws Exception {
-		ArrayList out = new ArrayList();
+		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
 		InputController inControl = new InputController(InputController.MYSQL_INPUT, url, username, password, competitionID);
 		while(inControl.hasNext()) {
 			out.add(inControl.getNext());

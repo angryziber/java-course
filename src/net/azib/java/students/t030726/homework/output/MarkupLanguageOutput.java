@@ -1,4 +1,4 @@
-package output;
+package net.azib.java.students.t030726.homework.output;
 
 import java.io.*;
 //Xerces 1 or 2 additional classes.
@@ -8,8 +8,8 @@ import org.xml.sax.helpers.*;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
-import decathlon.DecathlonChampionship;
-import decathlon.RatedDecathlonCompetition;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 
 /**
  * Class produces an XML file containing all the data

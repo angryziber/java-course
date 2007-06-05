@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * A representation of the Shot Put event. Has constants initialized to correct values for this event

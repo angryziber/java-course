@@ -1,8 +1,8 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * A 1500m run event. Has constants, that are relevant for the formula for this type of event
- * @author NTAdmin
+ * @author Deniss Nikiforov
  *
  */
 public class FifteenHundredMeterRunEvent extends RunnerDecathlonEvent {

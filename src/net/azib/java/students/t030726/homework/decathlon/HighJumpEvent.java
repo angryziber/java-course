@@ -1,9 +1,9 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * A high jump representation. Has all constants defined which are relevant for the formula for this particular event.
  * The formula requires a cm input of the achieved result, but it is provided in metres, so it is multiplied by 100.
- * @author NTAdmin
+ * @author Deniss Nikiforov
  *
  */
 public class HighJumpEvent extends FieldDecathlonEvent {

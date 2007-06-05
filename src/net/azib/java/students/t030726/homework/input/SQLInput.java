@@ -1,4 +1,4 @@
-package input;
+package net.azib.java.students.t030726.homework.input;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,18 +8,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import decathlon.DecathlonChampionship;
-import decathlon.DecathlonChampionshipParticipator;
-import decathlon.DiscusThrowEvent;
-import decathlon.FifteenHundredMeterRunEvent;
-import decathlon.FourHundredMeterSprint;
-import decathlon.HighJumpEvent;
-import decathlon.HundredAndTenMeterHurdlesEvent;
-import decathlon.HundredMeterSprint;
-import decathlon.JavelinThrowEvent;
-import decathlon.LongJumpEvent;
-import decathlon.PoleVaultEvent;
-import decathlon.ShotPutEvent;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionshipParticipator;
+import net.azib.java.students.t030726.homework.decathlon.DiscusThrowEvent;
+import net.azib.java.students.t030726.homework.decathlon.FifteenHundredMeterRunEvent;
+import net.azib.java.students.t030726.homework.decathlon.FourHundredMeterSprint;
+import net.azib.java.students.t030726.homework.decathlon.HighJumpEvent;
+import net.azib.java.students.t030726.homework.decathlon.HundredAndTenMeterHurdlesEvent;
+import net.azib.java.students.t030726.homework.decathlon.HundredMeterSprint;
+import net.azib.java.students.t030726.homework.decathlon.JavelinThrowEvent;
+import net.azib.java.students.t030726.homework.decathlon.LongJumpEvent;
+import net.azib.java.students.t030726.homework.decathlon.PoleVaultEvent;
+import net.azib.java.students.t030726.homework.decathlon.ShotPutEvent;
 
 /**
  * Class is responsible for SQL server access and extraction of date. Also abstracts the input in a common way for the input controller to read
@@ -89,7 +89,7 @@ public class SQLInput implements IInput {
 	 * @throws SQLException 
 	 */
 	private ArrayList processResultSetResults(ResultSet rs) throws SQLException, InstantiationException, Exception {
-		ArrayList out = new ArrayList();
+		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
 			while(rs.next()){
 				
 				out.add(this.processSingleRecord(rs));

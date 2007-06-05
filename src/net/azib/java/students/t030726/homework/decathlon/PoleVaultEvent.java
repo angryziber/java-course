@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * Represents a pole vauld event. Result multiplied by 100 to provide cm. Has constants initialized to correct values for this event

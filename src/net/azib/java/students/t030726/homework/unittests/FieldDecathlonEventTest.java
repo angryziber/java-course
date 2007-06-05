@@ -1,6 +1,6 @@
-package unittests;
+package net.azib.java.students.t030726.homework.unittests;
 
-import decathlon.FieldDecathlonEvent;
+import net.azib.java.students.t030726.homework.decathlon.FieldDecathlonEvent;
 import junit.framework.TestCase;
 
 public class FieldDecathlonEventTest extends TestCase {

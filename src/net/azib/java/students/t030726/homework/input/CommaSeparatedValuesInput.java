@@ -1,4 +1,4 @@
-package input;
+package net.azib.java.students.t030726.homework.input;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -6,19 +6,19 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import decathlon.DecathlonChampionship;
-import decathlon.DecathlonChampionshipParticipator;
-import decathlon.DiscusThrowEvent;
-import decathlon.FifteenHundredMeterRunEvent;
-import decathlon.FourHundredMeterSprint;
-import decathlon.HighJumpEvent;
-import decathlon.HundredAndTenMeterHurdlesEvent;
-import decathlon.HundredMeterSprint;
-import decathlon.InvalidDataFormatException;
-import decathlon.JavelinThrowEvent;
-import decathlon.LongJumpEvent;
-import decathlon.PoleVaultEvent;
-import decathlon.ShotPutEvent;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionshipParticipator;
+import net.azib.java.students.t030726.homework.decathlon.DiscusThrowEvent;
+import net.azib.java.students.t030726.homework.decathlon.FifteenHundredMeterRunEvent;
+import net.azib.java.students.t030726.homework.decathlon.FourHundredMeterSprint;
+import net.azib.java.students.t030726.homework.decathlon.HighJumpEvent;
+import net.azib.java.students.t030726.homework.decathlon.HundredAndTenMeterHurdlesEvent;
+import net.azib.java.students.t030726.homework.decathlon.HundredMeterSprint;
+import net.azib.java.students.t030726.homework.decathlon.InvalidDataFormatException;
+import net.azib.java.students.t030726.homework.decathlon.JavelinThrowEvent;
+import net.azib.java.students.t030726.homework.decathlon.LongJumpEvent;
+import net.azib.java.students.t030726.homework.decathlon.PoleVaultEvent;
+import net.azib.java.students.t030726.homework.decathlon.ShotPutEvent;
 
 /**
  * Class is responsible for reading data from the database and providing an iterator-like interface to self for easy data reading
@@ -44,7 +44,7 @@ public class CommaSeparatedValuesInput implements IInput {
 	//These are the lines read from CSV files (unformatted)
 	ArrayList rawLines = null;
 	//This is a list of DecathlonChampionship objects, it is save to allow multiple queries to the getter for it.
-	ArrayList finalResult = new ArrayList();
+	ArrayList<DecathlonChampionship> finalResult = new ArrayList<DecathlonChampionship>();
 	
 	Iterator mainIterator = null;
 	
@@ -55,7 +55,7 @@ public class CommaSeparatedValuesInput implements IInput {
 	 * @throws Exception
 	 */
 	private ArrayList readAllLines(String filePath) throws Exception {
-		ArrayList out = new ArrayList();
+		ArrayList<String> out = new ArrayList<String>();
 		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-16"));
 		
 

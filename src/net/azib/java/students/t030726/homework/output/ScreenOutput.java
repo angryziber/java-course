@@ -1,8 +1,8 @@
-package output;
+package net.azib.java.students.t030726.homework.output;
 
 
-import decathlon.DecathlonChampionship;
-import decathlon.RatedDecathlonCompetition;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 
 /**
  * Screen output class. Outputs all data in a human-readable manner

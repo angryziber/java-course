@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * A discus throw event representation. Has constants, that describe formula parameters for this type of event

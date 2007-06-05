@@ -1,4 +1,4 @@
-package output;
+package net.azib.java.students.t030726.homework.output;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,8 +12,8 @@ import java.io.OutputStreamWriter;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 
-import decathlon.RatedDecathlonCompetition;
-
+import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
+import net.azib.java.students.t030726.homework.output.MarkupLanguageOutput;
 /**
  * Outputs HTML by merging XML+XSL. The XSL helper file is not generated on the fly, but is located in the output package/folder
  * @author Deniss Nikiforov

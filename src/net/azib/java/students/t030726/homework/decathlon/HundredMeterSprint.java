@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * A 100m sprint run. Has constants initialized for proper values for this event.

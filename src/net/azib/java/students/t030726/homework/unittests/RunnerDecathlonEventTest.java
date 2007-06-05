@@ -1,7 +1,7 @@
-package unittests;
+package net.azib.java.students.t030726.homework.unittests;
 
-import decathlon.InvalidDataFormatException;
-import decathlon.RunnerDecathlonEvent;
+import net.azib.java.students.t030726.homework.decathlon.InvalidDataFormatException;
+import net.azib.java.students.t030726.homework.decathlon.RunnerDecathlonEvent;
 import junit.framework.TestCase;
 
 public class RunnerDecathlonEventTest extends TestCase {

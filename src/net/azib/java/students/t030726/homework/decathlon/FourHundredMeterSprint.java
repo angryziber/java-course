@@ -1,8 +1,8 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * A 400m run representation. Has all constants defined, that are relevant for the calculation formula.
- * @author NTAdmin
+ * @author Deniss Nikiforov
  *
  */
 public class FourHundredMeterSprint extends RunnerDecathlonEvent {

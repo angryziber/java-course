@@ -1,4 +1,4 @@
-package input;
+package net.azib.java.students.t030726.homework.input;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
 
-import decathlon.DecathlonChampionship;
-import decathlon.DecathlonChampionshipParticipator;
-import decathlon.DiscusThrowEvent;
-import decathlon.FifteenHundredMeterRunEvent;
-import decathlon.FourHundredMeterSprint;
-import decathlon.HighJumpEvent;
-import decathlon.HundredAndTenMeterHurdlesEvent;
-import decathlon.HundredMeterSprint;
-import decathlon.InvalidDataFormatException;
-import decathlon.JavelinThrowEvent;
-import decathlon.LongJumpEvent;
-import decathlon.PoleVaultEvent;
-import decathlon.ShotPutEvent;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionshipParticipator;
+import net.azib.java.students.t030726.homework.decathlon.DiscusThrowEvent;
+import net.azib.java.students.t030726.homework.decathlon.FifteenHundredMeterRunEvent;
+import net.azib.java.students.t030726.homework.decathlon.FourHundredMeterSprint;
+import net.azib.java.students.t030726.homework.decathlon.HighJumpEvent;
+import net.azib.java.students.t030726.homework.decathlon.HundredAndTenMeterHurdlesEvent;
+import net.azib.java.students.t030726.homework.decathlon.HundredMeterSprint;
+import net.azib.java.students.t030726.homework.decathlon.InvalidDataFormatException;
+import net.azib.java.students.t030726.homework.decathlon.JavelinThrowEvent;
+import net.azib.java.students.t030726.homework.decathlon.LongJumpEvent;
+import net.azib.java.students.t030726.homework.decathlon.PoleVaultEvent;
+import net.azib.java.students.t030726.homework.decathlon.ShotPutEvent;
 
 /**
  * Class is responsible for keyboard input and abstraction for the input controller
@@ -83,7 +83,7 @@ public class KeyboardInput implements IInput {
 	 */
 	private void inputWizard(BufferedReader br) throws IOException {
 		String inputLine = null;
-		ArrayList list = new ArrayList();
+		ArrayList<DecathlonChampionship> list = new ArrayList<DecathlonChampionship>();
 		while(true) {
 			try {
 				System.out.print("Would you like to enter details about a participator: (1 - yes, 2 - no): ");

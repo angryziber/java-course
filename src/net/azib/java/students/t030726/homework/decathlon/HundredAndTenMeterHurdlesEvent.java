@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 /**
  * A representation of the 110m hurdles run. Has all relevant constants defined, that are relevant for the computation formula.

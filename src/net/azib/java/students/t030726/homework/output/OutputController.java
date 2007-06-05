@@ -1,6 +1,6 @@
-package output;
+package net.azib.java.students.t030726.homework.output;
 
-import decathlon.RatedDecathlonCompetition;
+import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 
 /**
  * The output controller. Abstracts lower levels of output for the upper layers

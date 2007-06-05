@@ -1,6 +1,6 @@
-package input;
+package net.azib.java.students.t030726.homework.input;
 
-import decathlon.DecathlonChampionship;
+import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
 
 /**
  * The interface defines the standard functions, which are expected by the InputController.

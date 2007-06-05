@@ -1,4 +1,4 @@
-package decathlon;
+package net.azib.java.students.t030726.homework.decathlon;
 
 import java.lang.InstantiationException;
 
@@ -6,7 +6,7 @@ import java.lang.InstantiationException;
  * The main DTO object for the program. Contains all necessary information to produce output for a single participant.
  * Used in conjunction with arraylist.
  * A championship by my definition here is a series of all decathlon events
- * @author NTAdmin
+ * @author Dennis Nikiforov
  *
  */
 public class DecathlonChampionship  implements Comparable {
