@@ -36,16 +36,16 @@ public class ConsoleOutput {
 			append(padRight(result.getAthlete().getName(), nameWidth)).
 			append(padLeft(result.getAthlete().getBirthDate(),DATE_WIDTH)).
 			append(padLeft(result.getAthlete().getCountryCode(),COUNTRY_WIDTH)).
-			append(padLeft(DecathlonEvent.RACE_100M.eventResultFormat(result.getRace100()),RESULT_WIDTH)).
-			append(padLeft(DecathlonEvent.LONG_JUMP.eventResultFormat(result.getLongJump()),RESULT_WIDTH)).
-			append(padLeft(DecathlonEvent.SHOT_PUT.eventResultFormat(result.getShotPut()),RESULT_WIDTH)).
-			append(padLeft(DecathlonEvent.HIGH_JUMP.eventResultFormat(result.getHighJump()),RESULT_WIDTH)).
-			append(padLeft(DecathlonEvent.RACE_400M.eventResultFormat(result.getRace400()),TIME_WIDTH)).
-			append(padLeft(DecathlonEvent.HURDLES_110M.eventResultFormat(result.getHurdles110()),RESULT_WIDTH)).
-			append(padLeft(DecathlonEvent.DISCUS_THROW.eventResultFormat(result.getDiscusThrow()),RESULT_WIDTH)).
-			append(padLeft(DecathlonEvent.POLE_VAULT.eventResultFormat(result.getPoleVault()),RESULT_WIDTH)).
-			append(padLeft(DecathlonEvent.JAVELIN_THROW.eventResultFormat(result.getJavelinThrow()),RESULT_WIDTH)).
-			append(padLeft(DecathlonEvent.RACE_1500M.eventResultFormat(result.getRace1500()),TIME_WIDTH));
+			append(padLeft(result.getStringRace100(),RESULT_WIDTH)).
+			append(padLeft(result.getStringLongJump(),RESULT_WIDTH)).
+			append(padLeft(result.getStringShotPut(),RESULT_WIDTH)).
+			append(padLeft(result.getStringHighJump(),RESULT_WIDTH)).
+			append(padLeft(result.getStringRace400(),TIME_WIDTH)).
+			append(padLeft(result.getStringHurdles110(),RESULT_WIDTH)).
+			append(padLeft(result.getStringDiscusThrow(),RESULT_WIDTH)).
+			append(padLeft(result.getStringPoleVault(),RESULT_WIDTH)).
+			append(padLeft(result.getStringJavelinThrow(),RESULT_WIDTH)).
+			append(padLeft(result.getStringRace1500(),TIME_WIDTH));
 	}
 
 	protected StringBuffer spaces(int length) {

@@ -1,5 +1,7 @@
 package net.azib.java.students.t960644.homework;
 
+import java.text.ParseException;
+
 /**
  * Result
  * 
@@ -42,14 +44,7 @@ public class Result implements Comparable<Result>{
 	public void setAthlete(Athlete athlete) {
 		this.athlete = athlete;
 	}
-
-	/**
-	 * @return the race100
-	 */
-	public double getRace100() {
-		return race100;
-	}
-
+	
 	/**
 	 * @return the position
 	 */
@@ -65,12 +60,19 @@ public class Result implements Comparable<Result>{
 	}
 
 	/**
+	 * @return the race100
+	 */
+	public double getRace100() {
+		return race100;
+	}
+
+	/**
 	 * @param race100 the race100 to set
 	 */
 	public void setRace100(double race100) {
 		this.race100 = race100;
 	}
-
+	
 	/**
 	 * @return the longJump
 	 */
@@ -236,4 +238,66 @@ public class Result implements Comparable<Result>{
 		// TODO Auto-generated method stub
 		return o.calcResult()-this.calcResult();
 	}
+
+	public void setRace100(String race100) throws ParseException {
+		setRace100(DecathlonEvent.RACE_100M.eventResultParse(race100));
+	}
+	public void setLongJump(String longJump) throws ParseException{
+		setLongJump(DecathlonEvent.LONG_JUMP.eventResultParse(longJump));
+	}
+	public void setShotPut(String shotPut) throws ParseException {
+		setShotPut(DecathlonEvent.SHOT_PUT.eventResultParse(shotPut));
+	}
+	public void setHighJump(String highJump) throws ParseException {
+		setHighJump(DecathlonEvent.HIGH_JUMP.eventResultParse(highJump));
+	}
+	public void setRace400(String race400) throws ParseException {
+		setRace400(DecathlonEvent.RACE_400M.eventResultParse(race400));
+	}
+	public void setHurdles110(String hurdles110) throws ParseException {
+		setHurdles110(DecathlonEvent.HURDLES_110M.eventResultParse(hurdles110));
+	}
+	public void setDiscusThrow(String discusThrow) throws ParseException {
+		setDiscusThrow(DecathlonEvent.DISCUS_THROW.eventResultParse(discusThrow));
+	}
+	public void setPoleVault(String poleVault) throws ParseException {
+		setPoleVault(DecathlonEvent.POLE_VAULT.eventResultParse(poleVault));
+	}
+	public void setJavelinThrow(String javelinThrow) throws ParseException{
+		setJavelinThrow(DecathlonEvent.JAVELIN_THROW.eventResultParse(javelinThrow));
+	}
+	public void setRace1500(String race1500) throws ParseException{
+		setRace1500(DecathlonEvent.RACE_1500M.eventResultParse(race1500));
+	}
+	String getStringRace100(){
+		return DecathlonEvent.RACE_100M.eventResultFormat(getRace100());
+	}	
+	String getStringLongJump(){
+		return DecathlonEvent.LONG_JUMP.eventResultFormat(getLongJump());
+	}
+	String getStringShotPut(){
+		return DecathlonEvent.SHOT_PUT.eventResultFormat(getShotPut());
+	}
+	String getStringHighJump(){
+		return DecathlonEvent.HIGH_JUMP.eventResultFormat(getHighJump());
+	}
+	String getStringRace400(){
+		return DecathlonEvent.RACE_400M.eventResultFormat(getRace400());
+	}
+	String getStringHurdles110(){
+		return DecathlonEvent.HURDLES_110M.eventResultFormat(getHurdles110());
+	}
+	String getStringDiscusThrow(){
+		return DecathlonEvent.DISCUS_THROW.eventResultFormat(getDiscusThrow());
+	}
+	String getStringPoleVault(){
+		return DecathlonEvent.POLE_VAULT.eventResultFormat(getPoleVault());
+	}
+	String getStringJavelinThrow(){
+		return DecathlonEvent.JAVELIN_THROW.eventResultFormat(getJavelinThrow());
+	}
+	String getStringRace1500(){
+		return DecathlonEvent.RACE_1500M.eventResultFormat(getRace1500());	
+	}
+		
 }

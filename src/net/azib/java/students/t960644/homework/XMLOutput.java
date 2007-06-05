@@ -42,16 +42,16 @@ public class XMLOutput {
 		resElement.appendChild(writeElement("athlete",result.getAthlete().getName()));
 		resElement.appendChild(writeElement("born",result.getAthlete().getBirthDate()));
 		resElement.appendChild(writeElement("country",result.getAthlete().getCountryCode()));
-		resElement.appendChild(writeElement("race-100m",DecathlonEvent.RACE_100M.eventResultFormat(result.getRace100())));
-		resElement.appendChild(writeElement("long-jump",DecathlonEvent.LONG_JUMP.eventResultFormat(result.getLongJump())));
-		resElement.appendChild(writeElement("shot-put",DecathlonEvent.SHOT_PUT.eventResultFormat(result.getShotPut())));
-		resElement.appendChild(writeElement("high-jump",DecathlonEvent.HIGH_JUMP.eventResultFormat(result.getHighJump())));
-		resElement.appendChild(writeElement("race-400m",DecathlonEvent.RACE_400M.eventResultFormat(result.getRace400())));
-		resElement.appendChild(writeElement("hurdles-110m",DecathlonEvent.HURDLES_110M.eventResultFormat(result.getHurdles110())));
-		resElement.appendChild(writeElement("discus-throw",DecathlonEvent.DISCUS_THROW.eventResultFormat(result.getDiscusThrow())));
-		resElement.appendChild(writeElement("pole-vault",DecathlonEvent.POLE_VAULT.eventResultFormat(result.getPoleVault())));
-		resElement.appendChild(writeElement("javelin-throw",DecathlonEvent.JAVELIN_THROW.eventResultFormat(result.getJavelinThrow())));
-		resElement.appendChild(writeElement("race-1500m",DecathlonEvent.RACE_1500M.eventResultFormat(result.getRace1500())));		
+		resElement.appendChild(writeElement("race-100m",result.getStringRace100()));
+		resElement.appendChild(writeElement("long-jump",result.getStringLongJump()));
+		resElement.appendChild(writeElement("shot-put",result.getStringShotPut()));
+		resElement.appendChild(writeElement("high-jump",result.getStringHighJump()));
+		resElement.appendChild(writeElement("race-400m",result.getStringRace400()));
+		resElement.appendChild(writeElement("hurdles-110m",result.getStringHurdles110()));
+		resElement.appendChild(writeElement("discus-throw",result.getStringDiscusThrow()));
+		resElement.appendChild(writeElement("pole-vault",result.getStringPoleVault()));
+		resElement.appendChild(writeElement("javelin-throw",result.getStringJavelinThrow()));
+		resElement.appendChild(writeElement("race-1500m",result.getStringRace1500()));		
 		return resElement; 
 	}
 	

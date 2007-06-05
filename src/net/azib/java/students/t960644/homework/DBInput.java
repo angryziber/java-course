@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * DBInput
@@ -23,19 +25,35 @@ public class DBInput {
 		Class.forName(sqlDriver);
 		connection = DriverManager.getConnection(url, user, password);
 	}
-
-	public Competition readCompetition() throws SQLException {
-		Competition competition = new Competition();
+	public List<Competition> readCompetitions() throws SQLException {
 		Statement statement = connection.createStatement();
-		ResultSet resultSet = statement.executeQuery("select * from competitions where id=2");
-		while (resultSet.next()) { // uhh kui vilets lahendus, ajutine teema.
-			competition.setDate(resultSet.getDate("date"));
-			competition.setCountryCode(resultSet.getString("country_code"));
-			competition.setDescription(resultSet.getString("description"));
-			competition.setId(resultSet.getInt("id"));
+		List<Competition> returnList = new ArrayList<Competition>();
+		ResultSet resultSet = statement.executeQuery("select * from competitions"); 
+		while (resultSet.next()) {
+			returnList.add(readSingleCompetition(resultSet));
+		}
+		return returnList;
+	}
+
+	public Competition readCompetition(String compId) throws SQLException {
+		Competition competition = null;
+		PreparedStatement ps = connection.prepareStatement("select * from competitions where id=?");
+		ps.setString(1, compId);
+		ResultSet resultSet = ps.executeQuery("select * from competitions where id=2");
+		if (resultSet.first()){
+			competition = readSingleCompetition(resultSet);
 		}
 		resultSet.close();
-		statement.close();
+		ps.close();
+		return competition;
+	}
+
+	protected Competition readSingleCompetition(ResultSet resultSet) throws SQLException {
+		Competition competition = new Competition();
+		competition.setDate(resultSet.getDate("date"));
+		competition.setCountryCode(resultSet.getString("country_code"));
+		competition.setDescription(resultSet.getString("description"));
+		competition.setId(resultSet.getInt("id"));
 		return competition;
 	}
 
@@ -89,7 +107,7 @@ public class DBInput {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
 		DBInput dbInput = new DBInput();
 		dbInput.initConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/test", "root", "MykB5kB5");
-		Competition competition = dbInput.readCompetition();
+		Competition competition = dbInput.readCompetition("2");
 		dbInput.readAthletes(competition);
 		dbInput.readResults(competition);
 		dbInput.releaseConnection();
