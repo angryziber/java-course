@@ -30,7 +30,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @return the sprint_100m
 	 */	
-	public float getSprint_100m() {
+	public Float getSprint_100m() {
 		return sprint_100m;
 	}
 	/**
@@ -53,7 +53,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @return the longJump
 	 */
-	public float getLongJump() {
+	public Float getLongJump() {
 		return longJump;
 	}
 	/**
@@ -76,7 +76,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @return the shotPut
 	 */
-	public float getShotPut() {
+	public Float getShotPut() {
 		return shotPut;
 	}
 	/**
@@ -99,7 +99,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @return the highJump
 	 */
-	public float getHighJump() {
+	public Float getHighJump() {
 		return highJump;
 	}
 	/**
@@ -151,7 +151,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @return the hurdles_110m
 	 */
-	public float getHurdles_110m() {
+	public Float getHurdles_110m() {
 		return hurdles_110m;
 	}
 	/**
@@ -174,7 +174,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @return the discusThrow
 	 */
-	public float getDiscusThrow() {
+	public Float getDiscusThrow() {
 		return discusThrow;
 	}
 	/**
@@ -197,7 +197,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @return the poleVault
 	 */
-	public float getPoleVault() {
+	public Float getPoleVault() {
 		return poleVault;
 	}
 	/**
@@ -220,7 +220,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	/**
 	 * @return the javelinThrow
 	 */
-	public float getJavelinThrow() {
+	public Float getJavelinThrow() {
 		return javelinThrow;
 	}
 	/**
@@ -270,47 +270,47 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 		}
 	}
 	/**@return PointsCalc.SPRINT100.getPoints(sprint_100m);*/
-	public long getSprint_100mPoints(){
+	public Long getSprint_100mPoints(){
 		return PointsCalc.SPRINT100.getPoints(sprint_100m);
 	}
 	/**@return PointsCalc.LONGJUMP.getPoints(longJump)*/
-	public long getLongJumpPoints() {
+	public Long getLongJumpPoints() {
 		return PointsCalc.LONGJUMP.getPoints(longJump);
 	}
 	/**@return PointsCalc.SHOTPUT.getPoints(shotPut)*/
-	public long getShotPutPoints() {
+	public Long getShotPutPoints() {
 		return PointsCalc.SHOTPUT.getPoints(shotPut);
 	}
 	/** @return PointsCalc.HIGHJUMP.getPoints(highJump)*/
-	public long getHighJumpPoints() {
+	public Long getHighJumpPoints() {
 		return PointsCalc.HIGHJUMP.getPoints(highJump);
 	}
 	/** @return PointsCalc.SPRINT400.getPoints(sprint_400m)*/
-	public long getSprint_400mPoints() {
+	public Long getSprint_400mPoints() {
 		return PointsCalc.SPRINT400.getPoints(sprint_400m);
 	}
 	/**@return return PointsCalc.HURDLES110.getPoints(hurdles_110m)*/
-	public long getHurdles_110mPoints() {
+	public Long getHurdles_110mPoints() {
 		return PointsCalc.HURDLES110.getPoints(hurdles_110m);
 	}
 	/**@return the discusThrow*/
-	public long getDiscusThrowPoints() {
+	public Long getDiscusThrowPoints() {
 		return PointsCalc.DISCUSTHROW.getPoints(discusThrow);
 	} 
 	/**@return PointsCalc.POLEVAULT.getPoints(poleVault)*/
-	public long getPoleVaultPoints() {
+	public Long getPoleVaultPoints() {
 		return PointsCalc.POLEVAULT.getPoints(poleVault);
 	}
 	/**@return PointsCalc.JAVELINTHROW.getPoints(javelinThrow)*/
-	public long getJavelinThrowPoints() {
+	public Long getJavelinThrowPoints() {
 		return PointsCalc.JAVELINTHROW.getPoints(javelinThrow);
 	}
 	/**@return PointsCalc.RACE1500.getPoints(race_1500m)*/
-	public long getRace_1500mPoints() {
+	public Long getRace_1500mPoints() {
 		return PointsCalc.RACE1500.getPoints(race_1500m);
 	}
 	/**@return PointsTogether*/
-	public long getPoints() {
+	public Long getPoints() {
 		return 	getSprint_100mPoints() + getLongJumpPoints() +
 				getShotPutPoints() + getHighJumpPoints() +
 				getSprint_400mPoints() + getHurdles_110mPoints() +
@@ -349,7 +349,7 @@ public class ResultsOfTheAthlet extends Athlet implements Comparable<ResultsOfTh
 	@Override
 	public final int compareTo(ResultsOfTheAthlet ComparedResultsOfTheAtlet) {
 		ResultsOfTheAthlet rs = (ResultsOfTheAthlet)ComparedResultsOfTheAtlet; 
-		return ((int)rs.getPoints() - (int)getPoints());
+		return (int)(rs.getPoints() - getPoints());
 	}
 
 }

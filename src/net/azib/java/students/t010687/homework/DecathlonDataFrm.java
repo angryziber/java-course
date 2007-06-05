@@ -59,6 +59,8 @@ public class DecathlonDataFrm {
 	    table.getTableHeader().setBackground(Color.yellow);
     	tab.add("CompetitionPointsAndRank", new JScrollPane(table));
     	/////////////////////////
+    	tab.add("ExportData", panelExportData(ListWithDecathlonData));
+    	/////////////////////////	
     	frame.setSize(1200,400);
     	frame.setVisible(true);
     }
@@ -70,25 +72,45 @@ public class DecathlonDataFrm {
     	athletesInfoSorter.toggleSortOrder(0);
     	JTable table =new JTable(athletesInfoMdl);
         table.setRowSorter(athletesInfoSorter);
-        
+        table.getTableHeader().setBackground(Color.yellow);
         //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        //table.setFillsViewportHeight(true);
-	    table.getTableHeader().setBackground(Color.yellow);
+        //table.setFillsViewportHeight(true); 
 
 	    panel.add(new JScrollPane(table));
 	    JButton btn_InsertRow = new JButton("Add Athlete");
 	    btn_InsertRow.addActionListener(new AddRowForNewAthlete ());
 	    panel.add(btn_InsertRow);
-
-	    JButton btn_ToXML = new JButton("ExpoerToHTML");
-	    btn_ToXML.addActionListener(new ToXML());
-	    panel.add(btn_ToXML);
 	    
+	    return panel;	
+    }
+    private Panel panelExportData(List <ResultsOfTheAthlet>ListWithDecathlonData){
+		Panel panel = new Panel();
+	    JButton button = new JButton("ExportToXML");
+	    button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				DataExport exporter = new DataExport(results);
+				exporter.saveDataToXMLFormat();
+			}});
+	    panel.add(button);
+	    button = new JButton("ExportToHTML");
+	    button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				DataExport exporter = new DataExport(results);
+				exporter.saveDataToHTMLFormat();
+			}});
+	    panel.add(button);
+	    button = new JButton("ExportToCVS");
+	    button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				DataExport exporter = new DataExport(results);
+				exporter.saveDataToCSVFormat();
+			}});;
+	    panel.add(button);
 	    return panel;	
     }
     class AddRowForNewAthlete implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
-			ResultsOfTheAthlet	Results = new ResultsOfTheAthlet("XXXXXXXXXX", "01.01.1999", "NA");
+			ResultsOfTheAthlet	Results = new ResultsOfTheAthlet("XXXXNewAthleteXXXX", "01.01.1999", "--");
 	    	Results.setSprint_100m(0);	//(sec)
 	    	Results.setLongJump(0);		//(m)
 	    	Results.setShotPut(0);		//(m)
@@ -105,14 +127,6 @@ public class DecathlonDataFrm {
 			competResultsMdl.addRow(newRowIndex);
 			competPointsMdl.addRow(newRowIndex);
 		}
-    	
-    }
-    class ToXML implements ActionListener{
-		public void actionPerformed(ActionEvent arg0) {
-			Results2XML xx = new Results2XML(results);
-			xx.saveDataToHTMLFormat();
-		}
-    	
     }
     class CompetResultsModel extends AbstractTableModel {
         /** serialVersionUID */
@@ -141,9 +155,7 @@ public class DecathlonDataFrm {
         	}
         	return 0;
         }
-        //public Class <Object> getColumnClass(int c) {
-        //     return getValueAt(0, c).getClass();
-        //}
+
         public boolean isCellEditable(int row, int col) {
             //The data/cell address is constant,
             //no matter where the cell appears onscreen.
@@ -157,7 +169,6 @@ public class DecathlonDataFrm {
         	fireTableRowsInserted(rowIndex,rowIndex);
         }
         public void setValueAt(Object value, int row, int col) {
-        	//ResultsOfTheAthlet Result = (ResultsOfTheAthlet)data[row][columnNames.length];
         	switch(col){
         		case 1:
         			results.get(row).setSprint_100m((String)value);
@@ -231,7 +242,7 @@ public class DecathlonDataFrm {
         	return Ranks; 
         }
         private int setRank(int curRank){
-        	if (curRank < results.size() -1){
+        	if (curRank < results.size() -1){//if next item exists
         		if (results.get(curRank).getPoints()> results.get(curRank +1).getPoints()){
         			return curRank;
         		}
@@ -275,7 +286,7 @@ public class DecathlonDataFrm {
         public boolean isCellEditable(int row, int col) {return false;}
 
         public void setValueAt(Object value, int row, int col) {
-            fireTableCellUpdated(row, col);
+            //fireTableCellUpdated(row, col);
         }
     }
     class AthletesPersInfoModel extends AbstractTableModel {
@@ -307,6 +318,7 @@ public class DecathlonDataFrm {
         			results.get(row).setName((String)value);
                 	competResultsMdl.fireTableCellUpdated(row,0);
                 	competPointsMdl.fireTableCellUpdated(row,1);
+                	break;
         		case 1:
         			results.get(row).setDateOfBirth((String)value);
         			break;

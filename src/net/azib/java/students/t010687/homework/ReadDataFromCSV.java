@@ -22,23 +22,23 @@ import javax.swing.JOptionPane;
  * @author Matu
  */
 public class ReadDataFromCSV implements ActionListener{
-    private JFrame ParentFrm;
+    private JFrame parentFrm;
     public ReadDataFromCSV(JFrame Related_frame){
-    	ParentFrm = Related_frame;
+    	parentFrm = Related_frame;
     }
     public void actionPerformed(ActionEvent e){
         JFileChooser fc = new JFileChooser(new File(File.separator+"CSV"));
         // Show dialog; this method doesn't return until dialog is closed
-        fc.showOpenDialog(ParentFrm);
+        fc.showOpenDialog(parentFrm);
         // Get the selected file
         File file = fc.getSelectedFile();
         if (file != null){
         	List <ResultsOfTheAthlet> ListWithDechatlonInfo = parseCSVFile(file);
         	if (ListWithDechatlonInfo.isEmpty()){
-        		JOptionPane.showMessageDialog(ParentFrm,"Please select correct CSV File!");
+        		JOptionPane.showMessageDialog(parentFrm,"Please select correct CSV File!");
         		return;
         	}       	
-        	ParentFrm.dispose();
+        	parentFrm.dispose();
         	new DecathlonDataFrm(ListWithDechatlonInfo);
         }
     }

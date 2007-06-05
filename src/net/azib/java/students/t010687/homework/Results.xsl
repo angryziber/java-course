@@ -14,6 +14,7 @@
 <xsl:template match="DecathlonCompetitionResults">
 	<table border="2" width="50%">
 	<tr>
+		<td><i>Rank</i></td>
         <td><i>AthletesName</i></td>
         <td><i>DateOfBirth</i></td>
         <td><i>Country</i></td>
@@ -31,6 +32,7 @@
 	</tr>
 	<xsl:for-each select="athlete">
 	<tr>
+		<td><xsl:value-of select="rank"/></td>
 		<td><i><xsl:value-of select="name"/></i></td>
 		<td><xsl:value-of select="dob"/></td>
 		<td><xsl:value-of select="country"/></td>

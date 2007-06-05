@@ -16,37 +16,33 @@ import org.springframework.core.io.ClassPathResource;
  * @author Matu
  */
 public class ReadDataFromSQL implements ActionListener{
-    private JFrame ParentFrm;
+    private JFrame parentFrm;
     private DecathlonDao dechatlonDao;
-    public ReadDataFromSQL(JFrame Related_frame){
-    	ParentFrm = Related_frame;
+    public ReadDataFromSQL(JFrame related_frame){
+    	parentFrm = related_frame;
     }
     public void actionPerformed(ActionEvent e){
     	BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("beans.xml", ReadDataFromSQL.class));
     	dechatlonDao = (DecathlonDao) beanFactory.getBean(DecathlonDao.class.getName());
-    	ParentFrm.setEnabled(false);
+    	parentFrm.setEnabled(false);
     	Competition SelectedCompet = getSelectedCompetition();
     	if (SelectedCompet != null){
-    		ParentFrm.dispose();
+    		parentFrm.dispose();
     		List<ResultsOfTheAthlet> Results = dechatlonDao.getCompetition_id(SelectedCompet.getId());
-    		ParentFrm.dispose();
+    		parentFrm.dispose();
     		new DecathlonDataFrm(Results);
     	}
     	else {
-    		ParentFrm.setEnabled(true);
+    		parentFrm.setEnabled(true);
     	}
     }
     private Competition getSelectedCompetition(){
     	ArrayList<Competition> Competitions = new ArrayList<Competition>(dechatlonDao.getCompetitions());
     	return (Competition)JOptionPane.showInputDialog(
-    			ParentFrm,
-                "DECATHLON:\n"
+    			parentFrm, "DECATHLON:\n"
                 + "Please select competition:",
-                "DECATHLON",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                Competitions.toArray(),
-                null);
+                "DECATHLON",JOptionPane.PLAIN_MESSAGE,
+                null,Competitions.toArray(), null);
     }
   }
 
