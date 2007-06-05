@@ -1,4 +1,4 @@
-package net.azib.java.students.t020543.homework;
+package net.azib.java.students.t020543;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
