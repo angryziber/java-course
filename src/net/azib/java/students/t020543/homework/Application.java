@@ -48,7 +48,7 @@ public class Application {
 		System.out.println("\nTotal number of athletes: " + standings.size());
 		
 		//avoiding null size of list (IndexOutOfBoundsException)
-		if ( standings.size()>0){
+		if ( !standings.isEmpty()){
 		standings.get(0).setPlace(1);
 		}
 		
