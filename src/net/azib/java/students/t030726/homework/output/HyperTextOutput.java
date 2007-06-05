@@ -36,7 +36,7 @@ public class HyperTextOutput implements IOutput {
 	private File generateXSLTFile() throws IOException {
 		File f = File.createTempFile("xslt_helper", ".xsl");
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f), "UTF-8"));
-		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream("output/helper.xsl"), "UTF-8"));
+		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream("src/net/azib/java/students/t030726/homework/output/helper.xsl"), "UTF-8"));
 		String tempLine = null;
 		do {
 			tempLine = in.readLine();
@@ -78,12 +78,14 @@ public class HyperTextOutput implements IOutput {
 		    Transformer transformer = tFactory.newTransformer
 		         (new javax.xml.transform.stream.StreamSource
 		            (xsl.getPath()));
+		    FileOutputStream fis = new FileOutputStream(this.outputFile);
+            BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(fis, "UTF-16"));
 
 		    transformer.transform
 		      (new javax.xml.transform.stream.StreamSource
 		            (xml.getPath()),
 		       new javax.xml.transform.stream.StreamResult
-		            ( new FileOutputStream(this.outputFile)));
+		            ( buffWriter));
 		    }
 		  catch (Exception e) {
 		    e.printStackTrace( );

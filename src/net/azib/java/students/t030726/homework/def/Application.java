@@ -156,6 +156,7 @@ public class Application {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
+			
 			BufferedReader userIn = new BufferedReader(new InputStreamReader( System.in ) );
 			int userInputChoice = askForInputType(userIn);
 			int userOutputChoice = 0;
