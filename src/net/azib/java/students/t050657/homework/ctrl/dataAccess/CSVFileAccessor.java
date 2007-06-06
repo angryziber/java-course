@@ -3,6 +3,7 @@ package net.azib.java.students.t050657.homework.ctrl.dataAccess;
 import net.azib.java.students.t050657.homework.dao.CompetitionDao;
 import net.azib.java.students.t050657.homework.dao.csvFileDao.CompetitionDaoBean;
 import net.azib.java.students.t050657.homework.model.Competition;
+import net.azib.java.students.t050657.homework.model.InsufficientResultsException;
 
 import java.sql.Date;
 
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
 /**
- * CSVFileAccessor
+ * CSVFileAccessor implementation of DataAccessor with use of CSV as data-layer.
  *
  * @author Boriss
  */
@@ -21,16 +22,20 @@ public class CSVFileAccessor implements DataAccessor{
 
 	public Competition getCompetition(String countryCode, Date date, String description) {
 		BeanFactory beanFactory = new XmlBeanFactory(
-				new ClassPathResource("../../../mapping/fbeans.xml",
-				DBAccessor.class));
+				new ClassPathResource("../../mapping/fbeans.xml",
+				CSVFileAccessor.class));
 		
 		CompetitionDaoBean competitionDao = (CompetitionDaoBean) beanFactory.getBean(CompetitionDao.class.getName());
 		competitionDao.setFilepath(this.filepath);
 		
 		Competition competition = competitionDao.getCompetition(countryCode, date, description);
-		System.out.println(competition);
 		
-		competition.calculateAndSetPlaces();
+		try {
+			competition.calculateAndSetPlaces();
+		}
+		catch (InsufficientResultsException e) {
+			System.out.println("IRE Exception!");
+		}
 		
 		return competition;
 	}

@@ -12,18 +12,49 @@ import java.util.Map;
  * @author Boriss
  */
 
-public class Result{
+public class Result implements Comparable<Result>{
 	
 	private Integer id;
 	private Map<DecathlonCoeficient, Double> results = new HashMap<DecathlonCoeficient, Double>();
+	
+	private Athlet athlet;
+	private double finalScore;
+	private String place;
 	
 	/**
 	 * Class instance Constructor
 	 */
 	public Result() {
-		
+
 	}
 	
+	public Result(Integer id) {
+		this.id = id;
+	}
+	
+	/**
+	 * Overrides Object's toString method
+	 */
+	@Override
+	public String toString(){	
+		String result = null;
+		
+		if(this.finalScore == 0) {
+			try {
+				this.calculateFinalScore();
+			}
+			catch (InsufficientResultsException e) {
+				System.out.println("IRE in toString()");
+			}			
+		}
+		result = this.getPlace() + this.getAthlet() + ", "+ this.getFinalScore() + ", ";
+		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
+			result = result.concat((results.get(decCoef) + ", "));
+		}
+		
+		return result;
+	}
+
 	/**
 	 * Method to set row of results 
 	 * @param resultList should contain full row of results
@@ -63,16 +94,6 @@ public class Result{
 		}
 		return list;
 	}
-	
-	/**
-	 * Convert result to points
-	 * @param decCoef represents event for computation
-	 * @return points getted for the event
-	 */
-	public Double getConvertedResult(DecathlonCoeficient decCoef) {
-		double res = ((int)(decCoef.evalPoints(results.get(decCoef))*100))/100;
-		return res;
-	}
 
 	/**
 	 * Add result to results. 
@@ -101,7 +122,7 @@ public class Result{
 	 * @return final score
 	 * @throws InsufficientResultsException is thrown, if not all ten results were inserted
 	 */
-	public double getFinalScore() throws InsufficientResultsException {
+	public void calculateFinalScore() throws InsufficientResultsException {
 		if(results.size() != DecathlonCoeficient.EVENT_QUANT) {
 			throw new InsufficientResultsException("Not all results were added, " +
 					                               "can't calculate final score");
@@ -110,62 +131,103 @@ public class Result{
 		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
 			result += decCoef.evalPoints(this.getResult(decCoef));
 		}
-
-		return result;
+		this.finalScore = result;
 	}
 
 	/**
 	 * Indicates whether some other result is "equal to" this one.
-	 * All results contains in compares to the same decathlon event result in other result.
-	 * If each result is equal to another - objects are equal.
-	 * If two results were not setted to one decathlon event - objects are equal.
-	 * @return true, if results are equal, false otherwise 
+	 * Method was written to use result object with Set, so it compares results id.
 	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof Result)) {
 			return false;
 		}
+		Result result = (Result) obj;
+		if(this.id == result.id) {
+			return true;
+		}else return false;
+	}
+	
+	/**
+	 * Method compare two results (finalScore).
+	 * Method uses <i>calculateAndSetFinalScore</i> method.<br><br>
+	 * Return value depends on:
+	 * <ul>
+	 * 	<li>if results id are equal - return 0.</li>
+	 *  <li>if first result has <i>less</i> final score return 1</li>
+	 *  <li>if first rewsult has <i>upper</i> final score return -1 </li>
+	 * </ul>
+	 * It was designed for using with Collection.sort() method. 
+	 * So better results are higher after sort and different sortings goes right.
+	 */
+	public int compareTo(Result result) {
+		final int BETTER_RESULT = -1;
+		final int EQUAL_RESULT = 0;
+		final int LESS_RESULT = 1;
 		
-		Result res = (Result) obj;
-		
-		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
-			Double thisRes = null;
-			Double resRes = null;
-			
-			try {
-				thisRes = this.getResult(decCoef);
-			}
-			catch (InsufficientResultsException e) {
-				try {
-					resRes = res.getResult(decCoef);
-				}
-				catch (InsufficientResultsException ex) {
-					// Both results are not setted. They are equals
-				}
-				finally {
-					if(thisRes != resRes)
-						return false;
-				}
-			}				
+		if(this.id == result.id) {
+			return EQUAL_RESULT;
+		}
 				
+		if(this.finalScore  == 0) {
 			try {
-				resRes = res.getResult(decCoef);
+				this.calculateFinalScore();
 			}
 			catch (InsufficientResultsException e) {
-				//ignore
-			}			
-			
-			if (thisRes != resRes) {
-				return false;
+				e.printStackTrace();
 			}
 		}
-		
-		return true;
+				
+		if(result.finalScore == 0) {
+			try {
+				result.calculateFinalScore();
+			}
+			catch (InsufficientResultsException e) {
+				e.printStackTrace();
+			}
+		}
+	
+		if (this.getFinalScore() > result.getFinalScore()) {
+			return BETTER_RESULT;
+		}
+		else {
+			return LESS_RESULT;
+		}
+	}
+	
+	/**
+	 * Copy one result to another
+	 */
+	public void copyResult(Result resultToCopy) {
+		this.id = resultToCopy.id;
+		this.results = resultToCopy.results;
+		this.athlet = resultToCopy.athlet;
+		this.finalScore = resultToCopy.finalScore;
+		this.place = resultToCopy.place;
 	}
 
-	
-	// *********************** SMART SETTERS *************************//
+	public Athlet getAthlet() {
+		return athlet;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setAthlet(Athlet athlet) {
+		this.athlet = athlet;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public double getFinalScore() {
+		return finalScore;
+	}
+
+	// *********************** SMART SETTERS FOR HIBERNATE *************************//
 	/**
 	 * Setters for concrete competition
 	 * @param value to be inserted
@@ -210,8 +272,7 @@ public class Result{
 		results.put(DecathlonCoeficient.M_1500, value);
 	}
 	
-	
-	//	 *********************** SMART GETTERS *************************//
+	//	 *********************** SMART GETTERS FOR HIBERNATE *************************//
 	public Double getRace100() {
 		return this.results.get(DecathlonCoeficient.M_100);
 	}

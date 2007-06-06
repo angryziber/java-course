@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * CompetitionDaoBean
+ * Implementation of CompetitionDao for csv. 
  *
  * @author Boriss
  */
@@ -33,7 +33,9 @@ public class CompetitionDaoBean implements CompetitionDao{
 		  		  		              "sec", "m", "m", "m", "min:sec"});
 	
 	private String filepath = null;
-
+/**
+ * Gets a Competition.
+ */
 	public Competition getCompetition(String countryCode, Date date, String description) {
 		if(filepath == null) {
 			return null;
@@ -56,14 +58,17 @@ public class CompetitionDaoBean implements CompetitionDao{
 			}
 
 			try {
+				int i = 0;
 				while (reader.ready()) {
 					String line = reader.readLine();
 					line.trim();
 					
 					Athlet athlet = parseAthlet(line);
-					athlet.setResult(parseResult(line));	
+					Result result = parseResult(line, i);
+					result.setAthlet(athlet);	
 					
-					competition.addAthlet(athlet);
+					competition.addResult(result);
+					i++;
 				}
 			}
 			catch (IOException e) {
@@ -94,8 +99,8 @@ public class CompetitionDaoBean implements CompetitionDao{
 		return athlet;
 	}
 	
-	private static Result parseResult(String line){
-		Result result = new Result();
+	private static Result parseResult(String line, Integer lineNum){
+		Result result = new Result(lineNum);
 		
 		List<Double> results = new ArrayList<Double>();
 		List<String> resList = Arrays.asList(line.split(","));

@@ -4,6 +4,7 @@ import net.azib.java.students.t050657.homework.ctrl.dataAccess.CSVFileAccessor;
 import net.azib.java.students.t050657.homework.ctrl.dataOutput.CSVFileWriter;
 import net.azib.java.students.t050657.homework.ctrl.dataOutput.XMLFileWriter;
 import net.azib.java.students.t050657.homework.model.Competition;
+import net.azib.java.students.t050657.homework.model.InsufficientResultsException;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -47,16 +48,12 @@ public class FileAccessPanel extends JPanel{
 		competitionPanel.button.setText("Set competition");
 		
 		textField = new JTextField();
-		buttonBrowse = new JButton("Browse");
 		buttonParse = new JButton("Calculate results");
 
 		buttonParse.setSize(dim);
-		buttonBrowse.setSize(dim);
 		
 		buttonParse.addActionListener(EventHandler.create(
 				ActionListener.class, this, "output"));
-		buttonBrowse.addActionListener(EventHandler.create(
-				ActionListener.class, this, "buttonBrowse"));
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(buttonParse);
@@ -86,18 +83,25 @@ public class FileAccessPanel extends JPanel{
 			competitionPanel.warning.setText("");
 		}
 		
-		Competition competition = new CSVFileAccessor().getCompetition(
+		String filepath = textField.getText();
+		
+		Competition competition = new CSVFileAccessor().setFilepath(filepath).getCompetition(
 								competitionPanel.country.getText(),
 								Date.valueOf(competitionPanel.date.getText()),
 								competitionPanel.title.getText());
-		
-		competition.calculateAndSetPlaces();
-		
+		try {
+			competition.calculateAndSetPlaces();
+		}
+		catch (InsufficientResultsException e1) {
+			competitionPanel.warning.setText("Insufficient results were added");
+			e1.printStackTrace();
+		}
 		
 		if(gui.csv.isSelected()) {
 			try {
 				new CSVFileWriter().writeCompetition(competition);
 			}catch(IOException e) {
+				e.printStackTrace();
 				System.out.println("Cannot write to CSV file!");
 			}
 		}
@@ -106,7 +110,8 @@ public class FileAccessPanel extends JPanel{
 				new XMLFileWriter().writeCompetition(competition);
 			}
 			catch (IOException e) {
-				System.out.println("Cannot write to XML file!");
+				e.printStackTrace();
+				//System.out.println("Cannot write to XML file!");
 			}					
 		}
 		else if(gui.monitor.isSelected()) {

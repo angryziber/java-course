@@ -9,5 +9,9 @@
 	<bean id="net.azib.java.students.t050657.homework.dao.CompetitionDao" 
 		  class="net.azib.java.students.t050657.homework.dao.hibernateDao.CompetitionDaoBean" 
 		  autowire="byType"/>
+		  
+	<bean id="net.azib.java.students.t050657.homework.dao.hibernateDao.ResultsDaoBean"
+		  class="net.azib.java.students.t050657.homework.dao.hibernateDao.ResultsDaoBean"
+		  autowire="byType"/>
 
 </beans>

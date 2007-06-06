@@ -4,6 +4,7 @@ import net.azib.java.students.t050657.homework.ctrl.dataAccess.DBAccessor;
 import net.azib.java.students.t050657.homework.ctrl.dataOutput.CSVFileWriter;
 import net.azib.java.students.t050657.homework.ctrl.dataOutput.XMLFileWriter;
 import net.azib.java.students.t050657.homework.model.Competition;
+import net.azib.java.students.t050657.homework.model.InsufficientResultsException;
 
 import java.awt.event.ActionListener;
 import java.beans.EventHandler;
@@ -41,15 +42,19 @@ public class DBAccessPanel extends JPanel{
 		if(!this.dbCompetitionPanel.checkCompetitionInput()) {
 			return;
 		}
-		
-		
-		
+
 		Competition competition = new DBAccessor().getCompetition(
 								dbCompetitionPanel.country.getText(),
 								Date.valueOf(dbCompetitionPanel.date.getText()),
 								dbCompetitionPanel.title.getText());
-		
-		competition.calculateAndSetPlaces();
+			
+		try {
+			competition.calculateAndSetPlaces();
+		}
+		catch (InsufficientResultsException e1) {
+			dbCompetitionPanel.warning.setText("Insufficient results were added");
+			e1.printStackTrace();
+		}
 		
 		if(gui.csv.isSelected()) {
 			try {
@@ -63,6 +68,7 @@ public class DBAccessPanel extends JPanel{
 				new XMLFileWriter().writeCompetition(competition);
 			}
 			catch (IOException e) {
+			 e.printStackTrace();
 				System.out.println("Cannot write to XML file!");
 			}					
 		}

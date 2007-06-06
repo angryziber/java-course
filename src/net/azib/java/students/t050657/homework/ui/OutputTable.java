@@ -1,8 +1,9 @@
 package net.azib.java.students.t050657.homework.ui;
 
-import net.azib.java.students.t050657.homework.model.Athlet;
 import net.azib.java.students.t050657.homework.model.Competition;
 import net.azib.java.students.t050657.homework.model.DecathlonCoeficient;
+import net.azib.java.students.t050657.homework.model.InsufficientResultsException;
+import net.azib.java.students.t050657.homework.model.Result;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -56,18 +57,33 @@ public class OutputTable extends JPanel{
 		this.remove(scrollPane);
 		title.setText(competition.toString());
 		
-		String[][] athlets = new String[competition.getAthlets().size()][13];
-	 	List<Athlet> athletList = new ArrayList<Athlet>();
-	 	athletList.addAll(competition.getAthlets());
- 		for(int i=0; i<competition.getAthlets().size(); i++) {
-			athlets[i][0] = athletList.get(i).getName();
-			athlets[i][1] = athletList.get(i).getPlace();
-			athlets[i][2] = Double.toString(athletList.get(i).getFinalScore()); 
+		String[][] athlets = new String[competition.getResults().size()][13];
+	 	List<Result> resultList = new ArrayList<Result>();
+	 	resultList.addAll(competition.getResults());
+	 	
+	 	System.out.println(resultList.get(1));
+	 	System.out.println(resultList.get(1).getConvertedResults());
+	 	
+ 		for(int i=0; i<competition.getResults().size(); i++) {
+ 			try {
+				resultList.get(i).calculateFinalScore();
+			}
+			catch (InsufficientResultsException e) {
+				e.printStackTrace();
+			}
+			athlets[i][0] = resultList.get(i).getAthlet().getName();
+			athlets[i][1] = resultList.get(i).getPlace();
+			athlets[i][2] = Double.toString(resultList.get(i).getFinalScore()); 
 			
 			int j = 1;
 			for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
-				athlets[i][j+2] = Double.toString(
-						athletList.get(i).getResult().getConvertedResult(decCoef));
+				try {
+					athlets[i][j+2] = Double.toString(
+							resultList.get(i).getResult(decCoef));
+				}
+				catch (InsufficientResultsException e) {
+					e.printStackTrace();
+				}
 				j++;
 			}
 		}

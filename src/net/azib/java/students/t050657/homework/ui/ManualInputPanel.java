@@ -51,6 +51,8 @@ public class ManualInputPanel extends JPanel{
 		atletPanel.button.addActionListener(EventHandler.create(ActionListener.class,
 				this, "addAthlet"));
 		
+		
+		
 		panel.add(competitionPanel, BorderLayout.NORTH);
 		panel.add(atletPanel, BorderLayout.CENTER);
 		
@@ -95,7 +97,7 @@ public class ManualInputPanel extends JPanel{
 		athlet.setCountryCode(this.atletPanel.country.getText());
 		athlet.setDateOfBirth(Date.valueOf(this.atletPanel.dateOfBirth.getText()));
 
-		Result result = new Result();
+		Result result = new Result(competition.getResults().size() + 1);
 		
 		List<Double> resultList = new ArrayList<Double>();
 		
@@ -116,16 +118,20 @@ public class ManualInputPanel extends JPanel{
 		catch (InsufficientResultsException e) {
 			System.out.println("Not all result were added!");
 		}
-			
-		athlet.setResult(result);
-		athlet.calculateAndSetFinalScore();
-		competition.addAthlet(athlet);
-		competition.calculateAndSetPlaces();
+		
+		result.setAthlet(athlet);
+		
+		try {
+			result.calculateFinalScore();
+			competition.addResult(result);
+			competition.calculateAndSetPlaces();
+		}
+		catch (InsufficientResultsException e) {
+			e.printStackTrace();
+		}
 		
 		gui.resultTable.updateTable(competition);
 		gui.frame.pack();
-		
-		System.out.println(competition.getAthlets());
 	}
 	
 	public void printCompetition() {
@@ -141,6 +147,7 @@ public class ManualInputPanel extends JPanel{
 				new XMLFileWriter().writeCompetition(competition);
 			}
 			catch (IOException e) {
+				
 				System.out.println("Cannot write to XML file!");
 			}					
 		}

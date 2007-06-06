@@ -1,7 +1,7 @@
 package net.azib.java.students.t050657.homework.ctrl.dataOutput;
 
-import net.azib.java.students.t050657.homework.model.Athlet;
 import net.azib.java.students.t050657.homework.model.Competition;
+import net.azib.java.students.t050657.homework.model.Result;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -22,8 +22,8 @@ public class CSVFileWriter implements DataWriter{
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
 				new FileOutputStream(path + competition.getDescription() + ".txt"), "UTF8"));
 		
-		for(Athlet athlet : competition.getAthlets()) {
-			writer.write(athlet.toString() + lineEnd);
+		for(Result result : competition.getResults()) {
+			writer.write(result.toString() + lineEnd);
 		}
 
 		writer.close();

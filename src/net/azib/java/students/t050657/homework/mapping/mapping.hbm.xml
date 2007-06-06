@@ -5,25 +5,24 @@
           
 <hibernate-mapping>
 
-	<class name="net.azib.java.students.t050657.homework.model.Athlet"
-		   table="athletes">
-		<id name="id" access="field">
-			<generator class="increment"/>
+	<class name="net.azib.java.students.t050657.homework.model.Athlet" 
+		   table="athletes"
+		   lazy="false">
+		<id name="id" column="id" access="field">
+			<generator class="increment"/>	
 		</id>
 		<property name="name"/>
 		<property name="dateOfBirth" type="date" column="dob"/>
 		<property name="countryCode" column="country_code"/>
-		
-		<one-to-one name="Result"
-					class="net.azib.java.students.t050657.homework.model.Result">
-		</one-to-one>
 	</class>
 	
-	<class name="net.azib.java.students.t050657.homework.model.Result"
-		   table="results">
-		<id name="id" access="field">
+	<class name="net.azib.java.students.t050657.homework.model.Result" 
+		   table="results"
+		   lazy="false">
+		<id name="id" column="id" access="field">
 			<generator class="increment"/>
 		</id>
+	
 		<property name="race100" column="race_100m"/>
 		<property name="longJump" column="long_jump"/>
 		<property name="shotPut" column="shot_put"/>
@@ -34,28 +33,41 @@
 		<property name="poleVault" column="pole_vault"/>
 		<property name="javelinThrow" column="javelin_throw"/>
 		<property name="race1500" column="race_1500m"/>
+		
+		<many-to-one name="athlet"
+			         class="net.azib.java.students.t050657.homework.model.Athlet"
+			 		 column="athlete_id"/>
 	</class>
 
 	<class name="net.azib.java.students.t050657.homework.model.Competition" 
-		   table="competitions">
-		<id name="id" access="field">
+		   table="competitions"
+		   lazy="false">
+		<id name="id" column="id" access="field">
 			<generator class="increment"/>
 		</id>
 		<property name="countryCode" column="country_code"/>
 		<property name="eventDate" type="date" column="date"/>
-		<property name="description"/>
-		
-		<set name="athlets" table="results">
+		<property name="description"/>	
+		<!-- 
+		<set name="results" table="results">
 			<key column="competition_id"/>
-            <many-to-many class="net.azib.java.students.t050657.homework.model.Athlet" 
-            			  column="athlete_id"/>
+            <one-to-many class="net.azib.java.students.t050657.homework.model.Result"/>
 		</set>
+		-->
 	</class>
+	
+	<query name="Result.getByCompetitionId">
+		from Result where competition_id = :id
+	</query>
 	
 	<query name="Competition.getByDescription">
 		from Competition where description = :description 
 						   and countryCode = :countryCode
 						   and date = :date
+	</query>
+	
+	<query name="Competition.getCompetitions">
+		from Competition
 	</query>
 	
 </hibernate-mapping>

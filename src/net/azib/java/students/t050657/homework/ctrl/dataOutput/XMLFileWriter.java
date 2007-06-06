@@ -49,12 +49,12 @@ public class XMLFileWriter implements DataWriter{
 		
 		this.addCompetition(competition);
 		
-		for(Athlet a : competition.getAthlets()) {
-			this.addAthletToCompetition(a, competition);
+		for(Result result : competition.getResults()) {
+			this.addAthletToCompetition(result.getAthlet(), competition);
 			try {
-				this.addResultToAthlet(a.getResult(), a, competition);
+				this.addResultToAthlet(result, competition);
 			}catch (InsufficientResultsException e) {
-				System.out.println("In " + competition + ", " + a + " has not all results inserted");
+				System.out.println("In " + competition + ", " + result.getAthlet() + " has not all results inserted");
 			}
 		}
 		
@@ -107,19 +107,19 @@ public class XMLFileWriter implements DataWriter{
 		return true;
 	}
 	
-	private void addResultToAthlet(Result result, Athlet athlet, Competition competition) 
+	private void addResultToAthlet(Result result, Competition competition) 
 						throws InsufficientResultsException{
 		Element comp = this.findCompetition(competition);
-		Element ath = this.findAthlet(athlet, comp);
+		Element ath = this.findAthlet(result.getAthlet(), comp);
 		
-		if (athlet.getPlace() != null) {
+		if (result.getPlace() != null) {
 			Element place = new Element("place");
-			place.setText(athlet.getPlace());
+			place.setText(result.getPlace());
 			ath.addContent(place);
 		}		
-		if (athlet.getFinalScore() != 0) {
+		if (result.getFinalScore() != 0) {
 			Element finalScore = new Element("finalscore");
-			finalScore.setText(athlet.getFinalScore() + "");
+			finalScore.setText(result.getFinalScore() + "");
 			ath.addContent(finalScore);
 		}
 		
@@ -127,7 +127,7 @@ public class XMLFileWriter implements DataWriter{
 			Element event = new Element("event");
 			Attribute titleAttr = new Attribute("title", decCoef.getTitle());
 			event.setAttribute(titleAttr);
-			event.setText(Math.rint(result.getConvertedResult(decCoef)) + "");
+			event.setText(Math.rint(result.getResult(decCoef)) + "");
 			ath.addContent(event);
 		}
 	}
@@ -175,6 +175,15 @@ public class XMLFileWriter implements DataWriter{
 			}
 		}
 		return null;
+	}
+	
+	private void printCompetition(Competition competition) {
+		System.out.println(competition.toString());
+		
+		for(Result result : competition.getResults()) {
+			System.out.println("Athlet " + result.getAthlet().toString() 
+					+ ", with result : " + result.toString());
+		}
 	}
 
 }

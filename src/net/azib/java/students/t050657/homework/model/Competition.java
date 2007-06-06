@@ -1,11 +1,10 @@
 package net.azib.java.students.t050657.homework.model;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -24,7 +23,7 @@ public class Competition {
 	private Date eventDate;
 	private String description;
 	
-	private Set<Athlet> athlets = new TreeSet<Athlet>();
+	private SortedSet<Result> results = new TreeSet<Result>();
 
 	/**
 	 * Concstructs new instance of competition
@@ -57,22 +56,14 @@ public class Competition {
 		this.eventDate = competition.eventDate;
 		this.id = competition.id;
 	}
-	
-	/**
-	 * Add athlet to a ThreeSet
-	 * @param athlet to add
-	 */
-	public void addAthlet(Athlet athlet) {
-		athlets.add(athlet);
-	}
-	
+
 	/**
 	 * Overrides Object's toString method.
 	 * @return formatted competition string
 	 */
 	@Override
 	public String toString() {
-		return description + " at " + eventDate + ", " + countryCode;
+		return description + " at " + countryCode + ", " + eventDate;
 	}
 
 	/**
@@ -98,103 +89,95 @@ public class Competition {
 	/**
 	 * Calculates scores and places for athlets participate in competition.
 	 */
-	public void calculateAndSetPlaces() {
-		for(Athlet athlet : athlets) {
-			athlet.setPlace(null);
+	public void calculateAndSetPlaces() throws InsufficientResultsException{
+
+		List<Result> resList = this.sortResultsByFinalScore();
+		
+		for(Result result : resList) {
+			result.setPlace(null);
 		}
 		int place = 1;
-		for(Athlet a : athlets) {
+		for(Result res : resList) {
 			int tmp = 0;
-			if(a.getPlace() == null) {
-				List<Athlet> athletsWithERes = new ArrayList<Athlet>();
-				for(Athlet athlet : athlets) {
-					if(athlet.getFinalScore() == a.getFinalScore()) {
-						athletsWithERes.add(athlet);
+			if(res.getPlace() == null) {
+				List<Result> equalResultsList = new ArrayList<Result>();
+				for(Result result : resList) {
+					if(result.getFinalScore() == res.getFinalScore()) {
+						equalResultsList.add(result);
 					}
 				}
-				this.setPlaces(place, athletsWithERes);
-				tmp = athletsWithERes.size();
+				this.setPlaces(place, equalResultsList);
+				tmp = equalResultsList.size();
 			}
 			place += tmp;
 		}
+		
+		results.clear();
+		results.addAll(resList);
 	}
 	
-	private void setPlaces(int place, List<Athlet> list) {
+	private List<Result> sortResultsByFinalScore() throws InsufficientResultsException{
+		List<Result> sortedList = new ArrayList<Result>();
+		sortedList.addAll(results);
+		Collections.sort(sortedList);
+		return sortedList;
+	}
+	
+	private void setPlaces(int place, List<Result> list) {
 		if(list.size() == 1) {
 			list.get(0).setPlace(place + "");
 		}else {
-			for(Athlet a : list) {
-				a.setPlace(place + "-" + (place + list.size()-1));
+			for(Result result : list) {
+				result.setPlace(place + "-" + (place + list.size()-1));
 			}
 		}
 	}
-	
-	public Set<Athlet> getAthlets(){
-		return athlets;
+
+	public Integer getId() {
+		return id;
 	}
-	
-	/**
-	 * Getter for countryCode
-	 * @return countryCode
-	 */
+
 	public String getCountryCode() {
 		return countryCode;
 	}
 
-	/**
-	 * Getter for description
-	 * @return description
-	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * Getter for eventDate
-	 * @return eventDate
-	 */
 	public Date getEventDate() {
 		return eventDate;
 	}
-	
-	/**
-	 * Setter for athlets
-	 * @param Set of athlets to set 
-	 */
-	public void setAthlets(Set<Athlet> athlets) {
-		this.athlets = athlets;
+
+	public SortedSet<Result> getResults() {
+		return results;
+	}
+
+	public void setResults(SortedSet<Result> results) {
+		this.results = results;
 	}
 	
-	/**
-	 * Setter for countryCode
-	 * @param countryCode to set
-	 */
+	public void addResults(List<Result> resultList) {
+		results.addAll(resultList);
+	}
+	
+	public void addResult(Result result) {
+		this.results.add(result);
+	}
+
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
 
-	/**
-	 * Setter for description
-	 * @param description to set
-	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/**
-	 * Setter for eventDate
-	 * @param eventDate to set
-	 */
 	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
 	}
-//	
-//	/**
-//	 * Getter for event date in format, used in DB.
-//	 * @return string representation of eventDate in format yyyy-mm-dd
-//	 */
-//	public String getFormattedEventDate() {
-//		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//		return df.format(eventDate.getTime());
-//	}
+	
+	
+	
+
 }
