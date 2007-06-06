@@ -85,6 +85,9 @@ public class ConsoleInput {
 			try {
 				retValue = Integer.parseInt(retStringValue);
 				isCorrect = retValue>=0&&retValue<options.size();
+				if(!isCorrect) {
+					System.out.println("Out of range! Valid values are 0.."+(options.size()-1));
+				}
 			} catch (NumberFormatException e) {
 				printOut.println("Faulty value!");
 				return null;

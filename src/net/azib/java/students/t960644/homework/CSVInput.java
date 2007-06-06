@@ -1,5 +1,7 @@
 package net.azib.java.students.t960644.homework;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
@@ -22,12 +24,14 @@ public class CSVInput {
 		Competition competition = new Competition();
 		return competition;
 	}
-	public void initReader(String filename) {
+	public boolean initReader(String filename) throws FileNotFoundException {
 		try {
-			reader = new InputStreamReader(CSVInput.class.getResourceAsStream(filename),"UTF-8");
+			//reader = new InputStreamReader(CSVInput.class.getResourceAsStream(filename),"UTF-8");
+			reader = new InputStreamReader(new FileInputStream(filename),"UTF-8");
+			return reader!=null;
 		}
 		catch (UnsupportedEncodingException e) {
-			// do nothing
+			return false;
 			//e.printStackTrace();
 		}
 	}

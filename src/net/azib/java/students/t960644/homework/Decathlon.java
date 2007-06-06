@@ -29,7 +29,11 @@ public class Decathlon {
 		boolean isInputRead = false;
 		if (decathlon.commandLine.containsKey(CommandLineKeys.IN_DB)){
 			isInputRead = decathlon.readDbInput();
+		} else
+		if (decathlon.commandLine.containsKey(CommandLineKeys.IN_CSV)){
+			isInputRead = decathlon.readCSVInput();
 		}
+		
 		if (isInputRead) {
 			decathlon.competition.sortResults();
 			PrintStream printOut = new PrintStream(System.out,true,"UTF-8");
@@ -42,7 +46,7 @@ public class Decathlon {
 		csv.initReader("dec.csv");
 		Competition competition = new Competition();
 		csv.readResults(competition);
-		*
+		/*
 		DBInput dbInput = new DBInput();
 		dbInput.initConnection("com.mysql.jdbc.Driver", "jdbc:mysql://srv.azib.net:3306/decathlon", "java", "java");
 		Competition competition = dbInput.readCompetition();
@@ -64,27 +68,25 @@ public class Decathlon {
 		xo.printXML(new FileOutputStream("test.xml"));
 		// */
 	}
+	protected boolean readCSVInput() {
+		String csv = readParamConsole(CommandLineKeys.IN_CSV,"Enter csv file location: ");
+		CSVInput csvIn = new CSVInput();
+		try {
+			csvIn.initReader(csv);
+			competition = new Competition();
+			csvIn.readResults(competition);
+		} catch (Exception e) {
+			System.out.println("Error reading "+csv);
+			return false;
+		}
+		return true;
+	}
 	
 	protected boolean readDbInput() {
-		String db;
-		String dbDriver = "com.mysql.jdbc.Driver";
-		String dbUser;
-		String dbPass;
-		if (commandLine.containsKey(CommandLineKeys.IN_DB)) {
-			db = (String)commandLine.get(CommandLineKeys.IN_DB);
-		} else {
-			db = consoleIn.readValue(System.in, System.out, "Enter input database address: ");
-		}
-		if (commandLine.containsKey(CommandLineKeys.IN_DB_USER)){
-			dbUser = (String)commandLine.get(CommandLineKeys.IN_DB_USER);
-		} else {
-			dbUser = consoleIn.readValue(System.in, System.out, "Enter input database user: ");
-		}
-		if (commandLine.containsKey(CommandLineKeys.IN_DB_PASS)){
-			dbPass = (String)commandLine.get(CommandLineKeys.IN_DB_PASS);
-		} else {
-			dbPass = consoleIn.readValue(System.in, System.out, "Enter input database password: ");
-		}
+		String db = readParamConsole(CommandLineKeys.IN_DB,"Enter input database address: ");
+		String dbUser = readParamConsole(CommandLineKeys.IN_DB_USER,"Enter input database user: ");
+		String dbPass = readParamConsole(CommandLineKeys.IN_DB_PASS, "Enter input database password: ");
+		String dbDriver = readParamDefault(CommandLineKeys.IN_DB_DRIVER, "com.mysql.jdbc.Driver");
 		DBInput dbInput = new DBInput();
 		try {
 			dbInput.initConnection(dbDriver, db, dbUser, dbPass);			
@@ -95,10 +97,7 @@ public class Decathlon {
 			System.out.println("Error querying database!");
 			return false;
 		}
-		String dbCompId = null;
-		if (commandLine.containsKey(CommandLineKeys.IN_DB_COMP_ID)) {
-			dbCompId = (String)commandLine.get(CommandLineKeys.IN_DB_COMP_ID);
-		}
+		String dbCompId = readParamDefault(CommandLineKeys.IN_DB_COMP_ID, null);
 		if (dbCompId==null) {
 			List<Competition> competitions;
 			try {
@@ -130,12 +129,28 @@ public class Decathlon {
 		try {
 			dbInput.readAthletes(competition);
 			dbInput.readResults(competition);
+			dbInput.releaseConnection();
 		}
 		catch (SQLException e) {
 			System.out.println("Error querying database!");
 			return false;
 		}
 		return true;
+	}
+	protected String readParamDefault(String key,String defaultValue) {
+		if (commandLine.containsKey(key)) {
+			return (String)commandLine.get(key);
+		} else {
+			return defaultValue;
+		}
+	}
+	
+	protected String readParamConsole(String key,String msg){
+		if (commandLine.containsKey(key)) {
+			return (String)commandLine.get(key);
+		} else {
+			return consoleIn.readValue(System.in, System.out, msg);
+		}		
 	}
 	
 	protected void parseParams(String[] args) {
@@ -144,8 +159,6 @@ public class Decathlon {
 			//(pParamName.matcher(s));
 			Vector<String> param = splitArg(s);
 			if (param.size()==2){
-				System.out.print(param.elementAt(0)+" ");
-				System.out.println(param.elementAt(1));
 				commandLine.put(param.elementAt(0), param.elementAt(1));
 			}
 		}
@@ -159,3 +172,10 @@ public class Decathlon {
 		return res;		
 	}
 }
+/*
+in.db=jdbc:mysql://srv.azib.net:3306/decathlon
+in.db.pass=java
+in.db.user=java
+in.db.comp=2
+in.csv="c:\java\java\dec.csv"
+*/
