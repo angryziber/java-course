@@ -9,7 +9,7 @@ import javax.swing.*;
  *
  * @author Matu
  */
-public class Programm {
+public class Program {
 	/**
 	 * @param args
 	 */

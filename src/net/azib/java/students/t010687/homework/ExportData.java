@@ -17,16 +17,16 @@ import javax.xml.transform.stream.StreamSource;
  *
  * @author Matu
  */
-public class DataExport {
+public class ExportData {
 	// Protected Properties
 	protected DocumentBuilderFactory domFactory = null;
 	protected DocumentBuilder domBuilder = null;
 	private List<ResultsOfTheAthlet> results;
 	
-	public DataExport(List<ResultsOfTheAthlet> results){
+	public ExportData(List<ResultsOfTheAthlet> results){
 		this.results = results;
 	}
-	private DOMSource getXMLDocContent(){
+	protected DOMSource getXMLDocContent(){
 		try{
 			domFactory = DocumentBuilderFactory.newInstance();
 			domBuilder = domFactory.newDocumentBuilder();
@@ -132,14 +132,19 @@ public class DataExport {
         if (file == null)return;
 		// Save the document to the disk file
 		try {
+			FileOutputStream dest = new FileOutputStream(file);
 			Transformer aTransformer = TransformerFactory.newInstance().newTransformer();
 			DOMSource src = getXMLDocContent();
 			if (src !=null){
 				aTransformer.transform(src,
-						new StreamResult(file));
+						new StreamResult(dest));
+				dest.close();
 			}		
 		}
 		catch (TransformerException e) {
+			System.err.println(e.toString());
+		}
+		catch (IOException e) {
 			System.err.println(e.toString());
 		}
 		
@@ -152,15 +157,20 @@ public class DataExport {
         if (file == null)return;
 		// Save the document to the disk file
 		try {
+			FileOutputStream dest = new FileOutputStream(file);
 	        Transformer aTransformer =TransformerFactory.newInstance().newTransformer(
 	        		new StreamSource("src/net/azib/java/students/t010687/homework/Results.xsl"));
 			DOMSource src = getXMLDocContent();
 			if (src !=null){
 				aTransformer.transform(src,        
-						new StreamResult(file)); 
+						new StreamResult(dest)); 
+				dest.close();
 			}
 		}
 		catch (TransformerException e) {
+			System.err.println(e.toString());
+		}
+		catch (IOException e) {
 			System.err.println(e.toString());
 		}
 	}
@@ -177,7 +187,7 @@ public class DataExport {
 	      String AthletesRanks[] = getAthletesRanks();
 	      int i=0;
 	      for(ResultsOfTheAthlet Result: results){
-	    	  pw.println(Result.getName() + "," + Result.getDateOfBirth() + ","
+	    	  pw.println("\"" + Result.getName() + "\"," + Result.getDateOfBirth() + ","
 	    			  + Result.getCountry() + "," + Result.getSprint_100m().toString() + "," 
 	    			  + Result.getLongJump().toString() + "," + Result.getShotPut().toString()+ "," 
 	    			  + Result.getHighJump().toString()+ "," + Result.getSprint_400m() + "," 

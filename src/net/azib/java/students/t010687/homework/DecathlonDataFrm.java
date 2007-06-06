@@ -44,8 +44,8 @@ public class DecathlonDataFrm {
     	resultsSorter.toggleSortOrder(0);
     	JTable table = new JTable(competResultsMdl);
         table.setRowSorter(resultsSorter);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
+        //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        //table.setFillsViewportHeight(true);
 	    table.getTableHeader().setBackground(Color.yellow);
     	tab.add("CompetitionResults", new JScrollPane(table));
     	/////////////////////////
@@ -74,7 +74,7 @@ public class DecathlonDataFrm {
         table.setRowSorter(athletesInfoSorter);
         table.getTableHeader().setBackground(Color.yellow);
         //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        //table.setFillsViewportHeight(true); 
+        table.setFillsViewportHeight(true); 
 
 	    panel.add(new JScrollPane(table));
 	    JButton btn_InsertRow = new JButton("Add Athlete");
@@ -88,29 +88,29 @@ public class DecathlonDataFrm {
 	    JButton button = new JButton("ExportToXML");
 	    button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				DataExport exporter = new DataExport(results);
+				ExportData exporter = new ExportData(results);
 				exporter.saveDataToXMLFormat();
 			}});
 	    panel.add(button);
 	    button = new JButton("ExportToHTML");
 	    button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				DataExport exporter = new DataExport(results);
+				ExportData exporter = new ExportData(results);
 				exporter.saveDataToHTMLFormat();
 			}});
 	    panel.add(button);
 	    button = new JButton("ExportToCVS");
 	    button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				DataExport exporter = new DataExport(results);
+				ExportData exporter = new ExportData(results);
 				exporter.saveDataToCSVFormat();
 			}});;
 	    panel.add(button);
 	    return panel;	
     }
     class AddRowForNewAthlete implements ActionListener{
-		public void actionPerformed(ActionEvent arg0) {
-			ResultsOfTheAthlet	Results = new ResultsOfTheAthlet("XXXXNewAthleteXXXX", "01.01.1999", "--");
+		public void actionPerformed(ActionEvent arg0) {//\u0999 - for sorting. It adds new name to the end!
+			ResultsOfTheAthlet	Results = new ResultsOfTheAthlet("\u0999XXXXNewAthleteXXXX", "01.01.1999", "--");
 	    	Results.setSprint_100m(0);	//(sec)
 	    	Results.setLongJump(0);		//(m)
 	    	Results.setShotPut(0);		//(m)

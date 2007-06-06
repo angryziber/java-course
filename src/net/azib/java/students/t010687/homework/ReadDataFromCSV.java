@@ -57,8 +57,7 @@ public class ReadDataFromCSV implements ActionListener{
 			while(curLine != null){
 				SpitedRowData = curLine.split(",");
 				//stringTokenizer = new StringTokenizer(curLine, ",");
-				//if(stringTokenizer.countTokens() == 0xD){	
-				if(SpitedRowData.length == 0xD){	
+				if((SpitedRowData.length == 0xD)||(SpitedRowData.length == 0xF)){	
 					Results = new ResultsOfTheAthlet(removeQuotes(SpitedRowData[0]),SpitedRowData[1],SpitedRowData[2]);
 					Results.setSprint_100m(SpitedRowData[3]);	//(sec)
 					Results.setLongJump(SpitedRowData[4]);		//(m)
@@ -86,39 +85,6 @@ public class ReadDataFromCSV implements ActionListener{
 	}
     private String removeQuotes(String AthletsNameData){
     	String DataParts[] = AthletsNameData.split("\"");	
-    	return DataParts[1];
+    	return DataParts.length > 1 ? DataParts[1]:AthletsNameData;
     }
 }
-/*
- Here's some code that demonstrates the use of the actions:
-
-    JFrame frame = new JFrame();
-    
-    // Create a file chooser
-    String filename = File.separator+"tmp";
-    JFileChooser fc = new JFileChooser(new File(filename));
-    
-    // Create the actions
-    Action openAction = new OpenFileAction(frame, fc);
-    Action saveAction = new SaveFileAction(frame, fc);
-    
-    // Create buttons for the actions
-    JButton openButton = new JButton(openAction);
-    JButton saveButton = new JButton(saveAction);
-    
-    // Add the buttons to the frame and show the frame
-    frame.getContentPane().add(openButton, BorderLayout.NORTH);
-    frame.getContentPane().add(saveButton, BorderLayout.SOUTH);
-    frame.pack();
-    frame.setVisible(true);
-*/
-/*
-String filename = File.separator+"cvs";
-JFileChooser fc = new JFileChooser(new File(filename));
-
-// Show open dialog; this method does not return until the dialog is closed
-fc.showOpenDialog(frame);
-File selFile = fc.getSelectedFile();
-//plugins.file.writeTXTFile(tempFile,csv);
-System.out.println("CVS");
-*/

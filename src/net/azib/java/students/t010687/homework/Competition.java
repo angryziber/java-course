@@ -15,9 +15,9 @@ public class Competition {
 	private Date date;
 	private String description;
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 * returns with description
+	/** 
+	 * @return String Country-Date-Description Format
+	 * ("EE dd.mm.yyyy compdescription)
 	 */
 	@Override
 	public String toString() {
