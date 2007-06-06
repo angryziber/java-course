@@ -39,6 +39,7 @@ public class CompetitionTest {
 		found=competition.findAthleteByName("Juku Viiding",competition.DATE_FORMAT.parse("01.01.1980"),"EE");
 		assertEquals(found,athlete);
 	}
+	
 	@Test
 	public void testSetDate() throws Exception {
 		Competition comp = new Competition();

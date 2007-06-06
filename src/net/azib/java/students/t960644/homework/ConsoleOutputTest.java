@@ -31,6 +31,7 @@ public class ConsoleOutputTest {
 		assertTrue(co.spaces(4).toString().equals("    "));
 		assertTrue(co.spaces(0).toString().equals(""));
 		assertTrue(co.spaces(-1).toString().equals(""));
+		assertTrue(co.underscores(2).toString().equals("__"));
 	}
 	@Test
 	public void testWriteLine() throws Exception {
@@ -40,6 +41,12 @@ public class ConsoleOutputTest {
 		assertTrue(co.writeLine(5, 20, res).toString().
 				equals("    1| 8815|Peeter Hülss        |01.05.1986|EE|10.600|  7.63| 14.90|  2.03|  46.230|14.400| 43.40|  5.40| 67.01|4:29.580|"));
 		
+	}
+	@Test
+	public void testWriteHeader() throws Exception {
+		ConsoleOutput co = new ConsoleOutput();
+		assertTrue(co.writeHeader(5, 20).toString().
+				equals("Pos  |Score|Name                |BirthDate |CC|Rac100|LnJump|ShotPt|HiJump|Race400 |Hrd110|DiscTh|PoleVt|JavThr|Race1500|"));
 	}
 
 }

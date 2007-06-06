@@ -1,7 +1,5 @@
 package net.azib.java.students.t960644.homework;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
@@ -14,9 +12,9 @@ import java.util.regex.Pattern;
  */
 public class ConsoleInput {
 	
-	public void readResults(InputStream in, OutputStream out, Competition competition) {
+	public void readResults(Readable in, PrintStream out, Competition competition) {
 		boolean notFinished = true;
-		PrintStream printOut = new PrintStream(out);
+		//PrintStream printOut = new PrintStream(out);
 		while (notFinished) {
 			Athlete athlete = new Athlete();
 			Result result = new Result();
@@ -28,16 +26,21 @@ public class ConsoleInput {
 				result.setAthlete(athlete);
 				competition.addAthlete(athlete);
 				competition.addResult(result);
-				printOut.println("Added "+athlete.getName()+". Score = "+Integer.toString(result.calcResult()));
+				out.println("Added "+athlete.getName()+". Score = "+Integer.toString(result.calcResult()));
 			}
 		}
 	}
 
-	public boolean readAthlete(InputStream in, OutputStream out, Athlete athlete) {
+	protected boolean readAthlete(Readable in, PrintStream out, Athlete athlete) {
 		try {
-			athlete.setName(readValue(in, out, "Enter athlete's name: "));
+			String tempVal;
+			tempVal = readValue(in, out, "Enter athlete's name: ");
+			if (tempVal.equals("")) {return false;}
+			athlete.setName(tempVal);
 			athlete.setBirthDate(readValue(in, out, "Enter athlete's date of birth: "));
-			athlete.setCountryCode(readValue(in, out, "Enter athlete's country code: "));
+			tempVal = readValue(in, out, "Enter athlete's country code: ");
+			if (tempVal.equals("")) {return false;}
+			athlete.setCountryCode(tempVal);
 			return true;
 		}
 		catch (Exception e) {
@@ -45,7 +48,7 @@ public class ConsoleInput {
 		}
 	}
 
-	public boolean readResult(InputStream in, OutputStream out, Result result) {
+	protected boolean readResult(Readable in, PrintStream out, Result result) {
 		try {
 			result.setRace100(readValue(in, out, "Enter race 100m result: "));
 			result.setLongJump(readValue(in, out, "Enter long jump result: "));
@@ -64,18 +67,27 @@ public class ConsoleInput {
 		}
 	}
 
-	public String readValue(InputStream in, OutputStream out, String msg) {
+	/*public String readValue(InputStream in, OutputStream out, String msg) {
 		PrintStream printOut = new PrintStream(out);
 		printOut.println(msg);
 		Pattern pLF = Pattern.compile("$", Pattern.MULTILINE);
 		Scanner sc = new Scanner(in).useDelimiter(pLF);
 		return sc.next().replaceAll("\\n", "").replaceAll("\\r", "");
+	}*/
+
+	public String readValue(Readable in, PrintStream out, String msg) {
+		//PrintStream printOut = new PrintStream(out);
+		out.println(msg);
+		Pattern pLF = Pattern.compile("$", Pattern.MULTILINE);
+		Scanner sc = new Scanner(in).useDelimiter(pLF);
+		return sc.next().replaceAll("\\n", "").replaceAll("\\r", "");
 	}
 	
-	public Integer readOption(InputStream in, OutputStream out, List<String> options, String msg) {
-		PrintStream printOut = new PrintStream(out);
+	
+	public Integer readOption(Readable in, PrintStream out, List<String> options, String msg) {
+		//PrintStream printOut = new PrintStream(out);
 		for (int i=0;i<options.size();i++){
-			printOut.println(i+": "+options.get(i));
+			out.println(i+": "+options.get(i));
 		}
 		String retStringValue; 
 		Integer retValue = null;
@@ -89,7 +101,7 @@ public class ConsoleInput {
 					System.out.println("Out of range! Valid values are 0.."+(options.size()-1));
 				}
 			} catch (NumberFormatException e) {
-				printOut.println("Faulty value!");
+				out.println("Faulty value!");
 				return null;
 			}
 		}

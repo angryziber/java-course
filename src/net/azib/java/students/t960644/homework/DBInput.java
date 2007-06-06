@@ -1,7 +1,5 @@
 package net.azib.java.students.t960644.homework;
 
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -104,7 +102,7 @@ public class DBInput {
 		connection.close();
 	}
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
+	/*public static void main(String[] args) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
 		DBInput dbInput = new DBInput();
 		dbInput.initConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/test", "root", "MykB5kB5");
 		Competition competition = dbInput.readCompetition("2");
@@ -121,5 +119,5 @@ public class DBInput {
 			out.println(res.getAthlete().getCountryCode());
 			out.println(res.calcResult());
 		}
-	}
+	}*/
 }

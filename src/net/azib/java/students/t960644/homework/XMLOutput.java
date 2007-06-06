@@ -1,9 +1,6 @@
 package net.azib.java.students.t960644.homework;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.text.ParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -78,13 +75,13 @@ public class XMLOutput {
 		Element rootElement = doc.getDocumentElement();
 		Element compElement = doc.createElement("competition");
 		rootElement.appendChild(compElement);
-		if (competition.getDescription()==null) {
+		if (competition.getDescription()!=null) {
 			compElement.appendChild(writeElement("description",competition.getDescription()));
 		}
 		if (!competition.getStringDate().isEmpty()) {
 			compElement.appendChild(writeElement("date",competition.getStringDate()));			
 		}
-		if (competition.getCountryCode()==null){
+		if (competition.getCountryCode()!=null){
 			compElement.appendChild(writeElement("location",competition.getCountryCode()));
 		}
 		for (Result r:competition.getResults()) {
@@ -106,18 +103,6 @@ public class XMLOutput {
 			// do nothing
 			e.printStackTrace();
 		}
-	}
-	public static void main(String[] args) throws ParseException {
-		XMLOutput xo = new XMLOutput();
-		Competition c = OutputTest.singleCompetition();
-		xo.writeData(c);
-		try {
-			xo.printXML(new FileOutputStream("test.xml"));
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		xo.printXML(System.out);
 	}
 
 }

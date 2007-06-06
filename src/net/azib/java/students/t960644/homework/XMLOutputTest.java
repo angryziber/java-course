@@ -1,5 +1,6 @@
 package net.azib.java.students.t960644.homework;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -62,7 +63,40 @@ public class XMLOutputTest {
 		assertTrue(testElementData(elemList.item(0),"4:29.580"));
 				
 	}
-
+	@Test
+	public void testCreateDocTree() throws Exception {
+		XMLOutput xmlOut = new XMLOutput();
+		xmlOut.CreateDoc();
+		Competition comp = new Competition();
+		xmlOut.CreateDocTree(comp);
+		Element rootElem = xmlOut.doc.getDocumentElement();
+		NodeList elemList;
+		elemList = rootElem.getElementsByTagName("competition");
+		assertEquals(elemList.getLength(),1);
+		Element compElem = (Element)elemList.item(0);
+		elemList = compElem.getElementsByTagName("description");
+		assertEquals(elemList.getLength(),0);
+		elemList = compElem.getElementsByTagName("date");
+		assertEquals(elemList.getLength(),0);
+		elemList = compElem.getElementsByTagName("location");
+		assertEquals(elemList.getLength(),0);
+		
+		xmlOut = new XMLOutput();
+		xmlOut.CreateDoc();
+		comp = OutputTest.singleCompetition();
+		xmlOut.CreateDocTree(comp);
+		rootElem = xmlOut.doc.getDocumentElement();
+		elemList = rootElem.getElementsByTagName("competition");
+		compElem = (Element)elemList.item(0);
+		elemList = compElem.getElementsByTagName("description");
+		assertTrue(testElementData(elemList.item(0),"Kükametsa"));
+		elemList = compElem.getElementsByTagName("date");
+		assertTrue(testElementData(elemList.item(0),"01.06.2007"));
+		elemList = compElem.getElementsByTagName("location");
+		assertTrue(testElementData(elemList.item(0),"EE"));
+		
+		
+	}
 	protected boolean testElementTag(Element el, String tagName) {
 		return el.getTagName().equals(tagName);
 	}

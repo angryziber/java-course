@@ -26,8 +26,8 @@ public class DecathlonTest {
 	@Test
 	public void testSplitArg() throws Exception {
 		Decathlon dec = new Decathlon();
-		Vector<String> vec = dec.splitArg("-csvin=test.csv");
-		assertTrue(vec.elementAt(0).equals("-csvin"));
+		Vector<String> vec = dec.splitArg("csvin=test.csv");
+		assertTrue(vec.elementAt(0).equals("csvin"));
 		assertTrue(vec.elementAt(1).equals("test.csv"));
 	}
 	@Test

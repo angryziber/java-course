@@ -26,7 +26,7 @@
                             <th>Javelin Throw</th>
                             <th>Race 1500m</th>
                         </tr>
-                        <xsl:apply-templates select="."/>
+                        <xsl:apply-templates select="result"/>
                     </table>
                 </xsl:for-each>
             </body>

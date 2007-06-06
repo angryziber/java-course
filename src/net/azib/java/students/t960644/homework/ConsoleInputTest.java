@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +24,10 @@ public class ConsoleInputTest {
 	public void testReadValue() throws Exception {
 		ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
 		ByteArrayInputStream byteIn = new ByteArrayInputStream("123\n248\n".getBytes()); 
+		InputStreamReader reader = new InputStreamReader(byteIn);
+		PrintStream printOut = new PrintStream(byteOut);
 		ConsoleInput ci = new ConsoleInput();
-		String retVal = ci.readValue(byteIn, byteOut, "test");
+		String retVal = ci.readValue(reader, printOut, "test");
 		assertTrue(byteOut.toString().contains("test"));
 		assertTrue(retVal.equals("123"));
 		//res = ci.readValue(byteIn, byteOut, "");
@@ -33,16 +37,19 @@ public class ConsoleInputTest {
 	public void testReadOption() throws Exception {
 		ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
 		ByteArrayInputStream byteIn = new ByteArrayInputStream("0\n".getBytes()); 
+		InputStreamReader reader = new InputStreamReader(byteIn);
+		PrintStream printOut = new PrintStream(byteOut);
 		ConsoleInput ci = new ConsoleInput();
 		List<String> options = new ArrayList<String>();
 		options.add("option1");
 		options.add("option2");
-		Integer retVal = ci.readOption(byteIn, byteOut, options, "Pick option: ");
+		Integer retVal = ci.readOption(reader, printOut, options, "Pick option: ");
 		assertEquals(retVal.intValue(),0);
 		assertTrue(byteOut.toString().contains("0: option1"));
 		assertTrue(byteOut.toString().contains("1: option2"));
 		byteIn = new ByteArrayInputStream("blah\n".getBytes());
-		retVal = ci.readOption(byteIn, byteOut, options, "Pick option: ");
+		reader = new InputStreamReader(byteIn);
+		retVal = ci.readOption(reader, printOut, options, "Pick option: ");
 		assertNull(retVal);
 		assertTrue(byteOut.toString().contains("Faulty value!"));
 	}

@@ -19,7 +19,7 @@ public class Competition {
 	private Integer id;
 	private List<Athlete> athletes;
 	private List<Result> results;
-	protected SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.mm.yyyy");
+	protected SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 	public Competition() {
 		athletes = new ArrayList<Athlete>();

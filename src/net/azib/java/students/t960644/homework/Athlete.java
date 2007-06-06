@@ -14,7 +14,7 @@ public class Athlete {
 	private Date born;
 	private String countryCode;
 	private Integer id;
-	protected SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.mm.yyyy");
+	protected SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 	/**
 	 * @return the name
@@ -45,18 +45,21 @@ public class Athlete {
 	public void setBorn(Date born) {
 		this.born = born;
 	}
+
 	public String getBirthDate() {
-		if (born==null){
+		if (born == null) {
 			return "";
-		} else {
+		}
+		else {
 			return DATE_FORMAT.format(born);
 		}
-			
+
 	}
+
 	public void setBirthDate(String birthdate) throws ParseException {
 		setBorn(DATE_FORMAT.parse(birthdate));
 	}
-	
+
 	/**
 	 * @return the countryCode
 	 */
