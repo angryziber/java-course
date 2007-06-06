@@ -200,6 +200,7 @@ public class IOHandler {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 *             failed to read file
+	 * @return true, if data are read and are in correct format
 	 */
 	public boolean readInputFromCSVFile(String fileName) {
 
@@ -241,6 +242,7 @@ public class IOHandler {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 *             failed to write to file
+	 * @return true, if data are written in file
 	 */
 	public boolean writeOutputToCSVFile(String fileName) {
 		try {
@@ -294,6 +296,7 @@ public class IOHandler {
 	 * @throws NumberFormatException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
+	 * @return true, if data are read and are in correct format
 	 */
 	public boolean readInputFromMySQLDatabase(String competitionName) {
 		// Training in Tallinn OR DECATHLON4BEER in Krakow

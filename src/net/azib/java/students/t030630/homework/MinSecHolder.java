@@ -1,7 +1,7 @@
 package net.azib.java.students.t030630.homework;
 
 /**
- * a class that parse results got in format "min:sec" to format "sec"
+ * a class that parses results got in format "min:sec" to format "sec"
  * 
  * @author Sergei
  */

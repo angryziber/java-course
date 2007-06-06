@@ -48,6 +48,7 @@ public class Athlete {
 	 *            info
 	 * @throws ParseException
 	 * @throws NumberFormatException
+	 * @return true, if parsed data formats are corrected
 	 */
 	private boolean parseInputData(String inputData) {
 		String[] input = inputData.split(",");
@@ -130,6 +131,7 @@ public class Athlete {
 	 *            constant
 	 * @param P
 	 *            performance
+	 * @return points for running event
 	 */
 	private int calcPointsForRunningEvents(float A, float B, float C, float P) {
 		return (int) (A * Math.pow(B - P, C));
@@ -146,6 +148,7 @@ public class Athlete {
 	 *            constant
 	 * @param P
 	 *            performance
+	 * @return points for field event
 	 */
 	private int calcPointsForFieldEvents(float A, float B, float C, float P) {
 		return (int) (A * Math.pow(P - B, C));
@@ -153,6 +156,8 @@ public class Athlete {
 
 	/**
 	 * calculates total points got at competition
+	 * 
+	 * @return total points of an athlte for competition
 	 */
 	private int calcPoints() {
 		return (int) (calcPointsForRunningEvents(25.437f, 18.0f, 1.81f, sec100mSprint)
@@ -170,6 +175,8 @@ public class Athlete {
 	/**
 	 * show Athlete personal information(name, points, birthday, country) and
 	 * results got at competition
+	 * 
+	 * @return Athlete personal information and results as a String
 	 */
 	public String getAthletePersonalInfoAndResults() {
 		StringBuilder athleteCompleteInfo = new StringBuilder();
