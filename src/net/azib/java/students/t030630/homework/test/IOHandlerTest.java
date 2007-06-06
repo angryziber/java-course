@@ -1,7 +1,10 @@
-package net.azib.java.students.t030630.homework;
+package net.azib.java.students.t030630.homework.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import net.azib.java.students.t030630.homework.Athlete;
+import net.azib.java.students.t030630.homework.IOHandler;
 
 import java.io.BufferedReader;
 import java.io.File;

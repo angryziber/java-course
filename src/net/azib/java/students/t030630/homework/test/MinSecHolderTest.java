@@ -1,6 +1,8 @@
-package net.azib.java.students.t030630.homework;
+package net.azib.java.students.t030630.homework.test;
 
 import static org.junit.Assert.assertEquals;
+
+import net.azib.java.students.t030630.homework.MinSecHolder;
 
 import org.junit.Test;
 
