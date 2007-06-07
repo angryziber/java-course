@@ -23,6 +23,11 @@ Release plan
 		- restrictions
 		- redesign of move calculations
 		
+0.4 planned xx.07.2007
+	- implement English version of Sumo language
+		- implement parser
+		- implement Web page language selection (GNU gettext)
+		
 
 
 1.0 planned 31.08.2007
