@@ -43,14 +43,9 @@ public class SumoCode extends Robot implements Runnable {
 			try {
 				/** Test Code */
 				
-				edasi();
-				//tagasi();
-				//viivitus(2);
-				//vasakule();
-				//viivitus(1);
-				//tagasi();
-				//viivitus(100);
-				Thread.sleep(SumoApp.DELAY);
+				forward();
+
+				Thread.sleep(SumoApp.getDelay());
 			} catch (InterruptedException e) {
 
 			}
@@ -69,12 +64,6 @@ public class SumoCode extends Robot implements Runnable {
 	public void tick() {
 	}
 
-	public void viivitus(int ms) {
-		/*
-		 * while (Thread.currentThread() == sumoCode) { try { Thread.sleep(ms); }
-		 * catch (InterruptedException e) { //e.printStackTrace(); //return; } }
-		 */
-	}
 
 	/*
 	 * public void runCode(){

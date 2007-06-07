@@ -30,16 +30,22 @@ import java.awt.Image;
 
 public class Dohjo {
 
-	public int with;
+	public int width;
 
     public int height;
-
+    /**
+     * Some free space for printing status of sensors/motors
+     */
     private static final int FREEAREA = 60;
-
+    /**
+     * Japan minisumo board diameter = 77cm
+     */
     private static final int DOHJODIAM = 77;
     
     private static final int BORDER = 30;
-    
+    /**
+     * 
+     */
     private static final int WHITEAREA = 2;
     
     private static final int ROBOTWITH = 100;
@@ -47,12 +53,7 @@ public class Dohjo {
     private static final int ROBOTHEIGTH = 108;
     
     private static final int STARTLINE = 10;
-    
-    
-    
- //   private static final int KILLERX = 100;
-    
-  //  private static final int KILLERY = 100;
+
 
     private static double dojoScale;
     private static int dohjoCentreX;
@@ -67,9 +68,9 @@ public class Dohjo {
     
     public void init(int w, int h){
     	sumoMatch.init();
-    	with=w;
+    	width=w;
     	height=h;
-    	dojoScale = (with - FREEAREA) / (double) DOHJODIAM;
+    	dojoScale = (width - FREEAREA) / (double) DOHJODIAM;
     	dohjoCentreX = BORDER+(int)(DOHJODIAM * dojoScale/2.0);
     	dohjoCentreY = BORDER+(int)(DOHJODIAM * dojoScale/2.0);
     	UserState.x=BORDER+(int) (DOHJODIAM*dojoScale/2.0)-(int) (ROBOTWITH/2);
@@ -100,8 +101,6 @@ public void setImages(Image imgMyRobot, Image imgYouRobot) {
 public static boolean offDohjo(int x, int y){
 	
 	double distance;
-	//x=x-BORDER;
-	//y=y-BORDER;
 	distance=Math.sqrt((dohjoCentreX-x)*(dohjoCentreX-x)+(dohjoCentreY-y)*(dohjoCentreY-y));
 	System.out.println("distance "+(distance+ROBOTWITH/2.0) +" DOHJODIAM * dojoScale/2.0 "+DOHJODIAM * dojoScale/2.0 + "Centre x,y "+dohjoCentreX+","+dohjoCentreY);
 	/* distance from centre + robot*/

@@ -50,7 +50,7 @@ public class Move implements Runnable {
 			
 					
 
-				Thread.sleep(SumoApp.DELAY/10);
+				Thread.sleep(SumoApp.getDelay()/10);
 
 			} catch (InterruptedException e) {
 			}

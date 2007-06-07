@@ -21,111 +21,110 @@ package net.azib.java.students.t060397.homework;
 
 import java.applet.*;
 import java.awt.*;
-import java.io.IOException;
 import java.net.URL;
 
+/**
+ * @author Margus Ernits<p>
+ * The SumoApp class is contains main applet for Sumorobot application.
+ * This class contains graphical part and creation of board - no application logic.
+ * You will find newer version of Sumo language and training applet from
+ * <a href="http://robot.itcollege.ee:800/~robot/sumo/">SumoRobot programming</a>.<p>
+ * Sumo Language used by children for learning proposes.<p> Currently all built-in
+ * functions in Sumo language are in Estonian. I plan to develop English version too
+ * See release.txt 
+ */
 public class SumoApp extends Applet implements Runnable {
 
 	private static final long serialVersionUID = 4458887497742408563L;
-	//private static final String RESOURCE_FILE = "resource.properties";
 	
-	/** Image URL from html */
+
+	/** 
+	 * Image URL from html 
+	 */
 	private static final String IMG_URL = "imgurl";
-	
-	static int frame;
 
-	public static int DELAY;
+	/**
+	 * Sumomatch frame no. It can be used for syncronization of match.
+	 */
+	private static int frame;
 
-	Thread animator;
+	/**
+	 * Delay between frames
+	 */
+	private static int delay;
 
-	private static final int with = 640;
+	private Thread animator;
 
-	private static final int height = 640;
+	private static int width;
 
-	Dimension offScreenDim;
+	private static int height;
 
-	Image offScreenImage;
+	private Dimension offScreenDim;
 
-	Image imgMyRobot;
+	private Image offScreenImage;
 
-	Image imgYouRobot;
+	private Image imgMyRobot;
 
-	Graphics offScreenGraphics;
+	private Image imgYouRobot;
+
+	private Graphics offScreenGraphics;
 
 	private URL imageSrc;
-
-	Dohjo board;
+	/**
+	 * Sumoboard for match
+	 */
+	protected Dohjo board;
+	
 
 	public void start() {
 		animator = new Thread(this);
 		animator.start();
 	}
 
-	private void getResources() throws IOException {
-		
-		/** Getting class file location 
-		final String clsAsResource = this.getName ().replace ('.', '/').concat (".class");
-		final String pd = getClass().getProtectionDomain().getCodeSource().toString();
-	//	final CodeSource cs = pd.getCodeSource ();
-		System.out.println("UUU :"+pd);
-		
-		java.util.Properties props = new java.util.Properties();
-		//String path = getClass().
-		String path = getClass().getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
-		System.out.println("Path :"+path);
-		java.io.FileInputStream fis = new java.io.FileInputStream(new java.io.File(path + File.separator + RESOURCE_FILE));
-		props.load(fis);
-		java.net.URL url = ClassLoader.getSystemResource(RESOURCE_FILE);
-		if (url != null) {
-			props.load(url.openStream());
-			System.out.println(props);
-		}
-		else {
-			throw new IOException("Can't open resurce file: " + RESOURCE_FILE);
-		}
-		*/
-		/** Print properties */
-		/*
-		Properties sysprops = System.getProperties();
-		Collection c = sysprops.keySet();	
-		
-		for (Object key : c) {
-			System.out.println("Key "+key +" Value "+ sysprops.get(key));
-		}*/
-		
-	}
+
+/**
+ * init() creates Dohjo object and sets Robot pictures
+ */
 	public void init() {
-		
+
 		imageSrc = getCodeBase();
 		String imageSrcUrl = getParameter(IMG_URL);
-		
-		try{
-			getResources();
-	      
-	     
-		//SumoApp.getResourceAsStream("resource.properties");
-		}catch (IOException e){
-			
-			e.printStackTrace();
-		}
-		System.out.println("Codebase: "+ imageSrc);
 		setDelay();
-		setSize(with, height);
+		setWidth();
+		setHeight();
+		setSize(width, height);
 		setBackground(Color.green);
 		board = new Dohjo();
-		board.init(with, height);
-		//imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("websumobot.png"));
-		imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("java-logo.gif"));
-		//imgMyRobot = getImage(imageSrc,"net/azib/java/students/t060397/homework/images/websumobot.png");
-		imgYouRobot = getImage(imageSrc, "images/bot2.png");
+		board.init(width, height);
+		if (imageSrcUrl == null) {
+			imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("java-logo.gif"));
+			imgYouRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("java-logo.gif"));
+		}
+		else {
+			imgMyRobot = getImage(imageSrc, "websumobot.png");
+			imgYouRobot = getImage(imageSrc, "bot2.png");
+		}
 		board.setImages(imgMyRobot, imgYouRobot);
 
 	}
 
-	public void setDelay() {
-		String str = getParameter("fps");
+	private void setWidth() {
+		String str = getParameter("WIDTH");
+		int with = (str != null) ? Integer.parseInt(str) : 640;
+		SumoApp.width = (with > 640) ? with : 640;
+	}
+
+	private void setHeight() {
+		String str = getParameter("HEIGHT");
+		int height = (str != null) ? Integer.parseInt(str) : 640;
+		SumoApp.height = (height > 640) ? height : 640;
+		;
+	}
+
+	private void setDelay() {
+		String str = getParameter("FPS");
 		int fps = (str != null) ? Integer.parseInt(str) : 50;
-		SumoApp.DELAY = (fps > 0) ? (1000 / fps) : 100;
+		SumoApp.delay = (fps > 0) ? (1000 / fps) : 100;
 	}
 
 	/**
@@ -146,7 +145,7 @@ public class SumoApp extends Applet implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		// TODO Implement non applet instance too (not in this release)
+		// TODO Implement non applet instance too (see release.txt)
 
 	}
 
@@ -156,7 +155,7 @@ public class SumoApp extends Applet implements Runnable {
 		while (Thread.currentThread() == animator) {
 			repaint();
 			try {
-				tm += SumoApp.DELAY;
+				tm += SumoApp.delay;
 				Thread.sleep(Math.max(0, tm - System.currentTimeMillis()));
 			}
 			catch (InterruptedException e) {
@@ -194,6 +193,27 @@ public class SumoApp extends Applet implements Runnable {
 		animator = null;
 		offScreenImage = null;
 		offScreenGraphics = null;
+	}
+
+	/**
+	 * @return the frame
+	 */
+	public static synchronized int getFrame() {
+		return frame;
+	}
+
+	/**
+	 * @return the delay
+	 */
+	public static int getDelay() {
+		return delay;
+	}
+
+	/**
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
 	}
 
 }

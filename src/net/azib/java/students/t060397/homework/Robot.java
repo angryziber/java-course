@@ -45,7 +45,7 @@ abstract public class Robot {
 	public void setRobotName(String robotName) {
 		this.robotName = robotName;
 	}
-	public void tagasi() {
+	public void backward() {
 		if(getRobotName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.BACKWARD;
 			UserState.rmotork = UserState.motorState.BACKWARD;	
@@ -55,7 +55,7 @@ abstract public class Robot {
 		}
 	}
 
-	public void vasakule() {
+	public void left() {
 		if(getRobotName()=="killerRobot"){
 			UserState.angle++;
 			UserState.lmotor = UserState.motorState.STOP;
@@ -67,7 +67,7 @@ abstract public class Robot {
 		}
 	}
 
-	public void paremale() {
+	public void right() {
 		if(getRobotName()=="killerRobot"){
 			UserState.angle--;	
 			UserState.lmotor = UserState.motorState.STOP;
@@ -88,7 +88,7 @@ abstract public class Robot {
 			UserState.rmotor = UserState.motorState.STOP;	
 		}
 	}
-	public void edasi() {
+	public void forward() {
 		if(getRobotName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.FORWARD;
 			UserState.rmotork = UserState.motorState.FORWARD;	
@@ -111,6 +111,14 @@ abstract public class Robot {
 		
 		
 	}
+	
+	public void ms_sleep(int ms) {
+		/*
+		 * while (Thread.currentThread() == sumoCode) { try { Thread.sleep(ms); }
+		 * catch (InterruptedException e) { //e.printStackTrace(); //return; } }
+		 */
+	}
+
 
 
 }

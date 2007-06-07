@@ -28,7 +28,7 @@ public class UserCode extends Robot {
 	Image img;
 	public void paint(Graphics g) {
 		g.drawImage(img,500,500,null);
-		g.drawString("YourRobot " + SumoApp.frame, 500, 100);
+		g.drawString("YourRobot " + SumoApp.getFrame(), 500, 100);
 		
 	}
 	public void run(){
