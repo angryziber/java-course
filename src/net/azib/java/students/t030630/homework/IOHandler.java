@@ -321,7 +321,7 @@ public class IOHandler {
 			}
 			rsAthleteResults = stmtAthleteresults.executeQuery("SELECT * FROM results WHERE competition_id='" + id + "'");
 			while (rsAthleteResults.next()) {
-				StringBuffer data = new StringBuffer();
+				StringBuilder data = new StringBuilder();
 				int id2 = rsAthleteResults.getInt("athlete_id");
 				stmtAthleteInfo = con.createStatement();
 				rsAthleteInfo = stmtAthleteInfo.executeQuery("SELECT * FROM athletes WHERE id='" + id2 + "'");
