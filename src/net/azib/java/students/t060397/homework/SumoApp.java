@@ -127,9 +127,6 @@ public class SumoApp extends Applet implements Runnable {
 		SumoApp.delay = (fps > 0) ? (1000 / fps) : 100;
 	}
 
-	/**
-	 * @param args
-	 */
 	public void paint(Graphics g) {
 		if (offScreenImage != null) {
 			g.drawImage(offScreenImage, 0, 0, null);
@@ -196,6 +193,7 @@ public class SumoApp extends Applet implements Runnable {
 	}
 
 	/**
+	 * Returns frame number
 	 * @return the frame
 	 */
 	public static synchronized int getFrame() {
@@ -203,6 +201,7 @@ public class SumoApp extends Applet implements Runnable {
 	}
 
 	/**
+	 * Returns applet delay between frames
 	 * @return the delay
 	 */
 	public static int getDelay() {
@@ -210,10 +209,18 @@ public class SumoApp extends Applet implements Runnable {
 	}
 
 	/**
+	 * Returns applet heigth
 	 * @return the height
 	 */
 	public int getHeight() {
 		return height;
+	}
+	/**
+	 * Returns applet width
+	 * @return the witdh
+	 */
+	public int getWidth() {
+		return width;
 	}
 
 }

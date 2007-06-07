@@ -3,10 +3,10 @@ Release plan
 0.1 planned 08.06.2007
 
 - Initial design
-	- classes
-	- visual design
+	- classes - done
+	- visual design - done
 - Dohjo implementation
-	- robot is out
+	- robot is out of dohjo
 - Sumo language initial implementation
 	- parser - done
 	- web application for uploading sumocode - done
@@ -14,8 +14,11 @@ Release plan
 	- realization of program control locic (if, while) - done
 
 0.2 planned  22.06.2007
-	- Sumolanguage implemetation
-	- left, rigth, ms_sleep (vasakule, paremale, viivitus in Sumo language)
+	- Separate painting from other logic
+	- Get rid of ugly UserState class and logic
+	- better exception handling
+	- Full Sumolanguage implemetation
+		- left, rigth, ms_sleep (vasakule, paremale, viivitus in Sumo language)
 	- thread syncronization (needed for 2 robot match)
 
 0.3 planned 06.07.2007

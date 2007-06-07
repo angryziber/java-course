@@ -20,94 +20,129 @@ package net.azib.java.students.t060397.homework;
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
-
-
+/**
+ * 
+ * Dohjo - Japan minisumo board
+ * @author Margus Ernits<p>
+ * See <a href="http://www.robotroom.com/SumoRules.html">content rules</a>
+ * 
+ * <p>
+ * <img src="http://robot.itcollege.ee:800/~robot/sumo/pic/SumoApp.png" alt="SumoRobot picture">
+ * 
+ *  
+ */
 public class Dohjo {
 
-	public int width;
+	/**
+	 * Some free space for printing status of sensors/motors
+	 * 
+	 */
+	private static final int FREEAREA = 60;
+	/**
+	 * Japan minisumo board diameter = 77cm
+	 */
+	private static final int DOHJODIAM = 77;
 
-    public int height;
-    /**
-     * Some free space for printing status of sensors/motors
-     */
-    private static final int FREEAREA = 60;
-    /**
-     * Japan minisumo board diameter = 77cm
-     */
-    private static final int DOHJODIAM = 77;
-    
-    private static final int BORDER = 30;
-    /**
-     * 
-     */
-    private static final int WHITEAREA = 2;
-    
-    private static final int ROBOTWITH = 100;
-    
-    private static final int ROBOTHEIGTH = 108;
-    
-    private static final int STARTLINE = 10;
+	private static final int BORDER = 30;
+	/**
+	 * Bright border size 
+	 */
+	private static final int WHITEAREA = 2;
 
+	/**
+	 * Robot default width [px]
+	 */
+	private static final int ROBOTWIDTH = 100;
+	/**
+	 * Robot default heigth [px]
+	 */
+	private static final int ROBOTHEIGTH = 108;
+	/**
+	 * Brown start line distance from dohjo centre
+	 */
+	private static final int STARTLINE = 10;
+	/**
+	 * Dohjo scale factor
+	 */
+	private static double dojoScale;
+	/**
+	 * Dohjo centre point X coordinate [px]
+	 */
+	private static int dohjoCentreX;
+	/**
+	 * Dohjo centre point Y coordinate [px]
+	 */
+	private static int dohjoCentreY;
 
-    private static double dojoScale;
-    private static int dohjoCentreX;
-    private static int dohjoCentreY;
-    
-    private int frame;
-    Match sumoMatch = new Match();
-    
-    void setFrame(int frameno){
-    	frame=frameno;
-    }
-    
-    public void init(int w, int h){
-    	sumoMatch.init();
-    	width=w;
-    	height=h;
-    	dojoScale = (width - FREEAREA) / (double) DOHJODIAM;
-    	dohjoCentreX = BORDER+(int)(DOHJODIAM * dojoScale/2.0);
-    	dohjoCentreY = BORDER+(int)(DOHJODIAM * dojoScale/2.0);
-    	UserState.x=BORDER+(int) (DOHJODIAM*dojoScale/2.0)-(int) (ROBOTWITH/2);
-    	UserState.y=BORDER+(int) (DOHJODIAM*dojoScale/2.0)-(int) (ROBOTHEIGTH/2)-(int) (STARTLINE*dojoScale);
-    	UserState.xk=BORDER+(int) (DOHJODIAM*dojoScale/2.0)-(int) (ROBOTWITH/2);
-    	UserState.yk=BORDER+(int) (DOHJODIAM*dojoScale/2.0)-(int) (ROBOTHEIGTH/2)+(int) (STARTLINE*dojoScale);
-    }
-	
-public void paint(Graphics g){
-	
-    g.drawString("Sumorobotite rammukatsumine " + frame, 10, 10);
-    g.setColor(Color.white);
-    g.fillArc(BORDER, BORDER, (int) (DOHJODIAM * dojoScale), (int) (DOHJODIAM * dojoScale), 0, 360);
-    g.setColor(Color.black);
-    g.fillArc((int) (BORDER + WHITEAREA * dojoScale), (int) (BORDER + WHITEAREA * dojoScale),
-                    (int) (DOHJODIAM * dojoScale - WHITEAREA*WHITEAREA * dojoScale),
-                    (int) (DOHJODIAM * dojoScale - WHITEAREA*WHITEAREA * dojoScale), 0, 360);
-    sumoMatch.paint(g);
-   
-    
-}
+	private int frame;
 
-public void setImages(Image imgMyRobot, Image imgYouRobot) {
-	sumoMatch.setImages(imgMyRobot,imgYouRobot);
-	
-}
+	Match sumoMatch = new Match();
 
-public static boolean offDohjo(int x, int y){
-	
-	double distance;
-	distance=Math.sqrt((dohjoCentreX-x)*(dohjoCentreX-x)+(dohjoCentreY-y)*(dohjoCentreY-y));
-	System.out.println("distance "+(distance+ROBOTWITH/2.0) +" DOHJODIAM * dojoScale/2.0 "+DOHJODIAM * dojoScale/2.0 + "Centre x,y "+dohjoCentreX+","+dohjoCentreY);
-	/* distance from centre + robot*/
-	if(distance+ROBOTWITH/2>(DOHJODIAM * dojoScale/2.0 )){
-		return true;
+	void setFrame(int frameno) {
+		frame = frameno;
 	}
-	return false;
-}
+
+	/**
+	 * Inits Dohjo, sets up sumomatch, places robots to board
+	 * @param w area width
+	 * @param h area heigth
+	 */
+	public void init(int w, int h) {
+		sumoMatch.init();
+		dojoScale = (w - FREEAREA) / (double) DOHJODIAM;
+		dohjoCentreX = BORDER + (int) (DOHJODIAM * dojoScale / 2.0);
+		dohjoCentreY = BORDER + (int) (DOHJODIAM * dojoScale / 2.0);
+		UserState.x = BORDER + (int) (DOHJODIAM * dojoScale / 2.0) - (int) (ROBOTWIDTH / 2);
+		UserState.y = BORDER + (int) (DOHJODIAM * dojoScale / 2.0) - (int) (ROBOTHEIGTH / 2) - (int) (STARTLINE * dojoScale);
+		UserState.xk = BORDER + (int) (DOHJODIAM * dojoScale / 2.0) - (int) (ROBOTWIDTH / 2);
+		UserState.yk = BORDER + (int) (DOHJODIAM * dojoScale / 2.0) - (int) (ROBOTHEIGTH / 2) + (int) (STARTLINE * dojoScale);
+	}
+	/**
+	 * Paints Dohjo
+	 * @param g  applet graphics
+	 */
+	public void paint(Graphics g) {
+
+		g.drawString("Sumorobotite rammukatsumine " + frame, 10, 10);
+		g.setColor(Color.white);
+		g.fillArc(BORDER, BORDER, (int) (DOHJODIAM * dojoScale), (int) (DOHJODIAM * dojoScale), 0, 360);
+		g.setColor(Color.black);
+		g.fillArc((int) (BORDER + WHITEAREA * dojoScale), (int) (BORDER + WHITEAREA * dojoScale),
+				(int) (DOHJODIAM * dojoScale - WHITEAREA * WHITEAREA * dojoScale), (int) (DOHJODIAM * dojoScale - WHITEAREA
+						* WHITEAREA * dojoScale), 0, 360);
+		sumoMatch.paint(g);
+
+	}
+	/**
+	 * Sets Robot pictures
+	 * @param imgMyRobot SumoApp robot
+	 * @param imgYouRobot User robot - uses generated code from SumoLanguage
+	 */
+
+	public void setImages(Image imgMyRobot, Image imgYouRobot) {
+		sumoMatch.setImages(imgMyRobot, imgYouRobot);
+
+	}
+	/**
+	 * Checks robot location.
+	 * @param x robots x coordinate
+	 * @param y robots y coordinate
+	 * @return true if robot is outside dohjo
+	 */
+	public static boolean offDohjo(int x, int y) {
+
+		double distance;
+		distance = Math.sqrt((dohjoCentreX - x) * (dohjoCentreX - x) + (dohjoCentreY - y) * (dohjoCentreY - y));
+		
+		/* distance from centre + robot*/
+		if (distance + ROBOTWIDTH / 2 > (DOHJODIAM * dojoScale / 2.0)) {
+			return true;
+		}
+		return false;
+	}
 
 }

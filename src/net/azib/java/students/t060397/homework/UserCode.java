@@ -24,19 +24,29 @@ package net.azib.java.students.t060397.homework;
 import java.awt.Graphics;
 import java.awt.Image;
 
+/**
+ * 
+ * UserCode implements second robot<p>
+ * Not yet implemented<p>
+ * Please see release.txt
+ * @author marcus
+ */
 public class UserCode extends Robot {
 	Image img;
 	public void paint(Graphics g) {
 		g.drawImage(img,500,500,null);
-		g.drawString("YourRobot " + SumoApp.getFrame(), 500, 100);
 		
 	}
 	public void run(){
 		
 	}
 
-	public void setImage(Image imgYouRobot) {
-		img = imgYouRobot;
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t060397.homework.Robot#ms_sleep(int)
+	 */
+	@Override
+	public void ms_sleep(int ms) {
+		
 		
 	}
 

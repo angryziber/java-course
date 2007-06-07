@@ -20,15 +20,16 @@ package net.azib.java.students.t060397.homework;
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.geom.AffineTransform;
-
+/**
+ * 
+ * SumoCode class contains first robot behaiviour and runs generated code
+ *
+ * @author marcus
+ */
 public class SumoCode extends Robot implements Runnable {
-	
 
 	Thread sumoCode;
 
@@ -36,68 +37,41 @@ public class SumoCode extends Robot implements Runnable {
 		sumoCode = new Thread(this);
 		sumoCode.start();
 	}
-	
+
 	public void run() {
 
-		while (Thread.currentThread() == sumoCode) {			
+		while (Thread.currentThread() == sumoCode) {
 			try {
-				/** Test Code */
-				
+				/* GENERATED CODE by web interface*/
+
 				forward();
+				
+				/* GENERATED CODE by web interface*/
 
 				Thread.sleep(SumoApp.getDelay());
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) {
 
 			}
 		}
 	}
-
-
-
 	
-	
-
-	public int getVal(String sensorName) {
-		return 0;
-	}
-
-	public void tick() {
-	}
-
-
-	/*
-	 * public void runCode(){
-	 * 
-	 * if ( getVal("all_keskmine") < 400 ){ tagasi(); tick(); viivitus(500);
-	 * tick(); vasakule(); tick(); viivitus(500); tick(); } else if
-	 * (getVal("all_vasak")<400){ paremale(); tick(); viivitus(500); tick(); }
-	 * else if (getVal("all_parem")<400) { vasakule(); tick(); viivitus(800);
-	 * tick(); } else if ((getVal("vastane_vasak") > 150) &&
-	 * (getVal("vastane_parem") > 150)){
-	 * 
-	 * edasi(); tick(); viivitus(100); tick(); } else if
-	 * (getVal("vastane_vasak")>150){ while (getVal("vastane_parem") < 150){
-	 * vasakule(); } tick(); } }
+	/**
+	 * paints robot on the dohjo according to coordinates and angle.
+	 * paints motor and sensor states
+	 * @param g applet graphics
 	 */
 	public void paint(Graphics g) {
-		Graphics2D g2d = (Graphics2D)g;
-		//BufferedImage bimg = new BufferedImage(img.getWidth(null), img.getHeight(null),BufferedImage.TYPE_4BYTE_ABGR);
-		//Graphics2D g2d = bimg.createGraphics();
-	    AffineTransform origXform = g2d.getTransform();
-	    AffineTransform newXform = (AffineTransform)(origXform.clone());
-	     //center of rotation is center of the panel
-	     //int xRot = img.getWidth()/2;
-	     int xRot = img.getWidth(null)/2;
-	     int yRot = img.getHeight(null)/2;
-	     newXform.rotate(Math.toRadians(UserState.angle), xRot, yRot);
-	     g2d.setTransform(newXform);
-	     //draw image centered in panel
-	     //int x = (getWidth() - img.getWidth(this))/2;
-	     //int y = (getHeight() - img.getHeight(this))/2;
-	     g2d.drawImage(img, UserState.x, UserState.y, null);
-	     g2d.setTransform(origXform);
-		//g.drawImage(img, UserState.x, UserState.y, null);
-		g2d.drawString("YOU", 1, 600);
+		Graphics2D g2d = (Graphics2D) g;
+		AffineTransform origXform = g2d.getTransform();
+		AffineTransform newXform = (AffineTransform) (origXform.clone());
+		int xRot = img.getWidth(null) / 2;
+		int yRot = img.getHeight(null) / 2;
+		newXform.rotate(Math.toRadians(UserState.angle), xRot, yRot);
+		g2d.setTransform(newXform);
+		g2d.drawImage(img, UserState.x, UserState.y, null);
+		g2d.setTransform(origXform);
+		g2d.drawString("Andurid ja mootorid", 1, 600);
 		g2d.drawString("all_vasak", 1, 610);
 		g2d.drawString("all_keskmine", 1, 620);
 		g2d.drawString("all_parem", 1, 630);
@@ -105,12 +79,26 @@ public class SumoCode extends Robot implements Runnable {
 		g2d.drawString("vastane_parem", 150, 620);
 		g2d.drawString("vasak mootor", 250, 610);
 		g2d.drawString("parem mootor", 250, 620);
-		g2d.drawString("state.x " + UserState.x, 350, 620);
 	}
 
-	public void setImage(Image imgMyRobot) {
-		img = imgMyRobot;
+	
+
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t060397.homework.Robot#ms_sleep(int)
+	 */
+	@Override
+	public void ms_sleep(int ms) {
+
+		while (Thread.currentThread() == sumoCode) {
+			try {
+				Thread.sleep(ms);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+				return;
+			}
+
+		}
 	}
 
 }
-

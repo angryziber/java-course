@@ -22,29 +22,58 @@
  */
 package net.azib.java.students.t060397.homework;
 
+import java.awt.Graphics;
 import java.awt.Image;
 
 
 
 /**
- * @author marcus
- *
+ * Robot is abstract class for robots<p>
+ * You must implement run() and ms_sleep according robot role<p>
+ * TODO get rid of ugly UserState class<p>
+ * @author Margus Ernits
  */
 abstract public class Robot {
+	/**
+	 * Robot picture
+	 */
 	public Image img;
-	public String robotName;
-	
+	private String robotName;
+	/**
+	 * Override the run() method for particular robot. <p>
+	 * Run method for user robot will be generated from Sumolanguage program by web interface<p>
+	 * Interface address <a href="http://robot.itcollege.ee:800/~robot/sumo/">is here.</a><p>
+	 * Please upload some robot code according Sumo language.<p>
+	 * Please see <a href="http://robot.itcollege.ee:800/~robot/sumo/sumolanguage_tutorial.html">Sumolanguage tutorial (currently only in Estonian)</a>
+	 */
 	abstract public void run();
 	
-
+	/**
+	 * Sets the robots picture. 
+	 * @param imgMyRobot  display picture
+	 */
+	public void setImage(Image imgMyRobot) {
+		img = imgMyRobot;
+	}
 	
-	
+	/**
+	 * Get the name of robot.
+	 * @return robot name
+	 */
 	public String getRobotName() {
 		return robotName;
 	}
+	/**
+	 * Sets the name of robot.
+	 * @param robotName
+	 */
 	public void setRobotName(String robotName) {
 		this.robotName = robotName;
 	}
+	/**
+	 * Robot moves backward.<p>
+	 * Sets robot state fields used by Move thread
+	 */
 	public void backward() {
 		if(getRobotName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.BACKWARD;
@@ -54,7 +83,11 @@ abstract public class Robot {
 			UserState.rmotor = UserState.motorState.BACKWARD;	
 		}
 	}
-
+	
+	/**
+	 * Robot turns left.<p>
+	 * Sets robot angle and motorstate fields used by Move thread.
+	 */
 	public void left() {
 		if(getRobotName()=="killerRobot"){
 			UserState.angle++;
@@ -66,7 +99,11 @@ abstract public class Robot {
 			UserState.rmotork = UserState.motorState.STOP;
 		}
 	}
-
+	
+	/**
+	 * Robot turns left.<p>
+	 * Sets robot angle and motorstate fields used by Move thread.
+	 */
 	public void right() {
 		if(getRobotName()=="killerRobot"){
 			UserState.angle--;	
@@ -78,7 +115,10 @@ abstract public class Robot {
 			UserState.rmotork = UserState.motorState.STOP;
 		}
 	}
-	
+	/**
+	 * Stops robot.<p>
+	 * Sets robot angle and motorstate fields used by Move thread.
+	 */
 	public void stop(){
 		if(getRobotName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.STOP;
@@ -88,6 +128,10 @@ abstract public class Robot {
 			UserState.rmotor = UserState.motorState.STOP;	
 		}
 	}
+	/**
+	 * Robot moves forward.<p>
+	 * Sets robot state fields used by Move thread
+	 */
 	public void forward() {
 		if(getRobotName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.FORWARD;
@@ -98,6 +142,10 @@ abstract public class Robot {
 		}
 		
 	}
+	/**
+	 * Is robot out of game?
+	 * @return out or not
+	 */
 	public boolean offDohjo(){
 		if(getRobotName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.FORWARD;
@@ -111,13 +159,25 @@ abstract public class Robot {
 		
 		
 	}
-	
-	public void ms_sleep(int ms) {
-		/*
-		 * while (Thread.currentThread() == sumoCode) { try { Thread.sleep(ms); }
-		 * catch (InterruptedException e) { //e.printStackTrace(); //return; } }
-		 */
+	/**
+	 * Returns sensor value
+	 * @param sensorName
+	 * @return sensor value
+	 */
+	public int getVal(String sensorName) {
+		//TODO please see release.txt
+		return 0;
 	}
+	/**
+	 * Robot runs as motor state seys ms milliseconds
+	 * @param ms time in milliseconds
+	 */
+	abstract public void ms_sleep(int ms);
+	/**
+	 * Paints robot
+	 * @param g applet graphics object
+	 */
+	abstract public void paint(Graphics g);
 
 
 

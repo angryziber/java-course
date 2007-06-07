@@ -25,41 +25,38 @@ package net.azib.java.students.t060397.homework;
 import java.awt.Graphics;
 import java.awt.Image;
 
-
+/**
+ * Match class creates robots and move controller.
+ * @author Margus Ernits
+ */
 public class Match {
-	
-	
-	
+
     SumoCode killerRobot = new SumoCode();
-    //killerRobot.setRobotName("killerRobot");
     UserCode userRobot = new UserCode();
     Move move = new Move();
-    
-  
-    
-
+    /**
+     * paints robots
+     */
     public void paint(Graphics g){
     	killerRobot.paint(g);
     	userRobot.paint(g);
     }
+    /**
+     * sets robots images
+     */
 	public void setImages(Image imgMyRobot, Image imgYouRobot) {
 		killerRobot.setImage(imgMyRobot);
 		userRobot.setImage(imgYouRobot);
 		
 	}
+	/**
+	 * sets robot starting angles and names
+	 */
 	public void init() {
 		killerRobot.setRobotName("killerRobot");
 		UserState.angle=-15;
 		userRobot.setRobotName("userRobot");
 		UserState.anglek=90;
 	}
-	public void stop(){
-		
-	}
-	public void endMatch(String robotName){
-		//stop();
-		
-	}
-
     
 }

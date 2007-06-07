@@ -18,18 +18,24 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 package net.azib.java.students.t060397.homework;
-
+/**
+ * 
+ * Move class calculates robots new position on dohjo
+ *
+ * @author marcus
+ */
 public class Move implements Runnable {
 	Thread move;
 
-	/** Ctor. */
 	Move() {
 
 		move = new Thread(this);
 		move.start();
 	}
 
-	/** TODO */
+	/**
+	 * Move calculations based on robot state
+	 */
 	public void run() {
 		while (Thread.currentThread() == move) {
 			try {

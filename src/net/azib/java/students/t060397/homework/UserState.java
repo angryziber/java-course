@@ -19,35 +19,56 @@
  ***************************************************************************/
 
 package net.azib.java.students.t060397.homework;
-
+/**
+ * 
+ * UserState class contains robot state<p>
+ * WARNING this is bad desing and this class will be dropped<p>
+ * Please see release.txt
+ *
+ * @author Margus Ernits
+ */
 public class UserState {
-	
+	/**
+	 * 
+	 * motorState - possible states of robot motor
+	 *
+	 * @author Margus Ernits
+	 */
 	public enum motorState {
 		FORWARD,
 		BACKWARD,
 		STOP
 		}
-	
+	/**
+	 * 1. Robot coordinates
+	 */
 	static public int x, y;
-
+	/**
+	 * 1. Robot angle
+	 */
 	static public double angle;
-
-	static public int vastane_vasak, vastane_parem;
-
-	static public boolean all_vasak, all_keskmine, all_parem;
-
+	/**
+	 * 1. Robot motor states
+	 */
 	static public motorState lmotor, rmotor;
-	
-	static public int xk, yk;
-
-	static public double anglek;
-
-	static public int vastane_vasakk, vastane_paremk;
-
-	static public boolean all_vasakk, all_keskminek, all_paremk;
-
-	static public motorState lmotork, rmotork;
-
+	/**
+	 * 1. Robot position on dohjo or not
+	 */
 	public static boolean off;
+	/**
+	 * 2. Robot coordinates
+	 */
+	static public int xk, yk;
+	/**
+	 * 2. Robot angle
+	 */
+	static public double anglek;
+	/**
+	 * 2. Robot motor states
+	 */
+	static public motorState lmotork, rmotork;
+	/**
+	 * 2. Robot position on dohjo or not
+	 */
 	public static boolean offk;
 }
