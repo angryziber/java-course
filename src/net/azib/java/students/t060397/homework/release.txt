@@ -1,0 +1,30 @@
+Release plan
+
+0.1 planned 08.06.2007
+
+- Initial design
+	- classes
+	- visual design
+- Dohjo implementation
+	- robot is out
+- Sumo language initial implementation
+	- parser - done
+	- web application for uploading sumocode - done
+	- realization of basic functions forward, backward, stop (edasi, tagasi, stop in sumo language) - done
+	- realization of program control locic (if, while) - done
+
+0.2 planned  22.06.2007
+	- Sumolanguage implemetation
+	- left, rigth, ms_sleep (vasakule, paremale, viivitus in Sumo language)
+	- thread syncronization (needed for 2 robot match)
+
+0.3 planned 06.07.2007
+	- add second robot
+		- restrictions
+		- redesign of move calculations
+		
+
+
+1.0 planned 31.08.2007
+	- public test release
+
