@@ -1,6 +1,7 @@
 package net.azib.java.students.t060401.homework.decathlon;
 
-import net.azib.java.students.t060401.homework.util.Utils;
+import net.azib.java.students.t060401.homework.util.DateUtil;
+import net.azib.java.students.t060401.homework.util.LanguageUtil;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
 /**
  * Athlete
  * 
- * Holds data of an athlete like athlete's name, birth date, country and
+ * Holds data of an athlete including athlete's name, birth date, country and
  * decathlon result of a competition.
  * 
  * @author t060401
@@ -22,7 +23,6 @@ public class Athlete implements Comparable {
 
 	Logger log = Logger.getLogger(Athlete.class.getName());
 
-	private long id;
 	private String name = null;
 	private Date birthTime = null;
 	private String country = Locale.getISOCountries()[0];
@@ -46,11 +46,9 @@ public class Athlete implements Comparable {
 	}
 
 	/**
-	 * @param results
-	 *            decathlon results object
-	 * @throws IllegalArgumentException
+	 * @param results decathlon results object
 	 */
-	public void setDecathlonResults(DecathlonResults results) throws IllegalArgumentException {
+	public void setDecathlonResults(DecathlonResults results) {
 		this.decathlonResults = results;
 	}
 
@@ -74,6 +72,13 @@ public class Athlete implements Comparable {
 	 * @throws IllegalArgumentException
 	 */
 	public void setBirthTime(Date birthDate) throws IllegalArgumentException {
+		try {
+			validateBirthDate(birthDate);
+		}
+		catch (IllegalArgumentException e) {
+			this.birthTime = null;
+			throw e;
+		}
 		this.birthTime = birthDate;
 	}
 
@@ -86,18 +91,8 @@ public class Athlete implements Comparable {
 	 *             if the birth date could not be parsed
 	 */
 	public void setBirthTime(String birthDate) throws IllegalArgumentException {
-		this.birthTime = null;
-		if (isValidBirthDate(birthDate)) {
-			try {
-				this.birthTime = Utils.getDate(birthDate);
-			}
-			catch (Exception e) {
-				// This should never happen as birth date is already validated
-				throw new IllegalArgumentException("Invalid birth date: " + birthDate);
-			}
-		}
-		else
-			throw new IllegalArgumentException("Invalid birth date");
+			Date newBirthDate = DateUtil.getDate(birthDate);
+			setBirthTime(newBirthDate);
 	}
 
 	/**
@@ -115,12 +110,14 @@ public class Athlete implements Comparable {
 	 * @throws IllegalArgumentException
 	 */
 	public void setCountry(String country) throws IllegalArgumentException {
-		this.country = null;
-		if (isValidCountry(country)) {
-			this.country = country;
+		try {
+			validateCountry(country);
 		}
-		else
-			throw new IllegalArgumentException("Invalid country");
+		catch (IllegalArgumentException e) {
+			this.country = null;
+			throw e;
+		}
+		this.country = country;
 	}
 
 	/**
@@ -139,102 +136,77 @@ public class Athlete implements Comparable {
 	 * @throws IllegalArgumentException
 	 */
 	public void setName(String name) throws IllegalArgumentException {
-		this.name = null;
-		if (isValidName(name)) {
-			this.name = name.replaceAll("\"", "");
+		try {
+			validateName(name);
 		}
-		else
-			throw new IllegalArgumentException("Invalid athlete's name");
+		catch (IllegalArgumentException e) {
+			this.name = null;
+			throw e;
+		}
+		this.name = name.replaceAll("\"", "");
 	}
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param ID
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	private boolean isValidName(String name) {
-		boolean isValid = true;
+	private void validateName(String name) throws IllegalArgumentException {
 		if (name != null && !"".equals(name)) {
 			for (int j = 0; j < name.length(); j++) {
-				if (Character.isDigit(name.charAt(j)) ) {
-					log.log(Level.WARNING, "Name must contain only letters. Illegal character: " + name.charAt(j));
-					isValid = false;
-					break;
+				if (Character.isDigit(name.charAt(j))) {
+					log.log(Level.WARNING, "Name must contain only letters. Illegal character: "+name.charAt(j));
+					throw new IllegalArgumentException(LanguageUtil.getString("Athlete.IllegalName.ContainsNumbers")+name.charAt(j));
 				}
 			}
 		}
 		else
-			isValid = false;
-		return isValid;
+		{
+			log.log(Level.WARNING, "Name cannot be empty");
+			throw new IllegalArgumentException(LanguageUtil.getString("Athlete.IllegalName.Empty"));
+		}
 	}
-
-	private boolean isValidBirthDate(String date) {
-		boolean isValid = true;
-		if (date != null && !"".equals(date)) {
-			try {
-				Date birthDate = Utils.getDate(date);
-				// System.out.println(birthDate);
-				if (birthDate.after(new Date())) {
-					log.log(Level.WARNING, "Birth date cannot be in future: " + date);
-					isValid = false;
-				}
-			}
-			catch (Exception e) {
-				log.log(Level.WARNING, "Illegal date format: " + date + ". " + e);
-				isValid = false;
+	
+	private void validateBirthDate(Date date) throws IllegalArgumentException {
+		if (date != null) {
+			if (date.after(new Date())) {
+				throw new IllegalArgumentException(LanguageUtil.getString("Athlete.IllegalBirthDate.InFuture"));
 			}
 		}
 		else {
-			isValid = false;
+			throw new IllegalArgumentException(LanguageUtil.getString("Athlete.IllegalBirthDate.Empty"));
 		}
-		return isValid;
 	}
 
-	private boolean isValidCountry(String country) {
-		boolean isValid = true;
-		if (country != null && country.length() == 2) {
-			List<String> countries = Arrays.asList(Locale.getISOCountries());
-			if (!countries.contains(country)) {
-				log.log(Level.WARNING, "Countries list contains no such country: " + country);
-				isValid = false;
-			}
+	private void validateCountry(String country) throws IllegalArgumentException {
+		if (country == null) {
+			throw new IllegalArgumentException(LanguageUtil.getString("Athlete.IllegalCountry.Empty"));
 		}
-		else {
-			log.log(Level.WARNING, "Country code is empty or has inpropriate length: " + country);
-			isValid = false;
+		if (country.length() != 2) {
+			throw new IllegalArgumentException(LanguageUtil.getString("Athlete.IllegalCountry.Length"));
 		}
-		return isValid;
+		List<String> countries = Arrays.asList(Locale.getISOCountries());
+		if (!countries.contains(country)) {
+			throw new IllegalArgumentException(LanguageUtil.getString("Athlete.IllegalCountry.NotExisting"));
+		}
 	}
 
 	public String toString() {
 		String str = "";
-		str += this.name + " (" + this.country + ", " + Utils.getDateAsString(this.birthTime) + ")\n";
+		str += this.name + " (" + this.country + ", " + DateUtil.getDateAsString(this.birthTime) + ")\n";
 		str += decathlonResults;
 		return str;
 	}
 
 	/**
-	 * @return the points calculated from decathlon results
+	 * @return returns the points calculated according to the decathlon results
 	 */
 	public int getPoints() {
 		return decathlonResults.getPoints();
 	}
 
 	/**
-	 * @return returns <code>true</code> if all the athlete's data is set (does not contain null values).
+	 * @return returns <code>true</code> if all the athlete's data is set
+	 *         (does not contain null values).
 	 */
 	public boolean isComplete() {
 		System.out.println(this);
-		return name != null && country != null && birthTime != null && decathlonResults.isComplete();
+		return name != null && country != null && birthTime != null && decathlonResults!=null && decathlonResults.isComplete();
 	}
 
 	/*
@@ -254,13 +226,13 @@ public class Athlete implements Comparable {
 	 * 
 	 * @return returns vector containing all the data of this athlete
 	 */
-	public Vector<Object> toVector() {
-		Vector<Object> athleteVector = new Vector<Object>();
-		athleteVector.add(getPoints());
+	public Vector<String> toVector() {
+		Vector<String> athleteVector = new Vector<String>();
+		athleteVector.add(Integer.toString(getPoints()));
 		athleteVector.add(name);
-		athleteVector.add(Utils.getDateAsString(birthTime));
+		athleteVector.add(DateUtil.getDateAsString(birthTime));
 		athleteVector.add(country);
-		athleteVector.addAll(decathlonResults.toVector());
+		athleteVector.addAll(decathlonResults.getResultsVector());
 		return athleteVector;
 	}
 }
