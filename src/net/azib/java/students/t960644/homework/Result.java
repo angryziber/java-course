@@ -5,7 +5,7 @@ import java.text.ParseException;
 /**
  * Result
  * 
- * @author Lembit
+ * Class for storing performance results and calculating decathlon score.
  */
 public class Result implements Comparable<Result>{
 	private Athlete athlete;
@@ -60,21 +60,21 @@ public class Result implements Comparable<Result>{
 	}
 
 	/**
-	 * @return the race100
+	 * @return the race 100m result
 	 */
 	public double getRace100() {
 		return race100;
 	}
 
 	/**
-	 * @param race100 the race100 to set
+	 * @param race100 the race 100m result to set
 	 */
 	public void setRace100(double race100) {
 		this.race100 = race100;
 	}
 	
 	/**
-	 * @return the longJump
+	 * @return the long jump result
 	 */
 	public double getLongJump() {
 		return longJump;
@@ -88,112 +88,112 @@ public class Result implements Comparable<Result>{
 	}
 
 	/**
-	 * @return the shotPut
+	 * @return the shot put result
 	 */
 	public double getShotPut() {
 		return shotPut;
 	}
 
 	/**
-	 * @param shotPut the shotPut to set
+	 * @param shotPut the shot put result to set
 	 */
 	public void setShotPut(double shotPut) {
 		this.shotPut = shotPut;
 	}
 
 	/**
-	 * @return the highJump
+	 * @return the high jump result
 	 */
 	public double getHighJump() {
 		return highJump;
 	}
 
 	/**
-	 * @param highJump the highJump to set
+	 * @param highJump the high jump result to set
 	 */
 	public void setHighJump(double highJump) {
 		this.highJump = highJump;
 	}
 
 	/**
-	 * @return the race400
+	 * @return the race 400m result
 	 */
 	public double getRace400() {
 		return race400;
 	}
 
 	/**
-	 * @param race400 the race400 to set
+	 * @param race400 the race 400m result to set
 	 */
 	public void setRace400(double race400) {
 		this.race400 = race400;
 	}
 
 	/**
-	 * @return the hurdles110
+	 * @return the hurdles 110m result
 	 */
 	public double getHurdles110() {
 		return hurdles110;
 	}
 
 	/**
-	 * @param hurdles110 the hurdles110 to set
+	 * @param hurdles110 the hurdles 110m result to set
 	 */
 	public void setHurdles110(double hurdles110) {
 		this.hurdles110 = hurdles110;
 	}
 
 	/**
-	 * @return the discusThrow
+	 * @return the discus throw result
 	 */
 	public double getDiscusThrow() {
 		return discusThrow;
 	}
 
 	/**
-	 * @param discusThrow the discusThrow to set
+	 * @param discusThrow the discus throw result to set
 	 */
 	public void setDiscusThrow(double discusThrow) {
 		this.discusThrow = discusThrow;
 	}
 
 	/**
-	 * @return the poleVault
+	 * @return the pole vault result
 	 */
 	public double getPoleVault() {
 		return poleVault;
 	}
 
 	/**
-	 * @param poleVault the poleVault to set
+	 * @param poleVault the pole vault result to set
 	 */
 	public void setPoleVault(double poleVault) {
 		this.poleVault = poleVault;
 	}
 
 	/**
-	 * @return the javelinThrow
+	 * @return the javelin throw result
 	 */
 	public double getJavelinThrow() {
 		return javelinThrow;
 	}
 
 	/**
-	 * @param javelinThrow the javelinThrow to set
+	 * @param javelinThrow the javelin throw result to set
 	 */
 	public void setJavelinThrow(double javelinThrow) {
 		this.javelinThrow = javelinThrow;
 	}
 
 	/**
-	 * @return the race1500
+	 * @return the race 1500m result
 	 */
 	public double getRace1500() {
 		return race1500;
 	}
 
 	/**
-	 * @param race1500 the race1500 to set
+	 * @param race1500 the race 1500m result to set
 	 */
 	public void setRace1500(double race1500) {
 		this.race1500 = race1500;
@@ -230,15 +230,14 @@ public class Result implements Comparable<Result>{
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	/**
+	 * Compare method so that the List of Results in the Competition object can be sorted
+	 * @param o another Result object to compare 
 	 */
 	@Override
 	public int compareTo(Result o) {
-		// TODO Auto-generated method stub
 		return o.calcResult()-this.calcResult();
 	}
-
 	public void setRace100(String race100) throws ParseException {
 		setRace100(DecathlonEvent.RACE_100M.eventResultParse(race100));
 	}

@@ -8,39 +8,41 @@ import java.util.Scanner;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
-
 /**
  * CSVInput
- *
- * @author Lembit
+ * 
+ * Class for reading competition data from a CSV file.
  */
 public class CSVInput {
 	private InputStreamReader reader;
+
 	/**
-	 * Create a Competition object
-	 * @return
+	 * Initializes the reader to read data from specified file.
+	 * @param filename name of the file to read the csv data from
+	 * @return boolean denoting successful read
+	 * @throws FileNotFoundException
 	 */
-	public Competition readCompetition(){
-		Competition competition = new Competition();
-		return competition;
-	}
 	public boolean initReader(String filename) throws FileNotFoundException {
 		try {
-			//reader = new InputStreamReader(CSVInput.class.getResourceAsStream(filename),"UTF-8");
-			reader = new InputStreamReader(new FileInputStream(filename),"UTF-8");
-			return reader!=null;
+			// reader = new
+			// InputStreamReader(CSVInput.class.getResourceAsStream(filename),"UTF-8");
+			reader = new InputStreamReader(new FileInputStream(filename), "UTF-8");
+			return reader != null;
 		}
 		catch (UnsupportedEncodingException e) {
 			return false;
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
-	
-	public void readResults(Competition competition){
+	/**
+	 * Reads the performance results from the InputStreamReader
+	 * @param competition an empty instantiated Competition to fill
+	 */
+	public void readResults(Competition competition) {
 		Vector<String> lineElements;
-		for (String line:readFullLines(reader)){
+		for (String line : readFullLines(reader)) {
 			lineElements = readLineElements(line);
-			if (lineElements.size()==13){
+			if (lineElements.size() == 13) {
 				try {
 					Athlete athlete = new Athlete();
 					Result result = new Result();
@@ -61,30 +63,38 @@ public class CSVInput {
 					competition.addAthlete(athlete);
 					competition.addResult(result);
 				}
-				catch (Exception e){
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
 	}
-	
-	protected Vector<String> readFullLines(Readable input){
+	/**
+	 * Reads data from the Readable and seperates it to lines.
+	 * @param input Readable containing Strings seperated by CR or LF or both
+	 * @return a Vector of Strings
+	 */
+	protected Vector<String> readFullLines(Readable input) {
 		Vector<String> res = new Vector<String>();
-		Pattern pLF = Pattern.compile("$",Pattern.MULTILINE);
+		Pattern pLF = Pattern.compile("$", Pattern.MULTILINE);
 		Scanner sc = new Scanner(input).useDelimiter(pLF);
-		while (sc.hasNext()){
+		while (sc.hasNext()) {
 			res.add(sc.next());
 		}
 		return res;
 	}
-	
+	/**
+	 * Reads data seperated by commas from a string and divides it into elements. 
+	 * @param src A String containing values separated with ',' character
+	 * @return a Vector of values without characters ',' '"' LF CR removed 
+	 */
 	protected Vector<String> readLineElements(String src) {
 		Vector<String> res = new Vector<String>();
 		Scanner sc = new Scanner(src).useDelimiter(",");
-		while (sc.hasNext()){
+		while (sc.hasNext()) {
 			res.add(sc.next().replaceAll("\"", "").replaceAll("\n", "").replaceAll("\r", ""));
 		}
 		return res;
 	}
-	
+
 }

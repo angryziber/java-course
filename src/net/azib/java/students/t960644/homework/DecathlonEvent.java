@@ -3,13 +3,11 @@ package net.azib.java.students.t960644.homework;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Scanner;
-import java.util.Vector;
 
 /**
  * DecathlonEvent
  * 
- * @author Lembit
+ * An enum for all the decathlon events. 
  */
 public enum DecathlonEvent {
 	RACE_100M		(25.437, 	18.0, 	1.81, 	"sec"), 
@@ -27,16 +25,16 @@ public enum DecathlonEvent {
 	private final double b;
 	private final double c;
 	private final String units;
-	private DecimalFormat RESULT_FORMAT = new DecimalFormat("0.00");
-	private SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("m:ss.SSS");
-	private SimpleDateFormat SHORT_TIME_FORMAT = new SimpleDateFormat("ss.SSS");
+	private final DecimalFormat RESULT_FORMAT = new DecimalFormat("0.00");
+	private final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("m:ss.SSS");
+	private final SimpleDateFormat SHORT_TIME_FORMAT = new SimpleDateFormat("ss.SSS");
 
 
 	/**
+	 * Constructor.
 	 * @param a
 	 * @param b
 	 * @param c
-	 * @param d
 	 * @param units
 	 */
 	private DecathlonEvent(double a, double b, double c, String units) {
@@ -46,14 +44,17 @@ public enum DecathlonEvent {
 		this.units = units;
 		//RESULT_FORMAT.setDecimalFormatSymbols(newSymbols)
 	}
-	
+	/**
+	 * 
+	 * @return units
+	 */
 	public String units() {return units;}
+	
 	/**
 	 * Calculates the score for single events. If the performance result is 0 then returns 0.
 	 * @param p performance result
 	 * @return decatlon score for selected event
 	 */
-	
 	public int eventScore(double p) {
 		double result = 0;
 		if (p < 0.1) {
@@ -70,7 +71,7 @@ public enum DecathlonEvent {
 		return (int)result;
 	}
 	/**
-	 * 
+	 * Formats the performance result depending on the units and value to 0.00, ss.SSS or mm:ss.SSS
 	 * @param p performance result 
 	 * @return formatted result that can be used for various output options
 	 */
@@ -86,19 +87,23 @@ public enum DecathlonEvent {
 			return RESULT_FORMAT.format(p);
 		}
 	}
+	/**
+	 * Parses String input and produces a double value representing either meters or seconds depending on the event.
+	 * @param src a String containing performance result in 0.0, ss.S or mm:ss.S
+	 * @return a double representing the performance result in meters or seconds 
+	 * @throws ParseException
+	 */
 	public double eventResultParse(String src) throws ParseException {
 		if(units=="sec") {
-			Vector<String> elem = readTimeElements(src);
-			if(elem.size()==0){
+			String[] elem = src.split(":");
+			if(elem.length==0){
 				throw new ParseException("Empty string!",0);
 			} else {
 				double res = 0;
 				String s;
-				for (int i = elem.size()-1;i>=0;i--) {
-					s = elem.elementAt(i);
-					//System.out.println(s);
-					res = res + Double.parseDouble(s)*Math.pow(60, elem.size()-1-i);
-					//System.out.println(Math.pow(60, elem.size()-1-i));
+				for (int i = elem.length-1;i>=0;i--) {
+					s = elem[i];
+					res = res + Double.parseDouble(s)*Math.pow(60, elem.length-1-i);
 				}
 				return res;				
 			}
@@ -107,20 +112,5 @@ public enum DecathlonEvent {
 		}
 			
 	}
-	/*protected double absoluteTime(Date src) {
-		Calendar cal = new GregorianCalendar();
-		cal.setTime(src);
-		return (double)(cal.getTimeInMillis()+cal.get(Calendar.ZONE_OFFSET)+cal.get(Calendar.DST_OFFSET))/1000;
-		
-	}*/
-	protected Vector<String> readTimeElements(String src) {
-		Vector<String> res = new Vector<String>();
-		Scanner sc = new Scanner(src).useDelimiter(":");
-		while (sc.hasNext()){
-			res.add(sc.next());
-		}
-		return res;
-	}
-	
 	
 }

@@ -34,10 +34,10 @@ public class CompetitionTest {
 		assertNull(found);
 		found = competition.findAthleteById(14);
 		assertEquals(found,athlete);
-		found=competition.findAthleteByName("Juku Viiding",competition.DATE_FORMAT.parse("02.01.1980"),"EE");
-		assertNull(found);
-		found=competition.findAthleteByName("Juku Viiding",competition.DATE_FORMAT.parse("01.01.1980"),"EE");
-		assertEquals(found,athlete);
+		//found=competition.findAthleteByName("Juku Viiding",competition.DATE_FORMAT.parse("02.01.1980"),"EE");
+		//assertNull(found);
+		//found=competition.findAthleteByName("Juku Viiding",competition.DATE_FORMAT.parse("01.01.1980"),"EE");
+		//assertEquals(found,athlete);
 	}
 	
 	@Test

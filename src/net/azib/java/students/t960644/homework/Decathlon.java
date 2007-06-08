@@ -9,15 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
-import java.util.Vector;
 
 import javax.script.SimpleBindings;
 
 /**
  * Decathlon
  * 
- * @author Lembit
+ * The main program.
  */
 public class Decathlon {
 	SimpleBindings commandLine = new SimpleBindings();
@@ -25,12 +23,22 @@ public class Decathlon {
 	PrintStream printOut;
 	InputStreamReader reader;
 	Competition competition;
-
+	/**
+	 * Default constructor
+	 * @throws UnsupportedEncodingException
+	 */
 	public Decathlon() throws UnsupportedEncodingException {
 		printOut = new PrintStream(System.out, true, "UTF-8");
 		reader = new InputStreamReader(System.in,"UTF-8");
 	}
-
+	/**
+	 * Main program.
+	 * @param args commandline parameters as specified in CommandLineKeys class
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public static void main(String[] args) throws UnsupportedEncodingException, FileNotFoundException, ClassNotFoundException,
 			SQLException {
 		Locale.setDefault(Locale.US);
@@ -62,7 +70,9 @@ public class Decathlon {
 			}
 		}
 	}
-
+	/**
+	 * Writes competition results to XML.
+	 */
 	protected void writeXMLOutput() {
 		String xml = readParamConsole(CommandLineKeys.OUT_XML, "Enter output xml file location: ");
 		XMLOutput xmlOut = new XMLOutput();
@@ -74,7 +84,9 @@ public class Decathlon {
 			System.out.println("Error writing " + xml);
 		}
 	}
-
+	/**
+	 * Writes competition results to console
+	 */
 	protected void writeConsoleOutput() {
 		try {
 			PrintStream printOut = new PrintStream(System.out, true, "UTF-8");
@@ -86,7 +98,10 @@ public class Decathlon {
 			// e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Reads data from CSV file.
+	 * @return boolean to denote succesful read
+	 */
 	protected boolean readCSVInput() {
 		String csv = readParamConsole(CommandLineKeys.IN_CSV, "Enter input csv file location: ");
 		CSVInput csvIn = new CSVInput();
@@ -101,7 +116,9 @@ public class Decathlon {
 		}
 		return true;
 	}
-
+	/**
+	 * Writes competition results to a CSV file.
+	 */
 	protected void writeCSVOutput() {
 		String csv = readParamConsole(CommandLineKeys.OUT_CSV, "Enter output csv file location: ");
 		CSVOutput csvOut = new CSVOutput();
@@ -114,7 +131,10 @@ public class Decathlon {
 		}
 
 	}
-
+	/**
+	 * Reads data from console.
+	 * @return boolean to denote succesful read
+	 */
 	protected boolean readConsoleInput() {
 		competition = new Competition();
 		try {
@@ -127,7 +147,10 @@ public class Decathlon {
 		}
 		return competition.getResults().size() > 0;
 	}
-
+	/**
+	 * Reads data from database
+	 * @return boolean to denote succesful read
+	 */
 	protected boolean readDbInput() {
 		String db = readParamConsole(CommandLineKeys.IN_DB, "Enter input database address: ");
 		String dbUser = readParamConsole(CommandLineKeys.IN_DB_USER, "Enter input database user: ");
@@ -139,10 +162,25 @@ public class Decathlon {
 		}
 		catch (ClassNotFoundException e) {
 			System.out.println("No driver for: " + dbDriver);
+			try {
+				dbInput.releaseConnection();
+			}
+			catch (SQLException e2) {
+				// do nothing
+				//e2.printStackTrace();
+			}
 			return false;
 		}
 		catch (SQLException e) {
 			System.out.println("Error querying database!");
+			//e.printStackTrace();
+			try {
+				dbInput.releaseConnection();
+			}
+			catch (SQLException e2) {
+				// do nothing
+				//e2.printStackTrace();
+			}
 			return false;
 		}
 		String dbCompId = readParamDefault(CommandLineKeys.IN_DB_COMP_ID, null);
@@ -153,6 +191,14 @@ public class Decathlon {
 			}
 			catch (SQLException e) {
 				System.out.println("Error querying database!");
+				//e.printStackTrace();
+				try {
+					dbInput.releaseConnection();
+				}
+				catch (SQLException e2) {
+					// do nothing
+					//e2.printStackTrace();
+				}
 				return false;
 			}
 			List<String> options = new ArrayList<String>();
@@ -172,21 +218,42 @@ public class Decathlon {
 			}
 			catch (SQLException e) {
 				System.out.println("Error querying database!");
+				//e.printStackTrace();
+				try {
+					dbInput.releaseConnection();
+				}
+				catch (SQLException e2) {
+					// do nothing
+					//e2.printStackTrace();
+				}
 				return false;
 			}
 		}
 		try {
 			dbInput.readAthletes(competition);
 			dbInput.readResults(competition);
-			dbInput.releaseConnection();
 		}
 		catch (SQLException e) {
 			System.out.println("Error querying database!");
 			return false;
 		}
+		finally{
+			try {
+				dbInput.releaseConnection();
+			}
+			catch (SQLException e) {
+				// do nothing
+				//e.printStackTrace();
+			}			
+		}
 		return true;
 	}
-
+	/**
+	 * Looks for the key among the commandline parameters and sets a default value if command parameter was not used.
+	 * @param key Key 
+	 * @param defaultValue Default value when parameter was not specified
+	 * @return String Value
+	 */
 	protected String readParamDefault(String key, String defaultValue) {
 		if (commandLine.containsKey(key)) {
 			return (String) commandLine.get(key);
@@ -195,7 +262,12 @@ public class Decathlon {
 			return defaultValue;
 		}
 	}
-
+	/**
+	 * Looks for the key among the commandline parameters and reads the value from console if command parameter was not specified.
+	 * @param key Key
+	 * @param msg Message to ask the user for the value.
+	 * @return Value
+	 */
 	protected String readParamConsole(String key, String msg) {
 		if (commandLine.containsKey(key)) {
 			return (String) commandLine.get(key);
@@ -204,29 +276,17 @@ public class Decathlon {
 			return consoleIn.readValue(reader, printOut, msg);
 		}
 	}
-
+	/**
+	 * Maps the commandline parameters
+	 * @param args
+	 */
 	protected void parseParams(String[] args) {
 		for (String s : args) {
-			Vector<String> param = splitArg(s);
-			if (param.size() == 2) {
-				commandLine.put(param.elementAt(0), param.elementAt(1));
+			String[] param = s.split("=");
+			if (param.length == 2) {
+				commandLine.put(param[0], param[1]);
 			}
 		}
 	}
 
-	protected Vector<String> splitArg(String src) {
-		Vector<String> res = new Vector<String>();
-		Scanner sc = new Scanner(src).useDelimiter("=");
-		while (sc.hasNext()) {
-			res.add(sc.next());
-		}
-		return res;
-	}
 }
-/*
- * in.db=jdbc:mysql://srv.azib.net:3306/decathlon in.db.pass=java
- * in.db.user=java in.db.comp=2 in.csv="c:\java\java\dec.csv"
- * 
- * out.csv="c:\java\java\decathlon results.csv" out.console=0
- * out.xml="c:\java\java\decathlon_results.xml"
- */

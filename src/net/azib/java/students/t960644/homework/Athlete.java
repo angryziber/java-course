@@ -7,14 +7,14 @@ import java.util.Date;
 /**
  * Athlete
  * 
- * @author Lembit
+ * A class for storing information about a single athlete.
  */
 public class Athlete {
 	private String name;
 	private Date born;
 	private String countryCode;
 	private Integer id;
-	protected SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+	protected final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 	/**
 	 * @return the name
@@ -24,28 +24,29 @@ public class Athlete {
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return the born
+	 * @return date of birth
 	 */
 	public Date getBorn() {
 		return born;
 	}
 
 	/**
-	 * @param born
-	 *            the born to set
+	 * @param born the date of birth to set
 	 */
 	public void setBorn(Date born) {
 		this.born = born;
 	}
-
+	/**
+	 * Get date formatted as String
+	 * @return Date formatted as dd.MM.yyyy
+	 */
 	public String getBirthDate() {
 		if (born == null) {
 			return "";
@@ -55,7 +56,12 @@ public class Athlete {
 		}
 
 	}
-
+	
+	/**
+	 * Set date as String
+	 * @param birthdate String in the format dd.MM.yyyy
+	 * @throws ParseException
+	 */
 	public void setBirthDate(String birthdate) throws ParseException {
 		setBorn(DATE_FORMAT.parse(birthdate));
 	}
@@ -68,8 +74,7 @@ public class Athlete {
 	}
 
 	/**
-	 * @param countryCode
-	 *            the countryCode to set
+	 * @param countryCode the countryCode to set
 	 */
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;

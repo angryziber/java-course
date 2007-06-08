@@ -5,16 +5,24 @@ import java.io.PrintStream;
 /**
  * CSVOutput
  *
- * @author Lembit
+ * Class for outputting competition results to a CSV file (stream).
  */
 public class CSVOutput {
-	
+	/**
+	 * Writes the results list to the printstream as CSV
+	 * @param out PrintStream to print the results to
+	 * @param competition a filled and sorted Competition
+	 */
 	public void writeData(PrintStream out,Competition competition) {
 		for (Result r:competition.getResults()){
 			out.println(writeLine(r));
 		}
 	}
-	
+	/**
+	 * Creates a StringBuffer that contains a single line of the results as CSV 
+	 * @param result a filled Result 
+	 * @return StringBuffer containing the fields seperated by ','
+	 */
 	protected StringBuffer writeLine(Result result) {
 		return new StringBuffer(result.getPosition()).append(",").
 			append(Integer.toString(result.calcResult())).append(",").
@@ -32,7 +40,11 @@ public class CSVOutput {
 			append(result.getStringJavelinThrow()).append(",").
 			append(result.getStringRace1500());
 	}
-	
+	/**
+	 * Surrounds a string with '"' characters.
+	 * @param src a String to add '"' character to the beginning and end
+	 * @return a StringBuffer containing '"'+original string+'"'
+	 */
 	protected StringBuffer quotation(String src) {
 		return new StringBuffer(src).insert(0,'"').append('"');
 	}

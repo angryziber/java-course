@@ -8,13 +8,19 @@ import java.util.regex.Pattern;
 /**
  * ConsoleInput
  * 
- * @author Lembit
+ * Class for reading competition data from the console. Has some additional methods that maybe don't belong here: readOption is used only in the Decathlon class and is unnecessary for this class to function. In all cases pressing Enter key twice exits from the mehod.  
  */
 public class ConsoleInput {
-	
+
+	/**
+	 * Reads the competition data from the console
+	 * @param in InputStreamReader set to decode UTF-8
+	 * @param out PrintStream set to encode UTF-8
+	 * @param competition an empty Competiton to fill
+	 */
 	public void readResults(Readable in, PrintStream out, Competition competition) {
 		boolean notFinished = true;
-		//PrintStream printOut = new PrintStream(out);
+		// PrintStream printOut = new PrintStream(out);
 		while (notFinished) {
 			Athlete athlete = new Athlete();
 			Result result = new Result();
@@ -26,20 +32,31 @@ public class ConsoleInput {
 				result.setAthlete(athlete);
 				competition.addAthlete(athlete);
 				competition.addResult(result);
-				out.println("Added "+athlete.getName()+". Score = "+Integer.toString(result.calcResult()));
+				out.println("Added " + athlete.getName() + ". Score = " + Integer.toString(result.calcResult()));
 			}
 		}
 	}
 
+	/**
+	 * Reads single athlete from the console
+	 * @param in InputStreamReader set to decode UTF-8
+	 * @param out PrintStream set to encode UTF-8
+	 * @param athlete an empty Athlete to fill
+	 * @return boolean denoting successful read
+	 */
 	protected boolean readAthlete(Readable in, PrintStream out, Athlete athlete) {
 		try {
 			String tempVal;
 			tempVal = readValue(in, out, "Enter athlete's name: ");
-			if (tempVal.equals("")) {return false;}
+			if (tempVal.equals("")) {
+				return false;
+			}
 			athlete.setName(tempVal);
 			athlete.setBirthDate(readValue(in, out, "Enter athlete's date of birth: "));
 			tempVal = readValue(in, out, "Enter athlete's country code: ");
-			if (tempVal.equals("")) {return false;}
+			if (tempVal.equals("")) {
+				return false;
+			}
 			athlete.setCountryCode(tempVal);
 			return true;
 		}
@@ -48,6 +65,13 @@ public class ConsoleInput {
 		}
 	}
 
+	/**
+	 * Reads performance results from the console
+	 * @param in InputStreamReader set to decode UTF-8
+	 * @param out PrintStream set to encode UTF-8
+	 * @param result an empty Result to fill
+	 * @return boolean denoting succesful read
+	 */
 	protected boolean readResult(Readable in, PrintStream out, Result result) {
 		try {
 			result.setRace100(readValue(in, out, "Enter race 100m result: "));
@@ -67,40 +91,47 @@ public class ConsoleInput {
 		}
 	}
 
-	/*public String readValue(InputStream in, OutputStream out, String msg) {
-		PrintStream printOut = new PrintStream(out);
-		printOut.println(msg);
-		Pattern pLF = Pattern.compile("$", Pattern.MULTILINE);
-		Scanner sc = new Scanner(in).useDelimiter(pLF);
-		return sc.next().replaceAll("\\n", "").replaceAll("\\r", "");
-	}*/
-
+	/**
+	 * Reads a String value from the console
+	 * @param in InputStreamReader set to decode UTF-8
+	 * @param out PrintStream set to encode UTF-8
+	 * @param msg Text to display
+	 * @return entered String
+	 */
 	public String readValue(Readable in, PrintStream out, String msg) {
-		//PrintStream printOut = new PrintStream(out);
+		// PrintStream printOut = new PrintStream(out);
 		out.println(msg);
 		Pattern pLF = Pattern.compile("$", Pattern.MULTILINE);
 		Scanner sc = new Scanner(in).useDelimiter(pLF);
 		return sc.next().replaceAll("\\n", "").replaceAll("\\r", "");
 	}
-	
-	
+
+	/**
+	 * Enables user to make a selection from a list of options
+	 * @param in InputStreamReader set to decode UTF-8
+	 * @param out PrintStream set to encode UTF-8
+	 * @param options List of Strings reprsenting the menu options that the user can pick from. The options will be prefixed with the line number that the user has to enter.
+	 * @param msg Text to display
+	 * @return Integer index of selected item in the List or null when nothing was selected
+	 */
 	public Integer readOption(Readable in, PrintStream out, List<String> options, String msg) {
-		//PrintStream printOut = new PrintStream(out);
-		for (int i=0;i<options.size();i++){
-			out.println(i+": "+options.get(i));
+		// PrintStream printOut = new PrintStream(out);
+		for (int i = 0; i < options.size(); i++) {
+			out.println(i + ": " + options.get(i));
 		}
-		String retStringValue; 
+		String retStringValue;
 		Integer retValue = null;
 		boolean isCorrect = false;
-		while(!isCorrect){
-			retStringValue = readValue(in,out,msg);
+		while (!isCorrect) {
+			retStringValue = readValue(in, out, msg);
 			try {
 				retValue = Integer.parseInt(retStringValue);
-				isCorrect = retValue>=0&&retValue<options.size();
-				if(!isCorrect) {
-					System.out.println("Out of range! Valid values are 0.."+(options.size()-1));
+				isCorrect = retValue >= 0 && retValue < options.size();
+				if (!isCorrect) {
+					System.out.println("Out of range! Valid values are 0.." + (options.size() - 1));
 				}
-			} catch (NumberFormatException e) {
+			}
+			catch (NumberFormatException e) {
 				out.println("Faulty value!");
 				return null;
 			}

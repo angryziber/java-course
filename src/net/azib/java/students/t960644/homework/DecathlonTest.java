@@ -2,8 +2,6 @@ package net.azib.java.students.t960644.homework;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Vector;
-
 import org.junit.Test;
 
 
@@ -22,13 +20,6 @@ public class DecathlonTest {
 		assertTrue(dec.commandLine.containsKey("key2"));
 		assertTrue(dec.commandLine.get("key2").equals("val2"));
 		//assertTrue(false);
-	}
-	@Test
-	public void testSplitArg() throws Exception {
-		Decathlon dec = new Decathlon();
-		Vector<String> vec = dec.splitArg("csvin=test.csv");
-		assertTrue(vec.elementAt(0).equals("csvin"));
-		assertTrue(vec.elementAt(1).equals("test.csv"));
 	}
 	@Test
 	public void testReadParamDefault() throws Exception {

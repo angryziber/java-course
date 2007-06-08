@@ -31,7 +31,7 @@ public class ConsoleOutputTest {
 		assertTrue(co.spaces(4).toString().equals("    "));
 		assertTrue(co.spaces(0).toString().equals(""));
 		assertTrue(co.spaces(-1).toString().equals(""));
-		assertTrue(co.underscores(2).toString().equals("__"));
+		assertTrue(co.hyphens(2).toString().equals("--"));
 	}
 	@Test
 	public void testWriteLine() throws Exception {

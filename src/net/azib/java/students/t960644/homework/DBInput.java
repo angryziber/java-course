@@ -12,40 +12,65 @@ import java.util.List;
 /**
  * DBInput
  * 
- * @author Lembit
+ * Class for reading competition information from a database
  */
 public class DBInput {
 
 	protected Connection connection;
 
+	/**
+	 * Initializes the connection
+	 * @param sqlDriver name of the driver
+	 * @param url address of the database
+	 * @param user database user
+	 * @param password password for the database user
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void initConnection(String sqlDriver, String url, String user, String password) throws ClassNotFoundException,
 			SQLException {
 		Class.forName(sqlDriver);
 		connection = DriverManager.getConnection(url, user, password);
 	}
+
+	/**
+	 * Reads the contents of the competitions table into a List<Competition>. The athletes and performance results are not read.
+	 * @return a List containing all Competitions in the database. 
+	 * @throws SQLException
+	 */
 	public List<Competition> readCompetitions() throws SQLException {
 		Statement statement = connection.createStatement();
 		List<Competition> returnList = new ArrayList<Competition>();
-		ResultSet resultSet = statement.executeQuery("select * from competitions"); 
+		ResultSet resultSet = statement.executeQuery("select * from competitions");
 		while (resultSet.next()) {
 			returnList.add(readSingleCompetition(resultSet));
 		}
 		return returnList;
 	}
-
+	/**
+	 * Reads 
+	 * @param compId the id of the competition in the database
+	 * @return a new Competition object without the Athletes and Results
+	 * @throws SQLException
+	 */
 	public Competition readCompetition(String compId) throws SQLException {
 		Competition competition = null;
 		PreparedStatement ps = connection.prepareStatement("select * from competitions where id=?");
 		ps.setString(1, compId);
 		ResultSet resultSet = ps.executeQuery("select * from competitions where id=2");
-		if (resultSet.first()){
+		if (resultSet.first()) {
 			competition = readSingleCompetition(resultSet);
 		}
 		resultSet.close();
 		ps.close();
 		return competition;
 	}
-
+	/**
+	 * Creates a new Competition object and fills the fields from the provided ResultSet.
+	 * @param resultSet an active ResultSet containing the competition data 
+	 * @return a new Competition object filled by the data from the ResultSet
+	 * @throws SQLException
+	 */
 	protected Competition readSingleCompetition(ResultSet resultSet) throws SQLException {
 		Competition competition = new Competition();
 		competition.setDate(resultSet.getDate("date"));
@@ -54,7 +79,11 @@ public class DBInput {
 		competition.setId(resultSet.getInt("id"));
 		return competition;
 	}
-
+	/**
+	 * Adds list of Athletes associated with the competiton
+	 * @param competition an instantiated Competition with its fields set
+	 * @throws SQLException
+	 */
 	public void readAthletes(Competition competition) throws SQLException {
 		PreparedStatement preparedStatement = connection
 				.prepareStatement("select * from athletes where id in (select athlete_id from results where competition_id= ? )");
@@ -71,10 +100,13 @@ public class DBInput {
 		resultSet.close();
 		preparedStatement.close();
 	}
-	
+	/**
+	 * Add list of Results associated with the competition. readAthletes method has to be called before this one.
+	 * @param competition an instantiated Competition with its fields and list of athletes set
+	 * @throws SQLException
+	 */
 	public void readResults(Competition competition) throws SQLException {
-		PreparedStatement preparedStatement = connection
-				.prepareStatement("select * from results where competition_id= ? ");
+		PreparedStatement preparedStatement = connection.prepareStatement("select * from results where competition_id= ? ");
 		preparedStatement.setString(1, String.valueOf(competition.getId()));
 		ResultSet resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
@@ -96,28 +128,12 @@ public class DBInput {
 		resultSet.close();
 		preparedStatement.close();
 	}
-	
-
+	/**
+	 * Releases connection.
+	 * @throws SQLException
+	 */
 	public void releaseConnection() throws SQLException {
 		connection.close();
 	}
 
-	/*public static void main(String[] args) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
-		DBInput dbInput = new DBInput();
-		dbInput.initConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/test", "root", "MykB5kB5");
-		Competition competition = dbInput.readCompetition("2");
-		dbInput.readAthletes(competition);
-		dbInput.readResults(competition);
-		dbInput.releaseConnection();
-		//PrintStream out = System.out; 
-		PrintStream out = new PrintStream(System.out, true, "UTF-8");
-		out.println(competition.getCountryCode());
-		out.println(competition.getDate());
-		out.println(competition.getDescription());
-		for(Result res : competition.getResults()){
-			out.println(res.getAthlete().getName());
-			out.println(res.getAthlete().getCountryCode());
-			out.println(res.calcResult());
-		}
-	}*/
 }
