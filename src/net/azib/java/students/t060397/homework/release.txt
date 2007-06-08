@@ -14,6 +14,7 @@ Release plan
 	- realization of program control locic (if, while) - done
 
 0.2 planned  22.06.2007
+	- Switch test first development!
 	- Separate painting from other logic
 	- Get rid of ugly UserState class and logic
 	- better exception handling
