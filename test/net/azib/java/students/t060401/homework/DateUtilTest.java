@@ -102,6 +102,6 @@ public class DateUtilTest {
 		dateString = "12.02.83";
 		date = DateUtil.getDate(dateString);
 		dateAsString = DateUtil.getDateAsString(date);
-		assertEquals(dateString, "12.02.0083");
+		assertEquals(dateString, "12.02.83");
 	}
 }
