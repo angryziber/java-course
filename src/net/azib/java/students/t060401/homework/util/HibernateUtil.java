@@ -9,6 +9,8 @@ package net.azib.java.students.t060401.homework.util;
  */
 
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.hibernate.*;
 import org.hibernate.cfg.*;
@@ -16,7 +18,8 @@ import org.hibernate.cfg.*;
 public class HibernateUtil {
 
 	private static final SessionFactory sessionFactory;
-
+	private static Logger log = Logger.getLogger(HibernateUtil.class.getName());
+	
 	static {
 		try {
 			URL url = HibernateUtil.class.getResource("hibernate.cfg.xml");
@@ -24,8 +27,7 @@ public class HibernateUtil {
 			sessionFactory = new Configuration().configure(url).buildSessionFactory();
 		}
 		catch (Throwable ex) {
-			// Make sure you log the exception, as it might be swallowed
-			System.err.println("Initial SessionFactory creation failed." + ex);
+			log.log(Level.WARNING, "Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
