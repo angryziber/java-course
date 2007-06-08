@@ -26,9 +26,9 @@
 
 		<property name="hibernate.current_session_context_class">thread</property>
 
-		<mapping resource="\net\azib\java\students\t060401\homework\decathlon\Athlete.hbm.xml"/>
-        <mapping resource="\net\azib\java\students\t060401\homework\decathlon\Competition.hbm.xml"/>
-        <mapping resource="\net\azib\java\students\t060401\homework\decathlon\DecathlonResults.hbm.xml"/>
+		<mapping resource="net/azib/java/students/t060401/homework/decathlon/model/Athlete.hbm.xml"/>
+        <mapping resource="net/azib/java/students/t060401/homework/decathlon/model/Competition.hbm.xml"/>
+        <mapping resource="net/azib/java/students/t060401/homework/decathlon/model/DecathlonResults.hbm.xml"/>
 
     </session-factory>
 
