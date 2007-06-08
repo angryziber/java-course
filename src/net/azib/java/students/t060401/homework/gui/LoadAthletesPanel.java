@@ -5,14 +5,12 @@
 
 package net.azib.java.students.t060401.homework.gui;
 
-import net.azib.java.students.t060401.homework.decathlon.Athlete;
-import net.azib.java.students.t060401.homework.decathlon.Competition;
-import net.azib.java.students.t060401.homework.decathlon.Dao;
+import net.azib.java.students.t060401.homework.decathlon.DecathlonDao;
 import net.azib.java.students.t060401.homework.decathlon.DecathlonInfoVector;
+import net.azib.java.students.t060401.homework.decathlon.model.CompetitionVO;
+import net.azib.java.students.t060401.homework.util.LanguageUtil;
 
 import java.io.File;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
@@ -52,24 +50,21 @@ public class LoadAthletesPanel extends javax.swing.JPanel {
         chooseCompetitionCombo = new javax.swing.JComboBox();
         infoLabel = new javax.swing.JLabel();
 
-        openFileButton.setText("Load athletes from file");
+        openFileButton.setText(LanguageUtil.getString("LoadAthletes.LoadFromFile"));
         openFileButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 openFileButtonMouseClicked(evt);
             }
         });
 
-        openDBDataButton.setText("Load athletes from database");
+        openDBDataButton.setText(LanguageUtil.getString("LoadAthletes.LoadFromDB"));
         openDBDataButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 openDBDataButtonMouseClicked(evt);
             }
         });
-        Vector<Object> competitions = Dao.getCompetitions();
-        competitions.add(0, "Choose competition");
-        chooseCompetitionCombo.setModel(new DefaultComboBoxModel(competitions));
 
-        infoLabel.setText("Load results from file or database");
+        infoLabel.setText(LanguageUtil.getString("LoadAthletes.InfoMsg"));
         
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -111,25 +106,17 @@ public class LoadAthletesPanel extends javax.swing.JPanel {
 
     private void openDBDataButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openDBDataButtonMouseClicked
     	infoLabel.setText("");
-    	Object selectedItem = chooseCompetitionCombo.getSelectedItem();
-    	if (selectedItem instanceof Competition){
-    		Competition selectedCompetition = (Competition)selectedItem;
-    		long competitionId = selectedCompetition.getId();
-    		List<Athlete> athletes = Dao.getAthletesWithResults(competitionId);
-    		Iterator it = athletes.iterator();
-    		while (it.hasNext()) {
-    			Athlete athlete = (Athlete)it.next();
-    			if (athlete.isComplete()){
-    				this.decathlonVector.add(athlete);
-    			} else {
-    				infoLabel.setText("Database data could not be properly parsed.");
-    			}
-    		}
-    		infoLabel.setText(infoLabel.getText()+" Loading data complete");
-    	} else {
-    		infoLabel.setText("No competition data to load");
-    	}
-    }//GEN-LAST:event_openDBDataButtonMouseClicked
+		Object selectedItem = chooseCompetitionCombo.getSelectedItem();
+		if (selectedItem instanceof CompetitionVO) {
+			CompetitionVO selectedCompetition = (CompetitionVO) selectedItem;
+			long competitionId = selectedCompetition.getId();
+			String msg = decathlonVector.loadDecathlonInfoFromDB(competitionId);
+			infoLabel.setText(msg);
+		}
+		else {
+			infoLabel.setText(LanguageUtil.getString("LoadAthletes.NoCompetition"));
+		}
+    }// GEN-LAST:event_openDBDataButtonMouseClicked
 
     private void openFileButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openFileButtonMouseClicked
     	swingFileDialog.setFileFilter(new FileFilter());
@@ -139,16 +126,19 @@ public class LoadAthletesPanel extends javax.swing.JPanel {
 			File selectedFile = swingFileDialog.getSelectedFile();
 			String s = selectedFile.getPath();
 			try {
-				this.decathlonVector.loadDecathlonInfoFromFile(s);
-				infoLabel.setText("Data successfully loaded from file");
+				String msg = this.decathlonVector.loadDecathlonInfoFromFile(s);
+				infoLabel.setText(msg);
 			} catch (Exception e) {
 				infoLabel.setText(e.getMessage());
 			}
-			System.out.println("Got elems in vector "+this.decathlonVector.size());
 		}
     }//GEN-LAST:event_openFileButtonMouseClicked
     
     private void formComponentShown(java.awt.event.ComponentEvent evt) {
+    	 Vector<Object> competitions = DecathlonDao.getCompetitions();
+         competitions.add(0, LanguageUtil.getString("LoadAthletes.ChooseCompetition"));
+         chooseCompetitionCombo.setModel(new DefaultComboBoxModel(competitions));
+         
 		infoLabel.setText("");
 	}
     

@@ -7,7 +7,12 @@
 package net.azib.java.students.t060401.homework.gui;
 
 import net.azib.java.students.t060401.homework.decathlon.Athlete;
+import net.azib.java.students.t060401.homework.decathlon.DecathlonEvent;
+import net.azib.java.students.t060401.homework.decathlon.DecathlonEventEnum;
 import net.azib.java.students.t060401.homework.decathlon.DecathlonInfoVector;
+import net.azib.java.students.t060401.homework.decathlon.FieldEvent;
+import net.azib.java.students.t060401.homework.decathlon.RunningEvent;
+import net.azib.java.students.t060401.homework.util.LanguageUtil;
 
 import java.util.Locale;
 
@@ -91,7 +96,7 @@ public class AddAthletePanel extends javax.swing.JPanel {
             }
         });
         
-        addAthleteButton.setText("Save athlete");
+        addAthleteButton.setText(LanguageUtil.getString("AddAthlete.Save"));
         addAthleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addAthleteButtonMouseClicked(evt);
@@ -170,33 +175,33 @@ public class AddAthletePanel extends javax.swing.JPanel {
             }
         });
 
-        nameLabel.setText("Name:");
+        nameLabel.setText(LanguageUtil.getString("Info.Name"));
 
-        birthDateLabel.setText("Birth date:");
+        birthDateLabel.setText(LanguageUtil.getString("Info.BirthDate"));
 
-        countryLabel.setText("Country:");
+        countryLabel.setText(LanguageUtil.getString("Info.Country"));
 
-        sprint100mLabel.setText("100 m sprint:");
+        sprint100mLabel.setText(LanguageUtil.getString("Info.Sprint100m"));
 
-        longJumpLabel.setText("Long jump:");
+        longJumpLabel.setText(LanguageUtil.getString("Info.LongJump"));
 
-        shotPutLabel.setText("Shot put:");
+        shotPutLabel.setText(LanguageUtil.getString("Info.ShotPut"));
 
-        highJumpLabel.setText("High jump");
+        highJumpLabel.setText(LanguageUtil.getString("Info.HighJump"));
 
-        sprint400mLabel.setText("400 m sprint");
+        sprint400mLabel.setText(LanguageUtil.getString("Info.Sprint400m"));
 
-        hurdles110mLabel.setText("110 m hurdles");
+        hurdles110mLabel.setText(LanguageUtil.getString("Info.Hurdles110m"));
 
-        discusThrowLabel.setText("Discus throw");
+        discusThrowLabel.setText(LanguageUtil.getString("Info.DiscusThrow"));
 
-        poleVaultLabel.setText("Pole vault");
+        poleVaultLabel.setText(LanguageUtil.getString("Info.PoleVault"));
 
-        javelinThrowLabel.setText("Javelin throw");
+        javelinThrowLabel.setText(LanguageUtil.getString("Info.JavelinThrow"));
 
-        race1500mLabel.setText("1500 m race");
+        race1500mLabel.setText(LanguageUtil.getString("Info.Race1500m"));
 
-        resetButton.setText("Reset");
+        resetButton.setText(LanguageUtil.getString("AddAthlete.Reset"));
         resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 resetButtonMouseClicked(evt);
@@ -257,19 +262,19 @@ public class AddAthletePanel extends javax.swing.JPanel {
                             .addComponent(countryCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(shotPutWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sprint100mWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(birthDateWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(countryWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(longJumpWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(highJumpWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sprint400mWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hurdles110mWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(discusThrowWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(poleVaultWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(javelinThrowWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(race1500mWarningLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(shotPutWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sprint100mWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(birthDateWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nameWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(countryWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(longJumpWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(highJumpWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sprint400mWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hurdles110mWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(discusThrowWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(poleVaultWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(javelinThrowWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(race1500mWarningLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -351,7 +356,6 @@ public class AddAthletePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void resetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetButtonMouseClicked
-    	System.out.println("reset button clicked");
 		resetGUI();
 	}
 	
@@ -388,23 +392,22 @@ public class AddAthletePanel extends javax.swing.JPanel {
 	}
 
     private void addAthleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveFileButtonMouseClicked
-    	System.out.println("save athlete clicked");
 		if (athlete.isComplete())
 		{
 			this.decathlonVector.add(athlete);
 			resetGUI();
-			infoLabel.setText("Athlete added");
+			infoLabel.setText(LanguageUtil.getString("AddAthlete.Added"));
 		} else {
-			System.out.println("not complete");
-			infoLabel.setText("Please fill all the fields properly");
+			infoLabel.setText(LanguageUtil.getString("AddAthlete.FillProperly"));
 		}
     }//GEN-LAST:event_saveFileButtonMouseClicked
 
     private void race1500mFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_race1500mFieldFocusLost
     	String race1500m = race1500mField.getText();
-		System.out.println("field text "+race1500m);
 		try {
-			athlete.getDecathlonResults().setRace1500m(race1500m);
+			DecathlonEvent event = new RunningEvent(DecathlonEventEnum.RACE_1500M);
+			event.setPerformance(race1500m);
+			athlete.getDecathlonResults().put(event);
 			race1500mWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -414,9 +417,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void javelinThrowFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_javelinThrowFieldFocusLost
     	String javelinThrow = javelinThrowField.getText();
-		System.out.println("field text "+javelinThrow);
 		try {
-			athlete.getDecathlonResults().setJavelinThrow(javelinThrow);
+			DecathlonEvent event = new FieldEvent(DecathlonEventEnum.JAVELIN_THROW);
+			event.setPerformance(javelinThrow);
+			athlete.getDecathlonResults().put(event);
 			javelinThrowWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -426,9 +430,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void poleVaultFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_poleVaultFieldFocusLost
     	String poleVault = poleVaultField.getText();
-		System.out.println("field text "+poleVault);
 		try {
-			athlete.getDecathlonResults().setPoleVault(poleVault);
+			DecathlonEvent event = new FieldEvent(DecathlonEventEnum.POLE_VAULT);
+			event.setPerformance(poleVault);
+			athlete.getDecathlonResults().put(event);
 			poleVaultWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -438,9 +443,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void discusThrowFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_discusThrowFieldFocusLost
     	String discusThrow = discusThrowField.getText();
-		System.out.println("field text "+discusThrow);
 		try {
-			athlete.getDecathlonResults().setDiscusThrow(discusThrow);
+			DecathlonEvent event = new FieldEvent(DecathlonEventEnum.DISCUS_THROW);
+			event.setPerformance(discusThrow);
+			athlete.getDecathlonResults().put(event);
 			discusThrowWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -450,9 +456,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void hurdles110mFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_hurdles110mFieldFocusLost
     	String hurdles110m = hurdles110mField.getText();
-		System.out.println("field text "+hurdles110m);
 		try {
-			athlete.getDecathlonResults().setHurdles110m(hurdles110m);
+			DecathlonEvent event = new RunningEvent(DecathlonEventEnum.HURDLES_110M);
+			event.setPerformance(hurdles110m);
+			athlete.getDecathlonResults().put(event);
 			hurdles110mWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -462,9 +469,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void sprint400mFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sprint400mFieldFocusLost
     	String sprint400m = sprint400mField.getText();
-		System.out.println("field text "+sprint400m);
 		try {
-			athlete.getDecathlonResults().setSprint400m(sprint400m);
+			DecathlonEvent event = new RunningEvent(DecathlonEventEnum.SPRINT_400M);
+			event.setPerformance(sprint400m);
+			athlete.getDecathlonResults().put(event);
 			sprint400mWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -474,9 +482,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void highJumpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_highJumpFieldFocusLost
     	String highJump = highJumpField.getText();
-		System.out.println("field text "+highJump);
 		try {
-			athlete.getDecathlonResults().setHighJump(highJump);
+			DecathlonEvent event = new FieldEvent(DecathlonEventEnum.HIGH_JUMP);
+			event.setPerformance(highJump);
+			athlete.getDecathlonResults().put(event);
 			highJumpWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -486,9 +495,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void shotPutFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_shotPutFieldFocusLost
     	String shotPut = shotPutField.getText();
-		System.out.println("field text "+shotPut);
 		try {
-			athlete.getDecathlonResults().setShotPut(shotPut);
+			DecathlonEvent event = new FieldEvent(DecathlonEventEnum.SHOT_PUT);
+			event.setPerformance(shotPut);
+			athlete.getDecathlonResults().put(event);
 			shotPutWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -498,9 +508,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void longJumpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_longJumpFieldFocusLost
     	String longJump = longJumpField.getText();
-		System.out.println("field text "+longJump);
 		try {
-			athlete.getDecathlonResults().setLongJump(longJump);
+			DecathlonEvent event = new FieldEvent(DecathlonEventEnum.LONG_JUMP);
+			event.setPerformance(longJump);
+			athlete.getDecathlonResults().put(event);
 			longJumpWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -510,9 +521,10 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void sprint100mFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sprint100mFieldFocusLost
     	String sprint100m = sprint100mField.getText();
-		System.out.println("field text "+sprint100m);
 		try {
-			athlete.getDecathlonResults().setSprint100m(sprint100m);
+			DecathlonEvent event = new RunningEvent(DecathlonEventEnum.SPRINT_100M);
+			event.setPerformance(sprint100m);
+			athlete.getDecathlonResults().put(event);
 			sprint100mWarningLabel.setText("");
 		}
 		catch (IllegalArgumentException e) {
@@ -522,7 +534,6 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void countryComboFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_countryComboFocusLost
     	String country = (String)countryCombo.getSelectedItem();
-		System.out.println("field text "+country);
 		try {
 			athlete.setCountry(country);
 			countryWarningLabel.setText("");
@@ -534,7 +545,6 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void birthDateFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_birthDateFieldFocusLost
     	String birthDate = birthDateField.getText();
-		System.out.println("field text "+birthDate);
 		try {
 			athlete.setBirthTime(birthDate);
 			birthDateWarningLabel.setText("");
@@ -546,7 +556,6 @@ public class AddAthletePanel extends javax.swing.JPanel {
 
     private void nameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFieldFocusLost
     	String name = nameField.getText();
-		System.out.println("field text "+name+"a"+athlete);
 		try {
 			athlete.setName(name);
 			nameWarningLabel.setText("");

@@ -5,7 +5,7 @@
 package net.azib.java.students.t060401.homework.gui;
 
 import net.azib.java.students.t060401.homework.decathlon.DecathlonInfoVector;
-import net.azib.java.students.t060401.homework.util.Constants;
+import net.azib.java.students.t060401.homework.util.LanguageUtil;
 
 import java.io.File;
 import java.util.Arrays;
@@ -24,9 +24,22 @@ public class ResultsPanel extends javax.swing.JPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	private static String[] tableHeader = new String[] { "Place", "Points", "Name", "Birth date", "Country",
-			Constants.SPRINT_100M, Constants.LONG_JUMP, Constants.SHOT_PUT, Constants.HIGH_JUMP, Constants.SPRINT_400M,
-			Constants.HURDLES_110M, Constants.DISCUS_THROW, Constants.POLE_VAULT, Constants.JAVELIN_THROW, Constants.RACE_1500M };
+	private static String[] tableHeader = new String[] {
+		LanguageUtil.getString("Info.Place"),
+		LanguageUtil.getString("Info.Points"),
+		LanguageUtil.getString("Info.Name"),
+		LanguageUtil.getString("Info.BirthDate"), 
+		LanguageUtil.getString("Info.Country"),
+		LanguageUtil.getString("Info.Sprint100m"), 
+		LanguageUtil.getString("Info.LongJump"),
+		LanguageUtil.getString("Info.ShotPut"),
+		LanguageUtil.getString("Info.HighJump"),
+		LanguageUtil.getString("Info.Sprint400m"),
+		LanguageUtil.getString("Info.Hurdles110m"),
+		LanguageUtil.getString("Info.DiscusThrow"),
+		LanguageUtil.getString("Info.PoleVault"),
+		LanguageUtil.getString("Info.JavelinThrow"),
+		LanguageUtil.getString("Info.Race1500m") };
 
 	DecathlonInfoVector decathlonVector;
 
@@ -65,14 +78,14 @@ public class ResultsPanel extends javax.swing.JPanel {
 		
 		jScrollPane1.setViewportView(resultsTable);
 
-		saveFileButton.setText("Save results to file");
+		saveFileButton.setText(LanguageUtil.getString("Results.Save"));
 		saveFileButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				saveFileButtonMouseClicked(evt);
 			}
 		});
 
-		clearResultsButton.setText("Clear results");
+		clearResultsButton.setText(LanguageUtil.getString("Results.Clear"));
         clearResultsButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clearResultsButtonMouseClicked(evt);
@@ -112,7 +125,6 @@ public class ResultsPanel extends javax.swing.JPanel {
 	}
 
 	private void saveFileButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_saveFileButtonMouseClicked
-		System.out.println("heihei");
 		int returnVal = swingFileDialog.showSaveDialog(this);
 		this.repaint();
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -121,7 +133,12 @@ public class ResultsPanel extends javax.swing.JPanel {
 
 			if (decathlonVector!=null)
 			{
-				decathlonVector.saveDecathlonInfoVector(filePath);
+				try {
+					decathlonVector.saveDecathlonInfoVector(filePath);
+				}
+				catch (Exception e) {
+					// TODO: display info message
+				}
 			}
 		}
 	}// GEN-LAST:event_saveFileButtonMouseClicked
