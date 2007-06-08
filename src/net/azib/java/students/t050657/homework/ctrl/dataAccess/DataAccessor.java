@@ -2,7 +2,7 @@ package net.azib.java.students.t050657.homework.ctrl.dataAccess;
 
 import net.azib.java.students.t050657.homework.model.Competition;
 
-import java.sql.Date;
+import java.util.List;
 
 /**
  * DataAccessor interface between service tier and data tier in application.
@@ -17,6 +17,6 @@ public interface DataAccessor {
 	 * @param description
 	 * @return new comprtition 
 	 */
-	public Competition getCompetition(String countryCode, Date date, String description);
+	public List<Competition> getCompetition();
 	
 }

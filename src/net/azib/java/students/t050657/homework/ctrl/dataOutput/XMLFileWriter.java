@@ -29,15 +29,22 @@ import org.jdom.output.XMLOutputter;
 public class XMLFileWriter implements DataWriter{
 
 	private Document doc;
+	/**
+	 * By default so. Can be changed with setter.
+	 */
+	private String stylecheet = "type=\"text/xsl\" href=\"competition.xsl\"";
 	
+	/**
+	 * Writes competition to XML file using DOM.
+	 * For style cheet sets competition.xsl file.
+	 */
 	public void writeCompetition(Competition competition) throws IOException {
 		doc = new Document();
 		
 		Namespace xsi = Namespace.getNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		Namespace xsd =  Namespace.getNamespace("noNamespaceSchemaLocation", "competition.xsd");
 		
-		ProcessingInstruction pi = new ProcessingInstruction("xml-stylesheet", 
-							"type=\"text/xsl\" href=\"competition.xsl\"");
+		ProcessingInstruction pi = new ProcessingInstruction("xml-stylesheet", stylecheet);
 		doc.addContent(pi);
 		
 		Element root = new Element("competitions");
@@ -56,6 +63,10 @@ public class XMLFileWriter implements DataWriter{
 			}catch (InsufficientResultsException e) {
 				System.out.println("In " + competition + ", " + result.getAthlet() + " has not all results inserted");
 			}
+		}
+		
+		if(competition.getDescription() == null) {
+			competition.setDescription("Competition");
 		}
 		
 		this.writeXMLtoFile(path + competition.getDescription() + ".xml");
@@ -82,7 +93,8 @@ public class XMLFileWriter implements DataWriter{
 	}
 	
 	private boolean addAthletToCompetition(Athlet athlet, Competition competition) {
-		Element comp = this.findCompetition(competition);
+		Element comp = (Element)doc.getRootElement().getChildren().get(0);
+		
 		if(comp == null)
 			return false;
 		
@@ -109,7 +121,7 @@ public class XMLFileWriter implements DataWriter{
 	
 	private void addResultToAthlet(Result result, Competition competition) 
 						throws InsufficientResultsException{
-		Element comp = this.findCompetition(competition);
+		Element comp = (Element)doc.getRootElement().getChildren().get(0);
 		Element ath = this.findAthlet(result.getAthlet(), comp);
 		
 		if (result.getPlace() != null) {
@@ -141,24 +153,6 @@ public class XMLFileWriter implements DataWriter{
 		writer.close();
 	}
 	
-	private Element findCompetition(Competition competition) {
-		List<Element> competitions = doc.getRootElement().getChildren();
-		for(Element compEl : competitions) {
-			String date = compEl.getAttributeValue("date");
-			String country = compEl.getAttributeValue("countryCode");
-			String description = compEl.getAttributeValue("description");
-						
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			
-			if(competition.getCountryCode().equals(country) &&
-					competition.getDescription().equals(description) &&
-					df.format(competition.getEventDate().getTime()).equals(date)) {
-				return compEl;
-			}
-		}
-		return null; 
-	}
-	
 	private Element findAthlet(Athlet athlet, Element competition) {
 		List<Element> athlets = competition.getChildren();
 		for(Element a : athlets) {
@@ -176,14 +170,13 @@ public class XMLFileWriter implements DataWriter{
 		}
 		return null;
 	}
-	
-	private void printCompetition(Competition competition) {
-		System.out.println(competition.toString());
-		
-		for(Result result : competition.getResults()) {
-			System.out.println("Athlet " + result.getAthlet().toString() 
-					+ ", with result : " + result.toString());
-		}
+
+	public String getStylecheet() {
+		return stylecheet;
+	}
+
+	public void setStylecheet(String stylecheet) {
+		this.stylecheet = stylecheet;
 	}
 
 }

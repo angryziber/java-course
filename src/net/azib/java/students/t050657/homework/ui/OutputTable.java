@@ -18,8 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 /**
- * OutputTable
- *
+ * OutputTable represents table to show results.
  * @author Boriss
  */
 public class OutputTable extends JPanel{
@@ -53,6 +52,10 @@ public class OutputTable extends JPanel{
 		this.add(title, BorderLayout.NORTH);
 	}
 	
+	/**
+	 * Method to update table when needed.
+	 * @param competition to set into table
+	 */
 	public void updateTable(Competition competition) {
 		this.remove(scrollPane);
 		title.setText(competition.toString());
@@ -60,9 +63,6 @@ public class OutputTable extends JPanel{
 		String[][] athlets = new String[competition.getResults().size()][13];
 	 	List<Result> resultList = new ArrayList<Result>();
 	 	resultList.addAll(competition.getResults());
-	 	
-	 	System.out.println(resultList.get(1));
-	 	System.out.println(resultList.get(1).getConvertedResults());
 	 	
  		for(int i=0; i<competition.getResults().size(); i++) {
  			try {

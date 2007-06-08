@@ -60,12 +60,6 @@
 		from Result where competition_id = :id
 	</query>
 	
-	<query name="Competition.getByDescription">
-		from Competition where description = :description 
-						   and countryCode = :countryCode
-						   and date = :date
-	</query>
-	
 	<query name="Competition.getCompetitions">
 		from Competition
 	</query>

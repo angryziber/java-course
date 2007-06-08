@@ -1,8 +1,8 @@
 package net.azib.java.students.t050657.homework.dao;
 
-import java.sql.Date;
-
 import net.azib.java.students.t050657.homework.model.Competition;
+
+import java.util.List;
 /**
  * 
  * Interface for Dao for competition object.
@@ -11,5 +11,9 @@ import net.azib.java.students.t050657.homework.model.Competition;
  */
 public interface CompetitionDao {
 
-	public Competition getCompetition(String countryCode, Date date, String description);
+	/**
+	 * Method to get competition from source 
+	 * @return list of competitions
+	 */
+	public List<Competition> getCompetition();
 }

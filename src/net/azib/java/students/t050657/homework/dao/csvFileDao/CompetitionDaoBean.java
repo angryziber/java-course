@@ -28,27 +28,30 @@ import java.util.List;
  */
 public class CompetitionDaoBean implements CompetitionDao{
 	
+	/**
+	 * Data format in file. By default it is so. Can be setted using setter.
+	 */
 	private static List<String> formatsInFile = Arrays.asList(
 						new String[] {"sec", "m", "m", "m", "min:sec",
 		  		  		              "sec", "m", "m", "m", "min:sec"});
 	
+	/**
+	 * Filepath to file to parse
+	 */
 	private String filepath = null;
-/**
- * Gets a Competition.
- */
-	public Competition getCompetition(String countryCode, Date date, String description) {
-		if(filepath == null) {
-			return null;
+
+	/**
+	 * Gets new Competition object and fill it with results from file
+	 */
+	public List<Competition> getCompetition() {
+		if(filepath.equals("")) {
+			List<Competition> comps = new ArrayList<Competition>();
+			return comps;
 		}else {
-			Competition competition = new Competition();
-			competition.setCountryCode(countryCode);
-			competition.setEventDate(date);
-			competition.setDescription(description);
-			
 			BufferedReader reader = null;
 			try {
 				reader = new BufferedReader(new InputStreamReader(
-											new FileInputStream(filepath), "UTF8"));
+						new FileInputStream(filepath), "UTF8"));
 			}
 			catch (FileNotFoundException e) {
 				System.out.println("File not found!");
@@ -56,30 +59,38 @@ public class CompetitionDaoBean implements CompetitionDao{
 			catch (UnsupportedEncodingException e) {
 				System.out.println("Encoding UTF8 not supported!");
 			}
-
-			try {
-				int i = 0;
-				while (reader.ready()) {
-					String line = reader.readLine();
-					line.trim();
+		
+			Competition competition = new Competition();
+			if(reader != null) {
+				try {
+					int i = 0;
+					while (reader.ready()) {
+						String line = reader.readLine();
+						line.trim();
+						
+						Athlet athlet = parseAthlet(line);
+						Result result = parseResult(line);
+						result.setAthlet(athlet);	
 					
-					Athlet athlet = parseAthlet(line);
-					Result result = parseResult(line, i);
-					result.setAthlet(athlet);	
-					
-					competition.addResult(result);
-					i++;
+						competition.addResult(result);
+						i++;
+					}
+				}
+				catch (IOException e) {
+					System.out.println("IOException ???");
 				}
 			}
-			catch (IOException e) {
-				System.out.println("IOException ???");
-			}
-			
-			return competition;
+			List<Competition> comps = new ArrayList<Competition>();
+			comps.add(competition);
+			return comps;
 		}
-		
 	}
 	
+	/**
+	 * Parses line to get athlet object
+	 * @param line to parse
+	 * @return new Athlet object
+	 */
 	private static Athlet parseAthlet(String line) {
 		Athlet athlet = new Athlet();
 		
@@ -99,8 +110,12 @@ public class CompetitionDaoBean implements CompetitionDao{
 		return athlet;
 	}
 	
-	private static Result parseResult(String line, Integer lineNum){
-		Result result = new Result(lineNum);
+	/**
+	 * Parse line to get result object
+	 * @param line to parse
+	 */
+	private static Result parseResult(String line){
+		Result result = new Result();
 		
 		List<Double> results = new ArrayList<Double>();
 		List<String> resList = Arrays.asList(line.split(","));
@@ -123,5 +138,15 @@ public class CompetitionDaoBean implements CompetitionDao{
 
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
+	}
+
+	public static void setFormatsInFile(List<String> formatsInFile) {
+		if(formatsInFile.size() == 10) {
+			CompetitionDaoBean.formatsInFile = formatsInFile;
+		}
+	}
+
+	public static List<String> getFormatsInFile() {
+		return formatsInFile;
 	}
 }

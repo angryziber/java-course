@@ -19,6 +19,9 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
  */
 public class ResultsDaoBean implements ResultsDao{
 	
+	/**
+	 * Data format in DB. By default it is so. Can be setted using setter.
+	 */
 	private static List<String> formatsInDB = Arrays.asList(
 			   new String[] {"sec", "m", "m", "m", "sec",
 						  	 "sec", "m", "m", "m", "sec"});
@@ -29,28 +32,36 @@ public class ResultsDaoBean implements ResultsDao{
 		this.hibernateTemplate = hibernateTemplate;
 	}
 	
+	/**
+	 * Method fills competitions by results from database
+	 * using named query with parameter (competition id)
+	 */
 	public Competition getCompetitionResults(Competition competition) {
 		Integer id = competition.getId();
 		List<Result> results = (List<Result>) hibernateTemplate.findByNamedQueryAndNamedParam("Result.getByCompetitionId", "id", id);
-
-		competition.addResults(results);
-		competition = reduceResultsToFormat(competition);
 		
+		if(competition.getResults().isEmpty() == true) { 
+			competition.addResults(results);
+			competition = reduceResultsToFormat(competition);
+			for(Result result : competition.getResults()) {
+				try {
+					result.calculateFinalScore();
+				}
+				catch (InsufficientResultsException e) {
+					System.out.println("IRE exception!");
+					e.printStackTrace();
+				}
+			}
+		}
+
 		return competition;
 	}
-	
+
 	private Competition reduceResultsToFormat(Competition competition) {
 		Competition reducedCompetition = new Competition(competition);
 		List<Result> results = new ArrayList<Result>();
 		for(Result result : competition.getResults()) {
 			result = reduceResultToFormat(result);
-			try {
-				result.calculateFinalScore();
-			}
-			catch (InsufficientResultsException e) {
-				System.out.println("IRE exception!");
-				e.printStackTrace();
-			}
 			results.add(result);
 		}
 		reducedCompetition.addResults(results);
@@ -74,5 +85,15 @@ public class ResultsDaoBean implements ResultsDao{
 		}
 		return reducedResult;
 	}
+
+	public static List<String> getFormatsInDB() {
+		return formatsInDB;
+	}
+
+	public static void setFormatsInDB(List<String> formatsInDB) {
+		ResultsDaoBean.formatsInDB = formatsInDB;
+	}
+	
+	
 
 }

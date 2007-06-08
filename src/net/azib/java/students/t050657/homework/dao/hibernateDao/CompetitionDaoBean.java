@@ -3,6 +3,8 @@ package net.azib.java.students.t050657.homework.dao.hibernateDao;
 import net.azib.java.students.t050657.homework.dao.CompetitionDao;
 import net.azib.java.students.t050657.homework.model.Competition;
 
+import java.util.List;
+
 import org.springframework.orm.hibernate3.HibernateTemplate;
 /**
  * Implementation of CompetitionDao for MySql. 
@@ -16,12 +18,12 @@ public class CompetitionDaoBean implements CompetitionDao{
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
-
-	public Competition getCompetition(String countryCode, java.sql.Date date, String description) {
-		Competition competition = (Competition) hibernateTemplate.findByNamedQueryAndNamedParam("Competition.getByDescription", 
-				new String[] {"countryCode", "date", "description"},
-				new Object[] {countryCode, date, description}).get(0);
-		return competition;
+	
+	/**
+	 * Method gets all competitions from DB by named query
+	 */
+	public List<Competition> getCompetition(){
+		return hibernateTemplate.findByNamedQuery("Competition.getCompetitions", null);
 	}
 	
 }

@@ -1,21 +1,19 @@
 package net.azib.java.students.t050657.homework.ui;
 
 import net.azib.java.students.t050657.homework.ctrl.dataAccess.DBAccessor;
-import net.azib.java.students.t050657.homework.ctrl.dataOutput.CSVFileWriter;
-import net.azib.java.students.t050657.homework.ctrl.dataOutput.XMLFileWriter;
 import net.azib.java.students.t050657.homework.model.Competition;
 import net.azib.java.students.t050657.homework.model.InsufficientResultsException;
 
 import java.awt.event.ActionListener;
 import java.beans.EventHandler;
-import java.io.IOException;
-import java.sql.Date;
+import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
- * DBAccessPanel
- *
+ * DBAccessPanel for access data from DB source
  * @author Boriss
  */
 public class DBAccessPanel extends JPanel{
@@ -25,56 +23,39 @@ public class DBAccessPanel extends JPanel{
 	
 	DecathlonGUI gui;
 	
-	CompetitionPanel dbCompetitionPanel;
+	JComboBox competitions;
+	JButton calculate;
 
 	public DBAccessPanel(DecathlonGUI gui) {
 		this.gui = gui;
+		competitions = new JComboBox();
+		List<Competition> competitionList = new DBAccessor().getCompetition();
 		
-		dbCompetitionPanel = new CompetitionPanel();
-		dbCompetitionPanel.button.setText("Calculate results");
-		dbCompetitionPanel.button.addActionListener(EventHandler.create(ActionListener.class,
-								this, "analizeCompetition"));
-		this.add(dbCompetitionPanel);
+		calculate = new JButton("Calculate results");
+		calculate.addActionListener(EventHandler.create(
+				ActionListener.class, this, "analizeCompetition"));
+		
+		for(Competition competition : competitionList) {
+			competitions.addItem(competition);
+		}
+		this.add(competitions);
+		this.add(calculate);
 	}
 	
 	public void analizeCompetition() {
-		
-		if(!this.dbCompetitionPanel.checkCompetitionInput()) {
-			return;
-		}
+		Competition competition = (Competition)competitions.getSelectedItem();
 
-		Competition competition = new DBAccessor().getCompetition(
-								dbCompetitionPanel.country.getText(),
-								Date.valueOf(dbCompetitionPanel.date.getText()),
-								dbCompetitionPanel.title.getText());
-			
+		competition = new DBAccessor().getResultsForCompetition(competition);
+		
 		try {
 			competition.calculateAndSetPlaces();
 		}
 		catch (InsufficientResultsException e1) {
-			dbCompetitionPanel.warning.setText("Insufficient results were added");
+			System.out.println("Not all results were added to competition");
 			e1.printStackTrace();
 		}
 		
-		if(gui.csv.isSelected()) {
-			try {
-				new CSVFileWriter().writeCompetition(competition);
-			}catch(IOException e) {
-				System.out.println("Cannot write to CSV file!");
-			}
-		}
-		else if(gui.xml.isSelected()) {
-			try {
-				new XMLFileWriter().writeCompetition(competition);
-			}
-			catch (IOException e) {
-			 e.printStackTrace();
-				System.out.println("Cannot write to XML file!");
-			}					
-		}
-		else if(gui.monitor.isSelected()) {
-			gui.resultTable.updateTable(competition);
-		}
+		gui.printCompetition(competition);
 		gui.frame.pack();
 	}
 

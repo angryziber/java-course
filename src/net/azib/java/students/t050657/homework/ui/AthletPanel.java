@@ -12,8 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * AthletPanel
- *
+ * AthletPanel to set concrete athlet
  * @author Boriss
  */
 public class AthletPanel extends JPanel{
@@ -76,6 +75,10 @@ public class AthletPanel extends JPanel{
 		this.add(resultPanel, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Method checks all athlet parameters are setted.
+	 * @return true, if setted, false otherwise.
+	 */
 	public boolean checkAthletInput() {
 		Pattern datePattern = Pattern.compile("[1-9][0-9]{3}-[0-9]{1,2}-[0-9]{1,2}");
 		

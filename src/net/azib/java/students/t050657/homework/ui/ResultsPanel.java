@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * ResultsPanel
- *
+ * ResultsPanel represents panel to set results to athlet.
+ * Results should be in that format which indicated.
  * @author Boriss
  */
 public class ResultsPanel extends JPanel{
@@ -100,6 +100,10 @@ public class ResultsPanel extends JPanel{
 		this.add(m1500);
 	}
 	
+	/**
+	 * Checks that results in right format.
+	 * @return true if results setted right, false otherwise.
+	 */
 	public boolean checkResultInput() {
 		Pattern format = Pattern.compile("[1-9][0-9]*\\.?[0-9]{0,2}");
 		if(format.matcher(this.discusThrow.getText()).matches()

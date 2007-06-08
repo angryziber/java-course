@@ -63,6 +63,9 @@ public class Competition {
 	 */
 	@Override
 	public String toString() {
+		if(this.description == null || this.eventDate == null || this.countryCode == null) {
+			return "Competition";
+		}
 		return description + " at " + countryCode + ", " + eventDate;
 	}
 
@@ -90,12 +93,8 @@ public class Competition {
 	 * Calculates scores and places for athlets participate in competition.
 	 */
 	public void calculateAndSetPlaces() throws InsufficientResultsException{
-
 		List<Result> resList = this.sortResultsByFinalScore();
 		
-		for(Result result : resList) {
-			result.setPlace(null);
-		}
 		int place = 1;
 		for(Result res : resList) {
 			int tmp = 0;
@@ -176,8 +175,5 @@ public class Competition {
 	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
 	}
-	
-	
-	
 
 }

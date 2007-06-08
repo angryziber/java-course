@@ -128,7 +128,7 @@ public enum DecathlonCoeficient{
 	}
 
 	private double mToCm(String value) throws NumberFormatException{
-		return Double.parseDouble(value)*100;
+		return ((double)(int)(Double.parseDouble(value)*10000))/100;
 	}
 	
 	private double minSecToSec(String value) throws NumberFormatException{
@@ -140,10 +140,10 @@ public enum DecathlonCoeficient{
 			String[] v = value.split(":");
 			double mins = Double.parseDouble(v[0])*60;
 			double secs = Double.parseDouble(v[1]);
-			return mins + secs;
+			return ((double)(int)((mins + secs)*100))/100;
 		}
 		else if(sec.matcher(value).matches()) {
-			return Double.parseDouble(value);
+			return ((double)(int)Double.parseDouble(value)*100)/100;
 		}
 		else {
 			System.out.println(value);

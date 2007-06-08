@@ -11,8 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * CompetitionPanel
- *
+ * CompetitionPanel to set concrete competition.
  * @author Boriss
  */
 public class CompetitionPanel extends JPanel{
@@ -66,6 +65,10 @@ public class CompetitionPanel extends JPanel{
 		this.add(button);
 	}
 	
+	/**
+	 * Checs that all competition parameters are setted.
+	 * @return true, if setted, false otherwise.
+	 */
 	public boolean checkCompetitionInput() {
 		Pattern datePattern = Pattern.compile("[1-9][0-9]{3}-[0-9]{1,2}-[0-9]{1,2}");
 		

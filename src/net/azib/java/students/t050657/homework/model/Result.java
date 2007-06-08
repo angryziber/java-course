@@ -84,19 +84,20 @@ public class Result implements Comparable<Result>{
 	
 	/**
 	 * Convert results to points
-	 * @return list of converted results 
+	 * @return list of converted results
 	 */
 	public List<Double> getConvertedResults(){
 		List<Double> list = new ArrayList<Double>();
 		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
 			double points = decCoef.evalPoints(results.get(decCoef));
+			points = ((double)(int)(points*100))/100;
 			list.add(points);
 		}
 		return list;
 	}
 
 	/**
-	 * Add result to results. 
+	 * Add result to results.
 	 * @param decCoef represents decathlon event
 	 * @param result that was shown in competition. It should be "clean" result, not converted points
 	 */
@@ -114,7 +115,7 @@ public class Result implements Comparable<Result>{
 		if(!results.containsKey(decCoef)) {
 			throw new InsufficientResultsException("Result for requested event wasn't added");
 		}
-		return results.get(decCoef);
+		return ((double)(int)(results.get(decCoef)*100))/100;
 	}
 	
 	/**
@@ -131,12 +132,14 @@ public class Result implements Comparable<Result>{
 		for(DecathlonCoeficient decCoef : DecathlonCoeficient.values()) {
 			result += decCoef.evalPoints(this.getResult(decCoef));
 		}
-		this.finalScore = result;
+		this.finalScore = ((double)(int)(result*100))/100;
 	}
 
 	/**
 	 * Indicates whether some other result is "equal to" this one.
-	 * Method was written to use result object with Set, so it compares results id.
+	 * Results are equals only when it's athlets equals.
+	 * Method was written to use result object with Set, 
+	 * to avoid one athlet participate in one competition several times
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -144,7 +147,7 @@ public class Result implements Comparable<Result>{
 			return false;
 		}
 		Result result = (Result) obj;
-		if(this.id == result.id) {
+		if(this.athlet.equals(result.athlet)) {
 			return true;
 		}else return false;
 	}
@@ -166,7 +169,7 @@ public class Result implements Comparable<Result>{
 		final int EQUAL_RESULT = 0;
 		final int LESS_RESULT = 1;
 		
-		if(this.id == result.id) {
+		if(this.athlet.equals(result.athlet)) {
 			return EQUAL_RESULT;
 		}
 				

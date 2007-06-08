@@ -4,9 +4,8 @@ import net.azib.java.students.t050657.homework.dao.CompetitionDao;
 import net.azib.java.students.t050657.homework.dao.ResultsDao;
 import net.azib.java.students.t050657.homework.dao.hibernateDao.ResultsDaoBean;
 import net.azib.java.students.t050657.homework.model.Competition;
-import net.azib.java.students.t050657.homework.model.InsufficientResultsException;
 
-import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -23,8 +22,7 @@ public class DBAccessor implements DataAccessor{
 	private ResultsDao resDao;
 	
 	/**
-	 * Constructs new DBAccessor 
-	 *
+	 * Constructs new DBAccessor
 	 */
 	public DBAccessor() {
 		BeanFactory beanFactory = new XmlBeanFactory(
@@ -35,20 +33,23 @@ public class DBAccessor implements DataAccessor{
 		resDao = (ResultsDao) beanFactory.getBean(ResultsDaoBean.class.getName());
 		
 	}
+	
+	/**
+	 * Method fills competition with results from DB
+	 * @param competition to be filled
+	 * @return competition with results
+	 */
+	public Competition getResultsForCompetition(Competition competition) {
+		Competition comp = resDao.getCompetitionResults(competition);
+		return comp;
+	}
 
-	public Competition getCompetition(String countryCode, Date date, String description) {
-		Competition competition = comDao.getCompetition(countryCode, date, description);
-		
-		competition = resDao.getCompetitionResults(competition);
-		
-		try {
-			competition.calculateAndSetPlaces();
-		}
-		catch (InsufficientResultsException e) {
-			System.out.println("IRE Exception!");
-		}
-		
-		return competition;
+	/**
+	 * Method gets competitions from DB
+	 */
+	public List<Competition> getCompetition() {
+		List<Competition> comp = comDao.getCompetition();
+		return comp;
 	}
 	
 	public CompetitionDao getComDao() {

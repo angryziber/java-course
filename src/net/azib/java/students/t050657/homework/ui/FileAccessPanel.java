@@ -1,8 +1,6 @@
 package net.azib.java.students.t050657.homework.ui;
 
 import net.azib.java.students.t050657.homework.ctrl.dataAccess.CSVFileAccessor;
-import net.azib.java.students.t050657.homework.ctrl.dataOutput.CSVFileWriter;
-import net.azib.java.students.t050657.homework.ctrl.dataOutput.XMLFileWriter;
 import net.azib.java.students.t050657.homework.model.Competition;
 import net.azib.java.students.t050657.homework.model.InsufficientResultsException;
 
@@ -10,8 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.beans.EventHandler;
-import java.io.IOException;
-import java.sql.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,11 +27,8 @@ public class FileAccessPanel extends JPanel{
 	DecathlonGUI gui;
 	
 	JButton buttonParse;
-	JButton buttonBrowse;
 	JTextField textField;
-	
-	CompetitionPanel competitionPanel;
-	
+
 	public FileAccessPanel(DecathlonGUI gui) {
 		this.gui = gui;
 		
@@ -43,9 +37,7 @@ public class FileAccessPanel extends JPanel{
 		bl.setVgap(4);
 		this.setLayout(bl);
 		Dimension dim = new Dimension(100, 18);
-		
-		competitionPanel = new CompetitionPanel();
-		competitionPanel.button.setText("Set competition");
+
 		
 		textField = new JTextField();
 		buttonParse = new JButton("Calculate results");
@@ -68,58 +60,28 @@ public class FileAccessPanel extends JPanel{
 		p.add(pathPanel, BorderLayout.NORTH);
 		p.add(buttonPanel, BorderLayout.CENTER);
 
-		this.add(competitionPanel, BorderLayout.NORTH);
 		this.add(p, BorderLayout.CENTER);
 	}
 	
 	public void output() {
-
-		if(!this.competitionPanel.checkCompetitionInput()) {
-			return;
-		}else if(this.textField.getText().equals("")) {
-			competitionPanel.warning.setText("File path should be inserted");
-			return;
-		}else {
-			competitionPanel.warning.setText("");
-		}
-		
 		String filepath = textField.getText();
 		
-		Competition competition = new CSVFileAccessor().setFilepath(filepath).getCompetition(
-								competitionPanel.country.getText(),
-								Date.valueOf(competitionPanel.date.getText()),
-								competitionPanel.title.getText());
-		try {
-			competition.calculateAndSetPlaces();
-		}
-		catch (InsufficientResultsException e1) {
-			competitionPanel.warning.setText("Insufficient results were added");
-			e1.printStackTrace();
-		}
+		Competition competition = null;
+		List<Competition> compsList = new CSVFileAccessor().setFilepath(filepath).getCompetition();
 		
-		if(gui.csv.isSelected()) {
+		if(!compsList.isEmpty()) {
+			competition = compsList.get(0);
 			try {
-				new CSVFileWriter().writeCompetition(competition);
-			}catch(IOException e) {
-				e.printStackTrace();
-				System.out.println("Cannot write to CSV file!");
+				competition.calculateAndSetPlaces();
 			}
-		}
-		else if(gui.xml.isSelected()) {
-			try {
-				new XMLFileWriter().writeCompetition(competition);
+			catch (InsufficientResultsException e1) {
+				e1.printStackTrace();
 			}
-			catch (IOException e) {
-				e.printStackTrace();
-				//System.out.println("Cannot write to XML file!");
-			}					
-		}
-		else if(gui.monitor.isSelected()) {
-			gui.resultTable.updateTable(competition);
+			
+			gui.printCompetition(competition);
 		}
 		
 		gui.frame.pack();
-		
 	}
 
 }
