@@ -32,7 +32,7 @@ public class Match {
 
     BotRobot killerRobot = new BotRobot();
     UserRobot userRobot = new UserRobot();
-    Move move = new Move();
+    Move move = new Move(userRobot ,killerRobot);
     /**
      * paints robots
      */
@@ -47,6 +47,8 @@ public class Match {
 	public void init() {
 		killerRobot.setName("killerRobot");
 		killerRobot.data.setAngle(150);
+		killerRobot.data.setX(DohjoData.getDohjoCentreX());
+		killerRobot.data.setY(DohjoData.getDohjoCentreY()-DohjoData.getSartLine()-RobotData.getDimension());
 		userRobot.setName("userRobot");
 		userRobot.data.setAngle(90);
 	}

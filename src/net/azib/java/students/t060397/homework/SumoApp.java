@@ -68,6 +68,7 @@ public class SumoApp extends Applet implements Runnable {
 	
 	private Match sumoMatch = new Match();
 	
+	
 
 	public void start() {
 		animator = new Thread(this);

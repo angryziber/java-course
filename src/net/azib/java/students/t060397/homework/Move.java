@@ -30,7 +30,7 @@ package net.azib.java.students.t060397.homework;
 public class Move implements Runnable {
 	Thread move;
 	
-	Move() {
+	Move(UserRobot userRobot,BotRobot botRobot){
 
 		move = new Thread(this);
 		move.start();

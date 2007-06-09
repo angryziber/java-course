@@ -37,6 +37,8 @@ public class RobotData {
 	/**
 	 * @return the angle
 	 */
+	private final static int dimension=100;
+	
 	public double getAngle() {
 		return angle;
 	}
@@ -119,6 +121,13 @@ public class RobotData {
 	public void decAngle() {
 		this.angle--;
 		
+	}
+
+	/**
+	 * @return the dimension of robot 
+	 */
+	public static int getDimension() {
+		return dimension;
 	}
 	
 
