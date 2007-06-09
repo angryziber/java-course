@@ -1,7 +1,7 @@
 package net.azib.java.students.t030726.homework.input;
 
 /**
- * InputType
+ * InputType: Describes the possible input modes
  *
  * @author Deniss Nikiforov
  */

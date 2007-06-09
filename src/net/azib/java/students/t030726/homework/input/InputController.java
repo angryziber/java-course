@@ -58,6 +58,11 @@ public class InputController {
 		this.typeSwitcher(inputType);
 	}
 	
+	/**
+	 * Chooses the input type based on the InputType enum. After execution, this.controllerInput becomes available
+	 * @param inputType
+	 * @throws Exception
+	 */
 	private void typeSwitcher(InputType inputType) throws Exception {
 		switch(inputType) {
 		case CONSOLE_INPUT:

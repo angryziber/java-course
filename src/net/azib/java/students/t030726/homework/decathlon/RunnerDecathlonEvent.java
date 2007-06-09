@@ -15,7 +15,7 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 	private int points = 0; //The final point score
 	private boolean isCalulationComplete = false; //Holds a flag whether the points have already been calculated
 	private double timeResult; //This is the time in seconds (some passed as min:sec, so needs to be parsed)
-	private double handTime = 0.0; //storing the hand time
+	private double handTime = 0.0; //storing the hand time. This is applicable to some runner events (see official formula)
 	private Logger log = null;
 	/**
 	 * Attemps to parse the incomming result (time achieved on the event) from the child classes. 
@@ -57,7 +57,8 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 	
 	/**
 	 * This function computes the points according to the formula : Points = A*(B-P)C for Running Events 
-	 * A, B, C are taken from the super class. The points are always an integer (according to websites)
+	 * A, B, C are taken from the super class. The points are always an integer (according to websites), so its just casted to
+	 * an int
 	 * @return int
 	 */
 	private int computePoints() {

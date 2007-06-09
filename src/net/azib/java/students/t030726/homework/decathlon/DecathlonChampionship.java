@@ -32,6 +32,12 @@ public class DecathlonChampionship  implements Comparable {
 	private int eventsInitialized = 0;
 	private DecathlonChampionshipParticipator participator = null;
 	
+	/**
+	 * Gets a raw result for the score, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getHundredMeterSprintRawResult() throws InstantiationException {
 		if(this.hundredSprint == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getHundredMeterSprintRawResult)");
@@ -40,6 +46,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.hundredSprint.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the long jump, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getLongJumpRawResult() throws InstantiationException {
 		if(this.longJump == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getLongJumpRawResult)");
@@ -48,6 +60,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.longJump.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the shot put, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getShotPutRawResult() throws InstantiationException {
 		if(this.shotPut == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getShotPutRawResult)");
@@ -56,6 +74,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.shotPut.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the high jump, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getHighJumpRawResult() throws InstantiationException {
 		if(this.highJump == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getHighJumpRawResult)");
@@ -64,6 +88,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.highJump.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the Four hundred meter run, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getFourHundredMeterSprintRawResult() throws InstantiationException {
 		if(this.fourHundredSprint == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getFourHundredMeterSprintRawResult)");
@@ -72,6 +102,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.fourHundredSprint.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the hurdles event, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getHurdlesRawResult() throws InstantiationException {
 		if(this.hurdlesEvent == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getHurdlesRawResult)");
@@ -80,6 +116,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.hurdlesEvent.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the discus throw event, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getDiscusThrowRawResult() throws InstantiationException {
 		if(this.discusThrow == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getDiscusThrowRawResult)");
@@ -88,6 +130,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.discusThrow.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the pole vault event, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getPoleVaultRawResult() throws InstantiationException {
 		if(this.poleVault == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getPoleVaultRawResult)");
@@ -96,6 +144,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.poleVault.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the javelin throw, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getJavelinThrowRawResult() throws InstantiationException {
 		if(this.javelinThrow == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getJavelinThrowRawResult)");
@@ -104,6 +158,12 @@ public class DecathlonChampionship  implements Comparable {
 		return this.javelinThrow.getRawResult();
 	}
 	
+	/**
+	 * Gets a raw result for the 1500m run event, that was saved directly from the input (from the selected input type).
+	 * Used to put the same unctouched input into the output
+	 * @return
+	 * @throws InstantiationException
+	 */
 	public String getLongRunRawResult() throws InstantiationException {
 		if(this.longRun == null) {
 			this.log.log(Level.SEVERE, "Parameter not yet initialized (getLongRunRawResult)");
@@ -118,10 +178,19 @@ public class DecathlonChampionship  implements Comparable {
 		this.participator = participator;
 	}
 	
+	/**
+	 * A position setter. Sets the position for future extraction, see getPosition
+	 * @param position
+	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 	
+	/**
+	 * A getter for the position. The position must be initialized prior to reading, see setPosition
+	 * @return
+	 * @throws Exception
+	 */
 	public String getPosition() throws Exception {
 		if(this.position == null) {
 			this.log.log(Level.SEVERE, "Position was 0 when requested (getPosition)");
@@ -313,6 +382,10 @@ public class DecathlonChampionship  implements Comparable {
 		return this.computeTotalPoints();
 	}
 
+	/**
+	 * Compares the DecathlonChampionship object to self through using the total score for the event
+	 * returns 0 if both are equal, > 0 if score on self is larger, < 0 if smaller
+	 */
 	public int compareTo(Object arg0)  {
 		if(!(arg0 instanceof DecathlonChampionship)) {
 			this.log.log(Level.SEVERE, "A DecathlonChampionship Object is Expected");
@@ -323,7 +396,7 @@ public class DecathlonChampionship  implements Comparable {
 			otherResult = ((DecathlonChampionship) arg0).getPoints();
 		} catch (Exception ex) {
 			this.log.log(Level.FINE, "Safe exception when comparing", ex);
-			//Ok, we don't do anything here! Let it crash.
+			//Ok, we don't do anything here! Let it crash. This happens if a non-initialized object is passed
 		}
 		int myPoints = 0;
 		try {

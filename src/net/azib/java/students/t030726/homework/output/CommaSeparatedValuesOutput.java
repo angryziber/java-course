@@ -20,7 +20,7 @@ import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetiti
  */
 public class CommaSeparatedValuesOutput implements IOutput {
 	private String filePath = null;
-	private String[] rawLines = null;
+	private String[] rawLines = null; //Saves the raw lines until dump() is called
 	private Logger log;
 	
 	public CommaSeparatedValuesOutput(String filePath, RatedDecathlonCompetition competition) throws Exception {
@@ -78,6 +78,7 @@ public class CommaSeparatedValuesOutput implements IOutput {
 	 */
 	public void dump() throws Exception {
 		try {
+			//We use UTF-16 to comply with java String encoding
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePath), "UTF-16"));
 			for(int counter = 0; counter < this.rawLines.length; counter++) {
 				out.write(this.rawLines[counter].toString());

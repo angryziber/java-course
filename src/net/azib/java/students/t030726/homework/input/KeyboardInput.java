@@ -196,6 +196,7 @@ public class KeyboardInput implements IInput {
 		participator = new DecathlonChampionshipParticipator(participatorName, participatorCountryCode, participatorDateOfBirth);
 		championship = new DecathlonChampionship(participator);
 		
+		//Now we fill the object with some event data
 		championship.setHundredMeterSprintData(hundredSprint);
 		championship.setLongJumpEventData(longJump);
 		championship.setShotPutEventData(shotPut);

@@ -21,6 +21,8 @@ import junit.framework.TestCase;
  * @author Deniss Nikiforov
  */
 public class DecathlonChampionshipTest extends TestCase {
+	//These are local event representrations, which are initialized on setUp (so that we don't have to do that in separate
+	//tests
 	private DecathlonChampionship fixture = null;
 	DecathlonChampionshipParticipator tempParticipator = null;
 	private HundredMeterSprint hundredSprint = null;

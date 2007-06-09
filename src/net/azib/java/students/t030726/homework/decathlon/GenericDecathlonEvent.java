@@ -18,14 +18,26 @@ public class GenericDecathlonEvent {
 	private String rawResult = "";
 	private Logger log = null;
 	
+	/**
+	 * A getter for the raw result. 
+	 * @return
+	 */
 	public String getRawResult() {
 		return this.rawResult;
 	}
 	
+	/**
+	 * A setter for the raw result
+	 * @param result
+	 */
 	public void setRawResult(String result) {
 		this.rawResult = result;
 	}
 	
+	/**
+	 * Constructor is only needed to instantiate the logger
+	 *
+	 */
 	public GenericDecathlonEvent() {
 		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 	}

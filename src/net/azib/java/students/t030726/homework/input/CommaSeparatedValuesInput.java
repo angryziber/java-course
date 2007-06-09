@@ -100,7 +100,8 @@ public class CommaSeparatedValuesInput implements IInput {
 		DecathlonChampionshipParticipator participator = null;
 		String[] rawData = line.split(",");
 		if(rawData.length != 13) {
-			this.log.log(Level.SEVERE, "The CSV file is corrupted. We get fewer/more parameters, then expected");
+			this.log.log(Level.SEVERE, "The CSV file is corrupted. We get fewer/more parameters, then expected (" 
+					+ String.valueOf(rawData.length) + ")");
 			throw new InvalidDataFormatException();
 		}
 		participator = new DecathlonChampionshipParticipator(rawData[this.nameIndex].trim(), rawData[this.countryCodeIndex].trim(), 

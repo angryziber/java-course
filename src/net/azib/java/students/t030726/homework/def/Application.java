@@ -5,7 +5,6 @@ import net.azib.java.students.t030726.homework.input.InputController;
 import net.azib.java.students.t030726.homework.input.InputType;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,21 +20,40 @@ import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetiti
 
 public class Application {
 	
-	private static int askForInputType(BufferedReader userIn) throws NumberFormatException, IOException {
+	/**
+	 * Asks the user for the input type and returns an answer as an int
+	 * @param userIn
+	 * @return
+	 * @throws NumberFormatException
+	 * @throws Exception
+	 */
+	private static int askForInputType(BufferedReader userIn) throws NumberFormatException, Exception {
 		int out = 0;
 		System.out.print("Where would you like to get the data from? (1 - Keyboard. 2 - CSV file. 3 - Database):");
 		out = Integer.parseInt(userIn.readLine());
 		return out;
 	}
 
-	private static String askForCSVPath(BufferedReader userIn) throws IOException {
+	/**
+	 * Asks the user for the CSV file path
+	 * @param userIn
+	 * @return
+	 * @throws Exception
+	 */
+	private static String askForCSVPath(BufferedReader userIn) throws Exception {
 		String out = null;
 		System.out.print("Please enter a full path to the CSV file you wish to use: ");
 		out = userIn.readLine();
 		return out;
 	}
 	
-	private static String askForMySQLURL(BufferedReader userIn) throws IOException {
+	/**
+	 * Asks the user for the mysql server IP or DNS, Database schema namd and Port. Forms a mysql connection string
+	 * @param userIn
+	 * @return
+	 * @throws Exception
+	 */
+	private static String askForMySQLURL(BufferedReader userIn) throws Exception {
 		String out = null;
 		String server = null;
 		String database = null;
@@ -54,28 +72,51 @@ public class Application {
 		return out;
 	}
 	
-	private static String askForMySQLUser(BufferedReader userIn) throws IOException {
+	/**
+	 * Asks for the mysql username, with which to connect to the database
+	 * @param userIn
+	 * @return
+	 * @throws Exception
+	 */
+	private static String askForMySQLUser(BufferedReader userIn) throws Exception {
 		String out = null;
 		System.out.print("Please enter the MySQL username: ");
 		out = userIn.readLine();
 		return out;
 	}
 	
-	private static String askForMySQLPassword(BufferedReader userIn) throws IOException {
+	/**
+	 * Asks for mysql user password to connect to the database
+	 * @param userIn
+	 * @return
+	 * @throws Exception
+	 */
+	private static String askForMySQLPassword(BufferedReader userIn) throws Exception {
 		String out = null;
 		System.out.print("Please enter the MySQL password: ");
 		out = userIn.readLine();
 		return out;
 	}
 	
-	private static int askForTargetCompetition(BufferedReader userIn) throws IOException {
+	/**
+	 * Asks for a target competition from the database. There can be many.
+	 * @param userIn
+	 * @return An int representing a competition in the database
+	 * @throws Exception
+	 */
+	private static int askForTargetCompetition(BufferedReader userIn) throws Exception {
 		int out = 0;
 		System.out.print("Please enter the target competition ID from the database: ");
 		out = Integer.parseInt(userIn.readLine());
 		return out;
 	}
 	
-	private static ArrayList performFullConsoleRead() throws Exception {
+	/**
+	 * Asks the user to enter all the information about athletes
+	 * @return An ArrayList of DecathlonChampionship, which are already initialized and ready for use
+	 * @throws Exception
+	 */
+	private static ArrayList<DecathlonChampionship> performFullConsoleRead() throws Exception {
 		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
 		InputController inControl = new InputController(InputType.CONSOLE_INPUT);
 		while(inControl.hasNext()) {
@@ -84,6 +125,11 @@ public class Application {
 		return out;
 	}
 	
+	/**
+	 * Sorts all the DecathlonChampionship objects and assignes them places
+	 * @param participators
+	 * @return
+	 */
 	private static RatedDecathlonCompetition processAndRateParticipators(ArrayList participators) {
 		RatedDecathlonCompetition out = new RatedDecathlonCompetition();
 		for(Iterator it = participators.iterator(); it.hasNext();) {
@@ -92,21 +138,36 @@ public class Application {
 		return out;
 	}
 	
-	private static ArrayList performFullCSVRead(String filePath) throws Exception {
+	/**
+	 * Reads all lines from the CSV file and loads them into an ArrayList of DecathlonChampionship
+	 * @param filePath
+	 * @return ArrayList of DecathlonChampionship
+	 * @throws Exception
+	 */
+	private static ArrayList<DecathlonChampionship> performFullCSVRead(String filePath) throws Exception {
 		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
 		InputController inControl = new InputController(InputType.CSV_INPUT, filePath);
 		do {
 			try {
 				out.add(inControl.getNext());
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				throw ex;
 			}
 			
 		} while(inControl.hasNext());
 		return out;
 	}
 	
-	private static ArrayList performFullDatabaseRead(String url, String username, String password, int competitionID) throws Exception {
+	/**
+	 * Reads all rows from the database and loads all the information into an ArrayList of DecathlonChampionship
+	 * @param url
+	 * @param username
+	 * @param password
+	 * @param competitionID
+	 * @return ArrayList of DecathlonChampionship
+	 * @throws Exception
+	 */
+	private static ArrayList<DecathlonChampionship> performFullDatabaseRead(String url, String username, String password, int competitionID) throws Exception {
 		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
 		InputController inControl = new InputController(InputType.MYSQL_INPUT, url, username, password, competitionID);
 		while(inControl.hasNext()) {
@@ -116,45 +177,82 @@ public class Application {
 	}
 	
 	
-	private static int askForOutputType(BufferedReader userIn) throws IOException {
+	/**
+	 * Asks the user for the output type and returns an int representing his selection
+	 * @param userIn
+	 * @return
+	 * @throws Exception
+	 */
+	private static int askForOutputType(BufferedReader userIn) throws Exception {
 		int out =0;
 		System.out.print("Please choose what output would you like (1 - Screen, 2 - CSV file, 3 - XML, 4 - HTML):  ");
 		out = Integer.parseInt(userIn.readLine());
 		return out;
 	}
 	
-	private static String askForCSVSavePath(BufferedReader userIn) throws IOException {
+	/**
+	 * Asks the user for a path to save the csv file. The file has to be writable
+	 * @param userIn
+	 * @return
+	 * @throws Exception
+	 */
+	private static String askForCSVSavePath(BufferedReader userIn) throws Exception {
 		String out = null;
 		System.out.print("Please enter a path where to save the CSV file:  ");
 		out = userIn.readLine();
 		return out;
 	}
 	
-	private static String askForXMLSavePath(BufferedReader userIn) throws IOException {
+	/**
+	 * Asksfor a path to save the xml file. The path must be writable
+	 * @param userIn
+	 * @return
+	 * @throws Exception
+	 */
+	private static String askForXMLSavePath(BufferedReader userIn) throws Exception {
 		String out = null;
 		System.out.print("Please enter a path where to save the XML file:  ");
 		out = userIn.readLine();
 		return out;
 	}
 	
-	private static String askForHTMLSavePath(BufferedReader userIn) throws IOException {
+	/**
+	 * Asks for a path to save the html file
+	 * @param userIn
+	 * @return
+	 * @throws Exception
+	 */
+	private static String askForHTMLSavePath(BufferedReader userIn) throws Exception {
 		String out = null;
 		System.out.print("Please enter a path where to save the HTML file:  ");
 		out = userIn.readLine();
 		return out;
 	}
 	
+	/**
+	 * Dumps all output on the screen
+	 * @param result
+	 * @param outputType
+	 * @throws Exception
+	 */
 	private static void doOutputOnScreen(RatedDecathlonCompetition result, OutputType outputType) throws Exception {
 		OutputController outControl = new OutputController(result, outputType);
 		outControl.flush();
 	}
 	
+	/**
+	 * Dumps all output to the specified location on the filesystem, using the specified outputType
+	 * @param result
+	 * @param outputType
+	 * @param filePath
+	 * @throws Exception
+	 */
 	private static void doOutputOnFileSystem(RatedDecathlonCompetition result, OutputType outputType, String filePath) throws Exception {
 		OutputController outControl = new OutputController(result, outputType, filePath);
 		outControl.flush();
 	}
 	
-	/**
+	/** Handles and controls user input.
 	 * @param args
 	 * @throws Exception 
 	 */
@@ -203,7 +301,6 @@ public class Application {
 			
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			log.log(Level.SEVERE, "Application got halted", ex);
 			System.out.println("An error or several errors have occured (see log for details). Please double check your input and try again. Application Halted!");
 		}

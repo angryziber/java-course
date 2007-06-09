@@ -74,7 +74,7 @@ public class OutputController {
 	}
 	
 	/**
-	 * Dumps the content to disk (or screen)
+	 * Dumps the content to disk (or screen), depending on the inputType setting
 	 * @throws Exception 
 	 *
 	 */

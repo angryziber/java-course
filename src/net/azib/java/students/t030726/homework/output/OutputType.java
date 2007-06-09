@@ -1,7 +1,7 @@
 package net.azib.java.students.t030726.homework.output;
 
 /**
- * OutputType
+ * OutputType: Describes the possible output modes.
  *
  * @author Deniss Nikiforov
  */
