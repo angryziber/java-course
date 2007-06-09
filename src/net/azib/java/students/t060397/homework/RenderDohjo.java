@@ -27,6 +27,16 @@ public class RenderDohjo {
 		g.fillArc((int) (border+ whitearea * dojoScale), (int) (border + whitearea * dojoScale),
 				(int) (diameter * dojoScale - whitearea * whitearea * dojoScale), (int) (diameter * dojoScale - whitearea * whitearea * dojoScale), 0, 360);
 
+		g.setColor(Color.BLACK);
+		g.drawString("Andurid ja mootorid", 1, 600);
+		g.drawString("all_vasak", 1, 610);
+		g.drawString("all_keskmine", 1, 620);
+		g.drawString("all_parem", 1, 630);
+		g.drawString("vastane_vasak", 150, 610);
+		g.drawString("vastane_parem", 150, 620);
+		g.drawString("vasak mootor", 250, 610);
+		g.drawString("parem mootor", 250, 620);
+
 	}
 
 }

@@ -64,7 +64,7 @@ public class SumoApp extends Applet implements Runnable {
 	 */
 	protected DohjoBehaviour board;
 	
-	protected RenderDohjo render;
+	protected RenderDohjo renderDohjo;
 	
 	private Match sumoMatch = new Match();
 	
@@ -88,7 +88,7 @@ public class SumoApp extends Applet implements Runnable {
 		setBackground(Color.green);
 		board = new DohjoBehaviour();
 		board.init(width, height);
-	    render = new RenderDohjo();
+	    renderDohjo = new RenderDohjo();
 		sumoMatch.init();
 	}
 
@@ -107,8 +107,8 @@ public class SumoApp extends Applet implements Runnable {
 
 	private void setDelay() {
 		String str = getParameter("FPS");
-		int fps = (str != null) ? Integer.parseInt(str) : 50;
-		SumoApp.delay = (fps > 0) ? (1000 / fps) : 100;
+		int fps = (str != null) ? Integer.parseInt(str) : 20;
+		SumoApp.delay = (fps > 0) ? (1000 / fps) : 50;
 	}
 
 	public void paint(Graphics g) {
@@ -120,8 +120,8 @@ public class SumoApp extends Applet implements Runnable {
 
 	public void paintFrame(Graphics g) {
 
-		render.paint(g);
-		sumoMatch.paint(g);
+		renderDohjo.paint(g);
+		sumoMatch.render(g);
 
 	}
 

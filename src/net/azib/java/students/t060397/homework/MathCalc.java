@@ -34,5 +34,44 @@ public class MathCalc {
 		return true;
 	}
 	
+	/*
+	 * Nord, West, South, O -east (Ost)
+	 */
+	
+	public static enum Rumb {
+		N,
+		NW,
+		W,
+		SW,
+		S,
+		SO,
+		O,
+		NO
+		}
+	
+	public static Rumb getRumb(int angle){
+		
+		angle=angle%360;
+		
+		if(angle>=0 && angle<22){
+			return Rumb.O;
+		}else if(angle>=22 && angle<68){
+			return Rumb.NO;
+		}else if(angle>=68 && angle<113){
+			return Rumb.N;
+		}else if(angle>=113 && angle<158){
+			return Rumb.NW;
+		}else if(angle>=158 && angle<203){
+			return Rumb.W;
+		}else if(angle>=203 && angle<248){
+			return Rumb.SW;
+		}else if(angle>=248 && angle<293){
+			return Rumb.S;
+		}else if(angle>=293 && angle<338){
+			return Rumb.SO;
+		}
+		return Rumb.O;
+	}
+	
 
 }

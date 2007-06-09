@@ -18,6 +18,8 @@ public class RobotData {
 		BACKWARD,
 		STOP
 		}
+
+	private String robotName;
 	/**
 	 * Robot coordinates
 	 */
@@ -25,7 +27,7 @@ public class RobotData {
 	/**
 	 * Robot angle
 	 */
-	private double angle;
+	private int angle;
 	/**
 	 * Robot motor states
 	 */
@@ -39,13 +41,13 @@ public class RobotData {
 	 */
 	private final static int dimension=100;
 	
-	public double getAngle() {
+	public int getAngle() {
 		return angle;
 	}
 	/**
 	 * @param angle the angle to set
 	 */
-	public void setAngle(double angle) {
+	public void setAngle(int angle) {
 		this.angle = angle;
 	}
 	/**
@@ -113,6 +115,7 @@ public class RobotData {
 	 */
 	public void incAngle() {
 		this.angle++;
+		if(angle>360) this.angle=this.angle%360;
 		
 	}
 	/**
@@ -120,6 +123,7 @@ public class RobotData {
 	 */
 	public void decAngle() {
 		this.angle--;
+		if(angle<0) this.angle=this.angle+360;
 		
 	}
 
@@ -141,6 +145,34 @@ public class RobotData {
 	 */
 	public void incY() {
 		this.y++;
+		
+	}
+	/**
+	 * Get the name of robot.
+	 * @return robot name
+	 */
+	public String getName() {
+		return robotName;
+	}
+	/**
+	 * Sets the name of robot.
+	 * @param robotName
+	 */
+	public void setName(String robotName) {
+		this.robotName = robotName;
+	}
+	/**
+	 * 
+	 */
+	public void decY() {
+		this.y--;
+		
+	}
+	/**
+	 * 
+	 */
+	public void decX() {
+		this.x--;
 		
 	}
 	

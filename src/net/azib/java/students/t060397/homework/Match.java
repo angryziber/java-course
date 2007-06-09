@@ -34,6 +34,7 @@ public class Match implements Runnable{
 
     BotRobot killerRobot = new BotRobot();
     UserRobot userRobot = new UserRobot();
+    
 	
 	Match(){
 
@@ -67,7 +68,8 @@ public class Match implements Runnable{
     /**
      * paints robots
      */
-    public void paint(Graphics g){
+    public void render(Graphics g){
+
     	killerRobot.paint(g);
     	userRobot.paint(g);
     }
@@ -76,11 +78,11 @@ public class Match implements Runnable{
 	 * sets robot starting angles and names
 	 */
 	public void init() {
-		killerRobot.setName("killerRobot");
-		killerRobot.data.setAngle(150);
+		killerRobot.data.setName("killerRobot");
+		killerRobot.data.setAngle(0);
 		killerRobot.data.setX(DohjoData.getDohjoCentreX());
 		killerRobot.data.setY(DohjoData.getDohjoCentreY()-DohjoData.getSartLine()-RobotData.getDimension());
-		userRobot.setName("userRobot");
+		userRobot.data.setName("userRobot");
 		userRobot.data.setAngle(90);
 	}
     

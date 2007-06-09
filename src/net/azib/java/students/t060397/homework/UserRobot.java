@@ -1,4 +1,6 @@
 package net.azib.java.students.t060397.homework;
+
+import java.awt.Graphics;
 /***************************************************************************
  *   Copyright (C) 2007 by Margus Ernits   *
  *   Margus.Ernits@itcollege.ee   *
@@ -19,11 +21,6 @@ package net.azib.java.students.t060397.homework;
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
-import java.awt.Graphics;
-import java.awt.Image;
-
 /**
  * 
  * UserCode implements second robot<p>
@@ -32,11 +29,7 @@ import java.awt.Image;
  * @author marcus
  */
 public class UserRobot extends RobotBehaviour {
-	Image img;
-	public void paint(Graphics g) {
-		g.drawImage(img,500,500,null);
-		
-	}
+
 	public void run(){
 		
 	}
@@ -49,5 +42,15 @@ public class UserRobot extends RobotBehaviour {
 		
 		
 	}
+
+	/**
+	 * @param g
+	 */
+	public void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

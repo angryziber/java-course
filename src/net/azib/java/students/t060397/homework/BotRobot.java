@@ -47,9 +47,9 @@ public class BotRobot extends RobotBehaviour implements Runnable {
 				/* GENERATED CODE by web interface*/
 				//left();
 				
-				forward();
+				//forward();
 				//ms_sleep(19);
-				//backward();
+				backward();
 				/* GENERATED CODE by web interface*/
 
 				Thread.sleep(SumoApp.getDelay());
@@ -66,6 +66,7 @@ public class BotRobot extends RobotBehaviour implements Runnable {
 	 * @param g applet graphics
 	 */
 	public void paint(Graphics g) {
+		
 		Graphics2D g2d = (Graphics2D) g;
 		
 		RenderRobot.drawRobot(g2d, data.getX(), data.getY(), Color.LIGHT_GRAY, data.getAngle());
