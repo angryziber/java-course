@@ -162,14 +162,14 @@ public class RobotData {
 		this.robotName = robotName;
 	}
 	/**
-	 * 
+	 * Decrease Y coordinate
 	 */
 	public void decY() {
 		this.y--;
 		
 	}
 	/**
-	 * 
+	 * Decrease X coordinate
 	 */
 	public void decX() {
 		this.x--;
