@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * HundredAndTenMeterHurdlesEventTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class HundredAndTenMeterHurdlesEventTest extends TestCase {
 	private final double aParameter = 5.74352;

@@ -17,18 +17,15 @@ public class InputController {
 	private String mysqlPassword = null;
 	private String mysqlUsername = null;
 	private int mysqlCompetitionID = 0;
-	public static final int CONSOLE_INPUT = 1;
-	public static final int CSV_INPUT = 2;
-	public static final int MYSQL_INPUT = 3;
 	
-	private int selectedInputType = 0;
+	private InputType selectedInputType = InputType.CONSOLE_INPUT;
 	
 	/**
 	 * A Constructor for console input
 	 * @param inputType
 	 * @throws Exception
 	 */
-	public InputController(int inputType) throws Exception {
+	public InputController(InputType inputType) throws Exception {
 		this.selectedInputType = inputType;
 		this.typeSwitcher(inputType);
 	}
@@ -39,7 +36,7 @@ public class InputController {
 	 * @param csvFilePath
 	 * @throws Exception
 	 */
-	public InputController(int inputType, String csvFilePath) throws Exception {
+	public InputController(InputType inputType, String csvFilePath) throws Exception {
 		this.csvFilePath = csvFilePath;
 		this.typeSwitcher(inputType);
 	}
@@ -53,7 +50,7 @@ public class InputController {
 	 * @param targetCompetition
 	 * @throws Exception
 	 */
-	public InputController(int inputType, String serverURL, String serverUsername, String serverPassword, int targetCompetition) throws Exception {
+	public InputController(InputType inputType, String serverURL, String serverUsername, String serverPassword, int targetCompetition) throws Exception {
 		this.mysqlCompetitionID = targetCompetition;
 		this.mysqlPassword = serverPassword;
 		this.mysqlURL = serverURL;
@@ -61,16 +58,16 @@ public class InputController {
 		this.typeSwitcher(inputType);
 	}
 	
-	private void typeSwitcher(int inputType) throws Exception {
+	private void typeSwitcher(InputType inputType) throws Exception {
 		switch(inputType) {
-		case InputController.CONSOLE_INPUT:
+		case CONSOLE_INPUT:
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			this.controllerInput = new KeyboardInput(br);
 			break;
-		case InputController.CSV_INPUT:
+		case CSV_INPUT:
 			this.controllerInput = new CommaSeparatedValuesInput(this.csvFilePath);
 			break;
-		case InputController.MYSQL_INPUT:
+		case MYSQL_INPUT:
 			this.controllerInput = new SQLInput(this.mysqlURL, this.mysqlUsername, this.mysqlPassword, this.mysqlCompetitionID);
 			break;
 		default:
@@ -82,7 +79,7 @@ public class InputController {
 	 * Returns a numeric representation of the selected input type
 	 * @return
 	 */
-	public int getSelectedInputType() {
+	public InputType getSelectedInputType() {
 		return this.selectedInputType;
 	}
 	

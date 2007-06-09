@@ -6,9 +6,10 @@ package net.azib.java.students.t030726.homework.decathlon;
  *
  */
 public class DiscusThrowEvent extends FieldDecathlonEvent{
-	private final static double aParameter = 12.91;
-	private final static double bParameter = 4.0;
-	private final static double cParameter = 1.1;
+	//Implemented for convenience and possibility to access in other places statically
+	public final static double aParameter = 12.91;
+	public final static double bParameter = 4.0;
+	public final static double cParameter = 1.1;
 
 	public DiscusThrowEvent(double achievedResult) throws Exception {
 		super(achievedResult, aParameter, bParameter, cParameter);

@@ -8,10 +8,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
 import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 import net.azib.java.students.t030726.homework.output.MarkupLanguageOutput;
 /**
@@ -22,8 +25,10 @@ import net.azib.java.students.t030726.homework.output.MarkupLanguageOutput;
 public class HyperTextOutput implements IOutput {
 	private RatedDecathlonCompetition competition = null;
 	private String outputFile = null;
+	private Logger log;
 	
 	public HyperTextOutput(String filePath, RatedDecathlonCompetition competition) {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		this.outputFile = filePath;
 		this.competition = competition;
 	}
@@ -68,8 +73,9 @@ public class HyperTextOutput implements IOutput {
 	
 	/**
 	 * Transforming and saving to disk
+	 * @throws Exception 
 	 */
-	public void dump() {
+	public void dump() throws Exception {
 		try {
 			File xsl = this.generateXSLTFile();
 			File xml = this.generateXMLFile(this.competition);
@@ -88,7 +94,8 @@ public class HyperTextOutput implements IOutput {
 		            ( buffWriter));
 		    }
 		  catch (Exception e) {
-		    e.printStackTrace( );
+			  this.log.log(Level.SEVERE, "XML Parser Failed", e);
+			  throw e;
 		    }
 		  }
 

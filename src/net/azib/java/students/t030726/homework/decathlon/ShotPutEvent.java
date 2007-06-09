@@ -6,9 +6,10 @@ package net.azib.java.students.t030726.homework.decathlon;
  *
  */
 public class ShotPutEvent extends FieldDecathlonEvent {
-	private final static double aParameter = 51.39;
-	private final static double bParameter = 1.5;
-	private final static double cParameter = 1.05;
+//	Implemented for convenience and possibility to access in other places statically
+	public final static double aParameter = 51.39;
+	public final static double bParameter = 1.5;
+	public final static double cParameter = 1.05;
 
 	public ShotPutEvent(double achievedResult) throws Exception {
 		super(achievedResult, aParameter, bParameter, cParameter);

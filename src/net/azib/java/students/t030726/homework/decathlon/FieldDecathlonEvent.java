@@ -1,5 +1,10 @@
 package net.azib.java.students.t030726.homework.decathlon;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * This class implements all functions specific to Field Decathlon Events. The formula is cpecific here
  * @author Dennis Nikiforov
@@ -9,6 +14,7 @@ public class FieldDecathlonEvent extends GenericDecathlonEvent {
 	protected int points = 0;
 	protected boolean isCalulationComplete = false;
 	protected double achievedResult = 0;
+	private Logger log = null;
 	
 	
 	/**
@@ -51,7 +57,9 @@ public class FieldDecathlonEvent extends GenericDecathlonEvent {
 	 * @throws Exception
 	 */
 	public FieldDecathlonEvent(double achievedResult, double aParameter, double bParameter, double cParameter) throws Exception {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		if(achievedResult <= 0.0) {
+			this.log.log(Level.SEVERE, "The achieved result for a field event cannot be negative");
 			throw new InvalidDataFormatException();
 		}
 		this.achievedResult = achievedResult;

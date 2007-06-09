@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * ShotPutEventTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class ShotPutEventTest extends TestCase {
 

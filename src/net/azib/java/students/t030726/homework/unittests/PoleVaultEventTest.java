@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * PoleVaultEventTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class PoleVaultEventTest extends TestCase {
 	private final double aParameter = 0.2797;

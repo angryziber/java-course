@@ -7,9 +7,10 @@ package net.azib.java.students.t030726.homework.decathlon;
  *
  */
 public class HighJumpEvent extends FieldDecathlonEvent {
-	private final static double aParameter = 0.8465;
-	private final static double bParameter = 75;
-	private final static double cParameter = 1.42;
+//	Implemented for convenience and possibility to access in other places statically
+	public final static double aParameter = 0.8465;
+	public final static double bParameter = 75;
+	public final static double cParameter = 1.42;
 
 	public HighJumpEvent(double achievedResult) throws Exception {
 		//Multiply by 100 to comply with the formula.

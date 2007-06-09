@@ -6,10 +6,11 @@ package net.azib.java.students.t030726.homework.decathlon;
  *
  */
 public class HundredAndTenMeterHurdlesEvent extends RunnerDecathlonEvent {
-	private final static double aParameter = 5.74352;
-	private final static double bParameter = 28.5;
-	private final static double cParameter = 1.92;
-	private final static double handTime = 0.24;
+//	Implemented for convenience and possibility to access in other places statically
+	public final static double aParameter = 5.74352;
+	public final static double bParameter = 28.5;
+	public final static double cParameter = 1.92;
+	public final static double handTime = 0.24;
 
 	public HundredAndTenMeterHurdlesEvent(String achievedResult) throws Exception {
 		super(achievedResult, aParameter, bParameter, cParameter);

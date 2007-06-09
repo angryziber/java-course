@@ -2,18 +2,15 @@ package net.azib.java.students.t030726.homework.output;
 
 import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 
+
 /**
  * The output controller. Abstracts lower levels of output for the upper layers
  * @author NTAdmin
  *
  */
 public class OutputController {
-	public static final int SCREEN_OUTPUT = 1;
-	public static final int CSV_OUTPUT = 2;
-	public static final int XML_OUTPUT = 3;
-	public static final int HTML_OUTPUT = 4;
 	
-	private int chosenType = 0;
+	private OutputType chosenType = OutputType.SCREEN_OUTPUT;
 	private String outputFilePath = null;
 	private IOutput targetController = null;
 	
@@ -23,7 +20,7 @@ public class OutputController {
 	 * @param outputType
 	 * @throws Exception
 	 */
-	public OutputController(RatedDecathlonCompetition output, int outputType) throws Exception {
+	public OutputController(RatedDecathlonCompetition output, OutputType outputType) throws Exception {
 		this.chosenType = outputType;
 		this.typeSwitcher(outputType, output);
 	}
@@ -35,7 +32,7 @@ public class OutputController {
 	 * @param outFilePath
 	 * @throws Exception
 	 */
-	public OutputController(RatedDecathlonCompetition output, int outputType, String outFilePath) throws Exception {
+	public OutputController(RatedDecathlonCompetition output, OutputType outputType, String outFilePath) throws Exception {
 		this.chosenType = outputType;
 		this.outputFilePath = outFilePath;
 		this.typeSwitcher(outputType, output);
@@ -47,19 +44,19 @@ public class OutputController {
 	 * @param output
 	 * @throws Exception
 	 */
-	private void typeSwitcher(int outputType, RatedDecathlonCompetition output) throws Exception {
+	private void typeSwitcher(OutputType outputType, RatedDecathlonCompetition output) throws Exception {
 		IOutput outputControl = null;
 		switch(outputType) {
-		case OutputController.SCREEN_OUTPUT:
+		case SCREEN_OUTPUT:
 			outputControl = new ScreenOutput(output);
 			break;
-		case OutputController.CSV_OUTPUT:
+		case CSV_OUTPUT:
 			outputControl = new CommaSeparatedValuesOutput(this.outputFilePath, output);
 			break;
-		case OutputController.XML_OUTPUT:
+		case XML_OUTPUT:
 			outputControl = new MarkupLanguageOutput(this.outputFilePath, output);
 			break;
-		case OutputController.HTML_OUTPUT:
+		case HTML_OUTPUT:
 			outputControl = new HyperTextOutput(this.outputFilePath, output);
 			break;
 		default:
@@ -72,15 +69,16 @@ public class OutputController {
 	 * A getter for the active output type
 	 * @return
 	 */
-	public int getSelectedType() {
+	public OutputType getSelectedType() throws Exception {
 		return this.chosenType;
 	}
 	
 	/**
 	 * Dumps the content to disk (or screen)
+	 * @throws Exception 
 	 *
 	 */
-	public void flush() {
+	public void flush() throws Exception {
 		this.targetController.dump();
 	}
 	

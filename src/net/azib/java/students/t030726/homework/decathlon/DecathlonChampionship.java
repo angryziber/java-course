@@ -1,6 +1,10 @@
 package net.azib.java.students.t030726.homework.decathlon;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
+
 import java.lang.InstantiationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The main DTO object for the program. Contains all necessary information to produce output for a single participant.
@@ -22,6 +26,7 @@ public class DecathlonChampionship  implements Comparable {
 	private JavelinThrowEvent javelinThrow = null;
 	private FifteenHundredMeterRunEvent longRun = null;
 	private String position = null;
+	private Logger log = null;
 	
 	//Initialized event counter. Used to check whether everything is initialized prior to point computation
 	private int eventsInitialized = 0;
@@ -29,6 +34,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getHundredMeterSprintRawResult() throws InstantiationException {
 		if(this.hundredSprint == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getHundredMeterSprintRawResult)");
 			throw new InstantiationException();
 		}
 		return this.hundredSprint.getRawResult();
@@ -36,6 +42,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getLongJumpRawResult() throws InstantiationException {
 		if(this.longJump == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getLongJumpRawResult)");
 			throw new InstantiationException();
 		}
 		return this.longJump.getRawResult();
@@ -43,6 +50,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getShotPutRawResult() throws InstantiationException {
 		if(this.shotPut == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getShotPutRawResult)");
 			throw new InstantiationException();
 		}
 		return this.shotPut.getRawResult();
@@ -50,6 +58,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getHighJumpRawResult() throws InstantiationException {
 		if(this.highJump == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getHighJumpRawResult)");
 			throw new InstantiationException();
 		}
 		return this.highJump.getRawResult();
@@ -57,6 +66,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getFourHundredMeterSprintRawResult() throws InstantiationException {
 		if(this.fourHundredSprint == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getFourHundredMeterSprintRawResult)");
 			throw new InstantiationException();
 		}
 		return this.fourHundredSprint.getRawResult();
@@ -64,6 +74,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getHurdlesRawResult() throws InstantiationException {
 		if(this.hurdlesEvent == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getHurdlesRawResult)");
 			throw new InstantiationException();
 		}
 		return this.hurdlesEvent.getRawResult();
@@ -71,6 +82,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getDiscusThrowRawResult() throws InstantiationException {
 		if(this.discusThrow == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getDiscusThrowRawResult)");
 			throw new InstantiationException();
 		}
 		return this.discusThrow.getRawResult();
@@ -78,6 +90,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getPoleVaultRawResult() throws InstantiationException {
 		if(this.poleVault == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getPoleVaultRawResult)");
 			throw new InstantiationException();
 		}
 		return this.poleVault.getRawResult();
@@ -85,6 +98,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getJavelinThrowRawResult() throws InstantiationException {
 		if(this.javelinThrow == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getJavelinThrowRawResult)");
 			throw new InstantiationException();
 		}
 		return this.javelinThrow.getRawResult();
@@ -92,6 +106,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getLongRunRawResult() throws InstantiationException {
 		if(this.longRun == null) {
+			this.log.log(Level.SEVERE, "Parameter not yet initialized (getLongRunRawResult)");
 			throw new InstantiationException();
 		};
 		return this.longRun.getRawResult();
@@ -99,6 +114,7 @@ public class DecathlonChampionship  implements Comparable {
 	
 	
 	public DecathlonChampionship (DecathlonChampionshipParticipator participator) {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		this.participator = participator;
 	}
 	
@@ -108,7 +124,8 @@ public class DecathlonChampionship  implements Comparable {
 	
 	public String getPosition() throws Exception {
 		if(this.position == null) {
-			throw new Exception();
+			this.log.log(Level.SEVERE, "Position was 0 when requested (getPosition)");
+			throw new NullPointerException();
 		}
 		return this.position;
 	}
@@ -120,6 +137,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setHundredMeterSprintData(HundredMeterSprint eventData) throws InstantiationException {
 		if(this.hundredSprint != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setHundredMeterSprintData)");
 			throw new InstantiationException();
 		}
 		this.hundredSprint = eventData;
@@ -133,6 +151,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setLongJumpEventData(LongJumpEvent eventData) throws InstantiationException {
 		if(this.longJump != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setLongJumpEventData)");
 			throw new InstantiationException();
 		}
 		this.longJump = eventData;
@@ -146,6 +165,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setShotPutEventData(ShotPutEvent eventData) throws InstantiationException {
 		if(this.shotPut != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setShotPutEventData)");
 			throw new InstantiationException();
 		}
 		this.shotPut = eventData;
@@ -159,6 +179,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setHighJumpEventData(HighJumpEvent eventData) throws InstantiationException {
 		if(this.highJump != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setHighJumpEventData)");
 			throw new InstantiationException();
 		}
 		this.highJump = eventData;
@@ -172,6 +193,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setFourHundredMeterSprintEventData(FourHundredMeterSprint eventData) throws InstantiationException {
 		if(this.fourHundredSprint != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setFourHundredMeterSprintEventData)");
 			throw new InstantiationException();
 		}
 		this.fourHundredSprint = eventData;
@@ -185,6 +207,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setHundredAndTenMeterHurdlesEventData(HundredAndTenMeterHurdlesEvent eventData) throws InstantiationException {
 		if(this.hurdlesEvent != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setHundredAndTenMeterHurdlesEventData)");
 			throw new InstantiationException();
 		}
 		this.hurdlesEvent = eventData;
@@ -198,6 +221,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setDiscusThrowEventData(DiscusThrowEvent eventData) throws InstantiationException {
 		if(this.discusThrow != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setDiscusThrowEventData)");
 			throw new InstantiationException();
 		}
 		this.discusThrow = eventData;
@@ -211,6 +235,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setPoleVaultEventData(PoleVaultEvent eventData) throws InstantiationException {
 		if(this.poleVault != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setPoleVaultEventData)");
 			throw new InstantiationException();
 		}
 		this.poleVault = eventData;
@@ -224,6 +249,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setJavelinThrowEventData(JavelinThrowEvent eventData) throws InstantiationException {
 		if(this.javelinThrow != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setJavelinThrowEventData)");
 			throw new InstantiationException();
 		}
 		this.javelinThrow = eventData;
@@ -237,6 +263,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public void setFifteenHundredMeterRunEventData(FifteenHundredMeterRunEvent eventData) throws InstantiationException {
 		if(this.longRun != null) {
+			this.log.log(Level.SEVERE, "Parameter already initialized (setFifteenHundredMeterRunEventData)");
 			throw new InstantiationException();
 		}
 		this.longRun = eventData;
@@ -279,6 +306,7 @@ public class DecathlonChampionship  implements Comparable {
 	 */
 	public int getPoints() throws Exception {
 		if(this.eventsInitialized != this.totalEvents) {
+			this.log.log(Level.SEVERE, "Not all events were initialized");
 			throw new Exception("Not all events were initialized");
 		}
 		
@@ -287,18 +315,21 @@ public class DecathlonChampionship  implements Comparable {
 
 	public int compareTo(Object arg0)  {
 		if(!(arg0 instanceof DecathlonChampionship)) {
-			 throw new ClassCastException("A DecathlonChampionship Object is Expected");
+			this.log.log(Level.SEVERE, "A DecathlonChampionship Object is Expected");
+			throw new ClassCastException("A DecathlonChampionship Object is Expected");
 		}
 		int otherResult = 0;
 		try {
 			otherResult = ((DecathlonChampionship) arg0).getPoints();
 		} catch (Exception ex) {
+			this.log.log(Level.FINE, "Safe exception when comparing", ex);
 			//Ok, we don't do anything here! Let it crash.
 		}
 		int myPoints = 0;
 		try {
 			myPoints = this.getPoints();
 		} catch (Exception ex) {
+			this.log.log(Level.FINE, "Safe exception when comparing", ex);
 			//Same as above, we ignore this
 		}
 		

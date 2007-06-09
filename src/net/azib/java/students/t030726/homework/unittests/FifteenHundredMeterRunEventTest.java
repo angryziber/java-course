@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * FifteenHundredMeterRunEventTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class FifteenHundredMeterRunEventTest extends TestCase {
 	private final double aParameter = 0.03768;

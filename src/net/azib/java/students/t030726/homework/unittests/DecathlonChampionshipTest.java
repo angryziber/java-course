@@ -18,7 +18,7 @@ import junit.framework.TestCase;
 /**
  * DecathlonChampionshipTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class DecathlonChampionshipTest extends TestCase {
 	private DecathlonChampionship fixture = null;

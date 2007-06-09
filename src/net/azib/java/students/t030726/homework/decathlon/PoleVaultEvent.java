@@ -6,9 +6,9 @@ package net.azib.java.students.t030726.homework.decathlon;
  *
  */
 public class PoleVaultEvent extends FieldDecathlonEvent {
-	private final static double aParameter = 0.2797;
-	private final static double bParameter = 100;
-	private final static double cParameter = 1.35;
+	public final static double aParameter = 0.2797;
+	public final static double bParameter = 100;
+	public final static double cParameter = 1.35;
 
 	public PoleVaultEvent(double achievedResult) throws Exception {
 		super((100*achievedResult), aParameter, bParameter, cParameter);

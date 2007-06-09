@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * DiscusThrowEventTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class DiscusThrowEventTest extends TestCase {
 	private final double aParameter = 12.91;

@@ -1,8 +1,12 @@
 package net.azib.java.students.t030726.homework.output;
 
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
 import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
 import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Screen output class. Outputs all data in a human-readable manner
@@ -11,9 +15,11 @@ import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetiti
  */
 public class ScreenOutput implements IOutput {
 	private RatedDecathlonCompetition competition = null;
+	private Logger log;
 
 
 	public ScreenOutput(RatedDecathlonCompetition competition) {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		this.competition = competition;
 	}
 	
@@ -46,14 +52,15 @@ public class ScreenOutput implements IOutput {
 	
 	/**
 	 * Bulk printing. 
+	 * @throws Exception 
 	 */
-	public void dump() {
+	public void dump() throws Exception {
 		while (this.competition.hasNext()) {
 			try {
 				this.outputSingleParticipatorInfo(competition.getNext());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				this.log.log(Level.SEVERE, "Cannot Dump", e);
+				throw e;
 			}
 		}
 		

@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * HundredMeterSprintTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class HundredMeterSprintTest extends TestCase {
 	private final double aParameter = 25.437;

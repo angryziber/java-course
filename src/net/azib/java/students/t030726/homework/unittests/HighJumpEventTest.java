@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * HighJumpEventTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class HighJumpEventTest extends TestCase {
 	private HighJumpEvent fixture = null;

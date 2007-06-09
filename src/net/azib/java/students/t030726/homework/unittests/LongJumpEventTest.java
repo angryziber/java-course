@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * LongJumpEventTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class LongJumpEventTest extends TestCase {
 	private final double aParameter = 0.14354;

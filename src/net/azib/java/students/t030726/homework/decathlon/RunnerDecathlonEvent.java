@@ -1,5 +1,10 @@
 package net.azib.java.students.t030726.homework.decathlon;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * This is a class, which implements all functionality, which is specific for running events. The time conversions (minutes:seconds to seconds)
  * and the formula are specific here
@@ -11,7 +16,7 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 	private boolean isCalulationComplete = false; //Holds a flag whether the points have already been calculated
 	private double timeResult; //This is the time in seconds (some passed as min:sec, so needs to be parsed)
 	private double handTime = 0.0; //storing the hand time
-	
+	private Logger log = null;
 	/**
 	 * Attemps to parse the incomming result (time achieved on the event) from the child classes. 
 	 * The time can come in min:sec or just sec format. This function deals with this and convers everything into seconds
@@ -24,6 +29,7 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 		try {
 			//If Number is passed in seconds (as for some events), this will not fail
 			resultInSeconds = Double.parseDouble(result);
+			this.log.log(Level.FINE, "We got seconds as a proper value: " + result);
 		} catch(Exception ex) {
 			try {
 				String[] splitTime = result.split(":");
@@ -36,11 +42,13 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 				resultInSeconds = minutes * 60 + seconds;
 				
 			} catch (Exception innerEx) {
+				this.log.log(Level.SEVERE, "We have a bad exception for result " + result, innerEx);
 				throw innerEx;
 			}
 		}
 		//The result cannot be 0 or negative
 		if(resultInSeconds == 0 || resultInSeconds < 0) {
+			this.log.log(Level.SEVERE, "Result is negative!");
 			throw new InvalidDataFormatException();
 		}
 		return resultInSeconds;
@@ -83,6 +91,7 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 	public void setHandTime(double handTime) throws InvalidDataFormatException {
 		//Hand time cannot be less than zero. If it is zero, then it shouldn't be set here, as zero is default
 		if(handTime < 0  || handTime == 0) {
+			this.log.log(Level.SEVERE, "We got a negative or zero hand time");
 			throw new InvalidDataFormatException();
 		}
 		this.handTime = handTime;
@@ -99,6 +108,7 @@ public class RunnerDecathlonEvent extends GenericDecathlonEvent {
 	 */
 	public RunnerDecathlonEvent(String achievedResult, double aParameter, double bParameter, double cParameter) throws Exception {
 		//We need to get seconds out of the incomming data
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		super.setRawResult(achievedResult);
 		this.timeResult = this.parseIncomingResult(achievedResult);
 		super.setAParameter(aParameter);

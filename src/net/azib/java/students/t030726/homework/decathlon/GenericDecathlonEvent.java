@@ -1,5 +1,9 @@
 package net.azib.java.students.t030726.homework.decathlon;
+import net.azib.java.lessons.logging.JavaUtilLogging;
+
 import java.lang.NullPointerException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This is the source class for all decathlon events. It has the basic functionality, which is common for all events (like A, B, C parameters,
@@ -12,6 +16,7 @@ public class GenericDecathlonEvent {
 	private double bParameter = 0.0;
 	private double cParameter = 0.0;
 	private String rawResult = "";
+	private Logger log = null;
 	
 	public String getRawResult() {
 		return this.rawResult;
@@ -21,6 +26,11 @@ public class GenericDecathlonEvent {
 		this.rawResult = result;
 	}
 	
+	public GenericDecathlonEvent() {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
+	}
+	
+	
 	/**
 	 * A parameter is being set here (parameter from the points calculation formula)
 	 * @param parameter
@@ -28,6 +38,7 @@ public class GenericDecathlonEvent {
 	 */
 	public void setAParameter(double parameter) throws InvalidDataFormatException {
 		if(parameter < 0 || parameter == 0) {
+			this.log.log(Level.SEVERE, "A Parameter had an invalid value (" + String.valueOf(parameter) + ")");
 			throw new InvalidDataFormatException();
 		}
 		this.aParameter = parameter;
@@ -40,7 +51,9 @@ public class GenericDecathlonEvent {
 	 */
 	public void setBParameter(double parameter) throws InvalidDataFormatException {
 		if(parameter < 0 || parameter == 0) {
+			this.log.log(Level.SEVERE, "B Parameter had an invalid value (" + String.valueOf(parameter) + ")");
 			throw new InvalidDataFormatException();
+			
 		}
 		this.bParameter = parameter;
 	}
@@ -52,6 +65,7 @@ public class GenericDecathlonEvent {
 	 */
 	public void setCParameter(double parameter) throws InvalidDataFormatException {
 		if(parameter < 0 || parameter == 0) {
+			this.log.log(Level.SEVERE, "C Parameter had an invalid value (" + String.valueOf(parameter) + ")");
 			throw new InvalidDataFormatException();
 		}
 		this.cParameter = parameter;
@@ -64,6 +78,7 @@ public class GenericDecathlonEvent {
 	 */
 	public double getAParameter() {
 		if(this.aParameter == 0) {
+			this.log.log(Level.SEVERE, "A Parameter was null when referenced");
 			throw new NullPointerException();
 		}
 		return this.aParameter;
@@ -76,6 +91,7 @@ public class GenericDecathlonEvent {
 	 */
 	public double getBParameter() {
 		if(this.bParameter == 0) {
+			this.log.log(Level.SEVERE, "B Parameter was null when referenced");
 			throw new NullPointerException();
 		}
 		return this.bParameter;
@@ -88,6 +104,7 @@ public class GenericDecathlonEvent {
 	 */
 	public double getCParameter() {
 		if(this.cParameter == 0) {
+			this.log.log(Level.SEVERE, "C Parameter was null when referenced");
 			throw new NullPointerException();
 		}
 		return this.cParameter;

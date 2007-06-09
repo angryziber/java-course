@@ -2,11 +2,13 @@ package net.azib.java.students.t030726.homework.input;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
 import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
 import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionshipParticipator;
 import net.azib.java.students.t030726.homework.decathlon.DiscusThrowEvent;
@@ -29,13 +31,15 @@ import net.azib.java.students.t030726.homework.decathlon.ShotPutEvent;
 public class KeyboardInput implements IInput {
 	private ArrayList finalResults = null;
 	private Iterator mainIterator = null;
+	private Logger log;
 	
 	/**
 	 * The parameter is here for unit tests. So we can pass something else and test the class independently from what the user enters
 	 * @param br
 	 * @throws IOException
 	 */
-	public KeyboardInput(BufferedReader br) throws IOException {
+	public KeyboardInput(BufferedReader br) throws Exception {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		this.inputWizard(br);
 		this.mainIterator = this.finalResults.iterator();
 	}
@@ -47,11 +51,12 @@ public class KeyboardInput implements IInput {
 	 * @return
 	 */
 	private boolean isDateValid(String dateOfBirth) {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.DATE_FIELD, Locale.GERMANY); //Germany is set to accept date formats like we have
+		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy"); 
 		
 		try{
 			df.parse(dateOfBirth);
 		} catch (Exception ex) {
+			this.log.log(Level.SEVERE, "Date has an invalid format", ex);
 			return false;
 		}
 		return true;
@@ -81,7 +86,7 @@ public class KeyboardInput implements IInput {
 	 * @param br
 	 * @throws IOException
 	 */
-	private void inputWizard(BufferedReader br) throws IOException {
+	private void inputWizard(BufferedReader br) throws Exception {
 		String inputLine = null;
 		ArrayList<DecathlonChampionship> list = new ArrayList<DecathlonChampionship>();
 		while(true) {
@@ -93,20 +98,23 @@ public class KeyboardInput implements IInput {
 						break;
 					}
 				} catch (Exception ex) {
+					this.log.log(Level.SEVERE, "Invalid user input from keyboard", ex);
 					System.out.println("You need to enter either 1 for yes and 2 for no.");
 					continue;
 				}
 				
 				try {
 					list.add(this.singleParticipatorInput(br));
-				} catch (Exception e) {
+				} catch (Exception ex) {
+					this.log.log(Level.SEVERE, "Something broke here", ex);
 					//Something obviously broke here. We assume it is caused by invalid data entry, so we tell that to the user.
 					System.out.println("An error occured in processing your data entry, please start over");
 				}
 				
 				
-			} catch (IOException e) {
-				throw e;
+			} catch (IOException ex) {
+				this.log.log(Level.SEVERE, "Something broke here", ex);
+				throw new Exception("Invalid User Input");
 			}
 		}
 		this.finalResults = list;
@@ -142,7 +150,7 @@ public class KeyboardInput implements IInput {
 		//General participator information
 		System.out.print("What is the name: ");
 		participatorName = br.readLine();
-		System.out.print("What is your birth date (dd.mm.yyyy):");
+		System.out.print("What is your birth date (dd-mm-yyyy):");
 		participatorDateOfBirth = br.readLine();
 		if(!this.isDateValid(participatorDateOfBirth)) {
 			throw new InvalidDataFormatException();

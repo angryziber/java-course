@@ -6,9 +6,10 @@ package net.azib.java.students.t030726.homework.decathlon;
  *
  */
 public class FifteenHundredMeterRunEvent extends RunnerDecathlonEvent {
-	private final static double aParameter = 0.03768;
-	private final static double bParameter = 480;
-	private final static double cParameter = 1.85;
+//	Implemented for convenience and possibility to access in other places statically
+	public final static double aParameter = 0.03768;
+	public final static double bParameter = 480;
+	public final static double cParameter = 1.85;
 
 	public FifteenHundredMeterRunEvent(String achievedResult) throws Exception {
 		super(achievedResult, aParameter, bParameter, cParameter);

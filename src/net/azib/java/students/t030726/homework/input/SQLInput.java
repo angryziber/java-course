@@ -7,7 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
 import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
 import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionshipParticipator;
 import net.azib.java.students.t030726.homework.decathlon.DiscusThrowEvent;
@@ -30,6 +33,7 @@ public class SQLInput implements IInput {
 	private Connection mysqlConnection= null;
 	
 	ArrayList finalResult = new ArrayList();
+	private Logger log = null;
 	
 	Iterator mainIterator = null;
 	
@@ -43,10 +47,21 @@ public class SQLInput implements IInput {
 	 * @throws InstantiationException 
 	 */
 	public SQLInput(String serverURL, String serverUsername, String serverPassword, int competitionID) throws InstantiationException, Exception {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		this.establishConnection(serverURL, serverUsername, serverPassword);
-		ResultSet rs = this.readRawSQLData(competitionID);
-		this.finalResult = this.processResultSetResults(rs);
-		this.mainIterator = this.finalResult.iterator();
+		ResultSet rs = null;
+		try {
+			rs = this.readRawSQLData(competitionID);
+			this.finalResult = this.processResultSetResults(rs);
+			this.mainIterator = this.finalResult.iterator();
+		} catch (Exception ex) {
+			this.log.log(Level.SEVERE, "Connection broke", ex);
+			throw ex;
+		} finally {
+			this.terminateConnection();
+		}
+		
+		
 	}
 	
 	/**
@@ -111,6 +126,10 @@ public class SQLInput implements IInput {
 		this.mysqlConnection = DriverManager.getConnection(url,serverUsername, serverPassword);
 	}
 	
+	private void terminateConnection() throws SQLException {
+		this.mysqlConnection.close();
+	}
+	
 	/**
 	 * Getting a resultset from the database
 	 * @param competitionID
@@ -120,6 +139,7 @@ public class SQLInput implements IInput {
 	private ResultSet readRawSQLData(int competitionID) throws SQLException {
 		ResultSet rs = null;
 		String sql = "SELECT * FROM results join athletes on results.athlete_id = athletes.id where competition_id = ?";
+		this.log.log(Level.INFO, "Executing: " + sql);
 		PreparedStatement preparedStatement = this.mysqlConnection.prepareStatement(sql);
 		preparedStatement.setInt(1, competitionID);
 

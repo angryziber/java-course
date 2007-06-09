@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 /**
  * DecathlonChampionshipParticipatorTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class DecathlonChampionshipParticipatorTest extends TestCase {
 	private final String sampleName = "Tester";

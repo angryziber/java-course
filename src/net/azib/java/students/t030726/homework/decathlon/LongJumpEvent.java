@@ -7,9 +7,10 @@ package net.azib.java.students.t030726.homework.decathlon;
  *
  */
 public class LongJumpEvent extends FieldDecathlonEvent {
-	private final static double aParameter = 0.14354;
-	private final static double bParameter = 220;
-	private final static double cParameter = 1.40;
+//	Implemented for convenience and possibility to access in other places statically
+	public final static double aParameter = 0.14354;
+	public final static double bParameter = 220;
+	public final static double cParameter = 1.40;
 	
 	public LongJumpEvent(double achievedResult) throws Exception {
 		super((100*achievedResult), aParameter, bParameter, cParameter);

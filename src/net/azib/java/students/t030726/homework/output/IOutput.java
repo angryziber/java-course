@@ -7,5 +7,5 @@ package net.azib.java.students.t030726.homework.output;
  */
 public interface IOutput {
 
-	public void dump();
+	public void dump() throws Exception;
 }

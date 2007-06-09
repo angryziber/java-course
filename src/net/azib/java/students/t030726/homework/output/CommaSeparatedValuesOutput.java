@@ -6,7 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
 import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
 import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 
@@ -18,13 +21,16 @@ import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetiti
 public class CommaSeparatedValuesOutput implements IOutput {
 	private String filePath = null;
 	private String[] rawLines = null;
+	private Logger log;
 	
-	public CommaSeparatedValuesOutput(String filePath, RatedDecathlonCompetition competition) {
+	public CommaSeparatedValuesOutput(String filePath, RatedDecathlonCompetition competition) throws Exception {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		this.filePath = filePath;
 		try {
 			this.rawLines = this.prepareDump(competition);
 		} catch (Exception e) {
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "Preparation to dump the file failed", e);
+			throw e;
 		}
 		
 	}
@@ -44,6 +50,7 @@ public class CommaSeparatedValuesOutput implements IOutput {
 			tempChampionship = competition.getNext();
 			rawLine = new String();
 			try {
+				//String buffer is used behind the scenes, so no worries here
 				rawLine = tempChampionship.getPosition().toString() + "," + String.valueOf(tempChampionship.getPoints()) + "," + 
 					tempChampionship.getParticipator().getParticipatorName() + "," + tempChampionship.getParticipator().getDateOfBirth() + 
 					"," + tempChampionship.getParticipator().getParticipatorCountryCode() + "," + 
@@ -57,7 +64,8 @@ public class CommaSeparatedValuesOutput implements IOutput {
 					temp[indexCounter] = rawLine;	
 					indexCounter++;
 			} catch (Exception e) {
-				e.printStackTrace();
+				this.log.log(Level.SEVERE, "Could not format the string", e);
+				throw e;
 			}
 		} 
 		return temp;
@@ -66,8 +74,9 @@ public class CommaSeparatedValuesOutput implements IOutput {
 	
 	/**
 	 * Dumping the file data to disk
+	 * @throws Exception 
 	 */
-	public void dump() {
+	public void dump() throws Exception {
 		try {
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePath), "UTF-16"));
 			for(int counter = 0; counter < this.rawLines.length; counter++) {
@@ -76,11 +85,14 @@ public class CommaSeparatedValuesOutput implements IOutput {
 			}
 			out.close();
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "Cannot Dump", e);
+			throw e;
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "Cannot Dump", e);
+			throw e;
 		} catch (IOException e) {
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "Cannot Dump", e);
+			throw new Exception("File System Error");
 		}
 		return;
 		

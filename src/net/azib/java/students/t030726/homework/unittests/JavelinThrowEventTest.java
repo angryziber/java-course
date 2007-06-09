@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 /**
  * JavelinThrowEventTest
  *
- * @author NTAdmin
+ * @author Deniss Nikiforov
  */
 public class JavelinThrowEventTest extends TestCase {
 	private final double aParameter = 10.14;

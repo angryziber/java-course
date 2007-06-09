@@ -1,6 +1,8 @@
 package net.azib.java.students.t030726.homework.output;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //Xerces 1 or 2 additional classes.
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
@@ -8,6 +10,7 @@ import org.xml.sax.helpers.*;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
 import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
 import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
 
@@ -19,8 +22,10 @@ import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetiti
 public class MarkupLanguageOutput implements IOutput {
 	private String filePath = null;
 	private RatedDecathlonCompetition competition = null;
+	private Logger log;
 	
 	public MarkupLanguageOutput(String filePath, RatedDecathlonCompetition competition) throws Exception {
+		this.log = Logger.getLogger(JavaUtilLogging.class.getName());
 		this.filePath = filePath;
 		this.competition = competition;
 	}
@@ -48,21 +53,22 @@ public class MarkupLanguageOutput implements IOutput {
 		try {
 			hd = serializer.asContentHandler();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "Cannot Dump", e);
+			throw new Exception("File system error");
 		}
 		try {
 			hd.startDocument();
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "XML Parser Failed", e);
+			throw e;
 		}
 
 		AttributesImpl atts = new AttributesImpl();
 		try {
 			hd.startElement("","","participators",atts);
 		} catch (SAXException e) {
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "XML Parser Failed", e);
+			throw e;
 		}
 		String[] places = new String[this.competition.length()];
 		int[] points = new int[this.competition.length()];
@@ -154,7 +160,8 @@ public class MarkupLanguageOutput implements IOutput {
 			
 			hd.endElement("","","participator");
 		} catch (SAXException e) {
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "XML Parser Failed", e);
+			throw e;
 		}
 		  
 		}
@@ -166,13 +173,14 @@ public class MarkupLanguageOutput implements IOutput {
 	
 	/**
 	 * Generate and dump
+	 * @throws Exception 
 	 */
-	public void dump() {
+	public void dump() throws Exception {
 		try {
 			this.prepareAndSaveDocument();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.log.log(Level.SEVERE, "Failed to dump to disk", e);
+			throw e;
 		}
 		
 		

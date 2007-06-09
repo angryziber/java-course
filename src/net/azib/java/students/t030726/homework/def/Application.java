@@ -1,14 +1,20 @@
 package net.azib.java.students.t030726.homework.def;
 
+import net.azib.java.lessons.logging.JavaUtilLogging;
 import net.azib.java.students.t030726.homework.input.InputController;
+import net.azib.java.students.t030726.homework.input.InputType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.azib.java.students.t030726.homework.output.OutputController;
+import net.azib.java.students.t030726.homework.output.OutputType;
 
 import net.azib.java.students.t030726.homework.decathlon.DecathlonChampionship;
 import net.azib.java.students.t030726.homework.decathlon.RatedDecathlonCompetition;
@@ -50,14 +56,14 @@ public class Application {
 	
 	private static String askForMySQLUser(BufferedReader userIn) throws IOException {
 		String out = null;
-		System.out.print("Please enter the mysql username: ");
+		System.out.print("Please enter the MySQL username: ");
 		out = userIn.readLine();
 		return out;
 	}
 	
 	private static String askForMySQLPassword(BufferedReader userIn) throws IOException {
 		String out = null;
-		System.out.print("Please enter the mysql password: ");
+		System.out.print("Please enter the MySQL password: ");
 		out = userIn.readLine();
 		return out;
 	}
@@ -71,7 +77,7 @@ public class Application {
 	
 	private static ArrayList performFullConsoleRead() throws Exception {
 		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
-		InputController inControl = new InputController(InputController.CONSOLE_INPUT);
+		InputController inControl = new InputController(InputType.CONSOLE_INPUT);
 		while(inControl.hasNext()) {
 			out.add(inControl.getNext());
 		}
@@ -88,7 +94,7 @@ public class Application {
 	
 	private static ArrayList performFullCSVRead(String filePath) throws Exception {
 		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
-		InputController inControl = new InputController(InputController.CSV_INPUT, filePath);
+		InputController inControl = new InputController(InputType.CSV_INPUT, filePath);
 		do {
 			try {
 				out.add(inControl.getNext());
@@ -102,7 +108,7 @@ public class Application {
 	
 	private static ArrayList performFullDatabaseRead(String url, String username, String password, int competitionID) throws Exception {
 		ArrayList<DecathlonChampionship> out = new ArrayList<DecathlonChampionship>();
-		InputController inControl = new InputController(InputController.MYSQL_INPUT, url, username, password, competitionID);
+		InputController inControl = new InputController(InputType.MYSQL_INPUT, url, username, password, competitionID);
 		while(inControl.hasNext()) {
 			out.add(inControl.getNext());
 		}
@@ -138,12 +144,12 @@ public class Application {
 		return out;
 	}
 	
-	private static void doOutputOnScreen(RatedDecathlonCompetition result, int outputType) throws Exception {
+	private static void doOutputOnScreen(RatedDecathlonCompetition result, OutputType outputType) throws Exception {
 		OutputController outControl = new OutputController(result, outputType);
 		outControl.flush();
 	}
 	
-	private static void doOutputOnFileSystem(RatedDecathlonCompetition result, int outputType, String filePath) throws Exception {
+	private static void doOutputOnFileSystem(RatedDecathlonCompetition result, OutputType outputType, String filePath) throws Exception {
 		OutputController outControl = new OutputController(result, outputType, filePath);
 		outControl.flush();
 	}
@@ -153,9 +159,12 @@ public class Application {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) {
+		Logger log = Logger.getLogger(JavaUtilLogging.class.getName());
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
+			URL loggingConfig = JavaUtilLogging.class.getClassLoader().getResource("logging.properties");
+			System.setProperty("java.util.logging.config.file", loggingConfig.getPath());
 			
 			BufferedReader userIn = new BufferedReader(new InputStreamReader( System.in ) );
 			int userInputChoice = askForInputType(userIn);
@@ -177,24 +186,26 @@ public class Application {
 			switch(userOutputChoice) {
 			case 1:
 				//Screen
-				doOutputOnScreen(result, OutputController.SCREEN_OUTPUT);
+				doOutputOnScreen(result, OutputType.SCREEN_OUTPUT);
 				break;
 			case 2:
 				//CSV
-				doOutputOnFileSystem(result, OutputController.CSV_OUTPUT, askForCSVSavePath(userIn));
+				doOutputOnFileSystem(result, OutputType.CSV_OUTPUT, askForCSVSavePath(userIn));
 				break;
 			case 3:
 				//XML
-				doOutputOnFileSystem(result, OutputController.XML_OUTPUT, askForXMLSavePath(userIn));
+				doOutputOnFileSystem(result, OutputType.XML_OUTPUT, askForXMLSavePath(userIn));
 				break;
 			case 4:
 				//HTML
-				doOutputOnFileSystem(result, OutputController.HTML_OUTPUT, askForHTMLSavePath(userIn));
+				doOutputOnFileSystem(result, OutputType.HTML_OUTPUT, askForHTMLSavePath(userIn));
 				break;
 			
 			}
 		} catch (Exception ex) {
-			System.out.println("An error or several errors have occured. Please double check your input and try again. Application Halted!");
+			ex.printStackTrace();
+			log.log(Level.SEVERE, "Application got halted", ex);
+			System.out.println("An error or several errors have occured (see log for details). Please double check your input and try again. Application Halted!");
 		}
 		
 		}
