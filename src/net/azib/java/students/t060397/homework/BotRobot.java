@@ -25,7 +25,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 /**
  * 
- * SumoCode class contains first robot behaiviour and runs generated code
+ * SumoCode class contains computer driven code
  *
  * @author marcus
  */
