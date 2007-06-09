@@ -129,6 +129,20 @@ public class RobotData {
 	public static int getDimension() {
 		return dimension;
 	}
+	/**
+	 * Increase X coordinate
+	 */
+	public void incX() {
+		this.x++;
+		
+	}
+	/**
+	 * Increase Y coordinate
+	 */
+	public void incY() {
+		this.y++;
+		
+	}
 	
 
 }
