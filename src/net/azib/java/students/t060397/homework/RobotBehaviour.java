@@ -103,15 +103,7 @@ abstract public class RobotBehaviour {
 		data.setLmotor(RobotData.motorState.FORWARD);
 		data.setRmotor(RobotData.motorState.FORWARD);		
 	}
-	/**
-	 * Is robot out of game?
-	 * @return out or not
-	 */
-	public boolean offDohjo(){
-		if(DohjoBehaviour.offDohjo(data.getX(), data.getY())) return true;
-		return false;
-		
-	}
+	
 	/**
 	 * Returns sensor value
 	 * @param sensorName
@@ -132,7 +124,12 @@ abstract public class RobotBehaviour {
 	 */
 	abstract public void paint(Graphics g);
 	
-
+	public void turn(){
+		if((this.data.getLmotor()==RobotData.motorState.FORWARD)&&(this.data.getRmotor()==RobotData.motorState.FORWARD)){
+			
+			this.data.incY();
+		}
+	}
 
 
 }

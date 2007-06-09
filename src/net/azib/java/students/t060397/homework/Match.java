@@ -47,30 +47,16 @@ public class Match implements Runnable{
 	public void run() {
 		while (Thread.currentThread() == move) {
 			try {
-				if((killerRobot.data.getLmotor()==RobotData.motorState.FORWARD)&&(killerRobot.data.getRmotor()==RobotData.motorState.FORWARD)){
-					
-					killerRobot.data.incY();
-				}
-				//if()
-				//UserState.y--;
-			/*	if ((UserState.lmotor == UserState.motorState.FORWARD) && (UserState.rmotor == UserState.motorState.FORWARD)){
-					UserState.y++;
-					//UserState.y++;
-					//LOG.info("UserState.y++ "+UserState.y);
-					//System.out.println("UserState.y++ "+UserState.y);
-				}else if ((UserState.lmotor==UserState.motorState.BACKWARD) && (UserState.rmotor==UserState.motorState.BACKWARD )){
-					UserState.y--;
-					
-				}
-				//if(DohjoBehaviour.offDohjo(UserState.x, UserState.y)){
-					UserState.off=true;
+				killerRobot.turn();
+				userRobot.turn();
+				if(DohjoBehaviour.offDohjo(killerRobot.data.getX(), killerRobot.data.getY())){
 					break;
+					
 				}
-				*/
 			
 					
 
-				Thread.sleep(SumoApp.getDelay()/10);
+				Thread.sleep(SumoApp.getDelay()/5);
 
 			} catch (InterruptedException e) {
 			}
