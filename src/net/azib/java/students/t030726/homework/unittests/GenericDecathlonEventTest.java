@@ -6,6 +6,9 @@ import junit.framework.TestCase;
 
 public class GenericDecathlonEventTest extends TestCase {
 	private GenericDecathlonEvent fixture = null;
+	private double correctParameter = 1.234;
+	private double badParameter = -1.234;
+	private String rawResult = "1.156";
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -19,7 +22,7 @@ public class GenericDecathlonEventTest extends TestCase {
 
 	public void testSetAParamater() {
 		try {
-			this.fixture.setAParameter(1.234);
+			this.fixture.setAParameter(this.correctParameter);
 		} catch (InvalidDataFormatException ex){
 			fail("When saving a normal A parameter it should not fail");
 		}
@@ -37,7 +40,7 @@ public class GenericDecathlonEventTest extends TestCase {
 	
 	public void testSetAParamaterWithNegativeInput() {
 		try {
-			this.fixture.setAParameter(-2.159);
+			this.fixture.setAParameter(this.badParameter);
 		} catch (InvalidDataFormatException ex) {
 			return;
 		}
@@ -46,7 +49,7 @@ public class GenericDecathlonEventTest extends TestCase {
 
 	public void testSetBParameter() {
 		try {
-			this.fixture.setBParameter(1.234);
+			this.fixture.setBParameter(this.correctParameter);
 		} catch (InvalidDataFormatException ex){
 			fail("When saving a normal B parameter it should not fail");
 		}
@@ -64,7 +67,7 @@ public class GenericDecathlonEventTest extends TestCase {
 	
 	public void testSetBParamaterWithNegativeInput() {
 		try {
-			this.fixture.setBParameter(-2.159);
+			this.fixture.setBParameter(this.badParameter);
 		} catch (InvalidDataFormatException ex) {
 			return;
 		}
@@ -73,7 +76,7 @@ public class GenericDecathlonEventTest extends TestCase {
 	
 	public void testSetCParameter() {
 		try {
-			this.fixture.setCParameter(1.234);
+			this.fixture.setCParameter(this.correctParameter);
 		} catch (InvalidDataFormatException ex){
 			fail("When saving a normal C parameter it should not fail");
 		}
@@ -91,7 +94,7 @@ public class GenericDecathlonEventTest extends TestCase {
 	
 	public void testSetCParamaterWithNegativeInput() {
 		try {
-			this.fixture.setCParameter(-2.159);
+			this.fixture.setCParameter(this.badParameter);
 		} catch (InvalidDataFormatException ex) {
 			return;
 		}
@@ -108,7 +111,7 @@ public class GenericDecathlonEventTest extends TestCase {
 	}
 	
 	public void testGetAParameter() {
-		double expectedResult = 2.158;
+		double expectedResult = this.correctParameter;
 		double gotResult = 0.0;
 		try {
 			this.fixture.setAParameter(expectedResult);
@@ -133,7 +136,7 @@ public class GenericDecathlonEventTest extends TestCase {
 	}
 	
 	public void testGetBParameter() {
-		double expectedResult = 2.158;
+		double expectedResult = this.correctParameter;
 		double gotResult = 0.0;
 		try {
 			this.fixture.setBParameter(expectedResult);
@@ -158,7 +161,7 @@ public class GenericDecathlonEventTest extends TestCase {
 	}
 	
 	public void testGetCParameter() {
-		double expectedResult = 2.158;
+		double expectedResult = this.correctParameter;
 		double gotResult = 0.0;
 		try {
 			this.fixture.setCParameter(expectedResult);
@@ -171,6 +174,11 @@ public class GenericDecathlonEventTest extends TestCase {
 			fail("Reading proper results from C parameter should not produce errors");
 		}
 		assertEquals(expectedResult, gotResult, 0);
+	}
+	
+	public void testSetAndGetRawResult() {
+		this.fixture.setRawResult(this.rawResult);
+		assertEquals(this.rawResult, this.fixture.getRawResult());
 	}
 
 }

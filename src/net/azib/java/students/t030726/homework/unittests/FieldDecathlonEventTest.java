@@ -8,6 +8,7 @@ public class FieldDecathlonEventTest extends TestCase {
 	private double sampleBParameter = 0.18;
 	private double sampleCParameter = 1.80;
 	private double achievedResult = 12.344;
+	private double badAchievedResult = -15.234;
 	private FieldDecathlonEvent fixture = null;
 
 	protected void setUp() throws Exception {
@@ -29,6 +30,19 @@ public class FieldDecathlonEventTest extends TestCase {
 		int expectedResult = this.computePoints();
 		int gotResult = this.fixture.getPoints();
 		assertEquals(expectedResult, gotResult);
+	}
+	
+	public void testBadAchievedResult() {
+		FieldDecathlonEvent sample = null;
+		try {
+			sample = new FieldDecathlonEvent(this.badAchievedResult, this.sampleAParameter, this.sampleBParameter, this.sampleCParameter);
+		}
+		catch (Exception e) {
+			//Do nothing, still need to check for instance
+			return;
+		}
+		assert(sample instanceof FieldDecathlonEvent);
+		fail("Negative achieved result is logically incorrect");
 	}
 
 }

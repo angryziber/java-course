@@ -51,6 +51,9 @@ public class FieldDecathlonEvent extends GenericDecathlonEvent {
 	 * @throws Exception
 	 */
 	public FieldDecathlonEvent(double achievedResult, double aParameter, double bParameter, double cParameter) throws Exception {
+		if(achievedResult <= 0.0) {
+			throw new InvalidDataFormatException();
+		}
 		this.achievedResult = achievedResult;
 		super.setAParameter(aParameter);
 		super.setBParameter(bParameter);

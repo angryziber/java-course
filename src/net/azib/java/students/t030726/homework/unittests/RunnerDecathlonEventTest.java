@@ -11,6 +11,7 @@ public class RunnerDecathlonEventTest extends TestCase {
 	private double achievedResultSecondsOnlyD = 43.3;
 	private double achievedResultsMinutesAndSecondsD = 85;
 	private String achievedResultMinutesAndSeconds = "1:25";
+	private String badAchievedResult = "-1.126";
 	private double sampleAParameter = 1.2345;
 	private double sampleBParameter = 0.18;
 	private double sampleCParameter = 1.80;
@@ -115,8 +116,21 @@ public class RunnerDecathlonEventTest extends TestCase {
 		} catch (Exception ex) {
 			return;
 		}
-		assertTrue(sample instanceof RunnerDecathlonEvent);
+		assert(sample instanceof RunnerDecathlonEvent);
 		fail("Invalid achieved result should trigger an exception");
+	}
+	
+	public void testWithNegativeAchievedResult() {
+		RunnerDecathlonEvent sample = null;
+		try {
+			sample = new RunnerDecathlonEvent(this.badAchievedResult, this.sampleAParameter, this.sampleBParameter, this.sampleCParameter);
+		}
+		catch (Exception e) {
+			return;
+		}
+		assert(sample instanceof RunnerDecathlonEvent);
+		fail("Negative result should cause an exception");
+		
 	}
 
 }
