@@ -178,6 +178,15 @@ abstract public class Robot {
 	 * @param g applet graphics object
 	 */
 	abstract public void paint(Graphics g);
+	
+	private final static int dimension=100;
+	/**
+	 * @return the dimension of robot 
+	 */
+	public static int getDimension() {
+		return dimension;
+	}
+	
 
 
 

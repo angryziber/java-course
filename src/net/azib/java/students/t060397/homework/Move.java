@@ -18,6 +18,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 package net.azib.java.students.t060397.homework;
+
+
+
 /**
  * 
  * Move class calculates robots new position on dohjo
@@ -26,7 +29,7 @@ package net.azib.java.students.t060397.homework;
  */
 public class Move implements Runnable {
 	Thread move;
-
+	
 	Move() {
 
 		move = new Thread(this);
@@ -44,6 +47,8 @@ public class Move implements Runnable {
 				if ((UserState.lmotor == UserState.motorState.FORWARD) && (UserState.rmotor == UserState.motorState.FORWARD)){
 					UserState.y++;
 					//UserState.y++;
+					//LOG.info("UserState.y++ "+UserState.y);
+					//System.out.println("UserState.y++ "+UserState.y);
 				}else if ((UserState.lmotor==UserState.motorState.BACKWARD) && (UserState.rmotor==UserState.motorState.BACKWARD )){
 					UserState.y--;
 					

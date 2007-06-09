@@ -20,9 +20,9 @@ package net.azib.java.students.t060397.homework;
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 /**
  * 
  * SumoCode class contains first robot behaiviour and runs generated code
@@ -43,9 +43,11 @@ public class SumoCode extends Robot implements Runnable {
 		while (Thread.currentThread() == sumoCode) {
 			try {
 				/* GENERATED CODE by web interface*/
-
-				forward();
+				//left();
 				
+				forward();
+				//ms_sleep(19);
+				//backward();
 				/* GENERATED CODE by web interface*/
 
 				Thread.sleep(SumoApp.getDelay());
@@ -63,14 +65,18 @@ public class SumoCode extends Robot implements Runnable {
 	 */
 	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		AffineTransform origXform = g2d.getTransform();
+		/*AffineTransform origXform = g2d.getTransform();
 		AffineTransform newXform = (AffineTransform) (origXform.clone());
-		int xRot = img.getWidth(null) / 2;
-		int yRot = img.getHeight(null) / 2;
+		int xRot = img.getWidth(null)/2;
+		int yRot = img.getHeight(null)/2;
+		
 		newXform.rotate(Math.toRadians(UserState.angle), xRot, yRot);
 		g2d.setTransform(newXform);
 		g2d.drawImage(img, UserState.x, UserState.y, null);
-		g2d.setTransform(origXform);
+		g2d.setTransform(origXform);*/
+		
+		RenderRobot.drawRobot(g2d, UserState.x, UserState.y, Color.LIGHT_GRAY, UserState.angle);
+		g2d.setColor(Color.BLACK);
 		g2d.drawString("Andurid ja mootorid", 1, 600);
 		g2d.drawString("all_vasak", 1, 610);
 		g2d.drawString("all_keskmine", 1, 620);

@@ -134,15 +134,10 @@ public class Dohjo {
 	 * @return true if robot is outside dohjo
 	 */
 	public static boolean offDohjo(int x, int y) {
+		if (MathCalc.inCircle(x, y,dohjoCentreX, dohjoCentreY, (int) (DOHJODIAM * dojoScale / 2.0)))
+			return false;
+		return true;
 
-		double distance;
-		distance = Math.sqrt((dohjoCentreX - x) * (dohjoCentreX - x) + (dohjoCentreY - y) * (dohjoCentreY - y));
-		
-		/* distance from centre + robot*/
-		if (distance + ROBOTWIDTH / 2 > (DOHJODIAM * dojoScale / 2.0)) {
-			return true;
-		}
-		return false;
 	}
 
 }
