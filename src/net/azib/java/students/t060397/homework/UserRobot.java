@@ -1,5 +1,4 @@
 package net.azib.java.students.t060397.homework;
-
 /***************************************************************************
  *   Copyright (C) 2007 by Margus Ernits   *
  *   Margus.Ernits@itcollege.ee   *
@@ -23,32 +22,32 @@ package net.azib.java.students.t060397.homework;
 
 
 import java.awt.Graphics;
+import java.awt.Image;
 
 /**
- * Match class creates robots and move controller.
- * @author Margus Ernits
+ * 
+ * UserCode implements second robot<p>
+ * Not yet implemented<p>
+ * Please see release.txt
+ * @author marcus
  */
-public class Match {
-
-    BotRobot killerRobot = new BotRobot();
-    UserRobot userRobot = new UserRobot();
-    Move move = new Move();
-    /**
-     * paints robots
-     */
-    public void paint(Graphics g){
-    	killerRobot.paint(g);
-    	userRobot.paint(g);
-    }
-
-	/**
-	 * sets robot starting angles and names
-	 */
-	public void init() {
-		killerRobot.setName("killerRobot");
-		UserState.angle=150;
-		userRobot.setName("userRobot");
-		UserState.anglek=90;
+public class UserRobot extends RobotBehaviour {
+	Image img;
+	public void paint(Graphics g) {
+		g.drawImage(img,500,500,null);
+		
 	}
-    
+	public void run(){
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see net.azib.java.students.t060397.homework.Robot#ms_sleep(int)
+	 */
+	@Override
+	public void ms_sleep(int ms) {
+		
+		
+	}
+
 }

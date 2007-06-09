@@ -23,7 +23,6 @@
 package net.azib.java.students.t060397.homework;
 
 import java.awt.Graphics;
-import java.awt.Image;
 
 
 
@@ -33,11 +32,8 @@ import java.awt.Image;
  * TODO get rid of ugly UserState class<p>
  * @author Margus Ernits
  */
-abstract public class Robot {
-	/**
-	 * Robot picture
-	 */
-	public Image img;
+abstract public class RobotBehaviour {
+	
 	private String robotName;
 	/**
 	 * Override the run() method for particular robot. <p>
@@ -48,26 +44,19 @@ abstract public class Robot {
 	 */
 	abstract public void run();
 	
-	/**
-	 * Sets the robots picture. 
-	 * @param imgMyRobot  display picture
-	 */
-	public void setImage(Image imgMyRobot) {
-		img = imgMyRobot;
-	}
-	
+
 	/**
 	 * Get the name of robot.
 	 * @return robot name
 	 */
-	public String getRobotName() {
+	public String getName() {
 		return robotName;
 	}
 	/**
 	 * Sets the name of robot.
 	 * @param robotName
 	 */
-	public void setRobotName(String robotName) {
+	public void setName(String robotName) {
 		this.robotName = robotName;
 	}
 	/**
@@ -75,7 +64,7 @@ abstract public class Robot {
 	 * Sets robot state fields used by Move thread
 	 */
 	public void backward() {
-		if(getRobotName()=="killerRobot"){
+		if(getName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.BACKWARD;
 			UserState.rmotork = UserState.motorState.BACKWARD;	
 		}else{
@@ -89,7 +78,7 @@ abstract public class Robot {
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void left() {
-		if(getRobotName()=="killerRobot"){
+		if(getName()=="killerRobot"){
 			UserState.angle++;
 			UserState.lmotor = UserState.motorState.STOP;
 			UserState.rmotor = UserState.motorState.STOP;	
@@ -105,7 +94,7 @@ abstract public class Robot {
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void right() {
-		if(getRobotName()=="killerRobot"){
+		if(getName()=="killerRobot"){
 			UserState.angle--;	
 			UserState.lmotor = UserState.motorState.STOP;
 			UserState.rmotor = UserState.motorState.STOP;
@@ -120,7 +109,7 @@ abstract public class Robot {
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void stop(){
-		if(getRobotName()=="killerRobot"){
+		if(getName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.STOP;
 			UserState.rmotork = UserState.motorState.STOP;	
 		}else{
@@ -133,7 +122,7 @@ abstract public class Robot {
 	 * Sets robot state fields used by Move thread
 	 */
 	public void forward() {
-		if(getRobotName()=="killerRobot"){
+		if(getName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.FORWARD;
 			UserState.rmotork = UserState.motorState.FORWARD;	
 		}else{
@@ -147,7 +136,7 @@ abstract public class Robot {
 	 * @return out or not
 	 */
 	public boolean offDohjo(){
-		if(getRobotName()=="killerRobot"){
+		if(getName()=="killerRobot"){
 			UserState.lmotork = UserState.motorState.FORWARD;
 			UserState.rmotork = UserState.motorState.FORWARD;
 			return false;

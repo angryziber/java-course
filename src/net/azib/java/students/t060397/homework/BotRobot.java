@@ -1,4 +1,5 @@
 package net.azib.java.students.t060397.homework;
+
 /***************************************************************************
  *   Copyright (C) 2007 by Margus Ernits   *
  *   Margus.Ernits@itcollege.ee   *
@@ -19,35 +20,76 @@ package net.azib.java.students.t060397.homework;
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-
+import java.awt.Graphics2D;
 /**
  * 
- * UserCode implements second robot<p>
- * Not yet implemented<p>
- * Please see release.txt
+ * SumoCode class contains first robot behaiviour and runs generated code
+ *
  * @author marcus
  */
-public class UserCode extends Robot {
-	Image img;
+public class BotRobot extends RobotBehaviour implements Runnable {
+	
+	
+
+	Thread botCode;
+
+	BotRobot() {
+		botCode = new Thread(this);
+		botCode.start();
+	}
+
+	public void run() {
+
+		while (Thread.currentThread() == botCode) {
+			try {
+				/* GENERATED CODE by web interface*/
+				//left();
+				
+				forward();
+				//ms_sleep(19);
+				//backward();
+				/* GENERATED CODE by web interface*/
+
+				Thread.sleep(SumoApp.getDelay());
+			}
+			catch (InterruptedException e) {
+
+			}
+		}
+	}
+	
+	/**
+	 * paints robot on the dohjo according to coordinates and angle.
+	 * paints motor and sensor states
+	 * @param g applet graphics
+	 */
 	public void paint(Graphics g) {
-		g.drawImage(img,500,500,null);
+		Graphics2D g2d = (Graphics2D) g;
+		
+		RenderRobot.drawRobot(g2d, UserState.x, UserState.y, Color.LIGHT_GRAY, UserState.angle);
 		
 	}
-	public void run(){
-		
-	}
+
+	
 
 	/* (non-Javadoc)
 	 * @see net.azib.java.students.t060397.homework.Robot#ms_sleep(int)
 	 */
 	@Override
 	public void ms_sleep(int ms) {
-		
-		
+
+		while (Thread.currentThread() == botCode) {
+			try {
+				Thread.sleep(ms);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+				return;
+			}
+
+		}
 	}
 
 }

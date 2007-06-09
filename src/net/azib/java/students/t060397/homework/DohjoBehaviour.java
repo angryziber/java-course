@@ -28,8 +28,8 @@ public class DohjoBehaviour {
 	 * @param h area heigth
 	 */
 	public void init(int w, int h) {
-		Match sumoMatch = new Match();
-		sumoMatch.init();
+
+		/* Calculate Dohjo runtime parameters*/
 		int freeArea = DohjoConfiguration.getFreeArea();
 		int dohjodiam = DohjoConfiguration.getDohjoDiam();
 		int border = DohjoConfiguration.getBorder();
@@ -40,8 +40,8 @@ public class DohjoBehaviour {
 		DohjoConfiguration.setDohjoCentreX(dohjoCentreX);
 		int dohjoCentreY = border + (int) (dohjodiam * dojoScale / 2.0);
 		DohjoConfiguration.setDohjoCentreY(dohjoCentreY);
-		//UserState.x = BORDER + (int) (DOHJODIAM * dojoScale / 2.0) - (int) (ROBOTWIDTH / 2);
-		//UserState.y = BORDER + (int) (DOHJODIAM * dojoScale / 2.0) - (int) (ROBOTHEIGTH / 2) - (int) (STARTLINE * dojoScale);
+		
+		/* Set robot states (UserState class will be deleted soon) */
 		UserState.x = dohjoCentreX;
 		UserState.y = dohjoCentreY- (int) (startLine * dojoScale);
 		UserState.xk = border + (int) (dohjodiam * dojoScale / 2.0) - (int) (DohjoConfiguration.getRrobotWidth()/ 2);

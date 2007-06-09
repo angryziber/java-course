@@ -36,7 +36,7 @@ public class RenderRobot {
 	public static void drawRobot(Graphics2D g, int x, int y,Color color,double angle){
 		
 		g.setColor(color);
-		g.fillOval( x-Robot.getDimension()/2, y-Robot.getDimension()/2, Robot.getDimension(),Robot.getDimension()); 
+		g.fillOval( x-RobotBehaviour.getDimension()/2, y-RobotBehaviour.getDimension()/2, RobotBehaviour.getDimension(),RobotBehaviour.getDimension()); 
 	}
 
 }

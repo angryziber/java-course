@@ -66,6 +66,8 @@ public class SumoApp extends Applet implements Runnable {
 	
 	protected RenderDohjo render;
 	
+	private Match sumoMatch = new Match();
+	
 
 	public void start() {
 		animator = new Thread(this);
@@ -86,6 +88,7 @@ public class SumoApp extends Applet implements Runnable {
 		board = new DohjoBehaviour();
 		board.init(width, height);
 	    render = new RenderDohjo();
+		sumoMatch.init();
 	}
 
 	private void setWidth() {
@@ -117,6 +120,7 @@ public class SumoApp extends Applet implements Runnable {
 	public void paintFrame(Graphics g) {
 
 		render.paint(g);
+		sumoMatch.paint(g);
 
 	}
 
