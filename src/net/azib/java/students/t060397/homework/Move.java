@@ -53,7 +53,7 @@ public class Move implements Runnable {
 					UserState.y--;
 					
 				}
-				if(DohjoBehaviour.offDohjo(UserState.x, UserState.y)){
+				//if(DohjoBehaviour.offDohjo(UserState.x, UserState.y)){
 					UserState.off=true;
 					break;
 				}
