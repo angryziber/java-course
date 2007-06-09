@@ -16,7 +16,7 @@ Release plan
 0.2 planned  22.06.2007
 	- Switch test first development!
 	- Separate painting from other logic
-	- Get rid of ugly UserState class and logic
+	- Get rid of ugly UserState class and logic - done
 	- better exception handling
 	- Full Sumolanguage implemetation
 		- left, rigth, ms_sleep (vasakule, paremale, viivitus in Sumo language)
