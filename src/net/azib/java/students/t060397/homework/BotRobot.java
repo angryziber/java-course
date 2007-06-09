@@ -45,11 +45,14 @@ public class BotRobot extends RobotBehaviour implements Runnable {
 		while (Thread.currentThread() == botCode) {
 			try {
 				/* GENERATED CODE by web interface*/
-				//left();
+				left();
+				ms_sleep(1000);
 				
-				//forward();
-				//ms_sleep(19);
+				forward();
+				ms_sleep(1000);
+				
 				backward();
+				ms_sleep(1000);
 				/* GENERATED CODE by web interface*/
 
 				Thread.sleep(SumoApp.getDelay());
@@ -80,16 +83,11 @@ public class BotRobot extends RobotBehaviour implements Runnable {
 	 */
 	@Override
 	public void ms_sleep(int ms) {
-
-		while (Thread.currentThread() == botCode) {
-			try {
-				Thread.sleep(ms);
-			}
-			catch (InterruptedException e) {
-				e.printStackTrace();
-				return;
-			}
-
+		try {
+			Thread.sleep(ms);
+		}
+		catch (InterruptedException e1) {
+			e1.printStackTrace();
 		}
 	}
 

@@ -26,9 +26,6 @@ package net.azib.java.students.t060397.homework;
  * Robot is abstract class for robots
  * <p>
  * You must implement run() and ms_sleep according robot role
- * <p>
- * TODO get rid of ugly UserState class
- * <p>
  * 
  * @author Margus Ernits
  */
@@ -68,9 +65,11 @@ abstract public class RobotBehaviour {
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void left() {
-		data.setLmotor(RobotData.motorState.STOP);
-		data.setRmotor(RobotData.motorState.STOP);
-		data.incAngle();
+		this.data.setLmotor(RobotData.motorState.STOP);
+		this.data.setRmotor(RobotData.motorState.STOP);
+		this.data.setAngle(this.data.getAngle()+40);
+		//this.data.incAngle();
+
 	}
 
 	/**
@@ -79,9 +78,9 @@ abstract public class RobotBehaviour {
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void right() {
-		data.setLmotor(RobotData.motorState.STOP);
-		data.setRmotor(RobotData.motorState.STOP);
-		data.decAngle();
+		this.data.setLmotor(RobotData.motorState.STOP);
+		this.data.setRmotor(RobotData.motorState.STOP);
+		this.data.decAngle();
 	}
 
 	/**
@@ -90,8 +89,8 @@ abstract public class RobotBehaviour {
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void stop() {
-		data.setLmotor(RobotData.motorState.STOP);
-		data.setRmotor(RobotData.motorState.STOP);
+		this.data.setLmotor(RobotData.motorState.STOP);
+		this.data.setRmotor(RobotData.motorState.STOP);
 	}
 
 	/**
@@ -100,8 +99,8 @@ abstract public class RobotBehaviour {
 	 * Sets robot state fields used by Move thread
 	 */
 	public void forward() {
-		data.setLmotor(RobotData.motorState.FORWARD);
-		data.setRmotor(RobotData.motorState.FORWARD);
+		this.data.setLmotor(RobotData.motorState.FORWARD);
+		this.data.setRmotor(RobotData.motorState.FORWARD);
 	}
 
 	/**
@@ -134,15 +133,21 @@ abstract public class RobotBehaviour {
 	 * 
 	 */
 	public void turn() {
-		MathCalc.Rumb s = MathCalc.getRumb(this.data.getAngle());
-		System.out.println("Angle " + s);
-		
+
+		if ((this.data.getLmotor() == RobotData.motorState.STOP)&&(this.data.getRmotor() == RobotData.motorState.STOP)) {
+
+		}
+		else {
+
+			MathCalc.Rumb s = MathCalc.getRumb(this.data.getAngle());
+
 			switch (s) {
 			case N: {
 				if (this.isBackward()) {
 					this.data.incY();
-				} else {
-				this.data.decY();				
+				}
+				else {
+					this.data.decY();
 				}
 				break;
 			}
@@ -150,42 +155,72 @@ abstract public class RobotBehaviour {
 				if (this.isBackward()) {
 					this.data.incY();
 					this.data.incX();
-				} else {
-				this.data.decY();
-				this.data.decX();
+				}
+				else {
+					this.data.decY();
+					this.data.decX();
 				}
 				break;
 			}
 			case W: {
-				this.data.decX();
+				if (this.isBackward()) {
+					this.data.incX();
+				}
+				else
+					this.data.decX();
 				break;
 			}
 			case SW: {
-				this.data.incY();
-				this.data.decX();
+				if (this.isBackward()) {
+					this.data.incX();
+					this.data.decY();
+				}
+				else {
+					this.data.incY();
+					this.data.decX();
+				}
 				break;
 			}
 			case S: {
-				this.data.incY();
+				if (this.isBackward()) {
+					this.data.decY();
+				}
+				else
+					this.data.incY();
 				break;
 			}
 			case SO: {
-				this.data.incY();
-				this.data.incX();
+				if (this.isBackward()) {
+					this.data.decY();
+					this.data.decX();
+				}
+				else {
+					this.data.incY();
+					this.data.incX();
+				}
 				break;
 			}
-			case O:{
-				this.data.incX();
+			case O: {
+				if (this.isBackward()) {
+					this.data.decX();
+				}
+				else
+					this.data.incX();
 				break;
 			}
 			case NO: {
-				this.data.incX();
-				this.data.decY();
+				if (this.isBackward()) {
+					this.data.incY();
+					this.data.decX();
+				}
+				else {
+					this.data.incX();
+					this.data.decY();
+				}
 				break;
 			}
 
-			
-			
+			}
 		}
 	}
 }

@@ -48,6 +48,11 @@ public class MathCalc {
 		O,
 		NO
 		}
+	/**
+	 * Gives rumb from angle
+	 * @param angle
+	 * @return rumb
+	 */
 	
 	public static Rumb getRumb(int angle){
 		
