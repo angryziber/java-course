@@ -44,7 +44,7 @@ public class Move implements Runnable {
 			try {
 				
 				//UserState.y--;
-				if ((UserState.lmotor == UserState.motorState.FORWARD) && (UserState.rmotor == UserState.motorState.FORWARD)){
+			/*	if ((UserState.lmotor == UserState.motorState.FORWARD) && (UserState.rmotor == UserState.motorState.FORWARD)){
 					UserState.y++;
 					//UserState.y++;
 					//LOG.info("UserState.y++ "+UserState.y);
@@ -57,7 +57,7 @@ public class Move implements Runnable {
 					UserState.off=true;
 					break;
 				}
-				
+				*/
 			
 					
 

@@ -33,7 +33,7 @@ import java.awt.Graphics;
  * @author Margus Ernits
  */
 abstract public class RobotBehaviour {
-	
+	public RobotData data = new RobotData(); 
 	private String robotName;
 	/**
 	 * Override the run() method for particular robot. <p>
@@ -64,13 +64,8 @@ abstract public class RobotBehaviour {
 	 * Sets robot state fields used by Move thread
 	 */
 	public void backward() {
-		if(getName()=="killerRobot"){
-			UserState.lmotork = UserState.motorState.BACKWARD;
-			UserState.rmotork = UserState.motorState.BACKWARD;	
-		}else{
-			UserState.lmotor = UserState.motorState.BACKWARD;
-			UserState.rmotor = UserState.motorState.BACKWARD;	
-		}
+		data.setLmotor(RobotData.motorState.BACKWARD);
+		data.setRmotor(RobotData.motorState.BACKWARD);
 	}
 	
 	/**
@@ -78,15 +73,9 @@ abstract public class RobotBehaviour {
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void left() {
-		if(getName()=="killerRobot"){
-			UserState.angle++;
-			UserState.lmotor = UserState.motorState.STOP;
-			UserState.rmotor = UserState.motorState.STOP;	
-		}else{
-			UserState.anglek++;
-			UserState.lmotork = UserState.motorState.STOP;
-			UserState.rmotork = UserState.motorState.STOP;
-		}
+		data.setLmotor(RobotData.motorState.STOP);
+		data.setRmotor(RobotData.motorState.STOP);
+		data.incAngle();
 	}
 	
 	/**
@@ -94,58 +83,33 @@ abstract public class RobotBehaviour {
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void right() {
-		if(getName()=="killerRobot"){
-			UserState.angle--;	
-			UserState.lmotor = UserState.motorState.STOP;
-			UserState.rmotor = UserState.motorState.STOP;
-		}else{
-			UserState.anglek--;
-			UserState.lmotork = UserState.motorState.STOP;
-			UserState.rmotork = UserState.motorState.STOP;
-		}
+		data.setLmotor(RobotData.motorState.STOP);
+		data.setRmotor(RobotData.motorState.STOP);
+		data.decAngle();
 	}
 	/**
 	 * Stops robot.<p>
 	 * Sets robot angle and motorstate fields used by Move thread.
 	 */
 	public void stop(){
-		if(getName()=="killerRobot"){
-			UserState.lmotork = UserState.motorState.STOP;
-			UserState.rmotork = UserState.motorState.STOP;	
-		}else{
-			UserState.lmotor = UserState.motorState.STOP;
-			UserState.rmotor = UserState.motorState.STOP;	
-		}
+		data.setLmotor(RobotData.motorState.STOP);
+		data.setRmotor(RobotData.motorState.STOP);
 	}
 	/**
 	 * Robot moves forward.<p>
 	 * Sets robot state fields used by Move thread
 	 */
 	public void forward() {
-		if(getName()=="killerRobot"){
-			UserState.lmotork = UserState.motorState.FORWARD;
-			UserState.rmotork = UserState.motorState.FORWARD;	
-		}else{
-			UserState.lmotor = UserState.motorState.FORWARD;
-			UserState.rmotor = UserState.motorState.FORWARD;	
-		}
-		
+		data.setLmotor(RobotData.motorState.FORWARD);
+		data.setRmotor(RobotData.motorState.FORWARD);		
 	}
 	/**
 	 * Is robot out of game?
 	 * @return out or not
 	 */
 	public boolean offDohjo(){
-		if(getName()=="killerRobot"){
-			UserState.lmotork = UserState.motorState.FORWARD;
-			UserState.rmotork = UserState.motorState.FORWARD;
-			return false;
-		}else{
-			UserState.lmotor = UserState.motorState.FORWARD;
-			UserState.rmotor = UserState.motorState.FORWARD;
-			return false;
-		}
-		
+		if(DohjoBehaviour.offDohjo(data.getX(), data.getY())) return true;
+		return false;
 		
 	}
 	/**

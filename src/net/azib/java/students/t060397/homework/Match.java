@@ -46,9 +46,9 @@ public class Match {
 	 */
 	public void init() {
 		killerRobot.setName("killerRobot");
-		UserState.angle=150;
+		killerRobot.data.setAngle(150);
 		userRobot.setName("userRobot");
-		UserState.anglek=90;
+		userRobot.data.setAngle(90);
 	}
     
 }

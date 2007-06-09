@@ -16,17 +16,16 @@ public class RenderDohjo {
 	 * @param g  applet graphics
 	 */
 	public void paint(Graphics g) {
-		int whitearea=DohjoConfiguration.getWhiteArea();
-		int border=DohjoConfiguration.getBorder();
-		int diameter=DohjoConfiguration.getDohjoDiam();
-		double dojoScale=DohjoConfiguration.getDohjoScale();
+		int whitearea=DohjoData.getWhiteArea();
+		int border=DohjoData.getBorder();
+		int diameter=DohjoData.getDohjoDiam();
+		double dojoScale=DohjoData.getDohjoScale();
 		g.drawString("Sumorobotite rammukatsumine " + SumoApp.getFrame(), 10, 10);
 		g.setColor(Color.white);
 		g.fillArc(border, border, (int) (diameter * dojoScale), (int) (diameter * dojoScale), 0, 360);
 		g.setColor(Color.black);
 		g.fillArc((int) (border+ whitearea * dojoScale), (int) (border + whitearea * dojoScale),
 				(int) (diameter * dojoScale - whitearea * whitearea * dojoScale), (int) (diameter * dojoScale - whitearea * whitearea * dojoScale), 0, 360);
-	//TODO	sumoMatch.paint(g);
 
 	}
 

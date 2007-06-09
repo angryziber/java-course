@@ -68,7 +68,7 @@ public class BotRobot extends RobotBehaviour implements Runnable {
 	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
-		RenderRobot.drawRobot(g2d, UserState.x, UserState.y, Color.LIGHT_GRAY, UserState.angle);
+		RenderRobot.drawRobot(g2d, data.getX(), data.getY(), Color.LIGHT_GRAY, data.getAngle());
 		
 	}
 

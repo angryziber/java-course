@@ -15,7 +15,7 @@ public class DohjoBehaviour {
 	 * TODO testCase
 	 */
 	public static boolean offDohjo(int x, int y) {
-		if (MathCalc.inCircle(x, y,DohjoConfiguration.getDohjoCentreX(),DohjoConfiguration.getDohjoCentreY(), (int) ((DohjoConfiguration.getDohjoDiam() * DohjoConfiguration.getDohjoScale() / 2.0) )))
+		if (MathCalc.inCircle(x, y,DohjoData.getDohjoCentreX(),DohjoData.getDohjoCentreY(), (int) ((DohjoData.getDohjoDiam() * DohjoData.getDohjoScale() / 2.0) )))
 			return false;
 		return true;
 	
@@ -30,22 +30,17 @@ public class DohjoBehaviour {
 	public void init(int w, int h) {
 
 		/* Calculate Dohjo runtime parameters*/
-		int freeArea = DohjoConfiguration.getFreeArea();
-		int dohjodiam = DohjoConfiguration.getDohjoDiam();
-		int border = DohjoConfiguration.getBorder();
+		int freeArea = DohjoData.getFreeArea();
+		int dohjodiam = DohjoData.getDohjoDiam();
+		int border = DohjoData.getBorder();
 		int	dojoScale = (int) ((w - freeArea) / (double) dohjodiam);
-		int startLine = DohjoConfiguration.getSartLine();
-		DohjoConfiguration.setDohjoScale(dojoScale);
+
+		DohjoData.setDohjoScale(dojoScale);
 		int dohjoCentreX = border + (int) (dohjodiam * dojoScale / 2.0);
-		DohjoConfiguration.setDohjoCentreX(dohjoCentreX);
+		DohjoData.setDohjoCentreX(dohjoCentreX);
 		int dohjoCentreY = border + (int) (dohjodiam * dojoScale / 2.0);
-		DohjoConfiguration.setDohjoCentreY(dohjoCentreY);
-		
-		/* Set robot states (UserState class will be deleted soon) */
-		UserState.x = dohjoCentreX;
-		UserState.y = dohjoCentreY- (int) (startLine * dojoScale);
-		UserState.xk = border + (int) (dohjodiam * dojoScale / 2.0) - (int) (DohjoConfiguration.getRrobotWidth()/ 2);
-		UserState.yk = border + (int) (dohjodiam * dojoScale / 2.0) - (int) (DohjoConfiguration.getRobotHeigth()/ 2) + (int) (startLine * dojoScale);
+		DohjoData.setDohjoCentreY(dohjoCentreY);
+
 	}
 
 }

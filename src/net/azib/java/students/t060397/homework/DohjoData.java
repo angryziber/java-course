@@ -11,7 +11,7 @@ package net.azib.java.students.t060397.homework;
  * 
  *  
  */
-public class DohjoConfiguration {
+public class DohjoData {
 
 	/**
 	 * Some free space for printing status of sensors/motors
@@ -97,7 +97,7 @@ public class DohjoConfiguration {
 	 * @param dohjoScale the Dohjo scale factor to set
 	 */
 	public static void setDohjoScale(double dohjoScale) {
-		DohjoConfiguration.dohjoScale = dohjoScale;
+		DohjoData.dohjoScale = dohjoScale;
 	}
 
 
@@ -116,7 +116,7 @@ public class DohjoConfiguration {
 	 * @param dohjoCentreX the Dohjo centre point X coordinate [px] to set
 	 */
 	public static void setDohjoCentreX(int dohjoCentreX) {
-		DohjoConfiguration.dohjoCentreX = dohjoCentreX;
+		DohjoData.dohjoCentreX = dohjoCentreX;
 	}
 
 
@@ -134,7 +134,7 @@ public class DohjoConfiguration {
 	 * @param dohjoCentreY the Dohjo centre point Y coordinate [px] to set
 	 */
 	public static void setDohjoCentreY(int dohjoCentreY) {
-		DohjoConfiguration.dohjoCentreY = dohjoCentreY;
+		DohjoData.dohjoCentreY = dohjoCentreY;
 	}
 
 
