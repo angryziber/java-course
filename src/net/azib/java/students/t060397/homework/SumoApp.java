@@ -21,7 +21,6 @@ package net.azib.java.students.t060397.homework;
 
 import java.applet.*;
 import java.awt.*;
-import java.net.URL;
 
 /**
  * @author Margus Ernits<p>
@@ -37,11 +36,6 @@ public class SumoApp extends Applet implements Runnable {
 
 	private static final long serialVersionUID = 4458887497742408563L;
 	
-
-	/** 
-	 * Image URL from html 
-	 */
-	private static final String IMG_URL = "imgurl";
 
 	/**
 	 * Sumomatch frame no. It can be used for syncronization of match.
@@ -63,17 +57,14 @@ public class SumoApp extends Applet implements Runnable {
 
 	private Image offScreenImage;
 
-	private Image imgMyRobot;
-
-	private Image imgYouRobot;
-
 	private Graphics offScreenGraphics;
 
-	private URL imageSrc;
 	/**
 	 * Sumoboard for match
 	 */
-	protected Dohjo board;
+	protected DohjoBehaviour board;
+	
+	protected RenderDohjo render;
 	
 
 	public void start() {
@@ -87,25 +78,14 @@ public class SumoApp extends Applet implements Runnable {
  */
 	public void init() {
 
-		imageSrc = getCodeBase();
-		String imageSrcUrl = getParameter(IMG_URL);
 		setDelay();
 		setWidth();
 		setHeight();
 		setSize(width, height);
 		setBackground(Color.green);
-		board = new Dohjo();
+		board = new DohjoBehaviour();
 		board.init(width, height);
-		if (imageSrcUrl == null) {
-			imgMyRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("java-logo.gif"));
-			imgYouRobot = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("java-logo.gif"));
-		}
-		else {
-			imgMyRobot = getImage(imageSrc, "websumobot.png");
-			imgYouRobot = getImage(imageSrc, "bot2.png");
-		}
-		board.setImages(imgMyRobot, imgYouRobot);
-
+	    render = new RenderDohjo();
 	}
 
 	private void setWidth() {
@@ -136,8 +116,7 @@ public class SumoApp extends Applet implements Runnable {
 
 	public void paintFrame(Graphics g) {
 
-		board.setFrame(frame);
-		board.paint(g);
+		render.paint(g);
 
 	}
 

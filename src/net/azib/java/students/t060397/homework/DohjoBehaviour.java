@@ -14,12 +14,14 @@ public class DohjoBehaviour {
 	 * @return true if robot is outside dohjo
 	 * TODO testCase
 	 */
-	public static boolean offDohjo(int x, int y,int centreX,int centreY,int radius) {
-		if (MathCalc.inCircle(x, y,centreX, centreY, (int) ((DohjoConfiguration.getDohjoDiam() * DohjoConfiguration.getDohjoScale() / 2.0) )))
+	public static boolean offDohjo(int x, int y) {
+		if (MathCalc.inCircle(x, y,DohjoConfiguration.getDohjoCentreX(),DohjoConfiguration.getDohjoCentreY(), (int) ((DohjoConfiguration.getDohjoDiam() * DohjoConfiguration.getDohjoScale() / 2.0) )))
 			return false;
 		return true;
 	
 	}
+
+
 	/**
 	 * Inits Dohjo, sets up sumomatch, places robots to board
 	 * @param w area width

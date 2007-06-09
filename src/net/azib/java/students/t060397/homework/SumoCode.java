@@ -45,9 +45,9 @@ public class SumoCode extends Robot implements Runnable {
 				/* GENERATED CODE by web interface*/
 				//left();
 				
-				forward();
+				//forward();
 				//ms_sleep(19);
-				//backward();
+				backward();
 				/* GENERATED CODE by web interface*/
 
 				Thread.sleep(SumoApp.getDelay());
