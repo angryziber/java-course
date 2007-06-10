@@ -2,7 +2,8 @@ package net.azib.java.students.t060397.homework;
 
 /**
  * 
- * Dohjo - Japan minisumo board data
+ * DohjoData class contains Japan minisumo board data<p>
+ * Dohjo is sumoboard<p>
  * @author Margus Ernits<p>
  * See <a href="http://www.robotroom.com/SumoRules.html">content rules</a>
  * 
