@@ -5,10 +5,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * FileWriter writes sorted competitors list with results to the file.
@@ -23,7 +22,7 @@ public class OutFileWriter {
 		FileOutputStream outStream;
 		OutputStreamWriter outStreamWriter;
 		BufferedWriter outBufWriter;
-		Set <String> compsDataToWrite = new TreeSet<String>();
+		List <String> compsDataToWrite = new LinkedList<String>();
 		for(Competitor champ : listofCompetitorstoWrite){
 			compsDataToWrite.add(String.valueOf("("+places.get(champ.getPoints())+"), "+champ));
 		}

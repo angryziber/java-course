@@ -75,6 +75,7 @@ public class SqlQuery {
 	    	  
 	    	  al.add(data.toString());
 	      }
+	      rs.close();
 	      con.close();
 	    }catch( Exception e ) {
 	      e.printStackTrace();

@@ -60,8 +60,7 @@ public class XmlCreator {
             	sortingCompetitorsArray.add(data);
             }
             List <Competitor> sortedCompetitorsList = new LinkedList<Competitor>();
-            for(int i= sortingCompetitorsArray.size()-1; i>-1; i--
-            		/*String data : sortingCompetitors */){
+            for(int i= sortingCompetitorsArray.size()-1; i>-1; i--){
             	sortedCompetitorsList.add(new Competitor(sortingCompetitorsArray.get(i).substring(sortingCompetitorsArray.get(i).indexOf("|")+1)));
             }
             NumberFormat nf = NumberFormat.getInstance();

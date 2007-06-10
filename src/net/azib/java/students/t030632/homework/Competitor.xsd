@@ -3,6 +3,7 @@
   <xsd:element name="Competition" type="Competitor"/>
 
   <xsd:element name="competitor"/>
+  
   <xsd:complexType name="Competitor">
     <xsd:sequence>
       <xsd:element name="competitor" type="competitor_data"/>

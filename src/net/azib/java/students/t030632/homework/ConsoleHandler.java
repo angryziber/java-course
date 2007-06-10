@@ -2,8 +2,6 @@ package net.azib.java.students.t030632.homework;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -39,7 +37,7 @@ public class ConsoleHandler {
 		System.out.println("Help, Input options:");
 		System.out.println("\t c <results>: results are read from console");
 		System.out.println("\t f <filename>: results are in CSV file");
-		System.out.println("\t d <username:password>: results are taken from DB");
+		System.out.println("\t d : results are taken from DB");
 	}
 	private void printOutputOptions(){
 		System.out.println("Help, Output options:");
@@ -51,7 +49,6 @@ public class ConsoleHandler {
 	private void printExitOptions(){
 		System.out.println("Exit options: ");
 		System.out.println("\t q : quit");
-//		System.out.println("\t u : continue with input options");
 		System.out.println("\t t : continue with output options");
 	}
 	private void handleInput(String inputCommand){
@@ -107,25 +104,29 @@ public class ConsoleHandler {
 	private void handleOutput(String outputCommand){
 		String fileName ;
 		Map<Integer, String> places = new PlaceCalculator(competitorsList).getPlaces();
+		Set <String> sortingCompetitors = new TreeSet<String>();
+        for(Competitor champ:competitorsList){
+        	sortingCompetitors.add(champ.getPoints()+"*"+places.get(champ.getPoints())+"|"+champ.getInitialData());
+        }
+        List <String> sortingCompetitorsArray = new LinkedList<String>();
+        for(String data : sortingCompetitors){
+        	sortingCompetitorsArray.add(data);
+        }
+        List <Competitor> sortedCompetitorsList = new LinkedList<Competitor>();
+        for(int i= sortingCompetitorsArray.size()-1; i>-1; i--){
+        	sortedCompetitorsList.add(new Competitor(sortingCompetitorsArray.get(i).substring(sortingCompetitorsArray.get(i).indexOf("|")+1)));
+        }
 		char key = outputCommand.charAt(0);
 		switch (key) {
 		case 'o':// to the terminal window
-			Set <String> compsDataToWrite = new TreeSet<String>();
-			for(Competitor champ : competitorsList){
-				compsDataToWrite.add(String.valueOf("("+places.get(champ.getPoints())+") "+champ));
+			List <String> compsDataToWrite = new LinkedList<String>();
+			for(Competitor champ : sortedCompetitorsList){
+				compsDataToWrite.add(String.valueOf("("+places.get(champ.getPoints())+") Points: "+champ.getPoints()+" Name: "+champ.getName()));
 			}
-			System.out.println("Rated results to console: ");
-			try {
-					PrintStream out = new PrintStream(System.out, true, "UTF8");
-					for(String data:compsDataToWrite){
-						out.println(data);
-					}
-				}
-				catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			
+			System.out.println("Rated results to console: ");					
+			for(String data:compsDataToWrite){
+				System.out.println(new String(data.toCharArray()));
+			}		
 			printExitOptions();
 			handleExit(scanner.nextLine());
 			break;
@@ -138,7 +139,7 @@ public class ConsoleHandler {
 			}else{
 				outputFile = new File(fileName+".csv");
 			}
-			new OutFileWriter(outputFile, competitorsList);
+			new OutFileWriter(outputFile, sortedCompetitorsList);
 			System.out.println("Rated results to "+outputFile.getAbsolutePath()+" file: ");
 			printExitOptions();
 			handleExit(scanner.nextLine());
