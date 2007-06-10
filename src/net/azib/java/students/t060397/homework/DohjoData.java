@@ -23,7 +23,7 @@ public class DohjoData {
 	 */
 	private static final int DOHJODIAM = 77;
 
-	private static final int BORDER = FREEAREA/2;
+	private static final int BORDER = FREEAREA / 2;
 	/**
 	 * Bright border size 
 	 */
@@ -54,11 +54,6 @@ public class DohjoData {
 	 */
 	private static int dohjoCentreY;
 
-	
-
-
-
-
 	/**
 	 * @return the border
 	 */
@@ -82,16 +77,12 @@ public class DohjoData {
 		return DOHJODIAM;
 	}
 
-
-
 	/**
 	 * @return the Dohjo scale factor
 	 */
 	public static double getDohjoScale() {
 		return dohjoScale;
 	}
-
-
 
 	/**
 	 * @param dohjoScale the Dohjo scale factor to set
@@ -100,16 +91,12 @@ public class DohjoData {
 		DohjoData.dohjoScale = dohjoScale;
 	}
 
-
-
 	/**
 	 * @return the the Dohjo centre point X coordinate [px]
 	 */
 	public static int getDohjoCentreX() {
 		return dohjoCentreX;
 	}
-
-
 
 	/**
 	 * 
@@ -119,16 +106,12 @@ public class DohjoData {
 		DohjoData.dohjoCentreX = dohjoCentreX;
 	}
 
-
-
 	/**
 	 * @return the Dohjo centre point Y coordinate [px]
 	 */
 	public static int getDohjoCentreY() {
 		return dohjoCentreY;
 	}
-
-
 
 	/**
 	 * @param dohjoCentreY the Dohjo centre point Y coordinate [px] to set
@@ -137,16 +120,12 @@ public class DohjoData {
 		DohjoData.dohjoCentreY = dohjoCentreY;
 	}
 
-
-
 	/**
 	 * @return the FreeArea
 	 */
 	public static int getFreeArea() {
 		return FREEAREA;
 	}
-
-
 
 	/**
 	 * @return the  Brown start line distance from dohjo centre [cm]
@@ -155,8 +134,6 @@ public class DohjoData {
 		return STARTLINE;
 	}
 
-
-
 	/**
 	 * @return the Robot default width [px]
 	 */
@@ -164,14 +141,11 @@ public class DohjoData {
 		return ROBOTWIDTH;
 	}
 
-
-
 	/**
 	 * @return the Robot default heigth [px]
 	 */
 	public static int getRobotHeigth() {
 		return ROBOTHEIGTH;
 	}
-
 
 }

@@ -35,7 +35,6 @@ import java.awt.*;
 public class SumoApp extends Applet implements Runnable {
 
 	private static final long serialVersionUID = 4458887497742408563L;
-	
 
 	/**
 	 * Sumomatch frame no. It can be used for syncronization of match.
@@ -63,22 +62,19 @@ public class SumoApp extends Applet implements Runnable {
 	 * Sumoboard for match
 	 */
 	protected DohjoBehaviour board;
-	
+
 	protected RenderDohjo renderDohjo;
-	
+
 	private Match sumoMatch = new Match();
-	
-	
 
 	public void start() {
 		animator = new Thread(this);
 		animator.start();
 	}
 
-
-/**
- * init() creates Dohjo object and sets Robot pictures
- */
+	/**
+	 * init() creates Dohjo object and sets Robot pictures
+	 */
 	public void init() {
 
 		setDelay();
@@ -88,7 +84,7 @@ public class SumoApp extends Applet implements Runnable {
 		setBackground(Color.green);
 		board = new DohjoBehaviour();
 		board.init(width, height);
-	    renderDohjo = new RenderDohjo();
+		renderDohjo = new RenderDohjo();
 		sumoMatch.init();
 	}
 
@@ -199,6 +195,7 @@ public class SumoApp extends Applet implements Runnable {
 	public int getHeight() {
 		return height;
 	}
+
 	/**
 	 * Returns applet width
 	 * @return the witdh

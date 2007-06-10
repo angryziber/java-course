@@ -20,28 +20,24 @@ package net.azib.java.students.t060397.homework;
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
 import java.awt.Graphics;
 
 /**
  * Match class creates robots and move controller.
  * @author Margus Ernits
  */
-public class Match implements Runnable{
+public class Match implements Runnable {
 	Thread move;
 
+	BotRobot killerRobot = new BotRobot();
+	UserRobot userRobot = new UserRobot();
 
-    BotRobot killerRobot = new BotRobot();
-    UserRobot userRobot = new UserRobot();
-    
-	
-	Match(){
+	Match() {
 
 		move = new Thread(this);
 		move.start();
 	}
-	
+
 	/**
 	 * Move calculations based on robot state
 	 */
@@ -50,29 +46,27 @@ public class Match implements Runnable{
 			try {
 				killerRobot.turn();
 				userRobot.turn();
-				if(DohjoBehaviour.offDohjo(killerRobot.data.getX(), killerRobot.data.getY())){
+				if (DohjoBehaviour.offDohjo(killerRobot.data.getX(), killerRobot.data.getY())) {
 					break;
-					
+
 				}
-			
-					
 
-				Thread.sleep(SumoApp.getDelay()/5);
+				Thread.sleep(SumoApp.getDelay() / 5);
 
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) {
 			}
 		}
 	}
 
+	/**
+	 * paints robots
+	 */
+	public void render(Graphics g) {
 
-    /**
-     * paints robots
-     */
-    public void render(Graphics g){
-
-    	killerRobot.paint(g);
-    	userRobot.paint(g);
-    }
+		killerRobot.paint(g);
+		userRobot.paint(g);
+	}
 
 	/**
 	 * sets robot starting angles and names
@@ -81,9 +75,9 @@ public class Match implements Runnable{
 		killerRobot.data.setName("killerRobot");
 		killerRobot.data.setAngle(0);
 		killerRobot.data.setX(DohjoData.getDohjoCentreX());
-		killerRobot.data.setY(DohjoData.getDohjoCentreY()-DohjoData.getSartLine()-RobotData.getDimension());
+		killerRobot.data.setY(DohjoData.getDohjoCentreY() - DohjoData.getSartLine() - RobotData.getDimension());
 		userRobot.data.setName("userRobot");
 		userRobot.data.setAngle(90);
 	}
-    
+
 }

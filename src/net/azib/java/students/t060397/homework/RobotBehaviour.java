@@ -67,8 +67,7 @@ abstract public class RobotBehaviour {
 	public void left() {
 		this.data.setLmotor(RobotData.motorState.STOP);
 		this.data.setRmotor(RobotData.motorState.STOP);
-		this.data.setAngle(this.data.getAngle()+40);
-		//this.data.incAngle();
+		this.data.setAngle(this.data.getAngle() + 40);
 
 	}
 
@@ -80,7 +79,7 @@ abstract public class RobotBehaviour {
 	public void right() {
 		this.data.setLmotor(RobotData.motorState.STOP);
 		this.data.setRmotor(RobotData.motorState.STOP);
-		this.data.decAngle();
+		this.data.setAngle(this.data.getAngle() - 40);
 	}
 
 	/**
@@ -134,8 +133,8 @@ abstract public class RobotBehaviour {
 	 */
 	public void turn() {
 
-		if ((this.data.getLmotor() == RobotData.motorState.STOP)&&(this.data.getRmotor() == RobotData.motorState.STOP)) {
-
+		if ((this.data.getLmotor() == RobotData.motorState.STOP) && (this.data.getRmotor() == RobotData.motorState.STOP)) {
+			// TODO too big method, needs refactoring
 		}
 		else {
 

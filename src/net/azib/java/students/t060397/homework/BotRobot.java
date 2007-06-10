@@ -23,6 +23,7 @@ package net.azib.java.students.t060397.homework;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 /**
  * 
  * SumoCode class contains computer driven code
@@ -30,8 +31,6 @@ import java.awt.Graphics2D;
  * @author marcus
  */
 public class BotRobot extends RobotBehaviour implements Runnable {
-	
-	
 
 	Thread botCode;
 
@@ -45,14 +44,15 @@ public class BotRobot extends RobotBehaviour implements Runnable {
 		while (Thread.currentThread() == botCode) {
 			try {
 				/* GENERATED CODE by web interface*/
-				left();
-				ms_sleep(1000);
-				
-				forward();
-				ms_sleep(1000);
-				
 				backward();
 				ms_sleep(1000);
+				
+				left();
+				ms_sleep(1000);
+
+				forward();
+				ms_sleep(1000);
+
 				/* GENERATED CODE by web interface*/
 
 				Thread.sleep(SumoApp.getDelay());
@@ -62,21 +62,19 @@ public class BotRobot extends RobotBehaviour implements Runnable {
 			}
 		}
 	}
-	
+
 	/**
 	 * paints robot on the dohjo according to coordinates and angle.
 	 * paints motor and sensor states
 	 * @param g applet graphics
 	 */
 	public void paint(Graphics g) {
-		
-		Graphics2D g2d = (Graphics2D) g;
-		
-		RenderRobot.drawRobot(g2d, data.getX(), data.getY(), Color.LIGHT_GRAY, data.getAngle());
-		
-	}
 
-	
+		Graphics2D g2d = (Graphics2D) g;
+
+		RenderRobot.drawRobot(g2d, data.getX(), data.getY(), Color.LIGHT_GRAY, data.getAngle());
+
+	}
 
 	/* (non-Javadoc)
 	 * @see net.azib.java.students.t060397.homework.Robot#ms_sleep(int)
