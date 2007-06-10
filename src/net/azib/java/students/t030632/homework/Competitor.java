@@ -14,7 +14,7 @@ import sun.security.pkcs.ParsingException;
  * Result string should be input data to constructor.
  * @author Toni
  */
-public class Competitor{
+public class Competitor implements Calculative {
 	private int points;
 	private String name;
 	private Date birthDate;
@@ -36,23 +36,23 @@ public class Competitor{
 	 * creates a competitor
 	 * @param competitorData string with results in csv view
 	 */
-	public Competitor(String competitorData) {
+	public Competitor(String competitorData){
 		initialData = competitorData;
 		parseResults(competitorData);
 		calculatePoints();
 	}
 	private void calculatePoints(){
 		float points=0f;
-		points+=(25.437f * Math.pow((18.0f-getSprint()), 1.81d));
-		points+=(0.14354f * Math.pow((getLongJump()*100f- 220f), 1.40d));
-		points+=(51.39f * Math.pow((getShotPut()- 1.5f), 1.05d));
-		points+=(0.8465f * Math.pow((getHighJump()*100f- 75f), 1.42d));
-		points+=(1.53775f * Math.pow((82f-getLongSprint()), 1.81d));
-		points+=(5.74352f * Math.pow((28.5f-getHurdles()), 1.92d));
-		points+=(12.91f * Math.pow((getDiscusThrow()- 4.0f), 1.1d));
-		points+=(0.2797f * Math.pow((getPoleVault()*100f- 100f), 1.35d));
-		points+=(10.14f * Math.pow((getJavelinThrow()- 7.0f), 1.08d));
-		points+=(0.03768f * Math.pow((480f-getRace()), 1.85d));
+		points+=(SPRINT * Math.pow((SPRINT_B-getSprint()), SPRINT_C));
+		points+=(LONGJUMP * Math.pow((getLongJump()*100f- LONGJUMP_B), LONGJUMP_C));
+		points+=(SHOTPUT * Math.pow((getShotPut()- SHOTPUT_B), SHOTPUT_C));
+		points+=(HIGHJUMP * Math.pow((getHighJump()*100f- HIGHJUMP_B), HIGHJUMP_C));
+		points+=(LONGSPRINT * Math.pow((LONGSPRINT_B-getLongSprint()), LONGSPRINT_C));
+		points+=(HURDLES * Math.pow((HURDLES_B-getHurdles()), HURDLES_C));
+		points+=(DISCUSTHROW * Math.pow((getDiscusThrow()- DISCUSTHROW_B), DISCUSTHROW_C));
+		points+=(POLEVAULT * Math.pow((getPoleVault()*100f- POLEVAULT_B), POLEVAULT_C));
+		points+=(JAVELINTHROW * Math.pow((getJavelinThrow()- JAVELINTHROW_B), JAVELINTHROW_C));
+		points+=(RACE * Math.pow((RACE_B-getRace()), RACE_C));
 		setPoints((int) points);
 	}
 	private void parseResults (String competitorData){
