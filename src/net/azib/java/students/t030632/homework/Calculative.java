@@ -1,12 +1,14 @@
 package net.azib.java.students.t030632.homework;
 
 /**
- * Calculative
- *
+ * Calculative conatins constants from 
+ * http://www.geocities.com/mdetting/sports/decathlon-points-formula.html
+ * 
  * @author Toni
  */
 public interface Calculative {
 
+	//constant A
 	public static float SPRINT = 25.437f ;
 	public static float LONGJUMP = 0.14354f;
 	public static float SHOTPUT =  51.39f;
@@ -18,6 +20,7 @@ public interface Calculative {
 	public static float JAVELINTHROW =  10.14f ;
 	public static float RACE =  0.03768f;
 	
+	//constant B
 	public static float SPRINT_B = 18.0f ;
 	public static float LONGJUMP_B = 220f;
 	public static float SHOTPUT_B =  1.5f;
@@ -29,6 +32,7 @@ public interface Calculative {
 	public static float JAVELINTHROW_B =  7.0f ;
 	public static float RACE_B =  480f;
 	
+	//constant C
 	public static double SPRINT_C = 1.81d ;
 	public static double LONGJUMP_C = 1.40d;
 	public static double SHOTPUT_C =  1.05d;
