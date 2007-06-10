@@ -199,14 +199,12 @@ public class XmlCreator {
                 xmlFormer.transform(source, xmlResultStream);
             }
             catch (TransformerConfigurationException e) {
-                System.out.println("Error: " + e);
-                e.printStackTrace();
+                System.err.println("Error: " + e);
                 System.exit(1);
             }
         }
         catch (Exception e) {
-            System.out.print("Error: " + e);
-            e.printStackTrace();
+            System.err.print("Error: " + e);
             System.exit(1);
         }
         System.out.println("XML done!");
@@ -227,7 +225,7 @@ public class XmlCreator {
             htmlFormer.transform(xmlSource, htmlResultStream);
         }
         catch (TransformerException e) {
-            e.printStackTrace();
+            System.err.print("Exception: "+e);
         }
         System.out.println("HTML done!");
     }

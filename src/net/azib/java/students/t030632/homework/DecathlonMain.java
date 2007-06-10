@@ -14,7 +14,7 @@ public class DecathlonMain {
 	 */
 	public static void main(String[] args) {
 		InputStream in = System.in;
-		new ConsoleHandler(in);
+		new ConsoleHandler().runProgram(in);
 	}
 
 }

@@ -39,7 +39,6 @@ public class OutFileWriter {
 		}
 		catch (IOException e) {
 			System.out.println("Unable to write data to: "+ fileName.getAbsolutePath()+" file");
-			e.printStackTrace();
 		}
 	
 	}

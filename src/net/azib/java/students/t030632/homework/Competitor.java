@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import sun.security.pkcs.ParsingException;
@@ -34,7 +33,7 @@ public class Competitor{
 	private String initialData;
 	
 	/**
-	 * 
+	 * creates a competitor
 	 * @param competitorData string with results in csv view
 	 */
 	public Competitor(String competitorData) {
@@ -60,23 +59,23 @@ public class Competitor{
 		results = competitorData.split(",");
 		int index = 0;
 		if(results.length>13){
-			throw new NullPointerException("Invalid data, too many arguments!!!");
+			System.err.println("Invalid data, too many arguments!!!");
+			
+//			throw new NullPointerException();
+			
 		}else if(results.length<13){
-			throw new NullPointerException("Invalid data, too few arguments!!!");
+//			throw new NullPointerException("Invalid data, too few arguments!!!");
+			System.err.println("Invalid data, too few arguments!!!");
 		}else{
 			setName(results[index++]);
+			String dateString = results[index++];
 			try {
 				DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-//				sdf.setCalendar(GregorianCalendar.getInstance());
-				Date date = sdf.parse(results[index++]);
-				GregorianCalendar gc = new GregorianCalendar();
-				gc.setTime(date);
-//				todo check correctness of formatted date
-				setBirthDate(date/*DateFormat.getDateInstance(DateFormat.SHORT).parse(results[index++])*/);
+				Date date = sdf.parse(dateString);
+				setBirthDate(date);
 			}
 			catch (ParseException e) {
-				System.out.println("Unable to parse Date of Birth!!!");
-				e.printStackTrace();
+				System.out.println("Unable to parse Date of Birth!!! Given string: "+ dateString);
 			}
 			setCountry(parseLocaleString(results[index++]));
 			setSprint(Float.parseFloat(results[index++]));
@@ -116,8 +115,7 @@ public class Competitor{
 			throw new ParsingException("Unknown Country abbreviation: "+str);
 		}
 		catch (ParsingException e) {
-			System.out.println("Unable to throw Parsing Exception: Unknown Country = "+str);
-			e.printStackTrace();
+			System.err.println("Unable to throw Parsing Exception: Unknown Country = "+str);
 			return null;
 		}
 		 
@@ -290,25 +288,12 @@ public class Competitor{
 	public float getSprint() {
 		return sprint;
 	}
+	
 	/**
 	 * 
-	 * @return
-	 */
-	/*public String returnCompetitorsData (){
-		String data="";
-		data="Points: "+getPoints();
-		StringBuffer sb = new StringBuffer(data);
-		sb.append(data).append("Points: ").append(getPoints()).append(": ").append(
-				getName()).append(", ").append(
-				getBirthDate()).append(", ").append(
-				getCountry()).append(".");
-		return sb.toString();
-	}*/
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @return competitors data in csv format with overall points
 	 */
 	@Override
-	
 	public String toString() {
 		DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		String data = new String();

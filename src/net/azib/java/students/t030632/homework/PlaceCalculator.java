@@ -51,8 +51,6 @@ public class PlaceCalculator {
 			}
 			
 		}
-		
-
 	}
 	/**
 	 * 

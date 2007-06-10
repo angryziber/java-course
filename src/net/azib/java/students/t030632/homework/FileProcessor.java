@@ -32,12 +32,10 @@ public class FileProcessor {
 	        }
 		}
 		catch (FileNotFoundException e) {
-			System.out.println("File not Found!..");
-			e.printStackTrace();
+			System.out.println("File not Found: " + file.getAbsolutePath());
 		}
 		catch (IOException e) {
-			System.out.println("Error while reading file specified!..");
-			e.printStackTrace();
+			System.out.println("Error while reading file specified: " + file.getAbsolutePath() );
 		}
         
 	}

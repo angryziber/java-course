@@ -1,10 +1,10 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-  <xsd:element name="Competition" type="Competitor"/>
+  <xsd:element name="Competition" type="CompetitorsList"/>
 
-  <xsd:element name="competitor"/>
+  <xsd:element name="competitor" type = "competitor_data"/>
   
-  <xsd:complexType name="Competitor">
+  <xsd:complexType name="CompetitorsList">
     <xsd:sequence>
       <xsd:element name="competitor" type="competitor_data"/>
     </xsd:sequence>
@@ -18,17 +18,22 @@
       <xsd:element name="competitors_Country" type="xsd:string"/>
       <xsd:element name="Total_Points"  type="xsd:int"/>
       <xsd:element name="place"  type="xsd:string"/>
-      <xsd:element name="events"  type="event"/>
+      <xsd:element name="events"  type="eventsList"/>
     </xsd:sequence>
     <xsd:attribute name="id" type="xsd:int"/>
   </xsd:complexType>
 
-  <xsd:complexType name="event">
+  <xsd:complexType name="eventsList">
     <xsd:sequence>
-      <xsd:element name="name" type="xsd:string"/>
+      <xsd:element name="event" type="eventData"/>
     </xsd:sequence>
-    <xsd:attribute name="result" type="xsd:float"/>
   </xsd:complexType>
+
+  <xsd:complexType name="eventData">
+    <xsd:attribute name="result" type="xsd:float"/>
+    <xsd:attribute name="eventName" type="xsd:string"/>
+  </xsd:complexType>
+
 
 
 </xsd:schema>
