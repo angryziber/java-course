@@ -26,7 +26,7 @@ public class CSVFileAccessor implements DataAccessor{
 	 */
 	public List<Competition> getCompetition() {
 		BeanFactory beanFactory = new XmlBeanFactory(
-				new ClassPathResource("../../mapping/fbeans.xml",
+				new ClassPathResource("fbeans.xml",
 				CSVFileAccessor.class));
 		
 		CompetitionDaoBean competitionDao = (CompetitionDaoBean) beanFactory.getBean(CompetitionDao.class.getName());

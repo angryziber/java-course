@@ -25,12 +25,15 @@ public class DBAccessor implements DataAccessor{
 	 * Constructs new DBAccessor
 	 */
 	public DBAccessor() {
-		BeanFactory beanFactory = new XmlBeanFactory(
-				new ClassPathResource("../../mapping/hbeans.xml",
-				DBAccessor.class));
-		
-		comDao = (CompetitionDao) beanFactory.getBean(CompetitionDao.class.getName());
-		resDao = (ResultsDao) beanFactory.getBean(ResultsDaoBean.class.getName());
+		try {
+			BeanFactory beanFactory = new XmlBeanFactory(
+					new ClassPathResource("hbeans.xml",
+							DBAccessor.class));
+			comDao = (CompetitionDao) beanFactory.getBean(CompetitionDao.class.getName());
+			resDao = (ResultsDao) beanFactory.getBean(ResultsDaoBean.class.getName());
+		}catch (Exception e) {
+			System.out.println("========= Database access for user denied! =========");
+		}
 		
 	}
 	

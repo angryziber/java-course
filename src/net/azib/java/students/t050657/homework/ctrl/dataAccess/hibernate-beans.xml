@@ -7,7 +7,7 @@
 		<property name="dataSource" ref="datasource"/>
 		<property name="mappingResources">
 			<list>
-				<value>net/azib/java/students/t050657/homework/mapping/mapping.hbm.xml</value>
+				<value>net/azib/java/students/t050657/homework/ctrl/dataAccess/mapping.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
