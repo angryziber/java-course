@@ -15,6 +15,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 
@@ -24,12 +26,15 @@ import org.junit.Test;
  * @author Toni
  */
 public class OutFileWriterTest {
-	@Test
-	public void testOutFileWriter() throws Exception {
-		String results = "(1), Points: 4238, \"Siim Susi\" , 01.01.1976, Eesti, 12.61, 5.00, 9.22, 1.50, 59.39, 16.43, 21.60, 2.60, 35.81, 5:25.72. "+ "(2), Points: 3204, \"Beata Kana\", 01.03.1982, South Africa, 13.04, 4.53, 7.79, 1.55, 1:04.72, 18.74, 24.20, 2.40, 28.20, 6:50.76. ";
+	private String givenResults;
+	private String resultStrFromFile;
+	private File testCSVFile; 
+	@Before
+	public void prepareData(){
+		givenResults = "(1), Points: 4238, \"Siim Susi\" , 01.01.1976, Eesti, 12.61, 5.00, 9.22, 1.50, 59.39, 16.43, 21.60, 2.60, 35.81, 5:25.72. "+ "(2), Points: 3204, \"Beata Kana\", 01.03.1982, South Africa, 13.04, 4.53, 7.79, 1.55, 1:04.72, 18.74, 24.20, 2.40, 28.20, 6:50.76. ";
 		String fs = File.separator;
 		File testFile = new File(".."+fs+"java"+fs+"src"+fs+"net"+fs+"azib"+fs+"java"+fs+"students"+fs+"t030632"+fs+"homework"+fs+"test.csv");
-		File testCSVFile = new File(".."+fs+"java"+fs+"src"+fs+"net"+fs+"azib"+fs+"java"+fs+"students"+fs+"t030632"+fs+"homework"+fs+"testCSV.csv");
+		testCSVFile = new File(".."+fs+"java"+fs+"src"+fs+"net"+fs+"azib"+fs+"java"+fs+"students"+fs+"t030632"+fs+"homework"+fs+"testCSV.csv");
 		FileOutputStream outStream;
 		OutputStreamWriter outStreamWriter;
 		BufferedWriter outBufWriter;
@@ -53,7 +58,7 @@ public class OutFileWriterTest {
 		FileInputStream inStream;
 		InputStreamReader inStreamReader;
 		BufferedReader inBufReader;
-		String resultStr="";
+		resultStrFromFile="";
 		try {
 			inStream = new FileInputStream(testCSVFile);
 			inStreamReader = new InputStreamReader(inStream, "UTF8");
@@ -61,7 +66,7 @@ public class OutFileWriterTest {
 	        String competitorData;
 	        
 	        while((competitorData = inBufReader.readLine())!=null ){
-	        	resultStr+=competitorData;
+	        	resultStrFromFile+=competitorData;
 	        }
 		}
 		catch (FileNotFoundException e) {
@@ -70,9 +75,15 @@ public class OutFileWriterTest {
 		catch (IOException e) {
 			System.err.println("Error while reading file: "+testCSVFile);
 		}
+	
+	}
+	@Test
+	public void testOutFileWriter() throws Exception {
+		assertEquals(givenResults,resultStrFromFile);
+	}
+	@After
+	public void deleteAuxilaryFiles(){
 		testCSVFile.delete();
-		assertEquals(results,resultStr);
-		
 	}
 	
 	

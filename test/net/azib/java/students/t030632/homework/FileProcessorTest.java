@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 
@@ -19,10 +21,13 @@ import org.junit.Test;
  * @author Toni
  */
 public class FileProcessorTest {
-	@Test
-	public void testFileProcessor() throws Exception {
+	private List <Competitor> list;
+	private File testFile;
+	
+	@Before
+	public void prepareData(){
 		String fs = File.separator;
-		File testFile = new File(".."+fs+"java"+fs+"src"+fs+"net"+fs+"azib"+fs+"java"+fs+"students"+fs+"t030632"+fs+"homework"+fs+"test.csv");
+		testFile = new File(".."+fs+"java"+fs+"src"+fs+"net"+fs+"azib"+fs+"java"+fs+"students"+fs+"t030632"+fs+"homework"+fs+"test.csv");
 		FileOutputStream outStream;
 		OutputStreamWriter outStreamWriter;
 		BufferedWriter outBufWriter;
@@ -41,10 +46,14 @@ public class FileProcessorTest {
 		catch (IOException e) {
 			System.out.println("Unable to write data to: "+ testFile.getAbsolutePath()+" file");
 		}
-		List <Competitor> list =  new FileProcessor(testFile).getCompetitors();
-		testFile.delete();
+		list =  new FileProcessor(testFile).getCompetitors();
+	}
+	@Test
+	public void testFileProcessor() throws Exception {
 		assertEquals(2,list.size());
-		
-		
+	}
+	@After
+	public void deleteAuxilaryFile(){
+		testFile.delete();
 	}
 }
