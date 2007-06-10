@@ -15,12 +15,13 @@ Release plan
 
 0.2 planned  22.06.2007
 	- Switch test first development!
-	- Separate painting from other logic
+	- Separate painting from other logic - all drawin are separated. Some classes contain thin pain methods for forwarding Graphics object
 	- Get rid of ugly UserState class and logic - done
 	- better exception handling
-	- Full Sumolanguage implemetation
+	- Full Sumolanguage implemetation - paritally done (vasakule, paremale, viivitus)
+		- sensor methods and logic not done
 		- left, rigth, ms_sleep (vasakule, paremale, viivitus in Sumo language)
-	- thread syncronization (needed for 2 robot match)
+
 
 0.3 planned 06.07.2007
 	- add second robot
