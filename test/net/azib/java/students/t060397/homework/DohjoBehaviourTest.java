@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * DohjoBehaviourTest
  *
- * @author marcus
+ * @author Margus Ernits
  */
 public class DohjoBehaviourTest {
 	DohjoData data;
