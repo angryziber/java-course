@@ -40,7 +40,6 @@ public class FileProcessorTest {
 		}
 		catch (IOException e) {
 			System.out.println("Unable to write data to: "+ testFile.getAbsolutePath()+" file");
-			e.printStackTrace();
 		}
 		List <Competitor> list =  new FileProcessor(testFile).getCompetitors();
 		testFile.delete();

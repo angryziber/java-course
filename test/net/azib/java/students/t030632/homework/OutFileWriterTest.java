@@ -38,7 +38,6 @@ public class OutFileWriterTest {
 			outStream = new FileOutputStream(testFile);
 			outStreamWriter = new OutputStreamWriter(outStream,"UTF8");
 			outBufWriter = new BufferedWriter(outStreamWriter);
-			/*PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName),""));*/
 			
 				outBufWriter.write("\"Siim Susi\" ,01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72"+System.getProperty("line.separator"));
 				outBufWriter.write("\"Beata Kana\",29.02.1982,ZA,13.04,4.53,7.79,1.55,1:04.72,18.74,24.20,2.40,28.20,6:50.76"); 
@@ -46,8 +45,7 @@ public class OutFileWriterTest {
 			outBufWriter.close();
 		}
 		catch (IOException e) {
-			System.out.println("Unable to write data to: "+ testFile.getAbsolutePath()+" file");
-			e.printStackTrace();
+			System.err.println("Unable to write data to: "+ testFile.getAbsolutePath()+" file");
 		}
 		List <Competitor> list =  new FileProcessor(testFile).getCompetitors();
 		testFile.delete();
@@ -67,12 +65,10 @@ public class OutFileWriterTest {
 	        }
 		}
 		catch (FileNotFoundException e) {
-			System.out.println("File not Found!..");
-			e.printStackTrace();
+			System.err.println(testCSVFile+ " File not Found!..");
 		}
 		catch (IOException e) {
-			System.out.println("Error while reading file specified!..");
-			e.printStackTrace();
+			System.err.println("Error while reading file: "+testCSVFile);
 		}
 		testCSVFile.delete();
 		assertEquals(results,resultStr);
