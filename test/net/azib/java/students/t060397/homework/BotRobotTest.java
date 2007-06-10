@@ -13,12 +13,17 @@ import org.junit.Test;
  */
 public class BotRobotTest {
 	BotRobot bot;
+	DohjoData data;
+	DohjoBehaviour dohjo;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 		bot = new BotRobot();
+		data = new DohjoData();
+		dohjo = new DohjoBehaviour();
+		dohjo.init(640, 640);
 	}
 
 	/**
@@ -27,6 +32,8 @@ public class BotRobotTest {
 	@After
 	public void tearDown() throws Exception {
 		bot = null;
+		data = null;
+		dohjo = null;
 	}
 
 
@@ -45,7 +52,7 @@ public class BotRobotTest {
 		bot.data.setAngle(180);
 		int xold = bot.data.getX();
 		int yold = bot.data.getY();
-		
+	
 		bot.turn();
 		assertEquals(xold--,bot.data.getX());
 		assertEquals(yold,bot.data.getY());
