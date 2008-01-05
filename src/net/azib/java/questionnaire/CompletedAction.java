@@ -27,13 +27,15 @@ public class CompletedAction implements Action {
 		
 		try {
 			SessionPersister persister = new SessionPersister(session);
-			persister.storeUserInfo();
-			String username = persister.giveAccess();
+			String username = persister.storeUser();
 			template.setAttribute("username", username);
 		}
 		catch (IllegalStateException e) {
 			// already saved, ignore
 		}
+		
+		// don't save again
+		session.setFinished();
 		
 		return null;
 	}

@@ -14,6 +14,7 @@ public class SessionPersister {
 	private static final String DB_URL = "jdbc:mysql://srv.azib.net:3306/java";
 	private static final String DB_USER = "java";
 	private static final String DB_PASSWORD = "java";
+	private static final String SHELL = "/bin/bash";
 	private static final String SVN_HOME = "/home/svn/";
 	private static final String USERADD_SCRIPT = ".java_useradd.sh";
 	
@@ -35,8 +36,9 @@ public class SessionPersister {
 
 	/**
 	 * Persists the data permanently to the Database.
+	 * @return the newly created username 
 	 */
-	public void storeUserInfo() throws PersistException {
+	public String storeUser() throws PersistException {
 		Connection conn = null;
 		try {
 			conn = openConnection();
@@ -47,10 +49,9 @@ public class SessionPersister {
 				saveAnswer(conn, userId, answer);
 			}
 			
+			String username = giveSubversionAccess();
 			conn.commit();
-			
-			// don't save again
-			session.setFinished();
+			return username;
 		}
 		catch (Exception e) {
 			try {
@@ -122,24 +123,27 @@ public class SessionPersister {
 	 * Gives access to Subversion
 	 * @return the newly created username 
 	 */
-	public String giveAccess() throws PersistException {
-		// synchronize globally to prevent multiple simultaneous calls
+	private String giveSubversionAccess() throws PersistException {
+		// synchronize globally to prevent multiple simultaneous calls of the script
 		synchronized (SessionPersister.class) {
+			int exitCode = 0;
 			try {
 				String username = "t" + session.user.studentCode;
 				// run the script for addition
 				Process p = Runtime.getRuntime().exec(
-						new String[] {USERADD_SCRIPT, username, session.user.password}, 
+						new String[] {SHELL, USERADD_SCRIPT, username, session.user.password}, 
 						null, new File(SVN_HOME));
 				
-				int exitCode = p.waitFor();
-				if (exitCode != 0) {
-					throw new PersistException("Failed to give Subversion access (code " + exitCode + ")");
-				}
+				exitCode = p.waitFor();
 				return username;
 			}
 			catch (Exception e) {
 				throw new PersistException("Failed to give Subversion access", e);
+			}
+			finally {
+				if (exitCode != 0) {
+					throw new PersistException("Failed to give Subversion access (code " + exitCode + ")");
+				}				
 			}
 		}
 		
