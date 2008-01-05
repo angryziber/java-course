@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE example [
-	<!ENTITY copy "&#xA9;">
-	<!ENTITY copyright-notice "Copyright &copy; 2007, Mega Corporation">
-]>
-<example>
-	&copyright-notice;
-</example>
