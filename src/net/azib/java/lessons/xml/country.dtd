@@ -1,0 +1,4 @@
+<!ELEMENT country (name, code, population)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT code (#PCDATA)>
+<!ELEMENT population (#PCDATA)>
