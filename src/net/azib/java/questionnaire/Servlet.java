@@ -69,21 +69,34 @@ public class Servlet extends HttpServlet {
 				request.getSession().invalidate();
 			}
 
-			// output something
-			StringTemplate mainTemplate = getStringTemplate("Main");
-			mainTemplate.setAttribute("title", actionName);
-			mainTemplate.setAttribute("body", template.toString());
-			
-			response.setContentType("text/html");
-			response.setCharacterEncoding(ULTIMATE_ENCODING);
-			Writer writer = response.getWriter();
-			writer.write(mainTemplate.toString());
-			writer.close();
+			writeResponse(response, actionName, template);
 		}
 		catch (Exception e) {
 			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Unexpected exception", e);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.toString());
+			try {
+				// try to show a nice error
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				StringTemplate template = getStringTemplate("Error");
+				template.setAttribute("error", e.toString());
+				writeResponse(response, "Error", template);
+			}
+			catch (Exception e2) {
+				// fallback to standard error processing
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.toString());
+			}
 		}
+	}
+
+	private void writeResponse(HttpServletResponse response, String actionName, StringTemplate template) throws IOException {
+		StringTemplate mainTemplate = getStringTemplate("Main");
+		mainTemplate.setAttribute("title", actionName);
+		mainTemplate.setAttribute("body", template.toString());
+		
+		response.setContentType("text/html");
+		response.setCharacterEncoding(ULTIMATE_ENCODING);
+		Writer writer = response.getWriter();
+		writer.write(mainTemplate.toString());
+		writer.close();
 	}
 
 	/**

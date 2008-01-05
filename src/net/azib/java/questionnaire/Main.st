@@ -55,7 +55,6 @@
 			background: #ffffaa;
 			font-size: 14px;
 			padding: 3px;
-			//border: 1px solid brown;
 			font-weight: bold;
 		}
 		.wrong {

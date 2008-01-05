@@ -11,7 +11,9 @@ public class CompletedAction implements Action {
 	public Result process(RequestParameters params, StringTemplate template, Session session) throws Exception {
 		template.setAttribute("answers", session.answers);
 		template.setAttribute("name", session.user.name.substring(0, session.user.name.indexOf(' ')));
-		// TODO: display time taken
+		
+		int timeSec = session.getElapsedTimeSec();
+		template.setAttribute("time", (timeSec / 60) + " min, " + (timeSec % 60) + " sec");
 		
 		int correctAnswers = 0;
 		for (Answer answer : session.answers)
@@ -23,7 +25,15 @@ public class CompletedAction implements Action {
 		template.setAttribute("wrongAnswers", wrongAnswers);
 		template.setAttribute("percentage", correctAnswers*100/(wrongAnswers + correctAnswers));
 		
-		new SessionPersister().persist(session);
+		try {
+			SessionPersister persister = new SessionPersister(session);
+			persister.storeUserInfo();
+			String username = persister.giveAccess();
+			template.setAttribute("username", username);
+		}
+		catch (IllegalStateException e) {
+			// already saved, ignore
+		}
 		
 		return null;
 	}

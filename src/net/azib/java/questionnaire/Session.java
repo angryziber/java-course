@@ -12,6 +12,7 @@ public class Session {
 	public List<Question> questions;
 	public List<Answer> answers;
 	
+	private long startTime = System.currentTimeMillis();
 	private boolean isFinished;
 	
 	/**
@@ -26,5 +27,12 @@ public class Session {
 	 */
 	public void setFinished() {
 		isFinished = true;
+	}
+	
+	/**
+	 * @return the number seconds elapsed since the session was created
+	 */
+	public int getElapsedTimeSec() {
+		return (int) ((System.currentTimeMillis() - startTime)/1000);
 	}
 }
