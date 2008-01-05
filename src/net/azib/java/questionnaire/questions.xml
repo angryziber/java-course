@@ -31,7 +31,7 @@
 		<answer>2^63+1</answer>
 	</question>
 	<question>
-		<text>Which of the following access modifiers allow access to the base class members from the derived class if they are in the same package?</text>
+		<text>Which of the following access modifiers allow access to the base class members from the derived class (classes are in the same package)?</text>
 		<answer>private</answer>
 		<answer correct="true">default</answer>
 		<answer correct="true">protected</answer>
@@ -96,11 +96,11 @@
 		<answer>Hello_World</answer>
 	</question>
 	<question>
-		<text>How are Java applications embedded in web pages called? (plural)</text>
+		<text>How Java applications embedded in web pages are called? (plural)</text>
 		<answer correct="true">Applets</answer>
 	</question>
 	<question>
-		<text>How are server-side Java applications called? (plural)</text>
+		<text>How server-side Java applications are called? (plural)</text>
 		<answer correct="true">Servlets</answer>
 	</question>
 	<question>
@@ -119,11 +119,12 @@
 		<answer>function</answer>
 	</question>
 	<question>
-		<text>From which parts does the floating point values consist?</text>
+		<text>From which parts do the floating point values consist?</text>
+		<answer>integer part</answer>
 		<answer correct="true">sign</answer>
+		<answer>fractional part</answer>
 		<answer correct="true">exponent</answer>
 		<answer>number of fractional bits</answer>
-		<answer>integer part</answer>
 		<answer correct="true">mantissa</answer>
 		<answer>none of the above</answer>
 	</question>
@@ -180,7 +181,7 @@
 		<answer>Bag</answer>
 	</question>
 	<question>
-		<text>What is a recursive function/method?</text>
+		<text>What of the following applied to a recursive function/method?</text>
 		<answer correct="true">it calls itself directly</answer>
 		<answer correct="true">it calls itself transitively</answer>
 		<answer>it does not terminate</answer>

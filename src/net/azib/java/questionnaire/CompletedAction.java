@@ -11,6 +11,7 @@ public class CompletedAction implements Action {
 	public Result process(RequestParameters params, StringTemplate template, Session session) throws Exception {
 		template.setAttribute("answers", session.answers);
 		template.setAttribute("name", session.user.name.substring(0, session.user.name.indexOf(' ')));
+		// TODO: display time taken
 		
 		int correctAnswers = 0;
 		for (Answer answer : session.answers)
@@ -24,7 +25,6 @@ public class CompletedAction implements Action {
 		
 		new SessionPersister().persist(session);
 		
-		//return new Finish();
 		return null;
 	}
 

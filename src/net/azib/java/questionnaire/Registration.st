@@ -19,7 +19,7 @@
 		<p/>
 		<p><input id="submit" name="submit" value="Continue &raquo;" type="submit"/></p>
 		<div class="note">
-			The data will be saved after the following questionnaire will be completed.
+			The data will be saved after the following questionnaire will is completed.
 		</div>
 		<script>document.form.name.focus();</script>
 	</fieldset>

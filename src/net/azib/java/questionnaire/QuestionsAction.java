@@ -27,7 +27,7 @@ public class QuestionsAction implements Action {
 		}
 		
 		int submittedIndex = -1;
-		if (params.contains("submit")) {
+		if (params.contains("index")) {
 			// an answer was submitted
 			submittedIndex = Integer.parseInt(params.get("index"));
 			Answer answer = new Answer(session.questions.get(submittedIndex));
