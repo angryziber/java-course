@@ -7,10 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 
 public class SessionPersister {
 	
 	// these ideally need to be configurable
+	private static final int YEAR = Calendar.getInstance().get(Calendar.YEAR);
 	private static final String DB_URL = "jdbc:mysql://srv.azib.net:3306/java";
 	private static final String DB_USER = "java";
 	private static final String DB_PASSWORD = "java";
@@ -87,14 +89,15 @@ public class SessionPersister {
 
 	private int saveUser(Connection conn, User user) throws SQLException, PersistException {
 		// insert the new user
-		PreparedStatement statement = conn.prepareStatement("insert into users (year, name, studentCode, curriculumCode, email, phone, company, password) values (2007, ?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-		statement.setString(1, user.name);
-		statement.setString(2, user.studentCode);
-		statement.setString(3, user.curriculumCode);
-		statement.setString(4, user.email);
-		statement.setString(5, user.phone);
-		statement.setString(6, user.company);
-		statement.setString(7, user.password);
+		PreparedStatement statement = conn.prepareStatement("insert into users (year, name, studentCode, curriculumCode, email, phone, company, password) values (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+		statement.setInt(1, YEAR);
+		statement.setString(2, user.name);
+		statement.setString(3, user.studentCode);
+		statement.setString(4, user.curriculumCode);
+		statement.setString(5, user.email);
+		statement.setString(6, user.phone);
+		statement.setString(7, user.company);
+		statement.setString(8, user.password);
 		if (statement.executeUpdate() != 1)
 			throw new PersistException("Cannot save user");
 		
