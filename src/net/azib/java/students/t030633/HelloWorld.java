@@ -3,7 +3,7 @@ package net.azib.java.students.t030633;
 /**
  * HelloWorld
  * 
- * @author Tarmo Ojala
+ * @author t030633
  */
 public class HelloWorld {
 	public static void main(String[] args) {
