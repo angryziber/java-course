@@ -1,5 +1,7 @@
 package net.azib.java.students.t001370;
 
+import java.util.Date;
+
 /**
  * HelloWorld
  *
@@ -12,7 +14,7 @@ public class HelloWorld
 	 */
 	public static void main(String[] args) 
 	{
-		System.out.println("bla-bla");
-		System.out.println("Hello!");
+		System.out.println(Constans.GREETING_MESSAGE);
+		System.out.println(new Date());
 	}
 }
