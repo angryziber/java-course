@@ -19,17 +19,16 @@ public class Fibonacci {
 	
 	public void reCalculate(int n) {
 		BigInteger nextPrevNumber = new BigInteger("1");
-		prevNumber = BigInteger.ONE;
+		prevNumber = BigInteger.ZERO;
 		
-		fibonacciNumber = nextPrevNumber;
+		fibonacciNumber = prevNumber;
 		fibonacciCount = n;
-		if (n > 2)
-			for (int count = 3; count <= n; count++) {
-				fibonacciNumber = fibonacciNumber.add(prevNumber);
-				prevNumber = nextPrevNumber;
-				nextPrevNumber = fibonacciNumber;
-				// System.out.println("Result=" + fibonacciNumber + ", prev=" + prevNumber + ", nextPrev=" + nextPrevNumber);
-			}
+		for (int count = 0; count <= n; count++) {
+			fibonacciNumber = fibonacciNumber.add(prevNumber);
+			prevNumber = nextPrevNumber;
+			nextPrevNumber = fibonacciNumber;
+			// System.out.println("Result=" + fibonacciNumber + ", prev=" + prevNumber + ", nextPrev=" + nextPrevNumber);
+		}
 	}
 	
 	public void calcNext() {
@@ -40,14 +39,12 @@ public class Fibonacci {
 	}
 	
 	public void calcPrev() {
-		if (fibonacciCount > 2) {
+		if (fibonacciCount > 0) {
 			BigInteger prevPrevNumber = fibonacciNumber.subtract(prevNumber);
 			fibonacciNumber = prevNumber;
 			prevNumber = prevPrevNumber;
-		}
-		
-		if (fibonacciCount > 1)
 			fibonacciCount--;
+		}
 	}
 	
 	public BigInteger getResult() {
@@ -59,11 +56,11 @@ public class Fibonacci {
 	}
 	
 	public static void main(String[] args) {
-		Fibonacci f = new Fibonacci(10);
+		Fibonacci f = new Fibonacci(0);
+		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
+		f.reCalculate(10);
 		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
 		f.calcNext();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
 		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
 		f.calcPrev();
 		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
