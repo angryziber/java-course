@@ -1,7 +1,5 @@
 package net.azib.java.students.t980814;
 
-import java.util.Date;
-
 /**
  * Dog
  * 
