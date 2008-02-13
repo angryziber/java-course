@@ -1,4 +1,4 @@
-package net.azib.java.students.t001370.homework.home1;
+package net.azib.java.students.t001370.lectures.lec1;
 
 import java.math.BigDecimal;
 
