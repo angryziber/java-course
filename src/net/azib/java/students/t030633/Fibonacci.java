@@ -14,13 +14,13 @@ public class Fibonacci {
 		BigInteger low = BigInteger.ZERO;
 		BigInteger high = BigInteger.ONE;
 
-		for (BigInteger i = BigInteger.ONE; i.compareTo(BigInteger.valueOf(100)) < 0; i = i.add(BigInteger.ONE)) {
+		for (int i = 1; i < 100; i++) {
 			high = high.add(low);
 			low = high.subtract(low);
 		}
-		
-		System.out.print(high);
-		
+
+		System.out.println(high);
+
 	}
 
 }
