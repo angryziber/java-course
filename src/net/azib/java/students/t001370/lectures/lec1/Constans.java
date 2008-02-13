@@ -1,4 +1,4 @@
-package net.azib.java.students.t001370;
+package net.azib.java.students.t001370.lectures.lec1;
 
 /**
  * Constans
