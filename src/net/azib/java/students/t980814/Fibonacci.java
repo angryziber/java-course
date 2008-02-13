@@ -56,37 +56,7 @@ public class Fibonacci {
 	}
 	
 	public static void main(String[] args) {
-		Fibonacci f = new Fibonacci(0);
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.reCalculate(10);
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcNext();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.calcPrev();
-		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
-		f.reCalculate(100);
+		Fibonacci f = new Fibonacci(100);
 		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
 	}
 }
