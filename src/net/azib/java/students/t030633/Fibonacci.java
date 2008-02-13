@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.io.*;
 
 /**
- * Fibonacci number and sequence calculator. Uses recursion.
+ * Fibonacci number and sequence calculator.
  * 
  * @author t030633
  */
@@ -23,7 +23,8 @@ public class Fibonacci {
 	public static void main(String[] args) {
 		System.out.println("Sequence starts with 0, 1, ... with 0 being the \"first\" number.");
 		fibNumber(); // Prints the n-th Fibonacci number
-		fibSequence(); // Prints Fibonacci sequence of length n
+		fibSequenceSlow(); // Prints Fibonacci sequence of length n
+		fibSequenceFast(); // - same, but faster
 	}
 
 	public static void fibNumber() { // Prints the n-th Fibonacci number
@@ -34,7 +35,8 @@ public class Fibonacci {
 		try {
 			input = BigInteger.valueOf(Integer.parseInt(br.readLine()));
 
-			// Some sequences (including this one) see 0 as the "first" Fibonacci number
+			// Some sequences (including this one) see 0 as the "first"
+			// Fibonacci number
 			if (input.compareTo(BigInteger.ZERO) == 0)
 				System.out.println("Sequence starts with the \"first\" number.");
 			else {
@@ -55,7 +57,12 @@ public class Fibonacci {
 
 	}
 
-	public static void fibSequence() { // Prints Fibonacci sequence of length n
+	/*
+	 * Prints Fibonacci sequence of length n by using the recursive function to
+	 * calculate each member. Slow, because it needs to calculate the whole
+	 * sequence again at every new member.
+	 */
+	public static void fibSequenceSlow() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		System.out.println("How many numbers in the sequence?");
@@ -65,13 +72,59 @@ public class Fibonacci {
 			input = BigInteger.valueOf(Integer.parseInt(br.readLine()));
 			System.out.println("The first " + input + " Fibonacci numbers are:");
 
-			// Some sequences (including this one) see 0 as the "first" Fibonacci number
+			// Some sequences (including this one) see 0 as the "first"
+			// Fibonacci number
 			if (input.compareTo(BigInteger.ZERO) > 0)
 				System.out.print(0);
 
 			// Print the sequence
 			for (BigInteger i = BigInteger.ZERO; i.compareTo(input.subtract(BigInteger.ONE)) < 0; i = i.add(BigInteger.ONE)) {
 				System.out.print(", " + fib(i));
+			}
+			System.out.println("");
+		}
+		catch (NumberFormatException e) {
+			System.out.println("Not a number.");
+		}
+		catch (IOException e) {
+			System.out.println("Input error.");
+		}
+
+	}
+
+	/*
+	 * Prints the Fibonacci sequence, using add/sub method. Much faster than the
+	 * recursive method.
+	 */
+	public static void fibSequenceFast() {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		System.out.println("How many numbers in the sequence?");
+
+		try {
+			// Ask for user input on sequence length
+			input = BigInteger.valueOf(Integer.parseInt(br.readLine()));
+			System.out.println("The first " + input + " Fibonacci numbers are:");
+
+			// Some sequences (including this one) see 0 as the "first"
+			// Fibonacci number
+			if (input.compareTo(BigInteger.ZERO) > 0)
+				System.out.print(0);
+
+			// Print the sequence
+			BigInteger low;
+			BigInteger high;
+			low = high = BigInteger.ONE;
+
+			if (input.compareTo(BigInteger.ONE) > 0)
+				System.out.print(", " + 1);
+			if (input.compareTo(BigInteger.valueOf(2)) > 0)
+				System.out.print(", " + 1);
+
+			for (BigInteger i = BigInteger.valueOf(2); i.compareTo(input.subtract(BigInteger.ONE)) < 0; i = i.add(BigInteger.ONE)) {
+				high = high.add(low);
+				low = high.subtract(low);
+				System.out.print(", " + high);
 			}
 			System.out.println("");
 		}
