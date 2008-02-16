@@ -1,7 +1,5 @@
 package net.azib.java.students.t020281;
 
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
