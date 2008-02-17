@@ -1,11 +1,9 @@
 package net.azib.java.lessons;
 
 import java.io.PrintStream;
-import java.math.BigInteger;
 
 /**
  * A class to show how to use <i>javadoc</i> in Java.
- *
  * @version 1.0
  * @author anton
  */
