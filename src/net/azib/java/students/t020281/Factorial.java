@@ -7,7 +7,7 @@ import java.math.BigInteger;
  *
  * @author t020281
  */
-public class factorial {
+public class Factorial {
 	
 	// Number of elements to be calculated
 	static final int NUM = 100;

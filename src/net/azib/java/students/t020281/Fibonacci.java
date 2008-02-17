@@ -7,7 +7,7 @@ import java.math.BigInteger;
  *
  * @author t020281
  */
-public class fibonacci {
+public class Fibonacci {
 	// Number of elements to be calculated
 	static final int NUM = 100;
 		
