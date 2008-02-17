@@ -9,11 +9,11 @@ public class Dog {
 	
 	String name;
 	
-	public Dog() {
+	Dog() {
 		this.name = "Unnamed";
 	}
 	
-	public Dog(String name) {
+	Dog(String name) {
 		this.name = name;
 	}
 
