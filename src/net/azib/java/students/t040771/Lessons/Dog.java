@@ -1,4 +1,4 @@
-package net.azib.java.students.t040771;
+package net.azib.java.students.t040771.Lessons;
 
 /**
  * Dog
