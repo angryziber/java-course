@@ -13,8 +13,9 @@ public class fibonacci {
 		
 		public static void main(String[] args) {
 			// BigInteger initialization
+			byte[] n0 = new byte[] {0} ;
 			byte[] n = new byte[] {1} ;	
-			BigInteger n1 = new BigInteger(n) ;
+			BigInteger n1 = new BigInteger(n0) ;
 			BigInteger n2 = new BigInteger(n);
 			// temporary value, used during swapping
 			BigInteger temp;
