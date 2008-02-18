@@ -1,4 +1,4 @@
-package net.azib.java.students.t040771.Hometasks;
+package net.azib.java.students.t040771.hometask1;
 
 import java.math.BigInteger;
 
