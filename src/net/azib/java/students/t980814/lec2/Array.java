@@ -22,7 +22,12 @@ public class Array {
 		{
 			System.out.println("Enter " + (i+1) + ". word:");
 			words[i] = scanner.next();		
-			numberOfCharacters += words[i].length();
+			//numberOfCharacters += words[i].length();
+		}
+		
+		// for-loop over array
+		for (String si: words) {
+			numberOfCharacters += si.length();
 		}
 		
 		System.out.println(words.length + " words and " + numberOfCharacters + " letters were entered.");
