@@ -1,4 +1,4 @@
-package net.azib.java.students.t980814;
+package net.azib.java.students.t980814.lec1;
 
 /**
  * Constants

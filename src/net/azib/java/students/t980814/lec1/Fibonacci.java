@@ -1,4 +1,4 @@
-package net.azib.java.students.t980814;
+package net.azib.java.students.t980814.lec1;
 
 import java.math.BigInteger;
 
@@ -13,10 +13,18 @@ public class Fibonacci {
 	BigInteger prevNumber;
 	int fibonacciCount;
 	
+	/**
+	 * Constructor, that calculates the fibonacci number
+	 * @param n
+	 */
 	Fibonacci(int n) {
 		reCalculate(n);
 	}
 	
+	/**
+	 * Calculates the new value for fibonacci number
+	 * @param n
+	 */
 	public void reCalculate(int n) {
 		BigInteger nextPrevNumber = new BigInteger("1");
 		prevNumber = BigInteger.ZERO;
@@ -31,6 +39,9 @@ public class Fibonacci {
 		}
 	}
 	
+	/**
+	 * Calculates the next fibonacci number
+	 */
 	public void calcNext() {
 		BigInteger nextPrevNumber = fibonacciNumber;
 		fibonacciNumber = fibonacciNumber.add(prevNumber);
@@ -38,6 +49,9 @@ public class Fibonacci {
 		fibonacciCount++;
 	}
 	
+    /**
+     * Calculates the previous fibonacci number 
+     */
 	public void calcPrev() {
 		if (fibonacciCount > 0) {
 			BigInteger prevPrevNumber = fibonacciNumber.subtract(prevNumber);
@@ -47,10 +61,18 @@ public class Fibonacci {
 		}
 	}
 	
+	/**
+	 * Returns the calculated fibonacci number
+	 * @return
+	 */
 	public BigInteger getResult() {
 		return fibonacciNumber;
 	}
 	
+	/**
+	 * Returns the counter that represents the calculated fibonacci number
+	 * @return
+	 */
 	public int getCounter() {
 		return fibonacciCount;
 	}
