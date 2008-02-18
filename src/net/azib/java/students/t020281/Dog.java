@@ -22,7 +22,7 @@ public class Dog {
 		
 		
 	}
-
+	
 	String getName(){
 		
 		return name;
