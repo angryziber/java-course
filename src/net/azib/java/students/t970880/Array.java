@@ -21,10 +21,12 @@ public class Array {
 		System.out.println("you entered " + i);
 		String[] strArray = new String[i];
 		int kokku = 0;
-		for (int k = 0; k < i; k++){
+		int k = 0;
+		for (String s1 : strArray){
+			
 			System.out.println("enter string number " + k);
-			strArray[k]= scanner.next();
-			kokku += strArray[k].length();
+			s1 = scanner.next();
+			kokku += s1.length();
 		}
 		System.out.println("kokku = " + kokku);
 	}
