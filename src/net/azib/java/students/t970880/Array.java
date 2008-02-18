@@ -24,7 +24,7 @@ public class Array {
 		int k = 0;
 		for (String s1 : strArray){
 			
-			System.out.println("enter string number " + k);
+			System.out.println("enter string number " + k++);
 			s1 = scanner.next();
 			kokku += s1.length();
 		}
