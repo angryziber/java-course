@@ -7,7 +7,7 @@ package net.azib.java.students.t040750;
  */
 public class Dog {
 
-	String name; 		//Main1: ei saa teha staailiseks, kuna muidu iga Dog tüüpi objekti
+	protected String name; 		//Main1: ei saa teha staailiseks, kuna muidu iga Dog tüüpi objekti
 						// muutuja name kirjutatakse ühte ja samasse mäluauku, st iga objekti puhul
 						// omab name seda väärtust, mis viimane objekt talle andis
 	
@@ -18,19 +18,13 @@ public class Dog {
 		this.name = name;
 	}
 
-	/**
-	 * 
-	 */
-	public Dog() {
-		this.name = "Unknown";
-	}
 
-	String getName() {
-		/*
-		final String newName = "";
+	public String getName() {
+		
+		final String newName = "Mega" + name;
 		return newName;
-		*/
-		return name;
+		
+		//return name;
 	}
 	/* Main1 
 	public static void main(String[] args) {
@@ -44,12 +38,18 @@ public class Dog {
 	}
 	*/
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Bulldog: " + getName();
+	}
+	
 	public static void main(String[] args) {
 		Dog a = new Dog("Sharik");
 		Dog b = new Dog("Tuzik");
 		
-		Dog c = new Dog();
-		
-		System.out.println("I have 3 dogs: " + a.getName() + ", " + b.getName() + " and " + c.getName());
+		System.out.println("I have 2 dogs: " + a.getName() + ", " + b.getName());
 	}
 }
