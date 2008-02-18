@@ -1,4 +1,4 @@
-package net.azib.java.students.t040771.lessons1;
+package net.azib.java.students.t040771.lessons;
 
 
 import java.util.Date; //Ctrl+1
