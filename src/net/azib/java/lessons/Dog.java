@@ -7,28 +7,22 @@ package net.azib.java.lessons;
  */
 public class Dog {
 	
-	String name;
-	
-	Dog() {
-		this.name = "Unnamed";
-	}
+	protected String name;
 	
 	Dog(String name) {
+		super();
 		this.name = name;
 	}
 
-	String getName() {
+	public String getName() {
 		final String newName = "Mega" + name;
 		return newName;
 	}
 	
-	public static void main(String[] args) {
-		Dog a = new Dog("Sharik");
-		Dog b = new Dog("Tuzik");
-		Dog c = new Dog();
-		
-		System.out.println("I have two three: " + 
-				a.getName() + ", " + b.getName() + " and " + c.getName());
+	@Override
+	public final String toString() {
+		return "Dog: " + getName(); 
 	}
 
+	
 }
