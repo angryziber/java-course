@@ -10,15 +10,25 @@ import java.util.Scanner;
 public class Array {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		int 	nofSymbol = 0;
+		int 	nofSymbol1 = 0;
+		int 	nofSymbol2 = 0;
 		int 	nofStrings;
 		
 		System.out.print("Enter n: ");
 		nofStrings = scanner.nextInt();
+
+		String[] words = new String[nofStrings];
 		
 		for (int i = 0; i < nofStrings; i++) {
-			nofSymbol += scanner.next().length();
+			words[i] = scanner.next();
+			
+			nofSymbol1 += words[i].length();
 		}
-		System.out.println("No. of chars in strings: " + nofSymbol);
+		
+		for (String string : words) {
+			nofSymbol2 += string.length();
+		}
+		System.out.println("No. of chars in chars1: " + nofSymbol1);
+		System.out.println("No. of chars in chars2: " + nofSymbol2);
 	}
 }
