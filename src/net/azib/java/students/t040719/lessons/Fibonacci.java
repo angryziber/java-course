@@ -15,7 +15,11 @@ public class Fibonacci {
 	      fibCache.add(BigInteger.ZERO);
 	      fibCache.add(BigInteger.ONE);
 	}
-	
+	/**
+	 * Prints out n Fibonacci numbers
+	 * @param n
+	 * @return
+	 */
 	public String getFiboList(int n){
 		String result = new String();
 		for(int i=0; i<n; i++){

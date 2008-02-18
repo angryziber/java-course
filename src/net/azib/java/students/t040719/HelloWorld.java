@@ -18,5 +18,10 @@ public class HelloWorld {
 		long l = 0L;
 		Integer i = Integer.parseInt("5");
 		System.out.println(bb);
+		
+		Dog ad = new Dog("blinn"); //polümorfism
+		Dog bd = new Buldog("blinn");
+		Object cd = new Buldog("blinn"); //polümorfims
+		System.out.println("I have 2 dogs: " + ad + ", " + bd + ", " + cd);
 	}
 }
