@@ -7,6 +7,8 @@ package net.azib.java.students.t040719.lessons;
  */
 public class Cow extends Animal {
 	private int dailyMilkProduction;
+	public final static int MIN_PRODUCTION = 0;
+	public final static int MAX_PRODUCTION = 40;
 	
 	public Cow() {
 		dailyMilkProduction = calcRndMilkProduction();
@@ -15,25 +17,24 @@ public class Cow extends Animal {
 	
 	public Cow(String name, String breed, int age, int milkProduction) {
 		super(name,breed,age,"Cow");
-		dailyMilkProduction = milkProduction;
+		dailyMilkProduction = (milkProduction <= MAX_PRODUCTION && milkProduction >= MIN_PRODUCTION)? milkProduction : calcRndMilkProduction();
 	}
 	
 	public Cow(String name, String breed, int age) {
 		super(name,breed,age,"Cow");
 		dailyMilkProduction = calcRndMilkProduction();
-		
 	}
 	
 	public int getDailyMilkProduction(){
 		return dailyMilkProduction;
 	}
 	
-	public double milkTheCow(){
-		return (Math.random()*(dailyMilkProduction - 6) + 6);
+	public float milkTheCow(){
+		return (float)Math.random()*dailyMilkProduction;
 	}
 	
 	private int calcRndMilkProduction(){
-		return (int)Math.round(Math.random()*14 +6);
+		return (int)Math.round(Math.random()*14 + 6);
 	}
 	/* (non-Javadoc)
 	 * @see net.azib.java.students.t040719.lessons.Animal#makeSound()

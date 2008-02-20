@@ -18,6 +18,11 @@ public class Cock extends Animal {
 	public Cock(String name, String breed, int age) {
 		super(name,breed,age,"Cock");
 	}
+
+	public Cock(String name, String breed, int age, int numCrows) {
+		super(name,breed,age,"Cock");
+		this.numberOfCrows = (numCrows >= 0) ? numCrows : 0;
+	}
 	
 	public int getCrowsCount(){
 		return numberOfCrows;

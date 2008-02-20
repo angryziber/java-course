@@ -7,20 +7,21 @@ package net.azib.java.students.t040719.lessons;
  */
 public class Cat extends Animal {
 	private int lives;
+	public final static int MAX_LIVES = 9;
 
 	public Cat() {
 		species = "Cat";
-		lives = 9;
+		lives = MAX_LIVES;
 	}
 	
 	public Cat(String name, String breed, int age) {
 		super(name,breed,age,"Cat");
-		this.lives = 9;
+		this.lives = MAX_LIVES;
 	}
 
 	public Cat(String name, String breed, int age, int lives) {
 		super(name,breed,age,"Cat");
-		this.lives = lives;
+		this.lives = (lives >= 0 && lives <= MAX_LIVES)? lives: MAX_LIVES;
 	}
 
 	/* (non-Javadoc)

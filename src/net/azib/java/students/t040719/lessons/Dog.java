@@ -7,6 +7,8 @@ package net.azib.java.students.t040719.lessons;
  */
 public class Dog extends Animal {
 	private int barkingLoudness;
+	public final static int MAX_LOUDNESS = 90;
+	public final static int MIN_LOUDNESS = 0;
 	/**
 	 * 
 	 */
@@ -22,7 +24,7 @@ public class Dog extends Animal {
 
 	public Dog(String name, String breed, int age, int loudness) {
 		super(name,breed,age,"Dog");
-		this.barkingLoudness = loudness;
+		this.barkingLoudness = (loudness >= MIN_LOUDNESS && loudness <= MAX_LOUDNESS)? loudness : calcRndLoudness();
 	}
 	
 	private int calcRndLoudness(){
@@ -34,7 +36,7 @@ public class Dog extends Animal {
 	}
 	
 	public boolean changeBarkingLoudness(int loudnessInDB){
-		if (loudnessInDB < 100 && loudnessInDB > 0){
+		if (loudnessInDB <= MAX_LOUDNESS && loudnessInDB >= MIN_LOUDNESS){
 			barkingLoudness = loudnessInDB;
 			return true;
 		}
