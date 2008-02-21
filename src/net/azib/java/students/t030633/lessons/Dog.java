@@ -14,7 +14,6 @@ public class Dog {
 	}
 
 	Dog(String name) {
-		// TODO Auto-generated constructor stub
 		this.name = name;
 	}
 
@@ -30,7 +29,6 @@ public class Dog {
 	 */
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Dog " + name;
 	}
 

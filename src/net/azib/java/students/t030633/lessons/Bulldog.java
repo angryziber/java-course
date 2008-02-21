@@ -7,7 +7,8 @@ package net.azib.java.students.t030633.lessons;
  */
 public class Bulldog extends Dog {
 
-	Bulldog() {}
+	Bulldog() {
+	}
 
 	Bulldog(String name) {
 		super(name); // passes name to Dog
@@ -20,7 +21,6 @@ public class Bulldog extends Dog {
 	 */
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Bulldog " + name;
 	}
 
