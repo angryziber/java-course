@@ -72,12 +72,6 @@ public class AnimalPen {
 
 	}
 
-	public void nameAnimals() {
-		for (int i = 0; i < animals.length; i++) {
-			// 
-		}
-	}
-
 	public static void main(String[] args) {
 		
 		AnimalPen pen = new AnimalPen();
