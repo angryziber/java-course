@@ -15,12 +15,10 @@ public class AnimalHandler {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 		int i = 0;
 
 		System.out.println("Animals in array:");
 		System.out.println("-----------------------------------");
-		i = 0;
 		for (Animal animal: animalArray) {
 			System.out.println(++i + " - " + animal);
 			System.out.print(animal.getName() + " is making sound like: ");

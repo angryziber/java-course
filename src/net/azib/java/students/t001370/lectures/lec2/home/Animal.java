@@ -102,7 +102,7 @@ public abstract class Animal {
 		
 		returnString = "Animal name is: " + animalName + "\n";
 		if (animalBirthDate != null) {
-			returnString += animalName + "'s birth day is on: " + 
+			returnString += animalName + "'s birth day is on " + 
 								dateFormat.format(animalBirthDate) + "\n" +  
 			   				animalName + " is " + getAge() + " years old";
 		}

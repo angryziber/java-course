@@ -6,6 +6,7 @@ package net.azib.java.students.t001370.lectures.lec2.home;
  * @author maksim
  */
 public class Cow extends Animal{
+	
 	Cow(String name){
 		super(name);
 	}
