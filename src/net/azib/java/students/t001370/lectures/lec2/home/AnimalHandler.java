@@ -23,6 +23,8 @@ public class AnimalHandler {
 		i = 0;
 		for (Animal animal: animalArray) {
 			System.out.println(++i + " - " + animal);
+			System.out.print(animal.getName() + " is making sound like: ");
+			animal.makeSound();
 			System.out.println("-----------------------------------");
 		}
 	}

@@ -14,6 +14,6 @@ public class Cow extends Animal{
 	}
 
 	void makeSound(){
-		System.out.println("Muuuuu!");
+		System.out.println("\"Muuuuu!\"");
 	}
 }

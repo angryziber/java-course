@@ -15,6 +15,6 @@ public class Cat extends Animal{
 	}
 	
 	void makeSound(){
-		System.out.println("Mijau!");
+		System.out.println("\"Mijau!\"");
 	}
 }

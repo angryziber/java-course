@@ -14,6 +14,6 @@ public class Cock extends Animal{
 	}
 	
 	void makeSound(){
-		System.out.println("Kukareku!");
+		System.out.println("\"Kukareku!\"");
 	}
 }
