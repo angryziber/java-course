@@ -8,6 +8,7 @@ package net.azib.java.students.t040719.lessons;
 public abstract class Animal {
 	protected String name;
 	protected String breed;
+	// TODO: remove this as getClass() method will return the actuall type
 	protected String species;
 	protected int age;
 	public abstract void makeSound();
