@@ -19,7 +19,7 @@ public class MyArray {
 			yourInput[a] = scanner.next();		
 		}		
 		
-		//for each
+		//for each loop
 		for (String a : yourInput){
 			result += a.length();
 		}
