@@ -8,7 +8,7 @@ import java.math.BigInteger;
  * @author t072073
  */
 public class Factorial {
-	static int LAST_VALUE = 20;
+	static int LAST_VALUE = 100;
 	private static BigInteger factorial = BigInteger.ONE;
 	
 	public static void main(String[] args) {
