@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
  * @author maksim
  */
 public abstract class Animal {
+	// TODO: it is a bad idea to use String-representation for Dates
 	DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	private String animalName;
 	private Date   animalBirthDate;
