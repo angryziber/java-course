@@ -67,7 +67,7 @@ public class AnimalPen {
 
 		for (Animal a : animals) {
 			if (a != null)
-				System.out.println(a.toString());
+				System.out.println(a);
 		}
 
 	}
