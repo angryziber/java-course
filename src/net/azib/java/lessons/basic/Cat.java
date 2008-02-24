@@ -1,22 +1,22 @@
 package net.azib.java.lessons.basic;
 
 /**
- * Dog
+ * Cat
  *
  * @author anton
  */
-public class Dog extends Animal {
+public class Cat extends Animal {
 
-	public Dog(String name) {
+	public Cat(String name) {
 		super(name);
 	}
 
-	public Dog(String name, byte age) {
+	public Cat(String name, byte age) {
 		super(name, age);
 	}
-
+	
 	@Override
 	public void makeSound() {
-		System.out.println("Woof-woof!");
+		System.out.println("Meow!");
 	}
 }

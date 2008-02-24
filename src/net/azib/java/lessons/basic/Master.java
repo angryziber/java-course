@@ -1,16 +1,16 @@
 package net.azib.java.lessons.basic;
 
 /**
- * Master
+ * Master - the keeper of {@link Animal}s.
  *
  * @author anton
  */
 public class Master {
 	public static void main(String[] args) {
 		Object a = new Dog("Sharik");
-		Object b = new Bulldog("Tuzik");
+		Object b = new Cat("Murzik");
 		
-		System.out.println("I have two:\n" + a + " and\n" + b);
+		System.out.println("I have two animals:\n" + a + " and\n" + b);
 	}
 
 }
