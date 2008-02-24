@@ -1,4 +1,4 @@
-package net.azib.java.lessons;
+package net.azib.java.lessons.basic;
 
 import java.io.PrintStream;
 
