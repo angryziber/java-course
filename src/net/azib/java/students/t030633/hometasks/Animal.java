@@ -8,11 +8,10 @@ package net.azib.java.students.t030633.hometasks;
 abstract public class Animal {
 
 	protected String name, species;
-	protected int age;
+	protected Integer age;
 
 	Animal() {
 		name = "Noname";
-		age = -1; // -1 indicates uninitialized age
 	}
 
 	Animal(String setname, int setage) {
