@@ -2,6 +2,7 @@ package net.azib.java.students.t001370.lectures.lec3;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -35,6 +36,8 @@ public class CollectionsDemo {
 		c.add("789");
 		c.add("000");
 		c.add(1, "zzz");
+		
+		c = Collections.unmodifiableList(c);
 
 		System.out.println(c.size());
 		
