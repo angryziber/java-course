@@ -18,8 +18,8 @@ public class Rabbit extends Animal {
 		System.out.println("What's up, Doc?");
 	}	
 	
+	@Override
 	void action() {
 		System.out.println("Run really fast");
 	}
-
 }

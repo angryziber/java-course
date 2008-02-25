@@ -29,5 +29,18 @@ public class AnimalTrainer {
 			a.makeSound();
 			a.action();
 		}
+		
+		try {
+			Animal x = (Animal)animals[4].clone();
+			System.out.println(x);
+		}
+		catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println(animals[4].compareTo(animals[1]));
+		System.out.println(animals[1].compareTo(animals[4]));
+		
 	}
 }

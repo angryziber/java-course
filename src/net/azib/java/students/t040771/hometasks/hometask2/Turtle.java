@@ -18,6 +18,7 @@ public class Turtle extends Animal {
 		System.out.println("...");
 	}
 	
+	@Override
 	void action() {
 		System.out.println("Ninja");
 	}
