@@ -5,9 +5,10 @@ package net.azib.java.students.t030633.hometasks;
  * 
  * @author t030633
  */
-abstract public class Animal {
 
-	protected String name, species;
+abstract public class Animal implements Comparable<Animal>, Cloneable {
+
+	protected String name;
 	protected Integer age;
 
 	Animal() {
@@ -19,18 +20,58 @@ abstract public class Animal {
 		age = setage;
 	}
 
+	public int compareTo(Animal that) {
+		// age is a primitive type
+		// to make auto-boxing work we have to wrap age
+		// into an object
+		return new Integer(age).compareTo((int) that.age);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object that) {
+		if (that instanceof Animal)
+			return this.name.equals(((Animal) that).name);
+		else
+			return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+
 	public int getAge() {
 		return age;
 	}
 
 	protected String getName() {
-		return species + ": " + name;
+		return getClass().getSimpleName() + ": " + name;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#clone()
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 	protected abstract String makeSound();
 
 	public String toString() {
-		return "I am a " + species + ", my name is " + name + " and i go: " + makeSound();
+		return "I am a " + getClass().getSimpleName() + ", my name is " + name + " and i go: " + makeSound();
 	}
 
 }

@@ -8,12 +8,10 @@ package net.azib.java.students.t030633.hometasks;
 public class Cat extends Animal {
 
 	Cat() {
-		species = "Cat";
 	}
-	
+
 	Cat(String name, int age) {
 		super(name, age);
-		species = "Cat";
 	}
 
 	/*

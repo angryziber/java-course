@@ -8,12 +8,10 @@ package net.azib.java.students.t030633.hometasks;
 public class Horse extends Animal {
 
 	Horse() {
-		species = "Horse";
 	}
 
 	Horse(String name, int age) {
 		super(name, age);
-		species = "Horse";
 	}
 
 	/*

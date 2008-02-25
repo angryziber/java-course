@@ -8,12 +8,10 @@ package net.azib.java.students.t030633.hometasks;
 public class Dog extends Animal {
 
 	Dog() {
-		species = "Dog";
 	}
-	
+
 	Dog(String name, int age) {
 		super(name, age);
-		species = "Dog";
 	}
 
 	/*
@@ -25,4 +23,5 @@ public class Dog extends Animal {
 	public String makeSound() {
 		return "Woof!";
 	}
+
 }

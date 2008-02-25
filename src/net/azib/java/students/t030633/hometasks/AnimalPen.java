@@ -37,24 +37,32 @@ public class AnimalPen {
 
 		for (int i = 0; i < animals.length; i++) {
 
-			System.out.print("Give it a name: ");
-			name = scanner.next();
-			System.out.print("Determine age: ");
-			age = scanner.nextInt();
-			System.out.print("What is it? 1) Dog 2) Cat 3) Horse ");
+			try {
+				System.out.print("Give it a name: ");
+				name = scanner.next();
 
-			switch (scanner.nextInt()) {
-			case 1:
-				animals[i] = new Dog(name, age);
-				break;
-			case 2:
-				animals[i] = new Cat(name, age);
-				break;
-			case 3:
-				animals[i] = new Horse(name, age);
-				break;
-			default:
-				break;
+				System.out.print("Determine age: ");
+				age = scanner.nextInt();
+
+				System.out.print("What is it? 1) Dog 2) Cat 3) Horse ");
+
+				switch (scanner.nextInt()) {
+				case 1:
+					animals[i] = new Dog(name, age);
+					break;
+				case 2:
+					animals[i] = new Cat(name, age);
+					break;
+				case 3:
+					animals[i] = new Horse(name, age);
+					break;
+				default:
+					break;
+				}
+			}
+
+			catch (Exception e) {
+				System.out.println("Animal ran away");
 			}
 
 		}
@@ -73,11 +81,34 @@ public class AnimalPen {
 	}
 
 	public static void main(String[] args) {
-		
-		AnimalPen pen = new AnimalPen();
 
-		pen.catchAnimals();
-		pen.callAnimals();
+		// AnimalPen pen = new AnimalPen(2);
+
+		// pen.catchAnimals();
+		// pen.callAnimals();
+
+		Animal a = new Dog("Nimi", 2);
+		Animal b = new Cat("Nimi", 3);
+
+		System.out.println(a.compareTo(b));
+		System.out.println(b.compareTo(a));
+
+		// Cloneable c = a;
+		// System.out.println(c);
+
+		try {
+			Animal d = (Animal) a.clone();
+			d = null;
+			System.out.println(d);
+			System.out.println(d.compareTo(a));
+		}
+		catch (CloneNotSupportedException e) {
+			System.out.println("Clone bug");
+		}
+		catch (NullPointerException e) {
+			// e.printStackTrace();
+			System.out.println("Null");
+		}
 
 	}
 }
