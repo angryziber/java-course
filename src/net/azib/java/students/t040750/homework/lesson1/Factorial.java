@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750.homework;
+package net.azib.java.students.t040750.homework.lesson1;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
