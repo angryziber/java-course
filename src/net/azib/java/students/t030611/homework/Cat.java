@@ -10,7 +10,6 @@ public class Cat extends Animal {
 
 	/** @Override */
 	String getVoice() {
-		// TODO Auto-generated method stub
 		return "mjau!";
 	}
 
@@ -27,6 +26,6 @@ public class Cat extends Animal {
 
 	/** @Override */
 	public String toString() {
-		return "My cat: breed: " + getBreed() + ", name: " + getName() + ", age" + getAge()+", says " + getVoice();
+		return "My " +getClass().getName()+ ": breed: " + getBreed() + ", name: " + getName() + ", age" + getAge()+", says " + getVoice();
 	}
 }
