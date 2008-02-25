@@ -5,7 +5,7 @@ package net.azib.java.students.t040719.lessons;
  *
  * @author Romi
  */
-public abstract class Animal {
+public abstract class Animal implements Cloneable {
 	protected String name;
 	protected String breed;
 	// TODO: remove this as getClass() method will return the actuall type
@@ -45,10 +45,38 @@ public abstract class Animal {
 	@Override
 	public String toString() {
 		String str = "Animal: " + species;
-		str += "\nBreed: " + breed;
+		str += "\nBreed: " + getClass().getSimpleName();
 		str += "\nName: " + name;
 		str += "\nAge: " + age;
 		return  str;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object that) {
+		if (that instanceof Animal) 
+			return this.name.equals(((Animal)that).name);			
+		else
+			return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+	
 
 }
