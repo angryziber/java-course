@@ -7,25 +7,15 @@ import java.text.SimpleDateFormat;
 
 /**
  * Animal
- * Hometask: Create an abstract class Animal with 
- * common fields and methods for all animals, like 
- * name and age. Make some abstract methods as well, 
- * like makeSound(). Implement a few concrete animal 
- * types by extending the Animal, like Dog, Cat, 
- * Cock, Cow, etc. Make sure each of them has some 
- * distinct properties as well as common ones inherited 
- * from Animal. Implement toString(). 
- * Create an Animal[] array, fill it with different 
- * animals, and output them to the screen using 
- * 'for each' loop.
  *
  * @author maksim
  */
-public abstract class Animal {
+public abstract class Animal implements Comparable<Animal>, Cloneable {
 	// TODO: it is a bad idea to use String-representation for Dates
 	DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	private String animalName;
 	private Date   animalBirthDate;
+	private int age;
 	
 	/**
 	 * Class Animal constructor
@@ -70,7 +60,7 @@ public abstract class Animal {
         Date now = new Date();
 		int animalAge = 0;
         
-		animalAge = now.getYear() - animalBirthDate.getYear();
+		age = animalAge = now.getYear() - animalBirthDate.getYear();
 		
 		return animalAge;
 	}
@@ -95,13 +85,19 @@ public abstract class Animal {
 	 */
 	abstract void makeSound();
 	
+	
+	
+	public int compareTo(Animal that) {
+		return new Integer(age).compareTo(that.age);
+	}
+
 	/**
 	 * Returns information about the animal
 	 */
 	public final String toString(){
 		String returnString = "";
 		
-		returnString = "Animal name is: " + animalName + "\n";
+		returnString = getClass().getSimpleName() + " name is: " + animalName + "\n";
 		if (animalBirthDate != null) {
 			returnString += animalName + "'s birth day is on " + 
 								dateFormat.format(animalBirthDate) + "\n" +  
@@ -110,4 +106,26 @@ public abstract class Animal {
 		return returnString;
 	}
 
+	/*alt+shift+s */
+	@Override
+	public boolean equals(Object that) {
+		if (that instanceof Animal)
+			return this.animalName.equals(((Animal)that).animalName);
+		else
+			return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return animalName.hashCode();
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+	
+	
+	
+	//getClass.getSimpleName(); väljastab classi nime
 }

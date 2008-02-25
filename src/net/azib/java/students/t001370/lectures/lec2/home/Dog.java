@@ -19,4 +19,5 @@ public class Dog extends Animal{
 		System.out.println("\"Gaf-Gaf!\"");
 	}
 	
+	
 }
