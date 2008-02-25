@@ -1,5 +1,7 @@
 package net.azib.java.students.t980814.lec2;
 
+import java.util.Date;
+
 /**
  * Turtle
  *
@@ -7,8 +9,8 @@ package net.azib.java.students.t980814.lec2;
  */
 public class Turtle extends Animal {
 	
-	Turtle(String name, int age) {
-		super(name, age, false);		
+	Turtle(String name, Date birthDay) {
+		super(name, birthDay, false);		
 	}
 
 	public void makeSound() {
@@ -16,6 +18,6 @@ public class Turtle extends Animal {
 	}
 	
 	public String toString() {
-		return "Turtle " + name;
+		return "Turtle " + super.toString();
 	}
 }

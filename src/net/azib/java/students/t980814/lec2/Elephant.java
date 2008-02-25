@@ -1,5 +1,7 @@
 package net.azib.java.students.t980814.lec2;
 
+import java.util.Date;
+
 /**
  * Elephant
  *
@@ -7,8 +9,10 @@ package net.azib.java.students.t980814.lec2;
  */
 public class Elephant extends Animal {
 
-	public Elephant(String name, int age) {
-		super(name, age, false);
+	protected String origin;
+	
+	public Elephant(String name, Date birthDay) {
+		super(name, birthDay, false);
 	}
 	
 	public void makeSound() {
@@ -16,6 +20,6 @@ public class Elephant extends Animal {
 	}
 	
 	public String toString() {
-		return "Elephant " + name;
+		return "Elephant " + super.toString();
 	}
 }

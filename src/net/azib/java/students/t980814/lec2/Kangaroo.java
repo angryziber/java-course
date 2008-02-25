@@ -1,5 +1,7 @@
 package net.azib.java.students.t980814.lec2;
 
+import java.util.Date;
+
 /**
  * Kangaroo
  *
@@ -7,8 +9,8 @@ package net.azib.java.students.t980814.lec2;
  */
 public class Kangaroo extends Animal {
 
-	Kangaroo(String name, int age) {
-		super(name, age, true);		
+	Kangaroo(String name, Date birthDay) {
+		super(name, birthDay, true);		
 	}
 
 	public void makeSound() {
@@ -16,6 +18,6 @@ public class Kangaroo extends Animal {
 	}
 	
 	public String toString() {
-		return "Kangaroo " + name;
+		return "Kangaroo " + super.toString();
 	}
 }
