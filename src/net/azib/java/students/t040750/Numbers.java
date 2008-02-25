@@ -1,6 +1,5 @@
 package net.azib.java.students.t040750;
 
-import java.io.PrintStream;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;

@@ -13,7 +13,7 @@ public class Chicken extends Animal {
 	 * @param age
 	 * @param color
 	 */
-	public Chicken(String name, String age, String color) {
+	public Chicken(String name, byte age, String color) {
 		super(name, age, color);
 	}
 
@@ -24,10 +24,5 @@ public class Chicken extends Animal {
 	
 	public void layEgg() {
 		System.out.println("I just layed an egg!");
-	}
-
-	@Override
-	public String toString() {
-		return "I am a chicken and my feathers are " + getColor();
 	}
 }

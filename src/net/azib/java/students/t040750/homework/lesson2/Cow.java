@@ -13,7 +13,7 @@ public class Cow extends Animal {
 	 * @param age
 	 * @param color
 	 */
-	public Cow(String name, String age, String color) {
+	public Cow(String name, byte age, String color) {
 		super(name, age, color);
 	}
 
@@ -24,12 +24,5 @@ public class Cow extends Animal {
 	
 	public void giveMilk() {
 		System.out.println("I just gave milk!");
-	}
-
-	@Override
-	public String toString() {
-		return "I am a cow named " + getName() + " and I am " + getAge() + " years old";
-	}
-	
-	
+	}	
 }

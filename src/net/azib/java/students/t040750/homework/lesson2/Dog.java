@@ -15,7 +15,7 @@ public class Dog extends Animal {
 	 * @param age
 	 * @param color
 	 */
-	public Dog(String name, String age, String color) {
+	public Dog(String name, byte age, String color) {
 		super(name, age, color);
 	}
 
@@ -27,11 +27,4 @@ public class Dog extends Animal {
 	public void wagTail() {
 		System.out.println("Look, I'm wagging my tail!");
 	}
-
-	@Override
-	public String toString() {
-		return "I am a dog named " + getName();
-	}
-	
-	
 }
