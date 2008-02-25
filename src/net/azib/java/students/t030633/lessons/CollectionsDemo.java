@@ -1,11 +1,8 @@
 package net.azib.java.students.t030633.lessons;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
-
-import antlr.collections.List;
 
 /**
  * CollectionsDemo
