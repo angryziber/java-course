@@ -11,8 +11,7 @@ import java.text.SimpleDateFormat;
  * @author maksim
  */
 public abstract class Animal implements Comparable<Animal>, Cloneable {
-	// TODO: it is a bad idea to use String-representation for Dates
-	DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	private DateFormat dateFormat = new SimpleDateFormat().getDateInstance();
 	private String animalName;
 	private Date   animalBirthDate;
 	private int age;
@@ -30,7 +29,7 @@ public abstract class Animal implements Comparable<Animal>, Cloneable {
 	 * Class Animal constructor
 	 * 
 	 * @param name - animal name
-	 * @param birthDay - animal birth date (format: "dd.MM.yyyy")
+	 * @param birthDay - animal birth date 
 	 */
 	Animal(String name, String birthDay){
 		animalName = name;
@@ -68,9 +67,9 @@ public abstract class Animal implements Comparable<Animal>, Cloneable {
 	/**
 	 * Gives the possibility to set animal birth date if 
 	 * it wasn't set by constructor
-	 * @param birthDay animal birth date (format: "dd.MM.yyyy")
+	 * @param birthDay animal birth date
 	 */
-	void setAge(String birthDay){
+	void setBirthDay(String birthDay){
 		try {
 			Date date = dateFormat.parse(birthDay);
 			animalBirthDate = date;
@@ -91,16 +90,15 @@ public abstract class Animal implements Comparable<Animal>, Cloneable {
 		return new Integer(age).compareTo(that.age);
 	}
 
-	/**
-	 * Returns information about the animal
-	 */
-	public final String toString(){
+	
+	@Override
+	public String toString() {
 		String returnString = "";
 		
 		returnString = getClass().getSimpleName() + " name is: " + animalName + "\n";
 		if (animalBirthDate != null) {
 			returnString += animalName + "'s birth day is on " + 
-								dateFormat.format(animalBirthDate) + "\n" +  
+								dateFormat.format(animalBirthDate) + "\n" +
 			   				animalName + " is " + getAge() + " years old";
 		}
 		return returnString;

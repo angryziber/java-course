@@ -27,47 +27,48 @@ public class AnimalHandler {
 		}
 
 		
-		Animal a = new Dog("Sharik");
-		Animal b = new Cat("Tuzik");
-		System.out.println(a.compareTo(b));
+//		Animal a = new Dog("Sharik");
+//		Animal b = new Cat("Tuzik");
+//		System.out.println(a.compareTo(b));
 
 		
-		System.out.println("-----------------------------------");
-		/*Cloneable c = a;
-		System.out.println(a);
-		System.out.println(c);*/
+		
+//		System.out.println("-----------------------------------");
+//		/*Cloneable c = a;
+//		System.out.println(a);
+//		System.out.println(c);*/
 		
 		
-		System.out.println("-----------------------------------");
-		Dog d = (Dog)a;
-		System.out.println(d);
-		System.out.println(((Cat)b).getName());
-		a.makeSound();
-		b.makeSound();
+//		System.out.println("-----------------------------------");
+//		Dog d = (Dog)a;
+//		System.out.println(d);
+//		System.out.println(((Cat)b).getName());
+//		a.makeSound();
+//		b.makeSound();
 
-		System.out.println("-----------------------------------");
-		System.out.println(a.equals(a));
+//		System.out.println("-----------------------------------");
+//		System.out.println(a.equals(a));
 		
-		Exception e2 = new Exception();
-		try{
-			Animal e = (Animal)a.clone();
-			e = null;
-			System.out.println(e);
-			System.out.println(e.equals(a));
-		}
-		catch (Exception e){
-			System.out.println("Unknown error: " + e);
-		}
-		finally{
-			//System.out.println("finally");
-			e2.printStackTrace();
-		}
-		/*catch (CloneNotSupportedException e){
-			System.out.println("Can't clone ...");
-		}
-		catch (NullPointerException e){
-			e.printStackTrace();
-		}*/
+//		Exception e2 = new Exception();
+//		try{
+//			Animal e = (Animal)a.clone();
+//			e = null;
+//			System.out.println(e);
+//			System.out.println(e.equals(a));
+//		}
+//		catch (Exception e){
+//			System.out.println("Unknown error: " + e);
+//		}
+//		finally{
+//			//System.out.println("finally");
+//			e2.printStackTrace();
+//		}
+//		/*catch (CloneNotSupportedException e){
+//			System.out.println("Can't clone ...");
+//		}
+//		catch (NullPointerException e){
+//			e.printStackTrace();
+//		}*/
 		
 	}
 }
