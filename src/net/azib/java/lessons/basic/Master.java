@@ -7,10 +7,29 @@ package net.azib.java.lessons.basic;
  */
 public class Master {
 	public static void main(String[] args) {
-		Object a = new Dog("Sharik");
-		Object b = new Cat("Murzik");
+		Animal a = new Dog("Sharik");
+		Animal b = new Cat("Murzik");
+		
+		a.growUp();
 		
 		System.out.println("I have two animals:\n" + a + " and\n" + b);
+		
+		a.makeSound();
+		b.makeSound();
+				
+		try {
+			Animal c = (Animal) a.clone();
+			c = null;
+			System.out.println(c);
+			System.out.println(c.equals(a));
+		}
+		catch (CloneNotSupportedException e) {
+			
+		}
+		finally {
+			
+		}
+			
 	}
 
 }
