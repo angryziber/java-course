@@ -10,18 +10,13 @@ public class Cow extends Animal {
 	public final static int MIN_PRODUCTION = 0;
 	public final static int MAX_PRODUCTION = 40;
 	
-	public Cow() {
-		dailyMilkProduction = calcRndMilkProduction();
-		species = "Cow";
-	}
-	
 	public Cow(String name, String breed, int age, int milkProduction) {
-		super(name,breed,age,"Cow");
+		super(name,breed,age);
 		dailyMilkProduction = (milkProduction <= MAX_PRODUCTION && milkProduction >= MIN_PRODUCTION)? milkProduction : calcRndMilkProduction();
 	}
 	
 	public Cow(String name, String breed, int age) {
-		super(name,breed,age,"Cow");
+		super(name,breed,age);
 		dailyMilkProduction = calcRndMilkProduction();
 	}
 	

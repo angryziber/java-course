@@ -8,19 +8,13 @@ package net.azib.java.students.t040719.lessons;
 public abstract class Animal implements Cloneable {
 	protected String name;
 	protected String breed;
-	// TODO: remove this as getClass() method will return the actuall type
-	protected String species;
 	protected int age;
 	public abstract void makeSound();
 	
-	/**
-	 * 
-	 */
-	public Animal(String name, String breed, int age, String animalSpecies) {
+	public Animal(String name, String breed, int age) {
 		this.breed = breed;
 		this.name = name;
 		this.age = age;
-		this.species = animalSpecies;
 	}
 	
 	public Animal() {
@@ -32,7 +26,7 @@ public abstract class Animal implements Cloneable {
 	}
 	
 	public String getSpecies(){
-		return species;
+		return getClass().getSimpleName();
 	}
 
 	public String getBreed(){
@@ -44,7 +38,7 @@ public abstract class Animal implements Cloneable {
 	 */
 	@Override
 	public String toString() {
-		String str = "Animal: " + species;
+		String str = "Animal: " + getSpecies();
 		str += "\nBreed: " + getClass().getSimpleName();
 		str += "\nName: " + name;
 		str += "\nAge: " + age;
@@ -74,7 +68,7 @@ public abstract class Animal implements Cloneable {
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 	
