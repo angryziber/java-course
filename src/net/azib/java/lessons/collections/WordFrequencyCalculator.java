@@ -14,6 +14,6 @@ public interface WordFrequencyCalculator {
 	 * @param text the text to analyze
 	 * @return a Map, where keys are words and values are number of occurrences 
 	 */
-	Map<String, Integer> calculateFrequenciesOf(String text);
+	Map calculateFrequenciesOf(String text);
 
 }
