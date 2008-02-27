@@ -26,7 +26,7 @@ public class CollectionsDemo {
 		//c.add(1,"adasd");
 		
 		//teeb listi immutableks, ehk ple võimalik enam muuta
-		c=Collections.unmodifiableList(c); 
+		c = Collections.unmodifiableCollection(c); 
 		
 		System.out.println(c.size());
 		for (Object o : c){
