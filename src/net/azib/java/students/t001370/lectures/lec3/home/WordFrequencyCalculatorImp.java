@@ -4,6 +4,7 @@ import net.azib.java.lessons.collections.WordFrequencyCalculator;
 
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * WordFrequencyCalculator
  *
@@ -11,20 +12,42 @@ import java.util.Map;
  */
 public class WordFrequencyCalculatorImp implements WordFrequencyCalculator{
 
-	public Map calculateFrequenciesOf(String text) {
+	
+	private String removaMarksFromString(String text){
+		if (text.contains(".")) {text = text.replace(".", " ");}
+		if (text.contains(",")) {text = text.replace(",", " ");}
+		if (text.contains(")")) {text = text.replace(")", " ");}
+		if (text.contains("(")) {text = text.replace("(", " ");}
+		if (text.contains(":")) {text = text.replace(":", " ");}
+		if (text.contains(";")) {text = text.replace(";", " ");}
+		if (text.contains("<")) {text = text.replace("<", " ");}
+		if (text.contains(">")) {text = text.replace(">", " ");}
+		if (text.contains("-")) {text = text.replace("-", " ");}
+		if (text.contains("[")) {text = text.replace("[", " ");}
+		if (text.contains("]")) {text = text.replace("]", " ");}
+		if (text.contains("{")) {text = text.replace("{", " ");}
+		if (text.contains("}")) {text = text.replace("}", " ");}
+		
+		do {
+			text = text.replace("  ", " ");
+		}
+		while (text.contains("  "));
+		
+		return text;
+	}
+	
+	public Map<String,Integer> calculateFrequenciesOf(String text) {
 		Map<String,Integer> returnMap = new HashMap<String,Integer>();
+		
+		text = removaMarksFromString(text);
 		String[] strArray = text.split("\\s");
 		
 		for (String keyStr : strArray) {
-			Integer integerValue = new Integer(0);
-			
-			integerValue = returnMap.get(keyStr);
-			
-			if (integerValue == null) {
-				returnMap.put(keyStr, (integerValue.valueOf(1)));
+			if (returnMap.containsKey(keyStr)){
+				returnMap.put(keyStr, returnMap.get(keyStr) + 1);
 			}
 			else{
-				returnMap.put(keyStr, integerValue.valueOf(integerValue.intValue() + 1));
+				returnMap.put(keyStr, 1);
 			}
 		}
 		return returnMap;

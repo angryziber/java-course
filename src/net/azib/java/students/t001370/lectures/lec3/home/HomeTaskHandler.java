@@ -2,9 +2,6 @@ package net.azib.java.students.t001370.lectures.lec3.home;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 
 /**
@@ -15,7 +12,9 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 public class HomeTaskHandler {
 	
 	public static void useDublicateRemover(){
-		System.out.println("Dublicate Remover ---------------------");
+		System.out.println("---------------------------------------");
+		System.out.println("--- Dublicate Remover -----------------");
+		System.out.println("---------------------------------------");
 		
 		DuplicateRemoverImpl dri = new DuplicateRemoverImpl();
 		String[] strArray = new String[]{
@@ -40,7 +39,9 @@ public class HomeTaskHandler {
 	
 	public static void useWordFrequencyCalculator(){
 		
-		System.out.println("Word Frequency Calculator -------------");
+		System.out.println("---------------------------------------");
+		System.out.println("--- Word Frequency Calculator ---------");
+		System.out.println("---------------------------------------");
 		
 		String str = "Hash table based implementation of the Map " +
 				"interface. This implementation provides all of " +
@@ -52,19 +53,12 @@ public class HomeTaskHandler {
 				"it does not guarantee that the order will remain constant " +
 				"over time.";
 		WordFrequencyCalculatorImp wfci = new WordFrequencyCalculatorImp();
-		Map wfciMap = new HashMap();
 		
-		wfciMap = wfci.calculateFrequenciesOf(str);
+		for (Map.Entry me : wfci.calculateFrequenciesOf(str).entrySet()) {
+			System.out.println(me.getKey() + " - " + me.getValue());
+		}
 		
-		/*Set s = wfciMap.entrySet();
-		for(Iterator i = s.iterator();i.hasNext();){
-		   Map.Entry me = (Map.Entry)i.next();
-		   System.out.println(me.getKey() + " : " + me.getValue()); 
-		}*/
-		
-		
-		System.out.println("---------------------------------------");
-		
+		System.out.println("---------------------------------------\n");
 	}
 
 	/**
@@ -74,7 +68,14 @@ public class HomeTaskHandler {
 		useDublicateRemover();
 		useWordFrequencyCalculator();
 		
-		//getProperty practice
+		
+		System.out.println("---------------------------------------");
+		System.out.println("--- Property practice -----------------");
+		System.out.println("---------------------------------------");
 		System.out.println("JVM version:" + System.getProperty("java.version"));
+
+		for (Map.Entry me : System.getProperties().entrySet()) {
+			System.out.println(me.getKey() + " - " + me.getValue());
+		}
 	}
 }

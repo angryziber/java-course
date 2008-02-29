@@ -13,19 +13,12 @@ import java.util.LinkedHashSet;
 public class DuplicateRemoverImpl implements DuplicateRemover{
 	
 	public String[] removeDuplicateStrings(String[] array) {
-		Collection lhs = new LinkedHashSet();
+		Collection<String> lhs = new LinkedHashSet<String>();
 		
 		for (String str : array) {
-			lhs.add((Object)str);
+			lhs.add(str);
 		}
 
-		String[] returnArray = new String[lhs.size()];
-		int i = 0;
-		for (Object object : lhs) {
-			returnArray[i] = object.toString();
-			i++;
-		}
-		
-		return returnArray;
+		return lhs.toArray(new String[lhs.size()]);
 	}
 }
