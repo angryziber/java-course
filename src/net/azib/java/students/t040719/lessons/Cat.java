@@ -9,12 +9,12 @@ public class Cat extends Animal {
 	private int lives;
 	public final static int MAX_LIVES = 9;
 
-	public Cat(String name, String breed, int age) {
+	public Cat(String name, String breed, byte age) {
 		super(name,breed,age);
 		this.lives = MAX_LIVES;
 	}
 
-	public Cat(String name, String breed, int age, int lives) {
+	public Cat(String name, String breed, byte age, int lives) {
 		super(name,breed,age);
 		this.lives = (lives >= 0 && lives <= MAX_LIVES)? lives: MAX_LIVES;
 	}

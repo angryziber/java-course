@@ -10,12 +10,12 @@ public class Dog extends Animal {
 	public final static int MAX_LOUDNESS = 90;
 	public final static int MIN_LOUDNESS = 0;
 	
-	public Dog(String name, String breed, int age) {
+	public Dog(String name, String breed, byte age) {
 		super(name,breed,age);
 		this.barkingLoudness = calcRndLoudness();
 	}
 
-	public Dog(String name, String breed, int age, int loudness) {
+	public Dog(String name, String breed, byte age, int loudness) {
 		super(name,breed,age);
 		this.barkingLoudness = (loudness >= MIN_LOUDNESS && loudness <= MAX_LOUDNESS)? loudness : calcRndLoudness();
 	}

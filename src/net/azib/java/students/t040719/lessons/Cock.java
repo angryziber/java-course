@@ -8,11 +8,11 @@ package net.azib.java.students.t040719.lessons;
 public class Cock extends Animal {
 	private int numberOfCrows;
 	
-	public Cock(String name, String breed, int age) {
+	public Cock(String name, String breed, byte age) {
 		super(name,breed,age);
 	}
 
-	public Cock(String name, String breed, int age, int numCrows) {
+	public Cock(String name, String breed, byte age, int numCrows) {
 		super(name,breed,age);
 		this.numberOfCrows = (numCrows >= 0) ? numCrows : 0;
 	}

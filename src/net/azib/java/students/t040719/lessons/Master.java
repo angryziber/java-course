@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class Master {
 	public static void main(String[] args) {
-		Animal a = new Dog("Figaro","Cocker Spaniel",1);
-		Animal b = new Cat("Cora","Persian",2);
+		Animal a = new Dog("Figaro","Cocker Spaniel",(byte)1);
+		Animal b = new Cat("Cora","Persian",(byte)2);
 		
 		Exception e2 = new Exception();
 		

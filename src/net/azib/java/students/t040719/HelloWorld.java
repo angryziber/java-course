@@ -23,5 +23,9 @@ public class HelloWorld {
 		Dog bd = new Buldog("blinn");
 		Object cd = new Buldog("blinn"); //polümorfims
 		System.out.println("I have 2 dogs: " + ad + ", " + bd + ", " + cd);
+		
+		Primes algarvud = new Primes();
+		
+		System.out.println(algarvud.findPrimes(1500));
 	}
 }
