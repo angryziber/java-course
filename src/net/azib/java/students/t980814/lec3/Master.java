@@ -1,7 +1,6 @@
 package net.azib.java.students.t980814.lec3;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Master
@@ -59,7 +58,7 @@ public class Master {
 							     "Kaie Kand alustab ettevalmistust Eestis ja aprilli-maisse on planeeritud " +
 							     "kaks lõunalaagrit Hispaanias. Kõik meeste mitmevõistluse koondislased, " +
 							     "eesotsas Andres Rajaga, on samuti kindlad, et kevadine ettevalmistus " +
-							     "saab läbi viidud soojemas kliimas."); */
+							     "saab läbi viidud soojemas kliimas.");*/
 
 		String heaven = new String("There's a lady who's sure all that glitters is gold " +
 				"And she's buying a stairway to heaven " +
@@ -111,40 +110,35 @@ public class Master {
 				"With a word she can get what she came for " +
 				"And she's buying a stairway to heaven, uh uh uh. ");
 		
-        String[] splititud = heaven.split("\\s");
+        String[] splitWords = heaven.split("\\s");
 	
 		// Remove punctuation
-		for (int i = 0; i < splititud.length; i++) {
-			if (splititud[i].endsWith(",") ||
-					splititud[i].endsWith(".") ||
-					splititud[i].endsWith("!") ||
-					splititud[i].endsWith("?") ||
-					splititud[i].endsWith(":"))
-			{
-				splititud[i] = splititud[i].substring(0, splititud[i].length()-1);
+		for (int i = 0; i < splitWords.length; i++) {
+			if (splitWords[i].endsWith(",") || splitWords[i].endsWith(".")) {
+				splitWords[i] = splitWords[i].substring(0, splitWords[i].length()-1);
 			}
 		}
 		// Output the original text
 		System.out.println(heaven);
 
 		// Remove all duplicate words...
-		String[] removedDuplicates = DuplicateRemoverImpl.removeDuplicateStrings(splititud);
+		DuplicateRemoverImpl removedDuplicates = new DuplicateRemoverImpl(splitWords);
 		// ... and output them
-		for (String s : removedDuplicates) {
+		for (String s : removedDuplicates.uniqueWords) {
 			System.out.println(s);
 		}
 
 		System.out.println("-------------------------------------------");
 		
 		// Calculate frequency of all unique words...
-		TreeMap<String, Integer> freqTable = WordFrequencyCalculator.calculateFrequenciesOf(splititud);
+		WordFrequencyCalculatorImpl freqTable = new WordFrequencyCalculatorImpl(heaven);
 		// ... and output them all
-		for(Map.Entry<String, Integer> e : freqTable.entrySet()) {
+		for(Map.Entry<String, Integer> e : freqTable.freqMap.entrySet()) {
 			System.out.println(e.getKey() + " - " + e.getValue());
 		}
 
 		// Output conclusion
-		System.out.println("Words in original text: " + splititud.length);
-		System.out.println("Unique words: " + removedDuplicates.length);
+		System.out.println("Words in original text: " + splitWords.length);
+		System.out.println("Unique words: " + removedDuplicates.uniqueWords.length);
 	}
 }

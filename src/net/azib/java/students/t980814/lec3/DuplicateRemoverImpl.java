@@ -1,5 +1,6 @@
 package net.azib.java.students.t980814.lec3;
 
+import net.azib.java.lessons.collections.DuplicateRemover;
 import java.util.LinkedHashSet;
 
 /**
@@ -7,8 +8,17 @@ import java.util.LinkedHashSet;
  *
  * @author allan
  */
-public class DuplicateRemoverImpl {
+public class DuplicateRemoverImpl implements DuplicateRemover {
 
+	public String[] uniqueWords;
+	
+	/**
+	 * 
+	 */
+	public DuplicateRemoverImpl(String[] text) {
+		uniqueWords = removeDuplicateStrings(text);
+	}
+	
 	/**
 	 * Removes all duplicate elements from an array of Strings.
 	 * 
@@ -16,7 +26,7 @@ public class DuplicateRemoverImpl {
 	 * @return an array of Strings, where each String appears only once. 
 	 * The Strings have the same order as in the source array.
 	 */
-	static public String[] removeDuplicateStrings(String[] array) {
+	public String[] removeDuplicateStrings(String[] array) {
 		LinkedHashSet<String> uniqueStrings = new LinkedHashSet<String>();
 		for (String s : array) {
 			if (!uniqueStrings.contains(s))

@@ -34,7 +34,7 @@ public class Zoo {
 	
 	public static void main(String[] args) {
 		int nofAnimals;
-		
+
 		System.out.print("Enter number of animals: ");
 		nofAnimals = scanner.nextInt();
 		
@@ -76,7 +76,6 @@ public class Zoo {
 			System.out.print(currAnimal + " sounds ");
 			currAnimal.makeSound();
 			System.out.println(currAnimal + (currAnimal.iCanJump() ? " can" : " cannot") + " jump." );
-			currAnimal.getAge();
 		}
 	}
 }
