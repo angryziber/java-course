@@ -36,16 +36,6 @@ public class Master {
 			e2.printStackTrace();
 		}
 		System.out.println(a.getClass() + " ja " + b.getClass());
-		
 	
-	}
-	public Map<String, Integer> calculateFrequenciesOf(String[] words) {
-		Map<String, Integer> frequencies = new LinkedHashMap<String, Integer>();
-		for (String word : words) {
-			if (!frequencies.containsKey(word))
-				frequencies.put(word, 0);
-			frequencies.put(word, frequencies.get(word)+1);
-		}
-		return frequencies;
 	}
 }
