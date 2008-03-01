@@ -19,7 +19,7 @@ public class Elephant extends Animal {
 		System.out.println("Üüaaaarghh");
 	}
 	
-	public String toString() {
-		return "Elephant " + super.toString();
-	}
+	//public String toString() {
+	//	return "Elephant " + super.toString();
+	//}
 }

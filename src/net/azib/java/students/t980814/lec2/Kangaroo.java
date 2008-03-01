@@ -17,7 +17,7 @@ public class Kangaroo extends Animal {
 		System.out.println("wheee");
 	}
 	
-	public String toString() {
-		return "Kangaroo " + super.toString();
-	}
+	//public String toString() {
+	//	return "Kangaroo " + super.toString();
+	//}
 }

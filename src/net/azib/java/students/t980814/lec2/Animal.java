@@ -35,7 +35,7 @@ public abstract class Animal {
 
 	@SuppressWarnings("deprecation")
 	public int getAge() {
-		Date rightNow = new Date(); // või new Date();
+		Date rightNow = new Date();
 		int age = 0;
 		
 		if (birthDay.compareTo(rightNow) < 0) {
@@ -52,6 +52,7 @@ public abstract class Animal {
 	abstract void makeSound();
 
 	public String toString() {
-		return (name + "(" + getAge() + ")");
+		// lecture 3 täiendus: getClass().getSimpleName()
+		return (getClass().getSimpleName() + " " + name + "(" + getAge() + ")");
 	}
 }

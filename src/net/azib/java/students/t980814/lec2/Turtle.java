@@ -17,7 +17,7 @@ public class Turtle extends Animal {
 		System.out.println("mmm");
 	}
 	
-	public String toString() {
-		return "Turtle " + super.toString();
-	}
+	//public String toString() {
+	//	return "Turtle " + super.toString();
+	//}
 }
