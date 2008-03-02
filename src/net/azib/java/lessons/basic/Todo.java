@@ -1,4 +1,4 @@
-package net.azib.java.lessons.enums;
+package net.azib.java.lessons.basic;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
