@@ -10,8 +10,6 @@ import java.util.TreeMap;
  */
 public class WordFrequencyCalculator implements net.azib.java.lessons.collections.WordFrequencyCalculator {
 
-	@SuppressWarnings("unchecked")
-	@Override
 	public Map calculateFrequenciesOf(String text) {
 		TreeMap<String, Integer> tmap = new TreeMap<String, Integer>();
 		String stringArray[] = text.split("\\s");
@@ -23,7 +21,6 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 		return tmap;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		WordFrequencyCalculator wordCalc = new WordFrequencyCalculator();
 		String s = "hello world hello world goodbye hello world";
