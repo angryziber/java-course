@@ -5,7 +5,7 @@ package net.azib.java.lessons.basic;
  *
  * @author anton
  */
-public class Cat extends Animal {
+public class Cat extends AbstractAnimal {
 
 	public Cat(String name) {
 		super(name);

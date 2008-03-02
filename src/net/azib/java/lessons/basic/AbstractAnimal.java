@@ -1,19 +1,19 @@
 package net.azib.java.lessons.basic;
 
 /**
- * Animal
+ * Abstract implementation of Animal interface to ease concrete implementations.
  *
  * @author anton
  */
-public abstract class Animal implements Comparable<Animal>, Cloneable {
+public abstract class AbstractAnimal implements Animal {
 	private String name;
 	private byte age;
 
-	public Animal(String name) {
+	public AbstractAnimal(String name) {
 		this.name  = name;
 	}
 
-	public Animal(String name, byte age) {
+	public AbstractAnimal(String name, byte age) {
 		this.name = name;
 		this.age = age;
 	}	
@@ -33,7 +33,7 @@ public abstract class Animal implements Comparable<Animal>, Cloneable {
 	public abstract void makeSound();
 	
 	public int compareTo(Animal that) {
-		return ((Byte)age).compareTo(that.age);
+		return ((Byte)getAge()).compareTo(that.getAge());
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public abstract class Animal implements Comparable<Animal>, Cloneable {
 
 	@Override
 	public boolean equals(Object that) {
-		if (that instanceof Animal)
-			return this.name.equals(((Animal)that).name);
+		if (that instanceof AbstractAnimal)
+			return this.name.equals(((AbstractAnimal)that).name);
 		else
 			return false;
 	}
@@ -55,8 +55,14 @@ public abstract class Animal implements Comparable<Animal>, Cloneable {
 	}
 
 	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	public Animal clone() {
+		try {
+			return (Animal) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			// this cannot happen
+			throw new RuntimeException(e);
+		}
 	}
 	
 }
