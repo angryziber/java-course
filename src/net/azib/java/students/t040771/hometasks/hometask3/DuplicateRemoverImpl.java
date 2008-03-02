@@ -11,7 +11,6 @@ import java.util.LinkedHashSet;
  */
 public class DuplicateRemoverImpl implements DuplicateRemover {
 
-	@Override
 	public String[] removeDuplicateStrings(String[] array) {
 		LinkedHashSet<String> set = new LinkedHashSet<String>();
 		
