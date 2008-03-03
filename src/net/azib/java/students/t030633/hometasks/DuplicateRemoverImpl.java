@@ -1,8 +1,9 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks;
 
 import net.azib.java.lessons.collections.DuplicateRemover;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * DuplicateRemoverImpl
@@ -24,7 +25,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 		// }
 		// return coll.toArray(new String[coll.size()]);
 
-		LinkedHashSet<String> set = new LinkedHashSet<String>(Arrays.asList(array));
+		Set<String> set = new LinkedHashSet<String>(Arrays.asList(array));
 		return set.toArray(new String[set.size()]);
 
 	}
@@ -38,7 +39,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 		String[] strings = new String[] { "pong", "ping", "ping", "ping", "pong" };
 
 		System.out.println(Arrays.toString(strings));
-		System.out.println(Arrays.toString(dupRem.removeDuplicateStrings(strings)));		
+		System.out.println(Arrays.toString(dupRem.removeDuplicateStrings(strings)));
 
 	}
 

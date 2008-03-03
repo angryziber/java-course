@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -8,7 +8,7 @@ import java.util.TreeMap;
  * 
  * @author t030633
  */
-public class WordFrequencyCalculator implements net.azib.java.lessons.collections.WordFrequencyCalculator {
+public class WordFrequencyCalculatorImpl implements net.azib.java.lessons.collections.WordFrequencyCalculator {
 
 	/*
 	 * (non-Javadoc)
@@ -16,8 +16,7 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 	 * @see net.azib.java.lessons.collections.WordFrequencyCalculator#calculateFrequenciesOf(java.lang.String)
 	 */
 
-	@SuppressWarnings("unchecked")
-	public Map calculateFrequenciesOf(String text) {
+	public Map<String, Integer> calculateFrequenciesOf(String text) {
 
 		TreeMap<String, Integer> map = new TreeMap<String, Integer>();
 		String[] strings = text.split("\\s");
@@ -38,9 +37,9 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 
-		WordFrequencyCalculator freqCalc = new WordFrequencyCalculator();
-		String text = "Steve Ballmer Developers Developers Developers Developers Developers Developers Developers " +
-				"Developers Developers Developers Developers Developers Developers Developers Developers";
+		WordFrequencyCalculatorImpl freqCalc = new WordFrequencyCalculatorImpl();
+		String text = "Steve Ballmer Developers Developers Developers Developers Developers Developers Developers "
+				+ "Developers Developers Developers Developers Developers Developers Developers Developers";
 
 		Map map = freqCalc.calculateFrequenciesOf(text); // does the work :)
 
