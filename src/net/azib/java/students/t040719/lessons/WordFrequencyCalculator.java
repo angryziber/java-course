@@ -13,11 +13,13 @@ import java.util.LinkedHashMap; // Kasutada seda, kui tahad näha sõnu esinemis
 public class WordFrequencyCalculator{
 	static Map<String,Integer> calculateFrequenciesOf(String text){
 		Map<String,Integer> ret = new TreeMap<String,Integer>();
-		for (String s: text.split("\\s")){
+		/*for (String s: text.split("\\s")){
 			if(!ret.containsKey(s))
 				ret.put(s, 0);
 			ret.put(s, ret.get(s)+1);
-		}
+		}*/
+		for (String s: text.split("\\s"))
+			ret.put(s, (ret.get(s) == null)? 1 : ret.get(s)+1);
 		return ret;
 	}
 }
