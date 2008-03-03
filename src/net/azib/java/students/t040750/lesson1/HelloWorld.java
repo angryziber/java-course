@@ -1,4 +1,5 @@
-package net.azib.java.students.t040750;
+package net.azib.java.students.t040750.lesson1;
+
 
 import java.util.Date;
 
@@ -15,15 +16,15 @@ public class HelloWorld {
 		char c = 'A' + 1 + '\u0020'; // 'A' + 1 = B
 						   			 // '\u0020' = 0x32 = space
 		
-		long l = 4568780112211212L; //L peab lõpus olema, 
+		//long l = 4568780112211212L; //L peab lõpus olema, 
 									//kuna muidu on default parempoolne väärtus int
 									
 		
 		
-		Integer i = new Integer(5); //mõlemad variandid on lubatud
-		Integer j = 5;				//ja samaväärsed
+		//Integer i = new Integer(5); //mõlemad variandid on lubatud
+		//Integer j = 5;				//ja samaväärsed
 		
-		int k = Integer.parseInt("5");
+		//int k = Integer.parseInt("5");
 		
 		System.out.println("Character c is: " + c);
 		

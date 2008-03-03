@@ -1,9 +1,9 @@
-package net.azib.java.students.t040750;
+package net.azib.java.students.t040750.lesson3;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+//import java.util.Collection;
+//import java.util.HashSet;
+//import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CollectionDemo {
 	public static void main(String[] args) {
-		List c = new ArrayList();
+		List<String> c = new ArrayList<String>();
 		//Collection c = new HashSet();
 		//Collection c = new LinkedHashSet();
 		

@@ -1,8 +1,8 @@
-package net.azib.java.students.t040750;
+package net.azib.java.students.t040750.lesson1;
 
 import java.math.BigInteger;
 import java.util.Calendar;
-import java.util.Date;
+//import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -45,7 +45,7 @@ public class Numbers {
 		
 		printNumber(i);
 		
-		Date d = new Date(2008, 1, 1); 	//deprecated, kuna ei tööta piisavalt
+//		Date d = new Date(2008, 1, 1); 	//deprecated, kuna ei tööta piisavalt
 										//hästi erinevate timezone'ide puhul
 		
 		Calendar c = new GregorianCalendar();

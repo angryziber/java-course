@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750;
+package net.azib.java.students.t040750.lesson2;
 
 import java.util.Scanner;
 
