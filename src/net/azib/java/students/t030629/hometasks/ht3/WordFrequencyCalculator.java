@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- * AN implementationf for WordFrequencyCalculator in Lesson 4.
+ * An implementation for WordFrequencyCalculator in Lesson 4.
  *
  * @author anton_chepurov
  */
