@@ -1,6 +1,5 @@
 package net.azib.java.students.t654321;
 
-import net.azib.java.lessons.basic.Todo;
 import net.azib.java.lessons.enums.Planet;
 
 /**
@@ -8,8 +7,6 @@ import net.azib.java.lessons.enums.Planet;
  *
  * @author t999902
  */
-@Todo("Commit your work")
-@Deprecated
 public class EnumDemo {
 	public static void main(String[] args) {
 		Season season = Season.WINTER;
