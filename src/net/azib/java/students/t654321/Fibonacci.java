@@ -10,9 +10,7 @@ public class Fibonacci {
 	
 	private static BigInteger calculateFibonacciElement(int whichElement){
 		BigInteger firstElement = new BigInteger("0");
-		//System.out.println("Fibonacci series element f(0) is: " + firstElement.toString());
 		BigInteger secondElement = new BigInteger("1");
-		//System.out.println("Fibonacci series element f(1) is: " + secondElement.toString());
 		int i = 2;
 		BigInteger element = new BigInteger("0");
 		
@@ -27,9 +25,15 @@ public class Fibonacci {
 	
 	public static void main(String[] args) {
 //		int whichElement = Integer.parseInt(args[0]);
-		int whichElement = 100;
+		int whichElement = 4;
 		BigInteger element = calculateFibonacciElement(whichElement);
 		System.out.println("Fibonacci series element f(" + (whichElement - 1) + ") is: " + element.toString());
+		
+/*
+		if (!"100".equals(calculateFibonacciElement(1))){
+			throw new RuntimeException("failed");
 		}
+*/
+				}
 
 }
