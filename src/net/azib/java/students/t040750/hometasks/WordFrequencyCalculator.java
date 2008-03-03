@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750.homework;
+package net.azib.java.students.t040750.hometasks;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

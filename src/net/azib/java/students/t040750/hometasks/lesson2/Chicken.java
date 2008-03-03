@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750.homework.lesson2;
+package net.azib.java.students.t040750.hometasks.lesson2;
 
 
 /**

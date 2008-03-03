@@ -1,9 +1,10 @@
-package net.azib.java.students.t040750.homework.lesson3;
+package net.azib.java.students.t040750.hometasks.lesson3;
 
 import net.azib.java.lessons.collections.DuplicateRemover;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * DuplicateRemoverImpl
@@ -13,14 +14,11 @@ import java.util.LinkedHashSet;
 public class DuplicateRemoverImpl implements DuplicateRemover{
 
 	public String[] removeDuplicateStrings(String[] array) {
-		Collection<String> c = new LinkedHashSet<String>();
+		Set<String> set = new LinkedHashSet<String>(Arrays.asList(array));
 		
-		for(String str:array)
-		{
-			c.add(str);
-		}
-			
-		return (String[])c.toArray();
+		return (String[])set.toArray(new String[set.size()]);
 	}
+	
+	
 
 }

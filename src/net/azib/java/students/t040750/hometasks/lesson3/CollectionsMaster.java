@@ -1,6 +1,6 @@
-package net.azib.java.students.t040750.homework.lesson3;
+package net.azib.java.students.t040750.hometasks.lesson3;
 
-import net.azib.java.students.t040750.homework.lesson3.DuplicateRemoverImpl;;
+import net.azib.java.students.t040750.hometasks.lesson3.DuplicateRemoverImpl;
 
 /**
  * CollectionsMaster
@@ -24,7 +24,9 @@ public class CollectionsMaster{
 		array[9] = "võrratult ";
 			
 		DuplicateRemoverImpl remDuplicate = new DuplicateRemoverImpl();
+		String[] newArray = remDuplicate.removeDuplicateStrings(array);
 		
-		System.out.println(remDuplicate.removeDuplicateStrings(array));
+		for(String str:newArray)
+			System.out.print(str);
 	}
 }

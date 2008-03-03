@@ -1,15 +1,15 @@
-package net.azib.java.students.t040750.homework.lesson1;
+package net.azib.java.students.t040750.hometasks.lesson1;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 
 /**
- * Factorial
+ * Fibonacci
  *
  * @author karpo
  */
-public class Factorial {
+public class Fibonacci {
 	private static BufferedReader buff;
 	
 	public static void main(String[] args) {
@@ -18,11 +18,11 @@ public class Factorial {
 		int iterator;
 		
 		try {
-			/* Get number whose Factorial is needed. Check if the input is 
+			/* Get the iterator for the Fibonacci number. Check if the input is 
 			 * valid (non-negative integer)
 			*/
 			while(true) {
-				System.out.print("Sisesta number, millest faktoriaal arvutada: ");
+				System.out.print("Sisesta soovitud Fibonacci arvu järk: ");
 				input = buff.readLine();
 					
 					if(validInt(input)) {
@@ -33,7 +33,7 @@ public class Factorial {
 				System.out.println("Vigane sisend. Proovi uuesti!");
 			}
 			
-			System.out.println("Arvu " + iterator + " faktoriaal on: " + getFactorial(iterator));
+			System.out.println(iterator + ". järku Fibonacci arv on: " + getFibonacciNumber(iterator));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -57,20 +57,21 @@ public class Factorial {
 	}
 	
 	/*
-	 * Returns the factorial of the input number
+	 * Returns the positive Fibonacci number specified by the iterator by calling the
+	 * Fibonacci calculation function.
 	*/
-	private static BigInteger getFactorial(int input) {
-		return getFactorial(0,input,BigInteger.ONE);
+	private static BigInteger getFibonacciNumber(int iterator) {
+		return getFibonacciNumber(0,iterator,BigInteger.ZERO,BigInteger.ONE);
 	}
 	
 	/*
-	 * Calculates factorial of the input number recursively until the specified iterator 
+	 * Calculates the positive Fibonacci number recursively until the specified iterator 
 	 * equals the recursive steps
 	*/
-	private static BigInteger getFactorial(int i, int input, BigInteger factorial) {
-		if(i < input)
-			return getFactorial(++i,input,factorial.multiply(BigInteger.valueOf(i)));
+	private static BigInteger getFibonacciNumber(int i, int iterator, BigInteger fibNr, BigInteger prevFibNr) {
+		if(i < iterator)
+			return getFibonacciNumber(++i,iterator,fibNr.add(prevFibNr),fibNr);
 		else
-			return factorial;
+			return fibNr;
 	}
 }
