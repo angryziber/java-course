@@ -8,7 +8,7 @@ import java.util.TreeMap;
  *
  * @author Trial
  */
-public class WordFrequencyCalculator implements net.azib.java.lessons.collections.WordFrequencyCalculator {
+public class WordFrequencyCalculatorImpl implements net.azib.java.lessons.collections.WordFrequencyCalculator {
 
 	public Map<String, Integer> calculateFrequenciesOf(String text) {
 		// TODO Auto-generated method stub
@@ -37,7 +37,7 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 				"collection views return their elements. Some map implementations," +
 				" like the TreeMap class, make specific guarantees as to their" +
 				" order; others, like the HashMap class, do not. ";
-		WordFrequencyCalculator myCalculator = new WordFrequencyCalculator();
+		WordFrequencyCalculatorImpl myCalculator = new WordFrequencyCalculatorImpl();
 		
 		myCalculatedMap = myCalculator.calculateFrequenciesOf(text);
 		
