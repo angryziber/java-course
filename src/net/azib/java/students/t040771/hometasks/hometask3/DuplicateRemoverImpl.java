@@ -2,6 +2,7 @@ package net.azib.java.students.t040771.hometasks.hometask3;
 
 import net.azib.java.lessons.collections.DuplicateRemover;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 /**
@@ -12,10 +13,7 @@ import java.util.LinkedHashSet;
 public class DuplicateRemoverImpl implements DuplicateRemover {
 
 	public String[] removeDuplicateStrings(String[] array) {
-		LinkedHashSet<String> set = new LinkedHashSet<String>();
-		
-		for(String s: array) set.add(s);
-		
+		LinkedHashSet<String> set = new LinkedHashSet<String>(Arrays.asList(array));
 		return set.toArray(new String[set.size()]);
 	}
 

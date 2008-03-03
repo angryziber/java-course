@@ -1,5 +1,6 @@
 package net.azib.java.students.t040771.hometasks.hometask3;
 
+import net.azib.java.lessons.collections.WordFrequencyCalculator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -8,9 +9,9 @@ import java.util.TreeMap;
  *
  * @author raido
  */
-public class WordFrequencyCalculator implements net.azib.java.lessons.collections.WordFrequencyCalculator {
+public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 
-	public Map calculateFrequenciesOf(String text) {
+	public Map<String, Integer> calculateFrequenciesOf(String text) {
 		TreeMap<String, Integer> tmap = new TreeMap<String, Integer>();
 		String stringArray[] = text.split("\\s");
 		Integer i;
@@ -22,11 +23,11 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 	}
 
 	public static void main(String[] args) {
-		WordFrequencyCalculator wordCalc = new WordFrequencyCalculator();
+		WordFrequencyCalculatorImpl wordCalc = new WordFrequencyCalculatorImpl();
 		String s = "hello world hello world goodbye hello world";
 		System.out.println(s);
 		
-		Map map;
+		Map<String, Integer> map;
 		map = wordCalc.calculateFrequenciesOf(s);
 		
 		System.out.println(map);
