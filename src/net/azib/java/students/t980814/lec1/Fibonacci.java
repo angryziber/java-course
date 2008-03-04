@@ -17,7 +17,7 @@ public class Fibonacci {
 	 * Constructor, that calculates the fibonacci number
 	 * @param n
 	 */
-	Fibonacci(int n) {
+	public Fibonacci(int n) {
 		reCalculate(n);
 	}
 	

@@ -1,6 +1,8 @@
 package net.azib.java.students.t980814.lec3;
 
 import net.azib.java.lessons.collections.DuplicateRemover;
+
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 /**
@@ -27,11 +29,14 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 	 * The Strings have the same order as in the source array.
 	 */
 	public String[] removeDuplicateStrings(String[] array) {
-		LinkedHashSet<String> uniqueStrings = new LinkedHashSet<String>();
-		for (String s : array) {
-			if (!uniqueStrings.contains(s))
-				uniqueStrings.add(s);
-		}
+		LinkedHashSet<String> uniqueStrings = new LinkedHashSet<String>(Arrays.asList(array));
 		return uniqueStrings.toArray(new String[uniqueStrings.size()]);
+
+// Ülal on parim lahendus, all on minu lahendus.
+//		
+//		LinkedHashSet<String> uniqueStrings = new LinkedHashSet<String>();
+//		for (String s : array)
+//			uniqueStrings.add(s);
+//		return uniqueStrings.toArray(new String[uniqueStrings.size()]);
 	}
 }

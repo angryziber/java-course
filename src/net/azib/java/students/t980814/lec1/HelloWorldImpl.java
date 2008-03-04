@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  * @author t980814
  */
-public class HelloWorld {
+public class HelloWorldImpl {
 	public static void main(String[] args) {
 		System.out.println(Constants.HELLO_MESSAGE);
 		System.out.println(Constants.GREETING_MESSAGE);
