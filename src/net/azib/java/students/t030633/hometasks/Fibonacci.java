@@ -9,18 +9,18 @@ import java.math.BigInteger;
  */
 public class Fibonacci {
 
-	public static void main(String[] args) {
-
+	public BigInteger fibonacciNumber(int number){
+		
 		BigInteger low = BigInteger.ZERO;
 		BigInteger high = BigInteger.ONE;
 
-		for (int i = 1; i < 100; i++) {
+		for (int i = 1; i < number; i++) {
 			high = high.add(low);
 			low = high.subtract(low);
 		}
 
-		System.out.print(high);
-
+		return high;
+		
 	}
-
+	
 }

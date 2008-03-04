@@ -30,17 +30,4 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		DuplicateRemoverImpl dupRem = new DuplicateRemoverImpl();
-		String[] strings = new String[] { "pong", "ping", "ping", "ping", "pong" };
-
-		System.out.println(Arrays.toString(strings));
-		System.out.println(Arrays.toString(dupRem.removeDuplicateStrings(strings)));
-
-	}
-
 }

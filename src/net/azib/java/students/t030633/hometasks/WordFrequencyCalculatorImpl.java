@@ -31,20 +31,4 @@ public class WordFrequencyCalculatorImpl implements net.azib.java.lessons.collec
 
 	}
 
-	/**
-	 * @param args
-	 */
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
-
-		WordFrequencyCalculatorImpl freqCalc = new WordFrequencyCalculatorImpl();
-		String text = "Steve Ballmer Developers Developers Developers Developers Developers Developers Developers "
-				+ "Developers Developers Developers Developers Developers Developers Developers Developers";
-
-		Map map = freqCalc.calculateFrequenciesOf(text); // does the work :)
-
-		System.out.println(map.toString());
-
-	}
-
 }
