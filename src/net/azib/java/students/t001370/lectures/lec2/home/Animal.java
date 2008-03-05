@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
  * @author maksim
  */
 public abstract class Animal implements Comparable<Animal>, Cloneable {
-	private DateFormat dateFormat = new SimpleDateFormat().getDateInstance();
+	private DateFormat dateFormat = SimpleDateFormat.getDateInstance();
 	private String animalName;
 	private Date   animalBirthDate;
 	private int age;

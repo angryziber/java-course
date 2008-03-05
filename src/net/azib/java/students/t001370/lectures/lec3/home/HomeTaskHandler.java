@@ -53,7 +53,7 @@ public class HomeTaskHandler {
 				"over time.";
 		WordFrequencyCalculatorImp wfci = new WordFrequencyCalculatorImp();
 		
-		for (Map.Entry me : wfci.calculateFrequenciesOf(str).entrySet()) {
+		for (Map.Entry<String, Integer> me : wfci.calculateFrequenciesOf(str).entrySet()) {
 			System.out.println(me.getKey() + " - " + me.getValue());
 		}
 		
@@ -73,7 +73,7 @@ public class HomeTaskHandler {
 		System.out.println("---------------------------------------");
 		System.out.println("JVM version:" + System.getProperty("java.version"));
 
-		for (Map.Entry me : System.getProperties().entrySet()) {
+		for (Map.Entry<Object, Object> me : System.getProperties().entrySet()) {
 			System.out.println(me.getKey() + " - " + me.getValue());
 		}
 	}

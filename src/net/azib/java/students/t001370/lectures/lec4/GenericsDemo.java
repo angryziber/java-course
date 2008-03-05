@@ -20,7 +20,7 @@ public class GenericsDemo {
 		
 		list.add(5);
 		//String s = listOfStrings.get(0);
-		Integer in = list.get(0);
+		//Integer in = list.get(0);
 	}
 
 }

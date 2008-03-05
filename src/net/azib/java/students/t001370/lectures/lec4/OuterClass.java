@@ -12,7 +12,7 @@ public class OuterClass {
 	private class InnerClass{
 		public void inner(){
 			int i=0;
-			System.out.println(OuterClass.this.i);
+			System.out.println("Inner i = " + i + ":: Outer i = " + OuterClass.this.i);
 		}
 	}
 
