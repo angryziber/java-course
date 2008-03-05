@@ -20,5 +20,9 @@ public class DuplicateRemoverImpl implements DuplicateRemover{
 		}
 
 		return lhs.toArray(new String[lhs.size()]);
+		
+		//saaks ka nii!!!! on effektiivsem
+		//Set set = new LinkedHashSet(Arrays.asList(array));
+		//return (String[]) set.toArray(new String[set.size()]);
 	}
 }
