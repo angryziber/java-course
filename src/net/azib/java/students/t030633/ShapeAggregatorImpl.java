@@ -3,6 +3,7 @@ package net.azib.java.students.t030633;
 import net.azib.java.lessons.collections.Shape;
 import net.azib.java.lessons.collections.ShapeAggregator;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -16,12 +17,10 @@ import java.util.List;
 public class ShapeAggregatorImpl implements ShapeAggregator {
 
 	private List<Shape> list = new LinkedList<Shape>();
-
+	
 	public void addShapes(Shape... shapes) {
 
-		for (Shape shape : shapes) {
-			list.add(shape);
-		}
+		list.addAll(Arrays.asList(shapes));
 		Collections.sort(list);
 
 	}
