@@ -7,32 +7,44 @@ import net.azib.java.lessons.collections.Shape;
  * @author maksim
  */
 public class Square extends Shape{
-	int edgeLength;
+	int edgeLenght;
 	
 	Square(int el){
-		this.edgeLength = el;
+		this.edgeLenght = el;
+	}
+	
+	public int getEdgeLenght(){
+		return edgeLenght;
 	}
 
 	@Override
 	public double area() {
-		return edgeLength*edgeLength;
+		return edgeLenght*edgeLenght;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		if (o == null) 
+			return false;
+		else if (o == this)
+			return true;
+		else if (o.getClass() != this.getClass()) 
+			return false;
+		else if (((Square)o).getEdgeLenght() == this.edgeLenght) 
+			return true;
+		else 
+			return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return edgeLength;
+		return edgeLenght;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Shape is a Square with: " +
+		"r = " + this.edgeLenght + " and " +
+		"S = " + this.area();
 	}
-
 }

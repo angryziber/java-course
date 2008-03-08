@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * @author maksim
  */
 public class Factorial {
-	static BigDecimal calcFactorial(int count){
+	public static BigDecimal calcFactorial(int count){
 		BigDecimal fact = new BigDecimal("1");
 		
 		for (int i = 1; i <= count; i++) {

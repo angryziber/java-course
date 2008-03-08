@@ -19,14 +19,14 @@ public class AssertDemo {
 		System.out.println(i);*/
 		
 		Fibonacci fib = new Fibonacci();
-		System.out.println(fib.calc(10));
+		/*System.out.println(fib.calc(10));
 		
 		assert "1".equals(fib.calc(1)): "jop";
 		assert "2".equals(fib.calc(2)) : "bla-bla";
 		
 		if (!"1".equals(fib.calc(10))) {
 			throw new RuntimeException("failed!!!");
-		}
+		}*/
 		
 	}
 

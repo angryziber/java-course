@@ -9,12 +9,12 @@ import java.math.BigDecimal;
  */
 public class Fibonacci {
 	
-	public String calc(int inp){
+	/*public String calc(int inp){
 		return "1";
-	}
+	}*/
 	
 	
-	static BigDecimal calcFibonacci(int count){
+	public static BigDecimal calcFibonacci(int count){
 		BigDecimal a = new BigDecimal("0");
 		BigDecimal b = new BigDecimal("1");
 		BigDecimal c = new BigDecimal("0");
