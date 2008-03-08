@@ -1,6 +1,6 @@
 package net.azib.java.students.t001370.lectures.lec4.home;
 
-import net.azib.java.lessons.collections.Shape
+import net.azib.java.lessons.collections.Shape;
 /**
  * Square
  *
