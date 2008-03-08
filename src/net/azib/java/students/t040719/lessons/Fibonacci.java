@@ -27,6 +27,7 @@ public class Fibonacci {
 				result += fibCache.get(i) + " ";
 	        } else {
 	            fibCache.add(i, calculateFib(i-1).add(calculateFib(i-2)));	        	
+				result += fibCache.get(i) + " ";
 	        }
 		}
 		return result;

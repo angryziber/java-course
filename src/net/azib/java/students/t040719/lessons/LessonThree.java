@@ -21,6 +21,7 @@ public class LessonThree {
 		}
 		System.out.println("");
 		Map<String,Integer> map = WordFrequencyCalculator.calculateFrequenciesOf("how many times is ten times ten");
+		//System.out.println(map.toString());
 		for(Map.Entry e : map.entrySet()){
 			System.out.println(e.getKey() + " : " + e.getValue());
 		}

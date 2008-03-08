@@ -22,6 +22,7 @@ public class Factorial {
 				result += factCache.get(i) + " ";
 	        } else {
 	        	factCache.add(i, BigInteger.valueOf(i).multiply(calculateFact(i-1)));	        	
+				result += factCache.get(i) + " ";
 	        }
 		}
 		return result;
