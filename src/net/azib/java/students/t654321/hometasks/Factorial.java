@@ -10,29 +10,29 @@ import java.math.BigInteger;
 public class Factorial {
 
 	/**
-	 * @param witchElement - index of element of factorial. 
-	 * @deprecated - very bad method
+	 * @param whichElement - index of element of factorial. 
+	 * @return 
 	 */
-	private static void calculateFactorial(int witchElement) {
-		int i = 1;
+	public BigInteger calculateFactorial(int whichElement) {
+		int i = 0;
 		BigInteger factorial = new BigInteger("1");
-		while (i < witchElement){
-			BigInteger indx = new BigInteger(Integer.toString(i));
-			factorial = factorial.multiply(indx);
-			i++;
+		
+		if(whichElement < 0)
+			return null;
+		
+		switch(whichElement){
+		case 0:
+			return BigInteger.ZERO;
+		case 1:
+			return BigInteger.ONE;
+		default:
+			while (i < whichElement){
+				// Kas alati uus BigInteger objekt?
+				BigInteger indx = new BigInteger(Integer.toString(i + 1));
+				factorial = factorial.multiply(indx);
+				i++;
+			}
+			return factorial;
 		}
-		System.out.println(factorial);
 	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int witchElement = 100;
-		calculateFactorial(witchElement);
-	}
-
-	
-
 }

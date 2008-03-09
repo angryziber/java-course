@@ -8,28 +8,38 @@ public class Fibonacci {
 	 * @param args
 	 */
 	
-	private static BigInteger calculateFibonacciElement(int whichElement){
+	public BigInteger calculateFibonacciElement(int whichElement){
 		BigInteger firstElement = new BigInteger("0");
 		//System.out.println("Fibonacci series element f(0) is: " + firstElement.toString());
 		BigInteger secondElement = new BigInteger("1");
 		//System.out.println("Fibonacci series element f(1) is: " + secondElement.toString());
-		int i = 2;
+		int i = 1;
 		BigInteger element = new BigInteger("0");
 		
-		while(i < whichElement){
-			element = firstElement.add(secondElement);
-			firstElement = secondElement;
-			secondElement = element;
-			i++;
+		if(whichElement < 0)
+			return null;
+		
+		switch(whichElement){
+			case 0:
+				return BigInteger.ZERO;
+			case 1:
+				return BigInteger.ONE;
+			default:
+				while(i < whichElement){
+				element = firstElement.add(secondElement);
+				firstElement = secondElement;
+				secondElement = element;
+				i++;
+				}
+				return element;
 		}
-		return element;
 	}
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 //		int whichElement = Integer.parseInt(args[0]);
-		int whichElement = 100;
+		int whichElement = 29;
 		BigInteger element = calculateFibonacciElement(whichElement);
-		System.out.println("Fibonacci series element f(" + (whichElement - 1) + ") is: " + element.toString());
+		System.out.println("Fibonacci series element f(" + (whichElement) + ") is: " + element.toString());
 		}
-
+*/
 }
