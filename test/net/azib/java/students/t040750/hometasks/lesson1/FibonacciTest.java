@@ -16,7 +16,8 @@ public class FibonacciTest {
 	
 	@Test
 	public void computeGives1() throws Exception {
-		Fibonacci fibonacci = new Fibonacci();
-		assertEquals("1",fibonacci.toString());
+		assertEquals("1", Fibonacci.getFibonacciNumber(1).toString());
+		assertEquals("1", Fibonacci.getFibonacciNumber(2).toString());
+		assertEquals("13", Fibonacci.getFibonacciNumber(7).toString());
 	}
 }

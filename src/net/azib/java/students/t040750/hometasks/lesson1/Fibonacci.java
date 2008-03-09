@@ -60,7 +60,7 @@ public class Fibonacci {
 	 * Returns the positive Fibonacci number specified by the iterator by calling the
 	 * Fibonacci calculation function.
 	*/
-	private static BigInteger getFibonacciNumber(int iterator) {
+	public static BigInteger getFibonacciNumber(int iterator) {
 		return getFibonacciNumber(0,iterator,BigInteger.ZERO,BigInteger.ONE);
 	}
 	
