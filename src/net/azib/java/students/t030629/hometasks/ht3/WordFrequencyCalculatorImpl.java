@@ -1,5 +1,7 @@
 package net.azib.java.students.t030629.hometasks.ht3;
 
+import net.azib.java.lessons.collections.WordFrequencyCalculator;
+
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
@@ -10,14 +12,14 @@ import java.util.TreeMap;
  *
  * @author anton_chepurov
  */
-public class WordFrequencyCalculator implements net.azib.java.lessons.collections.WordFrequencyCalculator {
+public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 	private Comparator comparator;
 	
-	public WordFrequencyCalculator(Comparator comparator){
+	public WordFrequencyCalculatorImpl(Comparator comparator){
 		this.comparator = comparator;
 	}
 
-	public WordFrequencyCalculator() {
+	public WordFrequencyCalculatorImpl() {
 		this(null);
 	}
 
@@ -26,8 +28,10 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 			? new TreeMap<String, Integer>() : new TreeMap<String, Integer>(comparator);
 		String[] words = text.split("\\s");
 		
+		Integer amount;
 		for (String word : words) {
-			wordMap.put(word, wordMap.containsKey(word) ? wordMap.get(word) + 1 : 1);
+			amount = wordMap.get(word);
+			wordMap.put(word, amount == null ? 1 : amount + 1);
 		}
 		
 		return wordMap;
@@ -38,7 +42,7 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 		
 		/* Do not ignore case */
 		System.out.println("Case sensitive:");
-		Map wordFrequences = new WordFrequencyCalculator().calculateFrequenciesOf(phrase);
+		Map<String, Integer> wordFrequences = new WordFrequencyCalculatorImpl().calculateFrequenciesOf(phrase);
 		for (Map.Entry<String, Integer> entry : (Set<Map.Entry<String, Integer>>) wordFrequences.entrySet()) {
 			System.out.println(entry.getKey() + ": " + entry.getValue());
 		}
@@ -46,10 +50,10 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 		/* Ignore case */
 		System.out.println("###########################");
 		System.out.println("Case insensitive:");
-		wordFrequences = new WordFrequencyCalculator(new AlphabeticalComparator()).calculateFrequenciesOf(phrase);
+		wordFrequences = new WordFrequencyCalculatorImpl(new AlphabeticalComparator()).calculateFrequenciesOf(phrase);
 		for (Map.Entry<String, Integer> entry : (Set<Map.Entry<String, Integer>>) wordFrequences.entrySet()) {
 			System.out.println(entry.getKey() + ": " + entry.getValue());
-		}
+		}		
 		
 	}
 	
