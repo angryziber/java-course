@@ -2,6 +2,8 @@ package net.azib.java.lessons.basic;
 
 import static org.junit.Assert.*;
 
+import java.math.BigInteger;
+
 import org.junit.Test;
 
 
@@ -11,18 +13,36 @@ import org.junit.Test;
  * @author anton
  */
 public class FibonacciTest {
+	private Fibonacci fibonacci = new Fibonacci();
+	
+	@Test
+	public void zeroIsZero() {
+		assertCorrect("0", 0);
+	}
 
 	@Test
-	public void computeGives1() throws Exception {
-		Fibonacci fibonacci = new Fibonacci();
-		assertEquals("1", fibonacci.compute(1));
-		assertEquals("1", fibonacci.compute(2));
+	public void firstTwoNumbersAreOnes() {
+		assertCorrect("1", 1);
+		assertCorrect("1", 2);
 	}
 	
 	@Test
-	public void compute3rdNumber() throws Exception {
-		Fibonacci fibonacci = new Fibonacci();
-		assertEquals("2", fibonacci.compute(3));
+	public void compute3rdNumber() {
+		assertCorrect("2", 3);
+	}
+	
+	@Test
+	public void compute7thNumber() {
+		assertCorrect("13", 7);
 	}
 
+	@Test
+	public void compute100thNumber() {
+		assertCorrect("354224848179261915075", 100);
+	}
+
+	/** Helper method for asserting {@link Fibonacci#compute(int)} calls */
+	private void assertCorrect(String expected, int index) {
+		assertEquals(new BigInteger(expected), fibonacci.compute(index));
+	}
 }
