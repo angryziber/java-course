@@ -17,6 +17,8 @@ public class StringDemo {
 		String s1 = "sa";
 		String s2 = s1 + "";
 		
+		System.out.println(s1 == s2);
+		
 		StringBuilder sb = new StringBuilder();
 		for (int i = 1 ; i <= 10; i++) {
 			sb.append(i).append(' ');

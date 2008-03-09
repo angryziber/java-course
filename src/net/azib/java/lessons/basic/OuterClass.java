@@ -11,6 +11,7 @@ public class OuterClass {
 	
 	private class InnerClass {
 		public void inner() {
+			@SuppressWarnings("unused")
 			int i = 0;
 			System.out.println(OuterClass.this.i);
 		}
@@ -31,6 +32,7 @@ public class OuterClass {
 		outer.i = 5;
 		inner.inner();
 		
+		@SuppressWarnings("unused")
 		StaticInnerClass staticInner = new OuterClass.StaticInnerClass();
 	}
 

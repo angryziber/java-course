@@ -1,7 +1,6 @@
 package net.azib.java.lessons.basic;
 
 import java.math.BigInteger;
-import java.util.Date;
 
 /**
  * Test class for learning numbers in Java
