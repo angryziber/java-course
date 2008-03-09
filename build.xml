@@ -1,20 +1,32 @@
 <?xml version="1.0"?>
-<project name="HelloAnt" default="sayHello" basedir=".">
-   <property name="text.hello" value="Hello, Ant!"/>
+<project name="java-course" default="all" basedir=".">
 	
-   <property name="java.jar" file="jar_filename.txt"/>
-   
-   <target name="sayHello" if="text.hello">
-     <echo>${text.hello}</echo>
-   </target>
+	<target name="all">
+		<echo>This is an ant build script.</echo>
+		<echo>Currently used by the cruise control to ensure the repository is always healthy.</echo>
+	</target>
 	
-   <target name="compile" depends="sayHello">
-     <javac srcdir="src" destdir="bin"/>
-   </target>
+	<target name="cruise" description="for cruise control builds" depends="compile,test,clean"/>
 	
-   <target name="package">
-   		<jar destfile="${java.jar}">
-   			<fileset dir="bin"/>
-   		</jar>
-   </target>
+	<target name="clean">
+		<delete dir="ant-bin"/>
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="ant-bin"/>
+		<javac srcdir="src" destdir="ant-bin" encoding="UTF-8" target="1.6">
+			<classpath>
+				<fileset dir="lib" includes="*.jar"/>
+			</classpath>
+		</javac>
+		<javac srcdir="test" destdir="ant-bin" encoding="UTF-8" target="1.6">
+			<classpath>
+				<fileset dir="lib" includes="*.jar"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="test">
+	</target>
+	
 </project>
