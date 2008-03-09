@@ -6,27 +6,46 @@
 		<echo>Currently used by the cruise control to ensure the repository is always healthy.</echo>
 	</target>
 	
-	<target name="cruise" description="for cruise control builds" depends="compile,test,clean"/>
+	<target name="cruise" description="for cruise control builds" depends="clean,compile,compile-tests,test"/>
 	
 	<target name="clean">
-		<delete dir="ant-bin"/>
+		<delete dir="classes-src"/>
+		<delete dir="classes-test"/>
+		<delete dir="test-results"/>
 	</target>
 	
 	<target name="compile">
-		<mkdir dir="ant-bin"/>
-		<javac srcdir="src" destdir="ant-bin" encoding="UTF-8" target="1.6">
+		<mkdir dir="classes-src"/>
+		<javac srcdir="src" destdir="classes-src" encoding="UTF-8" target="1.6">
 			<classpath>
 				<fileset dir="lib" includes="*.jar"/>
 			</classpath>
 		</javac>
-		<javac srcdir="test" destdir="ant-bin" encoding="UTF-8" target="1.6">
+	</target>
+	
+	<target name="compile-tests">
+		<mkdir dir="classes-test"/>
+		<javac srcdir="test" destdir="classes-test" encoding="UTF-8" target="1.6">
 			<classpath>
+				<path path="classes-src"/>
 				<fileset dir="lib" includes="*.jar"/>
 			</classpath>
 		</javac>
 	</target>
 	
 	<target name="test">
+		<mkdir dir="test-results"/>
+		<junit haltonfailure="true">
+			<batchtest todir="test-results">
+				<fileset dir="classes-test" includes="**/*Test.class"/>
+				<formatter type="xml"/>
+			</batchtest>
+			<classpath>
+				<path path="classes-src"/>
+				<path path="classes-test"/>
+				<fileset dir="lib" includes="*.jar"/>
+			</classpath>
+		</junit>
 	</target>
 	
 </project>
