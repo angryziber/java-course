@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
  *
  * @author anton
  */
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.METHOD})
 public @interface Todo {
 	String value() default "";
 }

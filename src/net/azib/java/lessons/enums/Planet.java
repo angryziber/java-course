@@ -31,4 +31,7 @@ public enum Planet {
     public double surfaceWeight(double otherMass) {
         return otherMass * surfaceGravity();
     }
+    public String surfaceWeightAsString(String name, double mass) {
+    	return name + " weights " + surfaceWeight(mass) + " N on " + name();
+    }
 }
