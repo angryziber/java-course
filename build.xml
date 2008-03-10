@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<project name="java-course" default="all" basedir=".">
+<project name="java-course" default="cruise" basedir=".">
 	
-	<target name="all">
+	<target name="info">
 		<echo>This is an ant build script.</echo>
 		<echo>Currently used by the cruise control to ensure the repository is always healthy.</echo>
 	</target>
