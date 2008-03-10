@@ -4,7 +4,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
 
-
 /**
  * AnimalKeeperTest
  *
@@ -12,11 +11,10 @@ import static org.easymock.EasyMock.*;
  */
 public class AnimalKeeperTest {
 	
-
 	@Test
 	public void toStringCallsAnimalToString() throws Exception {
 		Animal mockAnimal = createMock(Animal.class);
-		expect(mockAnimal.getName()).andReturn("ABC").times(2);
+		expect(mockAnimal.getName()).andReturn("ABC").once();
 		
 		replay(mockAnimal);
 		
