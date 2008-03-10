@@ -15,6 +15,11 @@ import org.junit.Test;
 public class FibonacciTest {
 	private Fibonacci fibonacci = new Fibonacci();
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void illegalArgumentFails() throws Exception {
+		fibonacci.compute(-1);
+	}
+	
 	@Test
 	public void zeroIsZero() {
 		assertCorrect("0", 0);

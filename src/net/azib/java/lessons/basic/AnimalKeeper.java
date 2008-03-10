@@ -33,7 +33,7 @@ public class AnimalKeeper {
 	public String toString() {
 		String s = "I have " + animals.size() + " animals:";
 		for (Animal a : animals) {
-			s += "\n" + a;
+			s += "\n" + a.getName();
 		}
 		return s;
 	}

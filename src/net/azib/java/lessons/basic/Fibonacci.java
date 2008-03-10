@@ -10,6 +10,9 @@ import java.math.BigInteger;
 public class Fibonacci {
 	
 	public BigInteger compute(int index) {
+		if (index < 0)
+			throw new IllegalArgumentException("index must be positive");
+		
 		BigInteger n = BigInteger.ZERO, n1 = n, n2 = n;
 		
 		if (index > 0)
