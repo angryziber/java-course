@@ -1,5 +1,6 @@
 package net.azib.java.students.t001370.lectures.lec2.home;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -56,12 +57,10 @@ public abstract class Animal implements Comparable<Animal>, Cloneable {
 	 * @return Return animal age in years
 	 */
 	int getAge(){
-        Date now = new Date();
-		int animalAge = 0;
-        
-		age = animalAge = now.getYear() - animalBirthDate.getYear();
-		
-		return animalAge;
+		Calendar birthDate = Calendar.getInstance();
+		birthDate.setTime(animalBirthDate);
+		age = Calendar.getInstance().get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+		return age;
 	}
 	
 	/**
