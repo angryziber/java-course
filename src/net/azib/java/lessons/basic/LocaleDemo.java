@@ -3,8 +3,6 @@ package net.azib.java.lessons.basic;
 import java.math.BigDecimal;
 import java.text.ChoiceFormat;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.Format;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -19,6 +17,7 @@ import java.util.Locale;
  * @author anton
  */
 public class LocaleDemo {
+
 	public static void main(String[] args) throws ParseException {
 		Locale locale = new Locale("et", "EE");
 		
@@ -41,7 +40,5 @@ public class LocaleDemo {
 		MessageFormat mf = new MessageFormat("I have {0,number} apples");
 		Object[] data = mf.parse("I have 10 apples");
 		System.out.println(Arrays.toString(data));
-		
-		
 	}
 }
