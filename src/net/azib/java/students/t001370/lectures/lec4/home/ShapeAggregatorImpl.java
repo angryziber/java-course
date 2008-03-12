@@ -4,6 +4,7 @@ import net.azib.java.lessons.collections.Shape;
 import net.azib.java.lessons.collections.ShapeAggregator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
@@ -21,17 +22,19 @@ public class ShapeAggregatorImpl implements ShapeAggregator{
 	}
 
 	public void addShapes(Shape... shapes) {
-		for (Shape shape : shapes) {
+		shapeAggrCollection.addAll(Arrays.asList(shapes));
+		/*for (Shape shape : shapes) {
 			shapeAggrCollection.add(shape);
-		}
+		}*/
 	}
 
 	public void copyLargerTo(Shape smallestShape, Collection<? super Shape> shapesCollection) {
-		for (Shape shape : shapeAggrCollection) {
+		shapesCollection = shapeAggrCollection.tailSet(smallestShape);
+		/*for (Shape shape : shapeAggrCollection) {
 			if (smallestShape.compareTo(shape) > 0){
 				shapesCollection.add(shape);
 			}
-		}
+		}*/
 	}
 
 	public void copyTo(Collection<? super Shape> shapesCollection) {
