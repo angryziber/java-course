@@ -77,8 +77,9 @@ public class Fibonacci {
 		return fibonacciCount;
 	}
 	
-	public static void main(String[] args) {
-		Fibonacci f = new Fibonacci(100);
+/*	public static void main(String[] args) {
+		Fibonacci f = new Fibonacci(21);
 		System.out.println("F(" + f.getCounter() + ")=" + f.getResult());
 	}
+*/	
 }
