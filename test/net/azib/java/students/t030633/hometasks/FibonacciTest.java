@@ -13,15 +13,15 @@ import org.junit.Test;
  */
 public class FibonacciTest {
 
+	private Fibonacci fib = new Fibonacci();
+	
 	/**
 	 * Test method for
 	 * {@link net.azib.java.students.t030633.hometasks.Fibonacci#FibonacciNumber(int)}.
 	 */
 	@Test
-	public void testFibonacciNumber100() {
-		Fibonacci f = new Fibonacci();
-		BigInteger b = new BigInteger("354224848179261915075");
-		assertEquals(b, f.fibonacciNumber(100));
+	public void zeroIsZero() {
+		assertEquals(0, fib.fibonacciNumber(0));
 	}
 	
 	/**
@@ -29,10 +29,18 @@ public class FibonacciTest {
 	 * {@link net.azib.java.students.t030633.hometasks.Fibonacci#FibonacciNumber(int)}.
 	 */
 	@Test
-	public void testFibonacciNumber5() {
-		Fibonacci f = new Fibonacci();
-		BigInteger b = new BigInteger("5");
-		assertEquals(b, f.fibonacciNumber(5));
+	public void compute5thNumber() {
+		assertEquals(5, fib.fibonacciNumber(5));
 	}
-
+	
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.hometasks.Fibonacci#FibonacciNumber(int)}.
+	 */
+	@Test
+	public void compute100thNumber() {
+		BigInteger b = new BigInteger("354224848179261915075");
+		assertEquals(b, fib.fibonacciNumber(100));
+	}
+	
 }

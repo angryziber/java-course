@@ -9,8 +9,11 @@ import java.math.BigInteger;
  */
 public class Fibonacci {
 
-	public BigInteger fibonacciNumber(int number){
-		
+	public BigInteger fibonacciNumber(int number) {
+
+		if (number == 0)
+			return BigInteger.ZERO;
+
 		BigInteger low = BigInteger.ZERO;
 		BigInteger high = BigInteger.ONE;
 
@@ -20,7 +23,7 @@ public class Fibonacci {
 		}
 
 		return high;
-		
+
 	}
-	
+
 }

@@ -29,7 +29,7 @@ public class DogTest {
 	@Test
 	public void testToString() {
 		Animal dog = new Dog("Laika", 1);
-		String string = "I am a Dog, my name is Laika and i go: Woof!";
+		String string = "Dog Laika says Woof!";
 		assertEquals(string, dog.toString());
 	}
 

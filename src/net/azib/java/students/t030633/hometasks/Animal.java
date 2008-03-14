@@ -55,7 +55,7 @@ abstract public class Animal implements Comparable<Animal>, Cloneable {
 	}
 
 	protected String getName() {
-		return getClass().getSimpleName() + ": " + name;
+		return getClass().getSimpleName() + ' ' + name;
 	}
 
 	/*
@@ -71,7 +71,7 @@ abstract public class Animal implements Comparable<Animal>, Cloneable {
 	protected abstract String makeSound();
 
 	public String toString() {
-		return "I am a " + getClass().getSimpleName() + ", my name is " + name + " and i go: " + makeSound();
+		return getName() + " says " + makeSound();
 	}
 
 }
