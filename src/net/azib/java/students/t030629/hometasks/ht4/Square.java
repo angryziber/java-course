@@ -34,5 +34,9 @@ public class Square extends Shape {
 	public String toString() {
 		return "Square with side " + side;
 	}
+	
+	public Square clone(){
+		return (Square) super.clone();
+	}
 
 }

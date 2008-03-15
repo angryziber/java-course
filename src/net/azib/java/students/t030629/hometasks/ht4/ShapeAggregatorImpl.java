@@ -35,7 +35,7 @@ public class ShapeAggregatorImpl implements ShapeAggregator {
 	public void copyLargerTo(Shape smallestShape, Collection<? super Shape> shapesCollection) {
 		for (Shape shape : shapes){
 			if (shape.compareTo(smallestShape) > 0){
-				shapesCollection.add(shape.clone());
+				shapesCollection.add(((Square)shape).clone()); //todo: change to "shape.clone()"
 			}
 		}
 	}
