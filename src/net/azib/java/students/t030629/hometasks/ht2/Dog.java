@@ -18,8 +18,8 @@ public class Dog extends Animal {
         return false;
     }
 
-    String getAnimalClass() {
-        return ANIMAL_CLASS.toString();
+    AnimalClass getAnimalClass() {
+        return ANIMAL_CLASS;
     }
 
     String getAdditionalInfo() {

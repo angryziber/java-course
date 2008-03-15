@@ -25,7 +25,7 @@ public abstract class Animal {
      * Queries for the class of the animal.
      * @return a string representing the class of the animal
      */
-    abstract String getAnimalClass();
+    abstract AnimalClass getAnimalClass();
 
     /**
      * Queries for additional info for the given animal.

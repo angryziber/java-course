@@ -16,8 +16,8 @@ public class Pigeon extends Animal {
         return true;
     }
 
-    String getAnimalClass() {
-        return ANIMAL_CLASS.toString();
+    AnimalClass getAnimalClass() {
+        return ANIMAL_CLASS;
     }
 
     String getAdditionalInfo() {

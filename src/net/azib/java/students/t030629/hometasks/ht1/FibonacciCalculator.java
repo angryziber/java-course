@@ -7,7 +7,7 @@ import java.math.BigInteger;
  * 
  * @author _anton_chepurov
  */
-public class FibonacciNumber {
+public class FibonacciCalculator {
     private BigInteger aBigInteger;
     private BigInteger bBigInteger;
     private BigInteger cBigInteger;
@@ -15,11 +15,11 @@ public class FibonacciNumber {
 
     /**
      * @param index index of the Fibonacci number to be calculated
-     * @throws Exception if the index is negative
+     * @throws IndexOutOfBoundsException if the specified index is negative
      */
-    public FibonacciNumber(int index) throws Exception {
+    public FibonacciCalculator(int index) throws IndexOutOfBoundsException {
         if (index < 0) {
-            throw new Exception("Fibonacci number cannot be calculated for a negative index. " +
+            throw new IndexOutOfBoundsException("Fibonacci number cannot be calculated for a negative index. " +
                     "Requested index: " + index);
         }
         this.index = auxIndex = index;
@@ -55,20 +55,4 @@ public class FibonacciNumber {
 
     }
 
-    public static void main(String[] args) {
-        try {
-
-            FibonacciNumber fibNumber = new FibonacciNumber(100);
-            System.out.println(fibNumber.getIndex() + "th: " + fibNumber.getValue());
-            System.out.println(fibNumber.getIndex() + "th: " + fibNumber.getValue());
-
-            /* http://en.wikipedia.org/wiki/Fibonacci_number */
-            for (int index = 0; index < 15; index++) {
-            	fibNumber = new FibonacciNumber(index);
-                System.out.println(index + "th: " + fibNumber.getValue());
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }

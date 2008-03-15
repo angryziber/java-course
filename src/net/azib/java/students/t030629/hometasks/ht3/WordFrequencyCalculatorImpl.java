@@ -13,9 +13,9 @@ import java.util.TreeMap;
  * @author anton_chepurov
  */
 public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
-	private Comparator comparator;
+	private Comparator<String> comparator;
 	
-	public WordFrequencyCalculatorImpl(Comparator comparator){
+	public WordFrequencyCalculatorImpl(Comparator<String> comparator){
 		this.comparator = comparator;
 	}
 
@@ -23,7 +23,7 @@ public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 		this(null);
 	}
 
-	public Map calculateFrequenciesOf(String text) {
+	public Map<String, Integer> calculateFrequenciesOf(String text) {
 		Map<String, Integer> wordMap = (comparator == null)
 			? new TreeMap<String, Integer>() : new TreeMap<String, Integer>(comparator);
 		String[] words = text.split("\\s");

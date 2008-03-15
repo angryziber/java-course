@@ -18,24 +18,4 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 		return set.toArray(new String[set.size()]);
 	}
 
-	public static void main(String... args) {
-		String[] arrayWithDuplicates = {
-				"abc",
-				"more abc",
-				"abc",
-				"123",
-				"11111",
-				"qwer",
-				"qwer",
-				"321",
-				"123"
-		};
-		
-		String[] arrayWithoutDuplicates = new DuplicateRemoverImpl().removeDuplicateStrings(arrayWithDuplicates);
-		
-		for (String element : arrayWithoutDuplicates) {
-			System.out.println(element);
-		}
-	}
-
 }
