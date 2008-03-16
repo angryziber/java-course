@@ -1,13 +1,10 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks;
 
 import static org.junit.Assert.*;
-
 import net.azib.java.lessons.collections.Shape;
-
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.junit.Test;
 
 /**
@@ -19,7 +16,7 @@ public class ShapeAggregatorImplTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.ShapeAggregatorImpl#addShapes(net.azib.java.lessons.collections.Shape[])}.
+	 * {@link net.azib.java.students.t030633.hometasks.ShapeAggregatorImpl#addShapes(net.azib.java.lessons.collections.Shape[])}.
 	 */
 	@Test
 	public void testAddShapesShapeArray() {
@@ -33,7 +30,7 @@ public class ShapeAggregatorImplTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.ShapeAggregatorImpl#addShapes(java.util.Collection)}.
+	 * {@link net.azib.java.students.t030633.hometasks.ShapeAggregatorImpl#addShapes(java.util.Collection)}.
 	 */
 	@Test
 	public void testAddShapesCollectionOfQextendsShape() {
@@ -50,7 +47,7 @@ public class ShapeAggregatorImplTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.ShapeAggregatorImpl#copyLargerTo(net.azib.java.lessons.collections.Shape, java.util.Collection)}.
+	 * {@link net.azib.java.students.t030633.hometasks.ShapeAggregatorImpl#copyLargerTo(net.azib.java.lessons.collections.Shape, java.util.Collection)}.
 	 */
 	@Test
 	public void testCopyLargerTo() {
@@ -69,7 +66,7 @@ public class ShapeAggregatorImplTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.ShapeAggregatorImpl#copyTo(java.util.Collection)}.
+	 * {@link net.azib.java.students.t030633.hometasks.ShapeAggregatorImpl#copyTo(java.util.Collection)}.
 	 */
 	@Test
 	public void testCopyTo() {
@@ -89,7 +86,7 @@ public class ShapeAggregatorImplTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.ShapeAggregatorImpl#sortedShapes()}.
+	 * {@link net.azib.java.students.t030633.hometasks.ShapeAggregatorImpl#sortedShapes()}.
 	 */
 	@Test
 	public void testSortedShapes() {
@@ -105,7 +102,7 @@ public class ShapeAggregatorImplTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.ShapeAggregatorImpl#totalArea()}.
+	 * {@link net.azib.java.students.t030633.hometasks.ShapeAggregatorImpl#totalArea()}.
 	 */
 	@Test
 	public void testTotalArea() {

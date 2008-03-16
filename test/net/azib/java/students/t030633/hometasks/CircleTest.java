@@ -1,18 +1,17 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 /**
  * CircleTest
  * 
- * @author khonsu
+ * @author t030633
  */
 public class CircleTest {
 
 	/**
-	 * Test method for {@link net.azib.java.students.t030633.Circle#hashCode()}.
+	 * Test method for {@link net.azib.java.students.t030633.hometasks.Circle#hashCode()}.
 	 */
 	@Test
 	public void testHashCode() {
@@ -22,7 +21,7 @@ public class CircleTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.Circle#equals(java.lang.Object)}.
+	 * {@link net.azib.java.students.t030633.hometasks.Circle#equals(java.lang.Object)}.
 	 */
 	@Test
 	public void testEqualsObject() {
@@ -32,7 +31,7 @@ public class CircleTest {
 	}
 
 	/**
-	 * Test method for {@link net.azib.java.students.t030633.Circle#toString()}.
+	 * Test method for {@link net.azib.java.students.t030633.hometasks.Circle#toString()}.
 	 */
 	@Test
 	public void testToString() {
@@ -41,7 +40,7 @@ public class CircleTest {
 	}
 
 	/**
-	 * Test method for {@link net.azib.java.students.t030633.Circle#area()}.
+	 * Test method for {@link net.azib.java.students.t030633.hometasks.Circle#area()}.
 	 */
 	@Test
 	public void testArea() {
@@ -51,7 +50,7 @@ public class CircleTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.Circle#setRadius(double)}.
+	 * {@link net.azib.java.students.t030633.hometasks.Circle#setRadius(double)}.
 	 */
 	@Test
 	public void testSetRadius() {

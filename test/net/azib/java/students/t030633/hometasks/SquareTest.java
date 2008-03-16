@@ -1,18 +1,17 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 /**
  * SquareTest
  * 
- * @author khonsu
+ * @author t030633
  */
 public class SquareTest {
 
 	/**
-	 * Test method for {@link net.azib.java.students.t030633.Square#hashCode()}.
+	 * Test method for {@link net.azib.java.students.t030633.hometasks.Square#hashCode()}.
 	 */
 	@Test
 	public void testHashCode() {
@@ -22,7 +21,7 @@ public class SquareTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.Square#equals(java.lang.Object)}.
+	 * {@link net.azib.java.students.t030633.hometasks.Square#equals(java.lang.Object)}.
 	 */
 	@Test
 	public void testEqualsObject() {
@@ -32,7 +31,7 @@ public class SquareTest {
 	}
 
 	/**
-	 * Test method for {@link net.azib.java.students.t030633.Square#toString()}.
+	 * Test method for {@link net.azib.java.students.t030633.hometasks.Square#toString()}.
 	 */
 	@Test
 	public void testToString() {
@@ -41,7 +40,7 @@ public class SquareTest {
 	}
 
 	/**
-	 * Test method for {@link net.azib.java.students.t030633.Square#area()}.
+	 * Test method for {@link net.azib.java.students.t030633.hometasks.Square#area()}.
 	 */
 	@Test
 	public void testArea() {
@@ -51,7 +50,7 @@ public class SquareTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.Square#setSide(double)}.
+	 * {@link net.azib.java.students.t030633.hometasks.Square#setSide(double)}.
 	 */
 	@Test
 	public void testSetSide() {

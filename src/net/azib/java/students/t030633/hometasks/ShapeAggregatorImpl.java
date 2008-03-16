@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks;
 
 import net.azib.java.lessons.collections.Shape;
 import net.azib.java.lessons.collections.ShapeAggregator;
