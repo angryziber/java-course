@@ -20,8 +20,10 @@ public class LessonSix {
 	
 	public static void main(String[] args) {
 		//FileCopier fc = new SimpleCopyProgram();
-		System.out.println("Copy without buffer took " + measureRunTime(new SimpleCopyProgram(new File("D:\\sisend.jpg"), new File("D:\\valjund.jpg"))) +" ms");
-		System.out.println("Copy with buffering took " + measureRunTime(new BufferedCopyProgram(new File("D:\\sisend.jpg"), new File("D:\\valjund.jpg"))) +" ms");
+		String in = "D:\\ESET.rar";
+		String out = "D:\\eset2.rar";
+		System.out.println("Copy without buffer took " + measureRunTime(new SimpleCopyProgram(new File(in), new File(out))) +" ms");
+		System.out.println("Copy with buffering took " + measureRunTime(new BufferedCopyProgram(new File(in), new File(out))) +" ms");
 		/*try {
 			fc.copy(new File("D:\\sisend.jpg"), new File("D:\\valjund.jpg"));
 		}
