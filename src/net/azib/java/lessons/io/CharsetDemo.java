@@ -1,5 +1,10 @@
 package net.azib.java.lessons.io;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +18,7 @@ public class CharsetDemo {
 		{
 			put("en", "english");
 			put("et", "eesti");
-			put("et", "latviešu");			
+			put("lv", "latviešu");			
 			put("fr", "français");
 			put("es", "español");
 			put("ru", "русский");
@@ -27,4 +32,32 @@ public class CharsetDemo {
 			put("ar", "الْعَرَبيّة");			
 		}
 	};
+	
+	public static void main(String[] args) throws IOException {
+		byte[] b = LANGUAGES.get("lv").getBytes();
+		System.out.println(new String(b));
+		
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(".classpath"), "UTF-8"));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				System.out.println(line);
+				line = null;
+				System.out.println(line.length());
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Sorry, file not found");
+		}
+		catch (IOException e) {
+			System.out.println("reading failed: " + e.getMessage());
+		}
+		finally {
+			if (reader != null) {
+				reader.close();
+				System.out.println("closed!!!");
+			}
+		}
+	}
 }
