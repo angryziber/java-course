@@ -14,54 +14,46 @@ import org.junit.Test;
  */
 public class BinaryParserTest {
 	
-	private static final String LN = System.getProperty("line.separator");
+	private static final String LN = System.getProperty("line.separator");;
 	
-	private String processInput(String input) {
+	private String processInput(String s) {
+		Scanner input = new Scanner(s);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		new BinaryParser(new Scanner(input), new PrintStream(out)).processInput();
+		new BinaryParser(input, new PrintStream(out)).processInput();
 		return out.toString();
 	}
 	
-	private void assertLastLine(String expected, String out) {
-		String lastLine = out.substring(out.lastIndexOf('\n', out.length() - 2) + 1, out.length() - 1);
-		assertEquals(expected, lastLine);
-	}
-	
-	@Test
-	public void welcomeTextIsDisplayed() throws Exception {
-		String out = processInput("");
-		assertTrue(out.startsWith(BinaryParser.WELCOME_TEXT));
-		assertTrue(out.endsWith(LN));
+	private void assertOutput(String expected, String input) {
+		assertEquals(BinaryParser.WELCOME_TEXT + LN + expected + LN, processInput(input));
 	}
 
 	@Test
-	public void xEndsProgram() throws Exception {
-		String outWithX = processInput("x\nsomething else");
-		String welcomeOut = processInput("");
-		assertEquals("'x' resulted in weird output", welcomeOut, outWithX);
+	public void welcomeNoteDisplayed() throws Exception {
+		assertEquals(BinaryParser.WELCOME_TEXT + LN, processInput(""));
 	}
 	
 	@Test
-	public void binaryAccepted() throws Exception {
-		assertLastLine("0 (0x0)", processInput("0"));
-		assertLastLine("1 (0x1)", processInput("1"));
-		assertLastLine("15 (0xf)", processInput("00001111"));
-		assertLastLine("101 (0x65)", processInput("1100101"));
-		assertLastLine("65535 (0xffff)", processInput("1111111111111111"));
+	public void simpleBinaryNumberConversion() throws Exception {
+		assertOutput("0 (0x0)", "0");
+	}
+
+	@Test
+	public void arbitraryBinaryNumberConversion() throws Exception {
+		assertOutput("15 (0xF)", "1111");
 	}
 	
 	@Test
-	public void nonBinaryRejected() throws Exception {
-		assertLastLine("'abc'" + BinaryParser.NOT_A_NUMBER_TEXT, processInput("abc"));
-		assertLastLine("'12'" + BinaryParser.NOT_A_NUMBER_TEXT, processInput("12"));
+	public void nonBinaryNumberRejected() throws Exception {
+		assertOutput("'foo' is not a binary number", "foo");
 	}
 	
 	@Test
-	public void fullSequenceWorks() throws Exception {
-		String expected = BinaryParser.WELCOME_TEXT + LN +
-						  "0 (0x0)" + LN + 
-						  "1 (0x1)" + LN +
-						  "'q'" + BinaryParser.NOT_A_NUMBER_TEXT + LN;
-		assertEquals(expected, processInput("0\n1\nq\nx\nall!"));
+	public void multipleInputProcessing(){
+		assertOutput("8 (0x8)" + LN + "5 (0x5)", "1000" + LN + "101");
+	}
+
+	@Test
+	public void xEndsProgram() {
+		assertOutput("65535 (0xFFFF)", "1111111111111111" + LN + "x" + LN + "1");
 	}
 }
