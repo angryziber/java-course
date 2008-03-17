@@ -12,11 +12,13 @@ import java.util.Scanner;
 public class BinaryParser {
 
 	private Scanner scanner;
+	private BigInteger lastInput;
 	
 	public BinaryParser(InputStream in) {
 		scanner = new Scanner(in);
+		lastInput = new BigInteger("-1");
 	}
-	
+/*	
 	public boolean processInput() {
 		String thisInput = scanner.next();
 		if (thisInput.equalsIgnoreCase("x"))
@@ -32,11 +34,39 @@ public class BinaryParser {
 			System.out.println("Not a binary number.");
 		return true;
 	}
+*/
+	public boolean processInput() {
+		String thisString = scanner.next();
+		if (thisString.equalsIgnoreCase("x"))
+			return false;
+		else if (thisString.matches("[0-1]+"))
+			lastInput = new BigInteger(thisString, 2);
+		else
+			lastInput = BigInteger.valueOf(-1);
+		return true;
+	}
+	
+	public String getDecimal() {
+		if (lastInput.equals(new BigInteger("-1")))
+			return "Enter binary number!";
+		else
+			return lastInput.toString(10);
+	}
+	
+	public String getHex() {
+		if (lastInput.equals(new BigInteger("-1")))
+			return "Enter binary number!";
+		else
+			return lastInput.toString(16);
+	}
 	
 	public static void main(String[] args) {
 		BinaryParser bp = new BinaryParser(System.in);
-		do {
+		System.out.print("Enter binary number (or 'x' to terminate): ");
+		while (bp.processInput()) {
+			System.out.println("Decimal: " + bp.getDecimal());
+			System.out.println("Hex: " + bp.getHex());
 			System.out.print("Enter binary number (or 'x' to terminate): ");
-		}while (bp.processInput());
+		}
 	}
 }
