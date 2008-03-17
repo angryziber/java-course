@@ -20,21 +20,6 @@ public class BinaryParserTest {
         binaryParser = new BinaryParser();
     }
 
-    @Test
-    public void testParser(){
-        
-        binaryParser.listen();
-    }
 
-    @Test
-    public void testRead(){
-        InputStream mockSystemIn = createMock(InputStream.class);
-//        expect(mockSystemIn).andReturn();
-
-        replay(mockSystemIn);
-
-//        new BinaryParser(mockSystemIn, );
-
-    }
 
 }
