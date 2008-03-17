@@ -36,7 +36,7 @@ public class Square extends Shape {
 
 	@Override
 	public String toString() {
-		return "This is square with radius" + this.side + ".";
+		return "This is square with side " + this.side + ".";
 	}
 
 }
