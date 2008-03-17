@@ -12,6 +12,10 @@ public class Square extends Shape {
 	private double side;
 	private static final int HASH_PRIME = 103;
 	
+	public Square(double side){
+		this.side = side;
+	}
+	
 	@Override
 	public double area() {
 		return Math.pow(side, 2.0);
@@ -33,13 +37,6 @@ public class Square extends Shape {
 	@Override
 	public String toString() {
 		return "This is square with radius" + this.side + ".";
-	}
-
-	/**
-	 * @param side the side to set
-	 */
-	public void setSide(double side) {
-		this.side = side;
 	}
 
 }

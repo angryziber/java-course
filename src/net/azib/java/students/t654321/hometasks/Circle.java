@@ -12,10 +12,7 @@ public class Circle extends Shape {
 	private double radius;
 	private static final int HASH_PRIME = 113;
 	
-	/**
-	 * @param radius the radius to set
-	 */
-	public void setRadius(double radius) {
+	public Circle(double radius){
 		this.radius = radius;
 	}
 
