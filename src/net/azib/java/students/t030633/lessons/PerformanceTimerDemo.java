@@ -3,11 +3,11 @@ package net.azib.java.students.t030633.lessons;
 // import net.azib.java.lessons.io.FileCopier;
 
 /**
- * PerformanceTimer
+ * PerformanceTimerDemo
  * 
  * @author t030633
  */
-public class PerformanceTimer {
+public class PerformanceTimerDemo {
 	public static void main(String[] args) {
 		long t = System.currentTimeMillis();
 		// do, put things here

@@ -1,9 +1,7 @@
 package net.azib.java.students.t030633;
 
-import java.io.InputStream;
-import java.util.InputMismatchException;
+import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * BinaryParser
@@ -12,60 +10,39 @@ import java.util.regex.Pattern;
  */
 public class BinaryParser {
 
-	private int number;
-	private Scanner scanner;
-	private Pattern pattern;
+	static final String INIT_MESSAGE = "Binary Parser. (x to exit)";
+	static final String ESCAPE = "x";
+	static final String BINARY = "[01]+";
+	private final Scanner in;
+	private final PrintStream out;
 
 	public BinaryParser() {
-		scanner = new Scanner(System.in);
-		pattern = Pattern.compile("[0,1]*");
+		this(new Scanner(System.in), System.out);
 	}
 
-	public BinaryParser(InputStream is) {
-		scanner = new Scanner(is);
-		pattern = Pattern.compile("[0,1]*");
+	public BinaryParser(Scanner scanner, PrintStream printStream) {
+		this.in = scanner;
+		this.out = printStream;
 	}
 
-	public void readBinary() {
-		if (!scanner.hasNext(pattern))
-			throw new InputMismatchException(scanner.next());
-		number = Integer.parseInt(scanner.next(pattern), 2);
-	}
-
-	public int getInteger() {
-		return number;
-	}
-
-	public String getDecimalString() {
-		return Integer.toString(number);
-	}
-
-	public String getHexString() {
-		return Integer.toHexString(number);
+	public void parse() {
+		out.println(INIT_MESSAGE);
+		while (in.hasNext()) {
+			if (in.hasNext(BINARY)) {
+				int number = Integer.parseInt(in.next(BINARY), 2);
+				out.println(number + " (0x" + Integer.toHexString(number).toUpperCase() + ")");
+			}
+			else if (in.hasNext(ESCAPE)) {
+				in.next();
+				break;
+			}
+			else
+				out.println(in.next() + " is not a binary number.");
+		}
 	}
 
 	public static void main(String[] args) {
-
-		BinaryParser binParser = new BinaryParser();
-
-		while (true) {
-
-			System.out.print("Bin: ");
-
-			try {
-				binParser.readBinary();
-				System.out.println("Dec: " + binParser.getDecimalString());
-				System.out.println("Hex: " + binParser.getHexString());
-			}
-			catch (InputMismatchException e) {
-				if (e.getMessage().compareTo("x") == 0)
-					break;
-				else
-					System.out.println("Enter a binary number. (x to exit)");
-			}
-
-		}
-
+		new BinaryParser().parse();
 	}
 
 }
