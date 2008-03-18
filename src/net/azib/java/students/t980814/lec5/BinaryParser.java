@@ -14,6 +14,10 @@ public class BinaryParser {
 	private Scanner scanner;
 	private BigInteger lastInput;
 	
+	public BinaryParser() {
+		this(System.in);
+	}
+	
 	public BinaryParser(InputStream in) {
 		scanner = new Scanner(in);
 		lastInput = new BigInteger("-1");

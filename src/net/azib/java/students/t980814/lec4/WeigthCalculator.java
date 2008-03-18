@@ -22,13 +22,9 @@ public class WeigthCalculator {
 	public String toString() {
 		StringBuilder result = new StringBuilder("The person weights: \n");
 		
-		for(Planet planet : Planet.values()) {
-			result.append((int)(planet.surfaceWeight(weigthOnEarth)/9.8));
-			result.append("kg on ");
-			result.append(planet.toString());
-			result.append("\n");
-		}
-		
+		for(Planet planet : Planet.values())
+			result.append((int)(planet.surfaceWeight(weigthOnEarth)/9.8)).append("kg on ").append(planet.toString()).append("\n");
+
 		return result.toString();
 	}
 }
