@@ -2,7 +2,6 @@ package net.azib.java.lessons.io;
 
 import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * BinaryParser

@@ -12,8 +12,9 @@ import java.io.IOException;
  */
 public class CopyPerformanceTimer {
 
-	static final String SOURCE_ADDRESS = "bin" + System.getProperty("file.separator") + "java-logo.gif";
-	static final String DESTINATION_ADDRESS = System.getProperty("java.io.tmpdir") + ".copydest.gif";
+	static final String SEP = System.getProperty("file.separator");
+	static final String SOURCE_ADDRESS = "bin" + SEP + "java-logo.gif";
+	static final String DESTINATION_ADDRESS = System.getProperty("java.io.tmpdir") + SEP + ".copydest.gif";
 	private final File source;
 	private final File destination;
 
