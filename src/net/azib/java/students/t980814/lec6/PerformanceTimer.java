@@ -40,7 +40,7 @@ public class PerformanceTimer {
 				}
 		});
 
-		new File("copy1.dest").deleteOnExit();
+		new File("copy1.dest").delete();
 		
 		new PerformanceTimer(System.out, new Runnable() {
 			public void run() {
@@ -57,7 +57,7 @@ public class PerformanceTimer {
 			}
 		});
 
-		new File("copy2.dest").deleteOnExit();
+		new File("copy2.dest").delete();
 
 	}
 }
