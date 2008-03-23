@@ -21,6 +21,9 @@
 				<fileset dir="lib" includes="*.jar"/>
 			</classpath>
 		</javac>
+		<copy todir="classes-src">
+			<fileset dir="src" includes="**/*" excludes="**/*.java"/>
+		</copy>
 	</target>
 	
 	<target name="compile-tests">
@@ -31,6 +34,9 @@
 				<fileset dir="lib" includes="*.jar"/>
 			</classpath>
 		</javac>
+		<copy todir="classes-test">
+			<fileset dir="test" includes="**/*" excludes="**/*.java"/>
+		</copy>
 	</target>
 	
 	<target name="test">
