@@ -18,10 +18,18 @@ public class PerformanceTimer {
 		out.println(measureRunnablePerformanceInMillis(runnable) + "ms");
 	}
 	
+	long startTimer() {
+		return System.currentTimeMillis();
+	}
+	
+	long stopTimer(long startTime) {
+		return System.currentTimeMillis() - startTime;
+	}
+	
 	public long measureRunnablePerformanceInMillis(Runnable runnable) {
-		long l = System.currentTimeMillis();
+		long startTime = startTimer();
 		runnable.run();
-		return (System.currentTimeMillis() - l);
+		return stopTimer(startTime);
 	}
 
 	public static void main(String[] args) {

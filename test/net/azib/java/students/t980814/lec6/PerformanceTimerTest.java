@@ -1,4 +1,4 @@
-package net.azib.java.students.t980814;
+package net.azib.java.students.t980814.lec6;
 
 import net.azib.java.students.t980814.lec6.PerformanceTimer;
 
@@ -35,17 +35,7 @@ public class PerformanceTimerTest {
 	public void test0msTimeUse() {
 		final String INFO_TXT = "0ms"; 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		new PerformanceTimer(new PrintStream(out), new Runnable() {
-			public void run() {
-				try {
-					Thread.sleep(0);
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			public String toString() { return INFO_TXT; }
-			} );
+		new PerformanceTimer(new PrintStream(out), new EmptyRunnable(INFO_TXT));
 		assertEquals(PerformanceTimer.WELCOME_TEXT + INFO_TXT + LN + INFO_TXT + LN, out.toString()); 
 	}
 
@@ -53,18 +43,29 @@ public class PerformanceTimerTest {
 	public void test1000msTimeUse() {
 		final String INFO_TXT = "1000ms"; 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		new PerformanceTimer(new PrintStream(out), new Runnable() {
-			public void run() {
-				try {
-					Thread.sleep(1000);
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+		new PerformanceTimer(new PrintStream(out), new EmptyRunnable(INFO_TXT)) {
+			@Override
+			long stopTimer(long startTime) {
+				// return a predefined value for this test
+				return 1000;
 			}
-			public String toString() { return INFO_TXT; }
-			} );
+		};
 		assertEquals(PerformanceTimer.WELCOME_TEXT + INFO_TXT + LN + INFO_TXT + LN, out.toString()); 
 	}
 	
+	private class EmptyRunnable implements Runnable {
+		private String s;
+
+		public EmptyRunnable(String s) {
+			this.s = s;
+		}
+
+		public void run() {
+			// do nothing here
+		}
+
+		public String toString() {
+			return s;
+		}
+	}
 }
