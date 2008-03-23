@@ -1,12 +1,15 @@
 package net.azib.java.students.t654321.hometasks;
 
+
 import net.azib.java.lessons.collections.Shape;
 import java.util.Collections;
-//import java.util.Iterator;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+
 
 
 /**
@@ -15,7 +18,16 @@ import org.junit.Test;
  * @author Karl
  */
 public class ShapeAggregatorImplTest {
+
+
 	
+	/*
+	 * Still TODO:
+	 * 1. One shape can be added to Shapelist
+	 * 2. Circle and Square unit tests
+	 * 3. Add empty list
+	 * 4. Add empty array
+	 */
 	ShapeAggregatorImpl sai = new ShapeAggregatorImpl();
 	
 	// Creates list of Shapes
@@ -47,17 +59,18 @@ public class ShapeAggregatorImplTest {
 		arrayOfShapesForTest[7] = new Square(20.0); // area = 400
 		return arrayOfShapesForTest;
 	}
-/*	
+	
+	// Creates sorted reference list to for copyLargerTo method
 	private List<Shape> referenceShapeListCreator(Shape referenceShape) {
 		List<Shape> referenceShapeList = new LinkedList<Shape>();
-		for (Iterator<Shape> iterator = shapeListCreator().iterator(); iterator.hasNext();) {
+		for (Iterator <Shape> iterator = shapeListCreator().iterator(); iterator.hasNext();) {
 			Shape shape = (Shape) iterator.next();
 			if(shape.area() > referenceShape.area())
 				referenceShapeList.add(shape);
 		}
 		return referenceShapeList;
 	}
-*/	
+	
 	// Verify, that Shape array can be added to ShapeAggregatorImpl list.
 	@Test
 	public void shapeArrayIsAddedToList(){
@@ -87,16 +100,17 @@ public class ShapeAggregatorImplTest {
 	}
 	
 	
-/* 
+ 
 	// Verify, that all contained Shapes are copied to provided Collection, which are larger than smallestShape
 	@Test
 	public void copiesLargerThanArgumentShapeToAnotherList(){
 		List<Shape> largerShapes = new LinkedList<Shape>();
-		Shape referenceShape = new Square(5.39); 
+		Shape referenceShape = new Square(5.39);
+		sai.addShapes(shapeListCreator());
 		sai.copyLargerTo(referenceShape, largerShapes);
 		assertEquals(referenceShapeListCreator(referenceShape).toString(), largerShapes.toString());
 	}
-*/
+
 	
 	// Verify, that total area of list Shape are calculated correctly.
 	@Test
