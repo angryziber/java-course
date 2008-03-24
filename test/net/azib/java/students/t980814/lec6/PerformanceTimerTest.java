@@ -24,11 +24,19 @@ public class PerformanceTimerTest {
 	public void testWelcomeMessage() {
 		final String INFO_TXT = "nothing"; 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		new PerformanceTimer(new PrintStream(out), new Runnable() {
-			public void run() {}
-			public String toString() { return INFO_TXT; }
-			} );
+		new PerformanceTimer(new PrintStream(out), new EmptyRunnable(INFO_TXT));
 		assertEquals(PerformanceTimer.WELCOME_TEXT + INFO_TXT + LN + "0ms" + LN, out.toString()); 
+	}
+	
+	@Test
+	public void runIsCalled() {
+		final boolean runWasCalled[] = {false};
+		new PerformanceTimer(System.out, new Runnable() {
+			public void run() {
+				runWasCalled[0] = true;
+			}
+		});
+		assertTrue(runWasCalled[0]);
 	}
 	
 	@Test
