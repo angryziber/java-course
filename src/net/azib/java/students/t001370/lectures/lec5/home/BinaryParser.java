@@ -10,9 +10,9 @@ import java.util.Scanner;
  * @author maksim
  */
 public class BinaryParser {
-	public final String WELCOME_MSG = "Welcome! Enter binary ('x' for exit)";
+	public final String WELCOME_MSG = "Welcome! Enter binary ('x' for exit): ";
 	public final String EXIT_MSG = "Exit! You have pressed 'x' for exit!";
-	public final String ERROR_MSG = "Error! Entered pattern does not match :: ";
+	public final String ERROR_MSG = "Error! Entered number is not binary :: ";
 	
 	private final PrintStream output;
 	private final Scanner input;
@@ -26,17 +26,17 @@ public class BinaryParser {
 		this.input 	= in;
 	}
 	
+	public static BigInteger binToBigInt(String bin){
+		BigInteger bi = new BigInteger(bin, 2);
+		return bi;
+	}
+
 	public void parseBinary(){
 		output.println(WELCOME_MSG);
 		do{
 			if (input.hasNext("[0-1]+")) {
-				try{
-					int number = binToDec(input.next());
-					output.println("Binary in Dec: " + number + " and in Hex: 0x" + Integer.toHexString(number).toUpperCase());
-				}
-				catch (Exception e){
-					output.println("Entered numer is to big! " + e.getMessage());
-				}
+				BigInteger number = binToBigInt(input.next());
+				output.println("Binary in Dec: " + number + " and in Hex: 0x" + number.toString(16).toUpperCase());
 			}
 			else if (input.hasNext("x")) {
 				output.println(EXIT_MSG);
@@ -46,21 +46,9 @@ public class BinaryParser {
 				output.println(ERROR_MSG + input.next());
 		}while (true);
 	}
-	
-	public int binToDec(String binStr){
-		return Integer.parseInt(binStr, 2);
-	}
-
-	public static BigInteger binToInt(String bin){
-		BigInteger i = new BigInteger(bin, 2);
-		return i;
-	}
-	
 
 	public static void main(String[] args) {
 		new BinaryParser().parseBinary();
-		
-		//System.out.println(BinaryParser.binToInt("1111").toString());
 	}
 
 }
