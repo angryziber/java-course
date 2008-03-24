@@ -28,7 +28,7 @@ public class PrimitiveWebServerTest {
 		assertEquals(PrimitiveWebServer.HTTP_OK_RESPONSE + 
 					 "Server: " + webServer.getClass().getSimpleName() + PrimitiveWebServer.HTTP_LN +
 					 "Content-Type: text/html" + PrimitiveWebServer.HTTP_LN +
-				     PrimitiveWebServer.HTTP_LN + PrimitiveWebServer.HTTP_LN + 
+				     PrimitiveWebServer.HTTP_LN + 
 				     "<h1>Hello World!</h1>", out.toString());
 				     		
 	}

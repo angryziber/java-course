@@ -36,7 +36,7 @@ public class FileCopierImplTest {
 		testFileCopy = new FileInputStream(fileDest);
 		testFileCopy.read(testBytesCopied);
 		testFileCopy.close();
-		assertEquals(testBytes,testBytesCopied);
+		assertArrayEquals(testBytes,testBytesCopied);
 	} 
 	catch (IOException e) {}
 	finally{

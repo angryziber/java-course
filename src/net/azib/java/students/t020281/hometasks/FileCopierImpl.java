@@ -23,7 +23,7 @@ public class FileCopierImpl implements FileCopier {
 			srcFile = new FileInputStream(src);
 			dstFile = new FileOutputStream(dest);
 			while ((data = srcFile.read()) != -1) {
-				dstFile.write(srcFile.read());
+				dstFile.write(data);
 			}
 		}
 		catch (IOException e){}
