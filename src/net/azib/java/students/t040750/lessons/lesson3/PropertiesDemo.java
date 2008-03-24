@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750.lesson3;
+package net.azib.java.students.t040750.lessons.lesson3;
 
 import java.util.Properties;
 

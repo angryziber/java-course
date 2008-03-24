@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750.lesson5;
+package net.azib.java.students.t040750.lessons.lesson5;
 
 import java.util.regex.Pattern;
 

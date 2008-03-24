@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750.lesson4;
+package net.azib.java.students.t040750.lessons.lesson4;
 
 import net.azib.java.lessons.enums.Planet;
 

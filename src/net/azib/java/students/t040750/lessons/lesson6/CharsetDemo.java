@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750.lesson6;
+package net.azib.java.students.t040750.lessons.lesson6;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

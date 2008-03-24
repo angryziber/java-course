@@ -1,4 +1,4 @@
-package net.azib.java.students.t040750.lesson1;
+package net.azib.java.students.t040750.lessons.lesson1;
 
 import java.math.BigInteger;
 import java.util.Calendar;
