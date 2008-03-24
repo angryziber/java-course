@@ -1,12 +1,12 @@
 package net.azib.java.students.t030633;
 
-import static org.junit.Assert.*;
-
-import java.io.File;
-import java.io.IOException;
-
-import static org.easymock.EasyMock.*;
 import net.azib.java.lessons.io.FileCopier;
+
+import static org.easymock.EasyMock.createMock;
+
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -17,13 +17,10 @@ import org.junit.Test;
  */
 public class CopyPerformanceTimerTest {
 
-	private final File src = CopyPerformanceTimer.SOURCE_ADDRESS;
-	private final File dest = CopyPerformanceTimer.DESTINATION_ADDRESS;
-
 	@Test
 	public void timeIsLong() throws IOException {
 		FileCopier mockCopier = createMock(FileCopier.class);
-		long measuredTime = new CopyPerformanceTimer(src, dest).measureCopyTime(mockCopier);
+		long measuredTime = new CopyPerformanceTimer().measureCopyTime(mockCopier);
 		assertTrue((Long) measuredTime instanceof Long);
 	}
 

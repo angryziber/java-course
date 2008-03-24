@@ -14,8 +14,8 @@ import org.junit.Test;
  */
 public class BufferedCopyProgramTest {
 
-	private final File src = CopyPerformanceTimer.SOURCE_ADDRESS;
-	private final File dest = CopyPerformanceTimer.DESTINATION_ADDRESS;
+	private final File src = CopyPerformanceTimer.SOURCE_FILE;
+	private final File dest = CopyPerformanceTimer.DEST_FILE;
 
 	private void copy() throws IOException {
 		if (dest.exists())
