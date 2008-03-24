@@ -3,6 +3,8 @@ package net.azib.java.students.t040719;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
+import org.junit.Test;
+
 
 /**
  * SimpleWebServerDemoTest
@@ -12,7 +14,7 @@ import java.io.ByteArrayOutputStream;
 public class SimpleWebServerDemoTest {
 	private SimpleWebServerDemo webServ;
 	
-	//@Test
+	@Test
 	public void requestHandled(){
 		webServ = new SimpleWebServerDemo();
 		ByteArrayInputStream input = new ByteArrayInputStream("GET / HTTP/1.0\r\n\r\n".getBytes());
