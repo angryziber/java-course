@@ -14,8 +14,8 @@ import org.junit.Test;
  */
 public class SimpleCopyProgramTest {
 
-	private final File src = new File(CopyPerformanceTimer.SOURCE_ADDRESS);
-	private final File dest = new File(CopyPerformanceTimer.DESTINATION_ADDRESS);
+	private final File src = CopyPerformanceTimer.SOURCE_ADDRESS;
+	private final File dest = CopyPerformanceTimer.DESTINATION_ADDRESS;
 
 	private void copy() throws IOException {
 		if (dest.exists())

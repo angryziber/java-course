@@ -12,14 +12,23 @@ import java.io.IOException;
  */
 public class CopyPerformanceTimer {
 
-	static final String SEP = System.getProperty("file.separator");
-	static final String SOURCE_ADDRESS = CopyPerformanceTimer.class.getClassLoader().getResource("java-logo.gif").getPath();
-	static final String DESTINATION_ADDRESS = System.getProperty("java.io.tmpdir") + SEP + ".copydest.gif";
+	static final File SOURCE_ADDRESS = new File(CopyPerformanceTimer.class.getClassLoader().getResource("java-logo.gif").getPath());
+	static File DESTINATION_ADDRESS;
+	
+	static {
+		try {
+			DESTINATION_ADDRESS = File.createTempFile("copydest", ".gif");
+		}
+		catch (IOException e) {
+			DESTINATION_ADDRESS = null;
+		}
+	}
+	
 	private final File source;
 	private final File destination;
 
 	public CopyPerformanceTimer() {
-		this(new File(SOURCE_ADDRESS), new File(DESTINATION_ADDRESS));
+		this(SOURCE_ADDRESS, DESTINATION_ADDRESS);
 	}
 
 	public CopyPerformanceTimer(File src, File dest) {

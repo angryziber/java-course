@@ -14,11 +14,7 @@ import org.junit.Test;
  * @author Trial
  */
 public class FileCopierImplTest {
-	
-	@Test
-	public void todo() throws Exception {
-	}
-	
+		
 	@Test
 	public void fileIsCopied () {
 		FileOutputStream testFile = null;
@@ -35,9 +31,7 @@ public class FileCopierImplTest {
 		testFile.close();
 		
 		fileCopy = new FileCopierImpl();
-		File src = new File(fileSrc);
-		File dest = new File(fileDest);
-		fileCopy.copy(src, dest);
+		fileCopy.copy(new File(fileSrc), new File(fileDest));
 		
 		testFileCopy = new FileInputStream(fileDest);
 		testFileCopy.read(testBytesCopied);
