@@ -43,7 +43,7 @@
 		<mkdir dir="test-results"/>
 		<junit haltonfailure="true">
 			<batchtest todir="test-results">
-				<fileset dir="classes-test" includes="**/*Test.class"/>
+				<fileset dir="classes-test" includes="**/*Test.class" excludes="**/Abstract*"/>
 				<formatter type="xml"/>
 			</batchtest>
 			<classpath>
