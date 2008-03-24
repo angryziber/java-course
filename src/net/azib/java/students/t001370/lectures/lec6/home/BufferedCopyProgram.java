@@ -1,5 +1,7 @@
 package net.azib.java.students.t001370.lectures.lec6.home;
 
+import net.azib.java.lessons.io.FileCopier;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -13,7 +15,7 @@ import java.io.IOException;
  *
  * @author maksim
  */
-public class BufferedCopyProgram {
+public class BufferedCopyProgram implements FileCopier, Runnable{
 	
 	private BufferedInputStream input;
 	private BufferedOutputStream output;
@@ -44,16 +46,15 @@ public class BufferedCopyProgram {
 			while ((infoRead = input.read()) != -1){
 				output.write(infoRead);
 			}
+			dest.deleteOnExit();
 			closeStreams();
 		}
 	}
 	
-	void copyFile(){
+	public void run(){
 		File src = new File("C:\\Users\\maksim\\Desktop\\Kool\\IAG0040 Programmeerimise erikursus II\\Speller.exe");
 		File dest = new File("C:\\Users\\maksim\\Desktop\\Kool\\IAG0040 Programmeerimise erikursus II\\Speller_BufferedDest.exe");
 		
-		System.out.println("Started BufferedCopier!");
-		long startTime = System.currentTimeMillis();
 		try{
 			copy(src, dest);
 		}
@@ -63,11 +64,9 @@ public class BufferedCopyProgram {
 		catch (IOException e) {
 			System.out.println("IOException" + e.getMessage());
 		}
-		System.out.println("Stopped! Time: " + (System.currentTimeMillis() - startTime));
-	
 	}
 	
 	public static void main(String[] args) {
-		new BufferedCopyProgram().copyFile();
+		new BufferedCopyProgram().run();
 	}
 }

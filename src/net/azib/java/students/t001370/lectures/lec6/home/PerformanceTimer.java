@@ -1,23 +1,40 @@
 package net.azib.java.students.t001370.lectures.lec6.home;
 
+import java.io.PrintStream;
+
+/**
+ * PerformanceTimer
+ *
+ * @author maksim
+ */
 /**
  * PerformanceTimer
  *
  * @author maksim
  */
 public class PerformanceTimer {
-	public static long runAndMeasureTime(Runnable runnable){
-		long t = System.currentTimeMillis();
-		runnable.run();
-		return System.currentTimeMillis() - t;
+	
+	PrintStream output;
+	
+	PerformanceTimer(){
+		output = System.out;
 	}
 	
+	PerformanceTimer(PrintStream out){
+		this.output = out;
+	}
 	
-	
-	/*public static void main(String[] args) {
+	public void runAndMeasureTime(Runnable runnable){
 		long t = System.currentTimeMillis();
-		//do 
-		System.out.println("passeed: " + (System.currentTimeMillis() - t) + " ms");
-	}*/
+		
+		output.print(runnable.getClass().getSimpleName() + " performance is: ");
+		runnable.run();
+		output.println((System.currentTimeMillis() - t) + "ms");
+	}
+	
+	public static void main(String[] args) {
+		new PerformanceTimer().runAndMeasureTime(new BufferedCopyProgram());
+		new PerformanceTimer().runAndMeasureTime(new SimpelCopyProgram());
+	}
 
 }

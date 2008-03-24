@@ -12,7 +12,7 @@ import java.io.IOException;
  *
  * @author maksim
  */
-public class SimpelCopyProgram implements FileCopier{
+public class SimpelCopyProgram implements FileCopier, Runnable{
 	
 	private FileInputStream input;
 	private FileOutputStream output;
@@ -46,12 +46,10 @@ public class SimpelCopyProgram implements FileCopier{
 		}
 	}
 	
-	void copyFile(){
+	public void run(){
 		File src = new File("C:\\Users\\maksim\\Desktop\\Kool\\IAG0040 Programmeerimise erikursus II\\Speller.exe");
 		File dest = new File("C:\\Users\\maksim\\Desktop\\Kool\\IAG0040 Programmeerimise erikursus II\\Speller_SimpelDest.exe");
 		
-		System.out.println("Started SimpelCopier!");
-		long startTime = System.currentTimeMillis();
 		try{
 			copy(src, dest);
 		}
@@ -61,12 +59,10 @@ public class SimpelCopyProgram implements FileCopier{
 		catch (IOException e) {
 			System.out.println("IOException" + e.getMessage());
 		}
-		System.out.println("Stopped! Time: " + (System.currentTimeMillis() - startTime));
-	
 	}
 	
 	public static void main(String[] args) {
-		new SimpelCopyProgram().copyFile();
+		new SimpelCopyProgram().run();
 	}
 
 }
