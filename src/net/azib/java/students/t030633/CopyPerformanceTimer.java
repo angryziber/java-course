@@ -13,24 +13,34 @@ import java.net.URI;
  */
 public class CopyPerformanceTimer {
 
+	static final String SEP = System.getProperty("file.separator");
 	static File SOURCE_FILE;
 	static File DEST_FILE;
 
 	static {
 		try {
 			/*
-			 * SDN bug 4466485. Synopsis: getClass().getResource().getFile()
-			 * returns file name with %20. Work around : you can force any
-			 * %-escaped characters to be decoded by first converting the URL to
-			 * a URI, and then using the path component of the URI as the
-			 * filename.
+			 * SDN bug 4466485.
+			 * 
+			 * Synopsis: getClass().getResource().getFile() returns file name
+			 * with %20.
+			 * 
+			 * Work around : you can force any %-escaped characters to be
+			 * decoded by first converting the URL to a URI, and then using the
+			 * path component of the URI as the filename.
 			 */
-			URI sourceURI = new URI(CopyPerformanceTimer.class.getClassLoader().getResource("java-logo.gif").toString());
-			SOURCE_FILE = new File(sourceURI.getPath());
-			DEST_FILE = File.createTempFile("copydest", ".gif");
+			URI source = new URI(CopyPerformanceTimer.class.getClassLoader().getResource(
+					"net" + SEP + "azib" + SEP + "java" + SEP + "students" + SEP + "t030633" + SEP + "timer.testfile.htm")
+					.toString());
+			SOURCE_FILE = new File(source.getPath());
+			DEST_FILE = File.createTempFile("timer.destfile", ".htm");
 		}
 		catch (Exception e) {
-			DEST_FILE = null;
+			System.err.println("File initialization error.");
+		}
+		finally {
+			if (DEST_FILE != null)
+				DEST_FILE.deleteOnExit();
 		}
 	}
 

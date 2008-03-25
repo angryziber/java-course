@@ -1,26 +1,20 @@
 package net.azib.java.students.t030633;
 
-import net.azib.java.lessons.io.FileCopier;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * SimpleCopyProgram
  * 
  * @author t030633
  */
-public class SimpleCopyProgram implements FileCopier {
+public class SimpleCopyProgram extends AbstractFileCopier {
 
-	public void copy(File src, File dest) throws IOException {
-		FileOutputStream out = new FileOutputStream(dest);
-		FileInputStream in = new FileInputStream(src);
-		while (in.available() > 0)
-			out.write(in.read());
-		in.close();
-		out.close();
+	@Override
+	public void copy(InputStream src, OutputStream dest) throws IOException {
+		while (src.available() > 0)
+			dest.write(src.read());
 	}
 
 }

@@ -1,7 +1,6 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks;
 
 import static org.junit.Assert.assertEquals;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
