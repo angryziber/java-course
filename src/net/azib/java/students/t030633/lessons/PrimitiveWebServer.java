@@ -28,7 +28,6 @@ public class PrimitiveWebServer {
 			}
 		}
 		catch (IOException e) {
-			// TODO !!
 		}
 	}
 

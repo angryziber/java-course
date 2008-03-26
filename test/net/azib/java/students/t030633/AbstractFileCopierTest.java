@@ -18,7 +18,7 @@ import org.junit.Test;
  */
 public abstract class AbstractFileCopierTest {
 
-	private File src = CopyPerformanceTimer.SOURCE_FILE;
+	private File src = TestFileLocation.SOURCE_FILE;
 	private File dest = CopyPerformanceTimer.DEST_FILE;
 
 	private AbstractFileCopier afc;
