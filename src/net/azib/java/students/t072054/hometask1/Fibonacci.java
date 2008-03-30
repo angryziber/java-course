@@ -10,7 +10,9 @@ import java.io.*;
 public class Fibonacci {
 	public static void main(String[] args) {
 		int fibo_num = 0;
-		long fibo_answer = 0;
+		long fibo_answer = 1;
+		long fibo_old = 1;
+		long temp;
 		String string = "";
 
 		System.out.println("Enter Fibonacci number index... ");
@@ -24,11 +26,13 @@ public class Fibonacci {
 		}
 		catch (Exception e) {
 		}
-		
+
 		fibo_num = Integer.parseInt(string);
 
-		for (int i = 0; i <= fibo_num; i++) {
-			fibo_answer += i;
+		for (int i = 0; i < fibo_num - 1; i++) {
+			temp = fibo_answer;
+			fibo_answer += fibo_old;
+			fibo_old = temp;
 		}
 
 		System.out.println("The answer is: " + fibo_answer);
