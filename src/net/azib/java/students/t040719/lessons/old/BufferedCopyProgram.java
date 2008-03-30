@@ -1,4 +1,4 @@
-package net.azib.java.students.t040719.lessons;
+package net.azib.java.students.t040719.lessons.old;
 
 import net.azib.java.lessons.io.FileCopier;
 

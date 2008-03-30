@@ -1,6 +1,8 @@
 package net.azib.java.students.t040719.lessons;
 
 import net.azib.java.lessons.io.FileCopier;
+import net.azib.java.students.t040719.lessons.old.BufferedCopyProgram;
+import net.azib.java.students.t040719.lessons.old.SimpleCopyProgram;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,8 +22,8 @@ public class LessonSix {
 	
 	public static void main(String[] args) {
 		//FileCopier fc = new SimpleCopyProgram();
-		String in = "D:\\ESET.rar";
-		String out = "D:\\eset2.rar";
+		String in = "D:\\test.jpg";
+		String out = "D:\\out.file";
 		System.out.println("Copy without buffer took " + measureRunTime(new SimpleCopyProgram(new File(in), new File(out))) +" ms");
 		System.out.println("Copy with buffering took " + measureRunTime(new BufferedCopyProgram(new File(in), new File(out))) +" ms");
 		/*try {
