@@ -14,8 +14,9 @@ import java.net.Socket;
  * @author anton
  */
 public class PrimitiveWebServer {
-	/** HTTP_PORT */
-	private static final int HTTP_PORT = 8080;
+
+	private static final int DEFAULT_PORT = 8080;
+	
 	public static final String HTTP_LN = "\r\n";
 	public static final String HTTP_OK_RESPONSE = "HTTP 200 OK" + HTTP_LN;
 
@@ -48,10 +49,10 @@ public class PrimitiveWebServer {
 	public void run() {
 		ServerSocket server;
 		try {
-			server = new ServerSocket(HTTP_PORT);
+			server = new ServerSocket(DEFAULT_PORT);
 		}
 		catch (IOException e) {
-			System.err.println("Unable to bind to port " + HTTP_PORT);
+			System.err.println("Unable to bind to port " + DEFAULT_PORT);
 			return;
 		}
 		
