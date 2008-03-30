@@ -2,6 +2,8 @@ package net.azib.java.lessons.io;
 
 import static org.junit.Assert.assertEquals;
 
+import net.azib.java.lessons.net.PrimitiveWebServer;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 

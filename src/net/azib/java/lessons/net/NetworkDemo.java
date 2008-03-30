@@ -1,4 +1,4 @@
-package net.azib.java.lessons.io;
+package net.azib.java.lessons.net;
 
 import java.io.IOException;
 import java.net.InetAddress;
