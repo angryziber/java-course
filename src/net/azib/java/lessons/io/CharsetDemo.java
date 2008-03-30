@@ -43,7 +43,6 @@ public class CharsetDemo {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				System.out.println(line);
-				line = null;
 				System.out.println(line.length());
 			}
 		}
