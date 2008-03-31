@@ -47,6 +47,8 @@ public class CopyPerformanceTimer {
 	public static void main(String[] args) throws IOException {
 		System.out.println(new CopyPerformanceTimer().measureCopyTime(new SimpleCopyProgram()));
 		System.out.println(new CopyPerformanceTimer().measureCopyTime(new BufferedCopyProgram()));
+		System.out.println(new CopyPerformanceTimer().measureCopyTime(new ChanneledCopyProgram()));
+		System.out.println(new CopyPerformanceTimer().measureCopyTime(new DirectChanneledCopyProgram()));
 	}
 
 }

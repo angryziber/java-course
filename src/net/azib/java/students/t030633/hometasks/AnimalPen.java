@@ -100,7 +100,7 @@ public class AnimalPen {
 			Animal d = (Animal) a.clone();
 			d = null;
 			System.out.println(d);
-			System.out.println(d.compareTo(a));
+			//System.out.println(d.compareTo(a));
 		}
 		catch (CloneNotSupportedException e) {
 			System.out.println("Clone bug");

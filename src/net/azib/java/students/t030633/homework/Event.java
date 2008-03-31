@@ -7,23 +7,22 @@ package net.azib.java.students.t030633.homework;
  */
 public enum Event {
 
-	M100(25.437, 18.0, 1.81, true), 
-	LONG(0.14354, 220, 1.40, false), 
-	SHOT(51.39, 1.5, 1.05, false), 
-	HIGH(0.8465, 75, 1.42, false), 
-	M400(1.53775, 82, 1.81, true), 
-	HURDLES(5.74352, 28.5, 1.92, true), 
-	DISCUS(12.91, 4.0, 1.1, false), 
-	POLE(0.2797, 100, 1.35, false), 
-	JAVELIN(10.14, 7.0, 1.08, false), 
-	M1500(0.03768, 480, 1.85, true);
+	M100(25.437D, 18.0D, 1.81D, true), 
+	LONG(0.14354D, 220D, 1.40D, false), 
+	SHOT(51.39D, 1.5D, 1.05D, false), 
+	HIGH(0.8465D, 75D, 1.42D, false), 
+	M400(1.53775D, 82D, 1.81D, true), 
+	HURDLES(5.74352D, 28.5D, 1.92D, true), 
+	DISCUS(12.91D, 4.0D, 1.1D, false), 
+	POLE(0.2797D, 100D, 1.35D, false), 
+	JAVELIN(10.14D, 7.0D, 1.08D, false), 
+	M1500(0.03768D, 480D, 1.85D, true);
 
 	private final double A, B, C; // calculation constants
-	
-	/* 
-	 * there are two types of events: running and field
-	 * property running is true if event is a running event
-	 * and false if event is a field event
+
+	/*
+	 * there are two types of events: running and field property running is true
+	 * if event is a running event and false if event is a field event
 	 */
 	private final boolean running;
 
@@ -34,13 +33,15 @@ public enum Event {
 		this.running = running;
 	}
 
-	double points(double performance) {
-		if (running)
+	int points(double performance) {
+		if (performance == 0D)
+			return 0;
+		else if (running)
 			// Points = A*(B-P)^C for Running Events
-			return A * Math.pow((B - performance), C);
+			return (int) Math.floor(A * Math.pow((B - performance), C));
 		else
 			// Points = A*(P-B)^C for Field Events
-			return A * Math.pow((performance - B), C);
+			return (int) Math.floor(A * Math.pow((performance - B), C));
 	}
-	
+
 }
