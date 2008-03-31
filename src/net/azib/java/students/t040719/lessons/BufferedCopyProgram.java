@@ -13,7 +13,7 @@ import java.io.OutputStream;
  *
  * @author romi
  */
-public class BufferedCopyProgram extends AbstractFileCopier {
+public class BufferedCopyProgram extends AbstractCopier {
 
 	@Override
 	public void copy(InputStream src, OutputStream dest) throws IOException {

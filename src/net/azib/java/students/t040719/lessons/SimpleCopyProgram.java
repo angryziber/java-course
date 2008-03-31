@@ -9,7 +9,7 @@ import java.io.OutputStream;
  *
  * @author romi
  */
-public class SimpleCopyProgram extends AbstractFileCopier {
+public class SimpleCopyProgram extends AbstractCopier {
 
 	@Override
 	public void copy(InputStream src, OutputStream dest) throws IOException {
