@@ -24,9 +24,7 @@ public class TestFileLocation {
 			 * decoded by first converting the URL to a URI, and then using the
 			 * path component of the URI as the filename.
 			 */
-			URI source = new URI(CopyPerformanceTimer.class.getClassLoader().getResource(
-					"net" + TestFileLocation.SEP + "azib" + TestFileLocation.SEP + "java" + TestFileLocation.SEP + "students"
-							+ TestFileLocation.SEP + "t030633" + TestFileLocation.SEP + "timer.testfile.htm").toString());
+			URI source = CopyPerformanceTimer.class.getResource("timer.testfile.htm").toURI();
 			SOURCE_FILE = new File(source.getPath());
 		}
 		catch (Exception e) {

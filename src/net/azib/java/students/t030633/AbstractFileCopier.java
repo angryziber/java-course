@@ -25,6 +25,4 @@ public abstract class AbstractFileCopier implements FileCopier, DataCopier {
 		os.close();
 	}
 
-	public abstract void copy(InputStream src, OutputStream dest) throws IOException;
-
 }

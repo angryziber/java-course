@@ -13,14 +13,12 @@ import java.io.OutputStream;
  */
 public class BufferedCopyProgram extends AbstractFileCopier {
 
-	@Override
 	public void copy(InputStream src, OutputStream dest) throws IOException {
 		BufferedInputStream in = new BufferedInputStream(src);
 		BufferedOutputStream out = new BufferedOutputStream(dest);
 		while (in.available() > 0)
 			out.write(in.read());
-		in.close();
-		out.close();
+		out.flush();
 	}
 
 }

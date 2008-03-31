@@ -29,7 +29,6 @@ public abstract class AbstractChanneledCopyProgram extends AbstractFileCopier {
 
 	protected abstract ByteBuffer allocateBuffer(int capacity);
 
-	@Override
 	public void copy(InputStream src, OutputStream dest) throws IOException {
 
 		buffer = allocateBuffer(capacity);

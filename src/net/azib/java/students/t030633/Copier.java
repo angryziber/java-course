@@ -1,5 +1,7 @@
 package net.azib.java.students.t030633;
 
+import net.azib.java.lessons.io.FileCopier;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -13,7 +15,7 @@ public class Copier {
 
 	private final PrintStream out;
 	private CopyMethod method;
-	private AbstractFileCopier copier;
+	private FileCopier copier;
 
 	public Copier() {
 		this(System.out);
@@ -53,20 +55,7 @@ public class Copier {
 		else
 			out.print("Using " + method.getName().toLowerCase() + " method to copy files.");
 
-		switch (method) {
-		case S:
-			copier = new SimpleCopyProgram();
-			break;
-		case B:
-			copier = new BufferedCopyProgram();
-			break;
-		case C:
-			copier = new ChanneledCopyProgram();
-			break;
-		case D:
-			copier = new DirectChanneledCopyProgram();
-			break;
-		}
+		copier = method.getCopier();
 
 		try {
 			copier.copy(src, destfile);

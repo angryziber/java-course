@@ -127,7 +127,9 @@ public class Servlet extends HttpServlet {
 
 	@SuppressWarnings("unchecked")
 	private Action createAction(String actionName) throws Exception {
-		Class<Action> actionClass = (Class<Action>) Class.forName(getClass().getPackage().getName() + "." + actionName + "Action");
+		Class<Action> actionClass = (Class<Action>) 
+			Class.forName(
+					getClass().getPackage().getName() + "." + actionName + "Action");
 		return actionClass.newInstance();
 	}
 

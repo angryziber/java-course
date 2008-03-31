@@ -46,6 +46,28 @@ public class PrimitiveWebServer {
 		}
 	}
 	
+	private class RequestHandler implements Runnable {
+		
+		private Socket socket;
+
+		public RequestHandler(Socket s) {
+			this.socket = s;
+		}
+
+		public void run() {
+			try {
+				handleRequest(socket.getInputStream(), socket.getOutputStream());
+			}
+			catch (IOException e) {
+				System.err.println("Request handling failed");
+			}			
+			finally {
+				closeQuietly(socket);
+			}
+		}
+		
+	}
+	
 	public void run() {
 		ServerSocket server;
 		try {
@@ -60,13 +82,9 @@ public class PrimitiveWebServer {
 			Socket socket = null;
 			try {
 				socket = server.accept();
-				handleRequest(socket.getInputStream(), socket.getOutputStream());
+				new Thread(new RequestHandler(socket)).start();
 			}
 			catch (IOException e) {
-				System.err.println("Request handling failed");
-			}
-			finally {
-				closeQuietly(socket);
 			}
 		}		
 	}
