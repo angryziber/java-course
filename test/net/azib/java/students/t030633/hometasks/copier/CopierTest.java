@@ -44,20 +44,20 @@ public class CopierTest {
 
 	@Test
 	public void defaultsToSimpleMethod() {
+		to.delete();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		new Copier(new PrintStream(out)).main(from, to.getAbsolutePath());
 		assertEquals("Using simple method to copy files.", out.toString());
 		assertTrue(to.exists());
-		to.delete();
 	}
 
 	@Test
 	public void acceptsMethodArgument() {
+		to.delete();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		new Copier(new PrintStream(out)).main(from, to.getAbsolutePath(), "d");
 		assertEquals("Using direct channeled method to copy files.", out.toString());
 		assertTrue(to.exists());
-		to.delete();
 	}
 
 }
