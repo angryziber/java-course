@@ -11,7 +11,7 @@ import org.junit.Test;
  *
  * @author t030633
  */
-public class ContractDecathlonInputTest {
+public abstract class ContractDecathlonInputTest {
 
 	private DecathlonInput input;
 	

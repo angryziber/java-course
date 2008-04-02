@@ -13,7 +13,7 @@ import org.junit.Test;
  *
  * @author t030633
  */
-public class ContractDecathlonOutputTest {
+public abstract class ContractDecathlonOutputTest {
 
 	private DecathlonOutput output;
 	
