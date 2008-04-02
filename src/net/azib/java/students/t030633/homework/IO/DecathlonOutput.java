@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Input
+ * Decathlon output interface.
  * 
  * @author t030633
  */
-public interface Input {
+public interface DecathlonOutput {
 
-	List<Athlete> read() throws IOException;
-
+	boolean write(List<Athlete> out) throws IOException; // true if output complete
+	
 }

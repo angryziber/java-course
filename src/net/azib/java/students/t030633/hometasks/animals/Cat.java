@@ -1,16 +1,16 @@
-package net.azib.java.students.t030633.hometasks;
+package net.azib.java.students.t030633.hometasks.animals;
 
 /**
  * Extends Animal.
  * 
  * @author t030633
  */
-public class Dog extends Animal {
+public class Cat extends Animal {
 
-	Dog() {
+	Cat() {
 	}
 
-	Dog(String name, int age) {
+	Cat(String name, int age) {
 		super(name, age);
 	}
 
@@ -21,7 +21,7 @@ public class Dog extends Animal {
 	 */
 	@Override
 	public String makeSound() {
-		return "Woof!";
+		return "Meow!";
 	}
 
 }

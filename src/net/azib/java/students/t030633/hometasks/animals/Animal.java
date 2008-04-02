@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633.hometasks;
+package net.azib.java.students.t030633.hometasks.animals;
 
 /**
  * Abstract animal.

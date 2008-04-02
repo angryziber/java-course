@@ -1,6 +1,7 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks.copier;
 
 import net.azib.java.lessons.io.FileCopier;
+import net.azib.java.students.t030633.FileLocations;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,23 +15,9 @@ public class CopyPerformanceTimer {
 
 	private final File source;
 	private final File destination;
-	static File DEST_FILE;
-
-	static {
-		try {
-			DEST_FILE = File.createTempFile("timer.destfile", ".htm");
-		}
-		catch (IOException e) {
-			System.err.println("File initialization error.");
-		}
-		finally {
-			if (DEST_FILE != null)
-				DEST_FILE.deleteOnExit();
-		}
-	}
 
 	public CopyPerformanceTimer() {
-		this(TestFileLocation.SOURCE_FILE, CopyPerformanceTimer.DEST_FILE);
+		this(FileLocations.SOURCE_FILE, FileLocations.DESTINATION_FILE);
 	}
 
 	public CopyPerformanceTimer(File src, File dest) {

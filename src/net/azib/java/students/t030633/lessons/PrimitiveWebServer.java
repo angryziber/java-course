@@ -23,8 +23,10 @@ public class PrimitiveWebServer {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		try {
 			if (reader.readLine().startsWith("GET ")) {
-				out.write((HTTP_OK_RESPONSE + HTTP_LN + "Server: " + getClass().getSimpleName() + HTTP_LN + "Hello World!")
-						.getBytes());
+				out.write((HTTP_OK_RESPONSE + HTTP_LN + 
+						"Server: " + getClass().getSimpleName() + HTTP_LN + 
+						"Content-Type: text/html" + HTTP_LN + HTTP_LN +
+						"Hello World!").getBytes());
 			}
 		}
 		catch (IOException e) {

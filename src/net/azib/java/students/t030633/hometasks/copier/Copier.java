@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks.copier;
 
 import net.azib.java.lessons.io.FileCopier;
 
@@ -61,6 +61,7 @@ public class Copier {
 			copier.copy(src, destfile);
 		}
 		catch (IOException e) {
+			System.err.println("Copy error.");
 		}
 
 	}

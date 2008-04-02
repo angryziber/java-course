@@ -20,9 +20,8 @@ public class Athlete {
 
 		this.name = name;
 		this.birthDate = date;
-		this.country = country; //TODO check if country exists
-		// try to create a locale?
-		this.results = results; //TODO check for correctness?
+		this.country = new Checker().checkCountry(country);
+		this.results = new Checker().checkResults(results);
 
 		// iterate through events and calculate score
 		for (Event e : Event.values()) {

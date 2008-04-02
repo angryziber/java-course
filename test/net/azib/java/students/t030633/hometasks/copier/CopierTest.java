@@ -1,11 +1,12 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks.copier;
+
+import net.azib.java.students.t030633.FileLocations;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintStream;
 
 import org.junit.Test;
@@ -17,21 +18,8 @@ import org.junit.Test;
  */
 public class CopierTest {
 
-	private static File from = TestFileLocation.SOURCE_FILE;
-	static File to;
-
-	static {
-		try {
-			to = File.createTempFile("copier.destfile", ".htm");
-		}
-		catch (IOException e) {
-			System.err.println("File initialization error.");
-		}
-		finally {
-			if (to != null)
-				to.deleteOnExit();
-		}
-	}
+	private static File from = FileLocations.SOURCE_FILE;
+	static File to = FileLocations.DESTINATION_FILE;
 
 	@Test
 	public void argumentsAccepted() {

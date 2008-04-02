@@ -1,6 +1,8 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks.copier;
 
 import static org.junit.Assert.assertTrue;
+
+import net.azib.java.students.t030633.FileLocations;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,8 +20,8 @@ import org.junit.Test;
  */
 public abstract class AbstractFileCopierTest {
 
-	private File src = TestFileLocation.SOURCE_FILE;
-	private File dest = CopyPerformanceTimer.DEST_FILE;
+	private File src = FileLocations.SOURCE_FILE;
+	private File dest = FileLocations.DESTINATION_FILE;
 
 	private AbstractFileCopier afc;
 

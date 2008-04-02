@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks.copier;
 
 import net.azib.java.lessons.io.DataCopier;
 import net.azib.java.lessons.io.FileCopier;
