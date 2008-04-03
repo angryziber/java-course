@@ -14,6 +14,9 @@ import java.net.Socket;
  */
 public class QuietCloser {
 
+    /* Forbid instantiation */
+    private QuietCloser() {}
+
     public static void closeQuietly(Closeable closeable) {
         if (closeable != null) {
             try {
