@@ -1,25 +1,24 @@
 package net.azib.java.students.t030629.hometasks.ht6;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 /**
  * <br><br>User: Anton Chepurov
- * <br>Date: 23.03.2008
- * <br>Time: 22:42:32
+ * <br>Date: 02.04.2008
+ * <br>Time: 11:31:35
  */
-public class SimpleCopyProgramTest extends AbstractFileCopierTest {
-
+public class BufferedCopyProgramTest extends AbstractFileCopierTest {
     /**
-     * @see AbstractFileCopierTest#initCopier() 
+     * @see AbstractFileCopierTest#initCopier()  
      */
     @Before
     public void initCopier() {
-        copier = new SimpleCopyProgram();
+        copier = new BufferedCopyProgram();
     }
-
 
     @Test(expected = NullPointerException.class)
     public void nullPointerExceptionThrownForSourceFile() throws IOException {
@@ -38,12 +37,12 @@ public class SimpleCopyProgramTest extends AbstractFileCopierTest {
 
     @Test(expected = NullPointerException.class)
     public void nullPointerExceptionThrownForDestStream() throws IOException {
-        super.nullPointerExceptionThrownForDestStream();    
+        super.nullPointerExceptionThrownForDestStream();
     }
 
     @Test(expected = FileNotFoundException.class)
     public void fileNotFoundExceptionThrownForSourceFile() throws IOException {
-        super.fileNotFoundExceptionThrownForSourceFile();   
+        super.fileNotFoundExceptionThrownForSourceFile();
     }
 
     @Test
@@ -53,12 +52,13 @@ public class SimpleCopyProgramTest extends AbstractFileCopierTest {
 
     @Test
     public void correctMessageForFileNotFoundException() throws IOException {
-        super.correctMessageForFileNotFoundException();    
+        super.correctMessageForFileNotFoundException();
     }
+
 
     @Test
     public void copyStreamWorks() throws IOException {
-        super.copyStreamWorks();    
+        super.copyStreamWorks();
     }
 
     @Test
