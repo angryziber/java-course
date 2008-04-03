@@ -29,12 +29,12 @@ public abstract class AbstractFileCopier implements FileCopier, DataCopier {
 
     }
 
-    private void validateFiles(File src, File dest) throws FileNotFoundException {
+    protected void validateFiles(File src, File dest) throws FileNotFoundException {
         if (src == null || dest == null) throw new NullPointerException(NULL_POINTER_TEXT);
         if (!src.exists()) throw new FileNotFoundException(MISSING_SOURCE_TEXT);
     }
 
-    private void validateStreams(InputStream src, OutputStream dest) {
+    protected void validateStreams(InputStream src, OutputStream dest) {
         if (src == null || dest == null) throw new NullPointerException(NULL_POINTER_TEXT);
     }
 
