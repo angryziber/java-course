@@ -9,6 +9,14 @@ import java.nio.ByteBuffer;
  */
 public class DirectChanneledCopyProgram extends AbstractChanneledCopyProgram {
 
+	public DirectChanneledCopyProgram() {
+		super();
+	}
+
+	public DirectChanneledCopyProgram(int capacity) {
+		super(capacity);
+	}
+
 	protected ByteBuffer allocateBuffer(int capacity) {
 		return ByteBuffer.allocateDirect(capacity);
 	}

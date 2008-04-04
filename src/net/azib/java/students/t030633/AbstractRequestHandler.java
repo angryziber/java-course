@@ -20,7 +20,7 @@ public abstract class AbstractRequestHandler implements RequestHandlerInterface,
 			capacity = s.getSendBufferSize();
 		}
 		catch (SocketException e) {
-			System.err.println("Socket protocol error.");
+			System.err.println("Protocol error.");
 		}
 	}
 
@@ -30,7 +30,7 @@ public abstract class AbstractRequestHandler implements RequestHandlerInterface,
 				socket.close();
 			}
 			catch (IOException e) {
-				System.err.println("Socket " + socket.toString() + " open.");
+				System.err.println("Unable to close socket " + socket.toString());
 			}
 	}
 
@@ -39,7 +39,7 @@ public abstract class AbstractRequestHandler implements RequestHandlerInterface,
 			handleRequest(socket.getInputStream(), socket.getOutputStream());
 		}
 		catch (IOException e) {
-			System.err.println("Request handling failed");
+			System.err.println("Handling failed.");
 		}
 		finally {
 			closeQuietly(socket);

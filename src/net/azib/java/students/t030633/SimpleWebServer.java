@@ -12,12 +12,12 @@ import java.net.Socket;
 public class SimpleWebServer implements Runnable {
 
 	public static final int HTTP_PORT = 8080;
-	public static final String SERVER_NAME = "Simple Web Server - 030633";
+	public static final String SERVER_NAME = "Simple Web Server (030633)";
 
 	public void run() {
 
 		ServerSocket server;
-		
+
 		try {
 			server = new ServerSocket(HTTP_PORT);
 		}
@@ -25,21 +25,22 @@ public class SimpleWebServer implements Runnable {
 			System.err.println("Unable to bind to port " + HTTP_PORT);
 			return;
 		}
-		
+
 		while (true) {
 			Socket socket = null;
+
 			try {
 				socket = server.accept();
-				// new Thread(new SimpleRequestHandler(socket)).start();
-				new Thread(new FileRequestHandler(socket)).start();
 			}
 			catch (IOException e) {
-				System.err.println("Request failed.");
+				System.err.println("Unable to open socket.");
 			}
+			new Thread(new FileRequestHandler(socket)).start();
+
 		}
 
 	}
-	
+
 	public static void main(String[] args) {
 		new SimpleWebServer().run();
 	}

@@ -13,8 +13,8 @@ public interface RequestHandlerInterface {
 	
 	/**
 	 * Handles a web server request.
-	 * @param in
-	 * @param out
+	 * @param in - request stream
+	 * @param out - response stream
 	 * @throws IOException if handling fails
 	 */
 	public void handleRequest(InputStream in, OutputStream out) throws IOException;
