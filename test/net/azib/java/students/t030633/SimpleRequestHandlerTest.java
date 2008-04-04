@@ -15,10 +15,6 @@ import org.junit.Test;
  */
 public class SimpleRequestHandlerTest {
 
-	/* Test your server by starting it in a separate thread in a test class, 
-	 * sending requests over a Socket and verifying its contents, 
-	 * then interrupting the server.*/
-	
 	private SimpleRequestHandler handler;
 
 	@Test

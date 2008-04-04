@@ -9,7 +9,7 @@ import java.net.Socket;
  * 
  * @author t030633
  */
-public class SimpleWebServer {
+public class SimpleWebServer implements Runnable {
 
 	public static final int HTTP_PORT = 8080;
 	public static final String SERVER_NAME = "Simple Web Server - 030633";

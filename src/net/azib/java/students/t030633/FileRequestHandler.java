@@ -45,7 +45,7 @@ public class FileRequestHandler extends AbstractRequestHandler {
 			
 			try {
 				
-				fileURI = new URI(st.nextToken().substring(1));
+				fileURI = new URI(st.nextToken());
 				dirURI = FileRequestHandler.class.getResource(".").toURI();
 				file = new File(dirURI.getPath() + fileURI.getPath());
 				if (!file.exists())
