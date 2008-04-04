@@ -13,10 +13,22 @@ import java.net.URISyntaxException;
  */
 public class CopyPerformanceTimer {
 
-    long measure(Runnable runnable){
+    private long measure(Runnable runnable){
         long startTime = System.currentTimeMillis();
         runnable.run();
         return System.currentTimeMillis() - startTime;
+    }
+
+     public void doMeasure(final FileCopier fileCopier, final File src, final File dest){
+        long duration = new CopyPerformanceTimer().measure(new Runnable() {
+            public void run() {
+                try {
+                    fileCopier.copy(src, dest);
+                } catch (IOException e) {/* Do nothing. Exception is guaranteed not to be thrown here. */}
+            }
+        });
+        
+        System.out.println("Duration: " + duration + "ms");
     }
 
     public static void main(String[] args) throws URISyntaxException, IOException {
@@ -32,18 +44,6 @@ public class CopyPerformanceTimer {
 
         dest1.delete();
         dest2.delete();
-    }
-
-    private void doMeasure(final FileCopier fileCopier, final File src, final File dest){
-        long duration = new CopyPerformanceTimer().measure(new Runnable() {
-            public void run() {
-                try {
-                    fileCopier.copy(src, dest);
-                } catch (IOException e) {/* Do nothing. Exception is guaranteed not to be thrown here. */}
-            }
-        });
-        
-        System.out.println("Duration: " + duration + "ms");
     }
 
 }
