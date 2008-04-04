@@ -79,7 +79,7 @@ public class CopyProgramDemo {
             }
 
             /* Create Client part and send a request to the server */
-            Thread clientThread = new Thread(new ClientDemo(tempFile4));
+            Thread clientThread = new Thread(new ClientDemo(tempFile4, ProtocolDemo.FILE_REQUEST));
             clientThread.start();
         }
 
