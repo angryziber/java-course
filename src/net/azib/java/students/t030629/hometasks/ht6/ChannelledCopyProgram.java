@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
  */
 public class ChannelledCopyProgram extends AbstractFileCopier {
     static final String NEGATIVE_BUFFER_SIZE_TEXT = "Buffer capacity is a negative number: ";
-    private static final int DEFAULT_CAPACITY = 8192;
+    private static final int DEFAULT_CAPACITY = (int) Math.pow(2, 15)/*8192*/; // 2^20 = 32768
     protected final int bufCapacity;
 
     public ChannelledCopyProgram(int bufCapacity) {
