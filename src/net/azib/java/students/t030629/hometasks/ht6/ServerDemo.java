@@ -7,8 +7,8 @@ import java.io.*;
 
 /**
  * Server that hosts <code>java-logo.gif</code> file and sends it to the connected client
- * (instance of {@link net.azib.java.students.t030629.hometasks.ht6.ClientDemo})
- * in response to {@link net.azib.java.students.t030629.hometasks.ht6.ClientDemo#FILE_REQUEST}.
+ * (instance of {@link ClientDemo})
+ * in response to {@link ProtocolDemo#FILE_REQUEST}.
  *
  * <br><br>User: Anton Chepurov
  * <br>Date: 02.04.2008
@@ -40,11 +40,9 @@ public class ServerDemo implements Runnable {
     public void run() {
 
         while (!Thread.interrupted()) {
-            Socket socket;
             try {
-                socket = serverSocket.accept();
                 if (threadCount < MAX_THREAD_COUNT) {
-                    new Thread(new RequestHandler(socket)).start();
+                    new Thread(new RequestHandler(serverSocket.accept())).start();
                     threadCount++;
                 }
             }
@@ -57,9 +55,8 @@ public class ServerDemo implements Runnable {
     }
 
     private class RequestHandler implements Runnable {
-        private static final String OUTPUT_STREAM_ERROR_TEXT = "Could not obtain an OutputStream from the socket on address: ";
-        private static final String INPUT_STREAM_ERROR_TEXT = "Could not obtain an InputStream from the socket on address: ";
-        private static final String REQUEST_PROCESSING_ERROR_TEXT = "Could not read request from socket InputStream on address: ";
+        private static final String IO_STREAM_ERROR_TEXT = "Could not obtain I/O streams from the socket on address: ";
+        private static final String REQUEST_READ_PROCESS_ERROR_TEXT = "Could not read or process request from socket InputStream on address: ";
         private static final String COPY_FAILED = "Copy failed for address: ";
         private Socket socket;
 
@@ -72,37 +69,31 @@ public class ServerDemo implements Runnable {
             address.getHostName(); address.getHostName(); // obtain all values for further use in toString()
 
             BufferedReader reader;
+            OutputStream out;
             try {
                 reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out = socket.getOutputStream();
             } catch (IOException e) {
-                System.err.println(INPUT_STREAM_ERROR_TEXT + address);
+                System.err.println(IO_STREAM_ERROR_TEXT + address);
                 return;
             }
-            try {
-                if (reader.readLine().equalsIgnoreCase(ClientDemo.FILE_REQUEST)) {
-                    OutputStream out;
-                    InputStream in = null;
-                    try {
-                        try {
-                            out = socket.getOutputStream();
-                        } catch (IOException e) {
-                            System.err.println(OUTPUT_STREAM_ERROR_TEXT + address);
-                            return;
-                        }
 
-                        try {
-                            in = ServerDemo.class.getResource("/java-logo.gif").openStream();
-                            new BufferedCopyProgram().copy(in, out);
-                        } catch (IOException e) {
-                            System.err.println(COPY_FAILED + address);
-                        }
-                    } finally {
-                        QuietCloser.closeQuietly(in);
-                        QuietCloser.closeQuietly(socket);
-                    }
-                } 
+            ProtocolDemo protocol = new ProtocolDemo();
+            String clientInput;
+            InputStream serverOutput = null;
+            try {
+                clientInput = reader.readLine();
+                serverOutput = protocol.processInput(clientInput);
+                try {
+                    new BufferedCopyProgram().copy(serverOutput, out);
+                } catch (IOException e) {
+                    System.err.println(COPY_FAILED + address);
+                }
             } catch (IOException e) {
-                System.err.println(REQUEST_PROCESSING_ERROR_TEXT + address);
+                System.err.println(REQUEST_READ_PROCESS_ERROR_TEXT + address);
+            } finally {
+                QuietCloser.closeQuietly(serverOutput);
+                QuietCloser.closeQuietly(socket);
             }
         }
 

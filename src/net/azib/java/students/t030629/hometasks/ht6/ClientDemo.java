@@ -12,7 +12,6 @@ import java.io.*;
  * <br>Time: 18:29:26
  */
 public class ClientDemo implements Runnable {
-    static final String FILE_REQUEST = "GET YOUR MEGAFILE";
     private static final String LN = System.getProperty("line.separator");
     private File dest;
 
@@ -26,7 +25,7 @@ public class ClientDemo implements Runnable {
         try {
             /* Connect to server, request the hosted file and save it on local machine */
             socket = new Socket("localhost", ServerDemo.DEFAULT_PORT); // Connect
-            socket.getOutputStream().write((FILE_REQUEST + LN).getBytes()); // Request
+            socket.getOutputStream().write((ProtocolDemo.FILE_REQUEST + LN).getBytes()); // Request
             InputStream in = socket.getInputStream();
             fos = new FileOutputStream(dest);
             new SimpleCopyProgram().copy(in, fos); // Save
