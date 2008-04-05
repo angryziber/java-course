@@ -16,7 +16,7 @@ import org.jdom.input.SAXBuilder;
  *
  * @author romi
  */
-public class Country {
+public class ISOCountry {
 	private static Map<String,String> countries = new TreeMap<String,String>();
 	
 	static{
@@ -32,12 +32,12 @@ public class Country {
 	}
 	
 	public static boolean isValidCountryCode(String isoCode){
-		return Country.countries.containsKey(isoCode);
+		return ISOCountry.countries.containsKey(isoCode);
 	}
 	
 	public static String getCountryName(String isoCode){
-		if (Country.isValidCountryCode(isoCode))
-			return Country.countries.get(isoCode);
+		if (ISOCountry.isValidCountryCode(isoCode))
+			return ISOCountry.countries.get(isoCode);
 		else
 			return "";
 	}
@@ -49,7 +49,7 @@ public class Country {
 		
 		List<Element> children = doc.getRootElement().getChildren("country");
 		for (Element country : children) {
-			Country.countries.put(country.getChildText("code"), country.getChildText("name"));
+			ISOCountry.countries.put(country.getChildText("code"), country.getChildText("name"));
 		}
 	}
 	

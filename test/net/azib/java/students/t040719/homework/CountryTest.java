@@ -14,22 +14,23 @@ public class CountryTest {
 	
 	@Test
 	public void getCountryNameFails() {
-		assertEquals("", Country.getCountryName("XX"));
+		assertEquals("", ISOCountry.getCountryName("XX"));
 	}
 	
 	@Test
 	public void getCountryNameSucceeds() {
-		assertEquals("SPAIN", Country.getCountryName("ES"));
+		assertEquals("SPAIN", ISOCountry.getCountryName("ES"));
 	}
 	
 	@Test
 	public void isValidCountryFails() {
-		assertEquals(false, Country.isValidCountryCode("XX"));
+		assertEquals(false, ISOCountry.isValidCountryCode("XX"));
 	}
 	
 	@Test
 	public void isValidCountrySucceeds() {
-		assertEquals(true, Country.isValidCountryCode("US"));
+		assertEquals(true, ISOCountry.isValidCountryCode("US"));
 	}
+	
 	
 }
