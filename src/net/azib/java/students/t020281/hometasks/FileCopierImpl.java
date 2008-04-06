@@ -18,12 +18,12 @@ public class FileCopierImpl implements FileCopier {
 		// TODO Auto-generated method stub
 		FileInputStream srcFile = null;
 		FileOutputStream dstFile = null;
-		int data = 0;
 		try {
 			srcFile = new FileInputStream(src);
 			dstFile = new FileOutputStream(dest);
-			while ((data = srcFile.read()) != -1) {
-				dstFile.write(data);
+			while (srcFile.available() != 0) {
+				dstFile.write(srcFile.read());
+
 			}
 		}
 		catch (IOException e){}
