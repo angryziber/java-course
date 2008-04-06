@@ -9,11 +9,13 @@ import java.util.regex.Pattern;
 
 
 /**
- * Athlete
+ * Athlete - a class to hold decathlon results of one athlete
  *
- * @author romi
+ * @version 1.0
+ * @author Romi Agar
+ * 
  */
-public class Athlete {
+public class Athlete implements Comparable<Athlete>{
 	private static final String DATE_FORMAT = "dd.MM.yyyy"; 
 	private String name; 
 	private Date birthday;
@@ -148,6 +150,10 @@ public class Athlete {
 			this.decathlonPoints += (int)event.calculateEventPoints(f);
 			event = event.next();
 		}
+	}
+
+	public int compareTo(Athlete o) {
+		return ((Integer)decathlonPoints).compareTo(o.decathlonPoints);
 	}
 	
 }
