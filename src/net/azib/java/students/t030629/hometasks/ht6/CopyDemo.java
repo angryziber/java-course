@@ -177,7 +177,7 @@ Duration: 1703ms
 Copying done with BufferedCopyProgram!
 
 ##################################################
-File: D:\TEMPORARY\BlueCanary_1988_\Лицедеи - Blue Canary (Голубой огонёк, 1988).avi
+File: D:\TEMPORARY\BlueCanary_1988_x\ - Blue Canary (x, 1988).avi
 File size: 44 MB
 Buf: 8192
 
