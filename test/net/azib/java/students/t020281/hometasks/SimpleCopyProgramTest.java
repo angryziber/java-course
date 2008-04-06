@@ -13,13 +13,13 @@ import org.junit.Test;
  *
  * @author Trial
  */
-public class FileCopierImplTest {
+public class SimpleCopyProgramTest {
 		
 	@Test
 	public void fileIsCopied () {
 		FileOutputStream testFile = null;
 	 	FileInputStream testFileCopy = null;
-	 	FileCopierImpl fileCopy = null;
+	 	SimpleCopyProgram fileCopy = null;
 	 	String fileSrc = "./testfile.987";
 	 	String fileDest = "./testfilecopy.987" ;
 	    byte [] testBytes = "copytest".getBytes();
@@ -31,7 +31,7 @@ public class FileCopierImplTest {
 		testFile.write(testBytes);
 		testFile.close();
 		
-		fileCopy = new FileCopierImpl();
+		fileCopy = new SimpleCopyProgram();
 		File src = new File(fileSrc);
 		File dest = new File(fileDest);
 
