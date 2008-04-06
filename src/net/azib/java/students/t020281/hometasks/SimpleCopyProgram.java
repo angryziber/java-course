@@ -12,7 +12,7 @@ import java.io.IOException;
  *
  * @author Trial
  */
-public class FileCopierImpl implements FileCopier {
+public class SimpleCopyProgram implements FileCopier {
 
 	public void copy(File src, File dest) throws IOException {
 		// TODO Auto-generated method stub
