@@ -16,11 +16,11 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 	public String[] removeDuplicateStrings(String[] array) {
 //		Set<String> set = new LinkedHashSet<String>(Arrays.asList(array));
 
-		Set<String> set = new LinkedHashSet<String>();
+		Set<String> words = new LinkedHashSet<String>();
 		for (String s : array) {
-			set.add(s);
+			words.add(s);
 		}
-		return set.toArray(new String[set.size()]);
+		return words.toArray(new String[words.size()]);
 	}
 
 	public static void main(String[] args) {
