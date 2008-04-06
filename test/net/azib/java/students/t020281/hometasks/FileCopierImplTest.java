@@ -22,8 +22,9 @@ public class FileCopierImplTest {
 	 	FileCopierImpl fileCopy = null;
 	 	String fileSrc = "./testfile.987";
 	 	String fileDest = "./testfilecopy.987" ;
-	    byte [] testBytes = new byte[] {1,2,3,4,5};
-	 	byte [] testBytesCopied = new byte[5];
+	    byte [] testBytes = "copytest".getBytes();
+	 	byte [] testBytesCopied = new byte[testBytes.length];
+
 	 	
 	try {	
 		testFile = new FileOutputStream(fileSrc);
@@ -31,12 +32,17 @@ public class FileCopierImplTest {
 		testFile.close();
 		
 		fileCopy = new FileCopierImpl();
-		fileCopy.copy(new File(fileSrc), new File(fileDest));
-		
+		File src = new File(fileSrc);
+		File dest = new File(fileDest);
+
+		fileCopy.copy(src, dest);
+
 		testFileCopy = new FileInputStream(fileDest);
 		testFileCopy.read(testBytesCopied);
 		testFileCopy.close();
 		assertArrayEquals(testBytes,testBytesCopied);
+		src.delete();
+		dest.delete();
 	} 
 	catch (IOException e) {}
 	finally{
