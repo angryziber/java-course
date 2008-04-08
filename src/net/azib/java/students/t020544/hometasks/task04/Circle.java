@@ -33,7 +33,11 @@ public class Circle extends Shape {
 
 	@Override
 	public boolean equals(Object o) {
-		return (o instanceof Circle) && (Double.valueOf(radius).equals(((Circle) o).radius));
+		if (o == null)
+			return false;
+		if (getClass() != o.getClass())
+			return false;
+		return Double.valueOf(radius).equals(((Circle) o).radius);
 
 	}
 

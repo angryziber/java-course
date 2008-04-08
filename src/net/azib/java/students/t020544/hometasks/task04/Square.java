@@ -33,7 +33,11 @@ public class Square extends Shape {
 
 	@Override
 	public boolean equals(Object o) {
-		return (o instanceof Square) && (Double.valueOf(squareSide).equals(((Square) o).squareSide));
+		if (o == null)
+			return false;
+		if (getClass() != o.getClass())
+			return false;
+		return Double.valueOf(squareSide).equals(((Square) o).squareSide);
 	}
 
 	@Override
