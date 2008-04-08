@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633.homework;
+package net.azib.java.students.t030633.homework.Model;
 
 import static org.junit.Assert.*;
 
@@ -21,16 +21,16 @@ public class EventTest {
 	}
 	@Test 
 	public void eventsAreCorrect() {
-		assertNotNull(Event.valueOf(Event.class, "M100"));
+		assertNotNull(Event.valueOf(Event.class, "R100M"));
 		assertNotNull(Event.valueOf(Event.class, "LONG"));
 		assertNotNull(Event.valueOf(Event.class, "SHOT"));
 		assertNotNull(Event.valueOf(Event.class, "HIGH"));
-		assertNotNull(Event.valueOf(Event.class, "M400"));
-		assertNotNull(Event.valueOf(Event.class, "HURDLES"));
+		assertNotNull(Event.valueOf(Event.class, "R400M"));
+		assertNotNull(Event.valueOf(Event.class, "R110MH"));
 		assertNotNull(Event.valueOf(Event.class, "DISCUS"));
 		assertNotNull(Event.valueOf(Event.class, "POLE"));
 		assertNotNull(Event.valueOf(Event.class, "JAVELIN"));
-		assertNotNull(Event.valueOf(Event.class, "M1500"));
+		assertNotNull(Event.valueOf(Event.class, "R1500M"));
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class EventTest {
 
 	@Test
 	public void calculatePointsForHurdles() {
-		Event e = Event.HURDLES;
+		Event e = Event.R110MH;
 		assertEquals(960, e.points(14.11D));
 	}
 

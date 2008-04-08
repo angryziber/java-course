@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;

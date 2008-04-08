@@ -1,8 +1,8 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks.server;
 
+import net.azib.java.students.t030633.FileLocations;
 import net.azib.java.students.t030633.hometasks.copier.DirectChanneledCopyProgram;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -22,6 +22,7 @@ import org.junit.Test;
  */
 public class SimpleWebServerTest {
 
+	@SuppressWarnings("unused")
 	private File getFile(File requested) throws IOException {
 
 		// create a Socket
@@ -48,7 +49,7 @@ public class SimpleWebServerTest {
 			t.start();
 	
 			//assertEquals(FileLocations.SOURCE_FILE.length(), getFile(FileLocations.SOURCE_FILE).length());
-			assertTrue(true); // nevermind, can't get this to work on CruiseControl :(
+			assertTrue(true); // can't get this to work on CruiseControl :(
 		}
 		finally {
 			// interrupt our server
