@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 
 import org.junit.Test;
@@ -21,12 +22,10 @@ import org.junit.Test;
  */
 public class SimpleWebServerTest {
 
-	private static final String LOCALHOST = "127.0.0.1";
-
 	private File getFile(File requested) throws IOException {
 
 		// create a Socket
-		Socket socket = new Socket(LOCALHOST, SimpleWebServer.HTTP_PORT);
+		Socket socket = new Socket(InetAddress.getLocalHost(), SimpleWebServer.HTTP_PORT);
 		PrintWriter socketOut = new PrintWriter(socket.getOutputStream(), true);
 		InputStream socketIn = socket.getInputStream();
 
@@ -43,15 +42,18 @@ public class SimpleWebServerTest {
 	@Test
 	public void testRun() throws IOException {
 
-		// start SimpleWebServer in a thread
 		Thread t = new Thread(new SimpleWebServer());
-		t.start();
-
-		//assertEquals(FileLocations.SOURCE_FILE.length(), getFile(FileLocations.SOURCE_FILE).length());
-		assertTrue(true); // nevermind, can't get this to work on CruiseControl :(
-		
-		// interrupt our server
-		t.interrupt();
+		try {
+			// start SimpleWebServer in a thread
+			t.start();
+	
+			//assertEquals(FileLocations.SOURCE_FILE.length(), getFile(FileLocations.SOURCE_FILE).length());
+			assertTrue(true); // nevermind, can't get this to work on CruiseControl :(
+		}
+		finally {
+			// interrupt our server
+			t.interrupt();
+		}
 
 	}
 
