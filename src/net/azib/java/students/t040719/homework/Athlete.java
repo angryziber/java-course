@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
  * 
  */
 public class Athlete implements Comparable<Athlete>{
-	private static final String DATE_FORMAT = "dd.MM.yyyy"; 
 	private String name; 
 	private Date birthday;
 	private String country;
@@ -38,25 +37,21 @@ public class Athlete implements Comparable<Athlete>{
 	private int decathlonPoints;
 	private float[] results = new float[10];
 	
-	public Athlete(String name, String birthday, String country, String ... rawResults) {
-		if (!isValidName(name))
+	public Athlete(String name, Date birthday, String country, float ... rawResults) {
+		/*if (!isValidName(name))
 			throw new IllegalArgumentException("Name is not valid!");
 		if (!ISOCountry.isValidCountryCode(country))
 			throw new IllegalArgumentException("Country code is not valid!");
-
+		*/
 		this.country = country;
 		this.name = name;
+		this.birthday = birthday; //parseDateString(birthday);
 		
-		try {
-			this.birthday = parseDateString(birthday);
-		}
-		catch (Exception e) {
-			throw new IllegalArgumentException("Birthday date is not valid!");
-		}
 		if (rawResults.length != 10)
 			throw new IllegalArgumentException("Wrong number of raw results!");
+		results = rawResults;
 		//this.hundredMeterSprint = Float.valueOf(rawResults[0]);
-		for(int i=0; i<10; i++){
+		/*for(int i=0; i<10; i++){
 			if (i==4 || i==9)
 				if(!rawResults[i].matches(REGEX))
 					throw new IllegalArgumentException("110 m hurdles parameter in wrong format!");
@@ -64,7 +59,7 @@ public class Athlete implements Comparable<Athlete>{
 					this.results[i] = parseLongTime(rawResults[i]);
 			else
 				this.results[i] = Float.parseFloat(rawResults[i]);
-		}
+		}*/
 		/*
 		try {
 			this.hundredMeterSprint = Float.parseFloat(rawResults[0]);
@@ -85,10 +80,6 @@ public class Athlete implements Comparable<Athlete>{
 			throw new NumberFormatException();
 		}*/
 		calculatePoints();
-	}
-	
-	public static boolean isValidName(String name){
-		return name.matches("\\w+ \\w+.*");
 	}
 	
 	public String getName(){
@@ -115,33 +106,6 @@ public class Athlete implements Comparable<Athlete>{
 
 	public int getDecathlonPoints(){
 		return this.decathlonPoints;
-	}
-	
-	private Date parseDateString(String dateString) throws Exception{
-		//Locale locale = new Locale(System.getProperty("user.language"));
-		//DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
-		Date d = null;
-		try {
-			d = new SimpleDateFormat(DATE_FORMAT).parse(dateString);
-		}
-		catch (ParseException e) {
-			System.err.println("Error parsing date");
-			throw new Exception();
-		}
-		return d;
-	}
-	
-	private float parseLongTime(String time){
-		float resultTime = 0;
-		Pattern p = Pattern.compile(SPLIT);
-        String[] items = p.split(time);
-        if (items.length == 1)
-        	resultTime = Float.parseFloat(items[0]);
-        else{
-        	resultTime = Float.parseFloat(items[0])*60;
-        	resultTime += Float.parseFloat(items[1]);
-        }
-		return resultTime;
 	}
 	
 	private void calculatePoints(){

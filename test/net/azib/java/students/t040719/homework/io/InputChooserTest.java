@@ -16,7 +16,7 @@ import org.junit.Test;
  * @version 1.0
  * @author Romi Agar
  */
-public class InputParserTest {
+public class InputChooserTest {
 	
 	private static final String NL = System.getProperty("line.separator");
 	
@@ -27,7 +27,7 @@ public class InputParserTest {
 	private String processInput(String s) {
 		Scanner input = new Scanner(s);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		new InputParser(input, new PrintStream(out)).processInput();
+		new InputChooser(input, new PrintStream(out)).processInput();
 		return out.toString();
 	}
 	
@@ -38,14 +38,14 @@ public class InputParserTest {
 	private InputMethod processOutput(String s) {
 		Scanner input = new Scanner(s);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		return new InputParser(input, new PrintStream(out)).processInput();
+		return new InputChooser(input, new PrintStream(out)).processInput();
 	}
 	
 	private void assertOutput(String expected, String input) {
 		if (expected == "")
-			assertEquals(InputParser.INSTRUCTION_TEXT + NL, processInput(input));
+			assertEquals(InputChooser.INSTRUCTION_TEXT + NL, processInput(input));
 		else
-			assertEquals(InputParser.INSTRUCTION_TEXT + NL + expected + NL , processInput(input));
+			assertEquals(InputChooser.INSTRUCTION_TEXT + NL + expected + NL , processInput(input));
 	}
 	
 	@Test
@@ -56,7 +56,7 @@ public class InputParserTest {
 	@Test
 	public void wrongEnumRejected() {
 		String input = "l";
-		assertOutput("'l'" + InputParser.ERROR_TEXT, input);
+		assertOutput("'l'" + InputChooser.ERROR_TEXT, input);
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ public class InputParserTest {
 	@Test
 	public void xCancelsInput() {
 		String input = "l" + NL + "x";
-		assertOutput("'l'" + InputParser.ERROR_TEXT, input);
+		assertOutput("'l'" + InputChooser.ERROR_TEXT, input);
 		assertEquals(null, processOutput(input));
 	}
 	

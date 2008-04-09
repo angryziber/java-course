@@ -4,26 +4,26 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * InputParser - a class for handling data input of decathlon results
+ * InputParser - a class for choosing data input of decathlon results
  *
  * @version 1.0
  * @author Romi Agar
  */
-public class InputParser {
+public class InputChooser {
 
 	private final PrintStream out;
 	private final Scanner input;
 	private InputMethod im;
 
-	static final String NL = System.getProperty("line.separator");
+	public static final String NL = System.getProperty("line.separator");
 	static final String INSTRUCTION_TEXT = "Please type:"+ NL + options(false) + "'x' to cancel.";
 	static final String ERROR_TEXT = " is not valid input.";
 	
-	public InputParser(){
+	public InputChooser(){
 		this(new Scanner(System.in), System.out);
 	}
 	
-	InputParser(Scanner input, PrintStream out){
+	InputChooser(Scanner input, PrintStream out){
 		this.input = input;
 		this.out = out;
 		this.im = null;
