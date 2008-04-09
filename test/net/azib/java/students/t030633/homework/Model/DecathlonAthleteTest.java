@@ -5,37 +5,36 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 import java.util.EnumMap;
-import java.util.Map;
 
 import org.junit.Test;
 
 /**
- * AthleteTest
+ * DecathlonAthleteTest
  * 
  * @author t030633
  */
-public class AthleteTest {
+public class DecathlonAthleteTest {
 
-	private final String NAME = "Piitsut";
+	private final String NAME = "Testname";
 	private final String COUNTRY = "EE";
 	private final Date DATE = new Date();
-	private final Map<Event, Double> RESULTS = new EnumMap<Event, Double>(Event.class);
+	private final EnumMap<Event, Double> RESULTS = new EnumMap<Event, Double>(Event.class);
 	private final int SCORE_A = 2;
 	private final int SCORE_B = 3;
 
 	private Athlete createAthleteA() {
-		Athlete a = new Athlete(NAME, DATE, COUNTRY, RESULTS, SCORE_A);
+		DecathlonAthlete a = new DecathlonAthlete(NAME, DATE, COUNTRY, RESULTS, SCORE_A);
 		return a;
 	}
 
 	private Athlete createAthleteB() {
-		Athlete b = new Athlete(NAME, DATE, COUNTRY, RESULTS, SCORE_B);
+		DecathlonAthlete b = new DecathlonAthlete(NAME, DATE, COUNTRY, RESULTS, SCORE_B);
 		return b;
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Athlete#getName()}.
+	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getName()}.
 	 */
 	@Test
 	public void canGetName() {
@@ -44,7 +43,7 @@ public class AthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Athlete#getBirthDate()}.
+	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getBirthDate()}.
 	 */
 	@Test
 	public void canGetBirthDate() {
@@ -53,7 +52,7 @@ public class AthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Athlete#getCountry()}.
+	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getCountry()}.
 	 */
 	@Test
 	public void canGetCountry() {
@@ -62,7 +61,7 @@ public class AthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Athlete#getResults()}.
+	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getResults()}.
 	 */
 	@Test
 	public void canGetResults() {
@@ -71,7 +70,7 @@ public class AthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Athlete#getScore()}.
+	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getScore()}.
 	 */
 	@Test
 	public void canGetScore() {
@@ -80,14 +79,15 @@ public class AthleteTest {
 
 	/**
 	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.Athlete#compareTo()}.
+	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#compareTo()}.
 	 */
 	@Test
 	public void comparesAsInteger() {
 		Athlete a = createAthleteA();
 		Athlete b = createAthleteB();
-		assertTrue((Integer)a.compareTo(b) instanceof Integer);
+		assertTrue((Integer) a.compareTo(b) instanceof Integer);
 	}
+
 	@Test
 	public void compareIsScoreDifference() {
 		Athlete a = createAthleteA();

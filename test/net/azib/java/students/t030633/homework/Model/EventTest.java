@@ -13,7 +13,7 @@ public class EventTest {
 
 	/**
 	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.Event}.
+	 * {@link net.azib.java.students.t030633.homework.Model.Event}.
 	 */
 	@Test 
 	public void thereAre10Events() {
@@ -35,7 +35,7 @@ public class EventTest {
 
 	/**
 	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.Event#points(double)}.
+	 * {@link net.azib.java.students.t030633.homework.Model.Event#points(double)}.
 	 */
 	@Test
 	public void calculateZeroPoints() {

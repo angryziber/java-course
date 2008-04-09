@@ -1,24 +1,22 @@
 package net.azib.java.students.t030633.homework.Model;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.EnumMap;
 
 /**
- * Athlete
+ * An athlete participating in a decathlon competition.
  * 
  * @author t030633
  */
-public final class Athlete implements Comparable<Athlete> {
+public final class DecathlonAthlete implements Athlete {
 
-	//TODO separate class for results?
-	
 	private String name;
 	private Date birthDate;
 	private String country;
-	private Map<Event, Double> results;
+	private EnumMap<Event, Double> results;
 	private int score;
 
-	Athlete(String name, Date date, String country, Map<Event, Double> results, int score) {
+	DecathlonAthlete(String name, Date date, String country, EnumMap<Event, Double> results, int score) {
 		this.name = name;
 		this.birthDate = date;
 		this.country = country;
@@ -52,7 +50,7 @@ public final class Athlete implements Comparable<Athlete> {
 		return country;
 	}
 
-	public Map<Event, Double> getResults() {
+	public EnumMap<Event, Double> getResults() {
 		return results;
 	}
 
