@@ -1,0 +1,5 @@
+<!ELEMENT country (name, phone_code, population?)>
+<!ATTLIST country code CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT phone_code (#PCDATA)>
+<!ELEMENT population (#PCDATA)>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="country" type="countryType"/>
+	<xs:simpleType name="countryCodeType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="countryType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="phone_code" type="xs:string"/>
+			<xs:element name="population" type="xs:decimal"/>
+        </xs:sequence>
+		<xs:attribute name="code" type="countryCodeType"/>
+  </xs:complexType>
+</xs:schema>
