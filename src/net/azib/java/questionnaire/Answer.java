@@ -25,6 +25,8 @@ public class Answer {
 		else {
 			// compare non-choice (manually entered) answers
 			String answer = answers.get(0).trim().replaceAll("\\s\\s+", " ");
+			if (answer.endsWith("s"))
+				answer = answer.substring(0, answer.length() - 1);
 			return answer.equalsIgnoreCase(question.correct.get(0));
 		}
 	}

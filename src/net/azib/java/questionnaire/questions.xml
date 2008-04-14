@@ -97,11 +97,11 @@
 	</question>
 	<question>
 		<text>How Java applications embedded in web pages are called? (plural)</text>
-		<answer correct="true">Applets</answer>
+		<answer correct="true">Applet</answer>
 	</question>
 	<question>
 		<text>How server-side Java applications are called? (plural)</text>
-		<answer correct="true">Servlets</answer>
+		<answer correct="true">Servlet</answer>
 	</question>
 	<question>
 		<text>What is the synchronized keyword used for?</text>
