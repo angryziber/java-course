@@ -75,12 +75,14 @@ public class FileInput implements DataInput {
 		String countryCode = "";
 		Date birthday = null;
 		String[] elements = null;
+		String[] sResults = null;
 		float[] results = null;
 		BufferedReader br = null;
 		//PrintStream ps = null;
 		//BufferedWriter ou = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("D:\\out.txt")),"UTF8"));
 		//ps = new PrintStream(System.out, true, "UTF-8");
 		try {
+			
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(dataSource), "UTF-8"));
 			while ((line = br.readLine()) != null) {
 				elements = line.split(",");
@@ -88,7 +90,8 @@ public class FileInput implements DataInput {
 					name = InputParser.parseName(elements[0]);
 					birthday = InputParser.parseDateString(elements[1]);
 					countryCode = InputParser.parseCountryCode(elements[2]);
-					results = InputParser.parseEventResults(Arrays.copyOfRange(elements, 3, 13));
+					System.arraycopy(elements, 3, sResults, 0, 10);
+					results = InputParser.parseEventResults(sResults);
 				}
 			}
 			System.out.println("done");
