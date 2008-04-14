@@ -1,13 +1,13 @@
 package net.azib.java.students.t030633.homework;
 
-import net.azib.java.students.t030633.homework.model1.AddingCalculator;
-import net.azib.java.students.t030633.homework.model1.Athlete;
-import net.azib.java.students.t030633.homework.model1.DecathlonAthleteBuilder;
-import net.azib.java.students.t030633.homework.model1.DecathlonChecker;
-import net.azib.java.students.t030633.homework.view1.Input;
-import net.azib.java.students.t030633.homework.view1.InputMethod;
-import net.azib.java.students.t030633.homework.view1.Output;
-import net.azib.java.students.t030633.homework.view1.OutputMethod;
+import net.azib.java.students.t030633.homework.model.AddingCalculator;
+import net.azib.java.students.t030633.homework.model.Athlete;
+import net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder;
+import net.azib.java.students.t030633.homework.model.DecathlonChecker;
+import net.azib.java.students.t030633.homework.view.Input;
+import net.azib.java.students.t030633.homework.view.InputMethod;
+import net.azib.java.students.t030633.homework.view.Output;
+import net.azib.java.students.t030633.homework.view.OutputMethod;
 
 import java.io.IOException;
 import java.util.Collections;

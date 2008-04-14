@@ -1,9 +1,9 @@
-package net.azib.java.students.t030633.homework.model1;
+package net.azib.java.students.t030633.homework.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import net.azib.java.students.t030633.homework.model1.AbstractChecker;
+import net.azib.java.students.t030633.homework.model.AbstractChecker;
 
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public abstract class AbstractCheckerTest {
 	
 	/**
 	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.model1.AbstractChecker#checkCountry(String)}.
+	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkCountry(String)}.
 	 */
 	@Test
 	public void nullCountryAvoided() {
@@ -41,7 +41,7 @@ public abstract class AbstractCheckerTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model1.AbstractChecker#checkDate(java.util.Date)}.
+	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkDate(java.util.Date)}.
 	 */
 	@Test
 	public void nullDateAvoided() {
@@ -50,7 +50,7 @@ public abstract class AbstractCheckerTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model1.AbstractChecker#checkName(String)}.
+	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkName(String)}.
 	 */
 	@Test
 	public void testCheckName() {

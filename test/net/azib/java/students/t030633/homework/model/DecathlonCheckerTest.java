@@ -1,10 +1,10 @@
-package net.azib.java.students.t030633.homework.model1;
+package net.azib.java.students.t030633.homework.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import net.azib.java.students.t030633.homework.model1.DecathlonChecker;
-import net.azib.java.students.t030633.homework.model1.Event;
+import net.azib.java.students.t030633.homework.model.DecathlonChecker;
+import net.azib.java.students.t030633.homework.model.Event;
 
 import java.util.EnumMap;
 
@@ -50,7 +50,7 @@ public class DecathlonCheckerTest extends AbstractCheckerTest {
 
 	/**
 	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.model1.DecathlonChecker#checkResults(EnumMap)}.
+	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
 	 */
 	@Test
 	public void nullResultsAvoided() {
