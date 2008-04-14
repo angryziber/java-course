@@ -7,7 +7,6 @@ package net.azib.java.students.t072054.hometask1;
  */
 
 import net.azib.java.lessons.collections.DuplicateRemover;
-import net.azib.java.students.t030629.hometasks.ht3.DuplicateRemoverImpl;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;

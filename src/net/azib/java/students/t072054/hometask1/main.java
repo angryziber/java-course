@@ -13,7 +13,7 @@ public class main {
 				"asdfds","afsd"};
 		String str2[];
 				
-		str2 = removeDuplicateStrings(str);
+		str2 = new DuplicateRemoverImpl(str).removeDuplicateStrings(str);
 		
 		}
 	}
