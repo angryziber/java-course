@@ -1,8 +1,6 @@
 package net.azib.java.lessons.xml;
 
-import static org.custommonkey.xmlunit.XMLAssert.assertXMLEqual;
-import static org.custommonkey.xmlunit.XMLAssert.assertXMLValid;
-import static org.custommonkey.xmlunit.XMLAssert.assertXpathEvaluatesTo;
+import static org.custommonkey.xmlunit.XMLAssert.*;
 
 import java.io.InputStreamReader;
 
@@ -29,28 +27,42 @@ public class CountryTest {
 	
 	@Test
 	public void testXPath() throws Exception {
-		assertXpathEvaluatesTo("Estonia", "/country/name", xml);
+		assertXpathExists("//country[name = 'Estonia']", xml);
+		assertXpathEvaluatesTo("EE", "/countries/country[1]/@code", xml);
+		assertXpathEvaluatesTo("LV", "/countries/country[2]/@code", xml);
 	}
 	
 	@Test
 	public void testEquals() throws Exception {
 		Document expected =
 			XMLUnit.buildControlDocument(
-			"<country>" +
+			"<countries>" +
+			"<country code='EE'>" +
 			"<name>Estonia</name>" +
 			"<phone_code>372</phone_code>" +
 			"<population>" + 1350000 + "</population>  " +
-			"</country>");
+			"</country>" +
+			"<country code='LV'>" +
+			"<name>Latvia</name>   " +
+			"<phone_code>371</phone_code>" +
+			"<population>" + 2500000 + "</population>  " +
+			"</country>" +
+			"</countries>");
 		XMLUnit.setIgnoreWhitespace(true);
 		assertXMLEqual(expected, xml);
 	}
 
-//	@Test
+	@Test
 	public void testValid() throws Exception {
 		InputStreamReader xmlReader = new InputStreamReader(getClass().getResourceAsStream("country.xml"));
 		String xsdPath = getClass().getResource("country.xsd").getPath();
+		
 		Validator validator = new Validator(xmlReader, xsdPath);
 		validator.useXMLSchema(true);
 		assertXMLValid(validator);
 	}
 }
+
+
+
+
