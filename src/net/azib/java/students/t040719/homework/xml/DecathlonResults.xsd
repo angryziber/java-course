@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+	<xs:element name="decathlon" type="decathlonType" />
+	
+	<xs:complexType name="decathlonType">
+		<xs:sequence>
+			<xs:element name="athlete" type="athleteType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="athleteType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="birthday" type="dateType"/>
+			<xs:element name="countryCode" type="countryCodeType"/>
+			<xs:element name="score" type="scoreType" />
+			<xs:element name="place" type="placeType"/>
+			<xs:element name="event" type="eventType" minOccurs="10" maxOccurs="10" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="countryCodeType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{2}" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="scoreType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="15000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="placeType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="eventType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="result" type="xs:string"/>
+			<xs:element name="unit" type="unitType"/>
+		</xs:sequence>
+		<xs:attribute name="order" type="orderType" />
+	</xs:complexType>
+	
+	<xs:simpleType name="orderType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="unitType">
+		<xs:restriction base="xs:string">
+	    	<xs:enumeration value="m"/>
+	    	<xs:enumeration value="sec"/>
+	    	<xs:enumeration value="min:sec"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="dateType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-3][0-9][.][0-1][0-9][.][1-2][09][0-9][0-9]" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
