@@ -1,6 +1,13 @@
-package net.azib.java.students.t030633.homework.Model;
+package net.azib.java.students.t030633.homework.model1;
 
 import static org.easymock.EasyMock.*;
+
+import net.azib.java.students.t030633.homework.model1.Athlete;
+import net.azib.java.students.t030633.homework.model1.AthleteBuilder;
+import net.azib.java.students.t030633.homework.model1.Calculator;
+import net.azib.java.students.t030633.homework.model1.Checker;
+import net.azib.java.students.t030633.homework.model1.DecathlonAthleteBuilder;
+import net.azib.java.students.t030633.homework.model1.Event;
 
 import static org.junit.Assert.assertEquals;
 
@@ -41,7 +48,7 @@ public class DecathlonAthleteBuilderTest {
 	
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthleteBuilder}.
+	 * {@link net.azib.java.students.t030633.homework.model1.DecathlonAthleteBuilder}.
 	 */
 	@Test
 	public void basicBuildCompletes() {

@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633.homework.View;
+package net.azib.java.students.t030633.homework.view1;
 
 /**
  * Decathlon output method - all possible output methods and classes that implement them.

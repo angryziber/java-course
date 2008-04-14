@@ -1,7 +1,7 @@
-package net.azib.java.students.t030633.homework.View;
+package net.azib.java.students.t030633.homework.view1;
 
-import net.azib.java.students.t030633.homework.Model.Athlete;
-import net.azib.java.students.t030633.homework.Model.AthleteBuilder;
+import net.azib.java.students.t030633.homework.model1.Athlete;
+import net.azib.java.students.t030633.homework.model1.AthleteBuilder;
 
 import java.io.IOException;
 import java.util.List;

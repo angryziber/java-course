@@ -1,6 +1,8 @@
-package net.azib.java.students.t030633.homework.Model;
+package net.azib.java.students.t030633.homework.model1;
 
 import static org.junit.Assert.*;
+
+import net.azib.java.students.t030633.homework.model1.Event;
 
 import org.junit.Test;
 
@@ -13,7 +15,7 @@ public class EventTest {
 
 	/**
 	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.Model.Event}.
+	 * {@link net.azib.java.students.t030633.homework.model1.Event}.
 	 */
 	@Test 
 	public void thereAre10Events() {
@@ -35,7 +37,7 @@ public class EventTest {
 
 	/**
 	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.Model.Event#points(double)}.
+	 * {@link net.azib.java.students.t030633.homework.model1.Event#points(double)}.
 	 */
 	@Test
 	public void calculateZeroPoints() {

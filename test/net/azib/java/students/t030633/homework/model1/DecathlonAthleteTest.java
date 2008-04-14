@@ -1,7 +1,11 @@
-package net.azib.java.students.t030633.homework.Model;
+package net.azib.java.students.t030633.homework.model1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import net.azib.java.students.t030633.homework.model1.Athlete;
+import net.azib.java.students.t030633.homework.model1.DecathlonAthlete;
+import net.azib.java.students.t030633.homework.model1.Event;
 
 import java.util.Date;
 import java.util.EnumMap;
@@ -34,7 +38,7 @@ public class DecathlonAthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getName()}.
+	 * {@link net.azib.java.students.t030633.homework.model1.DecathlonAthlete#getName()}.
 	 */
 	@Test
 	public void canGetName() {
@@ -43,7 +47,7 @@ public class DecathlonAthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getBirthDate()}.
+	 * {@link net.azib.java.students.t030633.homework.model1.DecathlonAthlete#getBirthDate()}.
 	 */
 	@Test
 	public void canGetBirthDate() {
@@ -52,7 +56,7 @@ public class DecathlonAthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getCountry()}.
+	 * {@link net.azib.java.students.t030633.homework.model1.DecathlonAthlete#getCountry()}.
 	 */
 	@Test
 	public void canGetCountry() {
@@ -61,7 +65,7 @@ public class DecathlonAthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getResults()}.
+	 * {@link net.azib.java.students.t030633.homework.model1.DecathlonAthlete#getResults()}.
 	 */
 	@Test
 	public void canGetResults() {
@@ -70,7 +74,7 @@ public class DecathlonAthleteTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#getScore()}.
+	 * {@link net.azib.java.students.t030633.homework.model1.DecathlonAthlete#getScore()}.
 	 */
 	@Test
 	public void canGetScore() {
@@ -79,7 +83,7 @@ public class DecathlonAthleteTest {
 
 	/**
 	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.Model.DecathlonAthlete#compareTo()}.
+	 * {@link net.azib.java.students.t030633.homework.model1.DecathlonAthlete#compareTo()}.
 	 */
 	@Test
 	public void comparesAsInteger() {

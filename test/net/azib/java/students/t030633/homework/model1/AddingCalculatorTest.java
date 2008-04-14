@@ -1,6 +1,10 @@
-package net.azib.java.students.t030633.homework.Model;
+package net.azib.java.students.t030633.homework.model1;
 
 import static org.junit.Assert.assertEquals;
+
+import net.azib.java.students.t030633.homework.model1.AddingCalculator;
+import net.azib.java.students.t030633.homework.model1.Event;
+
 import java.util.EnumMap;
 import org.junit.Test;
 
@@ -21,7 +25,7 @@ public class AddingCalculatorTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.Model.AddingCalculator#calculate(EnumMap)}.
+	 * {@link net.azib.java.students.t030633.homework.model1.AddingCalculator#calculate(EnumMap)}.
 	 */
 	@Test
 	public void passesScoreFromOneEvent() {

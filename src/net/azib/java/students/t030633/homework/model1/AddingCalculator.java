@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633.homework.Model;
+package net.azib.java.students.t030633.homework.model1;
 
 import java.util.EnumMap;
 
