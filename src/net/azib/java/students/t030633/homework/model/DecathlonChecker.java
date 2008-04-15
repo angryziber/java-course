@@ -7,7 +7,7 @@ import java.util.EnumMap;
  *
  * @author t030633
  */
-public class DecathlonChecker extends AbstractChecker {
+public class DecathlonChecker extends SimpleChecker {
 
 	public EnumMap<Event, Double> checkResults(EnumMap<Event, Double> results) {
 		if (results == null)

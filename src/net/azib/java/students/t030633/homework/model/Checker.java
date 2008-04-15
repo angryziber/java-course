@@ -10,12 +10,28 @@ import java.util.EnumMap;
  */
 public interface Checker {
 	
-	String checkCountry(String country);
+	/**
+	 * @param country - String, country code
+	 * @return String - country if valid according to ISO 3166-1 alpha-2, empty string if not or code was null
+	 */
+	public String checkCountry(String country);
 	
-	Date checkDate(Date date);
+	/**
+	 * @param date - Date, could be null
+	 * @return Date
+	 */
+	public Date checkDate(Date date);
 	
-	String checkName(String name);
+	/**
+	 * @param name - String, could be null
+	 * @return String - name, if name was null then empty string
+	 */
+	public String checkName(String name);
 
-	EnumMap<Event, Double> checkResults(EnumMap<Event, Double> results);
+	/**
+	 * @param results - EnumMap, results from a competition in Map format
+	 * @return EnumMap - results checked for logical correctness
+	 */
+	public EnumMap<Event, Double> checkResults(EnumMap<Event, Double> results);
 
 }

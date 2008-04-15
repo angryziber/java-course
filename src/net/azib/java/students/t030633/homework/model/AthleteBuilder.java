@@ -1,7 +1,6 @@
 package net.azib.java.students.t030633.homework.model;
 
 import java.util.Date;
-import java.util.EnumMap;
 
 /**
  * Interface for building athletes.
@@ -10,14 +9,34 @@ import java.util.EnumMap;
  */
 public interface AthleteBuilder {
 
-	public abstract AthleteBuilder name(String name);
+	/**
+	 * @param name - String, name for the athlete
+	 * @return AthleteBuilder
+	 */
+	public AthleteBuilder name(String name);
 
-	public abstract AthleteBuilder date(Date date);
+	/**
+	 * @param date - Date, birth date for the athlete
+	 * @return AthleteBuilder
+	 */
+	public AthleteBuilder date(Date date);
 
-	public abstract AthleteBuilder country(String country);
+	/**
+	 * @param country - String, country for the athlete
+	 * @return AthleteBuilder
+	 */
+	public AthleteBuilder country(String country);
 
-	public abstract AthleteBuilder results(EnumMap<Event, Double> results);
-
-	public abstract Athlete build();
+	/**
+	 * @param event - an event that the athlete participated in
+	 * @param performance - performance in the event
+	 * @return AthleteBuilder
+	 */
+	public AthleteBuilder addResult(Event event, Double performance);
+	
+	/**
+	 * @return Athlete
+	 */
+	public Athlete build();
 
 }

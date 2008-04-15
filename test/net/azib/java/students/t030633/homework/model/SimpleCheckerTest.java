@@ -3,37 +3,43 @@ package net.azib.java.students.t030633.homework.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import net.azib.java.students.t030633.homework.model.AbstractChecker;
-
 import org.junit.Test;
 
 /**
- * AbstractCheckerTest
+ * SimpleCheckerTest
  * 
  * @author t030633
  */
-public abstract class AbstractCheckerTest {
+public abstract class SimpleCheckerTest {
 
-	private AbstractChecker checker;
+	private SimpleChecker checker;
 
-	public AbstractCheckerTest(AbstractChecker checker) {
+	public SimpleCheckerTest(SimpleChecker checker) {
 		this.checker = checker;
 	}
 	
 	/**
-	 * Test methods for
-	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkCountry(String)}.
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkCountry(String)}.
 	 */
 	@Test
 	public void nullCountryAvoided() {
 		assertNotNull(checker.checkCountry(null));
 	}
 	
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkCountry(String)}.
+	 */
 	@Test
 	public void existingCountryAccepted() {
 		assertEquals("EE", checker.checkCountry("EE"));
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkCountry(String)}.
+	 */
 	@Test
 	public void notExistingCountryRemoved() {
 		assertEquals("", checker.checkCountry("PP"));
@@ -41,7 +47,7 @@ public abstract class AbstractCheckerTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkDate(java.util.Date)}.
+	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkDate(java.util.Date)}.
 	 */
 	@Test
 	public void nullDateAvoided() {
@@ -50,7 +56,7 @@ public abstract class AbstractCheckerTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkName(String)}.
+	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkName(String)}.
 	 */
 	@Test
 	public void testCheckName() {

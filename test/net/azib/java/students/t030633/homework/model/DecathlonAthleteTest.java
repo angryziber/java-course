@@ -3,10 +3,6 @@ package net.azib.java.students.t030633.homework.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import net.azib.java.students.t030633.homework.model.Athlete;
-import net.azib.java.students.t030633.homework.model.DecathlonAthlete;
-import net.azib.java.students.t030633.homework.model.Event;
-
 import java.util.Date;
 import java.util.EnumMap;
 
@@ -82,21 +78,21 @@ public class DecathlonAthleteTest {
 	}
 
 	/**
-	 * Test methods for
+	 * Test method for
 	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#compareTo()}.
 	 */
 	@Test
 	public void comparesAsInteger() {
-		Athlete a = createAthleteA();
-		Athlete b = createAthleteB();
-		assertTrue((Integer) a.compareTo(b) instanceof Integer);
+		assertTrue((Integer) createAthleteA().compareTo(createAthleteB()) instanceof Integer);
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#compareTo()}.
+	 */
 	@Test
 	public void compareIsScoreDifference() {
-		Athlete a = createAthleteA();
-		Athlete b = createAthleteB();
-		assertEquals(SCORE_A - SCORE_B, a.compareTo(b));
+		assertEquals(SCORE_A - SCORE_B, createAthleteA().compareTo(createAthleteB()));
 	}
 
 }

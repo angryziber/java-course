@@ -26,6 +26,10 @@ public enum Event {
 		this.C = C;
 	}
 
+	/**
+	 * @param performance - double, performance in the event
+	 * @return points - int, points gained from the performance
+	 */
 	public int points(double performance) {
 		if (performance == 0D)
 			return 0;

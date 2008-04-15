@@ -14,13 +14,18 @@ import org.junit.Test;
 public class EventTest {
 
 	/**
-	 * Test methods for
+	 * Test method for
 	 * {@link net.azib.java.students.t030633.homework.model.Event}.
 	 */
 	@Test 
 	public void thereAre10Events() {
 		assertTrue(Event.values().length == 10);
 	}
+	
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.Event}.
+	 */
 	@Test 
 	public void eventsAreCorrect() {
 		assertNotNull(Event.valueOf(Event.class, "R100M"));
@@ -36,7 +41,7 @@ public class EventTest {
 	}
 
 	/**
-	 * Test methods for
+	 * Test method for
 	 * {@link net.azib.java.students.t030633.homework.model.Event#points(double)}.
 	 */
 	@Test
@@ -45,18 +50,30 @@ public class EventTest {
 			assertEquals(0, e.points(0D));
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.Event#points(double)}.
+	 */
 	@Test
 	public void calculatePointsForJavelin() {
 		Event e = Event.JAVELIN;
 		assertEquals(35, e.points(10.21D));
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.Event#points(double)}.
+	 */
 	@Test
 	public void calculatePointsForHurdles() {
 		Event e = Event.R110MH;
 		assertEquals(960, e.points(14.11D));
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.Event#points(double)}.
+	 */
 	@Test
 	public void calculatePointsForShotPut() {
 		Event e = Event.SHOT;

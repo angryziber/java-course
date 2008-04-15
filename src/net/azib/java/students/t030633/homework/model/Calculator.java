@@ -1,6 +1,6 @@
 package net.azib.java.students.t030633.homework.model;
 
-import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Calculator interface.
@@ -9,6 +9,10 @@ import java.util.EnumMap;
  */
 public interface Calculator {
 
-	int calculate(EnumMap<Event, Double> results);
+	/**
+	 * @param results - Map, results (event performances)
+	 * @return int - score calculated from results
+	 */
+	int calculate(Map<Event, Double> results);
 
 }

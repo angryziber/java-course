@@ -1,7 +1,7 @@
 package net.azib.java.students.t030633.homework.model;
 
 import java.util.Date;
-import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Athlete interface.
@@ -20,16 +20,22 @@ public interface Athlete extends Comparable<Athlete> {
 	 * @throws NullPointerException
 	 *             in case anotherAthlete is null
 	 */
-	public abstract int compareTo(Athlete anotherAthlete);
+	public int compareTo(Athlete anotherAthlete);
 
-	public abstract String getName();
+	public String getName();
 
-	public abstract Date getBirthDate();
+	public Date getBirthDate();
 
-	public abstract String getCountry();
+	public String getCountry();
 
-	public abstract EnumMap<Event, Double> getResults();
+	/**
+	 * @return Map - competition results in a Map collection
+	 */
+	public Map<Event, Double> getResults();
 
-	public abstract int getScore();
+	/**
+	 * @return Integer - score calculated from performance(s)
+	 */
+	public int getScore();
 
 }

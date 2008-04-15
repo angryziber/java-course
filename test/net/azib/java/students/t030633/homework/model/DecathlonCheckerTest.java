@@ -15,7 +15,7 @@ import org.junit.Test;
  * 
  * @author t030633
  */
-public class DecathlonCheckerTest extends AbstractCheckerTest {
+public class DecathlonCheckerTest extends SimpleCheckerTest {
 
 	public DecathlonCheckerTest() {
 		super(new DecathlonChecker());
@@ -49,7 +49,7 @@ public class DecathlonCheckerTest extends AbstractCheckerTest {
 	}
 
 	/**
-	 * Test methods for
+	 * Test method for
 	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
 	 */
 	@Test
@@ -57,11 +57,19 @@ public class DecathlonCheckerTest extends AbstractCheckerTest {
 		assertNotNull(new DecathlonChecker().checkResults(null));
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
+	 */
 	@Test
 	public void validResultsAccepted() {
 		assertEquals(validResults(), new DecathlonChecker().checkResults(validResults()));
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
+	 */
 	@Test
 	public void invalidResultsRemoved() {
 		assertEquals(emptyResults(), new DecathlonChecker().checkResults(invalidResults()));

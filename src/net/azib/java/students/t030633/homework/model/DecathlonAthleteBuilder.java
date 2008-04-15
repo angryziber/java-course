@@ -21,6 +21,7 @@ public class DecathlonAthleteBuilder implements AthleteBuilder {
 	public DecathlonAthleteBuilder(Checker checker, Calculator calculator) {
 		this.checker = checker;
 		this.calculator = calculator;
+		this.results = new EnumMap<Event, Double>(Event.class);
 	}
 
 	public AthleteBuilder name(String name) {
@@ -38,13 +39,13 @@ public class DecathlonAthleteBuilder implements AthleteBuilder {
 		return this;
 	}
 
-	public AthleteBuilder results(EnumMap<Event, Double> results) {
-		this.results = checker.checkResults(results);
+	public AthleteBuilder addResult(Event event, Double performance) {
+		this.results.put(event, performance);
 		return this;
 	}
 
 	public DecathlonAthlete build() {
-		return new DecathlonAthlete(name, date, country, results, calculator.calculate(results));
+		return new DecathlonAthlete(name, date, country, checker.checkResults(results), calculator.calculate(results));
 	}
 
 }
