@@ -2,7 +2,7 @@ package net.azib.java.students.t030633.hometasks.copier;
 
 import static org.junit.Assert.assertTrue;
 
-import net.azib.java.students.t030633.FileLocations;
+import net.azib.java.students.t030633.hometasks.FileLocations;
 
 import java.io.File;
 import java.io.FileInputStream;

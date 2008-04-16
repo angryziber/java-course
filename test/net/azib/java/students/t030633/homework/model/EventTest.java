@@ -42,6 +42,15 @@ public class EventTest {
 
 	/**
 	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.Event#getName()}.
+	 */
+	@Test
+	public void getNameWorks() {
+		assertEquals("100 m dash", Event.R100M.getName());
+	}
+	
+	/**
+	 * Test method for
 	 * {@link net.azib.java.students.t030633.homework.model.Event#points(double)}.
 	 */
 	@Test

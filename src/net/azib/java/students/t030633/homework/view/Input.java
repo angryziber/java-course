@@ -12,9 +12,19 @@ import java.util.List;
  * @author t030633
  */
 public interface Input {
-	
+
+	/**
+	 * @param builder -
+	 *            AthleteBuilder, gives a builder instance to input
+	 * @return Input
+	 */
 	Input builder(AthleteBuilder builder);
 
+	/**
+	 * @return List<Athlete> - a list of athletes
+	 * @throws IOException
+	 *             if read fails
+	 */
 	List<Athlete> read() throws IOException;
 
 }

@@ -1,6 +1,6 @@
 package net.azib.java.students.t030633.hometasks.server;
 
-import net.azib.java.students.t030633.FileLocations;
+import net.azib.java.students.t030633.hometasks.FileLocations;
 import net.azib.java.students.t030633.hometasks.copier.DirectChanneledCopyProgram;
 
 import static org.junit.Assert.assertTrue;

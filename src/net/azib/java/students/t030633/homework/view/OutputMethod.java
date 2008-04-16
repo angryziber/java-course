@@ -1,7 +1,8 @@
 package net.azib.java.students.t030633.homework.view;
 
 /**
- * Decathlon output method - all possible output methods and classes that implement them.
+ * Decathlon output method - all possible output methods and classes that
+ * implement them.
  * 
  * @author t030633
  */
@@ -11,7 +12,7 @@ public enum OutputMethod {
 
 	private final Class<? extends Output> outputClass;
 
-	OutputMethod(Class<? extends Output> clazz) {
+	private OutputMethod(Class<? extends Output> clazz) {
 		this.outputClass = clazz;
 	}
 

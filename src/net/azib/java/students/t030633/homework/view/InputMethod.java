@@ -1,7 +1,8 @@
 package net.azib.java.students.t030633.homework.view;
 
 /**
- * Decathlon input method - all possible input methods and classes that implement them.
+ * Decathlon input method - all possible input methods and classes that
+ * implement them.
  * 
  * @author t030633
  */
@@ -11,7 +12,7 @@ public enum InputMethod {
 
 	private final Class<? extends Input> inputClass;
 
-	InputMethod(Class<? extends Input> clazz) {
+	private InputMethod(Class<? extends Input> clazz) {
 		this.inputClass = clazz;
 	}
 

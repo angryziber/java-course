@@ -1,6 +1,6 @@
 package net.azib.java.students.t030633.hometasks.copier;
 
-import net.azib.java.students.t030633.FileLocations;
+import net.azib.java.students.t030633.hometasks.FileLocations;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

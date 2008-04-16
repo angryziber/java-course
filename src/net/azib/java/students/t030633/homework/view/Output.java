@@ -12,6 +12,12 @@ import java.util.List;
  */
 public interface Output {
 
+	/**
+	 * @param out -
+	 *            List<Athlete>, a list of athletes to output
+	 * @throws IOException
+	 *             if output fails
+	 */
 	void write(List<Athlete> out) throws IOException;
-	
+
 }
