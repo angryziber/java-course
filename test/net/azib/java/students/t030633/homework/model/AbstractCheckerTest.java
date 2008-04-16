@@ -6,21 +6,21 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 
 /**
- * SimpleCheckerTest
+ * AbstractCheckerTest
  * 
  * @author t030633
  */
-public abstract class SimpleCheckerTest {
+public abstract class AbstractCheckerTest {
 
-	private SimpleChecker checker;
+	private AbstractChecker checker;
 
-	public SimpleCheckerTest(SimpleChecker checker) {
+	public AbstractCheckerTest(AbstractChecker checker) {
 		this.checker = checker;
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkCountry(String)}.
+	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkCountry(String)}.
 	 */
 	@Test
 	public void nullCountryAvoided() {
@@ -29,7 +29,7 @@ public abstract class SimpleCheckerTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkCountry(String)}.
+	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkCountry(String)}.
 	 */
 	@Test
 	public void existingCountryAccepted() {
@@ -38,7 +38,7 @@ public abstract class SimpleCheckerTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkCountry(String)}.
+	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkCountry(String)}.
 	 */
 	@Test
 	public void notExistingCountryRemoved() {
@@ -47,7 +47,7 @@ public abstract class SimpleCheckerTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkDate(java.util.Date)}.
+	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkDate(java.util.Date)}.
 	 */
 	@Test
 	public void nullDateAvoided() {
@@ -56,7 +56,7 @@ public abstract class SimpleCheckerTest {
 
 	/**
 	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.SimpleChecker#checkName(String)}.
+	 * {@link net.azib.java.students.t030633.homework.model.AbstractChecker#checkName(String)}.
 	 */
 	@Test
 	public void testCheckName() {

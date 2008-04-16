@@ -9,7 +9,7 @@ import java.util.Locale;
  *
  * @author t030633
  */
-public abstract class SimpleChecker implements Checker {
+public abstract class AbstractChecker implements Checker {
 
 	public String checkCountry(String country) {
 		if (country == null) return "";

@@ -15,7 +15,7 @@ import org.junit.Test;
  * 
  * @author t030633
  */
-public class DecathlonCheckerTest extends SimpleCheckerTest {
+public class DecathlonCheckerTest extends AbstractCheckerTest {
 
 	public DecathlonCheckerTest() {
 		super(new DecathlonChecker());
