@@ -15,7 +15,7 @@ public class WeightCalculator {
 	public static void main(String[] args) {
 		Planet pl;
 		String string = "";
-		int weight;
+		double weight;
 
 		System.out.println("Enter your weight...");
 
@@ -29,8 +29,17 @@ public class WeightCalculator {
 		}
 		catch (Exception e) {
 		}
+		/*
+		 * 
+		 * @weight - this your weight on the Earth
+		 */
 		weight = Integer.parseInt(string);
-		
+
+		double earth_mass = weight / Planet.EARTH.surfaceGravity();
+		for (Planet p : Planet.values()) {
+			System.out.printf("Your weight on %s is %f%n", p, p.surfaceWeight(earth_mass));
+			System.out.println(p.surfaceWeightAsString(p.name(), p.surfaceWeight(earth_mass)));
+		}
 	}
 
 }
