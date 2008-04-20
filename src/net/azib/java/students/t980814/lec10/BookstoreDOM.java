@@ -49,8 +49,7 @@ public class BookstoreDOM {
 		}
 		
 		for (Book book : bookstore) {
-			System.out.println(book.title + " - $" + book.price + "\n" + book.authors);
-			System.out.println(book.year);
+			System.out.println(book);
 			System.out.println("---");
 		}
 	}

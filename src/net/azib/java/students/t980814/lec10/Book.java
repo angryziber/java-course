@@ -10,13 +10,12 @@ import java.util.LinkedList;
  */
 public class Book {
 
-	String 				title;
-	LinkedList<String>  authors;
-	int 				year;
-	double 				price;
-	
-	String				category;
-	String				lang;
+	private String				category;
+	private String				lang;
+	private String 				title;
+	private LinkedList<String>  authors;
+	private int 				year = 0;
+	private double 				price = 0.0;
 	
 	Book(String title, String category, String lang) {
 		this.category = category;
@@ -57,4 +56,18 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		final String LN = System.getProperty("line.separator");;
+
+		StringBuilder text = new StringBuilder();
+		text.append("Category: " + category + " / " + lang + LN);
+		text.append(title + ((year == 0) ? " -" : (" [" + year + "] -")) +
+				            ((price == 0) ? " " : " $" + price) + LN);
+		text.append(authors);
+		return text.toString();
+	}
+
+	
 }
