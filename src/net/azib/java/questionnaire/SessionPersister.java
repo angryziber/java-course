@@ -60,7 +60,7 @@ public class SessionPersister {
 				// try to roll everything back
 				conn.rollback();
 			} 
-			catch (SQLException e2) {
+			catch (SQLException sqle) {
 			}
 			
 			// wrap exception if needed
@@ -81,7 +81,6 @@ public class SessionPersister {
 	}
 
 	private Connection openConnection() throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 		conn.setAutoCommit(false);
 		return conn;
