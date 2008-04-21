@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="net.azib.java.lessons.db" default-access="field">
-	<class name="Person" table="persons">
-		
+	<class name="net.azib.java.lessons.db.Person" table="persons">
+		<id name="id" column="id"/>
+		<property name="name" access="property"/>
+		<property name="age"/>
+		<property name="sexAsString" column="sex" access="property"/>
 	</class>
 </hibernate-mapping>
