@@ -5,12 +5,10 @@ import java.io.InputStream;
 import java.util.HashSet;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /**
  * BookstoreDOM
@@ -19,39 +17,63 @@ import org.xml.sax.SAXException;
  */
 public class BookstoreDOM {
 
-	static HashSet<Book> bookstore;
+	private HashSet<Book> bookstore;
 	
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
-		InputStream source = BookstoreDOM.class.getResourceAsStream("books.xml");
-		NodeList books = DocumentBuilderFactory.newInstance().
-												newDocumentBuilder().
-												parse(source).
-												getDocumentElement().
-												getChildNodes();
-		source.close();
-		
-		bookstore = new HashSet<Book>();
-		
-		for (int i = 0; i < books.getLength(); i++) {
-			Node node = books.item(i);
-			if (!(node instanceof Element))
-				continue;
-			Element bookNode = (Element)node;
+	BookstoreDOM(String resourceName) {
+		NodeList books;
+		InputStream source = BookstoreDOM.class.getResourceAsStream(resourceName);
+		try {
+			books = DocumentBuilderFactory.newInstance().
+										newDocumentBuilder().
+										parse(source).
+										getDocumentElement().
+										getChildNodes();
+			
+			bookstore = new HashSet<Book>();
+			
+			for (int i = 0; i < books.getLength(); i++) {
+				Node node = books.item(i);
+				if (!(node instanceof Element))
+					continue;
+				Element bookNode = (Element)node;
 
-			Book book = new Book(bookNode.getElementsByTagName("title").item(0).getTextContent(),
-								 bookNode.getAttribute("category"),
-								 bookNode.getAttribute("lang"));
-			for (int j = 0; j < bookNode.getElementsByTagName("author").getLength(); j++)
-				book.addAuthor(bookNode.getElementsByTagName("author").item(j).getTextContent());
-			book.setYear(new Integer(bookNode.getElementsByTagName("year").item(0).getTextContent()));
-			book.setPrice(new Double(bookNode.getElementsByTagName("price").item(0).getTextContent()));
-			bookstore.add(book);
+				Book book = new Book(bookNode.getElementsByTagName("title").item(0).getTextContent(),
+									 bookNode.getAttribute("category"),
+									 bookNode.getAttribute("lang"));
+				for (int j = 0; j < bookNode.getElementsByTagName("author").getLength(); j++)
+					book.addAuthor(bookNode.getElementsByTagName("author").item(j).getTextContent());
+				book.setYear(new Integer(bookNode.getElementsByTagName("year").item(0).getTextContent()));
+				book.setPrice(new Double(bookNode.getElementsByTagName("price").item(0).getTextContent()));
+				bookstore.add(book);
+			}
 		}
-		
-		for (Book book : bookstore) {
-			System.out.println(book);
-			System.out.println("---");
+		catch (Exception e) {
+			
+		}
+		finally { 
+			closeQuietly(source);
+		}
+	}
+	
+	private void closeQuietly(InputStream source) {
+		try {
+			source.close();
+		}
+		catch (IOException e) {
 		}
 	}
 
+	@Override
+	public String toString() {
+		final String LN = System.getProperty("line.separator");;
+		StringBuilder text = new StringBuilder();
+		for (Book book : bookstore)
+			text.append(book + LN + "---" + LN);
+		return text.toString();
+	}
+	
+	public static void main(String[] args) {
+		BookstoreDOM bookStore = new BookstoreDOM("books.xml");
+		System.out.println(bookStore);
+	}
 }
