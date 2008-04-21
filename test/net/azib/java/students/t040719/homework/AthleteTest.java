@@ -32,11 +32,11 @@ public class AthleteTest {
 		assertEquals("EE", ath.getCountryCode());
 	}
 
-	@Test
-	public void testGetCountryName() {
-		Athlete ath = new Athlete("s s", date, "EE", eventResults);
-		assertEquals("ESTONIA", ath.getCountryName());
-	}
+//	@Test
+//	public void testGetCountryName() {
+//		Athlete ath = new Athlete("s s", date, "EE", eventResults);
+//		assertEquals("ESTONIA", ath.getCountryName());
+//	}
 	
 	@Test
 	public void testGetBirtdayString() throws  ParseException {
