@@ -19,9 +19,9 @@ public class BookstoreDOM {
 
 	private HashSet<Book> bookstore;
 	
-	BookstoreDOM(String resourceName) {
+	BookstoreDOM(InputStream source) {
 		NodeList books;
-		InputStream source = BookstoreDOM.class.getResourceAsStream(resourceName);
+
 		try {
 			books = DocumentBuilderFactory.newInstance().
 										newDocumentBuilder().
@@ -50,30 +50,33 @@ public class BookstoreDOM {
 		catch (Exception e) {
 			
 		}
-		finally { 
+/*		finally { 
 			closeQuietly(source);
-		}
+		}*/
 	}
 	
-	private void closeQuietly(InputStream source) {
+/*	private void closeQuietly(InputStream source) {
 		try {
-			source.close();
+			if (source != null) 
+				source.close();
 		}
 		catch (IOException e) {
 		}
-	}
+	} */
 
 	@Override
 	public String toString() {
 		final String LN = System.getProperty("line.separator");;
 		StringBuilder text = new StringBuilder();
 		for (Book book : bookstore)
-			text.append(book + LN + "---" + LN);
+			text.append(book + LN);
 		return text.toString();
 	}
 	
-	public static void main(String[] args) {
-		BookstoreDOM bookStore = new BookstoreDOM("books.xml");
+	public static void main(String[] args) throws IOException {
+		InputStream source = BookstoreDOM.class.getResourceAsStream("books.xml");
+		BookstoreDOM bookStore = new BookstoreDOM(source);
+		source.close();
 		System.out.println(bookStore);
 	}
 }
