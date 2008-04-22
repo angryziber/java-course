@@ -15,8 +15,8 @@ public interface Athlete extends Comparable<Athlete> {
 	 * 
 	 * @param anotherAthlete
 	 *            an Athlete to compare with
-	 * @return -1, 0, or 1 showing whether the current Athlete is smaller,
-	 *         equal, or greater than anotherAthlete
+	 * @return negative, zero, or positive showing whether the current Athlete is greater,
+	 *         equal, or weaker than anotherAthlete
 	 * @throws NullPointerException
 	 *             in case anotherAthlete is null
 	 */

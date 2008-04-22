@@ -48,4 +48,11 @@ public class DecathlonAthleteBuilder implements AthleteBuilder {
 		return new DecathlonAthlete(name, date, country, checker.checkResults(results), calculator.calculate(results));
 	}
 
+	public void reset() {
+		this.results = new EnumMap<Event, Double>(Event.class);
+		this.name = null;
+		this.date = null;
+		this.country = null;
+	}
+
 }

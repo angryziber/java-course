@@ -26,7 +26,7 @@ public final class DecathlonAthlete implements Athlete {
 	}
 
 	public int compareTo(Athlete anotherAthlete) {
-		return score - anotherAthlete.getScore();
+		return anotherAthlete.getScore() - score;
 	}
 
 	public String getName() {

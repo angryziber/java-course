@@ -3,6 +3,7 @@ package net.azib.java.students.t030633.homework.view;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * 
  * @author t030633
  */
-public interface Input {
+public interface Input extends Closeable {
 
 	/**
 	 * @param builder -

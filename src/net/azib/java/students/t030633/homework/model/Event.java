@@ -12,7 +12,7 @@ public enum Event {
 	SHOT("Shot put", 51.39D, 1.5D, 1.05D),  // shot put
 	HIGH("High jump", 0.8465D, 75D, 1.42D),  // high jump
 	R400M("400 m dash", 1.53775D, 82D, 1.81D), // 400 m dash
-	R110MH("100 m high hurdles", 5.74352D, 28.5D, 1.92D), // 110 m high hurdles
+	R110MH("110 m high hurdles", 5.74352D, 28.5D, 1.92D), // 110 m high hurdles
 	DISCUS("Discus throw", 12.91D, 4.0D, 1.1D), // discus throw
 	POLE("Pole vault", 0.2797D, 100D, 1.35D), // pole vault
 	JAVELIN("Javelin throw", 10.14D, 7.0D, 1.08D), // javelin throw

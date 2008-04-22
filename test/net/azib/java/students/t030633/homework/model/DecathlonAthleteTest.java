@@ -92,7 +92,7 @@ public class DecathlonAthleteTest {
 	 */
 	@Test
 	public void compareIsScoreDifference() {
-		assertEquals(SCORE_A - SCORE_B, createAthleteA().compareTo(createAthleteB()));
+		assertEquals(SCORE_B - SCORE_A, createAthleteA().compareTo(createAthleteB()));
 	}
 
 }
