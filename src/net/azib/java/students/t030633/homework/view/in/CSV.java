@@ -7,8 +7,8 @@ import net.azib.java.students.t030633.homework.model.Event;
 import net.azib.java.students.t030633.homework.view.Input;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,10 +25,9 @@ public class CSV implements Input {
 	private AthleteBuilder athleteBuilder;
 
 	private InputStream in;
-	private File file;
 
-	public CSV() {
-		this.file = new Files().getCSVInputFile();
+	public CSV() throws FileNotFoundException {
+		this.in = new FileInputStream(new Files().getCSVInputFile());
 	}
 
 	public CSV(InputStream in) {
@@ -41,14 +40,8 @@ public class CSV implements Input {
 	}
 
 	public List<Athlete> read() throws IOException {
-		BufferedReader reader;
-		if (file == null)
-			reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-		else
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 		List<Athlete> list = new LinkedList<Athlete>();
-
 		while (reader.ready()) {
 			list.add(parseAthlete(athleteBuilder, reader.readLine()));
 		}

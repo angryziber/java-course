@@ -1,37 +1,54 @@
 package net.azib.java.students.t030633.homework;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
- * Holds and handles all input and output files.
+ * Holds and handles all input and output files and their possible Exceptions.
  * 
  * @author t030633
  */
 public class Files {
 
-	private static String XML_OUTPUT = "athletes.out.xml";
-	private static String CSV_INPUT = "athletes.in.csv";
-	private static File xmlOutput = new File(XML_OUTPUT);
-	private static File csvInput = new File(CSV_INPUT);
+	static String XML_OUTPUT_FILENAME = "athletes.out.xml";
+	static String CSV_INPUT_FILENAME = "athletes.in.csv";
 
-	public File getXMLOutputFile() {
+	public File getXMLOutputFile() throws FileNotFoundException {
+		File file = null;
 		try {
-			if (!xmlOutput.createNewFile()) {
-				new File(XML_OUTPUT + ".old").delete();
-				xmlOutput.renameTo(new File(XML_OUTPUT + ".old"));
-				xmlOutput = new File(XML_OUTPUT);
-				xmlOutput.createNewFile();
+			URI path = Files.class.getResource("").toURI();
+			file = new File(path.getPath(), File.separatorChar + XML_OUTPUT_FILENAME);
+			if (!file.createNewFile()) {
+				new File(path.getPath(), File.separatorChar + "old." + XML_OUTPUT_FILENAME).delete();
+				file.renameTo(new File(path.getPath(), File.separatorChar + "old." + XML_OUTPUT_FILENAME));
+				file = new File(path.getPath(), File.separatorChar + XML_OUTPUT_FILENAME);
+				file.createNewFile();
 			}
 		}
-		catch (IOException e) {
-			throw new RuntimeException("XML output file error.", e);
+		catch (Exception e) {
+			System.err.println("XML output file error.");
 		}
-		return xmlOutput;
+		if (file == null)
+			throw new FileNotFoundException("Unable to create XML output file.");
+		else
+			return file;
 	}
 
-	public File getCSVInputFile() {
-		return csvInput;
+	public File getCSVInputFile() throws FileNotFoundException {
+		File file = null;
+		try {
+			URI uri = Files.class.getResource(CSV_INPUT_FILENAME).toURI();
+			file = new File(uri.getPath());
+		}
+		catch (URISyntaxException e) {
+			System.err.println("CSV input file error.");
+		}
+		if (file == null)
+			throw new FileNotFoundException("CSV input file not found.");
+		else
+			return file;
 	}
 
 }

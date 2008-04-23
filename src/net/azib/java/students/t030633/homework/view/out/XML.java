@@ -5,7 +5,7 @@ import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.Event;
 import net.azib.java.students.t030633.homework.view.Output;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,10 +26,9 @@ import org.jdom.output.XMLOutputter;
 public class XML implements Output {
 
 	private OutputStream out;
-	private File file;
 
-	public XML() {
-		this.file = new Files().getXMLOutputFile();
+	public XML() throws FileNotFoundException {
+		this.out = new FileOutputStream(new Files().getXMLOutputFile());
 	}
 
 	public XML(OutputStream out) {
@@ -67,8 +66,6 @@ public class XML implements Output {
 	}
 
 	public void write(List<Athlete> out) throws IOException {
-		if(!(file == null))
-			this.out = new FileOutputStream(this.file);
 		try {
 			new XMLOutputter(Format.getRawFormat().setIndent("  ").setLineSeparator(System.getProperty("line.separator")))
 					.output(formDocument(out), this.out);

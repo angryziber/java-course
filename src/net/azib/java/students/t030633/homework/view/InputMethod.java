@@ -1,5 +1,8 @@
 package net.azib.java.students.t030633.homework.view;
 
+import net.azib.java.students.t030633.homework.view.in.CSV;
+import net.azib.java.students.t030633.homework.view.in.Console;
+
 /**
  * Decathlon input method - all possible input methods and classes that
  * implement them.
@@ -8,7 +11,7 @@ package net.azib.java.students.t030633.homework.view;
  */
 public enum InputMethod {
 
-	KEYBOARD(null), CSV(null), DATABASE(null);
+	KEYBOARD(Console.class), CSV(CSV.class), DATABASE(null);
 
 	private final Class<? extends Input> inputClass;
 

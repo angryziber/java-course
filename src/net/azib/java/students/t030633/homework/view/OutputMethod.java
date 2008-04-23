@@ -1,5 +1,8 @@
 package net.azib.java.students.t030633.homework.view;
 
+import net.azib.java.students.t030633.homework.view.out.Console;
+import net.azib.java.students.t030633.homework.view.out.XML;
+
 /**
  * Decathlon output method - all possible output methods and classes that
  * implement them.
@@ -8,7 +11,7 @@ package net.azib.java.students.t030633.homework.view;
  */
 public enum OutputMethod {
 
-	CONSOLE(null), CSV(null), XML(null), HTML(null);
+	CONSOLE(Console.class), CSV(null), XML(XML.class), HTML(null);
 
 	private final Class<? extends Output> outputClass;
 
