@@ -1,7 +1,6 @@
 package net.azib.java.students.t072054.hometask1;
 
 import java.util.Scanner;
-import java.io.*;
 
 /**
  * BinaryParser
@@ -9,7 +8,7 @@ import java.io.*;
  * @author r_vassiljev
  */
 public class BinaryParser {
-	private static void readStream() {
+	public static void readStream() {
 	       try {
 	         Scanner scanner = new Scanner(System.in);
 	         while (scanner.hasNext()) {
