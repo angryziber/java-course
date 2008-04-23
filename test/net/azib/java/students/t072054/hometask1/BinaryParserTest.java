@@ -6,7 +6,8 @@ package net.azib.java.students.t072054.hometask1;
  * @author r_vassiljev
  */
 public class BinaryParserTest {
-	public static void main(){
+	public static void main(){		
+		BinaryParser.readStream();
 		
 	}
 	
