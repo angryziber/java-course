@@ -35,8 +35,10 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 	}
 
 	public static void main(String[] args) {
-		String str[] = { "fafsfads", "adsfsadf", "fadssadf", "fasfdsafsad", "ffsad", "afdadfs", "asfasf", "fadfsadfs", "asfs",
-				"affs", "asafsd", "fadsdfsadsf", "afsfadssadf", "afdsaf", "afds", "afasf", "afdafs", "asfasd", "afsdds",
+		String str[] = { "fafsfads", "adsfsadf", "fadssadf", "fasfdsafsad", "ffsad", 
+				"afdadfs", "asfasf", "fadfsadfs", "asfs",
+				"affs", "asafsd", "fadsdfsadsf", "afsfadssadf", "afdsaf", "afds", "afasf", 
+				"afdafs", "asfasd", "asfasf",
 				"asdfds", "afsd" };
 		String str2[];
 
