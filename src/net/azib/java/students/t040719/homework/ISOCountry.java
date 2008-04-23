@@ -45,7 +45,7 @@ public class ISOCountry {
 	@SuppressWarnings("unchecked")
 	private static void loadCountries() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		Document doc = builder.build(Athlete.class.getResourceAsStream("countries.xml"));
+		Document doc = builder.build(ISOCountry.class.getResourceAsStream("xml/countries.xml"));
 		
 		List<Element> children = doc.getRootElement().getChildren("country");
 		for (Element country : children) {
