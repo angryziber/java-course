@@ -17,49 +17,45 @@ import java.util.LinkedList;
  * <br>Date: 21.04.2008
  * <br>Time: 13:55:32
  */
-public class DOMParser {
+public class DOMParser implements XMLParser {
     private final String xmlResource;
 
     public DOMParser(String xmlResource) {
         this.xmlResource = xmlResource;
     }
 
-    private List<Book> parse() throws IOException, SAXException, ParserConfigurationException {
-        List<Book> bookList = new LinkedList<Book>();
+    public List<Book> parse() throws IOException, SAXException, ParserConfigurationException {
+        BookCreator bookCreator = new BookCreator();
 
         Document doc = readDocument(xmlResource);
 
         NodeList books = doc.getElementsByTagName("book");
         for (int i = 0; i < books.getLength(); i++) {
-            parseBook((Element) books.item(i), bookList);
+            parseBook((Element) books.item(i), bookCreator);
         }
 
-        return bookList;
+        return bookCreator.getBooks();
     }
 
-    private void parseBook(Element bookElement, List<Book> bookList) {
-        String category, lang, title;
-        List<String> authorList = new LinkedList<String>();
-        int year;
-        double price;
-
+    private void parseBook(Element bookElement, BookCreator bookCreator) {
+        bookCreator.initBook();
 
         /* Process ATTRIBUTES */
-        category = bookElement.getAttribute("category");
-        lang = bookElement.getAttribute("lang");
+        bookCreator.setCategory(bookElement.getAttribute("category"));
+        bookCreator.setLang(bookElement.getAttribute("lang"));
 
         /* Process CHILDREN */
-        title = bookElement.getElementsByTagName("title").item(0).getTextContent();
+        bookCreator.setTitle(bookElement.getElementsByTagName("title").item(0).getTextContent());
         NodeList authors = bookElement.getElementsByTagName("author");
         for (int i = 0; i < authors.getLength(); i++){
-            authorList.add(authors.item(i).getTextContent());
+            bookCreator.setAuthor(authors.item(i).getTextContent());
         }
-        year = Integer.parseInt(bookElement.getElementsByTagName("year").item(0).getTextContent());
-        price = Double.parseDouble(bookElement.getElementsByTagName("price").item(0).getTextContent());
+        bookCreator.setYear(Integer.parseInt(bookElement.getElementsByTagName("year").item(0).getTextContent()));
+        bookCreator.setPrice(Double.parseDouble(bookElement.getElementsByTagName("price").item(0).getTextContent()));
 
-
-        /* Create new BOOK and add it to bookList*/
-        bookList.add(new Book(category, lang, title, authorList, year, price));
+        /* Create new BOOK */
+        bookCreator.createBook();
+        
     }
 
     private Document readDocument(String xmlResource) throws IOException, ParserConfigurationException, SAXException {
