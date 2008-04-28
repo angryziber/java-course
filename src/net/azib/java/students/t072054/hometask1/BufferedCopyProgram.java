@@ -45,11 +45,16 @@ public class BufferedCopyProgram implements FileCopier{
 		public static void main(String[] args) {
 			File f1 = new File("C:\\source.txt");
 			File f2 = new File("C:\\dest.txt");
+			long time_start, time_end;
 
 			BufferedCopyProgram bcp = new BufferedCopyProgram();
 
 			try {
+				time_start = System.currentTimeMillis();
 				bcp.copy(f1, f2);
+				time_end = System.currentTimeMillis();
+				
+				System.out.println(time_end - time_start);
 			}
 			catch (Exception e) {
 				System.out.println("File exception");
