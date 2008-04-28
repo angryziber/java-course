@@ -12,8 +12,10 @@ import java.io.OutputStream;
  * @author r_vassiljev
  */
 public class DataCopierImpl implements DataCopier{
-	void copy(InputStream src, OutputStream dest) throws IOException
-	{
+
+	public void copy(InputStream src, OutputStream dest) throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
+
 }
