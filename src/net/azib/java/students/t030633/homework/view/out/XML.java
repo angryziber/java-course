@@ -1,8 +1,8 @@
 package net.azib.java.students.t030633.homework.view.out;
 
-import net.azib.java.students.t030633.homework.Files;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.Event;
+import net.azib.java.students.t030633.homework.view.Files;
 import net.azib.java.students.t030633.homework.view.Output;
 
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ public class XML implements Output {
 	private OutputStream out;
 
 	public XML() throws FileNotFoundException {
-		this.out = new FileOutputStream(new Files().getXMLOutputFile());
+		this.out = new FileOutputStream(new Files().getOutputFile("xml"));
 	}
 
 	public XML(OutputStream out) {
@@ -36,7 +36,7 @@ public class XML implements Output {
 	}
 
 	private Document formDocument(List<Athlete> athletes) {
-		Element root = new Element("athletes");
+		Element root = new Element("competition");
 		Document doc = new Document(root);
 
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, new Locale(System.getProperty("user.country")));

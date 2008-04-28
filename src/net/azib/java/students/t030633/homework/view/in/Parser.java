@@ -3,7 +3,6 @@ package net.azib.java.students.t030633.homework.view.in;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Parses input strings.
@@ -12,9 +11,13 @@ import java.util.Locale;
  */
 public class Parser {
 
-	// TODO comment
+	/**
+	 * @param date -
+	 *            String to parse for Date
+	 * @return Date - parsed date, null if unable to parse a date
+	 */
 	public Date parseDate(String date) {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, new Locale(System.getProperty("user.country")));
+		DateFormat df = DateFormat.getDateInstance();
 		try {
 			return df.parse(date);
 		}
@@ -23,7 +26,11 @@ public class Parser {
 		}
 	}
 
-	// TODO Comment
+	/**
+	 * @param results -
+	 *            String array to parse for results
+	 * @return double[] - parsed results
+	 */
 	public double[] parseResults(String[] results) {
 		double[] numbers = new double[results.length];
 		for (int i = 0; i < results.length; i++) {
@@ -42,6 +49,8 @@ public class Parser {
 	 * @return String - string without quotation marks
 	 */
 	public String parseName(String name) {
+		// remove all quotation marks from the string and replace them with
+		// spaces, then remove leading and trailing spaces
 		return name.replace('"', ' ').trim();
 	}
 

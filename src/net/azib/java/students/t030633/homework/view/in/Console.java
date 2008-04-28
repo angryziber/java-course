@@ -12,10 +12,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Reads athletes from a scanner.
@@ -27,7 +25,9 @@ public class Console implements Input {
 	private static final String BEGIN_MSG = "-=[Athlete input]=-";
 	private static final String LN = System.getProperty("line.separator");
 	private static final String QUESTION = "Do you wish to enter another athlete? y/n" + LN + ">";
-	private static final String WRONG_FORMAT = "Result must be a number!" + LN;
+	private static final String WRONG_RESULT_FORMAT = "Result must be a number!" + LN;
+	private static final String WRONG_DATE_FORMAT = "Bad date format.";
+
 	private AthleteBuilder builder;
 	private final BufferedReader in;
 	private final PrintStream out;
@@ -59,9 +59,10 @@ public class Console implements Input {
 	public List<Athlete> read() throws IOException {
 
 		List<Athlete> list = new LinkedList<Athlete>();
+
 		out.println(BEGIN_MSG);
 
-		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, new Locale(System.getProperty("user.country")));
+		DateFormat df = DateFormat.getDateInstance();
 
 		do {
 			builder.reset();
@@ -75,7 +76,7 @@ public class Console implements Input {
 				builder = builder.date(df.parse(in.readLine()));
 			}
 			catch (ParseException e) {
-				builder = builder.date(new Date(0L));
+				out.print(WRONG_DATE_FORMAT);
 			}
 
 			out.println("Results: ");
@@ -87,7 +88,7 @@ public class Console implements Input {
 					builder = builder.addResult(e, Double.parseDouble(result));
 				}
 				catch (NumberFormatException ex) {
-					out.print(WRONG_FORMAT);
+					out.print(WRONG_RESULT_FORMAT);
 				}
 			}
 

@@ -1,9 +1,9 @@
 package net.azib.java.students.t030633.homework.view.in;
 
-import net.azib.java.students.t030633.homework.Files;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
+import net.azib.java.students.t030633.homework.view.Files;
 import net.azib.java.students.t030633.homework.view.Input;
 
 import java.io.BufferedReader;
@@ -27,7 +27,7 @@ public class CSV implements Input {
 	private InputStream in;
 
 	public CSV() throws FileNotFoundException {
-		this.in = new FileInputStream(new Files().getCSVInputFile());
+		this.in = new FileInputStream(new Files().getInputFile("csv"));
 	}
 
 	public CSV(InputStream in) {
@@ -49,6 +49,7 @@ public class CSV implements Input {
 	}
 
 	private Athlete parseAthlete(AthleteBuilder athleteBuilder, String line) {
+		athleteBuilder.reset();
 		String[] fields = line.split(",");
 		String[] stringResults = new String[Event.values().length];
 		System.arraycopy(fields, 3, stringResults, 0, Event.values().length);
@@ -62,7 +63,7 @@ public class CSV implements Input {
 	}
 
 	public void close() throws IOException {
-		// nothing to close
+		in.close();
 	}
 
 }

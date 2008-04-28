@@ -20,42 +20,65 @@ import java.util.List;
  */
 public class DecathlonPointsCalculator {
 
-	private Input input;
-	private Output output;
+	private static final String ERROR = "Error:";
 
-	/**
-	 * @param input -
-	 *            decathlon input
-	 * @param output -
-	 *            decathlon output
-	 */
-	public DecathlonPointsCalculator(Input input, Output output) {
-		this.input = input;
-		this.output = output;
+	private static final String HELP_MSG;
+
+	private static final String LN = System.getProperty("line.separator");
+
+	static {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Decathlon points calculator by 030633").append(LN).append("usage: ").append(
+				DecathlonPointsCalculator.class.getSimpleName()).append(" input output").append(LN);
+		sb.append(" possible inputs: ");
+		for (InputMethod im : InputMethod.values()) {
+			sb.append(im.name()).append(" ");
+		}
+		sb.append(LN).append(" possible outputs: ");
+		for (OutputMethod om : OutputMethod.values()) {
+			sb.append(om.name()).append(" ");
+		}
+		sb.append(LN).append(" file format: athletes.[in|out].[csv|xml|html]");
+		HELP_MSG = sb.toString();
 	}
 
 	public static void main(String[] args) {
-		// TODO do something with possible incorrect arguments
-		// TODO help
-		// Files.CSV_INPUT_FILENAME = args[2];
-		// Files.XML_OUTPUT_FILENAME = args[3];
-		// args[0], args[1]
-		new DecathlonPointsCalculator(InputMethod.valueOf("CSV").getInput(), OutputMethod.valueOf("CONSOLE").getOutput())
-				.calculate();
+		try {
+			new DecathlonPointsCalculator().run(args);
+		}
+		catch (RuntimeException e) {
+			System.out.println(HELP_MSG);
+		}
 	}
 
-	public void calculate() {
-
-		List<Athlete> athletes;
+	private void run(String[] args) {
+		Input input = null;
+		Output output = null;
 		try {
-			athletes = input.builder(new DecathlonAthleteBuilder(new DecathlonChecker(), new AddingCalculator())).read();
-			Collections.sort(athletes);
-			output.write(athletes);
+			input = InputMethod.valueOf("CSV").getInput();
+			output = OutputMethod.valueOf("CONSOLE").getOutput();
+			calculate(input, output);
 		}
 		catch (IOException e) {
-			System.err.println("IO Error.");
+			System.out.println(ERROR);
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try {
+				input.close();
+				output.close();
+			}
+			catch (IOException e) { // close quietly
+			}
 		}
 
+	}
+
+	public void calculate(Input input, Output output) throws IOException {
+		List<Athlete> athletes;
+		athletes = input.builder(new DecathlonAthleteBuilder(new DecathlonChecker(), new AddingCalculator())).read();
+		Collections.sort(athletes);
+		output.write(athletes);
 	}
 
 }
