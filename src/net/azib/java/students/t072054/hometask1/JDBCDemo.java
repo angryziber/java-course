@@ -19,22 +19,24 @@ public class JDBCDemo {
 			Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB","sa","");
 			Statement stmt = conn.createStatement();
 			
-			stmt.execute("create table persons (id integer, name varchar)");
-			stmt.execute("insert into persons values (1, 'John Doe')");
-			stmt.execute("insert into persons values (1, 'Jaan Tamm')");
+			stmt.execute("create table persons (id integer, name varchar, date varchar)");
+			stmt.execute("insert into persons values (1, 'Siim Susi', '01.01.1976')");
+			stmt.execute("insert into persons values (1, 'Beata Kana', '29.02.1982')");
 			
-			PreparedStatement personStatement = conn.prepareStatement("select name from persons where id=?");
+			PreparedStatement personStatement = conn.prepareStatement("SELECT name, date FROM persons WHERE id=?;");
 			
 			personStatement.setInt(1, 1);
 			ResultSet rs = personStatement.executeQuery();
 			while (rs.next()) {
 				System.out.println(rs.getString(1));
+				System.out.println(rs.getString(2));
+				System.out.println();
 			}
 			
 			conn.close();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
