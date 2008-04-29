@@ -6,6 +6,10 @@ package net.azib.java.lessons.basic;
  * @author anton
  */
 public class Cat extends AbstractAnimal {
+	
+	public Cat() {
+		super("");
+	}
 
 	public Cat(String name) {
 		super(name);

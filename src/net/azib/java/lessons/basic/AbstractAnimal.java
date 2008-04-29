@@ -1,11 +1,13 @@
 package net.azib.java.lessons.basic;
 
+import java.io.Serializable;
+
 /**
  * Abstract implementation of Animal interface to ease concrete implementations.
  *
  * @author anton
  */
-public abstract class AbstractAnimal implements Animal {
+public abstract class AbstractAnimal implements Animal, Serializable {
 	private String name;
 	private byte age;
 
@@ -22,6 +24,10 @@ public abstract class AbstractAnimal implements Animal {
 		return name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void growUp() {
 		age++;
 	}
