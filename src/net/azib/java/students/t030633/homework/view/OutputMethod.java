@@ -1,5 +1,6 @@
 package net.azib.java.students.t030633.homework.view;
 
+import net.azib.java.students.t030633.homework.view.out.CSV;
 import net.azib.java.students.t030633.homework.view.out.Console;
 import net.azib.java.students.t030633.homework.view.out.HTML;
 import net.azib.java.students.t030633.homework.view.out.XML;
@@ -12,7 +13,7 @@ import net.azib.java.students.t030633.homework.view.out.XML;
  */
 public enum OutputMethod {
 
-	CONSOLE(Console.class), CSV(null), XML(XML.class), HTML(HTML.class);
+	CONSOLE(Console.class), CSV(CSV.class), XML(XML.class), HTML(HTML.class);
 
 	private final Class<? extends Output> outputClass;
 

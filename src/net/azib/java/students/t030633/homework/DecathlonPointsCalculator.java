@@ -55,7 +55,7 @@ public class DecathlonPointsCalculator {
 		Input input = null;
 		Output output = null;
 		try {
-			input = InputMethod.valueOf("CSV").getInput();
+			input = InputMethod.valueOf("DB").getInput();
 			output = OutputMethod.valueOf("CONSOLE").getOutput();
 			calculate(input, output);
 		}

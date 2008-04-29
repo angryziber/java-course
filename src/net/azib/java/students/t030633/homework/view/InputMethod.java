@@ -11,7 +11,7 @@ import net.azib.java.students.t030633.homework.view.in.Console;
  */
 public enum InputMethod {
 
-	KEYBOARD(Console.class), CSV(CSV.class);
+	KEYBOARD(Console.class), CSV(CSV.class), DATABASE(null);
 
 	private final Class<? extends Input> inputClass;
 

@@ -9,55 +9,26 @@
 		<html>
 			<body>
 				<h1>Athletes</h1>
-				<xsl:apply-templates />
+				<xsl:apply-templates select="//athlete"/>
 			</body>
 		</html>
 	</xsl:template>
 
 	<xsl:template match="athlete">
-		<h2>
-			Name:
-			<xsl:value-of select="name" />
-			(
-			<xsl:value-of select="country" />
-			)
-		</h2>
-		<p>
-			Born:
-			<xsl:value-of select="birthdate" />
-		</p>
-		<p>
-			Total score:
-			<xsl:value-of select="score" />
-		</p>
+		<h2>Name: <xsl:value-of select="name" /> (<xsl:value-of select="country" />)</h2>
+		<p>Born: <xsl:value-of select="birthdate" /></p>
+		<p>Total score: <xsl:value-of select="score" /></p>
 		<table border="1">
-			<tr bgcolor="#9acd32">
-				<th>Event</th>
-				<th>Performance</th>
-			</tr>
-			<tr>
-				<xsl:apply-templates select="results/result" />
-			</tr>
+			<tr bgcolor="#9acd32"><th>Event</th><th>Performance</th></tr>
+			<tr><xsl:apply-templates select="results/result" /></tr>
 		</table>
 	</xsl:template>
 
 	<xsl:template match="result">
 		<tr>
-			<xsl:apply-templates select="event" />
-			<xsl:apply-templates select="performance" />
+			<td><xsl:value-of select="event" /></td>
+			<td><xsl:value-of select="performance" /></td>
 		</tr>
 	</xsl:template>
-
-	<xsl:template match="event">
-		<td>
-			<xsl:value-of select="." />
-		</td>
-	</xsl:template>
-
-	<xsl:template match="performance">
-		<td>
-			<xsl:value-of select="." />
-		</td>
-	</xsl:template>
-
+	
 </xsl:stylesheet>

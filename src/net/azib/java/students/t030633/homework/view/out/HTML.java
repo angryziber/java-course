@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 /**
- * Outputs HTML by transforming XML to HTML
+ * Writes athletes to HTML file using XSL transformation.
  * 
  * @author t030633
  */
