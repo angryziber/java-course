@@ -58,6 +58,7 @@ public class SortingID {
 			
 			System.out.println("max_num = " + max_num);
 			System.out.println("max_index = " + max_index);
+			
 		}
 		catch (SQLException e) {
 			// Auto-generated catch block
