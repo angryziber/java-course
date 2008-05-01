@@ -13,31 +13,54 @@ import java.sql.Statement;
  * @author r_vassiljev
  */
 public class LoadNewResults {
-	
-	public static void main(String[] args) {
+	public ResultSet rs1;
+	public ResultSet rs2;
+	public ResultSet rs3;
+
+	private Connection conn;
+
+	public void LoadResults() {
 		try {
-			// Load the JDBC driver. 
-			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver"); 
-			
-            // Establish the connection to the database
-			String url = "jdbc:mysql://srv.azib.net:3306";
-			Connection conn = DriverManager.getConnection(url,"java","java");
+			// Structure with results after reading from database here
+			// Later it will be moved to function parameters
+
+			// Establish the connection to the database
+			String url = "jdbc:mysql://srv.azib.net:3306/decathlon";
+			conn = DriverManager.getConnection(url, "java", "java");
 			Statement stmt = conn.createStatement();
-			
-			stmt.execute("create table persons (id integer, name varchar, date varchar)");
-			stmt.execute("insert into persons values (1, 'Siim Susi', '01.01.1976')");
-			stmt.execute("insert into persons values (1, 'Beata Kana', '29.02.1982')");
-			
-			PreparedStatement personStatement = conn.prepareStatement("SELECT name, date FROM persons WHERE id=?;");
-			
-			personStatement.setInt(1, 1);
-			ResultSet rs = personStatement.executeQuery();
-			while (rs.next()) {
-				System.out.println(rs.getString(1));
-				System.out.println(rs.getString(2));
-				System.out.println();
-			}
-			
+
+			PreparedStatement personStatement = conn.prepareStatement("SELECT * FROM athletes WHERE id > ?;");
+
+			// Optionally you can set some parameter for personStatment
+			personStatement.setInt(1, 0);
+			rs1 = personStatement.executeQuery();
+
+			rs1.first();
+
+			personStatement = conn.prepareStatement("SELECT * FROM competitions WHERE id > ?;");
+
+			// Optionally you can set some parameter for personStatment
+			personStatement.setInt(1, 0);
+			rs2 = personStatement.executeQuery();
+
+			rs2.first();
+
+			personStatement = conn.prepareStatement("SELECT * FROM results WHERE id > ?;");
+
+			// Optionally you can set some parameter for personStatment
+			personStatement.setInt(1, 0);
+			rs3 = personStatement.executeQuery();
+
+			rs3.first();
+		}
+		catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void ConnClose() {
+		try {
 			conn.close();
 		}
 		catch (SQLException e) {
