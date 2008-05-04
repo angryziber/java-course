@@ -1,4 +1,4 @@
-package net.azib.java.students.t030633;
+package net.azib.java.students.t030633.hometasks.xml;
 
 import java.io.File;
 import java.util.Scanner;
