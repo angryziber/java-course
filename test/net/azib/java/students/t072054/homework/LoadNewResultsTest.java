@@ -18,6 +18,9 @@ public class LoadNewResultsTest {
 	 */
 	@Test
 	public void testLoadResults() {
+		
+		// TODO what exactly is tested here?
+
 		LoadNewResults lnr = new LoadNewResults();
 
 		lnr.LoadResults();

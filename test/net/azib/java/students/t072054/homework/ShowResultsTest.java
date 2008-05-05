@@ -11,6 +11,9 @@ public class ShowResultsTest {
 	@Test
 	public void ShowSomeResults() {
 
+		// TODO this doesn't test anything yet
+		// where are the assertXXX calls?
+		
 		int[] a = {5, 4, 3, 2, 10};
 		int b = 5;
 		

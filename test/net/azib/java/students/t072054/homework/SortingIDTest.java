@@ -13,11 +13,8 @@ public class SortingIDTest {
 	 * Test method for ???
 	 */
 	@Test
-	public static void SortingTest() {
-
-		CountAthletResultTest cart = null;
-
-		cart.testAthletResult();
+	public static void sortingTest() {
+		// TODO this doesn't test anything yet
 	}
 
 }

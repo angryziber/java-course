@@ -13,11 +13,16 @@ import java.sql.Statement;
  * @author r_vassiljev
  */
 public class LoadNewResults {
+	// TOD WTF? public ResultSets?
 	public ResultSet rs1;
 	public ResultSet rs2;
 	public ResultSet rs3;
 
 	private Connection conn;
+	
+	// TODO Java naming convention is not followed
+	// TODO where is encapsulation, common interfaces?
+	// TODO unit test should never go the real DB!
 
 	public void LoadResults() {
 		try {

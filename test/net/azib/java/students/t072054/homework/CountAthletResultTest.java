@@ -18,6 +18,10 @@ public class CountAthletResultTest {
 	 */
 	@Test
 	public void testAthletResult() {
+
+		// TODO what exactly is tested here?
+		// where are the assertXXX calls?
+		
 		LoadNewResults lnr = new LoadNewResults();
 
 		lnr.LoadResults();
