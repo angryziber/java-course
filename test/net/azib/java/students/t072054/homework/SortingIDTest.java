@@ -13,7 +13,7 @@ public class SortingIDTest {
 	 * Test method for ???
 	 */
 	@Test
-	public static void sortingTest() {
+	public void sortingTest() {
 		// TODO this doesn't test anything yet
 	}
 

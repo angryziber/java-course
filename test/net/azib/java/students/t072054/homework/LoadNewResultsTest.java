@@ -21,25 +21,25 @@ public class LoadNewResultsTest {
 		
 		// TODO what exactly is tested here?
 
-		LoadNewResults lnr = new LoadNewResults();
+//		LoadNewResults lnr = new LoadNewResults();
 
 //		lnr.loadResults(); doesn't compile
 		
 		int i = 1; //counter
-		try{
-			do
-			{
-				System.out.println(lnr.rs1.getString(1));
-				assertTrue(lnr.rs1.getInt(1) == i);
-				i++;
-			}
-			while(lnr.rs1.next());
-		}
-		catch (SQLException e) {
+//		try{
+//			do
+//			{
+//				System.out.println(lnr.rs1.getString(1));
+//				assertTrue(lnr.rs1.getInt(1) == i);
+//				i++;
+//			}
+//			while(lnr.rs1.next());
+//		}
+//		catch (SQLException e) {
 			// Auto-generated catch block
-			e.printStackTrace();
-		}
+//			e.printStackTrace();
+//		}
 		
-		lnr.connClose();
+//		lnr.connClose();
 	}
 }
