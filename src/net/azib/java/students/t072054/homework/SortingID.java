@@ -23,7 +23,7 @@ public class SortingID {
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		lnr.loadResults();
+//		lnr.loadResults();
 
 		try {
 
