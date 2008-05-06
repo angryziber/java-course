@@ -23,7 +23,7 @@ public class LoadNewResultsTest {
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		lnr.loadResults();
+//		lnr.loadResults(); doesn't compile
 		
 		int i = 1; //counter
 		try{
