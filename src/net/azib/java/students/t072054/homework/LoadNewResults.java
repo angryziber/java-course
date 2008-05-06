@@ -24,7 +24,7 @@ public class LoadNewResults {
 	// TODO where is encapsulation, common interfaces?
 	// TODO unit test should never go the real DB!
 
-	public void LoadResults() {
+	public void loadResults() {
 		try {
 			// Structure with results after reading from database here
 			// Later it will be moved to function parameters
@@ -64,7 +64,7 @@ public class LoadNewResults {
 		}
 	}
 
-	public void ConnClose() {
+	public void connClose() {
 		try {
 			conn.close();
 		}

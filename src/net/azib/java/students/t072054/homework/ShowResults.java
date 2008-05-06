@@ -12,7 +12,7 @@ public class ShowResults {
 		// public static void main(String[] args) {
 		LoadNewResults lnr = new LoadNewResults();
 
-		lnr.LoadResults();
+		lnr.loadResults();
 
 		try {
 			for (int i = 0; i < num_of_results; i++) {
@@ -31,5 +31,7 @@ public class ShowResults {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		lnr.connClose();
 	}
 }
