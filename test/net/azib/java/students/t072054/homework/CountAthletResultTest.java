@@ -24,7 +24,7 @@ public class CountAthletResultTest {
 		
 		LoadNewResults lnr = new LoadNewResults();
 
-		lnr.LoadResults();
+		lnr.loadResults();
 
 		int i;
 		double[] buf = new double[14];
@@ -46,6 +46,6 @@ public class CountAthletResultTest {
 			e.printStackTrace();
 		}
 
-		lnr.ConnClose();
+		lnr.connClose();
 	}
 }

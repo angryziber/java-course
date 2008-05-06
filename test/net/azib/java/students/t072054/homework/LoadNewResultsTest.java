@@ -23,7 +23,7 @@ public class LoadNewResultsTest {
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		lnr.LoadResults();
+		lnr.loadResults();
 		
 		int i = 1; //counter
 		try{
@@ -40,6 +40,6 @@ public class LoadNewResultsTest {
 			e.printStackTrace();
 		}
 		
-		lnr.ConnClose();
+		lnr.connClose();
 	}
 }
