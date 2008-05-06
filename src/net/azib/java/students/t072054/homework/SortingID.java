@@ -23,7 +23,7 @@ public class SortingID {
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		lnr.LoadResults();
+		lnr.loadResults();
 
 		try {
 
@@ -102,7 +102,7 @@ public class SortingID {
 			e.printStackTrace();
 		}
 
-		lnr.ConnClose();
+		lnr.connClose();
 		
 		return return_value;
 	}
