@@ -56,7 +56,7 @@ public class SortingID {
 					// Incrementing number of rows
 					number_of_rows++;
 
-					// Check that this row is not choosed
+					// Check that this row is not chosen
 					for (int j = 0; j < number_of_indexes; j++) {
 						if (choosed_indexes[j] == number_of_rows-1)
 							choosed_flag = 1;
