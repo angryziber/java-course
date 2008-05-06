@@ -29,6 +29,7 @@ public abstract class AbstractCopierTest {
 		this.copier = copier;
 		try {
 			out = File.createTempFile("out", ".file");
+			out.deleteOnExit();
 			in = new File(new URI(LessonSeven.class.getClassLoader().getResource("net"+SEP+"azib"+SEP+"java"+SEP+"students"+SEP+"t040719"+SEP+"lessons"+SEP+"test.file").toString()));
 		}
 		catch (IOException e) {
