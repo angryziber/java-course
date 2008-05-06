@@ -23,7 +23,8 @@ public class ShowResults {
 				System.out.println(lnr.rs1.getString(1));
 				System.out.println(lnr.rs1.getString(2));
 				System.out.println();
-
+				
+				lnr.rs1.first();
 			}
 		}
 		catch (SQLException e) {
