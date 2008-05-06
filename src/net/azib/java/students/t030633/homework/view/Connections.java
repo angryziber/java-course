@@ -14,6 +14,8 @@ public class Connections {
 	public static String DATABASE = "jdbc:mysql://srv.azib.net:3306/decathlon";
 	public static String USER = "java";
 	public static String PASS = "java";
+	
+	public static String PARAMETER;
 
 	/**
 	 * @return Connection - connection to database

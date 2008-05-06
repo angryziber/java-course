@@ -28,7 +28,7 @@ public class XML implements Output {
 	private OutputStream out;
 
 	public XML() throws FileNotFoundException {
-		this.out = new FileOutputStream(new Files().getOutputFile("xml"));
+		this.out = new FileOutputStream(Files.getOutputFile());
 	}
 
 	public XML(OutputStream out) {

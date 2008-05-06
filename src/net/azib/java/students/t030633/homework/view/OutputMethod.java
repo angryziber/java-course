@@ -30,8 +30,7 @@ public enum OutputMethod {
 			return outputClass.newInstance();
 		}
 		catch (Exception e) {
-			System.err.println(outputClass.getSimpleName() + " : ");
-			System.out.println(e.getMessage());
+			System.err.println(outputClass.getSimpleName() + " instantiation error. " + e.getMessage());
 			return null;
 		}
 	}

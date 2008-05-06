@@ -27,7 +27,7 @@ public class CSV implements Input {
 	private InputStream in;
 
 	public CSV() throws FileNotFoundException {
-		this.in = new FileInputStream(new Files().getInputFile("csv"));
+		this.in = new FileInputStream(Files.getInputFile());
 	}
 
 	public CSV(InputStream in) {
@@ -63,7 +63,8 @@ public class CSV implements Input {
 	}
 
 	public void close() throws IOException {
-		in.close();
+		if (in != null)
+			in.close();
 	}
 
 }

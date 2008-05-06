@@ -60,14 +60,14 @@ public class OutputTransformer implements Output {
 	}
 
 	public void write(List<Athlete> out) throws IOException {
-		File temp = new Files().getTempFile();
+		File temp = Files.getTempFile();
 		new XML(new FileOutputStream(temp)).write(out);
 		transform(temp, this.out, this.stylesheetURL);
-		// temp.deleteOnExit(); not needed here, done in Files
 	}
 
 	public void close() throws IOException {
-		this.out.close();
+		if (this.out != null)
+			this.out.close();
 	}
 
 }

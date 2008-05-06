@@ -13,8 +13,7 @@ import java.io.FileOutputStream;
 public class CSV extends OutputTransformer {
 
 	public CSV() throws FileNotFoundException {
-		super(CSV.class.getResource("athletes.csv.xsl"), new FileOutputStream(new Files().getOutputFile("csv")));
-
+		super(CSV.class.getResource("athletes.csv.xsl"), new FileOutputStream(Files.getOutputFile()));
 	}
 
 }

@@ -11,7 +11,7 @@ import net.azib.java.students.t030633.homework.view.in.Console;
  */
 public enum InputMethod {
 
-	KEYBOARD(Console.class), CSV(CSV.class), DATABASE(null);
+	CONSOLE(Console.class), CSV(CSV.class), DATABASE(null);
 
 	private final Class<? extends Input> inputClass;
 
@@ -27,8 +27,7 @@ public enum InputMethod {
 			return inputClass.newInstance();
 		}
 		catch (Exception e) {
-			System.out.print(inputClass.getSimpleName() + " : ");
-			System.out.println(e.getMessage());
+			System.err.println(inputClass.getSimpleName() + " instantiation error. " + e.getMessage());
 			return null;
 		}
 	}

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Holds and handles all input and output files.
@@ -16,23 +17,31 @@ public class Files {
 	private static final String OUTPUT_ERROR = "Unable to create output file.";
 	private static final String TEMP_ERROR = "Unable to create temporary files.";
 
-	public static String OUTPUT_FILENAME = "athletes.out";
-	public static String INPUT_FILENAME = "athletes.in";
+	private static URI output;
+	private static URI input;
 
+	public static void setOutput(String name) throws URISyntaxException {
+		output = new URI(name);
+	}
+	
+	public static void setInput(String name) throws URISyntaxException {
+		input = new URI(name);
+	}
+	
 	/**
 	 * @return File - file for output
 	 * @throws FileNotFoundException
 	 *             if unable to create the file
 	 */
-	public File getOutputFile(String extension) throws FileNotFoundException {
+	public static File getOutputFile() throws FileNotFoundException {
 		File file = null;
 		try {
 			URI path = Files.class.getResource("..").toURI();
-			file = new File(path.getPath(), File.separatorChar + OUTPUT_FILENAME + "." + extension);
+			file = new File(path.getPath(), output.getPath());
 			if (!file.createNewFile()) {
-				new File(path.getPath(), File.separatorChar + "old." + OUTPUT_FILENAME + "." + extension).delete();
-				file.renameTo(new File(path.getPath(), File.separatorChar + "old." + OUTPUT_FILENAME + "." + extension));
-				file = new File(path.getPath(), File.separatorChar + OUTPUT_FILENAME + "." + extension);
+				new File(path.getPath(), output.getPath() + ".old").delete();
+				file.renameTo(new File(path.getPath(), output + ".old"));
+				file = new File(path.getPath(), output.getPath());
 				file.createNewFile();
 			}
 		}
@@ -47,10 +56,10 @@ public class Files {
 	 * @throws FileNotFoundException
 	 *             if unable to open the file
 	 */
-	public File getInputFile(String extension) throws FileNotFoundException {
+	public static File getInputFile() throws FileNotFoundException {
 		try {
 			URI path = Files.class.getResource("..").toURI();
-			return new File(path.getPath(), File.separatorChar + INPUT_FILENAME + "." + extension);
+			return new File(path.getPath(), input.getPath());
 		}
 		catch (Exception e) {
 			throw new FileNotFoundException(INPUT_ERROR);
@@ -62,7 +71,7 @@ public class Files {
 	 * @throws FileNotFoundException
 	 *             if unable to create a temporary file
 	 */
-	public File getTempFile() throws FileNotFoundException {
+	public static File getTempFile() throws FileNotFoundException {
 		File temp = null;
 		try {
 			temp = File.createTempFile("athletes", ".tmp");
@@ -76,4 +85,5 @@ public class Files {
 				temp.deleteOnExit();
 		}
 	}
+	
 }

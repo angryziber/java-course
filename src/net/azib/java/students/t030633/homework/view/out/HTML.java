@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 public class HTML extends OutputTransformer {
 
 	public HTML() throws FileNotFoundException {
-		super(HTML.class.getResource("athletes.html.xsl"), new FileOutputStream(new Files().getOutputFile("html")));
+		super(HTML.class.getResource("athletes.html.xsl"), new FileOutputStream(Files.getOutputFile()));
 	}
 
 }

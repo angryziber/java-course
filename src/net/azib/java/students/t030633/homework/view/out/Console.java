@@ -1,6 +1,5 @@
 package net.azib.java.students.t030633.homework.view.out;
 
-
 /**
  * Outputs athletes to console using XSL transformation.
  * 
