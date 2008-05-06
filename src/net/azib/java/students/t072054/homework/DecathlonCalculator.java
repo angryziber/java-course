@@ -7,19 +7,19 @@ package net.azib.java.students.t072054.homework;
  */
 public class DecathlonCalculator {
 	// Input/output methods
-	public static final int CONSOLE = 1;
-	public static final int CSV = 2;
-	public static final int DB = 3;
-	public static final int XML = 4;
-	public static final int HTML = 5;
+	private static final int CONSOLE = 1;
+	private static final int CSV = 2;
+	private static final int DB = 3;
+	private static final int XML = 4;
+	private static final int HTML = 5;
 
 	// Stages of parsing file
-	public static final int INPUT_METHOD = 0;
-	public static final int INPUT_STRING = 1;
-	public static final int INPUT_INTEGER = 2;
-	public static final int OUTPUT_METHOD = 3;
-	public static final int OUTPUT_STRING = 4;
-	public static final int PARSE_FINISHED = 5;
+	private static final int INPUT_METHOD = 0;
+	private static final int INPUT_STRING = 1;
+	private static final int INPUT_INTEGER = 2;
+	private static final int OUTPUT_METHOD = 3;
+	private static final int OUTPUT_STRING = 4;
+	private static final int PARSE_FINISHED = 5;
 
 	private static int input_method;
 	private static int output_method;
