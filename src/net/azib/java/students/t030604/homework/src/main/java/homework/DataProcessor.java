@@ -1,8 +1,9 @@
-package main.java.homework;
+package net.azib.java.students.t030604.homework.src.main.java.homework;
+
+import net.azib.java.students.t030604.homework.src.main.java.homework.domain.PlayerScore;
 
 import java.util.List;
 
-import main.java.homework.domain.PlayerScore;
 
 /**
  * Does all the calculation.

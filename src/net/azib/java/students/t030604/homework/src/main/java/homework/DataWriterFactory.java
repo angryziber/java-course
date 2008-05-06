@@ -1,4 +1,4 @@
-package main.java.homework;
+package net.azib.java.students.t030604.homework.src.main.java.homework;
 
 /**
  * Factory pattern to produce DataWriters

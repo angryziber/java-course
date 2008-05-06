@@ -1,6 +1,6 @@
-package main.java.homework;
+package net.azib.java.students.t030604.homework.src.main.java.homework;
 
-import main.java.homework.parser.ConsoleParser;
+import net.azib.java.students.t030604.homework.src.main.java.homework.parser.ConsoleParser;
 
 /**
  * Factory pattern to producs DataParsers

@@ -1,4 +1,7 @@
-package main.java.homework.parser;
+package net.azib.java.students.t030604.homework.src.main.java.homework.parser;
+
+import net.azib.java.students.t030604.homework.src.main.java.homework.IDataParser;
+import net.azib.java.students.t030604.homework.src.main.java.homework.domain.PlayerScore;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -7,8 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import main.java.homework.IDataParser;
-import main.java.homework.domain.PlayerScore;
 
 /**
  * @author Aleksandr Ivanov
@@ -32,7 +33,6 @@ public class ConsoleParser implements IDataParser {
 	/* (non-Javadoc)
 	 * @see main.java.homework.IDataParser#cleanup()
 	 */
-	@Override
 	public void cleanup() {
 		// TODO Auto-generated method stub
 
@@ -41,7 +41,6 @@ public class ConsoleParser implements IDataParser {
 	/* (non-Javadoc)
 	 * @see main.java.homework.IDataParser#parseData()
 	 */
-	@Override
 	public List<PlayerScore> parseData() {
 		
 		System.out.println("Enter the results in the following format");
@@ -161,7 +160,6 @@ public class ConsoleParser implements IDataParser {
 	/* (non-Javadoc)
 	 * @see main.java.homework.IDataParser#setup(java.lang.String[])
 	 */
-	@Override
 	public void setup(String... args) {
 		System.out.println("Console parser initialised");
 	}

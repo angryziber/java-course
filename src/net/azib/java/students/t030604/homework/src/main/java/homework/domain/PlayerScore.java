@@ -1,4 +1,4 @@
-package main.java.homework.domain;
+package net.azib.java.students.t030604.homework.src.main.java.homework.domain;
 
 import java.util.Date;
 import java.util.LinkedList;
