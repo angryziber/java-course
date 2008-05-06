@@ -14,9 +14,9 @@ import java.sql.Statement;
  */
 public class LoadNewResults {
 	// TOD WTF? public ResultSets?
-	public ResultSet rs1;
-	public ResultSet rs2;
-	public ResultSet rs3;
+	private ResultSet rs1;
+	private ResultSet rs2;
+	private ResultSet rs3;
 
 	private Connection conn;
 	
