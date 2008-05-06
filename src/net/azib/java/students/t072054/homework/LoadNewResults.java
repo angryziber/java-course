@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.Map;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 
 /**
  * LoadNewResults
@@ -22,6 +22,7 @@ public class LoadNewResults {
 	static public ResultSet rs3;
 
 	// 3 tables read from database
+	// TODO Change String[] with list or linkedlist or smth else
 	static private Map<Integer, String[]> result_map1;
 	static private Map<Integer, String[]> result_map2;
 	static private Map<Integer, String[]> result_map3;
@@ -37,7 +38,7 @@ public class LoadNewResults {
 		try {
 			// Structure with results after reading from database here
 			// Later it will be moved to function parameters
-			//result_map1 = new LinkedHashMap<Integer, String[]>();
+			result_map1 = new HashMap<Integer, String[]>();
 			
 
 			// Establish the connection to the database
@@ -82,8 +83,6 @@ public class LoadNewResults {
 	public static void readDatabase(ResultSet rs, Map<Integer, String[]> result_map) {
 		String[] str = new String[10000];
 		int j = 0;
-		
-		str[0] = " ";
 
 		try {
 			while (rs.next()) {
