@@ -12,13 +12,14 @@ public class DecathlonCalculator {
 	public static final int DB = 3;
 	public static final int XML = 4;
 	public static final int HTML = 5;
-	
+
 	// Stages of parsing file
 	public static final int INPUT_METHOD = 0;
 	public static final int INPUT_STRING = 1;
 	public static final int INPUT_INTEGER = 2;
 	public static final int OUTPUT_METHOD = 3;
 	public static final int OUTPUT_STRING = 4;
+	public static final int PARSE_FINISHED = 5;
 
 	private static int input_method;
 	private static int output_method;
@@ -27,35 +28,77 @@ public class DecathlonCalculator {
 	private static String output_route;
 
 	public static void main(String args[]) {
-		command_line_parsing(args);
+		CommandLineParsing(args);
 	}
 
-	public static void command_line_parsing(String args[]) {
-		int stage = 0;
+	public static String CommandLineParsing(String args[]) {
+		int stage = INPUT_METHOD;
+		String return_value;
+		
+		// Initialization of static members
+		input_route = null;
+		output_route = null;
+		input_method = 0;
+		output_method = 0;
+		input_num = 0;
 
 		for (String s : args) {
-			System.out.println(s);
-			if (stage == 0) {
-				if (s == "-console")
-				{
+			//System.out.println(s);
+			if (stage == INPUT_METHOD) {
+				if (s.equals("-console")) {
 					input_method = CONSOLE;
-					stage = 2;
+					stage = OUTPUT_METHOD;
 				}
-				if (s == "-csv")
-				{
+				else if (s.equals("-csv")) {
 					input_method = CSV;
-					stage = 1;
+					stage = INPUT_STRING;
 				}
-				if (s == "-db")
-				{
+				else if (s.equals("-db")) {
 					input_method = DB;
-					stage = 1;
+					stage = INPUT_INTEGER;
 				}
 			}
-			if (stage == 1)
-			{
-				
+			else if (stage == INPUT_STRING) {
+				input_route = s;
+				stage = OUTPUT_METHOD;
+			}
+			else if (stage == INPUT_INTEGER) {
+				char first_letter;
+
+				first_letter = s.charAt(0);
+				input_num = first_letter - 48;
+				stage = OUTPUT_METHOD;
+			}
+			else if (stage == OUTPUT_METHOD) {
+				if (s.equals("-console")) {
+					output_method = CONSOLE;
+					stage = OUTPUT_STRING;
+				}
+				else if (s.equals("-csv")) {
+					output_method = CSV;
+					stage = OUTPUT_STRING;
+				}
+				else if (s.equals("-xml")) {
+					output_method = XML;
+					stage = OUTPUT_STRING;
+				}
+				else if (s.equals("-html")) {
+					output_method = HTML;
+					stage = OUTPUT_STRING;
+				}
+			}
+			else if (stage == OUTPUT_STRING) {
+				output_route = s;
+				stage = PARSE_FINISHED;
 			}
 		}
+		
+		// DEBUG output
+		//System.out.println("Input route = " + input_route);
+		//System.out.println("Output route = " + output_route);
+		
+		return_value = input_route + " " + output_route + " " + input_method + " " + output_method + " " + input_num;
+		
+		return return_value;
 	}
 }
