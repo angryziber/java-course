@@ -25,7 +25,6 @@ public class LoadNewResultsTest {
 		
 		LoadNewResults lnr = new LoadNewResults();
 		
-		// TODO what exactly is tested here?
 		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
 		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
 		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
@@ -37,6 +36,14 @@ public class LoadNewResultsTest {
 		for (int i = 0; i < 10; i++)
 		{
 			str = result_map1.get(i);
+			
+			boolean result = str[0].equals(String.valueOf(i+1));
+			assertTrue(result);
+		}
+		
+		for (int i = 0; i < 2; i++)
+		{
+			str = result_map2.get(i);
 			
 			boolean result = str[0].equals(String.valueOf(i+1));
 			assertTrue(result);
