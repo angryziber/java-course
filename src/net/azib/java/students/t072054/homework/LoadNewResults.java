@@ -78,6 +78,8 @@ public class LoadNewResults {
 			rs3.first();
 			
 			readDatabase(rs3, result_map3, 13);
+			
+			connClose();
 		}
 		catch (SQLException e) {
 			// Auto-generated catch block
@@ -107,7 +109,7 @@ public class LoadNewResults {
 		}
 	}
 
-	public void connClose() {
+	private void connClose() {
 		try {
 			conn.close();
 		}

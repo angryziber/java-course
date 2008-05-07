@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * 
  * @author r_vassiljev
  */
+
+// TODO Add sorting by different events
 public class SortingID {
 
 	public static ArrayList<Integer> SortByID(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2, Map<Integer, String[]> result_map3) {
@@ -27,10 +29,13 @@ public class SortingID {
 		int count = 0; // counter
 		int end_counter = 2; // counter of end conditions
 		double max_num; // maximal value of result
+		int max_index = 1; // index of maximal number
+		double max_athlet = 0; // index of athlet with maximum score
 
 		str_buf = result_map3.get(0);
 
 		// Start to count decathlon points
+		buf[1] = Double.parseDouble(str_buf[1]);
 		for (int i = 3; i < 13; i++) {
 			// buf[i] = lnr.rs3.getDouble(i);
 			buf[i] = Double.parseDouble(str_buf[i]);
@@ -39,8 +44,6 @@ public class SortingID {
 				buf[12]);
 		// END of decathlon count //
 		max_num = result;
-
-		int max_index = 1; // index of maximal number
 
 		// All indexes are choosed?
 		while (end_counter > 1) {
@@ -69,6 +72,7 @@ public class SortingID {
 					// DEBUG output
 					//System.out.println("number of rows = " + number_of_rows);
 					
+					buf[1] = Double.parseDouble(str_buf[1]);
 					for (int i = 3; i < 13; i++) {
 						// buf[i] = lnr.rs3.getDouble(i);
 						buf[i] = Double.parseDouble(str_buf[i]);
@@ -87,6 +91,7 @@ public class SortingID {
 					if (result > max_num) {
 						max_num = result;
 						max_index = count;
+						max_athlet = buf[1];
 					}
 
 					end_counter++;
@@ -99,9 +104,10 @@ public class SortingID {
 			// DEBUG output
 			//System.out.println("max_num = " + max_num);
 			//System.out.println("max_index = " + max_index);
+			//System.out.println("max_athlet = " + max_athlet);
 			
 			choosed_indexes[number_of_indexes] = max_index;
-			return_value.add(max_index);
+			return_value.add((int) max_athlet);
 			max_num = 0;
 			max_index = 0;
 			number_of_indexes++;
