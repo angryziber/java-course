@@ -16,7 +16,8 @@ import org.junit.Test;
 public class SortingIDTest {
 
 	/**
-	 * Test method for ???
+	 * Test method for SortingID
+	 * Checks results of SortingID function 
 	 */
 
 	@Test
