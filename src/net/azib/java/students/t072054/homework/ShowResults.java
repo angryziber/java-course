@@ -9,6 +9,8 @@ import java.util.Map;
  * 
  * @author r_vassiljev
  */
+
+// TODO This class will be rewritten later
 public class ShowResults {
 	public static void ShowResultsAll(int[] indexes, int num_of_results) {
 		// public static void main(String[] args) {
