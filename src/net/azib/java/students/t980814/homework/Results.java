@@ -1,5 +1,13 @@
 package net.azib.java.students.t980814.homework;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +23,46 @@ public class Results {
 
 	private TreeSet<ResultRecord> results;
 	private int comp_id;
+	
+	public Results(InputStream inputStream) {
+		// loe andmed, moodusta string ja kasuta results.add(new ResultRecord(line))
+	}
+	
+	public Results(File fileCSV) throws IOException {
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileCSV), "UTF-8"));
+			String line;
+			results = new TreeSet<ResultRecord>();
+			int lineNumber = 0;
+			while ((line = reader.readLine()) != null) {
+				try {
+					lineNumber++;
+					results.add(new ResultRecord(line));
+				}
+				catch (IndexOutOfBoundsException e) {
+					System.out.println("Error in CSV file on line nr:" + lineNumber);
+					e.printStackTrace();
+				}
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("File not found!");
+		}
+		catch (UnsupportedEncodingException e) {
+			System.out.println("Unsupported encoding");
+		}
+		catch (IOException e) {
+			System.out.println("Error reading file");
+		}
+		finally {
+			try {
+				reader.close();
+			}
+			catch (Exception e) {
+			}
+		}
+	}
 	
 	public Results(Connection conn,
 			       String competition_id) throws SQLException {

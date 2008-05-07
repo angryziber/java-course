@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -18,7 +21,21 @@ public class Athlete {
 	private String name;
 	private Date dob;
 	private String country;
+	private DateFormat dfm;
 
+	public Athlete(int athlete_id, String name, String dob, String country) {
+		dfm = new SimpleDateFormat("dd.MM.yyyy");
+		this.athlete_id = athlete_id;
+		this.name = name;
+		try {
+			this.dob = dfm.parse(dob);
+		}
+		catch (ParseException e) {
+			System.out.println("Parse exception... athlete date");
+		}
+		this.country = country;
+	}
+	
 	public Athlete(Connection conn,
 			       int id) throws SQLException {
 		PreparedStatement athlete_statement = conn.prepareStatement("select * from athletes where id = ?");
@@ -43,7 +60,7 @@ public class Athlete {
 		final String COMMA = ",";
 		StringBuilder sb = new StringBuilder();
 		sb.append("\"").append(name).append("\"").append(COMMA);
-		sb.append(dob).append(COMMA);
+		sb.append(dfm.format(dob)).append(COMMA);
 		sb.append(country); 
 		return sb.toString();
 	}

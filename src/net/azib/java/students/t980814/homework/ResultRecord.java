@@ -14,8 +14,39 @@ import java.util.HashMap;
 public class ResultRecord implements Comparable<ResultRecord> {
 
 	Athlete athlete;
-	private HashMap<String, Float> results;
+	private HashMap<String, Float> resultData;
 	private int sum;
+	private static int athleteIdGenerator = 0;
+	
+	// FIX this: use my own exception? ..... error on line.
+	public ResultRecord(String lineCSV) throws IndexOutOfBoundsException, NumberFormatException {
+		// Get the athlete name (everything between ""-s)
+		String athleteName = lineCSV.substring(1, lineCSV.lastIndexOf('"'));
+		lineCSV = lineCSV.substring(lineCSV.lastIndexOf('"') + 2); // +1 because of '"' and +1 because of ','
+		String[] csvComponents = lineCSV.split(",");
+		athlete = new Athlete(athleteIdGenerator++, athleteName, csvComponents[0], csvComponents[1]);
+		resultData = new HashMap<String, Float>();
+
+		sum = 0;
+		DecathlonEvent event = DecathlonEvent.RACE_100M;
+		int index = 2;
+		while (true) {
+			Float result;
+			String[] timeComponents = csvComponents[index++].split(":");
+			if (event.isRunningEvent && (timeComponents.length > 1))
+				result = (new Integer(timeComponents[0]) * 60) + new Float(timeComponents[1]);
+			else
+				result = new Float(timeComponents[0]);
+			
+			resultData.put(event.key, result);	
+			if (result > 0)
+				sum += event.calcPoints(result);
+			if (event.hasNext())
+				event = event.next();
+			else
+				break;
+		};			
+	}
 	
 	public ResultRecord(Connection conn,
 			            PreparedStatement result_stmt) throws SQLException {
@@ -23,11 +54,12 @@ public class ResultRecord implements Comparable<ResultRecord> {
 		ResultSet rs = result_stmt.executeQuery();
 		while (rs.next()) { 
 			athlete = new Athlete(conn, rs.getInt("athlete_id"));
-			results = new HashMap<String, Float>();
+			resultData = new HashMap<String, Float>();
 			for (String e : DecathlonEvent.getAllKeys()) {
 				float result = rs.getFloat(e);
-				results.put(e, result);
-				sum += DecathlonEvent.getDecathlonEventByKey(e).calcPoints(result);
+				resultData.put(e, result);
+				if (result > 0)
+					sum += DecathlonEvent.getDecathlonEventByKey(e).calcPoints(result);
 			}
 		}
 		rs.close();
@@ -38,12 +70,15 @@ public class ResultRecord implements Comparable<ResultRecord> {
 	}
 	
 	public String getResultString(String key) {
-		String result;
-		float res = results.get(key);
-		if (DecathlonEvent.getDecathlonEventByKey(key).isRunningEvent && (res >= 60.0))
-			result = String.format("%d:%4.2f", ((int)res / 60), res % 60);
-		else
-			result = String.format("%.2f", res); 
+		String result = "0";
+		if (resultData.containsKey(key))
+		{
+			float res = resultData.get(key);
+			if (DecathlonEvent.getDecathlonEventByKey(key).isRunningEvent && (res >= 60.0))
+				result = String.format("%d:%4.2f", ((int)res / 60), res % 60);
+			else
+				result = String.format("%.2f", res);
+		}
 		return result.replace(',', '.');
 	}
 	

@@ -47,6 +47,10 @@ public enum DecathlonEvent {
 		return values()[(this.ordinal() + 1) % values().length];
 	}
 
+	public boolean hasNext() {
+		return (values().length > 0) && (this.ordinal() < (values().length - 1));
+	}
+	
 	public static String[] getAllKeys() {
 		String[] names = new String[values().length];
 		for (int i = 0; i < values().length; i++)
