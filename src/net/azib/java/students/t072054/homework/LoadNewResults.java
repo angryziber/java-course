@@ -16,6 +16,9 @@ import java.util.Map;
  * 
  * @author r_vassiljev
  */
+
+// TODO how will I know, how many rows in a MySQL table?
+
 public class LoadNewResults {
 	static private ResultSet rs1;
 	static private ResultSet rs2;
