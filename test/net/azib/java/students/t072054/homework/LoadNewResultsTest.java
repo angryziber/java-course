@@ -49,7 +49,7 @@ public class LoadNewResultsTest {
 			assertTrue(result);
 		}
 		
-		for (int i=0; i < 12; i++)
+		for (int i = 0; i < 12; i++)
 		{
 			str = result_map3.get(i);
 			
