@@ -1,6 +1,8 @@
 package net.azib.java.students.t072054.homework;
 
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * ShowResults
@@ -11,8 +13,12 @@ public class ShowResults {
 	public static void ShowResultsAll(int[] indexes, int num_of_results) {
 		// public static void main(String[] args) {
 		LoadNewResults lnr = new LoadNewResults();
-
-//		lnr.loadResults();
+		
+		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		
+		lnr.loadResults(result_map1, result_map2, result_map3);
 
 		try {
 			for (int i = 0; i < num_of_results; i++) {
