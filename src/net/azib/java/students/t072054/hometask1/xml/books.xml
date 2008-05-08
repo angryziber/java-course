@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="books.xsl"?>
+<bookstore>
+
+<book category="COOKING" lang="it">
+  <title>Antipasti Italiani</title>
+  <author>Giada De Laurentiis</author>
+  <year>2005</year>
+  <price>30.00</price>
+</book>
+
+<book category="LITERATURE" lang="et">
+  <title>Kalevipoeg</title>
+  <author>Friedrich Reinhold Kreutzwald</author>
+  <year>1982</year>
+  <price>37.50</price>
+</book>
+
+<book category="CHILDREN" lang="en">
+  <title>Harry Potter</title>
+  <author>J K. Rowling</author>
+  <year>2005</year>
+  <price>29.99</price>
+</book>
+
+<book category="COMPUTERS" lang="en">
+  <title>Art of Computer Programming</title>
+  <author>Donald Knuth</author>
+  <year>1998</year>
+  <price>152.00</price>
+</book>
+
+<book category="COMPUTERS" lang="en">
+  <title>Design Patterns: Elements of Reusable Object-Oriented Software</title>
+  <author>Erich Gamma</author>
+  <author>Richard Helm</author>
+  <author>Ralph Johnson</author>
+  <author>John Vissides</author>
+  <year>1994</year>
+  <price>59.99</price>
+</book>
+
+<book category="COMPUTERS" lang="en">
+  <title>Thinking in Java, 4th Edition</title>
+  <author>Bruce Eckel</author>
+  <year>2006</year>
+  <price>40.95</price>
+</book>
+
+<book category="COMPUTERS" lang="en">
+  <title>Effective Java</title>
+  <author>Joshua Bloch</author>
+  <year>2001</year>
+  <price>39.95</price>
+</book>
+
+</bookstore>
