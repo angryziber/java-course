@@ -18,8 +18,7 @@ public class ResultRecord implements Comparable<ResultRecord> {
 	private int sum;
 	private static int athleteIdGenerator = 0;
 	
-	// FIX this: use my own exception? ..... error on line.
-	public ResultRecord(String lineCSV) throws IndexOutOfBoundsException, NumberFormatException {
+	public ResultRecord(String lineCSV) throws DecaCalcException, IndexOutOfBoundsException {
 		// Get the athlete name (everything between ""-s)
 		String athleteName = lineCSV.substring(1, lineCSV.lastIndexOf('"'));
 		lineCSV = lineCSV.substring(lineCSV.lastIndexOf('"') + 2); // +1 because of '"' and +1 because of ','
@@ -49,20 +48,28 @@ public class ResultRecord implements Comparable<ResultRecord> {
 	}
 	
 	public ResultRecord(Connection conn,
-			            PreparedStatement result_stmt) throws SQLException {
+			            PreparedStatement result_stmt) throws DecaCalcException {
 		sum = 0;
-		ResultSet rs = result_stmt.executeQuery();
-		while (rs.next()) { 
-			athlete = new Athlete(conn, rs.getInt("athlete_id"));
-			resultData = new HashMap<String, Float>();
-			for (String e : DecathlonEvent.getAllKeys()) {
-				float result = rs.getFloat(e);
-				resultData.put(e, result);
-				if (result > 0)
-					sum += DecathlonEvent.getDecathlonEventByKey(e).calcPoints(result);
+		ResultSet rs = null;
+		try {
+			rs = result_stmt.executeQuery();
+			while (rs.next()) { 
+				athlete = new Athlete(conn, rs.getInt("athlete_id"));
+				resultData = new HashMap<String, Float>();
+				for (String e : DecathlonEvent.getAllKeys()) {
+					float result = rs.getFloat(e);
+					resultData.put(e, result);
+					if (result > 0)
+						sum += DecathlonEvent.getDecathlonEventByKey(e).calcPoints(result);
+				}
 			}
 		}
-		rs.close();
+		catch (SQLException e) {
+			throw new DecaCalcException("Error reading results database.");
+		}
+		finally {
+			Results.closeQuietly(rs);
+		}
 	}
 	
 	public int getSum() {

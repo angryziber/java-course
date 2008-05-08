@@ -1,10 +1,6 @@
 package net.azib.java.students.t980814.homework;
 
-import net.azib.java.students.t980814.homework.DecaInputOutputMethod.DecaInputMethod;
-import net.azib.java.students.t980814.homework.DecaInputOutputMethod.DecaOutputMethod;
-
 import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,31 +13,25 @@ import java.sql.SQLException;
 public class DecathlonCalculator {
 
 	private Results results;
-	private DecaInputOutputMethod ioMethod;
+	private DecaIOMethod ioMethod;
 	
-	public DecathlonCalculator(DecaInputOutputMethod ioMethod) {
+	public DecathlonCalculator(DecaIOMethod ioMethod) throws DecaCalcException {
 		this.ioMethod = ioMethod;
 		
-		if (ioMethod.inputMethod == DecaInputMethod.CONSOLE) {
+		if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.CONSOLE) {
 			results = new Results(System.in);			
 		}
-		else if (ioMethod.inputMethod == DecaInputMethod.CSV) {
-			try {
-				results = new Results(new File(ioMethod.inputParameter));
-			}
-			catch (IOException e) {
-				System.out.println("Err... CSV");
-			}
+		else if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.CSV) {
+			results = new Results(new File(ioMethod.inputParameter));
 		}
-		else if (ioMethod.inputMethod == DecaInputMethod.DATABASE) {
+		else if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.DATABASE) {
 			Connection connection = null;
 			try {
-//				 - both should work (DB connection string must be read from db.properties in the same package as the main class)
 				connection = DriverManager.getConnection("jdbc:mysql://srv.azib.net:3306/decathlon", "java", "java");
 				results = new Results(connection, ioMethod.inputParameter);
 			}
-			catch (SQLException e) {
-				System.out.println("Unable to load data from DB");			
+			catch (SQLException e) {				
+				throw new DecaCalcException("Unable to open connection to DB");			
 			}
 			finally {
 				try {
@@ -53,52 +43,49 @@ public class DecathlonCalculator {
 		}
 	}
 	
-	public void outputCalculatedData() {
+	public void outputCalculatedData() throws DecaCalcException {
 		if (results != null) {
-			if (ioMethod.outputMethod == DecaOutputMethod.CONSOLE)
+			if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.CONSOLE)
 				System.out.println(results);
-			else if (ioMethod.outputMethod == DecaOutputMethod.CSV) {
+			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.CSV)
+				results.toStringCSV(new File(ioMethod.outputParameter));
+			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.XML) {
 				// What to do if there is no data to output... create an empty file?
 				System.out.println("Not implemented");
 			}
-			else if (ioMethod.outputMethod == DecaOutputMethod.XML) {
-				// What to do if there is no data to output... create an empty file?
-				System.out.println("Not implemented");
-			}
-			else if (ioMethod.outputMethod == DecaOutputMethod.HTML) {
+			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.HTML) {
 				// What to do if there is no data to output... create an empty file?
 				System.out.println("Not implemented");
 			}
 		}
 		else
-			System.err.println("No data to output");
+			throw new DecaCalcException("There is no data to process.");
 	}
 	
-	
-	public static DecaInputOutputMethod readCommandLineParams(String[] args) {
+	public static DecaIOMethod readCommandLineParams(String[] args) {
 		int paramCount = 0;
-		DecaInputOutputMethod ioMethod = new DecaInputOutputMethod();
+		DecaIOMethod ioMethod = new DecaIOMethod();
 		
 		if (args.length >= 2) {
 			if (args[paramCount].matches("-db"))
-				ioMethod.setInputMethod(DecaInputMethod.DATABASE, args[++paramCount]);
+				ioMethod.setInputMethod(DecaIOMethod.DecaInputMethod.DATABASE, args[++paramCount]);
 			else if (args[paramCount].matches("-csv"))
-				ioMethod.setInputMethod(DecaInputMethod.CSV, args[++paramCount]);
+				ioMethod.setInputMethod(DecaIOMethod.DecaInputMethod.CSV, args[++paramCount]);
 			else if (args[paramCount].matches("-console"))
-				ioMethod.setInputMethod(DecaInputMethod.CONSOLE, null);
+				ioMethod.setInputMethod(DecaIOMethod.DecaInputMethod.CONSOLE, null);
 				
 			paramCount++;
 
 			if ((args.length > paramCount) &&
 				(args[paramCount].matches("-console")))
-				ioMethod.setOutputMethod(DecaOutputMethod.CONSOLE, null);
+				ioMethod.setOutputMethod(DecaIOMethod.DecaOutputMethod.CONSOLE, null);
 			else if (args.length > (paramCount + 1)) {
 				if (args[paramCount].matches("-csv"))
-					ioMethod.setOutputMethod(DecaOutputMethod.CSV, args[++paramCount]);
+					ioMethod.setOutputMethod(DecaIOMethod.DecaOutputMethod.CSV, args[++paramCount]);
 				else if (args[paramCount].matches("-xml"))
-					ioMethod.setOutputMethod(DecaOutputMethod.XML, args[++paramCount]);
+					ioMethod.setOutputMethod(DecaIOMethod.DecaOutputMethod.XML, args[++paramCount]);
 				else if (args[paramCount].matches("-html"))
-					ioMethod.setOutputMethod(DecaOutputMethod.HTML, args[++paramCount]);
+					ioMethod.setOutputMethod(DecaIOMethod.DecaOutputMethod.HTML, args[++paramCount]);
 			}
 		}
 		
@@ -128,12 +115,15 @@ public class DecathlonCalculator {
 	
 	public static void main(String[] args) {
 		try {
-			DecaInputOutputMethod ioMethod = readCommandLineParams(args);
+			DecaIOMethod ioMethod = readCommandLineParams(args);
 			if (ioMethod.isIOMethodLegal()) {
 				DecathlonCalculator deca = new DecathlonCalculator(ioMethod);
 				deca.outputCalculatedData();
 			} else
 				outputCommandLineError();
+		}
+		catch (DecaCalcException e) {
+			System.out.println(e.getMessage());
 		}
 		catch (Exception e) {
 			System.out.println("Unexpected error.");

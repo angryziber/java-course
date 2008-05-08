@@ -5,7 +5,7 @@ package net.azib.java.students.t980814.homework;
  *
  * @author dell
  */
-public class DecaInputOutputMethod {
+public class DecaIOMethod {
 
 	public enum DecaInputMethod {
 		UNKNOWN,
@@ -41,11 +41,4 @@ public class DecaInputOutputMethod {
 		return ((inputMethod != DecaInputMethod.UNKNOWN) &&
 		        (outputMethod != DecaOutputMethod.UNKNOWN));
 	}
-	
-/* For debug purposes */
-/*	public String toString() {
-		return ((inputMethod.toString() + ((inputParameter == null) ? "" : (" - " + inputParameter))) + 
-				System.getProperty("line.separator") +
-				(outputMethod.toString() + ((outputParameter == null) ? "" : (" - " + outputParameter)))); 
-	} */
 }
