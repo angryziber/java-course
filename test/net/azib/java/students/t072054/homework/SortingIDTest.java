@@ -48,11 +48,11 @@ public class SortingIDTest {
 
 		lnr.loadResults(result_map1, result_map2, result_map3);
 		
-		results = SortingID.SortByID(result_map1, result_map2, result_map3);
+		results = SortingID.SortByID(result_map1, result_map2, result_map3, 1);
 		
 		for (int i = 0; i < results.size(); i++)
 		{
-			//System.out.println(results.get(i));
+			System.out.println(results.get(i));
 //			assertTrue(answers.get(i) == results.get(i));
 		}
 	}
