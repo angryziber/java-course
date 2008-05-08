@@ -12,10 +12,13 @@ import java.util.ArrayList;
 // TODO Add sorting by different events
 public class SortingID {
 
-	public static ArrayList<Integer> SortByID(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2, Map<Integer, String[]> result_map3) {
+	public static ArrayList<Integer> SortByID(Map<Integer, String[]> result_map1, 
+			Map<Integer, String[]> result_map2, 
+			Map<Integer, String[]> result_map3,
+			double event_id) {
 		// public static void main(String[] args) {
 		ArrayList<Integer> return_value = new ArrayList<Integer>();
-		double[] buf = new double[10000];
+		double[] buf = new double[20];
 
 		String str_buf[] = new String[100]; // buffer for reading from result_maps
 
@@ -65,9 +68,15 @@ public class SortingID {
 						choosed_flag = 1;
 				}
 
-				if (choosed_flag == 0) {
+				// Reading data from database
+				str_buf = result_map3.get(count);
+				
+				//Check the id of competition
+				buf[2] = Double.parseDouble(str_buf[2]);
+				
+				if ((choosed_flag == 0) && (event_id == buf[2])) {
 					// START to count decathlon points
-					str_buf = result_map3.get(count);
+					//str_buf = result_map3.get(count);
 					
 					// DEBUG output
 					//System.out.println("number of rows = " + number_of_rows);

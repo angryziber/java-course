@@ -22,15 +22,17 @@ public class ShowResults {
 
 		lnr.loadResults(result_map1, result_map2, result_map3);
 
-		ArrayList<Integer> results = SortingID.SortByID(result_map1, result_map2, result_map3);
+		ArrayList<Integer> results = SortingID.SortByID(result_map1, result_map2, result_map3, 2);
 
 		for (int i = 0; i < results.size(); i++) {
 
 			for (int j = 0; j < 4; j++)
 			{
-				System.out.print(result_map1.get(results.get(i))[j] + " ");
-				System.out.println();
+				System.out.print(result_map1.get(results.get(i)-1)[j] + " ");
+				
 			}
+			System.out.print(CountAthletResult.CountResultByID(result_map3, (double)results.get(i), (double)2));
+			System.out.println();
 		}
 	}
 }
