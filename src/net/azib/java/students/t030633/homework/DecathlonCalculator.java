@@ -21,7 +21,7 @@ import java.util.List;
  * 
  * @author t030633
  */
-public class DecathlonPointsCalculator {
+public class DecathlonCalculator {
 
 	private static final String CALCULATION_ERROR = "Calculation error:";
 
@@ -32,7 +32,7 @@ public class DecathlonPointsCalculator {
 	static {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Decathlon points calculator by 030633").append(LN).append("usage: ").append(
-				DecathlonPointsCalculator.class.getSimpleName()).append(" -input [options] -output [options]").append(LN);
+				DecathlonCalculator.class.getSimpleName()).append(" -input [options] -output [options]").append(LN);
 		sb.append(" possible inputs: ");
 		for (InputMethod im : InputMethod.values()) {
 			sb.append(im.name().toLowerCase()).append(" ");
@@ -46,10 +46,11 @@ public class DecathlonPointsCalculator {
 
 	public static void main(String[] args) {
 		try {
-			new DecathlonPointsCalculator().run(args);
+			new DecathlonCalculator().run(args);
 		}
 		catch (Exception e) {
-			System.out.println(HELP_MSG);
+			System.out.println("Calculation failed.");
+			e.printStackTrace();
 		}
 	}
 
@@ -89,8 +90,8 @@ public class DecathlonPointsCalculator {
 						case CSV:
 							Files.setInput(string);
 							break;
-						case DATABASE:
-							Connections.PARAMETER = string;
+						case DB:
+							Connections.setParameter(string);
 							break;
 						}
 						isOpt = false;

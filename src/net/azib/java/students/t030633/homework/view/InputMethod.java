@@ -2,6 +2,7 @@ package net.azib.java.students.t030633.homework.view;
 
 import net.azib.java.students.t030633.homework.view.in.CSV;
 import net.azib.java.students.t030633.homework.view.in.Console;
+import net.azib.java.students.t030633.homework.view.in.Database;
 
 /**
  * Decathlon input method - all possible input methods and classes that
@@ -11,7 +12,7 @@ import net.azib.java.students.t030633.homework.view.in.Console;
  */
 public enum InputMethod {
 
-	CONSOLE(Console.class), CSV(CSV.class), DATABASE(null);
+	CONSOLE(Console.class), CSV(CSV.class), DB(Database.class);
 
 	private final Class<? extends Input> inputClass;
 
