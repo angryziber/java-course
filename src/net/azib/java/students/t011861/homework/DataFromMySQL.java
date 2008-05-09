@@ -43,7 +43,6 @@ public class DataFromMySQL {
 					{ 	
 						for (int i = 1; i < columns+1; i++ ) 
 						{
-							System.out.println(resultSet.getString(1));
 							athleteData.add(resultSet.getString(i));
 						}
 							athletesData.add((String[]) athleteData.toArray(new String[athleteData.size()]));
