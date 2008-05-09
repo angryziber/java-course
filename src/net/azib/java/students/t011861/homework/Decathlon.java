@@ -50,11 +50,25 @@ public class Decathlon {
 			File csvdata = new File("csvdata.csv");
 			DataFromCsv csvData = new DataFromCsv(csvdata);
 			List<String[]> csvDatas = csvData.getData();
+			printscreen.printToConsole(csvDatas);
 			CalculatePoints competitionResults2 = new CalculatePoints();
 			List<Double[]> allresults2 = competitionResults2.processResults(csvDatas);
 			ProcessedData finalData2 = new ProcessedData();
 			List<String[]> finalResultsList2 = finalData2.getFinalData(csvDatas, allresults2);
 			printscreen.printToConsole(finalResultsList2);
+			
+			File xml2 = new File("athletes2.xml");
+			//OutDataToXml writeXml = new OutDataToXml();
+			writeXml.showInXmlFile(xml2, finalResultsList2);
+			
+			File html2 = new File("athletes2.html");
+			//File xsl = new File("athletes.xsl");
+			//OutDataToHtml writeHtml = new OutDataToHtml();
+			writeHtml.showInHtmlFile(html2, xsl, finalResultsList2);
+			
+			File csv2 = new File("athletes2.csv");
+			//OutDataToCsv writeCsv = new OutDataToCsv();
+			writeCsv.showInCsvFile(csv2, finalResultsList2);
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
