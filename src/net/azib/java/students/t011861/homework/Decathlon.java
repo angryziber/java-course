@@ -40,13 +40,30 @@ public class Decathlon {
 			File csv = new File("athletes.csv");
 			OutDataToCsv writeCsv = new OutDataToCsv();
 			writeCsv.showInCsvFile(csv, finalResultsList);
+			/**
+			DataFromConsole consoleInput = new DataFromConsole();
+			List<String[]> consoleData = consoleInput.getData();
+			allresults = competitionResults.processResults(consoleData);
+			finalResultsList = finalData.getFinalData(consoleData, allresults);
+			printscreen.printToConsole(finalResultsList);
+			**/
+			File csvdata = new File("csvdata.csv");
+			DataFromCsv csvData = new DataFromCsv(csvdata);
+			List<String[]> csvDatas = csvData.getData();
+			CalculatePoints competitionResults2 = new CalculatePoints();
+			List<Double[]> allresults2 = competitionResults2.processResults(csvDatas);
+			ProcessedData finalData2 = new ProcessedData();
+			List<String[]> finalResultsList2 = finalData2.getFinalData(csvDatas, allresults2);
+			printscreen.printToConsole(finalResultsList2);
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		boolean check = false;
+		/**
 		do {
+			
 			String input = DataFromConsole.readOperation("Please insert the number of the command!");
 			switch (Integer.valueOf(input)) 
 			{
@@ -61,7 +78,7 @@ public class Decathlon {
 						catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}**/
+						}
 					break;
 					}
 				case 2: 
@@ -82,6 +99,7 @@ public class Decathlon {
 				break;
 			}
 		   } while (check);
+		   **/
 	}
 
 }

@@ -25,9 +25,18 @@ public class CreateDocument {
 			@SuppressWarnings("unused")
 			Element country = athlete.addElement("country").addText(athleteData[2]);
 			Element scores = athlete.addElement("results");
+			int noComma = athleteData.length-3;
 			for (int i = 3; i < (athleteData.length - 2); i++) {
-				@SuppressWarnings("unused")
-				Element score = scores.addText(athleteData[i] + ", ");
+				if (i != noComma)
+				{
+					@SuppressWarnings("unused")
+					Element score = scores.addText(athleteData[i] + ", ");
+				}
+				else
+				{
+					@SuppressWarnings("unused")
+					Element score = scores.addText(athleteData[i]);
+				}
 			}
 			@SuppressWarnings("unused")
 			Element points = athlete.addElement("points").addText(athleteData[13]);

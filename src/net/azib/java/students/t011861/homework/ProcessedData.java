@@ -63,64 +63,59 @@ public class ProcessedData {
 							onlyPoints.set(pointIndex, -1.0);
 							newOnlyPoints.add(helpPoint);
 					}
-					/**	
+					//Create ordered place labels
 					int startLabelCount = 0;
 					int t = 0;
 					while (t<rows-1)
 					{
-						Integer vitt = Integer.
-						Integer test1 = Integer.valueOf(newOnlyPoints.get(t).toString().trim());
-						Integer test2 = Integer.valueOf(newOnlyPoints.get(t+1).toString().trim());
-						if (test1 > test2)
+						String test1 = String.valueOf(newOnlyPoints.get(t).toString().trim());
+						String test2 = String.valueOf(newOnlyPoints.get(t+1).toString().trim());
+						if (!test1.equals(test2))
 						{
-							System.out.println("test1: "+test1+" "+"test2: "+test2);
-							//System.out.println(newOnlyPoints.get(t)+" "+newOnlyPoints.get(t+1));
 							Integer tempLabel = t + 1;
 							String place = String.valueOf(tempLabel);
 							placeLabel.add(place);
-							//System.out.println(place+" esimene");
-							
+							System.out.println(place);
+							t++;
 						}
 						
 						else
-						{	
-							String kaks = "teine";
-							System.out.println(kaks);
-							/**
+						{
 							int abi = t;
-							while ((newOnlyPoints.get(abi) != newOnlyPoints.get(abi+1)) || (abi == rows-1))
+							//test1 = String.valueOf(newOnlyPoints.get(abi).toString().trim());
+							//test2 = String.valueOf(newOnlyPoints.get(abi+1).toString().trim());
+							while ((test1.equals(test2)) || !(abi < rows-2))
 							{
 							startLabelCount++;
 							abi++;
-							System.out.println("teine");
-							}
-							t=abi;
-							**/
-							/**
-							for (int u = t; u >= u + startLabelCount ;u++)
+							test1 = String.valueOf(newOnlyPoints.get(abi).toString().trim());
+							test2 = String.valueOf(newOnlyPoints.get(abi+1).toString().trim());
+										
+							for (int u = t; u < t + startLabelCount+1 ;u++)
 							{
-								Integer tempStartLabel = u + 1;
-								Integer tempStopLabel = u + startLabelCount;
+								Integer tempStartLabel = t + 1;
+								Integer tempStopLabel = t + startLabelCount + 1;
 								String place = String.valueOf(tempStartLabel)+" - "+String.valueOf(tempStopLabel);
 								System.out.println(place);
 								placeLabel.add(place);								
 							}
-							t = t + startLabelCount;
-							startLabelCount = 0;
-							
-							//System.out.println(tempLabel);
-							//System.out.println(tempLabel);
-									
+							t = t + startLabelCount + 1;
+							startLabelCount = 0;	
+							}
 						}
-						t++;
+					}
+					String test1 = String.valueOf(newOnlyPoints.get(rows-1).toString().trim());
+					String test2 = String.valueOf(newOnlyPoints.get(rows-2).toString().trim());
+					if (!test1.equals(test2))
+					{
+						String place = String.valueOf(rows);
+						placeLabel.add(place);
 					}
 					for (int z=0; z<rows; z++)
 					{
-						System.out.println(newOnlyPoints.get(z));
-						//System.out.println(placeLabel.get(z));
+						System.out.println(newOnlyPoints.get(z)+" "+placeLabel.get(z));
 					}
-					
-					**/
+	
 			int orderNumber = 0;
 			int orderIndex = 0;
 			//Creates new ArrayList which consists of athletes data, points and places (join newOnlyPoints and athletes)! 
@@ -146,8 +141,8 @@ public class ProcessedData {
 							if (orderNumber == helpIndex)
 								{
 									athleteData.add(String.valueOf(newOnlyPoints.get(f).toString()));
-									//athleteData.add("Place: "+placeLabel.get(f).toString());
-									athleteData.add("Place: ");
+									athleteData.add("Place: "+placeLabel.get(f).toString());
+									//athleteData.add("Place: ");
 									orderIndex = f;
 									//int place = orderIndex+1;
 									
