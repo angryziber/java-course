@@ -8,24 +8,62 @@ import java.util.List;
  * @author 011861
  */
 public class Decathlon {
-
+	//Create point calculator
+	static CalculatePoints calculatedResults = new CalculatePoints();
+	//Create object which is responsible for making final data
+	static ProcessedData finalData = new ProcessedData();
+	
+	//List<Double[]> allresults = competitionResults.processResults(sqlData);
 	public static void main(String[] args) {	
+		try 
+		{
+			
+		/**
+		for (String procParam: args) {
+            System.out.println(procParam);
+        	}**/
+		
+		//if (args[0].equals("-console"))
+		{
+			DataFromConsole consoleInput = new DataFromConsole();
+			List<String[]> consoleData = consoleInput.getData();
+			List<Double[]> calculatedPoints = calculatedResults.processResults(consoleData);
+			List<String[]> finalResultsList = finalData.getFinalData(consoleData, calculatedPoints);
+			if (args[1].equals("-connsole"))
+			{
+				OutDataToScreen printscreen = new OutDataToScreen();
+				printscreen.printToConsole(finalResultsList);
+			}
+		}
+		/**
+		String inputMethod = args[0]
+		                          
+		#  -console - no parameters
+		# -csv - input file name or path
+		# -db -
+		
+		#  -conole - no parameters
+		# -csv - output file name or path
+		# -xml - output file name or path
+		# -html - out
+		**/
 		System.out.println("Choose a number to insert data:");
 		System.out.println("1 - Keyboard");
 		System.out.println("2 - CSV file");
 		System.out.println("3 - Database (MySQL)");
 		System.out.println("4 - QUIT");
-		try {
+		
+		
+			/**
 			DataFromMySQL mySqlData = new DataFromMySQL();
 			List<String[]> sqlData = mySqlData.getData();
 			
-			CalculatePoints competitionResults = new CalculatePoints();
-			List<Double[]> allresults = competitionResults.processResults(sqlData);
 			
-			ProcessedData finalData = new ProcessedData();
+			
+			
 			List<String[]> finalResultsList = finalData.getFinalData(sqlData, allresults);
 			
-			OutDataToScreen printscreen = new OutDataToScreen();
+			
 			printscreen.printToConsole(finalResultsList);
 			
 			File xml = new File("athletes.xml");
@@ -40,13 +78,13 @@ public class Decathlon {
 			File csv = new File("athletes.csv");
 			OutDataToCsv writeCsv = new OutDataToCsv();
 			writeCsv.showInCsvFile(csv, finalResultsList);
-			/**
+			
 			DataFromConsole consoleInput = new DataFromConsole();
 			List<String[]> consoleData = consoleInput.getData();
 			allresults = competitionResults.processResults(consoleData);
 			finalResultsList = finalData.getFinalData(consoleData, allresults);
 			printscreen.printToConsole(finalResultsList);
-			**/
+			
 			File csvdata = new File("csvdata.csv");
 			DataFromCsv csvData = new DataFromCsv(csvdata);
 			List<String[]> csvDatas = csvData.getData();
@@ -69,7 +107,8 @@ public class Decathlon {
 			File csv2 = new File("athletes2.csv");
 			//OutDataToCsv writeCsv = new OutDataToCsv();
 			writeCsv.showInCsvFile(csv2, finalResultsList2);
-		}
+		**/
+	}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,6 +153,6 @@ public class Decathlon {
 			}
 		   } while (check);
 		   **/
+	
 	}
-
 }
