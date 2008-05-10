@@ -1,9 +1,8 @@
-package net.azib.java.students.t030633.homework.view;
+package net.azib.java.students.t030633.homework.view.in;
 
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 
@@ -12,20 +11,15 @@ import java.util.List;
  * 
  * @author t030633
  */
-public interface Input extends Closeable {
+public interface Input {
 
 	/**
 	 * @param builder -
-	 *            AthleteBuilder, gives a builder instance to input
-	 * @return Input
-	 */
-	Input builder(AthleteBuilder builder);
-
-	/**
+	 *            AthleteBuilder to build athletes
 	 * @return List<Athlete> - a list of athletes
 	 * @throws IOException
-	 *             if read fails
+	 *             if reading fails
 	 */
-	List<Athlete> read() throws IOException;
+	List<Athlete> read(AthleteBuilder builder) throws IOException;
 
 }

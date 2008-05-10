@@ -1,9 +1,4 @@
-package net.azib.java.students.t030633.homework.view;
-
-import net.azib.java.students.t030633.homework.view.out.CSV;
-import net.azib.java.students.t030633.homework.view.out.Console;
-import net.azib.java.students.t030633.homework.view.out.HTML;
-import net.azib.java.students.t030633.homework.view.out.XML;
+package net.azib.java.students.t030633.homework.view.out;
 
 /**
  * Decathlon output method - all possible output methods and classes that

@@ -1,11 +1,10 @@
 package net.azib.java.students.t030633.homework.view.out;
 
+import net.azib.java.students.t030633.homework.DecathlonCalculator;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.Event;
-import net.azib.java.students.t030633.homework.view.Files;
-import net.azib.java.students.t030633.homework.view.Output;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -19,23 +18,23 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 /**
- * Forms XML and outputs it to OutputStream.
+ * Forms XML and writes it to OutputStream.
  * 
  * @author t030633
  */
 public class XML implements Output {
 
-	private OutputStream out;
+	private OutputStream output = null;
 
-	public XML() throws FileNotFoundException {
-		this.out = new FileOutputStream(Files.getOutputFile());
+	public XML() {
 	}
 
 	public XML(OutputStream out) {
-		this.out = out;
+		this.output = out;
 	}
 
 	private Document formDocument(List<Athlete> athletes) {
+
 		Element root = new Element("competition");
 		Document doc = new Document(root);
 
@@ -63,20 +62,26 @@ public class XML implements Output {
 			root.addContent(athleteElement);
 		}
 		return doc;
+
 	}
 
-	public void write(List<Athlete> out) throws IOException {
+	public void write(List<Athlete> athletes) throws IOException {
+
+		if (this.output == null) {
+			if (DecathlonCalculator.outputProperty == null)
+				throw new IOException("Output file not specified.");
+			this.output = new FileOutputStream(new File(DecathlonCalculator.class.getResource(".").getPath(),
+					DecathlonCalculator.outputProperty));
+		}
+
 		try {
 			new XMLOutputter(Format.getRawFormat().setIndent("  ").setLineSeparator(System.getProperty("line.separator")))
-					.output(formDocument(out), this.out);
+					.output(formDocument(athletes), output);
 		}
 		catch (IOException e) {
-			throw new IOException("XML Outputter error.", e);
+			throw new IOException("XML Outputter error.");
 		}
-	}
 
-	public void close() throws IOException {
-		this.out.close();
 	}
 
 }

@@ -3,7 +3,6 @@ package net.azib.java.students.t030633.homework.view.in;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
-import net.azib.java.students.t030633.homework.view.Input;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,35 +27,27 @@ public class Console implements Input {
 	private static final String WRONG_RESULT_FORMAT = "Result must be a number!" + LN;
 	private static final String WRONG_DATE_FORMAT = "Bad date format.";
 
-	private AthleteBuilder builder;
-	private final BufferedReader in;
-	private final PrintStream out;
+	private PrintStream out;
+	private InputStream in;
 
-	/**
-	 * Console: input stream defaults to System.in, output stream defaults to
-	 * System.out
-	 */
 	public Console() {
-		this(System.in, System.out);
+		this(System.out, System.in);
 	}
 
 	/**
-	 * @param in -
-	 *            InputStream to read input from
 	 * @param out -
-	 *            PrintStream for outgoing messages
+	 *            PrintStream for outgoing messages to console
+	 * @param in -
+	 *            InputStream to read console input from
 	 */
-	public Console(InputStream in, PrintStream out) {
-		this.in = new BufferedReader(new InputStreamReader(in));
+	public Console(PrintStream out, InputStream in) {
 		this.out = out;
+		this.in = in;
 	}
 
-	public Input builder(AthleteBuilder builder) {
-		this.builder = builder;
-		return this;
-	}
+	public List<Athlete> read(AthleteBuilder builder) throws IOException {
 
-	public List<Athlete> read() throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
 		List<Athlete> list = new LinkedList<Athlete>();
 
@@ -67,13 +58,13 @@ public class Console implements Input {
 		do {
 			builder.reset();
 			out.print("Name: ");
-			builder = builder.name(in.readLine());
+			builder = builder.name(reader.readLine());
 			out.print("Country: ");
-			builder = builder.country(in.readLine());
+			builder = builder.country(reader.readLine());
 			out.print("Birth date: ");
 
 			try {
-				builder = builder.date(df.parse(in.readLine()));
+				builder = builder.date(df.parse(reader.readLine()));
 			}
 			catch (ParseException e) {
 				out.print(WRONG_DATE_FORMAT);
@@ -83,7 +74,7 @@ public class Console implements Input {
 
 			for (Event e : Event.values()) {
 				out.print("\t" + e.getName() + ": ");
-				String result = in.readLine();
+				String result = reader.readLine();
 				try {
 					builder = builder.addResult(e, Double.parseDouble(result));
 				}
@@ -95,15 +86,10 @@ public class Console implements Input {
 			list.add(builder.build());
 			out.print(QUESTION);
 		}
-		while (in.readLine().equals("y"));
+		while (reader.readLine().equals("y"));
 
 		return list;
 
-	}
-
-	public void close() throws IOException {
-		this.in.close();
-		this.out.close();
 	}
 
 }

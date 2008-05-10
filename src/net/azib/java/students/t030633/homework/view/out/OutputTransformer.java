@@ -1,73 +1,63 @@
 package net.azib.java.students.t030633.homework.view.out;
 
+import net.azib.java.students.t030633.homework.DecathlonCalculator;
 import net.azib.java.students.t030633.homework.model.Athlete;
-import net.azib.java.students.t030633.homework.view.Files;
-import net.azib.java.students.t030633.homework.view.Output;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.List;
 
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 /**
- * Transformer
+ * Transforms XML using XSL stylesheet.
  * 
  * @author t030633
  */
 public class OutputTransformer implements Output {
 
-	private OutputStream out;
-	private URL stylesheetURL;
+	private URL stylesheet;
+	protected OutputStream output;
 
-	public OutputTransformer(URL stylesheet, OutputStream out) {
-		this.stylesheetURL = stylesheet;
-		this.out = out;
+	public OutputTransformer(URL stylesheet) {
+		this.stylesheet = stylesheet;
 	}
 
-	/**
-	 * @param source -
-	 *            File, source file to transform
-	 * @param destination -
-	 *            OutputStream for transformation result
-	 * @param stylesheet -
-	 *            URL for transformation XSL
-	 * @throws IOException
-	 *             if transformation fails
-	 */
-	private void transform(File source, OutputStream destination, URL stylesheet) throws IOException {
-		InputStream inputStream = null;
-		Transformer transformer;
+	public void write(List<Athlete> athletes) throws IOException {
+		init(); // Initialize from property
+		/*
+		 * Create a temporary file and write XML into it
+		 */
+		File temp = File.createTempFile("athletes", ".tmp");
+		new XML(new FileOutputStream(temp)).write(athletes);
+		temp.deleteOnExit();
+
 		try {
-			inputStream = stylesheet.openStream();
-			transformer = TransformerFactory.newInstance().newTransformer(new StreamSource(inputStream));
-			transformer.transform(new StreamSource(source), new StreamResult(destination));
+			Transformer transformer = TransformerFactory.newInstance().newTransformer(new StreamSource(stylesheet.openStream()));
+			transformer.transform(new StreamSource(temp), new StreamResult(output));
 		}
-		catch (Exception e) {
-			throw new IOException("Transformer error.", e);
+		catch (TransformerException e) {
+			throw new IOException(e.getMessage());
 		}
 		finally {
-			if (inputStream != null)
-				inputStream.close();
+			output.close();
+		}
+
+	}
+
+	public void init() throws IOException {
+		if (this.output == null) {
+			if (DecathlonCalculator.outputProperty == null)
+				throw new IOException("Output file not specified.");
+			this.output = new FileOutputStream(new File(DecathlonCalculator.class.getResource(".").getPath(),
+					DecathlonCalculator.outputProperty));
 		}
 	}
-
-	public void write(List<Athlete> out) throws IOException {
-		File temp = Files.getTempFile();
-		new XML(new FileOutputStream(temp)).write(out);
-		transform(temp, this.out, this.stylesheetURL);
-	}
-
-	public void close() throws IOException {
-		if (this.out != null)
-			this.out.close();
-	}
-
 }

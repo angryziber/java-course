@@ -1,8 +1,4 @@
-package net.azib.java.students.t030633.homework.view;
-
-import net.azib.java.students.t030633.homework.view.in.CSV;
-import net.azib.java.students.t030633.homework.view.in.Console;
-import net.azib.java.students.t030633.homework.view.in.Database;
+package net.azib.java.students.t030633.homework.view.in;
 
 /**
  * Decathlon input method - all possible input methods and classes that
@@ -21,7 +17,8 @@ public enum InputMethod {
 	}
 
 	/**
-	 * @return instance of a class that implements Input, return null if unable to instantiate
+	 * @return instance of a class that implements Input, return null if unable
+	 *         to instantiate
 	 */
 	public Input getInput() {
 		try {

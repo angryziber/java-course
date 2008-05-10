@@ -4,15 +4,13 @@ import net.azib.java.students.t030633.homework.model.AddingCalculator;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder;
 import net.azib.java.students.t030633.homework.model.DecathlonChecker;
-import net.azib.java.students.t030633.homework.view.Connections;
-import net.azib.java.students.t030633.homework.view.Files;
-import net.azib.java.students.t030633.homework.view.Input;
-import net.azib.java.students.t030633.homework.view.InputMethod;
-import net.azib.java.students.t030633.homework.view.Output;
-import net.azib.java.students.t030633.homework.view.OutputMethod;
+import net.azib.java.students.t030633.homework.view.in.Input;
+import net.azib.java.students.t030633.homework.view.in.InputMethod;
+import net.azib.java.students.t030633.homework.view.out.Output;
+import net.azib.java.students.t030633.homework.view.out.OutputMethod;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,12 +21,8 @@ import java.util.List;
  */
 public class DecathlonCalculator {
 
-	private static final String CALCULATION_ERROR = "Calculation error:";
-
-	private static final String HELP_MSG;
-
-	private static final String LN = System.getProperty("line.separator");
-
+	static final String HELP_MSG;
+	static final String LN = System.getProperty("line.separator");
 	static {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Decathlon points calculator by 030633").append(LN).append("usage: ").append(
@@ -44,107 +38,102 @@ public class DecathlonCalculator {
 		HELP_MSG = sb.toString();
 	}
 
-	public static void main(String[] args) {
-		try {
-			new DecathlonCalculator().run(args);
+	public static String inputProperty;
+	public static String outputProperty;
+
+	private Input input;
+	private Output output;
+	private PrintStream out; // For printing messages to user
+
+	public DecathlonCalculator() {
+		this(System.out); // PrintStream to user defaults to System.out
+	}
+
+	DecathlonCalculator(PrintStream out) {
+		this.out = out;
+	}
+
+	public void main(String[] args) {
+		DecathlonCalculator calc = new DecathlonCalculator();
+		if (calc.init(args)) {
+			try {
+				List<Athlete> athletes = input.read(new DecathlonAthleteBuilder(new DecathlonChecker(), new AddingCalculator()));
+				Collections.sort(athletes);
+				output.write(athletes);
+				out.println("Done.");
+			}
+			catch (IOException ioe) {
+				/*
+				 * Catch all exceptions from inputs and outputs. Message should
+				 * be something informative.
+				 */
+				out.print("Calculation failed. ");
+				out.println(ioe.getMessage());
+			}
+			catch (Exception e) {
+				out.println("Unexpected program crash, please contact author.");
+			}
 		}
-		catch (Exception e) {
-			System.out.println("Calculation failed.");
-			e.printStackTrace();
-		}
+		else
+			// Incorrect arguments, user needs help.
+			out.println(HELP_MSG);
 	}
 
 	/**
-	 * Parses command line arguments and configures Files and Connections if
-	 * needed. Calls calculate if successful.
+	 * Initializes calculator.
 	 * 
-	 * @param args
+	 * @param args -
+	 *            arguments to the program
+	 * @return true if arguments are formatically correct
 	 */
-	private void run(String[] args) {
-
-		InputMethod im = null;
-		OutputMethod om = null;
-		boolean isOpt = false;
-
-		/*
-		 * The following tries to parse arguments and options.
-		 */
-		try {
+	boolean init(String[] args) {
+		if ((args.length > 4) || (args.length < 2)) {
+			return false; // Filter out wrong number of arguments.
+		}
+		else {
+			InputMethod inputMethod = null;
+			OutputMethod outputMethod = null;
 
 			for (String string : args) {
 				if (string.startsWith("-")) {
-					if (im == null) {
-						im = InputMethod.valueOf(string.substring(1).toUpperCase());
-						isOpt = true;
+					if (inputMethod == null) {
+						try {
+							inputMethod = InputMethod.valueOf(string.substring(1).toUpperCase());
+						}
+						catch (IllegalArgumentException e) {
+							// Specified input method does not exist.
+							return false;
+						}
 					}
 					else {
-						om = OutputMethod.valueOf(string.substring(1).toUpperCase());
-						isOpt = true;
+						try {
+							outputMethod = OutputMethod.valueOf(string.substring(1).toUpperCase());
+						}
+						catch (IllegalArgumentException e) {
+							// Specified output method does not exist.
+							return false;
+						}
 					}
 				}
-				else if (isOpt) {
-					if (om == null) {
-						switch (im) {
-						case CONSOLE:
-							break;
-						case CSV:
-							Files.setInput(string);
-							break;
-						case DB:
-							Connections.setParameter(string);
-							break;
-						}
-						isOpt = false;
-					}
-					else {
-						switch (om) {
-						case CONSOLE:
-							break;
-						default:
-							Files.setOutput(string);
-							break;
-						}
-						isOpt = false;
-					}
+				else {
+					if (outputMethod == null)
+						inputProperty = string;
+					else
+						outputProperty = string;
 				}
 			}
-
-			calculate(im.getInput(), om.getOutput());
-
-		}
-		catch (URISyntaxException e) {
-			System.out.println(HELP_MSG);
-		}
-
-	}
-
-	/**
-	 * Reads athletes from input, writes them to output.
-	 * 
-	 * @param input
-	 * @param output
-	 */
-	private void calculate(Input input, Output output) {
-
-		try {
-			List<Athlete> athletes;
-			athletes = input.builder(new DecathlonAthleteBuilder(new DecathlonChecker(), new AddingCalculator())).read();
-			Collections.sort(athletes);
-			output.write(athletes);
-		}
-		catch (IOException e) {
-			System.out.println(CALCULATION_ERROR);
-			System.out.println(e.getMessage());
-		}
-		finally {
-			try {
-				input.close();
-				output.close();
-			}
-			catch (IOException e) { // close quietly
+			/*
+			 * Only check if both methods exist because some methods don't
+			 * require parameters. Parameter checking is therefore done in
+			 * methods themselves.
+			 */
+			if ((inputMethod == null) || (outputMethod == null))
+				return false;
+			else {
+				input = inputMethod.getInput();
+				output = outputMethod.getOutput();
+				return true;
 			}
 		}
-
 	}
-
 }

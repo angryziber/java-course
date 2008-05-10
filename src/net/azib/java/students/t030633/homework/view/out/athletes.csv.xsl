@@ -31,7 +31,7 @@
 <xsl:if test="position() != last()">,</xsl:if>
 </xsl:for-each>
 
-<xsl:text>;
+<xsl:text>
 </xsl:text>
 
 </xsl:for-each>

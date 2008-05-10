@@ -1,17 +1,17 @@
 package net.azib.java.students.t030633.homework.view.in;
 
+import net.azib.java.students.t030633.homework.DecathlonCalculator;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
-import net.azib.java.students.t030633.homework.view.Files;
-import net.azib.java.students.t030633.homework.view.Input;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,49 +22,69 @@ import java.util.List;
  */
 public class CSV implements Input {
 
-	private AthleteBuilder athleteBuilder;
+	public List<Athlete> read(AthleteBuilder builder) throws IOException {
 
-	private InputStream in;
+		if (DecathlonCalculator.inputProperty == null)
+			throw new IOException("Input file not specified.");
+		InputStream input = DecathlonCalculator.class.getResourceAsStream(DecathlonCalculator.inputProperty);
+		if (input == null) {
+			throw new IOException("Input file not found.");
+		}
 
-	public CSV() throws FileNotFoundException {
-		this.in = new FileInputStream(Files.getInputFile());
-	}
-
-	public CSV(InputStream in) {
-		this.in = in;
-	}
-
-	public Input builder(AthleteBuilder athleteBuilder) {
-		this.athleteBuilder = athleteBuilder;
-		return this;
-	}
-
-	public List<Athlete> read() throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 		List<Athlete> list = new LinkedList<Athlete>();
-		while (reader.ready()) {
-			list.add(parseAthlete(athleteBuilder, reader.readLine()));
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+			while (reader.ready()) {
+				list.add(parseAthlete(builder, reader.readLine()));
+			}
+		}
+		finally {
+			input.close();
 		}
 		return list;
+
 	}
 
-	private Athlete parseAthlete(AthleteBuilder athleteBuilder, String line) {
-		athleteBuilder.reset();
+	private Athlete parseAthlete(AthleteBuilder builder, String line) {
+		builder.reset();
 		String[] fields = line.split(",");
 		String[] stringResults = new String[Event.values().length];
 		System.arraycopy(fields, 3, stringResults, 0, Event.values().length);
-		Parser parser = new Parser();
-		double[] doubleResults = parser.parseResults(stringResults);
+		double[] doubleResults = parseResults(stringResults);
 		int i = 0;
 		for (Event e : Event.values()) {
-			athleteBuilder.addResult(e, doubleResults[i++]);
+			builder.addResult(e, doubleResults[i++]);
 		}
-		return athleteBuilder.name(parser.parseName(fields[0])).date(parser.parseDate(fields[1])).country(fields[2]).build();
+		return builder.name(parseName(fields[0])).date(parseDate(fields[1])).country(fields[2]).build();
 	}
 
-	public void close() throws IOException {
-		if (in != null)
-			in.close();
+	private Date parseDate(String date) {
+		DateFormat df = DateFormat.getDateInstance();
+		try {
+			return df.parse(date);
+		}
+		catch (ParseException e) {
+			return null;
+		}
+	}
+
+	private double[] parseResults(String[] results) {
+		double[] numbers = new double[results.length];
+		for (int i = 0; i < results.length; i++) {
+			if (results[i].contains(":")) {
+				String[] minutes = results[i].split(":");
+				numbers[i] = Integer.parseInt(minutes[0]) * 60 + Double.parseDouble(minutes[1]);
+			}
+			else if (results.length > i)
+				numbers[i] = Double.parseDouble(results[i]);
+		}
+		return numbers;
+	}
+
+	private String parseName(String name) {
+		// remove all quotation marks from the string and replace them with
+		// spaces, then remove leading and trailing spaces
+		return name.replace('"', ' ').trim();
 	}
 
 }

@@ -1,5 +1,7 @@
 package net.azib.java.students.t030633.homework.view.out;
 
+import java.io.IOException;
+
 /**
  * Outputs athletes to console using XSL transformation.
  * 
@@ -7,11 +9,13 @@ package net.azib.java.students.t030633.homework.view.out;
  */
 public class Console extends OutputTransformer {
 
-	static final String LN = System.getProperty("line.separator");
-	static final String BEGIN_MSG = LN + "-=[Athletes]=- " + LN;
-
 	public Console() {
-		super(Console.class.getResource("athletes.console.xsl"), System.out);
+		super(Console.class.getResource("athletes.console.xsl"));
+	}
+
+	@Override
+	public void init() throws IOException {
+		this.output = System.out;
 	}
 
 }
