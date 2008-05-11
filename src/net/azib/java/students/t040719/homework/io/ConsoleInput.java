@@ -134,7 +134,9 @@ public class ConsoleInput implements DataInput {
 		String line="";
 		do{
 			try {
-				dob = df.parse(line = input.readLine());
+				line = input.readLine();
+				if (line != null)
+					dob = df.parse(line);
 			}
 			catch (ParseException e){
 				out.println("'" + line + "'" + INVALID_DATE);
