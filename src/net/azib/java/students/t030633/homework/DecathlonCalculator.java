@@ -41,19 +41,19 @@ public class DecathlonCalculator {
 	public static String inputProperty;
 	public static String outputProperty;
 
-	private Input input;
-	private Output output;
-	private PrintStream out; // For printing messages to user
+	private static Input input;
+	private static Output output;
+	private static PrintStream out; // For printing messages to user
 
 	public DecathlonCalculator() {
 		this(System.out); // PrintStream to user defaults to System.out
 	}
 
 	DecathlonCalculator(PrintStream out) {
-		this.out = out;
+		DecathlonCalculator.out = out;
 	}
 
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		DecathlonCalculator calc = new DecathlonCalculator();
 		if (calc.init(args)) {
 			try {
