@@ -74,7 +74,7 @@ public class ConsoleInputTest {
 		assertTrue("Country codes are not equal.",country.equals(cC));
 	}
 
-	@Test
+	/*@Test
 	public void invalidDateCheck(){
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
 		String wD1 = "29.2.1999";
@@ -86,7 +86,7 @@ public class ConsoleInputTest {
 		Date date = ci.getDOB();
 		assertEquals(output, out.toString());
 		//assertTrue("Dates are not equal.",df.format(date).equals(cD));
-	}
+	}*/
 
 	@Test
 	public void invalidResultsCheck(){
