@@ -1,8 +1,8 @@
 package net.azib.java.students.t040719.homework;
 
-import net.azib.java.students.t040719.homework.io.*;
+import net.azib.java.students.t040719.homework.io.InputMethod;
+import net.azib.java.students.t040719.homework.io.OutputMethod;
 
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;
@@ -10,9 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Decathlon
+ * Decathlon - the main program for the homework
  *
- * @author romi
+ * @version 1.0
+ * @author Romi Agar
  */
 public class Decathlon {
 	private static final Logger LOG = Logger.getLogger(Decathlon.class.getSimpleName());			
@@ -25,23 +26,33 @@ public class Decathlon {
 	private String inputParam = "";
 	private String outputParam = "";
 	private List<Athlete> athletes;
-	//private DataInput inp;
 	
 	
 	public Decathlon() {
 		this(System.out);
 	}
 	
+	/**
+	 * Constructor for testing purposes
+	 * @param out output stream
+	 */
 	Decathlon(PrintStream out){
 		this.out = out;
 	}
 	
+	/**
+	 * Prints the program usage if incorrect arguments given
+	 */
 	private void printUsage(){
 		out.println(WRONG_ARGS);
 		out.println(USAGE);
 	}
 	
-	public void processInput(String... args) throws IOException{
+	/**
+	 * Processes the actual command line arguments and executes the program
+	 * @param args command-line arguments
+	 */
+	void processInput(String... args){
 		if (args.length == 2){
 			if (args[0].equals("-console") && args[1].equals("-console")){
 				im = InputMethod.K;
@@ -103,6 +114,10 @@ public class Decathlon {
 		om.getOutput().outputResults(athletes, outputParam);
 	}
 	
+	/**
+	 * The main entry point to the program
+	 * @param args command-line arguments
+	 */
 	public static void main(String... args) {
 		try{
 			new Decathlon().processInput(args);

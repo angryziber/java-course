@@ -3,9 +3,10 @@ package net.azib.java.students.t040719.homework;
 
 
 /**
- * DecathlonConstant
+ * DecathlonConstant - enum for holdin constants needed for calculating event results
  *
- * @author romi
+ * @version 1.0
+ * @author Romi Agar
  */
 public enum DecathlonConstants {
 	HUNDRED_M(25.437, 18.0, 1.81, 1, true, "100 m sprint"),
@@ -35,19 +36,34 @@ public enum DecathlonConstants {
 		this.name = name;
     }
     
+    /**
+     * @return returns the name of the event
+     */
     public String getName(){
     	return toString();
     }
 
+	/**
+	 * Overrides the default toString() method
+	 * in order to get more human readable output
+	 */
 	@Override
 	public String toString() {
 		return name;
 	}
     
+	/**
+	 * @return returns the next event
+	 */
 	public DecathlonConstants next() {
 		return values()[(this.ordinal() + 1) % values().length];
 	}
     
+	/**
+	 * Calculates event points for given event and results
+	 * @param rawResults event results in the format of 0.00f
+	 * @return returns the event points
+	 */
 	public float calculateEventPoints(float rawResults){
 		if (runningEvent)
 			return (float)(A*Math.pow(B-rawResults*multiplier, C));
@@ -55,6 +71,11 @@ public enum DecathlonConstants {
 			return (float)(A*Math.pow(rawResults*multiplier-B, C));
 	}
 	
+	/**
+	 * Returns the event by its ordinal position
+	 * @param i ordinal position (0...9)
+	 * @return returns the event on position i
+	 */
 	public static DecathlonConstants getOrdinal(int i){
 		i %= values().length;
 		return values()[i];

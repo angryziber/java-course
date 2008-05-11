@@ -2,7 +2,6 @@ package net.azib.java.students.t040719.homework.io;
 
 import net.azib.java.students.t040719.homework.Athlete;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -12,7 +11,7 @@ import java.util.List;
  */
 public class FileOutput implements DataOutput {
 
-	public void outputResults(List<Athlete> results, String... parameter) throws IOException {
+	public void outputResults(List<Athlete> results, String... parameter){
 		// TODO Auto-generated method stub
 		
 	}

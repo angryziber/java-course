@@ -18,5 +18,5 @@ public interface DataOutput {
 	 * @return list of decathlon results
 	 * @throws IOException if input fails somehow
 	 */
-	void outputResults(List<Athlete> results, String... parameter) throws IOException;
+	void outputResults(List<Athlete> results, String... parameter);
 }

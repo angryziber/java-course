@@ -12,9 +12,11 @@ import org.jdom.input.SAXBuilder;
 
 
 /**
- * Country
- *
- * @author romi
+ * Country - class that holds all the possible valid country codes in ISO 2-letter format
+ * Fetches the results from an xml file
+ * 
+ * @version 1.0
+ * @author Romi Agar
  */
 public class ISOCountry {
 	private static Map<String,String> countries = new TreeMap<String,String>();
@@ -31,10 +33,20 @@ public class ISOCountry {
 		}
 	}
 	
+	/**
+	 * Checks if given string is a valid country code
+	 * @param isoCode country code string
+	 * @return true if is valid, false otherwise
+	 */
 	public static boolean isValidCountryCode(String isoCode){
 		return ISOCountry.countries.containsKey(isoCode);
 	}
 	
+	/**
+	 * Returns a country name for given iso country code
+	 * @param isoCode country code string
+	 * @return country name if isoCode is valid, empty string otherwise
+	 */
 	public static String getCountryName(String isoCode){
 		if (ISOCountry.isValidCountryCode(isoCode))
 			return ISOCountry.countries.get(isoCode);
@@ -42,7 +54,7 @@ public class ISOCountry {
 			return "";
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") // Needed because of generics
 	private static void loadCountries() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = builder.build(ISOCountry.class.getResourceAsStream("xml/countries.xml"));
