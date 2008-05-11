@@ -1,15 +1,10 @@
 package net.azib.java.lessons.db;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
-
-import javax.sql.DataSource;
 
 /**
  * JDBCDemo
@@ -17,20 +12,12 @@ import javax.sql.DataSource;
  * @author anton
  */
 public class JDBCDemo {
-	
-	public static String someFunc(String x) {
-		return "<" + x + ">"; 
-	}
-	
-	public static void main(String[] args) throws SQLException {
+		
+	public static void main(String[] args) throws SQLException {		
+		new FakeDB().prepare();
+		
 		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
 		System.out.println(conn.getMetaData().getDatabaseProductName() + ", v" + conn.getMetaData().getDatabaseProductVersion());
-		
-		Statement stmt = conn.createStatement();
-		stmt.execute("create table persons (id integer, name varchar, age integer)");
-		stmt.execute("insert into persons values (1, 'John Doe', 25)");
-		stmt.execute("insert into persons values (2, 'Jaan Tamm', 43)");
-		stmt.execute("create alias some_func for \"" + JDBCDemo.class.getName() + ".someFunc\"");
 		
 		PreparedStatement personStatement = conn.prepareStatement("select * from persons where id = ?");
 

@@ -34,7 +34,7 @@ public class Person {
 		return name.toString();
 	}
 	
-	private void setName(String name) {
+	void setName(String name) {
 		this.name = new Name(name);
 	}
 	
@@ -51,12 +51,18 @@ public class Person {
 		return sex;
 	}
 	
-	private void setSexAsString(String sex) {
+	void setSexAsString(String sex) {
 		this.sex = Sex.valueOf(sex);
 	}
 
-	private String getSexAsString() {
+	String getSexAsString() {
 		return this.sex.toString();
+	}
+	
+	public String toString() {
+		return "Name: " + getName() + "\n" +
+			   "Age:  " + getAge() + "\n" +
+			   "Sex:  " + getSex() + "\n";
 	}
 }
 

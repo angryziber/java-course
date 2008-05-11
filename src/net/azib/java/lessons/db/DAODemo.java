@@ -9,18 +9,19 @@ import java.sql.SQLException;
  */
 public class DAODemo {
 	public static void main(String[] args) throws SQLException {
-		ActiveRecordDemo.prepareDB();		
+		new FakeDB().prepare();
+		
 		PersonDAO dao1 = new JDBCPersonDAO();
 		PersonDAO dao2 = new HibernatePersonDAO();
 		
 		Person person1 = dao1.loadPerson(1);
-		ActiveRecordDemo.displayPerson(person1);
+		System.out.println(person1.toString());
 		
 		Person person2 = dao2.loadPerson(2);
-		ActiveRecordDemo.displayPerson(person2);
+		System.out.println(person2.toString());
 
 		for (Person p : dao2.findAllPersons()) {
-			ActiveRecordDemo.displayPerson(p);
+			System.out.println(p.toString());
 		}
 		
 		// dao.savePerson(person);
