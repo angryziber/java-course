@@ -137,6 +137,10 @@ public class ConsoleInput implements DataInput {
 				line = input.readLine();
 				if (line != null)
 					dob = df.parse(line);
+				else{
+					LOG.log(Level.SEVERE, "Input is NULL.");
+					return new Date();
+				}
 			}
 			catch (ParseException e){
 				out.println("'" + line + "'" + INVALID_DATE);
