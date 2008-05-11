@@ -43,19 +43,14 @@ public class DecathlonCalculator {
 
 	private static Input input;
 	private static Output output;
-	private static PrintStream out; // For printing messages to user
+	private static PrintStream out = System.out; // For printing messages to user
 
-	public DecathlonCalculator() {
-		this(System.out); // PrintStream to user defaults to System.out
-	}
-
-	DecathlonCalculator(PrintStream out) {
-		DecathlonCalculator.out = out;
+	static void setPrintStream(PrintStream set) {
+		DecathlonCalculator.out = set;
 	}
 
 	public static void main(String[] args) {
-		DecathlonCalculator calc = new DecathlonCalculator();
-		if (calc.init(args)) {
+		if (init(args)) {
 			try {
 				List<Athlete> athletes = input.read(new DecathlonAthleteBuilder(new DecathlonChecker(), new AddingCalculator()));
 				Collections.sort(athletes);
@@ -86,7 +81,7 @@ public class DecathlonCalculator {
 	 *            arguments to the program
 	 * @return true if arguments are formatically correct
 	 */
-	boolean init(String[] args) {
+	static boolean init(String[] args) {
 		if ((args.length > 4) || (args.length < 2)) {
 			return false; // Filter out wrong number of arguments.
 		}
