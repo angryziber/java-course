@@ -156,7 +156,7 @@ public class ShowResults {
 		ArrayList<Integer> results = SortingID.SortByID(result_map1, result_map2, result_map3, numEvent);
 
 		// TODO DELETE THIS !
-		File f1 = new File("C:\\dest.csv");
+		//File f1 = new File("C:\\dest.csv");
 
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -169,7 +169,7 @@ public class ShowResults {
 		 * Creating new file for writing
 		 */
 		try {
-			FileWriter fw = new FileWriter(f1);
+			//FileWriter fw = new FileWriter(f1);
 
 			// Print competitions data
 			Element comp_data = document.createElement("competitions_data");
@@ -202,7 +202,8 @@ public class ShowResults {
 						el_c[5 * i].appendChild(el_c[5 * i + j]);
 					}
 				}
-				//el_c[5 * i].appendChild(document.createTextNode(result_map2.get(i)[0]));
+				// el_c[5 *
+				// i].appendChild(document.createTextNode(result_map2.get(i)[0]));
 				comp_data.appendChild(el_c[5 * i]);
 				// fw.write(result_map2.get(i)[j] + ",");
 				// fw.write("\n");
@@ -220,41 +221,108 @@ public class ShowResults {
 			int el_a_counter = 0;
 			for (int i = 0; i < results.size(); i++) {
 
-				el_a[el_a_counter] = document.createElement("data");
-				el_a[el_a_counter].appendChild(document.createTextNode(String.valueOf(i + 1)));
-				athletes_data.appendChild(el_a[el_a_counter]);
-				el_a_counter++;
+				el_a[6 * i] = document.createElement("athlet");
+				el_a[6 * i].setAttribute("place", String.valueOf(i + 1));
+				athletes_data.appendChild(el_a[6 * i]);
+
 				// fw.write((i + 1) + ",");
-				fw.write((int) CountAthletResult.CountResultByID(result_map3, (int) results.get(i), numEvent) + ",");
+				el_a[6 * i + 1] = document.createElement("score");
+				el_a[6 * i + 1].appendChild(document.createTextNode(Double.toString(CountAthletResult.CountResultByID(
+						result_map3, (int) results.get(i), numEvent))));
+				el_a[6 * i].appendChild(el_a[6 * i + 1]);
+				// fw.write((int) CountAthletResult.CountResultByID(result_map3,
+				// (int) results.get(i), numEvent) + ",");
 				for (int j = 0; j < 4; j++) {
-					fw.write(result_map1.get(results.get(i) - 1)[j] + ",");
+					switch (j) {
+					case 0:
+						el_a[6 * i + j + 2] = document.createElement("id");
+						break;
+					case 1:
+						el_a[6 * i + j + 2] = document.createElement("name");
+						break;
+					case 2:
+						el_a[6 * i + j + 2] = document.createElement("dob");
+						break;
+					case 3:
+						el_a[6 * i + j + 2] = document.createElement("country_code");
+						break;
+					}
+
+					el_a[6 * i + j + 2].appendChild(document.createTextNode(result_map1.get(results.get(i) - 1)[j]));
+					el_a[6 * i].appendChild(el_a[6 * i + j + 2]);
+					// fw.write(result_map1.get(results.get(i) - 1)[j] +
+					// ",");
 
 				}
-				fw.write("\n");
+				// fw.write("\n");
 
 				// Print athlete data from results table
+				Element results_data = document.createElement("results_data");
+				el_a[6 * i].appendChild(results_data);
+				
+				Element[] el_r = new Element[10000];
 				for (int k = 0; k < result_map3.size(); k++) {
 					if (Double.parseDouble(result_map3.get(k)[1]) == (double) results.get(i)) {
-						for (int j = 2; j < 13; j++)
-							fw.write(result_map3.get(k)[j] + ",");
+						for (int j = 2; j < 13; j++) {
+							switch (j) {
+							case 2:
+								el_r[13 * k + j - 2] = document.createElement("competition_id");
+								break;
+							case 3:
+								el_r[13 * k + j - 2] = document.createElement("race_100m");
+								break;
+							case 4:
+								el_r[13 * k + j - 2] = document.createElement("long_jump");
+								break;
+							case 5:
+								el_r[13 * k + j - 2] = document.createElement("shot_put");
+								break;
+							case 6:
+								el_r[13 * k + j - 2] = document.createElement("high_jump");
+								break;
+							case 7:
+								el_r[13 * k + j - 2] = document.createElement("race_400m");
+								break;
+							case 8:
+								el_r[13 * k + j - 2] = document.createElement("hurdles_110m");
+								break;
+							case 9:
+								el_r[13 * k + j - 2] = document.createElement("discus_throw");
+								break;
+							case 10:
+								el_r[13 * k + j - 2] = document.createElement("pole_vault");
+								break;
+							case 11:
+								el_r[13 * k + j - 2] = document.createElement("javelin_throw");
+								break;
+							case 12:
+								el_r[13 * k + j - 2] = document.createElement("race_1500m");
+								break;
+							}
+							el_r[13 * k + j - 2].appendChild(document.createTextNode(result_map3.get(k)[j]));
+							results_data.appendChild(el_r[13 * k + j - 2]);
+						}
+						// fw.write(result_map3.get(k)[j] + ",");
 
-						fw.write("\n");
+						//fw.write("\n");
 					}
 				}
 				System.out.println();
+
+				el_a_counter++;
 			}
 
 			// Close the file
-			fw.close();
+			//fw.close();
 		}
 		catch (Exception e) {
-			System.out.println("File exception");
+			System.out.println("Exception");
 		}
 
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(System.out);
+		StreamResult result = new StreamResult("c:\\results.xml");	//System.out
 		transformer.transform(source, result);
 
 	}
