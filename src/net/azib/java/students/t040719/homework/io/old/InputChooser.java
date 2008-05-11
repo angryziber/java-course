@@ -1,4 +1,6 @@
-package net.azib.java.students.t040719.homework.io;
+package net.azib.java.students.t040719.homework.io.old;
+
+import net.azib.java.students.t040719.homework.io.InputMethod;
 
 import java.io.PrintStream;
 import java.util.Scanner;

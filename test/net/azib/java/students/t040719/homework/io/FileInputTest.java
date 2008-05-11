@@ -1,11 +1,8 @@
 package net.azib.java.students.t040719.homework.io;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.util.Scanner;
 
 import org.junit.Test;
 
@@ -16,22 +13,41 @@ import org.junit.Test;
  * @author romi
  */
 public class FileInputTest {
+	private int errorCode;
 	
-	private String processInput(String s) throws IOException {
+	/*private String processInput(String s) throws IOException {
 		Scanner input = new Scanner(s);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		new FileInput(input, new PrintStream(out)).getResults();
+		new FileInput().getResults();
 		return out.toString();
 	}
 	
 	private void assertOutput(String expected, String input) throws IOException {
 		assertEquals(FileInput.INSTRUCTIONS_TEXT + InputChooser.NL + expected + InputChooser.NL, processInput(input));
+	}*/
+	@Test
+	public void noFileGiven() throws IOException{
+		FileInput fi = new FileInput(){
+	         @Override
+	         public void exit(int errorCode) {
+	        	 FileInputTest.this.errorCode = errorCode;
+	         }
+		};
+		fi.getResults();
+		assertEquals(1,errorCode);
 	}
 	
 	@Test
 	public void fileNotFound() throws IOException{
 		String file = "C:\\tester";
-		assertOutput("'" + file + "'" + FileInput.ERROR_NO_FILE_TEXT, file);
+		FileInput fi = new FileInput(){
+	         @Override
+	         public void exit(int errorCode) {
+	        	 FileInputTest.this.errorCode = errorCode;
+	         }
+		};
+		fi.getResults(file);
+		assertEquals(2,errorCode);
 	}
 	
 }

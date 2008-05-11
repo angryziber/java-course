@@ -1,6 +1,9 @@
-package net.azib.java.students.t040719.homework.io;
+package net.azib.java.students.t040719.homework.io.old;
 
 import static org.junit.Assert.assertEquals;
+
+import net.azib.java.students.t040719.homework.io.InputMethod;
+import net.azib.java.students.t040719.homework.io.old.InputChooser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

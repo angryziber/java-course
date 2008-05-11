@@ -2,23 +2,18 @@ package net.azib.java.students.t040719.homework.io;
 
 import net.azib.java.students.t040719.homework.Athlete;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.util.Arrays;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FileInput - a class for obtaining decathlon results from a CVS file
@@ -27,85 +22,98 @@ import java.util.Scanner;
  * @author Romi Agar
  */
 public class FileInput implements DataInput {
+	private static final Logger LOG = Logger.getLogger(DataInput.class.getSimpleName());			
 
-	public static final String INSTRUCTIONS_TEXT = "Please enter path to the CSV file:";
-	public static final String ERROR_NO_FILE_TEXT = " cannot be found.";
-	public static final String INVALID_DATA_TEXT = " contains data in invalid format.";
-	public static final String INVALID_FILENAME_TEXT = " is not valid file name.";
-	private final Scanner input;
-	private final PrintStream out;
-	private File dataSource;
+	static final String ERROR_NO_FILE_TEXT = " cannot be found.";
+	static final String INVALID_DATA_TEXT = " contains data in invalid format.";
+	static final String INVALID_FILENAME_TEXT = " is not valid file name.";
+	static final int ERROR_CODE_NO_ARGS = 1;
+	static final int ERROR_CODE_NO_FILE = 2;
+	static final int ERROR_CODE_ENCODING = 3;
+	static final int ERROR_CODE_READ_FILE = 4;
+	static final int ERROR_CODE_CLOSING = 5;
+	private File dataSource = null;
 
-	/**
-	 * @param input
-	 * @param printStream
-	 */
-	public FileInput(){
-		this(new Scanner(System.in), System.out);
-	}
-	
-	FileInput(Scanner input, PrintStream out) {
-		this.input = input;
-		this.out = out;
-	}
-	
-	boolean initiateFile(){
-		out.println(INSTRUCTIONS_TEXT);
-		String fileName = "";
-		if (input.hasNext())
-			 fileName = input.next();
-		/*while(!input.hasNext("[!\\.a-zA-Z_0-9:\\\\]+")){
-			out.println("'" + input.next() + "'" + INVALID_FILENAME_TEXT) ;
-			out.println(INSTRUCTIONS_TEXT);
-		}*/
-
+	boolean initiateFile(String fileName){
 		dataSource = new File(fileName);
 		if (!dataSource.exists()){
-			out.println("'" + dataSource + "'" + ERROR_NO_FILE_TEXT);
+			LOG.severe("'" + dataSource + "'" + ERROR_NO_FILE_TEXT);
+			dataSource = null;
 			return false;
 		}
 		return true;
 	}
 	
-	public List<Athlete> getResults() throws IOException {
-		if (!initiateFile())
-			return null;
-		String line = "";
-		String name = "";
-		String countryCode = "";
-		Date birthday = null;
-		String[] elements = null;
-		String[] sResults = null;
-		float[] results = null;
-		BufferedReader br = null;
-		//PrintStream ps = null;
-		//BufferedWriter ou = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("D:\\out.txt")),"UTF8"));
-		//ps = new PrintStream(System.out, true, "UTF-8");
-		try {
-			
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(dataSource), "UTF-8"));
-			while ((line = br.readLine()) != null) {
-				elements = line.split(",");
-				if (elements.length == 13){
-					name = InputParser.parseName(elements[0]);
-					birthday = InputParser.parseDateString(elements[1]);
-					countryCode = InputParser.parseCountryCode(elements[2]);
-					System.arraycopy(elements, 3, sResults, 0, 10);
-					results = InputParser.parseEventResults(sResults);
-				}
-			}
-			System.out.println("done");
-		}
-		finally{
-			br.close();
-		}
-			//throw new IOException();
-		return null;
+	void exit(int errorCode) {
+		   System.exit(errorCode);
 	}
 	
-	public static void main(String[] args) throws IOException {
-		FileInput fi = new FileInput();
-		fi.getResults();
+	public List<Athlete> getResults(String... parameter) {
+		if (parameter.length == 0){
+			LOG.severe("No input file name given.");			
+			exit(ERROR_CODE_NO_ARGS);
+		}else if (!initiateFile(parameter[0]))
+			exit(ERROR_CODE_NO_FILE);
+		if (dataSource != null){
+			List<Athlete> athletes = new ArrayList<Athlete>();
+			
+			String line = "";
+			String name = "";
+			String countryCode = "";
+			Date birthday = null;
+			String[] elements = null;
+			String[] sResults = new String[10];
+			float[] results = null;
+			BufferedReader br = null;
+			//PrintStream ps = null;
+			//BufferedWriter ou = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("D:\\out.txt")),"UTF8"));
+			//ps = new PrintStream(System.out, true, "UTF-8");
+			try {
+				
+				br = new BufferedReader(new InputStreamReader(new FileInputStream(dataSource), "UTF-8"));
+				while ((line = br.readLine()) != null) {
+					elements = line.split(",");
+					if (elements.length == 13){
+						System.out.println(line);
+						name = InputParser.parseName(elements[0]);
+						birthday = InputParser.parseDateString(elements[1]);
+						countryCode = InputParser.parseCountryCode(elements[2]);
+						System.arraycopy(elements, 3, sResults, 0, 10);
+						results = InputParser.parseEventResults(sResults);
+						Athlete athlete = new Athlete(name,birthday,countryCode, results);
+						athletes.add(athlete);
+					}else
+						LOG.warning("Wrong number of elements on line. Skipping this.");
+				}
+				System.out.println("done");
+			}
+			catch (UnsupportedEncodingException e) {
+				LOG.log(Level.SEVERE, "Encoding problem with file: " + dataSource, e);
+				exit(ERROR_CODE_ENCODING);
+			}
+			catch (FileNotFoundException e) {
+				LOG.log(Level.SEVERE, "'" + dataSource + "'" + ERROR_NO_FILE_TEXT, e);
+				exit(ERROR_CODE_NO_FILE);
+			}
+			catch (IOException e) {
+				LOG.log(Level.SEVERE, "Could not read from file: " + dataSource, e);
+				exit(ERROR_CODE_READ_FILE);
+			}
+			finally{
+				if (br != null){					
+					try {
+						br.close();
+					}
+					catch (IOException e) {
+						LOG.log(Level.SEVERE, "Could not close file: " + dataSource, e);
+						exit(ERROR_CODE_CLOSING);
+					}
+				}
+			}
+			
+			return athletes;
+		} else
+			return null;
 	}
-
+	
 }

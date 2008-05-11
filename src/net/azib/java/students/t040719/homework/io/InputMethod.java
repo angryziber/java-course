@@ -8,8 +8,8 @@ package net.azib.java.students.t040719.homework.io;
  * @author Romi Agar
  */
 public enum InputMethod {
-	K("Keyboard", InteractiveInput.class),
-	F("CSV file", FileInput.class),
+	K("Console", ConsoleInput.class),
+	C("CSV file", FileInput.class),
 	D("MySQL database", DatabaseInput.class);
 	
 	private final String source;
@@ -24,7 +24,7 @@ public enum InputMethod {
 		return source;
 	}
 	
-	public DataInput getCopier() {
+	public DataInput getInput() {
 		try {
 			return inputClass.newInstance();
 		}

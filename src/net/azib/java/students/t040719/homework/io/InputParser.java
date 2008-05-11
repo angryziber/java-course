@@ -5,6 +5,8 @@ import net.azib.java.students.t040719.homework.ISOCountry;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
@@ -14,6 +16,8 @@ import java.util.regex.Pattern;
  * @author Romi Agar
  */
 public class InputParser {
+	private static final Logger LOG = Logger.getLogger(InputParser.class.getSimpleName());
+	
 	protected static final String DATE_FORMAT = "dd.MM.yyyy"; 
 	private static final String REGEX_LONG = "([1-9]+:|)([0-5]|)[0-9]\\.[0-9]{2}";
 	private static final String REGEX = "([0-5]|)[0-9]\\.[0-9]{2}";
@@ -54,8 +58,7 @@ public class InputParser {
 			d = new SimpleDateFormat(DATE_FORMAT).parse(dateString);
 		}
 		catch (ParseException e) {
-			System.err.println("Error parsing date");
-			//throw new Exception();
+			LOG.log(Level.WARNING, "Error parsing date", e);
 		}
 		return d;
 	}
@@ -79,23 +82,29 @@ public class InputParser {
 	}
 	
 	public static float[] parseEventResults(String... rawResults){
-		if (rawResults.length != 10)
-			return null;//throw new IllegalArgumentException("Wrong number of raw results!");
+		if (rawResults.length != 10){
+			LOG.log(Level.SEVERE, "Event results cound is not 10.");			
+			return null;
+		}
 		float[] results = new float[10];
 		for(int i=0; i<10; i++){
 			if (i==4 || i==9)
-				if(!rawResults[i].matches(REGEX_LONG))
-					return null; //throw new IllegalArgumentException("110 m hurdles parameter in wrong format!");
+				if(!rawResults[i].matches(REGEX_LONG)){
+					LOG.log(Level.SEVERE, "Value '" + rawResults[i] + "' does not match regex '" + REGEX_LONG + "'");
+					return null;
+				}
 				else
 					results[i] = parseLongTime(rawResults[i]);
 			else
 				try{
-					if(!rawResults[i].matches(REGEX))
+					if(!rawResults[i].matches(REGEX)){
+						LOG.log(Level.SEVERE, "Value '" + rawResults[i] + "' does not match regex '" + REGEX + "'");
 						return null;
+					}
 					results[i] = Float.parseFloat(rawResults[i]);
 				}
 				catch(NumberFormatException e){
-					System.err.println("Error parsing number");
+					LOG.log(Level.SEVERE, "Error parsing number: " + rawResults[i], e);
 					return null;
 				}
 		}

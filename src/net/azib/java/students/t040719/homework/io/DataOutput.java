@@ -6,17 +6,17 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * DataInput - an interface for obtaining decathlon results
+ * DataInput - an interface for returning the results
  *
  * @version 1.0
  * @author Romi Agar
  */
-public interface DataInput {
+public interface DataOutput {
 	/**
 	 * Gets the decathlon results from various inputs.
 	 * 
 	 * @return list of decathlon results
 	 * @throws IOException if input fails somehow
 	 */
-	List<Athlete> getResults(String... parameter);
+	void outputResults(List<Athlete> results, String... parameter) throws IOException;
 }
