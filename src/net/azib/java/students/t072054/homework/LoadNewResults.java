@@ -1,5 +1,6 @@
 package net.azib.java.students.t072054.homework;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -128,11 +129,23 @@ public class LoadNewResults {
 				//result_map2 = new LinkedHashMap<Integer, String[]>();
 				//result_map3 = new LinkedHashMap<Integer, String[]>();
 
-				// Establish the connection to the database
-				String url = "jdbc:mysql://srv.azib.net:3306/decathlon";
-				conn = DriverManager.getConnection(url, "java", "java");
-				Statement stmt = conn.createStatement();
+				// Open the file
+				File f1 = /*new File(fileName);*/ new File("C:\\source.csv");
 
+				try{
+					
+				}
+				catch (Exception e){
+					System.out.println("File exception");
+				}
+				
+				//while (f1.)
+				
+				
+				
+				
+				
+				
 				PreparedStatement personStatement = conn.prepareStatement("SELECT * FROM athletes WHERE id > ?;");
 
 				// Optionally you can set some parameter for personStatment
