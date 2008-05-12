@@ -88,5 +88,15 @@ public class EventTest {
 		Event e = Event.SHOT;
 		assertEquals(384, e.points(8.3D));
 	}
+	
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.Event#points(double)}.
+	 */
+	@Test
+	public void calculatePointsForLongJump() {
+		Event e = Event.LONG;
+		assertEquals(382, e.points(5.00D));
+	}
 
 }

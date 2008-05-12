@@ -1,6 +1,5 @@
 package net.azib.java.students.t030633.homework.view.out;
 
-import net.azib.java.students.t030633.homework.DecathlonCalculator;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.Event;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -25,6 +24,8 @@ import org.jdom.output.XMLOutputter;
 public class XML implements Output {
 
 	private OutputStream output = null;
+	private String fileName;
+	private String filePath;
 
 	public XML() {
 	}
@@ -33,12 +34,19 @@ public class XML implements Output {
 		this.output = out;
 	}
 
+	/**
+	 * @param athletes -
+	 *            a List of athletes to put in a Document
+	 * @return JDOM Document for later generation
+	 */
 	private Document formDocument(List<Athlete> athletes) {
 
 		Element root = new Element("competition");
 		Document doc = new Document(root);
 
-		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, new Locale(System.getProperty("user.country")));
+		// User probably expects to see dates in local format (short, because
+		// only the birth date matters)
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 
 		for (Athlete athlete : athletes) {
 			Element athleteElement = new Element("athlete");
@@ -49,10 +57,11 @@ public class XML implements Output {
 			athleteElement.addContent(new Element("birthdate").setText(df.format(athlete.getBirthDate())));
 
 			Element resultsElement = new Element("results");
-			for (Event event : athlete.getResults().keySet()) {
+			Map<Event, Double> results = athlete.getResults();
+			for (Event event : results.keySet()) {
 				Element resultElement = new Element("result");
 				resultElement.addContent(new Element("event").setText(event.getName()));
-				resultElement.addContent(new Element("performance").setText(String.valueOf(athlete.getResults().get(event))));
+				resultElement.addContent(new Element("performance").setText(String.valueOf(results.get(event))));
 				resultsElement.addContent(resultElement);
 			}
 			athleteElement.addContent(resultsElement);
@@ -67,21 +76,26 @@ public class XML implements Output {
 
 	public void write(List<Athlete> athletes) throws IOException {
 
-		if (this.output == null) {
-			if (DecathlonCalculator.outputProperty == null)
+		if (output == null) {
+			if (fileName == null)
 				throw new IOException("Output file not specified.");
-			this.output = new FileOutputStream(new File(DecathlonCalculator.class.getResource(".").getPath(),
-					DecathlonCalculator.outputProperty));
+			output = new FileOutputStream(new File(filePath, fileName));
 		}
 
 		try {
-			new XMLOutputter(Format.getRawFormat().setIndent("  ").setLineSeparator(System.getProperty("line.separator")))
+			// Using JDOM to generate XML
+			new XMLOutputter(Format.getPrettyFormat().setIndent("  ").setLineSeparator(System.getProperty("line.separator")))
 					.output(formDocument(athletes), output);
 		}
 		catch (IOException e) {
 			throw new IOException("XML Outputter error.");
 		}
 
+	}
+
+	public void setParameters(String... param) {
+		fileName = param[1]; // Parameter 1 should be a file name
+		filePath = param[0]; // Parameter 0 should be file path
 	}
 
 }

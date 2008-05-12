@@ -15,7 +15,8 @@ public class Console extends OutputTransformer {
 
 	@Override
 	public void init() throws IOException {
-		this.output = System.out;
+		if (this.output == null)
+			this.output = System.out;
 	}
 
 }

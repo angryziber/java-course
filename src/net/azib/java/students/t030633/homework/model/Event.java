@@ -8,9 +8,9 @@ package net.azib.java.students.t030633.homework.model;
 public enum Event {
 
 	R100M("100 m dash", 25.437D, 18.0D, 1.81D), // 100 m dash
-	LONG("Long jump", 0.14354D, 220D, 1.40D),  // long jump
-	SHOT("Shot put", 51.39D, 1.5D, 1.05D),  // shot put
-	HIGH("High jump", 0.8465D, 75D, 1.42D),  // high jump
+	LONG("Long jump", 0.14354D, 220D, 1.40D), // long jump
+	SHOT("Shot put", 51.39D, 1.5D, 1.05D), // shot put
+	HIGH("High jump", 0.8465D, 75D, 1.42D), // high jump
 	R400M("400 m dash", 1.53775D, 82D, 1.81D), // 400 m dash
 	R110MH("110 m high hurdles", 5.74352D, 28.5D, 1.92D), // 110 m high hurdles
 	DISCUS("Discus throw", 12.91D, 4.0D, 1.1D), // discus throw
@@ -20,7 +20,7 @@ public enum Event {
 
 	private final double A, B, C; // calculation constants
 	private final String name;
-	
+
 	Event(String name, double A, double B, double C) {
 		this.name = name;
 		this.A = A;
@@ -29,7 +29,9 @@ public enum Event {
 	}
 
 	/**
-	 * @param performance - double, performance in the event
+	 * @param performance -
+	 *            double, performance in the event 
+	 *            all distances in meters, all times in seconds
 	 * @return int - points gained from the performance
 	 */
 	public int points(double performance) {
@@ -40,6 +42,9 @@ public enum Event {
 			// Points = A*(B-P)^C for Running Events
 			return (int) Math.floor(A * Math.pow((B - performance), C));
 		else
+			// formula assumes cm units for three events
+			if(name().equals("LONG") || name().equals("HIGH") || name().equals("POLE")) 
+				performance = performance * 100;
 			// Points = A*(P-B)^C for Field Events
 			return (int) Math.floor(A * Math.pow((performance - B), C));
 	}

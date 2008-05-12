@@ -22,4 +22,10 @@ public interface Input {
 	 */
 	List<Athlete> read(AthleteBuilder builder) throws IOException;
 
+	
+	/**
+	 * @param param - String parameters for input
+	 */
+	void setParameters(String... param);
+	
 }

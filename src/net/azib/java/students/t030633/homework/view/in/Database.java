@@ -1,6 +1,5 @@
 package net.azib.java.students.t030633.homework.view.in;
 
-import net.azib.java.students.t030633.homework.DecathlonCalculator;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
@@ -10,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,11 +18,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Reads athletes from a database.
+ * Reads decathlon athletes from a database.
  * 
  * @author t030633
  */
 public class Database implements Input {
+
+	private String search;
+	private String propertiesPath;
 
 	private Connection getConnection(File properties) throws IOException {
 		try {
@@ -68,13 +69,12 @@ public class Database implements Input {
 	private List<Athlete> parseAthletes(AthleteBuilder builder, ResultSet results) throws SQLException {
 		List<Athlete> list = new LinkedList<Athlete>();
 		while (results.next()) {
-			builder.reset();
 			builder.name(results.getString("name"));
 			builder.date(results.getDate("dob"));
 			builder.country(results.getString("country_code"));
 			int i = 4; // columns 4+ are results
 			for (Event e : Event.values()) {
-				builder.addResult(e, ((double) results.getFloat(i++)));
+				builder.addResult(e, ((double) Math.round(results.getFloat(i++) * 100) / 100));
 			}
 			list.add(builder.build());
 		}
@@ -82,19 +82,24 @@ public class Database implements Input {
 	}
 
 	public List<Athlete> read(AthleteBuilder builder) throws IOException {
-		String key = DecathlonCalculator.inputProperty;
-		if (key == null)
+		if (search == null)
 			throw new IOException("Competition name or number not specified.");
-
 		try {
-			Connection conn = getConnection(new File(DecathlonCalculator.class.getResource("db.properties").toURI()));
-			return parseAthletes(builder, getAthletes(conn, key));
-		}
-		catch (URISyntaxException e) {
-			throw new IOException("Unable to find properties file.");
+			File properties = new File(propertiesPath, "db.properties");
+			if (properties == null)
+				throw new IOException("Unable to find properties file.");
+			Connection conn = getConnection(properties);
+			return parseAthletes(builder, getAthletes(conn, search));
 		}
 		catch (SQLException e) {
 			throw new IOException("Error reading athlete from database.");
 		}
 	}
+
+	public void setParameters(String... param) {
+		propertiesPath = param[0]; // Parameter 0 should be a path to
+									// properties file
+		search = param[1]; // Parameter 1 should be a search criterion
+	}
+	
 }

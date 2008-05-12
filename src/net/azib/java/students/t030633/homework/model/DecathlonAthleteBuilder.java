@@ -45,14 +45,15 @@ public class DecathlonAthleteBuilder implements AthleteBuilder {
 	}
 
 	public DecathlonAthlete build() {
-		return new DecathlonAthlete(name, date, country, checker.checkResults(results), calculator.calculate(results));
-	}
-
-	public void reset() {
-		this.results = new EnumMap<Event, Double>(Event.class);
-		this.name = null;
-		this.date = null;
-		this.country = null;
+		try { // Return a decathlon athlete
+			return new DecathlonAthlete(name, date, country, checker.checkResults(results), calculator.calculate(results));
+		}
+		finally { // Reset the builder
+			this.results = new EnumMap<Event, Double>(Event.class);
+			this.name = null;
+			this.date = null;
+			this.country = null;
+		}
 	}
 
 }

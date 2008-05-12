@@ -44,9 +44,4 @@ public interface AthleteBuilder {
 	 */
 	public Athlete build();
 
-	/**
-	 * Resets the builder to empty (null) values.
-	 */
-	public void reset();
-
 }

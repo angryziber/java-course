@@ -7,6 +7,7 @@
 
 	<xsl:template match="/">
 		<html>
+			<head><meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta><title>Athletes</title></head>
 			<body>
 				<h1>Athletes</h1>
 				<xsl:apply-templates select="//athlete"/>

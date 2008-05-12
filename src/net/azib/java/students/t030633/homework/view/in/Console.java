@@ -6,7 +6,6 @@ import net.azib.java.students.t030633.homework.model.Event;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.text.DateFormat;
@@ -21,17 +20,20 @@ import java.util.List;
  */
 public class Console implements Input {
 
-	private static final String BEGIN_MSG = "-=[Athlete input]=-";
-	private static final String LN = System.getProperty("line.separator");
-	private static final String QUESTION = "Do you wish to enter another athlete? y/n" + LN + ">";
-	private static final String WRONG_RESULT_FORMAT = "Result must be a number!" + LN;
-	private static final String WRONG_DATE_FORMAT = "Bad date format.";
+	static final String BEGIN_MSG = "-=[Athlete input]=-";
+	static final String LN = System.getProperty("line.separator");
+	static final String QUESTION = "Do you wish to enter an athlete? y/n" + LN + ">";
+	static final String WRONG_RESULT_FORMAT = "Result must be a number!" + LN;
+	static final String WRONG_DATE_FORMAT = "Bad date format.";
+	
+	// Using system date format, which the user probably assumes
+	static final DateFormat DF = DateFormat.getDateInstance();
 
 	private PrintStream out;
-	private InputStream in;
+	private BufferedReader reader;
 
 	public Console() {
-		this(System.out, System.in);
+		this(System.out, new BufferedReader(new InputStreamReader(System.in)));
 	}
 
 	/**
@@ -40,23 +42,18 @@ public class Console implements Input {
 	 * @param in -
 	 *            InputStream to read console input from
 	 */
-	public Console(PrintStream out, InputStream in) {
+	public Console(PrintStream out, BufferedReader in) {
 		this.out = out;
-		this.in = in;
+		this.reader = in;
 	}
 
 	public List<Athlete> read(AthleteBuilder builder) throws IOException {
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
 		List<Athlete> list = new LinkedList<Athlete>();
-
+		
 		out.println(BEGIN_MSG);
-
-		DateFormat df = DateFormat.getDateInstance();
-
-		do {
-			builder.reset();
+		out.print(QUESTION);
+		while (reader.readLine().equals("y")) {
 			out.print("Name: ");
 			builder = builder.name(reader.readLine());
 			out.print("Country: ");
@@ -64,7 +61,7 @@ public class Console implements Input {
 			out.print("Birth date: ");
 
 			try {
-				builder = builder.date(df.parse(reader.readLine()));
+				builder = builder.date(DF.parse(reader.readLine()));
 			}
 			catch (ParseException e) {
 				out.print(WRONG_DATE_FORMAT);
@@ -86,10 +83,12 @@ public class Console implements Input {
 			list.add(builder.build());
 			out.print(QUESTION);
 		}
-		while (reader.readLine().equals("y"));
-
 		return list;
 
+	}
+
+	public void setParameters(String... param) {
+		// No parameters needed for console
 	}
 
 }

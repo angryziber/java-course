@@ -20,4 +20,9 @@ public interface Output {
 	 */
 	void write(List<Athlete> athletes) throws IOException;
 
+	/**
+	 * @param param - String parameters for output
+	 */
+	void setParameters(String... param);
+	
 }
