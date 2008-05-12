@@ -22,6 +22,10 @@ import org.w3c.dom.*;
 
 // TODO This class will be rewritten later
 public class ShowResults {
+	/**
+	 * @param results
+	 * @param numEvent
+	 */
 	public static void ShowResultsConsole(ArrayList<Integer> results, double numEvent) {
 		// public static void main(String[] args) {
 		LoadNewResults lnr = new LoadNewResults();
@@ -72,6 +76,11 @@ public class ShowResults {
 		}
 	}
 
+	/**
+	 * @param results
+	 * @param numEvent
+	 * @param fileName
+	 */
 	public static void ShowResultsCSV(ArrayList<Integer> results, double numEvent, String fileName) {
 		// public static void main(String[] args) {
 		LoadNewResults lnr = new LoadNewResults();
@@ -143,6 +152,12 @@ public class ShowResults {
 
 	// public static void ShowResultsXML(ArrayList<Integer> results, double
 	// numEvent, String fileName) throws Exception {
+	/**
+	 * @param args
+	 * @throws Exception
+	 */
+	// TODO http://www.topxml.com/xsltStylesheets/Stylesheets/DataFormatting/EmployeeStringFuncs/Employees.xml
+	// May be to try as it is done on link 
 	public static void main(String[] args) throws Exception {
 		LoadNewResults lnr = new LoadNewResults();
 
@@ -156,7 +171,7 @@ public class ShowResults {
 		ArrayList<Integer> results = SortingID.SortByID(result_map1, result_map2, result_map3, numEvent);
 
 		// TODO DELETE THIS !
-		//File f1 = new File("C:\\dest.csv");
+		// File f1 = new File("C:\\dest.csv");
 
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -169,7 +184,7 @@ public class ShowResults {
 		 * Creating new file for writing
 		 */
 		try {
-			//FileWriter fw = new FileWriter(f1);
+			// FileWriter fw = new FileWriter(f1);
 
 			// Print competitions data
 			Element comp_data = document.createElement("competitions_data");
@@ -259,7 +274,7 @@ public class ShowResults {
 				// Print athlete data from results table
 				Element results_data = document.createElement("results_data");
 				el_a[6 * i].appendChild(results_data);
-				
+
 				Element[] el_r = new Element[10000];
 				for (int k = 0; k < result_map3.size(); k++) {
 					if (Double.parseDouble(result_map3.get(k)[1]) == (double) results.get(i)) {
@@ -304,7 +319,7 @@ public class ShowResults {
 						}
 						// fw.write(result_map3.get(k)[j] + ",");
 
-						//fw.write("\n");
+						// fw.write("\n");
 					}
 				}
 				System.out.println();
@@ -313,7 +328,7 @@ public class ShowResults {
 			}
 
 			// Close the file
-			//fw.close();
+			// fw.close();
 		}
 		catch (Exception e) {
 			System.out.println("Exception");
@@ -322,8 +337,48 @@ public class ShowResults {
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult("c:\\results.xml");	//System.out
+		StreamResult result = new StreamResult("c:\\results.xml"); // System.out
 		transformer.transform(source, result);
 
 	}
+
+/*	public void transformUsingStylesheet()
+
+	{
+
+		try {
+
+			File sourceFile = new File("c:\\results.xml");
+
+			File resultFile = new File("c:\\results.htm");
+
+			StreamResult result = new StreamResult(resultFile);
+
+			StreamSource source = new StreamSource(sourceFile);
+
+			Templates template = tFactory.newTemplates(new StreamSource(stylesheetURI));
+
+			transformer = template.newTransformer();
+
+			transformer.setParameter("heading", "This is A Parameter Heading");
+
+			transformer.transform(source, result);
+
+		}
+		catch (TransformerConfigurationException tce)
+
+		{
+
+			tce.printStackTrace();
+
+		}
+		catch (TransformerException te)
+
+		{
+
+			te.printStackTrace();
+
+		}
+
+	}*/
 }

@@ -118,5 +118,59 @@ public class LoadNewResults {
 			e.printStackTrace();
 		}
 	}
+	
+	public void loadResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2, Map<Integer, String[]> result_map3) {
+		//public static void main(String[] args) {
+			try {
+				// Structure with results after reading from database here
+				// Later it will be moved to function parameters
+				//result_map1 = new LinkedHashMap<Integer, String[]>();
+				//result_map2 = new LinkedHashMap<Integer, String[]>();
+				//result_map3 = new LinkedHashMap<Integer, String[]>();
+
+				// Establish the connection to the database
+				String url = "jdbc:mysql://srv.azib.net:3306/decathlon";
+				conn = DriverManager.getConnection(url, "java", "java");
+				Statement stmt = conn.createStatement();
+
+				PreparedStatement personStatement = conn.prepareStatement("SELECT * FROM athletes WHERE id > ?;");
+
+				// Optionally you can set some parameter for personStatment
+				personStatement.setInt(1, 0);
+				rs1 = personStatement.executeQuery();
+
+				rs1.first();
+				
+				readDatabase(rs1, result_map1, 4);
+				
+				String str[] = result_map1.get(0);
+
+				personStatement = conn.prepareStatement("SELECT * FROM competitions WHERE id > ?;");
+
+				// Optionally you can set some parameter for personStatment
+				personStatement.setInt(1, 0);
+				rs2 = personStatement.executeQuery();
+				
+				rs2.first();
+				
+				readDatabase(rs2, result_map2, 5);
+
+				personStatement = conn.prepareStatement("SELECT * FROM results WHERE id > ?;");
+
+				// Optionally you can set some parameter for personStatment
+				personStatement.setInt(1, 0);
+				rs3 = personStatement.executeQuery();
+
+				rs3.first();
+				
+				readDatabase(rs3, result_map3, 13);
+				
+				connClose();
+			}
+			catch (SQLException e) {
+				// Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 }
