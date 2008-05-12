@@ -40,10 +40,9 @@ public class AthleteTest {
 	
 	@Test
 	public void testGetBirtdayString() throws  ParseException {
-		Date d = new SimpleDateFormat("dd.MM.yyyy").parse("29.02.2008");
 		date = new SimpleDateFormat("dd.MM.yyyy").parse("29.02.2008");
 		Athlete ath = new Athlete("s s", date, "EE", eventResults);
-		assertEquals(DateFormat.getDateInstance(DateFormat.MEDIUM, new Locale(System.getProperty("user.language"))).format(d), ath.getBirthdayString());
+		assertEquals("29.02.2008", ath.getBirthdayString());
 	}
 	
 	@Test
