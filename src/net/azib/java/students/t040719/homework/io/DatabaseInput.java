@@ -50,7 +50,7 @@ public class DatabaseInput implements DataInput {
 		String name = "";
 		String countryCode = "";
 		Date birthday = null;
-		float[] results = new float[10];
+		float[] results;
 
 		try{
 			conn = openConnection();
@@ -59,9 +59,10 @@ public class DatabaseInput implements DataInput {
 			prepStmt.setString(2, parameter[0]);
 			ResultSet rs = prepStmt.executeQuery();
 			while (rs.next()) {
-				name = InputParser.parseName(rs.getString("name"));
+				name = rs.getString("name");
 				birthday = rs.getDate("dob");
 				countryCode = InputParser.parseCountryCode(rs.getString("country_code"));
+				results = new float[10];
 				for (int i=0; i<10; i++){
 					results[i] = rs.getFloat(i+4);
 				}

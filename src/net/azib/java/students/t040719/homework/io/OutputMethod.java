@@ -2,7 +2,7 @@ package net.azib.java.students.t040719.homework.io;
 
 
 /**
- * InputMethod - enum for holding different data input methods
+ * OutputMethod - enum for holding different data output methods
  *
  * @version 1.0
  * @author Romi Agar
@@ -10,7 +10,7 @@ package net.azib.java.students.t040719.homework.io;
 public enum OutputMethod {
 	K("Console", ConsoleOutput.class),
 	C("CSV file", FileOutput.class),
-	X("XML file", FileOutput.class),
+	X("XML file", XMLOutput.class),
 	H("HTML file", FileOutput.class);
 	
 	private final String source;

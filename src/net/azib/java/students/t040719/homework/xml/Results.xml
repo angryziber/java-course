@@ -3,7 +3,10 @@
 	<athlete>
 		<name>Siim Susi</name>
 		<birthday>01.01.1976</birthday>
-		<countryCode>EE</countryCode>
+		<country>
+			<code>EE</code>
+			<name>ESTONIA</name>
+		</country>
 		<score>7434</score>
 		<place>5</place>
 		<event order="1">

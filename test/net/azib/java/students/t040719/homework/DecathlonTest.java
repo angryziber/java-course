@@ -43,6 +43,6 @@ public class DecathlonTest {
 		assertEquals(message, processInput("-console -xml"));
 		assertEquals(message, processInput("-db 1 -html"));
 		assertEquals(message, processInput("-csv -csv"));
-		//assertEquals(message, processInput("-db 2 -console"));
+		//assertEquals(message, processInput("-csv D:\\test.file -xml test.xml"));
 	}
 }

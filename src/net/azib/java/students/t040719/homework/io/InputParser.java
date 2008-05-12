@@ -23,36 +23,56 @@ public class InputParser {
 	private static final String REGEX = "([0-5]|)[0-9]\\.[0-9]{2}";
 	private static final String SPLIT = ":";
 	
-	protected static boolean isValidName(String name){
+	/**
+	 * Checks if given name is valid
+	 * @param name athlete's name as a string
+	 * @return true if valid, false otherwise
+	 */
+	public static boolean isValidName(String name){
 		return name.matches("\\w+ \\w+.*");
 	}
 	
-	protected static boolean isValidCountryCode(String isoCode){
-		return ISOCountry.isValidCountryCode(isoCode);
+	/**
+	 * Removes single quotes from the beginning and at the end of the string
+	 * @param str string from which to remove the quotes
+	 * @return string without quotes
+	 */
+	public static String removeQuotes(String str){
+		return str.replaceAll("\"(.+)\"","$1");
 	}
 	
-	protected static String removeQuotes(String name){
-		return name.replaceAll("\"(.+)\"","$1");
-	}
 	
-	public static String parseName(String name){
-		String tempName = removeQuotes(name);
-		if(!isValidName(tempName))
-			return "";
-		else
-			return tempName;
-	}
+	/**
+	 * Parses athlete's name by removing quotes and checking if the name is valid
+	 * @param name the name of the athlete as a string
+	 * @return valid name string or empty string if not valid
+	 */
+//	public static String parseName(String name){
+//		String tempName = removeQuotes(name);
+//		if(!isValidName(tempName))
+//			return "";
+//		else
+//			return tempName;
+//	}
 	
+	/**
+	 * Parses country code by checking if it is valid
+	 * @param isoCode 2-letter ISO country code string
+	 * @return isoCode if it is valid or empty string if it is not
+	 */
 	public static String parseCountryCode(String isoCode){
-		if(!isValidCountryCode(isoCode))
+		if(!ISOCountry.isValidCountryCode(isoCode))
 			return "";
 		else
 			return isoCode;
 	}
 	
+	/**
+	 * Parses date string
+	 * @param dateString date string in the format "dd.MM.yyyy" as in CSV files
+	 * @return date object if parsing is successful, NULL otherwise
+	 */
 	public static Date parseDateString(String dateString){
-		//Locale locale = new Locale(System.getProperty("user.language"));
-		//DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
 		Date d = null;
 		try {
 			d = new SimpleDateFormat(DATE_FORMAT).parse(dateString);
@@ -63,7 +83,12 @@ public class InputParser {
 		return d;
 	}
 	
-	protected static float parseLongTime(String time){
+	/**
+	 * Parses decathlon event times if they are in long format (min:sec)
+	 * @param time in the format of min:sec or sec
+	 * @return time in seconds (float) if successful, 0.0f otherwise
+	 */
+	public static float parseLongTime(String time){
 		float resultTime = 0.0f;
 		Pattern p = Pattern.compile(SPLIT);
         String[] items = p.split(time);
@@ -76,11 +101,16 @@ public class InputParser {
 		    }
         }
         catch(NumberFormatException e){
-        	System.err.println("Error parsing long time string");
+        	LOG.log(Level.WARNING, "Error parsing long time string", e);
         }
 		return resultTime;
 	}
 	
+	/**
+	 * Parses all the decathlon event results
+	 * @param rawResults as an array of strings
+	 * @return event results in float array if successful, NULL if not
+	 */
 	public static float[] parseEventResults(String... rawResults){
 		if (rawResults.length != 10){
 			LOG.log(Level.SEVERE, "Event results cound is not 10.");			

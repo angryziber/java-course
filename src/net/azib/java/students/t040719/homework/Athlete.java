@@ -9,9 +9,8 @@ import java.util.logging.Logger;
 /**
  * Athlete - a class to hold decathlon results of one athlete
  *
- * @version 1.0
+ * @version 1.1
  * @author Romi Agar
- * 
  */
 public class Athlete implements Comparable<Athlete>{
 	private static final Logger LOG = Logger.getLogger(Athlete.class.getSimpleName());
@@ -21,8 +20,15 @@ public class Athlete implements Comparable<Athlete>{
 	private String country;
 
 	private int decathlonPoints;
-	private float[] results = new float[10];
+	private float[] results;
 	
+	/**
+	 * Constructor for creating Athlete object
+	 * @param name string name of the athlete
+	 * @param birthday date of birth in date format
+	 * @param country string country code in ISO 2-letter format
+	 * @param rawResults decathlon result array of 10 events in the format of 0.00f
+	 */
 	public Athlete(String name, Date birthday, String country, float ... rawResults) {
 		
 		this.country = country;
@@ -31,38 +37,59 @@ public class Athlete implements Comparable<Athlete>{
 		
 		if (rawResults.length != 10){
 			LOG.severe("Wrong number of raw results!");
-			throw new IllegalArgumentException("Wrong number of raw results!");
+			exit(10);
 		}
-		results = rawResults;
+		this.results = rawResults;
 		calculatePoints();
 	}
 	
+	/**
+	 * @return returns the name of the athlete
+	 */
 	public String getName(){
 		return this.name;
 	}
 	
+	/**
+	 * @return returns the ISO country code of the athlete
+	 */
 	public String getCountryCode(){
 		return this.country;
 	}
 	
-	public String getCountryName(){
-		return ISOCountry.getCountryName(this.country);
-	}
-	
+	/**
+	 * @return returns the date of birth of the athlete in local MEDIUM length formatting
+	 */
 	public String getBirthdayString(){
 		Locale locale = new Locale(System.getProperty("user.language"));
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
 		return df.format(this.birthday);
 	}
 	
+	/**
+	 * @return returns date of birth of the athlete as a date object
+	 */
 	public Date getBirthday(){
 		return this.birthday;
 	}
+	
+	/**
+	 * @return returns decathlon results array (float)
+	 */
+	public float getDecathlonResult(int i){
+		return this.results[i];
+	}
 
+	/**
+	 * @return returns the decathlon points (final score)
+	 */
 	public int getDecathlonPoints(){
 		return this.decathlonPoints;
 	}
 	
+	/**
+	 * Calculates decathlon points
+	 */
 	private void calculatePoints(){
 		DecathlonConstants event = DecathlonConstants.getOrdinal(0);
 		for(float f : results){
@@ -71,9 +98,20 @@ public class Athlete implements Comparable<Athlete>{
 		}
 	}
 
+	/**
+	 * Compares one athlete to an other by their decathlon points
+	 * Needed for sorting
+	 */
 	public int compareTo(Athlete o) {
 		return o.decathlonPoints - decathlonPoints;
-		//return ((Integer)o.decathlonPoints).compareTo(decathlonPoints);
+	}
+	
+	/**
+	 * Exits the program with error code
+	 * @param errorCode error code (int) for exiting the program
+	 */
+	void exit(int errorCode) {
+		   System.exit(errorCode);
 	}
 	
 }

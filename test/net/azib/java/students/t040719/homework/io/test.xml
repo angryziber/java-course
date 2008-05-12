@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decathlon xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DecathlonResults.xsd">
+  <athlete>
+    <name>s s</name>
+    <birthday>1.01.1999</birthday>
+    <country>
+      <code>EE</code>
+      <name>ESTONIA</name>
+    </country>
+    <score>4234</score>
+    <place>1</place>
+    <event order="1">
+      <name>100 m sprint</name>
+      <result>12.61</result>
+      <unit>sec</unit>
+    </event>
+    <event order="2">
+      <name>Long jump</name>
+      <result>5.00</result>
+      <unit>m</unit>
+    </event>
+    <event order="3">
+      <name>Shot put</name>
+      <result>9.22</result>
+      <unit>m</unit>
+    </event>
+    <event order="4">
+      <name>High jump</name>
+      <result>1.50</result>
+      <unit>m</unit>
+    </event>
+    <event order="5">
+      <name>400 m sprint</name>
+      <result>59.39</result>
+      <unit>sec</unit>
+    </event>
+    <event order="6">
+      <name>110 m hurdles</name>
+      <result>16.43</result>
+      <unit>sec</unit>
+    </event>
+    <event order="7">
+      <name>Discus throw</name>
+      <result>21.60</result>
+      <unit>m</unit>
+    </event>
+    <event order="8">
+      <name>Pole vault</name>
+      <result>2.60</result>
+      <unit>m</unit>
+    </event>
+    <event order="9">
+      <name>Javelin throw</name>
+      <result>35.81</result>
+      <unit>m</unit>
+    </event>
+    <event order="10">
+      <name>1500 m race</name>
+      <result>325.72</result>
+      <unit>sec</unit>
+    </event>
+  </athlete>
+</decathlon>

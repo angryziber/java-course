@@ -74,8 +74,7 @@ public class FileInput implements DataInput {
 				while ((line = br.readLine()) != null) {
 					elements = line.split(",");
 					if (elements.length == 13){
-						System.out.println(line);
-						name = InputParser.parseName(elements[0]);
+						name = InputParser.removeQuotes(elements[0]);
 						birthday = InputParser.parseDateString(elements[1]);
 						countryCode = InputParser.parseCountryCode(elements[2]);
 						System.arraycopy(elements, 3, sResults, 0, 10);

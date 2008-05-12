@@ -26,21 +26,11 @@ public class InputParserTest {
 	}
 	
 	@Test
-	public void isValidCountryCodeFails(){
-		assertEquals(false, InputParser.isValidCountryCode("EN"));
-	}
-	
-	@Test
-	public void isValidCountryCodeSucceeds(){
-		assertEquals(true, InputParser.isValidCountryCode("ET"));
-	}
-	
-	@Test
 	public void removesQuotesFromBothStringEnds(){
 		assertEquals("test\"middle quote", InputParser.removeQuotes("\"test\"middle quote\""));
 	}
 
-	@Test
+/*	@Test
 	public void parseNameSucceeds(){
 		assertEquals("Siim susi", InputParser.parseName("\"Siim susi\""));
 	}
@@ -49,7 +39,7 @@ public class InputParserTest {
 	public void parseNameFails(){
 		assertEquals("", InputParser.parseName("Si+im susi"));
 		assertEquals("", InputParser.parseName("\"Siimsusi\""));
-	}
+	}*/
 	
 	@Test
 	public void parseCountryCodeFails(){

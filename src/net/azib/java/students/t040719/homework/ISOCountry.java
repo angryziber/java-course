@@ -1,14 +1,19 @@
 package net.azib.java.students.t040719.homework;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -19,18 +24,27 @@ import org.jdom.input.SAXBuilder;
  * @author Romi Agar
  */
 public class ISOCountry {
+	private static final Logger LOG = Logger.getLogger(ISOCountry.class.getSimpleName());
+
 	private static Map<String,String> countries = new TreeMap<String,String>();
 	
 	static{
-		try {
-			loadCountries();
-		}
-		catch (JDOMException e) {
-			System.err.println(e);
-		}
-		catch (IOException e) {
-			System.err.println(e);
-		}
+			try {
+				loadCountries();
+			}
+			catch (SAXException e) {
+				LOG.log(Level.SEVERE, "Cannot load countries.", e);
+			}
+			catch (IOException e) {
+				LOG.log(Level.SEVERE, "Cannot load countries.", e);
+			}
+			catch (ParserConfigurationException e) {
+				LOG.log(Level.SEVERE, "Cannot load countries.", e);
+			}
+			catch (URISyntaxException e){
+				LOG.log(Level.SEVERE, "Cannot load countries.", e);				
+			}
+
 	}
 	
 	/**
@@ -54,15 +68,21 @@ public class ISOCountry {
 			return "";
 	}
 	
-	@SuppressWarnings("unchecked") // Needed because of generics
-	private static void loadCountries() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
+	//@SuppressWarnings("unchecked") // Needed because of generics
+	private static void loadCountries() throws SAXException, IOException, ParserConfigurationException, URISyntaxException{
+		File file = new File(ISOCountry.class.getResource(("xml/countries.xml")).toURI().getPath());
+		NodeList nodes = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file).getElementsByTagName("country");
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Element e = (Element) nodes.item(i);
+			ISOCountry.countries.put(e.getElementsByTagName("code").item(0).getTextContent(), e.getElementsByTagName("name").item(0).getTextContent());
+		}
+		/*SAXBuilder builder = new SAXBuilder();
 		Document doc = builder.build(ISOCountry.class.getResourceAsStream("xml/countries.xml"));
 		
 		List<Element> children = doc.getRootElement().getChildren("country");
 		for (Element country : children) {
 			ISOCountry.countries.put(country.getChildText("code"), country.getChildText("name"));
-		}
+		}*/
 	}
 	
 }

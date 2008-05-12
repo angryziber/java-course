@@ -106,11 +106,6 @@ public class Decathlon {
 		}
 		athletes = im.getInput().getResults(inputParam);
 		Collections.sort(athletes);
-		for (Athlete ath: athletes){
-			System.out.println("Name: "+ath.getName());
-			System.out.println("Birthday: "+ath.getBirthdayString());
-			System.out.println("Points: "+ath.getDecathlonPoints());
-		}
 		om.getOutput().outputResults(athletes, outputParam);
 	}
 	

@@ -13,18 +13,12 @@
 		<xs:sequence>
 			<xs:element name="name" type="xs:string"/>
 			<xs:element name="birthday" type="dateType"/>
-			<xs:element name="countryCode" type="countryCodeType"/>
+			<xs:element name="country" type="countryType"/>
 			<xs:element name="score" type="scoreType" />
 			<xs:element name="place" type="placeType"/>
 			<xs:element name="event" type="eventType" minOccurs="10" maxOccurs="10" />
 		</xs:sequence>
 	</xs:complexType>
-	
-	<xs:simpleType name="countryCodeType">
-		<xs:restriction base="xs:string">
-			<xs:pattern value="[A-Z]{2}" />
-		</xs:restriction>
-	</xs:simpleType>
 	
 	<xs:simpleType name="scoreType">
 		<xs:restriction base="xs:integer">
@@ -48,6 +42,19 @@
 		</xs:sequence>
 		<xs:attribute name="order" type="orderType" />
 	</xs:complexType>
+	
+	<xs:complexType name="countryType">
+		<xs:sequence>
+			<xs:element name="code" type="countryCodeType"/>
+			<xs:element name="name" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="countryCodeType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{2}" />
+		</xs:restriction>
+	</xs:simpleType>
 	
 	<xs:simpleType name="orderType">
 		<xs:restriction base="xs:integer">

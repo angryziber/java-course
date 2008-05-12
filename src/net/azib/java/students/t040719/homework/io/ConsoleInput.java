@@ -2,6 +2,7 @@ package net.azib.java.students.t040719.homework.io;
 
 import net.azib.java.students.t040719.homework.Athlete;
 import net.azib.java.students.t040719.homework.DecathlonConstants;
+import net.azib.java.students.t040719.homework.ISOCountry;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -117,18 +118,17 @@ public class ConsoleInput implements DataInput {
 				LOG.log(Level.SEVERE, "Could not read athlete country code.", e);
 				return "--";
 			}
-			if (!InputParser.isValidCountryCode(line)){
+			if (!ISOCountry.isValidCountryCode(line)){
 				out.println("'" + line + "'" + INVALID_COUNTRY);
 				out.print("Country (ISO 2-letter code): ");
 			}
-		}while(!InputParser.isValidCountryCode(line));
+		}while(!ISOCountry.isValidCountryCode(line));
 		return line;
 	}
 
 	Date getDOB() {
 		Date dob = null;
-		Locale locale = Locale.getDefault();
-		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
 		df.setLenient(false);
 		out.print("Date of birth (" + ((SimpleDateFormat)df).toPattern() + "): ");
 		String line="";
