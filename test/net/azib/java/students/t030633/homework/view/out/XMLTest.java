@@ -41,7 +41,6 @@ public class XMLTest {
 		Validator v = new Validator(output.toString());
 		v.useXMLSchema(true);
 		v.setJAXP12SchemaSource(XMLTest.class.getResource("competition.xsd").getFile());
-		System.out.println(v.toString());
 
 		assertTrue(v.isValid()); // Validate XML
 		verify(mockAthlete); // All athlete methods should be called once

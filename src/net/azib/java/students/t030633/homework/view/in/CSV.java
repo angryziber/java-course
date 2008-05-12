@@ -58,8 +58,9 @@ public class CSV implements Input {
 			try {
 				list.add(parseAthlete(builder, line));
 			}
-			catch (Exception e) {
-				throw new IOException("Unable to parse athlete from file.");
+			catch (ParseException e) {
+				e.printStackTrace();
+				throw new IOException("Unable to parse athlete from file. " + e.getMessage());
 			}
 		}
 		return list;
@@ -81,7 +82,12 @@ public class CSV implements Input {
 	private Date parseDate(String date) throws ParseException {
 		// Using system date format, which the user probably assumes
 		DateFormat df = DateFormat.getDateInstance();
-		return df.parse(date);
+		try {
+			return df.parse(date);
+		}
+		catch (ParseException e) {
+			throw new ParseException("Unable to parse date.", e.getErrorOffset());
+		}
 	}
 
 	private double[] parseResults(String[] results) {
