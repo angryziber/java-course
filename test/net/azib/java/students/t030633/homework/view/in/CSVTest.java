@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,6 +29,7 @@ import org.junit.Test;
  */
 public class CSVTest {
 
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 	private static final String COUNTRY = "EE";
 	private static final String NAME = "Testname";
 	private static final Date DATE = new Date();
@@ -61,8 +63,8 @@ public class CSVTest {
 
 		Athlete mockAthlete = createMockAthlete();
 
-		AthleteBuilder mockBuilder = createMockBuilder(NUMBER, "1", DateFormat.getDateInstance().format(DATE), mockAthlete);
-		BufferedReader mockReader = createMockUserInput(NUMBER, "1", DateFormat.getDateInstance().format(DATE));
+		AthleteBuilder mockBuilder = createMockBuilder(NUMBER, "1", DATE_FORMAT.format(DATE), mockAthlete);
+		BufferedReader mockReader = createMockUserInput(NUMBER, "1", DATE_FORMAT.format(DATE));
 
 		List<Athlete> testList = new CSV(mockReader).read(mockBuilder);
 
@@ -104,7 +106,7 @@ public class CSVTest {
 			expect(mockBuilder.name(NAME)).andReturn(mockBuilder);
 			expect(mockBuilder.country(COUNTRY)).andReturn(mockBuilder);
 			try {
-				expect(mockBuilder.date(DateFormat.getDateInstance().parse(date))).andReturn(mockBuilder);
+				expect(mockBuilder.date(DATE_FORMAT.parse(date))).andReturn(mockBuilder);
 			}
 			catch (ParseException e0) {
 			}

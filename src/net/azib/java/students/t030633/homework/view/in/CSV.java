@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -79,14 +80,10 @@ public class CSV implements Input {
 	}
 
 	private Date parseDate(String date) throws ParseException {
-		// Using system date format, which the user probably assumes
-		DateFormat df = DateFormat.getDateInstance();
-		try {
-			return df.parse(date);
-		}
-		catch (ParseException e) {
-			throw new ParseException("Unable to parse date.", e.getErrorOffset());
-		}
+		// Defining date format, different date formats in different locales
+		// could cause CSV parsing errors
+		DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+		return df.parse(date);
 	}
 
 	private double[] parseResults(String[] results) {
