@@ -8,7 +8,7 @@
             <xs:sequence>
               <xs:element name="name" type="xs:string" />
               <xs:element name="country" type="xs:string" />
-              <xs:element name="birthdate" type="xs:string" />
+              <xs:element name="birthdate" type="xs:date" />
               <xs:element name="results">
                 <xs:complexType>
                   <xs:sequence>

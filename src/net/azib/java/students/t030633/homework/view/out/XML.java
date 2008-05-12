@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class XML implements Output {
 
 		// User probably expects to see dates in local format (short, because
 		// only the birth date matters)
-		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 		for (Athlete athlete : athletes) {
 			Element athleteElement = new Element("athlete");
