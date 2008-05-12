@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -75,17 +76,17 @@ public class ConsoleInputTest {
 	}
 
 	@Test
-	public void invalidDateCheck(){
+	public void invalidDateCheck() throws ParseException{
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
 		String wD1 = "29.2.1999";
 		String wD2 = "20.13.2000";
-		String cD = "21.03.1980";
+		String cD = df.format(new SimpleDateFormat("dd.MM.yyyy").parse("21.03.1980"));
 		String input = formatInputString(wD1, wD2, cD);
 		String output = formatOutputString("Date of birth (" + ((SimpleDateFormat)df).toPattern() + "): ", ConsoleInput.INVALID_DATE, wD1, wD2);
 		setup(input);
 		Date date = ci.getDOB();
-		//assertEquals(output, out.toString());
-		//assertTrue("Dates are not equal.",df.format(date).equals(cD));
+		assertEquals(output, out.toString());
+		assertTrue("Dates are not equal.",df.format(date).equals(cD));
 	}
 
 	@Test
