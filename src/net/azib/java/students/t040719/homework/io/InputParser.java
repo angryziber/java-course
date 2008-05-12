@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class InputParser {
 	private static final Logger LOG = Logger.getLogger(InputParser.class.getSimpleName());
 	
-	protected static final String DATE_FORMAT = "dd.MM.yyyy"; 
+	public static final String DATE_FORMAT = "dd.MM.yyyy"; 
 	private static final String REGEX_LONG = "([1-9]+:|)([0-5]|)[0-9]\\.[0-9]{2}";
 	private static final String REGEX = "([0-5]|)[0-9]\\.[0-9]{2}";
 	private static final String SPLIT = ":";
@@ -41,6 +41,14 @@ public class InputParser {
 		return str.replaceAll("\"(.+)\"","$1");
 	}
 	
+	/**
+	 * This quoting is needed for csv output
+	 * @param str arbitrary string to be quoted
+	 * @return string with quotes added to the beginning and at the end of the string str
+	 */
+	public static String addQuotes(String str){
+		return "\"" + str + "\"";
+	}
 	
 	/**
 	 * Parses athlete's name by removing quotes and checking if the name is valid

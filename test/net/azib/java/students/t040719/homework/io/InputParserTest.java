@@ -50,6 +50,11 @@ public class InputParserTest {
 	public void parseCountryCodeSucceeds(){
 		assertEquals("ET", InputParser.parseCountryCode("ET"));
 	}
+	
+	@Test
+	public void addsQuoteMarksToBothEndOfString(){
+		assertEquals("\"to be quoted for csv output\"", InputParser.addQuotes("to be quoted for csv output"));
+	}
 
 	@Test
 	public void parseDateStringSucceeds() throws ParseException{

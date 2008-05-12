@@ -9,7 +9,7 @@ package net.azib.java.students.t040719.homework.io;
  */
 public enum OutputMethod {
 	K("Console", ConsoleOutput.class),
-	C("CSV file", FileOutput.class),
+	C("CSV file", CSVOutput.class),
 	X("XML file", XMLOutput.class),
 	H("HTML file", FileOutput.class);
 	

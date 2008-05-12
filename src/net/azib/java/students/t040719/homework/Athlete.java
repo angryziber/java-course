@@ -1,8 +1,9 @@
 package net.azib.java.students.t040719.homework;
 
-import java.text.DateFormat;
+import net.azib.java.students.t040719.homework.io.InputParser;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.logging.Logger;
 
 
@@ -58,12 +59,13 @@ public class Athlete implements Comparable<Athlete>{
 	}
 	
 	/**
-	 * @return returns the date of birth of the athlete in local MEDIUM length formatting
+	 * @return returns the date of birth of the athlete
 	 */
 	public String getBirthdayString(){
-		Locale locale = new Locale(System.getProperty("user.language"));
-		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
-		return df.format(this.birthday);
+//		Locale locale = new Locale(System.getProperty("user.language"));
+//		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
+//		return df.format(this.birthday);
+		return new SimpleDateFormat(InputParser.DATE_FORMAT).format(this.birthday);
 	}
 	
 	/**

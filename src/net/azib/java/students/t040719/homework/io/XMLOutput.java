@@ -1,6 +1,7 @@
 package net.azib.java.students.t040719.homework.io;
 
 import net.azib.java.students.t040719.homework.Athlete;
+import net.azib.java.students.t040719.homework.Decathlon;
 import net.azib.java.students.t040719.homework.DecathlonConstants;
 import net.azib.java.students.t040719.homework.ISOCountry;
 
@@ -13,13 +14,23 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamSource;
+
+import org.custommonkey.xmlunit.Validator;
+import org.custommonkey.xmlunit.exceptions.ConfigurationException;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.Namespace;
 import org.dom4j.QName;
+import org.dom4j.io.DocumentResult;
+import org.dom4j.io.DocumentSource;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
+import org.xml.sax.SAXException;
 
 /**
  * XMLOutput - class for generating xml output and saving it to a file
@@ -95,6 +106,9 @@ public class XMLOutput implements DataOutput{
 		}
 		else{
 			Document document = makeXMLDocument(results);
+			String xsdPath = Decathlon.class.getResource("xml/DecathlonResults.xsd").getPath();
+			if (!isValidXML(document.asXML(), xsdPath))
+				LOG.warning("XML file is not valid.");
 	        OutputFormat format = OutputFormat.createPrettyPrint();
 	        XMLWriter writer;
 	        if (out == null)
@@ -110,5 +124,44 @@ public class XMLOutput implements DataOutput{
 			}
 		}	
 	}
+	
+	public static boolean isValidXML(String xmlAsString, String xsdPath){
+		Validator validator = null;
+		try {
+			validator = new Validator(xmlAsString, xsdPath);
+			validator.useXMLSchema(true);
+		}
+		catch (ConfigurationException e) {
+			LOG.log(Level.SEVERE, "Error validating XML file.", e);
+		}
+		catch (SAXException e) {
+			LOG.log(Level.SEVERE, "Error validating XML file.", e);
+		}
+		if (validator != null)
+			return validator.isValid();
+		return false;
+
+	}
+	
+	public static Document styleDocument(Document document, String stylesheetPath){
+	        TransformerFactory factory = TransformerFactory.newInstance();
+	        Transformer transformer;
+	        DocumentSource source;
+	        DocumentResult result = null;
+	        Document transformedDoc = null;
+	        try {
+				transformer = factory.newTransformer(new StreamSource( stylesheetPath ));
+				source = new DocumentSource(document);
+		        result = new DocumentResult();
+				transformer.transform( source, result );
+			}
+			catch (TransformerException e) {
+				LOG.log(Level.SEVERE, "Cannot transform xml to csv.",e);
+			}
+			if (result != null)
+				transformedDoc = result.getDocument();
+			
+	        return transformedDoc;
+	    }
 
 }

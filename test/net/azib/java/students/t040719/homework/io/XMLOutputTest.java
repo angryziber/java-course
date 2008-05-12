@@ -1,8 +1,10 @@
 package net.azib.java.students.t040719.homework.io;
 
 import net.azib.java.students.t040719.homework.Athlete;
+import net.azib.java.students.t040719.homework.Decathlon;
 
 import static junit.framework.Assert.assertEquals;
+import static org.custommonkey.xmlunit.XMLAssert.assertXMLValid;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.custommonkey.xmlunit.Validator;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -79,12 +82,7 @@ public class XMLOutputTest {
 
 	@Test
 	public void testMakeXMLDocument() throws ParseException, DocumentException, URISyntaxException, IOException{
-		Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.1999");
-		float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
-		Athlete ath = new Athlete("s s", d, "EE", realResults);
-		List<Athlete> al = new ArrayList<Athlete>();
-		al.add(ath);
-
+		List<Athlete> al = getAthleteList();
 		Document doc1 = XMLOutput.makeXMLDocument(al);
 		Document doc2 = parse(XMLOutputTest.class.getResource(("test.xml")).toURI().toURL());
 		
@@ -93,15 +91,38 @@ public class XMLOutputTest {
 	
 	@Test
 	public void testOutputResults() throws ParseException, DocumentException, URISyntaxException, IOException{
-		Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.1999");
-		float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
-		Athlete ath = new Athlete("s s", d, "EE", realResults);
-		List<Athlete> al = new ArrayList<Athlete>();
-		al.add(ath);
+		List<Athlete> al = getAthleteList();
 		File tmpFile = File.createTempFile("test", ".tmp");
 		new XMLOutput(tmpFile).outputResults(al, "nothing");
 		File tmpFile2 = new File(XMLOutputTest.class.getResource(("test.xml")).toURI().getPath());
 		
         assertEquals(tmpFile.length(), tmpFile2.length());	
+	}
+
+
+	private List<Athlete> getAthleteList() throws ParseException {
+		Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.1999");
+		float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
+		Athlete ath = new Athlete("s s", d, "EE", realResults);
+		List<Athlete> al = new ArrayList<Athlete>();
+		al.add(ath);
+		return al;
+	}
+	
+	@Test
+	public void testIfXMLIsValid() throws Exception {
+		Document doc = XMLOutput.makeXMLDocument(getAthleteList());
+		//InputStreamReader xmlReader = new InputStreamReader(getClass().getResourceAsStream("test.xml"));
+		String xsdPath = Decathlon.class.getResource("xml/DecathlonResults.xsd").getPath();
+		
+		Validator validator = new Validator(doc.asXML(), xsdPath);
+		validator.useXMLSchema(true);
+
+		assertXMLValid(validator);
+	}
+	
+	@Test
+	public void testValidatorWIthEmptyParameters() {
+		assertEquals(false, new XMLOutput().isValidXML("", ""));
 	}
 }
