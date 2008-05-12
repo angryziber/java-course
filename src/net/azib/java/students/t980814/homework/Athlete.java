@@ -10,6 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.dom4j.Element;
+
 /**
  * Athlete
  *
@@ -58,7 +60,7 @@ public class Athlete {
 			throw new DecaCalcException("Unsupported charset in athlete data, id=" + id);
 		}
 		finally {
-			Results.closeQuietly(rs);
+			Competition.closeQuietly(rs);
 		}
 	}
 
@@ -71,6 +73,14 @@ public class Athlete {
 		sb.append(dfm.format(dob)).append(COMMA);
 		sb.append(country); 
 		return sb.toString();
+	}
+	
+	public Element addAthleteDataToElement(Element root) {
+		if (root instanceof Element) {
+			root.addElement("name").addText(name);
+			root.addElement("dob").addText(dob.toString());
+		}
+		return root;
 	}
 
 	@Override

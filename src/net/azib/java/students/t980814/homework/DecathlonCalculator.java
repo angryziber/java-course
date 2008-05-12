@@ -12,23 +12,23 @@ import java.sql.SQLException;
  */
 public class DecathlonCalculator {
 
-	private Results results;
+	private Competition competition;
 	private DecaIOMethod ioMethod;
 	
 	public DecathlonCalculator(DecaIOMethod ioMethod) throws DecaCalcException {
 		this.ioMethod = ioMethod;
 		
 		if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.CONSOLE) {
-			results = new Results(System.in);			
+			competition = new Competition(System.in);			
 		}
 		else if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.CSV) {
-			results = new Results(new File(ioMethod.inputParameter));
+			competition = new Competition(new File(ioMethod.inputParameter));
 		}
 		else if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.DATABASE) {
 			Connection connection = null;
 			try {
 				connection = DriverManager.getConnection("jdbc:mysql://srv.azib.net:3306/decathlon", "java", "java");
-				results = new Results(connection, ioMethod.inputParameter);
+				competition = new Competition(connection, ioMethod.inputParameter);
 			}
 			catch (SQLException e) {				
 				throw new DecaCalcException("Unable to open connection to DB");			
@@ -44,15 +44,13 @@ public class DecathlonCalculator {
 	}
 	
 	public void outputCalculatedData() throws DecaCalcException {
-		if (results != null) {
+		if (competition != null) {
 			if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.CONSOLE)
-				System.out.println(results);
+				System.out.println(competition);
 			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.CSV)
-				results.toStringCSV(new File(ioMethod.outputParameter));
-			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.XML) {
-				// What to do if there is no data to output... create an empty file?
-				System.out.println("Not implemented");
-			}
+				competition.toStringCSV(new File(ioMethod.outputParameter));
+			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.XML)
+				competition.toXML(new File(ioMethod.outputParameter));
 			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.HTML) {
 				// What to do if there is no data to output... create an empty file?
 				System.out.println("Not implemented");
