@@ -10,8 +10,7 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 
 import java.io.ByteArrayOutputStream;
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,11 +50,7 @@ public class XMLTest {
 		Athlete mockAthlete = createMock(Athlete.class);
 		expect(mockAthlete.getName()).andReturn("testName");
 		expect(mockAthlete.getCountry()).andReturn("testCountry");
-		try {
-			expect(mockAthlete.getBirthDate()).andReturn(DateFormat.getDateInstance().parse("01.01.1971"));
-		}
-		catch (ParseException e) {
-		}
+		expect(mockAthlete.getBirthDate()).andReturn(new Date());
 		Map<Event, Double> mockResults = new HashMap<Event, Double>();
 		mockResults.put(Event.values()[1], 1D);
 		expect(mockAthlete.getResults()).andReturn(mockResults);
