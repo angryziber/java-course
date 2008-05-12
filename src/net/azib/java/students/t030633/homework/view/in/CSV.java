@@ -59,8 +59,7 @@ public class CSV implements Input {
 				list.add(parseAthlete(builder, line));
 			}
 			catch (ParseException e) {
-				e.printStackTrace();
-				throw new IOException("Unable to parse athlete from file. " + e.getMessage());
+				throw new IOException("Unable to parse athlete from file. Line: " + line);
 			}
 		}
 		return list;
