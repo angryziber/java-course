@@ -4,9 +4,9 @@ import net.azib.java.students.t040719.homework.Athlete;
 import net.azib.java.students.t040719.homework.Decathlon;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -14,22 +14,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.dom4j.Document;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
 
 /**
- * CSVOutput - class for generating csv file for outputting decathlon results
+ * HTMLOutput
  *
- * @version 1.0
- * @author Romi Agar
+ * @author romi
  */
-public class CSVOutput implements DataOutput{
-	private static final Logger LOG = Logger.getLogger(XMLOutput.class.getSimpleName());
+public class HTMLOutput implements DataOutput {
+	private static final Logger LOG = Logger.getLogger(HTMLOutput.class.getSimpleName());
 	private File out;			
 	
-	public CSVOutput() {
+	public HTMLOutput() {
 		this(null);
 	}
 
-	CSVOutput(File out) {
+	HTMLOutput(File out) {
 		this.out = out;
 	}
 
@@ -49,7 +50,7 @@ public class CSVOutput implements DataOutput{
 			URI stylesheetPath = null;
 			try {
 				xsdPath = Decathlon.class.getResource("xml/DecathlonResults.xsd").toURI();
-				stylesheetPath = Decathlon.class.getResource("xml/csv.xsl").toURI();
+				stylesheetPath = Decathlon.class.getResource("xml/html.xsl").toURI();
 			}
 			catch (URISyntaxException e) {
 				if (System.getProperty("program.debug") != null)
@@ -60,45 +61,30 @@ public class CSVOutput implements DataOutput{
 			if (xsdPath != null && !XMLOutput.isValidXML(xmlDoc.asXML(), xsdPath.getPath())){
 				LOG.warning("XML is not valid.");
 			}
-			
-			byte[] transformedDoc = XMLOutput.transformDocument(xmlDoc, stylesheetPath);
+			Document transformedDoc = XMLOutput.styleDocument(xmlDoc, stylesheetPath);
 			if (out == null)
 	        	out = new File(parameter[0]);
-			FileOutputStream fos = null;
+			OutputFormat format = OutputFormat.createPrettyPrint();
+	        XMLWriter writer;
+	        if (out == null)
+	        	out = new File(parameter[0]);
 			try {
-				fos = new FileOutputStream(out);
-				fos.write(transformedDoc);
-			}
-			catch (FileNotFoundException e) {
-				if (System.getProperty("program.debug") != null)
-					LOG.log(Level.SEVERE, "Cannot create new file.", e);
-				else
-					LOG.log(Level.SEVERE, "Cannot create new file.");
-			}
+				writer = new XMLWriter(new OutputStreamWriter(new FileOutputStream(out),"UTF8"),format);
+		        writer.write(transformedDoc);
+		        writer.close();
+		    }
 			catch (IOException e) {
 				if (System.getProperty("program.debug") != null)
-					LOG.log(Level.SEVERE, "Cannot write to file.", e);
+					LOG.log(Level.SEVERE, "Could not create xml output file", e);
 				else
-					LOG.log(Level.SEVERE, "Cannot write to file.");
+					LOG.log(Level.SEVERE, "Could not create xml output file");
+				exit(13);
 			}
-			finally{
-				if (fos != null)
-					try {
-						fos.close();
-					}
-					catch (IOException e) {
-						if (System.getProperty("program.debug") != null)
-							LOG.log(Level.SEVERE, "Cannot close output stream.", e);
-						else
-							LOG.log(Level.SEVERE, "Cannot close output stream.");
-					}
-			}
-			
 		}
 	}
-	
+
 	void exit(int errorCode) {
-		   System.exit(errorCode);
+		System.exit(errorCode);
 	}
 
 }

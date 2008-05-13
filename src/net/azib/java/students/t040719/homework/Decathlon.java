@@ -117,7 +117,10 @@ public class Decathlon {
 		try{
 			new Decathlon().processInput(args);
 		}catch(Exception e){
-			LOG.log(Level.SEVERE, "Unexpected bug", e);
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.SEVERE, "Unexpected bug", e);
+			else
+				LOG.log(Level.SEVERE, "Unexpected bug");
 		}	
 	}
 }

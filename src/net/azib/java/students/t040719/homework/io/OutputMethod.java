@@ -11,7 +11,7 @@ public enum OutputMethod {
 	K("Console", ConsoleOutput.class),
 	C("CSV file", CSVOutput.class),
 	X("XML file", XMLOutput.class),
-	H("HTML file", FileOutput.class);
+	H("HTML file", HTMLOutput.class);
 	
 	private final String source;
 	private final Class<? extends DataOutput> outputClass;

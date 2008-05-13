@@ -5,18 +5,24 @@ import net.azib.java.students.t040719.homework.Decathlon;
 import net.azib.java.students.t040719.homework.DecathlonConstants;
 import net.azib.java.students.t040719.homework.ISOCountry;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.custommonkey.xmlunit.Validator;
@@ -42,11 +48,6 @@ public class XMLOutput implements DataOutput{
 	private static final Logger LOG = Logger.getLogger(XMLOutput.class.getSimpleName());
 	private File out;			
 	
-	/**
-	 * Exiting from program with given error code
-	 * @param errorCode error code (int) for exiting
-	 */
-	
 	public XMLOutput() {
 		this(null);
 	}
@@ -54,7 +55,11 @@ public class XMLOutput implements DataOutput{
 	XMLOutput(File out) {
 		this.out = out;
 	}
-
+	
+	/**
+	 * Exiting from program with given error code
+	 * @param errorCode error code (int) for exiting
+	 */
 	void exit(int errorCode) {
 		   System.exit(errorCode);
 	}
@@ -119,7 +124,10 @@ public class XMLOutput implements DataOutput{
 		        writer.close();
 		    }
 			catch (IOException e) {
-				LOG.log(Level.SEVERE, "Could not create xml output file", e);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Could not create xml output file", e);
+				else
+					LOG.log(Level.SEVERE, "Could not create xml output file");
 				exit(13);
 			}
 		}	
@@ -132,10 +140,16 @@ public class XMLOutput implements DataOutput{
 			validator.useXMLSchema(true);
 		}
 		catch (ConfigurationException e) {
-			LOG.log(Level.SEVERE, "Error validating XML file.", e);
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.SEVERE, "Error validating XML file.", e);
+			else
+				LOG.log(Level.SEVERE, "Error validating XML file.");
 		}
 		catch (SAXException e) {
-			LOG.log(Level.SEVERE, "Error validating XML file.", e);
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.SEVERE, "Error validating XML file.", e);
+			else
+				LOG.log(Level.SEVERE, "Error validating XML file.");
 		}
 		if (validator != null)
 			return validator.isValid();
@@ -143,25 +157,57 @@ public class XMLOutput implements DataOutput{
 
 	}
 	
-	public static Document styleDocument(Document document, String stylesheetPath){
+	public static Document styleDocument(Document document, URI stylesheetSource){
 	        TransformerFactory factory = TransformerFactory.newInstance();
-	        Transformer transformer;
-	        DocumentSource source;
 	        DocumentResult result = null;
 	        Document transformedDoc = null;
 	        try {
-				transformer = factory.newTransformer(new StreamSource( stylesheetPath ));
-				source = new DocumentSource(document);
+	        	File xsltFile = new File(stylesheetSource.getPath());
+	        	Source xsltSource = new StreamSource(xsltFile);
+	        	Transformer transformer = factory.newTransformer(xsltSource);
+	        	DocumentSource source = new DocumentSource(document);
 		        result = new DocumentResult();
 				transformer.transform( source, result );
 			}
 			catch (TransformerException e) {
-				LOG.log(Level.SEVERE, "Cannot transform xml to csv.",e);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.",e);
+				else
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.");
 			}
 			if (result != null)
 				transformedDoc = result.getDocument();
 			
 	        return transformedDoc;
-	    }
+	}
+	
+	public static byte[] transformDocument(Document document, URI stylesheetSource){
+        TransformerFactory factory = TransformerFactory.newInstance();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+        	File xsltFile = new File(stylesheetSource.getPath());
+        	Source xsltSource = new StreamSource(xsltFile);
+        	Transformer transformer = factory.newTransformer(xsltSource);
+        	//Transformer transformer = factory.newTransformer(new StreamSource( new FileInputStream(new File(stylesheetSource.getPath())), "UTF-8"));
+        	//Transformer transformer = factory.newTransformer(new StreamSource( stylesheetPath ));
+        	transformer.transform( new StreamSource(new ByteArrayInputStream(document.asXML().getBytes("UTF-8"))), new StreamResult(out));
+
+		}
+		catch (TransformerException e) {
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.",e);
+			else
+				LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.");
+		}
+		catch (UnsupportedEncodingException e) {
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.SEVERE, "Problem with xml encoding.",e);
+			else
+				LOG.log(Level.SEVERE, "Problem with xml encoding.");
+		}
+
+	
+        return out.toByteArray();
+	}
 
 }
