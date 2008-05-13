@@ -26,15 +26,18 @@ public class ShowResults {
 	 * @param results
 	 * @param numEvent
 	 */
-	public static void ShowResultsConsole(ArrayList<Integer> results, double numEvent) {
+	public static void ShowResultsConsole(Map<Integer, String[]> result_map1, 
+			Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3,
+			ArrayList<Integer> results, double numEvent) {
 		// public static void main(String[] args) {
-		LoadNewResults lnr = new LoadNewResults();
+		//LoadNewResults lnr = new LoadNewResults();
 
-		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
 
-		lnr.loadResults(result_map1, result_map2, result_map3);
+		//lnr.loadResults(result_map1, result_map2, result_map3);
 
 		// double numEvent = 2;
 		// ArrayList<Integer> results = SortingID.SortByID(result_map1,
@@ -81,15 +84,18 @@ public class ShowResults {
 	 * @param numEvent
 	 * @param fileName
 	 */
-	public static void ShowResultsCSV(ArrayList<Integer> results, double numEvent, String fileName) {
+	public static void ShowResultsCSV(Map<Integer, String[]> result_map1, 
+			Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3,
+			ArrayList<Integer> results, double numEvent, String fileName) {
 		// public static void main(String[] args) {
 		LoadNewResults lnr = new LoadNewResults();
 
-		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
 
-		lnr.loadResults(result_map1, result_map2, result_map3);
+		//lnr.loadResults(result_map1, result_map2, result_map3);
 
 		// double numEvent = 2;
 		// ArrayList<Integer> results = SortingID.SortByID(result_map1,
@@ -165,7 +171,7 @@ public class ShowResults {
 		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
 		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
 
-		lnr.loadResults(result_map1, result_map2, result_map3);
+		/*lnr.loadResults(result_map1, result_map2, result_map3);*/ //TEMPORARY TODO
 
 		double numEvent = 2;
 		ArrayList<Integer> results = SortingID.SortByID(result_map1, result_map2, result_map3, numEvent);

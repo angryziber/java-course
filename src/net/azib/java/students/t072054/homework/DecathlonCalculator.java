@@ -1,5 +1,10 @@
 package net.azib.java.students.t072054.homework;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import java.util.LinkedHashMap;
+
 /**
  * DecathlonCalculator
  * 
@@ -28,13 +33,42 @@ public class DecathlonCalculator {
 	private static String output_route;
 
 	public static void main(String args[]) {
+		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		
+		// Initial value
+		input_num = 1;
+		
+		LoadNewResults lnr = new LoadNewResults();
+		
+		ArrayList<Integer> results_array = new ArrayList<Integer>();
+		
 		CommandLineParsing(args);
+
+		switch (input_method) {
+		case DB:
+			lnr.loadResultsDB(result_map1, result_map2, result_map3);
+			break;
+		case CSV:
+			lnr.loadResultsCSV(result_map1, result_map2, 
+					result_map3, input_route);
+			break;
+		}
+		
+		switch (output_method) {
+		case CONSOLE:
+			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
+			ShowResults.ShowResultsConsole(result_map1, result_map2, result_map3, 
+					results_array, input_num);
+			break;
+		}
 	}
 
 	public static String CommandLineParsing(String args[]) {
 		int stage = INPUT_METHOD;
 		String return_value;
-		
+
 		// Initialization of static members
 		input_route = null;
 		output_route = null;
@@ -43,7 +77,7 @@ public class DecathlonCalculator {
 		input_num = 0;
 
 		for (String s : args) {
-			//System.out.println(s);
+			// System.out.println(s);
 			if (stage == INPUT_METHOD) {
 				if (s.equals("-console")) {
 					input_method = CONSOLE;
@@ -92,13 +126,13 @@ public class DecathlonCalculator {
 				stage = PARSE_FINISHED;
 			}
 		}
-		
+
 		// DEBUG output
-		//System.out.println("Input route = " + input_route);
-		//System.out.println("Output route = " + output_route);
-		
+		// System.out.println("Input route = " + input_route);
+		// System.out.println("Output route = " + output_route);
+
 		return_value = input_route + " " + output_route + " " + input_method + " " + output_method + " " + input_num;
-		
+
 		return return_value;
 	}
 }

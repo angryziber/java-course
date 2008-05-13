@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,7 +37,7 @@ public class LoadNewResults {
 
 	// TODO where is encapsulation, common interfaces?
 
-	public void loadResults(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public void loadResultsDB(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3) {
 		// public static void main(String[] args) {
 		try {
@@ -123,15 +124,18 @@ public class LoadNewResults {
 		}
 	}
 
-	// public void loadResultsCSV(Map<Integer, String[]> result_map1,
-	// Map<Integer, String[]> result_map2, Map<Integer, String[]> result_map3) {
-	public static void main(String[] args) {
+	public void loadResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3, String fileName) {
+		// public static void main(String[] args) {
 		try {
 			// Structure with results after reading from database here
 			// Later it will be moved to function parameters
-			Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-			Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-			Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+			// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
+			// String[]>();
+			// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
+			// String[]>();
+			// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
+			// String[]>();
 
 			// Open the file
 			File f1 = /* new File(fileName); */new File("C:\\source.csv");
@@ -164,6 +168,66 @@ public class LoadNewResults {
 						count++;
 					}
 
+				}
+				result_map3.put(num_line, str_buf);
+				//for (int i = 0; i < 13; i++) {
+				//	System.out.println(str_buf[i]);
+				//}
+				count = 0;
+				num_line++;
+			}
+
+		}
+		catch (Exception e) {
+			System.out.println("File exception");
+		}
+
+	}
+
+	 public void loadResultsConsole(Map<Integer, String[]> result_map1,
+	 Map<Integer, String[]> result_map2, Map<Integer, String[]> result_map3) {
+	//public static void main(String[] args) {
+		try {
+			// Structure with results after reading from database here
+			// Later it will be moved to function parameters
+			//Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
+			//Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
+			//Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+
+			// Reading stream
+			InputStreamReader input = new InputStreamReader(System.in);
+			BufferedReader reader = new BufferedReader(input);
+
+			// One row in a table
+			String line = " ";
+			// Num of line
+			int num_line = 0;
+			// Strings separated by ','
+			String[] str_buf = new String[13];
+			char[] char_buf = new char[1000];
+			// Counter for chars in String
+			int char_count = 0;
+
+			int count = 0;
+
+			while (!line.equalsIgnoreCase("quit")) {
+				System.out.println("Enter results or write 'quit' to finish");
+				line = reader.readLine();
+				if (!line.equalsIgnoreCase("quit")) {
+
+					for (int i = 0; i < (line.length()); i++) {
+						if (line.charAt(i) != ','/* && (i) != line.length() */) {
+							char_buf[char_count] = line.charAt(i);
+							// char_buf[char_count + 1] = '\0';
+							char_count++;
+						}
+						if (line.charAt(i) == ',' || (i + 1) == line.length()) {
+							str_buf[count] = String.copyValueOf(char_buf, 0, char_count);
+							char_count = 0;
+							count++;
+						}
+
+					}
 				}
 				result_map2.put(num_line, str_buf);
 				for (int i = 0; i < 13; i++) {
