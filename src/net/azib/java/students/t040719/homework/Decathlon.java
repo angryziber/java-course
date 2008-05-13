@@ -23,8 +23,9 @@ public class Decathlon {
 	private final PrintStream out;
 	private InputMethod im;
 	private OutputMethod om;
-	private String inputParam = "";
-	private String outputParam = "";
+	private String inputFile = "";
+	private String outputFile = "";
+	private String outputFormat = "";
 	private List<Athlete> athletes;
 	
 	
@@ -53,7 +54,8 @@ public class Decathlon {
 	 * @param args command-line arguments
 	 */
 	void processInput(String... args){
-		if (args.length == 2){
+		switch (args.length){
+		case 2:
 			if (args[0].equals("-console") && args[1].equals("-console")){
 				im = InputMethod.K;
 				om = OutputMethod.K;
@@ -61,7 +63,8 @@ public class Decathlon {
 				printUsage();
 				return;
 			}
-		}else if(args.length == 3){
+			break;
+		case 3:
 			if (args[0].equals("-console") && (args[1].equals("-csv") || args[1].equals("-html") || args[1].equals("-xml"))){
 				im = InputMethod.K;
 				if(args[1].equals("-csv"))
@@ -70,43 +73,47 @@ public class Decathlon {
 					om = OutputMethod.X;
 				else
 					om = OutputMethod.H;
-				outputParam = args[2];
+				outputFile = args[2];
+				outputFormat = args[1];
 			}else if((args[0].equals("-csv") || args[0].equals("-db")) &&  args[2].equals("-console")){
 				if(args[0].equals("-csv"))
 					im = InputMethod.C;
 				else
 					im = InputMethod.D;
-				inputParam = args[1];
+				inputFile = args[1];
 				om = OutputMethod.K;
 			}else{
 				printUsage();
 				return;
 			}
-		}else if(args.length == 4){
+			break;
+		case 4:
 			if((args[0].equals("-csv") || args[0].equals("-db")) && (args[2].equals("-csv") || args[2].equals("-html") || args[2].equals("-xml"))){
 				if(args[0].equals("-csv"))
 					im = InputMethod.C;
 				else
 					im = InputMethod.D;
-				inputParam = args[1];
+				inputFile = args[1];
 				if(args[2].equals("-csv"))
 					om = OutputMethod.C;
 				else if(args[2].equals("-xml"))
 					om = OutputMethod.X;
 				else
 					om = OutputMethod.H;
-				outputParam = args[3];
+				outputFile = args[3];
+				outputFormat = args[2];
 			}else{
 				printUsage();
 				return;
 			}
-		}else{
+			break;
+		default:
 			printUsage();
 			return;
 		}
-		athletes = im.getInput().getResults(inputParam);
+		athletes = im.getInput().getResults(inputFile);
 		Collections.sort(athletes);
-		om.getOutput().outputResults(athletes, outputParam);
+		om.getOutput().outputResults(athletes, outputFile, outputFormat);
 	}
 	
 	/**

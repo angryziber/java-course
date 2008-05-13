@@ -65,9 +65,6 @@ public class FileInput implements DataInput {
 			String[] sResults = new String[10];
 			float[] results = null;
 			BufferedReader br = null;
-			//PrintStream ps = null;
-			//BufferedWriter ou = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("D:\\out.txt")),"UTF8"));
-			//ps = new PrintStream(System.out, true, "UTF-8");
 			try {
 				
 				br = new BufferedReader(new InputStreamReader(new FileInputStream(dataSource), "UTF-8"));
@@ -79,12 +76,15 @@ public class FileInput implements DataInput {
 						countryCode = InputParser.parseCountryCode(elements[2]);
 						System.arraycopy(elements, 3, sResults, 0, 10);
 						results = InputParser.parseEventResults(sResults);
+						if (results == null){
+							LOG.warning("Error parsing event results for athlete '" + name + "'. Skipping.");
+							continue;
+						}
 						Athlete athlete = new Athlete(name,birthday,countryCode, results);
 						athletes.add(athlete);
 					}else
 						LOG.warning("Wrong number of elements on line. Skipping this.");
 				}
-				System.out.println("done");
 			}
 			catch (UnsupportedEncodingException e) {
 				LOG.log(Level.SEVERE, "Encoding problem with file: " + dataSource, e);

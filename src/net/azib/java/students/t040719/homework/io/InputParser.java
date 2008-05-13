@@ -19,8 +19,8 @@ public class InputParser {
 	private static final Logger LOG = Logger.getLogger(InputParser.class.getSimpleName());
 	
 	public static final String DATE_FORMAT = "dd.MM.yyyy"; 
-	private static final String REGEX_LONG = "([1-9]+:|)([0-5]|)[0-9]\\.[0-9]{2}";
-	private static final String REGEX = "([0-5]|)[0-9]\\.[0-9]{2}";
+	private static final String REGEX_LONG = "([0-9]+:|)([0-5]|)[0-9]\\.[0-9]{2}";
+	private static final String REGEX = "[0-9]*[0-9]\\.[0-9]{2}";
 	private static final String SPLIT = ":";
 	
 	/**
@@ -109,6 +109,7 @@ public class InputParser {
 	 * Parses all the decathlon event results
 	 * @param rawResults as an array of strings
 	 * @return event results in float array if successful, NULL if not
+	 * TODO: For future development, results should be checked against world records and they shouldn't be excessively bigger
 	 */
 	public static float[] parseEventResults(String... rawResults){
 		if (rawResults.length != 10){
@@ -119,7 +120,7 @@ public class InputParser {
 		for(int i=0; i<10; i++){
 			if (i==4 || i==9)
 				if(!rawResults[i].matches(REGEX_LONG)){
-					LOG.log(Level.SEVERE, "Value '" + rawResults[i] + "' does not match regex '" + REGEX_LONG + "'");
+					LOG.log(Level.WARNING, "Value '" + rawResults[i] + "' does not match regex '" + REGEX_LONG + "'");
 					return null;
 				}
 				else
@@ -127,13 +128,13 @@ public class InputParser {
 			else
 				try{
 					if(!rawResults[i].matches(REGEX)){
-						LOG.log(Level.SEVERE, "Value '" + rawResults[i] + "' does not match regex '" + REGEX + "'");
+						LOG.log(Level.WARNING, "Value '" + rawResults[i] + "' does not match regex '" + REGEX + "'");
 						return null;
 					}
 					results[i] = Float.parseFloat(rawResults[i]);
 				}
 				catch(NumberFormatException e){
-					LOG.log(Level.SEVERE, "Error parsing number: " + rawResults[i], e);
+					LOG.log(Level.WARNING, "Error parsing number: " + rawResults[i], e);
 					return null;
 				}
 		}
