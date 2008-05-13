@@ -67,8 +67,7 @@ public class HTMLOutput implements DataOutput {
 				LOG.warning("XML is not valid.");
 			}
 			Document transformedDoc = XMLOutput.styleDocument(xmlDoc, stylesheetPath);
-			if (out == null)
-	        	out = new File(parameter[0]);
+
 			OutputFormat format = OutputFormat.createPrettyPrint();
 	        XMLWriter writer;
 	        if (out == null)

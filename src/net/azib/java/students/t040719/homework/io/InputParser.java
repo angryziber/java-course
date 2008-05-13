@@ -42,15 +42,6 @@ public class InputParser {
 	}
 	
 	/**
-	 * This quoting is needed for csv output
-	 * @param str arbitrary string to be quoted
-	 * @return string with quotes added to the beginning and at the end of the string str
-	 */
-	public static String addQuotes(String str){
-		return "\"" + str + "\"";
-	}
-	
-	/**
 	 * Parses athlete's name by removing quotes and checking if the name is valid
 	 * @param name the name of the athlete as a string
 	 * @return valid name string or empty string if not valid
