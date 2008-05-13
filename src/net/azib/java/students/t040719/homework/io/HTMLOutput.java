@@ -18,9 +18,10 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
 /**
- * HTMLOutput
+ * HTMLOutput - class for generating HTML output
  *
- * @author romi
+ * @version 1.0
+ * @author Romi Agar
  */
 public class HTMLOutput implements DataOutput {
 	private static final Logger LOG = Logger.getLogger(HTMLOutput.class.getSimpleName());
@@ -34,15 +35,19 @@ public class HTMLOutput implements DataOutput {
 		this.out = out;
 	}
 
-
+	/**
+	 * Outputs the athlete results from given list to an output file
+	 * @param results a list of athletes
+	 * @param parameter single parameter output file name
+	 */
 	public void outputResults(List<Athlete> results, String... parameter) {
 		if (results == null){
 			LOG.severe("Null parameter for athlete list.");
-			exit(14);
+			exit(1);
 		}
 		else if (parameter == null || parameter.length == 0 || parameter[0].equals("")){
 			LOG.severe("No output file name given.");
-			exit(15);
+			exit(2);
 		}
 		else{
 			Document xmlDoc = XMLOutput.makeXMLDocument(results);
@@ -78,11 +83,15 @@ public class HTMLOutput implements DataOutput {
 					LOG.log(Level.SEVERE, "Could not create xml output file", e);
 				else
 					LOG.log(Level.SEVERE, "Could not create xml output file");
-				exit(13);
+				exit(3);
 			}
 		}
 	}
-
+	
+	/**
+	 * Exiting from program with given error code
+	 * @param errorCode error code (int) for exiting
+	 */
 	void exit(int errorCode) {
 		System.exit(errorCode);
 	}
