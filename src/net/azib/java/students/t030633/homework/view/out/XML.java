@@ -45,9 +45,7 @@ public class XML implements Output {
 		Element root = new Element("competition");
 		Document doc = new Document(root);
 
-		// User probably expects to see dates in local format (short, because
-		// only the birth date matters)
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); // XSD date format
 
 		for (Athlete athlete : athletes) {
 			Element athleteElement = new Element("athlete");
