@@ -146,8 +146,13 @@ public class LoadNewResults {
 			String line;
 			// Num of line
 			int num_line = 0;
-			// Strings separated by ','
+			// Strings separated by ',' for map3
 			String[] str_buf = new String[13];
+			
+			// Same strings for map1, map2
+			String[] str_map1 = new String[4];
+			String[] str_map2 = new String[5];
+			
 			char[] char_buf = new char[1000];
 			// Counter for chars in String
 			int char_count = 0;
@@ -163,16 +168,50 @@ public class LoadNewResults {
 						char_count++;
 					}
 					else {
-						str_buf[count] = String.copyValueOf(char_buf, 0, char_count);
-						char_count = 0;
-						count++;
+						if (count > 2) {
+							str_buf[count] = String.copyValueOf(char_buf, 0, char_count);
+							char_count = 0;
+							count++;
+						}
+						else
+						{
+							if (count==0 || count==1)
+							{
+								str_buf[count] = String.valueOf(num_line + 1);
+								if (count == 0){
+									str_map1[0] = String.valueOf(num_line + 1);
+									str_map1[1] = String.copyValueOf(char_buf, 0, char_count);
+									
+									str_map2[0] = String.valueOf(num_line + 1);
+									str_map2[1] = "NA";
+									str_map2[2] = "0000-00-00";
+									str_map2[3] = "NA";
+									str_map2[4] = "NA";
+								}
+								if (count == 1){
+									str_map1[2] = String.copyValueOf(char_buf, 0, char_count);
+								}
+								char_count = 0;
+								count++;
+							}
+							else if (count == 2)
+							{
+								str_buf[count] = "1";
+								str_map1[3] = String.copyValueOf(char_buf, 0, char_count);
+								char_count = 0;
+								count++;
+							}
+						}
 					}
 
 				}
 				result_map3.put(num_line, str_buf);
-				//for (int i = 0; i < 13; i++) {
-				//	System.out.println(str_buf[i]);
-				//}
+				result_map1.put(num_line, str_map1);
+				result_map2.put(num_line, str_map2);
+
+				// for (int i = 0; i < 13; i++) {
+				// System.out.println(str_buf[i]);
+				// }
 				count = 0;
 				num_line++;
 			}
@@ -184,15 +223,18 @@ public class LoadNewResults {
 
 	}
 
-	 public void loadResultsConsole(Map<Integer, String[]> result_map1,
-	 Map<Integer, String[]> result_map2, Map<Integer, String[]> result_map3) {
-	//public static void main(String[] args) {
+	public void loadResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3) {
+		// public static void main(String[] args) {
 		try {
 			// Structure with results after reading from database here
 			// Later it will be moved to function parameters
-			//Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-			//Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-			//Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+			// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
+			// String[]>();
+			// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
+			// String[]>();
+			// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
+			// String[]>();
 
 			// Reading stream
 			InputStreamReader input = new InputStreamReader(System.in);
