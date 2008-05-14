@@ -156,6 +156,19 @@ public class FileOutputTest {
 		Document doc = FileOutput.makeXMLDocument(al);
 		new FileOutput(tmpFile).toCSVFile(doc);
 		File tmpFile2 = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
+		int len = (int)(tmpFile.length());
+        FileInputStream fis = new FileInputStream(tmpFile);
+        FileInputStream fis2 = new FileInputStream(tmpFile2);
+        byte buf[] = new byte[len];
+        byte buf2[] = new byte[len];
+        fis.read(buf);
+        fis.close();
+        fis2.read(buf2);
+        fis2.close();
+        for (int i=0; i<len; i++){
+        	assertEquals(buf[i], buf2[i]);
+        	System.out.println(String.format("%c-%c",buf[i], buf2[i]));
+        }	
         assertEquals(tmpFile.length(), tmpFile2.length());	
 	}
 
