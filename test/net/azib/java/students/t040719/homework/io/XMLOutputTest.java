@@ -103,7 +103,7 @@ public class XMLOutputTest {
 	private List<Athlete> getAthleteList() throws ParseException {
 		Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.1999");
 		float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
-		Athlete ath = new Athlete("s s", d, "EE", realResults);
+		Athlete ath = new Athlete("Siim Susi", d, "EE", realResults);
 		List<Athlete> al = new ArrayList<Athlete>();
 		al.add(ath);
 		return al;
@@ -124,6 +124,6 @@ public class XMLOutputTest {
 	@Test
 	public void testValidatorWIthEmptyParameters() {
 
-		assertEquals(false, new XMLOutput().isValidXML("", ""));
+		assertEquals(false, XMLOutput.isValidXML("", ""));
 	}
 }

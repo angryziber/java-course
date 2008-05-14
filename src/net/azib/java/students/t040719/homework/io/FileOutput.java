@@ -79,7 +79,11 @@ public class FileOutput implements DataOutput {
     	String place ="1";
         for (int i=0; i<results.size(); i++){
         	Athlete a = results.get(i);
-	        if (i != 0 && results.get(i-1).getDecathlonPoints()>a.getDecathlonPoints() && i < results.size()-1 && results.get(i+1).getDecathlonPoints()<a.getDecathlonPoints() || i == results.size()-1 && results.get(i-1).getDecathlonPoints()>a.getDecathlonPoints())
+	        if (i != 0 && results.get(i-1).getDecathlonPoints()>a.getDecathlonPoints() 
+	        		&& i < results.size()-1 
+	        		&& results.get(i+1).getDecathlonPoints()<a.getDecathlonPoints() 
+	        		|| i == results.size()-1 && results.size() > 1
+	        		&& results.get(i-1).getDecathlonPoints()>a.getDecathlonPoints())
 	        	place = Integer.toString(i+1);
 	        else if(i < results.size()-1 && results.get(i+1).getDecathlonPoints() == a.getDecathlonPoints())
 	        	place = findPlaceSharers(results, i);
@@ -108,7 +112,7 @@ public class FileOutput implements DataOutput {
 	 * @param i index from where to start looking
 	 * @return returns the shared place interval
 	 */
-	private static String findPlaceSharers(List<Athlete> results, int i) {
+	static String findPlaceSharers(List<Athlete> results, int i) {
 		String place = Integer.toString(i+1) + "-";
 		while (results.get(i).getDecathlonPoints()==results.get(i+1).getDecathlonPoints() && ++i < results.size()-1);
 		return place + Integer.toString(i+1);
@@ -155,7 +159,6 @@ public class FileOutput implements DataOutput {
 			exit(1);
 		}
 		else if (parameter == null || parameter.length != 2 || parameter[0].equals("") || !parameter[1].equals("-xml") && !parameter[1].equals("-csv") && !parameter[1].equals("-html")){
-			System.out.println(parameter[0]+" "+parameter[1]);
 			LOG.severe("Must specify output file name and output format (-xml/-html/-csv).");
 			exit(2);
 		}
@@ -189,7 +192,7 @@ public class FileOutput implements DataOutput {
 	 * Outputs xml document to comma separated file
 	 * @param document xml document
 	 */
-	private void toCSVFile(Document document) {
+	void toCSVFile(Document document) {
 		URI stylesheetPath = null;
 		try {
 			stylesheetPath = Decathlon.class.getResource("xml/csv.xsl").toURI();
@@ -236,7 +239,7 @@ public class FileOutput implements DataOutput {
 	 * Outputs xml document to HTML file
 	 * @param document xml document
 	 */
-	private void toHTMLFile(Document document) {
+	void toHTMLFile(Document document) {
 		URI stylesheetPath = null;
 		try {
 			stylesheetPath = Decathlon.class.getResource("xml/html.xsl").toURI();
@@ -288,24 +291,26 @@ public class FileOutput implements DataOutput {
 	 * @return returns xml document transformed with given stylesheet
 	 */
 	Document styleDocument(Document document, URI stylesheetSource){
+        DocumentResult result = new DocumentResult();;
 		if (document == null || stylesheetSource == null){
 			LOG.severe("Input paramteres needed.");
 			exit(4);
-		}
-        TransformerFactory factory = TransformerFactory.newInstance();
-        DocumentResult result = new DocumentResult();;
-        try {
-        	File xsltFile = new File(stylesheetSource.getPath());
-        	Source xsltSource = new StreamSource(xsltFile);
-        	Transformer transformer = factory.newTransformer(xsltSource);
-        	DocumentSource source = new DocumentSource(document);
-			transformer.transform( source, result );
-		}
-		catch (TransformerException e) {
-			if (System.getProperty("program.debug") != null)
-				LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.",e);
-			else
-				LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.");
+		} else {
+	        TransformerFactory factory = TransformerFactory.newInstance();
+	        try {
+	        	File xsltFile = new File(stylesheetSource.getPath());
+	        	Source xsltSource = new StreamSource(xsltFile);
+	        	Transformer transformer = factory.newTransformer(xsltSource);
+	        	DocumentSource source = new DocumentSource(document);
+				transformer.transform( source, result );
+			}
+			catch (TransformerException e) {
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.",e);
+				else
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.");
+				exit(7);
+			}
 		}
         return result.getDocument();
 	}
@@ -316,29 +321,31 @@ public class FileOutput implements DataOutput {
 	 * @return returns byte array of transformed xml document
 	 */
 	byte[] transformDocument(Document document, URI stylesheetSource){
+	    ByteArrayOutputStream out = new ByteArrayOutputStream();
 		if (document == null || stylesheetSource == null){
 			LOG.severe("Input paramteres needed.");
-			exit(4);
-		}
-	    TransformerFactory factory = TransformerFactory.newInstance();
-	    ByteArrayOutputStream out = new ByteArrayOutputStream();
-	    try {
-	    	File xsltFile = new File(stylesheetSource.getPath());
-	    	Source xsltSource = new StreamSource(xsltFile);
-	    	Transformer transformer = factory.newTransformer(xsltSource);
-	    	transformer.transform( new StreamSource(new ByteArrayInputStream(document.asXML().getBytes("UTF-8"))), new StreamResult(out));
-		}
-		catch (TransformerException e) {
-			if (System.getProperty("program.debug") != null)
-				LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.",e);
-			else
-				LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.");
-		}
-		catch (UnsupportedEncodingException e) {
-			if (System.getProperty("program.debug") != null)
-				LOG.log(Level.SEVERE, "Problem with xml encoding.",e);
-			else
-				LOG.log(Level.SEVERE, "Problem with xml encoding.");
+			exit(5);
+		}else{
+		    TransformerFactory factory = TransformerFactory.newInstance();
+		    try {
+		    	File xsltFile = new File(stylesheetSource.getPath());
+		    	Source xsltSource = new StreamSource(xsltFile);
+		    	Transformer transformer = factory.newTransformer(xsltSource);
+		    	transformer.transform( new StreamSource(new ByteArrayInputStream(document.asXML().getBytes("UTF-8"))), new StreamResult(out));
+			}
+			catch (TransformerException e) {
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.",e);
+				else
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.");
+				exit(6);
+			}
+			catch (UnsupportedEncodingException e) {
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Problem with xml encoding.",e);
+				else
+					LOG.log(Level.SEVERE, "Problem with xml encoding.");
+				exit(6);			}
 		}
 	    return out.toByteArray();
 	}

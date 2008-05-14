@@ -21,7 +21,7 @@ public enum OutputMethod {
 		outputClass = clazz;
 	}
 	
-	public String getSource(){
+	public String getOutputName(){
 		return source;
 	}
 	

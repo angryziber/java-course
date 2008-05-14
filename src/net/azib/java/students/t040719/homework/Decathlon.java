@@ -104,16 +104,19 @@ public class Decathlon {
 				outputFormat = args[2];
 			}else{
 				printUsage();
-				return;
 			}
 			break;
 		default:
 			printUsage();
 			return;
 		}
+		out.println("Loading athletes' information from "+im.getInputName());
 		athletes = im.getInput().getResults(inputFile);
+		out.println("Loaded " + athletes.size() + " entrie(s).");
 		Collections.sort(athletes);
+		out.println("Outputting results to " + om.getOutputName());
 		om.getOutput().outputResults(athletes, outputFile, outputFormat);
+		out.println("All done.");
 	}
 	
 	/**

@@ -20,7 +20,7 @@ public enum InputMethod {
 		inputClass = clazz;
 	}
 	
-	public String getSource(){
+	public String getInputName(){
 		return source;
 	}
 	

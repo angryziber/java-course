@@ -1,10 +1,15 @@
 package net.azib.java.students.t040719.homework;
 
+import net.azib.java.students.t040719.homework.io.FileOutputTest;
+import net.azib.java.students.t040719.homework.io.InputMethod;
+import net.azib.java.students.t040719.homework.io.OutputMethod;
+
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -31,7 +36,7 @@ public class DecathlonTest {
 	
 	private String[] parseParameters(String s){
 		Collection<String> args = new ArrayList<String>();
-		for (String param: s.split("\\s"))
+		for (String param: s.split(","))
 			args.add(param);
 		return args.toArray(new String[0]);
 	}
@@ -39,10 +44,18 @@ public class DecathlonTest {
 	@Test
 	public void showUsageWhenInsufficientArgumentsSupplied() throws IOException{
 		String message = Decathlon.WRONG_ARGS + LN + Decathlon.USAGE + LN;
-		assertEquals(message, processInput("-console here -console"));
-		assertEquals(message, processInput("-console -xml"));
-		assertEquals(message, processInput("-db 1 -html"));
-		assertEquals(message, processInput("-csv -csv"));
-		//assertEquals(message, processInput("-db 2 -xml test.xml"));
+		assertEquals(message, processInput("-console,here,-console"));
+		assertEquals(message, processInput("-console,-xml"));
+		assertEquals(message, processInput("-db,1,-html"));
+		assertEquals(message, processInput("-csv,asd,-csv"));
+	}
+	
+	@Test
+	public void testNormalUsage() throws IOException, URISyntaxException{
+		String message =  "Loading athletes' information from " + InputMethod.values()[1].getInputName() + LN +
+		"Loaded 4 entrie(s)." + LN +
+		"Outputting results to " + OutputMethod.values()[0].getOutputName() + LN +
+		"All done." + LN;
+		assertEquals(message, processInput("-csv," + FileOutputTest.class.getResource(("inputTest.csv")).toURI().getPath() + ",-console,"));
 	}
 }

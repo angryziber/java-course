@@ -113,7 +113,7 @@ public class DatabaseInputTest {
 				return conn;
 			}
 		};
-		List<Athlete> aths = dbi.getResults("1");
+		dbi.getResults("1");
 		verify(conn, stmt, rs);
 	}
 	

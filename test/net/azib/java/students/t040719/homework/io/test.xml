@@ -2,7 +2,7 @@
 
 <decathlon xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DecathlonResults.xsd">
   <athlete>
-    <name>s s</name>
+    <name>Siim Susi</name>
     <birthday>01.01.1999</birthday>
     <country>
       <code>EE</code>

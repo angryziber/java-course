@@ -1,11 +1,8 @@
 package net.azib.java.students.t040719.homework.io;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.util.Scanner;
 
 import org.junit.Test;
 
