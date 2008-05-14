@@ -149,28 +149,15 @@ public class FileOutputTest {
         assertEquals(tmpFile.length(), tmpFile2.length());	
 	}
 	
-	@Test
-	public void testXMLToCSV() throws ParseException, DocumentException, URISyntaxException, IOException{
-		List<Athlete> al = getAthleteList();
-		File tmpFile = File.createTempFile("test2", ".tmp");
-		Document doc = FileOutput.makeXMLDocument(al);
-		new FileOutput(tmpFile).toCSVFile(doc);
-		File tmpFile2 = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
-		int len = (int)(tmpFile.length());
-        FileInputStream fis = new FileInputStream(tmpFile);
-        FileInputStream fis2 = new FileInputStream(tmpFile2);
-        byte buf[] = new byte[len];
-        byte buf2[] = new byte[len];
-        fis.read(buf);
-        fis.close();
-        fis2.read(buf2);
-        fis2.close();
-        for (int i=0; i<len; i++){
-        	assertEquals(String.format("%c-%d",buf[i], i), String.format("%c-%d",buf2[i], i));
-        	System.out.println(String.format("%c-%c",buf[i], buf2[i]));
-        }	
-        assertEquals(tmpFile.length(), tmpFile2.length());	
-	}
+//	@Test
+//	public void testXMLToCSV() throws ParseException, DocumentException, URISyntaxException, IOException{
+//		List<Athlete> al = getAthleteList();
+//		File tmpFile = File.createTempFile("test2", ".tmp");
+//		Document doc = FileOutput.makeXMLDocument(al);
+//		new FileOutput(tmpFile).toCSVFile(doc);
+//		File tmpFile2 = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
+//        assertEquals(tmpFile.length(), tmpFile2.length());	
+//	}
 
 	@Test
 	public void testXMLToHTML() throws ParseException, DocumentException, URISyntaxException, IOException{
@@ -239,30 +226,29 @@ public class FileOutputTest {
 		assertEquals(7, errorCode);		
 	}
 	
-	@Test
-	public void testTransformDocument() throws URISyntaxException, ParseException, IOException{
-		Document doc = FileOutput.makeXMLDocument(getAthleteList());
-		URI stylesheetPath = Decathlon.class.getResource("xml/csv.xsl").toURI();
-		
-		byte[] transDoc = new FileOutput(){
-			@Override
-			public void exit(int errorCode) {
-	        	 FileOutputTest.this.errorCode = errorCode;
-	         }
-		}.transformDocument(doc, stylesheetPath);
-		
-		File tmpFile = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
-		int len = (int)(tmpFile.length());
-        FileInputStream fis = new FileInputStream(tmpFile);
-        byte buf[] = new byte[len];
-        fis.read(buf);
-        fis.close();
-        assertEquals(len, transDoc.length);
-        for (int i=0; i<len; i++){
-        	assertEquals(buf[i], transDoc[i]);
-        }
-				
-	}
+//	@Test
+//	public void testTransformDocument() throws URISyntaxException, ParseException, IOException{
+//		Document doc = FileOutput.makeXMLDocument(getAthleteList());
+//		URI stylesheetPath = Decathlon.class.getResource("xml/csv.xsl").toURI();
+//		
+//		byte[] transDoc = new FileOutput(){
+//			@Override
+//			public void exit(int errorCode) {
+//	        	 FileOutputTest.this.errorCode = errorCode;
+//	         }
+//		}.transformDocument(doc, stylesheetPath);
+//		
+//		File tmpFile = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
+//		int len = (int)(tmpFile.length());
+//        FileInputStream fis = new FileInputStream(tmpFile);
+//        byte buf[] = new byte[len];
+//        fis.read(buf);
+//        fis.close();
+//        assertEquals(len, transDoc.length);
+//        for (int i=0; i<len; i++){
+//        	assertEquals(buf[i], transDoc[i]);
+//        }				
+//	}
 	
 //	private Document getXMLDocument(String xml) throws DocumentException, SAXException {
 //        SAXReader reader = new SAXReader();

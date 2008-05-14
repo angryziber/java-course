@@ -8,7 +8,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,20 +28,32 @@ import org.junit.Test;
  * @author romi
  */
 public class DatabaseInputTest {
-	Connection conn;
-	
+	private Connection conn;
+	private int errorCode;
 	
 	@Test
 	public void connectionFails(){
-		DatabaseInput db = new DatabaseInput();
+		DatabaseInput db = new DatabaseInput(){
+			@Override
+			public void exit(int errorCode) {
+	        	 DatabaseInputTest.this.errorCode = errorCode;
+	        }
+		};
 		db.jdbcPassword = "wrong";
-		assertTrue("Could not connect to database", db.openConnection()==null);
+		db.openConnection();
+		assertEquals(1, errorCode);
 	}
 	
 	@Test
 	public void noParametersGivenError() throws IOException{
-		DatabaseInput db = new DatabaseInput();
-		assertTrue("No parameters given.", db.getResults()==null);
+		DatabaseInput db = new DatabaseInput(){
+			@Override
+			public void exit(int errorCode) {
+	        	 DatabaseInputTest.this.errorCode = errorCode;
+	        }
+		};
+		db.getResults();
+		assertEquals(2, errorCode);
 	}
 	
 	@Test

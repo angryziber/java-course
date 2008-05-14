@@ -25,63 +25,83 @@ public class DatabaseInput implements DataInput {
 	private String jdbcUser = "java";
 	String jdbcPassword = "java";
 	
+	/**
+	 * Exiting from program with given error code
+	 * @param errorCode error code (int) for exiting
+	 */
+	void exit(int errorCode) {
+		System.exit(errorCode);
+	}
+	
 	Connection openConnection() {
 		try {
 			return DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
 		}
 		catch (SQLException e) {
-			LOG.log(Level.SEVERE, "Could not connect to database.", e);
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.SEVERE, "Could not connect to database.", e);
+			else
+				LOG.log(Level.SEVERE, "Could not connect to database.");
+			exit(1);
 		}
 		return null;
 	}
 	
 	public List<Athlete> getResults(String... parameter){
+		List<Athlete> athletes = new ArrayList<Athlete>();
 		if (parameter.length == 0){
 			LOG.severe("No competition id nor name given.");
-			return null;
-		}
-		List<Athlete> athletes = new ArrayList<Athlete>();
-		final String sql = "SELECT A.name, A.dob, A.country_code, R.race_100m, " +
-				"R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, " +
-				"R.discus_throw, R.pole_vault, R.javelin_throw, R.race_1500m FROM " +
-				"results AS R INNER JOIN athletes AS A on A.id=R.athlete_id WHERE " +
-				"competition_id = (SELECT id FROM competitions WHERE id = ? or name = ?)";
-		Connection conn = null;
-		String name = "";
-		String countryCode = "";
-		Date birthday = null;
-		float[] results;
-
-		try{
-			conn = openConnection();
-			PreparedStatement prepStmt = conn.prepareStatement(sql);
-			prepStmt.setString(1, parameter[0]);
-			prepStmt.setString(2, parameter[0]);
-			ResultSet rs = prepStmt.executeQuery();
-			while (rs.next()) {
-				name = rs.getString("name");
-				birthday = rs.getDate("dob");
-				countryCode = InputParser.parseCountryCode(rs.getString("country_code"));
-				results = new float[10];
-				for (int i=0; i<10; i++){
-					results[i] = rs.getFloat(i+4);
+			exit(2);
+		} else {
+			final String sql = "SELECT A.name, A.dob, A.country_code, R.race_100m, " +
+					"R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, " +
+					"R.discus_throw, R.pole_vault, R.javelin_throw, R.race_1500m FROM " +
+					"results AS R INNER JOIN athletes AS A on A.id=R.athlete_id WHERE " +
+					"competition_id = (SELECT id FROM competitions WHERE id = ? or name = ?)";
+			Connection conn = null;
+			String name = "";
+			String countryCode = "";
+			Date birthday = null;
+			float[] results;
+	
+			try{
+				conn = openConnection();
+				PreparedStatement prepStmt = conn.prepareStatement(sql);
+				prepStmt.setString(1, parameter[0]);
+				prepStmt.setString(2, parameter[0]);
+				ResultSet rs = prepStmt.executeQuery();
+				while (rs.next()) {
+					name = rs.getString("name");
+					birthday = rs.getDate("dob");
+					countryCode = InputParser.parseCountryCode(rs.getString("country_code"));
+					results = new float[10];
+					for (int i=0; i<10; i++){
+						results[i] = rs.getFloat(i+4);
+					}
+					Athlete athlete = new Athlete(name,birthday,countryCode,results);
+					athletes.add(athlete);
 				}
-				Athlete athlete = new Athlete(name,birthday,countryCode,results);
-				athletes.add(athlete);
+				rs.close();
+					
+			}catch (SQLException e) {
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Could not get records from database.", e);
+				else
+					LOG.log(Level.SEVERE, "Could not get records from database.");
+				exit(3);
+			}finally {
+				if (conn != null)
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						if (System.getProperty("program.debug") != null)
+							LOG.log(Level.SEVERE, "Could not close database connection.",e);
+						else
+							LOG.log(Level.SEVERE, "Could not close database connection.");
+						exit(4);
+					}
 			}
-			rs.close();
-				
-		}catch (SQLException e) {
-			LOG.log(Level.SEVERE, "Could not get records from database.", e);
-			athletes = null;
-		}finally {
-			if (conn != null)
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					LOG.log(Level.SEVERE, "Could not close database connection.",e);
-				}
 		}
 		return athletes;
 	}
