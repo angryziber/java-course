@@ -232,7 +232,8 @@ public class FileOutput implements DataOutput {
 					else
 						LOG.log(Level.SEVERE, "Cannot close file output stream.");
 				}
-		}		
+		}	
+		System.out.println("Written file: " + out.getAbsolutePath());
 	}
 
 	/**
@@ -283,6 +284,7 @@ public class FileOutput implements DataOutput {
 						LOG.log(Level.SEVERE, "Could not close writer");
 				}
 		}
+		System.out.println("Written file: " + out.getAbsolutePath());
 	}
 
 	/**
