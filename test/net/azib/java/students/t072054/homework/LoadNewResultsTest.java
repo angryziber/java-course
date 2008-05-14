@@ -21,7 +21,7 @@ public class LoadNewResultsTest {
 	 * checks all id-s in MySQL tables
 	 */
 	@Test
-	public void testLoadResults() {
+	public void testLoadResultsDB() {
 		
 		LoadNewResults lnr = new LoadNewResults();
 		
@@ -29,7 +29,7 @@ public class LoadNewResultsTest {
 		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
 		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
 		
-		lnr.loadResults(result_map1, result_map2, result_map3);
+		lnr.loadResultsDB(result_map1, result_map2, result_map3);
 		
 		String str[]; 
 		
@@ -59,5 +59,21 @@ public class LoadNewResultsTest {
 		
 		
 
+	}
+	
+	/**
+	 * Test method for convertTime function,
+	 * converts some initial data to right result
+	 */
+	@Test
+	public void convertTime(){
+		String not_converted = "3:23.59";
+		String converted;
+		
+		LoadNewResults lnr = new LoadNewResults();
+		
+		converted = lnr.convertTime(not_converted);
+		System.out.println(converted.toCharArray());
+		assertTrue(converted.equals("203.59"));
 	}
 }
