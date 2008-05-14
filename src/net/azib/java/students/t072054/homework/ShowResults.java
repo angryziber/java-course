@@ -20,7 +20,6 @@ import org.w3c.dom.*;
  * @author r_vassiljev
  */
 
-// TODO This class will be rewritten later
 public class ShowResults {
 	/**
 	 * @param results
@@ -54,7 +53,8 @@ public class ShowResults {
 
 		// Print athletes data
 		System.out.println("Results:");
-		System.out.println(" ... "); // TODO Here will be the description of
+		System.out.println("(place score name birthdate country)");
+		System.out.println("(competition_index results[])");
 		// columns
 		for (int i = 0; i < results.size(); i++) {
 
@@ -156,28 +156,28 @@ public class ShowResults {
 
 	}
 
-	// public static void ShowResultsXML(ArrayList<Integer> results, double
-	// numEvent, String fileName) throws Exception {
+	public static void ShowResultsXML(Map<Integer, String[]> result_map1, 
+			Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3,
+			ArrayList<Integer> results, 
+			double numEvent, String fileName) throws Exception {
 	/**
 	 * @param args
 	 * @throws Exception
 	 */
-	// TODO http://www.topxml.com/xsltStylesheets/Stylesheets/DataFormatting/EmployeeStringFuncs/Employees.xml
 	// May be to try as it is done on link 
-	public static void main(String[] args) throws Exception {
-		LoadNewResults lnr = new LoadNewResults();
+	//public static void main(String[] args) throws Exception {
+		//LoadNewResults lnr = new LoadNewResults();
 
-		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
+		//Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
 
-		/*lnr.loadResults(result_map1, result_map2, result_map3);*/ //TEMPORARY TODO
+		/*lnr.loadResults(result_map1, result_map2, result_map3);*/ 
 
-		double numEvent = 2;
-		ArrayList<Integer> results = SortingID.SortByID(result_map1, result_map2, result_map3, numEvent);
+		//double numEvent = 2;
+		//ArrayList<Integer> results = SortingID.SortByID(result_map1, result_map2, result_map3, numEvent);
 
-		// TODO DELETE THIS !
-		// File f1 = new File("C:\\dest.csv");
 
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -343,7 +343,7 @@ public class ShowResults {
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult("c:\\results.xml"); // System.out
+		StreamResult result = new StreamResult(fileName); // System.out
 		transformer.transform(source, result);
 
 	}

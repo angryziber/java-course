@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * @author r_vassiljev
  */
 
-// TODO Add sorting by different events
 public class SortingID {
 
 	public static ArrayList<Integer> SortByID(Map<Integer, String[]> result_map1, 
