@@ -8,7 +8,7 @@ package net.azib.java.students.t030633.homework.model;
 public enum Event {
 
 	R100M("100 m dash", 25.437D, 18.0D, 1.81D), // 100 m dash
-	LONG("Long jump", 0.14354D, 220D, 1.40D), // long jump
+	LONGJ("Long jump", 0.14354D, 220D, 1.40D), // long jump
 	SHOT("Shot put", 51.39D, 1.5D, 1.05D), // shot put
 	HIGH("High jump", 0.8465D, 75D, 1.42D), // high jump
 	R400M("400 m dash", 1.53775D, 82D, 1.81D), // 400 m dash

@@ -16,7 +16,7 @@
 	</xsl:template>
 
 	<xsl:template match="athlete">
-		<h2>Name: <xsl:value-of select="name" /> (<xsl:value-of select="country" />)</h2>
+		<h2>#<xsl:value-of select="place" /> Name: <xsl:value-of select="name" /> (<xsl:value-of select="country" />)</h2>
 		<p>Born: <xsl:value-of select="birthdate" /></p>
 		<p>Total score: <xsl:value-of select="score" /></p>
 		<table border="1">

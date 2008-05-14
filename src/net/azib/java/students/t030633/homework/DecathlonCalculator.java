@@ -16,9 +16,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * DecathlonPointsCalculator
- * 
- * @author t030633
+ * Homework in Java course IAG0040 "Programmeerimise erikursus II"
+ * @version 1.0
+ * @author Tarmo Ojala, 030633 IASM
  */
 public class DecathlonCalculator {
 
@@ -56,7 +56,6 @@ public class DecathlonCalculator {
 				List<Athlete> athletes = input.read(new DecathlonAthleteBuilder(new DecathlonChecker(), new AddingCalculator()));
 				Collections.sort(athletes);
 				output.write(athletes);
-				out.println("Done.");
 			}
 			catch (IOException ioe) {
 				/*

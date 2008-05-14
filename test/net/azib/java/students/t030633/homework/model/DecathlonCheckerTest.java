@@ -39,7 +39,7 @@ public class DecathlonCheckerTest extends AbstractCheckerTest {
 		results.put(Event.DISCUS, 500D);
 		results.put(Event.HIGH, 5D);
 		results.put(Event.JAVELIN, 500D);
-		results.put(Event.LONG, 50D);
+		results.put(Event.LONGJ, 50D);
 		results.put(Event.POLE, 50D);
 		results.put(Event.R110MH, 5D);
 		results.put(Event.R1500M, 100D);

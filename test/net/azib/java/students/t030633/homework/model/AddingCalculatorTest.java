@@ -27,7 +27,7 @@ public class AddingCalculatorTest {
 	
 	private Map<Event, Double> zeroResults() {
 		EnumMap<Event, Double> map = new EnumMap<Event, Double>(Event.class);
-		map.put(Event.LONG, 0D);
+		map.put(Event.LONGJ, 0D);
 		map.put(Event.HIGH, 0D);
 		map.put(Event.POLE, 0D);
 		return map;

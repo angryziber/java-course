@@ -16,10 +16,13 @@ public class DecathlonChecker extends AbstractChecker {
 			for (Event e : results.keySet()) {
 				Double result = results.get(e);
 				switch (e) {
+				/*
+				 * Remove some impossible results.
+				 */
 				case DISCUS: if (result > 100D) results.remove(e); break;
 				case HIGH: if (result > 4D)	results.remove(e); break;
 				case JAVELIN: if (result > 150D) results.remove(e); break;
-				case LONG: if (result > 15D) results.remove(e); break;
+				case LONGJ: if (result > 15D) results.remove(e); break;
 				case POLE: if (result > 15D) results.remove(e); break;
 				case R100M:	if (result < 6D) results.remove(e); break;
 				case R110MH: if (result < 6D) results.remove(e); break;

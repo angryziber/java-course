@@ -29,7 +29,7 @@ public class EventTest {
 	@Test 
 	public void eventsAreCorrect() {
 		assertNotNull(Event.valueOf(Event.class, "R100M"));
-		assertNotNull(Event.valueOf(Event.class, "LONG"));
+		assertNotNull(Event.valueOf(Event.class, "LONGJ"));
 		assertNotNull(Event.valueOf(Event.class, "SHOT"));
 		assertNotNull(Event.valueOf(Event.class, "HIGH"));
 		assertNotNull(Event.valueOf(Event.class, "R400M"));
@@ -95,7 +95,7 @@ public class EventTest {
 	 */
 	@Test
 	public void calculatePointsForLongJump() {
-		Event e = Event.LONG;
+		Event e = Event.LONGJ;
 		assertEquals(382, e.points(5.00D));
 	}
 

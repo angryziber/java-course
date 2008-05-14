@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.jdom.Document;
@@ -47,9 +48,20 @@ public class XML implements Output {
 
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); // XSD date format
 
+		int placeEqual = 1;
+		int placeCounter = 1;
+		int lastScore = 20000;
 		for (Athlete athlete : athletes) {
 			Element athleteElement = new Element("athlete");
 
+			int score = athlete.getScore();
+			if (score != lastScore) {
+				placeEqual = placeCounter;
+				lastScore = score;
+			}
+			placeCounter++;
+
+			athleteElement.addContent(new Element("place").setText(String.valueOf(placeEqual)));
 			athleteElement.addContent(new Element("name").setText(athlete.getName()));
 			athleteElement.addContent(new Element("country").setText(athlete.getCountry()));
 
@@ -60,12 +72,20 @@ public class XML implements Output {
 			for (Event event : results.keySet()) {
 				Element resultElement = new Element("result");
 				resultElement.addContent(new Element("event").setText(event.getName()));
-				resultElement.addContent(new Element("performance").setText(String.valueOf(results.get(event))));
+				double performance = results.get(event);
+				StringBuilder perfBuilder = new StringBuilder();
+				if (performance > 60.0D)
+					perfBuilder.append((int) Math.floor(performance / 60)).append(":");
+				double remainder = ((double) Math.round((performance % 60) * 100)) / 100;
+				if (remainder < 10D)
+					perfBuilder.append("0");
+				perfBuilder.append(String.format(Locale.US, "%.2f", remainder));
+				resultElement.addContent(new Element("performance").setText(perfBuilder.toString()));
 				resultsElement.addContent(resultElement);
 			}
 			athleteElement.addContent(resultsElement);
 
-			athleteElement.addContent(new Element("score").setText(String.valueOf(athlete.getScore())));
+			athleteElement.addContent(new Element("score").setText(String.valueOf(score)));
 
 			root.addContent(athleteElement);
 		}

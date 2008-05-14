@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * Athlete interface.
+ * Athlete participating in a competition.
  *
  * @author t030633
  */

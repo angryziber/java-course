@@ -85,8 +85,8 @@ public class Database implements Input {
 		if (search == null)
 			throw new IOException("Competition name or number not specified.");
 		try {
-			File properties = new File(propertiesPath, "db.properties");
-			if (properties == null)
+			File properties = new File(propertiesPath, "db.properties.simple");
+			if (!properties.exists())
 				throw new IOException("Unable to find properties file.");
 			Connection conn = getConnection(properties);
 			return parseAthletes(builder, getAthletes(conn, search));
@@ -98,8 +98,8 @@ public class Database implements Input {
 
 	public void setParameters(String... param) {
 		propertiesPath = param[0]; // Parameter 0 should be a path to
-									// properties file
+		// properties file
 		search = param[1]; // Parameter 1 should be a search criterion
 	}
-	
+
 }

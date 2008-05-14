@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.EnumMap;
 
 /**
- * Builds an instance of Athlete.
+ * Builds an instance of DecathlonAthlete.
  * 
  * @author t030633
  */

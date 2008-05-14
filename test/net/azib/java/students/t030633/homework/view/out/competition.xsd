@@ -6,6 +6,7 @@
         <xs:element name="athlete">
           <xs:complexType>
             <xs:sequence>
+              <xs:element name="place" type="xs:string" />
               <xs:element name="name" type="xs:string" />
               <xs:element name="country" type="xs:string" />
               <xs:element name="birthdate" type="xs:date" />
@@ -16,7 +17,7 @@
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="event" type="xs:string" />
-                          <xs:element name="performance" type="xs:decimal" />
+                          <xs:element name="performance" type="xs:string" />
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>

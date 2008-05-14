@@ -42,13 +42,14 @@ public class CSV implements Input {
 			if (fileName == null)
 				throw new IOException("Input file not specified.");
 			InputStream input;
+			File inputFile = new File(filePath, fileName);
 			try {
-				input = new FileInputStream(new File(filePath, fileName));
+				input = new FileInputStream(inputFile);
+				reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
 			}
 			catch (FileNotFoundException e) {
 				throw new IOException("Input file not found.");
 			}
-			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
 		}
 		List<Athlete> list = new LinkedList<Athlete>();
 		String line;
@@ -59,7 +60,7 @@ public class CSV implements Input {
 			try {
 				list.add(parseAthlete(builder, line));
 			}
-			catch (ParseException e) {
+			catch (Exception e) {
 				throw new IOException("Unable to parse athlete from file. Line: " + line);
 			}
 		}
@@ -71,10 +72,10 @@ public class CSV implements Input {
 		String[] fields = line.split(",");
 		String[] stringResults = new String[Event.values().length];
 		System.arraycopy(fields, 3, stringResults, 0, Event.values().length);
-		double[] doubleResults = parseResults(stringResults);
+		double[] parsedResults = parseResults(stringResults);
 		int i = 0;
 		for (Event e : Event.values()) {
-			builder.addResult(e, doubleResults[i++]);
+			builder.addResult(e, parsedResults[i++]);
 		}
 		return builder.name(parseName(fields[0])).date(parseDate(fields[1])).country(fields[2]).build();
 	}
