@@ -152,7 +152,7 @@ public class FileOutputTest {
 	@Test
 	public void testXMLToCSV() throws ParseException, DocumentException, URISyntaxException, IOException{
 		List<Athlete> al = getAthleteList();
-		File tmpFile = File.createTempFile("test2", ".tmp");
+		File tmpFile = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());//File.createTempFile("test2", ".tmp");
 		Document doc = FileOutput.makeXMLDocument(al);
 		new FileOutput(tmpFile).toCSVFile(doc);
 		File tmpFile2 = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
