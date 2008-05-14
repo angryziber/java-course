@@ -1,8 +1,9 @@
-package net.azib.java.students.t030633.homework.view.in;
+package net.azib.java.students.t030633.hometasks;
 
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
+import net.azib.java.students.t030633.homework.view.in.Input;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +19,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Reads decathlon athletes from a database.
+ * Reads decathlon athletes from a database using simple JDBC connect.
+ * ! Replaced with Hibernate.
  * 
  * @author t030633
  */

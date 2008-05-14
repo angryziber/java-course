@@ -43,7 +43,7 @@ public enum Event {
 			return (int) Math.floor(A * Math.pow((B - performance), C));
 		else
 			// formula assumes cm units for three events
-			if(name().equals("LONG") || name().equals("HIGH") || name().equals("POLE")) 
+			if(name().equals("LONGJ") || name().equals("HIGH") || name().equals("POLE")) 
 				performance = performance * 100;
 			// Points = A*(P-B)^C for Field Events
 			return (int) Math.floor(A * Math.pow((performance - B), C));
