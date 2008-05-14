@@ -166,7 +166,7 @@ public class FileOutputTest {
         fis2.read(buf2);
         fis2.close();
         for (int i=0; i<len; i++){
-        	assertEquals(buf[i], buf2[i]);
+        	assertEquals(String.format("%c-%d",buf[i], i), String.format("%c-%d",buf2[i], i));
         	System.out.println(String.format("%c-%c",buf[i], buf2[i]));
         }	
         assertEquals(tmpFile.length(), tmpFile2.length());	
