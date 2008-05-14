@@ -54,11 +54,17 @@ public class DecathlonCalculator {
 			lnr.loadResultsCSV(result_map1, result_map2, 
 					result_map3, input_route);
 			break;
+		case CONSOLE:
+			lnr.loadResultsConsole(result_map1, result_map2, 
+					result_map3);
+			break;
 		}
 		
 		switch (output_method) {
 		case CONSOLE:
+			if (input_num == 0) input_num = 1;
 			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
+			if (input_num == 0) input_num = 1;
 			ShowResults.ShowResultsConsole(result_map1, result_map2, result_map3, 
 					results_array, input_num);
 			break;

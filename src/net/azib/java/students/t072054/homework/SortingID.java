@@ -47,6 +47,8 @@ public class SortingID {
 				buf[12]);
 		// END of decathlon count //
 		max_num = result;
+		max_athlet = buf[1];
+		max_index = 0;
 
 		// All indexes are choosed?
 		while (end_counter > 1) {

@@ -146,56 +146,57 @@ public class LoadNewResults {
 			String line;
 			// Num of line
 			int num_line = 0;
-			// Strings separated by ',' for map3
-			String[] str_buf = new String[13];
-			
-			// Same strings for map1, map2
-			String[] str_map1 = new String[4];
-			String[] str_map2 = new String[5];
-			
+
 			char[] char_buf = new char[1000];
 			// Counter for chars in String
 			int char_count = 0;
 
 			int count = 0;
 
+			// If true, needs conversion to second:millisecond format
+			boolean flag_need_converted = false;
+
 			while (in.ready()) {
 				line = in.readLine();
+
+				// Strings separated by ',' for map3
+				String[] str_buf = new String[13];
+
+				// Same strings for map1, map2
+				String[] str_map1 = new String[4];
+				String[] str_map2 = new String[5];
+
 				for (int i = 0; i < (line.length()); i++) {
 					if (line.charAt(i) != ',' && (i + 1) != line.length()) {
 						char_buf[char_count] = line.charAt(i);
+						if (char_buf[char_count] == ':')
+							flag_need_converted = true;
 						// char_buf[char_count + 1] = '\0';
 						char_count++;
 					}
 					else {
 						if (count > 2) {
 							str_buf[count] = String.copyValueOf(char_buf, 0, char_count);
+							if (flag_need_converted)
+								str_buf[count] = convertTime(str_buf[count]);
+							flag_need_converted = false;
 							char_count = 0;
 							count++;
 						}
-						else
-						{
-							if (count==0 || count==1)
-							{
+						else {
+							if (count == 0 || count == 1) {
 								str_buf[count] = String.valueOf(num_line + 1);
-								if (count == 0){
+								if (count == 0) {
 									str_map1[0] = String.valueOf(num_line + 1);
 									str_map1[1] = String.copyValueOf(char_buf, 0, char_count);
-									
-									str_map2[0] = String.valueOf(num_line + 1);
-									str_map2[1] = "NA";
-									str_map2[2] = "0000-00-00";
-									str_map2[3] = "NA";
-									str_map2[4] = "NA";
 								}
-								if (count == 1){
+								if (count == 1) {
 									str_map1[2] = String.copyValueOf(char_buf, 0, char_count);
 								}
 								char_count = 0;
 								count++;
 							}
-							else if (count == 2)
-							{
+							else if (count == 2) {
 								str_buf[count] = "1";
 								str_map1[3] = String.copyValueOf(char_buf, 0, char_count);
 								char_count = 0;
@@ -207,7 +208,15 @@ public class LoadNewResults {
 				}
 				result_map3.put(num_line, str_buf);
 				result_map1.put(num_line, str_map1);
-				result_map2.put(num_line, str_map2);
+
+				if (num_line == 0) {
+					str_map2[0] = "1";
+					str_map2[1] = "NA";
+					str_map2[2] = "0000-00-00";
+					str_map2[3] = "NA";
+					str_map2[4] = "NA";
+					result_map2.put(0, str_map2);
+				}
 
 				// for (int i = 0; i < 13; i++) {
 				// System.out.println(str_buf[i]);
@@ -244,39 +253,89 @@ public class LoadNewResults {
 			String line = " ";
 			// Num of line
 			int num_line = 0;
-			// Strings separated by ','
-			String[] str_buf = new String[13];
+
 			char[] char_buf = new char[1000];
 			// Counter for chars in String
 			int char_count = 0;
 
 			int count = 0;
 
+			// If true, needs conversion to second:millisecond format
+			boolean flag_need_converted = false;
+
 			while (!line.equalsIgnoreCase("quit")) {
 				System.out.println("Enter results or write 'quit' to finish");
 				line = reader.readLine();
 				if (!line.equalsIgnoreCase("quit")) {
+					
+					// Strings separated by ',' for map3
+					String[] str_buf = new String[13];
 
+					// Same strings for map1, map2
+					String[] str_map1 = new String[4];
+					String[] str_map2 = new String[5];
+					
 					for (int i = 0; i < (line.length()); i++) {
-						if (line.charAt(i) != ','/* && (i) != line.length() */) {
+						if (line.charAt(i) != ',' && (i + 1) != line.length()) {
 							char_buf[char_count] = line.charAt(i);
+							if (char_buf[char_count] == ':')
+								flag_need_converted = true;
 							// char_buf[char_count + 1] = '\0';
 							char_count++;
 						}
-						if (line.charAt(i) == ',' || (i + 1) == line.length()) {
-							str_buf[count] = String.copyValueOf(char_buf, 0, char_count);
-							char_count = 0;
-							count++;
+						if ((i + 1) == line.length() || line.charAt(i) == ',') {
+							if (count > 2) {
+								str_buf[count] = String.copyValueOf(char_buf, 0, char_count);
+								if (flag_need_converted)
+									str_buf[count] = convertTime(str_buf[count]);
+								flag_need_converted = false;
+								char_count = 0;
+								count++;
+							}
+							else {
+								if (count == 0 || count == 1) {
+									str_buf[count] = String.valueOf(num_line + 1);
+									if (count == 0) {
+										str_map1[0] = String.valueOf(num_line + 1);
+										str_map1[1] = String.copyValueOf(char_buf, 0, char_count);
+									}
+									if (count == 1) {
+										str_map1[2] = String.copyValueOf(char_buf, 0, char_count);
+									}
+									char_count = 0;
+									count++;
+								}
+								else if (count == 2) {
+									str_buf[count] = "1";
+									str_map1[3] = String.copyValueOf(char_buf, 0, char_count);
+									char_count = 0;
+									count++;
+								}
+							}
 						}
 
 					}
+					
+					result_map3.put(num_line, str_buf);
+					result_map1.put(num_line, str_map1);
+
+					if (num_line == 0) {
+						str_map2[0] = "1";
+						str_map2[1] = "NA";
+						str_map2[2] = "0000-00-00";
+						str_map2[3] = "NA";
+						str_map2[4] = "NA";
+						result_map2.put(0, str_map2);
+					}
+
+					// for (int i = 0; i < 13; i++) {
+					// System.out.println(str_buf[i]);
+					// }
+					count = 0;
+					num_line++;
 				}
-				result_map2.put(num_line, str_buf);
-				for (int i = 0; i < 13; i++) {
-					System.out.println(str_buf[i]);
-				}
-				count = 0;
-				num_line++;
+				
+			
 			}
 
 		}
@@ -284,5 +343,40 @@ public class LoadNewResults {
 			System.out.println("File exception");
 		}
 
+	}
+
+	public String convertTime(String not_converted) {
+		String converted;
+
+		int minute = 0;
+		int second = 0;
+		int millisecond = 0;
+
+		char[] char_buf = new char[10];
+		char char_count = 0;
+
+		for (int i = 0; i < (not_converted.length()); i++) {
+			if (not_converted.charAt(i) != ',') {
+				if (not_converted.charAt(i) == ':') {
+					minute = Integer.parseInt(String.copyValueOf(char_buf, 0, char_count));
+					char_count = 0;
+				}
+				else if (not_converted.charAt(i) == '.') {
+					second = Integer.parseInt(String.copyValueOf(char_buf, 0, char_count));
+					char_count = 0;
+				}
+				else {
+					char_buf[char_count] = not_converted.charAt(i);
+					char_count++;
+				}
+			}
+		}
+
+		millisecond = Integer.parseInt(String.copyValueOf(char_buf, 0, char_count));
+
+		second = minute * 60 + second;
+		converted = String.valueOf(second) + "." + String.valueOf(millisecond);
+
+		return converted;
 	}
 }
