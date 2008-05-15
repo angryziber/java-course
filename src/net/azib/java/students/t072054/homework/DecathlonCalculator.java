@@ -12,9 +12,9 @@ import java.util.LinkedHashMap;
  */
 
 // TODO 4. Sharing the places (equal score)
-// TODO 3. DB connection string must be read from db.properties in the same package as the main class
+// TODO 3. DB connection string must be read from db.properties in the same
+// package as the main class
 // http://www.webdevelopersjournal.com/columns/connection_pool.html
-// TODO 1. competition id or name - both should work
 // TODO 2. Validating for logical correctness
 public class DecathlonCalculator {
 	// Input/output methods
@@ -34,6 +34,7 @@ public class DecathlonCalculator {
 
 	private static int input_method;
 	private static int output_method;
+	private static String input_string;
 	private static int input_num;
 	private static String input_route;
 	private static String output_route;
@@ -42,54 +43,61 @@ public class DecathlonCalculator {
 		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
 		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
 		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
-		
+
 		// Initial value
 		input_num = 1;
-		
+
 		LoadNewResults lnr = new LoadNewResults();
-		
+
 		ArrayList<Integer> results_array = new ArrayList<Integer>();
-		
-		CommandLineParsing(args);
+
+		commandLineParsing(args);
 
 		switch (input_method) {
 		case DB:
 			lnr.loadResultsDB(result_map1, result_map2, result_map3);
 			break;
 		case CSV:
-			lnr.loadResultsCSV(result_map1, result_map2, 
-					result_map3, input_route);
+			lnr.loadResultsCSV(result_map1, result_map2, result_map3, input_route);
 			break;
 		case CONSOLE:
-			lnr.loadResultsConsole(result_map1, result_map2, 
-					result_map3);
+			lnr.loadResultsConsole(result_map1, result_map2, result_map3);
 			break;
 		}
 		
+		// Check for name of competition
+		if (input_method == DB) {
+			input_num = getEventID(result_map2, input_string);
+			if (input_num == -1)
+				input_num = Integer.valueOf(input_string);
+		}
+
 		switch (output_method) {
 		case CONSOLE:
-			if (input_num == 0) input_num = 1;
+			if (input_num == 0)
+				input_num = 1;
 			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
-			if (input_num == 0) input_num = 1;
-			ShowResults.ShowResultsConsole(result_map1, result_map2, result_map3, 
-					results_array, input_num);
+			if (input_num == 0)
+				input_num = 1;
+			ShowResults.ShowResultsConsole(result_map1, result_map2, result_map3, results_array, input_num);
 			break;
 		case XML:
-			if (input_num == 0) input_num = 1;
+			if (input_num == 0)
+				input_num = 1;
 			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
-			if (input_num == 0) input_num = 1;
-			try{
-			ShowResults.ShowResultsXML(result_map1, result_map2, result_map3, 
-					results_array, input_num, output_route);
+			if (input_num == 0)
+				input_num = 1;
+			try {
+				ShowResults.ShowResultsXML(result_map1, result_map2, result_map3, results_array, input_num, output_route);
 			}
-			catch (Exception e){
+			catch (Exception e) {
 				System.out.println("XML parsing exception!");
 			}
 			break;
 		}
 	}
 
-	public static String CommandLineParsing(String args[]) {
+	public static String commandLineParsing(String args[]) {
 		int stage = INPUT_METHOD;
 		String return_value;
 
@@ -123,8 +131,9 @@ public class DecathlonCalculator {
 			else if (stage == INPUT_INTEGER) {
 				char first_letter;
 
-				first_letter = s.charAt(0);
-				input_num = first_letter - 48;
+				// first_letter = s.charAt(0);
+				// input_num = first_letter - 48;
+				input_string = s;
 				stage = OUTPUT_METHOD;
 			}
 			else if (stage == OUTPUT_METHOD) {
@@ -155,8 +164,21 @@ public class DecathlonCalculator {
 		// System.out.println("Input route = " + input_route);
 		// System.out.println("Output route = " + output_route);
 
-		return_value = input_route + " " + output_route + " " + input_method + " " + output_method + " " + input_num;
+		return_value = input_route + " " + output_route + " " + input_method + " " + output_method + " " + input_string;
 
 		return return_value;
+	}
+
+	public static int getEventID(Map<Integer, String[]> result_map2, String name) {
+		int id = 0;
+
+		for (int i = 0; i < result_map2.size(); i++) {
+			if (result_map2.get(i)[3].equalsIgnoreCase(name)) {
+				id = Integer.parseInt((result_map2.get(i)[0]));
+				return id;
+			}
+		}
+
+		return -1;
 	}
 }
