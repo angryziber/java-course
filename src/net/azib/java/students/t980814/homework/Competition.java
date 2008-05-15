@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
+//import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,14 +16,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TreeSet;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
+//import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
+
 
 /**
  * Results
@@ -32,13 +35,10 @@ import org.dom4j.io.XMLWriter;
  */
 public class Competition {
 
-	final String OUTPUT_PLACE_DELIMITER_CONSOLE = ". ";
-	final String OUTPUT_PLACE_DELIMITER_CSV     = ",";
-	
+	final static String LN = System.getProperty("line.separator");
+
 	private TreeSet<Results> results;
-	private int comp_id;
-	private String outputPlaceSeparator = OUTPUT_PLACE_DELIMITER_CONSOLE;
-	
+	private int competitionId;
 	
 	public Competition(InputStream inputStream) {
 		StringBuilder sb = new StringBuilder();
@@ -47,7 +47,7 @@ public class Competition {
 		System.out.print("Enter athlete's name: ");
 		sb.append("\"").append(scanner.next()).append("\"");
 		
-		System.out.print("Enter his/her date of birth (" + Athlete.DATE_FORMAT + "): ");
+		System.out.print("Enter his/her date of birth (" + DateFormat.getDateInstance(DateFormat.MEDIUM) + "): ");
 		
 		scanner.close();
 	}
@@ -84,22 +84,18 @@ public class Competition {
 	}
 	
 	public Competition(Connection conn,
-			       String competition_id) throws DecaCalcException {
+			       String compIdString) throws DecaCalcException {
 		ResultSet rs = null;
 
 		try {
-			PreparedStatement result_statement = conn.prepareStatement("select * from results where id = ?");
 			PreparedStatement statement = conn.prepareStatement("select id from results where competition_id = ?");
+			competitionId = getCompetitionIdInt(conn, compIdString);
+			statement.setInt(1, competitionId);
 
-			this.comp_id = getCompetitionIdInt(conn, competition_id);
-			statement.setInt(1, this.comp_id);
-
-			rs = statement.executeQuery();
 			results = new TreeSet<Results>();
-			while (rs.next()) {
-				result_statement.setInt(1, rs.getInt("id"));
-				results.add(new Results(conn, result_statement));
-			}
+			rs = statement.executeQuery();
+			while (rs.next())
+				results.add(new Results(conn, rs.getInt("id")));
 		}
 		catch (SQLException e) {
 			throw new DecaCalcException("Error reading results database.");
@@ -109,14 +105,14 @@ public class Competition {
 		}
 	}
 
-	private int getCompetitionIdInt(Connection conn, String competition_id) throws DecaCalcException {
+	private int getCompetitionIdInt(Connection conn, String compIdString) throws DecaCalcException {
 		ResultSet rs = null;
 		int returnCompId = 0;
 		try {
 			PreparedStatement competition_statement =
 							conn.prepareStatement("select id from competitions where id = ? or name = ?");
-			competition_statement.setString(1, competition_id);
-			competition_statement.setString(2, competition_id);
+			competition_statement.setString(1, compIdString);
+			competition_statement.setString(2, compIdString);
 			rs = competition_statement.executeQuery();
 			if (rs.next())
 				returnCompId = rs.getInt("id");
@@ -130,14 +126,34 @@ public class Competition {
 		return returnCompId;
 	}
 	
+	private LinkedList<Integer> buildSortedResults() {
+		LinkedList<Integer> positions = new LinkedList<Integer>();
+		int place = 1;
+		int prevSum = -1;
+		int index = 1;
+		
+		for (Results rr : results) {
+			if (prevSum != rr.getSum())
+				place = index;
+			prevSum = rr.getSum();
+			positions.add(place);
+			index++;
+		}
+		return positions;
+	}
+	
 	public void toStringCSV(File fileCSV) throws DecaCalcException {
-		outputPlaceSeparator = OUTPUT_PLACE_DELIMITER_CSV;
+		/*StringBuilder sb = new StringBuilder();
+		java.util.Iterator<Integer> i = buildSortedResults().iterator();
+		for (Results rr : results)
+			sb.append(i.next()).append(",").append(rr.toStringCSV()).append(LN);
+		*/
 		String fileContent = toString();
 		BufferedOutputStream bs = null;
 		try {
 			// What to do if there is no data to output... create an empty file?
 			bs = new BufferedOutputStream(new FileOutputStream(fileCSV));
-			bs.write(fileContent.getBytes("UTF-8"));
+			bs.write(/*sb.toString().getBytes("UTF-8")*/fileContent.getBytes("UTF-8"));
 		}
 		catch (IOException e) {
 			throw new DecaCalcException("Unable to output data to CSV file named " + fileCSV);
@@ -148,56 +164,38 @@ public class Competition {
 	}
 
 	public String toString() {
-		final String LN = System.getProperty("line.separator");
 		StringBuilder sb = new StringBuilder();
-
-		int place = 1;
-		int prevSum = -1;
-		int index = 1;
-		
-		for (Results rr : results) {
-			if (prevSum != rr.getSum())
-				place = index;
-			prevSum = rr.getSum();
-			sb.append(place).append(outputPlaceSeparator).append(rr);
-			sb.append(LN);
-			index++;
-		}
-		outputPlaceSeparator = OUTPUT_PLACE_DELIMITER_CONSOLE;
+		java.util.Iterator<Integer> i = buildSortedResults().iterator();
+		for (Results rr : results)
+			sb.append(String.format("%2d", i.next())).append(". ").append(rr).append(LN);
 		return sb.toString();
 	}
 
 	public void toXML(File fileXML) throws DecaCalcException {
 		Document document = DocumentHelper.createDocument();
+		document.setXMLEncoding("UTF-8");
+		document.addDocType("competition", "", "decathlon.dtd");
 		Element root = document.addElement("competition");
 		
-		int place = 1;
-		int prevSum = -1;
-		int index = 1;
-
-		for (Results rr : results) {
-			if (prevSum != rr.getSum())
-				place = index;
-			prevSum = rr.getSum();
-
-			Element athleteElement = root.addElement("athlete").addAttribute("id", "1");
-			athleteElement.addElement("position").addText(String.valueOf(place));
-			rr.addResultsDataToElement(athleteElement);
-
-			index++;
-		}
+		java.util.Iterator<Integer> i = buildSortedResults().iterator();
+		for (Results rr : results)
+			root = rr.addResultsDataToElement(root, i.next());
 		
-		OutputFormat format = OutputFormat.createPrettyPrint();
-        XMLWriter writer = null;
+		//OutputFormat format = new OutputFormat("    ", true, "UTF-8");
+		XMLWriter writer = null;
+		BufferedOutputStream bs = null;
         try {
-            writer = new XMLWriter(new FileWriter(fileXML), format);
-			writer.write(document);
+			bs = new BufferedOutputStream(new FileOutputStream(fileXML));
+        	bs.write(document.asXML().getBytes("UTF-8"));
+        	//writer = new XMLWriter(new FileWriter(fileXML), format);
+			//writer.write(document);
 		}
 		catch (IOException e) {
 			throw new DecaCalcException("Unable to create XML file");
 		}
 		finally {
 			closeQuietly(writer);
+			closeQuietly(bs);
 		}
 	}
 	

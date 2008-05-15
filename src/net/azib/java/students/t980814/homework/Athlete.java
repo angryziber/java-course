@@ -19,16 +19,22 @@ import org.dom4j.Element;
  */
 public class Athlete {
 
-	public final static String DATE_FORMAT = "dd.MM.yyyy"; 
-
-	private int athlete_id;
+	final static String COMMA = ",";
+	public final static String CSV_DATE_FORMAT = "dd.MM.yyyy"; 
+	// when reading from CSV, then dd.MM.yyyy
+	// when reading from console, then use locale
+	// when printing to CSV, then dd.MM.yyyy
+	// when printing to console/XML, then use locale
+	
+	
+	private int athleteId;
 	private String name;
 	private Date dob;
 	private String country;
 
-	public Athlete(int athlete_id, String name, String dob, String country) throws DecaCalcException {
-		DateFormat dfm = new SimpleDateFormat(DATE_FORMAT);
-		this.athlete_id = athlete_id;
+	public Athlete(int athleteId, String name, String dob, String country) throws DecaCalcException {
+		DateFormat dfm = new SimpleDateFormat(CSV_DATE_FORMAT);
+		this.athleteId = athleteId;
 		this.name = name;
 		try {
 			this.dob = dfm.parse(dob);
@@ -47,7 +53,7 @@ public class Athlete {
 			athlete_statement.setInt(1, id);
 			rs = athlete_statement.executeQuery();
 			while (rs.next()) {
-				this.athlete_id = id;
+				this.athleteId = id;
 				this.dob = rs.getDate("dob");
 				this.name = new String(rs.getBytes("name"), "UTF-8");
 				this.country = new String(rs.getBytes("country_code"), "UTF-8");
@@ -66,25 +72,36 @@ public class Athlete {
 
 	@Override
 	public String toString() {
-		final String COMMA = ",";
-		StringBuilder sb = new StringBuilder();
-		DateFormat dfm = new SimpleDateFormat(DATE_FORMAT);
-		sb.append("\"").append(name).append("\"").append(COMMA);
-		sb.append(dfm.format(dob)).append(COMMA);
-		sb.append(country); 
-		return sb.toString();
+		return new StringBuilder().append(name).append(" (").
+                                   append(DateFormat.getDateInstance(DateFormat.MEDIUM).format(dob)).
+                                   append(") from ").append(country).toString();
 	}
 	
+	public String toStringCSV() {
+		String dateStr;
+		try {
+			dateStr = new SimpleDateFormat(CSV_DATE_FORMAT).format(dob);
+		} catch (Exception e) {
+			dateStr = "-";
+		}
+		return new StringBuilder().append("\"").append(name).append("\"").append(COMMA).
+								   append(dateStr).append(COMMA).
+								   append(country).toString(); 
+	}
+
 	public Element addAthleteDataToElement(Element root) {
 		if (root instanceof Element) {
+			DateFormat dfm = DateFormat.getDateInstance(DateFormat.MEDIUM);
 			root.addElement("name").addText(name);
-			root.addElement("dob").addText(dob.toString());
+			root.addElement("dob").addText(dfm.format(dob));
 		}
 		return root;
 	}
 
-	@Override
-	public int hashCode() {
-		return athlete_id;
+	/**
+	 * @return the athlete_id
+	 */
+	public int getAthleteId() {
+		return athleteId;
 	}
 }

@@ -15,6 +15,8 @@ import org.dom4j.Element;
  */
 public class Results implements Comparable<Results> {
 
+	final static String COMMA = ",";
+
 	Athlete athlete;
 	private HashMap<String, Float> resultData;
 	private int sum;
@@ -49,12 +51,13 @@ public class Results implements Comparable<Results> {
 		};			
 	}
 	
-	public Results(Connection conn,
-			            PreparedStatement result_stmt) throws DecaCalcException {
+	public Results(Connection conn, int id) throws DecaCalcException {
 		sum = 0;
 		ResultSet rs = null;
 		try {
-			rs = result_stmt.executeQuery();
+			PreparedStatement result_statement = conn.prepareStatement("select * from results where id = ?");
+			result_statement.setInt(1, id);
+			rs = result_statement.executeQuery();
 			while (rs.next()) { 
 				athlete = new Athlete(conn, rs.getInt("athlete_id"));
 				resultData = new HashMap<String, Float>();
@@ -92,24 +95,37 @@ public class Results implements Comparable<Results> {
 	}
 	
 	public String toString() {
-		final String COMMA = ",";
 		StringBuilder sb = new StringBuilder();
-		sb.append(sum).append(COMMA).append(athlete);
+		sb.append(sum).append(" - ").append(athlete).append(COMMA).append(" Results: ");
+		for (String key : DecathlonEvent.getAllKeys())
+			sb.append(getResultString(key)).append(COMMA);
+		return sb.substring(0, sb.length() - 1);
+	}
+
+	public String toStringCSV() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(sum).append(COMMA).append(athlete.toStringCSV());
 		for (String key : DecathlonEvent.getAllKeys())
 			sb.append(COMMA).append(getResultString(key));
 		return sb.toString();
 	}
+	
 
-	public Element addResultsDataToElement(Element athleteElement) {
-		if (athleteElement instanceof Element) {
+	public Element addResultsDataToElement(Element root, int position) throws DecaCalcException {
+		if (root instanceof Element) {
+			Element athleteElement = root.addElement("athlete").
+										  addAttribute("id", String.valueOf(athlete.getAthleteId()));
+			athleteElement.addElement("position").addText(String.valueOf(position));
 			athleteElement.addElement("score").addText(String.valueOf(sum));
 			athlete.addAthleteDataToElement(athleteElement);
 			Element resultsElement = athleteElement.addElement("results");
 			for (String key : DecathlonEvent.getAllKeys())
 				resultsElement.addElement(key).addText(getResultString(key));
 		}
-		return athleteElement;
-	}
+		else
+			throw new DecaCalcException("Unable to add data to XML file");
+		return root;
+	} 
 	
 	public int compareTo(Results o) {
 		return (sum <= o.getSum())? 1 : -1;
