@@ -337,7 +337,7 @@ public class ShowResults {
 			// fw.close();
 		}
 		catch (Exception e) {
-			System.out.println("Exception");
+			System.out.println("XML Exception");
 		}
 
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();

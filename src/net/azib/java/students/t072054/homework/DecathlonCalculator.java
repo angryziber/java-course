@@ -64,12 +64,17 @@ public class DecathlonCalculator {
 			lnr.loadResultsConsole(result_map1, result_map2, result_map3);
 			break;
 		}
-		
+
 		// Check for name of competition
-		if (input_method == DB) {
-			input_num = getEventID(result_map2, input_string);
-			if (input_num == -1)
-				input_num = Integer.valueOf(input_string);
+		try {
+			if (input_method == DB) {
+				input_num = getEventID(result_map2, input_string);
+				if (input_num == -1)
+					input_num = Integer.valueOf(input_string);
+			}
+		}
+		catch (Exception e) {
+			System.out.println("Competition name not found exception");
 		}
 
 		switch (output_method) {
@@ -91,7 +96,7 @@ public class DecathlonCalculator {
 				ShowResults.ShowResultsXML(result_map1, result_map2, result_map3, results_array, input_num, output_route);
 			}
 			catch (Exception e) {
-				System.out.println("XML parsing exception!");
+				System.out.println("XML creating exception!");
 			}
 			break;
 		}
@@ -129,7 +134,7 @@ public class DecathlonCalculator {
 				stage = OUTPUT_METHOD;
 			}
 			else if (stage == INPUT_INTEGER) {
-				char first_letter;
+				//char first_letter;
 
 				// first_letter = s.charAt(0);
 				// input_num = first_letter - 48;
