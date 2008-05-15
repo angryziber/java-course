@@ -16,24 +16,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * FileInput - a class for obtaining decathlon results from a CVS file
+ * FileInput - a class for obtaining decathlon results from a CSV file
  *
- * @version 0.0
+ * @version 1.0
  * @author Romi Agar
  */
 public class FileInput implements DataInput {
-	private static final Logger LOG = Logger.getLogger(DataInput.class.getSimpleName());			
+	private static final Logger LOG = Logger.getLogger(FileInput.class.getSimpleName());			
 
 	static final String ERROR_NO_FILE_TEXT = " cannot be found.";
 	static final String INVALID_DATA_TEXT = " contains data in invalid format.";
 	static final String INVALID_FILENAME_TEXT = " is not valid file name.";
-	static final int ERROR_CODE_NO_ARGS = 1;
-	static final int ERROR_CODE_NO_FILE = 2;
-	static final int ERROR_CODE_ENCODING = 3;
-	static final int ERROR_CODE_READ_FILE = 4;
-	static final int ERROR_CODE_CLOSING = 5;
+	static final int ERROR_CODE_NO_ARGS = 6;
+	static final int ERROR_CODE_NO_FILE = 7;
 	private File dataSource = null;
 
+	/**
+	 * @param fileName
+	 * @return returns true if file exists, false otherwise
+	 */
 	boolean initiateFile(String fileName){
 		dataSource = new File(fileName);
 		if (!dataSource.exists()){
@@ -43,20 +44,27 @@ public class FileInput implements DataInput {
 		}
 		return true;
 	}
-	
+
+	/**
+	 * Exiting from program with given error code
+	 * @param errorCode error code (int) for exiting
+	 */
 	void exit(int errorCode) {
 		   System.exit(errorCode);
 	}
 	
-	public List<Athlete> getResults(String... parameter) {
-		if (parameter.length == 0){
+	/**
+	 * @param parameters contains csv input file name
+	 * @return returns a list of athletes
+	 */
+	public List<Athlete> getResults(String... parameters) {
+		List<Athlete> athletes = new ArrayList<Athlete>();
+		if (parameters.length == 0){
 			LOG.severe("No input file name given.");			
 			exit(ERROR_CODE_NO_ARGS);
-		}else if (!initiateFile(parameter[0]))
+		}else if (!initiateFile(parameters[0]))
 			exit(ERROR_CODE_NO_FILE);
-		if (dataSource != null){
-			List<Athlete> athletes = new ArrayList<Athlete>();
-			
+		if (dataSource != null){			
 			String line = "";
 			String name = "";
 			String countryCode = "";
@@ -87,16 +95,22 @@ public class FileInput implements DataInput {
 				}
 			}
 			catch (UnsupportedEncodingException e) {
-				LOG.log(Level.SEVERE, "Encoding problem with file: " + dataSource, e);
-				exit(ERROR_CODE_ENCODING);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Encoding problem with file: " + dataSource, e);
+				else
+					LOG.log(Level.SEVERE, "Encoding problem with file: " + dataSource);
 			}
 			catch (FileNotFoundException e) {
-				LOG.log(Level.SEVERE, "'" + dataSource + "'" + ERROR_NO_FILE_TEXT, e);
-				exit(ERROR_CODE_NO_FILE);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "'" + dataSource + "'" + ERROR_NO_FILE_TEXT, e);
+				else
+					LOG.log(Level.SEVERE, "'" + dataSource + "'" + ERROR_NO_FILE_TEXT);
 			}
 			catch (IOException e) {
-				LOG.log(Level.SEVERE, "Could not read from file: " + dataSource, e);
-				exit(ERROR_CODE_READ_FILE);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Could not read from file: " + dataSource, e);
+				else
+					LOG.log(Level.SEVERE, "Could not read from file: " + dataSource);
 			}
 			finally{
 				if (br != null){					
@@ -104,15 +118,15 @@ public class FileInput implements DataInput {
 						br.close();
 					}
 					catch (IOException e) {
-						LOG.log(Level.SEVERE, "Could not close file: " + dataSource, e);
-						exit(ERROR_CODE_CLOSING);
+						if (System.getProperty("program.debug") != null)
+							LOG.log(Level.SEVERE, "Could not close file: " + dataSource, e);
+						else
+							LOG.log(Level.SEVERE, "Could not close file: " + dataSource);
 					}
 				}
 			}
-			
-			return athletes;
-		} else
-			return null;
+		}
+		return athletes;
 	}
 	
 }

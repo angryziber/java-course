@@ -37,10 +37,10 @@ public class Athlete implements Comparable<Athlete>{
 		this.birthday = birthday;
 		
 		if (rawResults.length != 10){
-			LOG.severe("Wrong number of raw results!");
-			exit(10);
-		}
-		this.results = rawResults;
+			LOG.warning("Wrong number of raw results!");
+			this.results = new float[10];
+		}else
+			this.results = rawResults;
 		calculatePoints();
 	}
 	
@@ -62,9 +62,6 @@ public class Athlete implements Comparable<Athlete>{
 	 * @return returns the date of birth of the athlete
 	 */
 	public String getBirthdayString(){
-//		Locale locale = new Locale(System.getProperty("user.language"));
-//		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
-//		return df.format(this.birthday);
 		return new SimpleDateFormat(InputParser.DATE_FORMAT).format(this.birthday);
 	}
 	
@@ -79,7 +76,12 @@ public class Athlete implements Comparable<Athlete>{
 	 * @return returns decathlon results array (float)
 	 */
 	public float getDecathlonResult(int i){
-		return this.results[i];
+		if (i<results.length)
+			return this.results[i];
+		else{
+			LOG.warning("Decathlon results array index out of bounds [0..9]");
+			return 0.0f;
+		}
 	}
 
 	/**
@@ -106,14 +108,6 @@ public class Athlete implements Comparable<Athlete>{
 	 */
 	public int compareTo(Athlete o) {
 		return o.decathlonPoints - decathlonPoints;
-	}
-	
-	/**
-	 * Exits the program with error code
-	 * @param errorCode error code (int) for exiting the program
-	 */
-	void exit(int errorCode) {
-		   System.exit(errorCode);
 	}
 	
 }

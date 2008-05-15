@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,12 +42,7 @@ public class ConsoleOutputTest {
 
 	@Test
 	public void testGetEventsFormatString(){
-		String str = "";
-		for(int i=0; i<DecathlonConstants.values().length-1; i++)
-			str += "%" + DecathlonConstants.getOrdinal(i).getName().length() + ".2f | ";
-		str += "%" + DecathlonConstants.getOrdinal(9).getName().length() + ".2f";
-
-		assertEquals(str, new ConsoleOutput().getEventsFormatString());
+		assertEquals("%9.2f%16$3s | %7.2f%16$2s | %7.2f%16$1s | %7.2f%16$2s | %10s%16$2s | %9.2f%16$4s | %9.2f%16$3s | %8.2f%16$2s | %9.2f%16$4s | %9s", new ConsoleOutput().getEventsFormatString());
 	}
 
 	@Test
@@ -63,16 +59,20 @@ public class ConsoleOutputTest {
 		float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
 		Athlete ath = new Athlete("s s", new Date(), "EE", realResults);
 		List<Object> lo = new ArrayList<Object>();
-		lo.add(2);
+		lo.add("2");
 		lo.add(ath.getName());
 		lo.add(ath.getDecathlonPoints());
 		lo.add(ath.getCountryCode());
 		lo.add(df.format(ath.getBirthday()));
 		for(int i=0; i<DecathlonConstants.values().length; i++)
-			lo.add(ath.getDecathlonResult(i));
+			if (i==4 || i==9)
+				lo.add(InputParser.formatTime(ath.getDecathlonResult(i)));
+			else
+				lo.add(ath.getDecathlonResult(i));
+		lo.add("");
 		
 		for(int i=0; i<lo.size(); i++)
-			assertEquals(lo.get(i), new ConsoleOutput().getAthleteInfo(2, df, ath)[i]);
+			assertEquals(lo.get(i), new ConsoleOutput().getAthleteInfo("2", df, ath)[i]);
 	}
 	
 	@Test
@@ -84,7 +84,19 @@ public class ConsoleOutputTest {
 	         }
 		};
 		co.outputResults(null);
-		assertEquals(11, errorCode);
+		assertEquals(9, errorCode);
+	}
+	
+	@Test
+	public void nullArgumentGivenToGetAthleteInfo(){
+		ConsoleOutput co = new ConsoleOutput() {
+			@Override
+			public void exit(int errorCode) {
+	        	 ConsoleOutputTest.this.errorCode = errorCode;
+	         }
+		};
+		co.getAthleteInfo("1", null, null);
+		assertEquals(10, errorCode);
 	}
 	
 	@Test
@@ -101,6 +113,16 @@ public class ConsoleOutputTest {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		new ConsoleOutput(new PrintStream(out)).outputResults(new ArrayList<Athlete>());
 		String formatted = String.format(Locale.getDefault(), "%1s %-4s %5s %7s %-" + dateLength + "s " + new ConsoleOutput().getEventNamesFormatString(),tableHeader.toArray());
-		assertEquals(LN + "The decathlon competition final results:"+LN + formatted +LN, out.toString());
+		assertEquals("The decathlon competition final results:"+LN + formatted +LN, out.toString());
+	}
+	
+	@Test
+	public void testGetPositionFieldLength() throws ParseException{
+		Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.1999");
+		float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
+		List<Athlete> al = new ArrayList<Athlete>();
+		al.add(new Athlete("Siim Susi", d, "EE", realResults));
+		al.add(new Athlete("Margus Murakas", d, "ET", realResults));
+		assertEquals(3,new ConsoleOutput().getPositionFieldLength(al));
 	}
 }

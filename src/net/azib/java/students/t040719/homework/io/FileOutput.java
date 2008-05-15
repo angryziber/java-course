@@ -41,7 +41,7 @@ import org.dom4j.io.XMLWriter;
 import org.xml.sax.SAXException;
 
 /**
- * FileOutput
+ * FileOutput - class for outputting decathlon results to files (currently csv,xml,html)
  *
  * @version 1.0
  * @author Romi Agar
@@ -69,13 +69,13 @@ public class FileOutput implements DataOutput {
 	
 	/**
 	 * @param results a list of athlete objects
-	 * @return returns a DOM4J xml document object
+	 * @return returns a DOM4J xml document
 	 */
 	public static Document makeXMLDocument(List<Athlete> results){
 		Document document = DocumentHelper.createDocument();
         Element root = document.addElement("decathlon")
         	.addAttribute(new QName("xmlns:xsi",Namespace.NO_NAMESPACE), "http://www.w3.org/2001/XMLSchema-instance")
-        	.addAttribute(new QName("xsi:noNamespaceSchemaLocation",Namespace.NO_NAMESPACE), "DecathlonResults.xsd");
+        	.addAttribute(new QName("xsi:noNamespaceSchemaLocation",Namespace.NO_NAMESPACE), "http://rmg.planet.ee/DecathlonResults.xsd");
     	String place ="1";
         for (int i=0; i<results.size(); i++){
         	Athlete a = results.get(i);
@@ -100,7 +100,10 @@ public class FileOutput implements DataOutput {
 		        Element event = athlete.addElement("event")
 		            .addAttribute("order", Integer.toString(j+1));
 		        event.addElement("name").addText(DecathlonConstants.getOrdinal(j).getName());
-	        	event.addElement("result").addText(String.format(Locale.US, "%.2f", a.getDecathlonResult(j)));
+		        if (DecathlonConstants.values()[j].getUnit().equals("min:sec"))
+		        	event.addElement("result").addText(InputParser.formatTime(a.getDecathlonResult(j)));
+		        else
+		        	event.addElement("result").addText(String.format(Locale.US, "%.2f", a.getDecathlonResult(j)));
 	        	event.addElement("unit").addText(DecathlonConstants.getOrdinal(j).getUnit());
 		    }
 	    }
@@ -112,7 +115,11 @@ public class FileOutput implements DataOutput {
 	 * @param i index from where to start looking
 	 * @return returns the shared place interval
 	 */
-	static String findPlaceSharers(List<Athlete> results, int i) {
+	public static String findPlaceSharers(List<Athlete> results, int i) {
+		if (results == null || i > results.size()-1 || i < 0){
+			LOG.warning("Incorrect parameters given to findPlaceSharers()");
+			return "-";
+		}
 		String place = Integer.toString(i+1) + "-";
 		while (results.get(i).getDecathlonPoints()==results.get(i+1).getDecathlonPoints() && ++i < results.size()-1);
 		return place + Integer.toString(i+1);
@@ -149,18 +156,18 @@ public class FileOutput implements DataOutput {
 	}
 	
 	/**
-	 * Outputs the athlete results from given list to an output file
+	 * Outputs the decathlon results from given list to an output file
 	 * @param results a list of athletes
-	 * @param parameter single parameter output file name
+	 * @param parameters single parameter output file name
 	 */
-	public void outputResults(List<Athlete> results, String... parameter) {
+	public void outputResults(List<Athlete> results, String... parameters) {
 		if (results == null){
-			LOG.severe("Null parameter for athlete list.");
-			exit(1);
+			LOG.severe("Null parameter for athlete list");
+			exit(11);
 		}
-		else if (parameter == null || parameter.length != 2 || parameter[0].equals("") || !parameter[1].equals("-xml") && !parameter[1].equals("-csv") && !parameter[1].equals("-html")){
-			LOG.severe("Must specify output file name and output format (-xml/-html/-csv).");
-			exit(2);
+		else if (parameters == null || parameters.length != 2 || parameters[0].equals("") || !parameters[1].equals("-xml") && !parameters[1].equals("-csv") && !parameters[1].equals("-html")){
+			LOG.severe("Must specify output file name and output format (-xml/-html/-csv)");
+			exit(12);
 		}
 		else{
 			Document document = makeXMLDocument(results);
@@ -177,13 +184,13 @@ public class FileOutput implements DataOutput {
 			if (!isValidXML(document.asXML(), xsdPath.getPath()))
 				LOG.warning("XML file is not valid.");
 	        if (out == null)
-	        	out = new File(parameter[0]);
+	        	out = new File(parameters[0]);
 
-			if (parameter[1].equals("-xml"))
+			if (parameters[1].equals("-xml"))
 				writeXMLToFile(document);
-			else if(parameter[1].equals("-html"))
+			else if(parameters[1].equals("-html"))
 				toHTMLFile(document);				
-			else if(parameter[1].equals("-csv"))
+			else if(parameters[1].equals("-csv"))
 				toCSVFile(document);
 		}	
 	}
@@ -193,6 +200,7 @@ public class FileOutput implements DataOutput {
 	 * @param document xml document
 	 */
 	void toCSVFile(Document document) {
+		boolean exception = false;
 		URI stylesheetPath = null;
 		try {
 			stylesheetPath = Decathlon.class.getResource("xml/csv.xsl").toURI();
@@ -214,12 +222,14 @@ public class FileOutput implements DataOutput {
 				LOG.log(Level.SEVERE, "Cannot create new file.", e);
 			else
 				LOG.log(Level.SEVERE, "Cannot create new file.");
+			exception = true;
 		}
 		catch (IOException e) {
 			if (System.getProperty("program.debug") != null)
 				LOG.log(Level.SEVERE, "Cannot write to file.", e);
 			else
 				LOG.log(Level.SEVERE, "Cannot write to file.");
+			exception = true;
 		}
 		finally{
 			if (fos != null)
@@ -232,6 +242,8 @@ public class FileOutput implements DataOutput {
 					else
 						LOG.log(Level.SEVERE, "Cannot close file output stream.");
 				}
+			if (exception)
+				exit(13);
 		}	
 		System.out.println("Written file: " + out.getAbsolutePath());
 	}
@@ -260,6 +272,7 @@ public class FileOutput implements DataOutput {
 	 * @param doc xml document
 	 */
 	void writeXMLToFile(Document doc) {
+		boolean exception = false;
 		OutputFormat format = OutputFormat.createPrettyPrint();
         XMLWriter writer = null;
 		try {
@@ -271,6 +284,7 @@ public class FileOutput implements DataOutput {
 				LOG.log(Level.SEVERE, "Could not create xml output file", e);
 			else
 				LOG.log(Level.SEVERE, "Could not create xml output file");
+			exception = true;
 		}
 		finally {
 			if (writer != null)
@@ -283,6 +297,8 @@ public class FileOutput implements DataOutput {
 					else
 						LOG.log(Level.SEVERE, "Could not close writer");
 				}
+			if (exception)
+				exit(14);
 		}
 		System.out.println("Written file: " + out.getAbsolutePath());
 	}
@@ -295,8 +311,8 @@ public class FileOutput implements DataOutput {
 	Document styleDocument(Document document, URI stylesheetSource){
         DocumentResult result = new DocumentResult();;
 		if (document == null || stylesheetSource == null){
-			LOG.severe("Input paramteres needed.");
-			exit(4);
+			LOG.severe("Input paramteres needed for styleDocument()");
+			exit(15);
 		} else {
 	        TransformerFactory factory = TransformerFactory.newInstance();
 	        try {
@@ -308,10 +324,10 @@ public class FileOutput implements DataOutput {
 			}
 			catch (TransformerException e) {
 				if (System.getProperty("program.debug") != null)
-					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.",e);
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet",e);
 				else
-					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.");
-				exit(7);
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet");
+				exit(16);
 			}
 		}
         return result.getDocument();
@@ -325,8 +341,8 @@ public class FileOutput implements DataOutput {
 	byte[] transformDocument(Document document, URI stylesheetSource){
 	    ByteArrayOutputStream out = new ByteArrayOutputStream();
 		if (document == null || stylesheetSource == null){
-			LOG.severe("Input paramteres needed.");
-			exit(5);
+			LOG.severe("Input paramteres needed for transformDocument()");
+			exit(17);
 		}else{
 		    TransformerFactory factory = TransformerFactory.newInstance();
 		    try {
@@ -337,17 +353,17 @@ public class FileOutput implements DataOutput {
 			}
 			catch (TransformerException e) {
 				if (System.getProperty("program.debug") != null)
-					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.",e);
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet",e);
 				else
-					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet.");
-				exit(6);
+					LOG.log(Level.SEVERE, "Cannot transform xml according to given stylesheet");
+				exit(16);
 			}
 			catch (UnsupportedEncodingException e) {
 				if (System.getProperty("program.debug") != null)
-					LOG.log(Level.SEVERE, "Problem with xml encoding.",e);
+					LOG.log(Level.SEVERE, "Problem with xml encoding",e);
 				else
-					LOG.log(Level.SEVERE, "Problem with xml encoding.");
-				exit(6);			}
+					LOG.log(Level.SEVERE, "Problem with xml encoding");
+				exit(18);			}
 		}
 	    return out.toByteArray();
 	}

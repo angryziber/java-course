@@ -1,5 +1,8 @@
 package net.azib.java.students.t040719.homework.io;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * OutputMethod - enum for holding different data output methods
@@ -12,6 +15,8 @@ public enum OutputMethod {
 	C("CSV file", FileOutput.class),
 	X("XML file", FileOutput.class),
 	H("HTML file", FileOutput.class);
+	
+	private static final Logger LOG = Logger.getLogger(OutputMethod.class.getSimpleName());			
 	
 	private final String source;
 	private final Class<? extends DataOutput> outputClass;
@@ -30,8 +35,12 @@ public enum OutputMethod {
 			return outputClass.newInstance();
 		}
 		catch (Exception e) {
-			System.err.println("Technical error, unable to instantiate " + outputClass.getName());
-			return null;
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.SEVERE, "Technical error, unable to instantiate " + outputClass.getName(),e);
+			else
+				LOG.log(Level.SEVERE, "Technical error, unable to instantiate " + outputClass.getName());
+			System.exit(2);
 		}
+		return null;
 	}
 }

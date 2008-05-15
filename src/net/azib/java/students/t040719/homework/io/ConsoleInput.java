@@ -19,9 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * InteractiveInput - a class for obtaining decathlon results from the user via console
+ * ConsoleInput - a class for obtaining decathlon results from the user via console
  *
- * @version 0.0
+ * @version 1.0
  * @author Romi Agar
  */
 public class ConsoleInput implements DataInput {
@@ -40,27 +40,35 @@ public class ConsoleInput implements DataInput {
 		this(new BufferedReader(new InputStreamReader(System.in)), System.out);
 	}
 	
+	/**
+	 * This constructor is for testing purpose
+	 */
 	ConsoleInput(BufferedReader input, PrintStream out){
 		this.input = input;
 		this.out = out;
 	}
 	
-	public List<Athlete> getResults(String... parameter){
-		//String defaultEncoding = new InputStreamReader(new ByteArrayInputStream(new byte[0])).getEncoding();
-		//System.out.println(defaultEncoding);
+	/**
+	 * @param parameters not implemented for console input
+	 * @return returns a list of athletes
+	 */
+	public List<Athlete> getResults(String... parameters){
 		Integer n = null;
 		String line = "";
-		out.print("How athletes do you want to enter? ");
+		out.print("How many athletes do you want to enter? ");
 		do{
 			try{
 				n = Integer.parseInt(line = input.readLine());
 			}catch (NumberFormatException e){
 				out.println("'" + line + "'" + NOT_AN_INT);
-				out.print("How athletes do you want to enter? ");
+				out.print("How many athletes do you want to enter? ");
 			}
 			catch (IOException e) {
-				LOG.log(Level.SEVERE, "Could not read athete count.", e);
-				System.exit(1);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Could not read athlete count.", e);
+				else
+					LOG.log(Level.SEVERE, "Could not read athlete count.");
+				System.exit(3);
 			}
 		}while(n == null);
 		
@@ -82,12 +90,15 @@ public class ConsoleInput implements DataInput {
 		return athletes;
 	}
 
+	/**
+	 * @return returns an array of decathlon event results taken from console input
+	 */
 	float[] getDecathlonResults() {
 		float[] results = new float[DecathlonConstants.values().length];
 		Float n;
 		String line = "";
-		out.println("NB! All event marks should be entered using the format 0.00!");
-		for (int i=0; i<DecathlonConstants.values().length; i++){
+		out.println("NB! All event marks should be entered using the format 0.00! (in SI units)");
+		for (int i=0; i<results.length; i++){
 			out.print(DecathlonConstants.getOrdinal(i).getName()+": ");
 			n = null;
 			do{
@@ -98,8 +109,11 @@ public class ConsoleInput implements DataInput {
 					out.print(DecathlonConstants.getOrdinal(i).getName()+": ");
 				}
 				catch (IOException e) {
-					LOG.log(Level.SEVERE, "Could not read decathlon result", e);
-					return new float[DecathlonConstants.values().length];
+					if (System.getProperty("program.debug") != null)
+						LOG.log(Level.WARNING, "Could not read decathlon result", e);
+					else
+						LOG.log(Level.WARNING, "Could not read decathlon result");
+					return results;
 				}				
 			}while(n == null);
 			results[i] = (float)((int)Math.round(n * 100)/100.0);
@@ -107,6 +121,9 @@ public class ConsoleInput implements DataInput {
 		return results;
 	}
 
+	/**
+	 * @return returns 2-letter country code taken from console input
+	 */
 	String getCountry() {
 		out.print("Country (ISO 2-letter code): ");
 		String line="";
@@ -115,7 +132,10 @@ public class ConsoleInput implements DataInput {
 				line = input.readLine().toUpperCase();
 			}
 			catch (IOException e) {
-				LOG.log(Level.SEVERE, "Could not read athlete country code.", e);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.WARNING, "Could not read athlete country code", e);
+				else
+					LOG.log(Level.WARNING, "Could not read athlete country code");
 				return "--";
 			}
 			if (!ISOCountry.isValidCountryCode(line)){
@@ -126,6 +146,9 @@ public class ConsoleInput implements DataInput {
 		return line;
 	}
 
+	/**
+	 * @return returns date of birth of athlete taken from console input
+	 */
 	Date getDOB() {
 		Date dob = null;
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
@@ -138,7 +161,7 @@ public class ConsoleInput implements DataInput {
 				if (line != null)
 					dob = df.parse(line);
 				else{
-					LOG.log(Level.SEVERE, "Input is NULL.");
+					LOG.log(Level.WARNING, "Input for date of birth is NULL.");
 					return new Date();
 				}
 			}
@@ -147,13 +170,19 @@ public class ConsoleInput implements DataInput {
 				out.print("Date of birth (" + ((SimpleDateFormat)df).toPattern() + "): ");				
 			}
 			catch (IOException e) {
-				LOG.log(Level.SEVERE, "Could not read athlete date of birth.",e);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.WARNING, "Could not read athlete' date of birth",e);
+				else
+					LOG.log(Level.WARNING, "Could not read athlete' date of birth");
 				return new Date();
 			}
 		}while(dob == null);
 		return dob;
 	}
 
+	/**
+	 * @return returns athlete name taken from console input
+	 */
 	String getName() {
 		String name = "";
 		out.print("Name: ");
@@ -162,7 +191,10 @@ public class ConsoleInput implements DataInput {
 				name= input.readLine();
 			}
 			catch (IOException e) {
-				LOG.log(Level.SEVERE, "Could not read athlete name.",e);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.WARNING, "Could not read athlete name",e);
+				else
+					LOG.log(Level.WARNING, "Could not read athlete name");
 				return "<no name>";
 			}
 			if (!InputParser.isValidName(name)){
@@ -172,52 +204,5 @@ public class ConsoleInput implements DataInput {
 		}while(!InputParser.isValidName(name));
 		return name;
 	}
-
 	
-		/*BufferedReader i = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\testg.txt"),"UTF-8"));
-
-		String str1 = i.readLine();
-
-   System.out.println("File Text : "+ str1);
-   Scanner in = new Scanner(System.in);
-
-   // Reads a single line from the console 
-   // and stores into name variable
-   String name = in.nextLine();
-   System.out.println(name);
-   
-		InputStreamReader  inp = new InputStreamReader(System.in, "Cp1257" );
-	      BufferedReader br = new BufferedReader(inp);
-
-	      System.out.println("Enter text : ");
-	 
-	     String str = br.readLine();
-	     PrintStream ps = new PrintStream(System.out, true, "UTF-16");
-	     ps.println(str1);
-	     System.out.println("You entered String : ");
-	     String strr = "caractères français :  à é \u00e9 фыв";
-	      System.out.println(str);
-	      BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\testg1.txt"),"UTF8"));
-	      out.write(strr);
-	      out.write(new String(str.getBytes()));
-	      out.write(name);
-	      out.close();
-	      String javaString = 
-	          "caractères français :  à é \u00e9 фыв";  // Unicode for "é"
-	        try {
-	          // output to the console
-	          Writer w = 
-	            new BufferedWriter
-	               (new OutputStreamWriter(System.out, "Cp1257"));
-	          w.write(javaString);
-	          w.write(str);
-	          w.write(str1);
-	          w.write(name);
-	          w.flush();
-	          w.close();  
-	          }
-	       catch (Exception e) {
-	          e.printStackTrace();
-	          }*/
-	       
 }

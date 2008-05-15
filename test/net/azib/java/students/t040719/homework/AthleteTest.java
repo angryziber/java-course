@@ -2,11 +2,9 @@ package net.azib.java.students.t040719.homework;
 
 import static org.junit.Assert.assertEquals;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import org.junit.Test;
 
@@ -17,8 +15,9 @@ import org.junit.Test;
  */
 public class AthleteTest {
 	private float[] eventResults = new float[10]; //{"12.61","5.00","9.22","1.50","59.39","16.43","21.60","2.60","35.81","5:25.72"};
+	private float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
 	private Date date; 
-	private int errorCode;
+	private Athlete ath = new Athlete("s s", date, "EE", realResults);
 
 	@Test
 	public void testGetName() {
@@ -32,12 +31,6 @@ public class AthleteTest {
 		assertEquals("EE", ath.getCountryCode());
 	}
 
-	/*@Test
-	public void testGetCountryName() {
-		Athlete ath = new Athlete("s s", date, "EE", eventResults);
-		assertEquals("ESTONIA", ath.getCountryName());
-	}*/
-	
 	@Test
 	public void testGetBirtdayString() throws  ParseException {
 		date = new SimpleDateFormat("dd.MM.yyyy").parse("29.02.2008");
@@ -55,27 +48,24 @@ public class AthleteTest {
 		
 	@Test
 	public void wrongNumberOfParameters() {
-		new Athlete("s s", date, "EE", new float[5]){
-			@Override
-	         public void exit(int errorCode) {
-	        	 AthleteTest.this.errorCode = errorCode;
-	         }
-		};
-		assertEquals(10,errorCode);
+		Athlete a = new Athlete("s s", date, "EE", new float[5]);
+		for (int i=0; i<10; i++)
+			assertEquals(0.0f, a.getDecathlonResult(i));
 	}
 	
 	@Test
 	public void testGetDecathlonPoints() {
-		float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
-		Athlete ath = new Athlete("s s", date, "EE", realResults);
 		assertEquals(4234, ath.getDecathlonPoints());
 	}
 	
 	@Test
 	public void testGetDecathlonResult() {
-		float[] realResults = {12.61f,5.00f,9.22f,1.50f,59.39f,16.43f,21.60f,2.60f,35.81f,325.72f};
-		Athlete ath = new Athlete("s s", date, "EE", realResults);
 		assertEquals(35.81f, ath.getDecathlonResult(8));
 		assertEquals(1.5f, ath.getDecathlonResult(3));
+	}
+
+	@Test
+	public void testGetDecathlonResultWithOutOfBoundsIndex() {
+		assertEquals(0.0f, ath.getDecathlonResult(10));
 	}
 }

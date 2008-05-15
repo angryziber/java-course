@@ -2,7 +2,6 @@ package net.azib.java.students.t040719.homework.io;
 
 import net.azib.java.students.t040719.homework.Athlete;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,8 +14,8 @@ public interface DataInput {
 	/**
 	 * Gets the decathlon results from various inputs.
 	 * 
+	 * @param parameters contains input identifier
 	 * @return list of decathlon results
-	 * @throws IOException if input fails somehow
 	 */
-	List<Athlete> getResults(String... parameter);
+	List<Athlete> getResults(String... parameters);
 }

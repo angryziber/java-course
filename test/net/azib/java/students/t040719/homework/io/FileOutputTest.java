@@ -7,10 +7,12 @@ import net.azib.java.students.t040719.homework.Decathlon;
 import static junit.framework.Assert.assertEquals;
 import static org.custommonkey.xmlunit.XMLAssert.assertXMLValid;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -73,15 +75,15 @@ public class FileOutputTest {
 	         }
 		};
 		xmlo.outputResults(null, "asd");
-		assertEquals(1,errorCode);
+		assertEquals(11,errorCode);
 		xmlo.outputResults(new ArrayList<Athlete>(), (String[])null);
-		assertEquals(2, errorCode);
+		assertEquals(12, errorCode);
 		xmlo.outputResults(new ArrayList<Athlete>(), "");
-		assertEquals(2, errorCode);
+		assertEquals(12, errorCode);
 		xmlo.outputResults(new ArrayList<Athlete>());
-		assertEquals(2, errorCode);
+		assertEquals(12, errorCode);
 		xmlo.outputResults(new ArrayList<Athlete>(),"nothing","-db");
-		assertEquals(2, errorCode);
+		assertEquals(12, errorCode);
 	}
 	
 	@Test
@@ -90,7 +92,7 @@ public class FileOutputTest {
 		Document doc2 = DocumentHelper.createDocument();
         doc2.addElement("decathlon")
         	.addAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
-        	.addAttribute(new QName("xsi:noNamespaceSchemaLocation",Namespace.NO_NAMESPACE), "DecathlonResults.xsd");
+        	.addAttribute(new QName("xsi:noNamespaceSchemaLocation",Namespace.NO_NAMESPACE), "http://rmg.planet.ee/DecathlonResults.xsd");
 
         assertEquals(xmlToString(doc1), xmlToString(doc2));	
 	}
@@ -149,15 +151,19 @@ public class FileOutputTest {
         assertEquals(tmpFile.length(), tmpFile2.length());	
 	}
 	
-//	@Test
-//	public void testXMLToCSV() throws ParseException, DocumentException, URISyntaxException, IOException{
-//		List<Athlete> al = getAthleteList();
-//		File tmpFile = File.createTempFile("test2", ".tmp");
-//		Document doc = FileOutput.makeXMLDocument(al);
-//		new FileOutput(tmpFile).toCSVFile(doc);
-//		File tmpFile2 = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
-//        assertEquals(tmpFile.length(), tmpFile2.length());	
-//	}
+	@Test
+	public void testXMLToCSV() throws ParseException, DocumentException, URISyntaxException, IOException{
+		List<Athlete> al = getAthleteList();
+		File tmpFile = File.createTempFile("test2", ".tmp");
+		Document doc = FileOutput.makeXMLDocument(al);
+		new FileOutput(tmpFile).toCSVFile(doc);
+		File tmpFile2 = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
+		String line1,line2;
+		BufferedReader br1 = new BufferedReader(new InputStreamReader(new FileInputStream(tmpFile),"UTF-8"));
+		BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(tmpFile2),"UTF-8"));
+		while((line1 = br1.readLine()) != null && (line2 = br2.readLine()) != null)
+			assertEquals(line1, line2);	
+	}
 
 	@Test
 	public void testXMLToHTML() throws ParseException, DocumentException, URISyntaxException, IOException{
@@ -177,7 +183,7 @@ public class FileOutputTest {
 	        	 FileOutputTest.this.errorCode = errorCode;
 	         }
 		}.toHTMLFile(null);
-		assertEquals(4, errorCode);
+		assertEquals(15, errorCode);
 	}
 	
 	@Test
@@ -188,7 +194,7 @@ public class FileOutputTest {
 	        	 FileOutputTest.this.errorCode = errorCode;
 	         }
 		}.toCSVFile(null);
-		assertEquals(5, errorCode);
+		assertEquals(17, errorCode);
 	}
 	
 	@Test
@@ -199,7 +205,7 @@ public class FileOutputTest {
 	        	 FileOutputTest.this.errorCode = errorCode;
 	         }
 		}.transformDocument(null, null);
-		assertEquals(5, errorCode);		
+		assertEquals(17, errorCode);		
 	}
 	
 	@Test
@@ -211,7 +217,7 @@ public class FileOutputTest {
 	        	 FileOutputTest.this.errorCode = errorCode;
 	         }
 		}.transformDocument(doc, new URI("/nofile.no"));
-		assertEquals(6, errorCode);		
+		assertEquals(16, errorCode);		
 	}
 
 	@Test
@@ -223,7 +229,7 @@ public class FileOutputTest {
 	        	 FileOutputTest.this.errorCode = errorCode;
 	         }
 		}.styleDocument(doc, new URI("/nofile.no"));
-		assertEquals(7, errorCode);		
+		assertEquals(16, errorCode);		
 	}
 	
 //	@Test
@@ -277,16 +283,8 @@ public class FileOutputTest {
 			public void exit(int errorCode) {
 	        	 FileOutputTest.this.errorCode = errorCode;
 	         }
-		}.styleDocument(doc, stylesheetPath);
-		
-		/*File tmpFile = new File(FileOutputTest.class.getResource(("test.html")).toURI().getPath());
-		String line, html="";
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(tmpFile), "UTF-8"));
-		while ((line = br.readLine()) != null)
-			html += line;
-		br.close();*/
+		}.styleDocument(doc, stylesheetPath);		
 		assertEquals(getDocument(FileOutputTest.class.getResource(("test.html")).toURI().getPath()).asXML().replaceAll("\\s", ""), styleDoc.asXML().replaceAll("\\s", ""));		
-		//assertEquals(getXMLDocument(html).asXML().replaceAll(">[ ]+<", "><").replaceAll(" {2,}", ""), styleDoc.asXML());		
 	}
 	
 	@Test
@@ -297,6 +295,37 @@ public class FileOutputTest {
 	        	 FileOutputTest.this.errorCode = errorCode;
 	         }
 		}.styleDocument(null, null);
-		assertEquals(4, errorCode);		
+		assertEquals(15, errorCode);		
 	}
+	
+	@Test
+	public void testXMLToFileWithNonWritableFile() throws ParseException{
+		List<Athlete> al = getAthleteList();
+		File noFile = new File("X1H4R:\\aldljaf.tmp");
+		Document doc = FileOutput.makeXMLDocument(al);
+		new FileOutput(noFile){
+			@Override
+			public void exit(int errorCode) {
+	        	 FileOutputTest.this.errorCode = errorCode;
+	         }
+		}.writeXMLToFile(doc);
+        assertEquals(14, errorCode);	
+
+	}
+	
+	@Test
+	public void testXMLToCSVWithNonWritableFile() throws ParseException{
+		List<Athlete> al = getAthleteList();
+		File noFile = new File("X1H4R:\\aldljaf.tmp");
+		Document doc = FileOutput.makeXMLDocument(al);
+		new FileOutput(noFile){
+			@Override
+			public void exit(int errorCode) {
+	        	 FileOutputTest.this.errorCode = errorCode;
+	         }
+		}.toCSVFile(doc);
+        assertEquals(13, errorCode);	
+
+	}
+
 }

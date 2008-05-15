@@ -14,16 +14,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * DatabaseInput - a class for obtaining decathlon results from a MySQL database
+ * DatabaseInput - a class for obtaining decathlon results from a database
  *
- * @version 0.0
+ * @version 1.0
  * @author Romi Agar
  */
 public class DatabaseInput implements DataInput {
 	private static final Logger LOG = Logger.getLogger(DatabaseInput.class.getSimpleName());
+	
 	private String jdbcURL = "jdbc:mysql://srv.azib.net:3306/decathlon";
 	private String jdbcUser = "java";
-	String jdbcPassword = "java";
+	private String jdbcPassword = "java";
 	
 	/**
 	 * Exiting from program with given error code
@@ -33,6 +34,9 @@ public class DatabaseInput implements DataInput {
 		System.exit(errorCode);
 	}
 	
+	/**
+	 * @return returns connection to database
+	 */
 	Connection openConnection() {
 		try {
 			return DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
@@ -42,16 +46,20 @@ public class DatabaseInput implements DataInput {
 				LOG.log(Level.SEVERE, "Could not connect to database.", e);
 			else
 				LOG.log(Level.SEVERE, "Could not connect to database.");
-			exit(1);
+			exit(4);
 		}
 		return null;
 	}
 	
-	public List<Athlete> getResults(String... parameter){
+	/**
+	 * @param parameters contains competition id or name
+	 * @return returns a list of athletes
+	 */
+	public List<Athlete> getResults(String... parameters){
 		List<Athlete> athletes = new ArrayList<Athlete>();
-		if (parameter.length == 0){
+		if (parameters.length == 0){
 			LOG.severe("No competition id nor name given.");
-			exit(2);
+			exit(5);
 		} else {
 			final String sql = "SELECT A.name, A.dob, A.country_code, R.race_100m, " +
 					"R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, " +
@@ -67,8 +75,8 @@ public class DatabaseInput implements DataInput {
 			try{
 				conn = openConnection();
 				PreparedStatement prepStmt = conn.prepareStatement(sql);
-				prepStmt.setString(1, parameter[0]);
-				prepStmt.setString(2, parameter[0]);
+				prepStmt.setString(1, parameters[0]);
+				prepStmt.setString(2, parameters[0]);
 				ResultSet rs = prepStmt.executeQuery();
 				while (rs.next()) {
 					name = rs.getString("name");
@@ -88,7 +96,6 @@ public class DatabaseInput implements DataInput {
 					LOG.log(Level.SEVERE, "Could not get records from database.", e);
 				else
 					LOG.log(Level.SEVERE, "Could not get records from database.");
-				exit(3);
 			}finally {
 				if (conn != null)
 					try {
@@ -99,11 +106,17 @@ public class DatabaseInput implements DataInput {
 							LOG.log(Level.SEVERE, "Could not close database connection.",e);
 						else
 							LOG.log(Level.SEVERE, "Could not close database connection.");
-						exit(4);
 					}
 			}
 		}
 		return athletes;
+	}
+
+	/**
+	 * @param jdbcPassword the jdbcPassword to set
+	 */
+	void setJdbcPassword(String jdbcPassword) {
+		this.jdbcPassword = jdbcPassword;
 	}
 
 }

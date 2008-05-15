@@ -5,6 +5,7 @@ import net.azib.java.students.t040719.homework.ISOCountry;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -25,7 +26,7 @@ public class InputParser {
 	
 	/**
 	 * Checks if given name is valid
-	 * @param name athlete's name as a string
+	 * @param name athlete name as a string
 	 * @return true if valid, false otherwise
 	 */
 	public static boolean isValidName(String name){
@@ -42,26 +43,13 @@ public class InputParser {
 	}
 	
 	/**
-	 * Parses athlete's name by removing quotes and checking if the name is valid
-	 * @param name the name of the athlete as a string
-	 * @return valid name string or empty string if not valid
-	 */
-//	public static String parseName(String name){
-//		String tempName = removeQuotes(name);
-//		if(!isValidName(tempName))
-//			return "";
-//		else
-//			return tempName;
-//	}
-	
-	/**
 	 * Parses country code by checking if it is valid
 	 * @param isoCode 2-letter ISO country code string
-	 * @return isoCode if it is valid or empty string if it is not
+	 * @return isoCode if it is valid or "--" if it is not
 	 */
 	public static String parseCountryCode(String isoCode){
 		if(!ISOCountry.isValidCountryCode(isoCode))
-			return "";
+			return "--";
 		else
 			return isoCode;
 	}
@@ -77,14 +65,17 @@ public class InputParser {
 			d = new SimpleDateFormat(DATE_FORMAT).parse(dateString);
 		}
 		catch (ParseException e) {
-			LOG.log(Level.WARNING, "Error parsing date", e);
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.WARNING, "Error parsing date string: " + dateString, e);
+			else
+				LOG.log(Level.WARNING, "Error parsing date string: " + dateString);
 		}
 		return d;
 	}
 	
 	/**
 	 * Parses decathlon event times if they are in long format (min:sec)
-	 * @param time in the format of min:sec or sec
+	 * @param time in the format of min:sec
 	 * @return time in seconds (float) if successful, 0.0f otherwise
 	 */
 	public static float parseLongTime(String time){
@@ -94,13 +85,14 @@ public class InputParser {
         try{
 		    if (items.length == 1)
 		    	resultTime = Float.parseFloat(items[0]);
-		    else{
-		    	resultTime = Float.parseFloat(items[0])*60;
-		    	resultTime += Float.parseFloat(items[1]);
-		    }
+		    else
+		    	resultTime = Float.parseFloat(items[0])*60 + Float.parseFloat(items[1]);
         }
         catch(NumberFormatException e){
-        	LOG.log(Level.WARNING, "Error parsing long time string", e);
+			if (System.getProperty("program.debug") != null)
+				LOG.log(Level.WARNING, "Error parsing time string " + time, e);
+			else
+				LOG.log(Level.WARNING, "Error parsing time string" + time);
         }
 		return resultTime;
 	}
@@ -113,7 +105,7 @@ public class InputParser {
 	 */
 	public static float[] parseEventResults(String... rawResults){
 		if (rawResults.length != 10){
-			LOG.log(Level.SEVERE, "Event results cound is not 10.");			
+			LOG.log(Level.WARNING, "Event results cound is not 10.");			
 			return null;
 		}
 		float[] results = new float[10];
@@ -134,10 +126,24 @@ public class InputParser {
 					results[i] = Float.parseFloat(rawResults[i]);
 				}
 				catch(NumberFormatException e){
-					LOG.log(Level.WARNING, "Error parsing number: " + rawResults[i], e);
+					if (System.getProperty("program.debug") != null)
+						LOG.log(Level.WARNING, "Error parsing number: " + rawResults[i], e);
+					else
+						LOG.log(Level.WARNING, "Error parsing number: " + rawResults[i]);						
 					return null;
 				}
 		}
 		return results;
+	}
+
+	/**
+	 * @param timeResult time in seconds
+	 * @return returns a string of time result formatted in min:sec format
+	 */
+	public static String formatTime(float timeResult) {
+		if (timeResult < 60.0f)
+			return String.format(Locale.US, "%.2f", timeResult);
+		else
+			return Integer.toString((int)Math.floor(timeResult / 60)) + ":" + ((timeResult % 60 < 10)? "0":"") + String.format(Locale.US, "%.2f", (float)(timeResult % 60));
 	}
 }

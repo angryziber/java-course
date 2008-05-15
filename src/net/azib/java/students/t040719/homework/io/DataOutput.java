@@ -13,6 +13,8 @@ import java.util.List;
 public interface DataOutput {
 	/**
 	 * Outputs the decathlon results.
+	 * @param results a list of athletes' results
+	 * @param parameters contains output file name and output format. Not used for console output.
 	 */
-	void outputResults(List<Athlete> results, String... parameter);
+	void outputResults(List<Athlete> results, String... parameters);
 }

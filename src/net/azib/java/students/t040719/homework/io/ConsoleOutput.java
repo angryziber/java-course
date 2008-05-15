@@ -31,24 +31,23 @@ public class ConsoleOutput implements DataOutput{
 	}
 	
 	/**
-	 * Formats the results and outputs them to the console
+	 * Formats the decathlon results and outputs them to console
 	 * @param results a sorted list of athletes
 	 * @param parameter not used for console output
 	 */
 	public void outputResults(List<Athlete> results, String... parameter){
 		if (results == null){
-			LOG.severe("No results given.");
-			exit(11);
+			LOG.severe("Null parameter for athlete list");
+			exit(9);
 		} else {
-			out.println("");
 			out.println("The decathlon competition final results:");
 			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
 			
 			int dateLength = ((SimpleDateFormat)df).toPattern().length()+1;
 			int longestNameLength = (getLongestNameLength(results)>0)? getLongestNameLength(results) : 4;
-			int positionFieldLength = Integer.toString(results.size()).length();
-			int i = 1;
-	
+			int positionFieldLength = getPositionFieldLength(results);
+			String place = "1";
+			
 			List<String> tableHeader = new ArrayList<String>();
 			tableHeader.add("#");
 			tableHeader.add("Name");
@@ -56,13 +55,35 @@ public class ConsoleOutput implements DataOutput{
 			tableHeader.add("Country");
 			tableHeader.add("DOB");
 			tableHeader.addAll(getEventNames());
-			out.println(String.format(Locale.getDefault(), "%" + positionFieldLength + "s %-" + longestNameLength + "s %5s %7s %-" + dateLength + "s " + getEventNamesFormatString(), tableHeader.toArray()));
-			for (Athlete a: results){
-				String format = "%" + positionFieldLength + "d %-" + longestNameLength + "s %5d %5s   %" + dateLength + "s " + getEventsFormatString();
-				out.println(String.format(Locale.getDefault(),format, getAthleteInfo(i,df,a)));
-				i++;
+			out.println(String.format(Locale.US, "%" + positionFieldLength + "s %-" + longestNameLength + "s %5s %7s %-" + dateLength + "s " + getEventNamesFormatString(), tableHeader.toArray()));
+			for (int i=0; i<results.size(); i++){
+	        	Athlete a = results.get(i);
+				if (i != 0 && results.get(i-1).getDecathlonPoints()>a.getDecathlonPoints() 
+		        		&& i < results.size()-1 
+		        		&& results.get(i+1).getDecathlonPoints()<a.getDecathlonPoints() 
+		        		|| i == results.size()-1 && results.size() > 1
+		        		&& results.get(i-1).getDecathlonPoints()>a.getDecathlonPoints())
+		        	place = Integer.toString(i+1);
+		        else if(i < results.size()-1 && results.get(i+1).getDecathlonPoints() == a.getDecathlonPoints())
+		        	place = FileOutput.findPlaceSharers(results, i);
+				String format = "%" + positionFieldLength + "s %-" + longestNameLength + "s %5d %5s   %" + dateLength + "s " + getEventsFormatString();
+				out.println(String.format(Locale.US,format, getAthleteInfo(place,df,a)));
 			}
 		}
+	}
+
+	/**
+	 * @param results a list of athletes
+	 * @return returns the longest position combination length (comes in handy if places are shared)
+	 */
+	int getPositionFieldLength(List<Athlete> results) {
+		boolean sharing = false;
+		for (int i=0; i<results.size(); i++)
+			if (i<results.size()-1 && results.get(i).getDecathlonPoints() == results.get(i+1).getDecathlonPoints()){
+				sharing = true;
+				break;
+			}	
+		return (sharing) ? 2*Integer.toString(results.size()).length()+1 : Integer.toString(results.size()).length();
 	}
 
 	/**
@@ -94,8 +115,11 @@ public class ConsoleOutput implements DataOutput{
 	String getEventsFormatString() {
 		String str = "";
 		for(int i=0; i<DecathlonConstants.values().length-1; i++)
-			str += "%" + DecathlonConstants.getOrdinal(i).getName().length() + ".2f | ";
-		return str + "%" + DecathlonConstants.getOrdinal(9).getName().length() + ".2f";
+			if (i==4)
+				str += "%" + ((int)Math.ceil((double)(DecathlonConstants.getOrdinal(i).getName().length()-7)/2)+7) + "s%16$" + ((int)Math.floor((double)(DecathlonConstants.getOrdinal(i).getName().length()-7)/2)) + "s | ";
+			else
+				str += "%" + ((int)Math.ceil((double)(DecathlonConstants.getOrdinal(i).getName().length()-5)/2)+5) + ".2f%16$" + ((int)Math.floor((double)(DecathlonConstants.getOrdinal(i).getName().length()-5)/2)) + "s | ";
+		return str + "%" + ((int)Math.ceil((double)(DecathlonConstants.getOrdinal(9).getName().length()-7)/2)+7) + "s";
 	}
 
 	/**
@@ -115,18 +139,31 @@ public class ConsoleOutput implements DataOutput{
 	 * @return returns an object array with one athlete's information 
 	 * in correct order for formatted output
 	 */
-	Object[] getAthleteInfo(int position, DateFormat df, Athlete athlete) {
+	Object[] getAthleteInfo(String place, DateFormat df, Athlete athlete) {
 		List<Object> lo = new ArrayList<Object>();
-		lo.add(position);
-		lo.add(athlete.getName());
-		lo.add(athlete.getDecathlonPoints());
-		lo.add(athlete.getCountryCode());
-		lo.add(df.format(athlete.getBirthday()));
-		for(int i=0; i<DecathlonConstants.values().length; i++)
-			lo.add(athlete.getDecathlonResult(i));
+		if (place == null || df == null || athlete == null){
+			LOG.severe("Null parameter(s) given for getAthleteInfo().");
+			exit(10);
+		}else{
+			lo.add(place);
+			lo.add(athlete.getName());
+			lo.add(athlete.getDecathlonPoints());
+			lo.add(athlete.getCountryCode());
+			lo.add(df.format(athlete.getBirthday()));
+			for(int i=0; i<DecathlonConstants.values().length; i++)
+				if (i==4 || i==9)
+					lo.add(InputParser.formatTime(athlete.getDecathlonResult(i)));
+				else
+					lo.add(athlete.getDecathlonResult(i));
+			lo.add("");
+		}
 		return lo.toArray();
 	}
 	
+	/**
+	 * Exiting from program with given error code
+	 * @param errorCode error code (int) for exiting
+	 */
 	void exit(int errorCode) {
 		   System.exit(errorCode);
 	}

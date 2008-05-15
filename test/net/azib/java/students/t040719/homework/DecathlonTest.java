@@ -56,6 +56,6 @@ public class DecathlonTest {
 		"Loaded 4 entrie(s)." + LN +
 		"Outputting results to " + OutputMethod.values()[0].getOutputName() + LN +
 		"All done." + LN;
-		assertEquals(message, processInput("-csv," + FileOutputTest.class.getResource(("inputTest.csv")).toURI().getPath() + ",-console,"));
+		assertEquals(message, processInput("-csv," + FileOutputTest.class.getResource("inputTest.csv").toURI().getPath() + ",-console,"));
 	}
 }

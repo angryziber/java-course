@@ -39,9 +39,9 @@ public class DatabaseInputTest {
 	        	 DatabaseInputTest.this.errorCode = errorCode;
 	        }
 		};
-		db.jdbcPassword = "wrong";
+		db.setJdbcPassword("wrong");
 		db.openConnection();
-		assertEquals(1, errorCode);
+		assertEquals(4, errorCode);
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class DatabaseInputTest {
 	        }
 		};
 		db.getResults();
-		assertEquals(2, errorCode);
+		assertEquals(5, errorCode);
 	}
 	
 	@Test
@@ -100,19 +100,7 @@ public class DatabaseInputTest {
 		stmt.setString(2, "1");
 		expect(stmt.executeQuery()).andReturn(rs);
 		expect(rs.next()).andReturn(false).times(1);
-		/*expect(rs.getString("name")).andReturn("").anyTimes();
-		expect(rs.getDate("dob")).andReturn(null).anyTimes();
-		expect(rs.getString("country_code")).andReturn("").anyTimes();
-		expect(rs.getFloat(4)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(5)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(6)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(7)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(8)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(9)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(10)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(11)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(12)).andReturn(0.0f).anyTimes();
-		expect(rs.getFloat(13)).andReturn(0.0f).anyTimes();*/
+
 		rs.close();
 		conn.close();
 		

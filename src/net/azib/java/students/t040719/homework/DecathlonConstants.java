@@ -13,12 +13,12 @@ public enum DecathlonConstants {
 	LONG_JUMP(0.14354, 220, 1.40, 100, false, "Long jump","m"),
 	SHOT_PUT(51.39, 1.5, 1.05, 1, false, "Shot put","m"),
 	HIGH_JUMP(0.8465, 75, 1.42,	100, false, "High jump","m"),
-	FOUR_HUNDRED_M(1.53775, 82, 1.81, 1, true, "400 m sprint","sec"),
+	FOUR_HUNDRED_M(1.53775, 82, 1.81, 1, true, "400 m sprint","min:sec"),
 	HUNDRED_TEN_M_HURDLES(5.74352, 28.5, 1.92, 1, true, "110 m hurdles","sec"),
 	DISCUS_THROW(12.91, 4.0, 1.1, 1, false, "Discus throw","m"),
 	POLE_VAULT(0.2797, 100, 1.35, 100, false, "Pole vault","m"),
 	JAVELIN_THROW(10.14, 7.0, 1.08, 1, false, "Javelin throw","m"),
-	FIFTEENHUNDRED_M(0.03768, 480, 1.85, 1, true, "1500 m race","sec");
+	FIFTEENHUNDRED_M(0.03768, 480, 1.85, 1, true, "1500 m race","min:sec");
 	
 	private final double A;
     private final double B;

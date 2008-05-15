@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<decathlon xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DecathlonResults.xsd">
+<decathlon xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://rmg.planet.ee/DecathlonResults.xsd">
   <athlete>
     <name>Siim Susi</name>
     <birthday>01.01.1999</birthday>
@@ -33,7 +33,7 @@
     <event order="5">
       <name>400 m sprint</name>
       <result>59.39</result>
-      <unit>sec</unit>
+      <unit>min:sec</unit>
     </event>
     <event order="6">
       <name>110 m hurdles</name>
@@ -57,8 +57,8 @@
     </event>
     <event order="10">
       <name>1500 m race</name>
-      <result>325.72</result>
-      <unit>sec</unit>
+      <result>5:25.72</result>
+      <unit>min:sec</unit>
     </event>
   </athlete>
 </decathlon>

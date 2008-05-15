@@ -1,8 +1,14 @@
 package net.azib.java.students.t040719.homework.io;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import net.azib.java.students.t040719.homework.Athlete;
+
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -15,16 +21,6 @@ import org.junit.Test;
 public class FileInputTest {
 	private int errorCode;
 	
-	/*private String processInput(String s) throws IOException {
-		Scanner input = new Scanner(s);
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		new FileInput().getResults();
-		return out.toString();
-	}
-	
-	private void assertOutput(String expected, String input) throws IOException {
-		assertEquals(FileInput.INSTRUCTIONS_TEXT + InputChooser.NL + expected + InputChooser.NL, processInput(input));
-	}*/
 	@Test
 	public void noFileGiven() throws IOException{
 		FileInput fi = new FileInput(){
@@ -34,7 +30,7 @@ public class FileInputTest {
 	         }
 		};
 		fi.getResults();
-		assertEquals(1,errorCode);
+		assertEquals(6,errorCode);
 	}
 	
 	@Test
@@ -47,7 +43,28 @@ public class FileInputTest {
 	         }
 		};
 		fi.getResults(file);
-		assertEquals(2,errorCode);
+		assertEquals(7,errorCode);
 	}
 	
+	@Test
+	public void initiateFileFails(){
+		assertTrue(new FileInput().initiateFile("c:\29jrfqnoi2")==false);
+	}
+	
+	@Test
+	public void initiateFileSucceeds() throws IOException{
+		File tmpFile = File.createTempFile("somefile", ".tmp");
+		assertTrue(new FileInput().initiateFile(tmpFile.getAbsolutePath())==true);
+	}
+	
+	@Test
+	public void testGetResults() throws URISyntaxException{
+		List<Athlete> al = new FileInput().getResults(FileInputTest.class.getResource("inputTest.csv").toURI().getPath());
+		int total = 0;
+		for (Athlete a:al)
+			total += a.getDecathlonPoints();
+		assertEquals(14028, total);
+		
+	}
+
 }

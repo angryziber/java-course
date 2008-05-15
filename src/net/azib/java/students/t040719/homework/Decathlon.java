@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Decathlon - the main program for the homework
  *
- * @version 1.0
+ * @version 1.1
  * @author Romi Agar
  */
 public class Decathlon {

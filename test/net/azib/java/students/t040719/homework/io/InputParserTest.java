@@ -30,20 +30,9 @@ public class InputParserTest {
 		assertEquals("test\"middle quote", InputParser.removeQuotes("\"test\"middle quote\""));
 	}
 
-/*	@Test
-	public void parseNameSucceeds(){
-		assertEquals("Siim susi", InputParser.parseName("\"Siim susi\""));
-	}
-
-	@Test
-	public void parseNameFails(){
-		assertEquals("", InputParser.parseName("Si+im susi"));
-		assertEquals("", InputParser.parseName("\"Siimsusi\""));
-	}*/
-	
 	@Test
 	public void parseCountryCodeFails(){
-		assertEquals("", InputParser.parseCountryCode("EX"));
+		assertEquals("--", InputParser.parseCountryCode("EX"));
 	}
 
 	@Test
@@ -88,5 +77,11 @@ public class InputParserTest {
 		assertEquals(null, InputParser.parseEventResults(new String[5]));
 		String[] eventResults = {"12.61",".5.00","9.22","1.50","59.3.9","16.43","21.60","2.60","35.81","5:25.72"};
 		assertEquals(null, InputParser.parseEventResults(eventResults));
+	}
+	
+	@Test
+	public void testFormatString(){
+		assertEquals("50.57", InputParser.formatTime(50.566f));
+		assertEquals("1:00.57", InputParser.formatTime(60.566f));
 	}
 }
