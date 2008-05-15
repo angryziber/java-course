@@ -250,11 +250,12 @@ public class FileOutputTest {
         byte buf[] = new byte[len];
         fis.read(buf);
         fis.close();
-        String[] str1 = new String(transDoc,"UTF8").split(System.getProperty("line.separator"));
-        String[] str2 = new String(buf,"UTF8").split("\r\n");
-        assertEquals(str1.length, str2.length);
-        for (int i=0; i<str1.length; i++)
-        	assertEquals(str1[i], str2[i]);
+//        String[] str1 = new String(transDoc,"UTF8").split(System.getProperty("line.separator"));
+//        String[] str2 = new String(buf,"UTF8").split("\r\n");
+//        assertEquals(str1.length, str2.length);
+//        for (int i=0; i<str1.length; i++)
+//        	assertEquals(str1[i], str2[i]);
+        assertEquals(new String(buf,"UTF8").replaceAll("\r\n", System.getProperty("line.separator")), new String(transDoc,"UTF8"));
         //assertEquals(new String(transDoc,"UTF8"), new String(buf,"UTF8"));
 //        assertEquals(len, transDoc.length);
 //        for (int i=0; i<len; i++){
