@@ -31,7 +31,6 @@ import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
-import org.hibernate.cfg.Environment;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -67,6 +66,15 @@ public class FileOutputTest {
 		return al;
 	}
 	
+	private Document getDocument( final String xmlFileName ) throws SAXException, DocumentException
+	{
+		Document document = null;
+		SAXReader reader = new SAXReader();
+        reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
+        document = reader.read( xmlFileName );
+        return document;
+	}
+
 	@Test
 	public void testOutputResultsForEmptyArguments(){
 		FileOutput xmlo = new FileOutput() {
@@ -250,36 +258,9 @@ public class FileOutputTest {
         byte buf[] = new byte[len];
         fis.read(buf);
         fis.close();
-//        String[] str1 = new String(transDoc,"UTF8").split(System.getProperty("line.separator"));
-//        String[] str2 = new String(buf,"UTF8").split("\r\n");
-//        assertEquals(str1.length, str2.length);
-//        for (int i=0; i<str1.length; i++)
-//        	assertEquals(str1[i], str2[i]);
         assertEquals(new String(buf,"UTF8").replaceAll("\r\n", System.getProperty("line.separator")), new String(transDoc,"UTF8"));
-        //assertEquals(new String(transDoc,"UTF8"), new String(buf,"UTF8"));
-//        assertEquals(len, transDoc.length);
-//        for (int i=0; i<len; i++){
-//        	assertEquals(buf[i], transDoc[i]);
-//        }				
 	}
-	
-//	private Document getXMLDocument(String xml) throws DocumentException, SAXException {
-//        SAXReader reader = new SAXReader();
-//        reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
-//        StringReader in = new StringReader(xml);
-//        Document domdoc = reader.read(in);
-//        return domdoc;
-//    }
-	
-	private Document getDocument( final String xmlFileName ) throws SAXException, DocumentException
-	{
-		Document document = null;
-		SAXReader reader = new SAXReader();
-        reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
-        document = reader.read( xmlFileName );
-        return document;
-	}
-	
+		
 	@Test
 	public void testStyleDocument() throws URISyntaxException, ParseException, IOException, DocumentException, SAXException{
 		Document doc = FileOutput.makeXMLDocument(getAthleteList());
