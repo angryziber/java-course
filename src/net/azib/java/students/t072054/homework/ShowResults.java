@@ -25,22 +25,29 @@ public class ShowResults {
 	 * @param results
 	 * @param numEvent
 	 */
-	public static void ShowResultsConsole(Map<Integer, String[]> result_map1, 
-			Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3,
-			ArrayList<Integer> results, double numEvent) {
+	public static void ShowResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent) {
 		// public static void main(String[] args) {
-		//LoadNewResults lnr = new LoadNewResults();
+		// LoadNewResults lnr = new LoadNewResults();
 
-		//Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		//Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		//Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
+		// String[]>();
+		// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
+		// String[]>();
+		// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
+		// String[]>();
 
-		//lnr.loadResults(result_map1, result_map2, result_map3);
+		// lnr.loadResults(result_map1, result_map2, result_map3);
 
 		// double numEvent = 2;
 		// ArrayList<Integer> results = SortingID.SortByID(result_map1,
 		// result_map2, result_map3, numEvent);
+
+		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
+
+		for (int i = 0; i < results.size(); i++) {
+			wcp.addScore(i, CountAthletResult.CountResultByID(result_map3, i + 1, numEvent));
+		}
 
 		// Print competitions data
 		System.out.println("Competitions data:");
@@ -57,8 +64,10 @@ public class ShowResults {
 		System.out.println("(competition_index results[])");
 		// columns
 		for (int i = 0; i < results.size(); i++) {
-
-			System.out.print((i + 1) + " ");
+			//Printing place
+			System.out.print(wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent)));
+			System.out.print(" ");
+			
 			System.out.print(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent));
 			for (int j = 0; j < 4; j++) {
 				System.out.print(result_map1.get(results.get(i) - 1)[j] + " ");
@@ -84,22 +93,28 @@ public class ShowResults {
 	 * @param numEvent
 	 * @param fileName
 	 */
-	public static void ShowResultsCSV(Map<Integer, String[]> result_map1, 
-			Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3,
-			ArrayList<Integer> results, double numEvent, String fileName) {
+	public static void ShowResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName) {
 		// public static void main(String[] args) {
 		LoadNewResults lnr = new LoadNewResults();
 
-		//Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		//Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		//Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
+		// String[]>();
+		// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
+		// String[]>();
+		// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
+		// String[]>();
 
-		//lnr.loadResults(result_map1, result_map2, result_map3);
+		// lnr.loadResults(result_map1, result_map2, result_map3);
 
 		// double numEvent = 2;
 		// ArrayList<Integer> results = SortingID.SortByID(result_map1,
 		// result_map2, result_map3, numEvent);
+		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
+
+		for (int i = 0; i < results.size(); i++) {
+			wcp.addScore(i, CountAthletResult.CountResultByID(result_map3, i + 1, numEvent));
+		}
 
 		// Output file name
 		File f1 = new File(fileName); // new File("C:\\dest.csv");
@@ -127,7 +142,7 @@ public class ShowResults {
 			fw.write("\n");
 			for (int i = 0; i < results.size(); i++) {
 
-				fw.write((i + 1) + ",");
+				fw.write(wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent)) + ",");
 				fw.write((int) CountAthletResult.CountResultByID(result_map3, (int) results.get(i), numEvent) + ",");
 				for (int j = 0; j < 4; j++) {
 					fw.write(result_map1.get(results.get(i) - 1)[j] + ",");
@@ -156,28 +171,31 @@ public class ShowResults {
 
 	}
 
-	public static void ShowResultsXML(Map<Integer, String[]> result_map1, 
-			Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3,
-			ArrayList<Integer> results, 
-			double numEvent, String fileName) throws Exception {
-	/**
-	 * @param args
-	 * @throws Exception
-	 */
-	// May be to try as it is done on link 
-	//public static void main(String[] args) throws Exception {
-		//LoadNewResults lnr = new LoadNewResults();
+	public static void ShowResultsXML(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName) throws Exception {
+		/**
+		 * @param args
+		 * @throws Exception
+		 */
+		// May be to try as it is done on link
+		// public static void main(String[] args) throws Exception {
+		// LoadNewResults lnr = new LoadNewResults();
+		// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
+		// String[]>();
+		// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
+		// String[]>();
+		// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
+		// String[]>();
+		/* lnr.loadResults(result_map1, result_map2, result_map3); */
 
-		//Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		//Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		//Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		// double numEvent = 2;
+		// ArrayList<Integer> results = SortingID.SortByID(result_map1,
+		// result_map2, result_map3, numEvent);
+		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
 
-		/*lnr.loadResults(result_map1, result_map2, result_map3);*/ 
-
-		//double numEvent = 2;
-		//ArrayList<Integer> results = SortingID.SortByID(result_map1, result_map2, result_map3, numEvent);
-
+		for (int i = 0; i < results.size(); i++) {
+			wcp.addScore(i, CountAthletResult.CountResultByID(result_map3, i + 1, numEvent));
+		}
 
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -243,7 +261,7 @@ public class ShowResults {
 			for (int i = 0; i < results.size(); i++) {
 
 				el_a[6 * i] = document.createElement("athlet");
-				el_a[6 * i].setAttribute("place", String.valueOf(i + 1));
+				el_a[6 * i].setAttribute("place", String.valueOf(wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent))));
 				athletes_data.appendChild(el_a[6 * i]);
 
 				// fw.write((i + 1) + ",");
@@ -348,43 +366,37 @@ public class ShowResults {
 
 	}
 
-/*	public void transformUsingStylesheet()
-
-	{
-
-		try {
-
-			File sourceFile = new File("c:\\results.xml");
-
-			File resultFile = new File("c:\\results.htm");
-
-			StreamResult result = new StreamResult(resultFile);
-
-			StreamSource source = new StreamSource(sourceFile);
-
-			Templates template = tFactory.newTemplates(new StreamSource(stylesheetURI));
-
-			transformer = template.newTransformer();
-
-			transformer.setParameter("heading", "This is A Parameter Heading");
-
-			transformer.transform(source, result);
-
-		}
-		catch (TransformerConfigurationException tce)
-
-		{
-
-			tce.printStackTrace();
-
-		}
-		catch (TransformerException te)
-
-		{
-
-			te.printStackTrace();
-
-		}
-
-	}*/
+	/*
+	 * public void transformUsingStylesheet()
+	 *  {
+	 * 
+	 * try {
+	 * 
+	 * File sourceFile = new File("c:\\results.xml");
+	 * 
+	 * File resultFile = new File("c:\\results.htm");
+	 * 
+	 * StreamResult result = new StreamResult(resultFile);
+	 * 
+	 * StreamSource source = new StreamSource(sourceFile);
+	 * 
+	 * Templates template = tFactory.newTemplates(new
+	 * StreamSource(stylesheetURI));
+	 * 
+	 * transformer = template.newTransformer();
+	 * 
+	 * transformer.setParameter("heading", "This is A Parameter Heading");
+	 * 
+	 * transformer.transform(source, result);
+	 *  } catch (TransformerConfigurationException tce)
+	 *  {
+	 * 
+	 * tce.printStackTrace();
+	 *  } catch (TransformerException te)
+	 *  {
+	 * 
+	 * te.printStackTrace();
+	 *  }
+	 *  }
+	 */
 }

@@ -11,7 +11,6 @@ import java.util.LinkedHashMap;
  * @author r_vassiljev
  */
 
-// TODO 4. Sharing the places (equal score)
 // TODO 3. DB connection string must be read from db.properties in the same
 // package as the main class
 // http://www.webdevelopersjournal.com/columns/connection_pool.html
@@ -97,6 +96,19 @@ public class DecathlonCalculator {
 			}
 			catch (Exception e) {
 				System.out.println("XML creating exception!");
+			}
+			break;
+		case CSV:
+			if (input_num == 0)
+				input_num = 1;
+			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
+			if (input_num == 0)
+				input_num = 1;
+			try {
+				ShowResults.ShowResultsCSV(result_map1, result_map2, result_map3, results_array, input_num, output_route);
+			}
+			catch (Exception e) {
+				System.out.println("CSV creating exception!");
 			}
 			break;
 		}
