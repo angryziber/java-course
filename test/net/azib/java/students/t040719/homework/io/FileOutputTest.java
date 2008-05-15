@@ -232,29 +232,29 @@ public class FileOutputTest {
 		assertEquals(16, errorCode);		
 	}
 	
-//	@Test
-//	public void testTransformDocument() throws URISyntaxException, ParseException, IOException{
-//		Document doc = FileOutput.makeXMLDocument(getAthleteList());
-//		URI stylesheetPath = Decathlon.class.getResource("xml/csv.xsl").toURI();
-//		
-//		byte[] transDoc = new FileOutput(){
-//			@Override
-//			public void exit(int errorCode) {
-//	        	 FileOutputTest.this.errorCode = errorCode;
-//	         }
-//		}.transformDocument(doc, stylesheetPath);
-//		
-//		File tmpFile = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
-//		int len = (int)(tmpFile.length());
-//        FileInputStream fis = new FileInputStream(tmpFile);
-//        byte buf[] = new byte[len];
-//        fis.read(buf);
-//        fis.close();
+	@Test
+	public void testTransformDocument() throws URISyntaxException, ParseException, IOException{
+		Document doc = FileOutput.makeXMLDocument(getAthleteList());
+		URI stylesheetPath = Decathlon.class.getResource("xml/csv.xsl").toURI();
+		
+		byte[] transDoc = new FileOutput(){
+			@Override
+			public void exit(int errorCode) {
+	        	 FileOutputTest.this.errorCode = errorCode;
+	         }
+		}.transformDocument(doc, stylesheetPath);
+		File tmpFile = new File(FileOutputTest.class.getResource(("test.csv")).toURI().getPath());
+		int len = (int)(tmpFile.length());
+        FileInputStream fis = new FileInputStream(tmpFile);
+        byte buf[] = new byte[len];
+        fis.read(buf);
+        fis.close();
+        assertEquals(new String(transDoc,"UTF8"), new String(buf,"UTF8"));
 //        assertEquals(len, transDoc.length);
 //        for (int i=0; i<len; i++){
 //        	assertEquals(buf[i], transDoc[i]);
 //        }				
-//	}
+	}
 	
 //	private Document getXMLDocument(String xml) throws DocumentException, SAXException {
 //        SAXReader reader = new SAXReader();
@@ -325,7 +325,11 @@ public class FileOutputTest {
 	         }
 		}.toCSVFile(doc);
         assertEquals(13, errorCode);	
-
+	}
+	
+	@Test
+	public void testFindPlaceSharersWithIncorrectArguments(){	
+        assertEquals("-", FileOutput.findPlaceSharers(new ArrayList<Athlete>(),2));	
 	}
 
 }
