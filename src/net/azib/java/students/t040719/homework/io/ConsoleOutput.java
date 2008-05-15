@@ -55,7 +55,7 @@ public class ConsoleOutput implements DataOutput{
 			tableHeader.add("Country");
 			tableHeader.add("DOB");
 			tableHeader.addAll(getEventNames());
-			out.println(String.format(Locale.US, "%" + positionFieldLength + "s %-" + longestNameLength + "s %5s %7s %-" + dateLength + "s " + getEventNamesFormatString(), tableHeader.toArray()));
+			out.println(String.format(Locale.getDefault(), "%" + positionFieldLength + "s %-" + longestNameLength + "s %5s %7s %-" + dateLength + "s " + getEventNamesFormatString(), tableHeader.toArray()));
 			for (int i=0; i<results.size(); i++){
 	        	Athlete a = results.get(i);
 				if (i != 0 && results.get(i-1).getDecathlonPoints()>a.getDecathlonPoints() 
@@ -67,7 +67,7 @@ public class ConsoleOutput implements DataOutput{
 		        else if(i < results.size()-1 && results.get(i+1).getDecathlonPoints() == a.getDecathlonPoints())
 		        	place = FileOutput.findPlaceSharers(results, i);
 				String format = "%" + positionFieldLength + "s %-" + longestNameLength + "s %5d %5s   %" + dateLength + "s " + getEventsFormatString();
-				out.println(String.format(Locale.US,format, getAthleteInfo(place,df,a)));
+				out.println(String.format(Locale.getDefault(),format, getAthleteInfo(place,df,a)));
 			}
 		}
 	}
