@@ -31,6 +31,7 @@ import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.hibernate.cfg.Environment;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -249,8 +250,8 @@ public class FileOutputTest {
         byte buf[] = new byte[len];
         fis.read(buf);
         fis.close();
-        String[] str1 = new String(transDoc,"UTF8").split("[\n\r]");
-        String[] str2 = new String(buf,"UTF8").split("[\n\r]");
+        String[] str1 = new String(transDoc,"UTF8").split(System.getProperty("line.separator"));
+        String[] str2 = new String(buf,"UTF8").split("\r\n");
         assertEquals(str1.length, str2.length);
         for (int i=0; i<str1.length; i++)
         	assertEquals(str1[i], str2[i]);
