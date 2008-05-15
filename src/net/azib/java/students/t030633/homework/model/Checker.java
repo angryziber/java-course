@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.EnumMap;
 
 /**
- * Checker interface.
+ * Checks Athlete parameters for logical correctness.
  *
  * @author t030633
  */

@@ -16,8 +16,8 @@
 	</xsl:template>
 
 	<xsl:template match="athlete">
-		<h2>#<xsl:value-of select="place" /> Name: <xsl:value-of select="name" /> (<xsl:value-of select="country" />)</h2>
-		<p>Born: <xsl:value-of select="birthdate" /></p>
+		<h2>#<xsl:value-of select="place" /><xsl:text> </xsl:text><xsl:value-of select="name" /> (<xsl:value-of select="country" />)</h2>
+		<p>Birth date: <xsl:apply-templates select="birthdate" /></p>
 		<p>Total score: <xsl:value-of select="score" /></p>
 		<table border="1">
 			<tr bgcolor="#9acd32"><th>Event</th><th>Performance</th></tr>
@@ -30,6 +30,11 @@
 			<td><xsl:value-of select="event" /></td>
 			<td><xsl:value-of select="performance" /></td>
 		</tr>
+	</xsl:template>
+	
+	<!-- Select local date format -->
+	<xsl:template match="birthdate">
+		<xsl:value-of select="@local" />
 	</xsl:template>
 	
 </xsl:stylesheet>

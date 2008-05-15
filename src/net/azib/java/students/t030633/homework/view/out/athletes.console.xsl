@@ -18,8 +18,7 @@
 		<xsl:value-of select="name" />
 		<xsl:text>&#xa;Country: </xsl:text>
 		<xsl:value-of select="country" />
-		<xsl:text>&#xa;Birth date: </xsl:text>
-		<xsl:value-of select="birthdate" />
+		<xsl:apply-templates select="birthdate" />
 		<xsl:text>&#xa;Total score: </xsl:text>
 		<xsl:value-of select="score" />
 		<xsl:apply-templates select="results/result" />
@@ -31,6 +30,13 @@
 		<xsl:value-of select="event" />
 		<xsl:text> -- </xsl:text>
 		<xsl:value-of select="performance" />
+	</xsl:template>
+	
+	
+	<xsl:template match="birthdate">
+		<xsl:text>&#xa;Birth date: </xsl:text>
+		<!-- Select local date format -->
+		<xsl:value-of select="@local" />
 	</xsl:template>
 
 </xsl:stylesheet>

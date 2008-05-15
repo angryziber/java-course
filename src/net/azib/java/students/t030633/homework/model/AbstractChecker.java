@@ -21,7 +21,7 @@ public abstract class AbstractChecker implements Checker {
 
 	public Date checkDate(Date date) {
 		if (date == null)
-			return new Date();
+			return new Date(0);
 		else
 			return date;
 	}

@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Athlete participating in a competition.
- *
+ * 
  * @author t030633
  */
 public interface Athlete extends Comparable<Athlete> {
@@ -15,17 +15,27 @@ public interface Athlete extends Comparable<Athlete> {
 	 * 
 	 * @param anotherAthlete
 	 *            an Athlete to compare with
-	 * @return negative, zero, or positive showing whether the current Athlete is greater,
-	 *         equal, or weaker than anotherAthlete
+	 * @return negative, zero, or positive showing whether the current Athlete
+	 *         is greater, equal, or weaker than anotherAthlete
 	 * @throws NullPointerException
 	 *             in case anotherAthlete is null
 	 */
 	public int compareTo(Athlete anotherAthlete);
 
+	/**
+	 * @return String - name of Athlete. Empty string if not available.
+	 */
 	public String getName();
 
+	/**
+	 * @return Date - birth date of Athlete. If not available then it returns "the epoch" date (January 1-st 1970).
+	 */
 	public Date getBirthDate();
 
+	/**
+	 * @return String - country code that the Athlete represents in ISO 3166-1
+	 *         alpha-2 standard. Empty string if not available.
+	 */
 	public String getCountry();
 
 	/**

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -47,7 +48,8 @@ public class XML implements Output {
 		Document doc = new Document(root);
 
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); // XSD date format
-
+		DateFormat ldf = DateFormat.getDateInstance(); // Local date format
+		
 		int placeEqual = 1;
 		int placeCounter = 1;
 		int lastScore = 20000;
@@ -65,7 +67,10 @@ public class XML implements Output {
 			athleteElement.addContent(new Element("name").setText(athlete.getName()));
 			athleteElement.addContent(new Element("country").setText(athlete.getCountry()));
 
-			athleteElement.addContent(new Element("birthdate").setText(df.format(athlete.getBirthDate())));
+			Date birthdate = athlete.getBirthDate();
+			athleteElement.addContent(new Element("birthdate")
+				.setText(df.format(birthdate))
+				.setAttribute("local", ldf.format(birthdate)));
 
 			Element resultsElement = new Element("results");
 			Map<Event, Double> results = athlete.getResults();

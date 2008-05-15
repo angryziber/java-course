@@ -9,7 +9,15 @@
               <xs:element name="place" type="xs:string" />
               <xs:element name="name" type="xs:string" />
               <xs:element name="country" type="xs:string" />
-              <xs:element name="birthdate" type="xs:date" />
+              <xs:element name="birthdate">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:date">
+                      <xs:attribute name="local" type="xs:string" use="required" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="results">
                 <xs:complexType>
                   <xs:sequence>
