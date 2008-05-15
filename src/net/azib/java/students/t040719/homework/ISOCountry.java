@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
 
 
 /**
- * Country - class that holds all the possible valid country codes in ISO 2-letter format
+ * ISOCountry - class that holds all the possible valid country codes in ISO 2-letter format
  * Fetches the results from an xml file
  * 
  * @version 1.0
@@ -33,18 +33,33 @@ public class ISOCountry {
 				loadCountries();
 			}
 			catch (SAXException e) {
-				LOG.log(Level.SEVERE, "Cannot load countries.", e);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Cannot load countries. Problem with SAX.", e);
+				else
+					LOG.log(Level.SEVERE, "Cannot load countries. Problem with SAX.");
+				System.exit(8);
 			}
 			catch (IOException e) {
-				LOG.log(Level.SEVERE, "Cannot load countries.", e);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Cannot find countries file.", e);
+				else
+					LOG.log(Level.SEVERE, "Cannot find countries file.");
+				System.exit(8);
 			}
 			catch (ParserConfigurationException e) {
-				LOG.log(Level.SEVERE, "Cannot load countries.", e);
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Cannot load countries.", e);
+				else
+					LOG.log(Level.SEVERE, "Cannot load countries.");
+				System.exit(8);
 			}
 			catch (URISyntaxException e){
-				LOG.log(Level.SEVERE, "Cannot load countries.", e);				
+				if (System.getProperty("program.debug") != null)
+					LOG.log(Level.SEVERE, "Incorrect URI syntax.", e);
+				else
+					LOG.log(Level.SEVERE, "Incorrect URI syntax.");
+				System.exit(8);
 			}
-
 	}
 	
 	/**
@@ -68,7 +83,6 @@ public class ISOCountry {
 			return "";
 	}
 	
-	//@SuppressWarnings("unchecked") // Needed because of generics
 	private static void loadCountries() throws SAXException, IOException, ParserConfigurationException, URISyntaxException{
 		File file = new File(ISOCountry.class.getResource(("xml/countries.xml")).toURI().getPath());
 		NodeList nodes = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file).getElementsByTagName("country");
@@ -76,13 +90,6 @@ public class ISOCountry {
 			Element e = (Element) nodes.item(i);
 			ISOCountry.countries.put(e.getElementsByTagName("code").item(0).getTextContent(), e.getElementsByTagName("name").item(0).getTextContent());
 		}
-		/*SAXBuilder builder = new SAXBuilder();
-		Document doc = builder.build(ISOCountry.class.getResourceAsStream("xml/countries.xml"));
-		
-		List<Element> children = doc.getRootElement().getChildren("country");
-		for (Element country : children) {
-			ISOCountry.countries.put(country.getChildText("code"), country.getChildText("name"));
-		}*/
 	}
 	
 }

@@ -301,7 +301,7 @@ public class FileOutputTest {
 	@Test
 	public void testXMLToFileWithNonWritableFile() throws ParseException{
 		List<Athlete> al = getAthleteList();
-		File noFile = new File("X1H4R:\\aldljaf.tmp");
+		File noFile = new File("X1H4R/ aldljaf.tmp");
 		Document doc = FileOutput.makeXMLDocument(al);
 		new FileOutput(noFile){
 			@Override
@@ -316,7 +316,7 @@ public class FileOutputTest {
 	@Test
 	public void testXMLToCSVWithNonWritableFile() throws ParseException{
 		List<Athlete> al = getAthleteList();
-		File noFile = new File("X1H4R:\\aldljaf.tmp");
+		File noFile = new File("X1H4R/ aldljaf.tmp");
 		Document doc = FileOutput.makeXMLDocument(al);
 		new FileOutput(noFile){
 			@Override
