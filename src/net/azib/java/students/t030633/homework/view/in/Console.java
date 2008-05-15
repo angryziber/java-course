@@ -25,7 +25,7 @@ public class Console implements Input {
 	static final String QUESTION = "Do you wish to enter an athlete? y/n" + LN + ">";
 	static final String WRONG_RESULT_FORMAT = "Result must be a number!" + LN;
 	static final String WRONG_DATE_FORMAT = "Bad date format.";
-	
+
 	// Using system date format, which the user probably assumes
 	static final DateFormat DF = DateFormat.getDateInstance();
 
@@ -50,7 +50,7 @@ public class Console implements Input {
 	public List<Athlete> read(AthleteBuilder builder) throws IOException {
 
 		List<Athlete> list = new LinkedList<Athlete>();
-		
+
 		out.println(BEGIN_MSG);
 		out.print(QUESTION);
 		while (reader.readLine().equals("y")) {
@@ -73,7 +73,14 @@ public class Console implements Input {
 				out.print("\t" + e.getName() + ": ");
 				String result = reader.readLine();
 				try {
-					builder = builder.addResult(e, Double.parseDouble(result));
+					result = result.replaceAll(",", "."); // To allow both comma and dot separators
+					if (result.contains(":")) {
+						String[] minutes = result.split(":");
+						builder = builder.addResult(e, Integer.parseInt(minutes[0]) * 60 + Double.parseDouble(minutes[1]));
+					}
+					else {
+						builder = builder.addResult(e, Double.parseDouble(result));
+					}
 				}
 				catch (NumberFormatException ex) {
 					out.print(WRONG_RESULT_FORMAT);
