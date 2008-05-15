@@ -9,7 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * HibernatePersonDAO
+ * HibernatePersonDAO.
+ * <p/>
+ * Note: See the same class in the spring package for a better version.
  *
  * @author anton
  */

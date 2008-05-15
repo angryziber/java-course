@@ -12,6 +12,8 @@ import java.util.Collection;
 
 /**
  * JDBCPersonDAO
+ * <p/>
+ * Note: See the same class in the spring package for a better version.
  *
  * @author anton
  */

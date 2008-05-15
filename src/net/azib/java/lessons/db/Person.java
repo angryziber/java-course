@@ -27,6 +27,16 @@ public class Person {
 		}
 	}
 	public static enum Sex {M, F}
+	
+	public Person() {
+	}
+
+	public Person(Name name, int age, Sex sex) {
+		this.name = name;
+		this.age = age;
+		this.sex = sex;
+	}
+
 	/**
 	 * @return the name
 	 */
