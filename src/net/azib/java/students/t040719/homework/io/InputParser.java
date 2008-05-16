@@ -30,7 +30,8 @@ public class InputParser {
 	 * @return true if valid, false otherwise
 	 */
 	public static boolean isValidName(String name){
-		return name.matches("\\w+ \\w+.*");
+		//return name.matches("\\w+ \\w+.*");
+		return name.matches("[a-zA-Z_0-9õÕäÄöÖüÜžŽšŠ]+ [a-zA-Z_0-9õÕäÄöÖüÜžŽšŠ]+.*");
 	}
 	
 	/**
