@@ -36,7 +36,6 @@ public class DataFromMySQL {
 			Class.forName(driver).newInstance();
 			connect = DriverManager.getConnection(url+"?user="+user+"&password="+passwd);
 			PreparedStatement statement = connect.prepareStatement("SELECT athletes.name AS name,athletes.dob AS birth,athletes.country_code AS c_code,results.race_100m AS a01,results.long_jump AS a02,results.shot_put AS a03,results.high_jump AS a04,results.race_400m AS a05,results.hurdles_110m AS a06,results.discus_throw AS a07,results.pole_vault AS a08,results.javelin_throw AS a09,results.race_1500m AS a10 FROM competitions INNER JOIN (results INNER JOIN athletes ON athletes.id = results.athlete_id) ON competitions.id = results.competition_id WHERE competitions.id="+compId);
-			System.out.println(statement);
 			resultSet = statement.executeQuery();
 			ResultSetMetaData rsmd = resultSet.getMetaData(); 
 			columns = rsmd.getColumnCount();
