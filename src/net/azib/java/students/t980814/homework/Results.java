@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import org.dom4j.Element;
 
@@ -21,6 +22,22 @@ public class Results implements Comparable<Results> {
 	private HashMap<String, Float> resultData;
 	private int sum;
 	private static int athleteIdGenerator = 0;
+	
+	public Results(Athlete athlete, LinkedList<Float> results) {
+		this.athlete = athlete;
+		resultData = new HashMap<String, Float>();
+		DecathlonEvent event = DecathlonEvent.RACE_100M;
+		while (!results.isEmpty()) {
+			float result = results.pop();
+			resultData.put(event.key, result);	
+			if (result > 0)
+				sum += event.calcPoints(result);
+			if (event.hasNext())
+				event = event.next();
+			else
+				break;
+		}
+	}
 	
 	public Results(String lineCSV) throws DecaCalcException, IndexOutOfBoundsException {
 		// Get the athlete name (everything between ""-s)
@@ -123,7 +140,7 @@ public class Results implements Comparable<Results> {
 				resultsElement.addElement(key).addText(getResultString(key));
 		}
 		else
-			throw new DecaCalcException("Unable to add data to XML file");
+			throw new DecaCalcException("Unable to add data to XML document");
 		return root;
 	} 
 	

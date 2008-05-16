@@ -21,11 +21,6 @@ public class Athlete {
 
 	final static String COMMA = ",";
 	public final static String CSV_DATE_FORMAT = "dd.MM.yyyy"; 
-	// when reading from CSV, then dd.MM.yyyy
-	// when reading from console, then use locale
-	// when printing to CSV, then dd.MM.yyyy
-	// when printing to console/XML, then use locale
-	
 	
 	private int athleteId;
 	private String name;
@@ -103,5 +98,12 @@ public class Athlete {
 	 */
 	public int getAthleteId() {
 		return athleteId;
+	}
+
+	/**
+	 * @param dob the dob to set
+	 */
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 }

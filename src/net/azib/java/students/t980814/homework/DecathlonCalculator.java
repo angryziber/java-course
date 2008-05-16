@@ -19,7 +19,7 @@ public class DecathlonCalculator {
 		this.ioMethod = ioMethod;
 		
 		if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.CONSOLE) {
-			competition = new Competition(System.in);			
+			competition = new Competition(System.out, System.in);			
 		}
 		else if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.CSV) {
 			competition = new Competition(new File(ioMethod.inputParameter));
@@ -51,10 +51,8 @@ public class DecathlonCalculator {
 				competition.toStringCSV(new File(ioMethod.outputParameter));
 			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.XML)
 				competition.toXML(new File(ioMethod.outputParameter));
-			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.HTML) {
-				// What to do if there is no data to output... create an empty file?
-				System.out.println("Not implemented");
-			}
+			else if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.HTML)
+				competition.toHTML(new File(ioMethod.outputParameter));
 		}
 		else
 			throw new DecaCalcException("There is no data to process.");

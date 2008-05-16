@@ -7,24 +7,34 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-//import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TreeSet;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-//import org.dom4j.io.OutputFormat;
+import org.dom4j.io.DocumentSource;
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
 
@@ -40,14 +50,98 @@ public class Competition {
 	private TreeSet<Results> results;
 	private int competitionId;
 	
-	public Competition(InputStream inputStream) {
-		StringBuilder sb = new StringBuilder();
-		Scanner scanner = new Scanner(inputStream);
+	private Float readRunningResult(PrintStream out, String queryText, Scanner scanner) {
+		String inputText;
+		Float result;
+		while (true) {
+			out.print(queryText);
+			inputText = scanner.next();
+			if (inputText.matches("([0-9]{1,2}:){0,1}[0-9]{1,2}[,.][0-9]{1,2}")) {
+				inputText = inputText.replace(',', '.');
+				String[] timeComponents = inputText.split(":");
+				if (timeComponents.length > 1)
+					result = (new Integer(timeComponents[0]) * 60) + new Float(timeComponents[1]);
+				else
+					result = new Float(timeComponents[0]);
+				return result;
+			}
+			else
+				out.println("The entered number doesn't match the required format (MM:)ss,mm or (MM:)ss.mm");
+		}
+	}
+	
+	private Float readFieldResult(PrintStream out, String queryText, Scanner scanner) {
+		String inputText;
+		Float result;
+		while (true) {
+			out.print(queryText);
+			inputText = scanner.next();
+			if (inputText.matches("[0-9]{1,3}[,.][0-9]{1,2}")) {
+				inputText = inputText.replace(',', '.');
+				result = new Float(inputText);
+				return result;
+			}
+			else
+				out.println("The entered number doesn't match the required format MMM,cc or MMM.cc");
+		}
+	}
 
-		System.out.print("Enter athlete's name: ");
-		sb.append("\"").append(scanner.next()).append("\"");
+	private Date readAthleteBirthday(PrintStream out, String queryText, Scanner scanner) {
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		Date date;
+		while (true) {
+			out.print(queryText + "(" + ((SimpleDateFormat)df).toPattern() + "): ");
+			String dateStr = scanner.next();
+			try {
+				date = df.parse(dateStr);
+				return date;
+			}
+			catch (ParseException e) {
+				out.println("The entered date doesn't match the required pattern.");
+			}
+		}
+	}
+	
+	private boolean askContinueEnteringConsole(PrintStream out, String queryText, Scanner scanner) {
+		out.print(queryText);
+		String response = scanner.next();
+		if (response.matches("[yY]"))
+			return true;
+		else
+			return false;
+	}
+	
+	public Competition(PrintStream printStream, InputStream inputStream) throws DecaCalcException {
+		LinkedList<Float> resultsFloat = new LinkedList<Float>();
+		Scanner scanner = new Scanner(inputStream);
+		results = new TreeSet<Results>();
+		int athleteId = 1;
+		do {
+			printStream.print("Enter athlete's name: ");
+			String name = scanner.next();
+			Date date = readAthleteBirthday(printStream, "Enter athlete's date of birth", scanner);
+			printStream.print("Enter athlete's country code: ");
+			String country = scanner.next();
+			
+			resultsFloat.clear();
+			resultsFloat.add(readRunningResult(printStream, "Enter result of 100 metres race: ", scanner));
+			resultsFloat.add(readFieldResult(printStream, "Enter result of long jump: ", scanner));
+			resultsFloat.add(readFieldResult(printStream, "Enter result of shot put: ", scanner));
+			resultsFloat.add(readFieldResult(printStream, "Enter result of high jump: ", scanner));
+			resultsFloat.add(readRunningResult(printStream, "Enter result of 400 metres race: ", scanner));
+			resultsFloat.add(readRunningResult(printStream, "Enter result of 110 metres hurdles: ", scanner));
+			resultsFloat.add(readFieldResult(printStream, "Enter result of discus throw: ", scanner));
+			resultsFloat.add(readFieldResult(printStream, "Enter result of pole vault: ", scanner));
+			resultsFloat.add(readFieldResult(printStream, "Enter result of javelin throw: ", scanner));
+			resultsFloat.add(readRunningResult(printStream, "Enter result of 1500 metres race: ", scanner));
 		
-		System.out.print("Enter his/her date of birth (" + DateFormat.getDateInstance(DateFormat.MEDIUM) + "): ");
+			results.add(new Results(new Athlete(athleteId++,
+												name,
+												new SimpleDateFormat(Athlete.CSV_DATE_FORMAT).format(date),
+												country),
+									resultsFloat));
+
+		} while(askContinueEnteringConsole(printStream, "Enter data for next athlete (y/n)?", scanner));
 		
 		scanner.close();
 	}
@@ -143,17 +237,16 @@ public class Competition {
 	}
 	
 	public void toStringCSV(File fileCSV) throws DecaCalcException {
-		/*StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		java.util.Iterator<Integer> i = buildSortedResults().iterator();
 		for (Results rr : results)
 			sb.append(i.next()).append(",").append(rr.toStringCSV()).append(LN);
-		*/
-		String fileContent = toString();
+
 		BufferedOutputStream bs = null;
 		try {
 			// What to do if there is no data to output... create an empty file?
 			bs = new BufferedOutputStream(new FileOutputStream(fileCSV));
-			bs.write(/*sb.toString().getBytes("UTF-8")*/fileContent.getBytes("UTF-8"));
+			bs.write(sb.toString().getBytes("UTF-8"));
 		}
 		catch (IOException e) {
 			throw new DecaCalcException("Unable to output data to CSV file named " + fileCSV);
@@ -171,7 +264,7 @@ public class Competition {
 		return sb.toString();
 	}
 
-	public void toXML(File fileXML) throws DecaCalcException {
+	private Document buildXMLDocument() throws DecaCalcException {
 		Document document = DocumentHelper.createDocument();
 		document.setXMLEncoding("UTF-8");
 		document.addDocType("competition", "", "decathlon.dtd");
@@ -180,25 +273,46 @@ public class Competition {
 		java.util.Iterator<Integer> i = buildSortedResults().iterator();
 		for (Results rr : results)
 			root = rr.addResultsDataToElement(root, i.next());
-		
-		//OutputFormat format = new OutputFormat("    ", true, "UTF-8");
+		return document;
+	}
+	
+	public void toXML(File fileXML) throws DecaCalcException {
+		OutputFormat format = OutputFormat.createPrettyPrint();
+		format.setEncoding("UTF-8");
 		XMLWriter writer = null;
-		BufferedOutputStream bs = null;
         try {
-			bs = new BufferedOutputStream(new FileOutputStream(fileXML));
-        	bs.write(document.asXML().getBytes("UTF-8"));
-        	//writer = new XMLWriter(new FileWriter(fileXML), format);
-			//writer.write(document);
+        	writer = new XMLWriter(new FileOutputStream(fileXML), format);
+			writer.write(buildXMLDocument());
 		}
 		catch (IOException e) {
 			throw new DecaCalcException("Unable to create XML file");
 		}
 		finally {
 			closeQuietly(writer);
-			closeQuietly(bs);
 		}
 	}
 	
+	public void toHTML(File fileHTML) throws DecaCalcException {
+		final String XSL_FILE = "DecaToHTML.xsl";
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(fileHTML);
+			Transformer t = TransformerFactory.newInstance().
+							newTransformer(new StreamSource(new FileInputStream(XSL_FILE)));
+			t.transform(new DocumentSource(buildXMLDocument()),
+						new StreamResult(fos));
+		}
+		catch (FileNotFoundException e) {
+			throw new DecaCalcException("Cannot find the XSL file: " + XSL_FILE);
+		}
+		catch (TransformerException e) {
+			throw new DecaCalcException("Unable to transform data into HTML file.");
+		}
+		finally {
+			closeQuietly(fos);
+		}
+	}
+
 	private void closeQuietly(XMLWriter writer) {
 		try {
 			if (writer != null)
