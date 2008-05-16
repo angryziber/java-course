@@ -1,6 +1,5 @@
 package net.azib.java.students.t001370.homework;
 
-import net.azib.java.students.t001370.lectures.lec13.UtilLoggingDemo;
 
 import java.io.PrintStream;
 import java.util.logging.Level;
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class Homework {
 	
-	private static final Logger LOG = Logger.getLogger(UtilLoggingDemo.class.getName());
+	private static final Logger LOG = Logger.getLogger(Homework.class.getName());
 
 	private final PrintStream output;
 

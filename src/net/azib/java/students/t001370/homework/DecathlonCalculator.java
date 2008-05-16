@@ -1,6 +1,5 @@
 package net.azib.java.students.t001370.homework;
 
-import net.azib.java.students.t001370.lectures.lec13.UtilLoggingDemo;
 
 import java.io.PrintStream;
 import java.util.Collection;
@@ -13,7 +12,7 @@ import java.util.logging.Logger;
  * @author maksim
  */
 public class DecathlonCalculator {
-	private static final Logger LOG = Logger.getLogger(UtilLoggingDemo.class.getName());
+	private static final Logger LOG = Logger.getLogger(DecathlonCalculator.class.getName());
 
 	private IOMethod inputMethod;
 	private IOMethod outputMethod;

@@ -1,6 +1,5 @@
 package net.azib.java.students.t001370.homework;
 
-import net.azib.java.students.t001370.lectures.lec13.UtilLoggingDemo;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -30,7 +29,7 @@ import java.util.logging.Logger;
  * @author maksim
  */
 public class DecathlonDataReader {
-	private static final Logger LOG = Logger.getLogger(UtilLoggingDemo.class.getName());
+	private static final Logger LOG = Logger.getLogger(DecathlonDataReader.class.getName());
 	
 	private IOMethod inputSource;
 	private final PrintStream output;
