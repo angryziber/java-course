@@ -46,7 +46,6 @@ public class SortingID {
 		// Start to count decathlon points
 		buf[1] = Double.parseDouble(str_buf[1]);
 		for (int i = 3; i < 13; i++) {
-			// buf[i] = lnr.rs3.getDouble(i);
 			buf[i] = Double.parseDouble(str_buf[i]);
 		}
 		double result = CountAthletResult.CountResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10], buf[11],
