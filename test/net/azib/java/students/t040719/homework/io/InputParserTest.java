@@ -17,7 +17,7 @@ import org.junit.Test;
 public class InputParserTest {
 	@Test
 	public void isValidNameFails(){
-		assertEquals(false, InputParser.isValidName("ss"));
+		assertEquals(false, InputParser.isValidName(""));
 	}
 	
 	@Test

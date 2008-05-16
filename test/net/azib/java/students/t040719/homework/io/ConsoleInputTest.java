@@ -55,11 +55,10 @@ public class ConsoleInputTest {
 
 	@Test
 	public void invalidNameCheck() {
-		String wN1 = "JuhanParts";
-		String wN2 = "Juhan-Parts";
+		String wN = "";
 		String cN = "Juha Parts";
-		String input = formatInputString(wN1, wN2, cN);
-		String output = formatOutputString("Name: ", ConsoleInput.INVALID_NAME, wN1, wN2); 
+		String input = formatInputString(wN, cN);
+		String output = formatOutputString("Name: ", ConsoleInput.INVALID_NAME, wN); 
 		setup(input);
 		String name = ci.getName();
 		assertEquals(output, out.toString());

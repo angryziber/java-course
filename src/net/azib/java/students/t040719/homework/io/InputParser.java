@@ -30,8 +30,9 @@ public class InputParser {
 	 * @return true if valid, false otherwise
 	 */
 	public static boolean isValidName(String name){
-		//return name.matches("\\w+ \\w+.*");
-		return name.matches("[a-zA-Z_0-9õÕäÄöÖüÜžŽšŠ]+ [a-zA-Z_0-9õÕäÄöÖüÜžŽšŠ]+.*");
+		//return name.matches("\\w+ \\w+.*"); //this regex does not accept all Estonian characters for the beginning of word. e.g. Ülar Aasmäe is not valid because of the Ü at the beginning of word
+		//return name.matches("[a-zA-Z_0-9õÕäÄöÖüÜžŽšŠ]+ [a-zA-Z_0-9õÕäÄöÖüÜžŽšŠ]+.*"); // This one on the other hand does not accept Russian characters for example
+		return !name.equals(""); //Therefore I decided to only check if the name is empty or not. An athlete must have some kind of a name.
 	}
 	
 	/**
