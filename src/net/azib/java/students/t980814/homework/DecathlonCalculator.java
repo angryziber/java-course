@@ -1,9 +1,13 @@
 package net.azib.java.students.t980814.homework;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * DecathlonCalculator
@@ -12,26 +16,52 @@ import java.sql.SQLException;
  */
 public class DecathlonCalculator {
 
+	private static final Logger LOG = Logger.getLogger(DecathlonCalculator.class.getName());
+	final static String LN = System.getProperty("line.separator");
+
 	private Competition competition;
 	private DecaIOMethod ioMethod;
 	
+	/**
+	 * @param ioMethod
+	 * @throws DecaCalcException
+	 */
 	public DecathlonCalculator(DecaIOMethod ioMethod) throws DecaCalcException {
 		this.ioMethod = ioMethod;
 		
 		if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.CONSOLE) {
+			LOG.info("Reading input from console");
 			competition = new Competition(System.out, System.in);			
 		}
 		else if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.CSV) {
+			LOG.info("Reading input from CSV, file=" + ioMethod.inputParameter);
 			competition = new Competition(new File(ioMethod.inputParameter));
 		}
 		else if (ioMethod.inputMethod == DecaIOMethod.DecaInputMethod.DATABASE) {
+			LOG.info("Reading input from database, id=" + ioMethod.inputParameter);
 			Connection connection = null;
 			try {
-				connection = DriverManager.getConnection("jdbc:mysql://srv.azib.net:3306/decathlon", "java", "java");
+				Properties deca_db = new Properties();
+				deca_db.load(DecathlonCalculator.class.getResourceAsStream("db.properties"));
+				LOG.info("Reading decathlon_db: " + deca_db.getProperty("decathlon_db") + LN +
+				         "Reading db_user: " + deca_db.getProperty("db_user") + LN +
+				         "Reading db_password: " + deca_db.getProperty("db_password"));
+				connection = DriverManager.getConnection(deca_db.getProperty("decathlon_db"),
+														 deca_db.getProperty("db_user"),
+														 deca_db.getProperty("db_password"));
 				competition = new Competition(connection, ioMethod.inputParameter);
 			}
 			catch (SQLException e) {				
+				LOG.log(Level.SEVERE, "Exception!", e);
 				throw new DecaCalcException("Unable to open connection to DB");			
+			}
+			catch (NullPointerException e) {
+				LOG.log(Level.SEVERE, "Exception!", e);
+				throw new DecaCalcException("Unable to find \"db.properties\" file");			
+			}
+			catch (IOException e) {
+				LOG.log(Level.SEVERE, "Exception!", e);
+				throw new DecaCalcException("Unable to find \"db.properties\" file");			
 			}
 			finally {
 				try {
@@ -43,6 +73,9 @@ public class DecathlonCalculator {
 		}
 	}
 	
+	/**
+	 * @throws DecaCalcException
+	 */
 	public void outputCalculatedData() throws DecaCalcException {
 		if (competition != null) {
 			if (ioMethod.outputMethod == DecaIOMethod.DecaOutputMethod.CONSOLE)
@@ -58,6 +91,10 @@ public class DecathlonCalculator {
 			throw new DecaCalcException("There is no data to process.");
 	}
 	
+	/**
+	 * @param args
+	 * @return
+	 */
 	public static DecaIOMethod readCommandLineParams(String[] args) {
 		int paramCount = 0;
 		DecaIOMethod ioMethod = new DecaIOMethod();
@@ -88,8 +125,10 @@ public class DecathlonCalculator {
 		return ioMethod;
 	}
 	
+	/**
+	 * 
+	 */
 	public static void outputCommandLineError() {
-		final String LN = System.getProperty("line.separator");
 		final String errorMessage = new String(
 				"Unsupported command line parameter configuration." + LN +
 				"Use following configuration:" + LN +
@@ -109,7 +148,10 @@ public class DecathlonCalculator {
 		System.out.println(errorMessage);
 	}
 	
-	public static void main(String[] args) {
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {		
 		try {
 			DecaIOMethod ioMethod = readCommandLineParams(args);
 			if (ioMethod.isIOMethodLegal()) {

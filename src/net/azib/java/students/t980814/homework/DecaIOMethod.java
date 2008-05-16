@@ -27,16 +27,27 @@ public class DecaIOMethod {
 	public String         inputParameter = null;
 	public String        outputParameter = null;
 
+	/**
+	 * @param i
+	 * @param param
+	 */
 	public void setInputMethod(DecaInputMethod i, String param) {
 		inputMethod = i;
 		inputParameter = param;
 	}
 		
+	/**
+	 * @param o
+	 * @param param
+	 */
 	public void setOutputMethod(DecaOutputMethod o, String param) {
 		outputMethod = o;
 		outputParameter = param;
 	}
 		
+	/**
+	 * @return
+	 */
 	public boolean isIOMethodLegal() {
 		return ((inputMethod != DecaInputMethod.UNKNOWN) &&
 		        (outputMethod != DecaOutputMethod.UNKNOWN));

@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -45,72 +46,17 @@ import org.dom4j.io.XMLWriter;
  */
 public class Competition {
 
+	private static final Logger LOG = Logger.getLogger(Competition.class.getName());
 	final static String LN = System.getProperty("line.separator");
 
 	private TreeSet<Results> results;
 	private int competitionId;
 	
-	private Float readRunningResult(PrintStream out, String queryText, Scanner scanner) {
-		String inputText;
-		Float result;
-		while (true) {
-			out.print(queryText);
-			inputText = scanner.next();
-			if (inputText.matches("([0-9]{1,2}:){0,1}[0-9]{1,2}[,.][0-9]{1,2}")) {
-				inputText = inputText.replace(',', '.');
-				String[] timeComponents = inputText.split(":");
-				if (timeComponents.length > 1)
-					result = (new Integer(timeComponents[0]) * 60) + new Float(timeComponents[1]);
-				else
-					result = new Float(timeComponents[0]);
-				return result;
-			}
-			else
-				out.println("The entered number doesn't match the required format (MM:)ss,mm or (MM:)ss.mm");
-		}
-	}
-	
-	private Float readFieldResult(PrintStream out, String queryText, Scanner scanner) {
-		String inputText;
-		Float result;
-		while (true) {
-			out.print(queryText);
-			inputText = scanner.next();
-			if (inputText.matches("[0-9]{1,3}[,.][0-9]{1,2}")) {
-				inputText = inputText.replace(',', '.');
-				result = new Float(inputText);
-				return result;
-			}
-			else
-				out.println("The entered number doesn't match the required format MMM,cc or MMM.cc");
-		}
-	}
-
-	private Date readAthleteBirthday(PrintStream out, String queryText, Scanner scanner) {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
-		Date date;
-		while (true) {
-			out.print(queryText + "(" + ((SimpleDateFormat)df).toPattern() + "): ");
-			String dateStr = scanner.next();
-			try {
-				date = df.parse(dateStr);
-				return date;
-			}
-			catch (ParseException e) {
-				out.println("The entered date doesn't match the required pattern.");
-			}
-		}
-	}
-	
-	private boolean askContinueEnteringConsole(PrintStream out, String queryText, Scanner scanner) {
-		out.print(queryText);
-		String response = scanner.next();
-		if (response.matches("[yY]"))
-			return true;
-		else
-			return false;
-	}
-	
+	/**
+	 * @param printStream
+	 * @param inputStream
+	 * @throws DecaCalcException
+	 */
 	public Competition(PrintStream printStream, InputStream inputStream) throws DecaCalcException {
 		LinkedList<Float> resultsFloat = new LinkedList<Float>();
 		Scanner scanner = new Scanner(inputStream);
@@ -118,7 +64,8 @@ public class Competition {
 		int athleteId = 1;
 		do {
 			printStream.print("Enter athlete's name: ");
-			String name = scanner.next();
+			String name = scanner.nextLine();
+			LOG.info("Reed name:" + name);
 			Date date = readAthleteBirthday(printStream, "Enter athlete's date of birth", scanner);
 			printStream.print("Enter athlete's country code: ");
 			String country = scanner.next();
@@ -146,10 +93,15 @@ public class Competition {
 		scanner.close();
 	}
 	
+	/**
+	 * @param fileCSV
+	 * @throws DecaCalcException
+	 */
 	public Competition(File fileCSV) throws DecaCalcException {
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileCSV), "UTF-8"));
+			LOG.info("Opened CSV file: " + fileCSV);
 			String line;
 			results = new TreeSet<Results>();
 			int lineNumber = 0;
@@ -159,7 +111,7 @@ public class Competition {
 					results.add(new Results(line));
 				}
 				catch (IndexOutOfBoundsException e) {
-					throw new DecaCalcException(e.getMessage() + "Error (not enough data) in file (" + fileCSV + ") on line nr:" + lineNumber);
+					throw new DecaCalcException("Error (not enough data) in file (" + fileCSV + ") on line nr:" + lineNumber);
 				}
 			}
 		}
@@ -177,6 +129,11 @@ public class Competition {
 		}
 	}
 	
+	/**
+	 * @param conn
+	 * @param compIdString
+	 * @throws DecaCalcException
+	 */
 	public Competition(Connection conn,
 			       String compIdString) throws DecaCalcException {
 		ResultSet rs = null;
@@ -199,6 +156,12 @@ public class Competition {
 		}
 	}
 
+	/**
+	 * @param conn
+	 * @param compIdString
+	 * @return
+	 * @throws DecaCalcException
+	 */
 	private int getCompetitionIdInt(Connection conn, String compIdString) throws DecaCalcException {
 		ResultSet rs = null;
 		int returnCompId = 0;
@@ -217,9 +180,13 @@ public class Competition {
 		finally {
 			closeQuietly(rs);
 		}
+		LOG.info("Reed competition id=" + returnCompId);
 		return returnCompId;
 	}
 	
+	/**
+	 * @return
+	 */
 	private LinkedList<Integer> buildSortedResults() {
 		LinkedList<Integer> positions = new LinkedList<Integer>();
 		int place = 1;
@@ -236,15 +203,19 @@ public class Competition {
 		return positions;
 	}
 	
+	/**
+	 * @param fileCSV
+	 * @throws DecaCalcException
+	 */
 	public void toStringCSV(File fileCSV) throws DecaCalcException {
 		StringBuilder sb = new StringBuilder();
-		java.util.Iterator<Integer> i = buildSortedResults().iterator();
+		java.util.Iterator<Integer> position = buildSortedResults().iterator();
 		for (Results rr : results)
-			sb.append(i.next()).append(",").append(rr.toStringCSV()).append(LN);
+			sb.append(position.next()).append(",").append(rr.toStringCSV()).append(LN);
 
 		BufferedOutputStream bs = null;
 		try {
-			// What to do if there is no data to output... create an empty file?
+			LOG.info("Creating CSV file=" + fileCSV);
 			bs = new BufferedOutputStream(new FileOutputStream(fileCSV));
 			bs.write(sb.toString().getBytes("UTF-8"));
 		}
@@ -256,31 +227,44 @@ public class Competition {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		java.util.Iterator<Integer> i = buildSortedResults().iterator();
+		StringBuilder sb = new StringBuilder("Sorted results: " + LN);
+		java.util.Iterator<Integer> position = buildSortedResults().iterator();
 		for (Results rr : results)
-			sb.append(String.format("%2d", i.next())).append(". ").append(rr).append(LN);
+			sb.append(String.format("%2d", position.next())).append(". ").append(rr).append(LN);
 		return sb.toString();
 	}
 
+	/**
+	 * @return
+	 * @throws DecaCalcException
+	 */
 	private Document buildXMLDocument() throws DecaCalcException {
+		LOG.info("Building XML document");
 		Document document = DocumentHelper.createDocument();
 		document.setXMLEncoding("UTF-8");
 		document.addDocType("competition", "", "decathlon.dtd");
 		Element root = document.addElement("competition");
 		
-		java.util.Iterator<Integer> i = buildSortedResults().iterator();
+		java.util.Iterator<Integer> position = buildSortedResults().iterator();
 		for (Results rr : results)
-			root = rr.addResultsDataToElement(root, i.next());
+			root = rr.addResultsDataToElement(root, position.next());
 		return document;
 	}
 	
+	/**
+	 * @param fileXML
+	 * @throws DecaCalcException
+	 */
 	public void toXML(File fileXML) throws DecaCalcException {
 		OutputFormat format = OutputFormat.createPrettyPrint();
 		format.setEncoding("UTF-8");
 		XMLWriter writer = null;
         try {
+    		LOG.info("Creating XML file=" + fileXML);
         	writer = new XMLWriter(new FileOutputStream(fileXML), format);
 			writer.write(buildXMLDocument());
 		}
@@ -292,10 +276,15 @@ public class Competition {
 		}
 	}
 	
+	/**
+	 * @param fileHTML
+	 * @throws DecaCalcException
+	 */
 	public void toHTML(File fileHTML) throws DecaCalcException {
 		final String XSL_FILE = "DecaToHTML.xsl";
 		FileOutputStream fos = null;
 		try {
+    		LOG.info("Creating HTML file=" + fileHTML);
 			fos = new FileOutputStream(fileHTML);
 			Transformer t = TransformerFactory.newInstance().
 							newTransformer(new StreamSource(Competition.class.getResourceAsStream(XSL_FILE)));
@@ -313,6 +302,100 @@ public class Competition {
 		}
 	}
 
+	
+	/**
+	 * @param out
+	 * @param queryText
+	 * @param scanner
+	 * @return
+	 */
+	private Float readRunningResult(PrintStream out, String queryText, Scanner scanner) {
+		String inputText;
+		Float result;
+		while (true) {
+			out.print(queryText);
+			inputText = scanner.next();
+			if (inputText.matches("([0-9]{1,2}:){0,1}[0-9]{1,2}[,.][0-9]{1,2}")) {
+				inputText = inputText.replace(',', '.');
+				String[] timeComponents = inputText.split(":");
+				if (timeComponents.length > 1)
+					result = (new Integer(timeComponents[0]) * 60) + new Float(timeComponents[1]);
+				else
+					result = new Float(timeComponents[0]);
+				LOG.info("Reed running result (float): " + result);
+				return result;
+			}
+			else
+				out.println("The entered number doesn't match the required format (MM:)ss,mm or (MM:)ss.mm");
+		}
+	}
+	
+	/**
+	 * @param out
+	 * @param queryText
+	 * @param scanner
+	 * @return
+	 */
+	private Float readFieldResult(PrintStream out, String queryText, Scanner scanner) {
+		String inputText;
+		Float result;
+		while (true) {
+			out.print(queryText);
+			inputText = scanner.next();
+			if (inputText.matches("[0-9]{1,3}[,.][0-9]{1,2}")) {
+				inputText = inputText.replace(',', '.');
+				result = new Float(inputText);
+				LOG.info("Reed field result (float): " + result);
+				return result;
+			}
+			else
+				out.println("The entered number doesn't match the required format MMM,cc or MMM.cc");
+		}
+	}
+
+	/**
+	 * @param out
+	 * @param queryText
+	 * @param scanner
+	 * @return
+	 */
+	private Date readAthleteBirthday(PrintStream out, String queryText, Scanner scanner) {
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		Date date;
+		while (true) {
+			out.print(queryText + "(" + ((SimpleDateFormat)df).toPattern() + "): ");
+			String dateStr = scanner.next();
+			try {
+				date = df.parse(dateStr);
+				LOG.info("Reed date: " + date);
+				return date;
+			}
+			catch (ParseException e) {
+				out.println("The entered date doesn't match the required pattern.");
+			}
+		}
+	}
+	
+	/**
+	 * @param out
+	 * @param queryText
+	 * @param scanner
+	 * @return
+	 */
+	private boolean askContinueEnteringConsole(PrintStream out, String queryText, Scanner scanner) {
+		out.print(queryText);
+		String response = scanner.next();
+		scanner.nextLine(); // flush the scanner
+		if (response.matches("[yY]"))
+			return true;
+		else
+			return false;
+	}
+	
+	
+	/**
+	 * @param writer
+	 */
 	private void closeQuietly(XMLWriter writer) {
 		try {
 			if (writer != null)
@@ -322,6 +405,9 @@ public class Competition {
 		}
 	}
 
+	/**
+	 * @param rs
+	 */
 	public static void closeQuietly(ResultSet rs) {
 		try {
 			if (rs != null)
@@ -331,6 +417,9 @@ public class Competition {
 		}
 	}
 
+	/**
+	 * @param r
+	 */
 	public static void closeQuietly(Closeable r) {
 		try {
 			if (r != null)

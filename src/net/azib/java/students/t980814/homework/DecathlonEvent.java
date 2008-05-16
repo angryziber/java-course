@@ -43,14 +43,23 @@ public enum DecathlonEvent {
 		C = c;
 	}
 
+	/**
+	 * @return
+	 */
 	public DecathlonEvent next() {
 		return values()[(this.ordinal() + 1) % values().length];
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean hasNext() {
 		return (values().length > 0) && (this.ordinal() < (values().length - 1));
 	}
 	
+	/**
+	 * @return
+	 */
 	public static String[] getAllKeys() {
 		String[] names = new String[values().length];
 		for (int i = 0; i < values().length; i++)
@@ -58,6 +67,10 @@ public enum DecathlonEvent {
 		return names;
 	}
 	
+	/**
+	 * @param key
+	 * @return
+	 */
 	public static DecathlonEvent getDecathlonEventByKey(String key) {
 		for (DecathlonEvent e : values())
 			if (e.key.equals(key))
@@ -65,6 +78,10 @@ public enum DecathlonEvent {
 		return null;
 	}
 	
+	/**
+	 * @param d
+	 * @return
+	 */
 	public int calcPoints(double d) {
 		if (isRunningEvent)
 			return new Integer((int) (A * Math.pow((B - d*multiplier), C)));

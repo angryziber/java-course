@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
 import org.dom4j.Element;
 
@@ -16,6 +17,7 @@ import org.dom4j.Element;
  */
 public class Results implements Comparable<Results> {
 
+	private static final Logger LOG = Logger.getLogger(Results.class.getName());
 	final static String COMMA = ",";
 
 	Athlete athlete;
@@ -23,7 +25,12 @@ public class Results implements Comparable<Results> {
 	private int sum;
 	private static int athleteIdGenerator = 0;
 	
+	/**
+	 * @param athlete
+	 * @param results
+	 */
 	public Results(Athlete athlete, LinkedList<Float> results) {
+		LOG.info("Creating resultData from Athlete and LinkedList<Float>");
 		this.athlete = athlete;
 		resultData = new HashMap<String, Float>();
 		DecathlonEvent event = DecathlonEvent.RACE_100M;
@@ -39,6 +46,11 @@ public class Results implements Comparable<Results> {
 		}
 	}
 	
+	/**
+	 * @param lineCSV
+	 * @throws DecaCalcException
+	 * @throws IndexOutOfBoundsException
+	 */
 	public Results(String lineCSV) throws DecaCalcException, IndexOutOfBoundsException {
 		// Get the athlete name (everything between ""-s)
 		String athleteName = lineCSV.substring(1, lineCSV.lastIndexOf('"'));
@@ -57,6 +69,7 @@ public class Results implements Comparable<Results> {
 				result = (new Integer(timeComponents[0]) * 60) + new Float(timeComponents[1]);
 			else
 				result = new Float(timeComponents[0]);
+			LOG.info("Reed result from CSV (float): " + result);
 			
 			resultData.put(event.key, result);	
 			if (result > 0)
@@ -68,6 +81,11 @@ public class Results implements Comparable<Results> {
 		};			
 	}
 	
+	/**
+	 * @param conn
+	 * @param id
+	 * @throws DecaCalcException
+	 */
 	public Results(Connection conn, int id) throws DecaCalcException {
 		sum = 0;
 		ResultSet rs = null;
@@ -80,6 +98,8 @@ public class Results implements Comparable<Results> {
 				resultData = new HashMap<String, Float>();
 				for (String e : DecathlonEvent.getAllKeys()) {
 					float result = rs.getFloat(e);
+					LOG.info("Reed result from DB (results id=" + id + ") (float): " + result);
+
 					resultData.put(e, result);
 					if (result > 0)
 						sum += DecathlonEvent.getDecathlonEventByKey(e).calcPoints(result);
@@ -94,10 +114,24 @@ public class Results implements Comparable<Results> {
 		}
 	}
 	
+	/**
+	 *
+	 */
+	public int compareTo(Results o) {
+		return (sum <= o.getSum())? 1 : -1;
+	}
+
+	/**
+	 * @return
+	 */
 	public int getSum() {
 		return sum;
 	}
 	
+	/**
+	 * @param key
+	 * @return
+	 */
 	public String getResultString(String key) {
 		String result = "0";
 		if (resultData.containsKey(key))
@@ -111,6 +145,9 @@ public class Results implements Comparable<Results> {
 		return result.replace(',', '.');
 	}
 	
+	/**
+	 *
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(sum).append(" - ").append(athlete).append(COMMA).append(" Results: ");
@@ -119,6 +156,9 @@ public class Results implements Comparable<Results> {
 		return sb.substring(0, sb.length() - 1);
 	}
 
+	/**
+	 * @return
+	 */
 	public String toStringCSV() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(sum).append(COMMA).append(athlete.toStringCSV());
@@ -127,7 +167,12 @@ public class Results implements Comparable<Results> {
 		return sb.toString();
 	}
 	
-
+	/**
+	 * @param root
+	 * @param position
+	 * @return
+	 * @throws DecaCalcException
+	 */
 	public Element addResultsDataToElement(Element root, int position) throws DecaCalcException {
 		if (root instanceof Element) {
 			Element athleteElement = root.addElement("athlete").
@@ -143,8 +188,4 @@ public class Results implements Comparable<Results> {
 			throw new DecaCalcException("Unable to add data to XML document");
 		return root;
 	} 
-	
-	public int compareTo(Results o) {
-		return (sum <= o.getSum())? 1 : -1;
-	}
 }
