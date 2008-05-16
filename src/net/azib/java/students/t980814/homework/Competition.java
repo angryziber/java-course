@@ -298,7 +298,7 @@ public class Competition {
 		try {
 			fos = new FileOutputStream(fileHTML);
 			Transformer t = TransformerFactory.newInstance().
-							newTransformer(new StreamSource(new FileInputStream(XSL_FILE)));
+							newTransformer(new StreamSource(Competition.class.getResourceAsStream(XSL_FILE)));
 			t.transform(new DocumentSource(buildXMLDocument()),
 						new StreamResult(fos));
 		}

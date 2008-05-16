@@ -88,6 +88,7 @@ public class Athlete {
 		if (root instanceof Element) {
 			DateFormat dfm = DateFormat.getDateInstance(DateFormat.MEDIUM);
 			root.addElement("name").addText(name);
+			root.addElement("country").addText(country);
 			root.addElement("dob").addText(dfm.format(dob));
 		}
 		return root;
