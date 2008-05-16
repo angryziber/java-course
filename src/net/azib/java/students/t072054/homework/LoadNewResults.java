@@ -1,7 +1,6 @@
 package net.azib.java.students.t072054.homework;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,16 +13,13 @@ import java.sql.Statement;
 
 import java.util.Map;
 
-import java.util.LinkedHashMap;
-
 /**
  * LoadNewResults
  * 
  * @author r_vassiljev
  */
 
-// TODO how will I know, how many rows in a MySQL table?
-public class LoadNewResults {
+public class LoadNewResults implements ResultsLoader {
 	static private ResultSet rs1;
 	static private ResultSet rs2;
 	static private ResultSet rs3;
@@ -35,10 +31,35 @@ public class LoadNewResults {
 
 	static private Connection conn;
 
-	// TODO where is encapsulation, common interfaces?
-
+	/**
+	 * Loads results from MySQL database
+	 * 
+	 * @param result_map1
+	 * @param result_map2
+	 * @param result_map3
+	 */
 	public void loadResultsDB(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3) {
+
+		String connection_string = " ";
+		String login = " ";
+		String password = " ";
+
+		// Reading data from db.properties
+		// Open the file
+		try {
+			File f1 = new File(LoadNewResults.class.getResource("db.properties").toURI().getPath());
+
+			BufferedReader in = new BufferedReader(new FileReader(f1));
+
+			connection_string = in.readLine();
+			login = in.readLine();
+			password = in.readLine();
+		}
+		catch (Exception e) {
+			System.out.print("Error opening db.properties");
+		}
+
 		// public static void main(String[] args) {
 		try {
 			// Structure with results after reading from database here
@@ -48,8 +69,8 @@ public class LoadNewResults {
 			// result_map3 = new LinkedHashMap<Integer, String[]>();
 
 			// Establish the connection to the database
-			String url = "jdbc:mysql://srv.azib.net:3306/decathlon";
-			conn = DriverManager.getConnection(url, "java", "java");
+			String url = connection_string;
+			conn = DriverManager.getConnection(url, login, password);
 			Statement stmt = conn.createStatement();
 
 			PreparedStatement personStatement = conn.prepareStatement("SELECT * FROM athletes WHERE id > ?;");
@@ -92,7 +113,14 @@ public class LoadNewResults {
 		}
 	}
 
-	public static void readDatabase(ResultSet rs, Map<Integer, String[]> result_map, int column_number) {
+	/**
+	 * Reads all strings from one table of database
+	 * 
+	 * @param rs
+	 * @param result_map
+	 * @param column_number
+	 */
+	private static void readDatabase(ResultSet rs, Map<Integer, String[]> result_map, int column_number) {
 		String[][] str = new String[100][100];
 		int j = 0;
 
@@ -114,6 +142,9 @@ public class LoadNewResults {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void connClose() {
 		try {
 			conn.close();
@@ -124,6 +155,14 @@ public class LoadNewResults {
 		}
 	}
 
+	/**
+	 * Loads results from CSV file
+	 * 
+	 * @param result_map1
+	 * @param result_map2
+	 * @param result_map3
+	 * @param fileName
+	 */
 	public void loadResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, String fileName) {
 		// public static void main(String[] args) {
@@ -138,7 +177,7 @@ public class LoadNewResults {
 			// String[]>();
 
 			// Open the file
-			File f1 = /* new File(fileName); */new File("C:\\source.csv");
+			File f1 = /* new File(fileName); */new File(fileName);
 
 			BufferedReader in = new BufferedReader(new FileReader(f1));
 
@@ -232,6 +271,13 @@ public class LoadNewResults {
 
 	}
 
+	/**
+	 * Loads results from console
+	 * 
+	 * @param result_map1
+	 * @param result_map2
+	 * @param result_map3
+	 */
 	public void loadResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3) {
 		// public static void main(String[] args) {
@@ -267,14 +313,14 @@ public class LoadNewResults {
 				System.out.println("Enter results or write 'quit' to finish");
 				line = reader.readLine();
 				if (!line.equalsIgnoreCase("quit")) {
-					
+
 					// Strings separated by ',' for map3
 					String[] str_buf = new String[13];
 
 					// Same strings for map1, map2
 					String[] str_map1 = new String[4];
 					String[] str_map2 = new String[5];
-					
+
 					for (int i = 0; i < (line.length()); i++) {
 						if (line.charAt(i) != ',' && (i + 1) != line.length()) {
 							char_buf[char_count] = line.charAt(i);
@@ -315,7 +361,7 @@ public class LoadNewResults {
 						}
 
 					}
-					
+
 					result_map3.put(num_line, str_buf);
 					result_map1.put(num_line, str_map1);
 
@@ -334,8 +380,7 @@ public class LoadNewResults {
 					count = 0;
 					num_line++;
 				}
-				
-			
+
 			}
 
 		}
@@ -345,6 +390,12 @@ public class LoadNewResults {
 
 	}
 
+	/**
+	 * Converts from minute:second.millisecond to second.millisecond format
+	 * 
+	 * @param not_converted
+	 * @return Converted data
+	 */
 	public String convertTime(String not_converted) {
 		String converted;
 

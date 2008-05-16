@@ -20,12 +20,17 @@ import org.w3c.dom.*;
  * @author r_vassiljev
  */
 
-public class ShowResults {
+public class ShowResults implements ResultShower {
 	/**
+	 * Prints results to console
+	 * 
+	 * @param result_map1
+	 * @param result_map2
+	 * @param result_map3
 	 * @param results
 	 * @param numEvent
 	 */
-	public static void ShowResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public void ShowResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent) {
 		// public static void main(String[] args) {
 		// LoadNewResults lnr = new LoadNewResults();
@@ -89,27 +94,17 @@ public class ShowResults {
 	}
 
 	/**
+	 * Prints results to CSV file
+	 * 
+	 * @param result_map1
+	 * @param result_map2
+	 * @param result_map3
 	 * @param results
 	 * @param numEvent
 	 * @param fileName
 	 */
-	public static void ShowResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public void ShowResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName) {
-		// public static void main(String[] args) {
-		LoadNewResults lnr = new LoadNewResults();
-
-		// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
-		// String[]>();
-		// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
-		// String[]>();
-		// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
-		// String[]>();
-
-		// lnr.loadResults(result_map1, result_map2, result_map3);
-
-		// double numEvent = 2;
-		// ArrayList<Integer> results = SortingID.SortByID(result_map1,
-		// result_map2, result_map3, numEvent);
 		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
 
 		for (int i = 0; i < results.size(); i++) {
@@ -171,12 +166,19 @@ public class ShowResults {
 
 	}
 
-	public static void ShowResultsXML(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	/**
+	 * Prints results to XML file
+	 * 
+	 * @param result_map1
+	 * @param result_map2
+	 * @param result_map3
+	 * @param results
+	 * @param numEvent
+	 * @param fileName
+	 * @throws Exception
+	 */
+	public void ShowResultsXML(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName) throws Exception {
-		/**
-		 * @param args
-		 * @throws Exception
-		 */
 		// May be to try as it is done on link
 		// public static void main(String[] args) throws Exception {
 		// LoadNewResults lnr = new LoadNewResults();

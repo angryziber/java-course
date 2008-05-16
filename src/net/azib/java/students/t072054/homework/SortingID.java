@@ -11,28 +11,35 @@ import java.util.ArrayList;
 
 public class SortingID {
 
+	/**
+	 * Sorting athletes' IDs by results of the competition
+	 * 
+	 * @param result_map1
+	 * @param result_map2
+	 * @param result_map3
+	 * @param event_id
+	 * @return List of athletes' id-s
+	 */
 	public static ArrayList<Integer> SortByID(Map<Integer, String[]> result_map1, 
 			Map<Integer, String[]> result_map2, 
 			Map<Integer, String[]> result_map3,
 			double event_id) {
-		// public static void main(String[] args) {
 		ArrayList<Integer> return_value = new ArrayList<Integer>();
 		double[] buf = new double[20];
 
 		String str_buf[] = new String[100]; // buffer for reading from result_maps
 
-		int[] choosed_indexes = new int[10000]; // Choosed indexes array
-		int number_of_indexes = 0; // Number of choosed indexes
-		char choosed_flag = 0; // If 1 - current row have already been choosed
+		int[] choosed_indexes = new int[10000]; // Chosen indexes array
+		int number_of_indexes = 0; // Number of chosen indexes
+		char choosed_flag = 0; // If 1 - current row have already been chosen
 
-		int number_of_rows = 2; // Number of not choosed rows in the table
-		// (If 1 - the last row was choosed)
+		int number_of_rows = 2; // Number of not chosen rows in the table
 
 		int count = 0; // counter
 		int end_counter = 2; // counter of end conditions
 		double max_num; // maximal value of result
 		int max_index = 1; // index of maximal number
-		double max_athlet = 0; // index of athlet with maximum score
+		double max_athlet = 0; // index of athlete with maximum score
 
 		str_buf = result_map3.get(0);
 

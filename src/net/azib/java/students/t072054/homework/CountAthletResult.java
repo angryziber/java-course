@@ -9,6 +9,21 @@ import java.util.Map;
  * @author r_vassiljev
  */
 public class CountAthletResult {
+	/**
+	 * Counts score by results of different events
+	 * 
+	 * @param m100
+	 * @param long_jump
+	 * @param shot_put
+	 * @param high_jump
+	 * @param m400
+	 * @param m110
+	 * @param discus
+	 * @param pole_vault
+	 * @param javelin
+	 * @param m1500
+	 * @return Athlete's score
+	 */
 	public static double CountResult(double m100, double long_jump, double shot_put, double high_jump, double m400, double m110,
 			double discus, double pole_vault, double javelin, double m1500) {
 		double result;
@@ -24,20 +39,19 @@ public class CountAthletResult {
 		javelin = 10.14 * Math.pow((javelin - 7.0), 1.08);
 		m1500 = 0.03768 * Math.pow((480 - m1500), 1.85);
 
-		// Debug output
-		/*
-		 * System.out.println(m100); System.out.println(long_jump);
-		 * System.out.println(shot_put); System.out.println(high_jump);
-		 * System.out.println(m400); System.out.println(m110);
-		 * System.out.println(discus); System.out.println(pole_vault);
-		 * System.out.println(javelin); System.out.println(m1500);
-		 */
-
 		result = m100 + long_jump + shot_put + high_jump + m400 + m110 + discus + pole_vault + javelin + m1500;
 		return result;
 
 	}
 
+	/**
+	 * Counts result of athlete by athlete's ID
+	 * 
+	 * @param result_map3
+	 * @param athlete_id
+	 * @param competition_id
+	 * @return
+	 */
 	public static double CountResultByID(Map<Integer, String[]> result_map3, double athlete_id, double competition_id) {
 		double[] buf = new double[20];
 		String str_buf[] = new String[100]; // buffer for reading from

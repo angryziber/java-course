@@ -11,9 +11,6 @@ import java.util.LinkedHashMap;
  * @author r_vassiljev
  */
 
-// TODO 3. DB connection string must be read from db.properties in the same
-// package as the main class
-// http://www.webdevelopersjournal.com/columns/connection_pool.html
 // TODO 2. Validating for logical correctness
 public class DecathlonCalculator {
 	// Input/output methods
@@ -38,6 +35,11 @@ public class DecathlonCalculator {
 	private static String input_route;
 	private static String output_route;
 
+	/**
+	 * Starting point of application
+	 * 
+	 * @param args
+	 */
 	public static void main(String args[]) {
 		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
 		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
@@ -45,6 +47,8 @@ public class DecathlonCalculator {
 
 		// Initial value
 		input_num = 1;
+		
+		ResultShower res_show = new ShowResults();
 
 		LoadNewResults lnr = new LoadNewResults();
 
@@ -83,7 +87,7 @@ public class DecathlonCalculator {
 			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
 			if (input_num == 0)
 				input_num = 1;
-			ShowResults.ShowResultsConsole(result_map1, result_map2, result_map3, results_array, input_num);
+			res_show.ShowResultsConsole(result_map1, result_map2, result_map3, results_array, input_num);
 			break;
 		case XML:
 			if (input_num == 0)
@@ -92,7 +96,7 @@ public class DecathlonCalculator {
 			if (input_num == 0)
 				input_num = 1;
 			try {
-				ShowResults.ShowResultsXML(result_map1, result_map2, result_map3, results_array, input_num, output_route);
+				res_show.ShowResultsXML(result_map1, result_map2, result_map3, results_array, input_num, output_route);
 			}
 			catch (Exception e) {
 				System.out.println("XML creating exception!");
@@ -105,7 +109,7 @@ public class DecathlonCalculator {
 			if (input_num == 0)
 				input_num = 1;
 			try {
-				ShowResults.ShowResultsCSV(result_map1, result_map2, result_map3, results_array, input_num, output_route);
+				res_show.ShowResultsCSV(result_map1, result_map2, result_map3, results_array, input_num, output_route);
 			}
 			catch (Exception e) {
 				System.out.println("CSV creating exception!");
@@ -114,6 +118,12 @@ public class DecathlonCalculator {
 		}
 	}
 
+	/**
+	 * Command line parsing
+	 * 
+	 * @param args
+	 * @return Test string input and output routes and parameters
+	 */
 	public static String commandLineParsing(String args[]) {
 		int stage = INPUT_METHOD;
 		String return_value;
@@ -186,6 +196,13 @@ public class DecathlonCalculator {
 		return return_value;
 	}
 
+	/**
+	 * Returns event ID by it's name
+	 * 
+	 * @param result_map2
+	 * @param name
+	 * @return Event ID
+	 */
 	public static int getEventID(Map<Integer, String[]> result_map2, String name) {
 		int id = 0;
 

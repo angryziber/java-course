@@ -20,6 +20,12 @@ public class WriteCorrectPlace {
 		scores = new double[length];
 	}
 
+	/**
+	 * Adds athlete's data to massive
+	 * 
+	 * @param id
+	 * @param score
+	 */
 	public void addScore(double id, double score) {
 		boolean flag_score_written = false;
 
@@ -45,6 +51,12 @@ public class WriteCorrectPlace {
 		num_rows++;
 	}
 
+	/**
+	 * Returns a place of athlete by the score
+	 * 
+	 * @param score
+	 * @return
+	 */
 	public String returnPlace(double score) {
 		// Number of equal scores
 		int num_of_equal = 0;
