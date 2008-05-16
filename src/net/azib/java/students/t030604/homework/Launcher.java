@@ -1,14 +1,14 @@
 package net.azib.java.students.t030604.homework;
 
 
-import net.azib.java.students.t030604.homework.domain.AthleteScore;
 import net.azib.java.students.t030604.homework.parser.ParserException;
 import net.azib.java.students.t030604.homework.writer.WriterException;
 
 import java.util.List;
 
 /**
- * Launches the whole thing
+ * Launches the whole thing. Responsible for parsing
+ * command line args, initializing parsers.
  * @author Aleksandr Ivanov
  * <a href="mailto:aleks21@gmail.com">contact</a>
  */
@@ -16,10 +16,9 @@ public class Launcher {
 	
 	/**
 	 * main method
-	 * @param args
+	 * @param args command line args
 	 */
 	public static void main (String[] args) {
-		
 		if (args == null || args.length == 0) {
 			displayUsageAndExit();
 		}
@@ -42,12 +41,17 @@ public class Launcher {
 		IDataParser parser = null;
 		IDataWriter output = null;
 		try {
-			parser = (IDataParser) inputMethod.getParser().newInstance();
+			parser = inputMethod.getParser().newInstance();
 			parser.setup(inputMethod.isMustHaveParam()? args[1] : null);
 			records = parser.parseData();
 			records = DataProcessor.process(records);
-			output = (IDataWriter) outputMethod.getWriter().newInstance();
-			output.setup(outputMethod.isMustHaveParam()? args[3] : null);
+			output = outputMethod.getWriter().newInstance();
+			output.setup(
+					outputMethod.isMustHaveParam() && inputMethod.isMustHaveParam()
+					? args[3] 
+					: outputMethod.isMustHaveParam() ^ inputMethod.isMustHaveParam()
+							? args[2]
+							: null);
 			output.output(records);
 		} catch (WriterException fatal) {
 			System.out.println(fatal.getMessage());
@@ -76,6 +80,7 @@ public class Launcher {
 		return null;
 	}
 	
+	//prints usage and exits
 	private static void displayUsageAndExit(){
 		System.out.println("<program> -<input-method> [input-parameters] -<output-method> [output-parameters]");
 		System.exit(0);

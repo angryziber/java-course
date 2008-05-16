@@ -1,7 +1,8 @@
 package net.azib.java.students.t030604.homework.writer;
 
+import net.azib.java.students.t030604.homework.AthleteScore;
 import net.azib.java.students.t030604.homework.IDataWriter;
-import net.azib.java.students.t030604.homework.domain.AthleteScore;
+import net.azib.java.students.t030604.homework.util.TimeFormat;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * CSV file writer
+ * CSV file writer - outputs everything to a neat csv file.
  * @author Aleksandr Ivanov
  * <a href="mailto:aleks21@gmail.com">contact</a>
  */
@@ -18,12 +19,11 @@ public class CsvWriter extends AbstractWriter implements IDataWriter {
 	private static final String FIELD_DELIMITER = ",";
 	private static final String RECORD_DELIMITER = "\n";
 	
-	
-	
 	private FileWriter writer;
-
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#cleanup()
+ 
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#cleanup()
+	 * {@inheritDoc}
 	 */
 	public void cleanup() throws WriterException {
 		try {
@@ -36,8 +36,9 @@ public class CsvWriter extends AbstractWriter implements IDataWriter {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#output(java.util.List)
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#output(java.util.List)
+	 * {@inheritDoc}
 	 */
 	public void output(List<AthleteScore> results)  throws WriterException {
 		try {
@@ -63,7 +64,7 @@ public class CsvWriter extends AbstractWriter implements IDataWriter {
 						.append(FIELD_DELIMITER)
 						.append(numberFormat.format(result.getHighJump()))
 						.append(FIELD_DELIMITER)
-						.append(timeFormat.format(result.getSprint400()))
+						.append(TimeFormat.format(result.getSprint400()))
 						.append(FIELD_DELIMITER)
 						.append(numberFormat.format(result.getHurdles110()))
 						.append(FIELD_DELIMITER)
@@ -73,20 +74,25 @@ public class CsvWriter extends AbstractWriter implements IDataWriter {
 						.append(FIELD_DELIMITER)
 						.append(numberFormat.format(result.getJavelinThrow()))
 						.append(FIELD_DELIMITER)
-						.append(timeFormat.format(result.getRace1500()))
+						.append(TimeFormat.format(result.getRace1500()))
 						.append(RECORD_DELIMITER);
 			}
+			writer.flush();
 		} catch (IOException fatal) {
 			throw new WriterException("output failed", fatal);
 		}
 	}	
 
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#setup()
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#setup(java.lang.String[])
+	 * {@inheritDoc}
 	 */
 	public void setup(String... args) throws WriterException {
+		if (args == null || args.length == 0) {
+			throw new WriterException("the call to this output-method should contain parameter", null);
+		}
 		try {
-			writer = new FileWriter(new File("output.csv"));
+			writer = new FileWriter(new File(args[0]));
 		} catch (IOException fatal) {
 			throw new WriterException("unable to initialize output file", fatal);
 		}

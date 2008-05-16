@@ -21,12 +21,16 @@ public enum CommandLineArgument {
 	XML("-xml", true, null, XmlWriter.class),
 	HTML ("-html", true, null, HtmlWriter.class);
 	
-	private Class<?> parser;
-	private Class<?> writer;
-	private String name;
-	private boolean mustHaveParam;
+	private Class<? extends IDataParser> parser; // parser implementation class
+	private Class<? extends IDataWriter> writer; // writer implementation class
+	private String name; // argument
+	private boolean mustHaveParam; // is parameter presence mandatory or not
 	
-	private CommandLineArgument(String name, boolean mustHaveParam, Class<?> parser, Class<?> writer){
+	private CommandLineArgument(
+			String name,
+			boolean mustHaveParam,
+			Class<? extends IDataParser> parser,
+			Class<? extends IDataWriter> writer){
 		this.name  = name;
 		this.mustHaveParam = mustHaveParam;
 		this.parser = parser;
@@ -50,14 +54,14 @@ public enum CommandLineArgument {
 	/**
 	 * @return the parser
 	 */
-	public Class<?> getParser() {
+	public Class<? extends IDataParser> getParser() {
 		return parser;
 	}
 
 	/**
 	 * @return the writer
 	 */
-	public Class<?> getWriter() {
+	public Class<? extends IDataWriter> getWriter() {
 		return writer;
 	}
 	

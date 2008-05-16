@@ -1,7 +1,7 @@
 package net.azib.java.students.t030604.homework.writer;
 
+import net.azib.java.students.t030604.homework.AthleteScore;
 import net.azib.java.students.t030604.homework.IDataWriter;
-import net.azib.java.students.t030604.homework.domain.AthleteScore;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,6 +22,8 @@ import org.dom4j.io.OutputFormat;
 import org.xml.sax.SAXException;
 
 /**
+ * HTML writer - outputs everything to a valid Strict 1.0 XHTML file
+ * 
  * @author Aleksandr Ivanov
  * <a href="mailto:aleks21@gmail.com">contact</a>
  */
@@ -30,20 +32,27 @@ public class HtmlWriter extends AbstractWriter implements IDataWriter {
 	private FileWriter fileWriter;
 	private Transformer transformer;
 
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#cleanup()
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#cleanup()
+	 * {@inheritDoc}
 	 */
 	public void cleanup() throws WriterException {
-		// TODO Auto-generated method stub
-
+		if (fileWriter != null) {
+			try {
+				fileWriter.close();
+			} catch (IOException fatal) {
+				throw new WriterException("cleanup failed", fatal);
+			}
+		}
 	}
 
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#output(java.util.List)
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#output(java.util.List)
+	 * {@inheritDoc}
 	 */
 	public void output(List<AthleteScore> results) throws WriterException {
 		try {
-			Document doc = new XmlWriter().generateDocument(results);
+			Document doc = XmlWriter.generateDocument(results);
 			DocumentSource source = new DocumentSource(doc);
 			DocumentResult result = new DocumentResult(); 
 			transformer.transform(source, result);
@@ -68,18 +77,25 @@ public class HtmlWriter extends AbstractWriter implements IDataWriter {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#setup(java.lang.String[])
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#setup(java.lang.String[])
+	 * {@inheritDoc}
 	 */
 	public void setup(String... args) throws WriterException {
+		if (args == null || args.length == 0) {
+			throw new WriterException("call to this writer must contain parameters", null);
+		}
 		try {
-		fileWriter = new FileWriter(new File("output.html"));
-		transformer = 
-			TransformerFactory.newInstance()
-				.newTransformer(new StreamSource(getClass().getClassLoader().getResourceAsStream("default.xsl")));
+			fileWriter = new FileWriter(new File(args[0]));
+			StreamSource stream = new StreamSource(
+					getClass().getClassLoader().getResourceAsStream("net/azib/java/students/t030604/homework/default.xsl"));
+			if (stream == null || stream.getInputStream() == null) {
+				throw new WriterException("default.xsl could not be located", null);
+			}
+			transformer = TransformerFactory.newInstance().newTransformer(stream);
 		
 		} catch (TransformerConfigurationException fatal) {
-			throw new WriterException("could not initialize writer", fatal);
+			throw new WriterException("Transformer configuration failed, is xsl file OK?", fatal);
 		} catch (IOException fatal) {
 			throw new WriterException("could not initialize writer", fatal);
 		}

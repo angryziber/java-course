@@ -1,14 +1,14 @@
 package net.azib.java.students.t030604.homework;
 
-import net.azib.java.students.t030604.homework.domain.FormulaComponent;
-import net.azib.java.students.t030604.homework.domain.AthleteScore;
-import static net.azib.java.students.t030604.homework.domain.FormulaComponent.*;
+import net.azib.java.students.t030604.homework.util.FormulaComponent;
+
+import static net.azib.java.students.t030604.homework.util.FormulaComponent.*;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Does all calculations.
+ * Utility class. Does all calculations, rankings and sorting.
  * @author Aleksandr Ivanov
  * <a href="mailto:aleks21@gmail.com">contact</a>
  */
@@ -20,8 +20,8 @@ public final class DataProcessor {
 
 	/**
 	 * Does all the calculation and ordering of Players
-	 * @param rawData
-	 * @return
+	 * @param rawData unordered list of athlete scores
+	 * @return ordered list
 	 */
 	public static List<AthleteScore> process(List<AthleteScore> rawData) {
 		//sanity check
@@ -43,7 +43,6 @@ public final class DataProcessor {
 	//sets the ranks and  shared ranks
 	private static void setRanks(List<AthleteScore> rawData) {
 		int i = 0;
-		
 		int currentPoints = 0;
 		while (i < rawData.size()) {
 			int sharedRank = 0;
@@ -83,9 +82,10 @@ public final class DataProcessor {
 	
 	//calculates single event points
 	private static float calculateEventPoints(float result, FormulaComponent object) {
+		// Long.NaN is converted to 0F, we're safe here.
 		float temp =  (float) (object.isRunning() 
 			? object.getA()* Math.pow((object.getB() - (result * object.getSiCoeficient())), object.getC())
-			: object.getA()* Math.pow(( (result * object.getSiCoeficient()) - object.getB()), object.getC()));
+			: object.getA()* Math.pow(((result * object.getSiCoeficient()) - object.getB()), object.getC()));
 		return temp;
 	}
 }

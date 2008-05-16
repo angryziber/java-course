@@ -1,7 +1,7 @@
 package net.azib.java.students.t030604.homework.writer;
 
+import net.azib.java.students.t030604.homework.AthleteScore;
 import net.azib.java.students.t030604.homework.IDataWriter;
-import net.azib.java.students.t030604.homework.domain.AthleteScore;
 
 import java.util.List;
 
@@ -11,15 +11,17 @@ import java.util.List;
  */
 public class ConsoleWriter extends AbstractWriter implements IDataWriter {
 
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#cleanup()
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#cleanup()
+	 * {@inheritDoc}
 	 */
 	public void cleanup() {
 		//blank
 	}
-
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#output(java.util.List)
+	
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#output(java.util.List)
+	 * {@inheritDoc}
 	 */
 	public void output(List<AthleteScore> results) {
 		for(AthleteScore result : results) {
@@ -27,8 +29,9 @@ public class ConsoleWriter extends AbstractWriter implements IDataWriter {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataWriter#setup()
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataWriter#setup(java.lang.String[])
+	 * {@inheritDoc}
 	 */
 	public void setup(String... args) {
 		//blank

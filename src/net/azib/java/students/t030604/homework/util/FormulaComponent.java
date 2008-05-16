@@ -1,4 +1,4 @@
-package net.azib.java.students.t030604.homework.domain;
+package net.azib.java.students.t030604.homework.util;
 
 /**
  * Container for various formula related constants.

@@ -1,8 +1,8 @@
 package net.azib.java.students.t030604.homework.parser;
 
+import net.azib.java.students.t030604.homework.AthleteScore;
 import net.azib.java.students.t030604.homework.IDataParser;
-import net.azib.java.students.t030604.homework.TimeFormat;
-import net.azib.java.students.t030604.homework.domain.AthleteScore;
+import net.azib.java.students.t030604.homework.util.TimeFormat;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * Class for parsing data from console input
+ * 
  * @author Aleksandr Ivanov
  * <a href="mailto:aleks21@gmail.com">contact</a>
  */
@@ -23,23 +25,20 @@ public class ConsoleParser implements IDataParser {
 	
 	private static Scanner scanner = new Scanner(System.in);
 	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-	private static TimeFormat timeFormat = new TimeFormat();
 	
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataParser#cleanup()
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataParser#cleanup()
+	 * {@inheritDoc}
 	 */
 	public void cleanup() {
 		//blank
 	}
 
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataParser#parseData()
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataParser#parseData()
+	 * {@inheritDoc}
 	 */
 	public List<AthleteScore> parseData() {
-		
-		System.out.println("Enter the results in the following format");
-		System.out.println("Name,dateOfBirth,CountryCode,Results");
-		
 		List<AthleteScore> result = new LinkedList<AthleteScore>();
 		
 		do {
@@ -76,7 +75,6 @@ public class ConsoleParser implements IDataParser {
 			do {
 				System.out.println("enter player country (ISO 2-letter code)");
 				temp = scanner.next();
-				
 				countryValid = temp.trim().length() == 2;
 			} while (!countryValid);
 			result.setCountry(temp);
@@ -107,13 +105,10 @@ public class ConsoleParser implements IDataParser {
 	private float getValidDistance(String message) {
 		Float result = null;
 		do {
-			System.out.println(message);
-			
+			System.out.println(message); 
 			try {
 				result = scanner.nextFloat();
-			} catch (Exception ignored) {
-				//TODO exception handling
-			}
+			} catch (Exception ignored) {}
 		} while (result == null);
 		return result.floatValue();
 	}
@@ -125,20 +120,19 @@ public class ConsoleParser implements IDataParser {
 		do {
 			System.out.println(message);
 			temp = scanner.next();
-			try {
-				result = (Float) timeFormat.parse(temp);
-			} catch (ParseException ignored){}
+			result = TimeFormat.parse(temp);
 		} while(result == null);
 		
 		return result.floatValue();
 	}
 	
-
-	/* (non-Javadoc)
-	 * @see main.java.homework.IDataParser#setup(java.lang.String[])
+	
+	/** 
+	 * @see net.azib.java.students.t030604.homework.IDataParser#setup(java.lang.String[])
+	 * {@inheritDoc}
 	 */
 	public void setup(String... args) {
-		System.out.println("Console parser initialised");
+		//blank
 	}
 
 }

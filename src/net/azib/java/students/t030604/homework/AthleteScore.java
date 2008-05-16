@@ -1,6 +1,7 @@
-package net.azib.java.students.t030604.homework.domain;
+package net.azib.java.students.t030604.homework;
 
-import net.azib.java.students.t030604.homework.TimeFormat;
+
+import net.azib.java.students.t030604.homework.util.TimeFormat;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -10,19 +11,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * AthleteScore - class to hold athlete related data.
+ * @author Aleksandr Ivanov
+ * <a href="mailto:aleks21@gmail.com">contact</a>
+ */
 public class AthleteScore implements Comparable<AthleteScore> {
 	
 	private final static DateFormat dateFormat;
 	private final static NumberFormat numberFormat;
-	private static final TimeFormat timeFormat;
 
 	static {
 		dateFormat = new SimpleDateFormat("dd.mm.yyyy");
 		numberFormat = NumberFormat.getNumberInstance();
 		numberFormat.setMaximumFractionDigits(2);
-		numberFormat.setMinimumFractionDigits(2);
-		timeFormat = new TimeFormat();
-		
+		numberFormat.setMinimumFractionDigits(2);		
 	}
 	
 	//input data
@@ -40,16 +43,35 @@ public class AthleteScore implements Comparable<AthleteScore> {
 	private float javelinThrow;
 	private float race1500;
 	//points and placement
-	private int points; // decathlon scoring system seems to round the float to the closest int
+	private int points; // decathlon scoring systems seem to round the float to the closest int
 	private int rank; // athlete's rank
 	private int sharedRank; // in case several athletes share the same rank. determines the last shared rank
 	
 	private List<String> validationErrors;
 	
+	/**
+	 * Blank constructor
+	 */
 	public AthleteScore() {
 		//blank
 	}
 	
+	/**
+	 * Constructor to initialize input data
+	 * @param name
+	 * @param birthDate
+	 * @param country
+	 * @param sprint100
+	 * @param longJump
+	 * @param shotPut
+	 * @param highJump
+	 * @param sprint400
+	 * @param hurdles110
+	 * @param discusThrow
+	 * @param poleVault
+	 * @param javelinThrow
+	 * @param race1500
+	 */
 	public AthleteScore(String name, Date birthDate, String country, float sprint100, float longJump, float shotPut,
 			float highJump, float sprint400, float hurdles110, float discusThrow, float poleVault, float javelinThrow,
 			float race1500) {
@@ -99,6 +121,7 @@ public class AthleteScore implements Comparable<AthleteScore> {
 				}
 			}
 			if (!countryValid) {
+				valid = false;
 				validationErrors.add("invalid country: " + country);
 			}
 		}
@@ -155,7 +178,7 @@ public class AthleteScore implements Comparable<AthleteScore> {
 			valid = false;
 			validationErrors.add("javelin throw result invalid: " + javelinThrow);
 		}
-		
+		//cant be zero
 		if (race1500 <= 0F) {
 			valid = false;
 			validationErrors.add("race 1500 result invalid: " + race1500);
@@ -382,7 +405,7 @@ public class AthleteScore implements Comparable<AthleteScore> {
 			.append(" m, high jump: ")
 			.append(numberFormat.format(highJump))
 			.append(" m, 400m: ")
-			.append(timeFormat.format(sprint400))
+			.append(TimeFormat.format(sprint400))
 			.append(" sec, hurdles 110m: ")
 			.append(numberFormat.format(hurdles110))
 			.append(" sec, discus throw: ")
@@ -392,7 +415,7 @@ public class AthleteScore implements Comparable<AthleteScore> {
 			.append(" m, javelin throw: ")
 			.append(numberFormat.format(javelinThrow))
 			.append(" m, 1500m: ")
-			.append(timeFormat.format(race1500))
+			.append(TimeFormat.format(race1500))
 			.append(" sec");
 		
 		return sb.toString();
