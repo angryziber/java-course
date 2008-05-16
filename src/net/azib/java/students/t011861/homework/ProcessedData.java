@@ -7,14 +7,21 @@ import java.util.List;
  * ProcessedData
  *
  * @author 011861
+ * @param Input parameter for completeData: 1. List<String[]> It consists of data which comes from input 
+ * modules (DataFromConsole, DataFromCsv and DataFromMySQL)! Input data has the same 
+ * format and structure in every circumstances! It doesn't depend on input module! 
+ * 2. List<Double[]> It consists of data which comes from module of CalculatePoints!
+ * @return Only one public function "completeData" returns List<String[]> which consists of 
+ * all original data, points and place label!
  */
 
 public class ProcessedData {
 	List<String[]> completeData = new ArrayList<String[]>();
 	public List<String[]> getFinalData(List<String[]> athletes,List<Double[]> points) throws Exception
 	{
-		int rows = points.size(); //Find the sum of all rows (results and athletes are the same!)
-				
+		try
+		{
+		int rows = points.size(); //Find the sum of all rows (results and athletes are the same!)	
 		List<? super Double> onlyPoints = null;
 		onlyPoints = new ArrayList<Double>();
 			
@@ -26,12 +33,14 @@ public class ProcessedData {
 		
 		List<? super String> placeLabel = null;
 		placeLabel = new ArrayList<String>();
-			
 		    //Creates array (newPoints) which consists of only total points
 			for (Double[] newPoints : points)
 			{
 				onlyPoints.add(newPoints[10]);
-			}	
+			}
+			//If there are more than 1 athlete's data, then program start next cycle 
+			if (rows != 1)
+			{
 		        //Creates sorted new arrays (pointOrder & newOnlypoints) to find final list of athletes results!
 				Double helpPoint = -1.0; //
 				int pointIndex = 0;
@@ -75,33 +84,33 @@ public class ProcessedData {
 							Integer tempLabel = t + 1;
 							String place = String.valueOf(tempLabel);
 							placeLabel.add(place);
-							System.out.println(place);
 							t++;
 						}
 						
 						else
 						{
 							int abi = t;
-							//test1 = String.valueOf(newOnlyPoints.get(abi).toString().trim());
-							//test2 = String.valueOf(newOnlyPoints.get(abi+1).toString().trim());
-							while ((test1.equals(test2)) || !(abi < rows-2))
+							while ((test1.equals(test2)) && (abi < rows-2))
 							{
 							startLabelCount++;
 							abi++;
 							test1 = String.valueOf(newOnlyPoints.get(abi).toString().trim());
-							test2 = String.valueOf(newOnlyPoints.get(abi+1).toString().trim());
-										
+							test2 = String.valueOf(newOnlyPoints.get(abi+1).toString().trim());	
+							}
+							if ((test1.equals(String.valueOf(newOnlyPoints.get(rows-1).toString().trim()))) && (String.valueOf(newOnlyPoints.get(rows-2).toString().trim()).equals(String.valueOf(newOnlyPoints.get(rows-1).toString().trim()))))
+							{
+								startLabelCount++;
+							}
 							for (int u = t; u < t + startLabelCount+1 ;u++)
 							{
 								Integer tempStartLabel = t + 1;
 								Integer tempStopLabel = t + startLabelCount + 1;
 								String place = String.valueOf(tempStartLabel)+" - "+String.valueOf(tempStopLabel);
-								System.out.println(place);
-								placeLabel.add(place);								
+								placeLabel.add(place);
+																
 							}
 							t = t + startLabelCount + 1;
 							startLabelCount = 0;	
-							}
 						}
 					}
 					String test1 = String.valueOf(newOnlyPoints.get(rows-1).toString().trim());
@@ -110,12 +119,21 @@ public class ProcessedData {
 					{
 						String place = String.valueOf(rows);
 						placeLabel.add(place);
-					}
-					for (int z=0; z<rows; z++)
-					{
-						System.out.println(newOnlyPoints.get(z)+" "+placeLabel.get(z));
-					}
-	
+					}		
+		}
+		//If there is only one row of athletes data, then program doesn't need to create different help arrays and so on!
+		//Then we know that place label will be "1", pointOrder index is 0!
+		else 
+		
+		{
+			placeLabel.add("1");
+			pointOrder.add(0);
+			for (Double[] newPoints : points)
+			{
+				newOnlyPoints.add(newPoints[10]);
+			}
+			
+		}
 			int orderNumber = 0;
 			int orderIndex = 0;
 			//Creates new ArrayList which consists of athletes data, points and places (join newOnlyPoints and athletes)! 
@@ -127,7 +145,7 @@ public class ProcessedData {
 					completeData.add((String[]) athleteData.toArray(new String[athleteData.size()]));
 				}
 				//Creates new row with complete information for every athletes and replaces it 
-				//in right place in printData array
+				//in right place in completeData array
 				int helpIndex = 0;
 				for (String[] newAthletes : athletes)
 				{	
@@ -141,10 +159,15 @@ public class ProcessedData {
 							if (orderNumber == helpIndex)
 								{
 									athleteData.add(String.valueOf(newOnlyPoints.get(f).toString()));
+									if (rows == 1)
+									{
+										athleteData.add("Place: 1");	
+									}
+									else
+									{
 									athleteData.add("Place: "+placeLabel.get(f).toString());
-									//athleteData.add("Place: ");
+									}
 									orderIndex = f;
-									//int place = orderIndex+1;
 									
 								}
 						}
@@ -152,6 +175,12 @@ public class ProcessedData {
 				athleteData.clear();
 				helpIndex++;
 				}
-	return completeData;
-	}
+		}
+		catch (Exception e)
+		{
+			System.out.println("There wasn't any input data!!");
+			e.printStackTrace();
+		}
+		return completeData;
+		}		
 }

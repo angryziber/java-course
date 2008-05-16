@@ -10,6 +10,8 @@ import java.util.List;
  * OutDataToCsv
  *
  * @author 011861
+ * @param Input parameters are output filename and data from ProcessedData module!
+ * @return Result is generated CSV file in projects root directory
  */
 public class OutDataToCsv {
 	public void showInCsvFile(File output, List<String[]> completeData) {
@@ -30,14 +32,15 @@ public class OutDataToCsv {
 				writer.write(System.getProperty("line.separator"));
 			}	
 		} catch (IOException e) 
-		  {
-				System.out.println("Can not find the file " + output.toString());
-		  }finally 
-		  	{
-			  try 
-			  {
-				  writer.close();
-			  } catch (IOException e) 
+		{
+			System.out.println("Can not find the file " + output.toString());
+		}
+		finally 
+		{
+			try 
+			{
+				writer.close();
+			} catch (IOException e) 
 			  	{
 				  System.out.println("Problem with closing " + output + " file");
 			  	}

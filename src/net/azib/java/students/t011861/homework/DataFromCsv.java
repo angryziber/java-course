@@ -13,6 +13,8 @@ import java.util.List;
  * DataFromCsv
  *
  * @author 011861
+ * @param Input parameter is CSV data file!
+ * @return getData() returns List<String[]> array , which consists of all data from CSV file!
  */
 public class DataFromCsv {
 	List<String[]> athletesData = new ArrayList<String[]>();
@@ -35,7 +37,6 @@ public class DataFromCsv {
 				for (int j = 0; j < test; j++)
 				{
 					athleteData.add(result[j]);
-					System.out.println(athleteData.get(j).toString());
 				}
 				athletesData.add((String[]) athleteData.toArray(new String[athleteData.size()]));
 				athleteData.clear();

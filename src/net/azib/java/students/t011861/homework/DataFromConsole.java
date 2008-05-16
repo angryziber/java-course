@@ -9,19 +9,17 @@ import java.util.List;
 /**
  * DataInputModule
  *
+ * Ask data from human using console interface!
  * @author 011861
+ * @param This class and his constructor don't need any input parameters!
+ * @return getData() returns List<String[]> array , which consists of all asked data!
  */
 
 public class DataFromConsole {
-	 /**
-	 * Ask data from human
-	 * @param String order - command to human
-	 * @return String commandNumber - inserted symbol 
-	 */
 	List<String[]> athletesDatas = new ArrayList<String[]>();
-	private static final String[] sportsArts = {"100 m", "long jump", "shot put", "high jump", "400 m",
-		"110 m hurdles", "discus throw", "pole vault", "javelin throw",
-		"1500 m"};
+	private static final String[] sportsArts = {"100 m (sec)", "long jump (m)", "shot put (m)", "high jump (m)", "400 m (sec)",
+		"110 m hurdles (sec)", "discus throw (m)", "pole vault (m)", "javelin throw (m)",
+		"1500 m (sec)"};
 	public List<String[]> getData() {
 		return athletesDatas;
 	}
@@ -50,14 +48,14 @@ public class DataFromConsole {
 								System.out.println("Insert date of birth: ");
 								}
 								break;
-								//Enter country code
+							//Enter country code
 							case 1: {
 								athleteData.add(command);
 								i++;
 								System.out.println("Insert country code: ");
 								}
 								break;
-								//Enter results
+							//Enter results
 							case 2: {
 								athleteData.add(command);
 								i++;
@@ -72,7 +70,7 @@ public class DataFromConsole {
 									athletesDatas.add((String[]) athleteData.toArray(new String[athleteData.size()]));
 									athleteData.clear();		
 									i = 0;
-									System.out.println("Insert new athlete's name or see results (quit)");
+									System.out.println("Insert new athlete's name or see results (type: quit)");
 								}
 								break;
 							}

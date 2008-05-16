@@ -9,10 +9,12 @@ import org.dom4j.Document;
  * OutDataToXml
  *
  * @author 011861
+ * @param Input parameters are output filename and data from ProcessedData module!
+ * @return Result is generated XML file in projects root directory
  */
 public class OutDataToXml {
 	public void showInXmlFile(File output, List<String[]> completeData) {
-		// Create XML document tree
+		//Create XML document tree
 		CreateDocument newDoc = new CreateDocument();
 		Document doc = newDoc.createDocument(completeData);
 		//Write XML tree into a file

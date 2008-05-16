@@ -8,11 +8,17 @@ import java.lang.Math;
  * CalculatePoints
  *
  * @author t011861
+ * @param Input parameter for processResults function: List<String[]> It consists of data which comes from input 
+ * modules (DataFromConsole, DataFromCsv and DataFromMySQL)! Input data has the same 
+ * format and structure in every circumstances! It doesn't depend on input module!
+ * @return Only one public function "processResults" returns Double ArrayList (List<Double[]>).
+ * It only consists of all points separately and total points!  
  */
 
 public class CalculatePoints {
 
 	List<Double[]> CalculatedPoints = new ArrayList<Double[]>();
+	//Calculate all the points and put them into array and return this array!
 	public List<Double[]> processResults(List<String[]> allAthletes) throws Exception
 	{
 		List<? super Double> resultsPerAthlete = null;
@@ -34,7 +40,7 @@ public class CalculatePoints {
 		}
 		return CalculatedPoints;
 	}
-	
+	//Function which calculates the points of every sports events!  
 	private double calculatePoints(Double result, int j) {
 		switch (j) {
 		// 100 m points (second)

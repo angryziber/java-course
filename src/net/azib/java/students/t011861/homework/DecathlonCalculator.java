@@ -4,11 +4,12 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Decathlon
+ * DecathlonCalculator
  *
  * @author 011861
  */
-public class Decathlon {
+
+public class DecathlonCalculator {
 	//Create point calculator
 	static CalculatePoints calculatedResults = new CalculatePoints();
 	//Create object which is responsible for making final data
@@ -55,7 +56,7 @@ public class Decathlon {
 				List<String[]> consoleData = csvInput.getData();
 				List<Double[]> calculatedPoints = calculatedResults.processResults(consoleData);
 				List<String[]> finalResultsList = finalData.getFinalData(consoleData, calculatedPoints);
-				if (args[1].equals("-console"))
+				if (args[2].equals("-console"))
 				{
 					OutDataToScreen printscreen = new OutDataToScreen();
 					printscreen.printToConsole(finalResultsList);
@@ -83,11 +84,11 @@ public class Decathlon {
 			else if (args[0].equals("-db"))
 			{
 				String competition = args[1];
-				DataFromMySQL sqlInput = new DataFromMySQL();
+				DataFromMySQL sqlInput = new DataFromMySQL(competition);
 				List<String[]> sqlData = sqlInput.getData();
 				List<Double[]> calculatedPoints = calculatedResults.processResults(sqlData);
 				List<String[]> finalResultsList = finalData.getFinalData(sqlData, calculatedPoints);
-				if (args[1].equals("-console"))
+				if (args[2].equals("-console"))
 				{
 					OutDataToScreen printscreen = new OutDataToScreen();
 					printscreen.printToConsole(finalResultsList);
@@ -116,7 +117,7 @@ public class Decathlon {
 		}
 		catch (Exception e) 
 		{
-			// TODO Auto-generated catch block
+			System.out.println("Check parameters!");
 			e.printStackTrace();
 		}
 	}

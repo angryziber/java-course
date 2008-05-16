@@ -2,7 +2,7 @@ package net.azib.java.students.t011861;
 /**
  * Fibonacci
  *
- * @author jaak
+ * @author 011861
  */
 public class Fibonacci {
 	/**

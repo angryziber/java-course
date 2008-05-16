@@ -10,9 +10,14 @@ import org.dom4j.Element;
  * CreateDocument
  *
  * @author 011861
+ * @param Input parameter for createDocument: List<String[]> It consists of data which comes 
+ * from module of ProcessedData! There are all needed data we need to send to output!
+ * @return Only one public function "createDocument" returns document which has type of Document!
+ * This class is necessary to generate XML and HTML output files!
  */
 
 public class CreateDocument {
+	//This function is responsible for creating XML tree!
 	public Document createDocument(List<String[]> completeData) {
 		Document document = DocumentHelper.createDocument();
 		Element root = document.addElement("athletes");
