@@ -10,10 +10,10 @@ import java.util.Map;
  */
 public interface ResultShower {
 	
-	public void ShowResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public String ShowResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent);
 	
-	public void ShowResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public String ShowResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName);
 	
 	public void ShowResultsXML(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,

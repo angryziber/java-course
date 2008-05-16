@@ -24,11 +24,6 @@ public class LoadNewResults implements ResultsLoader {
 	static private ResultSet rs2;
 	static private ResultSet rs3;
 
-	// 3 tables read from database
-	// static private Map<Integer, String[]> result_map1;
-	// static private Map<Integer, String[]> result_map2;
-	// static private Map<Integer, String[]> result_map3;
-
 	static private Connection conn;
 
 	/**
@@ -60,18 +55,12 @@ public class LoadNewResults implements ResultsLoader {
 			System.out.print("Error opening db.properties");
 		}
 
-		// public static void main(String[] args) {
 		try {
-			// Structure with results after reading from database here
-			// Later it will be moved to function parameters
-			// result_map1 = new LinkedHashMap<Integer, String[]>();
-			// result_map2 = new LinkedHashMap<Integer, String[]>();
-			// result_map3 = new LinkedHashMap<Integer, String[]>();
-
 			// Establish the connection to the database
 			String url = connection_string;
 			conn = DriverManager.getConnection(url, login, password);
-			Statement stmt = conn.createStatement();
+
+			conn.createStatement();
 
 			PreparedStatement personStatement = conn.prepareStatement("SELECT * FROM athletes WHERE id > ?;");
 
@@ -83,7 +72,7 @@ public class LoadNewResults implements ResultsLoader {
 
 			readDatabase(rs1, result_map1, 4);
 
-			String str[] = result_map1.get(0);
+			//String str[] = result_map1.get(0);
 
 			personStatement = conn.prepareStatement("SELECT * FROM competitions WHERE id > ?;");
 
@@ -165,16 +154,7 @@ public class LoadNewResults implements ResultsLoader {
 	 */
 	public void loadResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, String fileName) {
-		// public static void main(String[] args) {
 		try {
-			// Structure with results after reading from database here
-			// Later it will be moved to function parameters
-			// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
-			// String[]>();
-			// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
-			// String[]>();
-			// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
-			// String[]>();
 
 			// Open the file
 			File f1 = /* new File(fileName); */new File(fileName);
@@ -257,9 +237,6 @@ public class LoadNewResults implements ResultsLoader {
 					result_map2.put(0, str_map2);
 				}
 
-				// for (int i = 0; i < 13; i++) {
-				// System.out.println(str_buf[i]);
-				// }
 				count = 0;
 				num_line++;
 			}
@@ -280,16 +257,7 @@ public class LoadNewResults implements ResultsLoader {
 	 */
 	public void loadResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3) {
-		// public static void main(String[] args) {
 		try {
-			// Structure with results after reading from database here
-			// Later it will be moved to function parameters
-			// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
-			// String[]>();
-			// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
-			// String[]>();
-			// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
-			// String[]>();
 
 			// Reading stream
 			InputStreamReader input = new InputStreamReader(System.in);

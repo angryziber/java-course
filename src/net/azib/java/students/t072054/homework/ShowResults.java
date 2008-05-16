@@ -30,24 +30,11 @@ public class ShowResults implements ResultShower {
 	 * @param results
 	 * @param numEvent
 	 */
-	public void ShowResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public String ShowResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent) {
-		// public static void main(String[] args) {
-		// LoadNewResults lnr = new LoadNewResults();
 
-		// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
-		// String[]>();
-		// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
-		// String[]>();
-		// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
-		// String[]>();
-
-		// lnr.loadResults(result_map1, result_map2, result_map3);
-
-		// double numEvent = 2;
-		// ArrayList<Integer> results = SortingID.SortByID(result_map1,
-		// result_map2, result_map3, numEvent);
-
+		String return_string = "Test string: ";
+		
 		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
 
 		for (int i = 0; i < results.size(); i++) {
@@ -58,7 +45,11 @@ public class ShowResults implements ResultShower {
 		System.out.println("Competitions data:");
 		for (int i = 0; i < result_map2.size(); i++) {
 			for (int j = 0; j < 5; j++)
+			{
 				System.out.println(result_map2.get(i)[j]);
+				
+				return_string = return_string + result_map2.get(i)[j];
+			}
 			System.out.println();
 		}
 		System.out.println();
@@ -71,12 +62,13 @@ public class ShowResults implements ResultShower {
 		for (int i = 0; i < results.size(); i++) {
 			//Printing place
 			System.out.print(wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent)));
+			return_string = return_string + wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent));
 			System.out.print(" ");
 			
 			System.out.print(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent));
 			for (int j = 0; j < 4; j++) {
 				System.out.print(result_map1.get(results.get(i) - 1)[j] + " ");
-
+				return_string = return_string + result_map1.get(results.get(i) - 1)[j];
 			}
 			System.out.println();
 
@@ -84,13 +76,18 @@ public class ShowResults implements ResultShower {
 			for (int k = 0; k < result_map3.size(); k++) {
 				if (Double.parseDouble(result_map3.get(k)[1]) == (double) results.get(i)) {
 					for (int j = 2; j < 13; j++)
+					{
 						System.out.print(result_map3.get(k)[j] + " ");
+						return_string = return_string + result_map3.get(k)[j];
+					}
 
 					System.out.println();
 				}
 			}
 			System.out.println();
 		}
+		
+		return return_string;
 	}
 
 	/**
@@ -103,8 +100,11 @@ public class ShowResults implements ResultShower {
 	 * @param numEvent
 	 * @param fileName
 	 */
-	public void ShowResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public String ShowResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName) {
+		
+		String return_string = "Test string: ";
+		
 		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
 
 		for (int i = 0; i < results.size(); i++) {
@@ -124,8 +124,10 @@ public class ShowResults implements ResultShower {
 			fw.write("Competitions data:");
 			fw.write("\n");
 			for (int i = 0; i < result_map2.size(); i++) {
-				for (int j = 0; j < 5; j++)
+				for (int j = 0; j < 5; j++){
 					fw.write(result_map2.get(i)[j] + ",");
+					return_string = return_string + result_map2.get(i)[j];
+				}
 				fw.write("\n");
 			}
 			fw.write("\n");
@@ -138,10 +140,11 @@ public class ShowResults implements ResultShower {
 			for (int i = 0; i < results.size(); i++) {
 
 				fw.write(wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent)) + ",");
+				return_string = return_string + wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent));
 				fw.write((int) CountAthletResult.CountResultByID(result_map3, (int) results.get(i), numEvent) + ",");
 				for (int j = 0; j < 4; j++) {
 					fw.write(result_map1.get(results.get(i) - 1)[j] + ",");
-
+					return_string = return_string + result_map1.get(results.get(i) - 1)[j];
 				}
 				fw.write("\n");
 
@@ -149,8 +152,10 @@ public class ShowResults implements ResultShower {
 				for (int k = 0; k < result_map3.size(); k++) {
 					if (Double.parseDouble(result_map3.get(k)[1]) == (double) results.get(i)) {
 						for (int j = 2; j < 13; j++)
+						{
 							fw.write(result_map3.get(k)[j] + ",");
-
+							return_string = return_string + result_map3.get(k)[j];
+						}
 						fw.write("\n");
 					}
 				}
@@ -164,6 +169,7 @@ public class ShowResults implements ResultShower {
 			System.out.println("File exception");
 		}
 
+		return return_string;
 	}
 
 	/**
@@ -179,20 +185,6 @@ public class ShowResults implements ResultShower {
 	 */
 	public void ShowResultsXML(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName) throws Exception {
-		// May be to try as it is done on link
-		// public static void main(String[] args) throws Exception {
-		// LoadNewResults lnr = new LoadNewResults();
-		// Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer,
-		// String[]>();
-		// Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer,
-		// String[]>();
-		// Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer,
-		// String[]>();
-		/* lnr.loadResults(result_map1, result_map2, result_map3); */
-
-		// double numEvent = 2;
-		// ArrayList<Integer> results = SortingID.SortByID(result_map1,
-		// result_map2, result_map3, numEvent);
 		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
 
 		for (int i = 0; i < results.size(); i++) {
@@ -343,9 +335,6 @@ public class ShowResults implements ResultShower {
 							el_r[13 * k + j - 2].appendChild(document.createTextNode(result_map3.get(k)[j]));
 							results_data.appendChild(el_r[13 * k + j - 2]);
 						}
-						// fw.write(result_map3.get(k)[j] + ",");
-
-						// fw.write("\n");
 					}
 				}
 				System.out.println();
