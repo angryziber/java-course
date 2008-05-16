@@ -14,6 +14,10 @@ import java.util.Map;
  */
 public class DecathlonCalculatorTest {
 
+	/**
+	 * Checks parsing of command line
+	 * Test method for {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
+	 */
 	@Test
 	public void commandLineParsingTest1() {
 
@@ -25,6 +29,10 @@ public class DecathlonCalculatorTest {
 		assertEquals(DecathlonCalculator.commandLineParsing(a), "null results.xml 1 4 null");
 	}
 
+	/**
+	 * Checks parsing of command line
+	 * Test method for {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
+	 */
 	@Test
 	public void commandLineParsingTest3() {
 
@@ -36,6 +44,10 @@ public class DecathlonCalculatorTest {
 		assertEquals(DecathlonCalculator.commandLineParsing(a), "my_input.csv null 2 1 null");
 	}
 	
+	/**
+	 * Checks parsing of command line
+	 * Test method for {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
+	 */
 	@Test
 	public void commandLineParsingTest2() {
 
@@ -48,6 +60,10 @@ public class DecathlonCalculatorTest {
 		assertEquals(DecathlonCalculator.commandLineParsing(a), "null /tmp/results.html 3 5 2");
 	}
 
+	/**
+	 * Checks taking ID of event by the name of competition
+	 * Test method for {@link net.azib.java.students.t072054.homework.DecathlonCalculator.getEventID}.
+	 */
 	@Test
 	public void getIDEventTest() {
 		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();

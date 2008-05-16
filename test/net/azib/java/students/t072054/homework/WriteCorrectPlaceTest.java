@@ -11,10 +11,13 @@ import static org.junit.Assert.*;
  */
 public class WriteCorrectPlaceTest {
 	
+	/**
+	 * Checks WriteCorrectPlace function with a sequence of scores
+	 * Test method for {@link net.azib.java.students.t072054.homework.WriteCorrectPlace}.
+	 */
 	@Test
 	public void checkScore() {
 		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
-		
 		
 		wcp.addScore(1, 4343);
 		wcp.addScore(2, 4545);
@@ -31,6 +34,5 @@ public class WriteCorrectPlaceTest {
 		assertEquals(wcp.returnPlace(4343), "4-5-6-7");
 		assertEquals(wcp.returnPlace(4545), "1-2-3");
 		assertEquals(wcp.returnPlace(2323), "8");
-		
 	}
 }

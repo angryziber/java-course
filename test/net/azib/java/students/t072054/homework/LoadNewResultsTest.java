@@ -19,6 +19,7 @@ public class LoadNewResultsTest {
 	/**
 	 * Test method for LoadNewResults class,
 	 * checks all id-s in MySQL tables
+	 * Test method for {@link net.azib.java.students.t072054.homework.LoadNewResults.LoadResultsDB}.
 	 */
 	@Test
 	public void testLoadResultsDB() {
@@ -63,7 +64,8 @@ public class LoadNewResultsTest {
 	
 	/**
 	 * Test method for convertTime function,
-	 * converts some initial data to right result
+	 * converts some initial data to needed result and compares with it
+	 * Test method for {@link net.azib.java.students.t072054.homework.LoadNewResults.convertTime}.
 	 */
 	@Test
 	public void convertTime(){

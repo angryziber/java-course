@@ -2,7 +2,6 @@ package net.azib.java.students.t072054.homework;
 
 import static org.junit.Assert.assertTrue;
 
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,10 +15,9 @@ import org.junit.Test;
 public class CountAthletResultTest {
 
 	/**
+	 * Tests the correctness of result for one athlete
+	 * Test method for {@link net.azib.java.students.t072054.hometask1.CountAthletResult}.
 	 * 
-	 * 
-	 * 
-	 * Test method for CountResultByID
 	 */
 	@Test
 	public void testCountResultByIDCase() {
@@ -34,11 +32,14 @@ public class CountAthletResultTest {
 		
 		double result = CountAthletResult.CountResultByID(result_map3, 1, 2);
 		
-		assertTrue(result > 4238 && result < 4239);
-		
-		//System.out.println(CountAthletResult.CountResultByID(result_map3, 1, 2));
+		assertTrue(result == 4239);
 	}
 		
+	/**
+	 * Tests different ways to calculate results and compares them
+	 * Test method for {@link net.azib.java.students.t072054.hometask1.CountAthletResult}.
+	 * 
+	 */
 	@Test
 	public void testCompare() {
 		
