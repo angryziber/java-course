@@ -1,0 +1,13 @@
+
+<!ELEMENT tourapment  ( athlete )*>
+
+<!ELEMENT athlete  ( result )*>
+<!ATTLIST athlete
+name CDATA #REQUIRED
+birthdate CDATA #REQUIRED
+country CDATA #REQUIRED
+place CDATA #REQUIRED
+score CDATA #REQUIRED
+>
+
+<!ELEMENT result  ( #PCDATA )>
