@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -171,15 +173,123 @@ public class DecathlonOutputConsoleTest {
 
 		doc.printAthleteResults(a, 1, longestNameLen);
 		
-		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
-	    String dateStr = "" + ((SimpleDateFormat)df).format(a.getBirthday());
+		String tempStr = "";
+		String result = "";
+		NumberFormat nf = new DecimalFormat("#0.00");
+
+		//print place
+		tempStr = "" + 1;
+		result = "|" + tempStr;
+		for (int i = 0; i < (5 - tempStr.length()); i++) {
+			result += " ";
+		}
 		
-		for (int i = 0; i < (10 - dateStr.length()); i++) {
-			dateStr += " ";
+		//print total score
+		tempStr = "" + a.competitionResults.getTotalScore();
+		result += "|" + tempStr;
+		for (int i = 0; i < (11 - tempStr.length()); i++) {
+			result += " ";
+		}
+		
+		//print name
+		tempStr = "" + a.getName();
+		result += "|" + tempStr;
+		for (int i = 0; i < (longestNameLen - tempStr.length()); i++) {
+			result += " ";
+		}
+		
+		//print birthday
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		tempStr = "" + ((SimpleDateFormat)df).format(a.getBirthday());
+		result += "|" + tempStr;
+		for (int i = 0; i < (10 - tempStr.length()); i++) {
+			result += " ";
 		}
 
-		assertEquals("|1    |17906      |Viska Oda                               |" + dateStr + "|EE    |12,00      |5,00     |12,00   |4,00     |53,00      |12,00       |25,00       |25,00     |25,00        |333,00    |" + System.getProperty("line.separator"), 
-				out.toString());
+		
+		//print country code
+		tempStr = "" + a.getCountryCode();
+		result += "|" + tempStr;
+		for (int i = 0; i < (6 - tempStr.length()); i++) {
+			result += " ";
+		}
+		
+		//print 100m sprint
+		tempStr = "" + nf.format(a.competitionResults.getResult100mRace())/* + 
+					" (" + DecathlonFormulaArguments.RUNNING_EVENT_100M_IN_SEC.
+							getRunningEventResult(athlete.competitionResults.getResult100mRace()) + ")"*/;
+		result += "|" + tempStr;
+		for (int i = 0; i < (11 - tempStr.length()); i++) {
+			result += " ";
+		}
+
+		//print Long Jump 
+		tempStr = "" + nf.format(a.competitionResults.getResultLongJump()) /*+ 
+					" (" + DecathlonFormulaArguments.FIELD_EVENT_LONG_JUMP_IN_M.
+							getFieldEventResult(athlete.competitionResults.getResultLongJump()) + ")"*/;
+		result += "|" + tempStr;
+		for (int i = 0; i < (9 - tempStr.length()); i++) {
+			result += " ";
+		}
+		
+		//Shot Put
+		tempStr = "" + nf.format(a.competitionResults.getResultShotPut());
+		result += "|" + tempStr;
+		for (int i = 0; i < (8 - tempStr.length()); i++) {
+			result += " ";
+		}
+
+		//High Jump
+		tempStr = "" + nf.format(a.competitionResults.getResultHighJump());
+		result += "|" + tempStr;
+		for (int i = 0; i < (9 - tempStr.length()); i++) {
+			result += " ";
+		}
+
+		//Sprint 400m
+		tempStr = "" + nf.format(a.competitionResults.getResult400mSprint());
+		result += "|" + tempStr;
+		for (int i = 0; i < (11 - tempStr.length()); i++) {
+			result += " ";
+		}
+
+		//Hurdles 110m
+		tempStr = "" + nf.format(a.competitionResults.getResult110mHurdles());
+		result += "|" + tempStr;
+		for (int i = 0; i < (12 - tempStr.length()); i++) {
+			result += " ";
+		}
+
+		//Discus Throw
+		tempStr = "" + nf.format(a.competitionResults.getResultDiscusThrow());
+		result += "|" + tempStr;
+		for (int i = 0; i < (12 - tempStr.length()); i++) {
+			result += " ";
+		}
+
+		//Pole Vault
+		tempStr = "" + nf.format(a.competitionResults.getResultPoleVault());
+		result += "|" + tempStr;
+		for (int i = 0; i < (10 - tempStr.length()); i++) {
+			result += " ";
+		}
+
+		//Javelin Throw
+		tempStr = "" + nf.format(a.competitionResults.getResultJavelinThrow());
+		result += "|" + tempStr;
+		for (int i = 0; i < (13 - tempStr.length()); i++) {
+			result += " ";
+		}
+
+		//Race 1500m
+		tempStr = "" + nf.format(a.competitionResults.getResult1500mRace());
+		result += "|" + tempStr;
+		for (int i = 0; i < (10 - tempStr.length()); i++) {
+			result += " ";
+		}
+		result += "|" + System.getProperty("line.separator");
+		
+		assertEquals(result, out.toString());
 	}
 
 }
