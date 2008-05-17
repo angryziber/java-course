@@ -41,7 +41,7 @@ public class DecathlonOutputConsoleTest {
 
 		Athlete a = new Athlete();
 		a.setName("Siim Susi");
-		a.setBirthday(DateFormat.getDateInstance(DateFormat.SHORT).parse("1.01.1976"));
+		a.setBirthday(new SimpleDateFormat("dd.MM.yyyy").parse("1.01.1976"));
 		a.setCountryCode("EE");
 		a.competitionResults.setResult100mRace((float)12.61);
 		a.competitionResults.setResult110mHurdles((float)16.43);
