@@ -9,7 +9,7 @@ import java.util.*;
  */
 
 public class ReadMySqlProperty {
-	File f = new File("mysql.properties");
+	File f = new File("src\\net\\azib\\java\\students\\t011861\\homework\\db.properties");
 	private String url = "";
 	private String driver = "";
 	private String user = "";

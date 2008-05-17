@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * DecathlonCalculator
- *
+ * Main Class
  * @author 011861
  */
 
@@ -45,8 +45,7 @@ public class DecathlonCalculator {
 				{
 					File htmlData = new File(args[2]);
 					OutDataToHtml printHtml = new OutDataToHtml();
-					File stylesheet = new File("athletes.xsl");
-					printHtml.showInHtmlFile(htmlData, stylesheet, finalResultsList);
+					printHtml.showInHtmlFile(htmlData, finalResultsList);
 				}
 			}
 			else if (args[0].equals("-csv"))
@@ -77,8 +76,7 @@ public class DecathlonCalculator {
 				{
 					File htmlData = new File(args[3]);
 					OutDataToHtml printHtml = new OutDataToHtml();
-					File stylesheet = new File("athletes.xsl");
-					printHtml.showInHtmlFile(htmlData, stylesheet, finalResultsList);
+					printHtml.showInHtmlFile(htmlData, finalResultsList);
 				}
 			}
 			else if (args[0].equals("-db"))
@@ -109,8 +107,7 @@ public class DecathlonCalculator {
 				{
 					File htmlData = new File(args[3]);
 					OutDataToHtml printHtml = new OutDataToHtml();
-					File stylesheet = new File("athletes.xsl");
-					printHtml.showInHtmlFile(htmlData, stylesheet, finalResultsList);
+					printHtml.showInHtmlFile(htmlData, finalResultsList);
 				}
 			}
 		

@@ -17,11 +17,11 @@ import org.dom4j.io.DocumentSource;
  * OutDataToHtml
  *
  * @author 011861
- * @param Input parameters are output filename, stylesheet filename and data from ProcessedData module! !
+ * @param Input parameters are output filename and data from ProcessedData module! !
  * @return Result is generated HTML file in projects root directory
  */
 public class OutDataToHtml {
-public void showInHtmlFile(File output, File stylesheet, List<String[]> completeData) {
+public void showInHtmlFile(File output, List<String[]> completeData) {
 		
 		CreateDocument newDoc = new CreateDocument();
 		Document doc = newDoc.createDocument(completeData);
@@ -29,13 +29,13 @@ public void showInHtmlFile(File output, File stylesheet, List<String[]> complete
 		TransformerFactory factory = TransformerFactory.newInstance();
 		DocumentResult result = null;
 		try {
-			Transformer transformer = factory.newTransformer(new StreamSource(stylesheet));
+			Transformer transformer = factory.newTransformer(new StreamSource("src//net//azib//java//students//t011861//homework//athletes.xsl"));
 			//Style the given document
 			DocumentSource source = new DocumentSource(doc);
 			result = new DocumentResult();
 			transformer.transform(source, result);
 		} catch (TransformerConfigurationException e) {
-			System.out.println("Problem with configuring " + stylesheet+ " stylesheet file! " + e);
+			System.out.println("Problem with configuring stylesheet file! " + e);
 		} catch (TransformerException e) {
 			System.out.println("Problem with transforming new html document! " + e);
 		}
