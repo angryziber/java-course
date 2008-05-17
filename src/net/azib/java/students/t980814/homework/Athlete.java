@@ -128,4 +128,25 @@ public class Athlete {
 	public int getAthleteId() {
 		return athleteId;
 	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the dob
+	 */
+	public Date getDateOfBirth() {
+		return dob;
+	}
+
+	/**
+	 * @return the country
+	 */
+	public String getCountry() {
+		return country;
+	}
 }
