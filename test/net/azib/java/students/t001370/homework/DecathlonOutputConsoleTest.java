@@ -171,7 +171,14 @@ public class DecathlonOutputConsoleTest {
 
 		doc.printAthleteResults(a, 1, longestNameLen);
 		
-		assertEquals("|1    |17906      |Viska Oda                               |12.12.1212|EE    |12,00      |5,00     |12,00   |4,00     |53,00      |12,00       |25,00       |25,00     |25,00        |333,00    |" + System.getProperty("line.separator"), 
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+	    String dateStr = "" + ((SimpleDateFormat)df).format(a.getBirthday());
+		
+		for (int i = 0; i < (10 - dateStr.length()); i++) {
+			dateStr += " ";
+		}
+
+		assertEquals("|1    |17906      |Viska Oda                               |" + dateStr + "|EE    |12,00      |5,00     |12,00   |4,00     |53,00      |12,00       |25,00       |25,00     |25,00        |333,00    |" + System.getProperty("line.separator"), 
 				out.toString());
 	}
 
