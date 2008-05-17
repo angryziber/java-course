@@ -2,7 +2,6 @@ package net.azib.java.students.t001370.homework;
 
 import static org.junit.Assert.*;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
