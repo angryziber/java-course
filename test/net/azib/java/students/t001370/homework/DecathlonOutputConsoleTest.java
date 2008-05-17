@@ -58,7 +58,7 @@ public class DecathlonOutputConsoleTest {
 
 		Athlete b = new Athlete();
 		b.setName("Beata Kana");
-		b.setBirthday(DateFormat.getDateInstance(DateFormat.SHORT).parse("1.03.1982"));
+		b.setBirthday(new SimpleDateFormat("dd.MM.yyyy").parse("1.03.1982"));
 		b.setCountryCode("ZA");
 		b.competitionResults.setResult100mRace((float)13.04);
 		b.competitionResults.setResult110mHurdles((float)18.74);
