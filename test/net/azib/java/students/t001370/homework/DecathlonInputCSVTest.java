@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
@@ -103,8 +102,9 @@ public class DecathlonInputCSVTest {
 		Athlete a = dic.parseCSVData(str);
 		
 		assertEquals("Gaas Põhja", a.getName());
-		assertEquals("12.12.1212", 
-				((SimpleDateFormat)DateFormat.getDateInstance(DateFormat.MEDIUM)).format(a.getBirthday()));
+//		assertEquals("12.12.1212", 
+//				((SimpleDateFormat)DateFormat.getDateInstance(DateFormat.MEDIUM)).format(a.getBirthday()));
+		assertEquals("12.12.1212", new SimpleDateFormat("dd.MM.yyyy").format(a.getBirthday()));
 		assertEquals("EE", a.getCountryCode());
 		assertEquals((float)12.12, a.competitionResults.getResult100mRace());
 		assertEquals((float)4.53, a.competitionResults.getResultLongJump());
