@@ -51,8 +51,8 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 		compiledString = Integer.toString(place) 												+ "," +
 							Integer.toString(athlete.competitionResults.getTotalScore()) 		+ "," +
 							"\"" + athlete.getName() + "\"" 									+ "," +
-							((SimpleDateFormat)DateFormat.getDateInstance(DateFormat.MEDIUM)).
-								format(athlete.getBirthday()) 									+ "," +
+							//((SimpleDateFormat)DateFormat.getDateInstance(DateFormat.MEDIUM)).
+							new SimpleDateFormat("dd.MM.yyyy").format(athlete.getBirthday()) 									+ "," +
 							athlete.getCountryCode() 											+ "," +
 							Float.toString(athlete.competitionResults.getResult100mRace()) 		+ "," +
 							Float.toString(athlete.competitionResults.getResultLongJump()) 		+ "," +
