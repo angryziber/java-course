@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.TreeSet;
 
@@ -155,7 +156,7 @@ public class DecathlonOutputConsoleTest {
 		
 		Athlete a = new Athlete();
 		a.setName("Viska Oda");
-		a.setBirthday(DateFormat.getDateInstance(DateFormat.SHORT).parse("12.12.1212"));
+		a.setBirthday(new SimpleDateFormat("dd.MM.yyyy").parse("12.12.1212"));
 		a.setCountryCode("EE");
 		a.competitionResults.setResult100mRace(12);
 		a.competitionResults.setResult110mHurdles(12);
