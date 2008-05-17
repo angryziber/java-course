@@ -21,7 +21,7 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
  * DecathlonOutputXML
- *
+ * Class for writing decathlon competition data to XML file
  * @author maksim
  */
 public class DecathlonOutputXML extends DecathlonOutput{
@@ -29,10 +29,17 @@ public class DecathlonOutputXML extends DecathlonOutput{
 	
 	private PrintStream output;
 	
+	/**
+	 * DecathlonOutputXML constructor
+	 */
 	DecathlonOutputXML(){
 		this.output = System.out;
 	}
 	
+	/**
+	 * DecathlonOutputXML constructor. Mostly used for testing purpose
+	 * @param out - print stream for user interaction
+	 */
 	DecathlonOutputXML(PrintStream out){
 		this.output = out;
 	}

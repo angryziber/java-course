@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  * DecathlonOutputCSV
- *
+ * Class for writing decathlon competition data to CSV file
  * @author maksim
  */
 public class DecathlonOutputCSV extends DecathlonOutput{
@@ -33,7 +33,7 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 	
 	/**
 	 * Class constructor mainly used for unit testing
-	 * @param out - output stream
+	 * @param out - output stream for user interaction
 	 */
 	DecathlonOutputCSV(PrintStream out){
 		this.output = out;

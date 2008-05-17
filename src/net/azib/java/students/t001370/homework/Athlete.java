@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Athlet
- *
+ * Class for handling athlete data
  * @author maksim
  */
 public class Athlete implements Comparable<Athlete>{

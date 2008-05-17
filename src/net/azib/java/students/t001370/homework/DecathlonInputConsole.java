@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  * DecathlonInputConsole
- *
+ * Class for getting data from console (manual user input)
  * @author maksim
  */
 public class DecathlonInputConsole extends DecathlonInput {
@@ -21,13 +21,20 @@ public class DecathlonInputConsole extends DecathlonInput {
 	private final PrintStream output;
 	private final Scanner input;
 
-	
+	/**
+	 * DecathlonInputConsole constructor
+	 */
 	DecathlonInputConsole(){
 		this.output = new PrintStream(System.out);
 		this.input 	= new Scanner(System.in);
 
 	}
 	
+	/**
+	 * DecathlonInputConsole constructor. Mostly for testing purpose
+	 * @param out - print stream - user interaction output channel
+	 * @param in - scanner - user interaction input channel
+	 */
 	DecathlonInputConsole(PrintStream out, Scanner in){
 		this.output = out;
 		this.input 	= in;

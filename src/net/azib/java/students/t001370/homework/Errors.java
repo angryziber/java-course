@@ -2,7 +2,7 @@ package net.azib.java.students.t001370.homework;
 
 /**
  * Errors
- *
+ * Enum for holding possible errors 
  * @author maksim
  */
 public enum Errors {
@@ -38,10 +38,18 @@ public enum Errors {
 	
 	private String errorText;
 	
+	/**
+	 * Errors constructor
+	 * @param error - error description
+	 */
 	Errors(String error){
 		this.errorText = error;
 	}
 
+	/**
+	 * Get error description
+	 * @return error description string
+	 */
 	public String getErrorText(){
 		return this.errorText;
 	}

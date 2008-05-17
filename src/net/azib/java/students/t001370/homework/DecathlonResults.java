@@ -2,7 +2,7 @@ package net.azib.java.students.t001370.homework;
 
 /**
  * DecathlonResults
- *
+ * Class for holding decathlon competitor results and calculating total score
  * @author maksim
  */
 public class DecathlonResults {

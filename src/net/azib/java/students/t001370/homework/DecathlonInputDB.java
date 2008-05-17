@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  * DecathlonInputDB
- *
+ * Class for getting data from Database
  * @author maksim
  */
 public class DecathlonInputDB extends DecathlonInput{
@@ -24,10 +24,17 @@ public class DecathlonInputDB extends DecathlonInput{
 
 	private PrintStream output;
 	
+	/**
+	 * DecathlonInputDB constructor
+	 */
 	DecathlonInputDB(){
 		this.output = new PrintStream(System.out);
 	}
 	
+	/**
+	 * DecathlonInputDB constructor. Mostly user for testing purpose
+	 * @param out - print stream for user interaction
+	 */
 	DecathlonInputDB(PrintStream out){
 		this.output = out;
 	}

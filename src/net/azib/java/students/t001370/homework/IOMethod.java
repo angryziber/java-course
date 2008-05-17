@@ -2,7 +2,7 @@ package net.azib.java.students.t001370.homework;
 
 /**
  * IOMethod
- *
+ * Enum for holding possible IO methods
  * @author maksim
  */
 public enum IOMethod {
@@ -28,14 +28,18 @@ public enum IOMethod {
 		ioArgument = str;
 	}
 	
+	/**
+	 * Get IO argument for specified IO method
+	 * @return io argument string (ex. filepath, db search condition)
+	 */
 	public String getIOArgument(){
 		return ioArgument;
 	}
 	
 	/**
-	 * 
-	 * @param strToParse
-	 * @return
+	 * For parsing input argument method string into IOMethod
+	 * @param strToParse - method argument
+	 * @return IOMethod
 	 */
 	public IOMethod parseInputMethod(String strToParse){
 		IOMethod method = NONE;
@@ -54,9 +58,9 @@ public enum IOMethod {
 	}
 
 	/**
-	 * 
-	 * @param strToParse
-	 * @return
+	 * For parsing output argument method string into IOMethod
+	 * @param strToParse - method argument
+	 * @return IOMethod
 	 */
 	public IOMethod parseOutputMethod(String strToParse){
 		IOMethod method = NONE;

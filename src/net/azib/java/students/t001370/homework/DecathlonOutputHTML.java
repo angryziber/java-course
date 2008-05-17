@@ -17,7 +17,7 @@ import javax.xml.transform.stream.StreamSource;
 
 /**
  * DecathlonOutputHTML
- *
+ * Class for writing decathlon competition data to HTML file. 
  * @author maksim
  */
 public class DecathlonOutputHTML extends DecathlonOutput{
@@ -25,10 +25,18 @@ public class DecathlonOutputHTML extends DecathlonOutput{
 
 	private final PrintStream output;
 
+	/**
+	 * DecathlonOutputHTML constructor
+	 * @return
+	 */
 	DecathlonOutputHTML(){
 		this.output = System.out;
 	}
 	
+	/**
+	 * DecathlonOutputHTML constructor. Mostly used for testing purpose
+	 * @param out - print stream for user interaction
+	 */
 	DecathlonOutputHTML(PrintStream out){
 		this.output = out;
 	}

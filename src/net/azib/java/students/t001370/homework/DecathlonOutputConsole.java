@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  * DecathlonOutoutConsole
- *
+ * Class for writion decathlon competition data to console
  * @author maksim
  */
 public class DecathlonOutputConsole extends DecathlonOutput{
@@ -20,10 +20,17 @@ public class DecathlonOutputConsole extends DecathlonOutput{
 
 	private final PrintStream output;
 
+	/**
+	 * DecathlonOutputConsole constructor
+	 */
 	DecathlonOutputConsole(){
 		this.output = System.out;
 	}
 	
+	/**
+	 * DecathlonOutputConsole constructor. Mostly used for testing purpose
+	 * @param out - print stream for user interaction
+	 */
 	DecathlonOutputConsole(PrintStream out){
 		this.output = out;
 	}

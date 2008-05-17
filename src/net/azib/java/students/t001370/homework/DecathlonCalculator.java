@@ -30,6 +30,13 @@ public class DecathlonCalculator {
 		this.output = System.out;
 	}
 	
+	/**
+	 * DecathlonCalculator constructor. 
+	 * Set the input and output methods, and print stream
+	 * @param input - IOMethod. Input method to use for reading decathlon data
+	 * @param output - IOMethod. Output method to write decathlon data to
+	 * @param out - PrintStream. Mostly for testing purpose
+	 */
 	public DecathlonCalculator(IOMethod input, IOMethod output, PrintStream out){
 		this.inputMethod = input;
 		this.outputMethod = output;

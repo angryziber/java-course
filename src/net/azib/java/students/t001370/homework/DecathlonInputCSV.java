@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  * DecathlonInputCSV
- *
+ * Class for reading data from CSV file
  * @author maksim
  */
 public class DecathlonInputCSV extends DecathlonInput {
@@ -23,12 +23,19 @@ public class DecathlonInputCSV extends DecathlonInput {
 
 	private final PrintStream output;
 
-	
+	/**
+	 * DecathlonInputCSV constructor
+	 */
 	DecathlonInputCSV(){
 		this.output = new PrintStream(System.out);
 
 	}
 	
+	/**
+	 * DecathlonInputCSV constructor. Mostly for testing purpose
+	 * @param out - print stream - for user interaction
+	 * @param in - scanner - not in use
+	 */
 	DecathlonInputCSV(PrintStream out, Scanner in){
 		this.output = out;
 	}

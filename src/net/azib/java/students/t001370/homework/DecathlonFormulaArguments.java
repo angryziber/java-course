@@ -3,6 +3,7 @@ package net.azib.java.students.t001370.homework;
 /**
  * DecathlonFormulaArguments
  *
+ * Enum that holds specific data for calculating competition score 
  * @author maksim
  */
 public enum DecathlonFormulaArguments {
@@ -23,6 +24,16 @@ public enum DecathlonFormulaArguments {
 	private final double argC;
 	private final int resultMultiplier;
 	
+	/**
+	 * DecathlonFormulaArguments constructor. 
+	 * Running Event Formula: Points = A*(B-P)^C,
+	 * Field Event Formula: Points = A*(P-B)^C;
+	 * @param argA - decathlon formula argument
+	 * @param argB - decathlon formula argument
+	 * @param argC - decathlon formula argument
+	 * @param multiplier - multiplier for converting athlete result 
+	 * 						2from m to cm (needed by afficial formula)
+	 */
 	DecathlonFormulaArguments(double argA, double argB, double argC, int multiplier){
 		this.argA = argA;
 		this.argB = argB;
@@ -32,7 +43,7 @@ public enum DecathlonFormulaArguments {
 
 	/**
 	 * Calculate points for running event.
-	 * Formula: Points = A*(B-P)^C,
+	 * Formula: Points = A*(B-P)^C;
 	 * where P is your performance in the units described below and A, B, and C are constants
 	 * 
 	 * @param result - athlete result
