@@ -30,6 +30,13 @@ public class DecathlonCalculator {
 		this.output = System.out;
 	}
 	
+	public DecathlonCalculator(IOMethod input, IOMethod output, PrintStream out){
+		this.inputMethod = input;
+		this.outputMethod = output;
+		this.output = out;
+	}
+
+	
 	/**
 	 * Calculate decathlon data according to input data and write processed 
 	 * data to given output.
@@ -38,16 +45,20 @@ public class DecathlonCalculator {
 	public void calculate(){
 		LOG.log(Level.INFO, "Calcutator entered");
 		
-		Collection<Athlete> compResults = new DecathlonDataReader(inputMethod).getData();
-		
-		if (compResults != null) {
-			new DecathlonDataWriter(outputMethod, compResults).writeData();
+		if (inputMethod != null && outputMethod != null){
+			Collection<Athlete> compResults = new DecathlonDataReader(inputMethod).getData();
+			
+			if (compResults != null) {
+				new DecathlonDataWriter(outputMethod, compResults).writeData();
+			}
+			else
+			{
+				output.println(Errors.ERROR_0011.getErrorText());
+			}
 		}
-		else
-		{
-			output.println(Errors.ERROR_0011.getErrorText());
+		else{
+			output.println(Errors.ERROR_0028.getErrorText());
 		}
-		
 		
 		LOG.log(Level.INFO, "Calcutator exited");
 	}

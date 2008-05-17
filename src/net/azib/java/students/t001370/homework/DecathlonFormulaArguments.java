@@ -6,7 +6,7 @@ package net.azib.java.students.t001370.homework;
  * @author maksim
  */
 public enum DecathlonFormulaArguments {
-	                                  // A          B       C       Multiplier
+// 	                                     A          B       C       Multiplier
 	RUNNING_EVENT_100M_IN_SEC 			(25.437,	18.0, 	1.81,	1			),
 	FIELD_EVENT_LONG_JUMP_IN_M 			(0.14354,	220, 	1.40,	100			),
 	FIELD_EVENT_SHOT_PUT_IN_M 			(51.39,		1.5, 	1.05,	1			),

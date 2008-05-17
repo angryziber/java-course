@@ -14,7 +14,7 @@ public class Athlete implements Comparable<Athlete>{
     private Date birthday;
     public DecathlonResults competitionResults;
     
-    Athlete(){
+    public Athlete(){
     	
     	competitionResults = new DecathlonResults();
     }

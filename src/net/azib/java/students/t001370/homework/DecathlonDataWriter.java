@@ -47,42 +47,50 @@ public class DecathlonDataWriter {
 		this.athletes = athletes;
 		this.output= output;
 	}
+
+	/**
+	 * Gets valid output for given IO method. In case the output method is not valid throws exception
+	 * @param method - output channel
+	 * @return Decathlon output channel
+	 * @throws Exception
+	 */
+	private DecathlonOutput getDecathlonOutput(IOMethod method) throws Exception{
+		
+		DecathlonOutput destination = null;
+		
+		switch (method) {
+		
+			case CONSOLE_OUTPUT:
+				destination = new DecathlonOutputConsole();
+			break;
+			
+			case CSV_OUTPUT:
+				destination = new DecathlonOutputCSV();
+			break;
+			
+			case XML_OUTPUT:
+				destination = new DecathlonOutputXML();
+			break;
+			
+			case HTML_OUTPUT:
+				destination = new DecathlonOutputHTML();
+			break;
 	
+			default:
+				throw new Exception(Errors.ERROR_0007.getErrorText());
+		}
+	
+		return destination;
+	}
 
 	/**
 	 * Writes data to the specified source (by calling class constructor)
 	 */
 	public void writeData(){
 		LOG.log(Level.INFO, "writeData entered");
-
-		DecathlonOutput destination = null;
 		
 		try {
-			switch (outputSource) {
-				
-				case CONSOLE_OUTPUT:
-					destination = new DecathlonOutputConsole();
-				break;
-				
-				case CSV_OUTPUT:
-					destination = new DecathlonOutputCSV();
-				break;
-				
-				case XML_OUTPUT:
-					destination = new DecathlonOutputXML();
-				break;
-				
-				case HTML_OUTPUT:
-					destination = new DecathlonOutputHTML();
-				break;
-
-				default:
-					output.println(Errors.ERROR_0007.getErrorText() + outputSource.name());
-					
-					LOG.log(Level.INFO, Errors.ERROR_0007.getErrorText() + outputSource.name());
-					System.exit(1);
-				break;
-			}
+			DecathlonOutput destination = getDecathlonOutput(outputSource);
 			
 			destination.writeData(this.athletes, 
 					(outputSource.getIOArgument() != null) ? new File(outputSource.getIOArgument()) : null);
