@@ -11,9 +11,10 @@ import java.util.logging.Logger;
 import org.dom4j.Element;
 
 /**
- * ResultRecord
+ * Results class contains data and methods for retrieving and outputting data about result records.
+ * One result record (Results object) contains information about the athlete, his/her results and the total score.
  *
- * @author dell
+ * @author Allan Berg
  */
 public class Results implements Comparable<Results> {
 
@@ -26,8 +27,9 @@ public class Results implements Comparable<Results> {
 	private static int athleteIdGenerator = 0;
 	
 	/**
-	 * @param athlete
-	 * @param results
+	 * This is the constructor of Results that simply fills it with data.
+	 * @param athlete - instance of Athlete class to be added into this object
+	 * @param results - list of float results
 	 */
 	public Results(Athlete athlete, LinkedList<Float> results) {
 		LOG.info("Creating resultData from Athlete and LinkedList<Float>");
@@ -47,9 +49,10 @@ public class Results implements Comparable<Results> {
 	}
 	
 	/**
-	 * @param lineCSV
-	 * @throws DecaCalcException
-	 * @throws IndexOutOfBoundsException
+	 * This is the constructor of Results that parses the input string (CSV format) and stores data from it.
+	 * @param lineCSV - CSV formatted string
+	 * @throws DecaCalcException - if there are problems with creating instance of Athlete class.
+	 * @throws IndexOutOfBoundsException - if there are not enough data in <b>lineCSV</b>
 	 */
 	public Results(String lineCSV) throws DecaCalcException, IndexOutOfBoundsException {
 		// Get the athlete name (everything between ""-s)
@@ -82,9 +85,15 @@ public class Results implements Comparable<Results> {
 	}
 	
 	/**
-	 * @param conn
-	 * @param id
-	 * @throws DecaCalcException
+	 * This is the constructor of Results that uses the connection and id to retrieve the data from
+	 * database from 'results' table (and also from 'athletes' table via Athlete constructor).  
+	 * @param conn - an opened connection to database that contains an 'results' table that has following fields:
+	 * id (integer), athlete_id (integer), competition_id (integer), race_100m, long_jump, shot_put, high_jump, race_400m,
+	 * hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m (all float)
+	 *  and 'athletes' table that has following fields:
+	 * 	id (int), name (varchar in UTF-8 format), country (varchar) and dob (date). 
+	 * @param id - an identificator what to search from the 'results' table
+	 * @throws DecaCalcException - if it was impossible to read data from 'results' or 'athletes' table or if the athlete's name was not in UTF-8 format
 	 */
 	public Results(Connection conn, int id) throws DecaCalcException {
 		sum = 0;
@@ -115,24 +124,27 @@ public class Results implements Comparable<Results> {
 	}
 	
 	/**
-	 *
+	 * Implementation of comparator method. This is needed to be able to add Results object into TreeSet in sorted order.
+	 * The comparision is made using only calculated total score and two objects are never equal (0 is never returned).
 	 */
 	public int compareTo(Results o) {
 		return (sum <= o.getSum())? 1 : -1;
 	}
 
 	/**
-	 * @return
+	 * Returns the total score of current set of results
+	 * @return score
 	 */
 	public int getSum() {
 		return sum;
 	}
 	
 	/**
-	 * @param key
-	 * @return
+	 * Returns a formatted string of the decathlon event
+	 * @param key - the key to the event, see DecathlonEvent documentation
+	 * @return result - formatted string
 	 */
-	public String getResultString(String key) {
+	private String getResultString(String key) {
 		String result = "0";
 		if (resultData.containsKey(key))
 		{
@@ -146,7 +158,8 @@ public class Results implements Comparable<Results> {
 	}
 	
 	/**
-	 *
+	 * Returns the contents of Results as String (including Athlete) in regular format.
+	 * @return String
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -157,7 +170,8 @@ public class Results implements Comparable<Results> {
 	}
 
 	/**
-	 * @return
+	 * Returns the contents of Results as String (including Athlete) in CSV format)
+	 * @return String
 	 */
 	public String toStringCSV() {
 		StringBuilder sb = new StringBuilder();
@@ -168,10 +182,11 @@ public class Results implements Comparable<Results> {
 	}
 	
 	/**
-	 * @param root
-	 * @param position
-	 * @return
-	 * @throws DecaCalcException
+	 * Takes the data from this class (and Athlete class) and appends it to DOM4J Element as child-Elements.
+	 * @param root - a DOM4J Element where to add child-Elements
+	 * @param position - the position of this set of results in overall classification
+	 * @return root
+	 * @throws DecaCalcException - if the root Element is not instance of Element
 	 */
 	public Element addResultsDataToElement(Element root, int position) throws DecaCalcException {
 		if (root instanceof Element) {

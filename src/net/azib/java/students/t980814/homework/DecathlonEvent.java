@@ -1,9 +1,9 @@
 package net.azib.java.students.t980814.homework;
 
 /**
- * Event
+ * Enum, that contains the information and some basic methods about all 10 decathlon events.
  *
- * @author dell
+ * @author Allan Berg
  */
 public enum DecathlonEvent {
 
@@ -26,10 +26,12 @@ public enum DecathlonEvent {
 	private final int     multiplier;
 
 	/**
-	 * @param databaseName
-	 * @param a
-	 * @param b
-	 * @param c
+	 * @param databaseName - a key that is used to identify this event
+	 * @param a - coef. in points calculation formula
+	 * @param b - coef. in points calculation formula
+	 * @param c - coef. in points calculation formula
+	 * @param isRunningEvent - if this event is a running event
+	 * @param multiplier - the input data is multiplied by this value when making calculations 
 	 */
 	private DecathlonEvent(String key,
 						   double a, double b, double c,
@@ -44,21 +46,24 @@ public enum DecathlonEvent {
 	}
 
 	/**
-	 * @return
+	 * Returns the next value in current enum
+	 * @return DecathlonEvent
 	 */
 	public DecathlonEvent next() {
 		return values()[(this.ordinal() + 1) % values().length];
 	}
 
 	/**
-	 * @return
+	 * Verifies if there is a next value present in current enum or are we aready on the last one
+	 * @return boolean
 	 */
 	public boolean hasNext() {
 		return (values().length > 0) && (this.ordinal() < (values().length - 1));
 	}
 	
 	/**
-	 * @return
+	 * Returns list of all the <b>key</b>-s in this enum
+	 * @return String[]
 	 */
 	public static String[] getAllKeys() {
 		String[] names = new String[values().length];
@@ -68,8 +73,9 @@ public enum DecathlonEvent {
 	}
 	
 	/**
-	 * @param key
-	 * @return
+	 * Returns the enum value that matches the <b>key</b>
+	 * @param key - key 
+	 * @return DecathlonEvent or null if the key wasn't found in this enum
 	 */
 	public static DecathlonEvent getDecathlonEventByKey(String key) {
 		for (DecathlonEvent e : values())
@@ -79,8 +85,9 @@ public enum DecathlonEvent {
 	}
 	
 	/**
-	 * @param d
-	 * @return
+	 * Calculates and returns the points of this enum value
+	 * @param d - the result of this event
+	 * @return int
 	 */
 	public int calcPoints(double d) {
 		if (isRunningEvent)

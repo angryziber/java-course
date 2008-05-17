@@ -1,9 +1,11 @@
 package net.azib.java.students.t980814.homework;
 
 /**
- * InputOutputMethod
- *
- * @author dell
+ * A simple class that contains information about input and output methods.
+ * This class contains two enums: DecaInputMethod and DecaOutputMethod,
+ * methods to set their values and associating String parameters.
+ * 
+ * @author Allan Berg
  */
 public class DecaIOMethod {
 
@@ -28,8 +30,9 @@ public class DecaIOMethod {
 	public String        outputParameter = null;
 
 	/**
-	 * @param i
-	 * @param param
+	 * Sets the input method and its parameter
+	 * @param i - input method
+	 * @param param - parameter of the input method (e.g. file name of CSV)
 	 */
 	public void setInputMethod(DecaInputMethod i, String param) {
 		inputMethod = i;
@@ -37,8 +40,9 @@ public class DecaIOMethod {
 	}
 		
 	/**
-	 * @param o
-	 * @param param
+	 * Sets the output method and its parameter
+	 * @param o - output method
+	 * @param param - parameter of the output method (e.g. file name of CSV)
 	 */
 	public void setOutputMethod(DecaOutputMethod o, String param) {
 		outputMethod = o;
@@ -46,7 +50,8 @@ public class DecaIOMethod {
 	}
 		
 	/**
-	 * @return
+	 * Verifies if both input and output methods are set
+	 * @return boolean - true, if both methods are set
 	 */
 	public boolean isIOMethodLegal() {
 		return ((inputMethod != DecaInputMethod.UNKNOWN) &&

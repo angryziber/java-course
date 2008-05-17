@@ -1,26 +1,13 @@
 package net.azib.java.students.t980814.homework;
 
 /**
- * DecaCalcException
+ * This is a class of exceptions that are used in DecathlonCalculator program.
+ * This class acts exactly as the Exception class and this is needed only to identify
+ * my own generated exceptions.
  *
- * @author dell
+ * @author Allan Berg
  */
 public class DecaCalcException extends Exception {
-
-	/**
-	 * 
-	 */
-	public DecaCalcException() {
-		super();
-	}
-
-	/**
-	 * @param message
-	 * @param cause
-	 */
-	public DecaCalcException(String message, Throwable cause) {
-		super(message, cause);
-	}
 
 	/**
 	 * @param message
@@ -28,12 +15,4 @@ public class DecaCalcException extends Exception {
 	public DecaCalcException(String message) {
 		super(message);
 	}
-
-	/**
-	 * @param cause
-	 */
-	public DecaCalcException(Throwable cause) {
-		super(cause);
-	}
-
 }
