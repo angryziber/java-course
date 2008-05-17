@@ -41,7 +41,7 @@ public class DecathlonInputConsole extends DecathlonInput {
 	 * @return float value of the strValue
 	 * @throws NumberFormatException
 	 */
-	private float parseStringValue(String strValue) throws NumberFormatException{
+	 float parseStringValue(String strValue) throws NumberFormatException{
 		float readValue = 0;
 		
 		String[] valueComponents = strValue.replace(',', '.').split(":");
@@ -66,7 +66,7 @@ public class DecathlonInputConsole extends DecathlonInput {
 	 * @param strValue - string value representation
 	 * @return float value of strValue or input from console
 	 */
-	private float parseStringValueFromConsole(String strValue){
+	 float parseStringValueFromConsole(String strValue){
 		float readValue = 0;
 		boolean success = false;
 		
@@ -90,7 +90,7 @@ public class DecathlonInputConsole extends DecathlonInput {
 	 * Get competition results from user input
 	 * @return Collection of athletes
 	 */
-	private Collection<Athlete> getAthletesDataFromConsole(){
+	 Collection<Athlete> getAthletesDataFromConsole(){
 		LOG.log(Level.INFO, "get data from console entered");
 
 		

@@ -42,7 +42,7 @@ public class DecathlonInputCSV extends DecathlonInput {
 	 * @return float value of the strValue
 	 * @throws NumberFormatException
 	 */
-	private float parseStringValue(String strValue) throws NumberFormatException{
+	 float parseStringValue(String strValue) throws NumberFormatException{
 		float readValue = 0;
 		
 		String[] valueComponents = strValue.replace(',', '.').split(":");
@@ -68,7 +68,7 @@ public class DecathlonInputCSV extends DecathlonInput {
 	 * @param strValue - string value representation
 	 * @return float value of strValue
 	 */
-	private float parseStringValueFromCSV(String strValue){
+	 float parseStringValueFromCSV(String strValue){
 		float readValue = 0;
 
 		try{
@@ -89,7 +89,7 @@ public class DecathlonInputCSV extends DecathlonInput {
 	 * @param inputString String - coma-separated string with decathlon data 
 	 * @return Athlete - if data was valid, else null 
 	 */
-	private Athlete parseCSVData(String inputString) {
+	 Athlete parseCSVData(String inputString) {
 		
 		final int notAthleteDecathlonArgs = 13; //name + birthday + contry_code + 10(competitions) = 13
 		Athlete returnAthlete = null;

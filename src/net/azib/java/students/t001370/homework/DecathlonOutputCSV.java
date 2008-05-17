@@ -45,7 +45,7 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 	 * @param athlete - athlete which data will be compiled
 	 * @return compiled CSV string
 	 */
-	private String compileCSVLine(int place, Athlete athlete){
+	 String compileCSVLine(int place, Athlete athlete){
 		String compiledString = null;
 		
 		compiledString = Integer.toString(place) 												+ "," +
@@ -65,10 +65,6 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 							Float.toString(athlete.competitionResults.getResultJavelinThrow()) 	+ "," +
 							Float.toString(athlete.competitionResults.getResult1500mRace());
 		
-		System.out.println(
-				Integer.toString((int)(athlete.competitionResults.getResult1500mRace()%60)) + ":" +
-				Float.toString(athlete.competitionResults.getResult1500mRace() - (int)(athlete.competitionResults.getResult1500mRace()%60)));
-				
 		LOG.log(Level.INFO, compiledString);
 		return compiledString;
 	}
@@ -120,7 +116,5 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 				System.exit(1);
 			}
 		}
-		
 	}
-	
 }

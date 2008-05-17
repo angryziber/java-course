@@ -36,7 +36,7 @@ public class DecathlonInputDB extends DecathlonInput{
 	 * SQL statement for PreparedStatement
 	 * @return SQL statement string
 	 */
-	private String getSQLStatement(){
+	 String getSQLStatement(){
 		return "SELECT a.name 		AS name, 													" +
 				"       a.dob 			AS birthday, 											" +
 				"       a.country_code 	AS country_code,										" +

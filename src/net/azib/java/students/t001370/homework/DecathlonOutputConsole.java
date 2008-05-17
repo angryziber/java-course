@@ -34,25 +34,25 @@ public class DecathlonOutputConsole extends DecathlonOutput{
 	 * Prints table separator to output specified by calling class constructor
 	 * @param longestNameLen - for formating name column
 	 */
-	private void printTableSeparator(int longestNameLen){
+	 void printTableSeparator(int longestNameLen){
 		
 		output.print("+-----+-----------+");
 		for (int i = 0; i < longestNameLen; i++) {
 			output.print("-");
 		}
-		output.print("+----------+------+-----------+---------+--------+---------+-----------+------------+------------+----------+-------------+----------+\n");
+		output.println("+----------+------+-----------+---------+--------+---------+-----------+------------+------------+----------+-------------+----------+");
 	}
 	
 	/**
 	 * Prints table heading to output specified by calling class construtor
 	 * @param longestNameLen - for formating name column
 	 */
-	private void printTableHeading(int longestNameLen){
+	 void printTableHeading(int longestNameLen){
 		output.print("|Place|Total Score|Name");
 		for (int i = 0; i < (longestNameLen - "Name".length()); i++) {
 			output.print(" ");
 		}
-		output.print("|Birthday  |Coutry|Sprint 100m|Long Jump|Shot Put|High Jump|Sprint 400m|Hurdles 110m|Discus Throw|Pole Vault|Javelin Throw|Race 1500m|\n");
+		output.println("|Birthday  |Coutry|Sprint 100m|Long Jump|Shot Put|High Jump|Sprint 400m|Hurdles 110m|Discus Throw|Pole Vault|Javelin Throw|Race 1500m|");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class DecathlonOutputConsole extends DecathlonOutput{
 	 * @param place - giving athlete place 
 	 * @param longestNameLen - for formating name column
 	 */
-	private void printAthleteResults(Athlete athlete, int place, int longestNameLen){
+	 void printAthleteResults(Athlete athlete, int place, int longestNameLen){
 		String tempStr = null;
 		NumberFormat nf = new DecimalFormat("#0.00");
 		
@@ -175,7 +175,7 @@ public class DecathlonOutputConsole extends DecathlonOutput{
 		for (int i = 0; i < (10 - tempStr.length()); i++) {
 			output.print(" ");
 		}
-		output.print("|\n");
+		output.println("|");
 	}
 	
 	
