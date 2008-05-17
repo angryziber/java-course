@@ -94,21 +94,21 @@ public class DecathlonInputConsoleTest {
 	 */
 	@Test
 	public void testGetAthletesDataFromConsoleGetAthlete() {
-		String str="c\n" +
-				"Gaas Põhja\n" +
-				"12.12.1212\n" +
-				"EE\n" +
-				"12.12\n" +
-				"4.53\n" +
-				"10.12\n" +
-				"1,22\n" +
-				"1:06.44\n" +
-				"19.12\n" +
-				"25\n" +
-				"2.30\n" +
-				"36\n" +
-				"6:22.45\n" +
-				"x\n";
+		String str="c" + System.getProperty("line.separator") +
+				"Gaas Põhja" + System.getProperty("line.separator") +
+				"12.12.1212" + System.getProperty("line.separator") +
+				"EE" + System.getProperty("line.separator") +
+				"12.12" + System.getProperty("line.separator") +
+				"4.53" + System.getProperty("line.separator") +
+				"10.12" + System.getProperty("line.separator") +
+				"1,22" + System.getProperty("line.separator") +
+				"1:06.44" + System.getProperty("line.separator") +
+				"19.12" + System.getProperty("line.separator") +
+				"25" + System.getProperty("line.separator") +
+				"2.30" + System.getProperty("line.separator") +
+				"36" + System.getProperty("line.separator") +
+				"6:22.45" + System.getProperty("line.separator") +
+				"x" + System.getProperty("line.separator");
 		Scanner in = new Scanner(str);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		
@@ -122,7 +122,7 @@ public class DecathlonInputConsoleTest {
 	 */
 	@Test
 	public void testGetAthletesDataFromConsoleExitFromConsole() {
-		String str="x\n";
+		String str="x" + System.getProperty("line.separator");
 		Scanner in = new Scanner(str);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		
