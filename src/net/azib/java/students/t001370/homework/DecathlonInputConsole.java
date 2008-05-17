@@ -123,7 +123,7 @@ public class DecathlonInputConsole extends DecathlonInput {
 				//-----------------------------------------
 				
 				// set athlete birthday 
-				DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+				DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 				output.println("Enter athlete birhtday (example: " + ((SimpleDateFormat) df).toPattern() + "):");
 				do{
 					try {
