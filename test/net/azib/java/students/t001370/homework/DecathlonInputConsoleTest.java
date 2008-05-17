@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -89,34 +93,40 @@ public class DecathlonInputConsoleTest {
 		assertEquals(dic.parseStringValueFromConsole("12,12"), (float)12.12);
 	}
 
-//  works on my pc	
-//	/**
-//	 * Test method for {@link net.azib.java.students.t001370.homework.DecathlonInputConsole#getAthletesDataFromConsole()}.
-//	 */
-//	@Test
-//	public void testGetAthletesDataFromConsoleGetAthlete() {
-//		String str="c" + System.getProperty("line.separator") +
-//				"Gaas Põhja" + System.getProperty("line.separator") +
-//				"12.12.1212" + System.getProperty("line.separator") +
-//				"EE" + System.getProperty("line.separator") +
-//				"12.12" + System.getProperty("line.separator") +
-//				"4.53" + System.getProperty("line.separator") +
-//				"10.12" + System.getProperty("line.separator") +
-//				"1,22" + System.getProperty("line.separator") +
-//				"1:06.44" + System.getProperty("line.separator") +
-//				"19.12" + System.getProperty("line.separator") +
-//				"25" + System.getProperty("line.separator") +
-//				"2.30" + System.getProperty("line.separator") +
-//				"36" + System.getProperty("line.separator") +
-//				"6:22.45" + System.getProperty("line.separator") +
-//				"x" + System.getProperty("line.separator");
-//		Scanner in = new Scanner(str);
-//		ByteArrayOutputStream out = new ByteArrayOutputStream();
-//		
-//		DecathlonInputConsole dic = new DecathlonInputConsole(new PrintStream(out), in);
-//		
-//		assertEquals(((Athlete)dic.getAthletesDataFromConsole().toArray()[0]).competitionResults.getTotalScore(), (int)3389);
-//	}
+	/**
+	 * Test method for {@link net.azib.java.students.t001370.homework.DecathlonInputConsole#getAthletesDataFromConsole()}.
+	 * @throws ParseException 
+	 */
+	@Test
+	public void testGetAthletesDataFromConsoleGetAthlete() throws ParseException {
+		
+		Date date = new SimpleDateFormat("dd.MM.yyyy").parse("1.03.1982");
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		String dateStr = ((SimpleDateFormat)df).format(date);
+
+		 
+		String str="c" + System.getProperty("line.separator") +
+				"Gaas Põhja" + System.getProperty("line.separator") +
+				dateStr + System.getProperty("line.separator") +
+				"EE" + System.getProperty("line.separator") +
+				"12.12" + System.getProperty("line.separator") +
+				"4.53" + System.getProperty("line.separator") +
+				"10.12" + System.getProperty("line.separator") +
+				"1,22" + System.getProperty("line.separator") +
+				"1:06.44" + System.getProperty("line.separator") +
+				"19.12" + System.getProperty("line.separator") +
+				"25" + System.getProperty("line.separator") +
+				"2.30" + System.getProperty("line.separator") +
+				"36" + System.getProperty("line.separator") +
+				"6:22.45" + System.getProperty("line.separator") +
+				"x" + System.getProperty("line.separator");
+		Scanner in = new Scanner(str);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		
+		DecathlonInputConsole dic = new DecathlonInputConsole(new PrintStream(out), in);
+		
+		assertEquals(((Athlete)dic.getAthletesDataFromConsole().toArray()[0]).competitionResults.getTotalScore(), (int)3389);
+	}
 
 	/**
 	 * Test method for {@link net.azib.java.students.t001370.homework.DecathlonInputConsole#getAthletesDataFromConsole()}.
