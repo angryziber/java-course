@@ -10,9 +10,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * DecathlonCalculator
+ * The main class of DecathlonCalculator program.
+ * This class implements the main method and reads the command line parameters and parses them.
+ * According to this information this class calls the constructors and output methods of
+ * Competition class to input and output the results. 
  *
- * @author dell
+ * @author Allan Berg
  */
 public class DecathlonCalculator {
 
@@ -23,8 +26,12 @@ public class DecathlonCalculator {
 	private DecaIOMethod ioMethod;
 	
 	/**
-	 * @param ioMethod
-	 * @throws DecaCalcException
+	 * Creates competition object, uses the stored <b>ioMethod</b> to determine from where to read
+	 * the input data. If the data must be reed from database then reads the connection information
+	 * from "db.properties" file and creates a connection.
+	 * @param ioMethod 
+	 * @throws DecaCalcException - if exception was thrown from Competition class or if it was
+	 * impossible to create a connection to database or if the "db.properties" file was inaccessible 
 	 */
 	public DecathlonCalculator(DecaIOMethod ioMethod) throws DecaCalcException {
 		this.ioMethod = ioMethod;
@@ -74,7 +81,9 @@ public class DecathlonCalculator {
 	}
 	
 	/**
-	 * @throws DecaCalcException
+	 * Outputs decathlon results.
+	 * @throws DecaCalcException - if exception was thrown from Competition class or if the 
+	 * competition object was not created
 	 */
 	public void outputCalculatedData() throws DecaCalcException {
 		if (competition != null) {
@@ -92,8 +101,10 @@ public class DecathlonCalculator {
 	}
 	
 	/**
-	 * @param args
-	 * @return
+	 * Helper method for parsing command line parameters and putting them into
+	 * DecaIOMethod object.
+	 * @param args - command line parameters
+	 * @return DecaIOMethod - parsed command line parameters
 	 */
 	public static DecaIOMethod readCommandLineParams(String[] args) {
 		int paramCount = 0;
@@ -126,7 +137,7 @@ public class DecathlonCalculator {
 	}
 	
 	/**
-	 * 
+	 * Outputs message to console about error in command line parameters  
 	 */
 	public static void outputCommandLineError() {
 		final String errorMessage = new String(
@@ -149,7 +160,10 @@ public class DecathlonCalculator {
 	}
 	
 	/**
-	 * @param args
+	 * The main method of this program. Parses command line parameters,
+	 * verifies them and creates an instance of DecathlonCalculator if they were OK.
+	 * Otherwise outputs error message about error in command line parameters.
+	 * @param args - command line parameters
 	 */
 	public static void main(String[] args) {		
 		try {
@@ -165,7 +179,7 @@ public class DecathlonCalculator {
 		}
 		catch (Exception e) {
 			System.out.println("Unexpected error.");
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, "Unexpected error!", e);
 		}
 	}
 }

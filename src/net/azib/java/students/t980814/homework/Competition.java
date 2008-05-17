@@ -40,9 +40,12 @@ import org.dom4j.io.XMLWriter;
 
 
 /**
- * Results
- *
- * @author dell
+ * Class that operates with competitions.
+ * It can get the results from the console, from CSV file or from database.
+ * This class also builds the sorted list of all the results and outputs them to
+ * console or to CSV file or to XML file or to HTML file.
+ * 
+ * @author Allan Berg
  */
 public class Competition {
 
@@ -53,9 +56,13 @@ public class Competition {
 	private int competitionId;
 	
 	/**
-	 * @param printStream
-	 * @param inputStream
-	 * @throws DecaCalcException
+	 * Constructor of Competition that reads input from inputStream (e.g. from console)
+	 * and builds the Results collection
+	 * 
+	 * @param printStream - output stream to where to print the questions about data to be entered 
+	 * @param inputStream - input stream from where to read the entered data
+	 * @throws DecaCalcException - routes exceptions from Athlete or Results class if it was
+	 * 	not possible to construct these classes according to entered data. 
 	 */
 	public Competition(PrintStream printStream, InputStream inputStream) throws DecaCalcException {
 		LinkedList<Float> resultsFloat = new LinkedList<Float>();
@@ -94,8 +101,14 @@ public class Competition {
 	}
 	
 	/**
-	 * @param fileCSV
-	 * @throws DecaCalcException
+	 * Constructor of Competition class that reads input from CSV file
+	 * and builds the Results collection
+
+	 * @param fileCSV - CSV file to parse
+	 * @throws DecaCalcException - routes exceptions from Athlete or Results class if it was
+	 * 	not possible to construct these classes according to entered data.
+	 * 	Also throws this exception if the given file could not be found of there were
+	 *  problems accessing it.  
 	 */
 	public Competition(File fileCSV) throws DecaCalcException {
 		BufferedReader reader = null;
@@ -130,8 +143,18 @@ public class Competition {
 	}
 	
 	/**
-	 * @param conn
-	 * @param compIdString
+	 * This is the constructor of Competition that uses the connection and id to retrieve the data from
+	 * database from 'competitions' table and from 'results' table via Results constructor
+	 * (and also from 'athletes' table via Athlete constructor).  
+	 * 
+	 * @param conn - an opened connection to database that contains an 'results' table that has following fields:
+	 * id (integer), athlete_id (integer), competition_id (integer), race_100m, long_jump, shot_put, high_jump, race_400m,
+	 * hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m (all float)
+	 *  and 'athletes' table that has following fields:
+	 * 	id (int), name (varchar in UTF-8 format), country (varchar) and dob (date)
+	 *  and 'competitions' that has at least following fields:
+	 *  id (integer), name (varchar)
+	 * @param compIdString - competition name or id to process
 	 * @throws DecaCalcException
 	 */
 	public Competition(Connection conn,
@@ -157,10 +180,12 @@ public class Competition {
 	}
 
 	/**
-	 * @param conn
-	 * @param compIdString
-	 * @return
-	 * @throws DecaCalcException
+	 * Helper function that returns the competition id that matches the given competion name or id
+	 * @param conn - an opened connection to database that contains an 'competitions' table that has at least following fields:
+	 * id (integer), name (varchar)
+	 * @param compIdString - competition name or id to search
+	 * @return int - competitionId
+	 * @throws DecaCalcException - if it was not possible to access the 'competitions' table
 	 */
 	private int getCompetitionIdInt(Connection conn, String compIdString) throws DecaCalcException {
 		ResultSet rs = null;
@@ -185,7 +210,8 @@ public class Competition {
 	}
 	
 	/**
-	 * @return
+	 * Helper function that builds a list of places that match the current results
+	 * @return LinkedList<Integer> of places
 	 */
 	private LinkedList<Integer> buildSortedResults() {
 		LinkedList<Integer> positions = new LinkedList<Integer>();
@@ -204,8 +230,10 @@ public class Competition {
 	}
 	
 	/**
-	 * @param fileCSV
-	 * @throws DecaCalcException
+	 * Outputs the competition data into CSV file
+	 * 
+	 * @param fileCSV - file name to where to output 
+	 * @throws DecaCalcException - if it was not possible to output data
 	 */
 	public void toStringCSV(File fileCSV) throws DecaCalcException {
 		StringBuilder sb = new StringBuilder();
@@ -228,7 +256,8 @@ public class Competition {
 	}
 
 	/**
-	 *
+	 * Returns a formatted string of the decathlon competition
+	 * @return result - formatted string
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Sorted results: " + LN);
@@ -239,8 +268,11 @@ public class Competition {
 	}
 
 	/**
-	 * @return
-	 * @throws DecaCalcException
+	 * Helper function that builds a DOM4J Document according to current
+	 * information about the competition, results and athletes
+	 *
+	 * @return - DOM4J Document
+	 * @throws DecaCalcException - if exception was thrown from Results class
 	 */
 	private Document buildXMLDocument() throws DecaCalcException {
 		LOG.info("Building XML document");
@@ -256,8 +288,10 @@ public class Competition {
 	}
 	
 	/**
-	 * @param fileXML
-	 * @throws DecaCalcException
+	 * Outputs the competition data into XML file
+	 * 
+	 * @param fileXML - file name to where to output 
+	 * @throws DecaCalcException - if it was not possible to output data
 	 */
 	public void toXML(File fileXML) throws DecaCalcException {
 		OutputFormat format = OutputFormat.createPrettyPrint();
@@ -277,8 +311,10 @@ public class Competition {
 	}
 	
 	/**
-	 * @param fileHTML
-	 * @throws DecaCalcException
+	 * Outputs the competition data into HTML file using "DecaToHTML.xsl" stylesheet
+	 * 
+	 * @param fileHTML - file name to where to output 
+	 * @throws DecaCalcException - if it was not possible to output data or if the stylesheet file was not found
 	 */
 	public void toHTML(File fileHTML) throws DecaCalcException {
 		final String XSL_FILE = "DecaToHTML.xsl";
@@ -304,10 +340,11 @@ public class Competition {
 
 	
 	/**
-	 * @param out
-	 * @param queryText
-	 * @param scanner
-	 * @return
+	 * Helper function for reading, verifying and converting running result from console
+	 * @param out - output stream to where to print the question about the data
+	 * @param queryText - the question what to ask from user
+	 * @param scanner - from where to read the input
+	 * @return float - parsed and converted input data
 	 */
 	private Float readRunningResult(PrintStream out, String queryText, Scanner scanner) {
 		String inputText;
@@ -331,10 +368,11 @@ public class Competition {
 	}
 	
 	/**
-	 * @param out
-	 * @param queryText
-	 * @param scanner
-	 * @return
+	 * Helper function for reading, verifying and converting field result from console
+	 * @param out - output stream to where to print the question about the data
+	 * @param queryText - the question what to ask from user
+	 * @param scanner - from where to read the input
+	 * @return float - parsed and converted input data
 	 */
 	private Float readFieldResult(PrintStream out, String queryText, Scanner scanner) {
 		String inputText;
@@ -354,10 +392,11 @@ public class Competition {
 	}
 
 	/**
-	 * @param out
-	 * @param queryText
-	 * @param scanner
-	 * @return
+	 * Helper function for reading, verifying and converting date from console
+	 * @param out - output stream to where to print the question about the data
+	 * @param queryText - the question what to ask from user
+	 * @param scanner - from where to read the input
+	 * @return Date - parsed and converted Date
 	 */
 	private Date readAthleteBirthday(PrintStream out, String queryText, Scanner scanner) {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -377,10 +416,11 @@ public class Competition {
 	}
 	
 	/**
-	 * @param out
-	 * @param queryText
-	 * @param scanner
-	 * @return
+	 * Helper function for reading confirmation about whether to enter data for a next athlete or not
+	 * @param out - output stream to where to print the question about the data
+	 * @param queryText - the question what to ask from user
+	 * @param scanner - from where to read the input
+	 * @return boolean - if data inputting should continue
 	 */
 	private boolean askContinueEnteringConsole(PrintStream out, String queryText, Scanner scanner) {
 		out.print(queryText);
@@ -394,7 +434,8 @@ public class Competition {
 	
 	
 	/**
-	 * @param writer
+	 * A helper function to quietly close a XMLWriter
+	 * @param writer - XMLWriter to close
 	 */
 	private void closeQuietly(XMLWriter writer) {
 		try {
@@ -406,7 +447,8 @@ public class Competition {
 	}
 
 	/**
-	 * @param rs
+	 * A helper function to quietly close a ResultSet
+	 * @param rs - ResultSet to close
 	 */
 	public static void closeQuietly(ResultSet rs) {
 		try {
@@ -418,7 +460,8 @@ public class Competition {
 	}
 
 	/**
-	 * @param r
+	 * A helper function to quietly close a Closeable
+	 * @param rs - closeable to close
 	 */
 	public static void closeQuietly(Closeable r) {
 		try {
