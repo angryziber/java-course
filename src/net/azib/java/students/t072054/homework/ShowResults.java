@@ -3,10 +3,8 @@ package net.azib.java.students.t072054.homework;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
-import java.io.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;

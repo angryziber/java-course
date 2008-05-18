@@ -1,7 +1,5 @@
 package net.azib.java.students.t072054.homework;
 
-import java.util.ArrayList;
-
 /**
  * WriteCorrectPlace
  * 
