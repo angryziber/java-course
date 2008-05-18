@@ -20,14 +20,13 @@ public class SortingID {
 	 * @param event_id
 	 * @return List of athletes' id-s
 	 */
-	public static ArrayList<Integer> SortByID(Map<Integer, String[]> result_map1, 
-			Map<Integer, String[]> result_map2, 
-			Map<Integer, String[]> result_map3,
-			double event_id) {
+	public static ArrayList<Integer> SortByID(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+			Map<Integer, String[]> result_map3, double event_id) {
 		ArrayList<Integer> return_value = new ArrayList<Integer>();
 		double[] buf = new double[20];
 
-		String str_buf[] = new String[100]; // buffer for reading from result_maps
+		String str_buf[] = new String[100]; // buffer for reading from
+											// result_maps
 
 		int[] choosed_indexes = new int[10000]; // Chosen indexes array
 		int number_of_indexes = 0; // Number of chosen indexes
@@ -77,31 +76,31 @@ public class SortingID {
 
 				// Reading data from database
 				str_buf = result_map3.get(count);
-				
-				//Check the id of competition
+
+				// Check the id of competition
 				buf[2] = Double.parseDouble(str_buf[2]);
-				
+
 				if ((choosed_flag == 0) && (event_id == buf[2])) {
 					// START to count decathlon points
-					//str_buf = result_map3.get(count);
-					
+					// str_buf = result_map3.get(count);
+
 					// DEBUG output
-					//System.out.println("number of rows = " + number_of_rows);
-					
+					// System.out.println("number of rows = " + number_of_rows);
+
 					buf[1] = Double.parseDouble(str_buf[1]);
 					for (int i = 3; i < 13; i++) {
 						// buf[i] = lnr.rs3.getDouble(i);
 						buf[i] = Double.parseDouble(str_buf[i]);
-						
+
 						// DEBUG output
-						//System.out.println(buf[i]);
+						// System.out.println(buf[i]);
 					}
 					result = CountAthletResult.CountResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10],
 							buf[11], buf[12]);
 					// END of decathlon count //
 
 					// DEBUG output
-					//System.out.println("result = " + result);
+					// System.out.println("result = " + result);
 
 					// New max value if result > max_num
 					if (result > max_num) {
@@ -118,10 +117,10 @@ public class SortingID {
 			}
 
 			// DEBUG output
-			//System.out.println("max_num = " + max_num);
-			//System.out.println("max_index = " + max_index);
-			//System.out.println("max_athlet = " + max_athlet);
-			
+			// System.out.println("max_num = " + max_num);
+			// System.out.println("max_index = " + max_index);
+			// System.out.println("max_athlet = " + max_athlet);
+
 			choosed_indexes[number_of_indexes] = max_index;
 			return_value.add((int) max_athlet);
 			max_num = 0;

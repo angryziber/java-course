@@ -71,7 +71,7 @@ public class LoadNewResults implements ResultsLoader {
 
 			readDatabase(rs1, result_map1, 4);
 
-			//String str[] = result_map1.get(0);
+			// String str[] = result_map1.get(0);
 
 			personStatement = conn.prepareStatement("SELECT * FROM competitions WHERE id > ?;");
 
@@ -189,7 +189,6 @@ public class LoadNewResults implements ResultsLoader {
 						char_buf[char_count] = line.charAt(i);
 						if (char_buf[char_count] == ':')
 							flag_need_converted = true;
-						// char_buf[char_count + 1] = '\0';
 						char_count++;
 					}
 					else {
@@ -293,7 +292,6 @@ public class LoadNewResults implements ResultsLoader {
 							char_buf[char_count] = line.charAt(i);
 							if (char_buf[char_count] == ':')
 								flag_need_converted = true;
-							// char_buf[char_count + 1] = '\0';
 							char_count++;
 						}
 						if ((i + 1) == line.length() || line.charAt(i) == ',') {
@@ -341,9 +339,6 @@ public class LoadNewResults implements ResultsLoader {
 						result_map2.put(0, str_map2);
 					}
 
-					// for (int i = 0; i < 13; i++) {
-					// System.out.println(str_buf[i]);
-					// }
 					count = 0;
 					num_line++;
 				}

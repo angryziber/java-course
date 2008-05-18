@@ -15,8 +15,8 @@ import java.util.Map;
 public class DecathlonCalculatorTest {
 
 	/**
-	 * Checks parsing of command line
-	 * Test method for {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
+	 * Checks parsing of command line Test method for
+	 * {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
 	 */
 	@Test
 	public void commandLineParsingTest1() {
@@ -30,8 +30,8 @@ public class DecathlonCalculatorTest {
 	}
 
 	/**
-	 * Checks parsing of command line
-	 * Test method for {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
+	 * Checks parsing of command line Test method for
+	 * {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
 	 */
 	@Test
 	public void commandLineParsingTest3() {
@@ -43,10 +43,10 @@ public class DecathlonCalculatorTest {
 
 		assertEquals(DecathlonCalculator.commandLineParsing(a), "my_input.csv null 2 1 null");
 	}
-	
+
 	/**
-	 * Checks parsing of command line
-	 * Test method for {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
+	 * Checks parsing of command line Test method for
+	 * {@link net.azib.java.students.t072054.homework.DecathlonCalculator.commandLineParsing}.
 	 */
 	@Test
 	public void commandLineParsingTest2() {
@@ -61,30 +61,30 @@ public class DecathlonCalculatorTest {
 	}
 
 	/**
-	 * Checks taking ID of event by the name of competition
-	 * Test method for {@link net.azib.java.students.t072054.homework.DecathlonCalculator.getEventID}.
+	 * Checks taking ID of event by the name of competition Test method for
+	 * {@link net.azib.java.students.t072054.homework.DecathlonCalculator.getEventID}.
 	 */
 	@Test
 	public void getIDEventTest() {
 		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
 		String[] str1 = new String[5];
 		String[] str2 = new String[5];
-		
+
 		str1[0] = "5";
 		str1[1] = "EE";
 		str1[2] = "2005-02-03";
 		str1[3] = "First";
 		str1[4] = "Tallinn";
-		
+
 		str2[0] = "10";
 		str2[1] = "SW";
 		str2[2] = "2006-01-23";
 		str2[3] = "Second";
 		str2[4] = "Stokholm";
-		
+
 		result_map2.put(0, str1);
 		result_map2.put(1, str2);
-		
+
 		assertEquals(DecathlonCalculator.getEventID(result_map2, "First"), 5);
 		assertEquals(DecathlonCalculator.getEventID(result_map2, "Second"), 10);
 	}

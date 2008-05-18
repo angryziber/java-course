@@ -11,7 +11,6 @@ import java.util.LinkedHashMap;
  * @author r_vassiljev
  */
 
-// TODO 2. Validating for logical correctness
 public class DecathlonCalculator {
 	// Input/output methods
 	private static final int CONSOLE = 1;
@@ -47,7 +46,7 @@ public class DecathlonCalculator {
 
 		// Initial value
 		input_num = 1;
-		
+
 		ResultShower res_show = new ShowResults();
 
 		LoadNewResults lnr = new LoadNewResults();
@@ -115,6 +114,9 @@ public class DecathlonCalculator {
 				System.out.println("CSV creating exception!");
 			}
 			break;
+		case HTML:
+			System.out.println("HTML is not supported!");
+			break;
 		}
 	}
 
@@ -136,7 +138,6 @@ public class DecathlonCalculator {
 		input_num = 0;
 
 		for (String s : args) {
-			// System.out.println(s);
 			if (stage == INPUT_METHOD) {
 				if (s.equals("-console")) {
 					input_method = CONSOLE;
@@ -156,10 +157,6 @@ public class DecathlonCalculator {
 				stage = OUTPUT_METHOD;
 			}
 			else if (stage == INPUT_INTEGER) {
-				//char first_letter;
-
-				// first_letter = s.charAt(0);
-				// input_num = first_letter - 48;
 				input_string = s;
 				stage = OUTPUT_METHOD;
 			}
@@ -186,10 +183,6 @@ public class DecathlonCalculator {
 				stage = PARSE_FINISHED;
 			}
 		}
-
-		// DEBUG output
-		// System.out.println("Input route = " + input_route);
-		// System.out.println("Output route = " + output_route);
 
 		return_value = input_route + " " + output_route + " " + input_method + " " + output_method + " " + input_string;
 

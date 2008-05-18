@@ -55,7 +55,7 @@ public class CountAthletResult {
 	public static double CountResultByID(Map<Integer, String[]> result_map3, double athlete_id, double competition_id) {
 		double[] buf = new double[20];
 		String str_buf[] = new String[100]; // buffer for reading from
-											// result_map
+		// result_map
 		double result = 0;
 
 		for (int j = 0; j < result_map3.size(); j++) {
@@ -73,7 +73,7 @@ public class CountAthletResult {
 				return result;
 			}
 		}
-		
+
 		return -1;
 	}
 }
