@@ -13,14 +13,20 @@ import java.util.List;
  * DataFromCsv
  *
  * @author 011861
- * @param Input parameter is CSV data file!
- * @return getData() returns List<String[]> array , which consists of all data from CSV file!
  */
+
 public class DataFromCsv {
 	List<String[]> athletesData = new ArrayList<String[]>();
+	/**
+	 * @return List<String[]> array, which consists of all data from CSV file!
+	 */
 	public List<String[]> getData() {
 		return athletesData;
 	}
+	/**
+	 * Read data from CSV file and put results in List array.
+	 * @param CSV data file name!
+	 */
 	public DataFromCsv(File input) throws Exception{
 		BufferedReader reader = null;
 		String member = "";
@@ -44,12 +50,12 @@ public class DataFromCsv {
 			reader.close();
 		} 
 		catch (FileNotFoundException e) 
-			{
-				System.out.println("File " + input + " not found! \n" + e);
-			} 
+		{
+			System.out.println("File " + input + " not found! \n" + e);
+		} 
 		catch (IOException e) 
-				{
-					System.out.println("Problem with reading from " + input + "file!\\n" + e);
-				}
+		{
+			System.out.println("Problem with reading from " + input + "file!\\n" + e);
+		}
 	}
 }

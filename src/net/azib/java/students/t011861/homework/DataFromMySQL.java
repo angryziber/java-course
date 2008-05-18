@@ -13,18 +13,23 @@ import java.util.List;
  * DataFromMySQL
  *
  * @author t011861
- * @param Input parameter is competitions id!
- * @return getData() returns List<String[]> array , which consists of data from MySql database!
  */
 
 public class DataFromMySQL {
 	List<String[]> athletesData = new LinkedList<String[]>();
 	private int columns = 0;
+	/**
+	 * @return List<String[]> array , which consists of data from MySql database!
+	 */
 	public List<String[]> getData() {
 		return athletesData;
 	}
 	private Connection connect = null;
 	private ResultSet resultSet = null;
+	/**
+	 * Creates connection with database to ask data. All data will be put in List array.
+	 * @param Input is competitions id according to MySql database (compId).
+	 */
 	public DataFromMySQL(String compId) throws Exception 
 	{
 		try {
@@ -39,39 +44,37 @@ public class DataFromMySQL {
 			resultSet = statement.executeQuery();
 			ResultSetMetaData rsmd = resultSet.getMetaData(); 
 			columns = rsmd.getColumnCount();
-			
 			List<String> athleteData = new LinkedList<String>();
 				while(resultSet.next())
-					{ 	
-						for (int i = 1; i < columns+1; i++ ) 
-						{
-							athleteData.add(resultSet.getString(i));
-						}
-							athletesData.add((String[]) athleteData.toArray(new String[athleteData.size()]));
-								athleteData.clear();		
+				{ 	
+					for (int i = 1; i < columns+1; i++ ) 
+					{
+						athleteData.add(resultSet.getString(i));
 					}
+						athletesData.add((String[]) athleteData.toArray(new String[athleteData.size()]));
+							athleteData.clear();		
+				}
 				statement.close();
-			} 
+		} 
 		catch (ClassNotFoundException e) 
-			{
-				System.out.println("Can not find database driver! " + e);
-			} 
+		{
+			System.out.println("Can not find database driver! " + e);
+		} 
 		catch (SQLException e) 
-			{
-				System.out.println("Database access failed! " + e);
-			}
+		{
+			System.out.println("Database access failed! " + e);
+		}
 		finally 
-			{
-				try 
-					{
-						resultSet.close();
-						connect.close();
-						System.out.println("Database connection closed");
-					} 
+		{
+			try {
+				resultSet.close();
+				connect.close();
+				System.out.println("Database connection closed");
+				} 
 				catch (SQLException e) 
-					{
-						System.out.println("Failed to close database connection! " + e);
-					}
-			}
+				{
+					System.out.println("Failed to close database connection! " + e);
+				}
+		}
 	}
 }

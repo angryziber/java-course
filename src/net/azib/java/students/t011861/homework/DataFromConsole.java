@@ -9,10 +9,7 @@ import java.util.List;
 /**
  * DataInputModule
  *
- * Ask data from human using console interface!
  * @author 011861
- * @param This class and his constructor don't need any input parameters!
- * @return getData() returns List<String[]> array , which consists of all asked data!
  */
 
 public class DataFromConsole {
@@ -20,10 +17,15 @@ public class DataFromConsole {
 	private static final String[] sportsArts = {"100 m (sec)", "long jump (m)", "shot put (m)", "high jump (m)", "400 m (sec)",
 		"110 m hurdles (sec)", "discus throw (m)", "pole vault (m)", "javelin throw (m)",
 		"1500 m (sec)"};
+   /**
+	* @return List<String[]> array , which consists of all asked data!
+	*/
 	public List<String[]> getData() {
 		return athletesDatas;
 	}
-	
+   /**
+	* Ask data from human using console interface!
+	*/
 	public DataFromConsole() throws Exception{
 		BufferedReader in = null;
 		List<String> athleteData = new ArrayList<String>();
@@ -75,9 +77,10 @@ public class DataFromConsole {
 								break;
 							}
 					}
-			} catch (IOException e) 
-				{
-					System.out.println("Problems with reading from the console!");
-				}
+			} 
+			catch (IOException e) 
+			{
+				System.out.println("Problems with reading from the console!");
+			}
 	}
 }

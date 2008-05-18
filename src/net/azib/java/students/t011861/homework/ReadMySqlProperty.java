@@ -2,9 +2,10 @@ package net.azib.java.students.t011861.homework;
 
 import java.io.*;
 import java.util.*;
+
 /**
  * ReadMySqlProperty
- * 
+ * Class is responsible for to import data from db.properties files.
  * @author 011861
  */
 
@@ -14,31 +15,41 @@ public class ReadMySqlProperty {
 	private String driver = "";
 	private String user = "";
 	private String passwd = "";
-	
-	//Return URL from mysql.properties file for creating database connection
+	/**
+	 * Return URL from db.properties file for creating database connection 
+	 * @return url string
+	 */
 	public String getUrl() 
 		{
 			return url;
 		}
-	//Return Driver from mysql.properties file for creating database connection
+	/**
+	 * Return driver from db.properties file for creating database connection 
+	 * @return driver string
+	 */
 	public String getDriver() 
 	{
 		return driver;
 	}
-	//Return Username from mysql.properties file for creating database connection
+	/**
+	 * Return username from db.properties file for creating database connection 
+	 * @return username string
+	 */
 	public String getUser() 
 	{
 		return user;
 	}
-	//Return Password from mysql.properties file for creating database connection
+	/**
+	 * Return password from db.properties file for creating database connection 
+	 * @return password string
+	 */
 	public String getPasswd() 
 	{
 		return passwd;
 	}
 	
 	public ReadMySqlProperty(){
-    try
-    {
+    try {
     	Properties properties = new Properties();
         FileInputStream inputFile = new FileInputStream(f);
         properties.load(inputFile);

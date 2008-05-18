@@ -8,32 +8,35 @@ import java.lang.Math;
  * CalculatePoints
  *
  * @author t011861
- * @param Input parameter for processResults function: List<String[]> It consists of data which comes from input 
- * modules (DataFromConsole, DataFromCsv and DataFromMySQL)! Input data has the same 
- * format and structure in every circumstances! It doesn't depend on input module!
- * @return Only one public function "processResults" returns Double ArrayList (List<Double[]>).
- * It only consists of all points separately and total points!  
  */
 
 public class CalculatePoints {
-
 	List<Double[]> CalculatedPoints = new ArrayList<Double[]>();
-	//Calculate all the points and put them into array and return this array!
+	/**
+	 * Gets results and calculates all the points of sports events, including total points
+	 * and puts them into array and return this.
+	 * @param List<String[]> It consists of data which comes from input 
+	 * modules (DataFromConsole, DataFromCsv and DataFromMySQL)! Input data has the same
+	 * format and structure in every circumstances! It doesn't depend on input module.
+	 * @return Double ArrayList (List<Double[]>). It only consists of all points separately 
+	 * and total points.
+	 */
 	public List<Double[]> processResults(List<String[]> allAthletes) throws Exception
 	{
 		List<? super Double> resultsPerAthlete = null;
 		resultsPerAthlete = new ArrayList<Double>();
-		for (String[] singleAthlete : allAthletes) {
+		for (String[] singleAthlete : allAthletes) 
+		{
 			int columnCount = singleAthlete.length;
 			double totalPoints = 0;
 			for (int i = 3; i<columnCount; i++) 
-				{	
-					double athleteResult = Double.valueOf(singleAthlete[i].trim()).doubleValue();
-					double points = calculatePoints(athleteResult, i);
-					Long roundedPoints = Math.round(points);
-					resultsPerAthlete.add(roundedPoints.doubleValue());
-					totalPoints = totalPoints + roundedPoints; 
-				}
+			{	
+				double athleteResult = Double.valueOf(singleAthlete[i].trim()).doubleValue();
+				double points = calculatePoints(athleteResult, i);
+				Long roundedPoints = Math.round(points);
+				resultsPerAthlete.add(roundedPoints.doubleValue());
+				totalPoints = totalPoints + roundedPoints; 
+			}
 			resultsPerAthlete.add(totalPoints);
 			CalculatedPoints.add((Double[]) resultsPerAthlete.toArray(new Double[resultsPerAthlete.size()]));
 			resultsPerAthlete.clear();
@@ -41,8 +44,10 @@ public class CalculatePoints {
 		return CalculatedPoints;
 	}
 	//Function which calculates the points of every sports events!  
-	private double calculatePoints(Double result, int j) {
-		switch (j) {
+	private double calculatePoints(Double result, int j) 
+	{
+		switch (j) 
+		{
 		// 100 m points (second)
 		case 3: return (25.437*Math.pow(18 - result, 1.81));
 		// long jump points (centimeter)

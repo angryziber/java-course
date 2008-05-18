@@ -13,26 +13,41 @@ import org.dom4j.io.XMLWriter;
 /**
  * WriteIntoFile
  *
- * @author 011861
- * @param Input parameters are output filename and data document!
- * @return Result is generated file file! This class is used by OutDataToHtml and OutDataToXml modules!
+ * @author 011861 
  */
+
 public class WriteIntoFile {
+	/**
+	 * This class is responsible for generating output file.
+	 * This class is used by OutDataToHtml and OutDataToXml modules!
+	 * @param output filename
+	 * @param data document
+	 */
 	public void writeIntoFile(File output, Document document) {
         XMLWriter writer = null;
 		try {
 			writer = new XMLWriter(new OutputStreamWriter(new FileOutputStream(output), "UTF-8"));
 			writer.write(document);
-		} catch (UnsupportedEncodingException e) {
+		} 
+		catch (UnsupportedEncodingException e) 
+		{
 			System.out.println("Unsupported encoding" + e);
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) 
+		{
 			System.out.println(output + " file not found!");
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			System.out.println("Writing into " + output + " file failed!");
-		} finally {
+		} 
+		finally 
+		{
 			try {
 				writer.close();
-			} catch (IOException e1) {
+			} 
+			catch (IOException e1) 
+			{
 				System.out.println("Problem with closing " + output + " file");
 			}
 		}

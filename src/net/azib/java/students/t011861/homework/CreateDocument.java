@@ -10,18 +10,20 @@ import org.dom4j.Element;
  * CreateDocument
  *
  * @author 011861
- * @param Input parameter for createDocument: List<String[]> It consists of data which comes 
- * from module of ProcessedData! There are all needed data we need to send to output!
- * @return Only one public function "createDocument" returns document which has type of Document!
- * This class is necessary to generate XML and HTML output files!
  */
 
 public class CreateDocument {
-	//This function is responsible for creating XML tree!
+    /**This function is responsible for creating XML tree.
+     * It is necessary to generate XML and HTML output files.
+	 * @param List<String[]> It consists of data which comes 
+	 * from module of ProcessedData! There are all needed data we need to send to output.
+	 * @return Function returns document which has type of Document!
+	 */
 	public Document createDocument(List<String[]> completeData) {
 		Document document = DocumentHelper.createDocument();
 		Element root = document.addElement("athletes");
-		for (String[] athleteData : completeData) {
+		for (String[] athleteData : completeData) 
+		{
 			Element athlete = root.addElement("athlete");
 			@SuppressWarnings("unused")
 			Element name = athlete.addElement("name").addText(athleteData[0]);
@@ -31,7 +33,8 @@ public class CreateDocument {
 			Element country = athlete.addElement("country").addText(athleteData[2]);
 			Element scores = athlete.addElement("results");
 			int noComma = athleteData.length-3;
-			for (int i = 3; i < (athleteData.length - 2); i++) {
+			for (int i = 3; i < (athleteData.length - 2); i++) 
+			{
 				if (i != noComma)
 				{
 					@SuppressWarnings("unused")

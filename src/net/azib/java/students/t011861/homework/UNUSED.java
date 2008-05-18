@@ -12,10 +12,11 @@ import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
- * UNUSED
+ * UNUSED CLASS IN THIS APPLICATION (JUST FOR TESTING DIFFERENT POSSIBILITIES)
  *
  * @author 011861
  */
+
 public class UNUSED {
 		private static final String[] sports = { "name", "date_of_birth",
 			"country", "Results:","100 m", "long jump", "shot put", "high jump", "400 m",
@@ -23,8 +24,7 @@ public class UNUSED {
 			"1500 m", "score", "place" };
 		public void generateWithSAX(String filename, List<String[]> finalData)
 		  {
-		    try
-		    {
+		    try {
 		      FileOutputStream fos = new FileOutputStream(filename);
 		      OutputFormat of = new OutputFormat("XML","UTF-8",true);
 		      of.setIndent(1);
@@ -69,13 +69,14 @@ public class UNUSED {
 		      hd.endDocument();
 		      fos.close();
 		      
-		    } catch (SAXException se)
-		      {
-		        se.printStackTrace();
-		      }
-		      catch (IOException ioe)
-		      {
-		        ioe.printStackTrace();
-		      }
+		    } 
+		    catch (SAXException se)
+		    {
+		    	se.printStackTrace();
+		    }
+		    catch (IOException ioe)
+		    {
+		    	ioe.printStackTrace();
+		    }
 		  }
 }

@@ -17,12 +17,15 @@ import org.dom4j.io.DocumentSource;
  * OutDataToHtml
  *
  * @author 011861
- * @param Input parameters are output filename and data from ProcessedData module! !
- * @return Result is generated HTML file in projects root directory
  */
+
 public class OutDataToHtml {
-public void showInHtmlFile(File output, List<String[]> completeData) {
-		
+	/**
+	 * Result is generated HTML file in projects root directory.
+	 * @param Output filename.
+	 * @param Data from ProcessedData module.
+	 */
+	public void showInHtmlFile(File output, List<String[]> completeData) {		
 		CreateDocument newDoc = new CreateDocument();
 		Document doc = newDoc.createDocument(completeData);
 		//Load the transformer using JAXP
@@ -34,9 +37,13 @@ public void showInHtmlFile(File output, List<String[]> completeData) {
 			DocumentSource source = new DocumentSource(doc);
 			result = new DocumentResult();
 			transformer.transform(source, result);
-		} catch (TransformerConfigurationException e) {
+		} 
+		catch (TransformerConfigurationException e) 
+		{
 			System.out.println("Problem with configuring stylesheet file! " + e);
-		} catch (TransformerException e) {
+		} 
+		catch (TransformerException e) 
+		{
 			System.out.println("Problem with transforming new html document! " + e);
 		}
 		//Return the transformed document

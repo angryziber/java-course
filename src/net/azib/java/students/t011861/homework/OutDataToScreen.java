@@ -6,11 +6,14 @@ import java.util.List;
 /**
  * OutDataToScreen
  *
- * This class is used to browse data on console!
  * @author 011861
- * @param Input parameter is List array with data from ProcessedData module! !
  */
+
 public class OutDataToScreen {
+	/**
+	 * Get final data and browses it on console
+	 * @param List array with data from ProcessedData module.
+	 */
 	public void printToConsole(List<String[]> completeData) {
 		List<? super String> printLine = null;
 		printLine = new ArrayList<String>();

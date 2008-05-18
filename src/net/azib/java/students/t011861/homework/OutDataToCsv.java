@@ -6,18 +6,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
+
 /**
  * OutDataToCsv
  *
  * @author 011861
- * @param Input parameters are output filename and data from ProcessedData module!
- * @return Result is generated CSV file in projects root directory
  */
+
 public class OutDataToCsv {
+	/**
+	 * Writes processed data to the CSV file.
+	 * Generated CSV file will be in projects root directory.
+	 * @param Output filename.
+	 * @param Data from ProcessedData module.
+	 */
 	public void showInCsvFile(File output, List<String[]> completeData) {
 		BufferedWriter writer = null;
-		try 
-		{
+		try {
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(output), "UTF-8"));
 			for (String[] athleteData : completeData) 
 			{
@@ -31,19 +36,20 @@ public class OutDataToCsv {
 				}
 				writer.write(System.getProperty("line.separator"));
 			}	
-		} catch (IOException e) 
+		} 
+		catch (IOException e) 
 		{
 			System.out.println("Can not find the file " + output.toString());
 		}
 		finally 
 		{
-			try 
-			{
-				writer.close();
-			} catch (IOException e) 
+			try {
+					writer.close();
+				} 
+				catch (IOException e) 
 			  	{
-				  System.out.println("Problem with closing " + output + " file");
-			  	}
-		  	}
+					System.out.println("Problem with closing " + output + " file");
+			  	}	
+		}
 	}
 }

@@ -14,10 +14,21 @@ public class DecathlonCalculator {
 	static CalculatePoints calculatedResults = new CalculatePoints();
 	//Create object which is responsible for making final data
 	static ProcessedData finalData = new ProcessedData();
-	
+	/**
+	 * Main function needs parameters and input parameters must me before output parameters!
+	 * Input methods:
+	 * –console <no parameters>
+	 * –csv <csv filename (location: Eclipse projects root directory of the workspace)>
+	 * –db <id of competition (depends on database)>
+	 * Output methods:
+	 * –console <no parameters>
+	 * –csv <csv filename (generated automatically to Eclipse projects root directory of the workspace)>
+	 * –xml <xml filename (generated automatically to Eclipse projects root directory of the workspace)>
+	 * –html <html filename (generated automatically to Eclipse projects root directory of the workspace)>
+	 * @param args
+	 */
 	public static void main(String[] args) {	
-		try 
-		{
+		try {
 			if (args[0].equals("-console"))
 			{
 				DataFromConsole consoleInput = new DataFromConsole();

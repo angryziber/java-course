@@ -7,20 +7,23 @@ import java.util.List;
  * ProcessedData
  *
  * @author 011861
- * @param Input parameter for completeData: 1. List<String[]> It consists of data which comes from input 
- * modules (DataFromConsole, DataFromCsv and DataFromMySQL)! Input data has the same 
- * format and structure in every circumstances! It doesn't depend on input module! 
- * 2. List<Double[]> It consists of data which comes from module of CalculatePoints!
- * @return Only one public function "completeData" returns List<String[]> which consists of 
- * all original data, points and place label!
  */
 
 public class ProcessedData {
 	List<String[]> completeData = new ArrayList<String[]>();
+	/**
+	 * Gets calculated points, sorts results, gives final data and places in order
+	 * Create final List array with all needed data.
+	 * @param List<String[]> It consists of data which comes from input
+	 * modules (DataFromConsole, DataFromCsv and DataFromMySQL)! Input data has the same
+	 * format and structure in every circumstances! It doesn't depend on input module.
+	 * @param List<Double[]> It consists of data which comes from module of CalculatePoints.
+	 * @return returns List<String[]> which consists of all original data, points 
+	 * and place label.
+	 */
 	public List<String[]> getFinalData(List<String[]> athletes,List<Double[]> points) throws Exception
 	{
-		try
-		{
+		try{
 		int rows = points.size(); //Find the sum of all rows (results and athletes are the same!)	
 		List<? super Double> onlyPoints = null;
 		onlyPoints = new ArrayList<Double>();
