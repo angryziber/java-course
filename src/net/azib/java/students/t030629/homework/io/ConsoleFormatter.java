@@ -69,7 +69,7 @@ public class ConsoleFormatter implements OrderedAthleteFormatter {
      * @see net.azib.java.students.t030629.homework.io.OrderedAthleteFormatter
      */
     public String formatBirthday(Date date) {
-        return DATE_OF_BIRTH_PREFIX + new SimpleDateFormat(System.getProperty(DecathlonCalculator.DATE_PATTERN)).format(date);
+        return DATE_OF_BIRTH_PREFIX + new SimpleDateFormat(System.getProperty(DecathlonCalculator.DATE_PATTERN_KEY)).format(date);
     }
 
     /**

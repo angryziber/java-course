@@ -40,7 +40,7 @@ public class StringParser {
      * @throws ParseException if {@link java.text.SimpleDateFormat} throws it
      */
     public static Date parseBirthday(String dateAsString) throws ParseException {
-        return new SimpleDateFormat(System.getProperty(DecathlonCalculator.DATE_PATTERN)).parse(dateAsString);
+        return new SimpleDateFormat(System.getProperty(DecathlonCalculator.DATE_PATTERN_KEY)).parse(dateAsString);
     }
 
     /**

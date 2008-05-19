@@ -51,7 +51,7 @@ public class CSVFormatter implements OrderedAthleteFormatter {
      * @see net.azib.java.students.t030629.homework.io.OrderedAthleteFormatter
      */
     public String formatBirthday(Date date) {
-        return new SimpleDateFormat(System.getProperty(DecathlonCalculator.DATE_PATTERN)).format(date);
+        return new SimpleDateFormat(System.getProperty(DecathlonCalculator.DATE_PATTERN_KEY)).format(date);
     }
 
     /**

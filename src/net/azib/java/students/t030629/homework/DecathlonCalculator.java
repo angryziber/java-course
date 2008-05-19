@@ -26,7 +26,9 @@ import java.util.logging.Level;
 public class DecathlonCalculator {
     private static final Logger LOG = Logger.getLogger(DecathlonCalculator.class.getName());
     public static final String ENCODING_KEY = DecathlonCalculator.class.getName() + ".encoding";
-    public static final String DATE_PATTERN = DecathlonCalculator.class.getName() + ".datePattern";
+    public static final String DATE_PATTERN_KEY = DecathlonCalculator.class.getName() + ".datePattern";
+    static final String DEFAULT_ENCODING = "UTF-8";
+    static final String DEFAULT_DATE_PATTERN = "d.MM.yyyy";
 
     private Arguments arguments;
     private final OutputStream errorStream;
@@ -141,8 +143,8 @@ public class DecathlonCalculator {
     }
 
     public static void initProperties() {
-        System.setProperty(ENCODING_KEY, "UTF-8");
-        System.setProperty(DATE_PATTERN, "d.MM.yyyy");
+        System.setProperty(ENCODING_KEY, DEFAULT_ENCODING);
+        System.setProperty(DATE_PATTERN_KEY, DEFAULT_DATE_PATTERN);
     }
 
     private void showErrorAndExit(LoggingException e) {
