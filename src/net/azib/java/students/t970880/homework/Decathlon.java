@@ -101,7 +101,7 @@ class MinSecResultForamtter implements ResultFormatter {
 	}
 	public String format(float p) {
 		int min = (int) (p / 60);
-		return min + ":" + (p % 60);
+		return min + ":" + Decathlon.decimalFormat.format(p % 60);
 	}
 }
 
@@ -190,7 +190,8 @@ public class Decathlon {
 		return total;
 	}
 	
-	static DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
+	static DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, new Locale("FI"));//"ET"));
+	static DecimalFormat decimalFormat = new DecimalFormat("0.##", new DecimalFormatSymbols(new Locale("EN")));
 	
 	/** Creates a decathlon record. The name is expected in double quotes. */
 	static void fromCsv(String csv) throws java.text.ParseException {
@@ -259,8 +260,7 @@ public class Decathlon {
 			printUsage();
 		}
 
-		// Now, there is two parameters. One is input method, anther -- 
-		// optional input argument.
+		// Now, there is two parameters at least. One is input method, anther is its optional input argument.
 				
 		// We have the Input and Output methods
 		class MethodGroup {
@@ -359,30 +359,21 @@ public class Decathlon {
 								// read competition results
 								PreparedStatement statement = conn.prepareStatement(
 									"SELECT athletes.name, athletes.dob, athletes.country_code, results.race_100m, results.long_jump, results.shot_put, results.high_jump, results.race_400m, results.hurdles_110m, results.discus_throw, results.pole_vault, results.javelin_throw, results.race_1500m"
-										+ " FROM athletes "
-											+ "RIGHT JOIN results ON athletes.id=results.athlete_id "
+										+ " FROM results "
+											+ "RIGHT JOIN athletes ON athletes.id=results.athlete_id "
 											+ "WHERE results.competition_id = ?");
 								statement.setInt(1, Integer.parseInt(argument));
 								ResultSet rs = statement.executeQuery();
 								while (rs.next()) {
 									
-// 									Decathlon d = new Decathlon();
-// 									d.name = rs.getString(1); 
-// 									d.birthdy = rs.getDate(2); 
-// 									d.country = rs.getString(3); 
-// 									for (int i = 0, j = 4 ; i != 10 ; i++, j++)
-// 										d.ps[i] = rs.getFloat(j);
-// 									list.add(d);
-
 									// We can receive the fields into a csv and parse as usually
-									StringBuffer csv = new StringBuffer(Q + rs.getObject(1) + Q);
-									for (int i = 1, j = 2 ; i != 12 ; i++, j++ )
+									StringBuffer csv = new StringBuffer(Q + rs.getString(1) + Q);
+									csv.append("," + dateFormat.format(rs.getDate(2)));
+									for (int i = 1, j = 3 ; i != 12 ; i++, j++ )
 										csv.append("," + rs.getObject(j));
 									
-									fromCsv(csv.toString()); // instatntiate a decathlon
+									fromCsv(csv.toString()); // instatntiate the decathlon
 								}
-								
-								// Obtain user data
 								
 							} finally {
 								conn.close(); // Unfortunately, connection is not closable
@@ -402,14 +393,10 @@ public class Decathlon {
  								log(d.toCsv());
  							}
 // 							BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out/*, "Cp866"*/)); // Cp855//, Cp866 "UTF-8")); //Cp1251
-// 							try {
 // 								for (Decathlon d : list) {
-// 									w.write(d.toCsv());
-// 									w.newLine();
+// 									w.write(d.toCsv()); w.newLine();
 // 								}
-// 							} finally {
-// 								Utils.close(w);
-// 							} 
+// 								w.close();
 						}
 					},
 					new Method("csv") {
@@ -473,7 +460,7 @@ public class Decathlon {
 	
 // 		String chineseString = "\u4e00\u4e01\u4e02\u4e03\u4304";
 // 		(new PrintStream(System.out, true, "UTF-8")).println(chineseString);
-		
+		//log(dateFormat.format(new java.util.Date()));
 		log("Done");	
 	}
 }
