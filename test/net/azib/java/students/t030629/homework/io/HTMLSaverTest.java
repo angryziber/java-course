@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.Before;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 
@@ -14,6 +15,7 @@ import net.azib.java.students.t030629.homework.AthleteCreatorTestHelper;
 import net.azib.java.students.t030629.homework.DecathlonCalculator;
 
 import javax.xml.parsers.ParserConfigurationException;
+import static junit.framework.Assert.*;
 
 /**
  * <br><br>User: Anton Chepurov
@@ -26,30 +28,30 @@ public class HTMLSaverTest {
         DecathlonCalculator.initProperties();
     }
 
-    private OrderedAthlete orderedAthlete;
     private OrderedAthlete[] orderedAthletes;
 
     @Before
     public void createOrderedAthletes() throws ParserConfigurationException {
         Athlete[] athletes = AthleteCreatorTestHelper.createAthletes(0, 1);
-        this.orderedAthlete = new OrderedAthleteWrapper().wrap(athletes[0])[0];
         DecathlonCalculator.sortAthletesByResult(Arrays.asList(athletes));
         this.orderedAthletes = new OrderedAthleteWrapper().wrap(athletes);
-
     }
 
 
     @Test
-    public void test() throws URISyntaxException {
-        File parent = new File(getClass().getResource(".").toURI());
+    public void test() throws URISyntaxException, IOException {
+        File htmlFile = null;
+        try {
+            htmlFile = File.createTempFile("DecathlonXML", ".html");
 
-/*
-        Athlete[] unsortedAthletes = AthleteCreatorTestHelper.createAthletes(0, 1, 0);
-        DecathlonCalculator.sortAthletesByResult(Arrays.asList(unsortedAthletes));
-        this.orderedAthletes = new OrderedAthleteWrapper().wrap(unsortedAthletes);
-*/
+            new HTMLSaver(htmlFile).save(orderedAthletes);
 
-        new HTMLSaver(new File(parent, "HTMLresults.html")).save(orderedAthletes);
+            assertTrue(htmlFile.length() > 0);
+        } finally {
+            if (htmlFile != null) {
+                htmlFile.delete();
+            }
+        }
     }
 
 }

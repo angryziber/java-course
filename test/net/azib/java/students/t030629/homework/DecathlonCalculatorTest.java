@@ -1,7 +1,6 @@
 package net.azib.java.students.t030629.homework;
 
 import org.junit.Test;
-import org.junit.Before;
 import static junit.framework.Assert.*;
 
 import java.io.IOException;
@@ -19,22 +18,13 @@ import net.azib.java.students.t030629.homework.base.Athlete;
  */
 public class DecathlonCalculatorTest {
 
-    @Before
-    public void initProperties() {
-        DecathlonCalculator.initProperties();
-    }
-
     @Test
-    public void validInputParamsConsole(){
-        String[] args = null;
-
-        /* Console */
-//        ByteArrayOutputStream out = new ByteArrayOutputStream();
-//        new DecathlonCalculator(out, args);
-        
-
-        /* CSV */
-        /* DB */
+    public void testInitProperties() {
+        DecathlonCalculator.initProperties();
+        assertNotNull(System.getProperty(DecathlonCalculator.ENCODING_KEY));
+        assertNotNull(System.getProperty(DecathlonCalculator.DATE_PATTERN_KEY));
+        assertEquals(DecathlonCalculator.DEFAULT_ENCODING, System.getProperty(DecathlonCalculator.ENCODING_KEY));
+        assertEquals(DecathlonCalculator.DEFAULT_DATE_PATTERN, System.getProperty(DecathlonCalculator.DATE_PATTERN_KEY));
     }
 
     @Test

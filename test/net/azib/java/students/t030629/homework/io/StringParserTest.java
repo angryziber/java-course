@@ -37,7 +37,7 @@ public class StringParserTest {
     public void testBirthdayParsing() throws ParseException {
         String dateAsString = "29.02.2008";
         Date date = StringParser.parseBirthday(dateAsString);
-        assertEquals(dateAsString, new SimpleDateFormat(System.getProperty(DecathlonCalculator.DATE_PATTERN)).format(date));
+        assertEquals(dateAsString, new SimpleDateFormat(System.getProperty(DecathlonCalculator.DATE_PATTERN_KEY)).format(date));
     }
 
     @Test
