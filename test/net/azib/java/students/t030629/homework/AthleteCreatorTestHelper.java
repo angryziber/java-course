@@ -1,4 +1,4 @@
-﻿package net.azib.java.students.t030629.homework;
+package net.azib.java.students.t030629.homework;
 
 import net.azib.java.students.t030629.homework.base.Athlete;
 import net.azib.java.students.t030629.homework.io.CSVLoader;
