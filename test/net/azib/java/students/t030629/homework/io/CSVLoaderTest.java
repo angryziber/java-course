@@ -26,7 +26,7 @@ public class CSVLoaderTest {
     }
 
     @Test (expected = LoggingException.class)
-    public void incompleteAthleteDataRejected() throws IOException, ParseException {
+    public void incompleteAthleteDataRejected() throws IOException {
         String incompleteAthleteData = AthleteCreatorTestHelper.createAthleteData(1)[0];
         incompleteAthleteData = incompleteAthleteData.substring(0, incompleteAthleteData.lastIndexOf(","));
         File sourceFile = null;
