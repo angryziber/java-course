@@ -19,7 +19,7 @@ import net.azib.java.students.t030629.homework.DecathlonCalculator;
  * <br>Date: 14.05.2008
  * <br>Time: 13:04:08
  */
-public class ConsoleFormatterTest implements FormatterTestInterface {
+public class ConsoleFormatterTest extends AbstractFormatterTest {
     private OrderedAthleteFormatter formatter = new ConsoleFormatter();
     private static final String LN = System.getProperty("line.separator");
 
