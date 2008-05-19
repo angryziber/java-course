@@ -121,7 +121,7 @@ public class ConsoleFormatterTest extends AbstractFormatterTest {
 
         sb.append("########################").append(LN);
         sb.append("Place: 2nd (3100)").append(LN);
-        sb.append("Name: ������� ������, Date of birth: 21.10.1980, Country: Ukraine").append(LN);
+        sb.append("Name: Василий Пупкин, Date of birth: 21.10.1980, Country: Ukraine").append(LN);
         sb.append("#1: 100 m sprint >> 13.43 (sec) <<").append(LN);
         sb.append("#2: Long jump >> 4.35 (m) <<").append(LN);
         sb.append("#3: Shot put >> 8.64 (m) <<").append(LN);

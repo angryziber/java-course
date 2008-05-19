@@ -65,7 +65,7 @@ public class CSVLoaderTest {
             assertEquals(athleteData.length, athletes.size());
             assertEquals("Siim Susi", athletes.get(0).getName());
             assertEquals("Sz?r?s Sz?k", athletes.get(1).getName());
-            assertEquals("Василий Пупкин", athletes.get(2).getName());
+            assertEquals("Р’Р°СЃРёР»РёР№ РџСѓРїРєРёРЅ", athletes.get(2).getName());
         } finally {
             if (sourceFile != null) {
                 sourceFile.delete();
@@ -78,7 +78,7 @@ public class CSVLoaderTest {
      * Helper method for writing specified strings to temporary file.
      * @param stringsToWrite lines to be written
      * @return temporary file the strings have been written to
-     * @throws IOException if IO error occurrs while writing to file
+     * @throws IOException if IO error occurs while writing to file
      */
     private File writeStringToTempFile(String... stringsToWrite) throws IOException {
         OutputStreamWriter writer = null;
