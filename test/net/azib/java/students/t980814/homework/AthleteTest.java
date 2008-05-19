@@ -45,10 +45,11 @@ public class AthleteTest {
 	}
 
 	@Test
-	public void testAthleteConstructorDB() {
+	public void testAthleteConstructorDB() throws SQLException {
 		boolean exceptionWasThrown = false;
+		Connection conn = null;
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
+			conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
 			Statement stmt = conn.createStatement();
 			stmt.execute("create table athletes (id integer, name varchar, dob date, country_code varchar)");
 			stmt.execute("insert into athletes values (1, 'John Doe', '1970-02-03', 'EE')");
@@ -76,6 +77,10 @@ public class AthleteTest {
 		}
 		catch (ParseException e) {
 			e.printStackTrace();
+		}
+		finally {
+			if (conn != null)
+				conn.close();
 		}
 		assertEquals("Unexpected exception was thrown when creating Athlete", false, exceptionWasThrown);
 	}

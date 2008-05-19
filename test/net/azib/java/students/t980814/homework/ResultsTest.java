@@ -75,10 +75,11 @@ public class ResultsTest {
 	}
 	
 	@Test
-	public void testResultsConstructorDB() {
+	public void testResultsConstructorDB() throws SQLException {
 		boolean exceptionWasThrown = false;
+		Connection conn = null;
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
+			conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
 			Statement stmt = conn.createStatement();
 			stmt.execute("create table results (id integer, athlete_id integer, competition_id integer, " +
 					     "race_100m float, long_jump float, shot_put float, high_jump float, race_400m float," +
@@ -98,6 +99,10 @@ public class ResultsTest {
 		catch (DecaCalcException e) {
 			exceptionWasThrown = true;
 			e.printStackTrace();
+		}
+		finally {
+			if (conn != null)
+				conn.close();
 		}
 		assertEquals("Unexpected exception was thrown when creating Results", false, exceptionWasThrown);		
 	}
