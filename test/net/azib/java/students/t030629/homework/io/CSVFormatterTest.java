@@ -21,7 +21,7 @@ import net.azib.java.students.t030629.homework.DecathlonCalculator;
  * <br>Date: 13.05.2008
  * <br>Time: 23:33:45
  */
-public class CSVFormatterTest implements FormatterTest {
+public class CSVFormatterTest implements FormatterTestInterface {
     private OrderedAthleteFormatter formatter = new CSVFormatter();
 
 

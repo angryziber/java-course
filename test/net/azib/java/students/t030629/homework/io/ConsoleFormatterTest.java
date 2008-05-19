@@ -19,7 +19,7 @@ import net.azib.java.students.t030629.homework.DecathlonCalculator;
  * <br>Date: 14.05.2008
  * <br>Time: 13:04:08
  */
-public class ConsoleFormatterTest implements FormatterTest {
+public class ConsoleFormatterTest implements FormatterTestInterface {
     private OrderedAthleteFormatter formatter = new ConsoleFormatter();
     private static final String LN = System.getProperty("line.separator");
 
@@ -121,7 +121,7 @@ public class ConsoleFormatterTest implements FormatterTest {
 
         sb.append("########################").append(LN);
         sb.append("Place: 2nd (3100)").append(LN);
-        sb.append("Name: Василий Пупкин, Date of birth: 21.10.1980, Country: Ukraine").append(LN);
+        sb.append("Name: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, Date of birth: 21.10.1980, Country: Ukraine").append(LN);
         sb.append("#1: 100 m sprint >> 13.43 (sec) <<").append(LN);
         sb.append("#2: Long jump >> 4.35 (m) <<").append(LN);
         sb.append("#3: Shot put >> 8.64 (m) <<").append(LN);

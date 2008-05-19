@@ -12,7 +12,7 @@ import net.azib.java.students.t030629.homework.base.utils.AthleteBuilder;
  * <br>Date: 14.05.2008
  * <br>Time: 13:06:08
  */
-public interface FormatterTest {
+public interface FormatterTestInterface {
     @Test
     void correctNameFormatting();
 
