@@ -1,10 +1,18 @@
 package net.azib.java.students.t970880.homework;
+
 import java.util.*;
 import java.text.*;
 import java.io.*;
 import java.sql.*;
-import javax.xml.transform.*;
-import javax.xml.transform.stream.*;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**Mimics the C#'s using-construction. */
 abstract class Using<T extends Closeable> {
@@ -220,68 +228,27 @@ public class Decathlon {
 		System.exit(1);
 	}
 	
-	// Used by -xml and -html outputs
-	static String createXml() {
+	/**Creates XML and transforms it into a file.*/
+	static void createXml(Transformer transformer, String file) throws Exception {
 		
-		final StringBuffer sb = new StringBuffer();
-		
-		class Element {
-			
-			String name;
-			String[][] attributes;
-			Object children; // can be either text or Element[]
-			Element(String name, String[][] attributes, Object children) {
-				this.name = name;
-				this.attributes = attributes;
-				this.children = children;
-			}
-			
-			void write(StringBuffer ident) {
-				sb.append(ident + "<" + name);	// write element tag
-				for (String[] nameval : attributes)	// and attributes
-					sb.append(" " + nameval[0] + "=" + Q + nameval[1] + Q);
-				if (children instanceof String)
-					sb.append(">" + (String)children);
-				else {
-					sb.append(">\n");
-					ident.append("\t");	// indent
-					for (Element child : (Element[])children)	// and children
-						child.write(ident);
-					ident.setLength(ident.length()-1); // deindent
-					sb.append(ident+"");
-				}
-				sb.append("</" + name + ">\n"); // close tag
-
+		Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+		Element tourapment = (Element)document.appendChild(document.createElement("tourapment"));
+		for (Decathlon d : list) {
+			Element del = (Element)tourapment.appendChild(document.createElement("athlete"));
+			del.setAttribute("name", d.name);
+			del.setAttribute("birthdate", dateFormat.format(d.birthdy));
+			del.setAttribute("country", d.country);
+			del.setAttribute("place", d.place+"");
+			del.setAttribute("score", d.getScore()+"");
+			for (int i = 0 ; i != 10 ; i++) {
+				Element rel = (Element)del.appendChild(document.createElement("result"));
+				rel.appendChild(document.createTextNode(resultFactors[i].formatter.format(d.ps[i])));
 			}
 		}
-		
-		String[][] noAttributes = new String[][] {};
-		
-		Element[] athletes = new Element[list.size()];  // create and initialize tourapment elements (athlons)
-		{
-			for (int i = 0 ; i != athletes.length ; i++) {
-				Decathlon d = list.get(i);
-				Element[] results = new Element[10]; 	// prepare the result array for every athlon
-				{
-					for (int ri = 0 ; ri != 10 ; ri++)
-						results[ri] = new Element("result", noAttributes, resultFactors[ri].formatter.format(d.ps[ri])); // "result" element has no attributes
-				}
-				
-				athletes[i] = new Element("athlete", new String[][]
-					{{"name",d.name}, {"birthdate", dateFormat.format(d.birthdy)}, {"country", d.country}, {"place", d.place+""}, {"score", d.getScore()+""}} // attributes
-					, results); // children
 
-			}
-		}
-		
-		//?xml? and DOCTYPE are special elements
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		sb.append("<!DOCTYPE tourapment SYSTEM \"decathlon.dtd\">\n");
+		transformer.setOutputProperty(javax.xml.transform.OutputKeys.DOCTYPE_SYSTEM, "decathlon.dtd");
+		transformer.transform(new DOMSource(document), new StreamResult(Utils.createUtf8FileWriter(file)));
 
-		// root element + no attributes + child elements
-		new Element("tourapment", noAttributes, athletes).write(new StringBuffer(3)); 
-
-		return sb.toString();
 	}
 	
 	/** The Decathlon service application that implements the homework. */
@@ -332,7 +299,6 @@ public class Decathlon {
 								
 								fields = Arrays.asList(fieldNames).iterator();
 								// convert user input into csv string
-								log("console is " + System.console());
 								StringBuffer csv = new StringBuffer(Q + readLine() + Q);
 								while (!eoi && fields.hasNext()) {
 									csv.append("," + readLine());
@@ -460,18 +426,12 @@ public class Decathlon {
 					new Method("xml") {  // Extensive markup work. We have nothing better to do and XML improves our spiritual life.
 						
 						public void invoke(String argument) throws Exception {
-							
-							new Using<Writer>(Utils.createUtf8FileWriter(argument)) {public void work() throws Exception {
-								devfile.write(createXml());
-							}};
-							
+							createXml(TransformerFactory.newInstance().newTransformer(), argument);
 						}
 					},
 					new Method("html") {
 						public void invoke(String argument) throws Exception {
-					        TransformerFactory.newInstance().newTransformer(new StreamSource("decathlon.xsl"))
-					        	.transform(new StreamSource(new StringReader(createXml())), new StreamResult(new FileOutputStream(argument)));
-					        	
+							createXml(TransformerFactory.newInstance().newTransformer(new StreamSource("decathlon.xsl")), argument);
         				}
 					}
 					
