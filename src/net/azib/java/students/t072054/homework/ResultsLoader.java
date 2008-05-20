@@ -9,12 +9,12 @@ import java.util.Map;
  */
 public interface ResultsLoader {
 	public void loadResultsDB(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3);
+			Map<Integer, String[]> resultMap3);
 
-	public void loadResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3, String fileName);
+	public void loadResultsCSV(Map<Integer, String[]> resultMap1, Map<Integer, String[]> resultMap2,
+			Map<Integer, String[]> resultMap3, String fileName);
 
-	public void loadResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3);
+	public void loadResultsConsole(Map<Integer, String[]> resultMap1, Map<Integer, String[]> resultMap2,
+			Map<Integer, String[]> resultMap3);
 
 }

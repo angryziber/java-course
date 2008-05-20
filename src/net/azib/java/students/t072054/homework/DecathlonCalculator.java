@@ -40,37 +40,37 @@ public class DecathlonCalculator {
 	 * @param args
 	 */
 	public static void main(String args[]) {
-		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap1 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap2 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap3 = new LinkedHashMap<Integer, String[]>();
 
 		// Initial value
 		inputNum = 1;
 
-		ResultShower res_show = new ShowResults();
+		ResultShower resShow = new ShowResults();
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		ArrayList<Integer> results_array = new ArrayList<Integer>();
+		ArrayList<Integer> resultsArray = new ArrayList<Integer>();
 
 		commandLineParsing(args);
 
 		switch (inputMethod) {
 		case DB:
-			lnr.loadResultsDB(result_map1, result_map2, result_map3);
+			lnr.loadResultsDB(resultMap1, resultMap2, resultMap3);
 			break;
 		case CSV:
-			lnr.loadResultsCSV(result_map1, result_map2, result_map3, inputRoute);
+			lnr.loadResultsCSV(resultMap1, resultMap2, resultMap3, inputRoute);
 			break;
 		case CONSOLE:
-			lnr.loadResultsConsole(result_map1, result_map2, result_map3);
+			lnr.loadResultsConsole(resultMap1, resultMap2, resultMap3);
 			break;
 		}
 
 		// Check for name of competition
 		try {
 			if (inputMethod == DB) {
-				inputNum = getEventID(result_map2, inputString);
+				inputNum = getEventID(resultMap2, inputString);
 				if (inputNum == -1)
 					inputNum = Integer.valueOf(inputString);
 			}
@@ -83,19 +83,19 @@ public class DecathlonCalculator {
 		case CONSOLE:
 			if (inputNum == 0)
 				inputNum = 1;
-			results_array = SortingID.sortByID(result_map1, result_map2, result_map3, inputNum);
+			resultsArray = SortingID.sortByID(resultMap1, resultMap2, resultMap3, inputNum);
 			if (inputNum == 0)
 				inputNum = 1;
-			res_show.showResultsConsole(result_map1, result_map2, result_map3, results_array, inputNum);
+			resShow.showResultsConsole(resultMap1, resultMap2, resultMap3, resultsArray, inputNum);
 			break;
 		case XML:
 			if (inputNum == 0)
 				inputNum = 1;
-			results_array = SortingID.sortByID(result_map1, result_map2, result_map3, inputNum);
+			resultsArray = SortingID.sortByID(resultMap1, resultMap2, resultMap3, inputNum);
 			if (inputNum == 0)
 				inputNum = 1;
 			try {
-				res_show.showResultsXML(result_map1, result_map2, result_map3, results_array, inputNum, outputRoute);
+				resShow.showResultsXML(resultMap1, resultMap2, resultMap3, resultsArray, inputNum, outputRoute);
 			}
 			catch (Exception e) {
 				System.out.println("XML creating exception!");
@@ -104,11 +104,11 @@ public class DecathlonCalculator {
 		case CSV:
 			if (inputNum == 0)
 				inputNum = 1;
-			results_array = SortingID.sortByID(result_map1, result_map2, result_map3, inputNum);
+			resultsArray = SortingID.sortByID(resultMap1, resultMap2, resultMap3, inputNum);
 			if (inputNum == 0)
 				inputNum = 1;
 			try {
-				res_show.showResultsCSV(result_map1, result_map2, result_map3, results_array, inputNum, outputRoute);
+				resShow.showResultsCSV(resultMap1, resultMap2, resultMap3, resultsArray, inputNum, outputRoute);
 			}
 			catch (Exception e) {
 				System.out.println("CSV creating exception!");
@@ -192,16 +192,16 @@ public class DecathlonCalculator {
 	/**
 	 * Returns event ID by it's name
 	 * 
-	 * @param result_map2
+	 * @param resultMap2
 	 * @param name
 	 * @return Event ID
 	 */
-	public static int getEventID(Map<Integer, String[]> result_map2, String name) {
+	public static int getEventID(Map<Integer, String[]> resultMap2, String name) {
 		int id = 0;
 
-		for (int i = 0; i < result_map2.size(); i++) {
-			if (result_map2.get(i)[3].equalsIgnoreCase(name)) {
-				id = Integer.parseInt((result_map2.get(i)[0]));
+		for (int i = 0; i < resultMap2.size(); i++) {
+			if (resultMap2.get(i)[3].equalsIgnoreCase(name)) {
+				id = Integer.parseInt((resultMap2.get(i)[0]));
 				return id;
 			}
 		}

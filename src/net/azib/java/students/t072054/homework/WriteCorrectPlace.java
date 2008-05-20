@@ -10,7 +10,7 @@ public class WriteCorrectPlace {
 	static double[] ids;
 	static double[] scores;
 
-	static int num_rows = 0;
+	static int numRows = 0;
 
 	public WriteCorrectPlace(int length) {
 		places = new String[length];
@@ -25,11 +25,11 @@ public class WriteCorrectPlace {
 	 * @param score
 	 */
 	public void addScore(double id, double score) {
-		boolean flag_score_written = false;
+		boolean flagScoreWritten = false;
 
-		for (int i = 0; (i < num_rows) && !flag_score_written; i++) {
+		for (int i = 0; (i < numRows) && !flagScoreWritten; i++) {
 			if (score < scores[i]) {
-				for (int j = num_rows; j > i; j--) {
+				for (int j = numRows; j > i; j--) {
 					scores[j] = scores[j - 1];
 					ids[j] = ids[j - 1];
 				}
@@ -37,16 +37,16 @@ public class WriteCorrectPlace {
 				scores[i] = score;
 				ids[i] = id;
 
-				flag_score_written = true;
+				flagScoreWritten = true;
 			}
 		}
 
-		if (!flag_score_written) {
-			scores[num_rows] = score;
-			ids[num_rows] = id;
+		if (!flagScoreWritten) {
+			scores[numRows] = score;
+			ids[numRows] = id;
 		}
 
-		num_rows++;
+		numRows++;
 	}
 
 	/**
@@ -57,23 +57,23 @@ public class WriteCorrectPlace {
 	 */
 	public String returnPlace(double score) {
 		// Number of equal scores
-		int num_of_equal = 0;
+		int numOfEqual = 0;
 		// Place string that will be returned
 		String place = " ";
 
 		// Find the amount of equal scores
-		for (int i = 0; i < num_rows; i++) {
+		for (int i = 0; i < numRows; i++) {
 			if (scores[i] == score) {
-				num_of_equal++;
+				numOfEqual++;
 			}
 		}
 
 		// Find the place
-		for (int i = 0; i < num_rows; i++) {
+		for (int i = 0; i < numRows; i++) {
 			if (scores[i] == score) {
-				place = String.valueOf(num_rows - i);
-				for (int j = 1; j < num_of_equal; j++) {
-					place = place + "-" + String.valueOf(num_rows - i + j);
+				place = String.valueOf(numRows - i);
+				for (int j = 1; j < numOfEqual; j++) {
+					place = place + "-" + String.valueOf(numRows - i + j);
 				}
 			}
 		}

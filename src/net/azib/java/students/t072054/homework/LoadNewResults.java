@@ -28,14 +28,14 @@ public class LoadNewResults implements ResultsLoader {
 	/**
 	 * Loads results from MySQL database
 	 * 
-	 * @param result_map1
-	 * @param result_map2
-	 * @param result_map3
+	 * @param resultMap1
+	 * @param resultMap2
+	 * @param resultMap3
 	 */
-	public void loadResultsDB(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3) {
+	public void loadResultsDB(Map<Integer, String[]> resultMap1, Map<Integer, String[]> resultMap2,
+			Map<Integer, String[]> resultMap3) {
 
-		String connection_string = " ";
+		String connectionString = " ";
 		String login = " ";
 		String password = " ";
 
@@ -46,7 +46,7 @@ public class LoadNewResults implements ResultsLoader {
 
 			BufferedReader in = new BufferedReader(new FileReader(f1));
 
-			connection_string = in.readLine();
+			connectionString = in.readLine();
 			login = in.readLine();
 			password = in.readLine();
 		}
@@ -56,7 +56,7 @@ public class LoadNewResults implements ResultsLoader {
 
 		try {
 			// Establish the connection to the database
-			String url = connection_string;
+			String url = connectionString;
 			conn = DriverManager.getConnection(url, login, password);
 
 			conn.createStatement();
@@ -69,9 +69,9 @@ public class LoadNewResults implements ResultsLoader {
 
 			rs1.first();
 
-			readDatabase(rs1, result_map1, 4);
+			readDatabase(rs1, resultMap1, 4);
 
-			// String str[] = result_map1.get(0);
+			// String str[] = resultMap1.get(0);
 
 			personStatement = conn.prepareStatement("SELECT * FROM competitions WHERE id > ?;");
 
@@ -81,7 +81,7 @@ public class LoadNewResults implements ResultsLoader {
 
 			rs2.first();
 
-			readDatabase(rs2, result_map2, 5);
+			readDatabase(rs2, resultMap2, 5);
 
 			personStatement = conn.prepareStatement("SELECT * FROM results WHERE id > ?;");
 
@@ -91,7 +91,7 @@ public class LoadNewResults implements ResultsLoader {
 
 			rs3.first();
 
-			readDatabase(rs3, result_map3, 13);
+			readDatabase(rs3, resultMap3, 13);
 
 			connClose();
 		}
@@ -105,10 +105,10 @@ public class LoadNewResults implements ResultsLoader {
 	 * Reads all strings from one table of database
 	 * 
 	 * @param rs
-	 * @param result_map
+	 * @param resultMap
 	 * @param column_number
 	 */
-	private static void readDatabase(ResultSet rs, Map<Integer, String[]> result_map, int column_number) {
+	private static void readDatabase(ResultSet rs, Map<Integer, String[]> resultMap, int column_number) {
 		String[][] str = new String[100][100];
 		int j = 0;
 
@@ -117,7 +117,7 @@ public class LoadNewResults implements ResultsLoader {
 				for (int i = 0; i < column_number; i++) {
 					str[j][i] = rs.getString(i + 1);
 				}
-				result_map.put(j, str[j]);
+				resultMap.put(j, str[j]);
 				j++;
 			}
 			while (rs.next());
@@ -146,13 +146,13 @@ public class LoadNewResults implements ResultsLoader {
 	/**
 	 * Loads results from CSV file
 	 * 
-	 * @param result_map1
-	 * @param result_map2
-	 * @param result_map3
+	 * @param resultMap1
+	 * @param resultMap2
+	 * @param resultMap3
 	 * @param fileName
 	 */
-	public void loadResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3, String fileName) {
+	public void loadResultsCSV(Map<Integer, String[]> resultMap1, Map<Integer, String[]> resultMap2,
+			Map<Integer, String[]> resultMap3, String fileName) {
 		try {
 
 			// Open the file
@@ -163,11 +163,11 @@ public class LoadNewResults implements ResultsLoader {
 			// One row in a table
 			String line;
 			// Num of line
-			int num_line = 0;
+			int numLine = 0;
 
 			char[] char_buf = new char[1000];
 			// Counter for chars in String
-			int char_count = 0;
+			int charCount = 0;
 
 			int count = 0;
 
@@ -178,65 +178,65 @@ public class LoadNewResults implements ResultsLoader {
 				line = in.readLine();
 
 				// Strings separated by ',' for map3
-				String[] str_buf = new String[13];
+				String[] strBuf = new String[13];
 
 				// Same strings for map1, map2
-				String[] str_map1 = new String[4];
-				String[] str_map2 = new String[5];
+				String[] strMap1 = new String[4];
+				String[] strMap2 = new String[5];
 
 				for (int i = 0; i < (line.length()); i++) {
 					if (line.charAt(i) != ',' && (i + 1) != line.length()) {
-						char_buf[char_count] = line.charAt(i);
-						if (char_buf[char_count] == ':')
+						char_buf[charCount] = line.charAt(i);
+						if (char_buf[charCount] == ':')
 							flag_need_converted = true;
-						char_count++;
+						charCount++;
 					}
 					else {
 						if (count > 2) {
-							str_buf[count] = String.copyValueOf(char_buf, 0, char_count);
+							strBuf[count] = String.copyValueOf(char_buf, 0, charCount);
 							if (flag_need_converted)
-								str_buf[count] = convertTime(str_buf[count]);
+								strBuf[count] = convertTime(strBuf[count]);
 							flag_need_converted = false;
-							char_count = 0;
+							charCount = 0;
 							count++;
 						}
 						else {
 							if (count == 0 || count == 1) {
-								str_buf[count] = String.valueOf(num_line + 1);
+								strBuf[count] = String.valueOf(numLine + 1);
 								if (count == 0) {
-									str_map1[0] = String.valueOf(num_line + 1);
-									str_map1[1] = String.copyValueOf(char_buf, 0, char_count);
+									strMap1[0] = String.valueOf(numLine + 1);
+									strMap1[1] = String.copyValueOf(char_buf, 0, charCount);
 								}
 								if (count == 1) {
-									str_map1[2] = String.copyValueOf(char_buf, 0, char_count);
+									strMap1[2] = String.copyValueOf(char_buf, 0, charCount);
 								}
-								char_count = 0;
+								charCount = 0;
 								count++;
 							}
 							else if (count == 2) {
-								str_buf[count] = "1";
-								str_map1[3] = String.copyValueOf(char_buf, 0, char_count);
-								char_count = 0;
+								strBuf[count] = "1";
+								strMap1[3] = String.copyValueOf(char_buf, 0, charCount);
+								charCount = 0;
 								count++;
 							}
 						}
 					}
 
 				}
-				result_map3.put(num_line, str_buf);
-				result_map1.put(num_line, str_map1);
+				resultMap3.put(numLine, strBuf);
+				resultMap1.put(numLine, strMap1);
 
-				if (num_line == 0) {
-					str_map2[0] = "1";
-					str_map2[1] = "NA";
-					str_map2[2] = "0000-00-00";
-					str_map2[3] = "NA";
-					str_map2[4] = "NA";
-					result_map2.put(0, str_map2);
+				if (numLine == 0) {
+					strMap2[0] = "1";
+					strMap2[1] = "NA";
+					strMap2[2] = "0000-00-00";
+					strMap2[3] = "NA";
+					strMap2[4] = "NA";
+					resultMap2.put(0, strMap2);
 				}
 
 				count = 0;
-				num_line++;
+				numLine++;
 			}
 
 		}
@@ -249,12 +249,12 @@ public class LoadNewResults implements ResultsLoader {
 	/**
 	 * Loads results from console
 	 * 
-	 * @param result_map1
-	 * @param result_map2
-	 * @param result_map3
+	 * @param resultMap1
+	 * @param resultMap2
+	 * @param resultMap3
 	 */
-	public void loadResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3) {
+	public void loadResultsConsole(Map<Integer, String[]> resultMap1, Map<Integer, String[]> resultMap2,
+			Map<Integer, String[]> resultMap3) {
 		try {
 
 			// Reading stream
@@ -264,16 +264,16 @@ public class LoadNewResults implements ResultsLoader {
 			// One row in a table
 			String line = " ";
 			// Num of line
-			int num_line = 0;
+			int numLine = 0;
 
-			char[] char_buf = new char[1000];
+			char[] charBuf = new char[1000];
 			// Counter for chars in String
-			int char_count = 0;
+			int charCount = 0;
 
 			int count = 0;
 
 			// If true, needs conversion to second:millisecond format
-			boolean flag_need_converted = false;
+			boolean flagNeedConverted = false;
 
 			while (!line.equalsIgnoreCase("quit")) {
 				System.out.println("Enter results or write 'quit' to finish");
@@ -281,45 +281,45 @@ public class LoadNewResults implements ResultsLoader {
 				if (!line.equalsIgnoreCase("quit")) {
 
 					// Strings separated by ',' for map3
-					String[] str_buf = new String[13];
+					String[] strBuf = new String[13];
 
 					// Same strings for map1, map2
-					String[] str_map1 = new String[4];
-					String[] str_map2 = new String[5];
+					String[] strMap1 = new String[4];
+					String[] strMap2 = new String[5];
 
 					for (int i = 0; i < (line.length()); i++) {
 						if (line.charAt(i) != ',' && (i + 1) != line.length()) {
-							char_buf[char_count] = line.charAt(i);
-							if (char_buf[char_count] == ':')
-								flag_need_converted = true;
-							char_count++;
+							charBuf[charCount] = line.charAt(i);
+							if (charBuf[charCount] == ':')
+								flagNeedConverted = true;
+							charCount++;
 						}
 						if ((i + 1) == line.length() || line.charAt(i) == ',') {
 							if (count > 2) {
-								str_buf[count] = String.copyValueOf(char_buf, 0, char_count);
-								if (flag_need_converted)
-									str_buf[count] = convertTime(str_buf[count]);
-								flag_need_converted = false;
-								char_count = 0;
+								strBuf[count] = String.copyValueOf(charBuf, 0, charCount);
+								if (flagNeedConverted)
+									strBuf[count] = convertTime(strBuf[count]);
+								flagNeedConverted = false;
+								charCount = 0;
 								count++;
 							}
 							else {
 								if (count == 0 || count == 1) {
-									str_buf[count] = String.valueOf(num_line + 1);
+									strBuf[count] = String.valueOf(numLine + 1);
 									if (count == 0) {
-										str_map1[0] = String.valueOf(num_line + 1);
-										str_map1[1] = String.copyValueOf(char_buf, 0, char_count);
+										strMap1[0] = String.valueOf(numLine + 1);
+										strMap1[1] = String.copyValueOf(charBuf, 0, charCount);
 									}
 									if (count == 1) {
-										str_map1[2] = String.copyValueOf(char_buf, 0, char_count);
+										strMap1[2] = String.copyValueOf(charBuf, 0, charCount);
 									}
-									char_count = 0;
+									charCount = 0;
 									count++;
 								}
 								else if (count == 2) {
-									str_buf[count] = "1";
-									str_map1[3] = String.copyValueOf(char_buf, 0, char_count);
-									char_count = 0;
+									strBuf[count] = "1";
+									strMap1[3] = String.copyValueOf(charBuf, 0, charCount);
+									charCount = 0;
 									count++;
 								}
 							}
@@ -327,20 +327,20 @@ public class LoadNewResults implements ResultsLoader {
 
 					}
 
-					result_map3.put(num_line, str_buf);
-					result_map1.put(num_line, str_map1);
+					resultMap3.put(numLine, strBuf);
+					resultMap1.put(numLine, strMap1);
 
-					if (num_line == 0) {
-						str_map2[0] = "1";
-						str_map2[1] = "NA";
-						str_map2[2] = "0000-00-00";
-						str_map2[3] = "NA";
-						str_map2[4] = "NA";
-						result_map2.put(0, str_map2);
+					if (numLine == 0) {
+						strMap2[0] = "1";
+						strMap2[1] = "NA";
+						strMap2[2] = "0000-00-00";
+						strMap2[3] = "NA";
+						strMap2[4] = "NA";
+						resultMap2.put(0, strMap2);
 					}
 
 					count = 0;
-					num_line++;
+					numLine++;
 				}
 
 			}
@@ -355,37 +355,37 @@ public class LoadNewResults implements ResultsLoader {
 	/**
 	 * Converts from minute:second.millisecond to second.millisecond format
 	 * 
-	 * @param not_converted
+	 * @param notConverted
 	 * @return Converted data
 	 */
-	public String convertTime(String not_converted) {
+	public String convertTime(String notConverted) {
 		String converted;
 
 		int minute = 0;
 		int second = 0;
 		int millisecond = 0;
 
-		char[] char_buf = new char[10];
-		char char_count = 0;
+		char[] charBuf = new char[10];
+		char charCount = 0;
 
-		for (int i = 0; i < (not_converted.length()); i++) {
-			if (not_converted.charAt(i) != ',') {
-				if (not_converted.charAt(i) == ':') {
-					minute = Integer.parseInt(String.copyValueOf(char_buf, 0, char_count));
-					char_count = 0;
+		for (int i = 0; i < (notConverted.length()); i++) {
+			if (notConverted.charAt(i) != ',') {
+				if (notConverted.charAt(i) == ':') {
+					minute = Integer.parseInt(String.copyValueOf(charBuf, 0, charCount));
+					charCount = 0;
 				}
-				else if (not_converted.charAt(i) == '.') {
-					second = Integer.parseInt(String.copyValueOf(char_buf, 0, char_count));
-					char_count = 0;
+				else if (notConverted.charAt(i) == '.') {
+					second = Integer.parseInt(String.copyValueOf(charBuf, 0, charCount));
+					charCount = 0;
 				}
 				else {
-					char_buf[char_count] = not_converted.charAt(i);
-					char_count++;
+					charBuf[charCount] = notConverted.charAt(i);
+					charCount++;
 				}
 			}
 		}
 
-		millisecond = Integer.parseInt(String.copyValueOf(char_buf, 0, char_count));
+		millisecond = Integer.parseInt(String.copyValueOf(charBuf, 0, charCount));
 
 		second = minute * 60 + second;
 		converted = String.valueOf(second) + "." + String.valueOf(millisecond);

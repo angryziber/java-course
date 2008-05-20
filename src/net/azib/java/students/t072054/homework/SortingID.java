@@ -14,83 +14,83 @@ public class SortingID {
 	/**
 	 * Sorting athletes' IDs by results of the competition
 	 * 
-	 * @param result_map1
-	 * @param result_map2
-	 * @param result_map3
-	 * @param event_id
+	 * @param resultMap1
+	 * @param resultMap2
+	 * @param resultMap3
+	 * @param eventId
 	 * @return List of athletes' id-s
 	 */
-	public static ArrayList<Integer> sortByID(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
-			Map<Integer, String[]> result_map3, double event_id) {
-		ArrayList<Integer> return_value = new ArrayList<Integer>();
+	public static ArrayList<Integer> sortByID(Map<Integer, String[]> resultMap1, Map<Integer, String[]> resultMap2,
+			Map<Integer, String[]> resultMap3, double eventId) {
+		ArrayList<Integer> returnValue = new ArrayList<Integer>();
 		double[] buf = new double[20];
 
-		String str_buf[] = new String[100]; // buffer for reading from
-											// result_maps
+		String strBuf[] = new String[100]; // buffer for reading from
+											// resultMaps
 
-		int[] choosed_indexes = new int[10000]; // Chosen indexes array
-		int number_of_indexes = 0; // Number of chosen indexes
-		char choosed_flag = 0; // If 1 - current row have already been chosen
+		int[] choosedIndexes = new int[10000]; // Chosen indexes array
+		int numberOfIndexes = 0; // Number of chosen indexes
+		char choosedFlag = 0; // If 1 - current row have already been chosen
 
-		int number_of_rows = 2; // Number of not chosen rows in the table
+		int numberOfRows = 2; // Number of not chosen rows in the table
 
 		int count = 0; // counter
-		int end_counter = 2; // counter of end conditions
-		double max_num; // maximal value of result
-		int max_index = 1; // index of maximal number
-		double max_athlet = 0; // index of athlete with maximum score
+		int endCounter = 2; // counter of end conditions
+		double maxNum; // maximal value of result
+		int maxIndex = 1; // index of maximal number
+		double maxAthlet = 0; // index of athlete with maximum score
 
-		str_buf = result_map3.get(0);
+		strBuf = resultMap3.get(0);
 
 		// Start to count decathlon points
-		buf[1] = Double.parseDouble(str_buf[1]);
+		buf[1] = Double.parseDouble(strBuf[1]);
 		for (int i = 3; i < 13; i++) {
-			buf[i] = Double.parseDouble(str_buf[i]);
+			buf[i] = Double.parseDouble(strBuf[i]);
 		}
 		double result = CountAthletResult.countResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10], buf[11],
 				buf[12]);
 		// END of decathlon count //
-		max_num = result;
-		max_athlet = buf[1];
-		max_index = 0;
+		maxNum = result;
+		maxAthlet = buf[1];
+		maxIndex = 0;
 
 		// All indexes are choosed?
-		while (end_counter > 1) {
+		while (endCounter > 1) {
 			// Starting to count rows
-			number_of_rows = 0;
+			numberOfRows = 0;
 			count = 0;
 
 			// End counter = 0
-			end_counter = 0;
+			endCounter = 0;
 
-			while (count < result_map3.size()) {
+			while (count < resultMap3.size()) {
 
 				// Incrementing number of rows
-				number_of_rows++;
+				numberOfRows++;
 
 				// Check that this row is not chosen
-				for (int j = 0; j < number_of_indexes; j++) {
-					if (choosed_indexes[j] == number_of_rows - 1)
-						choosed_flag = 1;
+				for (int j = 0; j < numberOfIndexes; j++) {
+					if (choosedIndexes[j] == numberOfRows - 1)
+						choosedFlag = 1;
 				}
 
 				// Reading data from database
-				str_buf = result_map3.get(count);
+				strBuf = resultMap3.get(count);
 
 				// Check the id of competition
-				buf[2] = Double.parseDouble(str_buf[2]);
+				buf[2] = Double.parseDouble(strBuf[2]);
 
-				if ((choosed_flag == 0) && (event_id == buf[2])) {
+				if ((choosedFlag == 0) && (eventId == buf[2])) {
 					// START to count decathlon points
-					// str_buf = result_map3.get(count);
+					// strBuf = resultMap3.get(count);
 
 					// DEBUG output
-					// System.out.println("number of rows = " + number_of_rows);
+					// System.out.println("number of rows = " + numberOfRows);
 
-					buf[1] = Double.parseDouble(str_buf[1]);
+					buf[1] = Double.parseDouble(strBuf[1]);
 					for (int i = 3; i < 13; i++) {
 						// buf[i] = lnr.rs3.getDouble(i);
-						buf[i] = Double.parseDouble(str_buf[i]);
+						buf[i] = Double.parseDouble(strBuf[i]);
 
 						// DEBUG output
 						// System.out.println(buf[i]);
@@ -102,32 +102,32 @@ public class SortingID {
 					// DEBUG output
 					// System.out.println("result = " + result);
 
-					// New max value if result > max_num
-					if (result > max_num) {
-						max_num = result;
-						max_index = count;
-						max_athlet = buf[1];
+					// New max value if result > maxNum
+					if (result > maxNum) {
+						maxNum = result;
+						maxIndex = count;
+						maxAthlet = buf[1];
 					}
 
-					end_counter++;
+					endCounter++;
 				}
 
 				count++;
-				choosed_flag = 0;
+				choosedFlag = 0;
 			}
 
 			// DEBUG output
-			// System.out.println("max_num = " + max_num);
-			// System.out.println("max_index = " + max_index);
-			// System.out.println("max_athlet = " + max_athlet);
+			// System.out.println("maxNum = " + maxNum);
+			// System.out.println("maxIndex = " + maxIndex);
+			// System.out.println("maxAthlet = " + maxAthlet);
 
-			choosed_indexes[number_of_indexes] = max_index;
-			return_value.add((int) max_athlet);
-			max_num = 0;
-			max_index = 0;
-			number_of_indexes++;
+			choosedIndexes[numberOfIndexes] = maxIndex;
+			returnValue.add((int) maxAthlet);
+			maxNum = 0;
+			maxIndex = 0;
+			numberOfIndexes++;
 		}
 
-		return return_value;
+		return returnValue;
 	}
 }
