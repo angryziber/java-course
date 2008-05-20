@@ -1,12 +1,7 @@
 package net.azib.java.students.t072054.homework;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
 
 /**
  * ShowResultsTest
