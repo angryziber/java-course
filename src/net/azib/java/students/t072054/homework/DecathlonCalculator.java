@@ -27,12 +27,12 @@ public class DecathlonCalculator {
 	private static final int OUTPUT_STRING = 4;
 	private static final int PARSE_FINISHED = 5;
 
-	private static int input_method;
-	private static int output_method;
-	private static String input_string;
-	private static int input_num;
-	private static String input_route;
-	private static String output_route;
+	private static int inputMethod;
+	private static int outputMethod;
+	private static String inputString;
+	private static int inputNum;
+	private static String inputRoute;
+	private static String outputRoute;
 
 	/**
 	 * Starting point of application
@@ -45,7 +45,7 @@ public class DecathlonCalculator {
 		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
 
 		// Initial value
-		input_num = 1;
+		inputNum = 1;
 
 		ResultShower res_show = new ShowResults();
 
@@ -55,12 +55,12 @@ public class DecathlonCalculator {
 
 		commandLineParsing(args);
 
-		switch (input_method) {
+		switch (inputMethod) {
 		case DB:
 			lnr.loadResultsDB(result_map1, result_map2, result_map3);
 			break;
 		case CSV:
-			lnr.loadResultsCSV(result_map1, result_map2, result_map3, input_route);
+			lnr.loadResultsCSV(result_map1, result_map2, result_map3, inputRoute);
 			break;
 		case CONSOLE:
 			lnr.loadResultsConsole(result_map1, result_map2, result_map3);
@@ -69,46 +69,46 @@ public class DecathlonCalculator {
 
 		// Check for name of competition
 		try {
-			if (input_method == DB) {
-				input_num = getEventID(result_map2, input_string);
-				if (input_num == -1)
-					input_num = Integer.valueOf(input_string);
+			if (inputMethod == DB) {
+				inputNum = getEventID(result_map2, inputString);
+				if (inputNum == -1)
+					inputNum = Integer.valueOf(inputString);
 			}
 		}
 		catch (Exception e) {
 			System.out.println("Competition name not found exception");
 		}
 
-		switch (output_method) {
+		switch (outputMethod) {
 		case CONSOLE:
-			if (input_num == 0)
-				input_num = 1;
-			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
-			if (input_num == 0)
-				input_num = 1;
-			res_show.ShowResultsConsole(result_map1, result_map2, result_map3, results_array, input_num);
+			if (inputNum == 0)
+				inputNum = 1;
+			results_array = SortingID.sortByID(result_map1, result_map2, result_map3, inputNum);
+			if (inputNum == 0)
+				inputNum = 1;
+			res_show.showResultsConsole(result_map1, result_map2, result_map3, results_array, inputNum);
 			break;
 		case XML:
-			if (input_num == 0)
-				input_num = 1;
-			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
-			if (input_num == 0)
-				input_num = 1;
+			if (inputNum == 0)
+				inputNum = 1;
+			results_array = SortingID.sortByID(result_map1, result_map2, result_map3, inputNum);
+			if (inputNum == 0)
+				inputNum = 1;
 			try {
-				res_show.ShowResultsXML(result_map1, result_map2, result_map3, results_array, input_num, output_route);
+				res_show.showResultsXML(result_map1, result_map2, result_map3, results_array, inputNum, outputRoute);
 			}
 			catch (Exception e) {
 				System.out.println("XML creating exception!");
 			}
 			break;
 		case CSV:
-			if (input_num == 0)
-				input_num = 1;
-			results_array = SortingID.SortByID(result_map1, result_map2, result_map3, input_num);
-			if (input_num == 0)
-				input_num = 1;
+			if (inputNum == 0)
+				inputNum = 1;
+			results_array = SortingID.sortByID(result_map1, result_map2, result_map3, inputNum);
+			if (inputNum == 0)
+				inputNum = 1;
 			try {
-				res_show.ShowResultsCSV(result_map1, result_map2, result_map3, results_array, input_num, output_route);
+				res_show.showResultsCSV(result_map1, result_map2, result_map3, results_array, inputNum, outputRoute);
 			}
 			catch (Exception e) {
 				System.out.println("CSV creating exception!");
@@ -131,60 +131,60 @@ public class DecathlonCalculator {
 		String return_value;
 
 		// Initialization of static members
-		input_route = null;
-		output_route = null;
-		input_method = 0;
-		output_method = 0;
-		input_num = 0;
+		inputRoute = null;
+		outputRoute = null;
+		inputMethod = 0;
+		outputMethod = 0;
+		inputNum = 0;
 
 		for (String s : args) {
 			if (stage == INPUT_METHOD) {
 				if (s.equals("-console")) {
-					input_method = CONSOLE;
+					inputMethod = CONSOLE;
 					stage = OUTPUT_METHOD;
 				}
 				else if (s.equals("-csv")) {
-					input_method = CSV;
+					inputMethod = CSV;
 					stage = INPUT_STRING;
 				}
 				else if (s.equals("-db")) {
-					input_method = DB;
+					inputMethod = DB;
 					stage = INPUT_INTEGER;
 				}
 			}
 			else if (stage == INPUT_STRING) {
-				input_route = s;
+				inputRoute = s;
 				stage = OUTPUT_METHOD;
 			}
 			else if (stage == INPUT_INTEGER) {
-				input_string = s;
+				inputString = s;
 				stage = OUTPUT_METHOD;
 			}
 			else if (stage == OUTPUT_METHOD) {
 				if (s.equals("-console")) {
-					output_method = CONSOLE;
+					outputMethod = CONSOLE;
 					stage = OUTPUT_STRING;
 				}
 				else if (s.equals("-csv")) {
-					output_method = CSV;
+					outputMethod = CSV;
 					stage = OUTPUT_STRING;
 				}
 				else if (s.equals("-xml")) {
-					output_method = XML;
+					outputMethod = XML;
 					stage = OUTPUT_STRING;
 				}
 				else if (s.equals("-html")) {
-					output_method = HTML;
+					outputMethod = HTML;
 					stage = OUTPUT_STRING;
 				}
 			}
 			else if (stage == OUTPUT_STRING) {
-				output_route = s;
+				outputRoute = s;
 				stage = PARSE_FINISHED;
 			}
 		}
 
-		return_value = input_route + " " + output_route + " " + input_method + " " + output_method + " " + input_string;
+		return_value = inputRoute + " " + outputRoute + " " + inputMethod + " " + outputMethod + " " + inputString;
 
 		return return_value;
 	}

@@ -20,7 +20,7 @@ public class SortingID {
 	 * @param event_id
 	 * @return List of athletes' id-s
 	 */
-	public static ArrayList<Integer> SortByID(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public static ArrayList<Integer> sortByID(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, double event_id) {
 		ArrayList<Integer> return_value = new ArrayList<Integer>();
 		double[] buf = new double[20];
@@ -47,7 +47,7 @@ public class SortingID {
 		for (int i = 3; i < 13; i++) {
 			buf[i] = Double.parseDouble(str_buf[i]);
 		}
-		double result = CountAthletResult.CountResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10], buf[11],
+		double result = CountAthletResult.countResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10], buf[11],
 				buf[12]);
 		// END of decathlon count //
 		max_num = result;
@@ -95,7 +95,7 @@ public class SortingID {
 						// DEBUG output
 						// System.out.println(buf[i]);
 					}
-					result = CountAthletResult.CountResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10],
+					result = CountAthletResult.countResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10],
 							buf[11], buf[12]);
 					// END of decathlon count //
 

@@ -28,7 +28,7 @@ public class ShowResults implements ResultShower {
 	 * @param results
 	 * @param numEvent
 	 */
-	public String ShowResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public String showResultsConsole(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent) {
 
 		String return_string = "Test string: ";
@@ -36,7 +36,7 @@ public class ShowResults implements ResultShower {
 		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
 
 		for (int i = 0; i < results.size(); i++) {
-			wcp.addScore(i, CountAthletResult.CountResultByID(result_map3, i + 1, numEvent));
+			wcp.addScore(i, CountAthletResult.countResultByID(result_map3, i + 1, numEvent));
 		}
 
 		// Print competitions data
@@ -58,12 +58,12 @@ public class ShowResults implements ResultShower {
 		// columns
 		for (int i = 0; i < results.size(); i++) {
 			// Printing place
-			System.out.print(wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent)));
+			System.out.print(wcp.returnPlace(CountAthletResult.countResultByID(result_map3, (double) results.get(i), numEvent)));
 			return_string = return_string
-					+ wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent));
+					+ wcp.returnPlace(CountAthletResult.countResultByID(result_map3, (double) results.get(i), numEvent));
 			System.out.print(" ");
 
-			System.out.print(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent));
+			System.out.print(CountAthletResult.countResultByID(result_map3, (double) results.get(i), numEvent));
 			for (int j = 0; j < 4; j++) {
 				System.out.print(result_map1.get(results.get(i) - 1)[j] + " ");
 				return_string = return_string + result_map1.get(results.get(i) - 1)[j];
@@ -97,7 +97,7 @@ public class ShowResults implements ResultShower {
 	 * @param numEvent
 	 * @param fileName
 	 */
-	public String ShowResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public String showResultsCSV(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName) {
 
 		String return_string = "Test string: ";
@@ -105,7 +105,7 @@ public class ShowResults implements ResultShower {
 		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
 
 		for (int i = 0; i < results.size(); i++) {
-			wcp.addScore(i, CountAthletResult.CountResultByID(result_map3, i + 1, numEvent));
+			wcp.addScore(i, CountAthletResult.countResultByID(result_map3, i + 1, numEvent));
 		}
 
 		// Output file name
@@ -135,12 +135,11 @@ public class ShowResults implements ResultShower {
 			fw.write("\n");
 			for (int i = 0; i < results.size(); i++) {
 
-				fw
-						.write(wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent))
+				fw.write(wcp.returnPlace(CountAthletResult.countResultByID(result_map3, (double) results.get(i), numEvent))
 								+ ",");
 				return_string = return_string
-						+ wcp.returnPlace(CountAthletResult.CountResultByID(result_map3, (double) results.get(i), numEvent));
-				fw.write((int) CountAthletResult.CountResultByID(result_map3, (int) results.get(i), numEvent) + ",");
+						+ wcp.returnPlace(CountAthletResult.countResultByID(result_map3, (double) results.get(i), numEvent));
+				fw.write((int) CountAthletResult.countResultByID(result_map3, (int) results.get(i), numEvent) + ",");
 				for (int j = 0; j < 4; j++) {
 					fw.write(result_map1.get(results.get(i) - 1)[j] + ",");
 					return_string = return_string + result_map1.get(results.get(i) - 1)[j];
@@ -181,12 +180,12 @@ public class ShowResults implements ResultShower {
 	 * @param fileName
 	 * @throws Exception
 	 */
-	public void ShowResultsXML(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public void showResultsXML(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
 			Map<Integer, String[]> result_map3, ArrayList<Integer> results, double numEvent, String fileName) throws Exception {
 		WriteCorrectPlace wcp = new WriteCorrectPlace(11);
 
 		for (int i = 0; i < results.size(); i++) {
-			wcp.addScore(i, CountAthletResult.CountResultByID(result_map3, i + 1, numEvent));
+			wcp.addScore(i, CountAthletResult.countResultByID(result_map3, i + 1, numEvent));
 		}
 
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -242,12 +241,12 @@ public class ShowResults implements ResultShower {
 			for (int i = 0; i < results.size(); i++) {
 
 				el_a[6 * i] = document.createElement("athlet");
-				el_a[6 * i].setAttribute("place", String.valueOf(wcp.returnPlace(CountAthletResult.CountResultByID(result_map3,
+				el_a[6 * i].setAttribute("place", String.valueOf(wcp.returnPlace(CountAthletResult.countResultByID(result_map3,
 						(double) results.get(i), numEvent))));
 				athletes_data.appendChild(el_a[6 * i]);
 
 				el_a[6 * i + 1] = document.createElement("score");
-				el_a[6 * i + 1].appendChild(document.createTextNode(Double.toString(CountAthletResult.CountResultByID(
+				el_a[6 * i + 1].appendChild(document.createTextNode(Double.toString(CountAthletResult.countResultByID(
 						result_map3, (int) results.get(i), numEvent))));
 				el_a[6 * i].appendChild(el_a[6 * i + 1]);
 				for (int j = 0; j < 4; j++) {

@@ -24,7 +24,7 @@ public class CountAthletResult {
 	 * @param m1500
 	 * @return Athlete's score
 	 */
-	public static double CountResult(double m100, double long_jump, double shot_put, double high_jump, double m400, double m110,
+	public static double countResult(double m100, double long_jump, double shot_put, double high_jump, double m400, double m110,
 			double discus, double pole_vault, double javelin, double m1500) {
 		double result;
 
@@ -52,7 +52,7 @@ public class CountAthletResult {
 	 * @param competition_id
 	 * @return
 	 */
-	public static double CountResultByID(Map<Integer, String[]> result_map3, double athlete_id, double competition_id) {
+	public static double countResultByID(Map<Integer, String[]> result_map3, double athlete_id, double competition_id) {
 		double[] buf = new double[20];
 		String str_buf[] = new String[100]; // buffer for reading from
 		// result_map
@@ -67,7 +67,7 @@ public class CountAthletResult {
 			}
 
 			if (buf[1] == athlete_id && buf[2] == competition_id) {
-				result = CountAthletResult.CountResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10], buf[11],
+				result = CountAthletResult.countResult(buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10], buf[11],
 						buf[12]);
 
 				return result;
