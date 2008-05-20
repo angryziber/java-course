@@ -165,14 +165,14 @@ public class LoadNewResults implements ResultsLoader {
 			// Num of line
 			int numLine = 0;
 
-			char[] char_buf = new char[1000];
+			char[] charBuf = new char[1000];
 			// Counter for chars in String
 			int charCount = 0;
 
 			int count = 0;
 
 			// If true, needs conversion to second:millisecond format
-			boolean flag_need_converted = false;
+			boolean flagNeedConverted = false;
 
 			while (in.ready()) {
 				line = in.readLine();
@@ -186,17 +186,17 @@ public class LoadNewResults implements ResultsLoader {
 
 				for (int i = 0; i < (line.length()); i++) {
 					if (line.charAt(i) != ',' && (i + 1) != line.length()) {
-						char_buf[charCount] = line.charAt(i);
-						if (char_buf[charCount] == ':')
-							flag_need_converted = true;
+						charBuf[charCount] = line.charAt(i);
+						if (charBuf[charCount] == ':')
+							flagNeedConverted = true;
 						charCount++;
 					}
 					else {
 						if (count > 2) {
-							strBuf[count] = String.copyValueOf(char_buf, 0, charCount);
-							if (flag_need_converted)
+							strBuf[count] = String.copyValueOf(charBuf, 0, charCount);
+							if (flagNeedConverted)
 								strBuf[count] = convertTime(strBuf[count]);
-							flag_need_converted = false;
+							flagNeedConverted = false;
 							charCount = 0;
 							count++;
 						}
@@ -205,17 +205,17 @@ public class LoadNewResults implements ResultsLoader {
 								strBuf[count] = String.valueOf(numLine + 1);
 								if (count == 0) {
 									strMap1[0] = String.valueOf(numLine + 1);
-									strMap1[1] = String.copyValueOf(char_buf, 0, charCount);
+									strMap1[1] = String.copyValueOf(charBuf, 0, charCount);
 								}
 								if (count == 1) {
-									strMap1[2] = String.copyValueOf(char_buf, 0, charCount);
+									strMap1[2] = String.copyValueOf(charBuf, 0, charCount);
 								}
 								charCount = 0;
 								count++;
 							}
 							else if (count == 2) {
 								strBuf[count] = "1";
-								strMap1[3] = String.copyValueOf(char_buf, 0, charCount);
+								strMap1[3] = String.copyValueOf(charBuf, 0, charCount);
 								charCount = 0;
 								count++;
 							}
