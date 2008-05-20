@@ -4,10 +4,15 @@ import org.junit.Test;
 import org.custommonkey.xmlunit.Validator;
 import static org.custommonkey.xmlunit.XMLAssert.assertXMLValid;
 import org.xml.sax.SAXException;
+import org.xml.sax.InputSource;
 
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import net.azib.java.students.t030629.homework.DecathlonCalculator;
+
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.transform.Source;
 
 /**
  * <br><br>User: Anton Chepurov
@@ -22,10 +27,10 @@ public class DecathlonResultsTest {
 
     @Test
     public void testValid() throws SAXException {
-        InputStreamReader xmlReader = new InputStreamReader(getClass().getResourceAsStream("decathlonResults.xml"));
-        String xsdPath = getClass().getResource("decathlonResults.xsd").getPath();
+        InputSource xmlSource = new InputSource(getClass().getResourceAsStream("decathlonResults.xml"));
+        String xsdPath = getClass().getResource(XMLSaver.DEFAULT_XSD_PATH).getPath();
 
-        Validator validator = new Validator(xmlReader, xsdPath);
+        Validator validator = new Validator(xmlSource, xsdPath);
         validator.useXMLSchema(true);
         assertXMLValid(validator);
     }

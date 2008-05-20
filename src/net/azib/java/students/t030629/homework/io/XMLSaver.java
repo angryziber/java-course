@@ -32,7 +32,7 @@ public class XMLSaver implements AthleteSaver {
     private final File xmlFile;
     private final CSVFormatter formatter;
     private final DefaultNormalizer defaultNormalizer;
-    private static final String DEFAULT_XSD_PATH = "decathlonResults.xsd";
+    static final String DEFAULT_XSD_PATH = "decathlonResults.xsd";
 
     /**
      * Constructor with the specified XML file

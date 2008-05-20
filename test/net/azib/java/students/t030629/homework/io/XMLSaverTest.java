@@ -61,7 +61,7 @@ public class XMLSaverTest {
 
             /* XML source and XSD for validation */
             InputSource inputSource = new InputSource(new InputStreamReader(new FileInputStream(xmlFile), System.getProperty(DecathlonCalculator.ENCODING_KEY)));
-            String xsdPath = getClass().getResource("decathlonResults.xsd").getPath();
+            String xsdPath = getClass().getResource(XMLSaver.DEFAULT_XSD_PATH).getPath();
 
             /* Validate */
             Validator validator = new Validator(inputSource, xsdPath);
