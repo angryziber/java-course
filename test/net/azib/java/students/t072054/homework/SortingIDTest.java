@@ -32,7 +32,7 @@ public class SortingIDTest {
 
 		ShowResultsTest.createMaps(result_map1, result_map2, result_map3, results_array);
 
-		result_list = SortingID.SortByID(result_map1, result_map2, result_map3, 2);
+		result_list = SortingID.sortByID(result_map1, result_map2, result_map3, 2);
 
 		assertTrue(result_list.get(0) == 3);
 		assertTrue(result_list.get(1) == 1);

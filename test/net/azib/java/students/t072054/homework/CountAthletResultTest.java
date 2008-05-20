@@ -30,7 +30,7 @@ public class CountAthletResultTest {
 
 		lnr.loadResultsDB(result_map1, result_map2, result_map3);
 
-		double result = CountAthletResult.CountResultByID(result_map3, 1, 2);
+		double result = CountAthletResult.countResultByID(result_map3, 1, 2);
 
 		assertTrue(result == 4239);
 	}
@@ -51,8 +51,8 @@ public class CountAthletResultTest {
 
 		lnr.loadResultsDB(result_map1, result_map2, result_map3);
 
-		double result1 = CountAthletResult.CountResultByID(result_map3, 8, 1);
-		double result2 = CountAthletResult.CountResult(10.94, 7.83, 12.48, 2, 49.72, 15.67, 38.3, 5.4, 55.84, 271.72);
+		double result1 = CountAthletResult.countResultByID(result_map3, 8, 1);
+		double result2 = CountAthletResult.countResult(10.94, 7.83, 12.48, 2, 49.72, 15.67, 38.3, 5.4, 55.84, 271.72);
 
 		assertTrue(result1 == result2);
 	}
