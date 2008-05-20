@@ -25,30 +25,30 @@ public class LoadNewResultsTest {
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap1 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap2 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap3 = new LinkedHashMap<Integer, String[]>();
 
-		lnr.loadResultsDB(result_map1, result_map2, result_map3);
+		lnr.loadResultsDB(resultMap1, resultMap2, resultMap3);
 
 		String str[];
 
 		for (int i = 0; i < 10; i++) {
-			str = result_map1.get(i);
+			str = resultMap1.get(i);
 
 			boolean result = str[0].equals(String.valueOf(i + 1));
 			assertTrue(result);
 		}
 
 		for (int i = 0; i < 2; i++) {
-			str = result_map2.get(i);
+			str = resultMap2.get(i);
 
 			boolean result = str[0].equals(String.valueOf(i + 1));
 			assertTrue(result);
 		}
 
 		for (int i = 0; i < 12; i++) {
-			str = result_map3.get(i);
+			str = resultMap3.get(i);
 
 			boolean result = str[0].equals(String.valueOf(i + 1));
 			assertTrue(result);
@@ -63,12 +63,12 @@ public class LoadNewResultsTest {
 	 */
 	@Test
 	public void convertTime() {
-		String not_converted = "3:23.59";
+		String notConverted = "3:23.59";
 		String converted;
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		converted = lnr.convertTime(not_converted);
+		converted = lnr.convertTime(notConverted);
 		System.out.println(converted.toCharArray());
 		assertTrue(converted.equals("203.59"));
 	}
