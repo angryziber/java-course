@@ -8,7 +8,7 @@ import java.util.Map;
  * @author r_vassiljev
  */
 public interface ResultsLoader {
-	public void loadResultsDB(Map<Integer, String[]> result_map1, Map<Integer, String[]> result_map2,
+	public void loadResultsDB(Map<Integer, String[]> resultMap1, Map<Integer, String[]> resultMap2,
 			Map<Integer, String[]> resultMap3);
 
 	public void loadResultsCSV(Map<Integer, String[]> resultMap1, Map<Integer, String[]> resultMap2,

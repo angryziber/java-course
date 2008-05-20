@@ -44,20 +44,20 @@ public class CountAthletResult {
 
 
 	/**
-	 * @param result_map3
+	 * @param resultMap3
 	 * @param ahleteId
 	 * @param competitionId
 	 * @return
 	 */
-	public static double countResultByID(Map<Integer, String[]> result_map3, double ahleteId, double competitionId) {
+	public static double countResultByID(Map<Integer, String[]> resultMap3, double ahleteId, double competitionId) {
 		double[] buf = new double[20];
 		String strBuf[] = new String[100]; // buffer for reading from
-		// result_map
+		// resultMap
 		double result = 0;
 
-		for (int j = 0; j < result_map3.size(); j++) {
+		for (int j = 0; j < resultMap3.size(); j++) {
 			// Reading data from database
-			strBuf = result_map3.get(j);
+			strBuf = resultMap3.get(j);
 
 			for (int i = 1; i < 13; i++) {
 				buf[i] = Double.parseDouble(strBuf[i]);
