@@ -128,7 +128,7 @@ public class DecathlonCalculator {
 	 */
 	public static String commandLineParsing(String args[]) {
 		int stage = INPUT_METHOD;
-		String return_value;
+		String returnValue;
 
 		// Initialization of static members
 		inputRoute = null;
@@ -184,9 +184,9 @@ public class DecathlonCalculator {
 			}
 		}
 
-		return_value = inputRoute + " " + outputRoute + " " + inputMethod + " " + outputMethod + " " + inputString;
+		returnValue = inputRoute + " " + outputRoute + " " + inputMethod + " " + outputMethod + " " + inputString;
 
-		return return_value;
+		return returnValue;
 	}
 
 	/**
