@@ -92,7 +92,7 @@ public class Hibernate implements Input {
 	}
 
 	public void setParameters(String... param) {
-		search = param[1]; // Parameter 1 should be a search criterion
+		search = param[0]; // Parameter should be a search criterion
 	}
 
 }

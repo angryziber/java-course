@@ -26,7 +26,6 @@ import java.util.List;
 public class CSV implements Input {
 
 	private String fileName;
-	private String filePath;
 	private BufferedReader reader;
 
 	public CSV() {
@@ -42,7 +41,7 @@ public class CSV implements Input {
 			if (fileName == null)
 				throw new IOException("Input file not specified.");
 			InputStream input;
-			File inputFile = new File(filePath, fileName);
+			File inputFile = new File(fileName);
 			try {
 				input = new FileInputStream(inputFile);
 				reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
@@ -107,8 +106,7 @@ public class CSV implements Input {
 	}
 
 	public void setParameters(String... param) {
-		fileName = param[1]; // Parameter 1 should be a file name
-		filePath = param[0]; // Parameter 0 should be file path
+		fileName = param[0]; // Parameter should be a file name
 	}
 
 }

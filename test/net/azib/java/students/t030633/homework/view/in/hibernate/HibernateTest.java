@@ -99,7 +99,7 @@ public class HibernateTest {
 	@Test
 	public void implementInput() throws IOException {
 		Input hib = new Hibernate();
-		hib.setParameters(new String[] { null, "1" });
+		hib.setParameters("1");
 		List<Athlete> athletes = hib.read(createMockBuilder());
 
 		assertEquals(1, athletes.size());

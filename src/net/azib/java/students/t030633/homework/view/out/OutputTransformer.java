@@ -28,7 +28,6 @@ public class OutputTransformer implements Output {
 	private URL stylesheet; // The stylesheet could be anywhere...
 	protected OutputStream output;
 	private String fileName;
-	private String filePath;
 
 	public OutputTransformer(URL stylesheet) {
 		this.stylesheet = stylesheet;
@@ -63,13 +62,12 @@ public class OutputTransformer implements Output {
 		if ((fileName == null) && (output == null)) // When parameters have not been set
 			throw new IOException("Output file not specified.");
 		else if (output == null) { // Not null when testing
-			output = new FileOutputStream(new File(filePath, fileName));
+			output = new FileOutputStream(new File(fileName));
 		}
 	}
 
 	public void setParameters(String... param) {
-		fileName = param[1]; // Parameter 1 should be a file name
-		filePath = param[0]; // Parameter 0 should be file path
+		fileName = param[0]; // Parameter should be a file name
 	}
 	
 	// This method is mostly used for testing

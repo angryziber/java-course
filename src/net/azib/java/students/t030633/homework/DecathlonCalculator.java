@@ -11,7 +11,6 @@ import net.azib.java.students.t030633.homework.view.out.OutputMethod;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,9 +20,6 @@ import java.util.List;
  * @author Tarmo Ojala, 030633 IASM
  */
 public class DecathlonCalculator {
-
-	/** root path for all files */
-	private static final URL PATH = DecathlonCalculator.class.getResource(".");
 
 	static final String HELP_MSG;
 	static final String LN = System.getProperty("line.separator");
@@ -128,9 +124,9 @@ public class DecathlonCalculator {
 				return false;
 			else {
 				input = inputMethod.getInput();
-				input.setParameters(new String[] { PATH.getPath(), inputParameter });
+				input.setParameters( inputParameter );
 				output = outputMethod.getOutput();
-				output.setParameters(new String[] { PATH.getPath(), outputParameter });
+				output.setParameters( outputParameter );
 				return true;
 			}
 		}

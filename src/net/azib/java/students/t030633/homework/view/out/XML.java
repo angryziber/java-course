@@ -28,7 +28,6 @@ public class XML implements Output {
 
 	private OutputStream output = null;
 	private String fileName;
-	private String filePath;
 
 	public XML() {
 	}
@@ -49,28 +48,43 @@ public class XML implements Output {
 
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); // XSD date format
 		DateFormat ldf = DateFormat.getDateInstance(); // Local date format
-		
-		int placeEqual = 1;
+
+		int placeHigh = 1;
+		int placeLow = 1;
 		int placeCounter = 1;
-		int lastScore = 20000;
-		for (Athlete athlete : athletes) {
+		int lastHighScore = Integer.MAX_VALUE;
+
+		for (int i = 0; i < athletes.size(); i++) {
+
+			Athlete athlete = athletes.get(i);
 			Element athleteElement = new Element("athlete");
 
+			// place calculation
 			int score = athlete.getScore();
-			if (score != lastScore) {
-				placeEqual = placeCounter;
-				lastScore = score;
+			if (score != lastHighScore) {
+				placeHigh = placeCounter;
+				lastHighScore = score;
 			}
+
+			placeLow = placeCounter;
+
+			for (int j = 1; (i + j) < athletes.size(); j++) {
+				if (score == athletes.get(i + j).getScore())
+					placeLow++;
+				else
+					break;
+			}
+
 			placeCounter++;
 
-			athleteElement.addContent(new Element("place").setText(String.valueOf(placeEqual)));
+			athleteElement.addContent(new Element("place").setText(formPlaceText(placeHigh, placeLow)));
+
 			athleteElement.addContent(new Element("name").setText(athlete.getName()));
 			athleteElement.addContent(new Element("country").setText(athlete.getCountry()));
 
 			Date birthdate = athlete.getBirthDate();
-			athleteElement.addContent(new Element("birthdate")
-				.setText(df.format(birthdate))
-				.setAttribute("local", ldf.format(birthdate)));
+			athleteElement.addContent(new Element("birthdate").setText(df.format(birthdate)).setAttribute("local",
+					ldf.format(birthdate)));
 
 			Element resultsElement = new Element("results");
 			Map<Event, Double> results = athlete.getResults();
@@ -98,12 +112,19 @@ public class XML implements Output {
 
 	}
 
+	private String formPlaceText(int high, int low) {
+		if (high == low)
+			return String.valueOf(high);
+		else
+			return String.valueOf(high) + "-" + String.valueOf(low);
+	}
+
 	public void write(List<Athlete> athletes) throws IOException {
 
 		if (output == null) {
 			if (fileName == null)
 				throw new IOException("Output file not specified.");
-			output = new FileOutputStream(new File(filePath, fileName));
+			output = new FileOutputStream(new File(fileName));
 		}
 
 		try {
@@ -118,8 +139,7 @@ public class XML implements Output {
 	}
 
 	public void setParameters(String... param) {
-		fileName = param[1]; // Parameter 1 should be a file name
-		filePath = param[0]; // Parameter 0 should be file path
+		fileName = param[0]; // Parameter should be a file name
 	}
 
 }
