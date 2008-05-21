@@ -269,8 +269,8 @@ public class ShowResults implements ResultShower {
 					elA[6 * i].appendChild(elA[6 * i + j + 2]);
 
 				}
-				Element results_data = document.createElement("results_data");
-				elA[6 * i].appendChild(results_data);
+				Element resultsData = document.createElement("resultsData");
+				elA[6 * i].appendChild(resultsData);
 
 				Element[] elR = new Element[10000];
 				for (int k = 0; k < resultMap3.size(); k++) {
@@ -315,7 +315,7 @@ public class ShowResults implements ResultShower {
 							if (j != 2)
 								elR[13 * k + j - 2].appendChild(document.createTextNode(resultMap3.get(k)[j]));
 							if (j == 2) {
-								results_data.appendChild(elR[13 * k + j - 2]);
+								resultsData.appendChild(elR[13 * k + j - 2]);
 							}
 							else {
 								elR[13 * k].appendChild(elR[13 * k + j - 2]);
