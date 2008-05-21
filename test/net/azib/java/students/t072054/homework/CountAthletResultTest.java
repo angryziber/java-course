@@ -24,13 +24,13 @@ public class CountAthletResultTest {
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap1 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap2 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap3 = new LinkedHashMap<Integer, String[]>();
 
-		lnr.loadResultsDB(result_map1, result_map2, result_map3);
+		lnr.loadResultsDB(resultMap1, resultMap2, resultMap3);
 
-		double result = CountAthletResult.countResultByID(result_map3, 1, 2);
+		double result = CountAthletResult.countResultByID(resultMap3, 1, 2);
 
 		assertTrue(result == 4239);
 	}
@@ -45,13 +45,13 @@ public class CountAthletResultTest {
 
 		LoadNewResults lnr = new LoadNewResults();
 
-		Map<Integer, String[]> result_map1 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
-		Map<Integer, String[]> result_map3 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap1 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap2 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap3 = new LinkedHashMap<Integer, String[]>();
 
-		lnr.loadResultsDB(result_map1, result_map2, result_map3);
+		lnr.loadResultsDB(resultMap1, resultMap2, resultMap3);
 
-		double result1 = CountAthletResult.countResultByID(result_map3, 8, 1);
+		double result1 = CountAthletResult.countResultByID(resultMap3, 8, 1);
 		double result2 = CountAthletResult.countResult(10.94, 7.83, 12.48, 2, 49.72, 15.67, 38.3, 5.4, 55.84, 271.72);
 
 		assertTrue(result1 == result2);
