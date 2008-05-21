@@ -14,7 +14,10 @@
 
 	<xsl:template match="athlete">
 
-		<xsl:text>&#xa;&#xa;Name: </xsl:text>
+		<xsl:text>&#xa;&#xa;</xsl:text>
+		<xsl:text>#</xsl:text>
+		<xsl:value-of select="place" />
+		<xsl:text> - </xsl:text>
 		<xsl:value-of select="name" />
 		<xsl:text>&#xa;Country: </xsl:text>
 		<xsl:value-of select="country" />
