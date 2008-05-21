@@ -188,11 +188,11 @@ public class Results implements Comparable<Results> {
 	 * @return root
 	 * @throws DecaCalcException - if the root Element is not instance of Element
 	 */
-	public Element addResultsDataToElement(Element root, int position) throws DecaCalcException {
+	public Element addResultsDataToElement(Element root, String position) throws DecaCalcException {
 		if (root instanceof Element) {
 			Element athleteElement = root.addElement("athlete").
 										  addAttribute("id", String.valueOf(athlete.getAthleteId()));
-			athleteElement.addElement("position").addText(String.valueOf(position));
+			athleteElement.addElement("position").addText(position);
 			athleteElement.addElement("score").addText(String.valueOf(sum));
 			athlete.addAthleteDataToElement(athleteElement);
 			Element resultsElement = athleteElement.addElement("results");

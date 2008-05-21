@@ -123,7 +123,7 @@ public class ResultsTest {
 			Results a = new Results(new MockAthlete(), getTestResults());
 			Document document = DocumentHelper.createDocument();
 			Element root = document.addElement("competition");
-			root = a.addResultsDataToElement(root, 123);
+			root = a.addResultsDataToElement(root, "123");
 
 			assertEquals("The 'athlete'-s id attribute was not added correctly", "0", root.element("athlete").attributeValue("id") );
 			assertEquals("The 'position' element was not added correctly", "123", root.element("athlete").elementText("position"));
