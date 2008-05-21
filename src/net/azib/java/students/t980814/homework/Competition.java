@@ -232,7 +232,6 @@ public class Competition {
 					currentPosition.append(place-samePlaceCounter).append("-").append(place-1);
 					for (int j = 0; j < samePlaceCounter; j++)
 						positions.add(currentPosition.toString());
-					System.out.println(currentPosition + " - " + place);
 				}
 				positions.add(String.valueOf(place));	
 				samePlaceCounter = 1;
