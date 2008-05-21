@@ -276,7 +276,7 @@ public class Competition {
 		StringBuilder sb = new StringBuilder("Sorted results: " + LN);
 		java.util.Iterator<String> position = buildSortedResults().iterator();
 		for (Results rr : results)
-			sb.append(String.format("%2d", position.next())).append(". ").append(rr).append(LN);
+			sb.append(position.next()).append(". ").append(rr).append(LN);
 		return sb.toString();
 	}
 
