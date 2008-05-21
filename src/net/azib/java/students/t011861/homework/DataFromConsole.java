@@ -27,6 +27,7 @@ public class DataFromConsole {
 	* Ask data from human using console interface!
 	*/
 	public DataFromConsole() throws Exception{
+		DataControl testData = new DataControl();
 		BufferedReader in = null;
 		List<String> athleteData = new ArrayList<String>();
 		System.out.println("Please insert athlete's name: ");
@@ -52,7 +53,8 @@ public class DataFromConsole {
 								break;
 							//Enter country code
 							case 1: {
-								athleteData.add(command);
+								String checkedData = testData.checkDate(command);
+								athleteData.add(checkedData);
 								i++;
 								System.out.println("Insert country code: ");
 								}
@@ -63,11 +65,17 @@ public class DataFromConsole {
 								i++;
 								System.out.println("Insert results!");
 								BufferedReader getResult = null;
+								String newResult;
 								for (int j = 0; j < 10; j++)
 								{
+									do
+									{
 									System.out.println("Enter a "+sportsArts[j]+" result: ");
 									getResult = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
-									athleteData.add(getResult.readLine());
+									newResult = getResult.readLine();
+									}
+									while (testData.isNegativeCheck(newResult));
+									athleteData.add(newResult);
 								}
 									athletesDatas.add((String[]) athleteData.toArray(new String[athleteData.size()]));
 									athleteData.clear();		
