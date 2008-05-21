@@ -211,19 +211,33 @@ public class Competition {
 	
 	/**
 	 * Helper function that builds a list of places that match the current results
-	 * @return LinkedList<Integer> of places
+	 * @return LinkedList<String> of places
 	 */
-	private LinkedList<Integer> buildSortedResults() {
-		LinkedList<Integer> positions = new LinkedList<Integer>();
+	private LinkedList<String> buildSortedResults() {
+		LinkedList<String> positions = new LinkedList<String>();
 		int place = 1;
 		int prevSum = -1;
 		int index = 1;
+		int samePlaceCounter = 1;
 		
 		for (Results rr : results) {
-			if (prevSum != rr.getSum())
+			if (prevSum == rr.getSum()) {
+				samePlaceCounter++;
+				positions.removeLast();
+			}
+			else {
 				place = index;
+				if (samePlaceCounter > 1) {
+					StringBuilder currentPosition = new StringBuilder();
+					currentPosition.append(place-samePlaceCounter).append("-").append(place-1);
+					for (int j = 0; j < samePlaceCounter; j++)
+						positions.add(currentPosition.toString());
+					System.out.println(currentPosition + " - " + place);
+				}
+				positions.add(String.valueOf(place));	
+				samePlaceCounter = 1;
+			}
 			prevSum = rr.getSum();
-			positions.add(place);
 			index++;
 		}
 		return positions;
@@ -237,7 +251,7 @@ public class Competition {
 	 */
 	public void toStringCSV(File fileCSV) throws DecaCalcException {
 		StringBuilder sb = new StringBuilder();
-		java.util.Iterator<Integer> position = buildSortedResults().iterator();
+		java.util.Iterator<String> position = buildSortedResults().iterator();
 		for (Results rr : results)
 			sb.append(position.next()).append(",").append(rr.toStringCSV()).append(LN);
 
@@ -261,7 +275,7 @@ public class Competition {
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Sorted results: " + LN);
-		java.util.Iterator<Integer> position = buildSortedResults().iterator();
+		java.util.Iterator<String> position = buildSortedResults().iterator();
 		for (Results rr : results)
 			sb.append(String.format("%2d", position.next())).append(". ").append(rr).append(LN);
 		return sb.toString();
@@ -281,7 +295,7 @@ public class Competition {
 		document.addDocType("competition", "", "decathlon.dtd");
 		Element root = document.addElement("competition");
 		
-		java.util.Iterator<Integer> position = buildSortedResults().iterator();
+		java.util.Iterator<String> position = buildSortedResults().iterator();
 		for (Results rr : results)
 			root = rr.addResultsDataToElement(root, position.next());
 		return document;
