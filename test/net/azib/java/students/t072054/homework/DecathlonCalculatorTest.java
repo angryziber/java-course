@@ -66,7 +66,7 @@ public class DecathlonCalculatorTest {
 	 */
 	@Test
 	public void getIDEventTest() {
-		Map<Integer, String[]> result_map2 = new LinkedHashMap<Integer, String[]>();
+		Map<Integer, String[]> resultMap2 = new LinkedHashMap<Integer, String[]>();
 		String[] str1 = new String[5];
 		String[] str2 = new String[5];
 
@@ -82,10 +82,10 @@ public class DecathlonCalculatorTest {
 		str2[3] = "Second";
 		str2[4] = "Stokholm";
 
-		result_map2.put(0, str1);
-		result_map2.put(1, str2);
+		resultMap2.put(0, str1);
+		resultMap2.put(1, str2);
 
-		assertEquals(DecathlonCalculator.getEventID(result_map2, "First"), 5);
-		assertEquals(DecathlonCalculator.getEventID(result_map2, "Second"), 10);
+		assertEquals(DecathlonCalculator.getEventID(resultMap2, "First"), 5);
+		assertEquals(DecathlonCalculator.getEventID(resultMap2, "Second"), 10);
 	}
 }
