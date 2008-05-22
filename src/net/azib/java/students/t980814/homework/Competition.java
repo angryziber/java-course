@@ -222,8 +222,9 @@ public class Competition {
 		
 		for (Results rr : results) {
 			if (prevSum == rr.getSum()) {
+				if (samePlaceCounter == 1)
+					positions.removeLast();
 				samePlaceCounter++;
-				positions.removeLast();
 			}
 			else {
 				place = index;
@@ -238,6 +239,13 @@ public class Competition {
 			}
 			prevSum = rr.getSum();
 			index++;
+		}
+		if (samePlaceCounter > 1) {
+			place = index;
+			StringBuilder currentPosition = new StringBuilder();
+			currentPosition.append(place-samePlaceCounter).append("-").append(place-1);
+			for (int j = 0; j < samePlaceCounter; j++)
+				positions.add(currentPosition.toString());
 		}
 		return positions;
 	}
