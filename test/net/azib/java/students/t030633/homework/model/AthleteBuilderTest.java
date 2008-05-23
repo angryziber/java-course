@@ -13,7 +13,7 @@ import org.junit.Test;
  * 
  * @author t030633
  */
-public class DecathlonAthleteBuilderTest {
+public class AthleteBuilderTest {
 
 	private static final String NAME = "Testname";
 	private static final Date DATE = new Date();
@@ -25,7 +25,7 @@ public class DecathlonAthleteBuilderTest {
 		RESULTS.put(Event.DISCUS, 10D);
 	}
 	
-	private AthleteBuilder builderUnderTest = new DecathlonAthleteBuilder();
+	private AthleteBuilder builderUnderTest = new AthleteBuilder();
 
 	/**
 	 * Test method for
@@ -61,22 +61,22 @@ public class DecathlonAthleteBuilderTest {
 
 	@Test
 	public void addsValidResults() {
-		assertEquals(666D, new DecathlonAthleteBuilder().calculate(validResults()));
+		assertEquals(666D, new AthleteBuilder().calculate(validResults()));
 	}
 	
 	@Test
 	public void addsZeroResults() {
-		assertEquals(0D, new DecathlonAthleteBuilder().calculate(zeroResults()));
+		assertEquals(0D, new AthleteBuilder().calculate(zeroResults()));
 	}
 	
 	@Test
 	public void existingCountryAccepted() {
-		assertEquals("EE", new DecathlonAthleteBuilder().checkCountry("EE"));
+		assertEquals("EE", new AthleteBuilder().checkCountry("EE"));
 	}
 
 	@Test
 	public void notExistingCountryRemoved() {
-		assertEquals("", new DecathlonAthleteBuilder().checkCountry("PP"));
+		assertEquals("", new AthleteBuilder().checkCountry("PP"));
 	}
 	
 	private Map<Event, Double> validResults() {

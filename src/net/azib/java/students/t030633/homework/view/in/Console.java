@@ -2,7 +2,6 @@ package net.azib.java.students.t030633.homework.view.in;
 
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
-import net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
 
 import java.io.BufferedReader;
@@ -33,7 +32,7 @@ public class Console implements Input {
 
 	private PrintStream out;
 	private BufferedReader reader;
-	private AthleteBuilder builder = new DecathlonAthleteBuilder();
+	private AthleteBuilder builder = new AthleteBuilder();
 
 	public Console() {
 		this(System.out, new BufferedReader(new InputStreamReader(System.in)));

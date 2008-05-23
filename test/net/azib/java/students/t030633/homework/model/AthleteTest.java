@@ -13,7 +13,7 @@ import org.junit.Test;
  * 
  * @author t030633
  */
-public class DecathlonAthleteTest {
+public class AthleteTest {
 
 	private final String NAME = "Testname";
 	private final String COUNTRY = "EE";
@@ -23,73 +23,45 @@ public class DecathlonAthleteTest {
 	private final int SCORE_B = 3;
 
 	private Athlete createAthleteA() {
-		DecathlonAthlete a = new DecathlonAthlete(NAME, DATE, COUNTRY, RESULTS, SCORE_A);
+		Athlete a = new Athlete(NAME, DATE, COUNTRY, RESULTS, SCORE_A);
 		return a;
 	}
 
 	private Athlete createAthleteB() {
-		DecathlonAthlete b = new DecathlonAthlete(NAME, DATE, COUNTRY, RESULTS, SCORE_B);
+		Athlete b = new Athlete(NAME, DATE, COUNTRY, RESULTS, SCORE_B);
 		return b;
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#getName()}.
-	 */
 	@Test
 	public void canGetName() {
 		assertEquals(NAME, createAthleteA().getName());
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#getBirthDate()}.
-	 */
 	@Test
 	public void canGetBirthDate() {
 		assertEquals(DATE, createAthleteA().getBirthDate());
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#getCountry()}.
-	 */
 	@Test
 	public void canGetCountry() {
 		assertEquals(COUNTRY, createAthleteA().getCountry());
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#getResults()}.
-	 */
 	@Test
 	public void canGetResults() {
 		assertEquals(RESULTS, createAthleteA().getResults());
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#getScore()}.
-	 */
 	@Test
 	public void canGetScore() {
 		assertEquals(SCORE_A, createAthleteA().getScore());
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#compareTo()}.
-	 */
 	@Test
 	public void comparesAsInteger() {
 		assertTrue((Integer) createAthleteA().compareTo(createAthleteB()) instanceof Integer);
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthlete#compareTo()}.
-	 */
 	@Test
 	public void compareIsScoreDifference() {
 		assertEquals(SCORE_B - SCORE_A, createAthleteA().compareTo(createAthleteB()));

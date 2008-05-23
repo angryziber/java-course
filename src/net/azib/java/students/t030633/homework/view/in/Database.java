@@ -3,7 +3,6 @@ package net.azib.java.students.t030633.homework.view.in;
 import net.azib.java.students.t030633.homework.DecathlonCalculator;
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
-import net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
 
 import java.io.BufferedReader;
@@ -26,7 +25,7 @@ import java.util.List;
  */
 public class Database implements Input {
 
-	private AthleteBuilder builder = new DecathlonAthleteBuilder();
+	private AthleteBuilder builder = new AthleteBuilder();
 	private Connection conn;
 
 	Database() {}
