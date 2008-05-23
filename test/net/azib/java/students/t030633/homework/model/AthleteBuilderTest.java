@@ -27,10 +27,6 @@ public class AthleteBuilderTest {
 	
 	private AthleteBuilder builderUnderTest = new AthleteBuilder();
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder}.
-	 */
 	@Test
 	public void basicBuildCompletes() {
 		Athlete a = builderUnderTest.name(NAME).date(DATE).country(COUNTRY).build();
@@ -41,10 +37,6 @@ public class AthleteBuilderTest {
 		assertEquals(0, a.getScore());
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder}.
-	 */
 	@Test
 	public void buildWithResultsCompletes() {
 		Athlete a = builderUnderTest.name(NAME).date(DATE).country(COUNTRY).addResult(Event.DISCUS, 10D).build();

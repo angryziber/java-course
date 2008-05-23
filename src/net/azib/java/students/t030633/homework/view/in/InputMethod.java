@@ -10,7 +10,6 @@ package net.azib.java.students.t030633.homework.view.in;
 public enum InputMethod {
 
 	CONSOLE(Console.class), CSV(CSV.class), DB(Database.class);
-	// use DB(Database.class) for a more robust database input
 
 	private final Class<? extends Input> inputClass;
 

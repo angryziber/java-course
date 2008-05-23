@@ -47,8 +47,9 @@ public class XML implements Output {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); // XSD date format
 		DateFormat ldf = DateFormat.getDateInstance(); // Local date format
 
-		int placeHigh = 1;
-		int placeLow = 1;
+		// It is possible to share places when more than one athlete has the same score.
+		int placeHigh = 1; // Highest place for current athlete
+		int placeLow = 1; // Lowest place for current athlete
 		int placeCounter = 1;
 		int lastHighScore = Integer.MAX_VALUE;
 
@@ -57,7 +58,9 @@ public class XML implements Output {
 			Athlete athlete = athletes.get(i);
 			Element athleteElement = new Element("athlete");
 
-			// place calculation
+			/*
+			 * Place calculation to see if athletes share places.
+			 */
 			int score = athlete.getScore();
 			if (score != lastHighScore) {
 				placeHigh = placeCounter;
@@ -72,6 +75,9 @@ public class XML implements Output {
 				else
 					break;
 			}
+			/*
+			 * End place calculation.
+			 */
 
 			placeCounter++;
 
@@ -110,6 +116,12 @@ public class XML implements Output {
 
 	}
 
+	/**
+	 * If athletes share places then the user sees a nicely formatted place range. For example 3-4.
+	 * @param high
+	 * @param low
+	 * @return place range string
+	 */
 	private String formPlaceText(int high, int low) {
 		if (high == low)
 			return String.valueOf(high);

@@ -103,8 +103,7 @@ public class Database implements Input {
 		}
 		
 		try { // Try to read athletes from the database
-			// Database read has one parameter, it should be the search
-			// criterion
+			// Database read has one parameter, it should be the search criterion
 			return parseAthletes(getAthletes(conn, search[0]));
 		}
 		catch (ArrayIndexOutOfBoundsException e) {

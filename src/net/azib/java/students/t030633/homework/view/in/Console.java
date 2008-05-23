@@ -74,9 +74,10 @@ public class Console implements Input {
 				out.print("\t" + e.getName() + ": ");
 				String result = reader.readLine();
 				try {
-					result = result.replaceAll(",", "."); // To allow both
-					// comma and dot
-					// separators
+					/*
+					 * To allow both comma and dot separators
+					 */
+					result = result.replaceAll(",", ".");
 					if (result.contains(":")) {
 						String[] minutes = result.split(":");
 						builder = builder.addResult(e, Integer.parseInt(minutes[0]) * 60 + Double.parseDouble(minutes[1]));

@@ -84,8 +84,10 @@ public class CSV implements Input {
 	}
 
 	private Date parseDate(String date) throws ParseException {
-		// Defining date format, different date formats in different locales
-		// could cause CSV parsing errors
+		/*
+		 * Defining date format, different date formats in different locales
+		 * could cause CSV parsing errors
+		 */
 		DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 		try {
 			return df.parse(date);
@@ -110,8 +112,10 @@ public class CSV implements Input {
 	}
 
 	private String parseName(String name) {
-		// remove all quotation marks from the string and replace them with
-		// spaces, then remove leading and trailing spaces
+		/*
+		 * Remove all quotation marks from the string and replace them with
+		 * spaces, then remove leading and trailing spaces
+		 */
 		return name.replace('"', ' ').trim();
 	}
 

@@ -17,6 +17,15 @@ public class Athlete implements Comparable<Athlete> {
 	private EnumMap<Event, Double> results;
 	private int score;
 
+	
+	/**
+	 * Construct an athlete with given parameters.
+	 * @param name
+	 * @param date
+	 * @param country
+	 * @param results
+	 * @param score
+	 */
 	Athlete(String name, Date date, String country, EnumMap<Event, Double> results, int score) {
 		this.name = name;
 		this.birthDate = date;
