@@ -2,6 +2,7 @@ package net.azib.java.students.t030633.homework.view.in;
 
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
+import net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
 
 import java.io.BufferedReader;
@@ -31,7 +32,8 @@ public class Console implements Input {
 
 	private PrintStream out;
 	private BufferedReader reader;
-
+	private AthleteBuilder builder = new DecathlonAthleteBuilder();
+	
 	public Console() {
 		this(System.out, new BufferedReader(new InputStreamReader(System.in)));
 	}
@@ -47,7 +49,7 @@ public class Console implements Input {
 		this.reader = in;
 	}
 
-	public List<Athlete> read(AthleteBuilder builder) throws IOException {
+	public List<Athlete> read(String... param) throws IOException {
 
 		List<Athlete> list = new LinkedList<Athlete>();
 
@@ -92,10 +94,6 @@ public class Console implements Input {
 		}
 		return list;
 
-	}
-
-	public void setParameters(String... param) {
-		// No parameters needed for console
 	}
 
 }

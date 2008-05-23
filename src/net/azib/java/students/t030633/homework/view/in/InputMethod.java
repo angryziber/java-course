@@ -1,6 +1,5 @@
 package net.azib.java.students.t030633.homework.view.in;
 
-import net.azib.java.students.t030633.homework.view.in.hibernate.Hibernate;
 
 /**
  * Decathlon input method - all possible input methods and classes that
@@ -10,7 +9,7 @@ import net.azib.java.students.t030633.homework.view.in.hibernate.Hibernate;
  */
 public enum InputMethod {
 
-	CONSOLE(Console.class), CSV(CSV.class), DB(Hibernate.class);
+	CONSOLE(Console.class), CSV(CSV.class), DB(Database.class);
 	// use DB(Database.class) for a more robust database input
 
 	private final Class<? extends Input> inputClass;

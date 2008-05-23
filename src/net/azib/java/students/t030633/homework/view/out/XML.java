@@ -27,11 +27,9 @@ import org.jdom.output.XMLOutputter;
 public class XML implements Output {
 
 	private OutputStream output = null;
-	private String fileName;
 
-	public XML() {
-	}
-
+	public XML() {}
+	
 	public XML(OutputStream out) {
 		this.output = out;
 	}
@@ -88,10 +86,10 @@ public class XML implements Output {
 
 			Element resultsElement = new Element("results");
 			Map<Event, Double> results = athlete.getResults();
-			for (Event event : results.keySet()) {
+			for (Map.Entry<Event, Double> e : results.entrySet()) {
 				Element resultElement = new Element("result");
-				resultElement.addContent(new Element("event").setText(event.getName()));
-				double performance = results.get(event);
+				resultElement.addContent(new Element("event").setText(e.getKey().getName()));
+				double performance = e.getValue();
 				StringBuilder perfBuilder = new StringBuilder();
 				if (performance > 60.0D)
 					perfBuilder.append((int) Math.floor(performance / 60)).append(":");
@@ -119,12 +117,12 @@ public class XML implements Output {
 			return String.valueOf(high) + "-" + String.valueOf(low);
 	}
 
-	public void write(List<Athlete> athletes) throws IOException {
+	public void write(List<Athlete> athletes, String... fileName) throws IOException {
 
 		if (output == null) {
-			if (fileName == null)
+			if (fileName.length == 0) // Output file name should be given as a parameter
 				throw new IOException("Output file not specified.");
-			output = new FileOutputStream(new File(fileName));
+			output = new FileOutputStream(new File(fileName[0]));
 		}
 
 		try {
@@ -136,10 +134,6 @@ public class XML implements Output {
 			throw new IOException("XML Outputter error.");
 		}
 
-	}
-
-	public void setParameters(String... param) {
-		fileName = param[0]; // Parameter should be a file name
 	}
 
 }

@@ -15,10 +15,60 @@ import org.junit.Test;
  * 
  * @author t030633
  */
-public class DecathlonCheckerTest extends AbstractCheckerTest {
+public class DecathlonCheckerTest {
 
-	public DecathlonCheckerTest() {
-		super(new DecathlonChecker());
+	private Checker checker = new DecathlonChecker();
+	
+	@Test
+	public void nullCountryAvoided() {
+		assertNotNull(checker.checkCountry(null));
+	}
+
+	@Test
+	public void existingCountryAccepted() {
+		assertEquals("EE", checker.checkCountry("EE"));
+	}
+
+	@Test
+	public void notExistingCountryRemoved() {
+		assertEquals("", checker.checkCountry("PP"));
+	}
+
+	@Test
+	public void nullDateAvoided() {
+		assertNotNull(checker.checkDate(null));
+	}
+
+	@Test
+	public void testCheckName() {
+		assertNotNull(checker.checkName(null));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
+	 */
+	@Test
+	public void nullResultsAvoided() {
+		assertNotNull(checker.checkResults(null));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
+	 */
+	@Test
+	public void validResultsAccepted() {
+		assertEquals(validResults(), checker.checkResults(validResults()));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
+	 */
+	@Test
+	public void invalidResultsRemoved() {
+		assertEquals(emptyResults(), checker.checkResults(invalidResults()));
 	}
 
 	private EnumMap<Event, Double> emptyResults() {
@@ -47,32 +97,5 @@ public class DecathlonCheckerTest extends AbstractCheckerTest {
 		results.put(Event.SHOT, 50D);
 		return results;
 	}
-
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
-	 */
-	@Test
-	public void nullResultsAvoided() {
-		assertNotNull(new DecathlonChecker().checkResults(null));
-	}
-
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
-	 */
-	@Test
-	public void validResultsAccepted() {
-		assertEquals(validResults(), new DecathlonChecker().checkResults(validResults()));
-	}
-
-	/**
-	 * Test method for
-	 * {@link net.azib.java.students.t030633.homework.model.DecathlonChecker#checkResults(EnumMap)}.
-	 */
-	@Test
-	public void invalidResultsRemoved() {
-		assertEquals(emptyResults(), new DecathlonChecker().checkResults(invalidResults()));
-	}
-
+	
 }

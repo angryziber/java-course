@@ -2,6 +2,7 @@ package net.azib.java.students.t030633.homework.view.in;
 
 import net.azib.java.students.t030633.homework.model.Athlete;
 import net.azib.java.students.t030633.homework.model.AthleteBuilder;
+import net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder;
 import net.azib.java.students.t030633.homework.model.Event;
 
 import java.io.BufferedReader;
@@ -25,8 +26,8 @@ import java.util.List;
  */
 public class CSV implements Input {
 
-	private String fileName;
 	private BufferedReader reader;
+	private AthleteBuilder builder = new DecathlonAthleteBuilder();
 
 	public CSV() {
 	}
@@ -35,19 +36,23 @@ public class CSV implements Input {
 		this.reader = reader;
 	}
 
-	public List<Athlete> read(AthleteBuilder builder) throws IOException {
+	public List<Athlete> read(String... fileName) throws IOException {
 
-		if (reader == null) {
-			if (fileName == null)
-				throw new IOException("Input file not specified.");
+		if (reader == null) { // reader not null indicates a test case
 			InputStream input;
-			File inputFile = new File(fileName);
+			File inputFile;
+			try {
+				inputFile = new File(fileName[0]);
+			}
+			catch (ArrayIndexOutOfBoundsException e) {
+				throw new IOException("Input file not specified.", e);
+			}
 			try {
 				input = new FileInputStream(inputFile);
 				reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
 			}
 			catch (FileNotFoundException e) {
-				throw new IOException("Input file not found.");
+				throw new IOException("Input file not found.", e);
 			}
 		}
 		List<Athlete> list = new LinkedList<Athlete>();
@@ -103,10 +108,6 @@ public class CSV implements Input {
 		// remove all quotation marks from the string and replace them with
 		// spaces, then remove leading and trailing spaces
 		return name.replace('"', ' ').trim();
-	}
-
-	public void setParameters(String... param) {
-		fileName = param[0]; // Parameter should be a file name
 	}
 
 }

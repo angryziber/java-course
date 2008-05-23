@@ -27,19 +27,19 @@ public class OutputTransformer implements Output {
 
 	private URL stylesheet; // The stylesheet could be anywhere...
 	protected OutputStream output;
-	private String fileName;
 
 	public OutputTransformer(URL stylesheet) {
 		this.stylesheet = stylesheet;
 	}
 
-	public void write(List<Athlete> athletes) throws IOException {
+	public void write(List<Athlete> athletes, String... fileName) throws IOException {
 
-		init(); // Initialize from properties
+		initializeOutput(fileName); // Output is dependent on extending class
 
 		/*
-		 * Create a temporary XML buffer (in the form of ByteArrayOutputStream) and write XML into it
-		 * Hopefully we have enough memory to buffer the entire amount of data
+		 * Create a temporary XML buffer (in the form of ByteArrayOutputStream)
+		 * and write XML into it. Hopefully we have enough memory to buffer the
+		 * entire amount of data.
 		 */
 		ByteArrayOutputStream temp = new ByteArrayOutputStream();
 		new XML(temp).write(athletes);
@@ -58,19 +58,28 @@ public class OutputTransformer implements Output {
 
 	}
 
-	public void init() throws IOException {
-		if ((fileName == null) && (output == null)) // When parameters have not been set
-			throw new IOException("Output file not specified.");
-		else if (output == null) { // Not null when testing
-			output = new FileOutputStream(new File(fileName));
+	/**
+	 * Output initialization. Defaults to writing output to a file but can be
+	 * overridden to make the transformer write to some other output, like
+	 * System.out.
+	 * 
+	 * @param fileName -
+	 *            parameters from the write method
+	 * 
+	 * @throws IOException
+	 */
+	protected void initializeOutput(String[] fileName) throws IOException {
+		if (output == null) { // Not null when testing
+			try { // Output file name should have been given as a parameter
+				output = new FileOutputStream(new File(fileName[0]));
+			}
+			catch (ArrayIndexOutOfBoundsException e) {
+				throw new IOException("Output file not specified.", e);
+			}
 		}
 	}
 
-	public void setParameters(String... param) {
-		fileName = param[0]; // Parameter should be a file name
-	}
-	
-	// This method is mostly used for testing
+	// This method is for testing
 	void setOutputStream(OutputStream output) {
 		this.output = output;
 	}

@@ -4,24 +4,30 @@ import java.util.Date;
 import java.util.EnumMap;
 
 /**
- * Builds an instance of DecathlonAthlete.
+ * Builds decathlon athletes.
  * 
  * @author t030633
  */
 public class DecathlonAthleteBuilder implements AthleteBuilder {
 
-	private Checker checker;
-	private Calculator calculator;
+	private Checker checker = new DecathlonChecker();
+	private Calculator calculator = new AddingCalculator();
 
 	private String name;
 	private Date date;
 	private String country;
-	private EnumMap<Event, Double> results;
+	private EnumMap<Event, Double> results = new EnumMap<Event, Double>(Event.class);;
 
-	public DecathlonAthleteBuilder(Checker checker, Calculator calculator) {
-		this.checker = checker;
-		this.calculator = calculator;
-		this.results = new EnumMap<Event, Double>(Event.class);
+	public DecathlonAthleteBuilder() {}
+	
+	/**
+	 * We use this constructor in tests only, hence the 'mocks'.
+	 * @param mockChecker
+	 * @param mockCalculator
+	 */
+	public DecathlonAthleteBuilder(Checker mockChecker, Calculator mockCalculator) {
+		this.checker = mockChecker;
+		this.calculator = mockCalculator;
 	}
 
 	public AthleteBuilder name(String name) {

@@ -1,7 +1,6 @@
 package net.azib.java.students.t030633.homework.view.in;
 
 import net.azib.java.students.t030633.homework.model.Athlete;
-import net.azib.java.students.t030633.homework.model.AthleteBuilder;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,18 +13,13 @@ import java.util.List;
 public interface Input {
 
 	/**
-	 * @param builder -
-	 *            AthleteBuilder to build athletes
+	 * @param param -
+	 *            possible parameters for input. e.g. file names, search
+	 *            criterion(s) (depends on input)
 	 * @return List<Athlete> - a list of athletes
 	 * @throws IOException
 	 *             if reading fails
 	 */
-	List<Athlete> read(AthleteBuilder builder) throws IOException;
+	List<Athlete> read(String... param) throws IOException;
 
-	
-	/**
-	 * @param param - String parameters for input
-	 */
-	void setParameters(String... param);
-	
 }

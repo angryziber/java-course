@@ -3,7 +3,7 @@ package net.azib.java.students.t030633.homework.model;
 import java.util.Map;
 
 /**
- * Adds scores from all events. Final score is sum of all scores from single event performances.
+ * Calculates final score by adding scores from all events.
  * 
  * @author t030633
  */

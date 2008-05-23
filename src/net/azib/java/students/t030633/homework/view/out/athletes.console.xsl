@@ -14,7 +14,7 @@
 
 	<xsl:template match="athlete">
 
-		<xsl:text>&#xa;&#xa;</xsl:text>
+		<xsl:text>&#xa;</xsl:text>
 		<xsl:text>#</xsl:text>
 		<xsl:value-of select="place" />
 		<xsl:text> - </xsl:text>

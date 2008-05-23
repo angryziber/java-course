@@ -10,6 +10,7 @@ import java.util.Map;
 public interface Calculator {
 
 	/**
+	 * Calculate final score from results.
 	 * @param results - Map, results (event performances)
 	 * @return int - integer score calculated from results
 	 */

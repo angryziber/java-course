@@ -1,9 +1,6 @@
 package net.azib.java.students.t030633.homework;
 
-import net.azib.java.students.t030633.homework.model.AddingCalculator;
 import net.azib.java.students.t030633.homework.model.Athlete;
-import net.azib.java.students.t030633.homework.model.DecathlonAthleteBuilder;
-import net.azib.java.students.t030633.homework.model.DecathlonChecker;
 import net.azib.java.students.t030633.homework.view.in.Input;
 import net.azib.java.students.t030633.homework.view.in.InputMethod;
 import net.azib.java.students.t030633.homework.view.out.Output;
@@ -40,6 +37,10 @@ public class DecathlonCalculator {
 
 	private static Input input;
 	private static Output output;
+	
+	private static String inputParameter;
+	private static String outputParameter;
+	
 	private static PrintStream out = System.out; // For printing messages to user
 
 	static void setPrintStream(PrintStream set) {
@@ -49,9 +50,9 @@ public class DecathlonCalculator {
 	public static void main(String[] args) {
 		if (init(args)) {
 			try {
-				List<Athlete> athletes = input.read(new DecathlonAthleteBuilder(new DecathlonChecker(), new AddingCalculator()));
+				List<Athlete> athletes = input.read(inputParameter);
 				Collections.sort(athletes);
-				output.write(athletes);
+				output.write(athletes, outputParameter);
 			}
 			catch (IOException ioe) {
 				/*
@@ -84,8 +85,6 @@ public class DecathlonCalculator {
 		else {
 			InputMethod inputMethod = null;
 			OutputMethod outputMethod = null;
-			String inputParameter = null;
-			String outputParameter = null;
 
 			for (String string : args) {
 				if (string.startsWith("-")) {
@@ -124,9 +123,7 @@ public class DecathlonCalculator {
 				return false;
 			else {
 				input = inputMethod.getInput();
-				input.setParameters( inputParameter );
 				output = outputMethod.getOutput();
-				output.setParameters( outputParameter );
 				return true;
 			}
 		}

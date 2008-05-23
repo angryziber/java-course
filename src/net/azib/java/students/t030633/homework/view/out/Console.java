@@ -14,8 +14,9 @@ public class Console extends OutputTransformer {
 	}
 
 	@Override
-	public void init() throws IOException {
+	protected void initializeOutput(String[] fileName) throws IOException {
 		if (this.output == null)
+			// Initialize XSL transformation output to System.out
 			this.output = System.out;
 	}
 

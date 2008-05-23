@@ -13,16 +13,14 @@ import java.util.List;
 public interface Output {
 
 	/**
+	 * @param param -
+	 *            possible parameters for output, like output file names
+	 *            (depends on output)
 	 * @param athletes -
 	 *            List<Athlete>, a list of athletes to output
 	 * @throws IOException
 	 *             if writing fails
 	 */
-	void write(List<Athlete> athletes) throws IOException;
+	void write(List<Athlete> athletes, String... param) throws IOException;
 
-	/**
-	 * @param param - String parameters for output
-	 */
-	void setParameters(String... param);
-	
 }
