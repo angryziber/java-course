@@ -23,12 +23,12 @@ public interface Athlete extends Comparable<Athlete> {
 	public int compareTo(Athlete anotherAthlete);
 
 	/**
-	 * @return String - name of Athlete. Empty string if not available.
+	 * @return String - name of Athlete.
 	 */
 	public String getName();
 
 	/**
-	 * @return Date - birth date of Athlete. If not available then it returns "the epoch" date (January 1-st 1970).
+	 * @return Date - birth date of Athlete.
 	 */
 	public Date getBirthDate();
 
@@ -39,12 +39,12 @@ public interface Athlete extends Comparable<Athlete> {
 	public String getCountry();
 
 	/**
-	 * @return Map - competition results in a Map collection
+	 * @return Map - competition results in a Map collection.
 	 */
 	public Map<Event, Double> getResults();
 
 	/**
-	 * @return Integer - score calculated from performance(s)
+	 * @return Integer - score calculated from performance(s).
 	 */
 	public int getScore();
 

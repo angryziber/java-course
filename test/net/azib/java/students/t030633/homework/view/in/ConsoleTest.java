@@ -91,7 +91,7 @@ public class ConsoleTest {
 
 		// User input moves lines forward, therefore some newlines are missing
 		String expected = Console.BEGIN_MSG + Console.LN + Console.QUESTION + "Name: " + "Country: " + 
-				"Birth date: " + Console.WRONG_DATE_FORMAT + "Results: " + Console.LN;
+				"Birth date: " + Console.WRONG_DATE_FORMAT + Console.LN + "Results: " + Console.LN;
 		StringBuilder sb = new StringBuilder(expected);
 		for (Event e : Event.values()) {
 			sb.append("\t").append(e.getName()).append(": ");

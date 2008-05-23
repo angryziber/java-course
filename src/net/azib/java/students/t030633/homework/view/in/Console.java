@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,15 +26,15 @@ public class Console implements Input {
 	static final String LN = System.getProperty("line.separator");
 	static final String QUESTION = "Do you wish to enter an athlete? y/n" + LN + ">";
 	static final String WRONG_RESULT_FORMAT = "Result must be a number!" + LN;
-	static final String WRONG_DATE_FORMAT = "Bad date format.";
 
 	// Using system date format, which the user probably assumes
 	static final DateFormat DF = DateFormat.getDateInstance();
+	static final String WRONG_DATE_FORMAT = "Bad date format! (try " + ((SimpleDateFormat) DF).toPattern() + ")";
 
 	private PrintStream out;
 	private BufferedReader reader;
 	private AthleteBuilder builder = new DecathlonAthleteBuilder();
-	
+
 	public Console() {
 		this(System.out, new BufferedReader(new InputStreamReader(System.in)));
 	}
@@ -60,22 +61,23 @@ public class Console implements Input {
 			builder = builder.name(reader.readLine());
 			out.print("Country: ");
 			builder = builder.country(reader.readLine());
-			out.print("Birth date: ");
 
+			out.print("Birth date: ");
 			try {
 				builder = builder.date(DF.parse(reader.readLine()));
 			}
 			catch (ParseException e) {
-				out.print(WRONG_DATE_FORMAT);
+				out.println(WRONG_DATE_FORMAT);
 			}
 
 			out.println("Results: ");
-
 			for (Event e : Event.values()) {
 				out.print("\t" + e.getName() + ": ");
 				String result = reader.readLine();
 				try {
-					result = result.replaceAll(",", "."); // To allow both comma and dot separators
+					result = result.replaceAll(",", "."); // To allow both
+					// comma and dot
+					// separators
 					if (result.contains(":")) {
 						String[] minutes = result.split(":");
 						builder = builder.addResult(e, Integer.parseInt(minutes[0]) * 60 + Double.parseDouble(minutes[1]));

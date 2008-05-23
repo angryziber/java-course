@@ -88,7 +88,13 @@ public class CSV implements Input {
 		// Defining date format, different date formats in different locales
 		// could cause CSV parsing errors
 		DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-		return df.parse(date);
+		try {
+			return df.parse(date);
+		}
+		catch (ParseException e) {
+			// An athlete is born.
+			return new Date();
+		}
 	}
 
 	private double[] parseResults(String[] results) {

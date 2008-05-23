@@ -1,14 +1,10 @@
 package net.azib.java.students.t030633.homework.model;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 import java.util.EnumMap;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -22,30 +18,14 @@ public class DecathlonAthleteBuilderTest {
 	private static final String NAME = "Testname";
 	private static final Date DATE = new Date();
 	private static final String COUNTRY = "CZ";
-	private static final int SCORE = 6;
 
 	private static final EnumMap<Event, Double> EMPTY_RESULTS = new EnumMap<Event, Double>(Event.class);
 	private static final EnumMap<Event, Double> RESULTS = new EnumMap<Event, Double>(Event.class);
 	static {
 		RESULTS.put(Event.DISCUS, 10D);
 	}
-
-	private Checker createMockChecker(EnumMap<Event, Double> results) {
-		Checker mockChecker = createMock(Checker.class);
-		expect(mockChecker.checkName(NAME)).andReturn(NAME);
-		expect(mockChecker.checkDate(DATE)).andReturn(DATE);
-		expect(mockChecker.checkCountry(COUNTRY)).andReturn(COUNTRY);
-		expect(mockChecker.checkResults(results)).andReturn(results);
-		replay(mockChecker);
-		return mockChecker;
-	}
-
-	private Calculator createMockCalculator(EnumMap<Event, Double> results) {
-		Calculator mockCalculator = createMock(Calculator.class);
-		expect(mockCalculator.calculate(results)).andReturn(SCORE);
-		replay(mockCalculator);
-		return mockCalculator;
-	}
+	
+	private AthleteBuilder builderUnderTest = new DecathlonAthleteBuilder();
 
 	/**
 	 * Test method for
@@ -53,18 +33,12 @@ public class DecathlonAthleteBuilderTest {
 	 */
 	@Test
 	public void basicBuildCompletes() {
-
-		Calculator mockCalculator = createMockCalculator(EMPTY_RESULTS);
-		Checker mockChecker = createMockChecker(EMPTY_RESULTS);
-		AthleteBuilder builder = new DecathlonAthleteBuilder(mockChecker, mockCalculator);
-		Athlete a = builder.name(NAME).date(DATE).country(COUNTRY).build();
+		Athlete a = builderUnderTest.name(NAME).date(DATE).country(COUNTRY).build();
 		assertEquals(NAME, a.getName());
 		assertEquals(DATE, a.getBirthDate());
 		assertEquals(COUNTRY, a.getCountry());
 		assertEquals(EMPTY_RESULTS, a.getResults());
-		assertEquals(SCORE, a.getScore());
-		verify(mockChecker);
-		verify(mockCalculator);
+		assertEquals(0, a.getScore());
 	}
 
 	/**
@@ -73,19 +47,52 @@ public class DecathlonAthleteBuilderTest {
 	 */
 	@Test
 	public void buildWithResultsCompletes() {
-
-		Calculator mockCalculator = createMockCalculator(RESULTS);
-		Checker mockChecker = createMockChecker(RESULTS);
-		AthleteBuilder builder = new DecathlonAthleteBuilder(mockChecker, mockCalculator);
-		Athlete a = builder.name(NAME).date(DATE).country(COUNTRY).addResult(Event.DISCUS, 10D).build();
+		Athlete a = builderUnderTest.name(NAME).date(DATE).country(COUNTRY).addResult(Event.DISCUS, 10D).build();
 		assertEquals(NAME, a.getName());
 		assertEquals(DATE, a.getBirthDate());
 		assertEquals(COUNTRY, a.getCountry());
 		assertEquals(RESULTS, a.getResults());
-		assertEquals(SCORE, a.getScore());
-		verify(mockChecker);
-		verify(mockCalculator);
-
+		assertEquals(Event.DISCUS.points(10D), a.getScore());
 	}
 
+	/* 
+	 * Also test some package local methods.
+	 */
+
+	@Test
+	public void addsValidResults() {
+		assertEquals(666D, new DecathlonAthleteBuilder().calculate(validResults()));
+	}
+	
+	@Test
+	public void addsZeroResults() {
+		assertEquals(0D, new DecathlonAthleteBuilder().calculate(zeroResults()));
+	}
+	
+	@Test
+	public void existingCountryAccepted() {
+		assertEquals("EE", new DecathlonAthleteBuilder().checkCountry("EE"));
+	}
+
+	@Test
+	public void notExistingCountryRemoved() {
+		assertEquals("", new DecathlonAthleteBuilder().checkCountry("PP"));
+	}
+	
+	private Map<Event, Double> validResults() {
+		EnumMap<Event, Double> map = new EnumMap<Event, Double>(Event.class);
+		map.put(Event.SHOT, 8.3D); // 8.3m
+		map.put(Event.DISCUS, 14.2D); // 14.2m
+		map.put(Event.R1500M, 403D); // 6min 43sec
+		return map;
+	}
+	
+	private Map<Event, Double> zeroResults() {
+		EnumMap<Event, Double> map = new EnumMap<Event, Double>(Event.class);
+		map.put(Event.LONGJ, 0D);
+		map.put(Event.HIGH, 0D);
+		map.put(Event.POLE, 0D);
+		return map;
+	}
+	
 }
