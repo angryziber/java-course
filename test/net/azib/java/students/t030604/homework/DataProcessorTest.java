@@ -1,4 +1,4 @@
-package net.azib.java.students.t030604;
+package net.azib.java.students.t030604.homework;
 
 import net.azib.java.students.t030604.homework.AthleteScore;
 
