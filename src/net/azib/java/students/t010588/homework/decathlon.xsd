@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="decathlon" xmlns=""
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="decathlon">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="athlete">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="result" minOccurs="10"
+								maxOccurs="10">
+								<xs:complexType>
+									<xs:attribute name="index"
+										type="xs:integer" use="required" />
+									<xs:attribute name="points"
+										type="xs:integer" use="required" />
+									<xs:attribute name="value"
+										type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="birthDay" type="xs:string"
+							use="required" />
+						<xs:attribute name="country" type="xs:string"
+							use="required" />
+						<xs:attribute name="name" type="xs:string"
+							use="required" />
+						<xs:attribute name="place" type="xs:string"
+							use="required" />
+						<xs:attribute name="score" type="xs:integer"
+							use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
