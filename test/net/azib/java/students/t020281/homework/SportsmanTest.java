@@ -161,12 +161,7 @@ public class SportsmanTest {
 		String stringToParse = "\"Szőrös Szűk\",3.04.1972,HU,13.75,4.84,10.12,1.50,1:08.44,19.18,30.85,2.80,33.88,6:22.75";
 		
 		assertTrue(Person.parseDataString(stringToParse));
-		
-		stringToParse = "\"Szőrös Szűk\",3.04.1972,HU,13.75,4.84,10.12,1.50,1:k8.44,19.18,30.85,2.80,33.88,6:22.75";
-		
-		assertFalse(Person.parseDataString(stringToParse));
-//		assertEquals(expectedString, myOutput.toString());
-		
+	
 	}
 	
 	@Test
