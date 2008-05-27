@@ -15,6 +15,8 @@ public class HelloWorld
 	public static void main(String[] args) 
 	{
 		System.out.println(Constants.GREETING_MESSAGE);
-		System.out.println(new Date());
+		System.out.println(Math.pow(2, 3));
+		System.out.println(HelloWorld.class.getResource("test.csv"));
+		
 	}
 }
