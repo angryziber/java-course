@@ -21,7 +21,7 @@ public class ConsoleExporter implements AthleteExporter {
 				place = athlete.getFirstPlace() + "-" + athlete.getLastPlace();
 
 			System.out.println(place + ". " + athlete.getName() + " (" + DATE_FORMAT.format(athlete.getBirhday()) + ", "
-					+ String.valueOf(athlete.getCountry()) + " ), " + athlete.getScore());
+					+ String.valueOf(athlete.getCountry()) + "), " + athlete.getScore());
 			int i = 1;
 			for (Result result : athlete.getResults()) {
 				System.out.println("\t" + (i++) + ") " + result + " (" + result.getPoints() + ")");

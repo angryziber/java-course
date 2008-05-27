@@ -27,68 +27,46 @@ public class ResultsConverter {
 	 *            [output-parameters]
 	 */
 	public static void main(String[] args) {
-		String importerKey = null;
-		String importerParam = null;
-
-		String exporterKey = null;
-		String exporterParam = null;
-
-		switch (args.length) {
-		case 0:
-		case 1:
+		if (args.length < 2) {
 			help();
 			System.exit(0);
-			break;
-		case 2:
-			importerKey = args[0];
-			exporterKey = args[1];
-			break;
-		case 3:
-			importerKey = args[0];
-			importerParam = args[1];
-			exporterKey = args[2];
-			break;
-		default:
-			importerKey = args[0];
-			importerParam = args[1];
-
-			exporterKey = args[2];
-			exporterParam = args[3];
-			break;
 		}
+
+		int argIndex = 0;
 
 		AthleteImporter importer = null;
 		AthleteExporter exporter = null;
 
 		try {
-			if (importerKey.equals("-csv")) {
-				importer = new CSVImporter(new File(importerParam));
+			if (args[argIndex].equals("-csv")) {
+				importer = new CSVImporter(new File(args[++argIndex]));
 			}
-			else if (importerKey.equals("-console")) {
+			else if (args[argIndex].equals("-console")) {
 				importer = new ConsoleImporter();
 			}
-			else if (importerKey.equals("-db")) {
-				importer = new DatabaseImporter(new File("db.properties"), importerParam);
+			else if (args[argIndex].equals("-db")) {
+				importer = new DatabaseImporter(new File("db.properties"), args[++argIndex]);
 			}
 
-			if (exporterKey.equals("-csv")) {
-				exporter = new CSVExporter(new File(exporterParam));
+			argIndex++;
+
+			if (args[argIndex].equals("-csv")) {
+				exporter = new CSVExporter(new File(args[++argIndex]));
 			}
-			else if (exporterKey.equals("-xml")) {
-				exporter = new XMLExporter(new File(exporterParam));
+			else if (args[argIndex].equals("-xml")) {
+				exporter = new XMLExporter(new File(args[++argIndex]));
 			}
-			else if (exporterKey.equals("-console")) {
+			else if (args[argIndex].equals("-console")) {
 				exporter = new ConsoleExporter();
 			}
-			else if (exporterKey.equals("-html")) {
-				exporter = new HTMLExporter(new File(exporterParam));
+			else if (args[argIndex].equals("-html")) {
+				exporter = new HTMLExporter(new File(args[++argIndex]));
 			}
 
 			if (importer == null || exporter == null)
-				throw new WrongFormatException("Unsupported format:" + importerKey + " => " + exporterKey);
+				throw new WrongFormatException("Unsupported format:" + args[argIndex++] + " => " + args[argIndex++]);
 
-			DecathlonScoreCounter counter = new DecathlonScoreCounter();
-			counter.score(importer.getAthletes());
+			new DecathlonSummarizer().summarize(importer.getAthletes());
 
 			exporter.exportAthletes(importer.getAthletes());
 		}
@@ -115,7 +93,7 @@ public class ResultsConverter {
 		System.out.println("-console");
 		System.out.println("-cvs [file]");
 		System.out.println("-db [competition id or name]");
-		System.out.println("Supported output format(s): csv");
+		System.out.println("Supported output format(s):");
 		System.out.println("-console");
 		System.out.println("-cvs [file]");
 		System.out.println("-xml [file]");
