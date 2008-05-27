@@ -29,9 +29,26 @@ public class CalculatePoints {
 		{
 			int columnCount = singleAthlete.length;
 			double totalPoints = 0;
+			String tempRes = "";
 			for (int i = 3; i<columnCount; i++) 
 			{	
-				double athleteResult = Double.valueOf(singleAthlete[i].trim()).doubleValue();
+				if (i==7 || i==12 || i==3)
+				{
+					String[] timeParts = singleAthlete[i].trim().split(":");
+					if (timeParts.length != 1)
+					{
+						tempRes = String.valueOf(Double.valueOf(timeParts[0])*60 + Double.valueOf(timeParts[1]));
+					}
+					else
+					{
+						tempRes = singleAthlete[i].trim();
+					}
+				}
+				else
+				{
+					tempRes = singleAthlete[i].trim();
+				}
+				double athleteResult = Double.valueOf(tempRes).doubleValue();
 				double points = calculatePoints(athleteResult, i);
 				Long roundedPoints = Math.round(points);
 				resultsPerAthlete.add(roundedPoints.doubleValue());

@@ -92,7 +92,7 @@ public class DecathlonCalculator {
 			}
 			else if (args[0].equals("-db"))
 			{
-				String competition = args[1];
+				String competition = String.valueOf(args[1]);
 				DataFromMySQL sqlInput = new DataFromMySQL(competition);
 				List<String[]> sqlData = sqlInput.getData();
 				List<Double[]> calculatedPoints = calculatedResults.processResults(sqlData);
@@ -119,7 +119,7 @@ public class DecathlonCalculator {
 					File htmlData = new File(args[3]);
 					OutDataToHtml printHtml = new OutDataToHtml();
 					printHtml.showInHtmlFile(htmlData, finalResultsList);
-				}
+				} 
 			}
 		
 		}

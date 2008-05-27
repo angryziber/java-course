@@ -32,7 +32,7 @@ public class OutDataToHtml {
 		TransformerFactory factory = TransformerFactory.newInstance();
 		DocumentResult result = null;
 		try {
-			Transformer transformer = factory.newTransformer(new StreamSource("src//net//azib//java//students//t011861//homework//athletes.xsl"));
+			Transformer transformer = factory.newTransformer(new StreamSource("src/net/azib/java/students/t011861/homework/athletes.xsl"));
 			//Style the given document
 			DocumentSource source = new DocumentSource(doc);
 			result = new DocumentResult();
