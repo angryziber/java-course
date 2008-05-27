@@ -19,7 +19,11 @@ public class DecathlonCalculatorTest {
 	public void processInput(DecathlonCalculator testCalculator, String s, OutputStream out){
 		
 			Scanner in = new Scanner(s);
-			testCalculator.readFromStream(in, new PrintStream(out));
+			String[] res = testCalculator.readFromStream(in, new PrintStream(out));
+			for (int j = 0; j < res.length; j++) {
+				Sportsman person = new Sportsman(res[j]);
+				testCalculator.sportsmenList.add(person);
+			}
 
 	}
 	
@@ -36,6 +40,8 @@ public class DecathlonCalculatorTest {
 		expected+="Sportsman 1 data is: "+LN;
 		expected+="Name: Date of birth: Country Code: 100 m sprint (sec):400 m sprint (min:sec):110 m hurdles (sec):1500 m race (min:sec):Long jump (m):Shot put (m):High jump (m):Discus throw (m):Pole vault (m):Javelin throw (m):Do you want to add another sportsman?(y/n): Please enter y or n: ";
 		String actual=out.toString();
+		System.out.println(actual);
+		System.out.println(expected);
 		assertEquals(expected,actual);
 		double actualDouble = testCalculator.sportsmenList.getFirst().getRace1500mEvent();
 		double expectedDouble = 382.7;
