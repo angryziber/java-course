@@ -1,6 +1,7 @@
 package net.azib.java.students.t011861.homework;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.xml.transform.Transformer;
@@ -25,14 +26,21 @@ public class OutDataToHtml {
 	 * @param Output filename.
 	 * @param Data from ProcessedData module.
 	 */
-	public void showInHtmlFile(File output, List<String[]> completeData) {		
+	private File getPath() throws IOException
+	{
+		File dir1 = new File (".");
+	    String path = String.valueOf(dir1.getCanonicalPath().toString()); 
+	    File xslConf = new File(path + "/src/net/azib/java/students/t011861/homework/athletes.xsl");
+	    return xslConf;
+	}
+	public void showInHtmlFile(File output, List<String[]> completeData) throws IOException {		
 		CreateDocument newDoc = new CreateDocument();
 		Document doc = newDoc.createDocument(completeData);
 		//Load the transformer using JAXP
 		TransformerFactory factory = TransformerFactory.newInstance();
 		DocumentResult result = null;
 		try {
-			Transformer transformer = factory.newTransformer(new StreamSource("src/net/azib/java/students/t011861/homework/athletes.xsl"));
+			Transformer transformer = factory.newTransformer(new StreamSource(getPath()));
 			//Style the given document
 			DocumentSource source = new DocumentSource(doc);
 			result = new DocumentResult();

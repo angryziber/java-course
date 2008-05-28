@@ -10,7 +10,8 @@ import java.util.*;
  */
 
 public class ReadMySqlProperty {
-	File f = new File("src/net/azib/java/students/t011861/homework/db.properties");
+
+ 
 	private String url = "";
 	private String driver = "";
 	private String user = "";
@@ -48,10 +49,17 @@ public class ReadMySqlProperty {
 		return passwd;
 	}
 	
+	private File getFile() throws IOException
+	{
+		File dir1 = new File (".");
+	    String path = String.valueOf(dir1.getCanonicalPath().toString());
+		File f = new File(path + "/src/net/azib/java/students/t011861/homework/db.properties");
+		return f;
+	}
 	public ReadMySqlProperty(){
     try {
     	Properties properties = new Properties();
-        FileInputStream inputFile = new FileInputStream(f);
+        FileInputStream inputFile = new FileInputStream(getFile());
         properties.load(inputFile);
         url = properties.getProperty("URL");
         //driver = properties.getProperty("DRIVER");
@@ -60,11 +68,11 @@ public class ReadMySqlProperty {
     } 
     catch (FileNotFoundException e) 
     {
-    	System.out.println( f+ " file not found!");
+    	System.out.println(" db.properties file not found!");
     }
 	catch (IOException e) 
 	{
-		System.out.println("Problem with file: "+f);
+		System.out.println("Problem with file db.properties");
 		e.printStackTrace();
 	}
   }
