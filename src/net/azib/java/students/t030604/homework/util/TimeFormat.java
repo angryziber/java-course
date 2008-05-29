@@ -44,7 +44,7 @@ public final class TimeFormat {
 		Float result = null;
 		//firstly try to parse simple seconds
 		try {
-			result = new Float(raw);
+			result = Float.valueOf(raw);
 		} catch (NumberFormatException ignored) {
 			//ouch, let's try smth else
 		}

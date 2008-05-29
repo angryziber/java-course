@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  * ExporterTest
@@ -46,4 +47,10 @@ public class ExporterTest {
 		athletes.add(a1);
 		athletes.add(a2);
 	}
+	
+	@Test
+	public void unimplemented() throws Exception {
+		
+	}
+	
 }
