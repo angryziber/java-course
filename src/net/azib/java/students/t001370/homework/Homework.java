@@ -84,61 +84,104 @@ public class Homework {
 		IOMethod output = IOMethod.NONE;
 		int argSequence = 0;
 
-		//input method
-		input = input.parseInputMethod(inArgs[argSequence++]);
-		if (checkIfInputMethodValid(input) == false){
+		try{
 			
-			this.output.println(Errors.ERROR_0009.getErrorText() + inArgs[argSequence - 1]);
-
-		}
-		else{
-			//set input argument for CSV or DB
-			if (input == IOMethod.CSV_INPUT ||
-				input == IOMethod.DB_INPUT){
-				
-				String arg = inArgs[argSequence++];
-				
-				//check if there is input argument, input argument does not start with '-'
-				if (arg.startsWith("-") != true){
-					
-					input.setIOArgument(arg);
-				}
-				else{
-					this.output.println(Errors.ERROR_0026.getErrorText());
-//					this.output.println("Please insert input argument: ");
-//					input.setIOArgument(new Scanner(System.in).next());
-				}
-			}		
 			
-			//set output method
-			output = output.parseOutputMethod(inArgs[argSequence++]);
-			if (checkIfOutputMethodValid(output) == false){
+			//input method
+			input = input.parseInputMethod(inArgs[argSequence++]);
+			if (checkIfInputMethodValid(input) == false){
 				
-				this.output.println(Errors.ERROR_0010.getErrorText() + inArgs[argSequence - 1]);
-
+				this.output.println(Errors.ERROR_CHECK_INPUT_ARG.getErrorText() + inArgs[argSequence - 1]);
+				throw new DecathlonException();
 			}
 			else{
-				//set output argument for CSV,XML or HTML
-				if (output == IOMethod.CSV_OUTPUT ||
-					output == IOMethod.XML_OUTPUT ||
-					output == IOMethod.HTML_OUTPUT){
+				
+				//set input argument for CSV or DB
+				if (input == IOMethod.CSV_INPUT ||
+					input == IOMethod.DB_INPUT){
 					
+					String arg = inArgs[argSequence++];
 					
-					//check if there is output argument, max nof arguments suppose to be 4
-					if (inArgs[argSequence].length() != 4){
+					//check if there is input argument, input argument does not start with '-'
+					if (arg.startsWith("-") != true){
 						
-						output.setIOArgument(inArgs[argSequence]);
+						input.setIOArgument(arg);
 					}
 					else{
-						this.output.println(Errors.ERROR_0027.getErrorText());
-//						this.output.println("Please insert output argument: ");
-//						output.setIOArgument(new Scanner(System.in).next());
+						
+						this.output.println(Errors.ERROR_NO_INPUT_ARG_PARAM_FOUND.getErrorText());
+						throw new DecathlonException();
 					}
-				}	
+				}		
 				
-				//start processing of data
-				new DecathlonCalculator(input, output).calculate();
+				//set output method
+				output = output.parseOutputMethod(inArgs[argSequence++]);
+				if (checkIfOutputMethodValid(output) == false){
+					
+					this.output.println(Errors.ERROR_CHECK_OUTPUT_ARG.getErrorText() + inArgs[argSequence - 1]);
+					throw new DecathlonException();
+				}
+				else{
+					
+					//set output argument for CSV,XML or HTML
+					if (output == IOMethod.CSV_OUTPUT ||
+						output == IOMethod.XML_OUTPUT ||
+						output == IOMethod.HTML_OUTPUT){
+						
+						
+						//check if there is output argument, max nof arguments suppose to be 4
+						if (inArgs[argSequence].length() != 4){
+							
+							output.setIOArgument(inArgs[argSequence]);
+						}
+						else{
+							
+							this.output.println(Errors.ERROR_NO_OUTPUT_ARG_PARAM_FOUND.getErrorText());
+							throw new DecathlonException();
+						}
+					}	
+					
+					//start processing of data
+					new DecathlonCalculator(input, output).calculate();
+				}
 			}
+		}
+		catch (Exception e){
+			
+			//print error description
+			this.output.println(Errors.ERROR_IO_ARGS_NOT_SET.getErrorText());
+			this.output.println();
+			
+			//print out current user arguments
+			this.output.print("Your arguments:");
+			for (String string : inArgs) {
+				this.output.print(" " + string);
+			}
+			this.output.println();
+			
+			//print small help for user
+			this.output.println();
+			this.output.println("Argument description:");
+			this.output.println("  <program> -<input-method> [input-parameters] -<output-method> [output-parameters]");
+			this.output.println("where");
+			this.output.println("  * <program> is your main class, e.g. java net.azib.java.students.txxxxxx.homework.DecathlonCalculator");
+			this.output.println("  * <input-method> is the name of the input method preceded by dash (-): -console, -csv, -db");
+			this.output.println("  * [input-parameters] are optional parameters depending on the specified input method:");
+			this.output.println("       o -console - no parameters");
+			this.output.println("       o -csv - input file name or path");
+			this.output.println("       o -db - competition id or name - both should work (DB connection string must be read from db.properties in the same package as the main class)"); 
+			this.output.println("  * <output-method> is the name of the output method preceded by dash (-): -conole, -csv, -xml, -html");
+			this.output.println("  * [output-parameters] are optional parameters depending on the specified output method:");
+			this.output.println("       o -conole - no parameters");
+			this.output.println("       o -csv - output file name or path");
+			this.output.println("       o -xml - output file name or path");
+			this.output.println("       o -html - output file name or path");
+			this.output.println("Example:");
+			this.output.println("  -console -xml results.xml");
+			this.output.println("  -db 2 -html /tmp/results.html");
+			this.output.println("  -csv my_input.csv -console");
+
+
 		}
 	}
 
@@ -154,10 +197,9 @@ public class Homework {
 			decathlon.handleInputArguments(args);		
 		}
 		catch(Exception e){
-			decathlon.output.println(Errors.ERROR_0008.getErrorText());
+			decathlon.output.println(Errors.ERROR_MAJOR_ERROR.getErrorText());
 			
-			LOG.log(Level.INFO, Errors.ERROR_0008.getErrorText() + e.getMessage());
-			System.exit(1);
+			LOG.log(Level.INFO, Errors.ERROR_MAJOR_ERROR.getErrorText() + e.getMessage());
 		}
 	}
 }

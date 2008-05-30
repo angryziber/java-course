@@ -68,7 +68,7 @@ public class DecathlonOutputConsole extends DecathlonOutput{
 	 * @param place - giving athlete place 
 	 * @param longestNameLen - for formating name column
 	 */
-	 void printAthleteResults(Athlete athlete, int place, int longestNameLen){
+	 void printAthleteResults(Athlete athlete, String place, int longestNameLen){
 		String tempStr = null;
 		NumberFormat nf = new DecimalFormat("#0.00");
 		
@@ -110,18 +110,14 @@ public class DecathlonOutputConsole extends DecathlonOutput{
 		}
 		
 		//print 100m sprint
-		tempStr = "" + nf.format(athlete.competitionResults.getResult100mRace())/* + 
-					" (" + DecathlonFormulaArguments.RUNNING_EVENT_100M_IN_SEC.
-							getRunningEventResult(athlete.competitionResults.getResult100mRace()) + ")"*/;
+		tempStr = "" + nf.format(athlete.competitionResults.getResult100mRace());
 		output.print("|" + tempStr);
 		for (int i = 0; i < (11 - tempStr.length()); i++) {
 			output.print(" ");
 		}
 
 		//print Long Jump 
-		tempStr = "" + nf.format(athlete.competitionResults.getResultLongJump()) /*+ 
-					" (" + DecathlonFormulaArguments.FIELD_EVENT_LONG_JUMP_IN_M.
-							getFieldEventResult(athlete.competitionResults.getResultLongJump()) + ")"*/;
+		tempStr = "" + nf.format(athlete.competitionResults.getResultLongJump());
 		output.print("|" + tempStr);
 		for (int i = 0; i < (9 - tempStr.length()); i++) {
 			output.print(" ");
@@ -205,18 +201,9 @@ public class DecathlonOutputConsole extends DecathlonOutput{
 		printTableSeparator(longestNameLenght);
 		
 		//print athlete result as table
-		int prevAthleteTotal = 0;
-		int prevAthletePlace = 0;
-		int place = 1;
+		int athleteCount = 1;
 		for (Athlete athlete : competitors) {
-			int currAthleteTotal = athlete.competitionResults.getTotalScore();
-			int atheltesPlace = calculateCompatetorPlace(
-										place++, prevAthletePlace, prevAthleteTotal, currAthleteTotal);
-
-			printAthleteResults(athlete, atheltesPlace, longestNameLenght);
-		
-			prevAthletePlace = atheltesPlace;
-			prevAthleteTotal = currAthleteTotal;
+			printAthleteResults(athlete, calculateCompatetorPlace(athleteCount++, competitors), longestNameLenght);
 		}
 		
 		//print table border

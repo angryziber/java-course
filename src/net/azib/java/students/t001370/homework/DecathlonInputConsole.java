@@ -84,7 +84,7 @@ public class DecathlonInputConsole extends DecathlonInput {
 			}
 			catch (Exception e){
 				success = false;
-				output.println(Errors.ERROR_0014.getErrorText());
+				output.println(Errors.ERROR_NUMBER_FORMAT_IS_WRONG.getErrorText());
 				
 				strValue = input.next();
 			}
@@ -131,9 +131,9 @@ public class DecathlonInputConsole extends DecathlonInput {
 						success = true;
 					}
 					catch (ParseException e) {
-						output.println(Errors.ERROR_0015.getErrorText());
+						output.println(Errors.ERROR_FORMAT_IS_WRONG.getErrorText());
 						
-						LOG.log(Level.INFO, Errors.ERROR_0015.getErrorText());
+						LOG.log(Level.INFO, Errors.ERROR_FORMAT_IS_WRONG.getErrorText());
 						LOG.log(Level.INFO, e.getMessage());
 						success = false;
 					}
@@ -150,7 +150,7 @@ public class DecathlonInputConsole extends DecathlonInput {
 						success = true;
 					}
 					else{
-						output.println(Errors.ERROR_0023.getErrorText());
+						output.println(Errors.ERROR_COUNTRY_CONE_DOES_NOT_MATCH.getErrorText());
 					}
 				}while(success != true);
 				//-----------------------------------------

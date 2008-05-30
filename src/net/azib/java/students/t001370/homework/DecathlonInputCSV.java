@@ -82,7 +82,7 @@ public class DecathlonInputCSV extends DecathlonInput {
 			readValue = parseStringValue(strValue);
 		}
 		catch (Exception e){
-			output.println(Errors.ERROR_0022.getErrorText() + "(" + strValue + ")");
+			output.println(Errors.ERROR_RESULT_NUMBER_FORMAT_IS_WRONG.getErrorText() + "(" + strValue + ")");
 			
 			readValue = 0;
 		}
@@ -115,10 +115,10 @@ public class DecathlonInputCSV extends DecathlonInput {
 				returnAthlete.setBirthday(sdf.parse(dataStrings[i++]));
 			}
 			catch (ParseException e) {
-				output.println(Errors.ERROR_0016.getErrorText() + dataStrings[0]);
+				output.println(Errors.ERROR_BIRTHDAY_FORMAT_WRONG_IN_CSV.getErrorText() + dataStrings[0]);
 				output.println("Date format should be: '" + sdf.toPattern() + "'.");
 				
-				LOG.log(Level.INFO, Errors.ERROR_0016.getErrorText() + dataStrings[0]);
+				LOG.log(Level.INFO, Errors.ERROR_BIRTHDAY_FORMAT_WRONG_IN_CSV.getErrorText() + dataStrings[0]);
 				LOG.log(Level.INFO, e.getMessage());
 			}
 			//set athlete country code
@@ -163,14 +163,14 @@ public class DecathlonInputCSV extends DecathlonInput {
 					returnAthleteCollection.add(athlete);
 				}
 				else {
-					output.println(Errors.ERROR_0017.getErrorText() + line + "'");
+					output.println(Errors.ERROR_ATHLETE_DATA_NOT_VALID_IN_CSV.getErrorText() + line + "'");
 				}
 			}
 		}
 		catch (IOException e){
-			output.println(Errors.ERROR_0018.getErrorText());
+			output.println(Errors.ERROR_COULD_NOT_GET_DATA_FROM_CSV.getErrorText());
 			
-			LOG.log(Level.INFO, Errors.ERROR_0018.getErrorText());
+			LOG.log(Level.INFO, Errors.ERROR_COULD_NOT_GET_DATA_FROM_CSV.getErrorText());
 			LOG.log(Level.INFO, e.getMessage());
 		}
 		finally{
@@ -179,9 +179,9 @@ public class DecathlonInputCSV extends DecathlonInput {
 					reader.close();
 				}
 				catch (IOException e) {
-					output.println(Errors.ERROR_0019.getErrorText());
+					output.println(Errors.ERROR_PROBLEMS_CLOSING_CSV.getErrorText());
 					
-					LOG.log(Level.INFO, Errors.ERROR_0019.getErrorText());
+					LOG.log(Level.INFO, Errors.ERROR_PROBLEMS_CLOSING_CSV.getErrorText());
 					LOG.log(Level.INFO, e.getMessage());
 				}
 			}

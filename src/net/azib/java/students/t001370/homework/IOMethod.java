@@ -44,13 +44,13 @@ public enum IOMethod {
 	public IOMethod parseInputMethod(String strToParse){
 		IOMethod method = NONE;
 
-		if (strToParse.compareTo("-console") == 0) {
+		if (strToParse.equals("-console") == true) {
 			method = CONSOLE_INPUT;
 		}
-		else if (strToParse.compareTo("-csv") == 0){
+		else if (strToParse.equals("-csv") == true){
 			method = CSV_INPUT;
 		}
-		else if (strToParse.compareTo("-db") == 0){
+		else if (strToParse.equals("-db") == true){
 			method = DB_INPUT;
 		}
 		
@@ -65,16 +65,16 @@ public enum IOMethod {
 	public IOMethod parseOutputMethod(String strToParse){
 		IOMethod method = NONE;
 
-		if (strToParse.compareTo("-console") == 0) {
+		if (strToParse.equals("-console") == true) {
 			method = CONSOLE_OUTPUT;
 		}
-		else if (strToParse.compareTo("-csv") == 0){
+		else if (strToParse.equals("-csv") == true){
 			method = CSV_OUTPUT;
 		}
-		else if (strToParse.compareTo("-xml") == 0){
+		else if (strToParse.equals("-xml") == true){
 			method = XML_OUTPUT;
 		}
-		else if (strToParse.compareTo("-html") == 0){
+		else if (strToParse.equals("-html") == true){
 			method = HTML_OUTPUT;
 		}
 		

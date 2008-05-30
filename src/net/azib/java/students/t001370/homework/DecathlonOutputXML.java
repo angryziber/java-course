@@ -51,12 +51,12 @@ public class DecathlonOutputXML extends DecathlonOutput{
 	 * @param place - athlete's place in the completition
 	 * @return
 	 */
-	private Element createAthleteElementXML(Athlete athlete, Document xmlDoc, int place){
+	private Element createAthleteElementXML(Athlete athlete, Document xmlDoc, String place){
 		Element athleteElem = xmlDoc.createElement("athlete");
 		
 		//set athlete competition place
 		Element athPlaceElem = xmlDoc.createElement("place");
-		Text athPlaceText = xmlDoc.createTextNode(Integer.toString(place));
+		Text athPlaceText = xmlDoc.createTextNode(place);
 		athPlaceElem.appendChild(athPlaceText);
 		athleteElem.appendChild(athPlaceElem);
 		
@@ -73,9 +73,6 @@ public class DecathlonOutputXML extends DecathlonOutput{
 		Text athNameText = xmlDoc.createTextNode(athlete.getName());
 		athNameElem.appendChild(athNameText);
 		athleteElem.appendChild(athNameElem);
-		/*the same only shorter
-		athleteElem.appendChild(xmlDoc.createElement("name").
-				appendChild(xmlDoc.createTextNode(athlete.getName())));*/
 		
 		//set birthday 
 		Element athBirthdayElem = xmlDoc.createElement("birthday");
@@ -190,19 +187,9 @@ public class DecathlonOutputXML extends DecathlonOutput{
 		xmlDoc.appendChild(decathlonElem);
 		
 		//fill dom tree with athlete data
-		int prevAthleteTotal = 0;
-		int prevAthletePlace = 0;
-		int i = 1;
+		int competitorCount = 1;
 		for (Athlete athlete : compatetors) {
-			int currAthleteTotal = athlete.competitionResults.getTotalScore();
-			int atheltesPlace = calculateCompatetorPlace(
-									i++, prevAthletePlace, prevAthleteTotal, currAthleteTotal);
-			
-			//add athlete to decathlon
-			decathlonElem.appendChild(createAthleteElementXML(athlete, xmlDoc, atheltesPlace));
-			
-			prevAthletePlace = atheltesPlace;
-			prevAthleteTotal = currAthleteTotal;
+			decathlonElem.appendChild(createAthleteElementXML(athlete, xmlDoc, calculateCompatetorPlace(competitorCount++, compatetors)));
 		}
 		
 		return xmlDoc;
@@ -210,7 +197,7 @@ public class DecathlonOutputXML extends DecathlonOutput{
 
 	
 	@Override
-	public void writeData(Collection<Athlete> compatetors, File outputFile) {
+	public void writeData(Collection<Athlete> compatetors, File outputFile) throws DecathlonException {
 		Document xmlDoc = null;
 		
 		try {
@@ -227,10 +214,12 @@ public class DecathlonOutputXML extends DecathlonOutput{
 			serializer.serialize(xmlDoc);
 		}
 		catch (Exception e) {
-			output.println(Errors.ERROR_0004.getErrorText());
+			output.println(Errors.ERROR_COULD_NOT_WRITE_TO_XML.getErrorText());
 			
+			LOG.log(Level.INFO, Errors.ERROR_COULD_NOT_WRITE_TO_XML.getErrorText());
 			LOG.log(Level.INFO, e.getMessage());
-			System.exit(1);
+			
+			throw new DecathlonException();
 		}
 	}
 

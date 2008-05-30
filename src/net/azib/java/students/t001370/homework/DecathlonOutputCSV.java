@@ -44,10 +44,10 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 	 * @param athlete - athlete which data will be compiled
 	 * @return compiled CSV string
 	 */
-	 String compileCSVLine(int place, Athlete athlete){
+	 String compileCSVLine(String place, Athlete athlete){
 		String compiledString = null;
 		
-		compiledString = Integer.toString(place) 												+ "," +
+		compiledString = place 																	+ "," +
 							Integer.toString(athlete.competitionResults.getTotalScore()) 		+ "," +
 							"\"" + athlete.getName() + "\"" 									+ "," +
 							//((SimpleDateFormat)DateFormat.getDateInstance(DateFormat.MEDIUM)).
@@ -69,27 +69,18 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 	}
 	
 	@Override
-	public void writeData(Collection<Athlete> competitors, File outputFile) {
+	public void writeData(Collection<Athlete> competitors, File outputFile) throws DecathlonException {
 		BufferedWriter writer = null;
 		
 		try{
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
 			
-			
-			int prevAthleteTotal = 0;
-			int prevAthletePlace = 0;
-			int i = 1;
-			
+			//write athlete results to csv file
+			int athleteCount = 1;
 			for (Athlete athlete : competitors) {
-				int currAthleteTotal = athlete.competitionResults.getTotalScore();
-				int athletesPlace = calculateCompatetorPlace(
-										i++, prevAthletePlace, prevAthleteTotal, currAthleteTotal);
 				
-				writer.write(compileCSVLine(athletesPlace, athlete));
+				writer.write(compileCSVLine(calculateCompatetorPlace(athleteCount++, competitors), athlete));
 				writer.newLine();
-				
-				prevAthletePlace = athletesPlace;
-				prevAthleteTotal = currAthleteTotal;
 			}
 			
 			LOG.log(Level.INFO, "writer flushed");
@@ -97,10 +88,11 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 			
 		}
 		catch (Exception e){
-			output.println(Errors.ERROR_0006.getErrorText() + outputFile +  "'!");
+			output.println(Errors.ERROR_PROBLEMS_READING_CSV.getErrorText() + outputFile +  "'!");
 			
-			LOG.log(Level.INFO, "Error! Problems reading CSV file='" + outputFile +  "'!" + e.getMessage());
-			System.exit(1);
+			LOG.log(Level.INFO, Errors.ERROR_PROBLEMS_READING_CSV.getErrorText() + outputFile +  "'!" + e.getMessage());
+
+			throw new DecathlonException();
 		}
 		finally{
 			try {
@@ -109,10 +101,9 @@ public class DecathlonOutputCSV extends DecathlonOutput{
 				}
 			}
 			catch (IOException e) {
-				output.println(Errors.ERROR_0005.getErrorText());
+				output.println(Errors.ERROR_PROBLEMS_CLOSING_FILE.getErrorText());
 				
-				LOG.log(Level.INFO, "Error! Problems closing file write" + e.getMessage());
-				System.exit(1);
+				LOG.log(Level.INFO, Errors.ERROR_PROBLEMS_CLOSING_FILE.getErrorText() + e.getMessage());
 			}
 		}
 	}

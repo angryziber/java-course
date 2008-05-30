@@ -52,19 +52,31 @@ public class DecathlonCalculator {
 	public void calculate(){
 		LOG.log(Level.INFO, "Calcutator entered");
 		
+		//check if io methods are available
 		if (inputMethod != null && outputMethod != null){
-			Collection<Athlete> compResults = new DecathlonDataReader(inputMethod).getData();
 			
-			if (compResults != null) {
-				new DecathlonDataWriter(outputMethod, compResults).writeData();
+			Collection<Athlete> compResults = null;
+			
+			try {
+				//get competition results
+				compResults = new DecathlonDataReader(inputMethod).getData();
+				
+				if (compResults != null) {
+					//write competition results to appropriate output
+					new DecathlonDataWriter(outputMethod, compResults).writeData();
+				}
+				else{
+					output.println(Errors.ERROR_COULD_NOT_GET_DATA_FROM_INPUT.getErrorText());
+				}
 			}
-			else
-			{
-				output.println(Errors.ERROR_0011.getErrorText());
+			catch (DecathlonException e) {
+				//in case some error occurred during reading or writing
+				output.println(Errors.ERROR_WHILE_PROCESSING_DATA.getErrorText());
 			}
+			
 		}
 		else{
-			output.println(Errors.ERROR_0028.getErrorText());
+			output.println(Errors.ERROR_I_OR_O_METHOD_NOT_SET.getErrorText());
 		}
 		
 		LOG.log(Level.INFO, "Calcutator exited");

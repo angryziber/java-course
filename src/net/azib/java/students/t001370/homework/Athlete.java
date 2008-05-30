@@ -20,17 +20,68 @@ public class Athlete implements Comparable<Athlete>{
     }
     
     /**
-     * Athletes are compared according to their total score
+     * Athletes are compared according to their total score, name, 
+     * birthday, country code and results 
+     * 
      * @param compareToAthlere
      * @return -1, 0, 1 showing whether the current Athlete is 
      * greater, equal, or smaller than compareToAthlete
      * @throws NullPointerException in case compareToAthlete is null
      */
     public int compareTo(Athlete compareToAthlete){
-    	int totalScoreDifference = compareToAthlete.competitionResults.getTotalScore() -
-    												this.competitionResults.getTotalScore();
     	
-        return totalScoreDifference == 0 ? 1 : (int)Math.signum(totalScoreDifference);
+    	//check for difference in score
+    	int compareResult = compareToAthlete.competitionResults.getTotalScore() -
+    												this.competitionResults.getTotalScore();
+    	if (compareResult != 0) {
+    		return (int)Math.signum(compareResult);
+		}
+    	
+    	//check for difference in name
+    	compareResult = this.name.compareTo(compareToAthlete.getName());
+    	if (compareResult != 0) {
+    		return (int)Math.signum(compareResult);
+		}
+
+    	//check for difference in birthday
+    	compareResult = this.name.compareTo(compareToAthlete.getName());
+    	if (compareResult != 0) {
+    		return (int)Math.signum(compareResult);
+		}
+
+    	//check for difference in country code
+    	compareResult = this.countryCode.compareTo(compareToAthlete.getCountryCode());
+    	if (compareResult != 0) {
+    		return (int)Math.signum(compareResult);
+		}
+
+    	//check for difference in competition results. 
+    	float compareCompResult = (this.competitionResults.getResult100mRace() +
+    									this.competitionResults.getResult110mHurdles() +
+    									this.competitionResults.getResult1500mRace() +
+    									this.competitionResults.getResult400mSprint() +
+    									this.competitionResults.getResultDiscusThrow() +
+    									this.competitionResults.getResultHighJump() +
+    									this.competitionResults.getResultJavelinThrow() +
+    									this.competitionResults.getResultLongJump() +
+    									this.competitionResults.getResultPoleVault() +
+    									this.competitionResults.getResultShotPut()) -
+    								(compareToAthlete.competitionResults.getResult100mRace() +
+    									compareToAthlete.competitionResults.getResult110mHurdles() +
+    									compareToAthlete.competitionResults.getResult1500mRace() +
+    									compareToAthlete.competitionResults.getResult400mSprint() +
+    									compareToAthlete.competitionResults.getResultDiscusThrow() +
+    									compareToAthlete.competitionResults.getResultHighJump() +
+    									compareToAthlete.competitionResults.getResultJavelinThrow() +
+    									compareToAthlete.competitionResults.getResultLongJump() +
+    									compareToAthlete.competitionResults.getResultPoleVault() +
+    									compareToAthlete.competitionResults.getResultShotPut());
+    	if (compareCompResult != 0) {
+    		return (int)Math.signum(compareCompResult);
+		}
+    	
+    	//if we get here then it is the same athlete with the same results
+    	return 0;
     }
     
     @Override

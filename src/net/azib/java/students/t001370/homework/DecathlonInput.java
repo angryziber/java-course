@@ -14,6 +14,7 @@ public abstract class DecathlonInput {
 	 * Abstract method for getting competition results from input
 	 * @param inArg - input argument, could be database read condition, file path
 	 * @return Collection of athletes
+	 * @throws DecathlonException is thrown in case data could not be retrieved from input
 	 */
-	public abstract Collection<Athlete> getData(String inArg);
+	public abstract Collection<Athlete> getData(String inArg) throws DecathlonException;
 }

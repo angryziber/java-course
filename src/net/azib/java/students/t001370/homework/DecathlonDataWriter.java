@@ -77,7 +77,7 @@ public class DecathlonDataWriter {
 			break;
 	
 			default:
-				throw new Exception(Errors.ERROR_0007.getErrorText());
+				throw new Exception(Errors.ERROR_OUTPUT_METHOD_NOT_VALID.getErrorText());
 		}
 	
 		return destination;
@@ -85,21 +85,24 @@ public class DecathlonDataWriter {
 
 	/**
 	 * Writes data to the specified source (by calling class constructor)
+	 * @throws DecathlonException throws if data could not be written
 	 */
-	public void writeData(){
+	public void writeData() throws DecathlonException{
 		LOG.log(Level.INFO, "writeData entered");
 		
 		try {
 			DecathlonOutput destination = getDecathlonOutput(outputSource);
 			
+			//write data to output
+			//if output method needs parameter then it is file path
 			destination.writeData(this.athletes, 
 					(outputSource.getIOArgument() != null) ? new File(outputSource.getIOArgument()) : null);
 		}
 		catch (Exception e) {
-			output.println(Errors.ERROR_0003.getErrorText() + outputSource.name());
+			output.println(Errors.ERROR_COULD_NOT_WRITE_DATA_TO.getErrorText() + outputSource.name());
 			
 			LOG.log(Level.INFO, e.getMessage());
-			System.exit(1);
+			throw new DecathlonException();
 		}
 
 		output.println("Everithing is done!");

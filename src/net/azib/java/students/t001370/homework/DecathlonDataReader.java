@@ -69,7 +69,7 @@ public class DecathlonDataReader {
 			break;
 	
 			default:
-				throw new Exception(Errors.ERROR_0020.getErrorText() + inputSource.name());
+				throw new Exception(Errors.ERROR_INPUT_METHOD_NOT_VALID.getErrorText() + inputSource.name());
 		}
 		
 		return dataSource;
@@ -78,8 +78,9 @@ public class DecathlonDataReader {
 	/**
 	 * Get athletes data from input specified by calling class constructor
 	 * @return Collection of athletes
+	 * @throws DecathlonException throws if data could not be read from input
 	 */
-	public Collection<Athlete> getData(){
+	public Collection<Athlete> getData() throws DecathlonException{
 		LOG.log(Level.INFO, "getData entered");
 		
 		Collection<Athlete> competitionResults = null;
@@ -91,11 +92,12 @@ public class DecathlonDataReader {
 			competitionResults = resultSource.getData(inputSource.getIOArgument());
 		}
 		catch (Exception e) {
-			output.println(Errors.ERROR_0021.getErrorText());
+			output.println(Errors.ERROR_COULD_NOT_GET_DATA_FROM_INPUT.getErrorText());
 			
-			LOG.log(Level.INFO, Errors.ERROR_0021.getErrorText());
+			LOG.log(Level.INFO, Errors.ERROR_COULD_NOT_GET_DATA_FROM_INPUT.getErrorText());
 			LOG.log(Level.INFO, e.getMessage());
-			System.exit(1);
+			
+			throw new DecathlonException();
 		}
 		
 		return competitionResults;

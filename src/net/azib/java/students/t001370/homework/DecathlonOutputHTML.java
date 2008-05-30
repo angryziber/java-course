@@ -42,32 +42,37 @@ public class DecathlonOutputHTML extends DecathlonOutput{
 	}
 	
 	@Override
-	public void writeData(Collection<Athlete> compatetors, File outputFile) {
+	public void writeData(Collection<Athlete> compatetors, File outputFile) throws DecathlonException {
 		
 		InputStream stylesheet = null;
 		try{
+			//get stylesheet for transforming xml to html 
 			stylesheet = DecathlonDataWriter.class.getResourceAsStream("decathlon.xsl");
 			Transformer transformer = TransformerFactory.newInstance().
 					newTransformer(new StreamSource(stylesheet));
 			
+			//make xml document
 			DOMSource source = new DOMSource(new DecathlonOutputXML().createDecathlonXMLDocument(compatetors));
+			//transform xml to html and write to file
 			transformer.transform(source, new StreamResult(new FileOutputStream(outputFile)));
 		}
 		catch(Exception e){
-			output.println(Errors.ERROR_0001.getErrorText());
+			output.println(Errors.ERROR_COULD_NOT_CREATE_HTML.getErrorText());
 			
+			LOG.log(Level.INFO, Errors.ERROR_COULD_NOT_CREATE_HTML.getErrorText());
 			LOG.log(Level.INFO, e.getMessage());
-			System.exit(1);
+			
+			throw new DecathlonException();
 		}
 		finally{
 			try {
 				stylesheet.close();
 			}
 			catch (IOException e) {
-				output.println(Errors.ERROR_0002.getErrorText());
+				output.println(Errors.ERROR_COULD_NOT_CLOSE_STYLESHEET.getErrorText());
 				
+				LOG.log(Level.INFO, Errors.ERROR_COULD_NOT_CLOSE_STYLESHEET.getErrorText());
 				LOG.log(Level.INFO, e.getMessage());
-				System.exit(1);
 			}
 		}
 	}
