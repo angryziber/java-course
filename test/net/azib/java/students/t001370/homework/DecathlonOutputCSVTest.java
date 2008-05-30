@@ -41,7 +41,7 @@ public class DecathlonOutputCSVTest {
 		DecathlonOutputCSV doc = new DecathlonOutputCSV();
 		
 		 // works on my pc . in cruise date formating does not work the same way	
-		assertEquals("1,4234,\"Siim Susi\",01.01.1976,EE,12.61,5.0,9.22,1.5,59.39,16.43,21.6,2.6,35.81,325.72", doc.compileCSVLine(1, a));
+		assertEquals("1,4234,\"Siim Susi\",01.01.1976,EE,12.61,5.0,9.22,1.5,59.39,16.43,21.6,2.6,35.81,325.72", doc.compileCSVLine(Integer.toString(1), a));
 
 	}
 

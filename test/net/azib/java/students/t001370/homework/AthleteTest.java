@@ -21,10 +21,15 @@ public class AthleteTest {
 		Athlete a = new Athlete();
 		Athlete b = new Athlete();
 		
+		a.setName("Bla Bla");
+		a.setCountryCode("EE");
 		a.competitionResults.setResult100mRace((float)12.13);
+		
+		b.setName("Bla Bla");
+		b.setCountryCode("EE");
 		b.competitionResults.setResult100mRace((float)12.13);
 		
-		assertTrue(a.compareTo(b) == 1);
+		assertTrue(a.compareTo(b) == 0);
 	}
 
 	/**

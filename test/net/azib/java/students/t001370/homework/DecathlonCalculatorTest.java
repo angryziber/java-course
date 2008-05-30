@@ -27,7 +27,7 @@ public class DecathlonCalculatorTest {
 		
 		new DecathlonCalculator(null, null, new PrintStream(out)).calculate();
 		
-		assertEquals(out.toString(), Errors.ERROR_0028.getErrorText() + System.getProperties().getProperty("line.separator"));
+		assertEquals(out.toString(), Errors.ERROR_I_OR_O_METHOD_NOT_SET.getErrorText() + System.getProperties().getProperty("line.separator"));
 	}
 
 }

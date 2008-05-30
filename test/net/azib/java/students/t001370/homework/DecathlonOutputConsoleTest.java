@@ -169,7 +169,7 @@ public class DecathlonOutputConsoleTest {
 		a.competitionResults.setResultPoleVault(25);
 		a.competitionResults.setResultShotPut(12);
 
-		doc.printAthleteResults(a, 1, longestNameLen);
+		doc.printAthleteResults(a, ""+1, longestNameLen);
 		
 		String tempStr = "";
 		String result = "";

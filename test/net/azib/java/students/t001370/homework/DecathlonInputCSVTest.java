@@ -84,7 +84,7 @@ public class DecathlonInputCSVTest {
 		
 		dic.parseStringValueFromCSV(str);
 			
-		assertEquals(Errors.ERROR_0022.getErrorText() + "(" + str + ")" + System.getProperty("line.separator"),
+		assertEquals(Errors.ERROR_RESULT_NUMBER_FORMAT_IS_WRONG.getErrorText() + "(" + str + ")" + System.getProperty("line.separator"),
 				out.toString());
 	}
 	
