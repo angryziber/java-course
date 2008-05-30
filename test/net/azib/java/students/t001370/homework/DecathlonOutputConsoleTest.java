@@ -9,6 +9,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.TreeSet;
 
 import org.junit.Test;
 
@@ -19,63 +21,28 @@ import org.junit.Test;
  */
 public class DecathlonOutputConsoleTest {
 
-//	/**
-//	 * Test method for {@link net.azib.java.students.t001370.homework.DecathlonOutputConsole#writeData(java.util.Collection, java.io.File)}.
-//	 * @throws ParseException 
-//	 */
-//	@Test
-//	public void testWriteData() throws ParseException {
-//		ByteArrayOutputStream out = new ByteArrayOutputStream();
-//		DecathlonOutputConsole doc = new DecathlonOutputConsole(new PrintStream(out));
-//		
-//		String str = "+-----+-----------+----------+----------+------+-----------+---------+--------+---------+-----------+------------+------------+----------+-------------+----------+" + System.getProperty("line.separator") +
-//						"|Place|Total Score|Name      |Birthday  |Coutry|Sprint 100m|Long Jump|Shot Put|High Jump|Sprint 400m|Hurdles 110m|Discus Throw|Pole Vault|Javelin Throw|Race 1500m|" + System.getProperty("line.separator") +
-//						"+-----+-----------+----------+----------+------+-----------+---------+--------+---------+-----------+------------+------------+----------+-------------+----------+" + System.getProperty("line.separator") +
-//						"|1    |4234       |Siim Susi |1.01.1976 |EE    |12,61      |5,00     |9,22    |1,50     |59,39      |16,43       |21,60       |2,60      |35,81        |325,72    |" + System.getProperty("line.separator") +
-//						"|2    |3199       |Beata Kana|1.03.1982 |ZA    |13,04      |4,53     |7,79    |1,55     |64,72      |18,74       |24,20       |2,40      |28,20        |410,76    |" + System.getProperty("line.separator") +
-//						"+-----+-----------+----------+----------+------+-----------+---------+--------+---------+-----------+------------+------------+----------+-------------+----------+" + System.getProperty("line.separator");
-//
-//		Collection<Athlete> col = new TreeSet<Athlete>();
-//
-//		Athlete a = new Athlete();
-//		a.setName("Siim Susi");
-//		a.setBirthday(new SimpleDateFormat("dd.MM.yyyy").parse("1.01.1976"));
-//		a.setCountryCode("EE");
-//		a.competitionResults.setResult100mRace((float)12.61);
-//		a.competitionResults.setResult110mHurdles((float)16.43);
-//		a.competitionResults.setResult1500mRace((float)325.72);
-//		a.competitionResults.setResult400mSprint((float)59.39);
-//		a.competitionResults.setResultDiscusThrow((float)21.60);
-//		a.competitionResults.setResultHighJump((float)1.50);
-//		a.competitionResults.setResultJavelinThrow((float)35.81);
-//		a.competitionResults.setResultLongJump((float)5.00);
-//		a.competitionResults.setResultPoleVault((float)2.60);
-//		a.competitionResults.setResultShotPut((float)9.22);
-//		
-//		col.add(a);
-//
-//		Athlete b = new Athlete();
-//		b.setName("Beata Kana");
-//		b.setBirthday(new SimpleDateFormat("dd.MM.yyyy").parse("1.03.1982"));
-//		b.setCountryCode("ZA");
-//		b.competitionResults.setResult100mRace((float)13.04);
-//		b.competitionResults.setResult110mHurdles((float)18.74);
-//		b.competitionResults.setResult1500mRace((float)410.76);
-//		b.competitionResults.setResult400mSprint((float)64.72);
-//		b.competitionResults.setResultDiscusThrow((float)24.20);
-//		b.competitionResults.setResultHighJump((float)1.55);
-//		b.competitionResults.setResultJavelinThrow((float)28.20);
-//		b.competitionResults.setResultLongJump((float)4.53);
-//		b.competitionResults.setResultPoleVault((float)2.40);
-//		b.competitionResults.setResultShotPut((float)7.79);
-//		
-//		col.add(b);
-//		
-//		doc.writeData(col, null);
-//		
-//		assertEquals(str, out.toString());
-//		
-//	}
+	/**
+	 * Test method for {@link net.azib.java.students.t001370.homework.DecathlonOutputConsole#writeData(java.util.Collection, java.io.File)}.
+	 * @throws ParseException 
+	 */
+	@Test
+	public void testWriteDataPrintEmptyTable() throws ParseException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		DecathlonOutputConsole doc = new DecathlonOutputConsole(new PrintStream(out));
+		
+		String str = "+-----+-----------+----+----------+------+-----------+---------+--------+---------+-----------+------------+------------+----------+-------------+----------+" + System.getProperty("line.separator") +
+					 "|Place|Total Score|Name|Birthday  |Coutry|Sprint 100m|Long Jump|Shot Put|High Jump|Sprint 400m|Hurdles 110m|Discus Throw|Pole Vault|Javelin Throw|Race 1500m|" + System.getProperty("line.separator") +
+					 "+-----+-----------+----+----------+------+-----------+---------+--------+---------+-----------+------------+------------+----------+-------------+----------+" + System.getProperty("line.separator") +
+					 "+-----+-----------+----+----------+------+-----------+---------+--------+---------+-----------+------------+------------+----------+-------------+----------+" + System.getProperty("line.separator");
+
+		Collection<Athlete> col = new TreeSet<Athlete>();
+
+		
+		doc.writeData(col, null);
+		
+		assertEquals(str, out.toString());
+		
+	}
 
 	/**
 	 * Test method for {@link net.azib.java.students.t001370.homework.DecathlonOutputConsole#printTableSeparator(int)}.
