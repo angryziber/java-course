@@ -62,7 +62,6 @@ public class FieldEventResultTest {
 	 */
 	@Test
 	public void testGetPoints() {
-		// TODO: check point counting for all 6 field events
 		assertEquals(445, result.getPoints());
 	}
 

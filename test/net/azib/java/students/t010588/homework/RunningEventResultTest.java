@@ -62,7 +62,6 @@ public class RunningEventResultTest {
 	 */
 	@Test
 	public void testGetPoints() {
-		// TODO: check point counting for all 4 running events
 		assertEquals(1096, result.getPoints());
 	}
 
