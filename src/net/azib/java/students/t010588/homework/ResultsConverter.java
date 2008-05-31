@@ -9,10 +9,12 @@ import net.azib.java.students.t010588.homework.exporter.XMLExporter;
 import net.azib.java.students.t010588.homework.importer.AthleteImporter;
 import net.azib.java.students.t010588.homework.importer.CSVImporter;
 import net.azib.java.students.t010588.homework.importer.ConsoleImporter;
+import net.azib.java.students.t010588.homework.importer.DBConstants;
 import net.azib.java.students.t010588.homework.importer.DatabaseImporter;
 import net.azib.java.students.t010588.homework.importer.WrongFormatException;
 
 import java.io.File;
+import java.net.URL;
 
 /**
  * Tool to import decathlon results, scoring points and exporting results table
@@ -39,28 +41,36 @@ public class ResultsConverter {
 
 		try {
 			if (args[argIndex].equals("-csv")) {
-				importer = new CSVImporter(new File(args[++argIndex]));
+				importer = new CSVImporter(ResultsConverter.class.getResourceAsStream(args[++argIndex]));
 			}
 			else if (args[argIndex].equals("-console")) {
 				importer = new ConsoleImporter();
 			}
 			else if (args[argIndex].equals("-db")) {
-				importer = new DatabaseImporter(new File("db.properties"), args[++argIndex]);
+				importer = new DatabaseImporter(
+						ResultsConverter.class.getResourceAsStream(DBConstants.DEFAULT_DB_PROP_FILE_NAME), args[++argIndex]);
 			}
 
 			argIndex++;
 
 			if (args[argIndex].equals("-csv")) {
-				exporter = new CSVExporter(new File(args[++argIndex]));
+				URL dirUrl = ResultsConverter.class.getResource("./");
+				File exportFile = new File(dirUrl.getPath() + args[++argIndex]);
+				exporter = new CSVExporter(exportFile);
 			}
 			else if (args[argIndex].equals("-xml")) {
-				exporter = new XMLExporter(new File(args[++argIndex]));
+				URL dirUrl = ResultsConverter.class.getResource("./");
+				File exportFile = new File(dirUrl.getPath() + args[++argIndex]);
+				exporter = new XMLExporter(exportFile);
 			}
 			else if (args[argIndex].equals("-console")) {
 				exporter = new ConsoleExporter();
 			}
 			else if (args[argIndex].equals("-html")) {
-				exporter = new HTMLExporter(new File(args[++argIndex]));
+				URL dirUrl = ResultsConverter.class.getResource("./");
+				File exportFile = new File(dirUrl.getPath() + args[++argIndex]);
+				exporter = new HTMLExporter(exportFile, ResultsConverter.class
+						.getResourceAsStream(HTMLExporter.DEFAULT_STYLE_FILE_NAME));
 			}
 
 			if (importer == null || exporter == null)

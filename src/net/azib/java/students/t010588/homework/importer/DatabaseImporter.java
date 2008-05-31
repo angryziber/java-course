@@ -5,8 +5,7 @@ import net.azib.java.students.t010588.homework.FieldEventResult;
 import net.azib.java.students.t010588.homework.Result;
 import net.azib.java.students.t010588.homework.RunningEventResult;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,14 +35,14 @@ public class DatabaseImporter implements AthleteImporter {
 	private int competitionId = -1;
 
 	/**
-	 * @param dbProperties
-	 *            property file with database connection information
+	 * @param inputStream
+	 *            with database connection information
 	 * @param competition
 	 *            id or name
 	 * @throws WrongFormatException
 	 *             in case of wrong data base properties or invalid data
 	 */
-	public DatabaseImporter(File dbProperties, String competition) throws WrongFormatException {
+	public DatabaseImporter(InputStream inputStream, String competition) throws WrongFormatException {
 		athletes = new ArrayList<Athlete>();
 
 		try {
@@ -60,7 +59,7 @@ public class DatabaseImporter implements AthleteImporter {
 			DriverManager.registerDriver(new Driver());
 
 			Properties properties = new Properties();
-			properties.load(new FileInputStream(dbProperties));
+			properties.load(inputStream);
 			String url = properties.getProperty(DBConstants.URL_PROP);
 			String login = properties.getProperty(DBConstants.LOGIN_PROP);
 			String password = properties.getProperty(DBConstants.PASSWORD_PROP);
@@ -72,8 +71,7 @@ public class DatabaseImporter implements AthleteImporter {
 			connection.close();
 		}
 		catch (Exception e) {
-			e.printStackTrace(System.err);
-			throw new WrongFormatException(dbProperties.getAbsolutePath());
+			throw new WrongFormatException("Error reading database properties: " + e.getMessage());
 		}
 	}
 

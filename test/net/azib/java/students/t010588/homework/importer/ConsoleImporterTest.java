@@ -19,6 +19,6 @@ public class ConsoleImporterTest {
 	 */
 	@Test
 	public void testGetAthletes() throws WrongFormatException {
-//		TODO: hangs the test: assertTrue(new ConsoleImporter().getAthletes().size() > 0);
+		assertTrue(new ConsoleImporter(ConsoleImporterTest.class.getResourceAsStream("consoleTest.txt")).getAthletes().size() > 0);
 	}
 }

@@ -8,9 +8,8 @@ import net.azib.java.students.t010588.homework.Result;
 import net.azib.java.students.t010588.homework.RunningEventResult;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,19 +22,21 @@ import java.util.List;
  */
 public class CSVImporter implements AthleteImporter {
 
+	/** DEFAULT_ENCODING */
+	private static final String DEFAULT_ENCODING = "UTF8";
 	private List<Athlete> athletes;
 
 	/**
-	 * @param csvFile
-	 *            source file with athletes
+	 * @param cvsInputStream
+	 *            source stream with athletes
 	 * @throws WrongFormatException
 	 *             in a case of invalid file format
 	 */
-	public CSVImporter(File csvFile) throws WrongFormatException {
+	public CSVImporter(InputStream cvsInputStream) throws WrongFormatException {
 		athletes = new ArrayList<Athlete>();
 
 		try {
-			BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(csvFile), "UTF8"));
+			BufferedReader input = new BufferedReader(new InputStreamReader(cvsInputStream, DEFAULT_ENCODING));
 			try {
 				String line = null;
 				while ((line = input.readLine()) != null) {
@@ -46,8 +47,8 @@ public class CSVImporter implements AthleteImporter {
 				input.close();
 			}
 		}
-		catch (IOException ex) {
-			throw new WrongFormatException(csvFile.getAbsolutePath());
+		catch (IOException e) {
+			throw new WrongFormatException("Error CSV file: " + e.getMessage());
 		}
 	}
 

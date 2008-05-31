@@ -1,6 +1,5 @@
 package net.azib.java.students.t010588.homework.importer;
 
-import java.io.File;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -20,7 +19,7 @@ public class CSVImporterTest {
 	 */
 	@Test(expected = WrongFormatException.class)
 	public void testGetAthletesFromNotExistingFile() throws WrongFormatException {
-		new CSVImporter(new File("."));
+		new CSVImporter(CSVImporterTest.class.getResourceAsStream("."));
 	}
 
 	/**
@@ -31,6 +30,6 @@ public class CSVImporterTest {
 	 */
 	@Test
 	public void testGetAthletes() throws WrongFormatException {
-//		TODO: FAILING TEST: assertTrue(new CSVImporter(new File("test.csv")).getAthletes().size() > 0);
+		assertTrue(new CSVImporter(CSVImporterTest.class.getResourceAsStream("csvTest.csv")).getAthletes().size() > 0);
 	}
 }

@@ -2,7 +2,10 @@ package net.azib.java.students.t010588.homework.exporter;
 
 import static org.junit.Assert.assertTrue;
 
+import net.azib.java.students.t010588.homework.ResultsConverter;
+
 import java.io.File;
+import java.net.URL;
 
 import org.junit.Test;
 
@@ -21,8 +24,11 @@ public class HTMLExporterTest extends ExporterTest {
 	 */
 	@Test
 	public void testExportAthletes() throws InternalException {
-//		FAILING TEST
-//		new HTMLExporter(new File("results.html")).exportAthletes(athletes);
-//		assertTrue(new File("results.html").exists());
+		URL dirUrl = ResultsConverter.class.getResource("./");
+		File exportFile = new File(dirUrl.getPath() + generateFilename() + ".html");
+
+		new HTMLExporter(exportFile, ResultsConverter.class.getResourceAsStream(HTMLExporter.DEFAULT_STYLE_FILE_NAME))
+				.exportAthletes(athletes);
+		assertTrue(exportFile.exists());
 	}
 }

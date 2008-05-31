@@ -1,8 +1,8 @@
 package net.azib.java.students.t010588.homework.importer;
 
-import static org.junit.Assert.assertTrue;
+import net.azib.java.students.t010588.homework.ResultsConverter;
 
-import java.io.File;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -21,6 +21,7 @@ public class DatabaseImporterTest {
 	 */
 	@Test
 	public void testGetAthletes() throws WrongFormatException {
-//		TODO: FAILING TEST: assertTrue(new DatabaseImporter(new File("db.properties"), "1").getAthletes().size() > 0);
+		assertTrue(new DatabaseImporter(ResultsConverter.class.getResourceAsStream(DBConstants.DEFAULT_DB_PROP_FILE_NAME), "1")
+				.getAthletes().size() > 0);
 	}
 }

@@ -2,7 +2,10 @@ package net.azib.java.students.t010588.homework.exporter;
 
 import static org.junit.Assert.assertTrue;
 
+import net.azib.java.students.t010588.homework.ResultsConverter;
+
 import java.io.File;
+import java.net.URL;
 
 import org.junit.Test;
 
@@ -21,7 +24,10 @@ public class XMLExporterTest extends ExporterTest {
 	 */
 	@Test
 	public void testExportAthletes() throws InternalException {
-		new XMLExporter(new File("results.xml")).exportAthletes(athletes);
-		assertTrue(new File("results.xml").exists());
+		URL dirUrl = ResultsConverter.class.getResource("./");
+		File exportFile = new File(dirUrl.getPath() + generateFilename() + ".xml");
+
+		new XMLExporter(exportFile).exportAthletes(athletes);
+		assertTrue(exportFile.exists());
 	}
 }

@@ -1,8 +1,11 @@
 package net.azib.java.students.t010588.homework.exporter;
 
+import net.azib.java.students.t010588.homework.ResultsConverter;
+
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.net.URL;
 
 import org.junit.Test;
 
@@ -21,7 +24,10 @@ public class CSVExporterTest extends ExporterTest {
 	 */
 	@Test
 	public void testExportAthletes() throws InternalException {
-		new CSVExporter(new File("results.csv")).exportAthletes(athletes);
-		assertTrue(new File("results.csv").exists());
+		URL dirUrl = ResultsConverter.class.getResource("./");
+		File exportFile = new File(dirUrl.getPath() + generateFilename() + ".csv");
+
+		new CSVExporter(exportFile).exportAthletes(athletes);
+		assertTrue(exportFile.exists());
 	}
 }
