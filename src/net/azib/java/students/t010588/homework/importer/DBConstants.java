@@ -7,6 +7,8 @@ package net.azib.java.students.t010588.homework.importer;
  */
 public interface DBConstants {
 
+	public static final String DEFAULT_DB_PROP_FILE_NAME = "db.properties";
+
 	public static final String URL_PROP = "url";
 
 	public static final String LOGIN_PROP = "login";
