@@ -26,6 +26,9 @@ import org.w3c.dom.Node;
  */
 public class XMLExporter implements AthleteExporter {
 
+	/** DEFAULT_XSD_NAME */
+	private static final String DEFAULT_XSD_NAME = "decathlon.xsd";
+
 	protected Document document;
 
 	private File file;
@@ -54,7 +57,7 @@ public class XMLExporter implements AthleteExporter {
 			xsi.setNodeValue("http://www.w3.org/2001/XMLSchema-instance");
 
 			Attr schemaLocation = document.createAttribute("xsi:noNamespaceSchemaLocation");
-			schemaLocation.setNodeValue("decathlon.xsd");
+			schemaLocation.setNodeValue(DEFAULT_XSD_NAME);
 
 			root.setAttributeNode(xsi);
 			root.setAttributeNode(schemaLocation);
