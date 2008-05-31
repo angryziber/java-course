@@ -8,14 +8,15 @@ import net.azib.java.students.t010588.homework.RunningEventResult;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Before;
-import org.junit.Test;
 
 /**
- * ExporterTest
+ * Basics for testing exporters. Contains some predefined results that can be
+ * used in child classes to check exporter works correcly.
  *
- * @author slava
+ * @author Vjatseslav Rosin
  */
 public class ExporterTest {
 
@@ -27,6 +28,7 @@ public class ExporterTest {
 			new FieldEventResult(2, 6.1f), new FieldEventResult(3, 1.92f), new RunningEventResult(4, 50.01f),
 			new RunningEventResult(5, 13.4f), new FieldEventResult(6, 40f), new FieldEventResult(7, 4.0f),
 			new FieldEventResult(8, 60f), new RunningEventResult(9, "3:11.02") };
+
 	protected List<Athlete> athletes;
 
 	@Before
@@ -47,10 +49,16 @@ public class ExporterTest {
 		athletes.add(a1);
 		athletes.add(a2);
 	}
-	
-	@Test
-	public void unimplemented() throws Exception {
-		
+
+	/**
+	 * Simple way to create random file name (to exclude/decrease possibility
+	 * file already exists)
+	 *
+	 * @return 6 length file name
+	 */
+	protected String generateFilename() {
+		UUID uuid = UUID.randomUUID();
+		String fileName = uuid.toString();
+		return fileName.substring(0, 6);
 	}
-	
 }
