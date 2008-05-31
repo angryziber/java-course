@@ -47,8 +47,6 @@ public class AthleteTest {
 		assertEquals(FIRSTPLACE, athlete.getFirstPlace());
 		assertEquals(LASTPLACE, athlete.getLastPlace());
 
-		System.out.println(BIRTHDAY);
-
 		Result[] results = athlete.getResults();
 
 		for (int i = 0; i < RESULTS.length; i++) {
