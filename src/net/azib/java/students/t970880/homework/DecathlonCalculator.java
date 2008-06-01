@@ -384,7 +384,7 @@ public class DecathlonCalculator {
 									"SELECT athletes.name, athletes.dob, athletes.country_code, results.race_100m, results.long_jump, results.shot_put, results.high_jump, results.race_400m, results.hurdles_110m, results.discus_throw, results.pole_vault, results.javelin_throw, results.race_1500m"
 										+ " FROM results "
 											+ "RIGHT JOIN athletes ON athletes.id=results.athlete_id "
-											+ "WHERE results.competition_id = select id from competitions where id = ? or name = ? ");
+											+ "WHERE results.competition_id = (select id from competitions where id = ? or name = ? )");
 								int id = 0; // initialize to missing ID
 								try {id = Integer.parseInt(argument);} catch (NumberFormatException  e) {}
 								statement.setInt(1, id);
