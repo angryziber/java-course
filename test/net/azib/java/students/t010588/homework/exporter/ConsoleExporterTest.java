@@ -7,7 +7,7 @@ import org.junit.Test;
  *
  * @author Vjatseslav Rosin, 010588
  */
-public class ConsoleExporterTest extends ExporterTest {
+public class ConsoleExporterTest extends AbstractExporterTest {
 
 	/**
 	 * Test method for

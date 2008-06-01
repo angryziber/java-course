@@ -18,7 +18,7 @@ import org.junit.Before;
  *
  * @author Vjatseslav Rosin
  */
-public class ExporterTest {
+public abstract class AbstractExporterTest {
 
 	protected static final Result[] RESULTS1 = new Result[] { new RunningEventResult(0, 11.07f), new FieldEventResult(1, 6.42f),
 			new FieldEventResult(2, 6f), new FieldEventResult(3, 1.75f), new RunningEventResult(4, 50.47f),

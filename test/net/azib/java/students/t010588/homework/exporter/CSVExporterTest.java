@@ -14,7 +14,7 @@ import org.junit.Test;
  *
  * @author Vjatseslav Rosin, 010588
  */
-public class CSVExporterTest extends ExporterTest {
+public class CSVExporterTest extends AbstractExporterTest {
 
 	/**
 	 * Test method for

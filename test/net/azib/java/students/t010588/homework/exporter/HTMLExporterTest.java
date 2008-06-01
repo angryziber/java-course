@@ -14,7 +14,7 @@ import org.junit.Test;
  *
  * @author Vjatseslav Rosin, 010588
  */
-public class HTMLExporterTest extends ExporterTest {
+public class HTMLExporterTest extends AbstractExporterTest {
 
 	/**
 	 * Test method for
