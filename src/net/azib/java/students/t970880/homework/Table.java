@@ -6,8 +6,8 @@ interface Keyed {
 }
 
 // new Object() {
-// 	public @Key String part1 = "name1";
-// 	public @Key int part2 = 1;
+// 	@Key public  String part1 = "name1";
+// 	@Key public  int part2 = 1;
 // }
 
 /**A set, that allows to retreive objects by key similarily to DB table.
@@ -22,15 +22,16 @@ class Table<E extends Keyed> extends AbstractSet<E> {
 	final Map<Object, E> underlying = new HashMap<Object, E>(); 
 
 	public Table(Collection<E> c) {
-		Iterator<E> i = c.iterator();
-		while (i.hasNext())
-			add(i.next());
+		addAll(c);
+//		Iterator<E> i = c.iterator();
+//		while (i.hasNext())
+//			add(i.next());
 	}
 	
 	public boolean add(E e) {
 		return put(e) != null;
 	}
-
+// not sure whether it should be public
 	public E put(E e) {
 		return underlying.put(e.getKey(), e);
 	}

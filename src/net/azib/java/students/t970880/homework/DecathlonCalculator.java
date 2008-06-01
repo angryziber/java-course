@@ -60,7 +60,7 @@ abstract class Method implements Keyed {
 	
 	public Object getKey() {return name;}
 
-	@Key public final String name; // must be unique within the set of methods
+	/*@Key*/ public final String name; // must be unique within the set of methods
 	public final boolean hasArgument; 
 	
 	Method(String name) {this(name, true);}
@@ -101,7 +101,7 @@ class MinSecResultForamtter implements ResultFormatter {
 	}
 	public String format(float p) {
 		int min = (int) (p / 60);
-		return min + ":" + DecathlonCalculator.decimalFormat.format(p % 60);
+		return min + ":" + DecathlonCalculator.decimalFormat.format(p % 60); //weirdly, (p % 60) uses comma separator as opposed to (p+""). So we use a custom format here.
 	}
 }
 
@@ -152,7 +152,7 @@ class Decathlon {
 	/**These are the P parameters used in score calculation http://www.geocities.com/mdetting/sports/decathlon-points-formula.html 
 	The rest is stored in table of ResultFators.*/
 	public final float[] ps = new float[10]; 
-	public int place; // assigned after sort
+	public String place; // assigned after sort. Can be shared "1-2-3"
 	
 	// Sum all the 10 event scores
 	public int getScore() { // a computable field
@@ -168,7 +168,6 @@ class Decathlon {
 	Decathlon(String csv) throws java.text.ParseException {
 		Scanner tokenizer = new Scanner(csv);
 		tokenizer.useDelimiter(",");
-		
 		name = tokenizer.next("\\\".+\\\"").replaceAll(DecathlonCalculator.Q, ""); // remove the quotes
 		birthdy = DecathlonCalculator.dateFormat.parse(tokenizer.next());
 		country = tokenizer.next(); // check it is 2-letter?
@@ -270,7 +269,7 @@ public class DecathlonCalculator {
 			final String name;
 			final Method[] methods;
 			
-			MethodGroup(String name, Method[] methods) {
+			MethodGroup(String name, Method ... methods) {
 				this.name = name; 
 				this.methods = methods;
 			}
@@ -285,17 +284,20 @@ public class DecathlonCalculator {
 			}
 		}
 		
-		MethodGroup inputMethods = new MethodGroup("Input", new Method[] {
+		MethodGroup inputMethods = new MethodGroup("Input", //new Method[] {
 				
 				new Method("console", false) {
+					
 						Iterator<String> fields;
 						boolean eoi = false; // end of input (empty line entered);
-						String readLine() {
+						
+						String readLine() throws IOException {
 							System.out.print(fields.next() + ": ");
-							String result = System.console().readLine();
+							String result = (new BufferedReader(new InputStreamReader(System.in))).readLine();//System.console().readLine();
 							eoi = (result.length() == 0);
 							return result;
 						}
+						
 						public void invoke(String argument) throws Exception {
 							log("Enter empty line when finished");
 							while (true) {
@@ -321,9 +323,28 @@ public class DecathlonCalculator {
 					new Method("csv") {
 						public void invoke(String argument) throws Exception {
 							
+//							BufferedInputStream bis = new BufferedInputStream(new FileInputStream(argument));
+//							try {
+//								bis.mark(3);
+//								if (!Arrays.equals(Utils.readFully(bis, 3), new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF})) {
+//									log("bom is not present, rewinding to start");
+//									bis.reset();
+//								} else log("bom is there, skipping");
+							
+								// BufferedReader rb = ...
+							 	// ..
+//							} finally {
+//								// suppress exceptions in close
+//								try {
+//									bis.close();
+//								} catch (IOException ex) {
+//									System.err.println(ex + " when closing " + bis);
+//								}							
+//							}
+//		
 							new Using<BufferedInputStream>(new BufferedInputStream(new FileInputStream(argument))) {public void work() throws Exception {
-								
-								// Windows may prefix the UTF0-8 files with a 3-byte BOM. Skip it.
+
+								// Windows may prefix the UTF-8 files with a 3-byte BOM. Skip it. http://unicode.org/faq/utf_bom.html
 								devfile.mark(3);
 								if (!Arrays.equals(Utils.readFully(devfile, 3), new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF})) {
 									log("bom is not present, rewinding to start");
@@ -346,9 +367,6 @@ public class DecathlonCalculator {
 					new Method("db") {
 						public void invoke(String argument) throws Exception {
 							
-							// Load the MySQL driver
-							Class.forName("com.mysql.jdbc.Driver").newInstance();
-							
 							// Obtain the connection string and connect
 							final Properties props = new Properties();
 							{
@@ -357,15 +375,16 @@ public class DecathlonCalculator {
 								}};
 							}
 							log("Connecting to " + props.getProperty("url"));
+							
+							Class.forName(props.getProperty("driver")).newInstance();
 							Connection conn = DriverManager.getConnection(props.getProperty("url"));
-							try {
-								
+							try {								
 								// read competition results
 								PreparedStatement statement = conn.prepareStatement(
 									"SELECT athletes.name, athletes.dob, athletes.country_code, results.race_100m, results.long_jump, results.shot_put, results.high_jump, results.race_400m, results.hurdles_110m, results.discus_throw, results.pole_vault, results.javelin_throw, results.race_1500m"
 										+ " FROM results "
 											+ "RIGHT JOIN athletes ON athletes.id=results.athlete_id "
-											+ "WHERE results.competition_id = ?");
+											+ "WHERE results.competition_id = ?"); // prevents SQL injection
 								statement.setInt(1, Integer.parseInt(argument));
 								ResultSet rs = statement.executeQuery();
 								while (rs.next()) {
@@ -384,7 +403,7 @@ public class DecathlonCalculator {
 							}
 						}
 					}
-		});
+		/*}*/);
 
 		
 		MethodGroup outputMethods = new MethodGroup("Output", new Method[] {
@@ -448,12 +467,30 @@ public class DecathlonCalculator {
 		});
 		
 		// order places
-		Iterator<Decathlon> i = list.iterator();
-		Decathlon previous = i.next();
-		for (previous.place = 1; i.hasNext() ; ) {
-			Decathlon d = i.next();
-			d.place = previous.place + (d.getScore() == previous.getScore() ? 0 : 1);
-			previous = d;
+//		Iterator<Decathlon> i = list.iterator();
+//		Decathlon previous = i.next();
+//		for (previous.place = 1; i.hasNext() ; ) {
+//			Decathlon d = i.next();
+//			d.place = previous.place + (d.getScore() == previous.getScore() ? 0 : 1);
+//			previous = d;
+//		}
+
+		for (int place = 0; place != list.size() ; ) {
+			
+			// look ahead to see the number of shared positions
+			int shares = place + 1;
+			while (shares != list.size() && list.get(shares).getScore() == list.get(place).getScore())
+				shares++;
+			
+			// format the place string
+			StringBuffer sb = new StringBuffer((place + 1) + "");
+			for (int i = place+1; i != shares ; i++)
+				sb.append("-").append(i+1);
+			
+			// assign the shared place to the shares
+			for (; place != shares ; place++)
+				list.get(place).place = sb.toString();
+			
 		}
 		
 		int instructionPointer = intputMethod.hasArgument ? 2 : 1; // methods advance it by 0 or 1 dependently on their argument count
@@ -462,8 +499,6 @@ public class DecathlonCalculator {
 		Method outputMethod = outputMethods.getAt(instructionPointer);
 		outputMethod.invoke(outputMethod.hasArgument ? args[instructionPointer+1] : null);
 	
-// 		String chineseString = "\u4e00\u4e01\u4e02\u4e03\u4304";
-// 		(new PrintStream(System.out, true, "UTF-8")).println(chineseString);
 		//log(dateFormat.format(new java.util.Date()));
 		log("Done");	
 	}
