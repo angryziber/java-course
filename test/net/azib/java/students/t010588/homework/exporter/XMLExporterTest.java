@@ -2,7 +2,7 @@ package net.azib.java.students.t010588.homework.exporter;
 
 import static org.junit.Assert.assertTrue;
 
-import net.azib.java.students.t010588.homework.ResultsConverter;
+import net.azib.java.students.t010588.homework.DecathlonCalculator;
 
 import java.io.File;
 import java.net.URL;
@@ -24,7 +24,7 @@ public class XMLExporterTest extends ExporterTest {
 	 */
 	@Test
 	public void testExportAthletes() throws InternalException {
-		URL dirUrl = ResultsConverter.class.getResource("./");
+		URL dirUrl = DecathlonCalculator.class.getResource("./");
 		File exportFile = new File(dirUrl.getPath() + generateFilename() + ".xml");
 
 		new XMLExporter(exportFile).exportAthletes(athletes);

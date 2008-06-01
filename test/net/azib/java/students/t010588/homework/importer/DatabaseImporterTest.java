@@ -1,6 +1,6 @@
 package net.azib.java.students.t010588.homework.importer;
 
-import net.azib.java.students.t010588.homework.ResultsConverter;
+import net.azib.java.students.t010588.homework.DecathlonCalculator;
 
 import static org.junit.Assert.assertTrue;
 
@@ -21,7 +21,7 @@ public class DatabaseImporterTest {
 	 */
 	@Test
 	public void testGetAthletes() throws WrongFormatException {
-		assertTrue(new DatabaseImporter(ResultsConverter.class.getResourceAsStream(DBConstants.DEFAULT_DB_PROP_FILE_NAME), "1")
+		assertTrue(new DatabaseImporter(DecathlonCalculator.class.getResourceAsStream(DBConstants.DEFAULT_DB_PROP_FILE_NAME), "1")
 				.getAthletes().size() > 0);
 	}
 }

@@ -1,6 +1,6 @@
 package net.azib.java.students.t010588.homework.exporter;
 
-import net.azib.java.students.t010588.homework.ResultsConverter;
+import net.azib.java.students.t010588.homework.DecathlonCalculator;
 
 import static org.junit.Assert.assertTrue;
 
@@ -24,7 +24,7 @@ public class CSVExporterTest extends ExporterTest {
 	 */
 	@Test
 	public void testExportAthletes() throws InternalException {
-		URL dirUrl = ResultsConverter.class.getResource("./");
+		URL dirUrl = DecathlonCalculator.class.getResource("./");
 		File exportFile = new File(dirUrl.getPath() + generateFilename() + ".csv");
 
 		new CSVExporter(exportFile).exportAthletes(athletes);
