@@ -19,7 +19,7 @@ public class CSVImporterTest {
 	 */
 	@Test(expected = WrongFormatException.class)
 	public void testGetAthletesFromNotExistingFile() throws WrongFormatException {
-		new CSVImporter(CSVImporterTest.class.getResourceAsStream("."));
+		new CSVImporter(CSVImporterTest.class.getResourceAsStream(getClass().getSimpleName() + ".class"));
 	}
 
 	/**
