@@ -14,14 +14,15 @@ import net.azib.java.students.t010588.homework.importer.DatabaseImporter;
 import net.azib.java.students.t010588.homework.importer.WrongFormatException;
 
 import java.io.File;
-import java.net.URL;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * Tool to import decathlon results, scoring points and exporting results table
  *
  * @author Vjatseslav Rosin, 010588
  */
-public class ResultsConverter {
+public class DecathlonCalculator {
 
 	/**
 	 * @param args
@@ -41,35 +42,32 @@ public class ResultsConverter {
 
 		try {
 			if (args[argIndex].equals("-csv")) {
-				importer = new CSVImporter(ResultsConverter.class.getResourceAsStream(args[++argIndex]));
+				importer = new CSVImporter(new FileInputStream(args[++argIndex]));
 			}
 			else if (args[argIndex].equals("-console")) {
 				importer = new ConsoleImporter();
 			}
 			else if (args[argIndex].equals("-db")) {
 				importer = new DatabaseImporter(
-						ResultsConverter.class.getResourceAsStream(DBConstants.DEFAULT_DB_PROP_FILE_NAME), args[++argIndex]);
+						DecathlonCalculator.class.getResourceAsStream(DBConstants.DEFAULT_DB_PROP_FILE_NAME), args[++argIndex]);
 			}
 
 			argIndex++;
 
 			if (args[argIndex].equals("-csv")) {
-				URL dirUrl = ResultsConverter.class.getResource("./");
-				File exportFile = new File(dirUrl.getPath() + args[++argIndex]);
+				File exportFile = new File(args[++argIndex]);
 				exporter = new CSVExporter(exportFile);
 			}
 			else if (args[argIndex].equals("-xml")) {
-				URL dirUrl = ResultsConverter.class.getResource("./");
-				File exportFile = new File(dirUrl.getPath() + args[++argIndex]);
+				File exportFile = new File(args[++argIndex]);
 				exporter = new XMLExporter(exportFile);
 			}
 			else if (args[argIndex].equals("-console")) {
 				exporter = new ConsoleExporter();
 			}
 			else if (args[argIndex].equals("-html")) {
-				URL dirUrl = ResultsConverter.class.getResource("./");
-				File exportFile = new File(dirUrl.getPath() + args[++argIndex]);
-				exporter = new HTMLExporter(exportFile, ResultsConverter.class
+				File exportFile = new File(args[++argIndex]);
+				exporter = new HTMLExporter(exportFile, DecathlonCalculator.class
 						.getResourceAsStream(HTMLExporter.DEFAULT_STYLE_FILE_NAME));
 			}
 
@@ -89,6 +87,10 @@ public class ResultsConverter {
 			System.out.println("Internal error!");
 			System.out.println(e.getMessage());
 			help();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		System.exit(0);
