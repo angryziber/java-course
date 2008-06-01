@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.Collection;
 import java.util.Properties;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -23,6 +25,7 @@ public class DecathlonInputDBTest {
 	 * Make fake db using hsqldb
 	 * @throws SQLException
 	 */
+	@Before
 	public void makeFakeDB() throws SQLException {
 		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
 		Statement stmt = conn.createStatement();
@@ -91,7 +94,8 @@ public class DecathlonInputDBTest {
 	 * Shutdown DB
 	 * @throws SQLException
 	 */
-	private void shutdownDB() throws SQLException {
+	@After
+	public void shutdownDB() throws SQLException {
 		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
 		Statement stmt = conn.createStatement();
 		stmt.execute("shutdown");
@@ -157,8 +161,6 @@ public class DecathlonInputDBTest {
 	@Test
 	public void testGetAthletesDataFromDB() throws DecathlonException, SQLException{
 		
-		makeFakeDB();
-		
 		Collection<Athlete> competitors = new DecathlonInputDB().getAthletesDataFromDB("2", getProperties());
 	
 		assertTrue(competitors != null);
@@ -168,25 +170,14 @@ public class DecathlonInputDBTest {
 			s += athlete.getName()+ "=" + athlete.competitionResults.getTotalScore() + ";"; 
 		}
 		
-		//shutdown db
-		shutdownDB();		
-
 		assertEquals("Siim Susi=4234;Szőrös Szűk=3495;Beata Kana=3199;", s);
 	}
-
-
-
 
 	@Test
 	public void testGetAthletesDataFromDBNoData() throws DecathlonException, SQLException{
 		
-		makeFakeDB();
-		
 		Collection<Athlete> competitors = new DecathlonInputDB().getAthletesDataFromDB("1", getProperties());
 	
-		//shutdown db
-		shutdownDB();
-		
 		assertTrue(competitors.size() == 0);
 	}
 }

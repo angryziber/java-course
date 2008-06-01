@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 
 
@@ -30,6 +31,15 @@ import org.junit.Test;
 public class DatabaseInputTest {
 	private Connection conn;
 	private int errorCode;
+	
+	@After
+	public void shutdownDB() throws SQLException {
+		// Anton: you need to clear the state that you have changed with your tests
+		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
+		Statement stmt = conn.createStatement();
+		stmt.execute("shutdown");
+		conn.close();
+	}
 	
 	@Test
 	public void connectionFails(){
