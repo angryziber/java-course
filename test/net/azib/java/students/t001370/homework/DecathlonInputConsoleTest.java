@@ -94,6 +94,7 @@ public class DecathlonInputConsoleTest {
 	}
 
 //works on my pc
+//have no idea why it not passing on cruise	
 //	/**
 //	 * Test method for {@link net.azib.java.students.t001370.homework.DecathlonInputConsole#getAthletesDataFromConsole()}.
 //	 * @throws ParseException 
