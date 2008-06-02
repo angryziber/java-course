@@ -29,13 +29,13 @@
    <b>100 m sprint (sec):</b> 
    <xsl:value-of select="sprint100mEvent" />
    <br />
-   <b>Long jump (cm):</b> 
+   <b>Long jump (m):</b> 
       <xsl:value-of select="longJumpEvent" />
    <br />
     <b>Shot put (m):</b> 
       <xsl:value-of select="shotPutEvent" />
    <br />
-   <b>High jump (cm):</b> 
+   <b>High jump (m):</b> 
       <xsl:value-of select="highJumpEvent" />
    <br />
    <b>400 m sprint (sec):</b> 
@@ -47,7 +47,7 @@
    <b>Discus throw (m):</b> 
       <xsl:value-of select="discusThrowEvent" />
    <br />
-   <b>Pole vault (cm):</b> 
+   <b>Pole vault (m):</b> 
       <xsl:value-of select="poleVaultEvent" />
    <br />
    <b>Javelin throw (m):</b> 

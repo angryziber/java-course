@@ -37,7 +37,7 @@
 			<xs:element name="javelinThrowEvent" type="double" minOccurs="1"/>
 			<xs:element name="race1500mEvent" type="double" minOccurs="1"/>
 			<xs:element name="points" type="xs:positiveInteger" minOccurs="1"/>
-			<xs:element name="place" type="xs:positiveInteger" minOccurs="1"/>
+			<xs:element name="place" type="xs:string" minOccurs="1"/>
     </xs:all>
   </xs:complexType>
 </xs:schema>

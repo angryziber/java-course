@@ -1,5 +1,8 @@
 package net.azib.java.students.t020281.homework;
 
+import java.util.Properties;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -16,46 +19,91 @@ import java.util.ArrayList;
 public class SportsmanDAO {
 	
 	ArrayList<Results> resultList = null;
-	String url = "jdbc:mysql://srv.azib.net:3306/decathlon";
-	String user = "java";
-	String password = "java";
+	String url;
+	String user;
+	String password;
 	
 	/**
 	 * 
 	 */
 	public SportsmanDAO() {
 		resultList = new ArrayList<Results>();
-	}
+		Properties pr = new Properties();
+		InputStream in = null;
+		try {
+			in = SportsmanDAO.class.getResourceAsStream("db.properties");
+			pr.load(in);
+			url=pr.getProperty("url");
+			user = pr.getProperty("user");
+			password = pr.getProperty("pass");
+		}
+		catch (IOException e) {
+			System.out.println("Error reading Database properties form file. IOError!");
+		}
+		finally{
+			try {
+				in.close();
+			}
+			catch (IOException e) {
+				System.out.println("Error closing database properties file. IOError!");
+			}
+		}
 
-	Connection connectDb(){
+	}
+	
+	/**
+	 * Method for obtaining connection to database
+	 * @return - connection handler
+	 */
+	private Connection connectDb(){
+		
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			return conn;
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error connecting to database!");
 			return null;
 		}
 	}
 	
+	/**
+	 * Method for converting SQL date to another format.
+	 * Example: 2006-07-27 to 27.07.2006
+	 * @param date - SQL Date
+	 * @return date string
+	 */
 	private String convertSQLDate(Date date){
 		String[] arr= date.toString().split("\\-");
 		return arr[2]+"."+arr[1]+"."+arr[0];
 	}
 	
 	/**
-	 * Method reads Sportsmen data to string array in CSV format from database. Data is aquired by competition id.
-	 * @param competitionId
+	 * Method reads Sportsmen data to string array in CSV format from database.
+	 * Data is aquired by competition id or name.
+	 * @param id - id or name of competition
 	 * @return string array in csv format
 	 */
-	public String[] getResultsByCompetition(int competitionId){
-		if (getCompetitions(competitionId)) {
+	public String[] getResultsByCompetition(String id){
+		Connection conn = connectDb();
+		String[] res = getCompetitionResults(id, conn);
+			try {
+				conn.close();
+			}
+			catch (SQLException e) {
+				System.out.println("Error disconnecting from database!");
+				
+			}
+		return res;
+	}
+	
+	String [] getCompetitionResults(String param, Connection conn){
+		if (getResultsFromDB(param, conn)) {
 			String[] resultArray = new String[resultList.size()];
 			for (int i = 0; i < resultList.size(); i++) {
 				String resultString = new String();
-				resultString = getSportsmanDataById (resultList.get(i).athleteId);
+				resultString = getSportsmanDataFromDB(resultList.get(i).athleteId, conn);
 				resultString += resultList.get(i).toString();
 				resultArray[i] = resultString;
 			}
@@ -65,8 +113,15 @@ public class SportsmanDAO {
 		}
 	}
 	
-	private String getSportsmanDataById(int id){
-		Connection conn = connectDb();
+	/**
+	 * Method returns Sportsman name, date of birth and country code 
+	 * by ID in database. 
+	 * @param id - Sportsman id in database
+	 * @param conn -  connection handler to database
+	 * @return - CSV formed result string
+	 */
+	String getSportsmanDataFromDB(int id, Connection conn){
+		
 		PreparedStatement resultsStatement;
 		try {
 			String results;
@@ -78,23 +133,12 @@ public class SportsmanDAO {
 			return results;
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error accessing Sportsman data in database!");
 			return null;
 		}
-		finally {
-			try {
-				conn.close();
-			}
-			catch (SQLException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Error disconnecting from database!");
-				
-			}
-		}
 	}
 	
-	private class Results {
+	class Results {
 		int athleteId;
 		Double race_100m;
 		Double longJump;
@@ -117,11 +161,56 @@ public class SportsmanDAO {
 		
 	}
 	
-	private boolean getCompetitions(int id){
-		Connection conn = connectDb();
+	/**
+	 * Method returns competition id, red from database
+	 * by competition id or name. 
+	 * @param param - id or name as String
+	 * @return - competition id as int.
+	 */
+	private int getCompetitionID(String param,Connection conn){
+		PreparedStatement membersStatement;
+		try {
+			membersStatement = conn.prepareStatement("select * from competitions where id = ? or name = ? ");
+			int i = 0;
+			try{
+				i = Integer.parseInt(param);
+			}
+			catch (NumberFormatException e){
+			}
+		membersStatement.setInt(1, i);
+		membersStatement.setString(2, param);
+		
+		ResultSet rs = membersStatement.executeQuery();
+
+			if (rs.next()){
+				return rs.getInt("id");
+			} else {
+				return 0;
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Error accessing results by competition in database!");
+			return 0;
+		}
+	}
+	
+	/**
+	 * Method gets sportsmen competition results by ID or name
+	 * of competition in database and puts it into
+	 * resultList field of PersonDAO instance. 
+	 * @param param -  Sportsman id or name in database.
+	 * @param conn - connection handler
+	 * @return - true if succeeded of false if not. 
+	 */
+	boolean getResultsFromDB(String param, Connection conn){
 			PreparedStatement membersStatement;
+			int id = getCompetitionID(param, conn);
+			if (id < 1){
+				System.out.println("No competiton was found with name or id "+param);
+				return false;
+			}
 			try {
-				membersStatement = conn.prepareStatement("select * from results where competition_id = ?");
+				membersStatement = conn.prepareStatement("select * from results where competition_id = ? ");
 
 			membersStatement.setInt(1, id);
 			ResultSet rs = membersStatement.executeQuery();
@@ -146,16 +235,6 @@ public class SportsmanDAO {
 				// TODO Auto-generated catch block
 				System.out.println("Error accessing results by competition in database!");
 				return false;
-			}
-			finally {
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					// TODO Auto-generated catch block
-					System.out.println("Error disconnecting from database!");
-					
-				}
 			}
 	}
 }

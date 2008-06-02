@@ -1,6 +1,5 @@
 package net.azib.java.students.t020281;
 
-import java.util.Date;
 
 /**
  * HelloWorld
@@ -16,7 +15,17 @@ public class HelloWorld
 	{
 		System.out.println(Constants.GREETING_MESSAGE);
 		System.out.println(Math.pow(2, 3));
-		System.out.println(HelloWorld.class.getResource("test.csv"));
+		String s = "6";
+		int i = 5;
+		try{
+			i = Integer.parseInt(s);
+		}
+		catch (NumberFormatException e){
+			System.out.println("Exception!");
+		}
+		System.out.println(i);
+		
+		
 		
 	}
 }

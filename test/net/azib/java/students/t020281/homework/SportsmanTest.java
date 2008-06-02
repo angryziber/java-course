@@ -149,19 +149,23 @@ public class SportsmanTest {
 	@Test
 	public void csvStringParsed() {
 		
-//		ByteArrayOutputStream myOutput= new ByteArrayOutputStream();
-//		Sportsman Person = new Sportsman(myOutput);
-//		String expectedString = "15.05.2008 0:55:04 net.azib.java.students" +
-//								".t020281.homework.Sportsman parseDataString\n" +
-//								"WARNING: 400m sprint time has invalid format!" +
-//								"Example: 12.69 or 1:12.69";
-		
 		Sportsman Person = new Sportsman();
 		
 		String stringToParse = "\"Szőrös Szűk\",3.04.1972,HU,13.75,4.84,10.12,1.50,1:08.44,19.18,30.85,2.80,33.88,6:22.75";
 		
 		assertTrue(Person.parseDataString(stringToParse));
 	
+	}
+	
+	@Test
+	public void toStringTest(){
+		Sportsman person = new Sportsman();
+		String results = "\"Siim Susi\",01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72";
+		person.parseDataString(results);
+		person.calculateDecathlonPoints();
+		String expected = "\"Siim Susi\",01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,325.72,3846";
+		String actual = person.toString();
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -208,12 +212,12 @@ public class SportsmanTest {
 	
 	@Test
 	public void decathlonPointsCalculated() {
-		Sportsman Person = new Sportsman();
+		Sportsman person = new Sportsman();
 		String results = "\"Siim Susi\",01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72";
-		Person.parseDataString(results);
-		Person.calculateDecathlonPoints();
+		person.parseDataString(results);
+		person.calculateDecathlonPoints();
 		double expected = 3846.0664996823343;
-		double actual = Person.getPoints();
+		double actual = person.getPoints();
 		
 		assertEquals(expected, actual);
 	}

@@ -1,5 +1,6 @@
 package net.azib.java.students.t020281.homework;
 
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,18 +30,23 @@ import java.util.regex.Pattern;
 	private Double javelinThrowEvent;
 	private Double race1500mEvent;
 	private Double points;
-
 	
+	
+	/**
+	 * Method for converting Sportsman object to string
+	 * @return object as string
+	 */
 	public String toString(){
 		
 		StringBuilder builder = new StringBuilder();
+		DecimalFormat df = new DecimalFormat("0.00");
 		builder.append("\"").append(name).append("\",").append(birthDate).append(",");
-		builder.append(country).append(",").append(sprint100mEvent).append(",");
-		builder.append(longJumpEvent).append(",").append(shotPutEvent).append(",");
-		builder.append(highJumpEvent).append(",").append(sprint400mEvent).append(",");
-		builder.append(hurdles110mEvent).append(",").append(discusThrowEvent).append(",");
-		builder.append(poleVaultEvent).append(",").append(javelinThrowEvent).append(",");
-		builder.append(race1500mEvent).append(",").append(points);
+		builder.append(country).append(",").append(df.format(sprint100mEvent).replace( ',', '.' )).append(",");
+		builder.append(df.format(longJumpEvent/100).replace( ',', '.' )).append(",").append(df.format(shotPutEvent).replace( ',', '.' )).append(",");
+		builder.append(df.format(highJumpEvent/100).replace( ',', '.' )).append(",").append(df.format(sprint400mEvent).replace( ',', '.' )).append(",");
+		builder.append(df.format(hurdles110mEvent).replace( ',', '.' )).append(",").append(df.format(discusThrowEvent).replace( ',', '.' )).append(",");
+		builder.append(df.format(poleVaultEvent/100).replace( ',', '.' )).append(",").append(df.format(javelinThrowEvent).replace( ',', '.' )).append(",");
+		builder.append(df.format(race1500mEvent).replace( ',', '.' )).append(",").append(points.intValue());
 		return builder.toString();
 		
 	}
@@ -143,13 +149,18 @@ import java.util.regex.Pattern;
 		return points;
 	}
 
+	/**
+	 * 
+	 */
 	public Sportsman(){
 	}
 	
-	public Sportsman(String results) {
-//		this(System.out);
-		this.parseDataString(results);
-		this.calculateDecathlonPoints();
+	public Sportsman(String results) throws Exception {
+		if (this.parseDataString(results)){
+		this.calculateDecathlonPoints();}
+		else {
+			throw new Exception("Error parsing results string!");
+		}
 	}
 	
 
@@ -232,7 +243,8 @@ import java.util.regex.Pattern;
 	 * @return True or False depending on success of parsing
 	 */
 	public boolean parseDataString(String results) {
-
+		
+		try {
 		String[] resultArray = results.split("\\,");
 		
 		if (resultArray[0].startsWith("\"") && resultArray[0].endsWith("\"")){
@@ -308,9 +320,18 @@ import java.util.regex.Pattern;
 		this.race1500mEvent = convertToSec(resultArray[12]);
 		
 		return true;
+		}
+		catch (ArrayIndexOutOfBoundsException e){
+			return false;
+		}
 	}
 
-	public double convertToSec(String time){
+	/**
+	 * Method converts time in minutes to time in seconds
+	 * @param time as string
+	 * @return value in seconds
+	 */
+	double convertToSec(String time){
 		
 		double minute = 0; 
 		if (time.contains(":")) {
@@ -324,20 +345,40 @@ import java.util.regex.Pattern;
 	
 	
 	/**
-	 *  Function to convert meters to samntimeters
+	 *  Method converts meters to samntimeters
 	 * @param metres
-	 * @return
+	 * @return value in santimeters
 	 */
-	public double convertToSanti(double metres){
+	double convertToSanti(double metres){
 		return 100*metres;
 	}
 	
-	public double calcRunningEvent(double A,double B,double C,double P) {
+	/**
+	 * Method returns a result of calculation of 
+	 * decathlon points for running event
+	 * 
+	 * @param A - constant A
+	 * @param B - constant B
+	 * @param C - constant C
+	 * @param P - points for running event
+	 * @return decathlon points for running event
+	 */
+	double calcRunningEvent(double A,double B,double C,double P) {
 		
 		return A*Math.pow((B-P), C);
 	}
 	
-	public double calcFieldEvent(double A,double B,double C,double P) {
+	/**
+	 * Method returns a result of calculation of 
+	 * decathlon points for field event
+	 * 
+	 * @param A - constant A
+	 * @param B - constant B
+	 * @param C - constant C
+	 * @param P - points for field event
+	 * @return decathlon points for field events
+	 */
+	double calcFieldEvent(double A,double B,double C,double P) {
 		
 		return A*Math.pow((P-B), C);
 	}

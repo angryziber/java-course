@@ -1,6 +1,7 @@
 package net.azib.java.students.t020281.homework;
 
 
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -44,9 +45,11 @@ import javax.xml.transform.stream.StreamSource;
 public class DecathlonCalculator {
 	
 	LinkedList<Sportsman> sportsmenList = new LinkedList<Sportsman>();
+	String[] places;
 	
 	/**
-	 * Method to sort sportsmen list in descending order by their decathlon points.
+	 * Method to sort sportsmen list in descending order 
+	 * by their decathlon points.
 	 */
 	public void sortSportsmenList() {
 		Comparator<Sportsman> r = Collections.reverseOrder();
@@ -58,7 +61,8 @@ public class DecathlonCalculator {
 	}
 	
 	/**
-	 * Method reads Sportsmen data in CSV format from InputStream provided.
+	 * Method reads Sportsmen data in CSV format
+	 * from InputStream provided.
 	 * @param input
 	 * @return
 	 */
@@ -101,7 +105,6 @@ public class DecathlonCalculator {
 	public void writeToXML(OutputStream out){
 		
 		StringBuilder builder = new StringBuilder();
-		sortSportsmenList();
 		builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		builder.append("<results xsi:noNamespaceSchemaLocation=\"");
 		builder.append(DecathlonCalculator.class.getResource("decathlon.xsd")); 
@@ -114,18 +117,18 @@ public class DecathlonCalculator {
 			builder.append("<name>").append(person.getName()).append("</name>\n");
 			builder.append("<birthDate>").append(person.getBirthDate()).append("</birthDate>\n");
 			builder.append("<country>").append(person.getCountry()).append("</country>\n");
-			builder.append("<sprint100mEvent>").append(df.format(person.getSprint100mEvent())).append("</sprint100mEvent>\n");
-			builder.append("<longJumpEvent>").append(df.format(person.getLongJumpEvent())).append("</longJumpEvent>\n");
-			builder.append("<shotPutEvent>").append(df.format(person.getShotPutEvent())).append("</shotPutEvent>\n");
-			builder.append("<highJumpEvent>").append(df.format(person.getHighJumpEvent())).append("</highJumpEvent>\n");
-			builder.append("<sprint400mEvent>").append(df.format(person.getSprint400mEvent())).append("</sprint400mEvent>\n");
-			builder.append("<hurdles110mEvent>").append(df.format(person.getHurdles110mEvent())).append("</hurdles110mEvent>\n");
-			builder.append("<discusThrowEvent>").append(df.format(person.getDiscusThrowEvent())).append("</discusThrowEvent>\n");
-			builder.append("<poleVaultEvent>").append(df.format(person.getPoleVaultEvent())).append("</poleVaultEvent>\n");
-			builder.append("<javelinThrowEvent>").append(df.format(person.getJavelinThrowEvent())).append("</javelinThrowEvent>\n");
-			builder.append("<race1500mEvent>").append(df.format(person.getRace1500mEvent())).append("</race1500mEvent>\n");
+			builder.append("<sprint100mEvent>").append(df.format(person.getSprint100mEvent()).replace( ',', '.' )).append("</sprint100mEvent>\n");
+			builder.append("<longJumpEvent>").append(df.format(person.getLongJumpEvent()/100).replace( ',', '.' )).append("</longJumpEvent>\n");
+			builder.append("<shotPutEvent>").append(df.format(person.getShotPutEvent()).replace( ',', '.' )).append("</shotPutEvent>\n");
+			builder.append("<highJumpEvent>").append(df.format(person.getHighJumpEvent()/100).replace( ',', '.' )).append("</highJumpEvent>\n");
+			builder.append("<sprint400mEvent>").append(df.format(person.getSprint400mEvent()).replace( ',', '.' )).append("</sprint400mEvent>\n");
+			builder.append("<hurdles110mEvent>").append(df.format(person.getHurdles110mEvent()).replace( ',', '.' )).append("</hurdles110mEvent>\n");
+			builder.append("<discusThrowEvent>").append(df.format(person.getDiscusThrowEvent()).replace( ',', '.' )).append("</discusThrowEvent>\n");
+			builder.append("<poleVaultEvent>").append(df.format(person.getPoleVaultEvent()/100).replace( ',', '.' )).append("</poleVaultEvent>\n");
+			builder.append("<javelinThrowEvent>").append(df.format(person.getJavelinThrowEvent()).replace( ',', '.' )).append("</javelinThrowEvent>\n");
+			builder.append("<race1500mEvent>").append(df.format(person.getRace1500mEvent()).replace( ',', '.' )).append("</race1500mEvent>\n");
 			builder.append("<points>").append(person.getPoints().intValue()).append("</points>\n");
-			builder.append("<place>").append(i+1).append("</place>\n");
+			builder.append("<place>").append(places[i]).append("</place>\n");
 			builder.append("</sportsman>\n");
 		}
 		builder.append("</results>");
@@ -189,30 +192,114 @@ public class DecathlonCalculator {
 	 */
 	public void writeToConsole(OutputStream out){
 		StringBuilder builder = new StringBuilder();
-		sortSportsmenList();
 		for (int i = 0; i < sportsmenList.size(); i++) {
 			Sportsman person = new Sportsman();
 			person = sportsmenList.get(i);
 			DecimalFormat df = new DecimalFormat("0.00");
-			builder.append(person.getName().toUpperCase()).append(" (").append(person.getBirthDate()).append(") ").append(person.getCountry()).append(" results:\n");
-			builder.append("100 m sprint (sec): ").append(df.format(person.getSprint100mEvent())).append("\n");
-			builder.append("Long jump (m): ").append(df.format(person.getLongJumpEvent()/100)).append("\n");
-			builder.append("Shot put (m): ").append(df.format(person.getShotPutEvent())).append("\n");
-			builder.append("High jump (m): ").append(df.format(person.getHighJumpEvent()/100)).append("\n");
-			builder.append("400 m sprint (sec): ").append(df.format(person.getSprint400mEvent())).append("\n");
-			builder.append("110 m hurdles (sec): ").append(df.format(person.getHurdles110mEvent())).append("\n");
-			builder.append("Discus throw (m) : ").append(df.format(person.getDiscusThrowEvent())).append("\n");
-			builder.append("Pole vault (m): ").append(df.format(person.getPoleVaultEvent()/100)).append("\n");
-			builder.append("Javelin throw (m): ").append(df.format(person.getJavelinThrowEvent())).append("\n");
-			builder.append("1500 m race (sec): ").append(df.format(person.getRace1500mEvent())).append("\n");
+			builder.append(person.getName()).append(" (").append(person.getBirthDate()).append(") ").append(person.getCountry()).append(" results:\n");
+			builder.append("100 m sprint (sec): ").append(df.format(person.getSprint100mEvent()).replace( ',', '.' )).append("\n");
+			builder.append("Long jump (m): ").append(df.format(person.getLongJumpEvent()/100).replace( ',', '.' )).append("\n");
+			builder.append("Shot put (m): ").append(df.format(person.getShotPutEvent()).replace( ',', '.' )).append("\n");
+			builder.append("High jump (m): ").append(df.format(person.getHighJumpEvent()/100).replace( ',', '.' )).append("\n");
+			builder.append("400 m sprint (sec): ").append(df.format(person.getSprint400mEvent()).replace( ',', '.' )).append("\n");
+			builder.append("110 m hurdles (sec): ").append(df.format(person.getHurdles110mEvent()).replace( ',', '.' )).append("\n");
+			builder.append("Discus throw (m) : ").append(df.format(person.getDiscusThrowEvent()).replace( ',', '.' )).append("\n");
+			builder.append("Pole vault (m): ").append(df.format(person.getPoleVaultEvent()/100).replace( ',', '.' )).append("\n");
+			builder.append("Javelin throw (m): ").append(df.format(person.getJavelinThrowEvent()).replace( ',', '.' )).append("\n");
+			builder.append("1500 m race (sec): ").append(df.format(person.getRace1500mEvent()).replace( ',', '.' )).append("\n");
 			builder.append("Decathlon Points: ").append(person.getPoints().intValue()).append("\n");
-			builder.append("Place: ").append(i+1).append("\n\n");
+			builder.append("Place: ").append(places[i]).append("\n\n");
 		}
 		try {
-			out.write(builder.toString().getBytes());
+			OutputStreamWriter writer = new OutputStreamWriter(out,"UTF8");
+			writer.write(builder.toString());
+			writer.flush();
+			writer.close();
 		}
 		catch (IOException e) {
 			System.out.println("Error writing to console!");
+		}
+	}
+	
+	/**
+	 * Method for processing input CSV formatted strings of sportsmen
+	 * results, combine a list of sportsmen to field "sportsmenList",
+	 * sort this list, and calculate sportsmen places putting them into
+	 * "places" field.
+	 * @param res - CSV formatted strings of sportsmen results
+	 */
+	public boolean processInput(String[] res){
+		if (res!=null) {
+			for (int j = 0; j < res.length; j++) {
+				try {
+				Sportsman person = new Sportsman(res[j]);
+				this.sportsmenList.add(person);
+				}
+				catch (Exception e){
+					System.out.println(e.getMessage());
+					return false;
+				}
+			}
+			sortSportsmenList();
+			calculatePlaces();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Method calculates places for Sportsmen saved in field
+	 * "sportsmenList" and put results into field
+	 * "places" array of Strings.
+	 */
+	void calculatePlaces(){
+		if (places == null) {
+		places = new String[sportsmenList.size()];
+		int low = 0;
+		int hi = 0;
+		boolean flag = false;
+		int actual;
+		int next;
+		for (int i = 0; i < sportsmenList.size(); i++) {
+			if (flag){
+				try{
+					actual = sportsmenList.get(i).getPoints().intValue();
+					next = sportsmenList.get(i+1).getPoints().intValue();
+					if (actual==next){
+						hi = i+1;
+					} else {
+						flag = false;
+						for (int j = low; j < hi+1; j++) {
+							places[j]=(low+1)+"-"+(hi+1);
+						}
+					}
+				} 
+				catch(IndexOutOfBoundsException e){
+					for (int j = low; j < hi+1; j++) {
+						places[j]=(low+1)+"-"+(hi+1);
+					}
+				}
+			} else {
+				try{
+					actual = sportsmenList.get(i).getPoints().intValue();
+					next = sportsmenList.get(i+1).getPoints().intValue();
+					if (actual==next){
+						low = i;
+						hi = i+1;
+						flag = true;
+					}  else {
+						places[i]=new Integer(i+1).toString();
+					}
+				} 
+				catch(IndexOutOfBoundsException e){
+						places[i]=new Integer(i+1).toString();
+				}
+			}
+		}
+		}
+		else {
+//			do nothing, places are already calculated
 		}
 	}
 	
@@ -222,12 +309,11 @@ public class DecathlonCalculator {
 	 */
 	public void writeToCSV(OutputStream output){
 		
-		sortSportsmenList();
 		Writer writer = null;
 		StringBuilder builder = new StringBuilder();
 		
 		for (int i = 0; i < sportsmenList.size(); i++) {
-			builder.append(sportsmenList.get(i).toString()).append(",").append(i+1).append("\n");
+			builder.append(sportsmenList.get(i).toString()).append(",").append(places[i]).append("\n");
 		}
 		String[] results = builder.toString().split("\n");
 		
@@ -271,8 +357,9 @@ public class DecathlonCalculator {
 	 * Method for reading sportsman data from Scanner and output dialogs to given PrintStream
 	 * @return string array of CSV formatted strings 
 	 */
-	public String[] readFromStream(Scanner scanner, PrintStream out ){
+	String[] readFromStream(Scanner scanner, PrintStream out ){
 		StringBuilder builder = new StringBuilder();
+		String LN = System.getProperty("line.separator");
 		int i = 1;
 		String results;
 		String rawResult;
@@ -284,19 +371,19 @@ public class DecathlonCalculator {
 			
 			out.print("Name: ");
 			while (!Sportsman.isName(rawResult = scanner.nextLine())) {
-				out.println("Name has incorrect format.Example: Vasya Pupkin");
+				out.println("Name has incorrect format.Example: Vasya Pupkin"+LN+"Please, re-enter:");
 			}
 			results += "\""+rawResult+"\"";
 			
 			out.print("Date of birth: ");
 			while (!Sportsman.isDate(rawResult = scanner.next())) {
-				out.println("Date has incorrect format.Example: 12.03.1990");
+				out.println("Date has incorrect format.Example: 12.03.1990"+LN+"Please, re-enter:");
 			}
 			results += ","+rawResult;
 			
 			out.print("Country Code: ");
 			while (!Sportsman.isCode(rawResult = scanner.next())) {
-				out.println("Code has incorrect format.Example: EE");
+				out.println("Code has incorrect format.Example: EE"+LN+"Please, re-enter:");
 			}
 			results += ","+rawResult;
 			
@@ -308,7 +395,7 @@ public class DecathlonCalculator {
 			for (int j = 0; j < 4; j++) {
 				out.print(arr[j]+":");
 				while (!Sportsman.isTime(rawResult = scanner.next())) {
-					out.println("Time has incorrect format.Example: 1:04.72 or 04.72");
+					out.println("Time has incorrect format.Example: 1:04.72 or 04.72."+LN+"Please, re-enter:");
 				}
 				results += ","+rawResult;
 			}
@@ -322,7 +409,7 @@ public class DecathlonCalculator {
 			for (int j = 0; j < arr.length; j++) {
 				out.print(arr[j]+":");
 				while (!Sportsman.isDouble(rawResult = scanner.next())) {
-					out.println("Distance has incorrect format.Example: 04.72");
+					out.println("Distance has incorrect format.Example: 04.72"+LN+"Please, re-enter:");
 				}
 				results += ","+rawResult;
 			}
@@ -360,14 +447,15 @@ public class DecathlonCalculator {
 		OutputStream output = null;
 		SportsmanDAO dao = new SportsmanDAO();
 		int i = 0;
-
+		
+		try{
 		if(args[i].equalsIgnoreCase("-console")) {
-			i++;
 			i++;
 			res = dc.readFromConsole();
 		} else if(args[i].equalsIgnoreCase("-csv")) {
 			i++;
 			File csvInFile = new File(args[i]);
+			System.out.println("Reading from CSV file: "+csvInFile);
 			try {
 				input = new FileInputStream(csvInFile);
 			}
@@ -378,24 +466,22 @@ public class DecathlonCalculator {
 			i++;
 		} else if(args[i].equalsIgnoreCase("-db")){
 			i++;
-			res = dao.getResultsByCompetition(Integer.parseInt(args[i]));
+			System.out.println("Reading form database...");
+			res = dao.getResultsByCompetition(args[i]);
 			i++;
 		} else {
 			System.out.println("Some parameters of input are wrong. Please check program parameters!");
 		}
 		
-		if (res!=null) {
-		for (int j = 0; j < res.length; j++) {
-			Sportsman person = new Sportsman(res[j]);
-			dc.sportsmenList.add(person);
-		}
-		}
+		if (dc.processInput(res)){
 		
 		if (args[i].equalsIgnoreCase("-console")) {
+			System.out.println("--------Output results to console-----");
 			dc.writeToConsole(System.out);
 		} else if (args[i].equalsIgnoreCase("-csv")) {
 			i++;
 			File csvOutFile = new File(args[i]);
+			System.out.println("Writing CSV to file: "+csvOutFile); 
 			try {
 				output = new FileOutputStream(csvOutFile);
 			}
@@ -406,6 +492,7 @@ public class DecathlonCalculator {
 		} else if (args[i].equalsIgnoreCase("-xml")) {
 			i++;
 			File xmlOutFile = new File(args[i]);
+			System.out.println("Writing XML to file: "+xmlOutFile); 
 			try {
 				output = new FileOutputStream(xmlOutFile);
 			}
@@ -416,6 +503,7 @@ public class DecathlonCalculator {
 		} else if (args[i].equalsIgnoreCase("-html")) {
 			i++;
 			File htmlOutFile = new File(args[i]);
+			System.out.println("Writing HTML to file: "+htmlOutFile); 
 			try {
 				output = new FileOutputStream(htmlOutFile);
 			}
@@ -426,7 +514,9 @@ public class DecathlonCalculator {
 		} else {
 			System.out.println("Some parameters of output are wrong. Please check program parameters!");
 		}
-
+		} else {
+			System.out.println("Invalid data in results provided!");
+		}
 		try {
 			if (input!=null){
 			input.close();}
@@ -436,7 +526,11 @@ public class DecathlonCalculator {
 		catch (IOException e) {
 			System.out.println("Error closing file.");
 		}
-		
+		}
+		catch (ArrayIndexOutOfBoundsException e){
+			System.out.println("Error! No parameters or some parameters missing!");
+		}
+		System.out.println("------------Finished!-----------");
 
 	}
 	
