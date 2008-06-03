@@ -9,6 +9,6 @@ package net.azib.java.students.t030629.homework.io;
  */
 public enum OutputMethod {
 
-    CONOLE, CSV, XML, HTML
+    CONSOLE, CSV, XML, HTML
 
 }

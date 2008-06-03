@@ -92,7 +92,7 @@ public class ArgumentParserTest {
         String outFileName = "someFile.csv";
         // Check METHODs
         Arguments arguments = new Arguments("-console", "-conole");
-        assertEquals("Incorrectly parsed output method", OutputMethod.CONOLE, arguments.getOutMethod());
+        assertEquals("Incorrectly parsed output method", OutputMethod.CONSOLE, arguments.getOutMethod());
         arguments = new Arguments("-console", "-csv", outFileName);
         assertEquals("Incorrectly parsed output method", OutputMethod.CSV, arguments.getOutMethod());
         arguments = new Arguments("-console", "-htMl", outFileName);

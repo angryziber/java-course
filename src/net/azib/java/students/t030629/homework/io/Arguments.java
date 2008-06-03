@@ -143,7 +143,7 @@ public class Arguments {
             parseControlArgument(OutputMethod.class, argsIterator);
             // Parse ARGUMENTS for Output Method
             switch (outMethod) {
-                case CONOLE: /* Do nothing */
+                case CONSOLE: /* Do nothing */
                     break;
                 default:
                     checkMissingArgument(argsIterator, MISSING_OUTPUT_FILE_TEXT);

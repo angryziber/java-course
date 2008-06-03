@@ -88,7 +88,7 @@ public class DecathlonCalculator {
         OutputMethod outputMethod = arguments.getOutMethod();
         AthleteSaver saver;
         switch (outputMethod) {
-            case CONOLE:
+            case CONSOLE:
                 saver = new PlainDataSaver(new ConsoleFormatter(), System.out);
                 break;
             case CSV:
