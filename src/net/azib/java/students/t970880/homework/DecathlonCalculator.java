@@ -370,13 +370,12 @@ public class DecathlonCalculator {
 							// Obtain the connection string and connect
 							final Properties props = new Properties();
 							{
-								new Using<InputStream>(new FileInputStream("db.properties")) {public void work() throws Exception {
+								new Using<InputStream>(DecathlonCalculator.class.getResourceAsStream("db.properties")) {public void work() throws Exception {
 									props.load(devfile);
 								}};
 							}
 							log("Connecting to " + props.getProperty("url"));
 							
-							Class.forName(props.getProperty("driver")).newInstance();
 							Connection conn = DriverManager.getConnection(props.getProperty("url"));
 							try {								
 								// read competition results
@@ -444,7 +443,7 @@ public class DecathlonCalculator {
 					},
 					new Method("html") {
 						public void invoke(String argument) throws Exception {
-							createXml(TransformerFactory.newInstance().newTransformer(new StreamSource("decathlon.xsl")), argument);
+							createXml(TransformerFactory.newInstance().newTransformer(new StreamSource(getClass().getResourceAsStream("decathlon.xsl"))), argument);
         				}
 					}
 					
