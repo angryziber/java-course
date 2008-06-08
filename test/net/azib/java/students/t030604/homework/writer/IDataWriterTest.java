@@ -112,6 +112,11 @@ public class IDataWriterTest {
 		Assert.assertTrue(errors.toString(), errors.isEmpty());
 	}
 	
+	@Test
+	public void testDummy() {
+		//blank
+	}
+	
 	
 	//tests valid setup case
 	private void testSetupValid(IDataWriter tested) throws WriterException {
