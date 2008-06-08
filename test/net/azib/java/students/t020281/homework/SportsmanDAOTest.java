@@ -35,7 +35,7 @@ public class SportsmanDAOTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void getSportsmanDataFromDBTest(){
 		try{
 		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:TestDB", "sa", "");
@@ -50,7 +50,7 @@ public class SportsmanDAOTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void getResultsFromDBTest(){
 		try{
 		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:TestDB", "sa", "");
