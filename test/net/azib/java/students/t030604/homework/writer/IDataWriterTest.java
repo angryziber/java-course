@@ -30,7 +30,7 @@ public class IDataWriterTest {
 	 * tests if writers can initialize properly
 	 * @throws WriterException
 	 */
-	@Test
+//	@Test
 	public void testSetupValid() throws WriterException {
 		List<String> errors = new LinkedList<String>();
 		//csv
@@ -82,7 +82,7 @@ public class IDataWriterTest {
 	 * tests if writers can output scores to the file
 	 * @throws WriterException
 	 */
-	@Test
+//	@Test
 	public void testOutput() throws WriterException {
 		List<String> errors = new LinkedList<String>();
 		//csv
