@@ -43,7 +43,6 @@ public class CountAthletResult {
 
 	}
 
-
 	/**
 	 * @param resultMap3
 	 * @param ahleteId
