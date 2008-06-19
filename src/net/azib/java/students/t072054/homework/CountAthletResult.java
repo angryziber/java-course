@@ -37,7 +37,6 @@ public class CountAthletResult {
 		javelin = Math.round(10.14 * Math.pow((javelin - 7.0), 1.08));
 		m1500 = Math.round(0.03768 * Math.pow((480 - m1500), 1.85));
 
-		
 		result = m100 + longJump + shotPut + highJump + m400 + m110 + discus + poleVault + javelin + m1500;
 		return result;
 
