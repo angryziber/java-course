@@ -1,7 +1,0 @@
-Runnable - Java sisseehitatud interface //anonüümne inner class
-
-!Kodutöös on kasulik Enume kasutada
-
-Collection <? extends Animal> //upper bounded wildcard - kõik collectionid sobivad, mille elemendid extendivad Animali. Read only
-
-Collection <? super Animal>	//lower bounded wildcard - kõik collectionid sobivad, mis on Animal klassist või selle superklassist. Write only
