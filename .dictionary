@@ -2,7 +2,9 @@ servlet
 init
 fallback
 http
+https
 username
 javadoc
 anton
 estonia
+applet
