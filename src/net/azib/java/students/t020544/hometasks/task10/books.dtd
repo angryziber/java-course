@@ -1,9 +1,0 @@
-<!ELEMENT bookstore (book*)>
-<!ELEMENT book (title, author*, year?, price?)>
-<!ATTLIST book category CDATA #REQUIRED>
-<!ATTLIST book lang CDATA #REQUIRED>
-<!ELEMENT title (#PCDATA)>
-<!ELEMENT author (#PCDATA)>
-<!ELEMENT year (#PCDATA)>
-<!ELEMENT price (#PCDATA)>
-
