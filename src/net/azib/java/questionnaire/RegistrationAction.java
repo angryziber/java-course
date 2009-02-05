@@ -26,7 +26,7 @@ public class RegistrationAction implements Action {
 	}
 	
 	private void validate(User user) {
-		if (!user.name.matches("\\w+ \\w+.*")) 
+		if (!user.name.contains(" ")) 
 			throw new IllegalArgumentException("Both first and last name must be provided");
 		if (!user.studentCode.matches("\\d{6}")) 
 			throw new IllegalArgumentException("Student code must be composed of 6 digits");
