@@ -7,7 +7,7 @@
 		}
 		fieldset {
 			border: 1px solid #781351;
-			width: 25em;
+			width: 28em;
 			padding-left: 2em;
 			padding-right: 2em;
 		}

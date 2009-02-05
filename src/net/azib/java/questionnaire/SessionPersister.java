@@ -133,7 +133,7 @@ public class SessionPersister {
 				String username = "t" + session.user.studentCode;
 				// run the script for addition
 				Process p = Runtime.getRuntime().exec(
-						new String[] {SHELL, USERADD_SCRIPT, username, session.user.password}, 
+						new String[] {SHELL, USERADD_SCRIPT, username, session.user.password, session.user.email}, 
 						null, new File(SVN_HOME));
 				
 				exitCode = p.waitFor();

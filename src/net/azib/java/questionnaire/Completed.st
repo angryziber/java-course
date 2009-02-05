@@ -1,8 +1,8 @@
-<h1>Thank you, $name$!</h1>
+<h1>Thank you and welcome to the course, $name$!</h1>
 
 <div class="note">
 Your contact data and answers have been saved.<br/>
-You can now access <a href="http://java.azib.net/svn/java/">Subversion repository</a>.<br/> 
+You can now access <a href="http://svn.azib.net/java/">Subversion repository</a>.<br/> 
 Your username is <b>$username$</b>. Use the password that you have submitted.
 </div>
 
