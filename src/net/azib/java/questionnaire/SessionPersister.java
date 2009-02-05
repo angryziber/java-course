@@ -60,7 +60,7 @@ public class SessionPersister {
 				// try to roll everything back
 				conn.rollback();
 			} 
-			catch (SQLException sqle) {
+			catch (Exception npe) {
 			}
 			
 			// wrap exception if needed
@@ -111,6 +111,7 @@ public class SessionPersister {
 
 	private void saveAnswer(Connection conn, int userId, Answer answer) throws SQLException, PersistException {
 		PreparedStatement statement = conn.prepareStatement("insert into answers (user_id, question_id, answer, is_correct) values (?,?,?,?)");
+		try {
 		for (String answerText : answer.answers) {
 			statement.setInt(1, userId);
 			statement.setInt(2, answer.question.id);
@@ -118,6 +119,10 @@ public class SessionPersister {
 			statement.setBoolean(4, answer.isCorrect());
 			if (statement.executeUpdate() != 1)
 				throw new PersistException("Cannot save answer to the question " + answer.question.id);
+		}
+		}
+		catch (SQLException e) {
+			throw new PersistException("Cannot save answer to the question " + answer.question.id + ":" + e);
 		}
 	}
 	
