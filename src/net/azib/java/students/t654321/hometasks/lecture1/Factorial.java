@@ -4,7 +4,7 @@
  */
 package net.azib.java.students.t654321.hometasks.lecture1;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  *
@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 public class Factorial {
 
     public static void factorialCalculator(int factorialNumber) {
-        BigDecimal factorial = BigDecimal.ONE;
+        BigInteger factorial = BigInteger.ONE;
         for (int i = 1; i <= factorialNumber; i++) {
-            factorial = factorial.multiply(new BigDecimal(i));
+            factorial = factorial.multiply(BigInteger.valueOf(i));
             if (i == factorialNumber) {
                 System.out.println("Factorial of " + i + " is :" + factorial);
             }
