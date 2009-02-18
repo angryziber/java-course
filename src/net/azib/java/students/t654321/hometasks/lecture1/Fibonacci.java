@@ -12,7 +12,7 @@ import java.math.BigInteger;
  */
 public class Fibonacci {
 
-    public static void calculateFibonacciElement(int numberOfElement) {
+    public static void fibonacciElementsCalculator(int numberOfElement) {
         BigInteger firstFibonacciElement = BigInteger.ZERO;
         BigInteger secondFibonacciElement = BigInteger.ONE;
         BigInteger fibonacciElement = null;
@@ -26,6 +26,6 @@ public class Fibonacci {
 
     public static void main(String... args) {
         int numberOfElement = 100;
-        calculateFibonacciElement(numberOfElement);
+        fibonacciElementsCalculator(numberOfElement);
     }
 }
