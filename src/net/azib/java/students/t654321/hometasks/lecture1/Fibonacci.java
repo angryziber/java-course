@@ -13,19 +13,19 @@ import java.math.BigInteger;
 public class Fibonacci {
 
     public static void calculateFibonacciElement(int numberOfElement) {
-        BigInteger[] fibonacciElement = new BigInteger[numberOfElement];
-        fibonacciElement[0] = BigInteger.ZERO;
-        fibonacciElement[1] = BigInteger.ONE;
-        for (int i = 2; i < fibonacciElement.length; i++) {
-            fibonacciElement[i] = fibonacciElement[i - 2].add(fibonacciElement[i - 1]);
-            if (i == numberOfElement - 1) {
-                System.out.println("Fibonacci series 100th element is :" + fibonacciElement[i].toString());
-            }
+        BigInteger firstFibonacciElement = BigInteger.ZERO;
+        BigInteger secondFibonacciElement = BigInteger.ONE;
+        BigInteger fibonacciElement = null;
+        for (int i = 2; i < numberOfElement; i++) {
+            fibonacciElement = firstFibonacciElement.add(secondFibonacciElement);
+            firstFibonacciElement = secondFibonacciElement;
+            secondFibonacciElement = fibonacciElement;
         }
+        System.out.println("Fibonacci series 100th element is :" + fibonacciElement.toString());
     }
 
     public static void main(String... args) {
-        int numberOfElement = 120;
+        int numberOfElement = 100;
         calculateFibonacciElement(numberOfElement);
     }
 }

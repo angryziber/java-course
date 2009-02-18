@@ -16,10 +16,8 @@ public class Factorial {
         BigInteger factorial = BigInteger.ONE;
         for (int i = 1; i <= factorialNumber; i++) {
             factorial = factorial.multiply(BigInteger.valueOf(i));
-            if (i == factorialNumber) {
-                System.out.println("Factorial of " + i + " is :" + factorial);
-            }
         }
+        System.out.println("Factorial of " + factorialNumber + " is :" + factorial);
     }
 
     public static void main(String... args) {
