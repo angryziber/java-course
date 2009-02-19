@@ -12,16 +12,20 @@ import java.math.BigInteger;
  */
 public class Factorial {
 
-    public static void factorialCalculator(int factorialNumber) {
+    public static BigInteger factorialCalculator(int factorialNumber) {
+        if (factorialNumber < 0){
+            System.out.println("Invalid input");
+            return new BigInteger("-1");
+        }
         BigInteger factorial = BigInteger.ONE;
         for (int i = 1; i <= factorialNumber; i++) {
             factorial = factorial.multiply(BigInteger.valueOf(i));
         }
-        System.out.println("Factorial of " + factorialNumber + " is :" + factorial);
+        return factorial;
     }
 
     public static void main(String... args) {
         int factorial = 100;
-        factorialCalculator(factorial);
+        System.out.println("Factorial of " + factorial + " is :" + factorialCalculator(factorial).toString());
     }
 }

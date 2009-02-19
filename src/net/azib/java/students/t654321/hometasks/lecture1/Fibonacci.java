@@ -12,20 +12,31 @@ import java.math.BigInteger;
  */
 public class Fibonacci {
 
-    public static void fibonacciElementsCalculator(int numberOfElement) {
+    public static BigInteger fibonacciSeriesCalculator(int numberOfElement) {
+        if (numberOfElement < 0) {
+            System.out.println("Invalid input");
+            return new BigInteger("-1");
+        }
         BigInteger firstFibonacciElement = BigInteger.ZERO;
         BigInteger secondFibonacciElement = BigInteger.ONE;
-        BigInteger fibonacciElement = null;
+        BigInteger fibonacciElement = BigInteger.ZERO;
         for (int i = 2; i < numberOfElement; i++) {
             fibonacciElement = firstFibonacciElement.add(secondFibonacciElement);
             firstFibonacciElement = secondFibonacciElement;
             secondFibonacciElement = fibonacciElement;
         }
-        System.out.println("Fibonacci series 100th element is :" + fibonacciElement.toString());
+        switch (numberOfElement) {
+            case 0:
+                return firstFibonacciElement;
+            case 1:
+                return secondFibonacciElement;
+            default:
+                return fibonacciElement;
+        }
     }
 
     public static void main(String... args) {
         int numberOfElement = 100;
-        fibonacciElementsCalculator(numberOfElement);
+        System.out.println("Fibonacci series " + numberOfElement + "th element is :" + fibonacciSeriesCalculator(numberOfElement).toString());
     }
 }
