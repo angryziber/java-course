@@ -3,7 +3,10 @@ package net.azib.java.students.t074918;
 import java.util.Date;
 
 /**
- * HelloWorld 
+ * HelloWorld
+ * 
+ * Niimodi saab linki teha: {@link net.azib.java.students.t074918.Dog#toString()}
+ * 
  * @author Mart Mangus
  */
 public class HelloWorld {
@@ -14,6 +17,11 @@ public class HelloWorld {
 		System.out.println(now);
 		Dog dog = new Dog("Muki", 2);
 		System.out.println(dog);
+		
+		System.out.println(new Cat("Sofie", 1));
+		dog.makeNoise();
+		
+		System.out.println("Näeme nime (nagu C++ friendly): " + dog.name);
 		
 		int a = 0;
 		System.out.println(a);
