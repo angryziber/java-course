@@ -3,13 +3,26 @@ package net.azib.java.lessons.basic;
 import java.math.BigInteger;
 
 /**
- * Fibonacci
+ * Class for calculation of <b>Fibonacci</b> numbers.
  *
  * @author anton
+ * @since 2009
  */
 public class Fibonacci {
 	
-	public BigInteger compute(int index) {
+	/**
+	 * @deprecated please use {@link #compute(long)} instead
+	 */
+	public int compute(int index) {
+		return 0;
+	}
+	
+	/**
+	 * Computes Fibonacci numbers with arbitrary precision
+	 * @param index 
+	 * @return Fibonacci number with specified index
+	 */
+	public BigInteger compute(long index) {
 		BigInteger n = BigInteger.ZERO, n1 = n, n2 = n;
 		
 		if (index > 0)
@@ -25,7 +38,7 @@ public class Fibonacci {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(new Fibonacci().compute(100));
+		System.out.println(new Fibonacci().compute(100L));
 	}
 	
 }
