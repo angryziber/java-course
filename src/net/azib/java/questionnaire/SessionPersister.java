@@ -13,7 +13,7 @@ public class SessionPersister {
 	
 	// these ideally need to be configurable
 	private static final int YEAR = Calendar.getInstance().get(Calendar.YEAR);
-	private static final String DB_URL = "jdbc:mysql://srv.azib.net:3306/java";
+	private static final String DB_URL = "jdbc:mysql://java.azib.net:3306/java";
 	private static final String DB_USER = "java";
 	private static final String DB_PASSWORD = "java";
 	private static final String SHELL = "/bin/bash";
