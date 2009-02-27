@@ -1,5 +1,7 @@
 package net.azib.java.students.t050703;
 
+import java.util.Collections;
+
 import sun.org.mozilla.javascript.internal.ObjArray;
 
 
@@ -20,7 +22,7 @@ public class Zoo {
 	    Animal rabit    = new Rabit("Juss", 2);
 	    Animal cat      = new Cat("Maks", 5);
       
-	    ObjArray tere = new ObjArray(); //needs implementing collections interface to use foreach construct
+	    ObjArray tere = new ObjArray(); 
 	    
 	    tere.add(sheep);
 	    tere.add(rabit);
@@ -41,7 +43,7 @@ public class Zoo {
 	    
 	 System.out.println(tere.get(2));
 		
-      
+     
 	}
 
 }
