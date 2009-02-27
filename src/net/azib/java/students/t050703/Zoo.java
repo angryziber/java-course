@@ -2,7 +2,7 @@ package net.azib.java.students.t050703;
 
 import sun.org.mozilla.javascript.internal.ObjArray;
 
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
+
 
 
 
