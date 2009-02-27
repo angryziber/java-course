@@ -7,7 +7,7 @@ import net.azib.java.students.t074918.Dog;
  *
  * @author Mart Mangus
  */
-public abstract class Animal {
+public abstract class Animal implements Cloneable {
 	
 	String name;
 	private int age = 2;
@@ -19,8 +19,9 @@ public abstract class Animal {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Dog) {
-			return (((Dog)obj).name.equals(this.name));
+		if (obj instanceof Animal) {
+			Animal a = (Animal)obj;
+			return (a.name.equals(this.name) && a.age == this.age);
 		}
 		return false;
 	}
@@ -40,4 +41,17 @@ public abstract class Animal {
 	
 	public abstract void makeNoise();
 
+	@Override
+	public int hashCode() {
+		return name.hashCode() + age * 37;
+	}
+
+	@Override
+	public Animal clone() throws CloneNotSupportedException {
+		Animal clone = (Animal) super.clone();
+		clone.age = 0;
+		return clone;
+	}
+
+	
 }
