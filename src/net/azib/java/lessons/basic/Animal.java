@@ -5,7 +5,7 @@ package net.azib.java.lessons.basic;
  *
  * @author anton
  */
-public abstract class Animal {
+public abstract class Animal implements Cloneable {
 	String name;
 	private int age;
 	
@@ -18,13 +18,27 @@ public abstract class Animal {
 		return getClass().getSimpleName() + " named " + name + " and aged " + age;
 	}
 
-	public boolean equals(Object that) {
-		if (that instanceof Dog) {
-			Dog thatDog = (Dog)that;
-			return thatDog.name.equals(this.name);
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Animal) {
+			Animal that = (Animal)o;
+			return that.name.equals(this.name) 
+				&& that.age == this.age;
 		}
 		return false;
 	}
 	
+	@Override
+	public int hashCode() {
+		return name.hashCode() + age * 37;
+	}
+
 	public abstract void makeNoise();
+
+	@Override
+	public Animal clone() throws CloneNotSupportedException {
+		Animal clone = (Animal) super.clone();
+		clone.age = 0;
+		return clone;
+	}
 }
