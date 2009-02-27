@@ -15,4 +15,6 @@ public class Sheep extends Animal {
   {
 	  System.out.println("no mis h22lt lammas teeb?");
   }
+  
+  
 }

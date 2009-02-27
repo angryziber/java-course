@@ -1,5 +1,9 @@
 package net.azib.java.students.t050703;
 
+import sun.org.mozilla.javascript.internal.ObjArray;
+
+import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
+
 
 
 /**
@@ -16,6 +20,14 @@ public class Zoo {
 	    Animal rabit    = new Rabit("Juss", 2);
 	    Animal cat      = new Cat("Maks", 5);
       
+	    ObjArray tere = new ObjArray(); //needs implementing collections interface to use foreach construct
+	    
+	    tere.add(sheep);
+	    tere.add(rabit);
+	    tere.add(cat);
+	    
+	   
+	    
 		Animals[0] = sheep;
 	    Animals[1] = rabit;
 	    Animals[2] = cat;
@@ -26,6 +38,8 @@ public class Zoo {
 		 animal.makeSound();
 		 System.out.println("\n");
 		}
+	    
+	 System.out.println(tere.get(2));
 		
       
 	}

@@ -16,7 +16,7 @@ public abstract class Animal {
   
   public String toString()
   {  
-	  return getClass().getSimpleName()+ name+" " + age+ " years old";
+	  return getClass().getSimpleName()+" "+ name+" " + age+ " years old";
   }
   
   public abstract void makeSound();
