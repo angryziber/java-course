@@ -1,7 +1,12 @@
 package net.azib.java.students.t050703;
 
+
+import java.util.Arrays;
 import java.util.Collections;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
+import antlr.collections.List;
 import sun.org.mozilla.javascript.internal.ObjArray;
 
 
@@ -22,13 +27,14 @@ public class Zoo {
 	    Animal rabit    = new Rabit("Juss", 2);
 	    Animal cat      = new Cat("Maks", 5);
       
+	   	    
 	    ObjArray tere = new ObjArray(); 
 	    
 	    tere.add(sheep);
 	    tere.add(rabit);
 	    tere.add(cat);
 	    
-	   
+	 
 	    
 		Animals[0] = sheep;
 	    Animals[1] = rabit;
