@@ -2,20 +2,22 @@ package net.azib.java.students.t000522;
 
 import java.util.Date;
 
-public class Dog {
-
-	private String name;
-	private int age;
-	private Date date = new Date();
+public class Dog extends Animal {
 	
-	public Dog(String name, int age) {
-		this.name = name;
-		this.age = age;
+	private int taillength;
+	
+	public Dog(String name, int weigth, Date birthdate, int taillength) {
+		super(name, weigth, birthdate);
+		this.taillength = taillength;
 	}
 
 	@Override
-	public String toString() {
-		return "Dog named " + name + " and aged " + age + "; datetime " + date;
+	public void makeNoise() {
+		System.out.println("Gav");
 	}
 	
+	@Override
+	public String toString() {
+		return super.toString() + "; taillength " + taillength;	
+	}
 }
