@@ -8,8 +8,14 @@ import java.math.BigInteger;
  * @author janika
  */
 public class Numbers {
-	// ei ole hea mote kasutada floati, sest t2psus kaob 2ra.
-	//parem variant: rahasummasid saab esitada sentidena
+	/** ei ole hea mote kasutada floati, sest t2psus kaob 2ra.
+	*parem variant: rahasummasid saab esitada sentidena.
+	*Kui override'id equals(Object o) meetodit, siis tuleks ka hashCode
+	*üle kirjutada.
+	*Klassi deklaratsiooni kirjutada implements Cloneable, kui 
+	*tahad, et su klass oleks kloonitav + override'i clone meetod.
+	*Return type ei ole return type'i osa
+	*/
 	public static void main(String[] args) {
 		double f = 1.0;
 		f -= 0.9;

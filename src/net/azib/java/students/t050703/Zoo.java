@@ -6,8 +6,10 @@ import java.util.Collections;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 
+import org.mozilla.javascript.ObjArray;
+
 import antlr.collections.List;
-import sun.org.mozilla.javascript.internal.ObjArray;
+
 
 
 
