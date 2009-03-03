@@ -1,14 +1,10 @@
 package net.azib.java.students.t050703;
 
+import sun.org.mozilla.javascript.internal.ObjArray;
 
-import java.util.Arrays;
-import java.util.Collections;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
 
-import org.mozilla.javascript.ObjArray;
 
-import antlr.collections.List;
 
 
 
