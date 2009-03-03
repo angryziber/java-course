@@ -14,7 +14,7 @@ public class Fibonacci {
 	 * @deprecated please use {@link #compute(long)} instead
 	 */
 	public int compute(int index) {
-		return 0;
+		return compute((long)index).intValue();
 	}
 	
 	/**
