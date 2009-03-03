@@ -38,9 +38,9 @@ public class WordFrequencyCalculatorImplementation implements WordFrequencyCalcu
 		String[] str1 = text.split("\\s");
 		for (String string : Arrays.asList(str1)) {
 			String key = string;
-			Integer value = new Integer(1);
+			Integer value = 1;
 			if (tree1.containsKey(string)) {
-				value = tree1.get(string) + Integer.valueOf(1);
+				value = tree1.get(string) + 1;
 			}
 			tree1.put(key, value);
 		}
