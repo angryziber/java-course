@@ -1,15 +1,7 @@
 package net.azib.java.students.t050703;
 
-import sun.org.mozilla.javascript.internal.ObjArray;
-
-
-
-
-
-
-
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Zoo
@@ -26,7 +18,7 @@ public class Zoo {
 	    Animal cat      = new Cat("Maks", 5);
       
 	   	    
-	    ObjArray tere = new ObjArray(); 
+	    List tere = new ArrayList(); 
 	    
 	    tere.add(sheep);
 	    tere.add(rabit);
