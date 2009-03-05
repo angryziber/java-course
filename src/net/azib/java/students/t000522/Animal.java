@@ -32,7 +32,7 @@ public abstract class Animal implements Cloneable {
 		dateofbirth.setTime(birthdate);
 		Calendar currentday = Calendar.getInstance();
 		int age = currentday.get(Calendar.YEAR) - dateofbirth.get(Calendar.YEAR);
-		if (currentday.get(Calendar.DAY_OF_YEAR) <= dateofbirth.get(Calendar.DAY_OF_YEAR)) {
+		if (age > 0 & currentday.get(Calendar.DAY_OF_YEAR) <= dateofbirth.get(Calendar.DAY_OF_YEAR)) {
 			age--;
 		}
 		return age;

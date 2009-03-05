@@ -13,7 +13,7 @@ public class AnimalKeeper {
 		Date birthdate = new Date();
 		birthdate.setTime(933312312312L);
 		Date takenon = new Date();
-		Animal[] animals = {new Dog("Zuchka", 10, birthdate, 1), 
+		Animal[] animals = {new Dog("Zuchka", 10, new Date(), 1), 
 							new Cat("Kisa", 2, birthdate, takenon),
 							new Frog("Kit", 1, birthdate, 2)};
 
