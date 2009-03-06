@@ -12,7 +12,7 @@ import java.math.BigInteger;
  */
 public class Factorial {
 
-    public static BigInteger factorialCalculator(int factorialNumber) {
+     public static BigInteger factorialCalculator(int factorialNumber) {
         if (factorialNumber < 0){
             System.out.println("Invalid input");
             return new BigInteger("-1");
