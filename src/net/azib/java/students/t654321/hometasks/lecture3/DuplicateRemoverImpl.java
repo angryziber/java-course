@@ -16,8 +16,8 @@ import net.azib.java.lessons.collections.DuplicateRemover;
 public class DuplicateRemoverImpl implements DuplicateRemover {
 
     public String[] removeDuplicateStrings(String[] array) {
-        if(array.length == 0){return null;}
-        Set set = new LinkedHashSet(Arrays.asList(array));
+        Set set = new LinkedHashSet();
+        for (String string : array) {set.add(string.toLowerCase());}
         return (String[]) set.toArray(new String[set.size()]);
     }
 }
