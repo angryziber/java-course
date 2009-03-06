@@ -7,7 +7,7 @@ import net.azib.java.students.t074918.Dog;
  *
  * @author Mart Mangus
  */
-public abstract class Animal implements Cloneable {
+public abstract class Animal implements Cloneable, Comparable<Animal> {
 	
 	String name;
 	private int age = 2;
@@ -47,11 +47,22 @@ public abstract class Animal implements Cloneable {
 	}
 
 	@Override
-	public Animal clone() throws CloneNotSupportedException {
-		Animal clone = (Animal) super.clone();
-		clone.age = 0;
-		return clone;
+	public Animal clone() {
+		try {
+			Animal clone;
+			clone = (Animal) super.clone();
+			clone.age = 0;
+			return clone;
+		}
+		catch (CloneNotSupportedException e) {
+			// kuna Animal implements Clonable interface-i siis siia ei satuta
+			System.err.println("Kloonimine ebaõnnestus! (vigane DNA :D)");
+			return null;
+		}
 	}
 
+	public int compareTo(Animal a) {
+		return a.age - this.age;
+	}
 	
 }

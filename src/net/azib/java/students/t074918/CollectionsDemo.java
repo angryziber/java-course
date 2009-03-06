@@ -48,6 +48,12 @@ public class CollectionsDemo {
 		 * 	.put() .get() .remove() 
 		 * 	.containsKey()
 		 * 	.containsValue()
+		 * 
+		 * 		HashMap -- võti vaid korra
+		 * 		LinkedHashMap -- järjekorraga HashMap
+		 * 		TreeMap -- järjestatud
+		 * 		IdentityHashMap -- sama equals()-iga objekte võib hoida...
+		 * 		WeakHashMap -- objektid kaovad ise mingi spets värk :D
 		 *  
 		 * Queue -- FIFO or LIFO...
 		 * 
@@ -65,9 +71,9 @@ public class CollectionsDemo {
 		
 		System.out.println(System.getProperty("line.separator") + "SETID...");
 		
-		Set s1 = new HashSet();
-		Set s2 = new TreeSet();
-		Set s3 = new LinkedHashSet();
+		Set<String> s1 = new HashSet<String>();
+		Set<String> s2 = new TreeSet<String>();
+		Set<String> s3 = new LinkedHashSet<String>();
 		
 		fill(s1);
 		print(s1);
@@ -78,16 +84,20 @@ public class CollectionsDemo {
 		
 		System.out.println(System.getProperty("line.separator") + "LISTID...");
 		
-		List l1 = new ArrayList();
-		List l2 = new LinkedList();
+		List<String> l1 = new ArrayList<String>();
+		List<String> l2 = new LinkedList<String>();
 		
 		fill(l1);
 		print(l1);
 		fill(l2);
 		print(l2);
+		
+		for (String s : l2) {
+			System.out.print(s);
+		}
 	}
 	
-	private static void fill(Collection s)
+	private static void fill(Collection<String> s)
 	{
 		s.add("a");
 		s.add("b");
@@ -100,7 +110,7 @@ public class CollectionsDemo {
 		s.add("a");
 	}
 	
-	private static void print(Collection s)
+	private static void print(Collection<String> s)
 	{
 		System.out.println("size: " + s.size());
 		System.out.println(s.getClass().getSimpleName() + ": " + s);
