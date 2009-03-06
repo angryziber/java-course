@@ -5,7 +5,8 @@ package net.azib.java.lessons.basic;
  *
  * @author anton
  */
-public abstract class Animal implements Cloneable {
+@Todo("implement toString")
+public abstract class Animal implements Cloneable, Comparable<Animal> {
 	String name;
 	private int age;
 	
@@ -36,9 +37,20 @@ public abstract class Animal implements Cloneable {
 	public abstract void makeNoise();
 
 	@Override
-	public Animal clone() throws CloneNotSupportedException {
-		Animal clone = (Animal) super.clone();
-		clone.age = 0;
-		return clone;
+	public Animal clone() {
+		try {
+			Animal clone = (Animal) super.clone();
+			clone.age = 0;
+			return clone;
+		}
+		catch (CloneNotSupportedException e) {
+			// never should happen - Animal implements Cloneable
+			System.err.println("Clone failed:" + e);
+			return null;
+		}
+	}
+
+	public int compareTo(Animal a) {
+		return a.age - this.age;
 	}
 }

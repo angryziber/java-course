@@ -8,14 +8,15 @@ package net.azib.java.lessons.enums;
 public class EnumDemo {
 	public static void main(String[] args) {
 		Season season = Season.SPRING;
-		System.out.println("Before was " + season);
+		System.out.println("Before was " + season + " (" + season.ordinal() + ")");
 		
-		season = Season.AUTUMN;
 		System.out.println("Now is " + season.next());
+		Season.AUTUMN.next();
 		
-		String name = "Katja";
-		double weight = 45;
-		System.out.println(Planet.EARTH.surfaceWeightAsString(name, weight));
-		System.out.println(Planet.MARS.surfaceWeightAsString(name, weight));
+		String name = "Karl";
+		double weight = 85;		
+		for (Planet p : Planet.values()) {
+			System.out.println(p.surfaceWeightAsString(name, weight));
+		}
 	}
 }

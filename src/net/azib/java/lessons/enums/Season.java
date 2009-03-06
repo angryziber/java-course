@@ -10,6 +10,7 @@ public enum Season {
 	
 	@Todo("Implement me")
 	public Season next() {
-		return null;
+		Season[] values = values();
+		return values[(ordinal()+1) % values.length];
 	}
 }

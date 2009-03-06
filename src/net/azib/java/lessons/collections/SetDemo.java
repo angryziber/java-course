@@ -19,11 +19,11 @@ import java.util.TreeSet;
  */
 public class SetDemo {
 	public static void main(String[] args) {
-		Set s1 = new HashSet();
-		Set s2 = new TreeSet();
-		Set s3 = new LinkedHashSet();
-		List l1 = new ArrayList();
-		List l2 = new LinkedList();
+		Set<String> s1 = new HashSet<String>();
+		Set<String> s2 = new TreeSet<String>();
+		Set<String> s3 = new LinkedHashSet<String>();
+		List<String> l1 = new ArrayList<String>();
+		List<String> l2 = new LinkedList<String>();
 		
 		fill(s1);
 		fill(s2);
@@ -35,12 +35,12 @@ public class SetDemo {
 		l2 = Collections.unmodifiableList(l2);
 		// l2.add("h"); - can't do that!
 		
-		Set s = new HashSet();
+		Set<Dog> s = new HashSet<Dog>();
 		s.add(new Dog("Dog", 1));
 		System.out.println(s.contains(new Dog("Dog", 1)));
 	}
 
-	private static void fill(Collection s) {
+	private static void fill(Collection<String> s) {
 		s.add("d");
 		s.add("e");
 		s.add("a");
