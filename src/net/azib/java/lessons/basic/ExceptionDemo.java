@@ -10,6 +10,7 @@ import java.util.ConcurrentModificationException;
  * @author anton
  */
 public class ExceptionDemo {
+	@SuppressWarnings({"unchecked", "unused"})
 	public static void main(String[] args) {				
 		try {
 			String[] s = {"a"};

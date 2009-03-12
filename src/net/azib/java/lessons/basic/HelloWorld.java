@@ -8,6 +8,7 @@ import java.util.Date;
  * @author anton
  */
 public class HelloWorld {
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		System.out.println(Constants.GREETING_MESSAGE);
 		
