@@ -13,6 +13,7 @@ import java.util.Properties;
  * @author anton
  */
 public class CollectionsDemo {
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		List<String> l = Arrays.asList("c", "d", "e");
 		Collections.sort(l);

@@ -10,6 +10,7 @@ import java.util.Map;
  * @author anton
  */
 public class InnerClassDemo {
+	@SuppressWarnings({"unused", "unchecked"})
 	public static void main(String[] args) {
 		OuterClass o = new OuterClass();
 		o.inner.doSomething();
