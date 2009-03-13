@@ -18,13 +18,13 @@ import java.util.List;
  */
 public class ListDemo {
     public static void main(String... args) {
-        List l1 = new ArrayList();
-        List l2 = new LinkedList();
+        List<String> l1 = new ArrayList<String>();
+        List<String> l2 = new LinkedList<String>();
 
         fill(l1);
         fill(l2);
 
-        l2.add("a");
+        l2.add("12");
         l2 = Collections.unmodifiableList(l2);
         l2.add("g");
     }

@@ -16,9 +16,9 @@ import java.util.TreeSet;
  */
 public class SetDemo {
     public static void main(String... args) {
-        Set s1 = new HashSet();
-        Set s2 = new TreeSet();
-        Set s3 = new LinkedHashSet();
+        Set<String> s1 = new HashSet<String>();
+        Set<String> s2 = new TreeSet<String>();
+        Set<String> s3 = new LinkedHashSet<String>();
 
         fill(s1);
         fill(s2);
