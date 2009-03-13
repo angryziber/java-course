@@ -14,6 +14,6 @@ public interface DuplicateRemover {
 	 * @return an array of Strings, where each String appears only once. 
 	 * The Strings have the same order as in the source array.
 	 */
-	public String[] removeDuplicateStrings(String[] array);
+	public String[] removeDuplicateStrings(String ... array);
 
 }
