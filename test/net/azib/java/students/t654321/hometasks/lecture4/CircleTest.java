@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author karlb
+ * @author Karl
  */
 public class CircleTest {
 
@@ -41,8 +41,8 @@ public class CircleTest {
     @Test
     public void testEqualsAndHashCode() {
         int expectedHash = 141;
-        assertEquals(new Circle(10),new Circle(10));
-        assertEquals(expectedHash, new Circle(10).hashCode());
+        assertEquals(new Circle(10), new Circle(10));
+        assertEquals(expectedHash, new Circle(10).hashCode(),0);
     }
 
     @Test
@@ -54,8 +54,6 @@ public class CircleTest {
     public void testCompareTo() {
         Circle c1 = new Circle(10.00000000);
         Circle c2 = new Circle(10.00000015);
-        assertEquals(0,c1.compareTo(c2));
+        assertEquals(0, c1.compareTo(c2),0);
     }
-
-
 }

@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class ShapeAggregatorImplTest {
 
     ShapeAggregatorImpl sai = new ShapeAggregatorImpl();
-    
+
     private List<Shape> createreferanceListOfShapes() {
 
         List<Shape> shapes = new LinkedList<Shape>();
@@ -30,37 +30,37 @@ public class ShapeAggregatorImplTest {
     }
 
     private Shape[] createreferanceArrayOfShapes() {
-        return new Shape[] {new Circle(20.0),new Circle(21.0),new Circle(22.0), new Circle(23.0), new Circle(24.0)};
+        return new Shape[]{new Circle(20.0), new Circle(21.0), new Circle(22.0), new Circle(23.0), new Circle(24.0)};
     }
 
     @Test
-    public void addShapeArray(){
+    public void addShapeArray() {
         sai.addShapes(createreferanceArrayOfShapes());
         assertEquals(createreferanceListOfShapes(), sai.listOfShapes);
     }
 
     @Test
-    public void addShapeCollection(){
+    public void addShapeCollection() {
         sai.addShapes(createreferanceListOfShapes());
         assertEquals(createreferanceListOfShapes(), sai.listOfShapes);
     }
 
     @Test
-    public void smallestShape(){
+    public void smallestShape() {
         Shape smallestShape = new Circle(20.0);
         sai.addShapes(createreferanceListOfShapes());
         assertEquals(smallestShape, sai.min());
     }
 
     @Test
-    public void largestShape(){
+    public void largestShape() {
         Shape smallestShape = new Circle(24.0);
         sai.addShapes(createreferanceListOfShapes());
         assertEquals(smallestShape, sai.max());
     }
-    
+
     @Test
-    public void copyingShapes(){
+    public void copyingShapes() {
         List<Shape> shapes = new LinkedList<Shape>();
         sai.addShapes(createreferanceListOfShapes());
         sai.copyTo(shapes);
@@ -68,7 +68,7 @@ public class ShapeAggregatorImplTest {
     }
 
     @Test
-    public void copyingLargerShapes(){
+    public void copyingLargerShapes() {
         Shape refShape = new Circle(21.0);
         List<Shape> largerShapes = new LinkedList<Shape>();
         largerShapes.add(new Circle(22.0));
@@ -84,12 +84,9 @@ public class ShapeAggregatorImplTest {
     }
 
     @Test
-    public void calculateTotalArea(){
+    public void calculateTotalArea() {
         double refTotalArea = 7634.070148;
         sai.addShapes(createreferanceListOfShapes());
         assertEquals(refTotalArea, sai.totalArea(), 0.00001);
     }
-
-
-
 }

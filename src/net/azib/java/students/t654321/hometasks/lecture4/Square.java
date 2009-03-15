@@ -13,24 +13,37 @@ import net.azib.java.lessons.collections.Shape;
  */
 public class Square extends Shape {
 
+    private double lenghtOfSide;
+
+    Square(double lenghtOfSide) {
+        if(lenghtOfSide < 0){
+            throw new IllegalArgumentException("Lenght of side cannot be negative!");
+        }
+        this.lenghtOfSide = lenghtOfSide;
+    }
+
     @Override
     public boolean equals(Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(o instanceof Square){
+            Square s = (Square) o;
+            return this.lenghtOfSide == s.lenghtOfSide;
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return 23 * new Double(this.lenghtOfSide).intValue() + 19;
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "This is square with side lenght " + this.lenghtOfSide;
     }
 
     @Override
     public double area() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Math.pow(lenghtOfSide, 2);
     }
 
 }
