@@ -12,23 +12,8 @@ import java.util.LinkedHashSet;
  */
 public class DuplicateRemoverImpl implements DuplicateRemover {
 
-	public String[] removeDuplicateStrings(String[] array) {
-		return (String[]) new LinkedHashSet(Arrays.asList(array)).toArray(new String[0]);
-	}
-
-	public static void main(String[] args) {
-		String [] arrayWithDuplicates = new String[]{
-		   "Esimene",
-		   "Teine",
-		   "Kolmas",
-		   "Esimene",
-		   "Kolmas"
-		};
-		DuplicateRemoverImpl dupRemover = new DuplicateRemoverImpl();	
-		String[] resultStrings = dupRemover.removeDuplicateStrings(arrayWithDuplicates);
-		for(String s : resultStrings) {
-			System.out.println(s);
-		}
+	public String[] removeDuplicateStrings(String ... array) {
+		return new LinkedHashSet<String>(Arrays.asList(array)).toArray(new String[0]);
 	}
 
 }
