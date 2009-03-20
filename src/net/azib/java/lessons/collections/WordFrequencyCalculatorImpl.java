@@ -11,9 +11,10 @@ import java.util.Map;
 public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 
 	public Map<String, Integer> calculateFrequenciesOf(String text) {
-		String[] words = text.split("\\s");
+		String[] words = text.split("[\\s.,:!?()]+");
 		Map<String, Integer> frequencies = new LinkedHashMap<String, Integer>();
 		for (String word : words) {
+			word = word.toLowerCase();
 			if (!frequencies.containsKey(word))
 				frequencies.put(word, 0);
 			frequencies.put(word, frequencies.get(word)+1);
