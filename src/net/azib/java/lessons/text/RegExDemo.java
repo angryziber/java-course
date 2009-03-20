@@ -1,4 +1,4 @@
-package net.azib.java.lessons.basic;
+package net.azib.java.lessons.text;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

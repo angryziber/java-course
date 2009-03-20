@@ -1,4 +1,4 @@
-package net.azib.java.lessons.basic;
+package net.azib.java.lessons.text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
