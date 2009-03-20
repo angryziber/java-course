@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.azib.java.lessons.collections.Shape;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -43,11 +44,11 @@ public class ShapeAggregatorImplTest {
 		shapeAggregator.addShapes(shapeCollection);
 		assertEquals(new Square(12), shapeAggregator.min());
 	}
-	@Test	
+	@Test @Ignore	
 	public void testShortedShapes() throws Exception {
 		//TODO write test		
 	}
-	@Test	
+	@Test @Ignore	
 	public void testTotalArea() throws Exception {
 		//TODO write test		
 	}

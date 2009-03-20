@@ -13,9 +13,10 @@ import java.util.TreeMap;
 public class WordFrequencyCalculatorImp implements WordFrequencyCalculator {
 
 	public Map<String, Integer> calculateFrequenciesOf(String text) {
-		String [] words = text.split("\\s");
+		String [] words = text.split("[\\s,.!?()]+");
 		TreeMap<String, Integer> wordFrequencies = new TreeMap<String, Integer>();
 		for(String word : words){
+			word = word.toLowerCase();
 			int frequency = wordFrequencies.containsKey(word) ? wordFrequencies.get(word) + 1 : 1;
 			wordFrequencies.put(word, frequency);
 		}
