@@ -1,9 +1,7 @@
 package net.azib.java.students.t050545.hometasks;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 /**
  * Fibonacci
