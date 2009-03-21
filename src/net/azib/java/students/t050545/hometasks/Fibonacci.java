@@ -36,11 +36,11 @@ public class Fibonacci {
 	}
 
 	public static void printFibonacci(int number) {
-	    if(number == 0 ) System.out.println("The Fibonacci number zero  is : " + calculateFibonacci(number));
-		else if(number == 1) System.out.println("The first Fibonacci number is : " + calculateFibonacci(number));
-		else if(number == 2) System.out.println("The second Fibonacci number is : " + calculateFibonacci(number));
-		else if(number == 3) System.out.println("The third Fibonacci number is : " + calculateFibonacci(number));
-		else  System.out.println("The "+number+"th Fibonacci number is : " + calculateFibonacci(number));
+	    if(number == 0 ) System.out.println("The Fibonacci number zero   is \t: " + calculateFibonacci(number));
+		else if(number == 1) System.out.println("The first Fibonacci number  is \t: " + calculateFibonacci(number));
+		else if(number == 2) System.out.println("The second Fibonacci number is \t: " + calculateFibonacci(number));
+		else if(number == 3) System.out.println("The third Fibonacci number  is \t: " + calculateFibonacci(number));
+		else  System.out.println("The "+number+"th Fibonacci number  is \t: " + calculateFibonacci(number));
 	 }
 
 }
