@@ -23,7 +23,7 @@ public class UniqueWordExtractor {
 	}
 	
 	public Collection<String> getUniqueWords() {
-		String[] duplicateWords = text.split("\\s");
+		String[] duplicateWords = text.split("[\\s?!:,.()]+");
 		String[] uniqueWords = remover.removeDuplicateStrings(duplicateWords);
 		return Arrays.asList(uniqueWords);
 	}
