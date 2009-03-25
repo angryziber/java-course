@@ -25,6 +25,7 @@ public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 	
 	public static void main(String[] args) {
 		WordFrequencyCalculator fr = new WordFrequencyCalculatorImpl();
+		System.out.println(fr.calculateFrequenciesOf("black blue boy sheet water a waterfall").keySet());
 		System.out.println(fr.calculateFrequenciesOf("blu blue dark white black green yellow a boy sheet paper mellon blue white red purple red"));
 	}
         
