@@ -6,6 +6,8 @@ package net.azib.java.lessons.basic;
  * @author anton
  */
 public class Dog extends Animal {
+	private static final long serialVersionUID = 1;
+	
 	public Dog(String name, int age) {
 		super(name, age);
 	}

@@ -1,12 +1,14 @@
 package net.azib.java.lessons.basic;
 
+import java.io.Serializable;
+
 /**
  * Animal
  *
  * @author anton
  */
 @Todo("implement toString")
-public abstract class Animal implements Cloneable, Comparable<Animal> {
+public abstract class Animal implements Cloneable, Serializable, Comparable<Animal> {
 	String name;
 	private int age;
 	
