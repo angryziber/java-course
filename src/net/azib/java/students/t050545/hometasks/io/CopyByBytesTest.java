@@ -3,6 +3,7 @@ package net.azib.java.students.t050545.hometasks.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Properties;
 
 /**
@@ -23,12 +24,15 @@ public class CopyByBytesTest {
 		File outFile = new File(properties.getProperty("user.dir")+"\\src\\net\\azib\\java\\students\\t050545\\hometasks\\io","output.txt");
 		
 		FileCopier copyByte = new CopyByBytes();
-		long time = PerformanceTimer.measureTime(copyByte, inFile, outFile);
-		System.out.println("Coping byte by byte:\t"+time+"ns");
+		long time1 = PerformanceTimer.measureTime(copyByte, inFile, outFile);
+		System.out.println("Coping byte by byte:\t"+time1+"ns");
 		
 		CopyByStreamByffer copyStream = new CopyByStreamByffer();
-		time = PerformanceTimer.measureTime(copyStream, inFile, outFile);
-		System.out.println("Coping with buffer:\t"+time+"ns");
+		long time2 = PerformanceTimer.measureTime(copyStream, inFile, outFile);
+		System.out.println("Coping with buffer:\t"+time2+"ns");
+		DecimalFormat ratioDec = new DecimalFormat("0.00");
+		System.out.println("The ratio is "+ratioDec.format((double)time1/time2));
+		
 		
 		}
 		catch(FileNotFoundException e){
