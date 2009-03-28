@@ -19,10 +19,10 @@ public class CopyByBytesTest {
 	public static void main(String[] args){
 		Properties properties = System.getProperties();
 		try{
-	    File inFile = new File(properties.getProperty("user.dir")+"\\src\\net\\azib\\java\\students\\t050545\\hometasks\\io","ENGLISH.EXE");
-		File outFile = new File(properties.getProperty("user.dir")+"\\src\\net\\azib\\java\\students\\t050545\\hometasks\\io","ENGLISH2.EXE");
+	    File inFile = new File(properties.getProperty("user.dir")+"\\src\\net\\azib\\java\\students\\t050545\\hometasks\\io","input.txt");
+		File outFile = new File(properties.getProperty("user.dir")+"\\src\\net\\azib\\java\\students\\t050545\\hometasks\\io","output.txt");
 		
-		CopyByBytes copyByte = new CopyByBytes();
+		FileCopier copyByte = new CopyByBytes();
 		long time = PerformanceTimer.measureTime(copyByte, inFile, outFile);
 		System.out.println("Coping byte by byte:\t"+time+"ns");
 		

@@ -4,35 +4,36 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-
-
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * copyByBytes
- *
+ * 
  * @author libricon
  */
-public class CopyByBytes implements FileCopier{
-	
-	public void copy (File input, File output) throws IOException {
-		if(input.exists()== true && input.isFile() == true && input.canRead() ){
-			FileInputStream fileInput = new FileInputStream(input);
-			FileOutputStream fileOutput = new FileOutputStream(output);
-			
-			while(fileInput.available() != 0){
-				fileOutput.write(fileInput.read());
-			}
-			
-			fileInput.close();
-			fileOutput.close();
+public class CopyByBytes implements FileCopier, DataCopier {
+
+	public void copy(File input, File output) throws IOException {
+		if (input.exists() == true && input.isFile() == true && input.canRead()) {
+			copy(new FileInputStream(input), new FileOutputStream(output));
 		}
-		else{
+		else {
 			System.out.println("Something wrong with your files !!!");
-			System.out.println("exist: "+input.exists());
-			System.out.println("file: "+input.isFile());
-			System.out.println("canRead: "+input.canRead());
+			System.out.println("exist: " + input.exists());
+			System.out.println("file: " + input.isFile());
+			System.out.println("canRead: " + input.canRead());
 		}
+	}
+
+	public void copy(InputStream input, OutputStream output) throws IOException {
+
+		while (input.available() != 0) {
+			output.write(input.read());
+		}
+
+		input.close();
+		output.close();
 	}
 
 }
