@@ -16,7 +16,7 @@ import java.io.OutputStream;
  */
 public class CopyByStreamByffer implements FileCopier, DataCopier {
 	public void copy(File input, File output) throws IOException {
-		if (input.exists() == true && input.isFile() == true && input.canRead()) {
+		if (input.exists() && input.isFile() && input.canRead()) {
 			copy(new FileInputStream(input), new FileOutputStream(output));
 		}
 		else {
