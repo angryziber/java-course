@@ -28,12 +28,15 @@ public class ShapeAggregatorImpl implements ShapeAggregator {
 	}
 
 	public void copyLargerTo(Shape smallestShape, Collection<? super Shape> shapesList) {
-		// TODO write implementation
-
+		for(Shape shape : this.shapesList){
+			if(1 == shape.compareTo(smallestShape)) {
+				shapesList.add(shape);
+			}
+		}
 	}
 
 	public void copyTo(Collection<? super Shape> shapesList) {
-		// TODO write implementation
+		shapesList.addAll(this.shapesList);
 
 	}
 
