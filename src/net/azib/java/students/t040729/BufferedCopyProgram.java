@@ -17,8 +17,9 @@ public class BufferedCopyProgram {
 
 		InputStream kopeeritav = new BufferedInputStream(new FileInputStream("c:\\test.rar"));
 		OutputStream teine = new BufferedOutputStream(new FileOutputStream("c:\\test2.rar"));
+		SimpleCopyProgram scp = new SimpleCopyProgram();
 		long t = System.currentTimeMillis();
-		SimpleCopyProgram.copy(kopeeritav, teine);
+		scp.copy(kopeeritav, teine);
 		kopeeritav.close();
 		teine.close();
 		System.out.println("Aega võttis: " + (System.currentTimeMillis() - t) + "ms");
