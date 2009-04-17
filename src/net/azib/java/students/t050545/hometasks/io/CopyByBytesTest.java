@@ -19,28 +19,28 @@ public class CopyByBytesTest {
 	 */
 	public static void main(String[] args){
 		Properties properties = System.getProperties();
-		try{
+//		try{ 
 	    File inFile = new File(properties.getProperty("user.dir")+"\\src\\net\\azib\\java\\students\\t050545\\hometasks\\io","input.txt");
 		File outFile = new File(properties.getProperty("user.dir")+"\\src\\net\\azib\\java\\students\\t050545\\hometasks\\io","output.txt");
 		
 		FileCopier copyByte = new CopyByBytes();
-		long time1 = PerformanceTimer.measureTime(copyByte, inFile, outFile);
-		System.out.println("Coping byte by byte:\t"+time1+"ns");
+		//long time1 = PerformanceTimer.measureTimeOfFileCopier(copier, src, dest)(copyByte, inFile, outFile);
+		//System.out.println("Coping byte by byte:\t"+time1+"ns");
 		
 		CopyByStreamByffer copyStream = new CopyByStreamByffer();
-		long time2 = PerformanceTimer.measureTime(copyStream, inFile, outFile);
-		System.out.println("Coping with buffer:\t"+time2+"ns");
+		//long time2 = PerformanceTimer.measureTimeOf(copyStream, inFile, outFile);
+		//System.out.println("Coping with buffer:\t"+time2+"ns");
 		DecimalFormat ratioDec = new DecimalFormat("0.00");
-		System.out.println("The ratio is "+ratioDec.format((double)time1/time2));
+		//System.out.println("The ratio is "+ratioDec.format((double)time1/time2));
 		
 		
-		}
-		catch(FileNotFoundException e){
-			System.out.println("File not exist");
-		}
-		catch(IOException e){
-			System.out.println("ERROR!");
-		}
+//		}
+//		catch(FileNotFoundException e){
+//			System.out.println("File not exist");
+//		}
+//		catch(IOException e){
+//			System.out.println("ERROR!");
+//		}
 		
 	
 		

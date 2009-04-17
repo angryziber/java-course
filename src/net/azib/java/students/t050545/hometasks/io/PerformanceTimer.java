@@ -14,17 +14,23 @@ import java.io.OutputStream;
  */
 public class PerformanceTimer {
 	
-	public static long measureTime(FileCopier copier, File src, File dest) throws IOException {
+	public static void measureTimeOfFileCopier(FileCopier copier) throws IOException {
 		long t = System.nanoTime();
+		System.err.println("Measuring performance of " + copier);
+		File src = new File(PerformanceTimer.class.getResource("ENGLISH.EXE").getFile());
+		File dest = File.createTempFile("ENGLISH", "EXE");
 		copier.copy(src, dest);
-		return System.nanoTime() - t;
+		dest.delete();
+		System.err.println("Nanoseconds: " + (System.nanoTime() - t));
 	}
 	
-	public static long measureTime2(DataCopier copier, InputStream src, OutputStream dest) throws IOException {
+	public static long measureTimeOfDataCopier(DataCopier copier, InputStream src, OutputStream dest) throws IOException {
 		long t = System.nanoTime();
 		copier.copy(src, dest);
 		return System.nanoTime() - t;
 	}
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws Exception {
+		measureTimeOfFileCopier(new CopyByBytes());
+		measureTimeOfFileCopier(new CopyByStreamByffer());
 	}
 }
