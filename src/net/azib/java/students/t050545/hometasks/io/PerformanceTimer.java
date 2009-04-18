@@ -1,6 +1,8 @@
 package net.azib.java.students.t050545.hometasks.io;
 
-import net.azib.java.students.t050545.hometasks.io.FileCopier;
+
+import net.azib.java.lessons.io.DataCopier;
+import net.azib.java.lessons.io.FileCopier;
 
 import java.io.File;
 import java.io.IOException;
