@@ -3,7 +3,6 @@ package net.azib.java.students.t074918;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 import org.apache.commons.io.IOUtils;
 
