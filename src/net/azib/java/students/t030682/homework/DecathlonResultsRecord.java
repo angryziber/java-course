@@ -1,9 +1,5 @@
 package net.azib.java.students.t030682.homework;
 
-import sun.misc.Regexp;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
-
 public class DecathlonResultsRecord {
 
 	String name;
@@ -22,7 +18,7 @@ public class DecathlonResultsRecord {
 	int totalScore;
 
 	public DecathlonResultsRecord() {
-	};
+	}
 
 	public DecathlonResultsRecord(String name, String dateOfBirth, String country, double resultOf100mSprint,
 			double resultOfLongJump, double resultOfShotPut, double resultOfHighJump, double resultOf400mSprint,
@@ -61,8 +57,7 @@ public class DecathlonResultsRecord {
 	public static DecathlonResultsRecord stringToRecord(String rawResults) {
 
 		String[] splitResults = rawResults.split(",");
-		
-		
+
 		DecathlonResultsRecord newRecord = new DecathlonResultsRecord(splitResults[0], splitResults[1], splitResults[2], Double
 				.parseDouble(splitResults[3]), Double.parseDouble(splitResults[4]), Double.parseDouble(splitResults[5]), Double
 				.parseDouble(splitResults[6]), Double.parseDouble(splitResults[7]), Double.parseDouble(splitResults[8]), Double
@@ -71,17 +66,4 @@ public class DecathlonResultsRecord {
 
 		return newRecord;
 	}
-	
-	public static void main(String[] args) {
-		// DecathlonResultsRecord tmpRecord = new DecathlonResultsRecord(
-		// "Siim Susi","01.01.1976","EE",12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,325.72);
-		String tmp = "Siim Susi,01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,325.72";
-		String tmp2 = "Beata Kana,29.02.1982,ZA,13.04,4.53,7.79,1.55,64.72,18.74,24.20,2.40,28.20,410.76";
-		DecathlonResultsRecord tmpRecord = new DecathlonResultsRecord();
-		tmpRecord = DecathlonResultsRecord.stringToRecord(tmp2);
-
-		System.out.println(tmpRecord);
-
-	}
-
 }
