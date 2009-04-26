@@ -11,8 +11,32 @@ import java.util.Scanner;
  */
 public class DataInputClass {
 
+	public String[] consoleReader(){
+		Scanner s = new Scanner(System.in);
+		int arraySize =1;
+		String [] inputRecords = new String[arraySize];
+		System.out.println("DECATHLON RESULTS CONSOLE READER");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		String action = "y";
+	
+		//problem here
+		while (action=="y") {
+			inputRecords[arraySize-1]=inputRecordFromConsole();
+			action = ask(s,"Do you want to enter more athlete's data? y/n","[a-z&&[yn]]");
+			System.out.println(action);
+			if (action=="y") {
+			String[] tmpArray = new String[++arraySize];
+			System.arraycopy(inputRecords, 0, tmpArray, 0, inputRecords.length);
+			inputRecords=tmpArray;
+		} 
+		}
+		return inputRecords;
+		
+	}
+	
 	public String inputRecordFromConsole() {
 		Scanner s = new Scanner(System.in);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nEnter athlete's data:\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		String scannedData = ask(s, "first name:", "[A-Z][a-z]+");
 		scannedData = scannedData.concat(" " + ask(s, "surname:", "[A-Z][a-z]+"));
 		scannedData = scannedData.concat(","
@@ -28,6 +52,7 @@ public class DataInputClass {
 		scannedData = scannedData.concat("," + ask(s, "Pole vault result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
 		scannedData = scannedData.concat("," + ask(s, "Javelin throw result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
 		scannedData = scannedData.concat("," + ask(s, "1500m race time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		return scannedData;
 	}
 
@@ -93,7 +118,7 @@ public class DataInputClass {
 		String response = null;
 		while (true) {
 			try {
-				System.out.print("Please enter athlete's " + message);
+				System.out.print(message);
 				response = s.next(pattern);
 				break;
 			}
