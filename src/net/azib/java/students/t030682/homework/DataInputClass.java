@@ -3,6 +3,7 @@ package net.azib.java.students.t030682.homework;
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * DataInput
@@ -11,56 +12,59 @@ import java.util.Scanner;
  */
 public class DataInputClass {
 
-	public String[] consoleReader(){
+	public String[] consoleReader() {
 		Scanner s = new Scanner(System.in);
-		int arraySize =1;
-		String [] inputRecords = new String[arraySize];
+		int arraySize = 1;
+		String[] inputRecords = new String[arraySize];
 		System.out.println("DECATHLON RESULTS CONSOLE READER");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		String action = "y";
-	
-		//problem here
-		while (action=="y") {
-			inputRecords[arraySize-1]=inputRecordFromConsole();
-			action = ask(s,"Do you want to enter more athlete's data? y/n","[a-z&&[yn]]");
-			System.out.println(action);
-			if (action=="y") {
-			String[] tmpArray = new String[++arraySize];
-			System.arraycopy(inputRecords, 0, tmpArray, 0, inputRecords.length);
-			inputRecords=tmpArray;
-		} 
+		while (action.charAt(0) == 121) {
+			inputRecords[arraySize - 1] = inputRecordFromConsole();
+			action = askFromConsole(s, "Do you want to enter more athlete's data? y/n", "[a-z&&[yn]]");
+			if (action.charAt(0) == 121) {
+				String[] tmpArray = new String[++arraySize];
+				System.arraycopy(inputRecords, 0, tmpArray, 0, inputRecords.length);
+				inputRecords = tmpArray;
+			}
 		}
 		return inputRecords;
-		
 	}
-	
+
 	public String inputRecordFromConsole() {
 		Scanner s = new Scanner(System.in);
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nEnter athlete's data:\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		String scannedData = ask(s, "first name:", "[A-Z][a-z]+");
-		scannedData = scannedData.concat(" " + ask(s, "surname:", "[A-Z][a-z]+"));
+		String scannedData = askFromConsole(s, "first name:", "\\p{Lu}\\p{Ll}+");
+		scannedData = scannedData.concat(" " + askFromConsole(s, "surname:", "\\p{Lu}\\p{Ll}+"));
 		scannedData = scannedData.concat(","
-				+ ask(s, "date of birth [DD.MM.YYYY]:", "[0-3]?[0-9].[0-1]?[0-9].[1-2][0-9][0-9][0-9]"));
-		scannedData = scannedData.concat("," + ask(s, "country [XX]:", "[A-Z][A-Z]"));
-		scannedData = scannedData.concat("," + ask(s, "100m sprint time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "Long jump result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "Shot put result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "High jump result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "400m sprint time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "110m hurdles time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "Discus throw result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "Pole vault result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "Javelin throw result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
-		scannedData = scannedData.concat("," + ask(s, "1500m race time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
+				+ askFromConsole(s, "date of birth [DD.MM.YYYY]:", "[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9]"));
+		scannedData = scannedData.concat("," + askFromConsole(s, "country [XX]:", "[A-Z][A-Z]"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "100m sprint time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "Long jump result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "Shot put result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "High jump result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "400m sprint time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "110m hurdles time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "Discus throw result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "Pole vault result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "Javelin throw result [metres[.centimeters]]:", "[0-9]+.?[0-9]?[0-9]?"));
+		scannedData = scannedData.concat(","
+				+ askFromConsole(s, "1500m race time [seconds[.milliseconds]]:", "[0-9]+.?[0-9]?[0-9]?"));
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		return scannedData;
 	}
 
 	public String inputRecordFromCSVFile(String rowFromFile) {
-
-		rowFromFile.replaceAll("\"", "");
+		// rowFromFile.replaceAll("[\"]", "");
 		String[] splitRow = rowFromFile.split(",");
-
 		splitRow[7] = checkMinutesAndConvertToSeconds(splitRow[7]);
 		splitRow[12] = checkMinutesAndConvertToSeconds(splitRow[12]);
 		String fileRecord = splitRow[0];
@@ -81,22 +85,30 @@ public class DataInputClass {
 					++count;
 			}
 		}
+		is.close();
 		return count;
 	}
 
 	public String[] csvReader(String filename) throws IOException {
-		int n = countLinesInFile(filename);
-		String lines[] = new String[n + 1];
+		int arraySize = 0;
+		String lines[] = new String[arraySize];
 		try {
 			FileInputStream fstream = new FileInputStream(filename);
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
-			int i = 0;
-			while ((strLine = br.readLine()) != null) {
+				while ((strLine = br.readLine()) != null) {
 				strLine = strLine.replaceAll("[\"]", "");
-				lines[i] = strLine;
-				i++;
+				if (Pattern.compile("(\\uFEFF)?\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+,[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?)").matcher(strLine).matches()) {
+					String[] tmpArray = new String[++arraySize];
+					System.arraycopy(lines, 0, tmpArray, 0, lines.length);
+					lines=tmpArray;
+					lines[arraySize-1] = strLine;
+					}
+				else {
+					System.out.println("Wrong data in CSV on line " + arraySize + ": " + strLine);
+				}
+				
 			}
 			in.close();
 		}
@@ -114,7 +126,7 @@ public class DataInputClass {
 		return res;
 	}
 
-	private String ask(Scanner s, String message, String pattern) {
+	private String askFromConsole(Scanner s, String message, String pattern) {
 		String response = null;
 		while (true) {
 			try {
@@ -123,11 +135,23 @@ public class DataInputClass {
 				break;
 			}
 			catch (InputMismatchException e) {
-				// ask again
 				System.out.println("Wrong input data!");
 				s.next();
 			}
 		}
 		return response;
 	}
+	
+	
+	public String[] mysqlReader (String database) {
+		/*
+		select athletes.name, athletes.dob, athletes.country_code,race_100m,long_jump,shot_put,high_jump,race_400m,hurdles_110m, discus_throw,pole_vault,javelin_throw,race_1500m
+		from decathlon.athletes,decathlon.competitions,decathlon.results
+		where competitions.id=results.competition_id and athletes.id=results.athlete_id 
+			and competitions.name='training'  / and competitions.id='1'
+		*/
+		return null;
+	}
+	
+	
 }

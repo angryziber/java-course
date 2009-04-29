@@ -33,11 +33,9 @@ public class DataChecker {
 		return res;
 	}
 	
-	public boolean checkStringRecord(String checking){
-		
-		
-		return true;
-		
+
+	public boolean checkWholeString(String checkMe){
+		return (Pattern.compile("\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+,[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?)").matcher(checkMe).matches());
 	}
 	
 	public static void main(String[] args) {
@@ -47,7 +45,6 @@ public class DataChecker {
 		System.out.println(check.checkDateOfBirth("07.06.1985"));
 		System.out.println(check.checkTimeOrDistance("65.04"));
 		System.out.println(check.checkMinutesAndConvertToSeconds("2:38.32"));
-
+		System.out.println(check.checkWholeString("Siim Susi,01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72"));
 	}
-
 }
