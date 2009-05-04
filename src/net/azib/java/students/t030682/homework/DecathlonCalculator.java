@@ -1,9 +1,8 @@
 package net.azib.java.students.t030682.homework;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 import java.util.regex.Pattern;
 import java.util.Collections;
 
@@ -12,7 +11,7 @@ import java.util.Collections;
  *
  * @author aplotn
  */
-public class MainApp {
+public class DecathlonCalculator {
 
 	public static void main(String[] args) throws IOException {
 		
@@ -26,29 +25,23 @@ public class MainApp {
 			tmpArray = tmpInput.csvReader(args[1]);
 		}
 		else if (args[0].equals("-db")) {
-			System.out.println("mysql");
+			System.out.println("mysql input from database" + args[1]);
 		}
 		else
 			System.out.println("Wrong input arguments");
 		
-		
-		List<DecathlonResultsRecord> competitionRecords = new LinkedList<DecathlonResultsRecord>();
+		List<DecathlonResultsRecord> competitionRecords = new ArrayList<DecathlonResultsRecord>();
 		for (String s : tmpArray) {
 			competitionRecords.add(DecathlonResultsRecord.stringToRecord(s));
 		}
 		Collections.sort(competitionRecords);
-		System.out.println(competitionRecords.toArray(new String[competitionRecords.size()]));
 		
-		
-		
+		DataOutputClass out = new DataOutputClass();
 	if (args[2].equals("-console")) {
-			System.out.println("+++++++++++++++++\nAthletes results:\n+++++++++++++++++");
-			for (String s : tmpArray) {
-				System.out.println(DecathlonResultsRecord.stringToRecord(s));
-			}
-	  }
+		out.consoleWriter(competitionRecords);
+		}
 	  else if (args[2].equals("-csv")) {
-		  System.out.println("csv output to file " + args[3]);
+		  out.csvWriter(competitionRecords,args[3]);
 	  }
 	  else if (args[2].equals("-html")) {
 		  System.out.println("html output to file " + args[3]);

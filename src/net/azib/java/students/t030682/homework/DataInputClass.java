@@ -97,6 +97,7 @@ public class DataInputClass {
 
 	public String[] csvReader(String filename) throws IOException {
 		int arraySize = 0;
+		int errorLine = 0;
 		String lines[] = new String[arraySize];
 		try {
 			FileInputStream fstream = new FileInputStream(filename);
@@ -106,14 +107,16 @@ public class DataInputClass {
 				while ((strLine = br.readLine()) != null) {
 				if (Pattern.compile("(\\uFEFF)?\"\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+\",[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?) ?").matcher(strLine).matches()) {
 					strLine = strLine.replaceAll("[\"]", "");
+					strLine = strLine.replaceAll("\\uFEFF", "");
 					strLine = fixRecordFromCSVFile(strLine);
 					String[] tmpArray = new String[++arraySize];
 					System.arraycopy(lines, 0, tmpArray, 0, lines.length);
 					lines=tmpArray;
 					lines[arraySize-1] = strLine;
+					errorLine++;
 					}
 				else {
-					System.out.println("Wrong data in CSV on line " + ++arraySize + ": " + strLine);
+					System.out.println("Wrong data in CSV file on line " + ++errorLine + ": " + strLine);
 				}
 			}
 			in.close();
@@ -144,6 +147,7 @@ public class DataInputClass {
 	}
 	
 	public String[] mysqlReader (String database) {
+
 		/*
 		select athletes.name, athletes.dob, athletes.country_code,race_100m,long_jump,shot_put,high_jump,race_400m,hurdles_110m, discus_throw,pole_vault,javelin_throw,race_1500m
 		from decathlon.athletes,decathlon.competitions,decathlon.results

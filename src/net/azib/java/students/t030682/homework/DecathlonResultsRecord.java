@@ -50,7 +50,7 @@ public class DecathlonResultsRecord implements Comparable<DecathlonResultsRecord
 	}
 
 	public String toString() {
-		return name + " born " + dateOfBirth + " from " + country + " get " + totalScore + " points.";
+		return name + " born " + dateOfBirth + " from " + country + " with " + totalScore + " points.";
 
 	}
 
