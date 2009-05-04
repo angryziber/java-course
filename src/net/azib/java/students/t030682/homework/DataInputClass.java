@@ -62,70 +62,6 @@ public class DataInputClass {
 		return scannedData;
 	}
 
-	public String inputRecordFromCSVFile(String rowFromFile) {
-		// rowFromFile.replaceAll("[\"]", "");
-		String[] splitRow = rowFromFile.split(",");
-		splitRow[7] = checkMinutesAndConvertToSeconds(splitRow[7]);
-		splitRow[12] = checkMinutesAndConvertToSeconds(splitRow[12]);
-		String fileRecord = splitRow[0];
-		for (int i = 0; i < splitRow.length - 1; i++) {
-			fileRecord = fileRecord.concat("," + splitRow[i + 1]);
-		}
-		return fileRecord;
-	}
-
-	public int countLinesInFile(String filename) throws IOException {
-		InputStream is = new BufferedInputStream(new FileInputStream(filename));
-		byte[] c = new byte[1024];
-		int count = 0;
-		int readChars = 0;
-		while ((readChars = is.read(c)) != -1) {
-			for (int i = 0; i < readChars; ++i) {
-				if (c[i] == '\n')
-					++count;
-			}
-		}
-		is.close();
-		return count;
-	}
-
-	public String[] csvReader(String filename) throws IOException {
-		int arraySize = 0;
-		String lines[] = new String[arraySize];
-		try {
-			FileInputStream fstream = new FileInputStream(filename);
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-				while ((strLine = br.readLine()) != null) {
-				strLine = strLine.replaceAll("[\"]", "");
-				if (Pattern.compile("(\\uFEFF)?\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+,[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?)").matcher(strLine).matches()) {
-					String[] tmpArray = new String[++arraySize];
-					System.arraycopy(lines, 0, tmpArray, 0, lines.length);
-					lines=tmpArray;
-					lines[arraySize-1] = strLine;
-					}
-				else {
-					System.out.println("Wrong data in CSV on line " + arraySize + ": " + strLine);
-				}
-				
-			}
-			in.close();
-		}
-		catch (Exception e) {
-			System.err.println("Error: " + e.getMessage());
-		}
-		return lines;
-	}
-
-	public String checkMinutesAndConvertToSeconds(String res) {
-		if (res.indexOf(':') != -1) {
-			String[] splitted = res.split(":");
-			res = Double.toString(60 * Double.parseDouble(splitted[0]) + Double.parseDouble(splitted[1]));
-		}
-		return res;
-	}
-
 	private String askFromConsole(Scanner s, String message, String pattern) {
 		String response = null;
 		while (true) {
@@ -141,7 +77,71 @@ public class DataInputClass {
 		}
 		return response;
 	}
+
+	/*
+	public int countLinesInFile(String filename) throws IOException {
+		InputStream is = new BufferedInputStream(new FileInputStream(filename));
+		byte[] c = new byte[1024];
+		int count = 0;
+		int readChars = 0;
+		while ((readChars = is.read(c)) != -1) {
+			for (int i = 0; i < readChars; ++i) {
+				if (c[i] == '\n')
+					++count;
+			}
+		}
+		is.close();
+		return count;
+	}
+	*/
+
+	public String[] csvReader(String filename) throws IOException {
+		int arraySize = 0;
+		String lines[] = new String[arraySize];
+		try {
+			FileInputStream fstream = new FileInputStream(filename);
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
+				while ((strLine = br.readLine()) != null) {
+				if (Pattern.compile("(\\uFEFF)?\"\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+\",[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?) ?").matcher(strLine).matches()) {
+					strLine = strLine.replaceAll("[\"]", "");
+					strLine = fixRecordFromCSVFile(strLine);
+					String[] tmpArray = new String[++arraySize];
+					System.arraycopy(lines, 0, tmpArray, 0, lines.length);
+					lines=tmpArray;
+					lines[arraySize-1] = strLine;
+					}
+				else {
+					System.out.println("Wrong data in CSV on line " + ++arraySize + ": " + strLine);
+				}
+			}
+			in.close();
+		}
+		catch (Exception e) {
+			System.err.println("Error: " + e.getMessage());
+		}
+		return lines;
+	}
+
+	public String fixRecordFromCSVFile(String rowFromFile) {
+		String[] splitRow = rowFromFile.split(",");
+		splitRow[7] = checkMinutesAndConvertToSeconds(splitRow[7]);
+		splitRow[12] = checkMinutesAndConvertToSeconds(splitRow[12]);
+		String fileRecord = splitRow[0];
+		for (int i = 0; i < splitRow.length - 1; i++) {
+			fileRecord = fileRecord.concat("," + splitRow[i + 1]);
+		}
+		return fileRecord;
+	}	
 	
+	public String checkMinutesAndConvertToSeconds(String res) {
+		if (res.indexOf(':') != -1) {
+			String[] splitted = res.split(":");
+			res = Double.toString(60 * Double.parseDouble(splitted[0]) + Double.parseDouble(splitted[1]));
+		}
+		return res;
+	}
 	
 	public String[] mysqlReader (String database) {
 		/*

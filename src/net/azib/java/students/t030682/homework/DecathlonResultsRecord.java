@@ -1,6 +1,6 @@
 package net.azib.java.students.t030682.homework;
 
-public class DecathlonResultsRecord {
+public class DecathlonResultsRecord implements Comparable<DecathlonResultsRecord>{
 
 	String name;
 	String dateOfBirth;
@@ -65,5 +65,10 @@ public class DecathlonResultsRecord {
 				.parseDouble(splitResults[12]));
 
 		return newRecord;
+	}
+	
+	public int compareTo(DecathlonResultsRecord decRecord){
+		return decRecord.totalScore-totalScore;
+	
 	}
 }
