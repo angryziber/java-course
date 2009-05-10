@@ -69,7 +69,7 @@ public class Sportman {
 		arrayScore[8] = 98.48f;
 		arrayScore[9] = 206f;
 
-		Sportman sportman = new Sportman(arrayScore,new Person("Kirill", "Ru",  new GregorianCalendar(1987, 4, 29)));
+		Sportman sportman = new Sportman(arrayScore,new Person("Kirill", "RU",  new GregorianCalendar(1987, 4, 29)));
 		System.out.println(sportman);
 	}
 }
