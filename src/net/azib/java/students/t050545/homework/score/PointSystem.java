@@ -24,6 +24,11 @@ public class PointSystem {
 		calculatePoints();
 		calculatePointForTrack();
 	}
+	
+	public PointSystem(Score score){
+		this(score.getScores());
+		
+	}
 
 	private void calculatePoints() {
 		scores[0] = Jug100m.returnPoints(results[0]);
@@ -78,7 +83,7 @@ public class PointSystem {
 		if (getClass() != o.getClass())
 			return false;
 		PointSystem p = (PointSystem) o;
-		return this.score == p.score && this.scores.equals(p.scores);
+		return this.score == p.getScore() && this.scores.equals(p.scores);
 	}
 
 	@Override
@@ -94,6 +99,7 @@ public class PointSystem {
 		return buffer.toString();
 	}
 
+	
 	public static void main(String[] args) {
 
 		float[] arrayScore = new float[10];
