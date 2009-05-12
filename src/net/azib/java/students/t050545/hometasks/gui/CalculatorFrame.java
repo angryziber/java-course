@@ -1,15 +1,14 @@
 package net.azib.java.students.t050545.hometasks.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CalculatorFrame extends JFrame {
@@ -28,11 +27,7 @@ public class CalculatorFrame extends JFrame {
 	}
 
 	public CalculatorFrame(){
-		setTitle("Super puper mega calculator");
-		Toolkit kit = Toolkit.getDefaultToolkit();
-		Dimension dimens = kit.getScreenSize();
-		setSize((int)dimens.getWidth()/2, (int)dimens.getHeight()/2);
-		setLocation((int)dimens.getWidth()/2, (int)dimens.getHeight()/2);
+		setTitle("calculator");
 		CalcPanel numbers = new CalcPanel();
 		add(numbers);
 		pack();
@@ -53,8 +48,7 @@ class CalcPanel extends JPanel{
 		result = 0;
 		lastCommand = "=";
 		start = true;
-		display = new JButton("0");
-		display.setEnabled(false);
+		display = new JLabel("0");
 		add(display, BorderLayout.NORTH);
 		
 		ActionListener insert = new InsertAction();
@@ -137,7 +131,7 @@ class CalcPanel extends JPanel{
 		display.setText(""+result);
 	}
 	private JPanel panel;
-	private JButton display;
+	private JLabel display;
 	private double result;
 	private String lastCommand;
 	private boolean start;
