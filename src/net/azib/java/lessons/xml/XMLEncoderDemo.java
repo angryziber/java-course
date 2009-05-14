@@ -1,4 +1,6 @@
-package net.azib.java.lessons.gui;
+package net.azib.java.lessons.xml;
+
+import net.azib.java.lessons.gui.CommentBean;
 
 import java.beans.XMLEncoder;
 
@@ -11,6 +13,8 @@ public class XMLEncoderDemo {
 	public static void main(String[] args) {
 		CommentBean bean = new CommentBean();
 		bean.setComment("MegaComment");
-		new XMLEncoder(System.out).writeObject(bean);
+		XMLEncoder encoder = new XMLEncoder(System.out);
+		encoder.writeObject(bean);
+		encoder.close();
 	}
 }
