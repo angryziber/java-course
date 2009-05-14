@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
  *
  * @author libricon
  */
-public class Sportman {
+public class Sportman implements Comparable<Sportman> {
 	
     public Sportman(Score score, Person person){
     	this.person = person;
@@ -52,22 +52,28 @@ public class Sportman {
 		return person.toString() + points.toString();
 	}
 	
+	@Override
+	public int compareTo(Sportman o) {
+		Sportman man = (Sportman)o;
+		return man.getPoints().getScore()-this.getPoints().getScore();
+	}
+
 	private Person person;
 	private PointSystem points;
 	
 	
 	public static void main(String[] args) {
 		float[] arrayScore = new float[10];
-		arrayScore[0] = 9.69f;
-		arrayScore[1] = 8.95f;
-		arrayScore[2] = 23.12f;
-		arrayScore[3] = 2.45f;
-		arrayScore[4] = 43.18f;
-		arrayScore[5] = 12.87f;
-		arrayScore[6] = 74.08f;
-		arrayScore[7] = 6.14f;
-		arrayScore[8] = 98.48f;
-		arrayScore[9] = 206f;
+		arrayScore[0] = 10.395f;
+		arrayScore[1] = 7.76f;
+		arrayScore[2] = 18.4f;
+		arrayScore[3] = 2.20f;
+		arrayScore[4] = 46.17f;
+		arrayScore[5] = 13.8f;
+		arrayScore[6] = 56.17f;
+		arrayScore[7] = 5.28f;
+		arrayScore[8] = 77.19f;
+		arrayScore[9] = 233.79f;
 
 		Sportman sportman = new Sportman(arrayScore,new Person("Kirill", "RU",  new GregorianCalendar(1987, 4, 29)));
 		System.out.println(sportman);
