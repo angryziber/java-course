@@ -94,8 +94,8 @@ public class PointSystem {
 		buffer.append("\n");
 		for (int i : scores)
 			buffer.append(i + "\t");
-		buffer.append("\n");
-		buffer.append("Total score: " + score);
+		buffer.append("\n-----------------------------------------------------------------------------\n");
+		buffer.append("Total score: " + score +"\n\n");
 		return buffer.toString();
 	}
 

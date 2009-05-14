@@ -1,5 +1,6 @@
 package net.azib.java.students.t050545.homework.sportman;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
@@ -17,7 +18,8 @@ public class Person {
 	
 	@Override
 	public String toString(){
-        return (name+"\nBirthday is :" + birthDay.getTime() + "\nfrom "+country+"\n");
+		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        return (name+"\nBirthday is: " + df.format(birthDay.getTime()) + "\nfrom "+country+"\n");
 	}
 	
 	@Override
