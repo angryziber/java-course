@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE country SYSTEM "country.dtd">
-<countries>
+<countries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="country.xsd">
 	<country code="EE">
 	  <name>Estonia</name>
 	  <population>1350000</population>
