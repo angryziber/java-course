@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.GregorianCalendar;
 
 /**
@@ -47,11 +46,11 @@ public class CSVLoader implements SportmanLoader {
 
 			for (int i = 3; i < 13; i++) {
 				String[] split = arrayOfData[i].split("\\:");
-				System.out.print(Arrays.toString(split));
+				//System.out.print(Arrays.toString(split));
 				if (split.length == 1)
 					resultTable[i - 3] = Float.parseFloat(arrayOfData[i]);
 				else
-					resultTable[i - 3] = Float.parseFloat(split[0]) * 60f + Float.parseFloat(split[1]);
+					resultTable[i-3] = Float.parseFloat(split[0]) * 60f + Float.parseFloat(split[1]);
 				//System.out.println("result is : " + resultTable[i - 3]);
 			}
 			Person person = new Person(name, country, birthDate);
