@@ -34,6 +34,7 @@ public class Person {
 		return this.name.equals(p.getName()) && this.country.equals(p.getCountry()) && this.birthDay.equals(p.getBirthDay());
 	}
 	
+	
 	/**
 	 * @return the name
 	 */
@@ -59,7 +60,7 @@ public class Person {
 	 * @return the birthDay
 	 */
 	public GregorianCalendar getBirthDay() {
-		return birthDay;
+		return (GregorianCalendar)birthDay.clone();
 	}
 
 	

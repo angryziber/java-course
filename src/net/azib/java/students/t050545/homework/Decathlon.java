@@ -1,10 +1,8 @@
 package net.azib.java.students.t050545.homework;
 
 import net.azib.java.students.t050545.homework.sportman.Sportman;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.ParseException;
 
@@ -17,13 +15,13 @@ import java.text.ParseException;
 public class Decathlon {
 	public static void main(String[] args) throws ParseException, IOException {
 
-		BufferedReader reader = null;
+		CSVLoader loader = new CSVLoader("c:\\sport_utf8.txt");
 		PrintWriter printwriter = null;
 		
         try{
 		int i = 0;
 		if (args[i].equalsIgnoreCase("-csv")) {
-			reader = new BufferedReader(new FileReader(args[i + 1]));
+			loader = new CSVLoader(args[i+1]);
 			i = i + 2;
 		}
 		else if (args[i].equalsIgnoreCase("-db")) {
@@ -31,7 +29,7 @@ public class Decathlon {
 			i = i + 2;
 		}
 		else if (args[i].equalsIgnoreCase("-console")){
-			reader = new BufferedReader(new InputStreamReader(System.in));
+			//loader = new ConsoleLoader();
 			i++;
 		}
 		else {
@@ -63,19 +61,17 @@ public class Decathlon {
         	System.err.println("The arguments order is wrong or missing!");
         	System.exit(1);
         }
-        String line;
-        Competition comp = new Competition("Mega cup", 100011);
         
-		while ((line = reader.readLine()) != null && line.length() !=0) {
-			Sportman sportman = Parser.splitLine(line);
-			comp.addCompetitor(sportman);
-			//printwriter.println(comp);
-		}
+        Competition comp = new Competition("Mega cup", 100011);
+        Sportman sportman;
+        while((sportman = loader.nextSportman()) != null){
+        	comp.addCompetitor(sportman);
+        }
         comp.sortCompetitors();
-		printwriter.println(comp);
+        System.out.println(comp);
+		
 		
 		printwriter.close();
-		reader.close();
 		System.out.println("END");
 	}
 }

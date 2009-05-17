@@ -4,6 +4,8 @@ import net.azib.java.students.t050545.homework.sportman.Sportman;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Competition
@@ -20,20 +22,9 @@ public class Competition {
 		return competitors.add(sportman);
 	}
 
-	public void sortCompetitors() {
-		Collections.sort(competitors);
-	}
-
-	public void dividePlaces() {
-	    int score = 0;
-		for(int index = 0; index < competitors.size(); index++){
-			if(competitors.get(index).getPoints().getScore()==score)
-			tableScore.addPlace(competitors.get(index));
-			
-		}
-				
-
-	}
+	
+	public void sortCompetitors() { Collections.sort(competitors); }
+	 
 
 	@Override
 	public String toString() {
@@ -68,7 +59,7 @@ public class Competition {
 
 	}
 
-	private Places tableScore;
+	//private Places tableScore;
 	private ArrayList<Sportman> competitors = new ArrayList<Sportman>();
 	private String name;
 	private int id;

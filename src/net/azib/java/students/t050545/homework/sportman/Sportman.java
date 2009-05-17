@@ -6,20 +6,19 @@ import java.util.GregorianCalendar;
 
 /**
  * Sportman
- *
+ * 
  * @author libricon
  */
 public class Sportman implements Comparable<Sportman> {
-	
-    public Sportman(Score score, Person person){
-    	this.person = person;
-    	points = new PointSystem(score);
-    }
-    
-    public Sportman(float[] scores, Person person){
-    	this.person = person;
-    	points = new PointSystem(scores);
-    }
+
+	public Sportman(Score score, Person person) {
+		this(score.getScores(), person);
+	}
+
+	public Sportman(float[] scores, Person person) {
+		this.person = new Person(person.getName(),person.getCountry(),person.getBirthDay());
+		points = new PointSystem(scores);
+	}
 
 	/**
 	 * @return the points
@@ -27,14 +26,14 @@ public class Sportman implements Comparable<Sportman> {
 	public PointSystem getPoints() {
 		return points;
 	}
-	
+
 	/**
 	 * @return the person
 	 */
 	public Person getPerson() {
 		return person;
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -46,22 +45,21 @@ public class Sportman implements Comparable<Sportman> {
 		Sportman p = (Sportman) o;
 		return this.person.equals(p.getPerson()) && this.points.equals(p.getPoints());
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return person.toString() + points.toString();
 	}
-	
+
 	@Override
 	public int compareTo(Sportman o) {
-		Sportman man = (Sportman)o;
-		return man.getPoints().getScore()-this.getPoints().getScore();
+		Sportman man = (Sportman) o;
+		return man.getPoints().getScore() - this.getPoints().getScore();
 	}
 
 	private Person person;
 	private PointSystem points;
-	
-	
+
 	public static void main(String[] args) {
 		float[] arrayScore = new float[10];
 		arrayScore[0] = 10.395f;
@@ -75,7 +73,7 @@ public class Sportman implements Comparable<Sportman> {
 		arrayScore[8] = 77.19f;
 		arrayScore[9] = 233.79f;
 
-		Sportman sportman = new Sportman(arrayScore,new Person("Kirill", "RU",  new GregorianCalendar(1987, 4, 29)));
+		Sportman sportman = new Sportman(arrayScore, new Person("Kirill", "RU", new GregorianCalendar(1987, 4, 29)));
 		System.out.println(sportman);
 	}
 }
