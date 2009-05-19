@@ -13,6 +13,10 @@ import java.io.PrintWriter;
  * @author libricon
  */
 public class Decathlon {
+	/**
+	 * @param args command line arguments
+	 * @throws Exception anykind of exeption
+	 */
 	public static void main(String[] args) throws Exception {
 
 		SportmanLoader loader = new CSVLoader("c:\\sport_utf8.txt");
@@ -66,12 +70,15 @@ public class Decathlon {
         Sportman sportman;
         while((sportman = loader.nextSportman()) != null){
         	comp.addCompetitor(sportman);
+        	System.out.println(comp);
         }
         comp.sortCompetitors();
-        System.out.println(comp);
+        //printwriter.println(comp);
+        
 		
 		
 		printwriter.close();
 		System.out.println("END");
+		System.exit(0);
 	}
 }

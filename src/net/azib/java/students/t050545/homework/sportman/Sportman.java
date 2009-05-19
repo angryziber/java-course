@@ -12,20 +12,16 @@ import java.util.GregorianCalendar;
 public class Sportman implements Comparable<Sportman> {
 
 	/**
-	 * @param score
-	 *            object with sportman's results
-	 * @param person
-	 *            object contain sportman's name and other data
+	 * @param score object with sportman's results
+	 * @param person object contain sportman's name and other data
 	 */
 	public Sportman(Score score, Person person) {
 		this(score.getScores(), person);
 	}
 
 	/**
-	 * @param scores
-	 *            array with all results
-	 * @param person
-	 *            object contain sportman's name and other data
+	 * @param scores array with all results
+	 * @param person object contain sportman's name and other data
 	 */
 	public Sportman(float[] scores, Person person) {
 		this.person = new Person(person.getName(), person.getCountry(), person.getBirthDay());
@@ -49,8 +45,7 @@ public class Sportman implements Comparable<Sportman> {
 	/**
 	 * This Method compare 2 objects, if all field are equal, returns true
 	 * 
-	 * @param other
-	 *            The second object to compare
+	 * @param o The second object to compare
 	 * @return return true, if equals
 	 */
 	@Override
@@ -78,8 +73,7 @@ public class Sportman implements Comparable<Sportman> {
 	/**
 	 * This method allowed to sort Sportmans by score in TreeSet collection
 	 * 
-	 * @param o
-	 *            Second sportman
+	 * @param o Second sportman
 	 * @return other.score - this.score , what gives descending order
 	 */
 	@Override
@@ -96,8 +90,7 @@ public class Sportman implements Comparable<Sportman> {
 	/**
 	 * Main function, only for test purposes
 	 * 
-	 * @param args
-	 *            command line arguments
+	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
 		float[] arrayScore = new float[10];

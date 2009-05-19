@@ -19,26 +19,27 @@ import java.util.GregorianCalendar;
 public class CSVLoader implements SportmanLoader {
 
 	/**
-	 * @param file
-	 *            filename, what content sportmans data
-	 * @throws FileNotFoundException
-	 *             exception, if file name is wrong or file cannot be accessed.
+	 * @param file filename, what content sportmans data
+	 * @throws FileNotFoundException exception, if file name is wrong or file cannot be accessed.
 	 */
 	public CSVLoader(File file) throws FileNotFoundException {
 		reader = new BufferedReader(new FileReader(file));
 	}
 
 	/**
-	 * @param fileName
-	 *            filename, what content sportmans data
-	 * @throws FileNotFoundException
-	 *             exception, if file name is wrong or file cannot be accessed.
+	 * @param fileName filename, what content sportmans data
+	 * @throws FileNotFoundException exception, if file name is wrong or file cannot be accessed.
 	 */
 	public CSVLoader(String fileName) throws FileNotFoundException {
 		reader = new BufferedReader(new FileReader(fileName));
 	}
 
-	@Override
+	/**
+	 *  Method return Sportman object, what get from file
+	 * @return next sportman in file
+	 * @throws IOException file opening exception
+	 * @throws ParseException parse exception
+	 */
 	public Sportman nextSportman() throws IOException, ParseException {
 		String line = reader.readLine();
 		// System.out.print(line);
@@ -88,12 +89,9 @@ public class CSVLoader implements SportmanLoader {
 	private BufferedReader reader;
 
 	/**
-	 * @param args
-	 *            command line arguments
-	 * @throws IOException
-	 *             this exception throw problems with files
-	 * @throws ParseException
-	 *             appear when string format is incorrect
+	 * @param args ommand line arguments
+	 * @throws IOException this exception throw problems with files
+	 * @throws ParseException appear when string format is incorrect
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
 		CSVLoader loader = new CSVLoader("c:\\sport_utf8.txt");

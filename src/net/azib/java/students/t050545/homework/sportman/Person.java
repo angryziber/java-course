@@ -34,8 +34,7 @@ public class Person {
 	/**
 	 * This Method compare 2 objects, if all field are equal, returns true
 	 * 
-	 * @param other
-	 *            The second object to compare
+	 * @param other The second object to compare
 	 * @return return true, if equals
 	 */
 	@Override

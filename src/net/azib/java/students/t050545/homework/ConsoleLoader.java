@@ -31,9 +31,10 @@ public class ConsoleLoader implements SportmanLoader {
 
 		do {
 			System.out.println("Country:");
-			country = scanner.next();
+			country = Parser.addCountry(scanner.next());
 		}
 		while (!Parser.isValidCountry(country));
+		
 
 		do {
 			System.out.println("Please enter a birthDay:");
@@ -49,10 +50,8 @@ public class ConsoleLoader implements SportmanLoader {
 	}
 
 	/**
-	 * @param args
-	 *            command line arguments
-	 * @throws ParseException
-	 *             appear when string format is incorrect
+	 * @param args command line arguments
+	 * @throws ParseException appear when string format is incorrect
 	 */
 	public static void main(String[] args) throws ParseException {
 		ConsoleLoader console = new ConsoleLoader();
