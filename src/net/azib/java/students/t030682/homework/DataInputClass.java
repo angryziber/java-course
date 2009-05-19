@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * 
  * @author aplotn
  */
-public class DataInputClass {
+public class DataInputClass { 
 
 	public String[] consoleReader() {
 		Scanner s = new Scanner(System.in);

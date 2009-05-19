@@ -3,7 +3,7 @@ package net.azib.java.students.t030682.homework;
 public class DecathlonResultsRecord implements Comparable<DecathlonResultsRecord>{
 
 	String name;
-	String dateOfBirth;
+	String dateOfBirth; 
 	String country;
 	double resultOf100mSprint;
 	double resultOfLongJump;

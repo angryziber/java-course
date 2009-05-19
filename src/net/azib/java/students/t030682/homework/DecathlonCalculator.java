@@ -6,14 +6,15 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.Collections;
 
+import javax.xml.transform.TransformerException;
 /**
  * MainApp
  *
  * @author aplotn
  */
-public class DecathlonCalculator {
+public class DecathlonCalculator { 
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, TransformerException {
 		
 		DataInputClass tmpInput = new DataInputClass();	
 		String [] tmpArray = new String[0];
@@ -44,10 +45,10 @@ public class DecathlonCalculator {
 		  out.csvWriter(competitionRecords,args[3]);
 	  }
 	  else if (args[2].equals("-html")) {
-		  System.out.println("html output to file " + args[3]);
+		  out.htmlWriter(out.buildDocument(competitionRecords),args[3]);
 	  }
 	  else if (args[2].equals("-xml")) {
-		  System.out.println("xml output to file " + args[3]);
+		  out.xmlWriter(out.buildDocument(competitionRecords),args[3]);
 	  }
 	  else System.out.println("Wrong output arguments");
 	}
