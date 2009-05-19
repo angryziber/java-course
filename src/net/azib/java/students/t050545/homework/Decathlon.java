@@ -2,9 +2,9 @@ package net.azib.java.students.t050545.homework;
 
 import net.azib.java.students.t050545.homework.sportman.Sportman;
 
-import java.io.IOException;
+
 import java.io.PrintWriter;
-import java.text.ParseException;
+
 
 
 /**
@@ -13,9 +13,9 @@ import java.text.ParseException;
  * @author libricon
  */
 public class Decathlon {
-	public static void main(String[] args) throws ParseException, IOException {
+	public static void main(String[] args) throws Exception {
 
-		CSVLoader loader = new CSVLoader("c:\\sport_utf8.txt");
+		SportmanLoader loader = new CSVLoader("c:\\sport_utf8.txt");
 		PrintWriter printwriter = null;
 		
         try{
@@ -29,7 +29,7 @@ public class Decathlon {
 			i = i + 2;
 		}
 		else if (args[i].equalsIgnoreCase("-console")){
-			//loader = new ConsoleLoader();
+			loader = new ConsoleLoader();
 			i++;
 		}
 		else {

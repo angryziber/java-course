@@ -11,12 +11,24 @@ import java.util.GregorianCalendar;
  */
 public class Sportman implements Comparable<Sportman> {
 
+	/**
+	 * @param score
+	 *            object with sportman's results
+	 * @param person
+	 *            object contain sportman's name and other data
+	 */
 	public Sportman(Score score, Person person) {
 		this(score.getScores(), person);
 	}
 
+	/**
+	 * @param scores
+	 *            array with all results
+	 * @param person
+	 *            object contain sportman's name and other data
+	 */
 	public Sportman(float[] scores, Person person) {
-		this.person = new Person(person.getName(),person.getCountry(),person.getBirthDay());
+		this.person = new Person(person.getName(), person.getCountry(), person.getBirthDay());
 		points = new PointSystem(scores);
 	}
 
@@ -34,6 +46,13 @@ public class Sportman implements Comparable<Sportman> {
 		return person;
 	}
 
+	/**
+	 * This Method compare 2 objects, if all field are equal, returns true
+	 * 
+	 * @param other
+	 *            The second object to compare
+	 * @return return true, if equals
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -46,20 +65,40 @@ public class Sportman implements Comparable<Sportman> {
 		return this.person.equals(p.getPerson()) && this.points.equals(p.getPoints());
 	}
 
+	/**
+	 * This function returns String, with information about the Sportman
+	 * 
+	 * @return Return name, country and birthday and results in readable form
+	 */
 	@Override
 	public String toString() {
 		return person.toString() + points.toString();
 	}
 
+	/**
+	 * This method allowed to sort Sportmans by score in TreeSet collection
+	 * 
+	 * @param o
+	 *            Second sportman
+	 * @return other.score - this.score , what gives descending order
+	 */
 	@Override
 	public int compareTo(Sportman o) {
 		Sportman man = (Sportman) o;
 		return man.getPoints().getScore() - this.getPoints().getScore();
 	}
 
+	/** person store name, country, birthday */
 	private Person person;
+	/** this member store results and points */
 	private PointSystem points;
 
+	/**
+	 * Main function, only for test purposes
+	 * 
+	 * @param args
+	 *            command line arguments
+	 */
 	public static void main(String[] args) {
 		float[] arrayScore = new float[10];
 		arrayScore[0] = 10.395f;
