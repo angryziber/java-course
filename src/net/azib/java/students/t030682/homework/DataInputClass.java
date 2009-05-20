@@ -1,27 +1,38 @@
 package net.azib.java.students.t030682.homework;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * DataInput
+ * DataInputClass is a class containing all methods for inputing Decathlon Competition information
  * 
- * @author aplotn
+ * @author t030682
  */
 public class DataInputClass { 
 
+	/**
+	 * consoleReader allows Decathlon competition data to be read from console interactively
+	 * @return String[] array containg one inputted athlete's data in each array row
+	 * @author t030682
+	 */
 	public String[] consoleReader() {
 		Scanner s = new Scanner(System.in);
 		int arraySize = 1;
 		String[] inputRecords = new String[arraySize];
 		System.out.println("DECATHLON RESULTS CONSOLE READER");
+		//while user says "y" ask for new athletes data
 		String action = "y";
 		while (action.charAt(0) == 121) {
 			inputRecords[arraySize - 1] = inputRecordFromConsole();
 			action = askFromConsole(s, "Do you want to enter more athlete's data? y/n", "[a-z&&[yn]]");
 			if (action.charAt(0) == 121) {
+				//increase array size
 				String[] tmpArray = new String[++arraySize];
 				System.arraycopy(inputRecords, 0, tmpArray, 0, inputRecords.length);
 				inputRecords = tmpArray;
@@ -30,7 +41,12 @@ public class DataInputClass {
 		return inputRecords;
 	}
 
-	public String inputRecordFromConsole() {
+	/**
+	 * This method reads one athlete's data from console
+	 * @return String containing athletes data which have been read from console
+	 * @author t030682
+	 */
+	private String inputRecordFromConsole() {
 		Scanner s = new Scanner(System.in);
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nEnter athlete's data:\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		String scannedData = askFromConsole(s, "first name:", "\\p{Lu}\\p{Ll}+");
@@ -62,10 +78,20 @@ public class DataInputClass {
 		return scannedData;
 	}
 
+	/**
+	 * This method ask some string from console and compares it to predefined string
+	 * @param s Scanner which is used to read data from console
+	 * @param message Information to be printed to console
+	 * @param pattern Regular Expresion which is being compared to inputted string
+	 * 
+	 * @return String which was read from console
+	 * @author t030682
+	 */
 	private String askFromConsole(Scanner s, String message, String pattern) {
 		String response = null;
 		while (true) {
 			try {
+				//display message, read from console and compare to regex pattern
 				System.out.print(message);
 				response = s.next(pattern);
 				break;
@@ -78,23 +104,12 @@ public class DataInputClass {
 		return response;
 	}
 
-	/*
-	public int countLinesInFile(String filename) throws IOException {
-		InputStream is = new BufferedInputStream(new FileInputStream(filename));
-		byte[] c = new byte[1024];
-		int count = 0;
-		int readChars = 0;
-		while ((readChars = is.read(c)) != -1) {
-			for (int i = 0; i < readChars; ++i) {
-				if (c[i] == '\n')
-					++count;
-			}
-		}
-		is.close();
-		return count;
-	}
-	*/
-
+	/**
+	 * csvReader reads Decathlon Competition from .csv file
+	 * @param filename File location 
+	 * @return String[] array containg one inputted athlete's data in each array row
+	 * @author t030682
+	 */
 	public String[] csvReader(String filename) throws IOException {
 		int arraySize = 0;
 		int errorLine = 0;
@@ -105,10 +120,18 @@ public class DataInputClass {
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
 				while ((strLine = br.readLine()) != null) {
+					//while file contains new lines read line, compare to regex, if ok add to array and remove unneeded symbols
 				if (Pattern.compile("(\\uFEFF)?\"\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+\",[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?) ?").matcher(strLine).matches()) {
 					strLine = strLine.replaceAll("[\"]", "");
 					strLine = strLine.replaceAll("\\uFEFF", "");
-					strLine = fixRecordFromCSVFile(strLine);
+					String[] splitRow = strLine.split(",");
+					splitRow[7] = checkMinutesAndConvertToSeconds(splitRow[7]);
+					splitRow[12] = checkMinutesAndConvertToSeconds(splitRow[12]);
+					strLine = splitRow[0];
+					for (int i = 0; i < splitRow.length - 1; i++) {
+						strLine = strLine.concat("," + splitRow[i + 1]);
+					}
+					//increase array
 					String[] tmpArray = new String[++arraySize];
 					System.arraycopy(lines, 0, tmpArray, 0, lines.length);
 					lines=tmpArray;
@@ -116,6 +139,7 @@ public class DataInputClass {
 					errorLine++;
 					}
 				else {
+					//if some row contains wrong data, dont read this row and print error
 					System.out.println("Wrong data in CSV file on line " + ++errorLine + ": " + strLine);
 				}
 			}
@@ -126,19 +150,14 @@ public class DataInputClass {
 		}
 		return lines;
 	}
-
-	public String fixRecordFromCSVFile(String rowFromFile) {
-		String[] splitRow = rowFromFile.split(",");
-		splitRow[7] = checkMinutesAndConvertToSeconds(splitRow[7]);
-		splitRow[12] = checkMinutesAndConvertToSeconds(splitRow[12]);
-		String fileRecord = splitRow[0];
-		for (int i = 0; i < splitRow.length - 1; i++) {
-			fileRecord = fileRecord.concat("," + splitRow[i + 1]);
-		}
-		return fileRecord;
-	}	
 	
-	public String checkMinutesAndConvertToSeconds(String res) {
+	/**
+	 * This method fixes time from .csv file by converting format from MM:SS.ss to SS.ss
+	 * @param rowFromFile String time result needed to be converted
+	 * @return String converted time
+	 * @author t030682
+	 */
+	private String checkMinutesAndConvertToSeconds(String res) {
 		if (res.indexOf(':') != -1) {
 			String[] splitted = res.split(":");
 			res = Double.toString(60 * Double.parseDouble(splitted[0]) + Double.parseDouble(splitted[1]));
@@ -146,6 +165,12 @@ public class DataInputClass {
 		return res;
 	}
 	
+	/**
+	 * mysqlReader reads Decathlon competition data from database <b>Needs to be implemented yet</b>
+	 * @param database Database to get data from
+	 * @return 
+	 * @author t030682
+	 */
 	public String[] mysqlReader (String database) {
 
 		/*

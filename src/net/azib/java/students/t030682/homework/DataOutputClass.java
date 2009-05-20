@@ -20,35 +20,53 @@ import org.jdom.*;
 import org.jdom.output.XMLOutputter;
 
 /**
- * DataOutputClass
+ * DataInputClass is a class containing all methods for outputting Decathlon Competition information
  * 
- * @author aplotn
+ * @author t030682
  */
 public class DataOutputClass { 
 
-	public int[] countPlaces(List<DecathlonResultsRecord> results) {
+	/**
+	 * This method is needed for counting final places based on sorted competition list
+	 * @param results Sorted List with Decathlon competitition data
+	 * @return int[] array of places
+	 * @author t030682
+	 */
+	private int[] countPlaces(List<DecathlonResultsRecord> results) {
 		int places[] = new int[results.size()];
 		int tmpPlace;
 		int numberOfSamePlaces = 0;
 		int tmpScore = 0;
-		for (DecathlonResultsRecord hehe : results) {
-			tmpPlace = (results.indexOf(hehe));
-			if (hehe.totalScore == tmpScore) {
+		for (DecathlonResultsRecord decRecord : results) {
+			tmpPlace = (results.indexOf(decRecord));
+			if (decRecord.totalScore == tmpScore) {
+				//if some athletes share scores, they share places also
 				++numberOfSamePlaces;
 				tmpPlace = tmpPlace-numberOfSamePlaces;
 			} else numberOfSamePlaces = 0;
-			places[results.indexOf(hehe)] = tmpPlace + 1;
-			tmpScore = hehe.totalScore;
+			places[results.indexOf(decRecord)] = tmpPlace + 1;
+			tmpScore = decRecord.totalScore;
 		}
 		return places;
 	}
 
+	/**
+	 * consoleWriter print final results with scores and all information to console
+	 * @param results Sorted List with Decathlon competitition data
+	 * @author t030682
+	 */
 	public void consoleWriter(List<DecathlonResultsRecord> results) {
 		System.out.println("+++++++++++++++++\nAthletes results:\n+++++++++++++++++\n");
 		for (DecathlonResultsRecord consoleResult : results) 
 			System.out.println(countPlaces(results)[results.indexOf(consoleResult)] + ":   " + consoleResult);
 	}
 
+	/**
+	 * csvWriter saves final results to some file
+	 * @param results Sorted List with Decathlon competitition data
+	 * @param filename CSV file location for saving to
+	 * @author t030682
+	 */
 	public void csvWriter(List<DecathlonResultsRecord> results, String filename) {
 		try {
 			FileWriter fstream = new FileWriter(filename);
@@ -62,13 +80,19 @@ public class DataOutputClass {
 				out.newLine();
 			}
 			out.close();
+			System.out.println("Output saved in CSV format to: " + filename);
 		}
 		catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
 	
-	
+	/**
+	 * This method build DOM document from an array list of Decathlon records
+	 * @param results Sorted List with Decathlon competitition data
+	 * @return Document DOM document
+	 * @author t030682
+	 */
 	public Document buildDocument (List<DecathlonResultsRecord> results) {
 		Element root = new Element("Decathlon");
 		Element[] athlete = new Element[countPlaces(results).length];
@@ -116,24 +140,35 @@ public class DataOutputClass {
 			addContent("\n ");
 		
 			root.addContent(athlete[results.indexOf(docResult)]);
-			//root.addContent("\n ");
 		}
 		return new Document(root);
 	}
 	
+	/**
+	 * xmlWriter saves final results from DOM document to some file
+	 * @param doc DOM Document with Decathlon competitition data
+	 * @param filename XML file location for saving to
+	 * @author t030682
+	 */
 	public void xmlWriter (Document doc, String filename) throws FileNotFoundException, IOException {
 		XMLOutputter outputter = new XMLOutputter();
 		outputter.output(doc, new FileOutputStream(filename));
+		System.out.println("Output saved in XML format to: " + filename);
 	}
 	
-	
+	/**
+	 * htmlWriter saves final results from DOM document to some file
+	 * @param doc DOM Document with Decathlon competitition data
+	 * @param filename HTML file location for saving to
+	 * @author t030682
+	 */
 	public void htmlWriter (Document doc, String filename) throws TransformerException, FileNotFoundException, IOException{
 		XMLOutputter outputter = new XMLOutputter();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		outputter.output(doc, out);
 		Transformer serializer = TransformerFactory.newInstance().newTransformer(new StreamSource(DataOutputClass.class.getResource("decathlon.xsl").toString()));
 		serializer.transform(new StreamSource(new ByteArrayInputStream(out.toByteArray())), new StreamResult(new File(filename)));
-		
+		System.out.println("Output saved in HTML format to: " + filename);
 		
 	}
 
