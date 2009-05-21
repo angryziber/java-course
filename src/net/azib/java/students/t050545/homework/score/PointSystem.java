@@ -1,5 +1,6 @@
 package net.azib.java.students.t050545.homework.score;
 
+
 /**
  * PointSystem
  * 
@@ -90,9 +91,9 @@ public class PointSystem {
 			this.c = c;
 		}
 
-		float a;
-		float b;
-		float c;
+		final float a;
+		final float b;
+		final float c;
 
 		/**
 		 * This method calculate score for discipline
@@ -106,10 +107,9 @@ public class PointSystem {
 	}
 
 	private void calculatePoints() {
-		int i = 0;
+		
 		for (Discipline dis : Discipline.values()) {
-			scores[i] = dis.returnPoints(results[i]);
-			i++;
+			scores[dis.ordinal()] = dis.returnPoints(results[dis.ordinal()]);
 		}
 	}
 
@@ -123,7 +123,7 @@ public class PointSystem {
 	 * @return the results
 	 */
 	public float[] getResults() {
-		return results;
+		return (float[])results.clone();
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class PointSystem {
 	 * @return the scores
 	 */
 	public int[] getScores() {
-		return scores;
+		return (int[])scores.clone();
 	}
 
 	private float[] results;
@@ -185,5 +185,7 @@ public class PointSystem {
 
 		PointSystem points = new PointSystem(arrayScore);
 		System.out.println(points);
+		System.exit(0);
+		
 	}
 }
