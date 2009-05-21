@@ -72,7 +72,6 @@ public class Decathlon {
         Sportman sportman;
         while((sportman = loader.nextSportman()) != null){
         	comp.addCompetitor(sportman);
-        	System.out.println(comp);
         }
         comp.sortCompetitors();
         printwriter.println(comp);

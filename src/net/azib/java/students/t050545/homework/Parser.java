@@ -5,10 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 
-
 /**
  * Parser
- *
+ * 
  * @author libricon
  */
 public class Parser {
@@ -17,56 +16,69 @@ public class Parser {
 	 * @return the same gregorian calendar
 	 * @throws ParseException in case problems with parsing, generate parse error
 	 */
-	public static GregorianCalendar toParseBirthDay(String day) throws ParseException{
+	public static GregorianCalendar toParseBirthDay(String day) throws ParseException {
 		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 		String birthDay = day;
 		GregorianCalendar birthDate = new GregorianCalendar();
 		birthDate.setTime(df.parse(birthDay));
 		return birthDate;
 	}
-	
-	/** Method check string, is string a date in format "dd.MM.yyyy"
+
+	/**
+	 * Method check string, is string a date in format "dd.MM.yyyy"
+	 * 
 	 * @param birthDay gets string with a date
 	 * @return true, if string can be parsed
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	public static boolean isValidDate(String birthDay) {
-		
+
 		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-	    
-	    /*if (birthDay.trim().length() != df.toPattern().length()){
-	        System.out.println("lenght is wrong");
-	    	return false;	
-	    }*/ 
-	    
-	    df.setLenient(false);
-	    
-	    try{
-	    	df.parse(birthDay);
-	    	return true;
-	    } catch (ParseException ex){
-	    	return false;
-	    }
-	    
-	  }
-	
-	/** Method checkes string, if a coutry, strign chould be 2 characters 
+
+		/*
+		 * if (birthDay.trim().length() != df.toPattern().length()){
+		 * System.out.println("lenght is wrong"); return false; }
+		 */
+
+		df.setLenient(false);
+
+		try {
+			df.parse(birthDay);
+			return true;
+		}
+		catch (ParseException ex) {
+			return false;
+		}
+
+	}
+
+	/**
+	 * Method checkes string, if a coutry, strign chould be 2 characters
+	 * 
 	 * @param country sportman's country in competition
 	 * @return true, if string contain 2 letters
 	 */
-	public static boolean isValidCountry(String country){
-		return Pattern.matches("[a-zA-Z][a-zA-Z]",country);
+	public static boolean isValidCountry(String country) {
+		return Pattern.matches("[a-zA-Z][a-zA-Z]", country);
 	}
-	
-	/** Method return country in UPPER case
+
+	/**
+	 * Method return country in UPPER case
+	 * 
 	 * @param input country name
 	 * @return country in UPPER case
 	 */
-	public static String addCountry(String input){
-		return input.trim().toUpperCase(); //check, is trim needed
+	public static String addCountry(String input) {
+		return input.trim().toUpperCase(); // check, is trim needed
 	}
-	
-	/** Main function
+
+	public static boolean isCorrectResult(float result) {
+		return (result > 0);
+	}
+
+	/**
+	 * Main function
+	 * 
 	 * @param args comman arguments
 	 */
 	public static void main(String[] args) {
@@ -75,6 +87,7 @@ public class Parser {
 		System.out.println(Parser.isValidDate("29.02.1986"));
 		System.out.println(Parser.isValidDate("29.02.1985"));
 		System.out.println(Parser.isValidDate("29.02.1984"));
+		System.out.println(Parser.isCorrectResult(5f));
 		System.exit(0);
 	}
 }
