@@ -10,23 +10,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.Validator;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.jdom.*;
 import org.jdom.output.XMLOutputter;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 /**
  * DataInputClass is a class containing all methods for outputting Decathlon Competition information
@@ -101,11 +100,12 @@ public class DataOutputClass {
 	 * @param results Sorted List with Decathlon competitition data
 	 * @return Document DOM document
 	 * @author t030682
+	 * @throws IOException 
 	 */
-	public Document buildDocument (List<DecathlonResultsRecord> results) {
+	public ByteArrayOutputStream buildDocument (List<DecathlonResultsRecord> results) throws IOException {
 		Element root = new Element("Decathlon");
 		Element[] athlete = new Element[countPlaces(results).length];
-		root.addNamespaceDeclaration(Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance"));
+		
 		root.addNamespaceDeclaration(Namespace.getNamespace("noNamespaceSchemaLocation","decathlon.xsd"));
 		for (DecathlonResultsRecord docResult : results) {
 			root.addContent("\n "); 
@@ -152,7 +152,11 @@ public class DataOutputClass {
 		
 			root.addContent(athlete[results.indexOf(docResult)]);
 		}
-		return new Document(root);
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		XMLOutputter outputter = new XMLOutputter();
+		outputter.output(new Document(root), out);
+		return out;
 	}
 	
 	/**
@@ -161,9 +165,8 @@ public class DataOutputClass {
 	 * @param filename XML file location for saving to
 	 * @author t030682
 	 */
-	public void xmlWriter (Document doc, String filename) throws FileNotFoundException, IOException {
-		XMLOutputter outputter = new XMLOutputter();
-		outputter.output(doc, new FileOutputStream(filename));
+	public void xmlWriter (ByteArrayOutputStream input, String filename) throws FileNotFoundException, IOException {
+		input.writeTo(new FileOutputStream(filename));
 		System.out.println("Output saved in XML format to: " + filename);
 	}
 	
@@ -173,41 +176,36 @@ public class DataOutputClass {
 	 * @param filename HTML file location for saving to
 	 * @author t030682 
 	 */
-	public void htmlWriter (Document doc, String filename) throws TransformerException, FileNotFoundException, IOException{
-		XMLOutputter outputter = new XMLOutputter();
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		outputter.output(doc, out);
+	public void htmlWriter (ByteArrayOutputStream input, String filename) throws TransformerException, FileNotFoundException, IOException{
+
 		Transformer serializer = TransformerFactory.newInstance().newTransformer(new StreamSource(DataOutputClass.class.getResource("decathlon.xsl").toString()));
-		serializer.transform(new StreamSource(new ByteArrayInputStream(out.toByteArray())), new StreamResult(new File(filename)));
-		System.out.println("Output saved inn HTML format to: " + filename);
-		
+		serializer.transform(new StreamSource(new ByteArrayInputStream(input.toByteArray())), new StreamResult(new File(filename)));
+		System.out.println("Output saved in HTML format to: " + filename);
 	} 
 	
-    public void validateXML(String filename) throws SAXException, IOException, ParserConfigurationException {
-
-        try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
+	
+    public boolean validateXML(ByteArrayOutputStream src) throws IOException, ParserConfigurationException, SAXException {
+    	boolean valid = true;
+    	try {
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			factory.setValidating(false);
 			factory.setNamespaceAware(true);
-			factory.setValidating(true);
-			String schemaSource = DataOutputClass.class.getResource("decathlon.xsd").toString();
-			Source schemaSourceSrc = new StreamSource(schemaSource);        // has various constructors to pass xsd as a file,url,stream and so on ...
-			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema schema = schemaFactory.newSchema(schemaSourceSrc);
-			
-			factory.setSchema(schema);
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = (Document) builder.parse(filename);
-			System.out.println(document);
+			SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+			factory.setSchema(schemaFactory.newSchema(new Source[] {new StreamSource(DataOutputClass.class.getResource("decathlon.xsd").toString())}));
+			SAXParser parser = factory.newSAXParser();
+			XMLReader reader = parser.getXMLReader();
+			reader.parse(new InputSource(new ByteArrayInputStream(src.toByteArray())));
+			System.out.println("XML is valid.");
 		}
-        catch (SAXException e)  
-        {  
-        e.printStackTrace();  
-        }  
-        catch (IOException e)  
-        {  
-        e.printStackTrace();  
-        }  
+    	
+    	//not catching???
+		catch (Exception e) {
+	        System.out.println("Error: XML is not valid:" + e.getMessage());
+	        valid = false;
+	        System.exit(-1);
+
+		}
+    	return valid;
         
     }
 

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:element name="Decathlon" type="athletesResults"/>
-	
 	<xs:complexType name="athletesResults">
 		<xs:sequence>
 			<xs:element name="athlete" type="athleteRecord" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
-	
 	<xs:complexType name="athleteRecord">
 		<xs:sequence>
 			<xs:element name="place" type="xs:positiveInteger"/>
@@ -26,26 +24,21 @@
 			<xs:element name="resultOfJavelinThrow" type="result"/>
 			<xs:element name="resultOf1500mRace" type="result"/>
 		   </xs:sequence>
-    </xs:complexType>   
-    
+    </xs:complexType>
     <xs:simpleType name="countryCode">
 		<xs:restriction base="xs:string">
 			<xs:pattern value="[A-Z]{2}"/>
 		</xs:restriction>
 	</xs:simpleType>
-	
 	<xs:simpleType name="birthDate">
 		<xs:restriction base="xs:string">
 			<xs:pattern value="[0-9][0-9]?.[0-9]{2}.[0-9]{4}"/>
 		</xs:restriction>
 	</xs:simpleType>
-	
 	<xs:simpleType name="result">
 		<xs:restriction base="xs:string">
 			<xs:pattern value="([0-9]?[0-9]:)?[0-9]+.?[0-9]?[0-9]?">
 		</xs:pattern>
 		</xs:restriction>		
 	</xs:simpleType>
-
-
 </xs:schema>
