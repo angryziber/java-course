@@ -15,7 +15,7 @@ public class DecathlonResultsRecord implements Comparable<DecathlonResultsRecord
 	double resultOfHighJump;
 	double resultOf400mSprint;
 	double resultOf110mHurdles;
-	double resultOfDiscusThrow;
+	double resultOfDiscusThrow; 
 	double resultOfPoleVault;
 	double resultOfJavelinThrow;
 	double resultOf1500Race;

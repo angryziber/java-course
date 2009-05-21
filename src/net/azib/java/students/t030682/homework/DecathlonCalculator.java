@@ -6,15 +6,18 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.Collections;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 /**
  * MainApp
  *
  * @author aplotn
  */
-public class DecathlonCalculator { 
+public class DecathlonCalculator {  
 
-	public static void main(String[] args) throws IOException, TransformerException {
+	public static void main(String[] args) throws IOException, TransformerException, SAXException, ParserConfigurationException {
 		
 		DataInputClass tmpInput = new DataInputClass();	
 		String [] tmpArray = new String[0];
@@ -56,7 +59,8 @@ public class DecathlonCalculator {
 		  out.csvWriter(competitionRecords,outputfile);
 	  }
 	  else if (args[2].equals("-html")) {
-		  out.htmlWriter(out.buildDocument(competitionRecords),outputfile);
+		  //out.htmlWriter(out.buildDocument(competitionRecords),outputfile);
+		  out.validateXML(outputfile);
 	  }
 	  else if (args[2].equals("-xml")) {
 		  out.xmlWriter(out.buildDocument(competitionRecords),outputfile);

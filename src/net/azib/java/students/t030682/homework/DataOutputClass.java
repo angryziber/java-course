@@ -10,14 +10,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.Validator;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.jdom.*;
 import org.jdom.output.XMLOutputter;
+import org.xml.sax.SAXException;
 
 /**
  * DataInputClass is a class containing all methods for outputting Decathlon Competition information
@@ -160,7 +169,7 @@ public class DataOutputClass {
 	 * htmlWriter saves final results from DOM document to some file
 	 * @param doc DOM Document with Decathlon competitition data
 	 * @param filename HTML file location for saving to
-	 * @author t030682
+	 * @author t030682 
 	 */
 	public void htmlWriter (Document doc, String filename) throws TransformerException, FileNotFoundException, IOException{
 		XMLOutputter outputter = new XMLOutputter();
@@ -168,8 +177,37 @@ public class DataOutputClass {
 		outputter.output(doc, out);
 		Transformer serializer = TransformerFactory.newInstance().newTransformer(new StreamSource(DataOutputClass.class.getResource("decathlon.xsl").toString()));
 		serializer.transform(new StreamSource(new ByteArrayInputStream(out.toByteArray())), new StreamResult(new File(filename)));
-		System.out.println("Output saved in HTML format to: " + filename);
+		System.out.println("Output saved inn HTML format to: " + filename);
 		
-	}
+	} 
+	
+    public void validateXML(String filename) throws SAXException, IOException, ParserConfigurationException {
+
+        //String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
+        try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			factory.setNamespaceAware(true);
+			factory.setValidating(true);
+
+			String schemaSource = DataOutputClass.class.getResource("decathlon.xsl").toString();
+			Source schemaSourceSrc = new StreamSource(schemaSource);        // has various constructors to pass xsd as a file,url,stream and so on ...
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema schema = schemaFactory.newSchema(schemaSourceSrc);
+			
+			factory.setSchema(schema);
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = (Document) builder.parse(filename);
+			System.out.println(document);
+		}
+        catch (SAXException e)  
+        {  
+        e.printStackTrace();  
+        }  
+        catch (IOException e)  
+        {  
+        e.printStackTrace();  
+        }  
+        
+    }
 
 }

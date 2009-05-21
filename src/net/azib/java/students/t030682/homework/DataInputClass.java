@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * 
  * @author t030682
  */
-public class DataInputClass { 
+public class DataInputClass {  
 
 	/**
 	 * consoleReader allows Decathlon competition data to be read from console interactively
