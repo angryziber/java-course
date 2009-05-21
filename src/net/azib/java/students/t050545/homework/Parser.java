@@ -28,23 +28,26 @@ public class Parser {
 	/** Method check string, is string a date in format "dd.MM.yyyy"
 	 * @param birthDay gets string with a date
 	 * @return true, if string can be parsed
+	 * @throws ParseException 
 	 */
-	public static boolean isValidDate(String birthDay){
+	public static boolean isValidDate(String birthDay) {
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 	    
-	    if (birthDay.trim().length() != dateFormat.toPattern().length())
-	      return false;
-
-	    dateFormat.setLenient(false);
+	    /*if (birthDay.trim().length() != df.toPattern().length()){
+	        System.out.println("lenght is wrong");
+	    	return false;	
+	    }*/ 
 	    
-	    try {
-	      dateFormat.parse(birthDay.trim());
+	    df.setLenient(false);
+	    
+	    try{
+	    	df.parse(birthDay);
+	    	return true;
+	    } catch (ParseException ex){
+	    	return false;
 	    }
-	    catch (ParseException pe) {
-	      return false;
-	    }
-	    return true;
+	    
 	  }
 	
 	/** Method checkes string, if a coutry, strign chould be 2 characters 
@@ -68,7 +71,7 @@ public class Parser {
 	 */
 	public static void main(String[] args) {
 		System.out.println(Parser.isValidDate("29.04.1987"));
-		System.out.println(Parser.isValidDate("29.02.1987"));
+		System.out.println(Parser.isValidDate("01.01.1984"));
 		System.out.println(Parser.isValidDate("29.02.1986"));
 		System.out.println(Parser.isValidDate("29.02.1985"));
 		System.out.println(Parser.isValidDate("29.02.1984"));

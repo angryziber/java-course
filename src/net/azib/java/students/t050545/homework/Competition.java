@@ -24,6 +24,9 @@ public class Competition {
 		Collections.sort(competitors);
 	}
 
+	public void sortPlaces(){
+		
+	}
 	@Override
 	public String toString() {
 		return competitors.toString();
@@ -49,6 +52,10 @@ public class Competition {
 			this.sportman = sportman;
 		}
 
+		@Override
+		public String toString(){
+			return placeNum + "\n" + sportman;
+		}
 		String placeNum;
 		Sportman sportman;
 

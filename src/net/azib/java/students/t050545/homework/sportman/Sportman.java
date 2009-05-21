@@ -107,5 +107,6 @@ public class Sportman implements Comparable<Sportman> {
 
 		Sportman sportman = new Sportman(arrayScore, new Person("Kirill", "RU", new GregorianCalendar(1987, 4, 29)));
 		System.out.println(sportman);
+		System.exit(0);
 	}
 }

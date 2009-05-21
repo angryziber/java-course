@@ -4,6 +4,7 @@ import net.azib.java.students.t050545.homework.sportman.Sportman;
 
 
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 
 
@@ -21,6 +22,7 @@ public class Decathlon {
 
 		SportmanLoader loader = new CSVLoader("c:\\sport_utf8.txt");
 		PrintWriter printwriter = null;
+		System.out.println(Arrays.deepToString(args));
 		
         try{
 		int i = 0;
@@ -73,12 +75,13 @@ public class Decathlon {
         	System.out.println(comp);
         }
         comp.sortCompetitors();
-        //printwriter.println(comp);
+        printwriter.println(comp);
         
 		
 		
 		printwriter.close();
 		System.out.println("END");
 		System.exit(0);
+		
 	}
 }

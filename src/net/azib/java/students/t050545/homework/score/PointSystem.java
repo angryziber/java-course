@@ -1,16 +1,5 @@
 package net.azib.java.students.t050545.homework.score;
 
-import net.azib.java.students.t050545.homework.score.discipline.DiscusThrow;
-import net.azib.java.students.t050545.homework.score.discipline.HighJump;
-import net.azib.java.students.t050545.homework.score.discipline.Hurdles110m;
-import net.azib.java.students.t050545.homework.score.discipline.JavelinThrow;
-import net.azib.java.students.t050545.homework.score.discipline.Jug100m;
-import net.azib.java.students.t050545.homework.score.discipline.Jug1500m;
-import net.azib.java.students.t050545.homework.score.discipline.Jug400m;
-import net.azib.java.students.t050545.homework.score.discipline.LongJump;
-import net.azib.java.students.t050545.homework.score.discipline.PoleVault;
-import net.azib.java.students.t050545.homework.score.discipline.ShotPut;
-
 /**
  * PointSystem
  * 
@@ -24,23 +13,104 @@ public class PointSystem {
 		calculatePoints();
 		calculatePointForTrack();
 	}
-	
-	public PointSystem(Score score){
+
+	public PointSystem(Score score) {
 		this(score.getScores());
-		
+
+	}
+
+	public enum Discipline {
+
+		Jug100m(25.4347f, 18f, 1.81f) {
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((b - result), c));
+			}
+
+		},
+		LongJump(0.14354f, 220f, 1.4f) {
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((100 * result - b), c));
+			}
+
+		},
+		ShotPut(51.39f, 1.5f, 1.05f) {
+
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((result - b), c));
+			}
+
+		},
+		HighJump(0.8465f, 75f, 1.42f) {
+
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((100 * result - b), c));
+			}
+
+		},
+		Jug400m(1.53775f, 82f, 1.81f) {
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((b - result), c));
+			}
+
+		},
+		Hurdles110m(5.74352f, 28.5f, 1.92f) {
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((b - result), c));
+			}
+
+		},
+		DiscusThrow(12.91f, 4f, 1.1f) {
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((result - b), c));
+			}
+
+		},
+		PoleVault(0.2797f, 100f, 1.35f) {
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((100 * result - b), c));
+			}
+
+		},
+		JavelinThrow(10.14f, 7f, 1.08f) {
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((result - b), c));
+			}
+
+		},
+		Jug1500m(0.03768f, 480f, 1.85f) {
+			int returnPoints(float result) {
+				return (int) Math.round(a * Math.pow((b - result), c));
+			}
+
+		};
+
+		Discipline(float a, float b, float c) {
+			this.a = a;
+			this.b = b;
+			this.c = c;
+		}
+
+		float a;
+		float b;
+		float c;
+
+		/**
+		 * This method calculate score for discipline
+		 * 
+		 * @param result
+		 *            Sportman's result in seconds, meters.... depend on
+		 *            descipline
+		 * @return score points according to results
+		 */
+		abstract int returnPoints(float result);
 	}
 
 	private void calculatePoints() {
-		scores[0] = Jug100m.returnPoints(results[0]);
-		scores[1] = LongJump.returnPoints(results[1]);
-		scores[2] = ShotPut.returnPoints(results[2]);
-		scores[3] = HighJump.returnPoints(results[3]);
-		scores[4] = Jug400m.returnPoints(results[4]);
-		scores[5] = Hurdles110m.returnPoints(results[5]);
-		scores[6] = DiscusThrow.returnPoints(results[6]);
-		scores[7] = PoleVault.returnPoints(results[7]);
-		scores[8] = JavelinThrow.returnPoints(results[8]);
-		scores[9] = Jug1500m.returnPoints(results[9]);
+		int i = 0;
+		for (Discipline dis : Discipline.values()) {
+			scores[i] = dis.returnPoints(results[i]);
+			i++;
+		}
 	}
 
 	private int calculatePointForTrack() {
@@ -95,11 +165,10 @@ public class PointSystem {
 		for (int i : scores)
 			buffer.append(i + "\t");
 		buffer.append("\n-----------------------------------------------------------------------------\n");
-		buffer.append("Total score: " + score +"\n\n");
+		buffer.append("Total score: " + score + "\n\n");
 		return buffer.toString();
 	}
 
-	
 	public static void main(String[] args) {
 
 		float[] arrayScore = new float[10];
@@ -118,6 +187,3 @@ public class PointSystem {
 		System.out.println(points);
 	}
 }
-
-
-

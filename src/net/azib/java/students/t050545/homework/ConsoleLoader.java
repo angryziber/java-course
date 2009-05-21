@@ -25,6 +25,7 @@ public class ConsoleLoader implements SportmanLoader {
 		String name;
 		String country;
 		String birthDay;
+		Float[] results = new Float[10];
 
 		System.out.println("Sportman's name:");
 		name = scanner.next();
@@ -41,8 +42,9 @@ public class ConsoleLoader implements SportmanLoader {
 			birthDay = scanner.next();
 		}
 		while (!Parser.isValidDate(birthDay));
-
 		GregorianCalendar birthDate = Parser.toParseBirthDay(birthDay);
+		
+		
 		Person person = new Person(name, country, birthDate);
 
 		return null;// new Sportman(scores, person);
@@ -54,7 +56,13 @@ public class ConsoleLoader implements SportmanLoader {
 	 * @throws ParseException appear when string format is incorrect
 	 */
 	public static void main(String[] args) throws ParseException {
-		ConsoleLoader console = new ConsoleLoader();
-		console.nextSportman();
+		try{
+			ConsoleLoader console = new ConsoleLoader();
+			console.nextSportman();
+			System.exit(0);
+		}catch(Exception e){
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
 }
