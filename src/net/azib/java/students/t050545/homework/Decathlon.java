@@ -73,7 +73,7 @@ public class Decathlon {
         while((sportman = loader.nextSportman()) != null){
         	comp.addCompetitor(sportman);
         }
-        comp.sortCompetitors();
+        comp.sortPlaces();
         printwriter.println(comp);
         
 		
