@@ -21,7 +21,9 @@ public class DecathlonCalculator {
 		
 		DataInputClass tmpInput = new DataInputClass();	
 		String [] tmpArray = new String[0];
-		String outputfile=args[2];
+		String outputfile=null;
+		if (args.length!=0) {
+		outputfile=args[2];
 
 		//input data from source defined by arguments
 		if (Pattern.compile("-console").matcher(args[0]).matches()) {
@@ -40,7 +42,10 @@ public class DecathlonCalculator {
 			System.out.println("Wrong input arguments\nUsage:\nDecathlonCalculator -console|-csv filename|-db dbname -console|-csv filename|-xml filename|-html filename");
 			System.exit(-1);
 			}
-		
+		} else {
+			System.out.println("Error: No arguments!!");
+			System.exit(-1);
+		}
 		
 		//from athletes data form a collection and sort it
 		List<DecathlonResultsRecord> competitionRecords = new ArrayList<DecathlonResultsRecord>();
@@ -60,11 +65,11 @@ public class DecathlonCalculator {
 	  }
 	  else if (args[2].equals("-html")) {
 		  //out.htmlWriter(out.buildDocument(competitionRecords),outputfile);
-		  out.validateXML(outputfile);
+		  out.validateXML("c:/xml.xml");
 	  }
 	  else if (args[2].equals("-xml")) {
 		  out.xmlWriter(out.buildDocument(competitionRecords),outputfile);
-	  }
+	  } 
 	  else {
 		  System.out.println("Wrong output arguments");
 		  System.out.println("Wrong input arguments\nUsage:\nDecathlonCalculator -console|-csv filename|-db dbname -console|-csv filename|-xml filename|-html filename");

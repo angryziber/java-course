@@ -16,7 +16,7 @@
 			<xs:element name="dateOfBirth" type="birthDate"/>
 			<xs:element name="country" type="countryCode"/>
 			<xs:element name="resultOf100mSprint" type="result"/>
-			<xs:element name="resultOfLonhJump" type="result"/>
+			<xs:element name="resultOfLongJump" type="result"/>
 			<xs:element name="resultOfShotPut" type="result"/>
 			<xs:element name="resultOfHighJump" type="result"/>
 			<xs:element name="resultOf400mSprint" type="result"/>
@@ -36,7 +36,7 @@
 	
 	<xs:simpleType name="birthDate">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[0-9]{2}.[0-9]{2}.[0-9]{4}"/>
+			<xs:pattern value="[0-9][0-9]?.[0-9]{2}.[0-9]{4}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	

@@ -105,8 +105,10 @@ public class DataOutputClass {
 	public Document buildDocument (List<DecathlonResultsRecord> results) {
 		Element root = new Element("Decathlon");
 		Element[] athlete = new Element[countPlaces(results).length];
+		root.addNamespaceDeclaration(Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance"));
+		root.addNamespaceDeclaration(Namespace.getNamespace("noNamespaceSchemaLocation","decathlon.xsd"));
 		for (DecathlonResultsRecord docResult : results) {
-			root.addContent("\n ");
+			root.addContent("\n "); 
 			athlete[results.indexOf(docResult)] = new Element("athlete");
 			
 			Element place = new Element("place");
@@ -116,7 +118,7 @@ public class DataOutputClass {
 			Element name = new Element("name");
 			name.addContent(docResult.name);
 			Element birthdate = new Element("dateOfBirth");
-			birthdate.addContent(docResult.dateOfBirth);
+			birthdate.addContent(docResult.dateOfBirth); 
 			Element country = new Element("country");
 			country.addContent(docResult.country);
 			Element resultOf100mSprint = new Element("resultOf100mSprint");
@@ -127,7 +129,7 @@ public class DataOutputClass {
 			resultOfShotPut.addContent(Double.toString(docResult.resultOfShotPut));
 			Element resultOfHighJump = new Element("resultOfHighJump");
 			resultOfHighJump.addContent(Double.toString(docResult.resultOfHighJump));
-			Element resultOf400mSprint = new Element("resultOf400mSprintp");
+			Element resultOf400mSprint = new Element("resultOf400mSprint");
 			resultOf400mSprint.addContent(Double.toString(docResult.resultOf400mSprint));
 			Element resultOf110mHurdles = new Element("resultOf110mHurdles");
 			resultOf110mHurdles.addContent(Double.toString(docResult.resultOf110mHurdles));
@@ -183,13 +185,12 @@ public class DataOutputClass {
 	
     public void validateXML(String filename) throws SAXException, IOException, ParserConfigurationException {
 
-        //String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
         try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
 			factory.setNamespaceAware(true);
 			factory.setValidating(true);
-
-			String schemaSource = DataOutputClass.class.getResource("decathlon.xsl").toString();
+			String schemaSource = DataOutputClass.class.getResource("decathlon.xsd").toString();
 			Source schemaSourceSrc = new StreamSource(schemaSource);        // has various constructors to pass xsd as a file,url,stream and so on ...
 			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			Schema schema = schemaFactory.newSchema(schemaSourceSrc);
