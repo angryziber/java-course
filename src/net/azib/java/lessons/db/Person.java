@@ -30,6 +30,11 @@ public class Person {
 	
 	public Person() {
 	}
+	
+	public Person(int id, Name name, int age, Sex sex) {
+		this(name, age, sex);
+		this.id = id;
+	}
 
 	public Person(Name name, int age, Sex sex) {
 		this.name = name;

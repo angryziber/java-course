@@ -22,20 +22,33 @@ public class SQLInjectionDemo {
 		
 		// malicious user enters
 		String name = "abc1";
-		String password = "123";
+		String password = "' or 1 = 1 --";
 		
 		System.out.println("SQL Injection try:");
-		ResultSet rs = stmt.executeQuery("select 1 from users where id = '" + name + "' and password = '" + password + "'");
+		ResultSet rs = stmt.executeQuery("select * from users where id = '" + name + "' and password = '" + password + "'");
+		printLoginResult(rs);
+		
+		System.out.println("SQL Injection immune code:");
+		PreparedStatement pstmt = conn.prepareStatement("select * from users where id = ? and password = ?");
+		pstmt.setString(1, name);
+		pstmt.setString(2, password);
+		rs = pstmt.executeQuery();
+		printLoginResult(rs);
+
+		conn.close();
+	}
+
+	/**
+	 * @param rs
+	 * @throws SQLException
+	 */
+	private static void printLoginResult(ResultSet rs) throws SQLException {
 		if (rs.next()) {
 			System.out.println("Login OK!");
 		}
 		else {
 			System.out.println("Login failed!");
 		}
-		
-		// TODO: avoid using PreparedStatement
-
-		conn.close();
 	}
 }
 

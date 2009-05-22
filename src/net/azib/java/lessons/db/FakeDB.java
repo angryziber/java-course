@@ -13,12 +13,16 @@ import java.sql.Statement;
 public class FakeDB {
 
 	public void prepare() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
+		Connection conn = openConnection();
 		Statement stmt = conn.createStatement();
 		stmt.execute("create table persons (id integer, name varchar, age integer, sex char)");
 		stmt.execute("insert into persons values (1, 'John Doe', 25, 'M')");
 		stmt.execute("insert into persons values (2, 'Jaan Tamm', 43, 'M')");
 		conn.close();
+	}
+
+	static Connection openConnection() throws SQLException {
+		return DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
 	}
 
 }
