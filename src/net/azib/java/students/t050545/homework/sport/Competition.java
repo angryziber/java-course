@@ -62,10 +62,10 @@ public class Competition {
 
 			String place;
 			if (i != (j - 1)) {
-				place = "[" + i + "-" + (j - 1) + "]";
+				place = "[" + (i+1) + "-" + j + "]";
 			}
 			else {
-				place = "[" + i + "]";
+				place = "[" + (i+1) + "]";
 			}
 
 			for (int e = i; e <= j - 1; e++) {
