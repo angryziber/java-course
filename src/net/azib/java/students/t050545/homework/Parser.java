@@ -29,7 +29,6 @@ public class Parser {
 	 * 
 	 * @param birthDay gets string with a date
 	 * @return true, if string can be parsed
-	 * @throws ParseException
 	 */
 	public static boolean isValidDate(String birthDay) {
 
@@ -72,6 +71,10 @@ public class Parser {
 		return input.trim().toUpperCase(); // check, is trim needed
 	}
 
+	/** Method check result 
+	 * @param result
+	 * @return true if value > 0
+	 */
 	public static boolean isCorrectResult(float result) {
 		return (result > 0);
 	}
