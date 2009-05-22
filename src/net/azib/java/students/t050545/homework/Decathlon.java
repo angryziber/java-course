@@ -1,6 +1,10 @@
 package net.azib.java.students.t050545.homework;
 
-import net.azib.java.students.t050545.homework.sportman.Sportman;
+import net.azib.java.students.t050545.homework.loaders.CSVLoader;
+import net.azib.java.students.t050545.homework.loaders.ConsoleLoader;
+import net.azib.java.students.t050545.homework.loaders.SportmanLoader;
+import net.azib.java.students.t050545.homework.sport.Competition;
+import net.azib.java.students.t050545.homework.sport.Sportman;
 
 
 import java.io.PrintWriter;
