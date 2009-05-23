@@ -89,8 +89,6 @@ public class Competition {
 			str.append(pl);
 		}
 		return str.toString();
-		// return Arrays.deepToString(tableScore);
-		// return competitors.toString();
 	}
 
 	/**
@@ -125,7 +123,7 @@ public class Competition {
 	 * @throws Exception
 	 *             all kind of exeption's
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args){
 		try {
 			Competition comp = new Competition("MEGA CUP ", 010101);
 			SportmanLoader loader = new CSVLoader("c:\\sport_utf8.txt");

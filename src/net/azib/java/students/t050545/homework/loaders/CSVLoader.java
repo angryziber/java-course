@@ -1,6 +1,5 @@
 package net.azib.java.students.t050545.homework.loaders;
 
-import net.azib.java.students.t050545.homework.Parser;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Sportman;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
@@ -18,7 +17,7 @@ import java.util.GregorianCalendar;
  * 
  * @author libricon
  */
-public class CSVLoader implements SportmanLoader {
+public class CSVLoader extends DataChecker implements SportmanLoader {
 
 	/**
 	 * @param file
@@ -51,7 +50,7 @@ public class CSVLoader implements SportmanLoader {
 	 */
 	public Sportman nextSportman() throws IOException, ParseException {
 		String line = reader.readLine();
-
+		//System.out.println(line);
 		if (line != null && line.length() != 0) {
 
 			String name;
@@ -62,15 +61,15 @@ public class CSVLoader implements SportmanLoader {
 			arrayOfData[0] = arrayOfData[0].replace("\"", "");
 			name = arrayOfData[0];
 
-			if (Parser.isValidDate(arrayOfData[1])) {
-				birthDate = Parser.toParseBirthDay(arrayOfData[1]);
+			if (isValidDate(arrayOfData[1])) {
+				birthDate = toParseBirthDay(arrayOfData[1]);
 			}
 			else {
 				throw new ParseException("COUNTRY DATE\n"+line, 0);
 			}
 
-			if (Parser.isValidCountry(arrayOfData[2])) {
-				country = Parser.addCountry(arrayOfData[2]);
+			if (isValidCountry(arrayOfData[2])) {
+				country = addCountry(arrayOfData[2]);
 			}
 			else {
 				throw new ParseException("COUNTRY WRONG\n"+line, 0);
@@ -94,7 +93,7 @@ public class CSVLoader implements SportmanLoader {
 				else
 					resultTable[dis.ordinal()] = Float.parseFloat(split[0]) * 60f + Float.parseFloat(split[1]);
 
-				if (!Parser.isCorrectResult(resultTable[dis.ordinal()]))
+				if (!isCorrectResult(resultTable[dis.ordinal()]))
 					throw new ParseException("RESULT IS NEGATIVE, IT'S INCORRECT\n"+line, 0);
 
 			}
@@ -112,14 +111,9 @@ public class CSVLoader implements SportmanLoader {
 	private BufferedReader reader;
 
 	/**
-	 * @param args
-	 *            command line arguments
-	 * @throws IOException
-	 *             this exception throw problems with files
-	 * @throws ParseException
-	 *             appear when string format is incorrect
+	 * @param args command line arguments
 	 */
-	public static void main(String[] args) throws IOException, ParseException {
+	public static void main(String[] args){
 		try {
 			CSVLoader loader = new CSVLoader("c:\\sport_utf8.txt");
 			Sportman sportman;
@@ -129,7 +123,7 @@ public class CSVLoader implements SportmanLoader {
 			System.out.println("ALL");
 			System.exit(0);
 		}
-		catch (ParseException pe) {
+		catch (Exception pe) {
 			pe.printStackTrace();
 			pe.getMessage();
 			System.exit(1);

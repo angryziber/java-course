@@ -75,13 +75,13 @@ public class Decathlon {
         Competition comp = new Competition("Mega cup", 100011);
         Sportman sportman;
         while((sportman = loader.nextSportman()) != null){
+        	//System.out.println(sportman);
         	comp.addCompetitor(sportman);
+        	
         }
         comp.sortPlaces();
+        //System.out.println(comp);
         printwriter.println(comp);
-        
-		
-		
 		printwriter.close();
 		System.out.println("END");
 		System.exit(0);

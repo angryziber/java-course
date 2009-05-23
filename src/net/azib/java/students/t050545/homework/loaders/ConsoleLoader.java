@@ -1,6 +1,5 @@
 package net.azib.java.students.t050545.homework.loaders;
 
-import net.azib.java.students.t050545.homework.Parser;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.PointSystem;
 import net.azib.java.students.t050545.homework.sport.Sportman;
@@ -15,12 +14,11 @@ import java.util.Scanner;
  * 
  * @author libricon
  */
-public class ConsoleLoader implements SportmanLoader {
+public class ConsoleLoader extends DataChecker implements SportmanLoader {
 
 	/**
 	 * @return Sportman object or null, if no more
-	 * @throws ParseException
-	 *             exeption, if input is wrong
+	 * @throws ParseException exeption, if input is wrong
 	 */
 	public Sportman nextSportman() throws ParseException {
 		Scanner scanner = new Scanner(System.in);
@@ -36,17 +34,17 @@ public class ConsoleLoader implements SportmanLoader {
 
 		do {
 			System.out.print("Country: ");
-			country = Parser.addCountry(scanner.next());
+			country = addCountry(scanner.next());
 		}
-		while (!Parser.isValidCountry(country));
+		while (isValidCountry(country));
 		
 
 		do {
 			System.out.print("Please enter a birthDay: ");
 			birthDay = scanner.next();
 		}
-		while (!Parser.isValidDate(birthDay));
-		GregorianCalendar birthDate = Parser.toParseBirthDay(birthDay);
+		while (isValidDate(birthDay));
+		GregorianCalendar birthDate = toParseBirthDay(birthDay);
 		
 		System.out.println("Now enter results, or -1 to finish");
 		
@@ -62,7 +60,7 @@ public class ConsoleLoader implements SportmanLoader {
 					scanner.next();
 				}
 					
-			}while(!Parser.isCorrectResult(number));
+			}while(!isCorrectResult(number));
 			results[dis.ordinal()] = number;
 		}
 		
@@ -71,12 +69,9 @@ public class ConsoleLoader implements SportmanLoader {
 	}
 
 	/**
-	 * @param args
-	 *            command line arguments
-	 * @throws ParseException
-	 *             appear when string format is incorrect
+	 * @param args command line arguments
 	 */
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args){
 		try {
 			ConsoleLoader console = new ConsoleLoader();
 			System.out.println(console.nextSportman());

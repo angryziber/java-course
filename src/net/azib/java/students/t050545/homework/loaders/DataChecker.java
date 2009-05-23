@@ -1,4 +1,4 @@
-package net.azib.java.students.t050545.homework;
+package net.azib.java.students.t050545.homework.loaders;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,13 +10,13 @@ import java.util.regex.Pattern;
  * 
  * @author libricon
  */
-public class Parser {
+public class DataChecker {
 	/**
 	 * @param day String with date in format "dd.MM.yyyy"
 	 * @return the same gregorian calendar
 	 * @throws ParseException in case problems with parsing, generate parse error
 	 */
-	public static GregorianCalendar toParseBirthDay(String day) throws ParseException {
+	public GregorianCalendar toParseBirthDay(String day) throws ParseException {
 		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 		String birthDay = day;
 		GregorianCalendar birthDate = new GregorianCalendar();
@@ -30,7 +30,7 @@ public class Parser {
 	 * @param birthDay gets string with a date
 	 * @return true, if string can be parsed
 	 */
-	public static boolean isValidDate(String birthDay) {
+	public boolean isValidDate(String birthDay) {
 
 		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -57,7 +57,7 @@ public class Parser {
 	 * @param country sportman's country in competition
 	 * @return true, if string contain 2 letters
 	 */
-	public static boolean isValidCountry(String country) {
+	public boolean isValidCountry(String country) {
 		return Pattern.matches("[a-zA-Z][a-zA-Z]", country);
 	}
 
@@ -67,7 +67,7 @@ public class Parser {
 	 * @param input country name
 	 * @return country in UPPER case
 	 */
-	public static String addCountry(String input) {
+	public String addCountry(String input) {
 		return input.trim().toUpperCase(); // check, is trim needed
 	}
 
@@ -75,7 +75,7 @@ public class Parser {
 	 * @param result
 	 * @return true if value > 0
 	 */
-	public static boolean isCorrectResult(float result) {
+	public boolean isCorrectResult(float result) {
 		return (result > 0);
 	}
 
@@ -85,12 +85,13 @@ public class Parser {
 	 * @param args comman arguments
 	 */
 	public static void main(String[] args) {
-		System.out.println(Parser.isValidDate("29.04.1987"));
-		System.out.println(Parser.isValidDate("01.01.1984"));
-		System.out.println(Parser.isValidDate("29.02.1986"));
-		System.out.println(Parser.isValidDate("29.02.1985"));
-		System.out.println(Parser.isValidDate("29.02.1984"));
-		System.out.println(Parser.isCorrectResult(5f));
+		DataChecker datachecker = new DataChecker();
+		System.out.println(datachecker.isValidDate("29.04.1987"));
+		System.out.println(datachecker.isValidDate("01.01.1984"));
+		System.out.println(datachecker.isValidDate("29.02.1986"));
+		System.out.println(datachecker.isValidDate("29.02.1985"));
+		System.out.println(datachecker.isValidDate("29.02.1984"));
+		System.out.println(datachecker.isCorrectResult(5f));
 		System.exit(0);
 	}
 }
