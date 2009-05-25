@@ -1,6 +1,7 @@
 package net.azib.java.students.t030682.homework;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ import org.xml.sax.SAXException;
  */
 public class DecathlonCalculator {
 
-	public static void main(String[] args) throws IOException, TransformerException, SAXException, ParserConfigurationException {
+	public static void main(String[] args) throws IOException, TransformerException, SAXException, ParserConfigurationException, SQLException {
 
 		DataInputClass tmpInput = new DataInputClass();
 		String[] tmpArray = new String[0];
@@ -36,7 +37,7 @@ public class DecathlonCalculator {
 				outputfile = args[3];
 			}
 			else if (args[0].equals("-db")) {
-				System.out.println("mysql input from database" + args[1]);
+				tmpArray = tmpInput.mysqlReader(args[1]);
 				outputfile = args[3];
 			}
 			else {
@@ -63,6 +64,7 @@ public class DecathlonCalculator {
 		if (args[2].equals("-console")) {
 			out.consoleWriter(competitionRecords);
 		}
+
 		else if (args[2].equals("-csv")) {
 			out.csvWriter(competitionRecords, outputfile);
 		}

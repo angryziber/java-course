@@ -5,20 +5,30 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * DataInputClass is a class containing all methods for inputing Decathlon Competition information
+ * DataInputClass is a class containing all methods for inputing Decathlon
+ * Competition information
  * 
  * @author t030682
  */
-public class DataInputClass {  
+public class DataInputClass {
 
 	/**
-	 * consoleReader allows Decathlon competition data to be read from console interactively
-	 * @return String[] array containg one inputted athlete's data in each array row
+	 * consoleReader allows Decathlon competition data to be read from console
+	 * interactively
+	 * 
+	 * @return String[] array containg one inputted athlete's data in each array
+	 *         row
 	 * @author t030682
 	 */
 	public String[] consoleReader() {
@@ -26,13 +36,13 @@ public class DataInputClass {
 		int arraySize = 1;
 		String[] inputRecords = new String[arraySize];
 		System.out.println("DECATHLON RESULTS CONSOLE READER");
-		//while user says "y" ask for new athletes data
+		// while user says "y" ask for new athletes data
 		String action = "y";
 		while (action.charAt(0) == 121) {
 			inputRecords[arraySize - 1] = inputRecordFromConsole();
 			action = askFromConsole(s, "Do you want to enter more athlete's data? y/n", "[a-z&&[yn]]");
 			if (action.charAt(0) == 121) {
-				//increase array size
+				// increase array size
 				String[] tmpArray = new String[++arraySize];
 				System.arraycopy(inputRecords, 0, tmpArray, 0, inputRecords.length);
 				inputRecords = tmpArray;
@@ -43,6 +53,7 @@ public class DataInputClass {
 
 	/**
 	 * This method reads one athlete's data from console
+	 * 
 	 * @return String containing athletes data which have been read from console
 	 * @author t030682
 	 */
@@ -79,10 +90,15 @@ public class DataInputClass {
 	}
 
 	/**
-	 * This method ask some string from console and compares it to predefined string
-	 * @param s Scanner which is used to read data from console
-	 * @param message Information to be printed to console
-	 * @param pattern Regular Expresion which is being compared to inputted string
+	 * This method ask some string from console and compares it to predefined
+	 * string
+	 * 
+	 * @param s
+	 *            Scanner which is used to read data from console
+	 * @param message
+	 *            Information to be printed to console
+	 * @param pattern
+	 *            Regular Expresion which is being compared to inputted string
 	 * 
 	 * @return String which was read from console
 	 * @author t030682
@@ -91,7 +107,8 @@ public class DataInputClass {
 		String response = null;
 		while (true) {
 			try {
-				//display message, read from console and compare to regex pattern
+				// display message, read from console and compare to regex
+				// pattern
 				System.out.print(message);
 				response = s.next(pattern);
 				break;
@@ -106,8 +123,11 @@ public class DataInputClass {
 
 	/**
 	 * csvReader reads Decathlon Competition from .csv file
-	 * @param filename File location 
-	 * @return String[] array containg one inputted athlete's data in each array row
+	 * 
+	 * @param filename
+	 *            File location
+	 * @return String[] array containg one inputted athlete's data in each array
+	 *         row
 	 * @author t030682
 	 */
 	public String[] csvReader(String filename) throws IOException {
@@ -119,9 +139,13 @@ public class DataInputClass {
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
-				while ((strLine = br.readLine()) != null) {
-					//while file contains new lines read line, compare to regex, if ok add to array and remove unneeded symbols
-				if (Pattern.compile("(\\uFEFF)?\"\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+\",[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?) ?").matcher(strLine).matches()) {
+			while ((strLine = br.readLine()) != null) {
+				// while file contains new lines read line, compare to regex, if
+				// ok add to array and remove unneeded symbols
+				if (Pattern
+						.compile(
+								"(\\uFEFF)?\"\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+\",[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?) ?")
+						.matcher(strLine).matches()) {
 					strLine = strLine.replaceAll("[\"]", "");
 					strLine = strLine.replaceAll("\\uFEFF", "");
 					String[] splitRow = strLine.split(",");
@@ -131,15 +155,16 @@ public class DataInputClass {
 					for (int i = 0; i < splitRow.length - 1; i++) {
 						strLine = strLine.concat("," + splitRow[i + 1]);
 					}
-					//increase array
+					// increase array
 					String[] tmpArray = new String[++arraySize];
 					System.arraycopy(lines, 0, tmpArray, 0, lines.length);
-					lines=tmpArray;
-					lines[arraySize-1] = strLine;
+					lines = tmpArray;
+					lines[arraySize - 1] = strLine;
 					errorLine++;
-					}
+				}
 				else {
-					//if some row contains wrong data, dont read this row and print error
+					// if some row contains wrong data, dont read this row and
+					// print error
 					System.out.println("Wrong data in CSV file on line " + ++errorLine + ": " + strLine);
 				}
 			}
@@ -150,10 +175,13 @@ public class DataInputClass {
 		}
 		return lines;
 	}
-	
+
 	/**
-	 * This method fixes time from .csv file by converting format from MM:SS.ss to SS.ss
-	 * @param rowFromFile String time result needed to be converted
+	 * This method fixes time from .csv file by converting format from MM:SS.ss
+	 * to SS.ss
+	 * 
+	 * @param rowFromFile
+	 *            String time result needed to be converted
 	 * @return String converted time
 	 * @author t030682
 	 */
@@ -164,23 +192,60 @@ public class DataInputClass {
 		}
 		return res;
 	}
-	
-	/**
-	 * mysqlReader reads Decathlon competition data from database <b>Needs to be implemented yet</b>
-	 * @param database Database to get data from
-	 * @return 
-	 * @author t030682
-	 */
-	public String[] mysqlReader (String database) {
 
-		/*
-		select athletes.name, athletes.dob, athletes.country_code,race_100m,long_jump,shot_put,high_jump,race_400m,hurdles_110m, discus_throw,pole_vault,javelin_throw,race_1500m
-		from decathlon.athletes,decathlon.competitions,decathlon.results
-		where competitions.id=results.competition_id and athletes.id=results.athlete_id 
-			and competitions.name='training'  / and competitions.id='1'
-		*/
-		return null;
+	public String convertSQLString(String toConvert) {
+		char[] newString = new char[10];
+		newString[0] = toConvert.charAt(8);
+		newString[1] = toConvert.charAt(9);
+		newString[2] = '.';
+		newString[3] = toConvert.charAt(5);
+		newString[4] = toConvert.charAt(6);
+		newString[5] = '.';
+		newString[6] = toConvert.charAt(0);
+		newString[7] = toConvert.charAt(1);
+		newString[8] = toConvert.charAt(2);
+		newString[9] = toConvert.charAt(3);
+		return new String(newString);
 	}
-	
-	
+
+	/**
+	 * mysqlReader reads Decathlon competition data from database <b>Needs to be
+	 * implemented yet</b>
+	 * 
+	 * @param database
+	 *            Database to get data from
+	 * @return
+	 * @author t030682
+	 * @throws SQLException
+	 */
+	public String[] mysqlReader(String database) throws SQLException {
+		String[] athletes;
+		Connection conn;
+		athletes = new String[10];
+		conn = DriverManager
+				.getConnection("jdbc:mysql://java.azib.net:3306/decathlon?zeroDateTimeBehavior=round", "java", "java");
+		try {
+			PreparedStatement s = conn
+					.prepareStatement("select athletes.name, athletes.dob, athletes.country_code,race_100m,long_jump,shot_put,high_jump,race_400m,hurdles_110m, discus_throw,pole_vault,javelin_throw,race_1500m from decathlon.athletes,decathlon.competitions,decathlon.results	where competitions.id=results.competition_id and athletes.id=results.athlete_id and (competitions.name=? or competitions.id=?)");
+			s.setString(1, database);
+			s.setString(2, database);
+			ResultSet result = s.executeQuery();
+			int i = 0;
+			while (result.next()) {
+				athletes[i] = result.getString(1) + "," + convertSQLString(result.getDate(2).toString()) + ","
+						+ result.getString(3) + "," + result.getString(4) + "," + result.getString(5) + "," + result.getString(6)
+						+ "," + result.getString(7) + "," + result.getString(8) + "," + result.getString(9) + ","
+						+ result.getString(10) + "," + result.getString(11) + "," + result.getString(12) + ","
+						+ result.getString(13);
+				i++;
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			conn.close();
+		}
+		return athletes;
+	}
 }
