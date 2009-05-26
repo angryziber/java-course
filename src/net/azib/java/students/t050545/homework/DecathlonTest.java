@@ -1,5 +1,6 @@
 package net.azib.java.students.t050545.homework;
 
+import net.azib.java.students.t050545.homework.loaders.DataChecker;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Places;
@@ -9,6 +10,7 @@ import net.azib.java.students.t072073.tasks.Circle;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.ParseException;
 import java.util.GregorianCalendar;
 
 import org.junit.Test;
@@ -35,7 +37,6 @@ public class DecathlonTest {
 		arrayScore[8] = 77.19f;
 		arrayScore[9] = 233.79001f;
 		PointSystem points = new PointSystem(arrayScore);
-		System.out.println(points.getScore());
 		assertEquals(" Hurra  ", 10000, points.getScore(),10);
 	}
 	
@@ -93,6 +94,31 @@ public class DecathlonTest {
 		assertEquals(places[0].getPlaceNum(), "1-2");
 		assertEquals(places[1].getPlaceNum(), "1-2");
 		assertEquals(places[2].getPlaceNum(), "3");
+	}
+	
+	@Test
+	public void testDataChecker() throws ParseException{
+		DataChecker checker = new DataChecker();
+		assertEquals(true, checker.isValidCountry("RU"));
+		assertEquals(true, checker.isValidCountry("EN"));
+		assertEquals(true, checker.isValidCountry("FR"));
+		assertEquals(checker.isValidDate("29.03.1987"), true);
+		assertEquals(checker.isValidDate("29.02.1987"), false);
+		assertEquals(checker.isValidDate("29.13.1987"), false);
+		assertEquals(checker.isCorrectResult(10f), true);
+		assertEquals(checker.isCorrectResult(-10f), false);
+		GregorianCalendar greg = new GregorianCalendar();
+		greg.clear();
+		greg.set(1987, 02, 29);
+		assertEquals(checker.toParseBirthDay("29.03.1987").getTime(), greg.getTime());
+		greg.set(0000, 00, 01);
+		assertEquals(checker.toParseBirthDay("01.01.0000").getTime(), greg.getTime());
+		assertEquals("RU", checker.addCountry("ru"));
+		
+		
+		
+		
+		
 	}
 	
 	

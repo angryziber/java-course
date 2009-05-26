@@ -24,7 +24,7 @@ public class ConsoleLoader extends DataChecker implements SportmanLoader {
 		scanner = new Scanner(System.in);
 	}
 
-	/** Return new sportman, or null of no anyone else
+	/** Return new sportman, or null if no anyone else
 	 * @return Sportman object or null, if no more
 	 * @throws ParseException exeption, if input is wrong
 	 */
