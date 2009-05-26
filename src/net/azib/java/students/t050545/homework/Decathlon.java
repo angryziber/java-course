@@ -2,9 +2,13 @@ package net.azib.java.students.t050545.homework;
 
 import net.azib.java.students.t050545.homework.loaders.CSVLoader;
 import net.azib.java.students.t050545.homework.loaders.ConsoleLoader;
+import net.azib.java.students.t050545.homework.loaders.DBLoader;
 import net.azib.java.students.t050545.homework.loaders.SportmanLoader;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Sportman;
+import net.azib.java.students.t050545.homework.writer.CSVWriter;
+import net.azib.java.students.t050545.homework.writer.ConsoleWriter;
+import net.azib.java.students.t050545.homework.writer.SportmanWriter;
 
 
 import java.io.PrintWriter;
@@ -24,8 +28,8 @@ public class Decathlon {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		SportmanLoader loader = new CSVLoader("c:\\sport_utf8.txt");
-		PrintWriter printwriter = null;
+		SportmanLoader loader = null;
+		SportmanWriter writer = null;
 		System.out.println(Arrays.deepToString(args));
 		
         try{
@@ -35,8 +39,8 @@ public class Decathlon {
 			i = i + 2;
 		}
 		else if (args[i].equalsIgnoreCase("-db")) {
-			// TODO
-			i = i + 2;
+			loader = new DBLoader();
+			i = i + 1;
 		}
 		else if (args[i].equalsIgnoreCase("-console")){
 			loader = new ConsoleLoader();
@@ -48,7 +52,7 @@ public class Decathlon {
 		}
 
 		if (args[i].equalsIgnoreCase("-csv")) {
-			printwriter = new PrintWriter(args[i + 1]);
+			writer = new CSVWriter(args[i + 1]);
 		}
 		else if (args[i] == "-xml") {
 			// TODO
@@ -57,7 +61,7 @@ public class Decathlon {
 			// TODO
 		}
 		else if (args[i].equalsIgnoreCase("-console")) {
-			printwriter = new PrintWriter(System.out);
+			writer = new ConsoleWriter();
 			i++;
 		}
 		else {
@@ -71,19 +75,20 @@ public class Decathlon {
         	System.err.println("The arguments order is wrong or missing!");
         	System.exit(1);
         }
-        
+        try{
         Competition comp = new Competition("Mega cup", 100011);
         Sportman sportman;
         while((sportman = loader.nextSportman()) != null){
-        	//System.out.println(sportman);
+        	
         	comp.addCompetitor(sportman);
         	
         }
-        comp.sortPlaces();
-        //System.out.println(comp);
-        printwriter.println(comp);
-		printwriter.close();
-		System.out.println("END");
+        
+        writer.printResultTable(comp.getPlaces());
+        }catch (Exception e) {
+			e.printStackTrace();
+		}
+        System.out.println("END");
 		System.exit(0);
 		
 	}

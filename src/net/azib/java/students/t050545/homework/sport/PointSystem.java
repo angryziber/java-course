@@ -1,8 +1,8 @@
 package net.azib.java.students.t050545.homework.sport;
 
 /**
- * PointSystem
- * 
+ * PointSystem class hold sportman results, calculate points for each discipline 
+ * and total result
  * @author libricon
  */
 public class PointSystem {
@@ -11,8 +11,7 @@ public class PointSystem {
 	 * Takes results as a array in special order It is good to use Disciline
 	 * enumeration to fill array
 	 * 
-	 * @param bareResults
-	 *            array size to Decathlon should be 10
+	 * @param bareResults array size to Decathlon should be 10
 	 */
 	public PointSystem(float[] bareResults) {
 		results = (float[]) bareResults.clone();
@@ -42,95 +41,43 @@ public class PointSystem {
 	public enum Discipline {
 
 		/** Jug100m */
-		Jug100m(25.4347f, 18f, 1.81f) {
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((b - result), c));
-			}
-
-		},
+		Race_100m(25.4347f, 18f, 1.81f, 1),
 		/** LongJump */
-		LongJump(0.14354f, 220f, 1.4f) {
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((100 * result - b), c));
-			}
-
-		},
+		Long_jump(0.14354f, 220f, 1.4f, -1),
 		/** ShotPut */
-		ShotPut(51.39f, 1.5f, 1.05f) {
-
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((result - b), c));
-			}
-
-		},
+		Shot_put(51.39f, 1.5f, 1.05f, -1),
 		/** HighJump */
-		HighJump(0.8465f, 75f, 1.42f) {
-
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((100 * result - b), c));
-			}
-
-		},
+		High_jump(0.8465f, 75f, 1.42f, -1),
 		/** Jug400m */
-		Jug400m(1.53775f, 82f, 1.81f) {
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((b - result), c));
-			}
-
-		},
+		Race_400m(1.53775f, 82f, 1.81f, 1),
 		/** Hurdles110m */
-		Hurdles110m(5.74352f, 28.5f, 1.92f) {
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((b - result), c));
-			}
-
-		},
+		Hurdles_110m(5.74352f, 28.5f, 1.92f, 1),
 		/** DiscusThrow */
-		DiscusThrow(12.91f, 4f, 1.1f) {
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((result - b), c));
-			}
-
-		},
+		Discus_throw(12.91f, 4f, 1.1f, -1),
 		/** PoleVault */
-		PoleVault(0.2797f, 100f, 1.35f) {
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((100 * result - b), c));
-			}
-
-		},
+		Pole_vault(0.2797f, 100f, 1.35f, -1),
 		/** JavelinThrow */
-		JavelinThrow(10.14f, 7f, 1.08f) {
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((result - b), c));
-			}
-
-		},
+		Javelin_throw(10.14f, 7f, 1.08f, -1),
 		/** Jug1500m */
-		Jug1500m(0.03768f, 480f, 1.85f) {
-			int returnPoints(float result) {
-				return (int) Math.round(a * Math.pow((b - result), c));
-			}
-
-		};
+		Race_1500m(0.03768f, 480f, 1.85f, 1);
 
 		/**
 		 * To initialise each discipline need 3 constants to calculate points..
 		 * A B C
 		 * 
-		 * @param a
-		 *            first constant
-		 * @param b
-		 *            second constant
-		 * @param c
-		 *            third constant
+		 * @param a first constant
+		 * @param b second constant
+		 * @param c third constant
+		 * @param koef determine specific calculation for each discipline all races 1, polevault -1 ....
 		 */
-		Discipline(float a, float b, float c) {
+		Discipline(float a, float b, float c, int koef) {
 			this.a = a;
 			this.b = b;
 			this.c = c;
+			this.koef = koef;
 		}
-
+		
+		final int koef;
 		final float a;
 		final float b;
 		final float c;
@@ -138,12 +85,13 @@ public class PointSystem {
 		/**
 		 * This method calculate score for discipline
 		 * 
-		 * @param result
-		 *            Sportman's result in seconds, meters.... depend on
-		 *            descipline
+		 * @param result Sportman's result in seconds, meters.... depend on descipline
 		 * @return score points according to results
 		 */
-		abstract int returnPoints(float result);
+		int returnPoints(float result) {
+			return (int) Math.round(a * Math.pow((koef*(b - result)), c));
+		}
+
 	}
 
 	/**
@@ -222,8 +170,10 @@ public class PointSystem {
 	@Override
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
-		for (float f : results)
-			buffer.append(f + "\t");
+		for (float f : results){
+			float k = (int)(100*f);
+			buffer.append(k/100 + "\t");
+		}
 		buffer.append("\n");
 		for (int i : scores)
 			buffer.append(i + "\t");
@@ -232,26 +182,32 @@ public class PointSystem {
 		return buffer.toString();
 	}
 
-	/** Main method for control class work
-	 * @param args command line 
-	 */
-	public static void main(String[] args) {
 
-		float[] arrayScore = new float[10];
-		arrayScore[0] = 9.69f;
-		arrayScore[1] = 8.95f;
-		arrayScore[2] = 23.12f;
-		arrayScore[3] = 2.45f;
-		arrayScore[4] = 43.18f;
-		arrayScore[5] = 12.87f;
-		arrayScore[6] = 74.08f;
-		arrayScore[7] = 6.14f;
-		arrayScore[8] = 98.48f;
-		arrayScore[9] = 206f;
+		/**
+		 * Main function, only for test purposes
+		 * 
+		 * @param args command line arguments
+		 */
+		public static void main(String[] args) {
+			float[] arrayScore = new float[10];
+			arrayScore[0] = 10.395f;
+			arrayScore[1] = 7.76f;
+			arrayScore[2] = 18.4f;
+			arrayScore[3] = 2.20f;
+			arrayScore[4] = 46.17f;
+			arrayScore[5] = 13.8f;
+			arrayScore[6] = 56.17f;
+			arrayScore[7] = 5.28f;
+			arrayScore[8] = 77.19f;
+			arrayScore[9] = 233.79f;
+			
+			Score score = new Score(arrayScore);
+			
+			PointSystem points = new PointSystem(score.getScores());
+			System.out.println(points);
 
-		PointSystem points = new PointSystem(arrayScore);
-		System.out.println(points);
-		System.exit(0);
+			
+		}
 
-	}
+	
 }

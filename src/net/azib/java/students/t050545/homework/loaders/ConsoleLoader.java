@@ -2,6 +2,7 @@ package net.azib.java.students.t050545.homework.loaders;
 
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.PointSystem;
+import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.Sportman;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
 
@@ -20,7 +21,7 @@ public class ConsoleLoader extends DataChecker implements SportmanLoader {
 	 * @return Sportman object or null, if no more
 	 * @throws ParseException exeption, if input is wrong
 	 */
-	public Sportman nextSportman() throws ParseException {
+	public Sportman nextSportman() throws ParseException{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please enter essential sportman's data");
 
@@ -29,21 +30,24 @@ public class ConsoleLoader extends DataChecker implements SportmanLoader {
 		String birthDay;
 		float[] results = new float[PointSystem.Discipline.values().length];
 
-		System.out.print("Sportman's name: ");
+		System.out.print("Sportman's name, or -1: ");
 		name = scanner.next();
+		if(name == "-1") return null;
 
 		do {
-			System.out.print("Country: ");
+			System.out.print("Country, or -1: ");
 			country = addCountry(scanner.next());
+			if(country == "-1") return null;
 		}
-		while (isValidCountry(country));
+		while (!isValidCountry(country));
 		
 
 		do {
-			System.out.print("Please enter a birthDay: ");
+			System.out.print("Please enter a birthDay, or -1: ");
 			birthDay = scanner.next();
+			if(birthDay == "-1") return null;
 		}
-		while (isValidDate(birthDay));
+		while (!isValidDate(birthDay));
 		GregorianCalendar birthDate = toParseBirthDay(birthDay);
 		
 		System.out.println("Now enter results, or -1 to finish");
@@ -64,7 +68,7 @@ public class ConsoleLoader extends DataChecker implements SportmanLoader {
 			results[dis.ordinal()] = number;
 		}
 		
-		return new Sportman(results, new Person(name, country, birthDate));
+		return new Sportman(new Score(results), new Person(name, country, birthDate));
 
 	}
 

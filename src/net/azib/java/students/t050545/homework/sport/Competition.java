@@ -43,9 +43,11 @@ public class Competition {
 	}
 
 	/**
-	 * Method aim to sort sportmen and then put places for each of them.
+	 * Method aim to sort sportmen and then put places for each of them
+	 * After return all place
+	 * @return all sportmans with places
 	 */
-	public void sortPlaces() {
+	public Places[] getPlaces() {
 		Collections.sort(competitors);
 		tableScore = new Places[competitors.size()];
 
@@ -74,7 +76,7 @@ public class Competition {
 			i = j - 1;
 
 		}
-
+		return tableScore;
 	}
 
 	/**
@@ -133,7 +135,7 @@ public class Competition {
 				comp.addCompetitor(sportman);
 			}
 
-			comp.sortPlaces();
+			comp.getPlaces();
 			System.out.println(comp);
 		}
 		catch (Exception e) {

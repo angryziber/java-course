@@ -1,6 +1,7 @@
 package net.azib.java.students.t050545.homework.loaders;
 
 import net.azib.java.students.t050545.homework.sport.Person;
+import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.Sportman;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
 
@@ -65,7 +66,7 @@ public class CSVLoader extends DataChecker implements SportmanLoader {
 				birthDate = toParseBirthDay(arrayOfData[1]);
 			}
 			else {
-				throw new ParseException("COUNTRY DATE\n"+line, 0);
+				throw new ParseException("BIRTH DATE\n"+line, 0);
 			}
 
 			if (isValidCountry(arrayOfData[2])) {
@@ -98,7 +99,7 @@ public class CSVLoader extends DataChecker implements SportmanLoader {
 
 			}
 
-			return (new Sportman(resultTable, new Person(name, country, birthDate)));
+			return (new Sportman(new Score(resultTable), new Person(name, country, birthDate)));
 
 		}
 		else {
