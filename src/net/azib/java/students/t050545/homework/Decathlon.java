@@ -6,11 +6,11 @@ import net.azib.java.students.t050545.homework.loaders.DBLoader;
 import net.azib.java.students.t050545.homework.loaders.SportmanLoader;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Sportman;
-import net.azib.java.students.t050545.homework.writer.CSVWriter;
-import net.azib.java.students.t050545.homework.writer.ConsoleWriter;
-import net.azib.java.students.t050545.homework.writer.HTMLWriter;
-import net.azib.java.students.t050545.homework.writer.SportmanWriter;
-import net.azib.java.students.t050545.homework.writer.XMLWriter;
+import net.azib.java.students.t050545.homework.writers.CSVWriter;
+import net.azib.java.students.t050545.homework.writers.ConsoleWriter;
+import net.azib.java.students.t050545.homework.writers.HTMLWriter;
+import net.azib.java.students.t050545.homework.writers.SportmanWriter;
+import net.azib.java.students.t050545.homework.writers.XMLWriter;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
