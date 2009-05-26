@@ -12,22 +12,20 @@ import net.azib.java.students.t050545.homework.writer.HTMLWriter;
 import net.azib.java.students.t050545.homework.writer.SportmanWriter;
 import net.azib.java.students.t050545.homework.writer.XMLWriter;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
-
-
-
-
-
 /**
- * Decathlon
+ * Decathlon organise data processing from/to user
  * 
  * @author libricon
  */
 public class Decathlon {
 	/**
-	 * @param args command line arguments
-	 * @throws Exception anykind of exeption
+	 * @param args
+	 *            command line arguments
+	 * @throws Exception
+	 *             anykind of exeption
 	 */
 	public static void main(String[] args) throws Exception {
 
@@ -35,67 +33,75 @@ public class Decathlon {
 		SportmanWriter writer = null;
 		System.out.println(Arrays.deepToString(args));
 		Competition comp = null;
-		
-        try{
-		int i = 0;
-		if (args[i].equalsIgnoreCase("-csv")) {
-			comp = new Competition("CSVbase competition", 10101);
-			loader = new CSVLoader(args[i+1]);
-			i = i + 2;
+
+		try {
+			int i = 0;
+			if (args[i].equalsIgnoreCase("-csv")) {
+				comp = new Competition("CSVbase competition", 10101);
+				loader = new CSVLoader(args[i + 1]);
+				i = i + 2;
+			}
+			else if (args[i].equalsIgnoreCase("-db")) {
+				loader = new DBLoader(args[i + 1]);
+				comp = new Competition("DataBase Compettion", Integer.parseInt(args[i + 1]));
+				// TODO how to look at dataBase name !
+				i = i + 2;
+			}
+			else if (args[i].equalsIgnoreCase("-console")) {
+				loader = new ConsoleLoader();
+				comp = new Competition();
+				i++;
+			}
+			else {
+				System.err.println("Check input arguments");
+				System.exit(1);
+			}
+
+			if (args[i].equalsIgnoreCase("-csv")) {
+				writer = new CSVWriter(args[i + 1]);
+			}
+			else if (args[i].equalsIgnoreCase("-xml")) {
+				writer = new XMLWriter(args[i + 1]);
+			}
+			else if (args[i].equalsIgnoreCase("-html")) {
+				writer = new HTMLWriter(args[i + 1]);
+			}
+			else if (args[i].equalsIgnoreCase("-console")) {
+				writer = new ConsoleWriter();
+				i++;
+			}
+			else {
+				System.err.println("Check output arguments");
+				System.exit(1);
+			}
 		}
-		else if (args[i].equalsIgnoreCase("-db")) {
-			loader = new DBLoader(args[i+1]);
-			comp = new Competition("DataBase Compettion", Integer.parseInt(args[i+1]));
-			//TODO how to look at dataBase name !
-			i = i + 2;
+		catch (ArrayIndexOutOfBoundsException e) {
+			System.err.println("The arguments order is wrong!");
+			System.exit(1);
 		}
-		else if (args[i].equalsIgnoreCase("-console")){
-			loader = new ConsoleLoader();
-			comp = new Competition();
-			i++;
+		catch (FileNotFoundException e){
+			System.err.println("File name is wrong");
+			System.exit(1);
 		}
-		else {
-			System.err.println("Check input arguments");
+		catch (Exception e) {
+			System.err.println("The arguments order is wrong or missing!");
 			System.exit(1);
 		}
 
-		if (args[i].equalsIgnoreCase("-csv")) {
-			writer = new CSVWriter(args[i + 1]);
+		Sportman sportman;
+		try {
+			while ((sportman = loader.nextSportman()) != null) {
+				comp.addCompetitor(sportman);
+			}
 		}
-		else if (args[i].equalsIgnoreCase("-xml")) {
-			writer = new XMLWriter(args[i + 1]);
-		}
-		else if (args[i].equalsIgnoreCase("-html")) {
-			writer = new HTMLWriter(args[i+1]);
-		}
-		else if (args[i].equalsIgnoreCase("-console")) {
-			writer = new ConsoleWriter();
-			i++;
-		}
-		else {
-			System.err.println("Check output arguments");
-			System.exit(1);
-		}
-        }catch (ArrayIndexOutOfBoundsException e){
-        	System.err.println("The arguments order is wrong!");
-        	System.exit(1);
-        }catch (Exception e){
-        	System.err.println("The arguments order is wrong or missing!");
-        	System.exit(1);
-        }
-        
-        Sportman sportman;
-        try{
-        while((sportman = loader.nextSportman()) != null){
-        	comp.addCompetitor(sportman);
-        }}catch (Exception e) {
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-        writer.printResultTable(comp);
-        writer.close();
-        System.out.println("END");
+
+		writer.printResultTable(comp);
+		writer.close();
+		System.out.println("END");
 		System.exit(0);
-		
+
 	}
 }
