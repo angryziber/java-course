@@ -9,7 +9,7 @@
 	<xs:complexType name="athleteRecord">
 		<xs:sequence>
 			<xs:element name="place" type="xs:positiveInteger"/>
-			<xs:element name="points" type="xs:positiveInteger"/>
+			<xs:element name="points" type="xs:int"/>
 			<xs:element name="name" type="xs:string"/>
 			<xs:element name="dateOfBirth" type="birthDate"/>
 			<xs:element name="country" type="countryCode"/>

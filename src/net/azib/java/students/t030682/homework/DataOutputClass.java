@@ -23,8 +23,10 @@ import javax.xml.validation.SchemaFactory;
 
 import org.jdom.*;
 import org.jdom.output.XMLOutputter;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 
 /**
@@ -194,19 +196,37 @@ public class DataOutputClass {
 			factory.setSchema(schemaFactory.newSchema(new Source[] {new StreamSource(DataOutputClass.class.getResource("decathlon.xsd").toString())}));
 			SAXParser parser = factory.newSAXParser();
 			XMLReader reader = parser.getXMLReader();
+			reader.setErrorHandler(new MyErrorHandler());
 			reader.parse(new InputSource(new ByteArrayInputStream(src.toByteArray())));
 			System.out.println("XML is valid.");
 		}
     	
     	//not catching???
-		catch (Exception e) {
-	        System.out.println("Error: XML is not valid:" + e.getMessage());
+		catch (SAXException e) {
+	        System.out.println("Error: XML is not valid");
 	        valid = false;
-	        System.exit(-1);
 
 		}
     	return valid;
         
     }
 
+    
+    static class MyErrorHandler implements ErrorHandler {
+    	
+		public void error(SAXParseException e) throws SAXException {
+			System.out.println(e.toString());
+				throw new SAXException(e);
+		}
+
+		public void fatalError(SAXParseException e) throws SAXException {
+			System.out.println(e.toString());
+			throw new SAXException(e);
+		}
+
+		public void warning(SAXParseException e) throws SAXException {
+			System.out.println(e.toString());
+			throw new SAXException(e);
+		}
+      }
 }

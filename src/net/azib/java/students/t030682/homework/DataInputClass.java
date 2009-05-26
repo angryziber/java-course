@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -22,6 +21,7 @@ import java.util.regex.Pattern;
  * @author t030682
  */
 public class DataInputClass {
+	private static final String CORRECT_STRING = "(\\uFEFF)?\"?.+\"?,[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?) ?";
 
 	/**
 	 * consoleReader allows Decathlon competition data to be read from console
@@ -134,18 +134,15 @@ public class DataInputClass {
 		int arraySize = 0;
 		int errorLine = 0;
 		String lines[] = new String[arraySize];
+		FileInputStream fstream = new FileInputStream(filename);
+		DataInputStream in = new DataInputStream(fstream);
+		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		try {
-			FileInputStream fstream = new FileInputStream(filename);
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
 			while ((strLine = br.readLine()) != null) {
 				// while file contains new lines read line, compare to regex, if
 				// ok add to array and remove unneeded symbols
-				if (Pattern
-						.compile(
-								"(\\uFEFF)?\"\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)+\",[0-3]?[0-9].[0-1]?[0-9].[1-2][0,9][0-9][0-9],[A-Z][A-Z],(([0-9]:)?[0-9]+.?[0-9]?[0-9]?,){9}+(([0-9]:)?[0-9]+.?[0-9]?[0-9]?) ?")
-						.matcher(strLine).matches()) {
+				if (Pattern.compile(CORRECT_STRING).matcher(strLine).matches()) {
 					strLine = strLine.replaceAll("[\"]", "");
 					strLine = strLine.replaceAll("\\uFEFF", "");
 					String[] splitRow = strLine.split(",");
@@ -168,11 +165,16 @@ public class DataInputClass {
 					System.out.println("Wrong data in CSV file on line " + ++errorLine + ": " + strLine);
 				}
 			}
-			in.close();
+
 		}
 		catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
+			finally {
+				in.close();
+				br.close();
+				fstream.close();
+			}
 		return lines;
 	}
 
@@ -219,9 +221,11 @@ public class DataInputClass {
 	 * @throws SQLException
 	 */
 	public String[] mysqlReader(String database) throws SQLException {
-		String[] athletes;
+		int arraySize = 0;
+		int errorRow=0;
+		String[] athletes = new String[arraySize];
 		Connection conn;
-		athletes = new String[10];
+		boolean emptyResult = false;
 		conn = DriverManager
 				.getConnection("jdbc:mysql://java.azib.net:3306/decathlon?zeroDateTimeBehavior=round", "java", "java");
 		try {
@@ -231,21 +235,39 @@ public class DataInputClass {
 			s.setString(2, database);
 			ResultSet result = s.executeQuery();
 			int i = 0;
-			while (result.next()) {
-				athletes[i] = result.getString(1) + "," + convertSQLString(result.getDate(2).toString()) + ","
+
+			if (result.next()) {
+			do {
+				String resultRow = result.getString(1) + "," + convertSQLString(result.getDate(2).toString()) + ","
 						+ result.getString(3) + "," + result.getString(4) + "," + result.getString(5) + "," + result.getString(6)
 						+ "," + result.getString(7) + "," + result.getString(8) + "," + result.getString(9) + ","
 						+ result.getString(10) + "," + result.getString(11) + "," + result.getString(12) + ","
 						+ result.getString(13);
+				if (Pattern.compile(CORRECT_STRING).matcher(resultRow).matches()) {
+					String[] tmpArray = new String[++arraySize];
+					System.arraycopy(athletes, 0, tmpArray, 0, athletes.length);
+					athletes = tmpArray;
+					athletes[arraySize - 1] = resultRow;
+					errorRow++;	
+				} else {
+					System.out.println("Wrong data in database for athlete " + result.getString(1));
+					System.out.println(resultRow);
+					++errorRow;
+				}
 				i++;
-			}
+			} while (result.next());
+		} else {
+			emptyResult=true;
+			System.out.println("No data in database \"" + database + "\"");
 		}
+			}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 		finally {
 			conn.close();
 		}
+		if (emptyResult==true) System.exit(-1);
 		return athletes;
 	}
 }

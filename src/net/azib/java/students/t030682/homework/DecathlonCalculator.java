@@ -23,22 +23,35 @@ public class DecathlonCalculator {
 
 		DataInputClass tmpInput = new DataInputClass();
 		String[] tmpArray = new String[0];
-		String outputfile = null;
+		String inputSource=null,inputArg=null,outputDest=null,outputArg=null;
+		
 		if (args.length != 0) {
-			outputfile = args[2];
-
+			inputSource=args[0];
+			
+			if (inputSource.equals("-console")) {
+				outputDest=args[1];
+				if (!outputDest.equals("-console")){
+					outputArg=args[2];
+				}
+			} else {
+				inputArg=args[1];
+				outputDest=args[2];
+				if (!outputDest.equals("-console")){
+					outputArg=args[3];
+				}
+			}
+						
 			// input data from source defined by arguments
-			if (Pattern.compile("-console").matcher(args[0]).matches()) {
+			if (inputSource.equals("-console")) {
 				tmpArray = tmpInput.consoleReader();
-				args[2] = args[1];
 			}
-			else if (args[0].equals("-csv")) {
-				tmpArray = tmpInput.csvReader(args[1]);
-				outputfile = args[3];
+			else if (inputSource.equals("-csv")) {
+				tmpArray = tmpInput.csvReader(inputArg);
+
 			}
-			else if (args[0].equals("-db")) {
-				tmpArray = tmpInput.mysqlReader(args[1]);
-				outputfile = args[3];
+			else if (inputSource.equals("-db")) {
+				tmpArray = tmpInput.mysqlReader(inputArg);
+
 			}
 			else {
 				System.out
@@ -61,30 +74,27 @@ public class DecathlonCalculator {
 		// output data to console, csv file, xml file or html file depending on
 		// arguments
 		DataOutputClass out = new DataOutputClass();
-		if (args[2].equals("-console")) {
+		if (outputDest.equals("-console")) {
 			out.consoleWriter(competitionRecords);
 		}
 
-		else if (args[2].equals("-csv")) {
-			out.csvWriter(competitionRecords, outputfile);
+		else if (outputDest.equals("-csv")) {
+			out.csvWriter(competitionRecords, outputArg);
 		}
-		else if (args[2].equals("-html")) {
+		else if (outputDest.equals("-html")) {
 			if (out.validateXML(out.buildDocument(competitionRecords))) {
-				//System.out.println("XML is valid.");
-				out.htmlWriter(out.buildDocument(competitionRecords), outputfile);
+				out.htmlWriter(out.buildDocument(competitionRecords), outputArg);
 			}
 
 		}
-		else if (args[2].equals("-xml")) {
+		else if (outputDest.equals("-xml")) {
 			if (out.validateXML(out.buildDocument(competitionRecords))) {
-				//System.out.println("XML is valid.");
-				out.xmlWriter(out.buildDocument(competitionRecords), outputfile);
+				out.xmlWriter(out.buildDocument(competitionRecords), outputArg);
 			}
 		}
 		else {
-			System.out.println("Wrong output arguments");
 			System.out
-					.println("Wrong input arguments\nUsage:\nDecathlonCalculator -console|-csv filename|-db dbname -console|-csv filename|-xml filename|-html filename");
+					.println("Wrong output arguments\nUsage:\nDecathlonCalculator -console|-csv filename|-db dbname -console|-csv filename|-xml filename|-html filename");
 			System.exit(-1);
 		}
 	}
