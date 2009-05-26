@@ -34,7 +34,7 @@ public class CSVWriter implements SportmanWriter {
 
 	/**
 	 * This method print into file competition data and result table all places and names
-	 * @param compcompetition object
+	 * @param comp competition object
 	 */
 	@Override
 	public void printResultTable(Competition comp) {
@@ -44,7 +44,10 @@ public class CSVWriter implements SportmanWriter {
 		}
 		writer.flush();
 	}
-
+     
+    /** 
+     *  Method close printWriter stream
+     */
 	@Override
 	public void close() {
 		writer.close();

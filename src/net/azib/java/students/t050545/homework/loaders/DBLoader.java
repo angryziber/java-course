@@ -57,6 +57,7 @@ public class DBLoader extends DataChecker implements SportmanLoader {
 			name = resultset.getString("NAME");
 			country = resultset.getString("COUNTRY_CODE");
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
 			try {
 				birthDay = resultset.getString("DOB");
 			}
