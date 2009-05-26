@@ -53,5 +53,6 @@ public class CSVWriter implements SportmanWriter {
 		writer.close();
 	}
 
-	PrintWriter writer = null;
+	/** printwriter stream */
+	private PrintWriter writer = null;
 }

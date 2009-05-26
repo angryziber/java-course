@@ -21,12 +21,23 @@ import javax.xml.stream.XMLStreamWriter;
  */
 public class XMLWriter implements SportmanWriter {
 	
-	XMLStreamWriter writer;
+	/** XML file forms and writing here */
+	private XMLStreamWriter writer;
 	
+	/** XML file will be written to stream.
+	 * @param stream XML file stream
+	 * @throws XMLStreamException
+	 */
 	public XMLWriter(Writer stream) throws XMLStreamException{
 		XMLOutputFactory factory = XMLOutputFactory.newInstance();
 		writer = factory.createXMLStreamWriter(stream);
 	}
+	/** XML document will be written to fileName
+	 * @param fileName XML output file name
+	 * @throws ParserConfigurationException
+	 * @throws FileNotFoundException
+	 * @throws XMLStreamException
+	 */
 	public XMLWriter(String fileName) throws ParserConfigurationException, FileNotFoundException, XMLStreamException {
 		// New document  initialise
 		PrintWriter out = new PrintWriter(fileName);
@@ -34,6 +45,11 @@ public class XMLWriter implements SportmanWriter {
 		writer = factory.createXMLStreamWriter(out);	
 	}
 
+	/**
+	 *  Method form XML file by using competition and save it to stream
+	 *  After this method, it's needed to call <code>close()</code> method
+	 *  @param comp lint to competition with results and places
+	 */
 	@Override
 	public void printResultTable(Competition comp) throws XMLStreamException {
 		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
@@ -92,13 +108,20 @@ public class XMLWriter implements SportmanWriter {
 	
 		writer.writeEndDocument();
 		writer.flush();
-		writer.close();
 	}
 	
-	
+	/** 
+	 *  close write stream
+	 */
 	@Override
-	public void close() {
+	public void close(){
 		
+		try {
+			writer.close();
+		}
+		catch (XMLStreamException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

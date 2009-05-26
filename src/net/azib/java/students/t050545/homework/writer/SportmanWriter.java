@@ -1,7 +1,6 @@
 package net.azib.java.students.t050545.homework.writer;
 
 import net.azib.java.students.t050545.homework.sport.Competition;
-import net.azib.java.students.t050545.homework.sport.Places;
 
 /**
  * SportmanWriter
@@ -11,9 +10,13 @@ import net.azib.java.students.t050545.homework.sport.Places;
 public interface SportmanWriter {
 	
 	/** Method  should write to it's outStream all result
-	 * @param array with competition table
+	 * @param competition  competition
+	 * @throws Exception 
 	 */
 	void printResultTable(Competition competition) throws Exception;
+	/**
+	 *  Method close streams 
+	 */
 	void close();
 
 }
