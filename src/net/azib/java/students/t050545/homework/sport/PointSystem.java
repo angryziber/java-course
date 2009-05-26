@@ -22,7 +22,7 @@ public class PointSystem {
 
 	/**
 	 * This constructor use special class for result representation
-	 * 
+	 * score check result in addition
 	 * @param score
 	 */
 	public PointSystem(Score score) {
@@ -64,7 +64,6 @@ public class PointSystem {
 		/**
 		 * To initialise each discipline need 3 constants to calculate points..
 		 * A B C
-		 * 
 		 * @param a first constant
 		 * @param b second constant
 		 * @param c third constant
@@ -77,6 +76,7 @@ public class PointSystem {
 			this.koef = koef;
 		}
 		
+		/** this rotate (B-P) or (P-B) in method <code>returnPoints()</code> */
 		final int koef;
 		final float a;
 		final float b;
@@ -94,6 +94,26 @@ public class PointSystem {
 
 	}
 
+	/**
+	 * @return the results
+	 */
+	public float[] getResults() {
+		return (float[]) results.clone();
+	}
+
+	/** Return total score for  sportman in decathlon
+	 * @return the score
+	 */
+	public int getScore() {
+		return score;
+	}
+
+	/**
+	 * @return the scores
+	 */
+	public int[] getScores() {
+		return (int[]) scores.clone();
+	}
 	/**
 	 * Method calculate points for each discipline in array, order the same, as
 	 * in enumerations
@@ -116,27 +136,7 @@ public class PointSystem {
 			score += i;
 		return score;
 	}
-
-	/**
-	 * @return the results
-	 */
-	public float[] getResults() {
-		return (float[]) results.clone();
-	}
-
-	/**
-	 * @return the score
-	 */
-	public int getScore() {
-		return score;
-	}
-
-	/**
-	 * @return the scores
-	 */
-	public int[] getScores() {
-		return (int[]) scores.clone();
-	}
+	
 
 	/** Raw result in meters, second results */
 	private float[] results;
@@ -147,7 +147,6 @@ public class PointSystem {
 
 	/**
 	 * This method compares two PointSystem objects
-	 * 
 	 * @return true is total score and scores the same
 	 */
 	@Override
@@ -164,7 +163,6 @@ public class PointSystem {
 
 	/**
 	 * Method returns string with result and score in pair
-	 * 
 	 * @return table: result and score
 	 * */
 	@Override
@@ -184,7 +182,7 @@ public class PointSystem {
 
 
 		/**
-		 * Main function, only for test purposes
+		 * Test method
 		 * 
 		 * @param args command line arguments
 		 */

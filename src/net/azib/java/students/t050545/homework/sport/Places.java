@@ -8,11 +8,10 @@ package net.azib.java.students.t050545.homework.sport;
  * @author libricon
  */
 public class Places {
-	/**
-	 * @param place
-	 *            Place in competition
-	 * @param sportman
-	 *            Sportman's data
+	
+	/** Place is a string, usually like 1-2 ( braces [] added automat.)
+	 * @param place Place in competition
+	 * @param sportman Sportman's data
 	 */
 	public Places(String place, Sportman sportman) {
 		placeNum = place;

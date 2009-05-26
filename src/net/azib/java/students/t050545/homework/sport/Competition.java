@@ -1,6 +1,5 @@
 package net.azib.java.students.t050545.homework.sport;
 
-
 import net.azib.java.students.t050545.homework.loaders.CSVLoader;
 import net.azib.java.students.t050545.homework.loaders.SportmanLoader;
 
@@ -15,7 +14,7 @@ import java.util.Collections;
  * @author libricon
  */
 public class Competition {
-	/**
+	/** Initialise competition with name and uniq ID
 	 * @param name competition name
 	 * @param id competition ID
 	 */
@@ -45,35 +44,35 @@ public class Competition {
 	/**
 	 * Method aim to sort sportmen and then put places for each of them
 	 * After return all place
-	 * @return all sportmans with places
+	 * @return all sportmans with places as <code>Places</code> type
 	 */
 	public Places[] getPlaces() {
 		Collections.sort(competitors);
-		tableScore = new Places[competitors.size()];
+		tableScore = new Places[competitors.size()];                           // new table initialise
 
-		for (int i = 0; i < competitors.size(); i++) {
+		for (int i = 0; i < competitors.size(); i++) {                       // from the first to the last sportman
 			int j;
 
-			int score = competitors.get(i).getPoints().getScore();
+			int score = competitors.get(i).getPoints().getScore();        // current score 
 
-			for (j = i + 1; j < competitors.size(); j++) {
+			for (j = i + 1; j < competitors.size(); j++) {              // from next(i+1) sportman to last 
 				if (competitors.get(j).getPoints().getScore() != score) {
-					break;
+					break;                        // if current score not equal to j's sportman's score, break
 				}
 			}
 
 			String place;
-			if (i != (j - 1)) {
+			if (i != (j - 1)) {                  // If there is more than 1 sportman with the same score
 				place = (i+1) + "-" + j;
 			}
 			else {
 				place = String.valueOf(i+1);
 			}
 
-			for (int e = i; e <= j - 1; e++) {
+			for (int e = i; e <= j - 1; e++) {             // write to each table row place and sportman
 				tableScore[e] = new Places(place, competitors.get(e));
 			}
-			i = j - 1;
+			i = j - 1;        // as we finished on j sportman, i = j
 
 		}
 		return tableScore;
@@ -81,12 +80,11 @@ public class Competition {
 
 	/**
 	 * Return string will all places and sportman's
-	 * 
 	 * @return <code>places.toString()</code>
 	 */
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder();
+		StringBuilder str = new StringBuilder();  // String|Builder give a small advantage compare to string concat.
 		for (Places pl : tableScore) {
 			str.append(pl);
 		}
@@ -117,13 +115,11 @@ public class Competition {
 	/** Competition ID, like date */
 	private int id;
 
+	
+	
 	/**
-	 * Main function
-	 * 
-	 * @param args
-	 *            command line arguments
-	 * @throws Exception
-	 *             all kind of exeption's
+	 * Test function
+	 * @param args command line arguments
 	 */
 	public static void main(String[] args){
 		try {

@@ -10,12 +10,14 @@ import java.util.GregorianCalendar;
  */
 public class Sportman implements Comparable<Sportman> {
 
-	/**
+	/** Sportman consist of person and score
 	 * @param score object with sportman's results
 	 * @param person object contain sportman's name and other data
 	 */
 	public Sportman(Score score, Person person) {
-		this(score.getScores(), person);
+		this.person = new Person(person.getName(), person.getCountry(), person.getBirthDay());
+		points = new PointSystem(score);
+		
 	}
 
 	/**
@@ -23,21 +25,20 @@ public class Sportman implements Comparable<Sportman> {
 	 * @param person object contain sportman's name and other data
 	 */
 	public Sportman(float[] scores, Person person) {
-		this.person = new Person(person.getName(), person.getCountry(), person.getBirthDay());
-		points = new PointSystem(scores);
+		this(new Score(scores), person);
 	}
 
 	/**
 	 * @return the points
 	 */
 	public PointSystem getPoints() {
-		return points;
+		return points;                         // think about clone() !
 	}
 
 	/**
 	 * @return the person
 	 */
-	public Person getPerson() {
+	public Person getPerson() {			      // person cann't be modified
 		return person;
 	}
 

@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
  */
 public class Person {
 	
-	/** 
+	/** Country should be two letters(but can be anyone
 	 * @param name person's name
 	 * @param country country, where is from
 	 * @param birthDay BirthDay
@@ -65,13 +65,6 @@ public class Person {
 	}
 	
 	/**
-	 * @param country the country to set
-	 */
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	/**
 	 * @return cloned object
 	 */
 	public GregorianCalendar getBirthDay() {
@@ -86,11 +79,4 @@ public class Person {
 	/** birthDay */
 	private GregorianCalendar birthDay;
 	
-	/**
-	 * @param args command line arguments, not used
-	 */
-	public static void main(String[] args) {
-		Person person = new Person("Kirill","RU",new GregorianCalendar(1987, 4, 29));
-		System.out.println(person);
-	}
 }
