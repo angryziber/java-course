@@ -25,7 +25,6 @@ import org.junit.Test;
  */
 public class DecathlonTest {
 
-	
 	@Test
 	public void testPointSystem() throws Exception {
 		float[] arrayScore = new float[10];
@@ -43,7 +42,6 @@ public class DecathlonTest {
 		assertEquals(" Hurra  ", 10000, points.getScore(), 10);
 	}
 
-	
 	@Test
 	public void testPersonClass() throws Exception {
 		Person person = new Person("Jon Doe", "RU", new GregorianCalendar());
@@ -51,7 +49,6 @@ public class DecathlonTest {
 		assertEquals("RU", person.getCountry());
 	}
 
-	
 	@Test
 	public void testSportmanClass() throws Exception {
 		float[] arrayScore = new float[10];
@@ -123,7 +120,7 @@ public class DecathlonTest {
 	public void testCSVLoader() throws IOException, ParseException {
 		System.out.println(CSVLoader.class.getResource("sport_utf8.csv").getFile());
 		CSVLoader loader = new CSVLoader(CSVLoader.class.getResource("sport_utf8.csv").getFile());
-		
+
 		Sportman sportman;
 		Competition comp = new Competition();
 		while ((sportman = loader.nextSportman()) != null) {
@@ -136,8 +133,7 @@ public class DecathlonTest {
 		assertEquals(places[1].getPlaceNum(), "2-4");
 		assertEquals(places[2].getPlaceNum(), "2-4");
 		assertEquals(places[3].getPlaceNum(), "2-4");
-		
-			
+
 	}
 
 }
