@@ -64,14 +64,14 @@ public class Competition {
 
 			String place;
 			if (i != (j - 1)) {
-				place = "[" + (i+1) + "-" + j + "]";
+				place = (i+1) + "-" + j;
 			}
 			else {
-				place = "[" + (i+1) + "]";
+				place = String.valueOf(i+1);
 			}
 
 			for (int e = i; e <= j - 1; e++) {
-				tableScore[e] = new Places(place, competitors.get(i));
+				tableScore[e] = new Places(place, competitors.get(e));
 			}
 			i = j - 1;
 

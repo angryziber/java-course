@@ -25,7 +25,7 @@ public class Places {
 	 */
 	@Override
 	public String toString() {
-		return placeNum + "\n" + sportman;
+		return "["+placeNum+"]" + "\n" + sportman;
 	}
 
 	/**

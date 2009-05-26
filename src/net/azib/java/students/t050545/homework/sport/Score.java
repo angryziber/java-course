@@ -14,7 +14,7 @@ public class Score {
 	 */
 	public Score(float[] scores){
 		this.scores = new float[Discipline.values().length];
-		putScores(scores);
+		putScores(scores);	
 	}
 	
 	/** Just initialise array, to fill array it's neede to run 
@@ -40,13 +40,15 @@ public class Score {
 			}
 		}
 	}
-	
+
 	/**
 	 * @return new array with results 
 	 */
 	public float[] getScores(){
 		return (float[])scores.clone();
 	}
+	
 	private float[] scores;
+	private float bestResults[]; 
 
 }

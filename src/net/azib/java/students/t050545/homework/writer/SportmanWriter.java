@@ -13,7 +13,7 @@ public interface SportmanWriter {
 	/** Method  should write to it's outStream all result
 	 * @param array with competition table
 	 */
-	void printResultTable(Competition competition);
+	void printResultTable(Competition competition) throws Exception;
 	void close();
 
 }

@@ -8,7 +8,9 @@ import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Sportman;
 import net.azib.java.students.t050545.homework.writer.CSVWriter;
 import net.azib.java.students.t050545.homework.writer.ConsoleWriter;
+import net.azib.java.students.t050545.homework.writer.HTMLWriter;
 import net.azib.java.students.t050545.homework.writer.SportmanWriter;
+import net.azib.java.students.t050545.homework.writer.XMLWriter;
 
 import java.util.Arrays;
 
@@ -60,11 +62,11 @@ public class Decathlon {
 		if (args[i].equalsIgnoreCase("-csv")) {
 			writer = new CSVWriter(args[i + 1]);
 		}
-		else if (args[i] == "-xml") {
-			// TODO
+		else if (args[i].equalsIgnoreCase("-xml")) {
+			writer = new XMLWriter(args[i + 1]);
 		}
-		else if (args[i] == "-html") {
-			// TODO
+		else if (args[i].equalsIgnoreCase("-html")) {
+			writer = new HTMLWriter(args[i+1]);
 		}
 		else if (args[i].equalsIgnoreCase("-console")) {
 			writer = new ConsoleWriter();
