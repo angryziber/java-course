@@ -10,9 +10,10 @@ import net.azib.java.students.t050545.homework.writer.CSVWriter;
 import net.azib.java.students.t050545.homework.writer.ConsoleWriter;
 import net.azib.java.students.t050545.homework.writer.SportmanWriter;
 
-
-import java.io.PrintWriter;
 import java.util.Arrays;
+
+
+
 
 
 
@@ -31,19 +32,24 @@ public class Decathlon {
 		SportmanLoader loader = null;
 		SportmanWriter writer = null;
 		System.out.println(Arrays.deepToString(args));
+		Competition comp = null;
 		
         try{
 		int i = 0;
 		if (args[i].equalsIgnoreCase("-csv")) {
+			comp = new Competition("CSVbase competition", 10101);
 			loader = new CSVLoader(args[i+1]);
 			i = i + 2;
 		}
 		else if (args[i].equalsIgnoreCase("-db")) {
-			loader = new DBLoader();
-			i = i + 1;
+			loader = new DBLoader(args[i+1]);
+			comp = new Competition("DataBase Compettion", Integer.parseInt(args[i+1]));
+			//TODO how to look at dataBase name !
+			i = i + 2;
 		}
 		else if (args[i].equalsIgnoreCase("-console")){
 			loader = new ConsoleLoader();
+			comp = new Competition();
 			i++;
 		}
 		else {
@@ -75,19 +81,16 @@ public class Decathlon {
         	System.err.println("The arguments order is wrong or missing!");
         	System.exit(1);
         }
-        try{
-        Competition comp = new Competition("Mega cup", 100011);
-        Sportman sportman;
-        while((sportman = loader.nextSportman()) != null){
-        	
-        	comp.addCompetitor(sportman);
-        	
-        }
         
-        writer.printResultTable(comp.getPlaces());
-        }catch (Exception e) {
+        Sportman sportman;
+        try{
+        while((sportman = loader.nextSportman()) != null){
+        	comp.addCompetitor(sportman);
+        }}catch (Exception e) {
 			e.printStackTrace();
 		}
+        System.out.println(comp.getName()+" "+comp.getId());
+        writer.printResultTable(comp.getPlaces());
         System.out.println("END");
 		System.exit(0);
 		

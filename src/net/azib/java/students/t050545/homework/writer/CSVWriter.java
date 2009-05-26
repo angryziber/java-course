@@ -37,10 +37,14 @@ public class CSVWriter implements SportmanWriter {
 	@Override
 	public void printResultTable(Places[] places) {
 		for (Places place : places) {
-			System.out.println(place);
+			//System.out.println(place);
 			writer.print(place);
 		}
-		writer.flush();
-		
+		writer.flush();	
+	}
+	
+	@Override
+	public void close(){
+		writer.close();
 	}
 }

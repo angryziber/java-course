@@ -20,8 +20,13 @@ public class ConsoleWriter implements SportmanWriter {
 		for (Places pl : places) {
 			System.out.println(pl.toString());
 		}
-		
+	}
 	
-		
+	/** 
+	 *  It's no needed :)
+	 */
+	@Override
+	public void close(){
+		System.out.close();
 	}
 }

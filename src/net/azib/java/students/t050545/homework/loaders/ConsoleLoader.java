@@ -18,11 +18,18 @@ import java.util.Scanner;
 public class ConsoleLoader extends DataChecker implements SportmanLoader {
 
 	/**
+	 * 
+	 */
+	public ConsoleLoader() {
+		scanner = new Scanner(System.in);
+	}
+
+	/**
 	 * @return Sportman object or null, if no more
 	 * @throws ParseException exeption, if input is wrong
 	 */
-	public Sportman nextSportman() throws ParseException{
-		Scanner scanner = new Scanner(System.in);
+	public Sportman nextSportman() throws ParseException {
+
 		System.out.println("Please enter essential sportman's data");
 
 		String name;
@@ -32,50 +39,58 @@ public class ConsoleLoader extends DataChecker implements SportmanLoader {
 
 		System.out.print("Sportman's name, or -1: ");
 		name = scanner.next();
-		if(name == "-1") return null;
+		if (name == "-1")
+			return null;
 
 		do {
 			System.out.print("Country, or -1: ");
 			country = addCountry(scanner.next());
-			if(country == "-1") return null;
+			if (country == "-1")
+				return null;
 		}
 		while (!isValidCountry(country));
-		
 
 		do {
 			System.out.print("Please enter a birthDay, or -1: ");
 			birthDay = scanner.next();
-			if(birthDay == "-1") return null;
+			if (birthDay == "-1")
+				return null;
 		}
 		while (!isValidDate(birthDay));
 		GregorianCalendar birthDate = toParseBirthDay(birthDay);
-		
+
 		System.out.println("Now enter results, or -1 to finish");
-		
+
 		for (Discipline dis : Discipline.values()) {
 			float number = 0;
-			do{
-				System.out.print("The " + dis.name() +" is: ");
-				if(scanner.hasNextFloat()){
+			do {
+				System.out.print("The " + dis.name() + " is: ");
+				if (scanner.hasNextFloat()) {
 					number = scanner.nextFloat();
-					if((number+1)<=0.000001) return null;
-				} else {
+					if ((number + 1) <= 0.000001)
+						return null;
+				}
+				else {
 					System.out.println("You should enter a valid float number !");
 					scanner.next();
 				}
-					
-			}while(!isCorrectResult(number));
+
+			}
+			while (!isCorrectResult(number));
 			results[dis.ordinal()] = number;
 		}
-		
+
 		return new Sportman(new Score(results), new Person(name, country, birthDate));
 
 	}
 
+	Scanner scanner;
+
 	/**
-	 * @param args command line arguments
+	 * @param args
+	 *            command line arguments
 	 */
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		try {
 			ConsoleLoader console = new ConsoleLoader();
 			System.out.println(console.nextSportman());

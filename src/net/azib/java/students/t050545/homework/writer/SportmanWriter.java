@@ -13,5 +13,6 @@ public interface SportmanWriter {
 	 * @param array with competition table
 	 */
 	void printResultTable(Places[] places);
+	void close();
 
 }
