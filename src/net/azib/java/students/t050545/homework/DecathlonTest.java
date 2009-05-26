@@ -1,5 +1,6 @@
 package net.azib.java.students.t050545.homework;
 
+import net.azib.java.students.t050545.homework.loaders.CSVLoader;
 import net.azib.java.students.t050545.homework.loaders.DataChecker;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Person;
@@ -10,6 +11,8 @@ import net.azib.java.students.t072073.tasks.Circle;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.GregorianCalendar;
 
@@ -17,11 +20,11 @@ import org.junit.Test;
 
 /**
  * DecathlonTest
- *
+ * 
  * @author libricon
  */
 public class DecathlonTest {
-	
+
 	// PointSystem Test
 	@Test
 	public void testPointSystem() throws Exception {
@@ -37,18 +40,17 @@ public class DecathlonTest {
 		arrayScore[8] = 77.19f;
 		arrayScore[9] = 233.79001f;
 		PointSystem points = new PointSystem(arrayScore);
-		assertEquals(" Hurra  ", 10000, points.getScore(),10);
+		assertEquals(" Hurra  ", 10000, points.getScore(), 10);
 	}
-	
+
 	// Person class test
 	@Test
 	public void testPersonClass() throws Exception {
-		Person person = new Person("Jon Doe","RU",new GregorianCalendar());
+		Person person = new Person("Jon Doe", "RU", new GregorianCalendar());
 		assertEquals("Jon Doe", person.getName());
 		assertEquals("RU", person.getCountry());
-		assertEquals(new GregorianCalendar().getTime(), person.getBirthDay().getTime());
 	}
-	
+
 	// Sportman class test
 	@Test
 	public void testSportmanClass() throws Exception {
@@ -68,9 +70,9 @@ public class DecathlonTest {
 		assertEquals(10000, sportman.getPoints().getScore(), 10);
 		assertEquals(new GregorianCalendar(1987, 4, 29).getTime(), sportman.getPerson().getBirthDay().getTime());
 	}
-	
+
 	@Test
-	public void testCompetition(){
+	public void testCompetition() {
 		float[] arrayScore = new float[10];
 		arrayScore[0] = 10.395f;
 		arrayScore[1] = 7.76f;
@@ -95,9 +97,9 @@ public class DecathlonTest {
 		assertEquals(places[1].getPlaceNum(), "1-2");
 		assertEquals(places[2].getPlaceNum(), "3");
 	}
-	
+
 	@Test
-	public void testDataChecker() throws ParseException{
+	public void testDataChecker() throws ParseException {
 		DataChecker checker = new DataChecker();
 		assertEquals(true, checker.isValidCountry("RU"));
 		assertEquals(true, checker.isValidCountry("EN"));
@@ -114,13 +116,28 @@ public class DecathlonTest {
 		greg.set(0000, 00, 01);
 		assertEquals(checker.toParseBirthDay("01.01.0000").getTime(), greg.getTime());
 		assertEquals("RU", checker.addCountry("ru"));
-		
-		
-		
-		
-		
+
 	}
-	
-	
+
+	@Test
+	public void testCSVLoader() throws IOException, ParseException {
+		System.out.println(CSVLoader.class.getResource("sport_utf8.csv").getFile());
+		CSVLoader loader = new CSVLoader(CSVLoader.class.getResource("sport_utf8.csv").getFile());
+		
+		Sportman sportman;
+		Competition comp = new Competition();
+		while ((sportman = loader.nextSportman()) != null) {
+			comp.addCompetitor(sportman);
+
+		}
+		Places[] places = comp.getPlaces();
+		assertEquals(places[0].getPlaceNum(), "1");
+		assertEquals(places[0].getSportman().getPerson().getName(), "Василий Пупкин3");
+		assertEquals(places[1].getPlaceNum(), "2-4");
+		assertEquals(places[2].getPlaceNum(), "2-4");
+		assertEquals(places[3].getPlaceNum(), "2-4");
+		
+			
+	}
 
 }
