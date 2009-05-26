@@ -39,21 +39,21 @@ public class ConsoleLoader extends DataChecker implements SportmanLoader {
 
 		System.out.print("Sportman's name, or -1: ");
 		name = scanner.next();
-		if (name == "-1")
+		if (name.equals("-1"))
 			return null;
 
 		do {
 			System.out.print("Country, or -1: ");
 			country = addCountry(scanner.next());
-			if (country == "-1")
-				return null;
+			if (country.equals("-1"))
+			return null;
 		}
 		while (!isValidCountry(country));
 
 		do {
 			System.out.print("Please enter a birthDay, or -1: ");
 			birthDay = scanner.next();
-			if (birthDay == "-1")
+			if (birthDay.equals("-1"))
 				return null;
 		}
 		while (!isValidDate(birthDay));
