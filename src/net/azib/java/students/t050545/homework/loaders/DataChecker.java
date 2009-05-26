@@ -6,12 +6,12 @@ import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 
 /**
- * Parser
+ * This class contain essential validation methods for checking inputdata
  * 
  * @author libricon
  */
 public class DataChecker {
-	/**
+	/** Method parse birthday from string, in dd.MM.yyyy format
 	 * @param day String with date in format "dd.MM.yyyy"
 	 * @return the same gregorian calendar
 	 * @throws ParseException in case problems with parsing, generate parse error
@@ -34,12 +34,8 @@ public class DataChecker {
 
 		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
-		/*
-		 * if (birthDay.trim().length() != df.toPattern().length()){
-		 * System.out.println("lenght is wrong"); return false; }
-		 */
 
-		df.setLenient(false);
+		df.setLenient(false);   // the date should be valid! 
 
 		try {
 			df.parse(birthDay);
@@ -52,7 +48,7 @@ public class DataChecker {
 	}
 
 	/**
-	 * Method checkes string, if a coutry, strign chould be 2 characters
+	 * Method checkes string, country string should be 2 characters
 	 * 
 	 * @param country sportman's country in competition
 	 * @return true, if string contain 2 letters
