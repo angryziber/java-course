@@ -8,7 +8,7 @@ import java.util.Collections;
 
 /**
  * Competition class organise competition, it takes all sportmen and sort them,
- * give places For work it's needed to call method sortPlaces() to end
+ * give places For work it's needed to call method <code>getPlaces()</code> to end
  * competition and put places
  * 
  * @author libricon

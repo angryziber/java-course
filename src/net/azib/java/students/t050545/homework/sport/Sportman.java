@@ -4,7 +4,7 @@ package net.azib.java.students.t050545.homework.sport;
 import java.util.GregorianCalendar;
 
 /**
- * Sportman
+ * Sportman hold Person's data and result with scores
  * 
  * @author libricon
  */

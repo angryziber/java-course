@@ -10,7 +10,7 @@ import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
 public class Score {
 	
 	/** Constructor takes array of raw results and store all result inside
-	 * @param scores
+	 * @param scores array with result
 	 */
 	public Score(float[] scores){
 		this.scores = new float[Discipline.values().length];

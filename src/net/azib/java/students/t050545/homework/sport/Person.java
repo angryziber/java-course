@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
- * Person
+ * Person class hold name, birthday and country for the person
  *
  * @author libricon
  */
