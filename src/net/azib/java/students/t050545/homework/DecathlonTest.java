@@ -81,13 +81,18 @@ public class DecathlonTest {
 		arrayScore[7] = 5.285f;
 		arrayScore[8] = 77.19f;
 		arrayScore[9] = 233.79001f;
+		Sportman sportman0 = new Sportman(arrayScore, new Person("first", "RU", new GregorianCalendar(1987, 4, 29)));
+		arrayScore[0] = 9f;
 		Sportman sportman1 = new Sportman(arrayScore, new Person("first", "RU", new GregorianCalendar(1987, 4, 29)));
 		Sportman sportman2 = new Sportman(arrayScore, new Person("second", "RU", new GregorianCalendar(1987, 4, 29)));
 		Competition comp = new Competition();
+		comp.addCompetitor(sportman0);
 		comp.addCompetitor(sportman1);
 		comp.addCompetitor(sportman2);
 		Places[] places = comp.getPlaces();
 		assertEquals(places[0].getPlaceNum(), "1-2");
+		assertEquals(places[1].getPlaceNum(), "1-2");
+		assertEquals(places[2].getPlaceNum(), "3");
 	}
 	
 	
