@@ -61,8 +61,8 @@ public class HTMLWriter implements SportmanWriter {
 	}
 
 	/** destination file */
-	String outFile;
+	private String outFile;
 	/** transformer that transform xml to html form */
-	Transformer transformer;
+	private Transformer transformer;
 
 }

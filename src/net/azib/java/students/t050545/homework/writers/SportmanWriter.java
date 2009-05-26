@@ -10,7 +10,7 @@ import net.azib.java.students.t050545.homework.sport.Competition;
 public interface SportmanWriter {
 	
 	/** Method  should write to it's outStream all result
-	 * @param competition  competition
+	 * @param competition 
 	 * @throws Exception 
 	 */
 	void printResultTable(Competition competition) throws Exception;
