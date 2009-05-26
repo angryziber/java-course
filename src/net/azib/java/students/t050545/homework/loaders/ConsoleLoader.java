@@ -18,13 +18,13 @@ import java.util.Scanner;
 public class ConsoleLoader extends DataChecker implements SportmanLoader {
 
 	/**
-	 * 
+	 *  Take resource
 	 */
 	public ConsoleLoader() {
 		scanner = new Scanner(System.in);
 	}
 
-	/**
+	/** Return new sportman, or null of no anyone else
 	 * @return Sportman object or null, if no more
 	 * @throws ParseException exeption, if input is wrong
 	 */
@@ -84,11 +84,11 @@ public class ConsoleLoader extends DataChecker implements SportmanLoader {
 
 	}
 
-	Scanner scanner;
+	/** this is a console scanner */
+	private Scanner scanner;
 
-	/**
-	 * @param args
-	 *            command line arguments
+	/** Test method
+	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
 		try {

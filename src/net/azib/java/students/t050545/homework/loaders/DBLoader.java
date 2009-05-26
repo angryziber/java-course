@@ -12,11 +12,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.util.GregorianCalendar;
 
 /**
- * DBLoader
+ * DBLoader, load sportmans from database java.azib.net
  * 
  * @author libricon
  */
@@ -24,6 +23,7 @@ public class DBLoader extends DataChecker implements SportmanLoader {
 
 	
 	/** Cometition ID is id, what is putted into database
+	 * @param compID competition ID in DataBase
 	 * @throws SQLException
 	 */
 	public DBLoader(String compID) throws SQLException {
@@ -91,9 +91,13 @@ public class DBLoader extends DataChecker implements SportmanLoader {
 	 * results AS R ON A.id=R.athlete_id WHERE R.competition_id = 2
 	 */
 
-	ResultSet resultset;
-	Statement stmt;
-	Connection conn = null;
-	String baseQuery = "SELECT A.name, A.dob, A.country_code, R.race_100m, R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, R.discus_throw, R.pole_vault, R.javelin_throw, R.race_1500m FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id WHERE R.competition_id = ";
+	/** resultset store response from database*/
+	private ResultSet resultset;
+	/** stmt statement for database connection */
+	private Statement stmt;
+	/** conn connection itself*/
+	private Connection conn = null;
+	/** baseQuery, need to add competition id */
+	private String baseQuery = "SELECT A.name, A.dob, A.country_code, R.race_100m, R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, R.discus_throw, R.pole_vault, R.javelin_throw, R.race_1500m FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id WHERE R.competition_id = ";
 
 }

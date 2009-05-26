@@ -14,27 +14,23 @@ import java.text.ParseException;
 import java.util.GregorianCalendar;
 
 /**
- * Splitter
+ * Loader from csv file "," is separator, all data in line
  * 
  * @author libricon
  */
 public class CSVLoader extends DataChecker implements SportmanLoader {
 
-	/**
-	 * @param file
-	 *            filename, what content sportmans data
-	 * @throws FileNotFoundException
-	 *             exception, if file name is wrong or file cannot be accessed.
+	/** Standard constructor, takes results from file
+	 * @param file filename, what content sportmans data
+	 * @throws FileNotFoundException exception, if file name is wrong or file cannot be accessed.
 	 */
 	public CSVLoader(File file) throws FileNotFoundException {
 		reader = new BufferedReader(new FileReader(file));
 	}
 
-	/**
-	 * @param fileName
-	 *            filename, what content sportmans data
-	 * @throws FileNotFoundException
-	 *             exception, if file name is wrong or file cannot be accessed.
+	/** Takes full file name as a string
+	 * @param fileName filename, what content sportmans data
+	 * @throws FileNotFoundException exception, if file name is wrong or file cannot be accessed.
 	 */
 	public CSVLoader(String fileName) throws FileNotFoundException {
 		reader = new BufferedReader(new FileReader(fileName));
@@ -44,10 +40,8 @@ public class CSVLoader extends DataChecker implements SportmanLoader {
 	 * Method return Sportman object, what get from file
 	 * 
 	 * @return next sportman in file
-	 * @throws IOException
-	 *             file opening exception
-	 * @throws ParseException
-	 *             parse exception
+	 * @throws IOException file opening exception
+	 * @throws ParseException parse exception
 	 */
 	public Sportman nextSportman() throws IOException, ParseException {
 		String line = reader.readLine();
