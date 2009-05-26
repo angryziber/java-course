@@ -1,8 +1,8 @@
 package net.azib.java.students.t050545.homework.writer;
 
+import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Places;
 
-import java.io.PrintWriter;
 
 /**
  * ConsoleWriter writes result table on the screen
@@ -16,8 +16,9 @@ public class ConsoleWriter implements SportmanWriter {
 	 *  also place in competition
 	 */
 	@Override
-	public void printResultTable(Places[] places) {
-		for (Places pl : places) {
+	public void printResultTable(Competition comp) {
+		System.out.println(comp.getName()+" "+comp.getId());
+		for (Places pl : comp.getPlaces()) {
 			System.out.println(pl.toString());
 		}
 	}

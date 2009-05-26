@@ -89,8 +89,9 @@ public class Decathlon {
         }}catch (Exception e) {
 			e.printStackTrace();
 		}
-        System.out.println(comp.getName()+" "+comp.getId());
-        writer.printResultTable(comp.getPlaces());
+        
+        writer.printResultTable(comp);
+        writer.close();
         System.out.println("END");
 		System.exit(0);
 		
