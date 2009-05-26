@@ -16,30 +16,22 @@ import javax.xml.transform.stream.StreamSource;
 
 /**
  * HTMLWriter
- *
+ * 
  * @author libricon
  */
 public class HTMLWriter implements SportmanWriter {
+	
 	/**
-	 * @throws TransformerException 
-	 * @throws FileNotFoundException 
+	 * @throws TransformerException
+	 * @throws FileNotFoundException
 	 * 
 	 */
 	public HTMLWriter(String fileName) throws FileNotFoundException, TransformerException {
-		/*TransformerFactory tFactory = TransformerFactory.newInstance();
-	    transformer = tFactory.newTransformer
-	    (new javax.xml.transform.stream.StreamSource(HTMLWriter.class.getResource("competition.xslt").getFile()));
-        */
-		transformer=
-			TransformerFactory.newInstance().newTransformer(new StreamSource(HTMLWriter.class.getResource("competition.xslt").getFile()));
-	    this.outFile = fileName;
-	    
-	}
 
-	@Override
-	public void close() {
-		// TODO Auto-generated method stub
-		
+		transformer = TransformerFactory.newInstance().newTransformer(
+				new StreamSource(HTMLWriter.class.getResource("competition.xslt").getFile()));
+		this.outFile = fileName;
+
 	}
 
 	@Override
@@ -47,20 +39,24 @@ public class HTMLWriter implements SportmanWriter {
 		StringWriter out = new StringWriter();
 		XMLWriter xml = new XMLWriter(out);
 		xml.printResultTable(comp);
-		
-		StringReader in = new StringReader(out.toString());
-		transformer.transform(new StreamSource(in),
-	              new StreamResult( new FileOutputStream(outFile)));
-		
 
-		
+		StringReader in = new StringReader(out.toString());
+		transformer.transform(new StreamSource(in), new StreamResult(new FileOutputStream(outFile)));
+        out.close();
+        in.close();
 	}
 	
+	@Override
+	public void close() {
+		transformer.reset();
+
+	}
+
 	String outFile;
 	Transformer transformer;
-	
+
 	public static void main(String[] args) throws Exception {
 		System.out.println(HTMLWriter.class.getResource("competition.xslt").getFile());
 	}
-	
+
 }
