@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		elementFormDefault="qualified">
+	<xsd:element name="sportsmen" type="Sportsmen" />
+	<xsd:element name="sportsmens" type="Sportsmens"/>
+	
+	<xsd:complexType name="Sportsmen">
+		<xsd:sequence>
+			<xsd:element name="place" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="points" type="xsd:int" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="sprint100" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="longjump" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="shotput" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="highjump" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="sprint400" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="hurdles110" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="discusthrow" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="polevault" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="javelinthrow" type="xsd:float" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="race1500" type="xsd:float" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string"/>
+		<xsd:attribute name="birthday" type="xsd:string"/>
+		<xsd:attribute name="countrycode" type="xsd:string"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="Sportsmens">
+		<xsd:sequence>
+			<xsd:element ref="sportsmen" maxOccurs="unbounded" minOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>
