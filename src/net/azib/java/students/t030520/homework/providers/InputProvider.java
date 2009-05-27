@@ -33,7 +33,7 @@ public class InputProvider {
 	 * @throws IOException
 	 */
 	public static List<SportsmanWithResults> getResultFromCsv(String fileName) throws IOException {
-		return csvReaderWriter.readSportspenResultsFromConsole(fileName);
+		return csvReaderWriter.readSportspenResultsFromCsv(fileName);
 	}
 
 	/**

@@ -54,7 +54,7 @@ public class FileReaderWriter {
 	 * @return the list of sportsman's results.
 	 * @throws IOException
 	 */
-	public List<SportsmanWithResults> readSportspenResultsFromConsole(String fileName) throws IOException {
+	public List<SportsmanWithResults> readSportspenResultsFromCsv(String fileName) throws IOException {
 		List<SportsmanWithResults> results = new ArrayList<SportsmanWithResults>();
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
