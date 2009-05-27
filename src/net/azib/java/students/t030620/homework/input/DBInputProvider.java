@@ -18,7 +18,7 @@ import java.util.TreeSet;
 /**
  * DataAccess
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class DBInputProvider implements InputProvider {
 	
@@ -121,7 +121,10 @@ public class DBInputProvider implements InputProvider {
 	}
 
 
-
+	/**
+	 * @param param either competition id (Integer expected) or competition name (String expected)
+	 * @return sorted collection of DecathleteScoreKeeper with the calculated scores
+	 */
 	@Override
 	public Collection<DecathleteScoreKeeper> getInput(Object param) throws Exception {
 		if(param instanceof String) {return getScores((String)param);}

@@ -19,7 +19,7 @@ import org.w3c.dom.Node;
 /**
  * HTMLOutputProvider
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class HTMLOutputProvider implements OutputProvider {
 	
@@ -35,7 +35,13 @@ public class HTMLOutputProvider implements OutputProvider {
 			throw new Exception("No xsl file name found in output HTML component configuration file");
 		}
 	}
-
+	
+	/**
+	 * Outputs the collection of Decathlon score to the specified file in HTML format
+	 * 
+	 * @param scores sorted collection of DecathleteScoreKeeper 
+	 * @param param File instance for the HTML content to be written
+	 */
 	@Override
 	public void output(Collection<DecathleteScoreKeeper> scores, Object param) throws Exception {
 		

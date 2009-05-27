@@ -6,10 +6,14 @@ import java.sql.Timestamp;
 import java.util.Map;
 
 /**
- * DecathleteScoreWrapper
- *
- * @author Lord HellBunny
+ * DecathleteScoreKeeper
+ * 
+ * wrapper class for DecathleteScore, containing DecathleteScore instance 
+ * and fields needed to calculate and store score and place of the athlete
+ * 
+ * @author Maksim Konstantinov 030620
  */
+
 public class DecathleteScoreKeeper implements Comparable<DecathleteScoreKeeper> {
 	private int score = 0;
 	private String place;
@@ -31,6 +35,10 @@ public class DecathleteScoreKeeper implements Comparable<DecathleteScoreKeeper> 
 	}
 	
 	
+
+	/**
+	 * Caclulates and sets the 'score' field, basing on the 'scores' field values
+	 */
 	public void calclulateScore() {
 		score = 0;
 		for(Competition value : Competition.values()) {

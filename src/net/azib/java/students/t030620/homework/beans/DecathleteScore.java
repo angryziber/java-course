@@ -8,8 +8,9 @@ import java.util.Map;
 
 /**
  * DecathletScore
+ * bean, containing athlete data and competition scores
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class DecathleteScore {
 

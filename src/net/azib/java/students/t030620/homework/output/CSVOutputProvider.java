@@ -13,10 +13,17 @@ import org.apache.commons.io.FileUtils;
 /**
  * CSVOutputProvider
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class CSVOutputProvider implements OutputProvider {
-
+	
+	/**
+	 * Outputs the collection of Decathlon score to the specified file in csv format
+	 * 
+	 * @param scores sorted collection of DecathleteScoreKeeper 
+	 * @param param File instance for the CSV content to be written in
+	 */
+	
 	@Override
 	public void output(Collection<DecathleteScoreKeeper> scores, Object param) throws Exception {
 		File outputFile = (File)param;

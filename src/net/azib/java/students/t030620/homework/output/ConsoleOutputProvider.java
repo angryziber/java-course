@@ -10,7 +10,7 @@ import java.util.Collection;
 /**
  * ConsoleOutputProvider
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class ConsoleOutputProvider implements OutputProvider {
 	
@@ -21,6 +21,13 @@ public class ConsoleOutputProvider implements OutputProvider {
 	private static final int LENGTH_PLACE = 6;
 	private static final int LENGTH_VALUE = 24;
 	
+	
+	/**
+	 * Outputs the collection of Decathlon score to the console
+	 * 
+	 * @param scores sorted collection of DecathleteScoreKeeper 
+	 * @param param - not needed here, pass null
+	 */
 	@Override
 	public void output(Collection<DecathleteScoreKeeper> scores, Object param) throws Exception {
 		

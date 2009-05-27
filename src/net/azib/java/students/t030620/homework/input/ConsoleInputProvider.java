@@ -16,10 +16,14 @@ import java.util.TreeSet;
 /**
  * ConsoleInputProvider
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class ConsoleInputProvider implements InputProvider {
 
+	/**
+	 * @param param pass null instead of it
+	 * @return sorted collection of DecathleteScoreKeeper with the calculated scores
+	 */
 	@Override
 	public Collection<DecathleteScoreKeeper> getInput(Object param) throws Exception {
 		Set<DecathleteScoreKeeper> scores = new TreeSet<DecathleteScoreKeeper>();	 

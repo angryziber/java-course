@@ -5,8 +5,9 @@ import net.azib.java.students.t030620.homework.output.OutputType;
 
 /**
  * IOParams
- *
- * @author Lord HellBunny
+ * bean containing input/output parameters for the application 
+ * 
+ * @author Maksim Konstantinov 030620
  */
 public class IOParams {
 	private InputType inputType;

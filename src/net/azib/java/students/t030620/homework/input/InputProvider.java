@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * InputProvider
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public interface InputProvider {
 	

@@ -7,7 +7,7 @@ import java.util.Collection;
 /**
  * OutputProvider
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public interface OutputProvider {
 	

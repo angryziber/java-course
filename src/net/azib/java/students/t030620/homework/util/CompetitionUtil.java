@@ -8,13 +8,21 @@ import java.util.List;
 
 /**
  * CompetitionUtil
+ * utility class for decathlon competition resuts processing
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class CompetitionUtil {
 
 	
 	
+	/**
+	 * Formats the competition result for output according to its type
+	 * 
+	 * @param d the conpetition result
+	 * @param c the competition type
+	 * @return
+	 */
 	public static String formatCompetitionResult (double d, Competition c) {
 			
 			if(c == Competition.LONG_JUMP || c == Competition.POLE_VAULT || c == Competition.HIGH_JUMP) {
@@ -32,6 +40,11 @@ public class CompetitionUtil {
 			
 		}
 	
+	/**
+	 * Sets the place field for the each of input collection components accouring to its position in the list and score
+	 * @param scores sorted collection of DecathleteScoreKeeper 
+	 * @return list with of DecathleteScoreKeeper with the place set
+	 */
 	public static List<DecathleteScoreKeeper> setPlaces(List<DecathleteScoreKeeper> scores) {
 			
 			int i = 0;

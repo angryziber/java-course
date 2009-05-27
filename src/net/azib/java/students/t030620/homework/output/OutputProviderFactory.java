@@ -6,10 +6,16 @@ import java.util.Properties;
 /**
  * OutputProviderFactory
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class OutputProviderFactory {
 	
+	/**
+	 * @param type type the output type for desired provider
+	 * @param props output type type specific properties
+	 * @return InputProvider instance capable of processing the application output
+	 * @throws Exception
+	 */
 	public static OutputProvider getOutputProvider(OutputType type, Properties props) throws Exception{
 		
 		switch(type) {

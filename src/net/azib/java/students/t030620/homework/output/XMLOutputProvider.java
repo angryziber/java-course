@@ -24,11 +24,17 @@ import org.w3c.dom.Node;
 
 /**
  * XMLOutputProvider
- *
- * @author Lord HellBunny
+ * 
+ * @author Maksim Konstantinov 030620
  */
 public class XMLOutputProvider implements OutputProvider {
-
+	
+	/**
+	 * Outputs the collection of Decathlon score to the specified file in XML format
+	 * 
+	 * @param scores sorted collection of DecathleteScoreKeeper 
+	 * @param param File instance for the CML content to be written
+	 */
 	@Override
 	public void output(Collection<DecathleteScoreKeeper> scores, Object param) throws Exception {
 		File outputFile = (File)param;
@@ -38,6 +44,13 @@ public class XMLOutputProvider implements OutputProvider {
 
 	}
 	
+	
+	/**
+	 * Buids the xml document out of the sorted collection of DecathleteScoreKeeper
+	 * @param scores sorted collection of DecathleteScoreKeeper 
+	 * @return root Node containing the built document
+	 * @throws ParserConfigurationException
+	 */
 	public Node getXML(Collection<DecathleteScoreKeeper> scores) throws ParserConfigurationException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();

@@ -17,10 +17,15 @@ import java.util.TreeSet;
 /**
  * CSVInputProvider
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class CSVInputProvider implements InputProvider {
 
+	
+	/**
+	 * @param param the input csv file object (instance of File expected)
+	 * @return sorted collection of DecathleteScoreKeeper with the calculated scores
+	 */
 	@Override
 	public Collection<DecathleteScoreKeeper> getInput(Object param) throws Exception {
 		File inputFile = (File)param;

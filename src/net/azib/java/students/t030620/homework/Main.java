@@ -21,16 +21,16 @@ import java.util.Properties;
 /**
  * Main
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class Main {
 
 	/**
-	 * @param args
+	 * @param args the following input is expected -<input-method> [input-parameters] -<output-method> [output-parameters]
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		//try {
+		try {
 			
 			Utils.prompt("Ork work\n");
 			
@@ -52,16 +52,11 @@ public class Main {
 			output.output(scores, params.getOutputParam());
 			
 			Utils.prompt("Job's done");
-			
-		
-		
-	/*
+
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}*/
-		
-		
-		
+			Utils.prompt(e.getMessage());
+		}
+
 	}
 
 }

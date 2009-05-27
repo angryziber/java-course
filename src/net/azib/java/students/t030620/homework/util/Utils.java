@@ -3,8 +3,6 @@ package net.azib.java.students.t030620.homework.util;
 
 
 import java.util.Properties;
-import net.azib.java.students.t030620.homework.beans.DecathleteScoreKeeper;
-import net.azib.java.students.t030620.homework.enums.Competition;
 import net.azib.java.students.t030620.homework.input.InputType;
 import net.azib.java.students.t030620.homework.output.OutputType;
 import java.io.File;
@@ -13,13 +11,12 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Utils
  *
- * @author Lord HellBunny
+ * @author Maksim Konstantinov 030620
  */
 public class Utils {
 	
@@ -27,13 +24,17 @@ public class Utils {
 
 
 	
+	/**
+	 * Builds the input/output parameters from the application startup arguments
+	 * @param args the application input arguments
+	 * @return IOParams 
+	 * @throws Exception
+	 */
 	public static IOParams getIOParams(String[] args ) throws Exception {
 		 
 		if(args.length < 2) {
 			throw new Exception("Insufficient parameter amout");
 		}
-		
-		
 		
 		InputType inputType   = null;
 		Object inputParam     = null;		
@@ -164,6 +165,13 @@ public class Utils {
 	
 	
 	
+	/**
+	 * Parses the timnestamp of the format 'dd.MM.yyyy'
+	 * @param string string containing the timestamp
+	 * @param lineNr file line number for the error processing
+	 * @return parsed timestamp
+	 * @throws Exception
+	 */
 	public static Timestamp parseTimestamp(String string, int lineNr) throws Exception {
 		try {	
 			return new Timestamp(DATE_FORMAT.parse(string).getTime());
@@ -179,6 +187,10 @@ public class Utils {
 	
 	
 	
+	/**
+	 * @param seconds the seconds value to format
+	 * @return input formatted in format min:sec
+	 */
 	public static String formatSeconds(double seconds)  {
 		double minutes = seconds/60;
 		int iPart = (int) minutes;
@@ -186,6 +198,14 @@ public class Utils {
 		return iPart+":"+ formatDecimal(fPart*60);
 	}
 	
+	/**
+	 * Parses the seconds of the format min:sec
+	 * 
+	 * @param string string containing the seconnds in formt min:sec
+	 * @param lineNr line number for the error processing
+	 * @return the double seconds value 
+	 * @throws Exception
+	 */
 	public static double parseSeconds(String string, int lineNr) throws Exception {
 		String[] params = string.trim().split(":");
 		
@@ -211,6 +231,12 @@ public class Utils {
 		
 	}
 	
+	/**
+	 * @param string string containing the double
+	 * @param lineNr
+	 * @return line number for the error processing
+	 * @throws Exception
+	 */
 	public static double parseDouble(String string, int lineNr) throws Exception {
 		try {
 			return Double.parseDouble(string.trim());
@@ -225,11 +251,21 @@ public class Utils {
 	
 	
 	
+	/**
+	 * Formats the date in format 'dd.MM.yyyy'
+	 * @param date 
+	 * @return string containing formatted date 
+	 */
 	public static String formatDate(Timestamp date) {
 		if(date == null) return "00.00.0000";
 		return DATE_FORMAT.format(date);
 	}
 	
+	/**
+	 * Formats the double in format '##.##'
+	 * @param decimal the double to parse
+	 * @return string containing formatted double
+	 */
 	public static String formatDecimal (double decimal) {
 		
 		DecimalFormat f = new DecimalFormat("##.##");
@@ -239,10 +275,22 @@ public class Utils {
 		return f.format(decimal);
 	}
 	
+	/**
+	 * Outputs the given text to the console
+	 * @param txt text to be output
+	 */
 	public static void prompt(String txt) {
 		System.out.println(txt);
 	}
 	
+	/**
+	 * Creates the Properties instance from the file with the given name situated in the same package with the given class
+	 * 
+	 * @param fileName the .properties file containing 
+	 * @param c class in which package the file is situated
+	 * @return read properties
+	 * @throws Exception
+	 */
 	public static Properties getProperties(String fileName, Class<?> c)  throws Exception {
 		Properties props = new Properties();
 		try {
