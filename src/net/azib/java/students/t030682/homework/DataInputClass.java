@@ -36,7 +36,7 @@ public class DataInputClass {
 		int arraySize = 1;
 		String[] inputRecords = new String[arraySize];
 		System.out.println("DECATHLON RESULTS CONSOLE READER");
-		// while user says "y" ask for new athletes data
+		// while user type "y" continue asking for new athletes data
 		String action = "y";
 		while (action.charAt(0) == 121) {
 			inputRecords[arraySize - 1] = inputRecordFromConsole();
@@ -135,10 +135,12 @@ public class DataInputClass {
 		int errorLine = 0;
 		String lines[] = new String[arraySize];
 		FileInputStream fstream = new FileInputStream(filename);
+		System.out.println("Loading CSV file: " + filename);
 		DataInputStream in = new DataInputStream(fstream);
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		try {
 			String strLine;
+			System.out.println("Loading decathlon results records...");
 			while ((strLine = br.readLine()) != null) {
 				// while file contains new lines read line, compare to regex, if
 				// ok add to array and remove unneeded symbols
@@ -165,16 +167,15 @@ public class DataInputClass {
 					System.out.println("Wrong data in CSV file on line " + ++errorLine + ": " + strLine);
 				}
 			}
-
 		}
 		catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
-			finally {
-				in.close();
-				br.close();
-				fstream.close();
-			}
+		finally {
+			in.close();
+			br.close();
+			fstream.close();
+		}
 		return lines;
 	}
 
@@ -195,7 +196,14 @@ public class DataInputClass {
 		return res;
 	}
 
-	public String convertSQLString(String toConvert) {
+	/**
+	 * This method converts date from mySQL database from format YYYY-MM-DD to DD.MM.YYYY
+	 * 
+	 * @param toConvert String which is needed to be converted
+	 * @return String converted date
+	 * @author t030682
+	 */
+	private String convertSQLDate(String toConvert) {
 		char[] newString = new char[10];
 		newString[0] = toConvert.charAt(8);
 		newString[1] = toConvert.charAt(9);
@@ -211,63 +219,73 @@ public class DataInputClass {
 	}
 
 	/**
-	 * mysqlReader reads Decathlon competition data from database <b>Needs to be
-	 * implemented yet</b>
+	 * mysqlReader reads Decathlon competition data from database
 	 * 
 	 * @param database
 	 *            Database to get data from
-	 * @return
+	 * @return String[] array containg one inputted athlete's data in each array
 	 * @author t030682
 	 * @throws SQLException
 	 */
 	public String[] mysqlReader(String database) throws SQLException {
 		int arraySize = 0;
-		int errorRow=0;
+		int errorRow = 0;
 		String[] athletes = new String[arraySize];
 		Connection conn;
 		boolean emptyResult = false;
+		System.out.println("Connecting to database... ");
 		conn = DriverManager
 				.getConnection("jdbc:mysql://java.azib.net:3306/decathlon?zeroDateTimeBehavior=round", "java", "java");
 		try {
+			//query database for competition with given 'id' or 'name', one of them return needed data
 			PreparedStatement s = conn
 					.prepareStatement("select athletes.name, athletes.dob, athletes.country_code,race_100m,long_jump,shot_put,high_jump,race_400m,hurdles_110m, discus_throw,pole_vault,javelin_throw,race_1500m from decathlon.athletes,decathlon.competitions,decathlon.results	where competitions.id=results.competition_id and athletes.id=results.athlete_id and (competitions.name=? or competitions.id=?)");
 			s.setString(1, database);
 			s.setString(2, database);
+			System.out.println("Executing query...");
 			ResultSet result = s.executeQuery();
 			int i = 0;
-
+			System.out.println("Loading records...");
+			//if result is not empty, read data from ResultSet to String[] array row by row
 			if (result.next()) {
-			do {
-				String resultRow = result.getString(1) + "," + convertSQLString(result.getDate(2).toString()) + ","
-						+ result.getString(3) + "," + result.getString(4) + "," + result.getString(5) + "," + result.getString(6)
-						+ "," + result.getString(7) + "," + result.getString(8) + "," + result.getString(9) + ","
-						+ result.getString(10) + "," + result.getString(11) + "," + result.getString(12) + ","
-						+ result.getString(13);
-				if (Pattern.compile(CORRECT_STRING).matcher(resultRow).matches()) {
-					String[] tmpArray = new String[++arraySize];
-					System.arraycopy(athletes, 0, tmpArray, 0, athletes.length);
-					athletes = tmpArray;
-					athletes[arraySize - 1] = resultRow;
-					errorRow++;	
-				} else {
-					System.out.println("Wrong data in database for athlete " + result.getString(1));
-					System.out.println(resultRow);
-					++errorRow;
+				do {
+					String resultRow = result.getString(1) + "," + convertSQLDate(result.getDate(2).toString()) + ","
+							+ result.getString(3) + "," + result.getString(4) + "," + result.getString(5) + ","
+							+ result.getString(6) + "," + result.getString(7) + "," + result.getString(8) + ","
+							+ result.getString(9) + "," + result.getString(10) + "," + result.getString(11) + ","
+							+ result.getString(12) + "," + result.getString(13);
+					//check string for logical correctness, if correct copy to String[] array
+					if (Pattern.compile(CORRECT_STRING).matcher(resultRow).matches()) {
+						String[] tmpArray = new String[++arraySize];
+						System.arraycopy(athletes, 0, tmpArray, 0, athletes.length);
+						athletes = tmpArray;
+						athletes[arraySize - 1] = resultRow;
+						errorRow++;
+					}
+					//if wrong data, skip this string and output error message
+					else {
+						System.out.println("Wrong data in database for athlete " + result.getString(1) + ". Not used:");
+						System.out.println(">" + resultRow);
+						++errorRow;
+					}
+					i++;
 				}
-				i++;
-			} while (result.next());
-		} else {
-			emptyResult=true;
-			System.out.println("No data in database \"" + database + "\"");
-		}
+				while (result.next());
 			}
+			else {
+				emptyResult = true;
+				System.out.println("No data in database \"" + database + "\"");
+			}
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 		finally {
 			conn.close();
 		}
-		if (emptyResult==true) System.exit(-1);
+		//if no data was recieved from database, quit the program
+		if (emptyResult == true)
+			System.exit(-1);
 		return athletes;
 	}
 }
