@@ -1,0 +1,162 @@
+package net.azib.java.students.t090437.homework;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.SortedSet;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+/**
+ * CompetitionResultXMLProducer
+ *
+ * @author Ronald
+ */
+public class CompetitionToXML implements CompetitionResultsProducer {
+	private SortedSet<Competitor> competitors;
+	private String outputFileName;
+	private Source transformerSource;
+	
+	public CompetitionToXML(String outputFileName) {
+		this.outputFileName = outputFileName;
+	}
+	
+	private Document buildXMLDocument() {
+		Document doc = null;
+		Element root;
+	
+		try {
+			doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+		}
+		catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		root = doc.createElement("competition");
+		doc.appendChild(root);
+		
+		Element child;
+		Element result;
+		for ( Competitor competitor : competitors) {
+			child = doc.createElement("competitor");
+			child.setAttribute("name", competitor.getName());
+			child.setAttribute("country", competitor.getCountry());
+			// TODO Add birthday attribute
+			root.appendChild(child);
+			
+			result = doc.createElement("score");
+			result.appendChild(doc.createTextNode(Integer.toString(competitor.getScore())));
+			child.appendChild(result);
+			
+			result = doc.createElement("position");
+			result.appendChild(doc.createTextNode(competitor.getPosition().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("sprint100m");
+			result.appendChild(doc.createTextNode(competitor.getSprint_100m_s().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("long_jump");
+			result.appendChild(doc.createTextNode(competitor.getLong_jump_m().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("shot_put");
+			result.appendChild(doc.createTextNode(competitor.getShot_put_m().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("high_jump");
+			result.appendChild(doc.createTextNode(competitor.getShot_put_m().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("sprint400m");
+			result.appendChild(doc.createTextNode(competitor.getSprint_400m_m_s().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("hurdles");
+			result.appendChild(doc.createTextNode(competitor.getHurdles_s().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("discus");
+			result.appendChild(doc.createTextNode(competitor.getDiscus().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("pole_vault");
+			result.appendChild(doc.createTextNode(competitor.getPole_vault().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("javelin_throw");
+			result.appendChild(doc.createTextNode(competitor.getJavelin_throw().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("race1500m");
+			result.appendChild(doc.createTextNode(competitor.getRace_1500m_m_s().toString()));
+			child.appendChild(result);
+		}		
+		
+		return doc;
+	}
+	
+	protected void setTransformerStylesheet(Source source) {
+		this.transformerSource = source;
+	}
+
+	@Override
+	public void produceResults() {
+		Document doc = buildXMLDocument();
+		
+		try {
+			Transformer trans;
+			if(transformerSource == null) {
+				trans = TransformerFactory.newInstance().newTransformer();
+			} else {
+				trans = TransformerFactory.newInstance().newTransformer(transformerSource);
+			}
+			Writer outputwriter = new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8");
+			StreamResult streamresult = new StreamResult(outputwriter);
+			DOMSource source = new DOMSource(doc);
+			trans.transform(source, streamresult);
+			outputwriter.close();
+		}
+		catch (TransformerConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (TransformerFactoryConfigurationError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void setCompetitionResults(SortedSet<Competitor> competitors) {
+		this.competitors = competitors;		
+	}
+
+}
