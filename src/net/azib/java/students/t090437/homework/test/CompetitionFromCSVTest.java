@@ -3,7 +3,7 @@ package net.azib.java.students.t090437.homework.test;
 import net.azib.java.students.t090437.homework.CompetitionDataLoader;
 import net.azib.java.students.t090437.homework.Competitor;
 import net.azib.java.students.t090437.homework.CompetitionFromCSV;
-import net.azib.java.students.t090437.homework.DataLoadException;
+import net.azib.java.students.t090437.homework.MyException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -24,7 +24,7 @@ public class CompetitionFromCSVTest {
 	String line = "\"Siim Susi\",01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72";
 	
 	@Test
-	public void testIfCanReadExampleCSVFile() throws IOException, DataLoadException {
+	public void testIfCanReadExampleCSVFile() throws IOException, MyException {
 		String testFileContents = "" +
 				"\"Siim Susi\",01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72 \r\n" +
 				"\"Beata Kana\",29.02.1982,ZA,13.04,4.53,7.79,1.55,1:04.72,18.74,24.20,2.40,28.20,6:50.76 \r\n" + 
@@ -40,7 +40,7 @@ public class CompetitionFromCSVTest {
 		
 		CompetitionDataLoader dataLoader = new CompetitionFromCSV(testFileLocation);
 		
-		dataLoader.loadAndProcessData();
+		dataLoader.loadData();
 		
 		SortedSet<Competitor> competitors = dataLoader.getResults();
 		
@@ -67,7 +67,7 @@ public class CompetitionFromCSVTest {
 	}
 	
 	@Test
-	public void testIfWorksWithEmptyFile() throws IOException, DataLoadException {
+	public void testIfWorksWithEmptyFile() throws IOException, MyException {
 		String testFileContents = "";
 		String testFileLocation = System.getProperty("java.io.tmpdir") + "testinputcsvfile.csv"; 
 		
@@ -78,7 +78,7 @@ public class CompetitionFromCSVTest {
 		
 		CompetitionDataLoader dataLoader = new CompetitionFromCSV(testFileLocation);
 		
-		dataLoader.loadAndProcessData();
+		dataLoader.loadData();
 		
 		SortedSet<Competitor> competitors = dataLoader.getResults();
 		
