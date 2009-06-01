@@ -8,6 +8,6 @@ import java.util.SortedSet;
  * @author Ronald
  */
 public interface CompetitionDataLoader {
-	public void loadAndProcessData() throws DataLoadException;
+	public void loadData() throws MyException;
 	public SortedSet<Competitor> getResults();
 }

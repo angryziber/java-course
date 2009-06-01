@@ -49,7 +49,7 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 	}
 	
 	@Override
-	public void loadAndProcessData() throws DataLoadException {
+	public void loadData() throws MyException {
 		loadProperties();
 		PreparedStatement statement;
 		ResultSet results;
@@ -62,7 +62,7 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 					 dbProp.getProperty("username"), dbProp.getProperty("password"));
 		}
 		catch (SQLException e) {
-			throw new DataLoadException("Unable to connect to database : " + e);
+			throw new MyException("Unable to connect to database : " + e);
 		}
 		
 		if(filterByName) {
@@ -72,9 +72,9 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 				results = statement.executeQuery();
 				
 				if(!results.next() || results.getInt("count") == 0) {
-					throw new DataLoadException("No competitions with the name " + competitionName);
+					throw new MyException("No competitions with the name " + competitionName);
 				} else if(results.getInt("count") > 1) {
-					throw new DataLoadException("Too many competitions by the name " + competitionName +
+					throw new MyException("Too many competitions by the name " + competitionName +
 							". Use competition id for selecting the competition.");
 				} else {
 					competitionId = results.getInt("id");
@@ -98,35 +98,22 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 			}
 			catch (SQLException e1) {
 			}
-			throw new DataLoadException("Unable to load data from database : " + e);
+			throw new MyException("Unable to load data from database : " + e);
 		}
 		
 		competitors = new TreeSet<Competitor>();
 		
 		while(true) {
-			competitor = new Competitor();
 			badCompetitionEntry = false;
+			competitor = null;
 			
 			try {
 				if(!results.next()) {
 					break;
 				}
 			
-				competitor.setSprint_100m_s(MyTime.createObj(((double)results.getFloat("race_100m"))));
-				competitor.setLong_jump_m(MyDouble.createObj((double)results.getFloat("long_jump")));
-				competitor.setShot_put_m(MyDouble.createObj((double)results.getFloat("shot_put")));
-				competitor.setHigh_jump_m(MyDouble.createObj((double)results.getFloat("high_jump")));
-				competitor.setSprint_400m_m_s(MyTime.createObj((double)results.getFloat("race_400m")));
-				competitor.setHurdles_s(MyTime.createObj((double)results.getFloat("hurdles_110m")));
-				competitor.setDiscus(MyDouble.createObj((double)results.getFloat("discus_throw")));
-				competitor.setPole_vault(MyDouble.createObj((double)results.getFloat("pole_vault")));
-				competitor.setJavelin_throw(MyDouble.createObj((double)results.getFloat("javelin_throw")));
-				competitor.setRace_1500m_m_s(MyTime.createObj((double)results.getFloat("race_1500m")));
-				
-				competitor.setName(results.getString("name"));
-				competitor.setBirthday(results.getDate("dob"));
-				competitor.setCountry(results.getString("country_code"));
-			} catch(SQLException e) {
+				competitor = insertNewCompetitor(results);
+			} catch(Exception e) {
 				badCompetitionEntry = true;
 				try {
 					System.out.println(("Bad data or result entry for competitor " + results.getString("name") + "\r\n" +
@@ -150,14 +137,35 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 		PositionCalculator.calcPositions(competitors);
 	}
 
-	private void loadProperties() throws DataLoadException {
+	private Competitor insertNewCompetitor(ResultSet results) throws SQLException, BadDataFormatException {
+		Competitor competitor = new Competitor();
+		
+		competitor.setSprint_100m_s(MyTime.createObj(((double)results.getFloat("race_100m"))));
+		competitor.setLong_jump_m(MyDouble.createObj((double)results.getFloat("long_jump")));
+		competitor.setShot_put_m(MyDouble.createObj((double)results.getFloat("shot_put")));
+		competitor.setHigh_jump_m(MyDouble.createObj((double)results.getFloat("high_jump")));
+		competitor.setSprint_400m_m_s(MyTime.createObj((double)results.getFloat("race_400m")));
+		competitor.setHurdles_s(MyTime.createObj((double)results.getFloat("hurdles_110m")));
+		competitor.setDiscus(MyDouble.createObj((double)results.getFloat("discus_throw")));
+		competitor.setPole_vault(MyDouble.createObj((double)results.getFloat("pole_vault")));
+		competitor.setJavelin_throw(MyDouble.createObj((double)results.getFloat("javelin_throw")));
+		competitor.setRace_1500m_m_s(MyTime.createObj((double)results.getFloat("race_1500m")));
+		
+		competitor.setName(results.getString("name"));
+		competitor.setBirthday(results.getDate("dob"));
+		competitor.setCountry(results.getString("country_code"));
+		
+		return competitor;
+	}
+
+	private void loadProperties() throws MyException {
 		dbProp = new Properties();
 		try {
 			InputStream location = getClass().getResourceAsStream("db.properties");
 			dbProp.load(location);
 		}
 		catch (Exception e) {
-			throw new DataLoadException("Unable to read information about results database");
+			throw new MyException("Unable to read information about results database");
 		}
 	}
 

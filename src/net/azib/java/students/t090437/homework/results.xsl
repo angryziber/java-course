@@ -16,6 +16,7 @@
 	<tr>
 	<td><b><xsl:value-of select="position"/>.</b></td>
 	<td><b><xsl:value-of select="@name"/></b></td>
+	<td><xsl:value-of select="@birthday"/></td>
 	<td><xsl:value-of select="@country"/></td>
 	<td><b><xsl:value-of select="score"/></b></td>
 	

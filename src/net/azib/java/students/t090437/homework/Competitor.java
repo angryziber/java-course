@@ -1,5 +1,6 @@
 package net.azib.java.students.t090437.homework;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -8,6 +9,8 @@ import java.util.Date;
  * @author Ronald
  */
 public class Competitor implements Comparable<Competitor> {
+	private static String dateStrFormat = "dd.MM.yyyy";
+	
 	private String name;
 	private Date birthday;	
 	private String country;
@@ -118,11 +121,21 @@ public class Competitor implements Comparable<Competitor> {
 	public Date getBirthday() {
 		return birthday;
 	}
+	
+	public String getBirthdayStr() {
+		return new SimpleDateFormat(dateStrFormat).format(birthday);
+	}
 
 	/**
 	 * @param country the country to set
+	 * @throws BadDataFormatException 
 	 */
-	public void setCountry(String country) {
+	public void setCountry(String country) throws BadDataFormatException {
+		if(country.length() != 2 && country.charAt(0) >= 'A' 
+			&& country.charAt(0) <= 'Z' && country.charAt(1) >= 'A'
+				&& country.charAt(1) <= 'Z') {
+			throw new BadDataFormatException("Bad country code format : " + country);
+		}
 		this.country = country;
 	}
 

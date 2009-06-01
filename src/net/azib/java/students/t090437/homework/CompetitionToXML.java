@@ -1,8 +1,6 @@
 package net.azib.java.students.t090437.homework;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.SortedSet;
@@ -11,10 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -56,6 +51,7 @@ public class CompetitionToXML implements CompetitionResultsProducer {
 			child = doc.createElement("competitor");
 			child.setAttribute("name", competitor.getName());
 			child.setAttribute("country", competitor.getCountry());
+			child.setAttribute("birthday", competitor.getBirthdayStr());
 			// TODO Add birthday attribute
 			root.appendChild(child);
 			
@@ -116,7 +112,7 @@ public class CompetitionToXML implements CompetitionResultsProducer {
 	}
 
 	@Override
-	public void produceResults() {
+	public void produceResults() throws MyException {
 		Document doc = buildXMLDocument();
 		
 		try {
@@ -132,25 +128,8 @@ public class CompetitionToXML implements CompetitionResultsProducer {
 			trans.transform(source, streamresult);
 			outputwriter.close();
 		}
-		catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (TransformerFactoryConfigurationError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		catch (Exception e) {
+			throw new MyException("Unable to produce XML output.\r\n" + e);
 		}
 
 	}

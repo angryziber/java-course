@@ -16,9 +16,14 @@ public class CompetitionToHTML extends CompetitionToXML {
 	}
 	
 	@Override
-	public void produceResults() {
+	public void produceResults() throws MyException{
 		setTransformerStylesheet(new StreamSource(getClass().getResource("results.xsl").toString()));
-		super.produceResults();
+		try {
+			super.produceResults();
+		}
+		catch (MyException e) {
+			throw new MyException("Unable to produce HTML output.\r\n" + e);
+		}
 	}
 
 }

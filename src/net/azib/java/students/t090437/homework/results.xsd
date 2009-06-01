@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="competition" type="manyCompetitors"></xs:element>
+
+    <xs:complexType name="manyCompetitors">
+    	
+        <xs:sequence>
+    		
+            <xs:element name="competitor" type="competitorType" maxOccurs="unbounded" minOccurs="0">
+    		</xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="competitorType">
+    	
+        <xs:sequence>
+    		<xs:element name="score" type="xs:string"></xs:element>
+    		
+            <xs:element name="position" type="xs:string"></xs:element>
+            
+            <xs:element name="sprint100m" type="xs:string"></xs:element>
+            
+            <xs:element name="long_jump" type="xs:string"></xs:element>
+            
+            <xs:element name="shot_put" type="xs:string"></xs:element>
+            
+            <xs:element name="high_jump" type="xs:string"></xs:element>
+            
+            <xs:element name="sprint400m" type="xs:string"></xs:element>
+            
+            <xs:element name="hurdles" type="xs:string"></xs:element>
+            
+            <xs:element name="discus" type="xs:string"></xs:element>
+            
+            <xs:element name="pole_vault" type="xs:string"></xs:element>
+            
+            <xs:element name="javelin_throw" type="xs:string"></xs:element>
+            
+            <xs:element name="race1500m" type="xs:string"></xs:element>
+        </xs:sequence>
+        
+        <xs:attribute name="name" type="xs:string"></xs:attribute>
+        
+        <xs:attribute name="birthday" type="xs:string"></xs:attribute>
+        
+        <xs:attribute name="country" type="xs:string"></xs:attribute>
+    </xs:complexType>
+</xs:schema>

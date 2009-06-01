@@ -9,5 +9,5 @@ import java.util.SortedSet;
  */
 public interface CompetitionResultsProducer {
 	public void setCompetitionResults(SortedSet<Competitor> competitors);
-	public void produceResults();
+	public void produceResults() throws MyException;
 }

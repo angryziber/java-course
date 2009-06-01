@@ -1,9 +1,10 @@
 package net.azib.java.students.t090437.homework;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.SortedSet;
@@ -60,11 +61,11 @@ public class CompetitionFromCSV implements CompetitionDataLoader {
 		return competitors;
 	}
 
-	public void loadAndProcessData() throws DataLoadException {
+	public void loadData() throws MyException {
 		Competitor comp = null;
 		boolean firstQuoteFound = false;
 		try {
-			reader = new BufferedReader(new FileReader(fileName));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
 			while(reader.ready()) {
 				// Hack for getting rid of BOM
 				while(reader.ready() && !firstQuoteFound) {
@@ -80,15 +81,14 @@ public class CompetitionFromCSV implements CompetitionDataLoader {
 				comp.calcScore();
 				competitors.add(comp);
 			}
-			PositionCalculator.calcPositions(competitors);
 		} catch(FileNotFoundException exc) {
-			throw new DataLoadException("File \"" + fileName +"\" not found.");
+			throw new MyException("File \"" + fileName +"\" not found.");
 		}
 		catch(IOException exc) {
-			throw new DataLoadException("Failed to read file : " + exc);
+			throw new MyException("Failed to read file : " + exc);
 		}
 		catch (BadDataFormatException e) {
-			throw new DataLoadException("Error in parsing : " + e);
+			throw new MyException("Error in parsing : " + e);
 		}
 		finally {
 			try {
