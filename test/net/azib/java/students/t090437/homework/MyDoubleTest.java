@@ -1,7 +1,7 @@
 package net.azib.java.students.t090437.homework;
 
 import net.azib.java.students.t090437.homework.BadDataFormatException;
-import net.azib.java.students.t090437.homework.MyDouble;
+import net.azib.java.students.t090437.homework.DecimalResult;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,9 +15,9 @@ import org.junit.Test;
 public class MyDoubleTest {
 	@Test
 	public void testIfParsesFromStringCorrectly() throws BadDataFormatException {
-		Assert.assertEquals(MyDouble.parseDouble("1.00").getValue(), 1.00, 0.001);
-		Assert.assertEquals(MyDouble.parseDouble("1").getValue(), 1.00, 0.001);
-		Assert.assertEquals(MyDouble.parseDouble("1").getValue(), 1.00, 0.001);
+		Assert.assertEquals(DecimalResult.parseDouble("1.00").getValue(), 1.00, 0.001);
+		Assert.assertEquals(DecimalResult.parseDouble("1").getValue(), 1.00, 0.001);
+		Assert.assertEquals(DecimalResult.parseDouble("1").getValue(), 1.00, 0.001);
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class MyDoubleTest {
 		boolean errorDetected = false;
 		
 		try {
-			MyDouble.parseDouble("1,00");
+			DecimalResult.parseDouble("1,00");
 		}
 		catch (BadDataFormatException e) {
 			errorDetected = true;
@@ -34,7 +34,7 @@ public class MyDoubleTest {
 		
 		errorDetected = false;
 		try {
-			MyDouble.parseDouble("");
+			DecimalResult.parseDouble("");
 		}
 		catch (BadDataFormatException e) {
 			errorDetected = true;
@@ -44,7 +44,7 @@ public class MyDoubleTest {
 
 	@Test
 	public void testIfPrintsStringsCorrectly() throws BadDataFormatException {
-		Assert.assertEquals(MyDouble.createObj(1).toString(), "1.00");
-		Assert.assertEquals(MyDouble.createObj(0).toString(), "0.00");
+		Assert.assertEquals(DecimalResult.createObj(1).toString(), "1.00");
+		Assert.assertEquals(DecimalResult.createObj(0).toString(), "0.00");
 	}
 }
