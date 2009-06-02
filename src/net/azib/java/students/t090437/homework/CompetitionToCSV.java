@@ -28,7 +28,7 @@ public class CompetitionToCSV implements CompetitionResultsProducer {
 			
 			for(Competitor competitor : competitors) {
 				writer.write(competitor.getPosition() + "," + Integer.toString(competitor.getScore()) + 
-						"," + competitor.getName() + "," + competitor.getBirthdayStr() + "," + competitor.getCountry() +
+						",\"" + competitor.getName() + "\"," + competitor.getBirthdayStr() + "," + competitor.getCountry() +
 						"," + competitor.getSprint_100m_s() + "," + competitor.getLong_jump_m() +
 						"," + competitor.getShot_put_m() + "," + competitor.getHigh_jump_m() +
 						"," + competitor.getSprint_400m_m_s() + "," + competitor.getHurdles_s() +
