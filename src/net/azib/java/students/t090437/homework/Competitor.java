@@ -18,17 +18,17 @@ public class Competitor implements Comparable<Competitor> {
 	private Date birthday;	
 	private String country;
 	
-	private MyDouble long_jump_m;
-	private MyDouble shot_put_m;
-	private MyDouble high_jump_m;
-	private MyDouble discus;
-	private MyDouble pole_vault;
-	private MyDouble javelin_throw;
+	private DecimalResult long_jump_m;
+	private DecimalResult shot_put_m;
+	private DecimalResult high_jump_m;
+	private DecimalResult discus;
+	private DecimalResult pole_vault;
+	private DecimalResult javelin_throw;
 	
-	private MyTime sprint_100m_s;
-	private MyTime sprint_400m_m_s;
-	private MyTime hurdles_s;
-	private MyTime race_1500m_m_s;
+	private TimeResult sprint_100m_s;
+	private TimeResult sprint_400m_m_s;
+	private TimeResult hurdles_s;
+	private TimeResult race_1500m_m_s;
 	
 	private int score = 0;
 	
@@ -168,56 +168,56 @@ public class Competitor implements Comparable<Competitor> {
 	/**
 	 * @param sprint_100m_s the sprint_100m_s to set
 	 */
-	public void setSprint_100m_s(MyTime sprint_100m_s) {
+	public void setSprint_100m_s(TimeResult sprint_100m_s) {
 		this.sprint_100m_s = sprint_100m_s;
 	}
 
 	/**
 	 * @return the sprint_100m_s
 	 */
-	public MyTime getSprint_100m_s() {
+	public TimeResult getSprint_100m_s() {
 		return sprint_100m_s;
 	}
 
 	/**
 	 * @param sprint_400m_m_s the sprint_400m_m_s to set
 	 */
-	public void setSprint_400m_m_s(MyTime sprint_400m_m_s) {
+	public void setSprint_400m_m_s(TimeResult sprint_400m_m_s) {
 		this.sprint_400m_m_s = sprint_400m_m_s;
 	}
 
 	/**
 	 * @return the sprint_400m_m_s
 	 */
-	public MyTime getSprint_400m_m_s() {
+	public TimeResult getSprint_400m_m_s() {
 		return sprint_400m_m_s;
 	}
 
 	/**
 	 * @param hurdles_s the hurdles_s to set
 	 */
-	public void setHurdles_s(MyTime hurdles_s) {
+	public void setHurdles_s(TimeResult hurdles_s) {
 		this.hurdles_s = hurdles_s;
 	}
 
 	/**
 	 * @return the hurdles_s
 	 */
-	public MyTime getHurdles_s() {
+	public TimeResult getHurdles_s() {
 		return hurdles_s;
 	}
 
 	/**
 	 * @param race_1500m_m_s the race_1500m_m_s to set
 	 */
-	public void setRace_1500m_m_s(MyTime race_1500m_m_s) {
+	public void setRace_1500m_m_s(TimeResult race_1500m_m_s) {
 		this.race_1500m_m_s = race_1500m_m_s;
 	}
 
 	/**
 	 * @return the race_1500m_m_s
 	 */
-	public MyTime getRace_1500m_m_s() {
+	public TimeResult getRace_1500m_m_s() {
 		return race_1500m_m_s;
 	}
 
@@ -238,84 +238,84 @@ public class Competitor implements Comparable<Competitor> {
 	/**
 	 * @param long_jump_m the long_jump_m to set
 	 */
-	public void setLong_jump_m(MyDouble long_jump_m) {
+	public void setLong_jump_m(DecimalResult long_jump_m) {
 		this.long_jump_m = long_jump_m;
 	}
 
 	/**
 	 * @return the long_jump_m
 	 */
-	public MyDouble getLong_jump_m() {
+	public DecimalResult getLong_jump_m() {
 		return long_jump_m;
 	}
 
 	/**
 	 * @param shot_put_m the shot_put_m to set
 	 */
-	public void setShot_put_m(MyDouble shot_put_m) {
+	public void setShot_put_m(DecimalResult shot_put_m) {
 		this.shot_put_m = shot_put_m;
 	}
 
 	/**
 	 * @return the shot_put_m
 	 */
-	public MyDouble getShot_put_m() {
+	public DecimalResult getShot_put_m() {
 		return shot_put_m;
 	}
 
 	/**
 	 * @param high_jump_m the high_jump_m to set
 	 */
-	public void setHigh_jump_m(MyDouble high_jump_m) {
+	public void setHigh_jump_m(DecimalResult high_jump_m) {
 		this.high_jump_m = high_jump_m;
 	}
 
 	/**
 	 * @return the high_jump_m
 	 */
-	public MyDouble getHigh_jump_m() {
+	public DecimalResult getHigh_jump_m() {
 		return high_jump_m;
 	}
 
 	/**
 	 * @param discus the discus to set
 	 */
-	public void setDiscus(MyDouble discus) {
+	public void setDiscus(DecimalResult discus) {
 		this.discus = discus;
 	}
 
 	/**
 	 * @return the discus
 	 */
-	public MyDouble getDiscus() {
+	public DecimalResult getDiscus() {
 		return discus;
 	}
 
 	/**
 	 * @param pole_vault the pole_vault to set
 	 */
-	public void setPole_vault(MyDouble pole_vault) {
+	public void setPole_vault(DecimalResult pole_vault) {
 		this.pole_vault = pole_vault;
 	}
 
 	/**
 	 * @return the pole_vault
 	 */
-	public MyDouble getPole_vault() {
+	public DecimalResult getPole_vault() {
 		return pole_vault;
 	}
 
 	/**
 	 * @param javelin_throw the javelin_throw to set
 	 */
-	public void setJavelin_throw(MyDouble javelin_throw) {
+	public void setJavelin_throw(DecimalResult javelin_throw) {
 		this.javelin_throw = javelin_throw;
 	}
 
 	/**
 	 * @return the javelin_throw
 	 */
-	public MyDouble getJavelin_throw() {
+	public DecimalResult getJavelin_throw() {
 		return javelin_throw;
 	}
 }
