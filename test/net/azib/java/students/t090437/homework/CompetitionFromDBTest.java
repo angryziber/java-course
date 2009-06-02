@@ -55,8 +55,7 @@ public class CompetitionFromDBTest {
 	public void testIfReadsFromDB() throws SQLException, MyException {
 		setUpTestDatabase();
 		
-		CompetitionFromDB loader = new CompetitionFromDB(0);
-		loader.setDbConn(connection);
+		CompetitionDataLoader loader = new CompetitionFromDB(0);
 		loader.loadData();
 		
 		SortedSet<Competitor> competitors = loader.getResults();
