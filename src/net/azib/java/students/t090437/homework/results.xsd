@@ -15,10 +15,10 @@
     <xs:complexType name="competitorType">
     	
         <xs:sequence>
-    		<xs:element name="score" type="xs:string"></xs:element>
-    		
             <xs:element name="position" type="xs:string"></xs:element>
             
+    		<xs:element name="score" type="xs:string"></xs:element>
+    		
             <xs:element name="sprint100m" type="xs:string"></xs:element>
             
             <xs:element name="long_jump" type="xs:string"></xs:element>
