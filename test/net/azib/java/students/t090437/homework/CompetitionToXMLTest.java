@@ -78,8 +78,7 @@ public class CompetitionToXMLTest {
 	        validator.validate(new DOMSource(document));
 	    } catch (SAXException e) {
 	        Assert.assertTrue(false);
-	    }
-		
+	    }		
 	}
 
 }
