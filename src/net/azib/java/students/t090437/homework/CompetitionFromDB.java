@@ -52,13 +52,14 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 	
 	@Override
 	public void loadData() throws MyException {
-		//loadProperties();
 		PreparedStatement statement;
 		ResultSet results;
 		Competitor competitor;
 		boolean badCompetitionEntry;
 		
-		dbConn = openConnection();
+		if(dbConn == null) {
+			dbConn = openConnection();			
+		}
 		
 		if(filterByName) {
 			try {
@@ -82,7 +83,7 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 		}
 		
 		try {
-			statement = dbConn.prepareStatement("SELECT * FROM `results`, athletes WHERE competition_id = ? AND athletes.id = results.athlete_id");
+			statement = dbConn.prepareStatement("SELECT * FROM results, athletes WHERE results.competition_id = ? AND athletes.id = results.athlete_id");
 			statement.setInt(1, competitionId);
 			statement.execute();
 			results = statement.getResultSet();
@@ -126,8 +127,6 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 		}
 		catch (SQLException e) {
 		}
-		
-		PositionCalculator.calcPositions(competitors);
 	}
 
 	/**
@@ -165,5 +164,13 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 		competitor.setCountry(results.getString("country_code"));
 		
 		return competitor;
+	}
+	
+	/**
+	 * Database connection setter for debugging purposes
+	 * @param dbConn
+	 */
+	public void setDbConn(Connection dbConn) {
+		this.dbConn = dbConn;
 	}
 }
