@@ -73,12 +73,14 @@ public class CompetitionToXMLTest {
 	    // create a Validator instance, which can be used to validate an instance document
 	    Validator validator = schema.newValidator();
 
+	    testOutputFile.delete();
+	    testInputFile.delete();
 	    // validate the DOM tree
 	    try {
 	        validator.validate(new DOMSource(document));
 	    } catch (SAXException e) {
 	        Assert.assertTrue(false);
-	    }		
+	    }
 	}
 
 }
