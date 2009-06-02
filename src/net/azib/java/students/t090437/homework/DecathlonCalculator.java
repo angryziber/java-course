@@ -31,11 +31,14 @@ public class DecathlonCalculator {
 //		outputMethod = 3;
 //		output_arg = "C:\\results.html";
 		
-		if(inputMethod == 0) { // -console
+		switch(inputMethod) {
+		case 0: // -console
 			loader = new CompetitionFromConsole();
-		} else if(inputMethod == 1) { // -csv
+			break;
+		case 1: // -csv
 			loader = new CompetitionFromCSV(input_arg);
-		} else if(inputMethod == 2) { // -db
+			break;
+		case 2: // -db
 			int dbId = -1;
 			boolean isArgNumeric = true;
 			
@@ -58,28 +61,32 @@ public class DecathlonCalculator {
 			} else {
 				loader = new CompetitionFromDB(input_arg);
 			}
-		} else {
+			break;
+		default:
 			System.out.println("No input method recognized.");
 			printUsage();
 			return;
 		}
-		
-		
-		if(outputMethod == 0) {
+
+		switch(outputMethod) {
+		case 0: // -console
 			producer = new CompetitionToConsole();
-		} else if(outputMethod == 1) {
+			break;
+		case 1: // -csv
 			producer = new CompetitionToCSV(output_arg);
-		} else if(outputMethod == 2) {
+			break;
+		case 2: // -xml
 			producer = new CompetitionToXML(output_arg);
-		} else if(outputMethod == 3) {
+			break;
+		case 3:
 			producer = new CompetitionToHTML(output_arg);
-		} else {
+			break;
+		default:
 			System.out.println("No output method recognized.");
 			printUsage();
 			return;
 		}
-		
-		
+
 		try {
 			loader.loadData();
 		} catch(MyException e) {
