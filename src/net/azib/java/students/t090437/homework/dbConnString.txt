@@ -1,0 +1,1 @@
+jdbc:mysql://java.azib.net:3306/decathlon?user=java&password=java
