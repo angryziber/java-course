@@ -53,7 +53,11 @@ public class CompetitionFromDBTest {
 		setUpTestDatabase();
 		
 		CompetitionDataLoader loader = new CompetitionFromDB(0);
-		loader.loadData();
+		try {
+			loader.loadData();
+		} catch(Exception e) {
+			Assert.assertTrue(false);
+		}
 		
 		SortedSet<Competitor> competitors = loader.getResults();
 		Competitor competitor = competitors.first();
