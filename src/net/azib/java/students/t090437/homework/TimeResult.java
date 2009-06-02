@@ -69,8 +69,8 @@ public class TimeResult {
 	 */
 	public static TimeResult createObj(double sec) {
 		TimeResult obj = new TimeResult();
-		obj.sec = sec%60.0;
-		int min = (int) (sec - obj.sec)/60;
+		obj.sec = sec;
+		int min = (int) (sec - sec%60.0)/60;
 		
 		DecimalFormat formatter = formatterTo2Decimal();		
 		
