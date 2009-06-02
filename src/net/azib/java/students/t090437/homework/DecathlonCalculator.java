@@ -48,8 +48,8 @@ public class DecathlonCalculator {
 			if(isArgNumeric) {
 				System.out.println("This argument can be database name or database id");
 				System.out.println("Is this database id? Enter y if it is or anything else if not.");
-				if(!(new Scanner(System.in)).nextLine().equals("y")) {
-					isArgNumeric = true;
+				if(!(new Scanner(System.in)).nextLine().trim().equals("y")) {
+					isArgNumeric = false;
 				}
 			}
 			

@@ -29,6 +29,7 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 	 * @param competitionName
 	 */
 	public CompetitionFromDB(String competitionName) {
+		competitors = new TreeSet<Competitor>();
 		this.competitionName = competitionName;
 		filterByName = true;
 	}
@@ -100,8 +101,6 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 			}
 			throw new MyException("Unable to load data from database : " + e);
 		}
-		
-		competitors = new TreeSet<Competitor>();
 		
 		while(true) {
 			badCompetitionEntry = false;

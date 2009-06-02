@@ -5,6 +5,9 @@ import java.util.Date;
 
 /**
  * Competitor
+ * 
+ * Class for storing data and results of the competitor. Contains methods for 
+ * calculating the score of the competitor.
  *
  * @author Ronald
  */
@@ -87,11 +90,13 @@ public class Competitor implements Comparable<Competitor> {
 		}
 	}
 	
+	/**
+	 * Tells if the competitor names and birthdays are equal.
+	 */
 	@Override
 	public boolean equals(Object o) {
 		Competitor c = (Competitor)o;
-		// TODO Should compare birthdays as well?
-		return name.equals(c.getName());
+		return name.equals(c.getName()) && birthday.equals(c.getBirthday());
 	}
 
 	/**

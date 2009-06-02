@@ -22,6 +22,11 @@ public class MyDouble {
 		value = 0.0;
 	}
 	
+	/**
+	 * When the object was created with parseDouble, returns the string 
+	 * used as the parameter, otherwise will return the double as string with 
+	 * 2 decimal places.
+	 */
 	public String toString() {
 		return str;
 	}
@@ -52,6 +57,11 @@ public class MyDouble {
 		return obj;		
 	}
 	
+	/**
+	 * Creates new MyDouble object.
+	 * @param value
+	 * @return
+	 */
 	public static MyDouble createObj(double value) {
 		MyDouble obj = new MyDouble();
 		

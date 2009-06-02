@@ -4,6 +4,10 @@ import javax.xml.transform.stream.StreamSource;
 
 /**
  * CompetitionToHTML
+ * 
+ * Class for creating HTML document from the competition data. Uses CompetitionToXML class 
+ * to create an XML document object from the data results.xsl XSLT transform stylesheet 
+ * file for transforming the XML object to HTML file.
  *
  * @author Ronald
  */

@@ -21,6 +21,12 @@ public class CompetitionFromCSV implements CompetitionDataLoader {
 	String fileName;
 	SortedSet<Competitor> competitors;
 	
+	/**
+	 * Creates new object with interface of CompetitionDataLoader for loading 
+	 * competitor data and results from a CSV file.
+	 * 
+	 * @param fileName filename or path to CSV file containing competitor data. 
+	 */
 	public CompetitionFromCSV(String fileName) {
 		this.fileName = fileName;
 		competitors = new TreeSet<Competitor>();
@@ -57,10 +63,21 @@ public class CompetitionFromCSV implements CompetitionDataLoader {
 		return comp;
 	}
 
+	/**
+	 * Returns SortedSet<Competitor> containing the data loaded from the CSV file.
+	 */
+	@Override
 	public SortedSet<Competitor> getResults() {
 		return competitors;
 	}
 
+	/**
+	 * Loads data from the CSV file specified in the constructor. If any of the data fields 
+	 * is invalid, it ends reading the data and stores only the data of previous entries.
+	 * 
+	 * @throws MyException if any of the data fields is invalid.
+	 */
+	@Override
 	public void loadData() throws MyException {
 		Competitor comp = null;
 		boolean firstQuoteFound = false;

@@ -18,6 +18,8 @@ import org.w3c.dom.Element;
 
 /**
  * CompetitionResultXMLProducer
+ * 
+ * Class for generating XML file from the competitor data.
  *
  * @author Ronald
  */
@@ -26,10 +28,20 @@ public class CompetitionToXML implements CompetitionResultsProducer {
 	private String outputFileName;
 	private Source transformerSource;
 	
+	/**
+	 * Creates new object for generating the XML to the location 
+	 * specified by the parameter.
+	 * 
+	 * @param outputFileName
+	 */
 	public CompetitionToXML(String outputFileName) {
 		this.outputFileName = outputFileName;
 	}
 	
+	/**
+	 * Builds a XML document object from the competitors specified.
+	 * @return
+	 */
 	private Document buildXMLDocument() {
 		Document doc = null;
 		Element root;
@@ -107,10 +119,19 @@ public class CompetitionToXML implements CompetitionResultsProducer {
 		return doc;
 	}
 	
+	/**
+	 * Sets the source for the style sheet for transforming the XML document to file output.  
+	 * @param source
+	 */
 	protected void setTransformerStylesheet(Source source) {
 		this.transformerSource = source;
 	}
 
+	/**
+	 * Creates the output file from the competitor data. If no style sheet was specified 
+	 * then outputs a plain XML file with the name and location specified in the creation 
+	 * of the object.
+	 */
 	@Override
 	public void produceResults() throws MyException {
 		Document doc = buildXMLDocument();
@@ -134,6 +155,10 @@ public class CompetitionToXML implements CompetitionResultsProducer {
 
 	}
 
+	/**
+	 * Sets the competition data to be transformed to XML file. This must be done 
+	 * before the results can be produced.
+	 */
 	public void setCompetitionResults(SortedSet<Competitor> competitors) {
 		this.competitors = competitors;		
 	}

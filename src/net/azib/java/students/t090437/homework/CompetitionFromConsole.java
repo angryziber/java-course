@@ -8,6 +8,9 @@ import java.util.TreeSet;
 
 /**
  * CompetitionFromConsole
+ * 
+ * Class what implements functionality to allow for the user to insert 
+ * data about competitors and their results into the console. 
  *
  * @author Ronald
  */
@@ -18,12 +21,21 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 		competitors = new TreeSet<Competitor>();
 	}
 	
+	/**
+	 * Returns SortedSet<Competitor> containing the inserted data or empty set
+	 * when no data was inserted.
+	 */
 	@Override
 	public SortedSet<Competitor> getResults() {
 		return competitors;
 	}
 
-	@Override
+	/**
+	 * Asks data from the user about the competitors. If any of the data inserted 
+	 * is invalid, the same thing is asked once more. If nothing is entered to any 
+	 * kind of parameter, the process of inserting data ends and only the previous
+	 * competitors are stored.
+	 */
 	public void loadData() throws MyException {
 		Competitor competitor;
 		Scanner in = new Scanner(System.in);
