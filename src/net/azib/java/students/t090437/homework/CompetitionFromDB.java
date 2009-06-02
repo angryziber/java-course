@@ -1,12 +1,12 @@
 package net.azib.java.students.t090437.homework;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Properties;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -17,12 +17,11 @@ import java.util.TreeSet;
  */
 public class CompetitionFromDB implements CompetitionDataLoader {
 	private Connection dbConn;
-	private Properties dbProp;
 	private SortedSet<Competitor> competitors;
 	private String competitionName;
 	private boolean filterByName;
 	private int competitionId;
-	
+
 	/**
 	 * Creates CompetitionFromDB object with CompetitionLoader interface.
 	 * The parameter is the name of the competition whose results are to be loaded.	
@@ -32,6 +31,7 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 		competitors = new TreeSet<Competitor>();
 		this.competitionName = competitionName;
 		filterByName = true;
+		
 	}
 	
 	/**
@@ -40,6 +40,7 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 	 * @param competitionId
 	 */
 	public CompetitionFromDB(int competitionId) {
+		competitors = new TreeSet<Competitor>();
 		filterByName = false;
 		this.competitionId = competitionId;
 	}
@@ -51,20 +52,13 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 	
 	@Override
 	public void loadData() throws MyException {
-		loadProperties();
+		//loadProperties();
 		PreparedStatement statement;
 		ResultSet results;
 		Competitor competitor;
 		boolean badCompetitionEntry;
 		
-		try {
-			dbConn = DriverManager.getConnection(
-					"jdbc:mysql://" + dbProp.getProperty("server") + ":" + dbProp.getProperty("port") + "/" + dbProp.getProperty("database"), 
-					 dbProp.getProperty("username"), dbProp.getProperty("password"));
-		}
-		catch (SQLException e) {
-			throw new MyException("Unable to connect to database : " + e);
-		}
+		dbConn = openConnection();
 		
 		if(filterByName) {
 			try {
@@ -136,6 +130,22 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 		PositionCalculator.calcPositions(competitors);
 	}
 
+	/**
+	 * @throws MyException
+	 */
+	Connection openConnection() throws MyException {
+		String connectionStr = "";
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("dbConnString.txt")));
+			connectionStr = reader.readLine();
+			return DriverManager.getConnection(connectionStr);
+		}
+		catch (Exception e) {
+			throw new MyException("Unable to connect to database " +
+					"using connection string \"" + connectionStr + "\" : " + e);
+		}
+	}
+
 	private Competitor insertNewCompetitor(ResultSet results) throws SQLException, BadDataFormatException {
 		Competitor competitor = new Competitor();
 		
@@ -156,16 +166,4 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 		
 		return competitor;
 	}
-
-	private void loadProperties() throws MyException {
-		dbProp = new Properties();
-		try {
-			InputStream location = getClass().getResourceAsStream("db.properties");
-			dbProp.load(location);
-		}
-		catch (Exception e) {
-			throw new MyException("Unable to read information about results database");
-		}
-	}
-
 }
