@@ -18,7 +18,7 @@ import org.junit.Test;
  */
 public class CompetitionFromDBTest {
 	private void setUpTestDatabase() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:hsqldb:mem:TestDB", "sa", "");
+		Connection connection = DriverManager.getConnection("jdbc:hsqldb:mem:TestDB");
 		
 		Statement statement = connection.createStatement();
 		
