@@ -17,9 +17,8 @@ import org.junit.Test;
  * @author Ronald
  */
 public class CompetitionFromDBTest {
-	private Connection connection;
 	private void setUpTestDatabase() throws SQLException {
-		connection = DriverManager.getConnection("jdbc:hsqldb:mem:TestDB", "sa", "");
+		Connection connection = DriverManager.getConnection("jdbc:hsqldb:mem:TestDB", "sa", "");
 		
 		Statement statement = connection.createStatement();
 		
@@ -47,7 +46,6 @@ public class CompetitionFromDBTest {
 		statement.executeUpdate("INSERT INTO results(athlete_id, competition_id, race_100m, long_jump, shot_put, " +
 							"high_jump, race_400m, hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m) " +
 							"VALUES(0, 0, 10.68, 7.76, 15.11, 2.00, 46.71, 14.48, 43.66, 5.00, 65.82, 269.48)");
-		
 		
 	}
 	
