@@ -78,7 +78,7 @@ public class DecathlonCalculator {
 		case 2: // -xml
 			producer = new CompetitionToXML(output_arg);
 			break;
-		case 3:
+		case 3: // -html
 			producer = new CompetitionToHTML(output_arg);
 			break;
 		default:
