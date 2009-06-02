@@ -41,11 +41,10 @@ public class CompetitionFromDBTest {
 							"discus_throw float NOT NULL, pole_vault float NOT NULL, javelin_throw float NOT NULL," +
 							"race_1500m float NOT NULL, PRIMARY KEY  (id))");		
 		
-		statement.executeUpdate("INSERT INTO athletes(name, dob, country_code) VALUES ('Erki Nool', '2005-06-25', 'EE')");
-		statement.executeUpdate("INSERT INTO competitions(country_code, date, name, location) VALUES('AU', '2000-10-1', 'OM', 'Syndey')");
-		statement.executeUpdate("INSERT INTO results(athlete_id, competition_id, race_100m, long_jump, shot_put, " +
-							"high_jump, race_400m, hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m) " +
-							"VALUES(0, 0, 10.68, 7.76, 15.11, 2.00, 46.71, 14.48, 43.66, 5.00, 65.82, 269.48)");
+		statement.executeUpdate("INSERT INTO athletes VALUES (0, 'Erki Nool', '2005-06-25', 'EE')");
+		statement.executeUpdate("INSERT INTO competitions VALUES(0, 'AU', '2000-10-1', 'OM', 'Syndey')");
+		statement.executeUpdate("INSERT INTO results " +
+								"VALUES(0, 0, 0, 10.68, 7.76, 15.11, 2.00, 46.71, 14.48, 43.66, 5.00, 65.82, 269.48)");
 		
 	}
 	
