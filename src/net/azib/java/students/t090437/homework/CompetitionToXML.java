@@ -67,12 +67,12 @@ public class CompetitionToXML implements CompetitionResultsProducer {
 			// TODO Add birthday attribute
 			root.appendChild(child);
 			
-			result = doc.createElement("score");
-			result.appendChild(doc.createTextNode(Integer.toString(competitor.getScore())));
-			child.appendChild(result);
-			
 			result = doc.createElement("position");
 			result.appendChild(doc.createTextNode(competitor.getPosition().toString()));
+			child.appendChild(result);
+			
+			result = doc.createElement("score");
+			result.appendChild(doc.createTextNode(Integer.toString(competitor.getScore())));
 			child.appendChild(result);
 			
 			result = doc.createElement("sprint100m");
