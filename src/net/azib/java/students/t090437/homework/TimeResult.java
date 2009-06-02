@@ -17,19 +17,13 @@ import java.text.DecimalFormatSymbols;
 public class TimeResult {
 	private String txt;
 	private double sec;
-	private int min;
-
 	/**
 	 * Returns the amount of seconds specified by the object.
 	 */
 	public double getSec() {
 		return sec;
 	}
-	
-	/**
-	 * Returns the time specified by the same string what was used
-	 * to create the object.
-	 */
+
 	public String toString() {
 		return txt;
 	}
@@ -46,14 +40,18 @@ public class TimeResult {
 		int col_pos = txt.indexOf(':');
 		TimeResult obj = new TimeResult();
 		
-		obj.txt = txt;
+		DecimalFormat formatter = formatterTo2Decimal();
+		
+		//obj.txt = txt;
 		
 		try {
 			if(col_pos == -1) {
 				obj.sec = Double.parseDouble(txt);
+				obj.txt = formatter.format(obj.sec);
 			} else {
 				obj.sec = 60*Integer.parseInt(txt.substring(0, col_pos)) +
 					Double.parseDouble(txt.substring(col_pos + 1, txt.length()));
+				obj.txt = txt.substring(0, col_pos) + ":" + formatter.format(obj.sec);
 			}
 		} catch(NumberFormatException e) {
 			throw new BadDataFormatException("Bad time format : " + txt);
@@ -72,20 +70,27 @@ public class TimeResult {
 	public static TimeResult createObj(double sec) {
 		TimeResult obj = new TimeResult();
 		obj.sec = sec%60.0;
-		obj.min = (int) (sec - obj.sec)/60;
+		int min = (int) (sec - obj.sec)/60;
 		
-		DecimalFormat formatter = new DecimalFormat("0.00");
-		DecimalFormatSymbols formatterSymbols = new DecimalFormatSymbols();
-		formatterSymbols.setDecimalSeparator('.');
-		formatter.setDecimalFormatSymbols(formatterSymbols);
+		DecimalFormat formatter = formatterTo2Decimal();		
 		
-		
-		if(obj.min > 0) {
-			obj.txt = Integer.toString(obj.min) + ":" + formatter.format(sec%60.0);
+		if(min > 0) {
+			obj.txt = Integer.toString(min) + ":" + formatter.format(sec%60.0);
 		} else {
 			obj.txt = formatter.format(sec%60.0);
 		}	
 		
 		return obj;
+	}
+
+	/**
+	 * @return
+	 */
+	private static DecimalFormat formatterTo2Decimal() {
+		DecimalFormat formatter = new DecimalFormat("0.00");
+		DecimalFormatSymbols formatterSymbols = new DecimalFormatSymbols();
+		formatterSymbols.setDecimalSeparator('.');
+		formatter.setDecimalFormatSymbols(formatterSymbols);
+		return formatter;
 	}
 }
