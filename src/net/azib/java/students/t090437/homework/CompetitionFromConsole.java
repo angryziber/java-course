@@ -119,7 +119,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setRace_1500m_m_s(MyTime.createObj(line));
+				competitor.setRace_1500m_m_s(TimeResult.createObj(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -138,7 +138,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setJavelin_throw(MyDouble.parseDouble(line));
+				competitor.setJavelin_throw(DecimalResult.parseDouble(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -157,7 +157,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setPole_vault(MyDouble.parseDouble(line));
+				competitor.setPole_vault(DecimalResult.parseDouble(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -176,7 +176,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setDiscus(MyDouble.parseDouble(line));
+				competitor.setDiscus(DecimalResult.parseDouble(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -195,7 +195,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setHurdles_s(MyTime.createObj(line));
+				competitor.setHurdles_s(TimeResult.createObj(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -214,7 +214,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setSprint_400m_m_s(MyTime.createObj(line));
+				competitor.setSprint_400m_m_s(TimeResult.createObj(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -233,7 +233,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setHigh_jump_m(MyDouble.parseDouble(line));
+				competitor.setHigh_jump_m(DecimalResult.parseDouble(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -252,7 +252,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setShot_put_m(MyDouble.parseDouble(line));
+				competitor.setShot_put_m(DecimalResult.parseDouble(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -271,7 +271,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setLong_jump_m(MyDouble.parseDouble(line));
+				competitor.setLong_jump_m(DecimalResult.parseDouble(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;
@@ -290,7 +290,7 @@ public class CompetitionFromConsole implements CompetitionDataLoader {
 			}
 			
 			try {
-				competitor.setSprint_100m_s(MyTime.createObj(line));
+				competitor.setSprint_100m_s(TimeResult.createObj(line));
 			} catch(BadDataFormatException e) {
 				System.out.println("Bad format. Insert again or press enter to quit.");
 				continue;

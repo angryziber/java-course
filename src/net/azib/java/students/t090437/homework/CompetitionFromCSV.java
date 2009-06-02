@@ -49,16 +49,16 @@ public class CompetitionFromCSV implements CompetitionDataLoader {
 			throw new BadDataFormatException("Bad format for date field :" + fields[2]);
 		}
 		comp.setCountry(fields[2]);
-		comp.setSprint_100m_s(MyTime.createObj(fields[3]));
-		comp.setLong_jump_m(MyDouble.parseDouble(fields[4]));
-		comp.setShot_put_m(MyDouble.parseDouble(fields[5]));
-		comp.setHigh_jump_m(MyDouble.parseDouble(fields[6]));
-		comp.setSprint_400m_m_s(MyTime.createObj(fields[7]));
-		comp.setHurdles_s(MyTime.createObj(fields[8]));
-		comp.setDiscus(MyDouble.parseDouble(fields[9]));
-		comp.setPole_vault(MyDouble.parseDouble(fields[10]));
-		comp.setJavelin_throw(MyDouble.parseDouble(fields[11]));
-		comp.setRace_1500m_m_s(MyTime.createObj(fields[12]));		
+		comp.setSprint_100m_s(TimeResult.createObj(fields[3]));
+		comp.setLong_jump_m(DecimalResult.parseDouble(fields[4]));
+		comp.setShot_put_m(DecimalResult.parseDouble(fields[5]));
+		comp.setHigh_jump_m(DecimalResult.parseDouble(fields[6]));
+		comp.setSprint_400m_m_s(TimeResult.createObj(fields[7]));
+		comp.setHurdles_s(TimeResult.createObj(fields[8]));
+		comp.setDiscus(DecimalResult.parseDouble(fields[9]));
+		comp.setPole_vault(DecimalResult.parseDouble(fields[10]));
+		comp.setJavelin_throw(DecimalResult.parseDouble(fields[11]));
+		comp.setRace_1500m_m_s(TimeResult.createObj(fields[12]));		
 		
 		return comp;
 	}

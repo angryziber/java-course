@@ -139,16 +139,16 @@ public class CompetitionFromDB implements CompetitionDataLoader {
 	private Competitor insertNewCompetitor(ResultSet results) throws SQLException, BadDataFormatException {
 		Competitor competitor = new Competitor();
 		
-		competitor.setSprint_100m_s(MyTime.createObj(((double)results.getFloat("race_100m"))));
-		competitor.setLong_jump_m(MyDouble.createObj((double)results.getFloat("long_jump")));
-		competitor.setShot_put_m(MyDouble.createObj((double)results.getFloat("shot_put")));
-		competitor.setHigh_jump_m(MyDouble.createObj((double)results.getFloat("high_jump")));
-		competitor.setSprint_400m_m_s(MyTime.createObj((double)results.getFloat("race_400m")));
-		competitor.setHurdles_s(MyTime.createObj((double)results.getFloat("hurdles_110m")));
-		competitor.setDiscus(MyDouble.createObj((double)results.getFloat("discus_throw")));
-		competitor.setPole_vault(MyDouble.createObj((double)results.getFloat("pole_vault")));
-		competitor.setJavelin_throw(MyDouble.createObj((double)results.getFloat("javelin_throw")));
-		competitor.setRace_1500m_m_s(MyTime.createObj((double)results.getFloat("race_1500m")));
+		competitor.setSprint_100m_s(TimeResult.createObj(((double)results.getFloat("race_100m"))));
+		competitor.setLong_jump_m(DecimalResult.createObj((double)results.getFloat("long_jump")));
+		competitor.setShot_put_m(DecimalResult.createObj((double)results.getFloat("shot_put")));
+		competitor.setHigh_jump_m(DecimalResult.createObj((double)results.getFloat("high_jump")));
+		competitor.setSprint_400m_m_s(TimeResult.createObj((double)results.getFloat("race_400m")));
+		competitor.setHurdles_s(TimeResult.createObj((double)results.getFloat("hurdles_110m")));
+		competitor.setDiscus(DecimalResult.createObj((double)results.getFloat("discus_throw")));
+		competitor.setPole_vault(DecimalResult.createObj((double)results.getFloat("pole_vault")));
+		competitor.setJavelin_throw(DecimalResult.createObj((double)results.getFloat("javelin_throw")));
+		competitor.setRace_1500m_m_s(TimeResult.createObj((double)results.getFloat("race_1500m")));
 		
 		competitor.setName(results.getString("name"));
 		competitor.setBirthday(results.getDate("dob"));
