@@ -69,14 +69,15 @@ public class CompetitionFromCSVTest {
 	@Test
 	public void testIfWorksWithEmptyFile() throws IOException, MyException {
 		String testFileContents = "";
-		String testFileLocation = System.getProperty("java.io.tmpdir") + "testinputcsvfile.csv"; 
+			
+		File testFile = File.createTempFile("testfile", ".csv");
 		
-		Writer writer = new FileWriter(testFileLocation);
+		Writer writer = new FileWriter(testFile);
 		writer.write(testFileContents);
 		
 		writer.close();
 		
-		CompetitionDataLoader dataLoader = new CompetitionFromCSV(testFileLocation);
+		CompetitionDataLoader dataLoader = new CompetitionFromCSV(testFile.getAbsolutePath());
 		
 		dataLoader.loadData();
 		
@@ -84,8 +85,7 @@ public class CompetitionFromCSVTest {
 		
 		Assert.assertNotNull(competitors);
 		Assert.assertTrue(competitors.size() == 0);
-		
-		File testFile = new File(testFileLocation);
+
 		testFile.delete();
 	}
 }
