@@ -2,8 +2,8 @@ package net.azib.java.students.t090437.homework.test;
 
 import net.azib.java.students.t090437.homework.BadDataFormatException;
 import net.azib.java.students.t090437.homework.Competitor;
-import net.azib.java.students.t090437.homework.MyDouble;
-import net.azib.java.students.t090437.homework.MyTime;
+import net.azib.java.students.t090437.homework.DecimalResult;
+import net.azib.java.students.t090437.homework.TimeResult;
 
 import org.junit.*;
 
@@ -18,45 +18,45 @@ public class CompetitorTest {
 		Competitor comp = new Competitor();
 		int score = 0;
 		
-		comp.setSprint_100m_s(MyTime.createObj("10.68"));
+		comp.setSprint_100m_s(TimeResult.createObj("10.68"));
 		comp.calcScore();
 		score = comp.getScore();
 		
-		comp.setLong_jump_m(MyDouble.createObj(7.76));
+		comp.setLong_jump_m(DecimalResult.createObj(7.76));
 		comp.calcScore();
 		score = comp.getScore();
 		
-		comp.setShot_put_m(MyDouble.createObj(15.11));
+		comp.setShot_put_m(DecimalResult.createObj(15.11));
 		comp.calcScore();
 		score = comp.getScore();
 		
-		comp.setHigh_jump_m(MyDouble.createObj(2.00));
+		comp.setHigh_jump_m(DecimalResult.createObj(2.00));
 		comp.calcScore();
 		score = comp.getScore();
 		
-		comp.setSprint_400m_m_s(MyTime.createObj("0:46.71"));
+		comp.setSprint_400m_m_s(TimeResult.createObj("0:46.71"));
 		comp.calcScore();
 		score = comp.getScore();
 		
-		comp.setHurdles_s(MyTime.createObj("14.48"));
+		comp.setHurdles_s(TimeResult.createObj("14.48"));
 		comp.calcScore();
 		score = comp.getScore();
 		Assert.assertTrue(score == 5418);
 		
 		// Here the resulting score differs from wiki but wiki is wrong not me
-		comp.setDiscus(MyDouble.createObj(43.66));
+		comp.setDiscus(DecimalResult.createObj(43.66));
 		comp.calcScore();
 		score = comp.getScore();
 		
-		comp.setPole_vault(MyDouble.createObj(5.00));
+		comp.setPole_vault(DecimalResult.createObj(5.00));
 		comp.calcScore();
 		score = comp.getScore();
 		
-		comp.setJavelin_throw(MyDouble.createObj(65.82));
+		comp.setJavelin_throw(DecimalResult.createObj(65.82));
 		comp.calcScore();
 		score = comp.getScore();
 		
-		comp.setRace_1500m_m_s(MyTime.createObj("4:29.48"));
+		comp.setRace_1500m_m_s(TimeResult.createObj("4:29.48"));
 		comp.calcScore();
 		score = comp.getScore();
 		
@@ -80,7 +80,7 @@ public class CompetitorTest {
 		
 		Assert.assertTrue(comp1.compareTo(comp2) == 0);
 		
-		comp1.setSprint_100m_s(MyTime.createObj("10.60"));
+		comp1.setSprint_100m_s(TimeResult.createObj("10.60"));
 		comp1.calcScore();
 		
 		Assert.assertTrue(comp1.compareTo(comp2) < 0);
