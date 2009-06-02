@@ -105,8 +105,8 @@ public class DecathlonCalculator {
 	 * 
 	 */
 	private static void printUsage() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Program usage :");
+		System.out.println("java DecathlonCalculator -input_method [input_arg] -output_method [output_arg]");
 	}
 
 	private static void parseArguments(String[] args) {
