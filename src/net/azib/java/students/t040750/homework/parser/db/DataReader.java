@@ -7,6 +7,7 @@ import net.azib.java.students.t040750.homework.generic.DecathlonData;
 import net.azib.java.students.t040750.homework.generic.Result;
 import net.azib.java.students.t040750.homework.main.DecathlonDemo;
 import net.azib.java.students.t040750.homework.main.DecathlonProperties;
+import net.azib.java.students.t040750.homework.parser.Helper;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -34,9 +35,9 @@ public class DataReader {
 	 * 
 	 * @param competition - Competition name or id
 	 * @return - Array with data for the selected competition
-	 * @throws ClassNotFoundException 
+	 * @throws Exception - when errors parsing data
 	 */
-	public List<DecathlonData> getDecathlonData(String competition) {
+	public List<DecathlonData> getDecathlonData(String competition) throws Exception {
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -80,9 +81,9 @@ public class DataReader {
 				rs.beforeFirst();
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException("Error querying the database!", e);
+			throw new Exception("Error querying the database!", e);
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Invalid driver provided for " +
+			throw new Exception("Invalid driver provided for " +
 					"the database connection!", e);
 		}
 	
@@ -101,7 +102,12 @@ public class DataReader {
 						//has value 0000-00-00 (invalid for java.SQL.Date)
 						athlete.setBirthday(null);
 				}
-				athlete.setNationality(rs.getString(5));
+				
+				String nationality = rs.getString(5);
+				
+				if (Helper.isValidCountry(nationality))
+					athlete.setNationality(nationality);
+				else throw new Exception("Invalid country code");
 				
 				result.setRun100m(rs.getFloat(6));
 				result.setLongJump(rs.getFloat(7));
@@ -119,7 +125,7 @@ public class DataReader {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new RuntimeException("Database contains erroneous data for the " +
+			throw new Exception("Database contains erroneous data for the " +
 					"selected competition. Cannot proceed reading values!");
 		}
 		
@@ -145,13 +151,13 @@ public class DataReader {
 	 * @throws SQLException - if errors creating the connection object
 	 * @throws IOException - if errors accessing the db properties file
 	 */
-	private static Connection openDbConnection() throws SQLException, ClassNotFoundException {
+	private static Connection openDbConnection() throws SQLException, ClassNotFoundException, IOException {
 		
 		DecathlonProperties props;
 		try {
 			props = new DecathlonProperties(DecathlonDemo.class.getResourceAsStream(DecathlonDemo.DB_PROPERTIES_FILE));
 		} catch (IOException e) {
-			throw new RuntimeException("Error opening the database properties file!", e);
+			throw new IOException("Error opening the database properties file!", e);
 		}
 		
 		Class.forName(props.getProperty("driver"));

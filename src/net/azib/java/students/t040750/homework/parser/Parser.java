@@ -210,11 +210,38 @@ public class Parser {
 	 * Load competition data from the console
 	 * 
 	 * @return array containing the competition data
-	 * @throws Exception - when errors loading the input data
 	 */
-	public List<DecathlonData>loadCMDData() throws Exception {
-		Scanner input = new Scanner(System.in).useDelimiter("\\s*[,\\n]\\s*");
-		return inputData(input);
+	public List<DecathlonData>loadCMDData() {
+		Scanner input = new Scanner(System.in).useDelimiter("\\n");
+		List<DecathlonData> decathlonData = new ArrayList<DecathlonData>();
+		
+		String response;
+		
+		while (true) {
+			try {
+				Helper.displayCMDParseStartMessage();
+				decathlonData.add(generateDecathlonData(input));
+				System.out.println("Competition data loaded");
+				response = Helper.loadResponce(input, "Do you want to add data for another competitor? (Y/N)");
+				
+				if (response.contains("N") || response.contains("n"))
+					break;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				response = Helper.loadResponce(input,"Enter again? (Y/N)");
+				
+				if (response.contains("N") || response.contains("n"))
+					break;
+			}
+		}	
+		input.close();
+		
+		if (decathlonData.isEmpty())
+			System.out.println("No data was submitted. Program will exit.");
+		else
+			System.out.println("Competition data submitted to selected output");
+		
+		return decathlonData;
 	}
 
 	/**
@@ -237,8 +264,9 @@ public class Parser {
 	 * 
 	 * @param competition - competition name or id
 	 * @return array containing the competition data
+	 * @throws Exception - when errors reading from database
 	 */
-	public List<DecathlonData> loadDBData(String competition) {
+	public List<DecathlonData> loadDBData(String competition) throws Exception {
 		DataReader dataReader = new DataReader();
 		return dataReader.getDecathlonData(competition);
 	}
@@ -261,37 +289,6 @@ public class Parser {
 		}
 		
 		return objFact.createDecathlon(decathlon);
-	}
-	
-	/**
-	 * Generates an array containing the competition data read from the 
-	 * provided input {@link Scanner} object. 
-	 * 
-	 * @param input - source where to read the data from
-	 * @return array containing the competition data
-	 * @throws Exception - when errors reading the input, including the 
-	 * column number of the invalid input
-	 */
-	private static List<DecathlonData> inputData(Scanner input) throws Exception {
-		List<DecathlonData> decathlonData = new ArrayList<DecathlonData>();
-		
-		int row = 0;
-		
-		while (input.hasNext()) {
-			row++;
-			
-			try {
-				decathlonData.add(generateDecathlonData(input));
-			} catch (Exception e) {
-				throw new Exception(e.getMessage() + " - row " + row, e);
-			}
-			
-			if (input.hasNextLine())
-				input.nextLine();
-			}
-		input.close();
-		
-		return decathlonData;
 	}
 	
 	/**
@@ -337,11 +334,12 @@ public class Parser {
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String date;
+		String nationality;
 		
-		int col = 0;
+		int col = 1;
 		
 		try {
-			athlete.setName(input.next()); col++;
+			athlete.setName(input.next().trim()); col++;
 			
 			date = input.next();
 			// Make MySQL zero value readable for java.SQL.Date
@@ -349,9 +347,12 @@ public class Parser {
 			else athlete.setBirthday(new java.sql.Date(df.parse(date).getTime()));
 			col++;
 			
-			//TODO: check for correctness
-			athlete.setNationality(input.next()); col++;
-
+			nationality = input.next().trim();
+			
+			if (Helper.isValidCountry(nationality)) athlete.setNationality(nationality);
+			else throw new Exception("Invalid country code");
+			col++;
+			
 			result.setRun100m(Float.parseFloat(input.next())); col++;
 			result.setLongJump(Float.parseFloat(input.next())); col++;
 			result.setShotPut(Float.parseFloat(input.next())); col++;
@@ -361,7 +362,7 @@ public class Parser {
 			result.setDiscus(Float.parseFloat(input.next())); col++;
 			result.setPoleVault(Float.parseFloat(input.next())); col++;
 			result.setJavelin(Float.parseFloat(input.next())); col++;
-			result.setRun1500m(Float.parseFloat(input.next())); col = 0;
+			result.setRun1500m(Float.parseFloat(input.next())); col = 1;
 			
 			decData = new DecathlonData(athlete, result,
 					DecathlonPointsCalculator.calculateTotalPoints(result));
