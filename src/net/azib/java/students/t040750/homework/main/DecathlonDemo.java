@@ -9,6 +9,14 @@ import net.azib.java.students.t040750.org.apache.commons.cli.HelpFormatter;
 import net.azib.java.students.t040750.org.apache.commons.cli.Options;
 import net.azib.java.students.t040750.org.apache.commons.cli.ParseException;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
+import javax.xml.bind.JAXBException;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.transform.TransformerException;
+
 public class DecathlonDemo {
 
 	public static String CONSOLE = "console";
@@ -20,7 +28,7 @@ public class DecathlonDemo {
 	public static String DB_PROPERTIES_FILE = "db.properties";
 	public static String XSL_SCHEMA = "decathlon.xsl";
 	
-	public static void main(String[] args) {
+public static void main(String[] args) throws IOException, SQLException, NamingException, ClassNotFoundException, JAXBException, DatatypeConfigurationException, TransformerException {
 		
 		// Create the Options object
 		Options options = new Options();
@@ -48,8 +56,12 @@ public class DecathlonDemo {
 			return; 
 		}
 		else {
-			OutputHandler.outputData(cmd.getOptions()[1], 
-					InputHandler.readInput(cmd.getOptions()[0]));
+			try {
+				OutputHandler.outputData(cmd.getOptions()[1], 
+						InputHandler.readInput(cmd.getOptions()[0]));
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
 		}
 		
 	}

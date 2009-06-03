@@ -25,8 +25,9 @@ public class OutputHandler {
 	 *  
 	 * @param output - the requested output option
 	 * @param decathlonData - array containing the competition data which to output
+	 * @throws Exception - when errors generating the output
 	 */
-	public static void outputData(Option output, List<DecathlonData> decathlonData) {
+	public static void outputData(Option output, List<DecathlonData> decathlonData) throws Exception {
 		Parser parser = new Parser();
 		ArrayList<DecathlonData> orderedData = 
 			calculatePositions((ArrayList<DecathlonData>)decathlonData);

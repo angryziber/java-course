@@ -27,8 +27,10 @@ public class InputHandler {
 	 * 
 	 * @param input - the requested input option
 	 * @return array containing the competition data
+	 * @throws Exception - if errors reading the input data, containing the row and 
+	 * column number of the invalid input
 	 */
-	public static List<DecathlonData> readInput(Option input) {
+	public static List<DecathlonData> readInput(Option input) throws Exception {
 		Parser parser = new Parser();
 		List<DecathlonData> decathlonData = new ArrayList<DecathlonData>();
 		
@@ -36,7 +38,7 @@ public class InputHandler {
 			try {
 				decathlonData = parser.loadCSVData(new FileInputStream(input.getValue()));
 			} catch (FileNotFoundException e) {
-				throw new RuntimeException("CSV input file not found!", e);
+				throw new Exception("CSV input file not found!", e);
 			}
 		}
 		else if (input.getOpt().equals(DecathlonDemo.DB)) {
