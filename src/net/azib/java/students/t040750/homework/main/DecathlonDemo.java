@@ -62,12 +62,14 @@ public static void main(String[] args) {
 				Option input = cmd.getOptions()[0];
 				Option output = cmd.getOptions()[1];
 				
+				// Check if valid input parameter
 				if (input.getOpt().equals(XML) || input.getOpt().equals(HTML)) {
 					System.out.println("Invalid argument for input");
 					usage(options); 
 					return; 
 				}
 				
+				// Check if valid output parameter
 				if (output.getOpt().equals(DB)) {
 					System.out.println("Invalid argument for output");
 					usage(options); 
