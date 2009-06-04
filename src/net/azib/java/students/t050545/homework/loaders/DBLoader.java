@@ -28,7 +28,6 @@ public class DBLoader extends DataChecker implements SportmanLoader {
 	 */
 	public DBLoader(String compID) throws SQLException {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection("jdbc:mysql://java.azib.net:3306/decathlon", "java", "java");
 		}
 		catch (Exception e) {
@@ -63,7 +62,7 @@ public class DBLoader extends DataChecker implements SportmanLoader {
 			}
 			catch (Exception e) {
 				System.err.println("Wrong birthday in dataBase! " + name + " " + birthDay);
-				birthDay = "1111-11-11";
+				birthDay = null;
 			}
 			GregorianCalendar birthDate = new GregorianCalendar();
 			birthDate.setTime(df.parse(birthDay));

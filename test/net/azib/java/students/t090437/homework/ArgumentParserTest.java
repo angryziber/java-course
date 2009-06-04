@@ -1,5 +1,6 @@
 package net.azib.java.students.t090437.homework;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -9,7 +10,7 @@ import org.junit.Test;
  * @author Ronald
  */
 public class ArgumentParserTest {
-	@Test
+	@Test @Ignore
 	public void testIfHandlesCorrectlyNoArguments() {
 		
 	}

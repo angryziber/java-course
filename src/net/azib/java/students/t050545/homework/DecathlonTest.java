@@ -26,7 +26,7 @@ import org.junit.Test;
 public class DecathlonTest {
 
 	@Test
-	public void testPointSystem() throws Exception {
+	public void getScoreReturns1000() throws Exception {
 		float[] arrayScore = new float[10];
 		arrayScore[0] = 10.395f;
 		arrayScore[1] = 776f;
