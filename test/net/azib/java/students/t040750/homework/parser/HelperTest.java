@@ -1,7 +1,10 @@
 package net.azib.java.students.t040750.homework.parser;
 
-import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+import java.util.Scanner;
 
 
 /**
@@ -11,22 +14,17 @@ import org.junit.Test;
  */
 public class HelperTest {
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
 	@Test
 	public void testIsValidCountry() throws Exception {
-		
-	}
-	
-	@Test
-	public void testDisplayCMDParseStartMessage() throws Exception {
-		
+		assertTrue(Helper.isValidCountry("EE"));
+		assertFalse(Helper.isValidCountry("XX"));
 	}
 	
 	@Test
 	public void testLoadResponce() throws Exception {
-		
+		String input = "h\\r\\n a\\r\\n grd\\r\\nn\\r\\ny\\r\\n";
+		Scanner s = new Scanner(input).useDelimiter("\\n");
+		//String result = Helper.loadResponce(s, "");
+		//assertEquals("n\\r", result);
 	}
 }

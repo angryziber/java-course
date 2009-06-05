@@ -1,5 +1,8 @@
 package net.azib.java.students.t040750.homework.io;
 
+import org.junit.Before;
+import org.junit.Test;
+
 
 /**
  * InputHandlerTest
@@ -8,4 +11,12 @@ package net.azib.java.students.t040750.homework.io;
  */
 public class InputHandlerTest {
 
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void testReadInput() throws Exception {
+		
+	}
 }
