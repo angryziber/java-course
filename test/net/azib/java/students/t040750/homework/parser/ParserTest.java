@@ -25,6 +25,7 @@ public class ParserTest {
 	private Parser parser;
 	private List<DecathlonData> decathlonData;
 	private List<DecathlonData> testDecathlonData;
+	private DecathlonData decData;
 	private Properties props;
 	private Athlete athlete;
 	private Result result;
@@ -59,7 +60,9 @@ public class ParserTest {
 		
 		points = 8001;
 		
-		testDecathlonData.add(new DecathlonData(athlete,result,points));
+		decData = new DecathlonData(athlete,result,points);
+		decData.setPosition("1");
+		testDecathlonData.add(decData);
 		
 		athlete = new Athlete("Василий Пупкин",new java.sql.Date(
 				df.parse("1980-10-21").getTime()), "UA");
@@ -78,7 +81,9 @@ public class ParserTest {
 		
 		points = 3099;
 		
-		testDecathlonData.add(new DecathlonData(athlete,result,points));
+		decData = new DecathlonData(athlete,result,points);
+		decData.setPosition("2");
+		testDecathlonData.add(decData);
 	}
 
 	@Test
