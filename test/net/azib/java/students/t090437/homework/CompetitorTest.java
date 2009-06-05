@@ -31,7 +31,7 @@ public class CompetitorTest {
 		score = comp.getScore();
 		
 		comp.setHigh_jump_m(DecimalResult.createObj(2.00));
-		comp.calcScore();<>
+		comp.calcScore();
 		score = comp.getScore();
 		
 		comp.setSprint_400m_m_s(TimeResult.createObj("0:46.71"));
