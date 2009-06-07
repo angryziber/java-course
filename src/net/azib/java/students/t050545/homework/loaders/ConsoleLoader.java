@@ -5,7 +5,7 @@ import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.PointSystem;
 import net.azib.java.students.t050545.homework.sport.Score;
-import net.azib.java.students.t050545.homework.sport.Sportman;
+import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
 
 import java.text.ParseException;
@@ -35,7 +35,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 	/** Return new sportman, or null if no anyone else
 	 * @return Sportman object or null, if no more
 	 */
-	public Sportman nextSportman() throws ReadException {
+	public AthleteScore nextSportman() throws ReadException {
 
 		System.out.println("Please enter essential sportman's data");
 
@@ -93,7 +93,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 			results[dis.ordinal()] = number;
 		}
 
-		return new Sportman(new Score(results), new Person(name, country, birthDate));
+		return new AthleteScore(new Score(results), new Person(name, country, birthDate));
 
 	}
 

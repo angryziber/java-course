@@ -8,13 +8,13 @@ import java.util.GregorianCalendar;
  * 
  * @author libricon
  */
-public class Sportman implements Comparable<Sportman> {
+public class AthleteScore implements Comparable<AthleteScore> {
 
 	/** Sportman consist of person and score
 	 * @param score object with sportman's results
 	 * @param person object contain sportman's name and other data
 	 */
-	public Sportman(Score score, Person person) {
+	public AthleteScore(Score score, Person person) {
 		this.person = new Person(person.getName(), person.getCountry(), person.getBirthDay());
 		points = new PointSystem(score);
 		
@@ -24,7 +24,7 @@ public class Sportman implements Comparable<Sportman> {
 	 * @param scores array with all results
 	 * @param person object contain sportman's name and other data
 	 */
-	public Sportman(float[] scores, Person person) {
+	public AthleteScore(float[] scores, Person person) {
 		this(new Score(scores), person);
 	}
 
@@ -56,7 +56,7 @@ public class Sportman implements Comparable<Sportman> {
 			return false;
 		if (getClass() != o.getClass())
 			return false;
-		Sportman p = (Sportman) o;
+		AthleteScore p = (AthleteScore) o;
 		return this.person.equals(p.getPerson()) && this.points.equals(p.getPoints());
 	}
 
@@ -77,8 +77,8 @@ public class Sportman implements Comparable<Sportman> {
 	 * @return other.score - this.score , what gives descending order
 	 */
 	@Override
-	public int compareTo(Sportman o) {
-		Sportman man = (Sportman) o;
+	public int compareTo(AthleteScore o) {
+		AthleteScore man = (AthleteScore) o;
 		return man.getPoints().getScore() - this.getPoints().getScore();
 	}
 
@@ -105,7 +105,7 @@ public class Sportman implements Comparable<Sportman> {
 		arrayScore[8] = 77.19f;
 		arrayScore[9] = 233.79f;
 
-		Sportman sportman = new Sportman(arrayScore, new Person("Kirill", "RU", new GregorianCalendar(1987, 4, 29)));
+		AthleteScore sportman = new AthleteScore(arrayScore, new Person("Kirill", "RU", new GregorianCalendar(1987, 4, 29)));
 		System.out.println(sportman);
 		System.exit(0);
 	}

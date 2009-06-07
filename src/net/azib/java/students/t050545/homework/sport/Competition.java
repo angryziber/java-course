@@ -37,7 +37,7 @@ public class Competition {
 	 * @param sportman
 	 * @return true, if successfully
 	 */
-	public boolean addCompetitor(Sportman sportman) {
+	public boolean addCompetitor(AthleteScore sportman) {
 		return competitors.add(sportman);
 	}
 
@@ -109,7 +109,7 @@ public class Competition {
 	/** array of sportman's with places */
 	private Places[] tableScore;
 	/** ArrayList for storing sportman's */
-	private ArrayList<Sportman> competitors = new ArrayList<Sportman>();
+	private ArrayList<AthleteScore> competitors = new ArrayList<AthleteScore>();
 	/** Competition name */
 	private String name;
 	/** Competition ID, like date */

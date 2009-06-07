@@ -2,7 +2,7 @@ package net.azib.java.students.t050545.homework.loaders;
 
 import net.azib.java.students.t050545.homework.ArgumentParser;
 import net.azib.java.students.t050545.homework.ReadException;
-import net.azib.java.students.t050545.homework.sport.Sportman;
+import net.azib.java.students.t050545.homework.sport.AthleteScore;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,7 +24,7 @@ public interface AthleteLoader extends ArgumentParser {
 	 * @throws IOException 
 	 * @throws SQLException 
 	 */
-	Sportman nextSportman() throws ReadException, ParseException;
+	AthleteScore nextSportman() throws ReadException, ParseException;
 	
 	void close();
 	

@@ -3,7 +3,7 @@ package net.azib.java.students.t050545.homework;
 import net.azib.java.students.t050545.homework.writers.AthleteWriter;
 import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
 import net.azib.java.students.t050545.homework.sport.Competition;
-import net.azib.java.students.t050545.homework.sport.Sportman;
+import net.azib.java.students.t050545.homework.sport.AthleteScore;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,7 +40,7 @@ public class Decathlon {
 			}
 
 			Competition comp = new Competition();
-			Sportman sportman = null;
+			AthleteScore sportman = null;
 			try {
 				while ((sportman = loader.nextSportman()) != null) {
 					comp.addCompetitor(sportman);

@@ -7,6 +7,14 @@ package net.azib.java.students.t050545.homework.sport;
  */
 public class PointSystem {
 
+	/** Raw result in meters, second results */
+	private float[] results;
+	/** Total score */
+	private int score = 0;
+	/** Scores for each discipline in points */
+	private int[] scores;
+
+	
 	/**
 	 * Takes results as a array in special order It is good to use Disciline
 	 * enumeration to fill array
@@ -17,7 +25,6 @@ public class PointSystem {
 		results = (float[]) bareResults.clone();
 		scores = new int[results.length];
 		calculatePoints();
-		calculatePointForTrack();
 	}
 
 	/**
@@ -124,26 +131,12 @@ public class PointSystem {
 		for (Discipline dis : Discipline.values()) {
 			scores[dis.ordinal()] = dis.returnPoints(results[dis.ordinal()]);
 		}
-	}
-
-	/**
-	 * Method sums scores and return total score for one sportman
-	 * 
-	 * @return total score
-	 */
-	private int calculatePointForTrack() {
+		
 		for (int i : scores)
 			score += i;
-		return score;
-	}
-	
 
-	/** Raw result in meters, second results */
-	private float[] results;
-	/** Total score */
-	private int score = 0;
-	/** Scores for each discipline in points */
-	private int[] scores;
+	}
+
 
 	/**
 	 * This method compares two PointSystem objects
@@ -179,33 +172,5 @@ public class PointSystem {
 		buffer.append("Total score: " + score + "\n\n");
 		return buffer.toString();
 	}
-
-
-		/**
-		 * Test method
-		 * 
-		 * @param args command line arguments
-		 */
-		public static void main(String[] args) {
-			float[] arrayScore = new float[10];
-			arrayScore[0] = 10.395f;
-			arrayScore[1] = 7.76f;
-			arrayScore[2] = 18.4f;
-			arrayScore[3] = 2.20f;
-			arrayScore[4] = 46.17f;
-			arrayScore[5] = 13.8f;
-			arrayScore[6] = 56.17f;
-			arrayScore[7] = 5.28f;
-			arrayScore[8] = 77.19f;
-			arrayScore[9] = 233.79f;
-			
-			Score score = new Score(arrayScore);
-			
-			PointSystem points = new PointSystem(score.getScores());
-			System.out.println(points);
-
-			
-		}
-
 	
 }

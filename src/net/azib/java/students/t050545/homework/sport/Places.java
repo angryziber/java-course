@@ -13,7 +13,7 @@ public class Places {
 	 * @param place Place in competition
 	 * @param sportman Sportman's data
 	 */
-	public Places(String place, Sportman sportman) {
+	public Places(String place, AthleteScore sportman) {
 		placeNum = place;
 		this.sportman = sportman;
 	}
@@ -37,13 +37,13 @@ public class Places {
 	/**
 	 * @return the sportman
 	 */
-	public Sportman getSportman() {
+	public AthleteScore getSportman() {
 		return sportman;
 	}
 
 	/** sportman's place */
 	private String placeNum;
 	/** sportman */
-	private Sportman sportman;
+	private AthleteScore sportman;
 
 }

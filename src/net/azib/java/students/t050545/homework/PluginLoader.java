@@ -1,7 +1,7 @@
 package net.azib.java.students.t050545.homework;
 
 import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
-import net.azib.java.students.t050545.homework.sport.Sportman;
+import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.writers.AthleteWriter;
 
 import java.io.File;
@@ -142,6 +142,7 @@ public class PluginLoader {
 		
 		return builder.toString();
 	}
+	
 	private boolean isInterface(Class cl, String interName) {
 		Class[] theInterfaces = cl.getInterfaces();
 		for (Class inter : theInterfaces) {

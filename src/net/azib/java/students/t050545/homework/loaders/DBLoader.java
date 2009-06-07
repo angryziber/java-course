@@ -4,7 +4,7 @@ import net.azib.java.students.t050545.homework.LoadException;
 import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
-import net.azib.java.students.t050545.homework.sport.Sportman;
+import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
 
 import java.sql.Connection;
@@ -53,7 +53,7 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 	 * @throws SQLException 
 	 */
 	@Override
-	public Sportman nextSportman() throws ParseException, ReadException{
+	public AthleteScore nextSportman() throws ParseException, ReadException{
 
 		try{
 		
@@ -81,7 +81,7 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 				resultTable[dis.ordinal()] = Float.parseFloat(resultset.getString(dis.toString()));
 			}
 
-			return (new Sportman(new Score(resultTable), new Person(name, country, birthDate)));
+			return (new AthleteScore(new Score(resultTable), new Person(name, country, birthDate)));
 
 		}
 		else {
