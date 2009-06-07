@@ -1,9 +1,10 @@
 package net.azib.java.students.t050545.homework.loaders;
 
+import net.azib.java.students.t050545.homework.sport.Discipline;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
-import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
+import net.azib.java.students.t050545.homework.utils.DataChecker;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 
@@ -11,9 +12,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.Stack;
 
 /**
@@ -69,14 +71,14 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 		if (line != null && line.length() != 0) {
 
 			String name;
-			GregorianCalendar birthDate = null;
+			Date birthDate = null;
 			String country;
 
 			String[] arrayOfData = line.split("\\,");
 			arrayOfData[0] = arrayOfData[0].replace("\"", "");
 			name = arrayOfData[0];
-
-			if (isValidDate(arrayOfData[1])) {
+			
+			if (isValidDate(arrayOfData[1], DateFormat.getDateInstance())) {
 				birthDate = toParseBirthDay(arrayOfData[1], new SimpleDateFormat("dd.MM.yyyy"));
 			}
 			else {
