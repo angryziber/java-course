@@ -1,8 +1,5 @@
 package net.azib.java.students.t050545.homework.sport;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 /**
  * Person data + scores
  * 
