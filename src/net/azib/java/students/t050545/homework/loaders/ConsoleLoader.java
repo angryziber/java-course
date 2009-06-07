@@ -1,6 +1,7 @@
 package net.azib.java.students.t050545.homework.loaders;
 
 import net.azib.java.students.t050545.homework.LoadException;
+import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.PointSystem;
 import net.azib.java.students.t050545.homework.sport.Score;
@@ -9,7 +10,6 @@ import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
 
 import java.text.ParseException;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -34,9 +34,8 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 
 	/** Return new sportman, or null if no anyone else
 	 * @return Sportman object or null, if no more
-	 * @throws ParseException exeption, if input is wrong
 	 */
-	public Sportman nextSportman() throws ParseException {
+	public Sportman nextSportman() throws ReadException {
 
 		System.out.println("Please enter essential sportman's data");
 
@@ -65,7 +64,13 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 				return null;
 		}
 		while (!isValidDate(birthDay));
-		GregorianCalendar birthDate = toParseBirthDay(birthDay);
+		GregorianCalendar birthDate;
+		try {
+			birthDate = toParseBirthDay(birthDay);
+		}
+		catch (ParseException e) {
+			throw new ReadException("Can't parse birthDay, check format");
+		}
 
 		System.out.println("Now enter results, or -1 to finish");
 

@@ -1,6 +1,7 @@
 package net.azib.java.students.t050545.homework.loaders;
 
 import net.azib.java.students.t050545.homework.LoadException;
+import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.Sportman;
@@ -49,10 +50,13 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 	/**
 	 * Method return next sportman, if ther is no more, return nulls
 	 * @return Sportman or null
+	 * @throws SQLException 
 	 */
 	@Override
-	public Sportman nextSportman() throws SQLException, ParseException {
+	public Sportman nextSportman() throws ParseException, ReadException{
 
+		try{
+		
 		if (resultset.next()) {
 			String name;
 			String country;
@@ -84,7 +88,9 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 			conn.close();
 			return null;
 		}
-
+		}catch(SQLException e){
+			throw new ReadException("Can't read from database");
+		}
 	}
 
 	@Override

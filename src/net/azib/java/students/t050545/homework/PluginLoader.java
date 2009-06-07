@@ -28,12 +28,22 @@ public class PluginLoader {
 	private Map<String, AthleteWriter> writers = null;
 	private Stack<String> arguments = new Stack<String>();
 
-	public PluginLoader(String[] args) throws URISyntaxException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+	public PluginLoader(String[] args) throws LoadException{
+		try{
 		for(int i = args.length-1; i>=0; i--){
 			arguments.push(args[i]);
 		}
 		loaders = getLoaders();
 		writers = getWriters();
+		}catch(URISyntaxException e){
+			throw new LoadException("IT'S impossible, package URI exeption");
+		}catch(ClassNotFoundException e){
+			throw new LoadException("Check AthleteLoader and AthleteWriter files");
+		}catch(InstantiationException e){
+			throw new LoadException("In plugin is missing appropriate constructor");
+		}catch(Exception e){
+			throw new LoadException("Contack with developer");
+		}
 
 	}
 

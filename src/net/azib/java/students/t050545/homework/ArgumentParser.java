@@ -1,6 +1,5 @@
 package net.azib.java.students.t050545.homework;
 
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -10,18 +9,15 @@ import java.util.Stack;
  */
 public interface ArgumentParser {
 	/**
-	 * setup function
-	 * @param argument next console parametr
+	 * setup function, initialise loader or writer and cut's arguments
+	 * @param arguments console unused paramenters
+	 * @throws LoadException 
 	 */
 	void init(Stack<String> arguments) throws LoadException;
 		
-	/**
-	 *  Argument for command line 
-	 */
-	String getArgum();
+	/**  Argument for command line */
+	public String getArgum();
 	
-	/**
-	 *  Description  for -help argument
-	 */
-	String getDescription();
+	/** Description  for -h argument */
+	public String getDescription();
 }

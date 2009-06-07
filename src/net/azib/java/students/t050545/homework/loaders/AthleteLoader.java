@@ -1,13 +1,12 @@
 package net.azib.java.students.t050545.homework.loaders;
 
 import net.azib.java.students.t050545.homework.ArgumentParser;
-import net.azib.java.students.t050545.homework.LoadException;
+import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Sportman;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.List;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 
 /**
@@ -21,9 +20,11 @@ public interface AthleteLoader extends ArgumentParser {
 	 *  Method return new Sportman class object, 
 	 *  if there is no more, return NULL
 	 * @return The next competitor
-	 * @throws Exception all kind of exeptions, from IO, Parsing or DATABASE 
+	 * @throws ParseException 
+	 * @throws IOException 
+	 * @throws SQLException 
 	 */
-	Sportman nextSportman() throws Exception;
+	Sportman nextSportman() throws ReadException, ParseException;
 	
 	void close();
 	

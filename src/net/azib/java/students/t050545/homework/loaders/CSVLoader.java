@@ -1,6 +1,7 @@
 package net.azib.java.students.t050545.homework.loaders;
 
 import net.azib.java.students.t050545.homework.LoadException;
+import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.Sportman;
@@ -58,10 +59,15 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 	 * @return next sportman in file
 	 * @throws IOException file opening exception
 	 * @throws ParseException parse exception
+	 * @throws IOException 
 	 */
-	public Sportman nextSportman() throws IOException, ParseException {
-		String line = reader.readLine();
-		//System.out.println(line);
+	public Sportman nextSportman() throws ReadException, ParseException {
+		String line;
+		try{
+			line = reader.readLine();
+		}catch(IOException e){
+			throw new ReadException("Can't read from file");
+		}
 		if (line != null && line.length() != 0) {
 
 			String name;
@@ -113,7 +119,12 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 
 		}
 		else {
-			reader.close();
+			try {
+				reader.close();
+			}
+			catch (IOException e) {
+				throw new ReadException("Can't close file");
+			}
 			return null;
 		}
 	}

@@ -5,6 +5,9 @@ import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Sportman;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 /**
  * Decathlon organise data processing from/to user
@@ -12,41 +15,54 @@ import net.azib.java.students.t050545.homework.sport.Sportman;
  * @author libricon
  */
 public class Decathlon {
-	
-	public static void main(String[] args) throws Exception {
 
-		
-		PluginLoader plug = new PluginLoader(args); 
-		Sportman sportman = null;
+	public static void main(String[] args) {
+
 		AthleteLoader loader = null;
 		AthleteWriter writer = null;
-		
-		try{
-			if((loader = plug.getLoader()) == null){
-				throw new NullPointerException();
-			}
-			if((writer = plug.getWriter()) == null){
-				throw new NullPointerException();
-			}
-		} catch ( LoadException e){
-			e.printStackTrace();
-			System.exit(-1);
-		} catch (NullPointerException e){
-			System.exit(-2);
-		}
-		
-		Competition comp = new Competition();
 		try {
-			while ((sportman = loader.nextSportman()) != null) {
-				comp.addCompetitor(sportman);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+			try {
+				PluginLoader plug = new PluginLoader(args);
 
-		writer.printResultTable(comp);
-		writer.close();
+				if ((loader = plug.getLoader()) == null) {
+					throw new NullPointerException();
+				}
+				if ((writer = plug.getWriter()) == null) {
+					throw new NullPointerException();
+				}
+			}
+			catch (LoadException e) {
+				e.printStackTrace();
+				System.exit(-1);
+			}
+			catch (NullPointerException e) {
+				System.exit(-2);
+			}
+
+			Competition comp = new Competition();
+			Sportman sportman = null;
+			try {
+				while ((sportman = loader.nextSportman()) != null) {
+					comp.addCompetitor(sportman);
+				}
+				writer.printResultTable(comp);
+			}
+			catch (WriteException e) {
+				System.err.println("Program can't continue normal work, it will be closed");
+				System.exit(-3);
+			}
+			catch (ParseException e) {
+				e.printStackTrace();
+			}
+			catch (ReadException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		finally {
+			loader.close();
+			writer.close();
+		}
 		System.out.println("END");
 		System.exit(0);
 

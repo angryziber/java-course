@@ -1,15 +1,18 @@
 package net.azib.java.students.t050545.homework.writers;
 
 import net.azib.java.students.t050545.homework.LoadException;
+import net.azib.java.students.t050545.homework.WriteException;
 import net.azib.java.students.t050545.homework.sport.Competition;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.Stack;
 
+import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -43,6 +46,7 @@ public class HTMLWriter implements AthleteWriter {
 		return description;
 	}
 
+	/** Initialise HTML transformer and XML loader */
 	@Override
 	public void init(Stack<String> arguments) throws LoadException {
 		String fileName = arguments.pop();
@@ -66,7 +70,8 @@ public class HTMLWriter implements AthleteWriter {
 	 *  @throws Exception 
 	 */
 	@Override
-	public void printResultTable(Competition comp) throws Exception {
+	public void printResultTable(Competition comp) throws WriteException {
+		try{
 		// stringwriter is used instead of pipes, 
 		// because XMLWRITER write to out, and transformer need to read from out
 		StringWriter out = new StringWriter();
@@ -77,6 +82,15 @@ public class HTMLWriter implements AthleteWriter {
 		transformer.transform(new StreamSource(in), new StreamResult(new FileOutputStream(outFile)));
         out.close();
         in.close();
+		}catch(XMLStreamException e){
+			throw new WriteException("Problem with xml stream");
+		}catch(TransformerException e){
+			throw new WriteException("Can't transform into HTML, check .XSL file");
+		}catch(FileNotFoundException e){
+			throw new WriteException("Can't open output file");
+		}catch(IOException e){
+			throw new WriteException("Comman IO exception");
+		}
 	}
 	
 	/** 

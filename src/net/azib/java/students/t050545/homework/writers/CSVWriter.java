@@ -4,10 +4,8 @@ import net.azib.java.students.t050545.homework.LoadException;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Places;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -33,6 +31,8 @@ public class CSVWriter implements AthleteWriter {
 		return description;
 	}
 
+	/** Initialise writer, open file 
+	 */
 	@Override
 	public void init(Stack<String> arguments) throws LoadException {
 		String fileName = arguments.pop();
@@ -62,9 +62,7 @@ public class CSVWriter implements AthleteWriter {
 		writer.flush();
 	}
      
-    /** 
-     *  Method close printWriter stream
-     */
+    /** Method close printWriter stream */
 	@Override
 	public void close() {
 		writer.close();
