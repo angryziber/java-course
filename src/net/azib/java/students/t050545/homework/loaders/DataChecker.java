@@ -16,8 +16,7 @@ public class DataChecker {
 	 * @return the same gregorian calendar
 	 * @throws ParseException in case problems with parsing, generate parse error
 	 */
-	public GregorianCalendar toParseBirthDay(String day) throws ParseException {
-		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+	public GregorianCalendar toParseBirthDay(String day, SimpleDateFormat df) throws ParseException {
 		String birthDay = day;
 		GregorianCalendar birthDate = new GregorianCalendar();
 		birthDate.setTime(df.parse(birthDay));

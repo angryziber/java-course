@@ -4,7 +4,6 @@ import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
-import net.azib.java.students.t050545.homework.utils.AthleteLoader;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 

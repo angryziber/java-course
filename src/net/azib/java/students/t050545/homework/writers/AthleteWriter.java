@@ -1,6 +1,8 @@
-package net.azib.java.students.t050545.homework.utils;
+package net.azib.java.students.t050545.homework.writers;
 
 import net.azib.java.students.t050545.homework.sport.Competition;
+import net.azib.java.students.t050545.homework.utils.ArgumentParser;
+import net.azib.java.students.t050545.homework.utils.WriteException;
 
 
 /**

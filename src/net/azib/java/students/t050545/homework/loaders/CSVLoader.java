@@ -4,7 +4,6 @@ import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
-import net.azib.java.students.t050545.homework.utils.AthleteLoader;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 
@@ -13,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Stack;
 
@@ -77,7 +77,7 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 			name = arrayOfData[0];
 
 			if (isValidDate(arrayOfData[1])) {
-				birthDate = toParseBirthDay(arrayOfData[1]);
+				birthDate = toParseBirthDay(arrayOfData[1], new SimpleDateFormat("dd.MM.yyyy"));
 			}
 			else {
 				throw new ParseException("BIRTH DATE\n"+line, 0);

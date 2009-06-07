@@ -3,7 +3,6 @@ package net.azib.java.students.t050545.homework.writers;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Places;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
-import net.azib.java.students.t050545.homework.utils.AthleteWriter;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.WriteException;
 

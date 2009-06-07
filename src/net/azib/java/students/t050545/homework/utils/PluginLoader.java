@@ -1,5 +1,8 @@
 package net.azib.java.students.t050545.homework.utils;
 
+import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
+import net.azib.java.students.t050545.homework.writers.AthleteWriter;
+
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;

@@ -1,7 +1,7 @@
 package net.azib.java.students.t050545.homework.sport;
 
+import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
 import net.azib.java.students.t050545.homework.loaders.CSVLoader;
-import net.azib.java.students.t050545.homework.utils.AthleteLoader;
 
 import java.util.ArrayList;
 import java.util.Collections;

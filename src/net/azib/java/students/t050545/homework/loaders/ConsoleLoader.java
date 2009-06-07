@@ -5,11 +5,11 @@ import net.azib.java.students.t050545.homework.sport.PointSystem;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
-import net.azib.java.students.t050545.homework.utils.AthleteLoader;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.Stack;
@@ -62,7 +62,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 		GregorianCalendar birthDate;
 		
 		try {
-			birthDate = toParseBirthDay(birthDay);
+			birthDate = toParseBirthDay(birthDay, new SimpleDateFormat("dd.MM.yyyy"));
 		}
 		catch (ParseException e) {
 			throw new ReadException("Can't parse birthDay, check format");
