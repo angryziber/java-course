@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLOutputFactory;
@@ -54,9 +55,8 @@ public class XMLWriter implements AthleteWriter {
 	}
 	
 	@Override
-	public void init(List<String> arguments) throws LoadException {
-		String fileName = arguments.get(0);
-		arguments.remove(0);
+	public void init(Stack<String> arguments) throws LoadException {
+		String fileName = arguments.pop();
 		PrintWriter out;
 		try {
 			out = new PrintWriter(fileName);

@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * DBLoader, load sportmans from database java.azib.net
@@ -87,10 +88,9 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 	}
 
 	@Override
-	public void init(List<String> arguments) throws LoadException {
+	public void init(Stack<String> arguments) throws LoadException {
 		try {
-			String dataBaseID = arguments.get(0);
-			arguments.remove(0);
+			String dataBaseID = arguments.pop();
 			conn = DriverManager.getConnection("jdbc:mysql://java.azib.net:3306/decathlon", "java", "java");
 			stmt = conn.createStatement();
 			String query = baseQuery + dataBaseID;

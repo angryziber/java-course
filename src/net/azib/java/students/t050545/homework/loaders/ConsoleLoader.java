@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * ConsoleLoader
@@ -93,7 +94,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 
 
 	@Override
-	public void init(List<String> arguments) throws LoadException {
+	public void init(Stack<String> arguments) throws LoadException {
 		scanner = new Scanner(System.in);
 	}
 	

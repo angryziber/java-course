@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * CSVWriter write result table into file
@@ -33,9 +34,8 @@ public class CSVWriter implements AthleteWriter {
 	}
 
 	@Override
-	public void init(List<String> arguments) throws LoadException {
-		String fileName = arguments.get(0);
-		arguments.remove(0);
+	public void init(Stack<String> arguments) throws LoadException {
+		String fileName = arguments.pop();
 		try {
 			writer = new PrintWriter(fileName);
 		}

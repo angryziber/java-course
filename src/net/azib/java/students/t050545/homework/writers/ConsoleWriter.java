@@ -5,6 +5,7 @@ import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Places;
 
 import java.util.List;
+import java.util.Stack;
 
 
 /**
@@ -28,7 +29,7 @@ public class ConsoleWriter implements AthleteWriter {
 	}
 
 	@Override
-	public void init(List<String> arguments) throws LoadException {
+	public void init(Stack<String> arguments) throws LoadException {
 		
 	}
 	

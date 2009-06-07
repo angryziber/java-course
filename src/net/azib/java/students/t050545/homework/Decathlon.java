@@ -17,13 +17,21 @@ public class Decathlon {
 
 		
 		PluginLoader plug = new PluginLoader(args); 
-		AthleteLoader loader = plug.getLoader();
-		System.out.println(loader.getArgum()+"  "+loader.getDescription());
-		AthleteWriter writer = plug.getWriter();
-		System.out.println(writer.getArgum()+"  "+writer.getDescription());
-		Competition comp = null;
 		Sportman sportman = null;
+		AthleteLoader loader = null;
+		AthleteWriter writer = null;
 		
+		try{
+			loader = plug.getLoader();
+			writer = plug.getWriter();
+			System.out.println(loader.getArgum()+"  "+loader.getDescription());
+			System.out.println(writer.getArgum()+"  "+writer.getDescription());
+		} catch ( LoadException e){
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		
+		Competition comp = new Competition();
 		try {
 			while ((sportman = loader.nextSportman()) != null) {
 				comp.addCompetitor(sportman);

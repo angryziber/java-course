@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.TreeMap;
 
 import sun.java2d.pipe.hw.ExtendedBufferCapabilities;
@@ -24,25 +25,25 @@ public class PluginLoader {
 
 	private Map<String, AthleteLoader> loaders = null;
 	private Map<String, AthleteWriter> writers = null;
-	private List<String> arguments;
+	private Stack<String> arguments = new Stack<String>();
 
-	public PluginLoader(String[] args) throws Exception {
-		arguments = Arrays.asList(args);
+	public PluginLoader(String[] args) throws URISyntaxException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+		for(int i = args.length-1; i>=0; i--){
+			arguments.push(args[i]);
+		}
 		loaders = getLoaders();
 		writers = getWriters();
 
 	}
 
 	public AthleteLoader getLoader() throws LoadException{
-		AthleteLoader loader = loaders.get(arguments.get(0));
-		arguments.remove(0);
+		AthleteLoader loader = loaders.get(arguments.pop());
 		loader.init(arguments);
 		return loader;
 	}
 	
 	public AthleteWriter getWriter() throws LoadException{
-		AthleteWriter writer = writers.get(arguments.get(0));
-		arguments.remove(0);
+		AthleteWriter writer = writers.get(arguments.pop());
 		writer.init(arguments);
 		return writer;
 	}
@@ -66,9 +67,9 @@ public class PluginLoader {
 				Class unknowClass = Class.forName(AthleteLoader.class.getPackage().getName() + '.'
 						+ file.substring(0, file.length() - 6));
 				if (isInterface(unknowClass, AthleteLoader.class.getSimpleName())) {
-					System.out.println(unknowClass.getSimpleName());
+					//System.out.println(unknowClass.getSimpleName());
 					AthleteLoader temp = (AthleteLoader) unknowClass.newInstance();
-					System.out.println(temp.getArgum()+"  " + temp.getDescription());
+					//System.out.println(temp.getArgum()+"  " + temp.getDescription());
 					argVSclass.put(temp.getArgum(), temp);
 				}
 			}
@@ -89,9 +90,9 @@ public class PluginLoader {
 				Class unknowClass = Class.forName(AthleteWriter.class.getPackage().getName() + '.'
 						+ file.substring(0, file.length() - 6));
 				if (isInterface(unknowClass, AthleteWriter.class.getSimpleName())) {
-					System.out.println(unknowClass.getSimpleName());
+					//System.out.println(unknowClass.getSimpleName());
 					AthleteWriter temp = (AthleteWriter) unknowClass.newInstance();
-					System.out.println(temp.getArgum()+"  " + temp.getDescription());
+					//System.out.println(temp.getArgum()+"  " + temp.getDescription());
 					argVSclass.put(temp.getArgum(), temp);
 				}
 			}
@@ -113,7 +114,7 @@ public class PluginLoader {
 	public static void main(String[] args){
 		try {
 			PluginLoader loader = new PluginLoader(args);
-			System.out.println(loader.getLoadClasses());
+			loader.getLoader();
 		}
 		catch (Exception e) {
 			e.printStackTrace();

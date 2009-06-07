@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Loader from csv file "," is separator, all data in line
@@ -42,10 +43,9 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 	 * @param arguments list of console arguments
 	 * @throws LoadException 
 	 */
-	public void init(List<String> arguments) throws LoadException{
+	public void init(Stack<String> arguments) throws LoadException{
 		try {
-			String fileName = arguments.get(0);
-			arguments.remove(0);
+			String fileName = arguments.pop();
 			reader = new BufferedReader(new FileReader(fileName));
 		}
 		catch (FileNotFoundException e) {
