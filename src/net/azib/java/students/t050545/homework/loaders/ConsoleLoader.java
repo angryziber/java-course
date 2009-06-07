@@ -1,16 +1,16 @@
 package net.azib.java.students.t050545.homework.loaders;
 
+import net.azib.java.students.t050545.homework.sport.Discipline;
 import net.azib.java.students.t050545.homework.sport.Person;
-import net.azib.java.students.t050545.homework.sport.PointSystem;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
-import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
+import net.azib.java.students.t050545.homework.utils.DataChecker;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -37,7 +37,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 		String name;
 		String country;
 		String birthDay;
-		float[] results = new float[PointSystem.Discipline.values().length];
+		float[] results = new float[Discipline.values().length];
 
 		System.out.print("Sportman's name, or -1: ");
 		name = scanner.next();
@@ -58,11 +58,11 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 			if (birthDay.equals("-1"))
 				return null;
 		}
-		while (!isValidDate(birthDay));
-		GregorianCalendar birthDate;
+		while (!isValidDate(birthDay, DateFormat.getDateInstance()));
+		Date birthDate;
 		
 		try {
-			birthDate = toParseBirthDay(birthDay, new SimpleDateFormat("dd.MM.yyyy"));
+			birthDate = toParseBirthDay(birthDay, DateFormat.getDateInstance());
 		}
 		catch (ParseException e) {
 			throw new ReadException("Can't parse birthDay, check format");
