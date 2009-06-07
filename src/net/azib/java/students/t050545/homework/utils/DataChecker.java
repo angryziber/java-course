@@ -46,7 +46,7 @@ public class DataChecker {
 	 * @param country sportman's
 	 * @return if 2 letters, true
 	 */
-	public boolean isValidCountry(String country) {
+	public static boolean isValidCountry(String country) {
 		return Pattern.matches("[a-zA-Z][a-zA-Z]", country);
 	}
 
@@ -54,7 +54,7 @@ public class DataChecker {
 	 * @param country name
 	 * @return <code>toUpper()</code>
 	 */
-	public String addCountry(String input) {
+	public static  String addCountry(String input) {
 		return input.trim().toUpperCase();
 	}
 
@@ -62,7 +62,7 @@ public class DataChecker {
 	 * @param result
 	 * @return <code>(res > 0) ? true:false</code>
 	 */
-	public boolean isCorrectResult(float result) {
+	public static boolean isCorrectResult(float result) {
 		return (result > 0);
 	}
 
