@@ -1,12 +1,14 @@
 package net.azib.java.students.t050545.homework;
 
-import net.azib.java.students.t050545.homework.writers.AthleteWriter;
-import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
+import net.azib.java.students.t050545.homework.utils.AthleteLoader;
+import net.azib.java.students.t050545.homework.utils.AthleteWriter;
+import net.azib.java.students.t050545.homework.utils.LoadException;
+import net.azib.java.students.t050545.homework.utils.PluginLoader;
+import net.azib.java.students.t050545.homework.utils.ReadException;
+import net.azib.java.students.t050545.homework.utils.WriteException;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 
 /**
@@ -42,7 +44,7 @@ public class Decathlon {
 			Competition comp = new Competition();
 			AthleteScore sportman = null;
 			try {
-				while ((sportman = loader.nextSportman()) != null) {
+				while ((sportman = loader.nextSportsman()) != null) {
 					comp.addCompetitor(sportman);
 				}
 				writer.printResultTable(comp);

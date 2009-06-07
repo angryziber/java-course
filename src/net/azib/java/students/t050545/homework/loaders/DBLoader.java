@@ -1,11 +1,12 @@
 package net.azib.java.students.t050545.homework.loaders;
 
-import net.azib.java.students.t050545.homework.LoadException;
-import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
+import net.azib.java.students.t050545.homework.utils.AthleteLoader;
+import net.azib.java.students.t050545.homework.utils.LoadException;
+import net.azib.java.students.t050545.homework.utils.ReadException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,7 +54,7 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 	 * @throws SQLException 
 	 */
 	@Override
-	public AthleteScore nextSportman() throws ParseException, ReadException{
+	public AthleteScore nextSportsman() throws ParseException, ReadException{
 
 		try{
 		

@@ -1,4 +1,5 @@
-package net.azib.java.students.t050545.homework;
+package net.azib.java.students.t050545.homework.utils;
+
 
 import java.util.Stack;
 

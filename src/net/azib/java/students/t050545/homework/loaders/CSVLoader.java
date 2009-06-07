@@ -1,24 +1,23 @@
 package net.azib.java.students.t050545.homework.loaders;
 
-import net.azib.java.students.t050545.homework.LoadException;
-import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
+import net.azib.java.students.t050545.homework.utils.AthleteLoader;
+import net.azib.java.students.t050545.homework.utils.LoadException;
+import net.azib.java.students.t050545.homework.utils.ReadException;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Stack;
 
 /**
- * Loader from csv file "," is separator, all data in line
+ * Loader from csv file
  * 
  * @author libricon
  */
@@ -27,7 +26,7 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 	/** InputStream for file input, */
 	private BufferedReader reader;
 
-	private String argument = "    -csv";
+	private String argument = "-csv";
 	private String description = "<filename> file with athletes results";
 	
 	@Override
@@ -40,7 +39,7 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 		return description;
 	}
 
-	/** Opens file argument name
+	/** Opens file
 	 * @param arguments list of console arguments
 	 * @throws LoadException 
 	 */
@@ -55,13 +54,12 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 	}
 
 	/**
-	 * Method return Sportman object, what get from file
-	 * @return next sportman in file
-	 * @throws IOException file opening exception
+	 * Method return Sportsman from file
+	 * @return Sportsman  or null
+	 * @throws ReadException 
 	 * @throws ParseException parse exception
-	 * @throws IOException 
 	 */
-	public AthleteScore nextSportman() throws ReadException, ParseException {
+	public AthleteScore nextSportsman() throws ReadException, ParseException {
 		String line;
 		try{
 			line = reader.readLine();
@@ -129,6 +127,7 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 		}
 	}
 
+	/** Close fileReade */
 	public void close() {
 		try {
 			reader.close();

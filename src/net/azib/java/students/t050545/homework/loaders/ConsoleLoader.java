@@ -1,12 +1,13 @@
 package net.azib.java.students.t050545.homework.loaders;
 
-import net.azib.java.students.t050545.homework.LoadException;
-import net.azib.java.students.t050545.homework.ReadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.PointSystem;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
+import net.azib.java.students.t050545.homework.utils.AthleteLoader;
+import net.azib.java.students.t050545.homework.utils.LoadException;
+import net.azib.java.students.t050545.homework.utils.ReadException;
 
 import java.text.ParseException;
 import java.util.GregorianCalendar;
@@ -20,22 +21,16 @@ import java.util.Stack;
  */
 public class ConsoleLoader extends DataChecker implements AthleteLoader {
 
-	/** this is a console scanner */
 	private Scanner scanner;
-	
 	private String argument = "-console";
-	private String description = "Input takes from console";
-	
-	/**
-	 *  Take resource
-	 */
-	public ConsoleLoader() {
-	}
+	private String description = "You input all athlete throught console";
 
-	/** Return new sportman, or null if no anyone else
-	 * @return Sportman object or null, if no more
+
+	/**
+	 * @return Sportman or null, if no more
+	 * @throws ReadException 
 	 */
-	public AthleteScore nextSportman() throws ReadException {
+	public AthleteScore nextSportsman() throws ReadException {
 
 		System.out.println("Please enter essential sportman's data");
 
@@ -53,7 +48,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 			System.out.print("Country, or -1: ");
 			country = addCountry(scanner.next());
 			if (country.equals("-1"))
-			return null;
+				return null;
 		}
 		while (!isValidCountry(country));
 
@@ -65,6 +60,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 		}
 		while (!isValidDate(birthDay));
 		GregorianCalendar birthDate;
+		
 		try {
 			birthDate = toParseBirthDay(birthDay);
 		}
@@ -97,12 +93,12 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 
 	}
 
-
+	/** Create a new Scanner */
 	@Override
 	public void init(Stack<String> arguments) throws LoadException {
 		scanner = new Scanner(System.in);
 	}
-	
+
 	@Override
 	public String getArgum() {
 		return argument;
@@ -115,7 +111,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 
 	@Override
 	public void close() {
-		scanner.close();	
+		scanner.close();
 	}
 
 }
