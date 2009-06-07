@@ -1,9 +1,10 @@
 package net.azib.java.students.t050545.homework.loaders;
 
+import net.azib.java.students.t050545.homework.sport.Discipline;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
-import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
+import net.azib.java.students.t050545.homework.utils.DataChecker;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 
@@ -81,7 +82,7 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 				resultTable[dis.ordinal()] = Float.parseFloat(resultset.getString(dis.toString()));
 			}
 
-			return (new AthleteScore(new Score(resultTable), new Person(name, country, birthDate)));
+			return (new AthleteScore(new Score(resultTable), new Person(name, country, birthDate.getTime())));
 
 		}
 		else {
