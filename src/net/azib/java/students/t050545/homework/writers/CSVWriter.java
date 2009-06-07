@@ -20,7 +20,7 @@ public class CSVWriter implements AthleteWriter {
 	/** printwriter stream */
 	private PrintWriter writer = null;
 	
-	private String argument = "-csv";
+	private String argument = "    -csv";
 	private String description = "Competition results write to csv file";
 	
 	@Override

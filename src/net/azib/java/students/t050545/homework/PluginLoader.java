@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import sun.java2d.pipe.hw.ExtendedBufferCapabilities;
 
@@ -37,15 +38,29 @@ public class PluginLoader {
 	}
 
 	public AthleteLoader getLoader() throws LoadException{
-		AthleteLoader loader = loaders.get(arguments.pop());
+		String key = arguments.pop();
+		if(loaders.containsKey(key)){
+		AthleteLoader loader = loaders.get(key);
 		loader.init(arguments);
 		return loader;
+		} else {
+			System.out.println("Wrong arguments or filename ");
+			System.out.println(printHelp());
+			return null;
+		}
 	}
 	
 	public AthleteWriter getWriter() throws LoadException{
-		AthleteWriter writer = writers.get(arguments.pop());
+		String key = arguments.pop();
+		if(writers.containsKey(key)){
+		AthleteWriter writer = writers.get(key);
 		writer.init(arguments);
 		return writer;
+		} else {
+			System.out.println("Wrong arguments or filename ");
+			System.out.println(printHelp());
+			return null;
+		}
 	}
 	
 	private Map<String, AthleteLoader> getLoadClasses() {
@@ -102,6 +117,21 @@ public class PluginLoader {
 
 	}
 
+	private String printHelp(){
+		StringBuilder builder = new StringBuilder();
+		builder.append("Command line: <program> -<input-method> [input-parameters] -<output-method> [output-parameters]\n");
+		builder.append("\nThis program gets value from different sources, use follow arguments:\n");
+		for(String str: loaders.keySet()){
+			builder.append(str+"\t"+loaders.get(str).getDescription()+"\n");
+		}
+		
+		builder.append("\nYou can save competition result in a different forms, use follow arguments:\n");
+		for(String str: writers.keySet()){
+			builder.append(str+"\t"+writers.get(str).getDescription()+"\n");
+		}
+		
+		return builder.toString();
+	}
 	private boolean isInterface(Class cl, String interName) {
 		Class[] theInterfaces = cl.getInterfaces();
 		for (Class inter : theInterfaces) {

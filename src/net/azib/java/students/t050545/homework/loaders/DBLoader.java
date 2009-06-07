@@ -33,7 +33,7 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 	/** baseQuery, need to add competition id */
 	private String baseQuery = "SELECT A.name, A.dob, A.country_code, R.race_100m, R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, R.discus_throw, R.pole_vault, R.javelin_throw, R.race_1500m FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id WHERE R.competition_id = ";
 
-	private String argument = "-db";
+	private String argument = "     -db";
 	private String description = "<ID> Connect to database and load competitiona with ID";
 	
 	@Override

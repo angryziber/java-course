@@ -22,13 +22,17 @@ public class Decathlon {
 		AthleteWriter writer = null;
 		
 		try{
-			loader = plug.getLoader();
-			writer = plug.getWriter();
-			System.out.println(loader.getArgum()+"  "+loader.getDescription());
-			System.out.println(writer.getArgum()+"  "+writer.getDescription());
+			if((loader = plug.getLoader()) == null){
+				throw new NullPointerException();
+			}
+			if((writer = plug.getWriter()) == null){
+				throw new NullPointerException();
+			}
 		} catch ( LoadException e){
 			e.printStackTrace();
 			System.exit(-1);
+		} catch (NullPointerException e){
+			System.exit(-2);
 		}
 		
 		Competition comp = new Competition();

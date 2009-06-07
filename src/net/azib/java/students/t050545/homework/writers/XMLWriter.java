@@ -28,7 +28,7 @@ public class XMLWriter implements AthleteWriter {
 	/** XML file forms and writing here */
 	private XMLStreamWriter writer;
 	
-	private String argument = "-xml";
+	private String argument = "    -xml";
 	private String description = "Results print in xml file";
 	
 	@Override

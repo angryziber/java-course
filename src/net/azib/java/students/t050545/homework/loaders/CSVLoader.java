@@ -26,7 +26,7 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 	/** InputStream for file input, */
 	private BufferedReader reader;
 
-	private String argument = "-csv";
+	private String argument = "    -csv";
 	private String description = "<filename> file with athletes results";
 	
 	@Override

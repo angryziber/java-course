@@ -30,7 +30,7 @@ public class HTMLWriter implements AthleteWriter {
 	/** transformer that transform xml to html form */
 	private Transformer transformer;
 	
-	private String argument = "-html";
+	private String argument = "   -html";
 	private String description = "Results print in html file";
 	
 	@Override
