@@ -1,28 +1,34 @@
 package net.azib.java.students.t050545.homework.sport;
 
-
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * Sportman hold Person's data and result with scores
+ * Person data + scores
  * 
  * @author libricon
  */
 public class AthleteScore implements Comparable<AthleteScore> {
 
-	/** Sportman consist of person and score
-	 * @param score object with sportman's results
-	 * @param person object contain sportman's name and other data
+	/** person store name, country, birthday */
+	private Person person;
+	/** this member store results and points */
+	private PointSystem points;
+
+	/**
+	 * consist of person and score
+	 * @param score results in dethatlon
+	 * @param person name,country...
 	 */
 	public AthleteScore(Score score, Person person) {
 		this.person = new Person(person.getName(), person.getCountry(), person.getBirthDay());
 		points = new PointSystem(score);
-		
+
 	}
 
 	/**
-	 * @param scores array with all results
-	 * @param person object contain sportman's name and other data
+	 * @param scores  array with all results
+	 * @param person sportman's name and other data
 	 */
 	public AthleteScore(float[] scores, Person person) {
 		this(new Score(scores), person);
@@ -32,20 +38,18 @@ public class AthleteScore implements Comparable<AthleteScore> {
 	 * @return the points
 	 */
 	public PointSystem getPoints() {
-		return points;                         // think about clone() !
+		return points; 
 	}
 
 	/**
 	 * @return the person
 	 */
-	public Person getPerson() {			      // person cann't be modified
+	public Person getPerson() { 
 		return person;
 	}
 
 	/**
-	 * This Method compare 2 objects, if all field are equal, returns true
-	 * 
-	 * @param o The second object to compare
+	 * @param o other Athlete
 	 * @return return true, if equals
 	 */
 	@Override
@@ -61,9 +65,7 @@ public class AthleteScore implements Comparable<AthleteScore> {
 	}
 
 	/**
-	 * This function returns String, with information about the Sportman
-	 * 
-	 * @return Return name, country and birthday and results in readable form
+	 * @return name, country and birthday and results in readable form
 	 */
 	@Override
 	public String toString() {
@@ -71,42 +73,12 @@ public class AthleteScore implements Comparable<AthleteScore> {
 	}
 
 	/**
-	 * This method allowed to sort Sportmans by score in TreeSet collection
-	 * 
-	 * @param o Second sportman
+	 * @param other Athlete
 	 * @return other.score - this.score , what gives descending order
 	 */
 	@Override
 	public int compareTo(AthleteScore o) {
 		AthleteScore man = (AthleteScore) o;
 		return man.getPoints().getScore() - this.getPoints().getScore();
-	}
-
-	/** person store name, country, birthday */
-	private Person person;
-	/** this member store results and points */
-	private PointSystem points;
-
-	/**
-	 * Main function, only for test purposes
-	 * 
-	 * @param args command line arguments
-	 */
-	public static void main(String[] args) {
-		float[] arrayScore = new float[10];
-		arrayScore[0] = 10.395f;
-		arrayScore[1] = 7.76f;
-		arrayScore[2] = 18.4f;
-		arrayScore[3] = 2.20f;
-		arrayScore[4] = 46.17f;
-		arrayScore[5] = 13.8f;
-		arrayScore[6] = 56.17f;
-		arrayScore[7] = 5.28f;
-		arrayScore[8] = 77.19f;
-		arrayScore[9] = 233.79f;
-
-		AthleteScore sportman = new AthleteScore(arrayScore, new Person("Kirill", "RU", new GregorianCalendar(1987, 4, 29)));
-		System.out.println(sportman);
-		System.exit(0);
 	}
 }
