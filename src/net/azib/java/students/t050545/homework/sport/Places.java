@@ -1,30 +1,29 @@
 package net.azib.java.students.t050545.homework.sport;
 
-
 /**
- * This Class hold place in competition and sportman's data ( stores, name and
- * data )
+ * Hold Athlete data and place in competition
  * 
  * @author libricon
  */
 public class Places {
-	
-	/** Place is a string, usually like 1-2 ( braces [] added automat.)
-	 * @param place Place in competition
-	 * @param sportman Sportman's data
-	 */
+
+	/** sportman's place */
+	private String placeNum;
+	/** athlete */
+	private AthleteScore athlete;
+
+	/** Place is a string, like 1-2 */
 	public Places(String place, AthleteScore sportman) {
 		placeNum = place;
-		this.sportman = sportman;
+		this.athlete = sportman;
 	}
 
 	/**
-	 * ToString method, return place and all sportmans data
 	 * @return <code>place + \n + sportman.toString()</code>
 	 */
 	@Override
 	public String toString() {
-		return "["+placeNum+"]" + "\n" + sportman;
+		return "[" + placeNum + "]" + "\n" + athlete;
 	}
 
 	/**
@@ -38,12 +37,7 @@ public class Places {
 	 * @return the sportman
 	 */
 	public AthleteScore getSportman() {
-		return sportman;
+		return athlete;
 	}
-
-	/** sportman's place */
-	private String placeNum;
-	/** sportman */
-	private AthleteScore sportman;
 
 }
