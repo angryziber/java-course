@@ -14,10 +14,8 @@ import java.text.ParseException;
 
 public interface AthleteLoader extends ArgumentParser {
 	/**
-	 * 
 	 * @return sportman or null
-	 * @throws ReadException
-	 *             anykind of read exception
+	 * @throws ReadException anykind of read exception
 	 * @throws ParseException
 	 */
 	AthleteScore nextSportsman() throws ReadException, ParseException;
