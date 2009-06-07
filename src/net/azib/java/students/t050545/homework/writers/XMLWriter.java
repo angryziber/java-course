@@ -1,5 +1,6 @@
 package net.azib.java.students.t050545.homework.writers;
 
+import net.azib.java.students.t050545.homework.LoadException;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Places;
 import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
@@ -8,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
+import java.util.List;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -19,10 +22,23 @@ import javax.xml.stream.XMLStreamWriter;
  *
  * @author libricon
  */
-public class XMLWriter implements SportmanWriter {
+public class XMLWriter implements AthleteWriter {
 	
 	/** XML file forms and writing here */
 	private XMLStreamWriter writer;
+	
+	private String argument = "-xml";
+	private String description = "Results print in xml file";
+	
+	@Override
+	public String getArgum() {
+		return argument;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
 	
 	/** XML file will be written to stream.
 	 * @param stream XML file stream
@@ -32,18 +48,31 @@ public class XMLWriter implements SportmanWriter {
 		XMLOutputFactory factory = XMLOutputFactory.newInstance();
 		writer = factory.createXMLStreamWriter(stream);
 	}
-	/** XML document will be written to fileName
-	 * @param fileName XML output file name
-	 * @throws ParserConfigurationException
-	 * @throws FileNotFoundException
-	 * @throws XMLStreamException
-	 */
-	public XMLWriter(String fileName) throws ParserConfigurationException, FileNotFoundException, XMLStreamException {
-		// New document  initialise
-		PrintWriter out = new PrintWriter(fileName);
-		XMLOutputFactory factory = XMLOutputFactory.newInstance();
-		writer = factory.createXMLStreamWriter(out);	
+	
+	public XMLWriter(){
+		
 	}
+	
+	@Override
+	public void init(List<String> arguments) throws LoadException {
+		String fileName = arguments.get(0);
+		arguments.remove(0);
+		PrintWriter out;
+		try {
+			out = new PrintWriter(fileName);
+			XMLOutputFactory factory = XMLOutputFactory.newInstance();
+			writer = factory.createXMLStreamWriter(out);
+		}
+		catch (FileNotFoundException e) {
+			throw new LoadException("Can't write or read file" + fileName);
+		}
+		catch (XMLStreamException e){
+			throw new LoadException("XML Stream exception");
+		}
+			
+		
+	}
+
 
 	/**
 	 *  Method form XML file by using competition and save it to stream
@@ -110,6 +139,7 @@ public class XMLWriter implements SportmanWriter {
 		writer.flush();
 	}
 	
+	
 	/** 
 	 *  close write stream
 	 */
@@ -124,6 +154,8 @@ public class XMLWriter implements SportmanWriter {
 		}
 		
 	}
+
+	
 
 
 }

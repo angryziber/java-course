@@ -1,5 +1,6 @@
 package net.azib.java.students.t050545.homework.loaders;
 
+import net.azib.java.students.t050545.homework.LoadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.Sportman;
@@ -12,33 +13,48 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Loader from csv file "," is separator, all data in line
  * 
  * @author libricon
  */
-public class CSVLoader extends DataChecker implements SportmanLoader {
+public class CSVLoader extends DataChecker implements AthleteLoader {
 
-	/** Standard constructor, takes results from file
-	 * @param file filename, what content sportmans data
-	 * @throws FileNotFoundException exception, if file name is wrong or file cannot be accessed.
-	 */
-	public CSVLoader(File file) throws FileNotFoundException {
-		reader = new BufferedReader(new FileReader(file));
+	/** InputStream for file input, */
+	private BufferedReader reader;
+
+	private String argument = "-csv";
+	private String description = "<filename> file with athletes results";
+	
+	@Override
+	public String getArgum() {
+		return argument;
 	}
 
-	/** Takes full file name as a string
-	 * @param fileName filename, what content sportmans data
-	 * @throws FileNotFoundException exception, if file name is wrong or file cannot be accessed.
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	/** Opens file argument name
+	 * @param arguments list of console arguments
+	 * @throws LoadException 
 	 */
-	public CSVLoader(String fileName) throws FileNotFoundException {
-		reader = new BufferedReader(new FileReader(fileName));
+	public void init(List<String> arguments) throws LoadException{
+		try {
+			String fileName = arguments.get(0);
+			arguments.remove(0);
+			reader = new BufferedReader(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new LoadException("Wrong file name or file not exist");
+		}
 	}
 
 	/**
 	 * Method return Sportman object, what get from file
-	 * 
 	 * @return next sportman in file
 	 * @throws IOException file opening exception
 	 * @throws ParseException parse exception
@@ -102,27 +118,12 @@ public class CSVLoader extends DataChecker implements SportmanLoader {
 		}
 	}
 
-	/** InputStream for file input, */
-	private BufferedReader reader;
-
-	/**
-	 * @param args command line arguments
-	 */
-	public static void main(String[] args){
+	public void close() {
 		try {
-			CSVLoader loader = new CSVLoader("c:\\sport_utf8.txt");
-			Sportman sportman;
-			while ((sportman = loader.nextSportman()) != null) {
-				System.out.println(sportman.toString());
-			}
-			System.out.println("ALL");
-			System.exit(0);
+			reader.close();
 		}
-		catch (Exception pe) {
-			pe.printStackTrace();
-			pe.getMessage();
-			System.exit(1);
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
-
 }

@@ -1,5 +1,6 @@
 package net.azib.java.students.t050545.homework.loaders;
 
+import net.azib.java.students.t050545.homework.LoadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.Sportman;
@@ -13,36 +14,39 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * DBLoader, load sportmans from database java.azib.net
  * 
  * @author libricon
  */
-public class DBLoader extends DataChecker implements SportmanLoader {
+public class DBLoader extends DataChecker implements AthleteLoader {
 
+	/** resultset store response from database */
+	private ResultSet resultset;
+	/** stmt statement for database connection */
+	private Statement stmt;
+	/** conn connection itself */
+	private Connection conn = null;
+	/** baseQuery, need to add competition id */
+	private String baseQuery = "SELECT A.name, A.dob, A.country_code, R.race_100m, R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, R.discus_throw, R.pole_vault, R.javelin_throw, R.race_1500m FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id WHERE R.competition_id = ";
+
+	private String argument = "-db";
+	private String description = "<ID> Connect to database and load competitiona with ID";
 	
-	/** Cometition ID is id, what is putted into database
-	 * @param compID competition ID in DataBase
-	 * @throws SQLException
-	 */
-	public DBLoader(String compID) throws SQLException {
-		try {
-			conn = DriverManager.getConnection("jdbc:mysql://java.azib.net:3306/decathlon", "java", "java");
-		}
-		catch (Exception e) {
-			System.err.println("DataBase error!");
-			e.printStackTrace();
-		}
-		stmt = conn.createStatement();
-		String query = baseQuery + compID;
-		resultset = stmt.executeQuery(query);
-		resultset.first();
+	@Override
+	public String getArgum() {
+		return argument;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * Method return next sportman, if ther is no more, return null
-	 * 
+	 * Method return next sportman, if ther is no more, return nulls
 	 * @return Sportman or null
 	 */
 	@Override
@@ -82,21 +86,28 @@ public class DBLoader extends DataChecker implements SportmanLoader {
 
 	}
 
-	// SQL
-	/*
-	 * SELECT A.name, A.dob, A.country_code, R.race_100m, R.long_jump,
-	 * R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, R.discus_throw,
-	 * R.pole_vault, R.javelin_throw, R.race_1500m FROM athletes AS A INNER JOIN
-	 * results AS R ON A.id=R.athlete_id WHERE R.competition_id = 2
-	 */
-
-	/** resultset store response from database*/
-	private ResultSet resultset;
-	/** stmt statement for database connection */
-	private Statement stmt;
-	/** conn connection itself*/
-	private Connection conn = null;
-	/** baseQuery, need to add competition id */
-	private String baseQuery = "SELECT A.name, A.dob, A.country_code, R.race_100m, R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, R.discus_throw, R.pole_vault, R.javelin_throw, R.race_1500m FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id WHERE R.competition_id = ";
-
+	@Override
+	public void init(List<String> arguments) throws LoadException {
+		try {
+			String dataBaseID = arguments.get(0);
+			arguments.remove(0);
+			conn = DriverManager.getConnection("jdbc:mysql://java.azib.net:3306/decathlon", "java", "java");
+			stmt = conn.createStatement();
+			String query = baseQuery + dataBaseID;
+			resultset = stmt.executeQuery(query);
+			resultset.first();
+		}
+		catch (SQLException e) {
+			throw new LoadException("Database error!!!");
+		}
+	}
+	
+	public void close(){
+		try {
+			conn.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

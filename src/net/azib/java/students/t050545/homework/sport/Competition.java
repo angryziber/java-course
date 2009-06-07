@@ -1,7 +1,7 @@
 package net.azib.java.students.t050545.homework.sport;
 
 import net.azib.java.students.t050545.homework.loaders.CSVLoader;
-import net.azib.java.students.t050545.homework.loaders.SportmanLoader;
+import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -116,28 +116,5 @@ public class Competition {
 	private int id;
 
 	
-	
-	/**
-	 * Test function
-	 * @param args command line arguments
-	 */
-	public static void main(String[] args){
-		try {
-			Competition comp = new Competition("MEGA CUP ", 010101);
-			SportmanLoader loader = new CSVLoader("c:\\sport_utf8.txt");
-			Sportman sportman;
-
-			while ((sportman = loader.nextSportman()) != null) {
-				comp.addCompetitor(sportman);
-			}
-
-			comp.getPlaces();
-			System.out.println(comp);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.exit(0);
-	}
 
 }

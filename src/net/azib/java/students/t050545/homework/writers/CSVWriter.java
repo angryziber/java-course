@@ -1,36 +1,50 @@
 package net.azib.java.students.t050545.homework.writers;
 
+import net.azib.java.students.t050545.homework.LoadException;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.sport.Places;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * CSVWriter write result table into file
  * 
  * @author libricon
  */
-public class CSVWriter implements SportmanWriter {
+public class CSVWriter implements AthleteWriter {
 
-	/**
-	 * Constructor open file to write
-	 * 
-	 * @param fileName destination file
-	 * @throws FileNotFoundException
-	 */
-	public CSVWriter(String fileName) throws FileNotFoundException {
-		writer = new PrintWriter(fileName);
+	/** printwriter stream */
+	private PrintWriter writer = null;
+	
+	private String argument = "-csv";
+	private String description = "Competition results write to csv file";
+	
+	@Override
+	public String getArgum() {
+		return argument;
 	}
 
-	/**
-	 * @param file
-	 * @throws FileNotFoundException
-	 */
-	public CSVWriter(File file) throws FileNotFoundException {
-		writer = new PrintWriter(file);
+	@Override
+	public String getDescription() {
+		return description;
 	}
+
+	@Override
+	public void init(List<String> arguments) throws LoadException {
+		String fileName = arguments.get(0);
+		arguments.remove(0);
+		try {
+			writer = new PrintWriter(fileName);
+		}
+		catch (FileNotFoundException e) {
+			throw new LoadException("Can't read or write to file");
+		}
+	}
+	
+
 
 	/**
 	 * This method print into file competition data and result table all places and names
@@ -40,7 +54,10 @@ public class CSVWriter implements SportmanWriter {
 	public void printResultTable(Competition comp) {
 		writer.println(comp.getName() + " " + comp.getId());
 		for (Places place : comp.getPlaces()) {
-			writer.print(place);
+			writer.print("["+place.getPlaceNum()+"],");
+			writer.println(place.getSportman().getPerson().getName()+","
+					+place.getSportman().getPerson().getCountry()+","
+					+place.getSportman().getPoints().getScore());
 		}
 		writer.flush();
 	}
@@ -52,7 +69,4 @@ public class CSVWriter implements SportmanWriter {
 	public void close() {
 		writer.close();
 	}
-
-	/** printwriter stream */
-	private PrintWriter writer = null;
 }

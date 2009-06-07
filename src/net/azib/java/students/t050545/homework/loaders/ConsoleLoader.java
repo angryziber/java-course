@@ -1,5 +1,6 @@
 package net.azib.java.students.t050545.homework.loaders;
 
+import net.azib.java.students.t050545.homework.LoadException;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.PointSystem;
 import net.azib.java.students.t050545.homework.sport.Score;
@@ -8,6 +9,7 @@ import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
 
 import java.text.ParseException;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -15,13 +17,18 @@ import java.util.Scanner;
  * 
  * @author libricon
  */
-public class ConsoleLoader extends DataChecker implements SportmanLoader {
+public class ConsoleLoader extends DataChecker implements AthleteLoader {
 
+	/** this is a console scanner */
+	private Scanner scanner;
+	
+	private String argument = "-console";
+	private String description = "Input takes from console";
+	
 	/**
 	 *  Take resource
 	 */
 	public ConsoleLoader() {
-		scanner = new Scanner(System.in);
 	}
 
 	/** Return new sportman, or null if no anyone else
@@ -84,21 +91,25 @@ public class ConsoleLoader extends DataChecker implements SportmanLoader {
 
 	}
 
-	/** this is a console scanner */
-	private Scanner scanner;
 
-	/** Test method
-	 * @param args command line arguments
-	 */
-	public static void main(String[] args) {
-		try {
-			ConsoleLoader console = new ConsoleLoader();
-			System.out.println(console.nextSportman());
-			System.exit(0);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+	@Override
+	public void init(List<String> arguments) throws LoadException {
+		scanner = new Scanner(System.in);
 	}
+	
+	@Override
+	public String getArgum() {
+		return argument;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public void close() {
+		scanner.close();	
+	}
+
 }

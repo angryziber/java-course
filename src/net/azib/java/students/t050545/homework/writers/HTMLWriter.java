@@ -1,14 +1,19 @@
 package net.azib.java.students.t050545.homework.writers;
 
+import net.azib.java.students.t050545.homework.LoadException;
 import net.azib.java.students.t050545.homework.sport.Competition;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.List;
+
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -17,18 +22,41 @@ import javax.xml.transform.stream.StreamSource;
  * 
  * @author libricon
  */
-public class HTMLWriter implements SportmanWriter {
+public class HTMLWriter implements AthleteWriter {
 	
-	/** This writes writes to file in HTML form all competition data
-	 * @param fileName destination
-	 * @throws TransformerException
-	 * @throws FileNotFoundException
-	 * 
-	 */
-	public HTMLWriter(String fileName) throws FileNotFoundException, TransformerException {
-        // New transformer
-		transformer = TransformerFactory.newInstance().newTransformer(
-				new StreamSource(HTMLWriter.class.getResource("competition.xslt").getFile()));
+	/** destination file */
+	private String outFile;
+	/** transformer that transform xml to html form */
+	private Transformer transformer;
+	
+	private String argument = "-html";
+	private String description = "Results print in html file";
+	
+	@Override
+	public String getArgum() {
+		return argument;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public void init(List<String> arguments) throws LoadException {
+		String fileName = arguments.get(0);
+		arguments.remove(0);
+		
+		try {
+			transformer = TransformerFactory.newInstance().newTransformer(
+					new StreamSource(HTMLWriter.class.getResource("competition.xslt").getFile()));
+		}
+		catch (TransformerConfigurationException e) {
+			throw new LoadException("Configuration exception occur");
+		}
+		catch (TransformerFactoryConfigurationError e) {
+			throw new LoadException("Factory exception");
+		}
 		this.outFile = fileName;
 
 	}
@@ -57,12 +85,5 @@ public class HTMLWriter implements SportmanWriter {
 	@Override
 	public void close() {
 		transformer.reset();
-
 	}
-
-	/** destination file */
-	private String outFile;
-	/** transformer that transform xml to html form */
-	private Transformer transformer;
-
 }
