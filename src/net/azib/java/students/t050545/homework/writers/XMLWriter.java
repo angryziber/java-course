@@ -1,8 +1,8 @@
 package net.azib.java.students.t050545.homework.writers;
 
 import net.azib.java.students.t050545.homework.sport.Competition;
+import net.azib.java.students.t050545.homework.sport.Discipline;
 import net.azib.java.students.t050545.homework.sport.Places;
-import net.azib.java.students.t050545.homework.sport.PointSystem.Discipline;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.WriteException;
 
@@ -10,10 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Stack;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
