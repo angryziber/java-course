@@ -44,8 +44,10 @@ public class ConsoleWriterTest {
 		Competition comp = new Competition();
 		
 		sportman = loader.nextAthleteScore();
+		System.out.println(sportman);
 		Places places = new Places("1", sportman);
 	    comp.addCompetitor(sportman);
+	    System.out.println();
 	    
 		assertEquals(places.toString(), comp.getPlaces()[0].toString());
 		
