@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
 /*
  * PluginLoaderTest
  *
@@ -15,7 +17,7 @@ public class PluginLoaderTest {
 
 	@Test
 	public void testGetLoaders1() throws LoadException {
-		String[] args = { "-csv", CSVLoaderTest.class.getResource("sport_in.txt").getPath().toString(), "-csv", "sport_out.txt" };
+		String[] args = { "-csv", CSVLoaderTest.class.getResource("sportin.txt").getFile().replace('/', File.separatorChar).substring(1), "-csv", "sport_out.txt" };
 		PluginLoader plug = new PluginLoader(args);
 		assertEquals("CSVLoader", plug.getLoader().getClass().getSimpleName());
 	}
@@ -29,7 +31,7 @@ public class PluginLoaderTest {
 
 	@Test
 	public void testGetWriter1() throws LoadException {
-		String[] args = { "-csv", CSVLoaderTest.class.getResource("sport_in.txt").getPath().toString(), "-csv", "sport_out.txt" };
+		String[] args = { "-csv", CSVLoaderTest.class.getResource("sportin.txt").getFile().replace('/', File.separatorChar).substring(1), "-csv", "sport_out.txt" };
 		PluginLoader plug = new PluginLoader(args);
 		assertEquals("CSVWriter", plug.getWriter().getClass().getSimpleName());
 	}
