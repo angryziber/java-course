@@ -14,15 +14,13 @@ import java.text.ParseException;
 
 public interface AthleteLoader extends ArgumentParser {
 	/**
-	 * @return sportman or null
-	 * @throws ReadException anykind of read exception
+	 * @return AthleteScore or null
+	 * @throws ReadException 
 	 * @throws ParseException
 	 */
-	AthleteScore nextSportsman() throws ReadException, ParseException;
+	AthleteScore nextAthleteScore() throws ReadException, ParseException;
 
-	/**
-	 * Close open resources
-	 */
+	/** Close opened resources */
 	void close();
 
 }

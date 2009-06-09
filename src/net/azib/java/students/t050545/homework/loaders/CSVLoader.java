@@ -4,7 +4,7 @@ import net.azib.java.students.t050545.homework.sport.Discipline;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
-import net.azib.java.students.t050545.homework.utils.DataChecker;
+import static net.azib.java.students.t050545.homework.utils.DataChecker.*;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 
@@ -23,7 +23,7 @@ import java.util.Stack;
  * 
  * @author libricon
  */
-public class CSVLoader extends DataChecker implements AthleteLoader {
+public class CSVLoader implements AthleteLoader {
 
 	/** InputStream for file input, */
 	private BufferedReader reader;
@@ -61,7 +61,7 @@ public class CSVLoader extends DataChecker implements AthleteLoader {
 	 * @throws ReadException 
 	 * @throws ParseException parse exception
 	 */
-	public AthleteScore nextSportsman() throws ReadException, ParseException {
+	public AthleteScore nextAthleteScore() throws ReadException, ParseException {
 		String line;
 		try{
 			line = reader.readLine();

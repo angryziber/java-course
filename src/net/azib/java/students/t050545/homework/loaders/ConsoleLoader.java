@@ -4,9 +4,10 @@ import net.azib.java.students.t050545.homework.sport.Discipline;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
-import net.azib.java.students.t050545.homework.utils.DataChecker;
+import static net.azib.java.students.t050545.homework.utils.DataChecker.*;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
+
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -19,7 +20,7 @@ import java.util.Stack;
  * 
  * @author libricon
  */
-public class ConsoleLoader extends DataChecker implements AthleteLoader {
+public class ConsoleLoader implements AthleteLoader {
 
 	private Scanner scanner;
 	private String argument = "-console";
@@ -27,10 +28,10 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 
 
 	/**
-	 * @return Sportman or null, if no more
+	 * @return AthleteScore or null, if no more
 	 * @throws ReadException 
 	 */
-	public AthleteScore nextSportsman() throws ReadException {
+	public AthleteScore nextAthleteScore() throws ReadException {
 
 		System.out.println("Please enter essential sportman's data");
 
@@ -109,6 +110,7 @@ public class ConsoleLoader extends DataChecker implements AthleteLoader {
 		return description;
 	}
 
+	/** Close opened resources */
 	@Override
 	public void close() {
 		scanner.close();

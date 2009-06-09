@@ -4,7 +4,6 @@ import net.azib.java.students.t050545.homework.sport.Discipline;
 import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Score;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
-import net.azib.java.students.t050545.homework.utils.DataChecker;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 
@@ -16,7 +15,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -24,7 +22,7 @@ import java.util.Stack;
  * 
  * @author libricon
  */
-public class DBLoader extends DataChecker implements AthleteLoader {
+public class DBLoader implements AthleteLoader {
 
 	/** resultset store response from database */
 	private ResultSet resultset;
@@ -35,7 +33,7 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 	/** baseQuery, need to add competition id */
 	private String baseQuery = "SELECT A.name, A.dob, A.country_code, R.race_100m, R.long_jump, R.shot_put, R.high_jump, R.race_400m, R.hurdles_110m, R.discus_throw, R.pole_vault, R.javelin_throw, R.race_1500m FROM athletes AS A INNER JOIN results AS R ON A.id=R.athlete_id WHERE R.competition_id = ";
 
-	private String argument = "     -db";
+	private String argument = "-db";
 	private String description = "<ID> Connect to database and load competitiona with ID";
 	
 	@Override
@@ -49,12 +47,10 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 	}
 
 	/**
-	 * Method return next sportman, if ther is no more, return nulls
-	 * @return Sportman or null
-	 * @throws SQLException 
+	 * @return AthleteScore or null
 	 */
 	@Override
-	public AthleteScore nextSportsman() throws ParseException, ReadException{
+	public AthleteScore nextAthleteScore() throws ParseException, ReadException{
 
 		try{
 		
@@ -94,6 +90,7 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 		}
 	}
 
+	/** Open dataBase connection */
 	@Override
 	public void init(Stack<String> arguments) throws LoadException {
 		try {
@@ -109,6 +106,7 @@ public class DBLoader extends DataChecker implements AthleteLoader {
 		}
 	}
 	
+	/** Close opened resouses */
 	public void close(){
 		try {
 			conn.close();
