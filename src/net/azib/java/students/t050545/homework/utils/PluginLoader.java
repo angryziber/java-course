@@ -12,8 +12,8 @@ import java.util.TreeMap;
 
 
 /**
- * PluginLoader
- * 
+ * PluginLoader, 
+ * load all AthleteLoaders and AthleteWriters from packages: loaders, writers
  * @author libricon
  */
 public class PluginLoader {
@@ -22,14 +22,16 @@ public class PluginLoader {
 	private Map<String, AthleteLoader> loaders = null;
 	/** Collection of all writer classes */
 	private Map<String, AthleteWriter> writers = null;
+	/** command line arguments in reverse order */
 	private Stack<String> arguments = new Stack<String>();
+	
 
 	/** 
 	 * @param args command line arguments
 	 * @throws LoadException 
 	 */
 	public PluginLoader(String[] args) throws LoadException{
-		try{
+	  try{
 		for(int i = args.length-1; i>=0; i--){
 			arguments.push(args[i]);
 		}
@@ -44,8 +46,7 @@ public class PluginLoader {
 		}catch(Exception e){
 			throw new LoadException("Contack with developer");
 		}
-
-	}
+	  }
 
 	/** Load appropriate loader according argument
 	 * @return AthleteLoader or null
@@ -81,14 +82,13 @@ public class PluginLoader {
 		}
 	}
 	
-	private Map<String, AthleteLoader> getLoadClasses() {
-		return loaders;
-	}
-
-	private Map<String, AthleteWriter> getWriteClasses() {
-		return writers;
-	}
-
+	/** Gets classes with AthleteLoader interface from loaders package
+	 * @return argument and class object
+	 * @throws URISyntaxException
+	 * @throws ClassNotFoundException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 */
 	private Map<String, AthleteLoader> getLoaders() throws URISyntaxException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
 
 		URL pack = AthleteLoader.class.getResource(".");
@@ -97,7 +97,7 @@ public class PluginLoader {
 		Map<String, AthleteLoader> argVSclass = new TreeMap<String, AthleteLoader>();
 		for (String file : files) {
 			if (file.endsWith(".class")) {
-				Class unknowClass = Class.forName(AthleteLoader.class.getPackage().getName() + '.'
+				Class<?> unknowClass = Class.forName(AthleteLoader.class.getPackage().getName() + '.'
 						+ file.substring(0, file.length() - 6));
 				if (isInterface(unknowClass, AthleteLoader.class.getSimpleName())) {
 					AthleteLoader temp = (AthleteLoader) unknowClass.newInstance();
@@ -110,6 +110,13 @@ public class PluginLoader {
 
 	}
 
+	/** Gets classes with AthleteWriter interface from writers package
+	 * @return argument and class object
+	 * @throws URISyntaxException
+	 * @throws ClassNotFoundException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 */
 	private Map<String, AthleteWriter> getWriters() throws URISyntaxException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
 
 		URL pack = AthleteWriter.class.getResource(".");
@@ -118,7 +125,7 @@ public class PluginLoader {
 		Map<String, AthleteWriter> argVSclass = new TreeMap<String, AthleteWriter>();
 		for (String file : files) {
 			if (file.endsWith(".class")) {
-				Class unknowClass = Class.forName(AthleteWriter.class.getPackage().getName() + '.'
+				Class<?> unknowClass = Class.forName(AthleteWriter.class.getPackage().getName() + '.'
 						+ file.substring(0, file.length() - 6));
 				if (isInterface(unknowClass, AthleteWriter.class.getSimpleName())) {
 					AthleteWriter temp = (AthleteWriter) unknowClass.newInstance();
@@ -155,8 +162,8 @@ public class PluginLoader {
 	 * @return <code>(class implem interface)? true: false </code>
 	 */
 	private boolean isInterface(Class<?> cl, String interName) {
-		Class[] theInterfaces = cl.getInterfaces();
-		for (Class inter : theInterfaces) {
+		Class<?>[] theInterfaces = cl.getInterfaces();
+		for (Class<?> inter : theInterfaces) {
 			if (inter.getSimpleName().equals(interName))
 				return true;
 		}
