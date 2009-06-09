@@ -16,9 +16,9 @@ public interface ArgumentParser {
 	 */
 	void init(Stack<String> arguments) throws LoadException;
 		
-	/**  Argument for command line */
+	/**  @return argument with prefix */
 	public String getArgum();
 	
-	/** Description  for -h argument */
+	/** @return short description*/
 	public String getDescription();
 }
