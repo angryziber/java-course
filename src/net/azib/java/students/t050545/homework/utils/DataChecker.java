@@ -26,6 +26,7 @@ public class DataChecker {
 
 	/**
 	 * @param birthDay gets string with a date
+	 * @param df format of date, "dd.MM.yyyy"
 	 * @return true, if string can be parsed
 	 */
 	public static  boolean isValidDate(String birthDay, DateFormat df) {
@@ -50,8 +51,8 @@ public class DataChecker {
 		return Pattern.matches("[a-zA-Z][a-zA-Z]", country);
 	}
 
-	/** Convert to uppercase
-	 * @param country name
+	/** Convert to UpperCase
+	 * @param input country name
 	 * @return <code>toUpper()</code>
 	 */
 	public static  String addCountry(String input) {

@@ -11,7 +11,7 @@ import java.util.Stack;
 public interface ArgumentParser {
 	/**
 	 * setup function, initialise loader or writer and cut's arguments
-	 * @param arguments console unused paramenters
+	 * @param arguments console unused parameters
 	 * @throws LoadException 
 	 */
 	void init(Stack<String> arguments) throws LoadException;
