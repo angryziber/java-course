@@ -44,7 +44,7 @@ public class Decathlon {
 			Competition comp = new Competition();
 			AthleteScore sportman = null;
 			try {
-				while ((sportman = loader.nextSportsman()) != null) {
+				while ((sportman = loader.nextAthleteScore()) != null) {
 					comp.addCompetitor(sportman);
 				}
 				writer.printResultTable(comp);
