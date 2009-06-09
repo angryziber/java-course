@@ -14,7 +14,11 @@ import net.azib.java.students.t050545.homework.writers.CSVWriter;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.Stack;
 
@@ -26,7 +30,7 @@ import java.util.Stack;
 public class CSVWriterTest {
 
 	@Test
-	public void testPrintResult() throws LoadException, WriteException, ReadException, ParseException{
+	public void testPrintResult() throws LoadException, WriteException, ReadException, ParseException, URISyntaxException, IOException{
 		AthleteLoader loader = new CSVLoader();
 		AthleteWriter writer = new CSVWriter();
 		Stack<String> stack = new Stack<String>();
@@ -40,10 +44,14 @@ public class CSVWriterTest {
 		while ((sportman = loader.nextAthleteScore()) != null) {
 			comp.addCompetitor(sportman);
 		}
-		//System.out.println(comp);
 		writer.printResultTable(comp);
 		writer.close();
-		//System.out.println(comp);
+		
+		BufferedReader reader = new BufferedReader(new FileReader(new File(CSVWriterTest.class.getResource("sportout.txt").toURI())));
+		reader.readLine();
+		assertEquals("[1],Василий Пупкин3,UA,10001", reader.readLine());
+		reader.readLine();reader.readLine();reader.readLine();reader.readLine();
+		assertEquals("[5-7],Szőrös Szűk2,HU,3499", reader.readLine());
 		
 	}
 }
