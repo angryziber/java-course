@@ -2,19 +2,10 @@ package net.azib.java.students.t050545.homework.loaders;
 
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
-
 import org.junit.Test;
-
-import sun.security.action.GetLongAction;
-
 import static org.junit.Assert.assertEquals;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.text.ParseException;
 import java.util.Stack;
 
