@@ -92,6 +92,7 @@ public class Competition {
 	 */
 	@Override
 	public String toString() {
+		getPlaces();
 		StringBuilder str = new StringBuilder(); 
 		for (Places pl : tableScore) {
 			str.append(pl);
