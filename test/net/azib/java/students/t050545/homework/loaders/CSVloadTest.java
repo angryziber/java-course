@@ -33,6 +33,7 @@ public class CSVloadTest {
 		AthleteLoader loader = new CSVLoader();
 		Stack<String> stack = new Stack<String>();
 		stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
+		//stack.add("c:\\sport_utf8.txt");
 		System.out.println(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
 		loader.init(stack);
 		loader.nextAthleteScore();
