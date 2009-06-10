@@ -41,6 +41,7 @@ public class ConsoleWriterTest {
 	    stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
 		loader.init(stack);
 		writer.init(stack);
+		System.out.println(loader.nextAthleteScore());
 		AthleteScore sportman = null;
 		Competition comp = new Competition();
 		
