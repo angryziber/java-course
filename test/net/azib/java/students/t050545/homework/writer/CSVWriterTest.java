@@ -1,8 +1,7 @@
 package net.azib.java.students.t050545.homework.writer;
 
 import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
-import net.azib.java.students.t050545.homework.loaders.CSVLoader;
-import net.azib.java.students.t050545.homework.loaders.CSVLoaderTest;
+import net.azib.java.students.t050545.homework.loaders.CSVloadTest;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.Competition;
 import net.azib.java.students.t050545.homework.utils.LoadException;
@@ -35,7 +34,7 @@ public class CSVWriterTest {
 		AthleteWriter writer = new CSVWriter();
 		Stack<String> stack = new Stack<String>();
 	    stack.add(CSVWriterTest.class.getResource(".").getFile().replace('/', File.separatorChar).substring(1)+"sportout.txt");	
-		stack.add(CSVLoaderTest.class.getResource("sportin.txt").getFile().replace('/', File.separatorChar).substring(1));
+		stack.add(CSVloadTest.class.getResource("sportin.txt").getFile().replace('/', File.separatorChar).substring(1));
 		loader.init(stack);
 		writer.init(stack);
 		AthleteScore sportman = null;
