@@ -28,8 +28,8 @@ public class PluginLoaderTest {
 		String[] args = { "-console", "-console" };
 		PluginLoader plug = new PluginLoader(args);
 		assertEquals("ConsoleLoader", plug.getLoader().getClass().getSimpleName());
-		plug.getLoader().close();
-		plug.getWriter().close();
+		//plug.getLoader().close();
+		//plug.getWriter().close();
 	}
 
 	@Test
@@ -37,8 +37,8 @@ public class PluginLoaderTest {
 		String[] args = { "-csv", CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1), "-csv", "sport_out.txt" };
 		PluginLoader plug = new PluginLoader(args);
 		assertEquals("CSVWriter", plug.getWriter().getClass().getSimpleName());
-		plug.getLoader().close();
-		plug.getWriter().close();
+		//plug.getLoader().close();
+		//plug.getWriter().close();
 	}
 
 	@Test
@@ -46,8 +46,8 @@ public class PluginLoaderTest {
 		String[] args = { "-console", "-console" };
 		PluginLoader plug = new PluginLoader(args);
 		assertEquals("ConsoleWriter", plug.getWriter().getClass().getSimpleName());
-		plug.getLoader().close();
-		plug.getWriter().close();
+		//plug.getLoader().close();
+		//plug.getWriter().close();
 	
 	}
 
