@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author t030520
  */
-public class SportsmanWithResults {
+public class SportsmanWithResults implements Comparable<SportsmanWithResults>{
 
 	/** name of the sportsman */
 	private String name;
@@ -119,5 +119,14 @@ public class SportsmanWithResults {
 	 */
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	@Override
+	public int compareTo(SportsmanWithResults o) {
+		if (this.getPoints() == o.getPoints()) {
+			return 0;
+		}
+
+	    return this.getPoints() > o.getPoints() ? -1 : 1;
 	}
 }

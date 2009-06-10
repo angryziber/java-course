@@ -64,4 +64,12 @@ public enum TrackEvent implements Event {
 	public boolean equals(Event event) {
 		return event != null && event.getName().equals(event.getName());
 	}
+
+	/**
+	 * @param result the result of event.
+	 * @return the calculated points.
+	 */
+	public int getPoints(float result) {
+		return (int) Math.abs(this.getA()*Math.pow((this.getB() - result), this.getC()));
+	}
 }

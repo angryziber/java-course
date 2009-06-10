@@ -1,7 +1,6 @@
 package net.azib.java.students.t030520.homework.sportsman;
 
 import net.azib.java.students.t030520.homework.event.Event;
-import net.azib.java.students.t030520.homework.event.TrackEvent;
 
 /**
  * The object storing the event data: type and sportsman result.
@@ -47,18 +46,6 @@ public class EventResult {
 	 */
 	public void setType(Event type) {
 		this.type = type;
-	}
-
-	/**
-	 * @return the number of scored points.
-	 */
-	public long getPoints() {
-		Event type = getType();
-		if (type instanceof TrackEvent) {
-			return Math.round(type.getA()*Math.pow((type.getB() - getResult()), type.getC()));
-		} else {
-			return Math.round(type.getA()*Math.pow((getResult() - type.getB()), type.getC()));
-		}
 	}
 
 	/**

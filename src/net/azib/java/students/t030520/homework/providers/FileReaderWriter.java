@@ -9,7 +9,6 @@ import net.azib.java.students.t030520.homework.util.Utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,9 +33,6 @@ import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
-
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
  * Provides the functionality of reading from file and writing into file.
@@ -99,14 +95,15 @@ public class FileReaderWriter {
 	 * @throws IOException
 	 */
 	public void writeSportsmenResultToXml(List<SportsmanWithResults> results, String filename) throws IOException {
-		Document doc = generateXmlDoc(results);
 
-		OutputFormat format = new OutputFormat(doc);
-		format.setIndenting(true);
-
-		XMLSerializer serializer = new XMLSerializer(new FileOutputStream(new File(filename)), format);
-
-		serializer.serialize(doc);
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+		try {
+			Transformer transformer = tFactory.newTransformer();
+			transformer.transform(new DOMSource(generateXmlDoc(results)), new StreamResult(new FileOutputStream(filename)));
+		} catch (TransformerException e) {
+			System.out.println("Could not transform xml into html.");
+			System.exit(1);
+		}
 	}
 	
 	/**
@@ -160,13 +157,13 @@ public class FileReaderWriter {
 		result.getResults().add(new EventResult(getFloatInput(sportsmenData[3]), TrackEvent.SPRINT100));
 
 		// Enter longJump results
-		result.getResults().add(new EventResult(getFloatInput(sportsmenData[4]), FieldEvent.LONGJUMP));
+		result.getResults().add(new EventResult(getFloatInput(sportsmenData[4])*100, FieldEvent.LONGJUMP));
 
 		// Enter shotPut results
 		result.getResults().add(new EventResult(getFloatInput(sportsmenData[5]), FieldEvent.SHOTPUT));
 
 		// Enter highJump results
-		result.getResults().add(new EventResult(getFloatInput(sportsmenData[6]), FieldEvent.HIGHJUMP));
+		result.getResults().add(new EventResult(getFloatInput(sportsmenData[6])*100, FieldEvent.HIGHJUMP));
 
 		// Enter sprint400 results
 		result.getResults().add(new EventResult(getFloatInput(sportsmenData[7]), TrackEvent.SPRINT400));
@@ -178,7 +175,7 @@ public class FileReaderWriter {
 		result.getResults().add(new EventResult(getFloatInput(sportsmenData[9]), FieldEvent.DISCUSTHROW));
 
 		// Enter poleVault results
-		result.getResults().add(new EventResult(getFloatInput(sportsmenData[10]), FieldEvent.POLEVAULT));
+		result.getResults().add(new EventResult(getFloatInput(sportsmenData[10])*100, FieldEvent.POLEVAULT));
 
 		// Enter javelinThrow results
 		result.getResults().add(new EventResult(getFloatInput(sportsmenData[11]), FieldEvent.JAVELINTHROW));

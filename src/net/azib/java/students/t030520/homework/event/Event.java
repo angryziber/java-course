@@ -8,21 +8,6 @@ package net.azib.java.students.t030520.homework.event;
 public interface Event {
 
 	/**
-	 * @return the A coefficient.
-	 */
-	public float getA();
-
-	/**
-	 * @return the B coefficient.
-	 */
-	public float getB();
-
-	/**
-	 * @return the B coefficient.
-	 */
-	public float getC();
-
-	/**
 	 * @return the name of event enum type.
 	 */
 	public String getName();
@@ -31,5 +16,11 @@ public interface Event {
 	 * @return true if events are equal.
 	 */
 	public boolean equals(Event event);
+
+	/**
+	 * @param result the result of event.
+	 * @return the calculated points.
+	 */
+	public int getPoints(float result);
 
 }

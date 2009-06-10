@@ -2,7 +2,6 @@ package net.azib.java.students.t030520.homework;
 
 import net.azib.java.students.t030520.homework.command.InputCommand;
 import net.azib.java.students.t030520.homework.command.OutputCommand;
-import net.azib.java.students.t030520.homework.comparator.EventPointsComparator;
 import net.azib.java.students.t030520.homework.providers.InputProvider;
 import net.azib.java.students.t030520.homework.providers.OutputProvider;
 import net.azib.java.students.t030520.homework.sportsman.EventResult;
@@ -57,7 +56,7 @@ public class Main {
 		}
 
 		calculateSportsmanPoints(results);
-		Collections.sort(results, new EventPointsComparator());
+		Collections.sort(results);
 		calculateSportsmanPositions(results);
 
 		try {
@@ -182,7 +181,7 @@ public class Main {
 		for (SportsmanWithResults sportsman : sportsmanWithResults) {
 			int points = 0;
 			for (EventResult result : sportsman.getResults()) {
-				points += result.getPoints();
+				points += result.getType().getPoints(result.getResult());
 			}
 			sportsman.setPoints(points);
 		}

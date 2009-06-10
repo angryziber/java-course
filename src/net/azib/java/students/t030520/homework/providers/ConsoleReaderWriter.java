@@ -65,7 +65,7 @@ public class ConsoleReaderWriter {
 
 			// Enter longJump results
 			System.out.println("Long jump (m): ");
-			sportsmenResult.getResults().add(new EventResult(getFloatInput(br), FieldEvent.LONGJUMP));
+			sportsmenResult.getResults().add(new EventResult(getFloatInput(br)*100, FieldEvent.LONGJUMP));
 
 			// Enter shotPut results
 			System.out.println("Shot put (m): ");
@@ -73,7 +73,7 @@ public class ConsoleReaderWriter {
 
 			// Enter highJump results
 			System.out.println("High jump (m): ");
-			sportsmenResult.getResults().add(new EventResult(getFloatInput(br), FieldEvent.HIGHJUMP));
+			sportsmenResult.getResults().add(new EventResult(getFloatInput(br)*100, FieldEvent.HIGHJUMP));
 
 			// Enter sprint400 results
 			System.out.println("400 m sprint (min:sec): ");

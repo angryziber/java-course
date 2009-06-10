@@ -172,7 +172,7 @@ public class DatabaseReader {
 			if (longJump <= 0.0) {
 				continue;
 			}
-			sportsman.getResults().add(new EventResult(longJump, FieldEvent.LONGJUMP));
+			sportsman.getResults().add(new EventResult(longJump*100, FieldEvent.LONGJUMP));
 
 			// Set shotPut
 			float shotPut = rs.getFloat("shotPut");
@@ -186,7 +186,7 @@ public class DatabaseReader {
 			if (highJump <= 0.0) {
 				continue;
 			}
-			sportsman.getResults().add(new EventResult(highJump, FieldEvent.HIGHJUMP));
+			sportsman.getResults().add(new EventResult(highJump*100, FieldEvent.HIGHJUMP));
 
 			// Set sprint400
 			float sprint400 = rs.getFloat("sprint400");
