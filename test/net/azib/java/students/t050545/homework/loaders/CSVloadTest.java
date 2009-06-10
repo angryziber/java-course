@@ -16,26 +16,25 @@ import java.util.Stack;
  */
 public class CSVloadTest {
 	
-	private AthleteLoader initLoader() throws LoadException{
-		AthleteLoader loader = new CSVLoader();
-		Stack<String> stack = new Stack<String>();
-		stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
-		loader.init(stack);
-		return loader;
-	}
-	
-	
 	
 	@Test
 	public void testGetArg() throws LoadException{
-		AthleteLoader loader = initLoader();
+		AthleteLoader loader = new CSVLoader();
+		Stack<String> stack = new Stack<String>();
+		stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
+		//System.out.println(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
+		loader.init(stack);
 		assertEquals("-csv", loader.getArgum());
 		loader.close();
 	}
 	
 	@Test
 	public void testGetAthlete() throws LoadException, ReadException, ParseException, IOException{
-		AthleteLoader loader = initLoader();
+		AthleteLoader loader = new CSVLoader();
+		Stack<String> stack = new Stack<String>();
+		stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
+		System.out.println(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
+		loader.init(stack);
 		loader.nextAthleteScore();
 		assertEquals("Beata Kana1", loader.nextAthleteScore().getPerson().getName());
 		assertEquals("HU", loader.nextAthleteScore().getPerson().getCountry());
