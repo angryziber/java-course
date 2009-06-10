@@ -1,6 +1,7 @@
 package net.azib.java.students.t050545.homework.writer;
 
 import net.azib.java.students.t050545.homework.loaders.AthleteLoader;
+import net.azib.java.students.t050545.homework.loaders.CSVLoader;
 import net.azib.java.students.t050545.homework.loaders.CSVloadTest;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.Competition;
