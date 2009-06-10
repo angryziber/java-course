@@ -36,7 +36,8 @@ public class CSVWriterTest {
 		Stack<String> stack = new Stack<String>();
 	    stack.add(CSVWriterTest.class.getResource(".").getFile().replace('/', File.separatorChar).substring(1)+"sportout.txt");	
 		stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
-		loader.init(stack);
+	    //stack.add("c:\\sport_utf8.txt");
+	    loader.init(stack);
 		writer.init(stack);
 		AthleteScore sportman = null;
 		Competition comp = new Competition();
