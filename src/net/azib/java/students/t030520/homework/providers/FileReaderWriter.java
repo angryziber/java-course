@@ -101,7 +101,7 @@ public class FileReaderWriter {
 			Transformer transformer = tFactory.newTransformer();
 			transformer.transform(new DOMSource(generateXmlDoc(results)), new StreamResult(new FileOutputStream(filename)));
 		} catch (TransformerException e) {
-			System.out.println("Could not transform xml into html.");
+			System.out.println("Could not trangorm an xml.");
 			System.exit(1);
 		}
 	}

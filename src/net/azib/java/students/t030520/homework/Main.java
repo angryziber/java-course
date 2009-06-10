@@ -1,7 +1,6 @@
 package net.azib.java.students.t030520.homework;
 
-import net.azib.java.students.t030520.homework.command.InputCommand;
-import net.azib.java.students.t030520.homework.command.OutputCommand;
+import net.azib.java.students.t030520.homework.command.Command;
 import net.azib.java.students.t030520.homework.providers.InputProvider;
 import net.azib.java.students.t030520.homework.providers.OutputProvider;
 import net.azib.java.students.t030520.homework.sportsman.EventResult;
@@ -13,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
 
 /**
  * The main class for running the program, which calculate the decathlon point.
@@ -28,8 +26,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		InputCommand inputCommand = readInputCommand(args);
-		OutputCommand outputCommand = readOutputCommand(inputCommand, args);
+		Command inputCommand = readInputCommand(args);
+		Command outputCommand = readOutputCommand(inputCommand, args);
 
 		List<SportsmanWithResults> results = new ArrayList<SportsmanWithResults>();
 
@@ -65,17 +63,17 @@ public class Main {
 				OutputProvider.writeResultToConsole(results);
 				break;
 			case CSV: 
-				String filename = inputCommand.equals(InputCommand.CONSOLE) ? args[2] : args[3];
+				String filename = inputCommand.equals(Command.CONSOLE) ? args[2] : args[3];
 				OutputProvider.writeResultToCsvFile(results, filename);
 				System.out.println("Csv file succesfully generated.");
 				break;
 			case XML: 
-				filename = inputCommand.equals(InputCommand.CONSOLE) ? args[2] : args[3];
+				filename = inputCommand.equals(Command.CONSOLE) ? args[2] : args[3];
 				OutputProvider.writeResultToXmlFile(results, filename);
 				System.out.println("Xml file succesfully generated.");
 				break;
 			case HTML:
-				filename = inputCommand.equals(InputCommand.CONSOLE) ? args[2] : args[3];
+				filename = inputCommand.equals(Command.CONSOLE) ? args[2] : args[3];
 				OutputProvider.writeResultToHtmlFile(results, filename);
 				System.out.println("Html file succesfully generated.");
 				break;
@@ -87,7 +85,7 @@ public class Main {
 	}
 
 	// Should not return null
-	private static InputCommand readInputCommand(String args[]) {
+	private static Command readInputCommand(String args[]) {
 
 		String enteredCommand = null;
 		String resultCommand = null;
@@ -97,20 +95,17 @@ public class Main {
 			enteredCommand = null;
 		}
 
-		for (InputCommand command : InputCommand.values()) {
-			if (command.equals(enteredCommand)) {
+		for (Command command : Command.values()) {
+			if (command.isInput() && command.equals(enteredCommand)) {
 				
 				// Control the Parameters entered
 				if (command.getPattern() != null) {
-					String parameter = null;
 					try {
-						parameter = args[1];
+						if (!command.matches(args[1])) {
+							resultCommand = null;
+							break;
+						}
 					} catch (ArrayIndexOutOfBoundsException ex) {
-						resultCommand = null;
-						break;
-					}
-					Matcher m = command.getPattern().matcher(parameter);
-					if (!m.matches()) {
 						resultCommand = null;
 						break;
 					}
@@ -129,30 +124,28 @@ public class Main {
 	}
 
 	// Should not return null
-	private static OutputCommand readOutputCommand(InputCommand inputCommand, String args[]) {
+	private static Command readOutputCommand(Command inputCommand, String args[]) {
 
 		String enteredCommand = null;
 		String resultCommand = null;
 		try {
-			enteredCommand = inputCommand.equals(InputCommand.CONSOLE.valueOf()) ? args[1] : args[2];
+			enteredCommand = inputCommand.equals(Command.CONSOLE.valueOf()) ? args[1] : args[2];
 		} catch (ArrayIndexOutOfBoundsException ex) {
 			enteredCommand = null;
 		}
 
-		for (OutputCommand command : OutputCommand.values()) {
-			if (command.equals(enteredCommand)) {
+		for (Command command : Command.values()) {
+			if (command.isOutput() && command.equals(enteredCommand)) {
 
 				// Control the Parameters entered
 				if (command.getPattern() != null) {
-					String parameter = null;
 					try {
-						parameter = inputCommand.equals(InputCommand.CONSOLE.valueOf()) ? args[2] : args[3];
+						String parameter = inputCommand.equals(Command.CONSOLE.valueOf()) ? args[2] : args[3];
+						if (!command.matches(parameter)) {
+							resultCommand = null;
+							break;
+						}
 					} catch (ArrayIndexOutOfBoundsException ex) {
-						resultCommand = null;
-						break;
-					}
-					Matcher m = command.getPattern().matcher(parameter);
-					if (!m.matches()) {
 						resultCommand = null;
 						break;
 					}
