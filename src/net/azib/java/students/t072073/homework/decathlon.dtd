@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE decathlon [
+<!ELEMENT athlete (place, score, name,date_of_birth, country ,sprint_100m, 
+long_jump, shot_put, high_jump, sprint_400m, hurdles_110m, 
+discust_throw, pole_vault, javelin_throw, race_1500m)>
+<!ELEMENT place (#PCDATA)>
+<!ELEMENT score (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT date_of_birth (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT sprint_100m (#PCDATA)>
+<!ELEMENT long_jump (#PCDATA)>
+<!ELEMENT shot_put (#PCDATA)>
+<!ELEMENT high_jump (#PCDATA)>
+<!ELEMENT sprint_400m (#PCDATA)>
+<!ELEMENT hurdles_110m (#PCDATA)>
+<!ELEMENT discust_throw (#PCDATA)>
+<!ELEMENT pole_vault (#PCDATA)>
+<!ELEMENT javelin_throw (#PCDATA)>
+<!ELEMENT javelin_throw (#PCDATA)>
+]>
