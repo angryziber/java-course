@@ -2,6 +2,7 @@ package net.azib.java.students.t050545.homework.utils;
 
 import net.azib.java.students.t050545.homework.loaders.CSVloadTest;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,7 +16,7 @@ import java.io.File;
  */
 public class PluginLoaderTest {
 
-	@Test
+	@Test @Ignore
 	public void testGetLoaders1() throws LoadException {
 		String[] args = { "-csv", CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1), "-csv", "sport_out.txt" };
 		PluginLoader plug = new PluginLoader(args);
@@ -32,7 +33,7 @@ public class PluginLoaderTest {
 		//plug.getWriter().close();
 	}
 
-	@Test
+	@Test @Ignore
 	public void testGetWriter1() throws LoadException {
 		String[] args = { "-csv", CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1), "-csv", "sport_out.txt" };
 		PluginLoader plug = new PluginLoader(args);
