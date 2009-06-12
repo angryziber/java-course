@@ -18,7 +18,7 @@ public class PluginLoaderTest {
 
 	@Test @Ignore
 	public void testGetLoaders1() throws LoadException {
-		String[] args = { "-csv", CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1), "-csv", "sport_out.txt" };
+		String[] args = { "-csv", CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar), "-csv", "sport_out.txt" };
 		PluginLoader plug = new PluginLoader(args);
 		assertEquals("CSVLoader", plug.getLoader().getClass().getSimpleName());
 		
@@ -35,7 +35,7 @@ public class PluginLoaderTest {
 
 	@Test @Ignore
 	public void testGetWriter1() throws LoadException {
-		String[] args = { "-csv", CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1), "-csv", "sport_out.txt" };
+		String[] args = { "-csv", CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar), "-csv", "sport_out.txt" };
 		PluginLoader plug = new PluginLoader(args);
 		assertEquals("CSVWriter", plug.getWriter().getClass().getSimpleName());
 		//plug.getLoader().close();
