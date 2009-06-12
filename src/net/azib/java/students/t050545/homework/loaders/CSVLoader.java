@@ -9,6 +9,7 @@ import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -48,7 +49,8 @@ public class CSVLoader implements AthleteLoader {
 	public void init(Stack<String> arguments) throws LoadException{
 		try {
 			String fileName = arguments.pop();
-			reader = new BufferedReader(new FileReader(fileName));
+			System.out.println(fileName);
+			reader = new BufferedReader(new FileReader(new File(fileName)));
 		}
 		catch (FileNotFoundException e) {
 			throw new LoadException("Wrong file name or file not exist");
@@ -78,7 +80,7 @@ public class CSVLoader implements AthleteLoader {
 			arrayOfData[0] = arrayOfData[0].replace("\"", "");
 			name = arrayOfData[0];
 			
-			if (isValidDate(arrayOfData[1], DateFormat.getDateInstance())) {
+			if (isValidDate(arrayOfData[1], new SimpleDateFormat("dd.MM.yyyy"))) {
 				birthDate = toParseBirthDay(arrayOfData[1], new SimpleDateFormat("dd.MM.yyyy"));
 			}
 			else {

@@ -11,6 +11,7 @@ import net.azib.java.students.t050545.homework.utils.ReadException;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Stack;
@@ -59,11 +60,11 @@ public class ConsoleLoader implements AthleteLoader {
 			if (birthDay.equals("-1"))
 				return null;
 		}
-		while (!isValidDate(birthDay, DateFormat.getDateInstance()));
+		while (!isValidDate(birthDay, new SimpleDateFormat("dd.MM.yyyy")));
 		Date birthDate;
 		
 		try {
-			birthDate = toParseBirthDay(birthDay, DateFormat.getDateInstance());
+			birthDate = toParseBirthDay(birthDay, new SimpleDateFormat("dd.MM.yyyy"));
 		}
 		catch (ParseException e) {
 			throw new ReadException("Can't parse birthDay, check format");
