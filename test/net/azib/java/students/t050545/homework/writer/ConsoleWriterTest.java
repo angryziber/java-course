@@ -6,6 +6,7 @@ import net.azib.java.students.t050545.homework.loaders.CSVloadTest;
 import net.azib.java.students.t050545.homework.loaders.CSVloadTest;
 import net.azib.java.students.t050545.homework.sport.AthleteScore;
 import net.azib.java.students.t050545.homework.sport.Competition;
+import net.azib.java.students.t050545.homework.sport.Person;
 import net.azib.java.students.t050545.homework.sport.Places;
 import net.azib.java.students.t050545.homework.utils.LoadException;
 import net.azib.java.students.t050545.homework.utils.ReadException;
@@ -25,6 +26,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -39,8 +41,8 @@ public class ConsoleWriterTest {
 		AthleteLoader loader = new CSVLoader();
 		AthleteWriter writer = new ConsoleWriter();
 		Stack<String> stack = new Stack<String>();
-	    stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
-		//stack.add("c:\\sport_utf8.txt");
+	    stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getPath());
+		//stack.add("/media/MAXTOR_C/sport_utf8.txt");
 		loader.init(stack);
 		writer.init(stack);
 		System.out.println(loader.nextAthleteScore());
