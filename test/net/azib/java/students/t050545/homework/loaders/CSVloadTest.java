@@ -24,7 +24,6 @@ public class CSVloadTest {
 		AthleteLoader loader = new CSVLoader();
 		Stack<String> stack = new Stack<String>();
 		stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getPath());
-		//System.out.println(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar).substring(1));
 		loader.init(stack);
 		assertEquals("-csv", loader.getArgum());
 		loader.close();
@@ -36,9 +35,6 @@ public class CSVloadTest {
 		Stack<String> stack = new Stack<String>();
 
 		stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getFile());
-		//stack.add(CSVloadTest.class.getResource("sport_utf8.txt").getPath());
-		//stack.add("/media/MAXTOR_C/sport_utf8.txt");
-		//System.out.println(CSVloadTest.class.getResource("sport_utf8.txt").getFile().replace('/', File.separatorChar));
 		loader.init(stack);
 		loader.nextAthleteScore();
 		assertEquals("Beata Kana1", loader.nextAthleteScore().getPerson().getName());
