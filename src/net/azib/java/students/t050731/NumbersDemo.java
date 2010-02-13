@@ -1,4 +1,5 @@
 package net.azib.java.students.t050731;
+
 public class NumbersDemo 
 {	
 	public void printNumbers()
@@ -11,5 +12,11 @@ public class NumbersDemo
 		
 		//Print factorial
 		System.out.println(fact.calcFactorial(100));
+	}
+	
+	public static void main(String[] args)
+	{	
+	 NumbersDemo nrDemo = new NumbersDemo();
+	 nrDemo.printNumbers();
 	}
 }

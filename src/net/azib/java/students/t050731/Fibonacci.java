@@ -14,6 +14,15 @@ public class Fibonacci
 		BigInteger fibNr2 = BigInteger.ONE;		
 		BigInteger fibSum = BigInteger.ZERO;
 		
+		switch(index)
+		{
+		case 0:
+			return fibNr1;
+		case 1:
+		case 2:
+			return fibNr2;			
+		}
+		
 		for(int i = 2; i <= index; i++) 
 		{
 			fibSum = fibNr1.add(fibNr2);
