@@ -5,7 +5,7 @@ package net.azib.java.lessons.basic;
  *
  * @author anton
  */
-public class NumbersDemo {
+public class Numbers {
 	static final double PI_VALUE = 3.1415;
 	
 	public static void main(String[] args) {
