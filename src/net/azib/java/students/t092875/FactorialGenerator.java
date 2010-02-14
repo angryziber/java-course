@@ -16,7 +16,6 @@ public class FactorialGenerator implements NumbersGenerator {
 		}else{
 			switch(n){
 				case 0: return BigInteger.ONE;
-				case 1: return BigInteger.ONE;
 				default: return generateNthFactorial(n);
 			}
 		}
@@ -24,7 +23,7 @@ public class FactorialGenerator implements NumbersGenerator {
 	
 	private BigInteger generateNthFactorial(int n){
 		BigInteger temp = BigInteger.ONE;
-		for(int i=2; i<n+1; i++){
+		for(int i=1; i<n+1; i++){
 			temp = temp.multiply(new BigInteger(""+i));
 		}
 		return temp;
