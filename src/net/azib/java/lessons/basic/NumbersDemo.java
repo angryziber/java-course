@@ -21,8 +21,9 @@ public class NumbersDemo {
 		
 		int n = Integer.valueOf("5");
 		
+		System.out.println(Long.MAX_VALUE);
+		
 		byte smallByte = (byte)i1;
 		System.out.println(b);
-		
 	}
 }
