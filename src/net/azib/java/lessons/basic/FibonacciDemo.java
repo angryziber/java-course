@@ -6,8 +6,8 @@ package net.azib.java.lessons.basic;
  * @author anton
  */
 public class FibonacciDemo {
-	public static void main(String[] args) {
-		for (int i = 0; i <= 100; i++) {
+	public static void main(String ... args) {
+		for (long i = 0; i <= 100; i++) {
 			System.out.println(new Fibonacci().compute(i));
 		}
 	}

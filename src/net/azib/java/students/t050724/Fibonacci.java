@@ -6,6 +6,7 @@ import java.math.BigInteger;
  * Fibonacci
  *
  * @author xom
+ * @since 2010
  */
 public class Fibonacci {
 
@@ -23,17 +24,17 @@ public class Fibonacci {
 	
 	private BigInteger getNthFibonacci(int countNumber)
 	{
-		BigInteger tempFibonacci0 = BigInteger.ZERO;
-		BigInteger tempFibonacci1 = BigInteger.ONE;
+		BigInteger fibonacci0 = BigInteger.ZERO;
+		BigInteger fibonacci1 = BigInteger.ONE;
 		
 		for(int i = 3; i < countNumber + 2; i++)
 		{
-			BigInteger tempFibonacci = tempFibonacci0.add(tempFibonacci1);
-			tempFibonacci0 = tempFibonacci1;
-			tempFibonacci1 = tempFibonacci;
+			BigInteger tempFibonacci = fibonacci0.add(fibonacci1);
+			fibonacci0 = fibonacci1;
+			fibonacci1 = tempFibonacci;
 		}
 		
-		return tempFibonacci1;
+		return fibonacci1;
 		
 	}
 	

@@ -12,16 +12,18 @@ public class DogDemo {
 	public static void main(String[] args) {
 		si = 2;
 		
-		Dog dog = new Dog();
-		System.out.println(dog.age);
+		Pet dog = new Dog("Muku", 1);
+		System.out.println(dog.getAge());
 		
-		final Dog d = new Dog();
-		d.name = "Sharik";
-		Dog.age = 1;
+		final Pet d = new Dog("Sharik", 1);
 		
-		Dog d2 = new Dog();
-		Dog.age = 2;
+		Pet dog2 = new Dog("Sharik2", 2);
 		
-		System.out.println(d.age);
+		System.out.println(d.getAge());
+		
+		System.out.println(dog);
+		System.out.println(dog2);
+		System.out.println(dog == dog2);
+		System.out.println(dog.equals(new Dog("Muku", 100)));
 	}
 }

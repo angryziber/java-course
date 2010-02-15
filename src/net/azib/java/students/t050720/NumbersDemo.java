@@ -6,19 +6,19 @@ package net.azib.java.students.t050720;
  * @author Marek
  */
 public class NumbersDemo {
-	private Fibonacci m_fib;
-	private Factorial m_fact;
+	private Fibonacci fib;
+	private Factorial fact;
 	
 	private void stupidJava() throws Exception
 	{
-		m_fib=new Fibonacci();
-		m_fact=new Factorial();
+		fib=new Fibonacci();
+		fact=new Factorial();
 		
 		//some colour-speak there :)
 		System.out.print("Tha 100th Fib numbah iz...");
-		System.out.print(m_fib.getNumber(100).toString());
+		System.out.print(fib.getNumber(100).toString());
 		System.out.print("\nTha factorial of 100 is...");
-		System.out.print(m_fact.retFact(100).toString());
+		System.out.print(fact.retFact(100).toString());
 	}
 	
 	public static void main(String[] args)

@@ -10,7 +10,7 @@ import java.math.BigInteger;
 public class Fibonacci {
 
 	static BigInteger calculate(int SequenceLenght){
-	BigInteger FibonacciNumber1 = new BigInteger("1");
+	BigInteger FibonacciNumber1 = BigInteger.ONE;
 	BigInteger FibonacciNumber2 = new BigInteger("0");
 	
 	if (SequenceLenght < 1){

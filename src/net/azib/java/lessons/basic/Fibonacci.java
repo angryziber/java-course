@@ -10,11 +10,18 @@ import java.math.BigInteger;
 public class Fibonacci {
 	
 	/**
+	 * @deprecated please use {@link #compute(long)} instead.
+	 */
+	public BigInteger compute(int index) {
+		return compute((long)index);
+	}
+
+	/**
 	 * Computes Fibonacci numbers with arbitrary precision
 	 * @param index 
 	 * @return Fibonacci number with specified index (0-based)
 	 */
-	public BigInteger compute(int index) {
+	public BigInteger compute(long index) {
 		BigInteger n = BigInteger.ZERO, n1 = n, n2 = n;
 		
 		if (index > 0)
