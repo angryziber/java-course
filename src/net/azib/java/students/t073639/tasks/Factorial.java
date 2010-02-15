@@ -1,12 +1,12 @@
-package net.azib.java.students.t073639.homework;
+package net.azib.java.students.t073639.tasks;
 
 import java.math.BigInteger;
 
 /**
- * Factorial
- * 
+ *  
  * @author t073639
- */
+ * @since Monday, 15 February 2010
+ */ 
 public class Factorial {
 	BigInteger getFactorialNumber(int number) {
 		if (number == 1 || number == 0)
