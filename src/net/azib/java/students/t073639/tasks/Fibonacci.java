@@ -3,26 +3,27 @@ package net.azib.java.students.t073639.tasks;
 import java.math.BigInteger;
 
 /**
- * Fibonacci
- * 
  * @author t073639
+ * @version 2
+ * @since Tuesday, 16 February 2010
  */
 public class Fibonacci {
-	BigInteger getFibonacciNumber(int number) {
-		if (number > 2) {
-			BigInteger[] fiboArray = new BigInteger[number + 1];
-			fiboArray[0] = BigInteger.ZERO;
-			fiboArray[1] = BigInteger.ONE;
-			int i = 0;
-			while (i < fiboArray.length - 2) {
-				fiboArray[i + 2] = fiboArray[i].add(fiboArray[i + 1]);
+	BigInteger calculateNumber(int number) {
+		BigInteger previous = BigInteger.ZERO;
+		BigInteger current = BigInteger.ONE;
+		BigInteger next = BigInteger.ONE;
+		int i = 0;
+		if (number <= 0) {
+			return BigInteger.ZERO;
+		}
+		else {
+			while (i < number - 1) {
+				next = previous.add(current);
+				previous = current;
+				current = next;
 				i++;
 			}
-			return fiboArray[fiboArray.length - 2];
+			return next;
 		}
-		else if (number == 2)
-			return BigInteger.ONE;
-		else
-			return BigInteger.ZERO;
 	}
 }

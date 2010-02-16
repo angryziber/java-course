@@ -1,6 +1,5 @@
 package net.azib.java.students.t073639.tasks;
 
-
 /**
  * NumbersDemo
  * 
@@ -11,8 +10,8 @@ public class NumbersDemo {
 
 	public static void main(String[] args) {
 		Fibonacci objFibo = new Fibonacci();
-		System.out.println(objFibo.getFibonacciNumber(NUMBER));
+		System.out.println(objFibo.calculateNumber(NUMBER));
 		Factorial objFact = new Factorial();
-		System.out.println(objFact.getFactorialNumber(NUMBER));
+		System.out.println(objFact.calculateNumber(NUMBER));
 	}
 }
