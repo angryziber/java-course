@@ -5,14 +5,11 @@ public class NumbersDemo {
 	static int n =100;
 	
 	public static void main(String[] args) {
-		fib ofib= new fib();
-		System.out.println("F"+n+" = "+ofib.main(n));
+		Fibonacci ofib= new Fibonacci();
+		System.out.println("F"+n+" = "+ofib.calcFibonacci(n));
 		
-		fac ofac= new fac();
-		System.out.println(n+"! = "+ofac.main(n));
-		
-		
-
+		Factorial ofac= new Factorial();
+		System.out.println(n+"! = "+ofac.calcFactorial(n));
 	}
 
 }

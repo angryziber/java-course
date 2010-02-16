@@ -1,9 +1,9 @@
 package net.azib.java.students.t100258;
 import java.math.BigInteger;
 
-public class fib {
+public class Fibonacci{
 
-	public BigInteger main(int n) {
+	public BigInteger calcFibonacci(int n) {
 		BigInteger fn;
 		fn=BigInteger.ZERO;
 		BigInteger fnbig;

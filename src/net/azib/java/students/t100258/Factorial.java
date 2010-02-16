@@ -1,9 +1,9 @@
 package net.azib.java.students.t100258;
 import java.math.BigInteger;
 
-public class fac {
+public class Factorial {
 
-	public BigInteger main(int n) {
+	public BigInteger calcFactorial(int n) {
 		BigInteger fa;
 		
 		fa =BigInteger.ONE;
