@@ -23,7 +23,7 @@ public class Cat extends Pet{
 	}
 	
 	void move() {
-		System.out.println("The cat called "+getName()+" moves lazily to a different place, "+gender.thirdSubject()+" doesn't look very happy about it...");
+		System.out.println("You poke the cat. The cat called "+getName()+" moves lazily to a different place, "+gender.thirdSubject()+" doesn't look very happy about it...");
 		
 	}
 	

@@ -30,7 +30,7 @@ public class Wolf extends WildAnimal{
 
 	@Override
 	void move() {
-		System.out.println("The "+this+" seems a bit confused after you try to push "+gender.thirdObject()+".");
+		System.out.println("The "+this+" seems a bit confused after you poke "+gender.thirdObject()+".");
 		
 	}
 	

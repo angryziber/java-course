@@ -7,7 +7,7 @@ package net.azib.java.students.t073857;
  */
 public class NumbersDemo {
 	public static void main(String[] args) {
-		demonstrate();
+		demonstrate();		
 	}
 	
 	public static void demonstrate(){

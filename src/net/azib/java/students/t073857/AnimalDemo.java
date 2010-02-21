@@ -35,6 +35,7 @@ public class AnimalDemo {
 		animals.add( new Chicken(elven.compose(2), 3, 1, 4, Gender.MALE) );
 		
 		for(Animal a: animals){
+			a.description();
 			a.makeSound();
 			a.move();			
 			if(a instanceof Pet){				

@@ -33,6 +33,6 @@ public abstract class Animal {
 		return movingSpeed;
 	}
 	
-	
+	abstract void description();
 	
 }

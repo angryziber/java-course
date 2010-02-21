@@ -20,9 +20,14 @@ public abstract class Pet extends Animal{
 		this.name = name;
 	}	
 	
+	public void description(){
+		System.out.println(getName()+" is "+getAge()+" years old. "+gender.thirdSubject()+" weights about "+getWeight()+" kilograms " +
+				"and moves with an average speed of "+getMovingSpeed()+" km/h.");
+	}
+	
 	public String getName(){
 		return name;
-	}
+	}	
 	
 	public void changeName(String name){
 		this.name = name;

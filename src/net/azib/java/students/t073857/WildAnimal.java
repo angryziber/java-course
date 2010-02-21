@@ -19,7 +19,12 @@ public abstract class WildAnimal extends Animal{
 	}
 	
 	public void runFromIt(){
-		System.out.println("You run from a "+this+", "+gender.thirdSubject()+" starts to chase you and you have a lots of fun with "+gender.thirdObject()+".");
+		System.out.println("You run from a "+this+", "+gender.thirdSubject()+" starts to chase you for no apparent reason.");
+	}
+	
+	public void description(){
+		System.out.println("This "+this+" is "+getAge()+" years old. "+gender.thirdSubject()+" weights about "+getWeight()+" kilograms. " +
+				"and moves with an average speed of "+getMovingSpeed()+" km/h.");
 	}
 
 }

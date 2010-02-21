@@ -20,6 +20,6 @@ public enum Gender {
 	
 	public String thirdPosessive(){
 		if(this == MALE) return "his";
-		else return "hers";
+		else return "her";
 	}
 }

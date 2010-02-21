@@ -26,7 +26,7 @@ public class Chicken extends Pet{
 	}
 	
 	void move() {
-		System.out.println("The "+birdGender+" called "+getName()+" moves to a different place, and looks pretty much the same as before...");
+		System.out.println("The "+birdGender+" called "+getName()+" moves to a different place and looks pretty much the same as before...");
 		
 	}
 	
@@ -41,4 +41,6 @@ public class Chicken extends Pet{
 		System.out.println("You stroke the "+birdGender+" called "+getName()+", "+gender.thirdSubject()+" is still shocked from watching the cooking channel.");
 		
 	}
+
+	
 }

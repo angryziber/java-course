@@ -24,7 +24,7 @@ public class Dog extends Pet{
 	}
 	
 	void move() {
-		System.out.println("The dog called "+getName()+" moves lazily to a different place, "+gender.thirdSubject()+" doesn't look very happy about it...");
+		System.out.println("You poke the dog. The dog called "+getName()+" moves lazily to a different place, "+gender.thirdSubject()+" doesn't look very happy about it...");
 		
 	}
 	
