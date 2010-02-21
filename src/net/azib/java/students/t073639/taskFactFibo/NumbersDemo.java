@@ -1,4 +1,4 @@
-package net.azib.java.students.t073639.tasks;
+package net.azib.java.students.t073639.taskFactFibo;
 
 /**
  * NumbersDemo
