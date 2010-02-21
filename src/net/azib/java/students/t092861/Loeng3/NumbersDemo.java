@@ -1,3 +1,5 @@
+package net.azib.java.students.t092861.Loeng3;
+
 /**
  * @author Stanislav
  * 
