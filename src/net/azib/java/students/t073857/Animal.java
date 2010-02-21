@@ -11,8 +11,10 @@ public abstract class Animal {
 	private int movingSpeed;
 	Gender gender;
 	
-	abstract void move();
-	abstract void makeSound();
+	public abstract void move();
+	public abstract void makeSound();
+	public abstract void description();
+	public abstract String toString();
 	
 	public Animal(int weight, int age, int movingSpeed, Gender gender){
 		this.weight = weight;
@@ -33,6 +35,6 @@ public abstract class Animal {
 		return movingSpeed;
 	}
 	
-	abstract void description();
+	
 	
 }

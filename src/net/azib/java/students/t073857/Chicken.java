@@ -20,12 +20,12 @@ public class Chicken extends Pet{
 		else birdGender = "chicken";
 	}	
 	
-	void makeSound() {
+	public void makeSound() {
 		System.out.println("The "+birdGender+" called "+getName()+" says something funny, but you are too busy to listen to "+gender.thirdPosessive()+" "+birdGender+"talk right now.");
 		
 	}
 	
-	void move() {
+	public void move() {
 		System.out.println("The "+birdGender+" called "+getName()+" moves to a different place and looks pretty much the same as before...");
 		
 	}
@@ -40,6 +40,11 @@ public class Chicken extends Pet{
 	void stroke() {		
 		System.out.println("You stroke the "+birdGender+" called "+getName()+", "+gender.thirdSubject()+" is still shocked from watching the cooking channel.");
 		
+	}
+
+	@Override
+	public String toString() {
+		return getName()+" the "+birdGender;
 	}
 
 	

@@ -23,13 +23,13 @@ public class Wolf extends WildAnimal{
 	}
 
 	@Override
-	void makeSound() {
+	public void makeSound() {
 		System.out.println("The "+this+" howls at the moon.");
 		
 	}
 
 	@Override
-	void move() {
+	public void move() {
 		System.out.println("The "+this+" seems a bit confused after you poke "+gender.thirdObject()+".");
 		
 	}

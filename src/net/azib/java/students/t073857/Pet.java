@@ -21,7 +21,7 @@ public abstract class Pet extends Animal{
 	}	
 	
 	public void description(){
-		System.out.println(getName()+" is "+getAge()+" years old. "+gender.thirdSubject()+" weights about "+getWeight()+" kilograms " +
+		System.out.println(this+" is "+getAge()+" years old. "+gender.thirdSubject()+" weights about "+getWeight()+" kilograms " +
 				"and moves with an average speed of "+getMovingSpeed()+" km/h.");
 	}
 	

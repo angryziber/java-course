@@ -17,12 +17,12 @@ public class Cat extends Pet{
 		super(name, weight, age, movingSpeed, gender);		
 	}	
 	
-	void makeSound() {
+	public void makeSound() {
 		System.out.println("The cat called "+getName()+" says \"meow\", maybe you should give "+gender.thirdObject()+" some food.");
 		
 	}
 	
-	void move() {
+	public void move() {
 		System.out.println("You poke the cat. The cat called "+getName()+" moves lazily to a different place, "+gender.thirdSubject()+" doesn't look very happy about it...");
 		
 	}
@@ -30,5 +30,11 @@ public class Cat extends Pet{
 	void stroke() {		
 		System.out.println("You stroke the cat called "+getName()+", "+gender.thirdSubject()+" starts to purr...");
 		
+	}
+
+	@Override
+	public String toString() {
+		
+		return getName()+" the cat";
 	}
 }
