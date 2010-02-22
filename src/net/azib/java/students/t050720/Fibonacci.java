@@ -43,9 +43,10 @@ public class Fibonacci {
 		return Fibonacci.m_numbahs[m_rank];
 	}
 	
-	public BigInteger getNumber(int input) throws Exception
+	public BigInteger getNumber(int input) 
 	{
-		if (input<1) throw new Exception("Fibonacci::getNumber input must be 1 or greater");
+		if (input<1) 
+			throw new IllegalArgumentException("Fibonacci::getNumber input must be 1 or greater");
 		
 		BigInteger rv;
 		//If we have already computed the fibonacci values, let's not waste time

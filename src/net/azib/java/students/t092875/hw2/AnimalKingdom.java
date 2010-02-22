@@ -17,12 +17,13 @@ public class AnimalKingdom {
 	}
 	
 	public void showAnimals(){
-		Animal[] animals = new Animal[5];
-		animals[0] = new Dog("Sparky", 0, 30);
-		animals[1] = new Wolf(2, 30);
-		animals[2] = new Cat("Mr.Fluffy", 0, 30);
-		animals[3] = new Cow("Betsy", 0, 30);
-		animals[4] = new Cat("Mr.Fluffy", 0, 30,0);
+		Animal[] animals = new Animal[] {
+				new Dog("Sparky", 0, 30),
+				new Wolf(2, 30),
+				new Cat("Mr.Fluffy", 0, 30),
+				new Cow("Betsy", 0, 30),
+				new Cat("Mr.Fluffy", 0, 30,0)
+		};
 		for (Animal animal : animals) {
 			System.out.println(animal);
 		}

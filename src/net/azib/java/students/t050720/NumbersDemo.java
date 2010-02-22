@@ -9,7 +9,7 @@ public class NumbersDemo {
 	private Fibonacci fib;
 	private Factorial fact;
 	
-	private void stupidJava() throws Exception
+	private void stupidJava()
 	{
 		fib=new Fibonacci();
 		fact=new Factorial();
@@ -26,17 +26,8 @@ public class NumbersDemo {
 		NumbersDemo d=new NumbersDemo();
 		
 		System.out.println("Hi! Me's gonna display You's some funny stuff!\n\nLike...the 100th fibonacci number and factorial of 100!!1!\n");
-		try {
-			//again, a fluffy work-around for some stupid java quirk
-			d.stupidJava();
-		}
-		//i kinda added the exception just for fun. oh, well, let it be then...
-		catch (Exception e) { 
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
+		d.stupidJava();
 		System.out.println("");
-		
 	}
 
 }

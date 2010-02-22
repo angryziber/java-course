@@ -12,7 +12,7 @@ public class Cow extends Pet {
 		super(name,age,weight);
 	}
 	/**
-	 * Adds one galon of milk to the produced sum for this cow.
+	 * Adds one gallon of milk to the produced sum for this cow.
 	 */
 	public void giveMilk(){
 		this.milkGiven ++;

@@ -1,5 +1,7 @@
 package net.azib.java.lessons.basic;
 
+import net.azib.java.lessons.exception.PetNameException;
+
 /**
  * Pet
  *
@@ -12,8 +14,16 @@ public abstract class Pet implements Cloneable {
 	/**
 	 * @param name
 	 * @param age
+	 * @throws PetNameException thrown if name is not specified
 	 */
-	public Pet(String name, int age) {
+	public Pet(String name, int age) {		
+		try {
+			name.toString();
+		}
+		catch (NullPointerException e) {
+			throw new PetNameException(e);
+		}
+		
 		this.name = name;
 		this.age = age;
 	}
