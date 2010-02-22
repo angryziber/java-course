@@ -40,12 +40,12 @@ import java.util.ArrayList;
  * and RuntimeException will be thrown.
  * 
  * TO START:
- * Create a new GenName object, provide the syllable file, and create names using compose() method.
+ * Create a new NameGenerator object, provide the syllable file, and create names using compose() method.
  * 
  * @author Joonas Vali, August 2009. 
  *
  */
-public class GenName {
+public class NameGenerator {
 	ArrayList<String> pre = new ArrayList<String>();
 	ArrayList<String> mid = new ArrayList<String>();
 	ArrayList<String> sur = new ArrayList<String>();
@@ -60,7 +60,7 @@ public class GenName {
 	 * @param fileName insert file name, where syllables are located
 	 * @throws IOException
 	 */
-	public GenName(String fileName) throws IOException{
+	public NameGenerator(String fileName) throws IOException{
 		this.fileName = fileName;
 		refresh();
 	}

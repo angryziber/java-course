@@ -10,8 +10,17 @@ import java.util.ArrayList;
  */
 public class AnimalDemo {
 	public static void main(String[] args) throws IOException {
-		GenName elven = new GenName("./src/net/azib/java/students/t073857/elven.txt");
-		GenName roman = new GenName("./src/net/azib/java/students/t073857/roman.txt");
+		
+		String fileSeparator = System.getProperty("file.separator");		
+		
+		String path1 = "./src/net/azib/java/students/t073857/elven.txt";
+		String path2 = "./src/net/azib/java/students/t073857/roman.txt";
+		
+		path1 = path1.replace("/", fileSeparator);
+		path2 = path2.replace("/", fileSeparator);		
+		
+		NameGenerator elven = new NameGenerator(path1);
+		NameGenerator roman = new NameGenerator(path2);
 		
 		ArrayList<Animal> animals = new ArrayList<Animal>();
 		
