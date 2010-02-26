@@ -1,22 +1,23 @@
-package net.azib.java.students.t093052.lecture2;
+package net.azib.java.students.t093052.hometask01;
 
 import java.math.BigInteger;
 
 /**
- * Factorial
+ * Fibonacci
  *
  * @author Kostja
  */
-public class Factorial {
+public class Fibonacci {
 
 	public static BigInteger[] calculateNumbers(int index) {
 		BigInteger[] numbers = new BigInteger[index];
 		
-		BigInteger temp = BigInteger.ONE;
 		for (int i = 0; i < index; i++) {
-			temp = temp.multiply(BigInteger.ONE.add(
-					new BigInteger(String.valueOf(i))));
-			numbers[i] = temp;
+			if (i < 2) {
+				numbers[i] = BigInteger.ONE;
+			} else {
+				numbers[i] = numbers[i - 1].add(numbers[i - 2]);
+			}
 		}
 		return numbers;
 	}
