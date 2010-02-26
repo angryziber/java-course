@@ -29,10 +29,10 @@ public class ThirdHomework {
 	@Test
 	public void calculateFrequenciesTest() throws Exception {
 		assertEquals(new TreeMap<String, Integer>() {{
-			put("aaa", new Integer(4));
-			put("bbb", new Integer(2));
-			put("ddd", new Integer(1));
-			put("xxx", new Integer(5));
+			put("aaa", 4);
+			put("bbb", 2);
+			put("ddd", 1);
+			put("xxx", 5);
 		}}, new WordFrequencyCalculatorImpl().calculateFrequenciesOf(FREQ_DATA));
 	}
 	
