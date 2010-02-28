@@ -20,7 +20,6 @@ public class StringProcessor implements DuplicateRemover, WordFrequencyCalculato
 	@Override
 	public String[] removeDuplicateStrings(String... array) {
 		Set<String> set = new LinkedHashSet<String>();
-		String[] returnStrings;
 		for (String string : array) {
 			set.add(string);
 		}
