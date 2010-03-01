@@ -1,6 +1,8 @@
 package net.azib.java.students.t092874.homework;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +13,13 @@ import java.util.Date;
  * @author Aleksandr GLadki
  */
 class Util {
-
+	/**
+	 * Parses String to Float from format (min:sec)
+	 * 
+	 * @param String
+	 *            str in format (min:sec)
+	 * @return Flaot
+	 */
 	public static Float convertStringToNumberInSecond(String str) {
 		try {
 			if (str.contains(":")) {
@@ -28,20 +36,18 @@ class Util {
 		return null;
 	}
 
-	public static Float convertStringToNumberInMeter(String str) {
-		try {
-			if (str.contains(":")) {
-				return Float.valueOf(str.substring(0, str.lastIndexOf(":"))) * 100
-						+ Float.valueOf(str.substring(str.lastIndexOf(":") + 1));
-			}
-			else {
-				return Float.valueOf(str);
-			}
-		}
-		catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-		return null;
+	/**
+	 * Parses Float num to String in UI formatter 00:00
+	 * 
+	 * @param Float
+	 *            num
+	 * @return formatting String
+	 */
+	public static String convertNumberInSecondToString(Float num) {
+		NumberFormat formatter = new DecimalFormat("00.00");
+		return (num > 60 ? Integer.valueOf(num.intValue() / 60) + ":" : "")
+				+ formatter.format(Float.valueOf(num % 60)).toString();
+
 	}
 
 	/**
@@ -73,8 +79,8 @@ class Util {
 	 * @return the formatted time string.
 	 */
 	public static String convertDateToString(Date date) {
-		if ( date == null)
-			return"00-00-0000";
+		if (date == null)
+			return "";
 		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		return formatter.format(date);
 	}

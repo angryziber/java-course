@@ -20,7 +20,6 @@ import java.util.Properties;
  */
 class ShowingInDB {
 	private String nameOrId = "";
-	private boolean numInput = false;
 
 	/**
 	 * @return the nameOrId
@@ -31,12 +30,6 @@ class ShowingInDB {
 
 	ShowingInDB(String nameOrId) {
 		this.nameOrId = nameOrId;
-		try {
-			Integer.valueOf(nameOrId).toString();
-			numInput = true;
-		}
-		catch (NumberFormatException e) {
-		}
 	}
 
 	/**
@@ -48,7 +41,7 @@ class ShowingInDB {
 		Properties defaultProps = new Properties();
 		FileInputStream in;
 		try {
-			in = new FileInputStream(System.getProperty("user.dir")+Constants.MY_PATH + "db.properties");
+			in = new FileInputStream(System.getProperty("user.dir") + Constants.MY_PATH + "db.properties");
 			defaultProps.load(in);
 			in.close();
 		}
@@ -73,26 +66,12 @@ class ShowingInDB {
 			conn = DriverManager.getConnection(url + dbName, userName, password);
 			statement = conn.createStatement();
 			// Result set get the result of the SQL query
-			String query = "select r.*, a.* from ";
-			if (numInput) {
-				query += "results r, athletes a where  r.competition_id = " + getNameOrId() + " and a.id = r.athlete_id";
-
-			}
-			else {
-				query += "results r, athletes a, competitions c where c.name ='" + getNameOrId()
-						+ "' and c.id = r.competition_id and a.id=r.athlete_id";
-			}
+			String query = "select r.*, a.* from results r, athletes a, competitions c where ( c.name ='" + getNameOrId() + "' or c.id =" + getNameOrId()
+					+ ") and c.id = r.competition_id and a.id=r.athlete_id";
+			
 			resultSet = statement.executeQuery(query);
-
-			if (numInput) {
-				while (resultSet.next()) {
-					putDataToResult(resultSet, resultsList);
-				}
-			}
-			else {
-				while (resultSet.next()) {
-					putDataToResult(resultSet, resultsList);
-				}
+			while ( resultSet.next()){
+				putDataToResult(resultSet, resultsList);
 			}
 			Collections.sort(resultsList);
 			conn.close();

@@ -25,12 +25,7 @@ class ShowingInHTML {
 	 * @return the fileOrPath
 	 */
 	public String getFileOrPath() {
-		if (fileOrPath.contains("/")) {
-			return System.getProperty("user.dir") + fileOrPath;
-		}
-		else {
-			return System.getProperty("user.dir") + "/" + fileOrPath;
-		}
+		return fileOrPath;
 	}
 
 	/**
@@ -40,11 +35,6 @@ class ShowingInHTML {
 	 */
 	public void createHTML(List<Result> list) {
 		try {
-			File theDir = new File(Util.getDirFromString(getFileOrPath()));
-			// if the directory does not exist, create it
-			if (!theDir.getName().isEmpty() && !theDir.exists()) {
-				theDir.mkdir();
-			}
 			String nameXml = "/tmp/"
 					+ getFileOrPath().substring(getFileOrPath().lastIndexOf("/") + 1, getFileOrPath().indexOf(".") + 1) + "xml";
 			ShowingInXML xml = new ShowingInXML(nameXml);
@@ -52,14 +42,19 @@ class ShowingInHTML {
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 
 			Transformer transformer = tFactory.newTransformer(new javax.xml.transform.stream.StreamSource(System
-					.getProperty("user.dir")+Constants.MY_PATH
-					+ "results.xsl"));
+					.getProperty("user.dir")
+					+ Constants.MY_PATH + "results.xsl"));
 
+			File theDir = new File(Util.getDirFromString(getFileOrPath()));
+			// if the directory does not exist, create it
+			if (!theDir.exists()) {
+				theDir.mkdir();
+			}
+			
 			transformer.transform(new javax.xml.transform.stream.StreamSource(xml.getFileOrPath()),
 					new javax.xml.transform.stream.StreamResult(new FileOutputStream(getFileOrPath())));
 
-			deleteTemporyDir(xml);// created in this dir xml and after created
-									// html delete this xml file and dir
+			deleteTemporyDir(xml);// after created html delete xml file
 		}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -73,8 +68,6 @@ class ShowingInHTML {
 
 	private void deleteTemporyDir(ShowingInXML xml) {
 		File theDir = new File(xml.getFileOrPath());
-		theDir.delete();
-		theDir = new File(Util.getDirFromString(xml.getFileOrPath()));
 		theDir.delete();
 	}
 }

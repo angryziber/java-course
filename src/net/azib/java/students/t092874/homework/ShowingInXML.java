@@ -37,12 +37,7 @@ class ShowingInXML {
 	 * @return the fileOrPath
 	 */
 	public String getFileOrPath() {
-		if (fileOrPath.contains("/")) {
-			return System.getProperty("user.dir") + fileOrPath;
-		}
-		else {
-			return System.getProperty("user.dir") + "/" + fileOrPath;
-		}
+		return fileOrPath;
 	}
 
 	/**
@@ -59,7 +54,7 @@ class ShowingInXML {
 					"http://www.w3.org/2001/XMLSchema");
 
 			documentBuilderFactory.setAttribute("http://java.sun.com/xml/jaxp/properties/schemaSource", new InputSource(
-					new FileInputStream(System.getProperty("user.dir")+Constants.MY_PATH + "results.xsd")));
+					new FileInputStream(System.getProperty("user.dir") + Constants.MY_PATH + "results.xsd")));
 
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			// documentBuilder.setErrorHandler(new MyErrorHandler());
@@ -129,7 +124,7 @@ class ShowingInXML {
 				resultAll.appendChild(high_jumpName);
 
 				Element sprint_400Name = document.createElement("sprint_400");
-				Text sprint_400Text = document.createTextNode(String.valueOf(result.getSprint400()));
+				Text sprint_400Text = document.createTextNode(Util.convertNumberInSecondToString(result.getSprint400()));
 				sprint_400Name.appendChild(sprint_400Text);
 				resultAll.appendChild(sprint_400Name);
 
@@ -149,7 +144,7 @@ class ShowingInXML {
 				resultAll.appendChild(javelin_throwName);
 
 				Element race_1500Name = document.createElement("race_1500");
-				Text race_1500Text = document.createTextNode(String.valueOf(result.getRace()));
+				Text race_1500Text = document.createTextNode(Util.convertNumberInSecondToString(result.getRace()));
 				race_1500Name.appendChild(race_1500Text);
 				resultAll.appendChild(race_1500Name);
 
@@ -163,7 +158,7 @@ class ShowingInXML {
 			if (!theDir.exists()) {
 				theDir.mkdir();
 			}
-
+			
 			StreamResult streamResult = new StreamResult(new FileOutputStream(getFileOrPath()));
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 

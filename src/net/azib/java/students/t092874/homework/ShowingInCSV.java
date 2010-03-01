@@ -29,12 +29,7 @@ class ShowingInCSV {
 	 * @return the fileOrPath
 	 */
 	public String getFileOrPath() {
-		if (fileOrPath.contains("/")) {
-			return System.getProperty("user.dir") + fileOrPath;
-		}
-		else {
-			return System.getProperty("user.dir") + "/" + fileOrPath;
-		}
+		return fileOrPath;
 	}
 
 	/**
@@ -44,7 +39,6 @@ class ShowingInCSV {
 	void write(List<Result> list) {
 		BufferedWriter out;
 		try {
-
 			File theDir = new File(Util.getDirFromString(getFileOrPath()));
 			// if the directory does not exist, create it
 			if (!theDir.exists()) {
@@ -79,12 +73,6 @@ class ShowingInCSV {
 	List<Result> read() {
 		List<Result> resultsList = new ArrayList<Result>();
 		try {
-			File theDir = new File(Util.getDirFromString(getFileOrPath()));
-			// if the directory does not exist, create it
-			if (!theDir.getName().isEmpty() && !theDir.exists()) {
-				theDir.mkdir();
-			}
-
 			BufferedReader reader = new BufferedReader(new FileReader(getFileOrPath()));
 			String strLine;
 			// Read File Line By Line

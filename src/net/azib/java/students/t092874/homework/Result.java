@@ -37,14 +37,14 @@ public class Result implements Comparable<Result> {
 	 */
 	private void convertToResult(String[] line) {
 		setSprint100(Util.convertStringToNumberInSecond(line[3]));
-		setLongJump(Util.convertStringToNumberInMeter(line[4]));
-		setShortPut(Util.convertStringToNumberInMeter(line[5]));
-		setHighJump(Util.convertStringToNumberInMeter(line[6]));
+		setLongJump(Float.valueOf(line[4]));
+		setShortPut(Float.valueOf(line[5]));
+		setHighJump(Float.valueOf(line[6]));
 		setSprint400(Util.convertStringToNumberInSecond(line[7]));
 		setHurdles(Util.convertStringToNumberInSecond(line[8]));
-		setDiscusThrow(Util.convertStringToNumberInMeter(line[9]));
-		setPoleVault(Util.convertStringToNumberInMeter(line[10]));
-		setJavelinThrow(Util.convertStringToNumberInMeter(line[11]));
+		setDiscusThrow(Float.valueOf(line[9]));
+		setPoleVault(Float.valueOf(line[10]));
+		setJavelinThrow(Float.valueOf(line[11]));
 		setRace(Util.convertStringToNumberInSecond(line[12]));
 		getPoints(); // fill points
 	}
@@ -64,8 +64,9 @@ public class Result implements Comparable<Result> {
 
 		return getPoints() + "," + getAthlete().getName() + "," + Util.convertDateToString(getAthlete().getBirthDate()) + ","
 				+ getAthlete().getCountryCode() + "," + getSprint100() + "," + getLongJump() + "," + getShortPut() + ","
-				+ getHighJump() + "," + getSprint400() + "," + getHurdles() + "," + getDiscusThrow() + "," + getPoleVault() + ","
-				+ getJavelinThrow() + "," + getRace() + ",";
+				+ getHighJump() + "," + Util.convertNumberInSecondToString(getSprint400()) + "," + getHurdles() + ","
+				+ getDiscusThrow() + "," + getPoleVault() + "," + getJavelinThrow() + ","
+				+ Util.convertNumberInSecondToString(getRace());
 	}
 
 	/**
