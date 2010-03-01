@@ -1,7 +1,5 @@
 package net.azib.java.students.t100337;
 
-import java.util.Random;
-
 /**
  * Kitchen
  *
