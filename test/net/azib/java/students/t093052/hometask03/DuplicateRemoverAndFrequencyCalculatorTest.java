@@ -12,7 +12,7 @@ import org.junit.Test;
  *
  * @author Kostja
  */
-public class ThirdHomework {
+public class DuplicateRemoverAndFrequencyCalculatorTest {
 	private static final String[] DUPL_DATA = { 
 		"xxx", "ddd", "aaa", "xxx", "aaa", "xxx", 
 		"bbb", "xxx", "aaa", "bbb", "aaa", "xxx" };

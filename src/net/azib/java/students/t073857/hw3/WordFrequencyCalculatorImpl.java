@@ -1,5 +1,7 @@
 package net.azib.java.students.t073857.hw3;
 
+import net.azib.java.lessons.collections.WordFrequencyCalculator;
+
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;

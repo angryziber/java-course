@@ -5,6 +5,7 @@ package net.azib.java.lessons.basic;
  *
  * @author anton
  */
+@Todo("Rewrite it!!!")
 public class Dog extends Pet implements StickCatcher {
 	/**
 	 * @param name

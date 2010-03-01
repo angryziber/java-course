@@ -8,8 +8,7 @@ public enum Season {
 	SUMMER,
 	AUTUMN;
 	
-	@Todo("Implement me")
 	public Season next() {
-		return null;
+		return values()[(ordinal()+1) % values().length];
 	}
 }

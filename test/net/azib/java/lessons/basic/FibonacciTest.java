@@ -12,7 +12,6 @@ import org.junit.Test;
  * @author anton
  */
 public class FibonacciTest {
-	
 	@Test
 	public void beginningOfSequence() throws Exception {
 		Fibonacci fibonacci = new Fibonacci();
@@ -21,12 +20,15 @@ public class FibonacciTest {
 		assertEquals("First two numbers should be 1s", BigInteger.ONE, fibonacci.compute(2L));
 	}
 	
-	public static void main(String[] args) {
-		// test that beginning of fibonacci sequence is 0, 1, 1
+	@Test
+	public void tenthNumber() throws Exception {
 		Fibonacci fibonacci = new Fibonacci();
-		assert fibonacci.compute(0L).equals(BigInteger.ZERO) : "Should begin with 0";
-		assert fibonacci.compute(1L).equals(BigInteger.ONE) : "First two numbers should be 1s";
-		assert fibonacci.compute(2L).equals(BigInteger.ONE) : "First two numbers should be 1s";
-		System.out.println("OK");
+		assertEquals(new BigInteger("55"), fibonacci.compute(10L));
+	}
+
+	@Test
+	public void hundredthNumber() throws Exception {
+		Fibonacci fibonacci = new Fibonacci();
+		assertEquals(new BigInteger("354224848179261915075"), fibonacci.compute(100L));
 	}
 }

@@ -15,6 +15,6 @@ public interface WordFrequencyCalculator {
 	 * @return a Map, where keys are words and values are number of occurrences.
 	 * 		   Words should be in the alphabetical order.  
 	 */
-	Map calculateFrequenciesOf(String text);
+	Map<String, Integer> calculateFrequenciesOf(String text);
 
 }
