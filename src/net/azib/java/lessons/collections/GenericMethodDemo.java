@@ -10,6 +10,7 @@ import java.util.Set;
  */
 public class GenericMethodDemo {
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		Set<Integer> s = newHashSet();
 	}
 

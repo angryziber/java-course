@@ -3,7 +3,6 @@ package net.azib.java.lessons.collections;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * ListDemo
@@ -12,11 +11,11 @@ import java.util.Set;
  */
 public class ListDemo {
 	public static void main(String[] args) {
-		testList(new ArrayList());
-		testList(new LinkedList());
+		testList(new ArrayList<String>());
+		testList(new LinkedList<String>());
 	}
 	
-	private static void testList(List c) {
+	private static void testList(List<String> c) {
 		c.add("C");
 		c.add("A");
 		c.add("D");

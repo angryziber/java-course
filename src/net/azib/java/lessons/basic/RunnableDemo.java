@@ -1,7 +1,5 @@
 package net.azib.java.lessons.basic;
 
-import org.junit.internal.runners.statements.RunAfters;
-
 /**
  * RunnableDemo
  *

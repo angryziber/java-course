@@ -5,6 +5,7 @@ package net.azib.java.lessons.basic;
  *
  * @author anton
  */
+@SuppressWarnings("unused")
 public class Numbers {
 	static final double PI_VALUE = 3.1415;
 	
@@ -24,6 +25,6 @@ public class Numbers {
 		System.out.println(Long.MAX_VALUE);
 		
 		byte smallByte = (byte)i1;
-		System.out.println(b);
+		System.out.println(smallByte);
 	}
 }

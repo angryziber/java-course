@@ -1,13 +1,12 @@
 package net.azib.java.lessons.exception;
 
-import java.io.IOException;
-
 /**
  * ExceptionDemo
  *
  * @author anton
  */
 public class ExceptionDemo {
+	@SuppressWarnings("null") // intended
 	public static void main(String[] args) {
 		int i = 1;
 		String s = null;

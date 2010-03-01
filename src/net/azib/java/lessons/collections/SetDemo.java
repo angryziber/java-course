@@ -1,6 +1,5 @@
 package net.azib.java.lessons.collections;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -13,12 +12,12 @@ import java.util.TreeSet;
  */
 public class SetDemo {
 	public static void main(String[] args) {
-		testSet(new HashSet());
-		testSet(new TreeSet());
-		testSet(new LinkedHashSet());
+		testSet(new HashSet<String>());
+		testSet(new TreeSet<String>());
+		testSet(new LinkedHashSet<String>());
 	}
 
-	private static void testSet(Set c) {
+	private static void testSet(Set<String> c) {
 		c.add("C");
 		c.add("A");
 		c.add("D");

@@ -2,7 +2,6 @@ package net.azib.java.lessons.collections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,6 +10,7 @@ import java.util.List;
  * @author anton
  */
 public class BrokenGenericsDemo {
+	@SuppressWarnings("unchecked") // intentional
 	public static void main(String[] args) {
 		List<String> list = new ArrayList<String>(Arrays.asList("a", "b"));
 		// list = Collections.checkedList(list, String.class);

@@ -1,7 +1,5 @@
 package net.azib.java.lessons.collections;
 
-import java.util.Properties;
-
 /**
  * PropertiesDemo
  *
