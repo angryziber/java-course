@@ -50,7 +50,7 @@ public class NameGenerator {
 	ArrayList<String> mid = new ArrayList<String>();
 	ArrayList<String> sur = new ArrayList<String>();
 	
-	final private static char[] vocals = {'a', 'e', 'i', 'o', 'u', '�', '�', '�', '�', 'y'};
+	final private static char[] vocals = {'a', 'e', 'i', 'o', 'u', 'õ', 'ä', 'ö', 'ü', 'y'};
 	final private static char[] consonants = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p',	'q', 'r', 's', 't', 'v', 'w', 'x', 'y'};
 	
 	private String fileName;
@@ -77,7 +77,7 @@ public class NameGenerator {
 	}
 	
 	/**
-	 * Refresh names from file. No need to call that method, if you are not changing the file during the operation of program, as this method
+	 * Refresh syllables from file. No need to call that method, if you are not changing the file during the operation of program, as this method
 	 * is called every time file name is changed or new GenName object created.
 	 * @throws IOException
 	 */
