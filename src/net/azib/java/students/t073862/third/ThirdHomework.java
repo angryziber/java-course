@@ -26,7 +26,7 @@ public class ThirdHomework implements DuplicateRemover, WordFrequencyCalculator 
 	}
 
 	@Override
-	public Map calculateFrequenciesOf(String text) {
+	public Map<String, Integer> calculateFrequenciesOf(String text) {
 		String[] data = text.split("\\s");
 		Map<String, Integer> result = new TreeMap<String, Integer>();
 		for(String s : data) {
