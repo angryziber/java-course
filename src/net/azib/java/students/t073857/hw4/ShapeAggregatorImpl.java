@@ -70,7 +70,7 @@ public class ShapeAggregatorImpl implements ShapeAggregator{
 
 	@Override
 	public double totalArea() {
-		int sum=0;
+		double sum=0;
 		for(Shape s : aggregator){
 			sum += s.area();
 		}
