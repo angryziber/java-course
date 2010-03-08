@@ -12,8 +12,6 @@ import java.util.List;
  * @author Aleksandr GLadki
  */
 class ShowingInConsole {
-	// true -> read
-
 	/**
 	 *@param read
 	 *            input data from console
@@ -55,7 +53,7 @@ class ShowingInConsole {
 			}
 			pointsNum = result.getPoints();
 
-			System.out.println(placeNum + "," + result.putToString());
+			System.out.println(placeNum + "," + result.putToString(false));
 		}
 	}
 }

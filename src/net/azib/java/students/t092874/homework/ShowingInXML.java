@@ -93,7 +93,7 @@ class ShowingInXML {
 				athlete.appendChild(name);
 
 				Element birthday = document.createElement("birthday");
-				Text birthdayText = document.createTextNode(Util.convertDateToString(result.getAthlete().getBirthDate()));
+				Text birthdayText = document.createTextNode(Util.convertDateToString(result.getAthlete().getBirthday()));
 				birthday.appendChild(birthdayText);
 				athlete.appendChild(birthday);
 

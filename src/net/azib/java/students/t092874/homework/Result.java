@@ -1,5 +1,8 @@
 package net.azib.java.students.t092874.homework;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Decathlon
  * 
@@ -20,21 +23,15 @@ public class Result implements Comparable<Result> {
 	private Athlete athlete;
 	private int points;
 
-	Result() {
-
-	}
-
-	/**
-	 * 
-	 */
+	Result(){}
+	
 	Result(String[] line) {
+		if (line.length !=  13)
+			throw new IllegalArgumentException ("Line donn't consist 13 elements ");
 		convertToResult(line);
 		convertToAthlete(line);
 	}
 
-	/**
-	 * @param line
-	 */
 	private void convertToResult(String[] line) {
 		setSprint100(Util.convertStringToNumberInSecond(line[3]));
 		setLongJump(Float.valueOf(line[4]));
@@ -49,26 +46,36 @@ public class Result implements Comparable<Result> {
 		getPoints(); // fill points
 	}
 
-	/**
-	 * @param line
-	 */
 	private void convertToAthlete(String[] line) {
 		athlete = new Athlete();
-		athlete.setName(line[0].replaceAll("\"", ""));
-		athlete.setBirthDate(Util.convertStringToDate(line[1]));
+//		only word characters and whitespace
+		Pattern pattern = Pattern.compile("[^\\w\\s]");
+		Matcher matcher = pattern.matcher(line[0]);
+		String str = matcher.replaceAll("");
+		athlete.setName(str);
+		
+		athlete.setBirthday(Util.convertStringToDate(line[1]));
 		athlete.setCountryCode(line[2]);
 
 	}
+/**
+ * 
+ * @return Convert Result Object to one String line.
+ */
+	public String putToString(boolean csv) {
 
-	public String putToString() {
-
-		return getPoints() + "," + getAthlete().getName() + "," + Util.convertDateToString(getAthlete().getBirthDate()) + ","
-				+ getAthlete().getCountryCode() + "," + getSprint100() + "," + getLongJump() + "," + getShortPut() + ","
-				+ getHighJump() + "," + Util.convertNumberInSecondToString(getSprint400()) + "," + getHurdles() + ","
-				+ getDiscusThrow() + "," + getPoleVault() + "," + getJavelinThrow() + ","
-				+ Util.convertNumberInSecondToString(getRace());
+		String quote = "";
+		if (csv)
+			quote = "\"";
+		return getPoints() + "," + quote + getAthlete().getName() + quote + ","
+				+ Util.convertDateToString(getAthlete().getBirthday()) + "," + getAthlete().getCountryCode() + ","
+				+ getSprint100() + "," + getLongJump() + "," + getShortPut() + "," + getHighJump() + ","
+				+ Util.convertNumberInSecondToString(getSprint400()) + "," + getHurdles() + "," + getDiscusThrow() + ","
+				+ getPoleVault() + "," + getJavelinThrow() + "," + Util.convertNumberInSecondToString(getRace());
 	}
 
+	
+	
 	/**
 	 * @return the athlete
 	 */
@@ -252,6 +259,9 @@ public class Result implements Comparable<Result> {
 		this.points = points;
 	}
 
+	/**
+	 * Override compare method in Result Object
+	 */
 	@Override
 	public int compareTo(Result o) {
 		if (this.getPoints() > o.getPoints()) {
@@ -263,6 +273,9 @@ public class Result implements Comparable<Result> {
 		return 0;
 	}
 
+	/**
+	 * Calculate  points for athlete
+	 */
 	public void calculate() {
 		int points = 0;
 		points = Double.valueOf(

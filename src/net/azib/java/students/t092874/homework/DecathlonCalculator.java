@@ -18,7 +18,6 @@ public class DecathlonCalculator {
 	public static void main(String[] args) {
 		for (int i = 0; i < args.length; i++) {
 			if (args[i].equals(Constants.CONSOLE)) {
-				// i == 0 read , i!=0 write
 				if (i == 0)
 					_listResults = new ShowingInConsole().read();
 				else

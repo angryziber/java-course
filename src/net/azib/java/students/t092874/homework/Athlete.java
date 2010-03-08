@@ -9,7 +9,7 @@ import java.util.Date;
  */
 class Athlete {
 	private String name;
-	private Date birthDate;
+	private Date birthday;
 	private String CountryCode;
 
 	/**
@@ -30,16 +30,16 @@ class Athlete {
 	/**
 	 * @return the birthDate
 	 */
-	public Date getBirthDate() {
-		return birthDate;
+	public Date getBirthday() {
+		return birthday;
 	}
 
 	/**
-	 * @param birthDate
+	 * @param birthday
 	 *            the birthDate to set
 	 */
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	/**

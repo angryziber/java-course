@@ -57,7 +57,7 @@ class ShowingInCSV {
 				}
 				pointsNum = result.getPoints();
 
-				out.write(placeNum + "," + result.putToString());
+				out.write(placeNum + "," + result.putToString(true));
 				out.newLine();
 			}
 			out.close();

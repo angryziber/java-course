@@ -78,6 +78,12 @@ class ShowingInDB {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			}
+			catch (Exception e) {
+			}
 		}
 		return resultsList;
 	}
@@ -87,10 +93,10 @@ class ShowingInDB {
 		Athlete athlete = new Athlete();
 		athlete.setName(resultSet.getString("name"));
 		try {
-			athlete.setBirthDate(resultSet.getDate("dob"));
+			athlete.setBirthday(resultSet.getDate("dob"));
 		}
 		catch (java.sql.SQLException e) {
-			athlete.setBirthDate(null);
+			athlete.setBirthday(null);
 		}
 		athlete.setCountryCode(resultSet.getString("country_code"));
 		result.setAthlete(athlete);
