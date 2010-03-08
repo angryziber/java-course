@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -14,7 +12,7 @@ import java.util.TreeSet;
  * WordFrequencyCalculatorImpl
  * 
  * @author t073639
- * Doesn't work properly
+ * 
  */
 public class WordFrequencyCalculatorImpl implements net.azib.java.lessons.collections.WordFrequencyCalculator {
 	public static void main(String[] args) {
@@ -33,11 +31,10 @@ public class WordFrequencyCalculatorImpl implements net.azib.java.lessons.collec
 		Map<String, Integer> tm = new TreeMap<String, Integer>();
 		Collection<String> c = Arrays.asList(text.split(" ", text.length()));
 		TreeSet<String> ts = new TreeSet<String>(c);
-		Iterator<String> i = c.iterator();
 		Iterator<String> its = ts.iterator();
-		while (i.hasNext()) {
-			tm.put(i.next(), Collections.frequency(c, i.next()));
-			//tm.put(its.next(), Collections.frequency(c, its.next()));
+		while (its.hasNext()) {
+			String str=its.next();
+			tm.put(str, Collections.frequency(c, str));
 		}
 		return tm;
 	}
