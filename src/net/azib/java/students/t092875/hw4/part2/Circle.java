@@ -20,7 +20,6 @@ public class Circle extends Shape {
 	
 	@Override
 	public double area() {
-		// TODO Auto-generated method stub
 		return Math.PI*radius*radius;
 	}
 
@@ -28,7 +27,7 @@ public class Circle extends Shape {
 	public boolean equals(Object o) {
 		if(o instanceof Circle){
 			Circle oo = (Circle) o;
-			return oo.getRadius()==this.radius?true:false;
+			return oo.getRadius() == this.radius;
 		}else{
 			return false;
 		}
@@ -38,8 +37,8 @@ public class Circle extends Shape {
 	@Override
 	public int hashCode() {
 		int hash = 1;
-		hash = hash*32 + (int) this.radius;
-		hash = hash*32 + (int) this.area();
+		hash = hash * 31 + (int) this.radius;
+		hash = hash * 31 + (int) this.area();
 		return hash;
 	}
 

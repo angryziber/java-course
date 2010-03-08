@@ -43,27 +43,17 @@ public class ShapeAggregatorImpl implements ShapeAggregator{
 
 	@Override
 	public Shape max() {
-		Shape max = null;
-		for(Shape s: aggregator){
-			if(max == null || s.compareTo(max) == 1) max = s;
-		}
-		return max;
-		
+		return Collections.max(aggregator);
 	}
 
 	@Override
 	public Shape min() {
-		Shape min = null;
-		for(Shape s: aggregator){
-			if(min == null || s.compareTo(min) == -1) min = s;
-		}
-		return min;		
+		return Collections.min(aggregator);
 	}
 
 	@Override
 	public List<? extends Shape> sortedShapes() {		
-		List<Shape> list = new ArrayList<Shape>(aggregator.size());
-		copyTo(list);
+		List<Shape> list = new ArrayList<Shape>(aggregator);
 		Collections.sort(list);
 		return (List<Shape>) Collections.unmodifiableList(list);		
 	}

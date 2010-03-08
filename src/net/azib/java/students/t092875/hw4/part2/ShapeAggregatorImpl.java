@@ -69,7 +69,7 @@ public class ShapeAggregatorImpl implements ShapeAggregator {
 	public List<? extends Shape> sortedShapes() {
 		List<? extends Shape> list = (List<? extends Shape>) shapeList;
 		Collections.sort(list);
-		return list;
+		return Collections.unmodifiableList(list);
 	}
 
 	@Override

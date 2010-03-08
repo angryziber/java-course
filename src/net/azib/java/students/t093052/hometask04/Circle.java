@@ -29,7 +29,7 @@ public class Circle extends Shape {
 
 	@Override
 	public int hashCode() {
-		return new Double(radius).hashCode();
+		return ((Double)radius).hashCode();
 	}
 
 	@Override

@@ -3,9 +3,11 @@ package net.azib.java.students.t093052.hometask03;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -33,14 +35,14 @@ public class AlphabetTest {
 		assertArrayEquals(split(GER), sort(GER));
 	}
 	
-	@Test
+	@Test @Ignore
 	public void rus() throws Exception {
-//		assertArrayEquals(split(RUS), sort(RUS));
+		assertArrayEquals(split(RUS), sort(RUS));
 	}
 	
-	@Test
+	@Test @Ignore
 	public void est() throws Exception {
-//		assertArrayEquals(split(EST), sort(EST));
+		assertArrayEquals(split(EST), sort(EST));
 	}
 	
 	private String[] sort(String alphabet) {
