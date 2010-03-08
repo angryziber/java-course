@@ -13,7 +13,8 @@ public class DecathlonCalculator {
 
 	/**
 	 * 
-	 * @param source parametrs from console. What does.
+	 * @param source
+	 *            parametrs from console. What does.
 	 */
 	public static void main(String[] args) {
 		for (int i = 0; i < args.length; i++) {
@@ -39,7 +40,7 @@ public class DecathlonCalculator {
 				new ShowingInHTML(args[++i]).createHTML(_listResults);
 			}
 			else {
-				throw new IllegalArgumentException(args[i]);
+				throw new IllegalArgumentException("Invalid input parameter " + args[i]);
 			}
 		}
 	}

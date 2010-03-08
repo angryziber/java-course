@@ -22,7 +22,6 @@ class ShowingInCSV {
 	 */
 	ShowingInCSV(String fileName) {
 		this.fileOrPath = fileName;
-		System.out.println(fileName);
 	}
 
 	/**
@@ -72,17 +71,35 @@ class ShowingInCSV {
 	 */
 	List<Result> read() {
 		List<Result> resultsList = new ArrayList<Result>();
+		BufferedReader reader = null;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(getFileOrPath()));
+			reader = new BufferedReader(new FileReader(getFileOrPath()));
 			String strLine;
 			// Read File Line By Line
+
 			while ((strLine = reader.readLine()) != null) {
-				resultsList.add(new Result(strLine.split(",")));
+				try {
+					if (strLine.split(",").length != 13)
+						System.out.println("Line donn't consist of 13 elements");
+					else
+						resultsList.add(new Result(strLine.split(",")));
+				}
+				catch (NumberFormatException num) {
+					System.out.println("Exeption " + num.getMessage() + ". Cannot convert to Number .");
+				}
 			}
 			reader.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				reader.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return resultsList;
 	}

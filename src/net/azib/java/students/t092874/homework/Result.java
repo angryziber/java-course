@@ -25,9 +25,7 @@ public class Result implements Comparable<Result> {
 
 	Result(){}
 	
-	Result(String[] line) {
-		if (line.length !=  13)
-			throw new IllegalArgumentException ("Line donn't consist 13 elements ");
+	Result(String[] line){
 		convertToResult(line);
 		convertToAthlete(line);
 	}

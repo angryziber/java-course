@@ -26,7 +26,16 @@ class ShowingInConsole {
 
 			String strLine;
 			while (!("").equals(strLine = reader.readLine())) {
-				resultsList.add(new Result(strLine.split(",")));
+				try {
+					if (strLine.split(",").length != 13)
+						System.out.println("Line donn't consist of 13 elements");
+					else
+						resultsList.add(new Result(strLine.split(",")));
+				}
+				catch (NumberFormatException num) {
+					System.out.println();
+					System.out.println("Exeption " + num.getMessage() + ". Cannot convert to Number .");
+				}
 			}
 		}
 		catch (IOException e) {
