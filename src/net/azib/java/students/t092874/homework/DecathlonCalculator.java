@@ -40,7 +40,8 @@ public class DecathlonCalculator {
 				new ShowingInHTML(args[++i]).createHTML(_listResults);
 			}
 			else {
-				throw new IllegalArgumentException("Invalid input parameter " + args[i]);
+				System.out.println("Invalid input parameter " + args[i]);
+				break;
 			}
 		}
 	}
