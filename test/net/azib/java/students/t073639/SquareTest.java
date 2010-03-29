@@ -15,13 +15,13 @@ import org.junit.Test;
 public class SquareTest {
 	Square s=new Square(5.00);
 	@Test
-	public void testArea() throws Exception {
-		assertTrue("Area is not 25", s.area()==25); 
+	public void area() throws Exception {
+		assertEquals("Area is not 25", 25, s.area(), 0.01); 
 	}
 	@Test
 	public void testHashtableAndEquality() throws Exception {
 		Square s1=new Square(5);
 		assertEquals(s, s1);
-		assertTrue(s.hashCode()==s1.hashCode());
+		assertEquals(s.hashCode(), s1.hashCode());
 	}
 }
