@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
