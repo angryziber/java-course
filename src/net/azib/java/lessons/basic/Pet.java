@@ -2,12 +2,14 @@ package net.azib.java.lessons.basic;
 
 import net.azib.java.lessons.exception.PetNameException;
 
+import java.io.Serializable;
+
 /**
  * Pet
  *
  * @author anton
  */
-public abstract class Pet implements Cloneable {
+public abstract class Pet implements Cloneable, Serializable {
 	private String name;
 	private int age;
 	

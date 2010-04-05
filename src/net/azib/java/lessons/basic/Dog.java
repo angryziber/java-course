@@ -1,5 +1,7 @@
 package net.azib.java.lessons.basic;
 
+import java.io.Serializable;
+
 /**
  * Dog
  *
@@ -7,6 +9,10 @@ package net.azib.java.lessons.basic;
  */
 @Todo("Rewrite it!!!")
 public class Dog extends Pet implements StickCatcher {
+	static final long serialVersionUID = 2632417013995830400L;
+	
+	private transient String hello;
+	
 	/**
 	 * @param name
 	 * @param age
