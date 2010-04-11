@@ -32,8 +32,8 @@ public class SerializationDemo {
 		System.out.println(Arrays.toString(out.toByteArray()));
 		System.out.println(new String(out.toByteArray()).replace('\u0000', ' '));
 		
-		//IOUtils.write(out.toByteArray(), new FileOutputStream("/tmp/dog.dat"));
-		ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream("/tmp/dog.dat"));
+		//IOUtils.write(out.toByteArray(), new FileOutputStream("dog.dat"));
+		ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream("dog.dat"));
 		Dog dog2 = (Dog) objectInput.readObject();
 		
 		System.out.println(dog);
