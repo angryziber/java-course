@@ -1,13 +1,9 @@
 package net.azib.java.lessons.io;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.io.IOUtils;
 
