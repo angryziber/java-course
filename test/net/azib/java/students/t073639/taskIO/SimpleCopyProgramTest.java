@@ -24,6 +24,7 @@ public class SimpleCopyProgramTest {
 	@Test
 	public void LengthCompare() throws Exception {
 		System.out.println(PerformanceTimer.measureTime(scp, fIn, fOut));
+		fOut.deleteOnExit();
 		assertEquals(fIn.length(),fOut.length());
 	}
 	@Test
