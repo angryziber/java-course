@@ -15,7 +15,6 @@ import org.apache.commons.io.IOUtils;
  * @author t073639
  */
 public class SimpleCopyProgram implements FileCopier {
-	public long ms;
 
 	@Override
 	public void copy(File src, File dest) throws IOException {
@@ -23,11 +22,9 @@ public class SimpleCopyProgram implements FileCopier {
 		FileOutputStream outStream = new FileOutputStream(dest);
 		try {
 			int i;
-			long l = System.currentTimeMillis();
 			while ((i = inStream.read()) != -1) {
 				outStream.write(i);
 			}
-			ms = System.currentTimeMillis() - l;
 		}
 		catch (IOException e) {
 			System.err.println("Error");
