@@ -5,6 +5,9 @@ import net.azib.java.lessons.io.PerformanceTimer;
 import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -20,12 +23,19 @@ public class BufferedCopyProgramTest {
 	File fIn = new File(path, "8-io.pdf");
 	File fOut = new File(path, "8-io.pdf.buf.copy");
 	@Test
-	public void lengthCompare() throws Exception {
+	public void filesContentAndLengthCompare() throws Exception {
 		System.out.println(PerformanceTimer.measureTime(bcp, fIn, fOut));
 		assertEquals(fIn.length(),fOut.length());
+		assertTrue(IOUtils.contentEquals(new FileInputStream(fIn), new FileInputStream(fOut)));
 	}
 	@Test
-	public void contentEquals() throws Exception {
+	public void dataContentAndLengthCompare() throws Exception {
+		InputStream src=new FileInputStream(fIn);
+		OutputStream dest=new FileOutputStream(fOut);
+		long s=System.currentTimeMillis();
+		bcp.copy(src, dest);
+		System.out.println(System.currentTimeMillis()-s);
+		assertEquals(fIn.length(),fOut.length());
 		assertTrue(IOUtils.contentEquals(new FileInputStream(fIn), new FileInputStream(fOut)));
 	}
 }
