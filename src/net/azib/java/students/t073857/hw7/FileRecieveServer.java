@@ -16,7 +16,13 @@ import java.net.Socket;
  */
 public class FileRecieveServer extends BufferedCopyProgram {	
 	
-	public void reciever(int port, File dest) throws IOException{			
+	int port;
+	
+	public FileRecieveServer(int port) {
+		this.port = port;
+	}
+
+	public void recieveTo(File dest) throws IOException{			
 		ServerSocket server = new ServerSocket(port);
 		Socket s = server.accept();		
 		String name = getName(s.getInputStream());

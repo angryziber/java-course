@@ -17,7 +17,15 @@ import java.net.Socket;
  */
 public class FileSender {
 	
-	public void sender(InetAddress address, int port, File file) throws IOException{		
+	InetAddress address;
+	int port;
+	
+	public FileSender(InetAddress address, int port) {
+		this.address = address;
+		this.port = port;
+	}
+
+	public void send(File file) throws IOException{		
 		InetSocketAddress socketAddress = new InetSocketAddress(address, port);
 		Socket s = new Socket(); 
 		try{

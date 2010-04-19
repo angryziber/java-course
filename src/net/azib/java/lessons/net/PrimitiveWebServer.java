@@ -8,6 +8,10 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.apache.commons.io.IOUtils;
 
 /**
  * PrimitiveWebServer
@@ -28,26 +32,51 @@ public class PrimitiveWebServer {
 			System.err.println("Listening on port " + server.getLocalPort());
 			
 			while (true) {
-				Socket socket = server.accept();
-				BufferedReader reader = getReader(socket);
-				String request = reader.readLine();
-				dropHeaders(reader);
-				System.err.println("Request from " + socket.getRemoteSocketAddress() + ": " + request);
-				
-				Writer writer = getWriter(socket);
-				sendHeaders(writer);
-				
-				RequestHandler handler = new HelloWorldRequestHandler();
-				handler.handle(request, writer);
-				
-				writer.close();
-				socket.close();
+				final Socket socket = server.accept();
+				new Thread() {
+					@Override
+					public void run() {
+						handleConnection(socket);
+					}
+				}.start();
 			}
 		}
 		catch (IOException e) {
 			// TODO !!
 		}
 		
+	}
+	
+	private void handleConnection(Socket socket) {
+		Writer writer = null;
+		try {
+			BufferedReader reader = getReader(socket);
+			String request = reader.readLine();
+			dropHeaders(reader);
+			System.err.println("Request from " + socket.getRemoteSocketAddress() + ": " + request);
+			
+			writer = getWriter(socket);
+			sendHeaders(writer);
+			
+			RequestHandler handler = new HelloWorldRequestHandler();
+			handler.handle(request, writer);
+		}
+		catch (IOException e) {
+			System.err.println("failed to serve response: " + e);			
+		}
+		finally {
+			closeStuff(socket, writer);			
+		}
+	}
+
+	private void closeStuff(Socket socket, Writer writer) {
+		try {
+			if (writer != null)
+				writer.flush();
+			if (socket != null)
+				socket.close();
+		}
+		catch (IOException e) {}
 	}
 
 	private OutputStreamWriter getWriter(Socket socket) throws UnsupportedEncodingException, IOException {

@@ -10,6 +10,6 @@ import java.io.IOException;
  */
 public class FileRecieveServerDemo {
 	public static void main(String[] args) throws IOException {
-		new FileRecieveServer().reciever(2650, new File("C:/"));
+		new FileRecieveServer(2650).recieveTo(new File("C:/"));
 	}
 }

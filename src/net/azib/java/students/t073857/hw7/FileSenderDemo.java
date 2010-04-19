@@ -12,6 +12,9 @@ import java.net.InetAddress;
 public class FileSenderDemo {
 	public static void main(String[] args) throws IOException {
 		// Change file name to something which exists.
-		new FileSender().sender(InetAddress.getLocalHost(), 2650, new File("C:/Downloads/Readme.txt"));
+		FileSender sender = new FileSender(InetAddress.getLocalHost(), 2650);
+		
+		sender.send(new File("C:/Downloads/Readme.txt"));
+		sender.send(new File("C:/Downloads/Readme.txt"));
 	}
 }
