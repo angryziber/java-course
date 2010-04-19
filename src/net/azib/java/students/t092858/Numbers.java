@@ -10,5 +10,6 @@ public class Numbers {
 
 		System.out.printf("Factorial 100 = %s%n", Factorial.calculate(100));
 		System.out.printf("Fibonacci 100 = %s%n", Fibonacci.calculate(100));
+
 	}
 }

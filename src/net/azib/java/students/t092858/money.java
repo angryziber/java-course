@@ -22,7 +22,10 @@ public class money {
 		int b = -55;
 		b  >>= 2;
 		System.out.println(b);
+		
+		for (Integer i = 0; i < 100000; i++) {
 			
+		}
 	}
 
 }
