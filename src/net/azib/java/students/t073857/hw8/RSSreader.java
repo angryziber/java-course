@@ -22,6 +22,7 @@ public class RSSreader extends Thread{
 	public static final String US_NEWS = "http://rss.cnn.com/rss/edition_us.rss";
 	public static final String WORLD_NEWS = "http://rss.cnn.com/rss/edition_world.rss";
 	public static final String TOP_NEWS = "http://rss.cnn.com/rss/edition.rss";
+	public static final String RECENT_NEWS = "http://rss.cnn.com/rss/cnn_latest.rss";
 		
 	private LinkedList<String> data = new LinkedList<String>();
 	private LinkedList<News> news = new LinkedList<News>();
@@ -96,6 +97,9 @@ public class RSSreader extends Thread{
 				}else if(active.contains("<description>")){
 					active = active.replace("<description>", "");
 					active = active.replace("</description>", "");
+					if(active.contains("&lt")){
+						active = active.split("&lt")[0]; // Don't know why some RSS feed include some code...
+					}
 					description = active;
 				}else if(active.contains("</item>")){
 					inItem = false;

@@ -74,7 +74,7 @@ public class Calculator {
 		screen = new StringBuilder("0");
 		setNewInput=false;
 		ignoreOperator = false;
-		equalsMore = false;		
+		equalsMore = false;
 		previous = null;	
 		temp = null;
 		operator = 0;
@@ -83,7 +83,7 @@ public class Calculator {
 	@Override
 	public String toString(){
 		if(screen.toString().startsWith("0E")) return "0";
-		else return screen.toString();
+		else return screen.toString().replace(".", ",");
 	}
 	
 	

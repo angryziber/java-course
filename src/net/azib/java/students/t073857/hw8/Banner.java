@@ -46,7 +46,7 @@ public class Banner extends Canvas{
 	}
 	
 	public void init(int width){
-		rss = new RSSreader(RSSreader.TOP_NEWS);
+		rss = new RSSreader(RSSreader.RECENT_NEWS);
 		while(!rss.newContent){
 			try {
 				Thread.sleep(200);
