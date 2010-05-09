@@ -17,12 +17,7 @@ import java.util.LinkedList;
  * 
  */
 public class RSSreader extends Thread{
-	public static final int SLEEP_TIME = 6000000; // wait 10 minutes before refresh 
-	public static final String EUROPE_NEWS = "http://rss.cnn.com/rss/edition_europe.rss";
-	public static final String US_NEWS = "http://rss.cnn.com/rss/edition_us.rss";
-	public static final String WORLD_NEWS = "http://rss.cnn.com/rss/edition_world.rss";
-	public static final String TOP_NEWS = "http://rss.cnn.com/rss/edition.rss";
-	public static final String RECENT_NEWS = "http://rss.cnn.com/rss/cnn_latest.rss";
+	public static final int SLEEP_TIME = 6000000; // wait 10 minutes before refresh 	
 		
 	private LinkedList<String> data = new LinkedList<String>();
 	private LinkedList<News> news = new LinkedList<News>();
