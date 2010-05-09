@@ -1,4 +1,6 @@
-package net.azib.java.lessons.gui;
+package net.azib.java.lessons.xml;
+
+import net.azib.java.lessons.gui.CommentBean;
 
 import java.beans.XMLEncoder;
 
@@ -13,6 +15,6 @@ public class XMLEncoderDemo {
 		bean.setComment("Hello World!");
 		XMLEncoder encoder = new XMLEncoder(System.out);
 		encoder.writeObject(bean);
-		encoder.flush();
+		encoder.close();
 	}
 }
