@@ -16,12 +16,17 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.URI;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 /**
  * Calculator
@@ -40,6 +45,7 @@ public class CalculatorGUI {
 		
         final JFrame frame = new JFrame("Photos, The Up-To-Date Calculator");        
         final Banner banner = new Banner(frame.getWidth());
+        final ComboBoxModel comboModel;
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocation(new Point(200, 200));        
@@ -68,11 +74,13 @@ public class CalculatorGUI {
         screen.setBackground(Color.WHITE);
         screen.setHorizontalAlignment(JTextField.RIGHT);    
         
+        NewsType[] newsCombo = NewsType.values(); 
+        comboModel = new DefaultComboBoxModel(newsCombo);        
         
         JButton C = new JButton("C");
         JButton res1 = new JButton("");        
         JButton res2 = new JButton("");
-        JButton res3 = new JButton("");
+        JComboBox newsComboBox = new JComboBox(comboModel);
         JButton but1 = new JButton("1");
         JButton but2 = new JButton("2");        
         JButton but3 = new JButton("3");
@@ -92,8 +100,7 @@ public class CalculatorGUI {
              
         addListener(C);
         addListener(res1);
-        addListener(res2);
-        addListener(res3);
+        addListener(res2);        
         addListener(butComma);
         addListener(but0);
         addListener(but1);
@@ -114,7 +121,7 @@ public class CalculatorGUI {
         controlPanel.add(C);
         controlPanel.add(res1);
         controlPanel.add(res2);
-        controlPanel.add(res3);
+        controlPanel.add(newsComboBox);
         controlPanel.add(but1);
         controlPanel.add(but2);
         controlPanel.add(but3);
@@ -130,12 +137,25 @@ public class CalculatorGUI {
         controlPanel.add(butComma);
         controlPanel.add(but0);
         controlPanel.add(butMinus);
-        controlPanel.add(butEquals);    
+        controlPanel.add(butEquals);            
         
         res1.setEnabled(false);
         res2.setEnabled(false);
-        res3.setEnabled(false);
         
+        
+        comboModel.addListDataListener(new ListDataListener(){
+			@Override
+			public void contentsChanged(ListDataEvent e) {
+				banner.changeContent((NewsType)comboModel.getSelectedItem());				
+			}
+			
+			@Override
+			public void intervalAdded(ListDataEvent e) {	}
+			
+			@Override			
+			public void intervalRemoved(ListDataEvent e) {		}        	
+        });
+       
         banner.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         banner.addMouseListener(new MouseListener(){
 			@Override

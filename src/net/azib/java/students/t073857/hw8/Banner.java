@@ -38,6 +38,7 @@ public class Banner extends Canvas{
 					if(rss.newContent){
 						text = rss.getNews();
 						rss.newContent = false;
+						//System.out.println("Got new content");
 					}
 				}				
 				repaint();
@@ -45,8 +46,13 @@ public class Banner extends Canvas{
 		}, 100, 10);
 	}
 	
+	public void changeContent(NewsType changeTo){
+		rss = new RSSreader(changeTo);
+		rss.newContent=true;
+	}
+	
 	public void init(int width){
-		rss = new RSSreader(RSSreader.RECENT_NEWS);
+		rss = new RSSreader(NewsType.RECENT_NEWS);
 		while(!rss.newContent){
 			try {
 				Thread.sleep(200);

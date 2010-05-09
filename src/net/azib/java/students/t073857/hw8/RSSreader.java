@@ -29,13 +29,13 @@ public class RSSreader extends Thread{
 	public boolean newContent = false;
 	URL url; 
 	
-	public RSSreader(String newsType) {
+	public RSSreader(NewsType newsType) {
 		try {
-			url = new URL(newsType);
+			url = new URL(newsType.getLink());
 		}
 		catch (MalformedURLException e) {	} 		
 		start();
-	}
+	}	
 	
 	public void run(){
 		while(true){			
@@ -98,7 +98,7 @@ public class RSSreader extends Thread{
 					active = active.replace("<description>", "");
 					active = active.replace("</description>", "");
 					if(active.contains("&lt")){
-						active = active.split("&lt")[0]; // Don't know why some RSS feed include some code...
+						active = active.split("&lt")[0]; // Don't know why some RSS feed includes some code...
 					}
 					description = active;
 				}else if(active.contains("</item>")){
@@ -116,10 +116,11 @@ public class RSSreader extends Thread{
 			}			
 		}	
 		Collections.shuffle(this.news);
-		newContent = true;		
+		newContent = true;				
 	}
 	
 	public LinkedList<News> getNews(){
 		return news;
 	}
+	
 }
