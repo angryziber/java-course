@@ -74,8 +74,8 @@ public class CalculatorGUI {
         screen.setBackground(Color.WHITE);
         screen.setHorizontalAlignment(JTextField.RIGHT);    
         
-        NewsType[] newsCombo = NewsType.values(); 
-        comboModel = new DefaultComboBoxModel(newsCombo);        
+        
+        comboModel = new DefaultComboBoxModel(NewsType.values());        
         
         JButton C = new JButton("C");
         JButton res1 = new JButton("");        
@@ -146,7 +146,7 @@ public class CalculatorGUI {
         comboModel.addListDataListener(new ListDataListener(){
 			@Override
 			public void contentsChanged(ListDataEvent e) {
-				banner.changeContent((NewsType)comboModel.getSelectedItem());				
+				banner.changeContent((NewsType)comboModel.getSelectedItem());					
 			}
 			
 			@Override
@@ -160,7 +160,7 @@ public class CalculatorGUI {
         banner.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Object[] options = {"Read in browser",
+				String[] options = {"Read in browser",
 	            "Cancel"};
 				URI activeLink = banner.active.getUri();
 				int n = JOptionPane.showOptionDialog(frame, banner.active.slicedDescription(15)+
