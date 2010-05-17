@@ -6,11 +6,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
 import java.util.InputMismatchException;
@@ -46,9 +43,8 @@ public class Util {
 		return db;
 	}
 	/**
-	 * 
-	 * @param scanner
-	 * @param regex
+	 * Will return a float from the user, forcefully.
+	 * @param text text to present to the user
 	 * @return
 	 */
 	public static float getFloat(String text) {
@@ -94,7 +90,11 @@ public class Util {
 		}
 		return points;
 	}
-	
+	/**
+	 * Writes data to a file.
+	 * @param f
+	 * @param data
+	 */
 	public static void writeToFile(File f, String data) {
 		Writer outputWriter = null;
 		try {
@@ -118,7 +118,11 @@ public class Util {
 			}
 		}
 	}
-	
+	/**
+	 * Output file getter based on the file path. If filePath is a valid absolute path, then it is used. Otherwise Main.class.getResource is used
+	 * @param filePath
+	 * @return
+	 */
 	public static File getOutputFile(String filePath) {
 		File f = new File(filePath); 
 		if(!f.isAbsolute()) {

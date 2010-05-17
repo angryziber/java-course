@@ -1,7 +1,7 @@
 package net.azib.java.students.t073862.homework.model;
 
 /**
- * Scores
+ * Scores model, used for serializing to XML / CSV
  *
  * @author Pets
  */

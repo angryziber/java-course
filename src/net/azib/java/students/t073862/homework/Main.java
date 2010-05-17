@@ -5,7 +5,6 @@ import net.azib.java.students.t073862.homework.model.Score;
 import net.azib.java.students.t073862.homework.util.Util;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
@@ -21,6 +20,10 @@ public class Main {
 	public Main() {
 		
 	}
+	/**
+	 * Backbone of the program. Manages input and output.
+	 * @param args
+	 */
 	public void parseInput(String[] args) {
 		
 		if(args.length < 2) {
