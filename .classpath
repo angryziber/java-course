@@ -15,6 +15,7 @@
 	<classpathentry kind="lib" path="lib/xmlunit.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector.jar"/>
 	<classpathentry kind="lib" path="lib/cglib.jar"/>
+	<classpathentry kind="lib" path="lib/hsqldb.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
