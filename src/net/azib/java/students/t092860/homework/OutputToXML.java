@@ -1,6 +1,6 @@
 package net.azib.java.students.t092860.homework;
 
-import java.io.File;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Iterator;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-import org.apache.commons.io.FileUtils;
+import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
 
@@ -21,25 +21,31 @@ class OutputToXML implements Output {
 
 	private static Logger logger = Logger.getLogger("global");
 	
-	OutputToXML(File filepath)
+	OutputToXML(){}
+	
+	OutputToXML(OutputStream out)
 	{
-		file = filepath;
+		output = out;
 	}
 	
 	public void set(List<Data> dataList) throws Exception
 	{
-    	String output = getXML(dataList);
-    	FileUtils.writeStringToFile(file, output, "UTF8");
-	    
-		logger.info("Output to XML file success");
+	    XMLOutputter outputter = new XMLOutputter();
+		outputter.output(generateXML(dataList), output);	
 	}
 	
-	protected String getXML(List<Data> dataList)
+	public String getXML(List<Data> dataList) throws Exception
+	{
+		XMLOutputter outputter = new XMLOutputter();
+		return outputter.outputString(generateXML(dataList));
+	}
+	
+	private Document generateXML(List<Data> dataList) throws Exception
 	{
 		logger.info("Generate XML");
-	    XMLOutputter outputter = new XMLOutputter();
 
     	Element competition = new Element("Competition");
+    	Document doc = new Document(competition);
     	
     	Iterator<Data> it = dataList.iterator(); 
 		while(it.hasNext()) 
@@ -88,8 +94,8 @@ class OutputToXML implements Output {
 		}
 		logger.info("XML created successfully");
 		
-		return outputter.outputString(competition);
+		return doc;
 	}
 	
-	private File file;
+	private OutputStream output;
 }

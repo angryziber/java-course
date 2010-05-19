@@ -1,7 +1,9 @@
 package net.azib.java.students.t092860.homework;
 
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -16,7 +18,10 @@ class InputFromConsole implements Input {
 
 	private static Logger logger = Logger.getLogger("global");
 	
-	public InputFromConsole(){}
+	public InputFromConsole(InputStream in)
+	{
+		input = in;
+	}
 	
 	public List<Data> get() throws Exception
 	{
@@ -27,7 +32,7 @@ class InputFromConsole implements Input {
 
 		try		
 		{	
-			Scanner in = new Scanner(System.in);
+			Scanner in = new Scanner(input);
 			String strLine;
 			
 			try
@@ -62,7 +67,7 @@ class InputFromConsole implements Input {
 
 		athlete.setName(st.nextToken());
 		java.util.Date date = (new SimpleDateFormat("dd.MM.yyyy")).parse(st.nextToken());
-		athlete.setDate(new java.sql.Date(date.getTime()));	
+		athlete.setDate(new Date(date.getTime()));	
 		athlete.setCountry(st.nextToken());
 		athlete.addEvent(Events.RACE_100M, Converter.stringToTime(st.nextToken()));
 		athlete.addEvent(Events.LONG_JUMP, Double.parseDouble(st.nextToken()));
@@ -77,4 +82,6 @@ class InputFromConsole implements Input {
 
 		return athlete;
 	}
+	
+	private InputStream input;
 }

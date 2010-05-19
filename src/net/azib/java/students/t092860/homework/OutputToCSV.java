@@ -1,12 +1,9 @@
 package net.azib.java.students.t092860.homework;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
-
-import org.apache.commons.io.FileUtils; 
 
 /**
  * OutputToCSV
@@ -17,22 +14,21 @@ class OutputToCSV implements Output {
 	
 	private static Logger logger = Logger.getLogger("global");
 	
-	OutputToCSV(File filepath)
+	OutputToCSV(OutputStream out)
 	{
-		file = filepath;
+		output = out;
 	}
 	
 	public void set(List<Data> dataList) throws Exception
 	{
-		List<String> csvDataList = new ArrayList<String>();
+		//List<String> csvDataList = new ArrayList<String>();
 		
 		Iterator<Data> it = dataList.iterator(); 					
 		while(it.hasNext())
 		{
-			csvDataList.add(dataToString(it.next()));
+			String line = dataToString(it.next()) + System.getProperty("line.separator");
+			output.write(line.getBytes("UTF-8"));
 		}
-
-		FileUtils.writeLines(file, "UTF8", csvDataList);
 		
 		logger.info("Output to CSV file success");
 	}
@@ -48,5 +44,5 @@ class OutputToCSV implements Output {
 		return out;
 	}
 	
-	private File file;
+	private OutputStream output;
 }

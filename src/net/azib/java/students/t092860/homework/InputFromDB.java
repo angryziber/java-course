@@ -23,11 +23,15 @@ class InputFromDB implements Input {
 		competition = competitionId;
 	}
 	
+	public InputFromDB(Connection conn, String competitionId)
+	{
+		connection = conn;
+		competition = competitionId;
+	}
+	
 	public List<Data> get() throws Exception
 	{
 		List<Data> dataSet = new ArrayList<Data>();
-		
-		Connection conn = null;
 	
 		try
 		{
@@ -41,7 +45,8 @@ class InputFromDB implements Input {
 			String userName = getPropeties().getProperty("db.username");
 			String password = getPropeties().getProperty("db.password");
 			
-			conn = DriverManager.getConnection(connStr, userName, password);
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			connection = DriverManager.getConnection(connStr, userName, password);
 		}
 		catch (Exception e)
 		{
@@ -49,11 +54,11 @@ class InputFromDB implements Input {
 		}
 		finally
 		{
-			if (conn != null)
+			if (connection != null)
 			{
 				try
 				{
-					Statement s = conn.createStatement ();
+					Statement s = connection.createStatement ();
 					s.executeQuery ("SELECT * FROM results " +
 							"LEFT JOIN athletes ON results.athlete_id=athletes.id " +
 							"LEFT JOIN competitions ON results.competition_id=competitions.id  " +
@@ -74,7 +79,7 @@ class InputFromDB implements Input {
 						rs.close ();
 					}
 					   
-					conn.close();
+					connection.close();
 				}
 				catch (Exception e) { 
 					throw new Exception("Retrieving data from database failed. " + e.getMessage()); 
@@ -120,5 +125,6 @@ class InputFromDB implements Input {
 		return dbprop;
 	}
 
+	private Connection connection;
 	private String competition;
 }

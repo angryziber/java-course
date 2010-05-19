@@ -2,7 +2,6 @@ package net.azib.java.students.t092860.homework;
 
 import java.lang.Math;
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Converter
@@ -11,6 +10,12 @@ import java.util.Iterator;
  */
 class Converter {
 	
+	/**
+	 * Converts string representation of time to seconds in float
+	 * 
+	 * @param  input time in format (HH:mm:ss.SSS)
+	 * @return       seconds in float
+	 */
 	//convert String representation of time (HH:mm:ss.SSS) to seconds in float
 	public static double stringToTime(String input) throws Exception
 	{
@@ -28,18 +33,23 @@ class Converter {
 		return result;
 	}
 	
+	/**
+	 * Converts athletes data to comma separated string
+	 * 
+	 * @param  data athletes data
+	 * @return      comma separated string of the athletes data
+	 */
 	public static String athleteToString(Athlete data)
 	{
 		String out = "";
 		
-		out += "," + data.getName();
+		out += data.getName();
 		out += "," + data.getDate();
 		out += "," + data.getCountry();
 		
-		Collection<Double> coll = data.getEventResults();
-		Iterator<Double>  eventsIt = coll.iterator();
-		while(eventsIt.hasNext())
-			out += "," + String.valueOf(eventsIt.next());
+		Collection<Events> eventsColl = data.getEvents();
+		for(Events e: eventsColl)
+			out += "," + String.valueOf(data.getEventResult(e));
 		
 		return out;
 	}

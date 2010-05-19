@@ -1,9 +1,8 @@
 package net.azib.java.students.t092860.homework;
 
 /**
- * Events
+ * List of events performed by an athlete.
  *
- * @author scythe
  */
 enum Events {
 	RACE_100M,

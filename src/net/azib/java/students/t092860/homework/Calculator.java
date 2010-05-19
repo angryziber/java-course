@@ -19,6 +19,13 @@ class Calculator implements Comparator<Output.Data> {
 
 	private static Logger logger = Logger.getLogger("global");
 	
+	/**
+	 * Calculates the score and position of an athlete from Input.Data 
+	 * and convert it to Ouput.Data. 
+	 * 
+	 * @param  url  list of Athletes
+	 * @return      list of extended Athletes
+	 */
     public List<Output.Data> calcResults(List<Input.Data> inputSet)
 	{
     	List<Output.Data> outputList = new ArrayList<Output.Data>();

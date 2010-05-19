@@ -6,7 +6,8 @@ package net.azib.java.students.t092860.homework;
  * @author scythe
  */
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,9 +69,9 @@ class DecathlonCalculator {
 	{
 		Input input;
 		if (input_method.equals("-console"))
-			input = new InputFromConsole();
+			input = new InputFromConsole(System.in);
 		else if (input_method.equals( "-csv"))
-			input = new InputFromCSV(new File(input_parameter));
+			input = new InputFromCSV(new FileInputStream(input_parameter));
 	    else if (input_method.equals("-db"))
 	    	input = new InputFromDB(input_parameter);
 	    else
@@ -83,13 +84,13 @@ class DecathlonCalculator {
 	{
 		Output output;
 		if (output_method.equals("-console"))
-			output = new OutputToConsole();
+			output = new OutputToConsole(System.out);
 		else if (output_method.equals( "-csv"))
-			output = new OutputToCSV(new File(output_parameter));
+			output = new OutputToCSV(new FileOutputStream(output_parameter));
 	    else if (output_method.equals("-xml"))
-	    	output = new OutputToXML(new File(output_parameter));
+	    	output = new OutputToXML(new FileOutputStream(output_parameter));
 	    else if (output_method.equals("-html"))
-	    	output = new OutputToHTML(new File(output_parameter));
+	    	output = new OutputToHTML(new FileOutputStream(output_parameter));
 	    else
 	    	return;
 		
@@ -101,7 +102,7 @@ class DecathlonCalculator {
 	 */	
 	public static void main(String[] args)
 	{
-		logger.setLevel(Level.OFF);
+		logger.setLevel(Level.ALL);
 		
 		//validate program arguments
 		if(!validateArguments(args))

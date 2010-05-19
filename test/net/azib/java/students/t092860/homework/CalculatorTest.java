@@ -9,17 +9,17 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * TestCalculator
+ * CalculatorTest
  *
  * @author armin
  */
-public class TestCalculator {
+public class CalculatorTest {
 
 	/**
-	 * Test method for {@link net.azib.java.students.t092860.homework.Calculator#CalcResults(java.util.List)}.
+	 * Test method for {@link net.azib.java.students.t092860.homework.Calculator#calcResults(java.util.List)}.
 	 */
 	@Test
-	public void testCalcResults() {
+	public final void testCalcResults() {
 		Calculator calc = new Calculator();
 		assertNotNull(calc);
 		
@@ -45,4 +45,5 @@ public class TestCalculator {
 		assertTrue(out.get(0).getCountry() == in.get(0).getCountry());
 		assertTrue(out.get(0).getEventResult(Events.RACE_100M) == in.get(0).getEventResult(Events.RACE_100M));		
 	}
+
 }

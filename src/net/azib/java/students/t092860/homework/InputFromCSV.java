@@ -1,11 +1,11 @@
 package net.azib.java.students.t092860.homework;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -19,9 +19,9 @@ class InputFromCSV implements Input {
 
 	private static Logger logger = Logger.getLogger("global");
 	
-	public InputFromCSV(File filepath)
+	public InputFromCSV(InputStream in)
 	{
-		file = filepath;
+		input = in;
 	}
 	
 	public List<Data> get() throws Exception
@@ -30,7 +30,7 @@ class InputFromCSV implements Input {
 
 		try		
 		{								
-			BufferedReader in = new BufferedReader( new InputStreamReader( new FileInputStream(file), "UTF8"));			
+			BufferedReader in = new BufferedReader(new InputStreamReader(input, "UTF8"));			
 			String strLine;				
 			
 			try
@@ -68,7 +68,7 @@ class InputFromCSV implements Input {
 
 		athlete.setName(st.nextToken());
 		java.util.Date date = (new SimpleDateFormat("dd.MM.yyyy")).parse(st.nextToken());
-		athlete.setDate(new java.sql.Date(date.getTime()));	
+		athlete.setDate(new Date(date.getTime()));	
 		athlete.setCountry(st.nextToken());
 		athlete.addEvent(Events.RACE_100M, Converter.stringToTime(st.nextToken()));
 		athlete.addEvent(Events.LONG_JUMP, Double.parseDouble(st.nextToken()));
@@ -84,5 +84,5 @@ class InputFromCSV implements Input {
 		return athlete;
 	}
 	
-	private File file;
+	private InputStream input;
 }
