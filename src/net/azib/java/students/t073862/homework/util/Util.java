@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URI;
 import java.net.URL;
 import java.util.InputMismatchException;
 import java.util.Properties;
@@ -59,19 +60,46 @@ public class Util {
 		}
 		return returnval;
 	}
-	
+	/**
+	 * Points = INT(A*(B-P)^C) for track events
+	 * @return
+	 */
 	private static int calcTrack(float A, float B, float C, float P) {
 		return (int)(A*Math.pow((B-P),C));
 	}
+	/**
+	 * @return  INT(A*(P-B)^C) for field events
+	 */
 	private static int calcField(float A, float B, float C, float P) {
 		return (int)(A*Math.pow((P-B),C));
 	}	
-	private static Float[] A = { 25.4347F, 0.14354F, 51.39F, 0.8465F, 1.53775F, 5.74352F, 12.91F, 0.2797F, 10.14F, 0.03768F };
+	private static Float[] A = { 25.4347F,
+		0.14354F, 
+		51.39F, 
+		0.8465F, 
+		1.53775F, 
+		5.74352F, 
+		12.91F, 
+		0.2797F, 
+		10.14F, 
+		0.03768F 
+		};
 	private static Float[] B = { 18F, 220F, 1.5F, 75F, 82F, 28.5F, 4F, 100F, 7F, 480F  };
 	private static Float[] C = { 1.81F, 1.4F, 1.05F, 1.42F, 1.81F, 1.92F, 1.1F, 1.35F, 1.08F, 1.85F };
-	
-	private static boolean[] trackEvent = { true, true, false, true, true, false, false, true, false, true };
-	
+	private static String[] races = { "race_100m", "long_jump", "shot_put", "high_jump", "race_400m", "hurdles_110m", "discus_throw", "pole_vault", "javelin_throw", "race_1500m" };
+
+	private static boolean[] trackEvent = { 
+		true, //race_100m
+		false, //long_jump
+		false, //shot_put
+		false, //high_jump 
+		true, //race_400m
+		true, //hurdles_110m
+		false, //discus_throw
+		false, //pole_vault
+		false, //javelin_throw
+		true //race_1500m
+	};
 	
 	/**
 	 * Calculates the score for the given athlete
@@ -82,10 +110,22 @@ public class Util {
 		
 		for(int i = 0; i < trackEvent.length; i++) {
 			if(trackEvent[i]) {
-				points += calcTrack(A[i], B[i], C[i], scores[i]);
+				
+				int newPoints = calcTrack(A[i], B[i], C[i], scores[i]);
+				//System.out.println("races: " + races[i] + " scored: "+ newPoints + " ("+A[i] +"|"+B[i]+"|"+C[i] +")");
+				points += newPoints;
 			}
 			else {
-				points += calcField(A[i], B[i], C[i], scores[i]);
+				int newPoints = -1;
+				
+				if(i == 1 || i == 3 || i == 7) {
+					newPoints = calcField(A[i], B[i], C[i], (scores[i]*100));
+				}
+				else {
+					newPoints = calcField(A[i], B[i], C[i], scores[i]);
+				}
+				//System.out.println("races: " + races[i] + " scored: "+ newPoints + " ("+A[i] +"|"+B[i]+"|"+C[i]+"|"+scores[i] +")");
+				points += newPoints;
 			}
 		}
 		return points;
@@ -126,7 +166,10 @@ public class Util {
 	public static File getOutputFile(String filePath) {
 		File f = new File(filePath); 
 		if(!f.isAbsolute()) {
-			f = new File(Main.class.getResource(filePath).getFile().replace("%20", " "));
+			URL uri = Main.class.getResource(filePath);
+			if(uri != null) 
+				f = new File(uri.getFile().replace("%20", " "));
+			
 		}
 		if(!f.isFile()) {
 			try {
