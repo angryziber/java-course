@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -67,8 +66,7 @@ class InputFromCSV implements Input {
 						
 
 		athlete.setName(st.nextToken());
-		java.util.Date date = (new SimpleDateFormat("dd.MM.yyyy")).parse(st.nextToken());
-		athlete.setDate(new Date(date.getTime()));	
+		athlete.setDate((new SimpleDateFormat("dd.MM.yyyy")).parse(st.nextToken()));	
 		athlete.setCountry(st.nextToken());
 		athlete.addEvent(Events.RACE_100M, Converter.stringToTime(st.nextToken()));
 		athlete.addEvent(Events.LONG_JUMP, Double.parseDouble(st.nextToken()));

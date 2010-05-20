@@ -3,7 +3,7 @@ package net.azib.java.students.t092860.homework;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -56,7 +56,7 @@ class Athlete {
 	 */
 	public void addEvent(Events event, Double performance){
 		if(athleteEvents == null)
-			athleteEvents = new HashMap<Events, Double>();
+			athleteEvents = new LinkedHashMap<Events, Double>();
 
 		athleteEvents.put(event, performance);
 	}

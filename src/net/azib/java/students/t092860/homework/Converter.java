@@ -1,7 +1,9 @@
 package net.azib.java.students.t092860.homework;
 
 import java.lang.Math;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Locale;
 
 /**
  * Converter
@@ -44,7 +46,12 @@ class Converter {
 		String out = "";
 		
 		out += data.getName();
-		out += "," + data.getDate();
+		try{
+			out += "," + SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL, Locale.getDefault()).format(data.getDate());
+	    }
+	    catch(NullPointerException e){
+	    	out += "," + String.valueOf(data.getDate());
+	    }
 		out += "," + data.getCountry();
 		
 		Collection<Events> eventsColl = data.getEvents();

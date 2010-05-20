@@ -20,8 +20,8 @@ public class CalculatorTest {
 	 */
 	@Test
 	public final void testCalcResults() {
-		Calculator calc = new Calculator();
-		assertNotNull(calc);
+		Calculator testObj = new Calculator();
+		assertNotNull(testObj);
 		
 		List<Input.Data> in = new ArrayList<Input.Data>();
 		Input.Data data = new Input.Data();
@@ -35,14 +35,13 @@ public class CalculatorTest {
 		}
 		data.addEvent(Events.RACE_100M, 9.30);
 		in.add(data);
-		List<Output.Data> out = calc.calcResults(in);
+		List<Output.Data> out = testObj.calcResults(in);
 		
-		//System.out.println("aaa" + out.get(0).position);
-		assertTrue(out.get(0).getPosition().equals("1"));
+		assertTrue(out.get(0).getPosition().compareTo("1") == 0);
 		assertTrue(out.get(0).getScore() == 1276);
-		assertTrue(out.get(0).getName() == in.get(0).getName());
-		assertTrue(out.get(0).getDate() == in.get(0).getDate());
-		assertTrue(out.get(0).getCountry() == in.get(0).getCountry());
+		assertTrue(out.get(0).getName().compareTo(in.get(0).getName()) == 0);
+		assertTrue(out.get(0).getDate().compareTo(in.get(0).getDate()) == 0);
+		assertTrue(out.get(0).getCountry().compareTo(in.get(0).getCountry()) == 0);
 		assertTrue(out.get(0).getEventResult(Events.RACE_100M) == in.get(0).getEventResult(Events.RACE_100M));		
 	}
 

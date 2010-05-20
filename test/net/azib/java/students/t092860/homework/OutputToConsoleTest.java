@@ -5,22 +5,22 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * OutputToCSVTest
+ * OutputToConsoleTest
  *
  * @author armin
  */
-public class OutputToCSVTest {
+public class OutputToConsoleTest {
 
 	/**
-	 * Test method for {@link net.azib.java.students.t092860.homework.OutputToCSV#set(java.util.List)}.
+	 * Test method for {@link net.azib.java.students.t092860.homework.OutputToConsole#set(java.util.List)}.
 	 */
 	@Test
 	public final void testSet() {
 		OutputStreamMock outputMock = new OutputStreamMock();
-		OutputToCSV testObj = new OutputToCSV(outputMock);
+		OutputToConsole testObj = new OutputToConsole(outputMock);
 		assertNotNull(testObj);
 		
-		try {
+		try {			
 			testObj.set(AthleteData.GetOutputData());
 		}
 		catch (Exception e) {

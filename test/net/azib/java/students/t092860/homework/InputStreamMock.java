@@ -12,13 +12,18 @@ public class InputStreamMock extends InputStream {
 
 	@Override
 	public int read() throws IOException {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int out = -1;
+		if(!data.isEmpty()){
+			out = (int)data.charAt(0);
+			data = data.substring(1);
+		}
+		return out;
 	}
 
 	public void write(String b){
-		data.append(b);
+		data += b;
 	}
 	
-	private StringBuffer data = new StringBuffer();
+	private String data = "";
 }

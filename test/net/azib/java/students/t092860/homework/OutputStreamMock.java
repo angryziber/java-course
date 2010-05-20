@@ -12,13 +12,12 @@ public class OutputStreamMock extends OutputStream{
 
 	@Override
 	public void write(int b) throws IOException {
-		//System.out.print((char)b);
-		data.append((char)b);
+		data += (char)b;
 	}
 	
 	public String read() {
-		return data.toString();		
+		return String.valueOf(data);		
 	}
 	
-	private StringBuffer data = new StringBuffer();
+	private String data = "";
 }

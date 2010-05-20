@@ -12,7 +12,16 @@ interface Input {
 	/**
 	 * Class used as an input data in Input object.
 	 */
-	public class Data extends Athlete {}
+	public class Data extends Athlete{
+		Data(){}
+		Data(Athlete athlete)
+		{
+			athleteName = athlete.athleteName;
+			athleteBirthdate = athlete.athleteBirthdate;
+			athleteCountry = athlete.athleteCountry;
+			athleteEvents = athlete.athleteEvents;
+		}
+	}
 	
 	/**
 	 * Gets input data from particular input object.
