@@ -17,9 +17,6 @@ import org.antlr.stringtemplate.StringTemplateGroup;
  */
 
 public class Main {
-	public Main() {
-		
-	}
 	/**
 	 * Backbone of the program. Manages input and output.
 	 * @param args
