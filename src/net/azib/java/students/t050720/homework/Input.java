@@ -1,7 +1,5 @@
 package net.azib.java.students.t050720.homework;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -13,9 +11,8 @@ public interface Input {
 
 	/**
 	 * @param records
-	 * @throws FileNotFoundException 
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	void readInto(ArrayList<Record> records) throws FileNotFoundException, IOException;
+	void readInto(ArrayList<Record> records) throws Exception;
 
 }

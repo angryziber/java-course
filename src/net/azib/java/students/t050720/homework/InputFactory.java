@@ -1,6 +1,5 @@
 package net.azib.java.students.t050720.homework;
 
-import java.io.FileNotFoundException;
 
 
 /**

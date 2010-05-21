@@ -25,8 +25,8 @@ public class DecathlonManiac {
 			inputObj.readInto(records);
 		}
 		catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
 		
 		Collections.sort(records);
