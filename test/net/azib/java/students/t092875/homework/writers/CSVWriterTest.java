@@ -30,9 +30,8 @@ public class CSVWriterTest {
 		CSVWriter writer = new CSVWriter("test_write_result.csv");
 		writer.write(athletes);
 		File resultFile = new File("test_write_result.csv");
-		File dataFile = new File("test_write_data.csv");
 		try {
-			assertTrue(IOUtils.contentEquals(new FileInputStream(dataFile), new FileInputStream(resultFile)));
+			assertTrue(IOUtils.contentEquals(this.getClass().getResourceAsStream("test_write_data.csv"), new FileInputStream(resultFile)));
 		}catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}catch (IOException e) {
