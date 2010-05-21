@@ -79,8 +79,9 @@ public class InMySQL {
 			Float temppole_vault = Float.parseFloat(result.getString("pole_vault"));
 			Float tempjevelin_throw = Float.parseFloat(result.getString("javelin_throw"));
 			String temprace = result.getString("race_1500m");
-			Integer tempsum = null;
-			Result result1= new Result(tempname ,tempbirth ,tempcountry ,tempsprint_100 ,templong_jump ,tempshort_put ,temphigh_jump ,tempsprint_400 ,temphurdles ,tempdiscus_throw ,temppole_vault ,tempjevelin_throw ,temprace, tempsum);
+			Integer tempsum = 0;
+			Integer tempplace =0;
+			Result result1= new Result(tempname ,tempbirth ,tempcountry ,tempsprint_100 ,templong_jump ,tempshort_put ,temphigh_jump ,tempsprint_400 ,temphurdles ,tempdiscus_throw ,temppole_vault ,tempjevelin_throw ,temprace, tempsum, tempplace);
 			results.add(result1);
 			
 

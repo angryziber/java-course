@@ -19,7 +19,7 @@ public OutConsole(ArrayList <Object> results) {
 	while (results.size()  > i)   {
 		row=((Result)results.get(i)); 
 		// Print the content on the console
-	    System.out.println (row.name + ", " + row.country + ", " + row.date + ", " + row.sprint_100 + ", " + row.long_jump + ", " + row.short_put + ", " + row.hurdles + ", " + row.discus_throw + ", " + row.pole_vault + ", " + row.jevelin_throw + ", " + row.high_jump + ", " + row.sprint_400 + ", " + row.race + ", " + row.sum);
+	    System.out.println (row.place  + ", " + row.sum + ", " + row.name + ", " + row.country + ", " + row.date + ", " + row.sprint_100 + ", " + row.long_jump + ", " + row.short_put + ", " + row.hurdles + ", " + row.discus_throw + ", " + row.pole_vault + ", " + row.jevelin_throw + ", " + row.high_jump + ", " + row.sprint_400 + ", " + row.race);
 		i++;
 	    }
 }

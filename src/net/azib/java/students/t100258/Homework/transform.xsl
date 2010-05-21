@@ -23,6 +23,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<td>Sprint_400m</td>
 			<td>Race</td>
 			<td>Total</td>
+			<td>Place</td>
 			</tr>
 <xsl:for-each select="Athlete">
 			<tr>
@@ -40,6 +41,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			<td><xsl:copy-of select="Sprint_400m"/></td>
 			<td><xsl:copy-of select="Race"/></td>
 			<td><xsl:copy-of select="Total"/></td>
+			<td><xsl:copy-of select="Place"/></td>
 			</tr>
 </xsl:for-each>
 </table>

@@ -30,7 +30,7 @@ public class OutCsv {
 		while (results.size()  > i)   {
 			row=((Result)results.get(i));
 			
-	    out.write(row.name + ", " + row.country + ", " + row.date + ", " + row.sprint_100 + ", " + row.long_jump + ", " + row.short_put + ", " + row.hurdles + ", " + row.discus_throw + ", " + row.pole_vault + ", " + row.jevelin_throw + ", " + row.high_jump + ", " + row.sprint_400 + ", " + row.race + ", " + row.sum);
+	    out.write(row.place  + ", " + row.sum + ", " + row.name + ", " + row.country + ", " + row.date + ", " + row.sprint_100 + ", " + row.long_jump + ", " + row.short_put + ", " + row.hurdles + ", " + row.discus_throw + ", " + row.pole_vault + ", " + row.jevelin_throw + ", " + row.high_jump + ", " + row.sprint_400 + ", " + row.race);
 	    out.newLine();
 	    i++;
 		

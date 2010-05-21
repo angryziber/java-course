@@ -23,6 +23,7 @@ public class Result {
     public String sprint_400;
     public String race;
     public Integer sum;
+    public Integer place;
 
     
     /**
@@ -43,7 +44,7 @@ public class Result {
     * @param suma total sum of points
     * 
     */
-public Result(String namea, String datea, String countrya, Float sprint_100a, Float long_jumpa, Float short_puta, Float high_jumpa, String sprint_400a, Float hurdlesa, Float discus_throwa, Float pole_vaulta, Float jevelin_throwa,  String racea, int suma) {
+public Result(String namea, String datea, String countrya, Float sprint_100a, Float long_jumpa, Float short_puta, Float high_jumpa, String sprint_400a, Float hurdlesa, Float discus_throwa, Float pole_vaulta, Float jevelin_throwa,  String racea, int suma, int placea) {
 	name=namea;
     country=countrya;
     date=datea;
@@ -58,6 +59,7 @@ public Result(String namea, String datea, String countrya, Float sprint_100a, Fl
     sprint_400=sprint_400a;
     race=racea;
     sum=suma;
+    place=placea;
 
 }
 }

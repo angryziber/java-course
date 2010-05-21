@@ -42,7 +42,7 @@ public class OutXml {
 			out.write("<Athlete>");
 			out.newLine();
 			
-	    out.write("<Name>" +row.name + "</Name><Country>" + row.country + "</Country><Born>" + row.date + "</Born><Sprint_100m>" + row.sprint_100 + "</Sprint_100m><Long_Jump>" + row.long_jump + "</Long_Jump><Short_Put>" + row.short_put + "</Short_Put><Hurdles>" + row.hurdles + "</Hurdles><Discus_Throw>" + row.discus_throw + "</Discus_Throw><Pole_Vault>" + row.pole_vault + "</Pole_Vault><Jevelin_Throw>" + row.jevelin_throw + "</Jevelin_Throw><High_Jump>" + row.high_jump + "</High_Jump><Sprint_400m>" + row.sprint_400 + "</Sprint_400m><Race>" + row.race + "</Race><Total>" + row.sum + "</Total>");
+	    out.write("<Name>" +row.name + "</Name><Country>" + row.country + "</Country><Born>" + row.date + "</Born><Sprint_100m>" + row.sprint_100 + "</Sprint_100m><Long_Jump>" + row.long_jump + "</Long_Jump><Short_Put>" + row.short_put + "</Short_Put><Hurdles>" + row.hurdles + "</Hurdles><Discus_Throw>" + row.discus_throw + "</Discus_Throw><Pole_Vault>" + row.pole_vault + "</Pole_Vault><Jevelin_Throw>" + row.jevelin_throw + "</Jevelin_Throw><High_Jump>" + row.high_jump + "</High_Jump><Sprint_400m>" + row.sprint_400 + "</Sprint_400m><Race>" + row.race + "</Race><Total>" + row.sum + "</Total><Place>" + row.place + "</Place> ");
 	    out.newLine();
 	    out.write("</Athlete>");
 		out.newLine();

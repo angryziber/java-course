@@ -51,7 +51,7 @@ String veel ="Y";
 			System.out.println ("Insert result for 1500m race");
 			String temprace = in.nextLine();
 			Integer tempsum = null;
-			Result result1= new Result(tempname ,tempbirth ,tempcountry ,tempsprint_100 ,templong_jump ,tempshort_put ,temphigh_jump ,tempsprint_400 ,temphurdles ,tempdiscus_throw ,temppole_vault ,tempjevelin_throw ,temprace, tempsum);
+			Result result1= new Result(tempname ,tempbirth ,tempcountry ,tempsprint_100 ,templong_jump ,tempshort_put ,temphigh_jump ,tempsprint_400 ,temphurdles ,tempdiscus_throw ,temppole_vault ,tempjevelin_throw ,temprace, tempsum, tempsum);
 			results.add(result1);
 			System.out.println ("Insert Y to inset more competitors, anything else to end inserting");
 			veel = in.nextLine();
