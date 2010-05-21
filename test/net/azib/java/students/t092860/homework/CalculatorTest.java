@@ -10,16 +10,15 @@ import org.junit.Test;
 
 /**
  * CalculatorTest
- *
- * @author armin
  */
 public class CalculatorTest {
 
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.Calculator#calcResults(java.util.List)}.
+	 * @throws Exception 
 	 */
 	@Test
-	public final void testCalcResults() {
+	public final void testCalcResults() throws Exception {
 		Calculator testObj = new Calculator();
 		assertNotNull(testObj);
 		
@@ -27,12 +26,7 @@ public class CalculatorTest {
 		Input.Data data = new Input.Data();
 		data.setName("name");
 		data.setDate(new Date()); 
-		try {
-			data.setCountry("EE");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		data.setCountry("EE");
 		data.addEvent(Events.RACE_100M, 9.30);
 		in.add(data);
 		List<Output.Data> out = testObj.calcResults(in);

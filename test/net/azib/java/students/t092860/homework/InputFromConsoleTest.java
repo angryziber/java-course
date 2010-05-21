@@ -10,16 +10,15 @@ import org.junit.Test;
 
 /**
  * InputFromConsoleTest
- *
- * @author armin
  */
 public class InputFromConsoleTest {
 
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.InputFromConsole#get()}.
+	 * @throws Exception 
 	 */
 	@Test
-	public final void testGet() {
+	public final void testGet() throws Exception {
 		InputStreamMock inputMock = new InputStreamMock();
 		InputFromConsole testObj = new InputFromConsole(inputMock);
 		assertNotNull(testObj);
@@ -37,27 +36,21 @@ public class InputFromConsoleTest {
 		+","+trackPerf+","+fieldPerf+","+fieldPerf+","+fieldPerf+","+trackPerf;
 		
 		inputMock.write(input);
-
-		try {
-			output = testObj.get();
-			
-			assertTrue(output.get(0).getName().compareTo(name) == 0);
-			assertTrue(output.get(0).getDate().compareTo((new SimpleDateFormat("dd.MM.yyyy")).parse(date)) == 0);
-			assertTrue(output.get(0).getCountry().compareTo(country) == 0);
-			assertTrue(output.get(0).getEventResult(Events.RACE_100M) == Converter.stringToTime(trackPerf));
-			assertTrue(output.get(0).getEventResult(Events.LONG_JUMP) == Double.valueOf(fieldPerf));
-			assertTrue(output.get(0).getEventResult(Events.SHOT_PUT) == Double.valueOf(fieldPerf));
-			assertTrue(output.get(0).getEventResult(Events.HIGH_JUMP) == Double.valueOf(fieldPerf));
-			assertTrue(output.get(0).getEventResult(Events.RACE_400M) == Converter.stringToTime(trackPerf));
-			assertTrue(output.get(0).getEventResult(Events.HURDLES_110M) == Converter.stringToTime(trackPerf));
-			assertTrue(output.get(0).getEventResult(Events.DISCUS_THROW) == Double.valueOf(fieldPerf));
-			assertTrue(output.get(0).getEventResult(Events.POLE_VAULT) == Double.valueOf(fieldPerf));
-			assertTrue(output.get(0).getEventResult(Events.JAVELIN_THROW) == Double.valueOf(fieldPerf));
-			assertTrue(output.get(0).getEventResult(Events.RACE_1500M) == Converter.stringToTime(trackPerf));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		output = testObj.get();
+		
+		assertTrue(output.get(0).getName().compareTo(name) == 0);
+		assertTrue(output.get(0).getDate().compareTo((new SimpleDateFormat("dd.MM.yyyy")).parse(date)) == 0);
+		assertTrue(output.get(0).getCountry().compareTo(country) == 0);
+		assertTrue(output.get(0).getEventResult(Events.RACE_100M) == Converter.stringToTime(trackPerf));
+		assertTrue(output.get(0).getEventResult(Events.LONG_JUMP) == Double.valueOf(fieldPerf));
+		assertTrue(output.get(0).getEventResult(Events.SHOT_PUT) == Double.valueOf(fieldPerf));
+		assertTrue(output.get(0).getEventResult(Events.HIGH_JUMP) == Double.valueOf(fieldPerf));
+		assertTrue(output.get(0).getEventResult(Events.RACE_400M) == Converter.stringToTime(trackPerf));
+		assertTrue(output.get(0).getEventResult(Events.HURDLES_110M) == Converter.stringToTime(trackPerf));
+		assertTrue(output.get(0).getEventResult(Events.DISCUS_THROW) == Double.valueOf(fieldPerf));
+		assertTrue(output.get(0).getEventResult(Events.POLE_VAULT) == Double.valueOf(fieldPerf));
+		assertTrue(output.get(0).getEventResult(Events.JAVELIN_THROW) == Double.valueOf(fieldPerf));
+		assertTrue(output.get(0).getEventResult(Events.RACE_1500M) == Converter.stringToTime(trackPerf));
 	}
 
 }

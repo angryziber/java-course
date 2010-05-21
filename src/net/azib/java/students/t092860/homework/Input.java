@@ -3,30 +3,20 @@ package net.azib.java.students.t092860.homework;
 import java.util.List;
 
 /**
- * Interface to be implemented by different input types
- *
- * @author scythe
+ * Interface class to be implemented in order to retrieve data.
  */
-interface Input {
+public interface Input {
 	
 	/**
-	 * Class used as an input data in Input object.
+	 * Data class used to insert athletes info.
 	 */
-	public class Data extends Athlete{
-		Data(){}
-		Data(Athlete athlete)
-		{
-			athleteName = athlete.athleteName;
-			athleteBirthdate = athlete.athleteBirthdate;
-			athleteCountry = athlete.athleteCountry;
-			athleteEvents = athlete.athleteEvents;
-		}
-	}
+	public class Data extends Athlete{}
 	
 	/**
 	 * Gets input data from particular input object.
 	 * 
-	 * @return      list of input data
+	 * @return  list of input data
+	 * @throws Exception if data cannot be received or incorrect data is received.
 	 */
 	public List<Data> get() throws Exception;
 }

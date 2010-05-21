@@ -11,11 +11,9 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- * Calculator
- *
- * @author scythe
+ * Class to calculate athletes total decathlon scores and set positions
  */
-class Calculator implements Comparator<Output.Data> {
+public class Calculator implements Comparator<Output.Data> {
 
 	private static Logger logger = Logger.getLogger("global");
 	
@@ -23,94 +21,84 @@ class Calculator implements Comparator<Output.Data> {
 	 * Calculates the score and position of an athlete from Input.Data 
 	 * and convert it to Ouput.Data. 
 	 * 
-	 * @param  url  list of Athletes
+	 * @param  inputSet  list of Athletes
 	 * @return      list of extended Athletes
 	 */
-    public List<Output.Data> calcResults(List<Input.Data> inputSet)
-	{
-    	List<Output.Data> outputList = new ArrayList<Output.Data>();
+	public List<Output.Data> calcResults(List<Input.Data> inputSet) {
+		List<Output.Data> outputList = new ArrayList<Output.Data>();
 
-		Iterator<Input.Data> inputIt = inputSet.iterator(); 
-		while(inputIt.hasNext()) 
-		{
+		Iterator<Input.Data> inputIt = inputSet.iterator();
+		while (inputIt.hasNext()) {
 			Output.Data output = new Output.Data(inputIt.next());
 			int score = 0;
-			
+
 			Collection<Events> events = output.getEvents();
 			Iterator<Events> setIt = events.iterator();
-			while(setIt.hasNext()) 
-			{
+			while (setIt.hasNext()) {
 				Events event = setIt.next();
 				Values val = formulaValues.get(event);
 				double P = output.getEventResult(event);
 
-				switch(event)
-				{
-					//JUMPS
-					case LONG_JUMP:      
-					case HIGH_JUMP:
-					case POLE_VAULT: 
-						//INT(A*(P-B)**C) - P = Distance in centimeters
-						score += val.A * Math.pow(P*100 - val.B, val.C);
-						break;
-						
-					//THROWS
-					case SHOT_PUT: 
-					case DISCUS_THROW:  
-					case JAVELIN_THROW:
-						//INT(A*(P-B)**C) - P = Distance in meters
-						score += val.A * Math.pow(P - val.B, val.C);
-						break;
-					
-					//TRACK
-					case RACE_100M:
-					case RACE_400M:  
-					case HURDLES_110M:     	
-					case RACE_1500M:
-						//INT(A*(B-P)**C) - P = Time in seconds
-						score += val.A * Math.pow(val.B - P, val.C);
-						break;
+				switch (event) {
+				// JUMPS
+				case LONG_JUMP:
+				case HIGH_JUMP:
+				case POLE_VAULT:
+					score += val.A * Math.pow(P * 100 - val.B, val.C);
+					break;
+
+				// THROWS
+				case SHOT_PUT:
+				case DISCUS_THROW:
+				case JAVELIN_THROW:
+					score += val.A * Math.pow(P - val.B, val.C);
+					break;
+
+				// TRACK
+				case RACE_100M:
+				case RACE_400M:
+				case HURDLES_110M:
+				case RACE_1500M:
+					score += val.A * Math.pow(val.B - P, val.C);
+					break;
 				}
 			}
-			
+
 			output.setScore(score);
 			outputList.add(output);
-		} 
+		}
 		logger.info("athletes scores calculated");
-		
-		//calculate position
+
 		Collections.sort(outputList, this);
 		logger.info("athletes sorted by score");
-		
-		for (int i = 0; i < outputList.size(); i++)
-		{
+
+		for (int i = 0; i < outputList.size(); i++) {
 			int count = i;
-			while((++count != outputList.size()) && 
-				  (outputList.get(i).getScore() == outputList.get(count).getScore()));
-			
-			for (int j = i; j < count; j++)
-			{
+			while ((++count != outputList.size()) && (outputList.get(i).getScore() == outputList.get(count).getScore()))
+				;
+
+			for (int j = i; j < count; j++) {
 				String pos;
-				pos = String.valueOf(i+1);
-				if (i+1 != count)
-					pos +=  "-" +  String.valueOf(count);
-				
+				pos = String.valueOf(i + 1);
+				if (i + 1 != count)
+					pos += "-" + String.valueOf(count);
+
 				outputList.get(j).setPosition(pos);
 			}
-			i=count-1;
+			i = count - 1;
 		}
 		logger.info("athletes positioned by score");
-		
+
 		return outputList;
 	}
 	
-	public static class Values
-	{
-		Values(double a, double b, double c){ 
+	private static class Values {
+		Values(double a, double b, double c) {
 			A = a;
 			B = b;
 			C = c;
 		}
+
 		public double A;
 		public double B;
 		public double C;
@@ -130,11 +118,15 @@ class Calculator implements Comparator<Output.Data> {
 	        put(Events.RACE_1500M,    new Values( 0.03768 ,480  ,1.85 ));
 	    }});
 
-	public int compare(Output.Data d1, Output.Data d2)
-	{
-		if(d1.getScore() < d2.getScore())
+	/**
+	 * Compare method in order to sort the list of athletes by score.
+	 *
+	 * @return  0 if equal, 1 if d1 < d2, -1 if d1 > d2.
+	 */
+	public int compare(Output.Data d1, Output.Data d2) {
+		if (d1.getScore() < d2.getScore())
 			return 1;
-		else if(d1.getScore() > d2.getScore())
+		else if (d1.getScore() > d2.getScore())
 			return -1;
 		else
 			return 0;

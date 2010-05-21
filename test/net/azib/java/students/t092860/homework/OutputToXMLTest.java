@@ -6,27 +6,20 @@ import org.junit.Test;
 
 /**
  * OutputToXMLTest
- *
- * @author armin
  */
 public class OutputToXMLTest {
 
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.OutputToXML#set(java.util.List)}.
+	 * @throws Exception 
 	 */
 	@Test
-	public final void testSet() {
+	public final void testSet() throws Exception {
 		OutputStreamMock outputMock = new OutputStreamMock();
 		OutputToXML testObj = new OutputToXML(outputMock);
 		assertNotNull(testObj);
-		
-		try {			
-			testObj.set(AthleteData.GetOutputData());
-		}
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+				
+		testObj.set(TestData.GetOutputData());
 		
 		String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+System.getProperty("line.separator")+
 		"<Competition>" +

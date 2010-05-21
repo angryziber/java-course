@@ -5,8 +5,6 @@ import java.io.OutputStream;
 
 /**
  * FileOutputStreamMock
- *
- * @author armin
  */
 public class OutputStreamMock extends OutputStream{
 

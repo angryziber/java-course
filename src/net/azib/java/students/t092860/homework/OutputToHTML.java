@@ -14,35 +14,42 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.stream.StreamResult;
 
 /**
- * OutputToHTML
- *
- * @author scythe
+ * Class to be used to write data to XML file.
  */
-class OutputToHTML extends OutputToXML {
+public class OutputToHTML extends OutputToXML {
 	
 	private static Logger logger = Logger.getLogger("global");
 	
-	OutputToHTML(OutputStream out) throws FileNotFoundException
-	{
+	/**
+	 * Constructor
+	 * 
+	 * @param out a stream to write data to
+	 */
+	OutputToHTML(OutputStream out) throws FileNotFoundException {
 		super();
 		output = out;
 	}
 	
-	public void set(List<Data> dataList) throws Exception
-	{		
+	/**
+	 * Writes list of athletes (with results) to the stream given by the constructor
+	 * 
+	 * @param dataList list of athletes data (with results)
+	 * @throws Exception if data cannot be written.
+	 */
+	public void set(List<Data> dataList) throws Exception {
 		String stringXML = getXML(dataList);
 		InputStream stmXML = new ByteArrayInputStream(stringXML.getBytes("UTF-8"));
 		StreamSource srcXML = new StreamSource(stmXML);
-		
+
 		InputStream streamXSL = this.getClass().getResourceAsStream("template.xsl");
 		StreamSource srcXSL = new StreamSource(streamXSL);
-		
+
 		StreamResult trgtHTML = new StreamResult(output);
-		TransformerFactory tFactory = TransformerFactory.newInstance();	
+		TransformerFactory tFactory = TransformerFactory.newInstance();
 		Transformer transformer = tFactory.newTransformer(srcXSL);
 		transformer.setOutputProperty(OutputKeys.METHOD, "html");
 		transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
-		
+
 		transformer.transform(srcXML, trgtHTML);
 
 		logger.info("Output to HTML file success");

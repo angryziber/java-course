@@ -6,38 +6,43 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * OutputToConsole
- *
- * @author scythe
+ * Class to be used to write data to the console.
  */
-class OutputToConsole implements Output {
+public class OutputToConsole implements Output {
 	
 	private static Logger logger = Logger.getLogger("global");
 	
-	OutputToConsole(OutputStream out)
-	{
+	/**
+	 * Constructor
+	 * 
+	 * @param out a stream to write data to
+	 */
+	OutputToConsole(OutputStream out) {
 		output = out;
 	}
 	
-	public void set(List<Data> dataList) throws Exception
-	{
-		Iterator<Data> it = dataList.iterator(); 
-		while(it.hasNext()) 
-		{	
+	/**
+	 * Writes list of athletes (with results) to the stream given by the constructor
+	 * 
+	 * @param dataList list of athletes data (with results)
+	 * @throws Exception if data cannot be written.
+	 */
+	public void set(List<Data> dataList) throws Exception {
+		Iterator<Data> it = dataList.iterator();
+		while (it.hasNext()) {
 			String line = dataToString(it.next()) + System.getProperty("line.separator");
 			output.write(line.getBytes("UTF-8"));
-		} 
+		}
 		logger.info("Output to console success");
 	}
 	
-	private String dataToString(Data data)
-	{
+	private String dataToString(Data data) {
 		String out = "";
-		
+
 		out += data.getPosition();
 		out += "," + data.getScore();
 		out += "," + Converter.athleteToString(data);
-		
+
 		return out;
 	}
 	

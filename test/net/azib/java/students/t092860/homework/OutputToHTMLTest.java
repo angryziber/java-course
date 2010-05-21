@@ -6,28 +6,21 @@ import org.junit.Test;
 
 /**
  * OutputToHTMLTest
- *
- * @author armin
  */
 public class OutputToHTMLTest {
 
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.OutputToHTML#set(java.util.List)}.
+	 * @throws Exception 
 	 */
 	@Test
-	public final void testSet() {
+	public final void testSet() throws Exception {
 		OutputStreamMock outputMock = new OutputStreamMock();
 		OutputToHTML testObj = null;
 		
-		try {
-			testObj = new OutputToHTML(outputMock);
-			assertNotNull(testObj);
-			testObj.set(AthleteData.GetOutputData());
-		}
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+		testObj = new OutputToHTML(outputMock);
+		assertNotNull(testObj);
+		testObj.set(TestData.GetOutputData());
 		
 		String expected = "<html><body><h2>Decathlon competition</h2>" +
 				"<table border=\"1\"><tr bgcolor=\"#9acd32\"><th>Position</th>" +

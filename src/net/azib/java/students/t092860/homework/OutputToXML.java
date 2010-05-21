@@ -13,87 +13,94 @@ import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
 
 /**
- * OutputToXML
- *
- * @author scythe
+ * Class to be used to write data to HTML file.
  */
-class OutputToXML implements Output {
+public class OutputToXML implements Output {
 
 	private static Logger logger = Logger.getLogger("global");
 	
+	/**
+	 * Default constructor
+	 */
 	OutputToXML(){}
 	
-	OutputToXML(OutputStream out)
-	{
+	/**
+	 * Constructor
+	 * 
+	 * @param out a stream to write data to
+	 */
+	OutputToXML(OutputStream out) {
 		output = out;
 	}
 	
-	public void set(List<Data> dataList) throws Exception
-	{
-	    XMLOutputter outputter = new XMLOutputter();
-		outputter.output(generateXML(dataList), output);	
+	/**
+	 * Writes list of athletes (with results) to the stream given by the constructor
+	 * 
+	 * @param dataList list of athletes data (with results)
+	 * @throws Exception if data cannot be written.
+	 */
+	public void set(List<Data> dataList) throws Exception {
+		XMLOutputter outputter = new XMLOutputter();
+		outputter.output(generateXML(dataList), output);
 	}
-	
-	public String getXML(List<Data> dataList) throws Exception
-	{
+
+	protected String getXML(List<Data> dataList) throws Exception {
 		XMLOutputter outputter = new XMLOutputter();
 		return outputter.outputString(generateXML(dataList));
 	}
-	
-	private Document generateXML(List<Data> dataList) throws Exception
-	{
+
+	private Document generateXML(List<Data> dataList) throws Exception {
 		logger.info("Generate XML");
 
-    	Element competition = new Element("Competition");
-    	Document doc = new Document(competition);
-    	
-    	Iterator<Data> it = dataList.iterator(); 
-		while(it.hasNext()) 
-		{
-			Data data = it.next();
-			
-		    Element athlete = new Element("Athlete");
-		    
-		    Element pos = new Element("Position");
-		    pos.addContent(data.getPosition());
-		    athlete.addContent(pos);
-		    
-		    Element score = new Element("Score");
-		    score.addContent(String.valueOf(data.getScore()));
-		    athlete.addContent(score);
-		    
-		    Element name = new Element("Name");
-		    name.addContent(data.getName());
-		    athlete.addContent(name);
-		    
-		    Element birthdate = new Element("Birthdate");
-		    try{
-		    	birthdate.addContent(SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL, Locale.getDefault()).format(data.getDate()));
-		    }
-		    catch(NullPointerException e){
-		    	birthdate.addContent(String.valueOf(data.getDate()));
-		    }
-		    athlete.addContent(birthdate);
+		Element competition = new Element("Competition");
+		Document doc = new Document(competition);
 
-		    Element country = new Element("Country");
-		    country.addContent(data.getCountry());
-		    athlete.addContent(country);
-		    
-		    Element events = new Element("Events");
-		    
-		    Collection<Events> eventColl = data.getEvents();
-		    for (Events e : eventColl) 
-		    {
-		        Element event = new Element(String.valueOf(e));
-		        event.addContent(String.valueOf(data.getEventResult(e)));
-		        events.addContent(event);
-		    }
-		    
-		    athlete.addContent(events);
-		    competition.addContent(athlete);		    
+		Iterator<Data> it = dataList.iterator();
+		while (it.hasNext()) {
+			Data data = it.next();
+
+			Element athlete = new Element("Athlete");
+
+			Element pos = new Element("Position");
+			pos.addContent(data.getPosition());
+			athlete.addContent(pos);
+
+			Element score = new Element("Score");
+			score.addContent(String.valueOf(data.getScore()));
+			athlete.addContent(score);
+
+			Element name = new Element("Name");
+			name.addContent(data.getName());
+			athlete.addContent(name);
+
+			Element birthdate = new Element("Birthdate");
+			try {
+				birthdate.addContent(SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL, Locale.getDefault()).format(
+						data.getDate()));
+			}
+			catch (NullPointerException e) {
+				birthdate.addContent(String.valueOf(data.getDate()));
+			}
+			athlete.addContent(birthdate);
+
+			Element country = new Element("Country");
+			country.addContent(data.getCountry());
+			athlete.addContent(country);
+
+			Element events = new Element("Events");
+
+			Collection<Events> eventColl = data.getEvents();
+			for (Events e : eventColl) {
+				Element event = new Element(String.valueOf(e));
+				event.addContent(String.valueOf(data.getEventResult(e)));
+				events.addContent(event);
+			}
+
+			athlete.addContent(events);
+			competition.addContent(athlete);
 		}
 		logger.info("XML created successfully");
-		
+
 		return doc;
 	}
 	

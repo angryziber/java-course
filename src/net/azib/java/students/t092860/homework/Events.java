@@ -2,9 +2,8 @@ package net.azib.java.students.t092860.homework;
 
 /**
  * List of events performed by an athlete.
- *
  */
-enum Events {
+public enum Events {
 	RACE_100M,
 	LONG_JUMP,   
 	SHOT_PUT,     

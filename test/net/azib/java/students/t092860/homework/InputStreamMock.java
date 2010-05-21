@@ -5,8 +5,6 @@ import java.io.InputStream;
 
 /**
  * InputStreamMock
- *
- * @author armin
  */
 public class InputStreamMock extends InputStream {
 

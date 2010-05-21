@@ -8,14 +8,9 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Returns an Image object that can then be painted on the screen.  
- *
- * @param  url  an absolute URL giving the base location of the image
- * @param  name the location of the image, relative to the url argument
- * @return      the image at the specified URL
- * @exception
+ * Class containing athlete info
  */
-class Athlete {
+public class Athlete {
 	
 	/**
 	 * Sets the name of this athlete. 
@@ -39,6 +34,7 @@ class Athlete {
 	 * Sets the country of this athlete. 
 	 *
 	 * @param  country  athletes country
+	 * @throws Exception if input data is invalid
 	 */
 	public void setCountry(String country) throws Exception{
 	    String c[] = Locale.getISOCountries();
@@ -52,7 +48,7 @@ class Athlete {
 	 * Adds an event to this athlete. 
 	 *
 	 * @param  event  athletes event from Events enum
-	 * @param  event  athletes performance
+	 * @param  performance  athletes performance
 	 */
 	public void addEvent(Events event, Double performance){
 		if(athleteEvents == null)

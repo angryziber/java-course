@@ -6,10 +6,8 @@ import java.util.List;
 
 /**
  * AthleteData
- *
- * @author armin
  */
-public class AthleteData {
+public class TestData {
 
 	public static List<Output.Data> GetOutputData(){
 		List<Output.Data> dataList = new ArrayList<Output.Data>();
@@ -20,15 +18,15 @@ public class AthleteData {
 		return dataList;
 	}
 	
-	private static Athlete GetAthlete(){
+	public static Athlete GetAthlete(){
 		Athlete athlete = new Athlete();
 		
 		String trackPerf = "1:30";
 		String fieldPerf = "20.45";
-		
+
 		try {
 			athlete.setName("Name");
-			athlete.setDate(new SimpleDateFormat("yyyy/MM/dd").parse("2000/10/20"));	
+			athlete.setDate(new SimpleDateFormat("yyyy/MM/dd").parse("2000/10/20"));
 			athlete.setCountry("EE");
 			athlete.addEvent(Events.RACE_100M, Converter.stringToTime(trackPerf));
 			athlete.addEvent(Events.LONG_JUMP, Double.valueOf(fieldPerf));
@@ -44,7 +42,7 @@ public class AthleteData {
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		return athlete;
 	}
 }
