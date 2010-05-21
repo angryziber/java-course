@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="athletes" type="athletes" />
+
+	<xs:complexType name="athletes">
+		<xs:sequence>
+			<xs:element name="athlete" type="athleteType" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="athleteType">
+		<xs:sequence>
+			<xs:element name="place" type="xs:integer" />
+			<xs:element name="points" type="xs:decimal" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="country" type="countryCode" />
+			<xs:element name="dateOfBirth" type="xs:string" />
+			<xs:element name="results" type="resultsType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="resultsType">
+		<xs:sequence>
+			<xs:element name="result" type="xs:decimal" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="countryCode">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{2}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>
