@@ -1,6 +1,9 @@
 package net.azib.java.students.t050720.homework;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 /**
  * DatabaseInput
@@ -9,9 +12,15 @@ import java.util.ArrayList;
  */
 public class DatabaseInput implements Input {
 	
-	public DatabaseInput(String params)
+	private Properties dbProps;
+	
+	public DatabaseInput(String params) throws Exception
 	{
 		//
+		dbProps = new Properties();
+		FileInputStream in = new FileInputStream("src/net/azib/java/students/t050720/homework/db.properties");
+		dbProps.load(in);
+		in.close();
 	}
 /*
  * SELECT * 
@@ -30,7 +39,7 @@ WHERE competitions.name = 'Training';
 	
 	void connect() throws SQLException
 	{
-		dbConn = DriverManager.getConnection("jdbc:mysql://java.azib.net:3306/decathlon","java","java");
+		dbConn = DriverManager.getConnection(dbProps.getProperty("dburi"),dbProps.getProperty("dbuser"),dbProps.getProperty("dbpassword"));
 		st = dbConn.createStatement();
 //		ResultSet rs = st.executeQuery("SELECT * FROM results");
 		ResultSet rs = st.executeQuery("SELECT * FROM results INNER JOIN athletes ON results.athlete_id = athletes.id WHERE competition_id =2;"
@@ -45,13 +54,14 @@ WHERE competitions.name = 'Training';
 	{
 		return 0;
 	}
+	
 	public static void main(String[] args)
 	{
-		DatabaseInput t = new DatabaseInput("");
 		try {
+		DatabaseInput t = new DatabaseInput("");
 			t.connect();
 		}
-		catch (SQLException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

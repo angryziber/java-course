@@ -1,5 +1,7 @@
 package net.azib.java.students.t050720.homework;
 
+import java.util.ArrayList;
+
 /**
  * HTMLOutput
  *
@@ -15,9 +17,11 @@ public class HTMLOutput implements Output {
 	}
 
 	@Override
-	public void flush() {
+	public void flush(ArrayList<Record> records) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

@@ -1,5 +1,7 @@
 package net.azib.java.students.t050720.homework;
 
+import java.io.FileNotFoundException;
+
 
 /**
  * InputFactory
@@ -8,17 +10,17 @@ package net.azib.java.students.t050720.homework;
  */
 public class InputFactory {
 	
-	public Input getInputPlugin(String type, String parameters)
+	public Input getInputPlugin(String type, String parameters) throws Exception
 	{
-		if(type.equals("console"))
+		if(type.equals("-console"))
 		{
 			return new ConsoleInput();
 		}
-		else if(type.equals("csv"))
+		else if(type.equals("-csv"))
 		{
 			return new CSVInput(parameters);
 		}
-		else if(type.equals("db" ))
+		else if(type.equals("-db" ))
 		{
 			return new DatabaseInput(parameters);
 		}

@@ -1,5 +1,7 @@
 package net.azib.java.students.t050720.homework;
 
+import java.util.ArrayList;
+
 /**
  * Output
  *
@@ -8,8 +10,10 @@ package net.azib.java.students.t050720.homework;
 public interface Output {
 
 	/**
+	 * @param records 
+	 * @throws Exception 
 	 * 
 	 */
-	void flush();
+	void flush(ArrayList<Record> records) throws Exception;
 
 }

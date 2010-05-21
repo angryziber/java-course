@@ -6,21 +6,21 @@ package net.azib.java.students.t050720.homework;
  * @author Marek
  */
 public class Record implements Comparable<Record>{
-	int score=0;
-	String athlete;
-	String birthDate;
-	String country;
-	float race_100m;
-	float long_jump;
-	float shot_put;
-	float high_jump;
-	float race_400m;
-	float hurdles_110m;
-	float discus_throw;
-	float pole_vault;
-	float javelin_throw;
-	float race_1500m;
-	boolean scoreCalculated=false;
+	private int score=0;
+	private String athlete;
+	private String birthDate;
+	private String country;
+	private float race_100m;
+	private float long_jump;
+	private float shot_put;
+	private float high_jump;
+	private float race_400m;
+	private float hurdles_110m;
+	private float discus_throw;
+	private float pole_vault;
+	private float javelin_throw;
+	private float race_1500m;
+	private boolean scoreCalculated=false;
 	/**
 	 * @return the score
 	 */
@@ -239,8 +239,8 @@ private	void calculateScore()
 public int compareTo(Record o) {
 	int myScore=this.getScore();
 	int otherScore=o.getScore();
-	if(myScore > otherScore) return 1;
-	else if(myScore < otherScore) return -1;
+	if(myScore < otherScore) return 1;
+	else if(myScore > otherScore) return -1; //inverted comparator, because we want descending scores, not ascending
 	else if(myScore == otherScore) return 0;
 	else return 0;
 }

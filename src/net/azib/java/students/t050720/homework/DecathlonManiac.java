@@ -10,8 +10,9 @@ import java.util.Collections;
  */
 public class DecathlonManiac {
 
-	public static void Main(String [] args)
+	public static void main(String [] args) throws Exception
 	{
+		//System.out.println("current wdir:" + System.getProperty("user.dir"));
 		InputFactory inputHandler = new InputFactory();
 		
 		ArgumentsParser commander= new ArgumentsParser(args);
@@ -20,14 +21,19 @@ public class DecathlonManiac {
 		
 		ArrayList<Record> records = new ArrayList<Record>();
 		
-		inputObj.readInto(records);
+		try {
+			inputObj.readInto(records);
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Collections.sort(records);
 		
 		OutputFactory outputHandler = new OutputFactory();
 		Output outputObj = outputHandler.getOutputPlugin(commander.outputType(), commander.outputParams());
 		
-		outputObj.flush();
-		
+		outputObj.flush(records);
 	}
 }
