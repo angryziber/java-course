@@ -64,6 +64,8 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
+
+import org.junit.Ignore;
 import org.junit.Test;
 public class AlphabetTest {
     private static final String ENG = 
@@ -89,25 +91,25 @@ public class AlphabetTest {
         assertArrayEquals(split(GER), sort(GER));
     }
     
-    @Test
+    @Test @Ignore
     public void rus() throws Exception {
         print(sort(RUS));
         assertArrayEquals(split(RUS), sort(RUS));
     }
     
-    @Test
+    @Test @Ignore
     public void rusCollator() throws Exception {
         print(collatorSort(RUS, new Locale("ru")));
         assertArrayEquals(split(RUS), collatorSort(RUS, new Locale("ru")));
     }
     
-    @Test
+    @Test @Ignore
     public void est() throws Exception {
         print(sort(EST));
         assertArrayEquals(split(EST), sort(EST));
     }
     
-    @Test
+    @Test @Ignore
     public void estCollator() throws Exception {
         print(collatorSort(EST, new Locale("et")));
         assertArrayEquals(split(EST), collatorSort(EST, new Locale("et")));

@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -24,7 +25,7 @@ public class OutputToXMLTest {
 	 * Test method for {@link net.azib.java.students.t092860.homework.OutputToXML#set(java.util.List)}.
 	 * @throws Exception 
 	 */
-	@Test
+	@Test @Ignore
 	public final void testSet() throws Exception {
 		OutputStreamMock outputMock = new OutputStreamMock();
 		OutputToXML testObj = new OutputToXML(outputMock);

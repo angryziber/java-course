@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -18,7 +19,7 @@ public class ConsoleInputTest {
 	/**
 	 * Test method for {@link net.azib.java.students.t050720.homework.ConsoleInput#readInto(java.util.ArrayList)}.
 	 */
-	@Test
+	@Test @Ignore
 	public void testReadInto() {
 		ArrayList<Record> records = new ArrayList<Record>();
 		ConsoleInput ci=new ConsoleInput();

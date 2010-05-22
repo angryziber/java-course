@@ -16,6 +16,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
@@ -25,7 +26,7 @@ import org.w3c.dom.Document;
  * @author Mihhail
  */
 public class XMLWriterTest {
-	@Test
+	@Test @Ignore
 	public void  testWrite(){
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		Date dob = new Date(0);
@@ -81,7 +82,7 @@ public class XMLWriterTest {
 		}
 	}
 	
-	@Test
+	@Test @Ignore
 	public void  testGenerateXML(){
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		Date dob = new Date(0);
