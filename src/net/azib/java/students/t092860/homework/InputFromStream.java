@@ -25,7 +25,7 @@ public class InputFromStream implements Input {
 	}
 	
 	/**
-	 * Gets data from the stream provided by constructor
+	 * Gets data from the stream provided by the constructor
 	 * 
 	 * @return list of athletes data
 	 * @throws Exception if incorrect data is received.

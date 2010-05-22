@@ -28,6 +28,10 @@ public enum Events {
 			this.units = Units.SECONDS;
     }
 
+	/**
+	 * Gets type of units used by this event.
+	 * @return type of units
+	 */
     public Units getUnits() { 
     	return units; 
     }
