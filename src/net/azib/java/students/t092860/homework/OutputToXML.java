@@ -13,7 +13,7 @@ import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
 
 /**
- * Class to be used to write data to HTML file.
+ * Class to write data to XML file.
  */
 public class OutputToXML implements Output {
 

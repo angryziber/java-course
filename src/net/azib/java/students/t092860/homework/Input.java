@@ -8,12 +8,12 @@ import java.util.List;
 public interface Input {
 	
 	/**
-	 * Data class used to insert athletes info.
+	 * Data class used to hold athletes info.
 	 */
 	public class Data extends Athlete{}
 	
 	/**
-	 * Gets input data from particular input object.
+	 * Gets input data.
 	 * 
 	 * @return  list of input data
 	 * @throws Exception if data cannot be received or incorrect data is received.

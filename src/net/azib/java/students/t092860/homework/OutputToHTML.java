@@ -14,7 +14,7 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.stream.StreamResult;
 
 /**
- * Class to be used to write data to XML file.
+ * Class to write data to HTML file.
  */
 public class OutputToHTML extends OutputToXML {
 	

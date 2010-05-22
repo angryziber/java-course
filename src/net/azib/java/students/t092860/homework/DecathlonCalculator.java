@@ -18,10 +18,10 @@ public class DecathlonCalculator {
 
 		if (args.length >= 2 && args[0].equals("-console")) {
 			input_method = args[0];
-			if (args.length == 2 && args[1].equals("-console")) {
+			if (args.length >= 2 && args[1].equals("-console")) {
 				output_method = args[1];
 			}
-			else if (args.length == 3 && (args[1].equals("-csv") || args[1].equals("-xml") || args[1].equals("-html"))) {
+			else if (args.length >= 3 && (args[1].equals("-csv") || args[1].equals("-xml") || args[1].equals("-html"))) {
 				output_method = args[1];
 				output_parameter = args[2];
 			}
@@ -34,7 +34,7 @@ public class DecathlonCalculator {
 			if (args.length == 3 && args[2].equals("-console")) {
 				output_method = args[2];
 			}
-			else if (args.length == 4 && (args[2].equals("-csv") || args[2].equals("-xml") || args[2].equals("-html"))) {
+			else if (args.length >= 4 && (args[2].equals("-csv") || args[2].equals("-xml") || args[2].equals("-html"))) {
 				output_method = args[2];
 				output_parameter = args[3];
 			}
@@ -104,8 +104,7 @@ public class DecathlonCalculator {
 		catch (Exception e) {
 			System.out.print(e.getMessage() + "\n");
 		}
-
-		System.out.print("Exit success");
+		System.out.println("seee\n");
 	}
 	
 	private static String input_method;

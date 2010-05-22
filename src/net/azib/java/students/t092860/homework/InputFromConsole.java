@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 /**
- * Class to be used to read data from the console.
+ * Class to read data from the console.
  */
 public class InputFromConsole implements Input {
 
@@ -37,8 +37,9 @@ public class InputFromConsole implements Input {
 			Scanner scanner = new Scanner(input, "UTF-8");
 
 			try {
-				while (scanner.hasNextLine()) {
-					dataSet.add(parse(scanner.nextLine()));
+				String input = "";
+				while (scanner.hasNextLine() && !(input = scanner.nextLine()).isEmpty()) {
+					dataSet.add(parse(input));
 				}
 			}
 			finally {

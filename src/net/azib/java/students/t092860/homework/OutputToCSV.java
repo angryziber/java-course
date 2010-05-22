@@ -3,7 +3,7 @@ package net.azib.java.students.t092860.homework;
 import java.io.OutputStream;
 
 /**
- * Class to be used to write data to comma separated file.
+ * Class to write data to comma separated file.
  */
 public class OutputToCSV extends OutputToConsole {
 	

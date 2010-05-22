@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Class to be used to write data to the console.
+ * Class to write data to the console.
  */
 public class OutputToConsole implements Output {
 	
@@ -36,7 +36,7 @@ public class OutputToConsole implements Output {
 		logger.info("Output to console success");
 	}
 	
-	private String dataToString(Data data) {
+	private String dataToString(Data data) throws Exception {
 		String out = "";
 
 		out += data.getPosition();

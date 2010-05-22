@@ -10,7 +10,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 /**
- * Class to be used to read data from database.
+ * Class to read data from database.
  */
 public class InputFromDB implements Input {
 

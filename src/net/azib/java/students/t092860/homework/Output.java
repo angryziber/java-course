@@ -8,7 +8,7 @@ import java.util.List;
 public interface Output{
 	
 	/**
-	 * Data class used to insert athletes info.
+	 * Data class used to hold athletes info.
 	 */
 	public class Data extends Athlete {
 		
@@ -70,7 +70,7 @@ public interface Output{
 	
 	
 	/**
-	 * Sets output data of particular input object.
+	 * Sets output data.
 	 * 
 	 * @param dataSet list of output data
 	 * @throws Exception if data cannot be written.

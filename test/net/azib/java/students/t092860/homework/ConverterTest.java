@@ -52,9 +52,10 @@ public class ConverterTest {
 
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.Converter#athleteToString(net.azib.java.students.t092860.homework.Athlete)}.
+	 * @throws Exception 
 	 */
 	@Test
-	public final void testAthleteToString() {
+	public final void testAthleteToString() throws Exception {
 		Athlete athlete = TestData.GetAthlete();		
 		String result = Converter.athleteToString(athlete);		
 		String expected = "Name,reede, 20. Oktoober 2000,EE,90.0,20.45,20.45,20.45,90.0,90.0,20.45,20.45,20.45,90.0";

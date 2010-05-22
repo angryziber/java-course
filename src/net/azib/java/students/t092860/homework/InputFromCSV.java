@@ -3,7 +3,7 @@ package net.azib.java.students.t092860.homework;
 import java.io.InputStream;
 
 /**
- * Class to be used to read data from comma separated file.
+ * Class to read data from comma separated file.
  */
 public class InputFromCSV extends InputFromConsole {
 
