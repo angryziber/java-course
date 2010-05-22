@@ -12,7 +12,6 @@ public class DecathlonManiac {
 
 	public static void main(String [] args) throws Exception
 	{
-		//System.out.println("current wdir:" + System.getProperty("user.dir"));
 		InputFactory inputHandler = new InputFactory();
 		
 		ArgumentsParser commander= new ArgumentsParser(args);

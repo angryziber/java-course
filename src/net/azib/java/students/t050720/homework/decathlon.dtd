@@ -1,0 +1,10 @@
+<!ELEMENT competition (result+)>
+<!ELEMENT result (pos,score,athlete,dob,country,event+)>
+<!ELEMENT event (name,performance)>
+<!ELEMENT pos (#PCDATA)>
+<!ELEMENT score (#PCDATA)>
+<!ELEMENT athlete (#PCDATA)>
+<!ELEMENT dob (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT performance (#PCDATA)>
