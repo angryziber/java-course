@@ -2,6 +2,8 @@ package net.azib.java.students.t050720.homework;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 /**
@@ -16,7 +18,17 @@ public class ConsoleInputTest {
 	 */
 	@Test
 	public void testReadInto() {
-		fail("Not yet implemented");
+		ArrayList<Record> records = new ArrayList<Record>();
+		ConsoleInput ci=new ConsoleInput();
+		try {
+			ci.readInto(records);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Exception thrown!");
+		}
+		
+		assertEquals(false, records.isEmpty());
 	}
 
 }

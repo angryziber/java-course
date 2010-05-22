@@ -235,6 +235,7 @@ private	void calculateScore()
 	tmpScore+= getRace_1500m() >0 ? (int) (0.03768 * Math.pow(480 - getRace_1500m(), 	1.85)) : 0;
 	score=tmpScore;
 	}
+
 @Override
 public int compareTo(Record o) {
 	int myScore=this.getScore();

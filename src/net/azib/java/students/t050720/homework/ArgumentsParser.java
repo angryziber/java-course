@@ -17,14 +17,16 @@ public class ArgumentsParser {
 	 * @param args
 	 */
 	public ArgumentsParser(String[] args) {
-		if(args.length==0) return;
-		iType=args[0];
+		if(args.length<2) return;
+		for(String t:args) if(t==null) return;
+		iType=args[0].isEmpty() ? "-console":args[0];
 		int oTypeIndex=2;
 		if(iType.contentEquals("-console")) oTypeIndex=1;
 		else iParam=args[1];
 		
-		oType=args[oTypeIndex];
-		if(oType.contentEquals("-console")) return;
+		if(args.length<oTypeIndex+1) return;
+		oType=args[oTypeIndex].isEmpty() ? "-console" : args[oTypeIndex];
+		if(oType.contentEquals("-console") || args.length<oTypeIndex+2) return;
 		else oParam=args[oTypeIndex+1];
 	}
 

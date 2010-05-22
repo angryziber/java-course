@@ -30,7 +30,6 @@ public class RecordTest {
 		r.setRace_400m((float) 45.68);
 		r.setRace_1500m((float) 238.70);
 		r.setShot_put((float) 19.17);
-		System.out.println(r.getScore());
 		assertEquals(10485, r.getScore());
 	}
 
@@ -48,7 +47,44 @@ public class RecordTest {
 		record.setRace_1500m(0);
 		record.setRace_400m(0);
 		record.setShot_put(0);
-		System.out.println(record.getScore());
 		assertEquals(0, record.getScore());
+	}
+	
+	@Test
+	public void testNan()
+	{
+		Record record=new Record();
+		record.setAthlete("ää&&\"\\");
+		record.setDiscus_throw(Float.NaN);
+		record.setHigh_jump(Float.NaN);
+		record.setRace_100m(Float.NaN);
+		record.setRace_1500m(Float.NaN);
+		record.setRace_400m(Float.NaN);
+		record.setHigh_jump(Float.NaN);
+		record.setHurdles_110m(Float.NaN);
+		record.setPole_vault(Float.NaN);
+		record.setLong_jump(Float.NaN);
+		record.setJavelin_throw(Float.NaN);
+
+		assertEquals(0,record.getScore());
+	}
+	
+	@Test
+	public void testInfinity()
+	{
+		Record record=new Record();
+		record.setAthlete("ää&&\"\\");
+		record.setDiscus_throw(Float.NEGATIVE_INFINITY);
+		record.setHigh_jump(Float.NEGATIVE_INFINITY);
+		record.setRace_100m(Float.NEGATIVE_INFINITY);
+		record.setRace_1500m(Float.NEGATIVE_INFINITY);
+		record.setRace_400m(Float.NEGATIVE_INFINITY);
+		record.setHigh_jump(Float.NEGATIVE_INFINITY);
+		record.setHurdles_110m(Float.NEGATIVE_INFINITY);
+		record.setPole_vault(Float.NEGATIVE_INFINITY);
+		record.setLong_jump(Float.NEGATIVE_INFINITY);
+		record.setJavelin_throw(Float.NEGATIVE_INFINITY);
+
+		assertEquals(0,record.getScore());
 	}
 }
