@@ -1,5 +1,6 @@
 package net.azib.java.students.t050720.homework;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -37,7 +38,7 @@ public class DatabaseInput implements Input {
 	public DatabaseInput(String params) throws Exception
 	{
 		dbProps = new Properties();
-		FileInputStream in = new FileInputStream("src/net/azib/java/students/t050720/homework/db.properties");
+		InputStream in = getClass().getResourceAsStream("db.properties");// fixed: new FileInputStream("src/net/azib/java/students/t050720/homework/db.properties");
 		dbProps.load(in);
 		in.close();
 		
