@@ -4,7 +4,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.ListIterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,7 +36,7 @@ public class XMLOutput implements Output {
 
 	@Override
 	public void flush(ArrayList<Record> records) throws Exception {
-		Iterator<Record> iterator=records.iterator();
+		ListIterator<Record> iterator=records.listIterator();
 		
 		
 		DocumentBuilderFactory docBuildFactory = DocumentBuilderFactory.newInstance();
@@ -47,8 +47,6 @@ public class XMLOutput implements Output {
 		xml.appendChild(rootElement);
 		
 		int position=1;
-		int lastPos=1;
-		int lastScore=0;
 		while (iterator.hasNext())
 		{
 			DecimalFormat df= new DecimalFormat("0.00");
@@ -74,13 +72,106 @@ public class XMLOutput implements Output {
 
 			Element e_res = xml.createElement("result");
 
-			if(lastScore!=current.getScore()) 
+			String displayedPosition;
+			displayedPosition=String.valueOf(position);
+			boolean hN=iterator.hasNext();
+			iterator.previous();
+			boolean hP=iterator.hasPrevious();
+			iterator.next();
+			if(!hN & !hP)
 			{
-				lastPos=position;
-				lastScore=current.getScore();
+				displayedPosition=String.valueOf(position);
 			}
+			else
+			{
+				Record peekF=iterator.hasNext() ? iterator.next() : null;
+				if(peekF!=null) 
+				{
+					iterator.previous();
+				}
+				iterator.previous();
+				Record peekB=iterator.hasPrevious() ? iterator.previous() : null;
+				if(peekB!=null) 
+				{
+					iterator.next();
+				}
+				iterator.next();
+				
+				int scoreF= peekF==null ? -1 : peekF.getScore();
+				int scoreB= peekB==null ? -1 : peekB.getScore() ;
+				if(current.getScore() != scoreF && current.getScore() != scoreB) 
+				{
+					displayedPosition=String.valueOf(position);
+				}
+				else
+				{
+					int stepsBack=1;
+					int stepsForward=0;
+					int startOfTie=-1;
+					int endOfTie=-1;
+
+					if(peekB==null)
+					{
+						startOfTie=position;
+						stepsBack=0;
+					}
+					else 
+					{
+						iterator.previous();
+					}
+
+					while (startOfTie==-1)
+					{
+						if(!iterator.hasPrevious())
+						{
+							startOfTie=position-stepsBack+1;
+							break;
+						}
+						else {
+							Record prevEl=iterator.previous();
+							stepsBack++;
+							if(prevEl.getScore()!=current.getScore())
+							{
+								startOfTie=position-stepsBack+2;
+								break;
+							}
+						}
+					}
+
+					while(stepsBack-- > 0) iterator.next(); //rewind iterator
+
+					if(peekF==null)
+					{
+						endOfTie=position;
+					}
+					
+					while(endOfTie==-1)
+					{
+						if(!iterator.hasNext())
+						{
+							endOfTie=position+stepsForward;
+							break;
+						}
+						else 
+						{
+							Record nextEl=iterator.next();
+
+							stepsForward++;
+							if(nextEl.getScore()!=current.getScore())
+							{
+								endOfTie=position+stepsForward-1;
+								break;
+							}
+						}
+					}
+
+					while(stepsForward-- >0) iterator.previous(); //rewind iterator
+					displayedPosition=String.valueOf(startOfTie)+"-"+String.valueOf(endOfTie);
+				}
+			}
+
 			Element e_pos = xml.createElement("pos");
-			e_pos.appendChild(xml.createTextNode(String.valueOf(lastPos)));
+			e_pos.appendChild(xml.createTextNode(displayedPosition));
 			e_res.appendChild(e_pos);
 			
 			Element e_sc = xml.createElement("score");

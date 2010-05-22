@@ -35,6 +35,11 @@ public class CSVInput implements Input {
 		if(suspect.intValue()==0xFEFF) tmp=tmp.substring(1); //strip BOM if present
 		while (tmp != null)
 		{
+			if(tmp.trim().isEmpty()) 
+			{
+				tmp=reader.readLine();
+				continue;
+			}
 			String[] items=tmp.split(",");
 			
 			Record record=new Record();

@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
  * CSVOutput
@@ -27,11 +27,9 @@ public class CSVOutput implements Output {
 		
 		PrintWriter writer=new PrintWriter(f);
 		
-		Iterator<Record> iterator=records.iterator();
+		ListIterator<Record> iterator=records.listIterator();
 		
 		int position=1;
-		int lastPos=1;
-		int lastScore=0;
 		while (iterator.hasNext())
 		{
 			DecimalFormat df= new DecimalFormat("0.00");
@@ -54,12 +52,106 @@ public class CSVOutput implements Output {
 			Integer r1500min=(int) (current.getRace_1500m() / 60.0);
 			Float r1500s=(float) (current.getRace_1500m() - ((float) r1500min *60.0));
 			r1500=new String(r1500min.toString()+":"+raceF.format(r1500s));
-			if(lastScore!=current.getScore()) 
+
+			String displayedPosition;
+			displayedPosition=String.valueOf(position);
+			boolean hN=iterator.hasNext();
+			iterator.previous();
+			boolean hP=iterator.hasPrevious();
+			iterator.next();
+			if(!hN & !hP)
 			{
-				lastPos=position;
-				lastScore=current.getScore();
+				displayedPosition=String.valueOf(position);
 			}
-			writer.println(lastPos + "," 
+			else
+			{
+				Record peekF=iterator.hasNext() ? iterator.next() : null;
+				if(peekF!=null) 
+				{
+					iterator.previous();
+				}
+				iterator.previous();
+				Record peekB=iterator.hasPrevious() ? iterator.previous() : null;
+				if(peekB!=null) 
+				{
+					iterator.next();
+				}
+				iterator.next();
+				
+				int scoreF= peekF==null ? -1 : peekF.getScore();
+				int scoreB= peekB==null ? -1 : peekB.getScore() ;
+				if(current.getScore() != scoreF && current.getScore() != scoreB) 
+				{
+					displayedPosition=String.valueOf(position);
+				}
+				else
+				{
+					int stepsBack=1;
+					int stepsForward=0;
+					int startOfTie=-1;
+					int endOfTie=-1;
+
+					if(peekB==null)
+					{
+						startOfTie=position;
+						stepsBack=0;
+					}
+					else 
+					{
+						iterator.previous();
+					}
+
+					while (startOfTie==-1)
+					{
+						if(!iterator.hasPrevious())
+						{
+							startOfTie=position-stepsBack+1;
+							break;
+						}
+						else {
+							Record prevEl=iterator.previous();
+							stepsBack++;
+							if(prevEl.getScore()!=current.getScore())
+							{
+								startOfTie=position-stepsBack+2;
+								break;
+							}
+						}
+					}
+
+					while(stepsBack-- > 0) iterator.next(); //rewind iterator
+
+					if(peekF==null)
+					{
+						endOfTie=position;
+					}
+					
+					while(endOfTie==-1)
+					{
+						if(!iterator.hasNext())
+						{
+							endOfTie=position+stepsForward;
+							break;
+						}
+						else 
+						{
+							Record nextEl=iterator.next();
+
+							stepsForward++;
+							if(nextEl.getScore()!=current.getScore())
+							{
+								endOfTie=position+stepsForward-1;
+								break;
+							}
+						}
+					}
+
+					while(stepsForward-- >0) iterator.previous(); //rewind iterator
+					displayedPosition=String.valueOf(startOfTie)+"-"+String.valueOf(endOfTie);
+				}
+			}
+			
+			writer.println(displayedPosition + "," 
 					+ current.getScore() + ",\"" 
 					+ current.getAthlete() + "\"," 
 					+ current.getBirthDate() + ","
