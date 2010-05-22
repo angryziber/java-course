@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import javax.xml.transform.*;
 
 /**
- * HTMLOutput
+ * <b>HTMLOutput</b>
+ * 
+ * Handles exporting of data to basic HTML format.
  *
  * @author Marek
  */
@@ -15,13 +17,20 @@ public class HTMLOutput implements Output {
 	private File f;
 	
 	/**
-	 * @param parameters
-	 * @throws Exception 
+	 * @param filename is the output file name. Gets created or overwritten.
 	 */
 	public HTMLOutput(String filename) {
 		f=new File(filename);
 	}
 
+	/**
+	 * Writes the data from the passed ArrayList<Records> to the 
+	 * previously specified file in HTML.
+	 * The data is first written to a temporary XML file and then 
+	 * converted to HTML using the decathlon.xsl file.
+	 * 
+	 * @throws Exception
+	 */
 	@Override
 	public void flush(ArrayList<Record> records) throws Exception {
 		File xmlF = File.createTempFile("decathlon", ".tmp");

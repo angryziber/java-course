@@ -8,12 +8,15 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * DatabaseInputTest
+ * Test database input
  *
  * @author Marek
  */
 public class DatabaseInputTest {
 	
+	/**
+	 * Test reading database connection properties
+	 */
 	@Test
 	public void testReadProps()
 	{
@@ -27,6 +30,9 @@ public class DatabaseInputTest {
 		}
 	}
 	
+	/**
+	 * Test actual reading from database.
+	 */
 	@Test
 	public void testData() {
 		ArrayList<Record> records = new ArrayList<Record>();

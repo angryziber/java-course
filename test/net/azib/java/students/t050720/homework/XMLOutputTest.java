@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * XMLOutputTest
+ * Tests for the XML export facility
  *
  * @author Marek
  */
 public class XMLOutputTest {
 
 	/**
+	 * Tests the XML export. Compares the export result to a predefined "correct" result.
 	 * Test method for {@link net.azib.java.students.t050720.homework.XMLOutput#flush(java.util.ArrayList)}.
 	 */
 	@Test
@@ -25,11 +26,11 @@ public class XMLOutputTest {
 		File ftmp=null;
 		try {
 			ftmp = File.createTempFile("xmlo", "tmp");
-			ftmp.deleteOnExit();
 		}
 		catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		ftmp.deleteOnExit();
 		
 		ArrayList<Record> records = new ArrayList<Record>();
 		Record rec=new Record();

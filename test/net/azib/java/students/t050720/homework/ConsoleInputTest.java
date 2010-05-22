@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * ConsoleInputTest
+ * Test for the console input class. 
+ * This test is not that good a unit test as it requires an user to hit Enter to complete, and simply
+ * tests for object creation/addition. Could be done better with simulating console input.
  *
  * @author Marek
  */

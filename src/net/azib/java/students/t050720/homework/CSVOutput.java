@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 /**
- * CSVOutput
+ * <b>CSVOutput</b>
+ * 
+ * Handles writing to a file in the comma-separated-value format. Output file encoding is UTF-8 without the BOM.
  *
  * @author Marek
  */
@@ -16,12 +18,22 @@ public class CSVOutput implements Output {
 
 	private File f;
 	/**
-	 * @param parameters
+	 * @param filename is a String containing the name of the file to be written.
 	 */
 	public CSVOutput(String filename) {
 		f = new File(filename);
 	}
 
+	/**
+	 * Writes the data from the passed ArrayList<Record> to the file f, in comma-separated format, one line at a time.
+	 * Position is calculated here on the fly: If the previous or next records have the same score,
+	 * then the ArrayList is searched forwards and backwards starting from the current position,
+	 * to find out the start and end of the "tie" and then display that region. This is done for
+	 * every item that partakes in a tie, so for a competition with many or large ties it can get slow-ish.
+	 * Although the format of decathlon implies that there aren't very many ties.
+	 * 
+	 * @throws Exception
+	 */
 	@Override
 	public void flush(ArrayList<Record> records) throws Exception {
 		

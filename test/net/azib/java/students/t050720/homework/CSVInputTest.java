@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * CSVInputTest
+ * Tests the CSV importing facilities
  *
  * @author Marek
  */
 public class CSVInputTest {
 
 	/**
+	 * Simple test for object creation.
 	 * Test method for {@link net.azib.java.students.t050720.homework.CSVInput#CSVInput(java.lang.String)}.
 	 */
 	@Test
@@ -42,6 +43,10 @@ public class CSVInputTest {
 		assertEquals(true, ci!=null);
 	}
 	
+	/***
+	 * Tests behavior if an unexisting file is to be opened
+	 * @throws FileNotFoundException
+	 */
 	@Test (expected=FileNotFoundException.class)
 	public void testEmptyCSVInput() throws FileNotFoundException {
 		CSVInput ci=null;
@@ -50,6 +55,7 @@ public class CSVInputTest {
 	}
 
 	/**
+	 * Tests import of predefined result.
 	 * Test method for {@link net.azib.java.students.t050720.homework.CSVInput#readInto(java.util.ArrayList)}.
 	 */
 	@Test
@@ -85,6 +91,9 @@ public class CSVInputTest {
 		
 	}
 
+	/**
+	 * Test predefined result
+	 */
 	@Test
 	public void testReadIntoAroundMinuteValues() {
 		CSVInput ci=null;

@@ -13,7 +13,10 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 /**
- * DatabaseInput
+ * <b>DatabaseInput</b>
+ * Handles input from database. Database connection parameters are read from the db.properties file.
+ * Gathers results from a single competition identified by either an ID or name.
+ * The class makes do with a single database query (albeit with JOINs).
  *
  * @author Marek
  */
@@ -24,9 +27,15 @@ public class DatabaseInput implements Input {
 	private Statement st;
 	private String query;
 	
+	/**
+	 * Reads properties from file and assembles database query according to the params argument.
+	 * 
+	 * @param params is the competition name or ID. If it is a number, it is used as an ID
+	 * and otherwise a name. The database query is assembled accordingly.
+	 * @throws Exception
+	 */
 	public DatabaseInput(String params) throws Exception
 	{
-		//
 		dbProps = new Properties();
 		FileInputStream in = new FileInputStream("src/net/azib/java/students/t050720/homework/db.properties");
 		dbProps.load(in);
@@ -42,6 +51,14 @@ public class DatabaseInput implements Input {
 		}
 	}
 
+	/**
+	 * Connects to the database, executes the predefined query and processes the results.
+	 * The query results are parsed into the passed ArrayList of Record.
+	 * If the date-of-birth conversion from sql.Date to java.util.Date fails, a default date of 01.01.1900 is used.
+	 *  
+	 * @param records is a reference to the list that gets populated.
+	 * @throws Exception
+	 */
 	@Override
 	public void readInto(ArrayList<Record> records) throws Exception {
 		

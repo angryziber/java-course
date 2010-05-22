@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * DecathlonManiac
+ * <b>DecathlonManiac</b><br />
  *
+ * This is the class which contains the main method, where all the fun starts.
+ * 
+ * Program arguments are: -input-type [input-parameter] -output-type [output-parameter]
+ * 
  * @author Marek
  */
 public class DecathlonManiac {

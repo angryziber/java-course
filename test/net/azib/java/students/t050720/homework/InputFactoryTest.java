@@ -7,13 +7,14 @@ import java.io.FileNotFoundException;
 import org.junit.Test;
 
 /**
- * InputFactoryTest
+ * Test of the InputFactory class
  *
  * @author Marek
  */
 public class InputFactoryTest {
 
 	/**
+	 * Get console input
 	 * Test method for {@link net.azib.java.students.t050720.homework.InputFactory#getInputPlugin(java.lang.String, java.lang.String)}.
 	 */
 	@Test
@@ -31,6 +32,7 @@ public class InputFactoryTest {
 	}
 
 	/**
+	 * Get CSV input
 	 * Test method for {@link net.azib.java.students.t050720.homework.InputFactory#getInputPlugin(java.lang.String, java.lang.String)}.
 	 */
 	@Test
@@ -63,6 +65,9 @@ public class InputFactoryTest {
 		}
 	}
 	
+	/**
+	 * get database input
+	 */
 	@Test
 	public void testGetDBInputPlugin()
 	{
@@ -84,6 +89,9 @@ public class InputFactoryTest {
 		}
 	}
 	
+	/**
+	 * get default input (should be console)
+	 */
 	@Test
 	public void testGetDefaultInputPlugin()
 	{
@@ -99,6 +107,9 @@ public class InputFactoryTest {
 		assertEquals(i.getClass().getName(), (new ConsoleInput()).getClass().getName());	
 	}
 	
+	/**
+	 * get input plugin for invalid argument (should return console)
+	 */
 	@Test
 	public void testGetNonExistentInputPlugin()
 	{

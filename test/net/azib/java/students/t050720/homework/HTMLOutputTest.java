@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * HTMLOutputTest
+ * Test for HTML export facility
  *
  * @author Marek
  */
 public class HTMLOutputTest {
 	/**
+	 * Simple HTML export test, creating a file and comparing it to a predefined result.
 	 * Test method for {@link net.azib.java.students.t050720.homework.HTMLOutput#flush(java.util.ArrayList)}.
 	 */
 

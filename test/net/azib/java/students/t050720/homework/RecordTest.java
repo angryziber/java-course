@@ -5,13 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * RecordTest
+ * Tests the Record class.
  *
  * @author Marek
  */
 public class RecordTest {
 
 	/**
+	 * Some random results and score.
 	 * Test method for {@link net.azib.java.students.t050720.homework.Record#getScore()}.
 	 */
 	@Test
@@ -33,6 +34,9 @@ public class RecordTest {
 		assertEquals(10485, r.getScore());
 	}
 
+	/**
+	 * All event results are 0, therefore the total score should be 0 too.
+	 */
 	@Test
 	public void testGetScoreZero() {
 		Record record=new Record();
@@ -50,6 +54,9 @@ public class RecordTest {
 		assertEquals(0, record.getScore());
 	}
 	
+	/**
+	 * All event scores are not numbers (which is effectively 0 as far as score calculation is concerned), therefore the total score should be 0
+	 */
 	@Test
 	public void testNan()
 	{
@@ -69,6 +76,9 @@ public class RecordTest {
 		assertEquals(0,record.getScore());
 	}
 	
+	/**
+	 * Tests infinity.
+	 */
 	@Test
 	public void testInfinity()
 	{

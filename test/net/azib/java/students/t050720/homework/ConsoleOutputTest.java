@@ -9,13 +9,16 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * ConsoleOutputTest
+ * <b>ConsoleOutputTest</b>
+ * 
+ * Tests for ConsoleOutput class.
  *
  * @author Marek
  */
 public class ConsoleOutputTest {
 
 	/**
+	 * Tests conformation to format. Adds one record to the list and outputs it to a diverted stdout stream.
 	 * Test method for {@link net.azib.java.students.t050720.homework.ConsoleOutput#flush(java.util.ArrayList)}.
 	 */
 	@Test

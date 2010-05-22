@@ -1,8 +1,12 @@
 package net.azib.java.students.t050720.homework;
 
 /**
- * ResultRecord
- *
+ * <b>Record</b>
+ * 
+ * Contains a record of the results of an athlete's decathlon competition.
+ * All numeric data is stored as floating-point numbers, either in meters or in seconds, depending on the event.
+ * 
+ * The total score is calculated on the first query. If the data is changed, the next query necessitates a recalculation of the score.
  * @author Marek
  */
 public class Record implements Comparable<Record>{
@@ -22,56 +26,62 @@ public class Record implements Comparable<Record>{
 	private float race_1500m;
 	private boolean scoreCalculated=false;
 	/**
-	 * @return the score
+	 * Returns the total decathlon score.
+	 * Calculation is done on the first-time-query. Afterwards, the score is recalculated if this method is requested after an event data change. 
+	 * @return The total score for the decathlon competition.
 	 */
 	public int getScore() {
 		if(!scoreCalculated) calculateScore();
 		return score;
 	}
 	/**
-	 * @return the athlete
+	 * @return Athlete name
 	 */
 	public String getAthlete() {
 		return athlete;
 	}
 	/**
-	 * @param athlete the athlete to set
+	 * Sets athlete name.
+	 * @param athlete is the new name
 	 */
 	public void setAthlete(String athlete) {
 		this.athlete = athlete;
 	}
 	/**
-	 * @return the birthDate
+	 * @return birth date of athlete
 	 */
 	public String getBirthDate() {
 		return birthDate;
 	}
 	/**
-	 * @param birthDate the birthDate to set
+	 * Sets athlete birth date.
+	 * @param birthDate is the new birthDate
 	 */
 	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 	/**
-	 * @return the country
+	 * @return Country that the athlete represents
 	 */
 	public String getCountry() {
 		return country;
 	}
 	/**
-	 * @param country the country to set
+	 * Sets athlete country.
+	 * @param country is the new country
 	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
 	/**
-	 * @return the race_100m
+	 * @return 100m race result, in seconds
 	 */
 	public float getRace_100m() {
 		return race_100m;
 	}
 	/**
-	 * @param race_100m the race_100m to set
+	 * Sets the 100m race result, in seconds
+	 * @param race_100m - new result
 	 */
 	public void setRace_100m(float race_100m) {
 		scoreCalculated=false;
@@ -79,13 +89,14 @@ public class Record implements Comparable<Record>{
 		else this.race_100m = race_100m;
 	}
 	/**
-	 * @return the long_jump
+	 * @return long jump result, in meters
 	 */
 	public float getLong_jump() {
 		return long_jump;
 	}
 	/**
-	 * @param longJump the long_jump to set
+	 * Sets new long jump result, in meters
+	 * @param longJump - new result
 	 */
 	public void setLong_jump(float longJump) {
 		scoreCalculated=false;
@@ -93,13 +104,14 @@ public class Record implements Comparable<Record>{
 		else long_jump = longJump;
 	}
 	/**
-	 * @return the shot_put
+	 * @return shot put result, in meters
 	 */
 	public float getShot_put() {
 		return shot_put;
 	}
 	/**
-	 * @param shotPut the shot_put to set
+	 * Sets new shot put result, in meters
+	 * @param shotPut - new result
 	 */
 	public void setShot_put(float shotPut) {
 		scoreCalculated=false;
@@ -107,13 +119,14 @@ public class Record implements Comparable<Record>{
 		else shot_put = shotPut;
 	}
 	/**
-	 * @return the high_jump
+	 * @return high jump result, in meters
 	 */
 	public float getHigh_jump() {
 		return high_jump;
 	}
 	/**
-	 * @param highJump the high_jump to set
+	 * Sets new high jump result, in meters
+	 * @param highJump - new result
 	 */
 	public void setHigh_jump(float highJump) {
 		scoreCalculated=false;
@@ -121,13 +134,14 @@ public class Record implements Comparable<Record>{
 		else high_jump = highJump;
 	}
 	/**
-	 * @return the race_400m
+	 * @return the 400m race result, in seconds
 	 */
 	public float getRace_400m() {
 		return race_400m;
 	}
 	/**
-	 * @param race_400m the race_400m to set
+	 * Set new result for the 400m race, in seconds
+	 * @param race_400m - new result
 	 */
 	public void setRace_400m(float race_400m) {
 		scoreCalculated=false;
@@ -135,13 +149,14 @@ public class Record implements Comparable<Record>{
 		else this.race_400m = race_400m;
 	}
 	/**
-	 * @return the hurdles_110m
+	 * @return the 110m hurdles race result, in seconds
 	 */
 	public float getHurdles_110m() {
 		return hurdles_110m;
 	}
 	/**
-	 * @param hurdles_110m the hurdles_110m to set
+	 * Sets new result for the 110m hurdles race, in seconds
+	 * @param hurdles_110m - new result
 	 */
 	public void setHurdles_110m(float hurdles_110m) {
 		scoreCalculated=false;
@@ -149,13 +164,14 @@ public class Record implements Comparable<Record>{
 		else this.hurdles_110m = hurdles_110m;
 	}
 	/**
-	 * @return the discus_throw
+	 * @return discus throw result, in meters
 	 */
 	public float getDiscus_throw() {
 		return discus_throw;
 	}
 	/**
-	 * @param discusThrow the discus_throw to set
+	 * Set new discus throw result, meters
+	 * @param discusThrow - new result
 	 */
 	public void setDiscus_throw(float discusThrow) {
 		scoreCalculated=false;
@@ -163,13 +179,14 @@ public class Record implements Comparable<Record>{
 		else discus_throw = discusThrow;
 	}
 	/**
-	 * @return the pole_vault
+	 * @return pole vault result, meters
 	 */
 	public float getPole_vault() {
 		return pole_vault;
 	}
 	/**
-	 * @param poleVault the pole_vault to set
+	 * Set new pole vault result, meters
+	 * @param poleVault - new result
 	 */
 	public void setPole_vault(float poleVault) {
 		scoreCalculated=false;
@@ -177,13 +194,14 @@ public class Record implements Comparable<Record>{
 		else pole_vault = poleVault;
 	}
 	/**
-	 * @return the javelin_throw
+	 * @return javelin throw result, meters
 	 */
 	public float getJavelin_throw() {
 		return javelin_throw;
 	}
 	/**
-	 * @param javelinThrow the javelin_throw to set
+	 * Set new javelin throw result, meters
+	 * @param javelinThrow - new result
 	 */
 	public void setJavelin_throw(float javelinThrow) {
 		scoreCalculated=false;
@@ -191,13 +209,14 @@ public class Record implements Comparable<Record>{
 		else javelin_throw = javelinThrow;
 	}
 	/**
-	 * @return the race_1500m
+	 * @return The 1500m race result, in seconds.
 	 */
 	public float getRace_1500m() {
 		return race_1500m;
 	}
 	/**
-	 * @param race_1500m the race_1500m to set
+	 * Set new 1500m race result, in seconds.
+	 * @param race_1500m - new result
 	 */
 	public void setRace_1500m(float race_1500m) {
 		scoreCalculated=false;
@@ -236,6 +255,14 @@ private	void calculateScore()
 	score=tmpScore;
 	}
 
+/**
+ * This implements the compareTo interface, but backwards!
+ * This way we can sort an ArrayList of Records and have the sort method
+ * return the competition results, in descending score, and ascending position order.
+ * 
+ * @return -1, if the total score of o is bigger than the total score of the current Record,
+ * 0 if they are equal and +1, if the total score of o is smaller.
+ */
 @Override
 public int compareTo(Record o) {
 	int myScore=this.getScore();

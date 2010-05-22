@@ -2,8 +2,16 @@ package net.azib.java.students.t050720.homework;
 
 
 /**
- * ArgumentsParser
- *
+ * <b>ArgumentsParser</b>
+ * <br />
+ * Parses entered string list for the program.
+ * First string is assumed to be the input type/location, eg. {@code -console} or {@code -csv}.
+ * If the input source needs a parameter (all except -console), then the next string is the parameter.
+ * Then, the output type/location.
+ * Finally, if the output destination needs a parameter (all except {@code -console}), then the last string is assumed to be the parameter.
+ * 
+ * The default input and output locations are {@code -console} for both.
+ * 
  * @author Marek
  */
 public class ArgumentsParser {
@@ -14,7 +22,9 @@ public class ArgumentsParser {
 	private String oParam="";
 
 	/**
-	 * @param args
+	 * Creates ArgumentsParser object and parses the passed strings.
+	 * After creation, the object can be queried for the individual arguments.
+	 * @param args Contains the arguments to be parsed
 	 */
 	public ArgumentsParser(String[] args) {
 		if(args.length<2) return;
@@ -31,28 +41,32 @@ public class ArgumentsParser {
 	}
 
 	/**
-	 * @return
+	 * Returns the input type stored, either the default or custom. Returned string always starts with a dash, for example "-console"
+	 * @return String with the input type stored.
 	 */
 	public String inputType() {
 		return iType;
 	}
 
 	/**
-	 * @return
+	 * Returns the parameter for input, if any. Otherwise returns an empty String.
+	 * @return String with custom parameter for input.
 	 */
 	public String inputParams() {
 		return iParam;
 	}
 
 	/**
-	 * @return
+	 * Returns the output type stored, either the default or custom. Returned string always starts with a dash, for example "-console"
+	 * @return String with the output type stored.
 	 */
 	public String outputType() {
 		return oType;
 	}
 
 	/**
-	 * @return
+	 * Returns the parameter for output, if any. Otherwise returns an empty String.
+	 * @return String with custom parameter for output.
 	 */
 	public String outputParams() {
 		return oParam;

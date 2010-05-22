@@ -7,14 +7,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
- * ConsoleInput
+ * <b>ConsoleInput</b>
+ * <br />
+ * Gathers data interactively from user via the console. Implements Input interface.
  *
+ * @see net.azib.java.students.t050720.homework.Input
  * @author Marek
  */
 public class ConsoleInput implements Input {
 
 	BufferedReader rd;
 	
+	/**
+	 * Reads data from console into the ArrayList<Record> passed.
+	 * Does some simple validity checking, if a date or number cannot be parsed, a default is used.
+	 * The user is asked upon filling one record, if he/she wishes to fill another.
+	 */
 	@Override
 	public void readInto(ArrayList<Record> records) throws Exception {
 		

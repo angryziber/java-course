@@ -7,13 +7,25 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 /**
- * ConsoleOutput
+ * <b>ConsoleOutput</b>
+ * <br />
+ * Displays data to the console. Implements Output interface.
+ * Data displayed is basically in the same format that gets output to .csv files,
+ * apart from the column header.
  *
+ * @see net.azib.java.students.t050720.homework.Output
  * @author Marek
  */
 public class ConsoleOutput implements Output {
 
-	
+	/**
+	 * Displays the data from the passed ArrayList<Record>, preceded by a header.
+	 * Position is calculated here on the fly: If the previous or next records have the same score,
+	 * then the ArrayList is searched forwards and backwards starting from the current position,
+	 * to find out the start and end of the "tie" and then display that region. This is done for
+	 * every item that partakes in a tie, so for a competition with many or large ties it can get slow-ish.
+	 * Although the format of decathlon implies that there aren't very many ties.
+	 */
 	@Override
 	public void flush(ArrayList<Record> records) {
 		

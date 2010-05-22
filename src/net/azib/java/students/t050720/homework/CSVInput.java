@@ -4,28 +4,41 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * CSVInput
+ * <b>CSVInput</b>
  *
+ * Handles importing data from files in comma-separated-value format.
+ *  
  * @author Marek
  */
 public class CSVInput implements Input {
 	
 	File f;
 
+	/**
+	 * Sets the file name and checks if it exists. Throws an exception, if it doesn't.
+	 * 
+	 * @param fileName is the name of the file to be read
+	 * @throws FileNotFoundException
+	 */
 	public CSVInput(String fileName) throws FileNotFoundException
 	{
 			f = new File(fileName);
 			if(!f.exists()) throw new FileNotFoundException();
 	}
 
+	/**
+	 * Reads the CSV file contents into the passed ArrayList<Record>.
+	 * Does some basic checking on the way and substitutes non-good values
+	 * with defaults.
+	 * @param records is the record list.
+	 */
 	@Override
-	public void readInto(ArrayList<Record> records) throws IOException {
+	public void readInto(ArrayList<Record> records) throws Exception {
 		FileReader freader=new FileReader(f);
 		
 		BufferedReader reader=new BufferedReader(freader);

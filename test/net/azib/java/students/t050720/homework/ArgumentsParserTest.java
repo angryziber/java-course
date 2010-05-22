@@ -5,13 +5,15 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * ArgumentsParserTest
+ * Contains tests for the ArgumentsParser class.
  *
  * @author Marek
  */
 public class ArgumentsParserTest {
 
-	
+	/**
+	 * Tests empty array behavior.
+	 */
 	@Test
 	public void testEmptyArray() {
 		String[] args=new String[1];
@@ -19,6 +21,7 @@ public class ArgumentsParserTest {
 		assertEquals("-console", parser.inputType());
 	}
 	/**
+	 * Tests input type.
 	 * Test method for {@link net.azib.java.students.t050720.homework.ArgumentsParser#inputType()}.
 	 */
 	@Test
@@ -31,6 +34,7 @@ public class ArgumentsParserTest {
 	}
 
 	/**
+	 * Tests input parameter.
 	 * Test method for {@link net.azib.java.students.t050720.homework.ArgumentsParser#inputParams()}.
 	 */
 	@Test
@@ -42,6 +46,9 @@ public class ArgumentsParserTest {
 		assertEquals("1", parser.inputParams());
 	}
 	
+	/**
+	 * Tests empty input type.
+	 */
 	@Test
 	public void testEmptyInputType() {
 		String[] args = new String[2];
@@ -52,6 +59,7 @@ public class ArgumentsParserTest {
 	}
 
 	/**
+	 * Tests empty input parameter
 	 * Test method for {@link net.azib.java.students.t050720.homework.ArgumentsParser#inputParams()}.
 	 */
 	@Test
@@ -64,6 +72,7 @@ public class ArgumentsParserTest {
 	}
 
 	/**
+	 * Tests output type
 	 * Test method for {@link net.azib.java.students.t050720.homework.ArgumentsParser#outputType()}.
 	 */
 	@Test
@@ -78,6 +87,7 @@ public class ArgumentsParserTest {
 	}
 
 	/**
+	 * Tests empty output parameter
 	 * Test method for {@link net.azib.java.students.t050720.homework.ArgumentsParser#outputParams()}.
 	 */
 	@Test
@@ -89,7 +99,9 @@ public class ArgumentsParserTest {
 		assertEquals("", parser.outputParams());
 	}
 
-	
+	/**
+	 * Tests empty output type
+	 */
 	@Test
 	public void testEmptyOutputType() {
 		String[] args = new String[2];
@@ -99,6 +111,9 @@ public class ArgumentsParserTest {
 		assertEquals("-console", parser.outputType());
 	}
 
+	/**
+	 * Tests output parameter
+	 */
 	@Test
 	public void testOutputParams() {
 		String[] args = new String[4];

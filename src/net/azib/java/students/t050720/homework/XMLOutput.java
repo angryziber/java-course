@@ -19,7 +19,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * XMLOutput
+ * <b>XMLOutput</b>
+ * 
+ * Handles writing data to a custom XML format. No data is in tag attributes, all are neatly nested inside tags.
  *
  * @author Marek
  */
@@ -34,6 +36,15 @@ public class XMLOutput implements Output {
 		f=new File(filename);
 	}
 
+	/**
+	 * Writes the data from the passed ArrayList<Record> to the file f, in XML format.
+	 * Position is calculated here on the fly: If the previous or next records have the same score,
+	 * then the ArrayList is searched forwards and backwards starting from the current position,
+	 * to find out the start and end of the "tie" and then display that region. This is done for
+	 * every item that partakes in a tie, so for a competition with many or large ties it can get slow-ish.
+	 * Although the format of decathlon implies that there aren't very many ties.
+	 * @throws Exception
+	 */
 	@Override
 	public void flush(ArrayList<Record> records) throws Exception {
 		ListIterator<Record> iterator=records.listIterator();
