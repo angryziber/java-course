@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Class to write data to the console.
+ * Class to write data to the stream specified.
  */
-public class OutputToConsole implements Output {
+public class OutputToStream implements Output {
 	
 	private static Logger logger = Logger.getLogger("global");
 	
@@ -17,7 +17,7 @@ public class OutputToConsole implements Output {
 	 * 
 	 * @param out a stream to write data to
 	 */
-	OutputToConsole(OutputStream out) {
+	OutputToStream(OutputStream out) {
 		output = out;
 	}
 	

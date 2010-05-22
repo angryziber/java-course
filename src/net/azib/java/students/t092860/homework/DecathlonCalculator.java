@@ -52,10 +52,10 @@ public class DecathlonCalculator {
 		if (input_method.equals("-console")) {
 			System.out.print("Insert decathlon results per athlete (press enter when done)\n");
 			System.out.print("Example: \"Siim Susi\",01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72\n");
-			input = new InputFromConsole(System.in);
+			input = new InputFromStream(System.in);
 		}
 		else if (input_method.equals("-csv"))
-			input = new InputFromCSV(new FileInputStream(input_parameter));
+			input = new InputFromStream(new FileInputStream(input_parameter));
 		else if (input_method.equals("-db"))
 			input = new InputFromDB(input_parameter);
 		else
@@ -67,9 +67,9 @@ public class DecathlonCalculator {
 	private static void setOutput(List<Output.Data> data) throws Exception {
 		Output output;
 		if (output_method.equals("-console"))
-			output = new OutputToConsole(System.out);
+			output = new OutputToStream(System.out);
 		else if (output_method.equals("-csv"))
-			output = new OutputToCSV(new FileOutputStream(output_parameter));
+			output = new OutputToStream(new FileOutputStream(output_parameter));
 		else if (output_method.equals("-xml"))
 			output = new OutputToXML(new FileOutputStream(output_parameter));
 		else if (output_method.equals("-html"))

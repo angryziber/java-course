@@ -11,7 +11,7 @@ import org.junit.Test;
 /**
  * OutputToConsoleTest
  */
-public class OutputToConsoleTest {
+public class OutputToStreamTest {
 
 	private static Logger logger = Logger.getLogger("global");
 	
@@ -27,7 +27,7 @@ public class OutputToConsoleTest {
 	@Test
 	public final void testSet() throws Exception {
 		OutputStreamMock outputMock = new OutputStreamMock();
-		OutputToConsole testObj = new OutputToConsole(outputMock);
+		OutputToStream testObj = new OutputToStream(outputMock);
 		assertNotNull(testObj);
 		
 		testObj.set(TestData.GetOutputData());

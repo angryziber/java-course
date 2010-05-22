@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * InputFromConsoleTest
  */
-public class InputFromConsoleTest {
+public class InputFromStreamTest {
 
 	private static Logger logger = Logger.getLogger("global");
 	
@@ -30,7 +30,7 @@ public class InputFromConsoleTest {
 	@Test
 	public final void testGet() throws Exception {
 		InputStreamMock inputMock = new InputStreamMock();
-		InputFromConsole testObj = new InputFromConsole(inputMock);
+		InputFromStream testObj = new InputFromStream(inputMock);
 		assertNotNull(testObj);
 		
 		List<Input.Data> output = new ArrayList<Input.Data>();

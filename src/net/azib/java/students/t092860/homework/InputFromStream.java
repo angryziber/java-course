@@ -9,9 +9,9 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 /**
- * Class to read data from the console.
+ * Class to read data from the stream specified.
  */
-public class InputFromConsole implements Input {
+public class InputFromStream implements Input {
 
 	private static Logger logger = Logger.getLogger("global");
 	
@@ -20,7 +20,7 @@ public class InputFromConsole implements Input {
 	 * 
 	 * @param in a stream to read data from
 	 */
-	public InputFromConsole(InputStream in) {
+	public InputFromStream(InputStream in) {
 		input = in;
 	}
 	
@@ -75,16 +75,6 @@ public class InputFromConsole implements Input {
 			else
 				athlete.addEvent(e, Converter.stringToTime(st.nextToken()));
 		}
-		/*athlete.addEvent(Events.RACE_100M, Converter.stringToTime(st.nextToken()));
-		athlete.addEvent(Events.LONG_JUMP, Double.parseDouble(st.nextToken()));
-		athlete.addEvent(Events.SHOT_PUT, Double.parseDouble(st.nextToken()));
-		athlete.addEvent(Events.HIGH_JUMP, Double.parseDouble(st.nextToken()));
-		athlete.addEvent(Events.RACE_400M, Converter.stringToTime(st.nextToken()));
-		athlete.addEvent(Events.HURDLES_110M, Converter.stringToTime(st.nextToken()));
-		athlete.addEvent(Events.DISCUS_THROW, Double.parseDouble(st.nextToken()));
-		athlete.addEvent(Events.POLE_VAULT, Double.parseDouble(st.nextToken()));
-		athlete.addEvent(Events.JAVELIN_THROW, Double.parseDouble(st.nextToken()));
-		athlete.addEvent(Events.RACE_1500M, Converter.stringToTime(st.nextToken()));*/
 
 		return athlete;
 	}
