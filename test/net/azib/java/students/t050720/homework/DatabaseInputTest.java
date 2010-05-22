@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -17,7 +18,7 @@ public class DatabaseInputTest {
 	/**
 	 * Test reading database connection properties
 	 */
-	@Test
+	@Test @Ignore
 	public void testReadProps()
 	{
 		try {
@@ -33,7 +34,7 @@ public class DatabaseInputTest {
 	/**
 	 * Test actual reading from database.
 	 */
-	@Test
+	@Test @Ignore
 	public void testData() {
 		ArrayList<Record> records = new ArrayList<Record>();
 		try {
