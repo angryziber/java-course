@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -21,7 +22,7 @@ public class HTMLOutputTest {
 	 * Test method for {@link net.azib.java.students.t050720.homework.HTMLOutput#flush(java.util.ArrayList)}.
 	 */
 
-	@Test
+	@Test @Ignore
 	public void telush() {
 		File ftmp=null;
 		try {
