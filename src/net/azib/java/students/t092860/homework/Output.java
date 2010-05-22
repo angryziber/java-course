@@ -22,10 +22,10 @@ public interface Output{
 		 @param athlete data to be reused
 		 */
 		Data(Athlete athlete) {
-			athleteName = athlete.athleteName;
-			athleteBirthdate = athlete.athleteBirthdate;
-			athleteCountry = athlete.athleteCountry;
-			athleteEvents = athlete.athleteEvents;
+			this.name = athlete.name;
+			this.birthdate = athlete.birthdate;
+			this.country = athlete.country;
+			this.events = athlete.events;
 		}
 		
 		/**
@@ -34,7 +34,7 @@ public interface Output{
 		 * @param position athletes position
 		 */
 		public void setPosition(String position){
-			athletePosition = position;
+			this.position = position;
 		}
 		
 		/**
@@ -43,7 +43,7 @@ public interface Output{
 		 * @param score athletes score
 		 */
 		public void setScore(int score){
-			athleteScore = score;	
+			this.score = score;	
 		}
 		
 		/**
@@ -52,7 +52,7 @@ public interface Output{
 		 * @return athletes position
 		 */
 		public String getPosition(){
-			return athletePosition;
+			return this.position;
 		}
 		
 		/**
@@ -61,11 +61,11 @@ public interface Output{
 		 * @return athletes score
 		 */
 		public int getScore(){
-			return athleteScore;		
+			return this.score;		
 		}
 		
-		private String athletePosition;
-		private int athleteScore;
+		private String position;
+		private int score;
 	}
 	
 	

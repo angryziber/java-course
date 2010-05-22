@@ -2,6 +2,10 @@ package net.azib.java.students.t092860.homework;
 
 import static org.junit.Assert.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -9,6 +13,13 @@ import org.junit.Test;
  */
 public class OutputToXMLTest {
 
+	private static Logger logger = Logger.getLogger("global");
+	
+    @Before
+    public void setUp() {
+		logger.setLevel(Level.OFF);
+    }
+    
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.OutputToXML#set(java.util.List)}.
 	 * @throws Exception 
@@ -30,16 +41,16 @@ public class OutputToXMLTest {
 				"<Birthdate>reede, 20. Oktoober 2000</Birthdate>" +
 				"<Country>EE</Country>" +
 				"<Events>" +
-					"<RACE_100M>90.0</RACE_100M>" +
+					"<RACE_100M>90.00</RACE_100M>" +
 					"<LONG_JUMP>20.45</LONG_JUMP>" +
 					"<SHOT_PUT>20.45</SHOT_PUT>" +
 					"<HIGH_JUMP>20.45</HIGH_JUMP>" +
-					"<RACE_400M>90.0</RACE_400M>" +
-					"<HURDLES_110M>90.0</HURDLES_110M>" +
+					"<RACE_400M>90.00</RACE_400M>" +
+					"<HURDLES_110M>90.00</HURDLES_110M>" +
 					"<DISCUS_THROW>20.45</DISCUS_THROW>" +
 					"<POLE_VAULT>20.45</POLE_VAULT>" +
 					"<JAVELIN_THROW>20.45</JAVELIN_THROW>" +
-					"<RACE_1500M>90.0</RACE_1500M>" +
+					"<RACE_1500M>90.00</RACE_1500M>" +
 				"</Events>" +
 			"</Athlete>" +
 		"</Competition>"+System.getProperty("line.separator");

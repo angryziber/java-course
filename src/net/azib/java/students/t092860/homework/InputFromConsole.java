@@ -69,7 +69,13 @@ public class InputFromConsole implements Input {
 		athlete.setName(st.nextToken());
 		athlete.setDate((new SimpleDateFormat("dd.MM.yyyy")).parse(st.nextToken()));
 		athlete.setCountry(st.nextToken());
-		athlete.addEvent(Events.RACE_100M, Converter.stringToTime(st.nextToken()));
+		for(Events e: Events.values()){
+			if(e.getUnits() == Events.Units.METERS)
+				athlete.addEvent(e, Double.parseDouble(st.nextToken()));
+			else
+				athlete.addEvent(e, Converter.stringToTime(st.nextToken()));
+		}
+		/*athlete.addEvent(Events.RACE_100M, Converter.stringToTime(st.nextToken()));
 		athlete.addEvent(Events.LONG_JUMP, Double.parseDouble(st.nextToken()));
 		athlete.addEvent(Events.SHOT_PUT, Double.parseDouble(st.nextToken()));
 		athlete.addEvent(Events.HIGH_JUMP, Double.parseDouble(st.nextToken()));
@@ -78,7 +84,7 @@ public class InputFromConsole implements Input {
 		athlete.addEvent(Events.DISCUS_THROW, Double.parseDouble(st.nextToken()));
 		athlete.addEvent(Events.POLE_VAULT, Double.parseDouble(st.nextToken()));
 		athlete.addEvent(Events.JAVELIN_THROW, Double.parseDouble(st.nextToken()));
-		athlete.addEvent(Events.RACE_1500M, Converter.stringToTime(st.nextToken()));
+		athlete.addEvent(Events.RACE_1500M, Converter.stringToTime(st.nextToken()));*/
 
 		return athlete;
 	}

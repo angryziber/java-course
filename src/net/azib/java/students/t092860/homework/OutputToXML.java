@@ -92,7 +92,12 @@ public class OutputToXML implements Output {
 			Collection<Events> eventColl = data.getEvents();
 			for (Events e : eventColl) {
 				Element event = new Element(String.valueOf(e));
-				event.addContent(String.valueOf(data.getEventResult(e)));
+				
+				if(e.getUnits() == Events.Units.METERS)
+					event.addContent(Converter.distanceToString(data.getEventResult(e)));
+				else
+					event.addContent(Converter.timeToString(data.getEventResult(e)));
+				
 				events.addContent(event);
 			}
 

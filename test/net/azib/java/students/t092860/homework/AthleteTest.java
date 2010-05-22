@@ -29,7 +29,7 @@ public class AthleteTest extends Athlete {
 	public void testSetName() {
 		String testVal = "name";
 		setName(testVal);
-		assertEquals(testVal, athleteName);
+		assertEquals(testVal, name);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class AthleteTest extends Athlete {
 	public void testSetDate() {
 		Date testVal = new Date();
 		setDate(testVal);
-		assertEquals(testVal, athleteBirthdate);
+		assertEquals(testVal, birthdate);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class AthleteTest extends Athlete {
 	public void testSetCountry() throws Exception {
 		String testVal = "EE";
 		setCountry(testVal);
-		assertEquals(testVal, athleteCountry);
+		assertEquals(testVal, country);
 	}
 	
 	/**
@@ -71,8 +71,8 @@ public class AthleteTest extends Athlete {
 		Events testEvent = Events.RACE_100M;
 		double testPerf = 20.34;
 		addEvent(testEvent, testPerf);
-		assertTrue(testPerf == athleteEvents.get(testEvent));
-		assertTrue(athleteEvents.size() == 1);
+		assertTrue(testPerf == events.get(testEvent));
+		assertTrue(events.size() == 1);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class AthleteTest extends Athlete {
 	@Test
 	public void testGetName() {
 		String testVal = "name";
-		athleteName = testVal;
+		name = testVal;
 		assertEquals(testVal, getName());
 	}
 
@@ -91,7 +91,7 @@ public class AthleteTest extends Athlete {
 	@Test
 	public void testGetDate() {
 		Date testVal = new Date();
-		athleteBirthdate = testVal;
+		birthdate = testVal;
 		assertEquals(testVal, getDate());
 	}
 
@@ -101,7 +101,7 @@ public class AthleteTest extends Athlete {
 	@Test
 	public void testGetCountry() {
 		String testVal = "EE";
-		athleteCountry = testVal;
+		country = testVal;
 		assertEquals(testVal, getCountry());
 	}
 
@@ -112,9 +112,9 @@ public class AthleteTest extends Athlete {
 	public void testGetEventResult() {
 		Events testEvent = Events.RACE_100M;
 		double testPerf = 20.34;
-		if(athleteEvents == null)
-			athleteEvents = new LinkedHashMap<Events, Double>();
-		athleteEvents.put(testEvent, testPerf);
+		if(events == null)
+			events = new LinkedHashMap<Events, Double>();
+		events.put(testEvent, testPerf);
 		assertTrue(testPerf == getEventResult(testEvent));
 		assertTrue(getEvents().size() == 1);
 	}
@@ -126,9 +126,9 @@ public class AthleteTest extends Athlete {
 	public void testGetEvents() {
 		Events testEvent = Events.RACE_100M;
 		double testPerf = 20.34;
-		if(athleteEvents == null)
-			athleteEvents = new LinkedHashMap<Events, Double>();
-		athleteEvents.put(testEvent, testPerf);
+		if(events == null)
+			events = new LinkedHashMap<Events, Double>();
+		events.put(testEvent, testPerf);
 		assertTrue(getEvents().contains(testEvent));
 		assertTrue(getEvents().size() == 1);
 	}

@@ -2,6 +2,10 @@ package net.azib.java.students.t092860.homework;
 
 import static org.junit.Assert.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -9,9 +13,15 @@ import org.junit.Test;
  */
 public class ConverterTest {
 
+	private static Logger logger = Logger.getLogger("global");
+	
+    @Before
+    public void setUp() {
+		logger.setLevel(Level.OFF);
+    }
+    
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.Converter#stringToTime(java.lang.String)}.
-	 * @throws Exception 
 	 * @throws Exception 
 	 */
 	@Test
@@ -49,6 +59,15 @@ public class ConverterTest {
 	public final void testStringToTimeException2() throws Exception{
 		Converter.stringToTime("asdasd");
 	}
+	
+	/**
+	 * Test method for {@link net.azib.java.students.t092860.homework.Converter#distanceToString(java.lang.String)}.
+	 */
+	@Test
+	public final void distanceToString(){	
+		String out = Converter.distanceToString(320.51);		
+		assertTrue(out.compareTo("320.51") == 0);
+	}
 
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.Converter#athleteToString(net.azib.java.students.t092860.homework.Athlete)}.
@@ -58,7 +77,7 @@ public class ConverterTest {
 	public final void testAthleteToString() throws Exception {
 		Athlete athlete = TestData.GetAthlete();		
 		String result = Converter.athleteToString(athlete);		
-		String expected = "Name,reede, 20. Oktoober 2000,EE,90.0,20.45,20.45,20.45,90.0,90.0,20.45,20.45,20.45,90.0";
+		String expected = "Name,reede, 20. Oktoober 2000,EE,90.00,20.45,20.45,20.45,90.00,90.00,20.45,20.45,20.45,90.00";
 		assertTrue(result.compareTo(expected) == 0);
 	}
 

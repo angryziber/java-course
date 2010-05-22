@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -13,6 +16,13 @@ import org.junit.Test;
  */
 public class InputFromConsoleTest {
 
+	private static Logger logger = Logger.getLogger("global");
+	
+    @Before
+    public void setUp() {
+		logger.setLevel(Level.OFF);
+    }
+    
 	/**
 	 * Test method for {@link net.azib.java.students.t092860.homework.InputFromConsole#get()}.
 	 * @throws Exception 

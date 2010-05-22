@@ -18,7 +18,7 @@ public class Athlete {
 	 * @param  name  athletes name
 	 */
 	public void setName(String name){
-		athleteName = name;
+		this.name = name;
 	}
 	
 	/**
@@ -27,7 +27,7 @@ public class Athlete {
 	 * @param  date  athletes birthdate
 	 */
 	public void setDate(Date date){
-		athleteBirthdate = date;
+		this.birthdate = date;
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class Athlete {
 	    if (Arrays.binarySearch(c, country) < 0)
 	    	throw new Exception("Input data is invalid: country="+country+". ");
 
-		athleteCountry = country;
+	    this.country = country;
 	}
 	
 	/**
@@ -51,10 +51,10 @@ public class Athlete {
 	 * @param  performance  athletes performance
 	 */
 	public void addEvent(Events event, Double performance){
-		if(athleteEvents == null)
-			athleteEvents = new LinkedHashMap<Events, Double>();
+		if(this.events == null)
+			this.events = new LinkedHashMap<Events, Double>();
 
-		athleteEvents.put(event, performance);
+		this.events.put(event, performance);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class Athlete {
 	 * @return  the name of this athlete.
 	 */
 	public String getName(){
-		return athleteName;
+		return this.name;
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public class Athlete {
 	 * @return  the birthdate of this athlete.
 	 */
 	public Date getDate(){
-		return athleteBirthdate;	
+		return this.birthdate;	
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class Athlete {
 	 * @return  the country of this athlete.
 	 */
 	public String getCountry(){
-		return athleteCountry;
+		return this.country;
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class Athlete {
 	 * @return        the performance of this athlete.
 	 */
 	public double getEventResult(Events event){
-		return athleteEvents.get(event);	
+		return this.events.get(event);	
 	}
 	
 	/**
@@ -100,11 +100,11 @@ public class Athlete {
 	 * @return  list of events of this athlete
 	 */
 	public Collection<Events> getEvents(){
-		return athleteEvents.keySet();	
+		return this.events.keySet();	
 	}
 	
-	protected String athleteName;
-	protected Date athleteBirthdate;
-	protected String athleteCountry;
-	protected Map<Events, Double> athleteEvents;
+	protected String name;
+	protected Date birthdate;
+	protected String country;
+	protected Map<Events, Double> events;
 }

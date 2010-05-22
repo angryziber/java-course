@@ -1,7 +1,7 @@
 package net.azib.java.students.t092860.homework;
 
 import java.lang.Math;
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Locale;
@@ -37,7 +37,7 @@ public class Converter {
 	 * Converts seconds in double into string.
 	 * 
 	 * @param  input seconds in double
-	 * @return       time in format (HH:mm:ss.SSS)
+	 * @return       string of time in format (HH:mm:ss.SSS)
 	 * @throws Exception if input data in invalid.
 	 */
 	public static String timeToString(double input) throws Exception {
@@ -50,9 +50,27 @@ public class Converter {
 			input = input - temp*60;
 
 		}
-		result += String.valueOf(new DecimalFormat("#.##").format(input));
+		BigDecimal bd = new BigDecimal(Double.toString(input));
+		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+		result += String.valueOf(bd);
 			
 		result = result.replace(',', '.');
+		 
+		return result;
+	}
+	
+	/**
+	 * Converts distance in double into string.
+	 * 
+	 * @param  input distance (meters) in double
+	 * @return       string of distance in decimal precision of 2
+	 */
+	public static String distanceToString(double input){
+		String result = "";
+		
+		BigDecimal bd = new BigDecimal(Double.toString(input));
+		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+		result += String.valueOf(bd);
 		 
 		return result;
 	}
@@ -77,8 +95,12 @@ public class Converter {
 		out += "," + data.getCountry();
 
 		Collection<Events> eventsColl = data.getEvents();
-		for (Events e : eventsColl)
-			out += "," + String.valueOf(data.getEventResult(e));
+		for (Events e : eventsColl){
+			if(e.getUnits() == Events.Units.METERS)
+				out += "," + distanceToString(data.getEventResult(e));
+			else
+				out += "," + timeToString(data.getEventResult(e));
+		}
 
 		return out;
 	}

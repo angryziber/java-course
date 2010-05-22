@@ -104,7 +104,7 @@ public class DecathlonCalculator {
 		catch (Exception e) {
 			System.out.print(e.getMessage() + "\n");
 		}
-		System.out.println("seee\n");
+		//System.out.println("seee\n");
 	}
 	
 	private static String input_method;
