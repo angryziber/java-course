@@ -93,7 +93,7 @@ public class CSVInput implements Input {
 			String[] race1500=items[12].split(":",2);
 			try {
 				record.setRace_1500m((float) ((new Float(race1500[0]) * 60.0) + new Float(race1500[1])) );
-			}catch(NumberFormatException e) {
+			}catch(Exception e) {
 				record.setRace_1500m((float)0);
 			}
 			records.add(record);

@@ -74,7 +74,11 @@ public class XMLOutput implements Output {
 
 			Element e_res = xml.createElement("result");
 
-			if(lastScore!=current.getScore()) lastPos=position;
+			if(lastScore!=current.getScore()) 
+			{
+				lastPos=position;
+				lastScore=current.getScore();
+			}
 			Element e_pos = xml.createElement("pos");
 			e_pos.appendChild(xml.createTextNode(String.valueOf(lastPos)));
 			e_res.appendChild(e_pos);

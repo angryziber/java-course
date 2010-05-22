@@ -54,7 +54,11 @@ public class CSVOutput implements Output {
 			Integer r1500min=(int) (current.getRace_1500m() / 60.0);
 			Float r1500s=(float) (current.getRace_1500m() - ((float) r1500min *60.0));
 			r1500=new String(r1500min.toString()+":"+raceF.format(r1500s));
-			if(lastScore!=current.getScore()) lastPos=position;
+			if(lastScore!=current.getScore()) 
+			{
+				lastPos=position;
+				lastScore=current.getScore();
+			}
 			writer.println(lastPos + "," 
 					+ current.getScore() + ",\"" 
 					+ current.getAthlete() + "\"," 

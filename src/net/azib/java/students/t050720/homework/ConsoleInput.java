@@ -130,7 +130,7 @@ public class ConsoleInput implements Input {
 				String[] r1500=tmp.split(":");
 				try {
 				rec.setRace_1500m((float) (Float.valueOf(r1500[0])*60.0 + Float.valueOf(r1500[1])));
-				}catch (NumberFormatException e) {
+				}catch (Exception e) {
 					rec.setRace_1500m((float) 0);
 				}
 			}

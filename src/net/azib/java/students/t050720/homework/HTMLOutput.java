@@ -31,7 +31,7 @@ public class HTMLOutput implements Output {
 		xmlO.flush(records);
 		
 		TransformerFactory factory = TransformerFactory.newInstance();
-		Transformer transformer = factory.newTransformer (new javax.xml.transform.stream.StreamSource("decathlon.xsl"));
+		Transformer transformer = factory.newTransformer (new javax.xml.transform.stream.StreamSource("src/net/azib/java/students/t050720/homework/decathlon.xsl"));
 		transformer.transform(new javax.xml.transform.stream.StreamSource(xmlF.getAbsolutePath()), new javax.xml.transform.stream.StreamResult(new FileOutputStream(f)));
 	}
 
