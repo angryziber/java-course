@@ -38,14 +38,13 @@ public class HTMLWriterTest {
 	}
 
 	@Test
-	@Ignore
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
 		writer.write(athletes);
 		File path = new File("test/net/azib/java/students/t092875/homework/writers");
 		assertTrue(IOUtils.contentEquals(
 				new FileInputStream(new File(path,"test_write_data.html")),
-				new FileInputStream(new File(path,"test_write_data.html"))
+				new FileInputStream(new File("test_write_result.html"))
 		));
 	}
 }
