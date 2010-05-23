@@ -24,7 +24,7 @@ import org.junit.Test;
  *
  * @author Pets
  */
-public class TestScore {
+public class ScoreTest {
 
 	@Test
 	public void testScoreModel() {
