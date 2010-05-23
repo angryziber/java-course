@@ -2,6 +2,7 @@ package net.azib.java.students.t092860.homework;
 
 import static org.junit.Assert.*;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +19,7 @@ public class OutputToXMLTest {
     @Before
     public void setUp() {
 		logger.setLevel(Level.OFF);
+		Locale.setDefault(Locale.UK);
     }
     
 	/**
