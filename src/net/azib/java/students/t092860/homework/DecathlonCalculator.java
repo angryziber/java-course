@@ -13,51 +13,17 @@ public class DecathlonCalculator {
 	
 	private static Logger logger = Logger.getLogger("global");
 	
-	private static boolean validateArguments(String args[]) {
-		boolean retValue = true;
-
-		if (args.length >= 2 && args[0].equals("-console")) {
-			input_method = args[0];
-			if (args.length >= 2 && args[1].equals("-console")) {
-				output_method = args[1];
-			}
-			else if (args.length >= 3 && (args[1].equals("-csv") || args[1].equals("-xml") || args[1].equals("-html"))) {
-				output_method = args[1];
-				output_parameter = args[2];
-			}
-			else
-				retValue = false;
-		}
-		else if (args.length >= 3 && (args[0].equals("-csv") || args[0].equals("-db"))) {
-			input_method = args[0];
-			input_parameter = args[1];
-			if (args.length == 3 && args[2].equals("-console")) {
-				output_method = args[2];
-			}
-			else if (args.length >= 4 && (args[2].equals("-csv") || args[2].equals("-xml") || args[2].equals("-html"))) {
-				output_method = args[2];
-				output_parameter = args[3];
-			}
-			else
-				retValue = false;
-		}
-		else
-			retValue = false;
-
-		return retValue;
-	}
-	
 	private static List<Input.Data> getInput() throws Exception {
 		Input input;
-		if (input_method.equals("-console")) {
+		if (argumentHandler.GetInputMethod().equals("-console")) {
 			System.out.print("Insert decathlon results per athlete (press enter when done)\n");
 			System.out.print("Example: \"Siim Susi\",01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72\n");
 			input = new InputFromStream(System.in);
 		}
-		else if (input_method.equals("-csv"))
-			input = new InputFromStream(new FileInputStream(input_parameter));
-		else if (input_method.equals("-db"))
-			input = new InputFromDB(input_parameter);
+		else if (argumentHandler.GetInputMethod().equals("-csv"))
+			input = new InputFromStream(new FileInputStream(argumentHandler.GetInputParam()));
+		else if (argumentHandler.GetInputMethod().equals("-db"))
+			input = new InputFromDB(argumentHandler.GetInputParam());
 		else
 			return null;
 
@@ -66,14 +32,14 @@ public class DecathlonCalculator {
 	
 	private static void setOutput(List<Output.Data> data) throws Exception {
 		Output output;
-		if (output_method.equals("-console"))
+		if (argumentHandler.GetOutputMethod().equals("-console"))
 			output = new OutputToStream(System.out);
-		else if (output_method.equals("-csv"))
-			output = new OutputToStream(new FileOutputStream(output_parameter));
-		else if (output_method.equals("-xml"))
-			output = new OutputToXML(new FileOutputStream(output_parameter));
-		else if (output_method.equals("-html"))
-			output = new OutputToHTML(new FileOutputStream(output_parameter));
+		else if (argumentHandler.GetOutputMethod().equals("-csv"))
+			output = new OutputToStream(new FileOutputStream(argumentHandler.GetOutputParam()));
+		else if (argumentHandler.GetOutputMethod().equals("-xml"))
+			output = new OutputToXML(new FileOutputStream(argumentHandler.GetOutputParam()));
+		else if (argumentHandler.GetOutputMethod().equals("-html"))
+			output = new OutputToHTML(new FileOutputStream(argumentHandler.GetOutputParam()));
 		else
 			return;
 
@@ -88,14 +54,10 @@ public class DecathlonCalculator {
 	public static void main(String[] args) {
 		logger.setLevel(Level.OFF);
 
-		// validate program arguments
-		if (!validateArguments(args)) {
-			System.out.println("Invalid use of arguments!\n");
-			return;
-		}
-		logger.info("Input params validation passed");
-
 		try {
+			argumentHandler = new ArgumentHandler(args);
+			logger.info("Input params validation passed");
+			
 			List<Input.Data> inputData = getInput();
 			Calculator calculator = new Calculator();
 			List<Output.Data> outputData = calculator.calcResults(inputData);
@@ -104,11 +66,7 @@ public class DecathlonCalculator {
 		catch (Exception e) {
 			System.out.print(e.getMessage() + "\n");
 		}
-		//System.out.println("seee\n");
 	}
 	
-	private static String input_method;
-	private static String input_parameter;
-	private static String output_method;
-	private static String output_parameter;
+	static private ArgumentHandler argumentHandler;
 }
