@@ -1,9 +1,8 @@
 package net.azib.java.students.t092875.hw4.part2;
 
-import static org.junit.Assert.*;
-
 import net.azib.java.lessons.collections.Shape;
 
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 /**

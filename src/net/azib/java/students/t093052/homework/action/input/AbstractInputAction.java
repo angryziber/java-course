@@ -1,12 +1,12 @@
 package net.azib.java.students.t093052.homework.action.input;
 
+import net.azib.java.students.t093052.homework.Athlete;
+import net.azib.java.students.t093052.homework.CompetitionType;
+
 import java.text.ParseException;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
-
-import net.azib.java.students.t093052.homework.Athlete;
-import net.azib.java.students.t093052.homework.CompetitionType;
 
 /**
  * This class holds the common methods of all input actions

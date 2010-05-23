@@ -1,6 +1,5 @@
 package net.azib.java.students.t050720;
 
-import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 
 /**
  * Animal

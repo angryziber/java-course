@@ -4,13 +4,10 @@ import static org.junit.Assert.assertArrayEquals;
 
 import java.text.Collator;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.io.IOUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**

@@ -1,13 +1,13 @@
 package net.azib.java.students.t093052.homework.action.output;
 
+import net.azib.java.students.t093052.homework.DecathlonComputation;
+
 import java.io.IOException;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
-
-import net.azib.java.students.t093052.homework.DecathlonComputation;
 
 /**
  * This class represents the html output action.

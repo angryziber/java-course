@@ -1,8 +1,6 @@
 package net.azib.java.students.t073639.taskAggregation;
 
-import static org.junit.Assert.*;
-
-import net.azib.java.students.t073639.taskAggregation.Circle;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

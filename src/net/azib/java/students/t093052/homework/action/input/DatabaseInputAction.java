@@ -1,5 +1,8 @@
 package net.azib.java.students.t093052.homework.action.input;
 
+import net.azib.java.students.t093052.homework.Athlete;
+import net.azib.java.students.t093052.homework.DecathlonComputation;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-
-import net.azib.java.students.t093052.homework.Athlete;
-import net.azib.java.students.t093052.homework.DecathlonComputation;
 
 /**
  * This class represents the database input action.

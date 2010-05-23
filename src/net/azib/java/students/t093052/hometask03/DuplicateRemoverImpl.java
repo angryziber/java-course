@@ -3,8 +3,8 @@ package net.azib.java.students.t093052.hometask03;
 import net.azib.java.lessons.collections.DuplicateRemover;
 
 import java.util.Arrays;
-import java.util.Set;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * DuplicateRemoverImpl

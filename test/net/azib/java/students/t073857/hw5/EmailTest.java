@@ -1,8 +1,7 @@
 package net.azib.java.students.t073857.hw5;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.easymock.internal.AssertionErrorWrapper;
 import org.junit.Test;
 
 

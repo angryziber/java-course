@@ -1,6 +1,5 @@
 package net.azib.java.students.t092875.hw2;
 
-import  net.azib.java.students.t092875.hw2.Animal;
 
 /**
  * AnimalKingdom

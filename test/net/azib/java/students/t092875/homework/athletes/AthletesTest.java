@@ -1,9 +1,10 @@
 package net.azib.java.students.t092875.homework.athletes;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * AthletesTest

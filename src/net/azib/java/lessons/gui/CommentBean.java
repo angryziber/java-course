@@ -1,12 +1,12 @@
 package net.azib.java.lessons.gui;
 
 import java.awt.Canvas;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.Dimension;
 
 /**
  * CommentBean

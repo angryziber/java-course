@@ -1,6 +1,6 @@
 package net.azib.java.students.t050720.homework;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

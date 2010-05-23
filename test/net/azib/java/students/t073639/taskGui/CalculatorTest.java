@@ -1,6 +1,6 @@
 package net.azib.java.students.t073639.taskGui;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

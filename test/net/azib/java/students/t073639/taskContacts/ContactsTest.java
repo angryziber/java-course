@@ -1,7 +1,7 @@
 package net.azib.java.students.t073639.taskContacts;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.regex.Pattern;
 

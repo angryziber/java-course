@@ -1,6 +1,6 @@
 package net.azib.java.students.t073857.hw3;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 

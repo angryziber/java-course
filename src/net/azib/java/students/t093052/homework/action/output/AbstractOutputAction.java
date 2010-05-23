@@ -1,9 +1,9 @@
 package net.azib.java.students.t093052.homework.action.output;
 
+import net.azib.java.students.t093052.homework.Athlete;
+
 import java.io.IOException;
 import java.io.Writer;
-
-import net.azib.java.students.t093052.homework.Athlete;
 
 public abstract class AbstractOutputAction implements OutputAction {
 	private Writer writer;

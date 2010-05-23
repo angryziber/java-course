@@ -1,5 +1,4 @@
 package net.azib.java.students.t050720.homework;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;

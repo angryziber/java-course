@@ -1,6 +1,5 @@
 package net.azib.java.lessons.basic;
 
-import java.io.Serializable;
 
 /**
  * Dog

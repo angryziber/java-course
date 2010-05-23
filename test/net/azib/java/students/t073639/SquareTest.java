@@ -1,8 +1,8 @@
 package net.azib.java.students.t073639;
 
-import static org.junit.Assert.*;
-
 import net.azib.java.students.t073639.taskAggregation.Square;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

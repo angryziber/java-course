@@ -1,9 +1,11 @@
 package net.azib.java.students.t050720.homework;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import javax.xml.transform.*;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 
 /**
  * <b>HTMLOutput</b>

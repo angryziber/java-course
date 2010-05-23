@@ -1,6 +1,7 @@
 package net.azib.java.students.t092860.homework;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Locale;
 import java.util.logging.Level;

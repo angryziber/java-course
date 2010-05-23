@@ -1,9 +1,9 @@
 package net.azib.java.students.t093052.homework.action.input;
 
-import java.util.Set;
-
 import net.azib.java.students.t093052.homework.Athlete;
 import net.azib.java.students.t093052.homework.action.Action;
+
+import java.util.Set;
 
 /**
  * This interface represents the common format of all input actions

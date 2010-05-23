@@ -1,11 +1,11 @@
 package net.azib.java.students.t073857.hw3;
 
-import net.azib.java.students.t073857.hw3.WordFrequencyCalculatorImpl;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
 import java.util.Map;
 import java.util.Set;
+
+import org.junit.Test;
 
 
 /**

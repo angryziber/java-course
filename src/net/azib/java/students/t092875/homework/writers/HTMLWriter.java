@@ -1,11 +1,13 @@
 package net.azib.java.students.t092875.homework.writers;
 
 import net.azib.java.students.t092875.homework.athletes.Athlete;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.util.List;
+
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;

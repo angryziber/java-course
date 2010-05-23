@@ -1,13 +1,14 @@
 package net.azib.java.students.t092875.homework.readers;
 import net.azib.java.students.t092875.homework.athletes.Athlete;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+
+import org.junit.Test;
 /**
  * DatabaseReaderTest
  *

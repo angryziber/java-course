@@ -1,7 +1,6 @@
 package net.azib.java.lessons.gui;
 
 import java.applet.Applet;
-import java.awt.Dimension;
 import java.awt.Button;
 import java.awt.TextField;
 

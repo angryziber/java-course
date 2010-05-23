@@ -1,10 +1,5 @@
 package net.azib.java.students.t100258.Homework;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 /**

@@ -1,7 +1,6 @@
 package net.azib.java.lessons.xml;
 
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;

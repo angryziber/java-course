@@ -3,8 +3,6 @@ package net.azib.java.students.t092875.hw3;
 import net.azib.java.lessons.collections.DuplicateRemover;
 import net.azib.java.lessons.collections.WordFrequencyCalculator;
 
-import java.lang.reflect.Array;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;

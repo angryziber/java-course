@@ -1,12 +1,12 @@
 package net.azib.java.students.t093052.homework;
 
-import static org.junit.Assert.*;
+import static net.azib.java.students.t093052.homework.CompetitionType.HIGH_JUMP;
+import static net.azib.java.students.t093052.homework.CompetitionType.RACE_1500M;
+import static net.azib.java.students.t093052.homework.CompetitionType.SPRINT_100M;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import static net.azib.java.students.t093052.homework.CompetitionType.RACE_1500M;
-import static net.azib.java.students.t093052.homework.CompetitionType.HIGH_JUMP;
-import static net.azib.java.students.t093052.homework.CompetitionType.SPRINT_100M;
 
 public class CompetitionTypeTest {
 	@Test

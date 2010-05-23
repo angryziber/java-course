@@ -1,6 +1,6 @@
 package net.azib.java.lessons.text;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.text.Collator;
 import java.text.RuleBasedCollator;

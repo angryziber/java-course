@@ -1,6 +1,5 @@
 package net.azib.java.lessons.patterns;
 
-import java.util.Arrays;
 
 /**
  * StrategyDemo

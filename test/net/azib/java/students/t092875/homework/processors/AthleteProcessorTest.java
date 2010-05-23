@@ -1,7 +1,7 @@
 package net.azib.java.students.t092875.homework.processors;
-import static org.junit.Assert.*;
-
 import net.azib.java.students.t092875.homework.athletes.Athlete;
+
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collections;

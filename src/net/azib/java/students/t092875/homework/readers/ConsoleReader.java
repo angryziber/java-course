@@ -3,7 +3,6 @@ package net.azib.java.students.t092875.homework.readers;
 import net.azib.java.students.t092875.homework.athletes.Athlete;
 import net.azib.java.students.t092875.homework.competiotions.Competiotion;
 
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

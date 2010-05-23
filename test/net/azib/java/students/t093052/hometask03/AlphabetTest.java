@@ -1,6 +1,7 @@
 package net.azib.java.students.t093052.hometask03;
 
 import static org.junit.Assert.assertArrayEquals;
+
 import java.text.Collator;
 import java.util.Arrays;
 import java.util.Locale;

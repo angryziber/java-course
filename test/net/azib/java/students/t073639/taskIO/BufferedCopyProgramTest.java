@@ -2,7 +2,9 @@ package net.azib.java.students.t073639.taskIO;
 
 import net.azib.java.lessons.io.PerformanceTimer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

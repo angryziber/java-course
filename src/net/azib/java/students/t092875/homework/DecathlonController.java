@@ -1,7 +1,14 @@
 package net.azib.java.students.t092875.homework;
 
-import net.azib.java.students.t092875.homework.readers.*;
-import net.azib.java.students.t092875.homework.writers.*;
+import net.azib.java.students.t092875.homework.readers.CSVReader;
+import net.azib.java.students.t092875.homework.readers.ConsoleReader;
+import net.azib.java.students.t092875.homework.readers.DatabaseReader;
+import net.azib.java.students.t092875.homework.readers.DecathlonReader;
+import net.azib.java.students.t092875.homework.writers.CSVWriter;
+import net.azib.java.students.t092875.homework.writers.ConsoleWriter;
+import net.azib.java.students.t092875.homework.writers.DecathlonWriter;
+import net.azib.java.students.t092875.homework.writers.HTMLWriter;
+import net.azib.java.students.t092875.homework.writers.XMLWriter;
 
 /**
  * DecathlonController

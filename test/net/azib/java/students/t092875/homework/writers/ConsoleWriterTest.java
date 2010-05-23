@@ -2,7 +2,7 @@ package net.azib.java.students.t092875.homework.writers;
 
 import net.azib.java.students.t092875.homework.athletes.Athlete;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**

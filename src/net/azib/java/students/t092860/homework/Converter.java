@@ -1,6 +1,5 @@
 package net.azib.java.students.t092860.homework;
 
-import java.lang.Math;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Collection;

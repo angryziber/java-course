@@ -1,7 +1,9 @@
 package net.azib.java.students.t092875.homework;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
 /**
  * DecathlonControllerTest
  *

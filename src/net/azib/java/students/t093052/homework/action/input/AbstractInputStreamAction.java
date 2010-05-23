@@ -1,11 +1,11 @@
 package net.azib.java.students.t093052.homework.action.input;
 
+import net.azib.java.students.t093052.homework.Athlete;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.Set;
-
-import net.azib.java.students.t093052.homework.Athlete;
 
 /**
  * This class holds the common methods of console and csv input actions

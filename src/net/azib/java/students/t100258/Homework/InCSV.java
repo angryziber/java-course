@@ -1,10 +1,9 @@
 package net.azib.java.students.t100258.Homework;
 
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.Float;
+import java.util.ArrayList;
 
 
 /**

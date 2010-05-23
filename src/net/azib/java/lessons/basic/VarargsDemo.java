@@ -1,6 +1,6 @@
 package net.azib.java.lessons.basic;
 
-import static java.lang.System.*;
+import static java.lang.System.out;
 
 /**
  * VarargsDemo

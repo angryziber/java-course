@@ -1,5 +1,8 @@
 package net.azib.java.students.t093052.homework.action.output;
 
+import net.azib.java.students.t093052.homework.Athlete;
+import net.azib.java.students.t093052.homework.DecathlonComputation;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,9 +21,6 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-
-import net.azib.java.students.t093052.homework.Athlete;
-import net.azib.java.students.t093052.homework.DecathlonComputation;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
