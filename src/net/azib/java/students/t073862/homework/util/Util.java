@@ -1,6 +1,5 @@
 package net.azib.java.students.t073862.homework.util;
 
-import net.azib.java.lessons.xml.DOMDemo;
 import net.azib.java.students.t073862.homework.Main;
 
 import java.io.BufferedWriter;
@@ -18,10 +17,8 @@ import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 /**
  * Utilities class, random calculations etc
@@ -94,8 +91,6 @@ public class Util {
 		};
 	private static Float[] B = { 18F, 220F, 1.5F, 75F, 82F, 28.5F, 4F, 100F, 7F, 480F  };
 	private static Float[] C = { 1.81F, 1.4F, 1.05F, 1.42F, 1.81F, 1.92F, 1.1F, 1.35F, 1.08F, 1.85F };
-	private static String[] races = { "race_100m", "long_jump", "shot_put", "high_jump", "race_400m", "hurdles_110m", "discus_throw", "pole_vault", "javelin_throw", "race_1500m" };
-
 	private static boolean[] trackEvent = { 
 		true, //race_100m
 		false, //long_jump

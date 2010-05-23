@@ -28,10 +28,7 @@ public class InputManager {
 
 	private String[] races = { "race_100m", "long_jump", "shot_put", "high_jump", "race_400m", "hurdles_110m", "discus_throw", "pole_vault", "javelin_throw", "race_1500m" };
 
-	private DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 	private DateFormat formatter2 = new SimpleDateFormat("dd.mm.yyyy");
-	private DateFormat formatter3 = new SimpleDateFormat("m:s.S");	
-
 	/**
 	 * Loads input from the database
 	 * @param option

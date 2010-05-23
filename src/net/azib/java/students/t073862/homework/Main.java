@@ -1,6 +1,5 @@
 package net.azib.java.students.t073862.homework;
 
-import net.azib.java.lessons.xml.XSLDemo;
 import net.azib.java.students.t073862.homework.model.InputManager;
 import net.azib.java.students.t073862.homework.model.OutputManager;
 import net.azib.java.students.t073862.homework.model.Score;
@@ -8,16 +7,6 @@ import net.azib.java.students.t073862.homework.util.Util;
 
 import java.io.File;
 import java.util.Arrays;
-
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-
-import org.antlr.stringtemplate.StringTemplate;
-import org.antlr.stringtemplate.StringTemplateGroup;
-import org.w3c.dom.Document;
 
 
 /**
