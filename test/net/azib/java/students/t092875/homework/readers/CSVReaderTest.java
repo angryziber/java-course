@@ -20,6 +20,7 @@ public class CSVReaderTest {
 	public void testRead(){
 		CSVReader reader = new CSVReader("test_file.csv");
 		List<Athlete> athletes = reader.read();
+		// fails here with NPE
 		assertEquals(1, athletes.size());
 		assertEquals("Mumbalele-Nsowu Mensah-Bonsu Pops", athletes.get(0).getName());
 		assertEquals("ZW", athletes.get(0).getOrigin());

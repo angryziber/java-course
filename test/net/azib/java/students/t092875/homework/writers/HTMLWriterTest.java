@@ -35,6 +35,7 @@ public class HTMLWriterTest {
 		writer.write(athletes);
 		File resultFile = new File("test_write_result.html");
 		try {
+			// fails here
 			assertTrue(IOUtils.contentEquals(this.getClass().getResourceAsStream("test_write_data.html"), new FileInputStream(resultFile)));
 		}catch (FileNotFoundException e) {
 			e.printStackTrace();

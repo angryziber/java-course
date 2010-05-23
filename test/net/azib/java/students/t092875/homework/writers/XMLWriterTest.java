@@ -26,7 +26,7 @@ import org.w3c.dom.Document;
  * @author Mihhail
  */
 public class XMLWriterTest {
-	@Test @Ignore
+	@Test
 	public void  testWrite(){
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		Date dob = new Date(0);
@@ -50,7 +50,7 @@ public class XMLWriterTest {
 			
 			assertXpathEvaluatesTo("Mihhail Arhipov", "/athletes/athlete[1]/@name", doc);
 			assertXpathEvaluatesTo("ET", "/athletes/athlete[1]/@origin", doc);
-			assertXpathEvaluatesTo("01.01.70", "/athletes/athlete[1]/@dob", doc);
+			assertXpathEvaluatesTo("01/01/70", "/athletes/athlete[1]/@dob", doc);
 			assertXpathEvaluatesTo("1", "/athletes/athlete[1]/@place", doc);
 			
 			assertXpathEvaluatesTo("50.20", "/athletes/athlete[1]/event[1]", doc);
@@ -82,7 +82,7 @@ public class XMLWriterTest {
 		}
 	}
 	
-	@Test @Ignore
+	@Test
 	public void  testGenerateXML(){
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		Date dob = new Date(0);
@@ -101,7 +101,7 @@ public class XMLWriterTest {
 			
 			assertXpathEvaluatesTo("Mihhail Arhipov", "/athletes/athlete[1]/@name", doc);
 			assertXpathEvaluatesTo("ET", "/athletes/athlete[1]/@origin", doc);
-			assertXpathEvaluatesTo("01.01.70", "/athletes/athlete[1]/@dob", doc);
+			assertXpathEvaluatesTo("01/01/70", "/athletes/athlete[1]/@dob", doc);
 			assertXpathEvaluatesTo("1", "/athletes/athlete[1]/@place", doc);
 			
 			assertXpathEvaluatesTo("50.20", "/athletes/athlete[1]/event[1]", doc);
