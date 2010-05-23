@@ -57,6 +57,6 @@ public class HTMLWriterTest {
 		while((line=reader.readLine())!=null){
 			data+=line;
 		}
-		assertEquals(data, test);
+		assertEquals(test, data);
 	}
 }
