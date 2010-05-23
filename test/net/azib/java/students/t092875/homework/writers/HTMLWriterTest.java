@@ -23,7 +23,7 @@ import org.junit.Test;
  */
 public class HTMLWriterTest {
 	List<Athlete> athletes;
-
+	File path;
 	@Before
 	public void prepareData() {
 		athletes = new ArrayList<Athlete>();
@@ -32,16 +32,20 @@ public class HTMLWriterTest {
 		a.setPlace("1");
 		a.setResult(2000);
 		athletes.add(a);
+		
+		//File path
+		path = new File("test/"+this.getClass().getPackage().toString().replace(".", "/").replace("package ", ""));
 	}
 
-	@Test @Ignore
+	@Test
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
 		writer.write(athletes);
 		File resultFile = new File("test_write_result.html");
-		
-		InputStream testStream = HTMLWriterTest.class.getResource("test_write_data.html").openStream();
+		File dataFile = new File(path,"test_write_data.html");
+		//InputStream testStream = HTMLWriterTest.class.getResource("test_write_data.html").openStream();
 		FileInputStream resultStream = new FileInputStream(resultFile);
+		FileInputStream testStream = new FileInputStream(dataFile);
 		
 		assertTrue(IOUtils.contentEquals(testStream, resultStream));
 		resultFile.delete();
