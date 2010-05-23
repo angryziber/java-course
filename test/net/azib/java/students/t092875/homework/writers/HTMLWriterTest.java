@@ -47,7 +47,7 @@ public class HTMLWriterTest {
 				new FileInputStream(new File("test_write_result.html"))
 		));*/
 		byte[] b = new byte[10000000];
-		new FileInputStream(new File(path,"test_write_data.html")).read(b);
+		new FileInputStream(new File("test_write_data.html")).read(b);
 		byte[] a = new byte[10000000];;
 		new FileInputStream(new File("test_write_result.html")).read(a);
 		assertArrayEquals(b, a);
