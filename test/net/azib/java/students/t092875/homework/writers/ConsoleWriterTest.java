@@ -7,7 +7,9 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -17,11 +19,17 @@ import org.junit.Test;
  * @author Mihhail
  */
 public class ConsoleWriterTest {
+	
+	@Before
+	public void initLocale() {
+		Locale.setDefault(new Locale("et"));
+	}
+
 	@Test
 	public void  testWrite(){
 		String[] expectedResults = {
 			"Athlete: Mihhail Arhipov(ET)",
-			"Date Of Birth: 01/01/70",
+			"Date Of Birth: 1.01.70",
 			"Place: 1",
 			"Result in sprint 100m: 50.20",
 			"Result in long jump: 50.20",

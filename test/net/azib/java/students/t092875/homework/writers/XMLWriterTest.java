@@ -12,10 +12,13 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -26,6 +29,11 @@ import org.w3c.dom.Document;
  * @author Mihhail
  */
 public class XMLWriterTest {
+	@Before
+	public void initLocale() {
+		Locale.setDefault(new Locale("et"));
+	}
+	
 	@Test
 	public void  testWrite(){
 		List<Athlete> athletes = new ArrayList<Athlete>();
@@ -50,7 +58,7 @@ public class XMLWriterTest {
 			
 			assertXpathEvaluatesTo("Mihhail Arhipov", "/athletes/athlete[1]/@name", doc);
 			assertXpathEvaluatesTo("ET", "/athletes/athlete[1]/@origin", doc);
-			assertXpathEvaluatesTo("01/01/70", "/athletes/athlete[1]/@dob", doc);
+			assertXpathEvaluatesTo("1.01.70", "/athletes/athlete[1]/@dob", doc);
 			assertXpathEvaluatesTo("1", "/athletes/athlete[1]/@place", doc);
 			
 			assertXpathEvaluatesTo("50.20", "/athletes/athlete[1]/event[1]", doc);
@@ -101,7 +109,7 @@ public class XMLWriterTest {
 			
 			assertXpathEvaluatesTo("Mihhail Arhipov", "/athletes/athlete[1]/@name", doc);
 			assertXpathEvaluatesTo("ET", "/athletes/athlete[1]/@origin", doc);
-			assertXpathEvaluatesTo("01/01/70", "/athletes/athlete[1]/@dob", doc);
+			assertXpathEvaluatesTo("1.01.70", "/athletes/athlete[1]/@dob", doc);
 			assertXpathEvaluatesTo("1", "/athletes/athlete[1]/@place", doc);
 			
 			assertXpathEvaluatesTo("50.20", "/athletes/athlete[1]/event[1]", doc);
