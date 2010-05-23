@@ -1,13 +1,23 @@
 package net.azib.java.students.t073862.homework;
 
+import net.azib.java.lessons.xml.XSLDemo;
 import net.azib.java.students.t073862.homework.model.InputManager;
+import net.azib.java.students.t073862.homework.model.OutputManager;
 import net.azib.java.students.t073862.homework.model.Score;
 import net.azib.java.students.t073862.homework.util.Util;
 
 import java.io.File;
+import java.util.Arrays;
+
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
+import org.w3c.dom.Document;
 
 
 /**
@@ -40,28 +50,23 @@ public class Main {
 		else if(input.equalsIgnoreCase("-csv")) {
 			scores = inputManager.loadInputFromCSV(new File(args[pointer++]));
 		}
-		
+		Arrays.sort(scores);
+		OutputManager outputManager = new OutputManager();
 		String output = args[pointer++];
 		if(output.equalsIgnoreCase("-console")) {
-			for(Score s : scores) {
-				System.out.println(s);
-			}
+			outputManager.toConsole(scores);
 		}
 		else if(output.equalsIgnoreCase("-xml")) {
 			File f = Util.getOutputFile(args[pointer++]);
-			
-			StringTemplateGroup group = new StringTemplateGroup("Group Name",Main.class.getResource("").getFile().replace("%20", " "));
-			StringTemplate tmp = group.getInstanceOf("XML");
-			tmp.setAttribute("scores", scores);
-			Util.writeToFile(f,tmp.toString());
+			outputManager.toXML(scores, f);
 		}
 		else if(output.equalsIgnoreCase("-csv")) {
 			File f = Util.getOutputFile(args[pointer++]);
-				
-			StringTemplateGroup group = new StringTemplateGroup("Group Name",Main.class.getResource("").getFile().replace("%20", " "));
-			StringTemplate tmp = group.getInstanceOf("CSV");
-			tmp.setAttribute("scores", scores);
-			Util.writeToFile(f,tmp.toString());
+			outputManager.toCSV(scores, f);
+		}
+		else if(output.equalsIgnoreCase("-html")) {
+			File f = Util.getOutputFile(args[pointer++]);
+			outputManager.toHTML(scores, f);
 		}
 		
 	}

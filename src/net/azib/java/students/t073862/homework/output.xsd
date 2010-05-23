@@ -7,10 +7,12 @@
 		<xs:element name="score" maxOccurs="unbounded">
 			<xs:complexType>
     		<xs:sequence>
+    			<xs:element name="place" type="xs:id"/>
         		<xs:element name="name" type="xs:string"/>
             	<xs:element name="dob" type="xs:string"/>
             	<xs:element name="iso" type="xs:integer"/>
             	<xs:element name="points" type="xs:integer"/>
+            	<xs:element name="scoreData" type="xs:string"/>
     		</xs:sequence>
 		</xs:complexType>
 		</xs:element>

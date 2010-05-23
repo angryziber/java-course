@@ -75,21 +75,19 @@ public class InputManager {
 		ArrayList<Score> scores = new ArrayList<Score>();
 		try {
 			while(resultset.next()) {
-			    Date date = null;
+				Date date = null;
 				try {
-					date = (Date)formatter.parse(resultset.getString("dob"));
+					date = resultset.getDate("dob");
 				}
-				catch (ParseException e) {
-					e.printStackTrace();
-					System.out.println("SQL exceptions shouldn't happen!");
-					System.exit(1);
+				catch(Exception e) {
+					date = new Date(0);
 				}
-				Float[] scoreData = new Float[races.length];
+			    Float[] scoreData = new Float[races.length];
 				for(int i = 0; i < races.length; i++) {
 					scoreData[i] = resultset.getFloat(races[i]);
 				}
 
-				scores.add(new Score(resultset.getString("name"),date.toString() ,resultset.getString("country_code"),Util.calculateScores(scoreData)));
+				scores.add(new Score(resultset.getString("name"),date.toString() ,resultset.getString("country_code"),Util.calculateScores(scoreData),scoreData));
 			}
 		}
 		catch (SQLException e) {
@@ -150,9 +148,10 @@ public class InputManager {
 		                		fx = Float.parseFloat(token);
 		                		}
 		                		catch(NumberFormatException e) {
-			    					date = formatter3.parse(token);
-			    					fx = Float.parseFloat("" + date.getTime()/1000);
+			    					fx = parseMinutesToSeconds(token);
+
 		                		}
+		                		
 
 		                	}
 		                	else {
@@ -165,16 +164,11 @@ public class InputManager {
 		                	System.out.println("Error in CSV file");
 		                	System.exit(1);
 		                }
-		                catch(ParseException e) {
-		                	e.printStackTrace();
-		                	System.out.println("Error in CSV file");
-		                	System.exit(1);
-		                }
 		            
 		            }
 		        	i++;
 		        }
-		        scores.add(new Score(name,date.toString() ,iso ,Util.calculateScores(scoreData)));
+		        scores.add(new Score(name,date.toString() ,iso ,Util.calculateScores(scoreData),scoreData));
 			
 			}
 		}
@@ -184,6 +178,11 @@ public class InputManager {
         	System.exit(1);
 		}
 		return scores.toArray(new Score[]{});
+	}
+	
+	private float parseMinutesToSeconds(String s) throws NumberFormatException {
+		String data[] = s.split(":");
+		return Integer.valueOf(data[0])*60+Float.valueOf(data[1]);
 	}
 	
 	/**
@@ -233,7 +232,7 @@ public class InputManager {
 		for(int i = 0; i < races.length; i++) {
 			scoreData[i]  = Util.getFloat("Please enter results for: " + races[i]);
 		}
-		scores.add(new Score(name,date.toString() ,iso ,Util.calculateScores(scoreData)));
+		scores.add(new Score(name,date.toString() ,iso ,Util.calculateScores(scoreData),scoreData));
 		return consoleActon(scores);
 	}
 }

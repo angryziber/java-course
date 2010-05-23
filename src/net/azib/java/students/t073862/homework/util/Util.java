@@ -1,5 +1,6 @@
 package net.azib.java.students.t073862.homework.util;
 
+import net.azib.java.lessons.xml.DOMDemo;
 import net.azib.java.students.t073862.homework.Main;
 
 import java.io.BufferedWriter;
@@ -8,11 +9,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.net.URL;
 import java.util.InputMismatchException;
 import java.util.Properties;
 import java.util.Scanner;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
  * Utilities class, random calculations etc
@@ -181,5 +190,16 @@ public class Util {
 			}
 		}
 		return f;
+	}
+	/**
+	 * Loads a DOM Document from a XML file
+	 * @param string
+	 * @return
+	 */
+	public static Document loadDocument(String string) throws Exception {
+		InputStream stream = Main.class.getResourceAsStream(string);
+		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		return builder.parse(stream);
+		
 	}
 }
