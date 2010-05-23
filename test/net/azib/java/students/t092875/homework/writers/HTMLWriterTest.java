@@ -43,7 +43,6 @@ public class HTMLWriterTest {
 	}
 
 	@Test
-	@Ignore
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
 		writer.write(athletes);
@@ -58,6 +57,6 @@ public class HTMLWriterTest {
 		while((line=reader.readLine())!=null){
 			data+=line;
 		}
-		assertEquals(test, data);
+		assertEquals(data, test);
 	}
 }
