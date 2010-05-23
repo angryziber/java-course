@@ -15,6 +15,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
@@ -31,6 +32,7 @@ public class HTMLWriterTest {
 	File path;
 	@Before
 	public void prepareData() {
+		Locale.setDefault(new Locale("et"));
 		athletes = new ArrayList<Athlete>();
 		String[] results = { "50.20", "50.20", "50.20", "50.20", "50.20", "50.20", "50.20", "50.20", "50.20", "50.20" };
 		Athlete a = new Athlete("Mihhail Arhipov", new Date(0), "ET", results);
