@@ -22,10 +22,7 @@ public enum Events {
 	}
 	
 	private Events(Units units) {
-		if(units == Units.METERS || units == Units.SECONDS)
-			this.units = units;
-		else
-			this.units = Units.SECONDS;
+		this.units = units;
     }
 
 	/**
