@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,11 +33,10 @@ public class HTMLWriterTest {
 		athletes.add(a);
 		
 		//File path
-		path = new File("test/"+this.getClass().getPackage().toString().replace(".", "/").replace("package ", ""));
+		path = new File("src/"+this.getClass().getPackage().toString().replace(".", "/").replace("package ", ""));
 	}
 
 	@Test
-	@Ignore
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
 		writer.write(athletes);
