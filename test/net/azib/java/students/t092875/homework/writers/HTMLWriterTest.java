@@ -38,17 +38,16 @@ public class HTMLWriterTest {
 	}
 
 	@Test
-	@Ignore
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
 		writer.write(athletes);
-		File path = new File("test/net/azib/java/students/t092875/homework/writers");
+		File path = new File("test/net/azib/java/students/t092875/hw4/part2");
 		/*assertTrue(IOUtils.contentEquals(
 				new FileInputStream(new File(path,"test_write_data.html")),
 				new FileInputStream(new File("test_write_result.html"))
 		));*/
 		byte[] b = new byte[10000000];
-		new FileInputStream(new File("test_write_data.html")).read(b);
+		new FileInputStream(new File(path,"test_write_data.html")).read(b);
 		byte[] a = new byte[10000000];;
 		new FileInputStream(new File("test_write_result.html")).read(a);
 		assertArrayEquals(b, a);
