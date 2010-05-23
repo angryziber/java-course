@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,13 +41,10 @@ public class HTMLWriterTest {
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
 		writer.write(athletes);
-		File resultFile = new File("test_write_result.html");
-		File dataFile = new File(path,"test_write_data.html");
-		//InputStream testStream = HTMLWriterTest.class.getResource("test_write_data.html").openStream();
-		FileInputStream resultStream = new FileInputStream(resultFile);
-		FileInputStream testStream = new FileInputStream(dataFile);
 		
-		assertTrue(IOUtils.contentEquals(testStream, resultStream));
-		resultFile.delete();
+		assertTrue(IOUtils.contentEquals(
+				this.getClass().getResourceAsStream("test_write_data.html"),
+				new FileInputStream(new File("test_write_result.html"))
+		));
 	}
 }
