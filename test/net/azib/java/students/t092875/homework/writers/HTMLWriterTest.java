@@ -38,6 +38,7 @@ public class HTMLWriterTest {
 	}
 
 	@Test
+	@Ignore
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
 		writer.write(athletes);
