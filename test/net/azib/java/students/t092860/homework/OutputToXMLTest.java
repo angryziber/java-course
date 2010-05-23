@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -25,7 +24,7 @@ public class OutputToXMLTest {
 	 * Test method for {@link net.azib.java.students.t092860.homework.OutputToXML#set(java.util.List)}.
 	 * @throws Exception 
 	 */
-	@Test @Ignore
+	@Test
 	public final void testSet() throws Exception {
 		OutputStreamMock outputMock = new OutputStreamMock();
 		OutputToXML testObj = new OutputToXML(outputMock);
@@ -33,13 +32,14 @@ public class OutputToXMLTest {
 				
 		testObj.set(TestData.GetOutputData());
 		
-		String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+System.getProperty("line.separator")+
+		// Warning: locale & OS-specific test!
+		String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" +
 		"<Competition>" +
 			"<Athlete>" +
 				"<Position>1</Position>" +
 				"<Score>6000</Score>" +
 				"<Name>Name</Name>" +
-				"<Birthdate>reede, 20. Oktoober 2000</Birthdate>" +
+				"<Birthdate>Friday, 20 October 2000</Birthdate>" +
 				"<Country>EE</Country>" +
 				"<Events>" +
 					"<RACE_100M>90.00</RACE_100M>" +
@@ -54,9 +54,9 @@ public class OutputToXMLTest {
 					"<RACE_1500M>90.00</RACE_1500M>" +
 				"</Events>" +
 			"</Athlete>" +
-		"</Competition>"+System.getProperty("line.separator");
+		"</Competition>\r\n";
 		
 		String result = outputMock.read();
-		assertTrue(result.compareTo(expected) == 0);
+		assertEquals(expected, result);
 	}
 }
