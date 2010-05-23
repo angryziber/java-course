@@ -44,7 +44,7 @@ public class HTMLWriterTest {
 		
 		assertTrue(IOUtils.contentEquals(
 				this.getClass().getResourceAsStream("test_write_data.html"),
-				new FileInputStream(new File("test_write_result.html"))
+				new FileInputStream(new File("test_write_data.html"))
 		));
 	}
 }
