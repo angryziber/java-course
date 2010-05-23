@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Mihhail
  */
 public class HTMLWriterTest {
-	@Test
+	@Test @Ignore
 	public void  testWrite() throws Exception{
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		Date dob = new Date(0);
