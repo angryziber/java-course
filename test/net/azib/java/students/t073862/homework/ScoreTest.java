@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 import junit.framework.Assert;
 
@@ -25,20 +26,19 @@ import org.junit.Test;
  * @author Pets
  */
 public class ScoreTest {
-
+	Float[] scores = new Float[] { 10.395F, 7.76F, 18.4F, 2.20F, 46.17F, 13.8F, 56.17F, 5.28F, 77.19F, 233.79F };
 	@Test
 	public void testScoreModel() {
-		Score s = new Score("Peeter Tomberg", "18.06.1988", "ee", 10);
+		Score s = new Score("Peeter Tomberg", "18.06.1988", "ee", 9990, scores);
 		Assert.assertEquals("Name getter returning the right result?" ,"Peeter Tomberg", s.getName());
 		Assert.assertEquals("Dob getter returning the right result?" ,"18.06.1988", s.getDob());
 		Assert.assertEquals("Iso getter returning the right result?" ,"ee", s.getIso());	
-		Assert.assertEquals("toString returning the right result?" ,"Peeter Tomberg(18.06.1988) from ee scored: 10", s.toString());	
+		Assert.assertEquals("toString returning the right result?" ,"Peeter Tomberg(18.06.1988) from ee scored: 9990 " + Arrays.toString(scores), s.toString());	
 	}
 	@Test @Ignore("Test fails!")
 	public void testScoreCalculation() {
 		
-		int score = Util.calculateScores(new Float[] { 10.395F, 7.76F, 18.4F, 2.20F, 46.17F, 13.8F, 56.17F, 5.28F, 77.19F, 233.79F });
-		Assert.assertEquals("Do we lose precision somewhere? ",10000, score);
+		Assert.assertEquals("Do we lose precision somewhere? ",10000, Util.calculateScores(scores));
 	
 	}
 	@Test
