@@ -18,7 +18,7 @@ public class DatabaseInputTest {
 	/**
 	 * Test reading database connection properties
 	 */
-	@Test @Ignore
+	@Test
 	public void testReadProps()
 	{
 		try {
@@ -34,7 +34,7 @@ public class DatabaseInputTest {
 	/**
 	 * Test actual reading from database.
 	 */
-	@Test @Ignore
+	@Test
 	public void testData() {
 		ArrayList<Record> records = new ArrayList<Record>();
 		try {

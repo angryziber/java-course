@@ -19,7 +19,7 @@ public class ConsoleInputTest {
 	/**
 	 * Test method for {@link net.azib.java.students.t050720.homework.ConsoleInput#readInto(java.util.ArrayList)}.
 	 */
-	@Test @Ignore
+	@Test @Ignore("Interactive test, blocks console!")
 	public void testReadInto() {
 		ArrayList<Record> records = new ArrayList<Record>();
 		ConsoleInput ci=new ConsoleInput();

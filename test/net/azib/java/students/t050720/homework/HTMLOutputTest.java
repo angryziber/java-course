@@ -22,7 +22,7 @@ public class HTMLOutputTest {
 	 * Test method for {@link net.azib.java.students.t050720.homework.HTMLOutput#flush(java.util.ArrayList)}.
 	 */
 
-	@Test @Ignore
+	@Test
 	public void telush() {
 		File ftmp=null;
 		try {
