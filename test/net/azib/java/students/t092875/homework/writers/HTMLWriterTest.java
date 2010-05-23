@@ -1,12 +1,17 @@
 package net.azib.java.students.t092875.homework.writers;
 
+import net.azib.java.lessons.io.LineBasedReading;
 import net.azib.java.students.t092875.homework.athletes.Athlete;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStream;
+import java.io.LineNumberReader;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,15 +46,17 @@ public class HTMLWriterTest {
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
 		writer.write(athletes);
-		File path = new File("test/net/azib/java/students/t092875/hw4/part2");
-		/*assertTrue(IOUtils.contentEquals(
-				new FileInputStream(new File(path,"test_write_data.html")),
-				new FileInputStream(new File("test_write_result.html"))
-		));*/
-		byte[] b = new byte[10000000];
-		new FileInputStream(new File(path,"test_write_data.html")).read(b);
-		byte[] a = new byte[10000000];;
-		new FileInputStream(new File("test_write_result.html")).read(a);
-		assertArrayEquals(b, a);
+		String data = "";
+		String test = "";
+		LineNumberReader reader = new LineNumberReader(new FileReader(new File("test_write_result.html")));
+		String line = null;
+		while((line=reader.readLine())!=null){
+			test+=line;
+		}
+		reader = new LineNumberReader(new FileReader(new File(path,"test_write_data.html")));
+		while((line=reader.readLine())!=null){
+			data+=line;
+		}
+		assertEquals(data, test);
 	}
 }
