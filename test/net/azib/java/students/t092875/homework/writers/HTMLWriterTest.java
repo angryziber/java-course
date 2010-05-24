@@ -42,6 +42,7 @@ public class HTMLWriterTest {
 	@Test
 	public void testWrite() throws Exception {
 		HTMLWriter writer = new HTMLWriter("test_write_result.html");
+		writer.changeEncoding("UTF-8");
 		writer.write(athletes);
 		String data = "";
 		String test = "";
