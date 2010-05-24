@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 /**
@@ -20,7 +22,12 @@ import org.junit.Test;
  * @author Mihhail
  */
 public class CSVWriterTest {
-	@Test @Ignore
+	@Before
+	public void prepareData() {
+		Locale.setDefault(new Locale("et"));
+	}
+	
+	@Test
 	public void  testWrite(){
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		Date dob = new Date(0);
