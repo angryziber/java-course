@@ -1,25 +1,15 @@
 package net.azib.java.students.t092875.homework.writers;
 
-import net.azib.java.lessons.io.LineBasedReading;
 import net.azib.java.students.t092875.homework.athletes.Athlete;
-
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStream;
 import java.io.LineNumberReader;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import org.apache.commons.io.IOUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -41,7 +31,7 @@ public class HTMLWriterTest {
 		athletes.add(a);
 		
 		//File path
-		path = new File("src/"+this.getClass().getPackage().toString().replace(".", "/").replace("package ", ""));
+		path = new File("test/"+this.getClass().getPackage().toString().replace(".", "/").replace("package ", ""));
 	}
 
 	@Test

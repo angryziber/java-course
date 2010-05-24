@@ -19,7 +19,7 @@ public class AthleteProcessorTest {
 	@Test
 	public void testGetSpecialPlace(){
 		AthleteProcessor processor = new AthleteProcessor();
-		assertEquals("3-4-5", processor.getSpecialPlace(3, 3));
+		assertEquals("3-5", processor.getSpecialPlace(3, 3));
 		assertEquals("4-5", processor.getSpecialPlace(2, 4));
 	}
 	
