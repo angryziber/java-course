@@ -36,5 +36,7 @@ public class DecathlonControllerTest {
 		assertEquals("ConsoleWriter", dc.setWriter(commands4).getClass().getSimpleName());
 		String[] commands5 = {"-console","console"};;
 		assertNull(dc.setWriter(commands5));
+		String[] commands6 = {"-console","-html"};
+		assertNull(dc.setWriter(commands6));
 	}
 }
