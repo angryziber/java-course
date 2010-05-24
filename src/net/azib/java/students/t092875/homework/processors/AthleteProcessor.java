@@ -110,15 +110,7 @@ public class AthleteProcessor {
 	 */
 	String getSpecialPlace(int places, int curPlace){
 		String specialPlace = "";
-		boolean first = true;
-		for(int i=curPlace; i<(curPlace+places); i++){
-			if(first){
-				specialPlace += i;
-				first = false;
-			}else{
-				specialPlace += "-"+i;
-			}
-		}
+		specialPlace = curPlace +"-"+(curPlace+places-1);
 		return specialPlace;	
 	}
 }

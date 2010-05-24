@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,7 +70,14 @@ public class DatabaseReader implements DecathlonReader {
 				for(int i=0; i<10; i++){
 					results[i] = rs.getString("event"+i);
 				}
-				athletes.add(new Athlete(name,rs.getDate("dob"),origin,results));
+				Date dob = null;
+				try{
+					dob = rs.getDate("dob");
+				}catch(Exception e){
+					System.err.println("Invalid date for athlete: "+name+"! Setting default date.");
+					dob = new Date();
+				}
+				athletes.add(new Athlete(name,dob,origin,results));
 			}
 		}
 		catch (SQLException e) {

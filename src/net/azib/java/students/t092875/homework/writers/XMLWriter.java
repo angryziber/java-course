@@ -39,7 +39,7 @@ public class XMLWriter implements DecathlonWriter {
 	@Override
 	public void write(List<Athlete> athletes) {
 		Document doc = this.generateXML(athletes);
-		OutputFormat of = new OutputFormat("XML","UTF-8",true);
+		OutputFormat of = new OutputFormat("XML","UTF-16",true);
 		of.setIndent(1);
 		of.setIndenting(true);
 		File xmlFile = new File(filename);
@@ -87,5 +87,4 @@ public class XMLWriter implements DecathlonWriter {
 		doc.appendChild(root);
 		return doc;
 	}
-
 }

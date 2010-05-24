@@ -8,20 +8,20 @@
     	<table border="2">
         	<tr>
             	<td>Place</td>
-                <td>Name</td>
-                <td>Country</td>
-                <td>DOB</td>
-                <td>event1</td>
-                <td>event2</td>
-                <td>event3</td>
-                <td>event4</td>
-                <td>event5</td>
-                <td>event6</td>
-                <td>event7</td>
-                <td>event8</td>
-                <td>event9</td>
-                <td>event10</td>
-                <td>Total Result</td>
+    			<td>Name</td>
+                <td>Origin</td>
+                <td>Date Of Birth</td>
+            	<td>100 m sprint</td>
+    			<td>Long jump</td>
+                <td>Shot put</td>
+                <td>High jump</td>
+                <td>400 m sprint</td>
+                <td>110 m hurdles</td>
+                <td>Discus throw</td>
+                <td>Pole vault</td>
+                <td>Javelin throw</td>
+                <td>1500 m race</td> 
+                <td>Total Result</td> 
             </tr>
 		<xsl:apply-templates/>
 		</table>
@@ -35,16 +35,16 @@
         <td><xsl:value-of select="@name"/></td>
         <td><xsl:value-of select="@origin"/></td>
         <td><xsl:value-of select="@dob"/></td>
-        <td><xsl:value-of select="event0"/></td>
-        <td><xsl:value-of select="event1"/></td>
-        <td><xsl:value-of select="event2"/></td>
-        <td><xsl:value-of select="event3"/></td>
-        <td><xsl:value-of select="event4"/></td>
-        <td><xsl:value-of select="event5"/></td>
-        <td><xsl:value-of select="event6"/></td>
-        <td><xsl:value-of select="event7"/></td>
-        <td><xsl:value-of select="event8"/></td>
-        <td><xsl:value-of select="event9"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
+        <td><xsl:value-of select="event"/></td>
         <td><b><xsl:value-of select="total_result"/></b></td>
 	</tr>
 </xsl:template>

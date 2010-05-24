@@ -4,10 +4,12 @@ import net.azib.java.students.t092875.homework.athletes.Athlete;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import javax.swing.text.html.HTML;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -36,20 +38,26 @@ public class HTMLWriter extends XMLWriter{
 	public void write(List<Athlete> athletes){
 		Document doc = this.generateXML(athletes);
 		StreamSource xslSource = new StreamSource(HTMLWriter.class.getResourceAsStream("athletes.xsl"));
+		OutputStreamWriter writer = null;
 		try {
 			Transformer template = TransformerFactory.newInstance().newTransformer(xslSource);
 			File html = new File(this.filename);
 			html.createNewFile();
 			FileOutputStream fos = new FileOutputStream(html);
-			OutputStreamWriter writer = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
+			writer = new OutputStreamWriter(fos, Charset.forName("UTF-16"));
 			StreamResult s = new StreamResult();
 			s.setWriter(writer);
 			template.transform(new DOMSource(doc), s);
 			writer.close();
-		}
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally{
+			try {
+				writer.close();
+			}
+			catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 }

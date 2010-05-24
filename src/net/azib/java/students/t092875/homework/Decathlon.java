@@ -6,6 +6,7 @@ import net.azib.java.students.t092875.homework.readers.DecathlonReader;
 import net.azib.java.students.t092875.homework.writers.DecathlonWriter;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * HomeWork
@@ -17,20 +18,9 @@ public class Decathlon {
 		if(args.length>1 && args.length<5){
 			new Decathlon().run(args);
 		}else if(args[0].equals("-help")){
-			System.out.println("Useage:");
-			System.out.println("Decathlon -<input-method> [input-parameters] -<output-method> [output-parameters]");
-			System.out.println("input methods:");
-			System.out.println("console: -console, does not take parameters");
-			System.out.println("csv: -csv csv_file_name");
-			System.out.println("database: -db competition_number");
-			System.out.println("output methods:");
-			System.out.println("console: -console, does not take parameters");
-			System.out.println("csv: -csv csv_file_name");
-			System.out.println("xml: -xml xml_file_name");
-			System.out.println("html: -html html_file_name");
+			new Decathlon().printHelp();
 		}else{
-			System.out.println("Useage:");
-			System.out.println("Decathlon -<input-method> [input-parameters] -<output-method> [output-parameters]");
+			new Decathlon().printUsage();
 		}
 	}
 	
@@ -39,7 +29,15 @@ public class Decathlon {
 		DecathlonWriter writer;
 		DecathlonController controller = new DecathlonController();
 		reader = controller.setReader(args);
+		if(reader==null){
+			System.err.println("You entered invalid parameters for the Reader. Terminating program!");
+			return;
+		}
 		writer = controller.setWriter(args);
+		if(writer==null){
+			System.err.println("You entered invalid parameters for the Writer. Terminating program!");
+			return;
+		}
 		List<Athlete> athletes = null; 
 		try{
 			athletes = reader.read();
@@ -49,5 +47,24 @@ public class Decathlon {
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	public void printHelp(){
+		System.out.println("Useage:");
+		System.out.println("Decathlon -<input-method> [input-parameters] -<output-method> [output-parameters]");
+		System.out.println("input methods:");
+		System.out.println("console: -console, does not take parameters");
+		System.out.println("csv: -csv csv_file_name");
+		System.out.println("database: -db competition_number");
+		System.out.println("output methods:");
+		System.out.println("console: -console, does not take parameters");
+		System.out.println("csv: -csv csv_file_name");
+		System.out.println("xml: -xml xml_file_name");
+		System.out.println("html: -html html_file_name");
+	}
+	
+	public void printUsage(){
+		System.out.println("Useage:");
+		System.out.println("Decathlon -<input-method> [input-parameters] -<output-method> [output-parameters]");
 	}
 }

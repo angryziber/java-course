@@ -10,6 +10,8 @@ import net.azib.java.students.t092875.homework.writers.DecathlonWriter;
 import net.azib.java.students.t092875.homework.writers.HTMLWriter;
 import net.azib.java.students.t092875.homework.writers.XMLWriter;
 
+import java.util.regex.Pattern;
+
 /**
  * DecathlonController
  *
@@ -27,9 +29,9 @@ public class DecathlonController {
 	 * @return a reader to be used to read the data about the athletes in the competition
 	 */
 	public DecathlonReader setReader(String[] args){
-		if(args[0].equals("-csv")){
+		if(args[0].equals("-csv") && Pattern.matches(".{1,}\\.csv$", args[1])){
 			return new CSVReader(args[1]);
-		}else if(args[0].equals("-db")){
+		}else if(args[0].equals("-db") && Pattern.matches("\\d{1,}", args[1])){
 			return new DatabaseReader(new Integer(args[1]));
 		}else if(args[0].equals("-console")){
 			return new ConsoleReader();
@@ -51,13 +53,16 @@ public class DecathlonController {
 	 */
 	public DecathlonWriter setWriter(String[] args){
 		int offset = args[0].equals("-console")?1:2;
-		if(args[offset].equals("-csv")){
+		if(args.length==offset){
+			return null;
+		}
+		if(args[offset].equals("-csv") && args.length==(offset+2) && Pattern.matches(".{1,}\\.csv$", args[offset+1])){
 			return new CSVWriter(args[++offset]);
 		}else if(args[offset].equals("-console")){
 			return new ConsoleWriter();
-		}else if(args[offset].equals("-xml")){
+		}else if(args[offset].equals("-xml") && args.length==(offset+2) && Pattern.matches(".{1,}\\.xml$", args[offset+1])){
 			return new XMLWriter(args[++offset]);
-		}else if(args[offset].equals("-html")){
+		}else if(args[offset].equals("-html") && args.length==(offset+2) && Pattern.matches(".{1,}\\.html$", args[offset+1])){
 			return new HTMLWriter(args[++offset]);
 		}else{
 			return null;
