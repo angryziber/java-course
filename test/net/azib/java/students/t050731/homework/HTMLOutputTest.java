@@ -24,7 +24,7 @@ public class HTMLOutputTest {
 				3499);
 		a.add(athlete);
 		assertEquals("", out.createHTMLOutput(a, ""));
-		//assertEquals("test.html", out.createHTMLOutput(a, "test.html"));
+		//assertEquals("test.html", out.createHTMLOutput(a, "test.html")); // oops
 	}
 
 }
