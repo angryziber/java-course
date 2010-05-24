@@ -42,7 +42,7 @@ public class HTMLWriter extends XMLWriter{
 			File html = new File(this.filename);
 			html.createNewFile();
 			FileOutputStream fos = new FileOutputStream(html);
-			writer = new OutputStreamWriter(fos, Charset.forName("UTF-16"));
+			writer = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
 			StreamResult s = new StreamResult();
 			s.setWriter(writer);
 			template.transform(new DOMSource(doc), s);
