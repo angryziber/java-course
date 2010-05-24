@@ -6,7 +6,6 @@ import net.azib.java.students.t092875.homework.readers.DecathlonReader;
 import net.azib.java.students.t092875.homework.writers.DecathlonWriter;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * HomeWork
