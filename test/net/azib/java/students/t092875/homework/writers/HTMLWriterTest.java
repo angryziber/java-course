@@ -1,7 +1,11 @@
 package net.azib.java.students.t092875.homework.writers;
 
+
+
 import net.azib.java.students.t092875.homework.athletes.Athlete;
+
 import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.LineNumberReader;
@@ -9,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,3 +57,6 @@ public class HTMLWriterTest {
 		assertEquals(data, test);
 	}
 }
+
+
+
