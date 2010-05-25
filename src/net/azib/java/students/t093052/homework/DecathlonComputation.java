@@ -7,6 +7,7 @@ import net.azib.java.students.t093052.homework.action.input.InputActionType;
 import net.azib.java.students.t093052.homework.action.output.OutputAction;
 import net.azib.java.students.t093052.homework.action.output.OutputActionType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -53,20 +54,29 @@ public class DecathlonComputation {
 	
 	private void createOutput(OutputAction outputAction, 
 			Set<Athlete> athletes) throws Exception {
-		int place = 0;
-		int factor = 0;
-		double score = Double.MAX_VALUE;
+		int place = 1;
+		double score = Double.NaN;
 		
+		List<Athlete> tempList = new ArrayList<Athlete>();
 		for (Athlete athlete : athletes) {
-			factor++;
-			if (athlete.getPoints() < score) {
-				place += factor;
-				factor = 0;
+			if (!Double.isNaN(score) && athlete.getPoints() < score) {
+				outputAction.addToOutput(calculatePlaceInterval(place, 
+						tempList.size()), tempList);
+				place += tempList.size();
+				tempList.clear();
 			}
-			outputAction.addToOutput(place, athlete);
+			
+			tempList.add(athlete);
 			score = athlete.getPoints();
 		}
+		outputAction.addToOutput(calculatePlaceInterval(place, 
+				tempList.size()), tempList);
+		
 		outputAction.finishOutput();
+	}
+
+	private String calculatePlaceInterval(int place, int size) {
+		return size == 1 ? String.valueOf(place) : place + "-" + (place + size - 1);
 	}
 
 	private <T extends Action> T initAction(

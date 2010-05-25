@@ -11,8 +11,6 @@ import java.util.Set;
  * This class holds the common methods of console and csv input actions
  * */
 public abstract class AbstractInputStreamAction extends AbstractInputAction {
-	private static final String DELIMITER = ",";
-	
 	/**
 	 * @return the competitor's input stream
 	 * */
@@ -21,7 +19,8 @@ public abstract class AbstractInputStreamAction extends AbstractInputAction {
 	 * Reads the next line from the input stream
 	 * @return the string of data
 	 * */
-	abstract String nextLine(Scanner scanner);
+	abstract void addAthletes(Set<Athlete> athletes, 
+			Scanner scanner) throws Exception;
 	
 	public Set<Athlete> handleData() throws Exception {
 		Scanner scanner = new Scanner(getInputStream());
@@ -29,11 +28,7 @@ public abstract class AbstractInputStreamAction extends AbstractInputAction {
 		Set<Athlete> athletes = createAthleteSet();
 		
 		try {
-			String line = null;
-			while((line = nextLine(scanner)) != null) {
-				Athlete athlete = createAthlete(line.trim().split(DELIMITER));
-				athletes.add(athlete);
-			}
+			addAthletes(athletes, scanner);
 		} finally {
 			scanner.close();
 		}

@@ -6,6 +6,7 @@ import net.azib.java.students.t093052.homework.DecathlonComputation;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -58,14 +59,21 @@ public class XmlOutputAction implements OutputAction {
 	}
 	
 	@Override
-	public void addToOutput(int place, Athlete athlete) throws Exception {
+	public void addToOutput(String placeInterval, 
+			List<Athlete> athletes) throws Exception {
+		for (Athlete athlete : athletes) {
+			addToOutput(placeInterval, athlete);
+		}
+	}
+	
+	private void addToOutput(String placeInterval, Athlete athlete) throws Exception {
 		Element athleteElement = document.createElement("athlete");
 		athleteElement.setAttribute("name", athlete.getName());
 		athleteElement.setAttribute("dateOfBirth", athlete.getDateOfBirth());
 		athleteElement.setAttribute("country", athlete.getCountry());
 
 		Element placeElement = document.createElement("place");
-		placeElement.setTextContent(String.valueOf(place));
+		placeElement.setTextContent(placeInterval);
 		athleteElement.appendChild(placeElement);
 
 		Element pointsElement = document.createElement("points");

@@ -4,6 +4,7 @@ import net.azib.java.students.t093052.homework.Athlete;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 
 public abstract class AbstractOutputAction implements OutputAction {
 	private Writer writer;
@@ -19,12 +20,14 @@ public abstract class AbstractOutputAction implements OutputAction {
 	}
 
 	@Override
-	public void addToOutput(int place, Athlete athlete) throws Exception {
-		append(String.valueOf(place));
-		appendAll(athlete.getMainValues());
-		appendAll(athlete.getResults().values().toArray(
-				new String[athlete.getResults().size()]));
-		getWriter().write(System.getProperty("line.separator"));
+	public void addToOutput(String placeInterval, List<Athlete> athletes) throws Exception {
+		for (Athlete athlete : athletes) {
+			append(placeInterval);
+			appendAll(athlete.getMainValues());
+			appendAll(athlete.getResults().values().toArray(
+					new String[athlete.getResults().size()]));
+			getWriter().write(System.getProperty("line.separator"));
+		}
 	}
 	
 	private void appendAll(String[] values) throws IOException {
