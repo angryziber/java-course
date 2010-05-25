@@ -22,7 +22,7 @@ public class ResultTest {
 		assertEquals("Name", "Mingi Nimi", result.name);
 		assertEquals("Date", "0000-00-00", result.date);
 		assertEquals("Country", "EE", result.country);
-		assertEquals("Sprint 100 m", (Object)14.15f, result.sprint_100);
+		assertEquals("Sprint 100 m", 14.15, result.sprint_100, 0.0001);
 		assertEquals("Long Jump", (Object)3.98f, result.long_jump);
 		assertEquals("Short Put", (Object)10.0f, result.short_put);
 		assertEquals("High Jump", (Object)1.45f, result.high_jump);

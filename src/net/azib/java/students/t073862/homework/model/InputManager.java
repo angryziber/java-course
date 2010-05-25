@@ -89,8 +89,8 @@ public class InputManager {
 		}
 		catch (SQLException e) {
 			System.out.println("SQL exceptions shouldn't happen");
-			e.printStackTrace();
-			System.exit(1);
+			//e.printStackTrace();
+			//System.exit(1);
 		}
 		return scores.toArray(new Score[]{});
 	}
