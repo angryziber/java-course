@@ -5,6 +5,7 @@ import net.azib.java.students.t093052.homework.CompetitionType;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.DateFormat;
 import java.util.Map;
 import java.util.Set;
 
@@ -89,6 +90,11 @@ public class AbstractInputActionTest {
 			@Override
 			public Set<Athlete> handleData() throws Exception {
 				return null;
+			}
+
+			@Override
+			DateFormat getDateFormat() {
+				return DateFormat.getDateInstance(DateFormat.MEDIUM);
 			}
 		};
 	}

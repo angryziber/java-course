@@ -62,7 +62,7 @@ public abstract class NodeOutputAction extends AbstractOutputAction {
 	void append(String placeInterval, Athlete athlete) throws IOException {
 		Element athleteElement = document.createElement("athlete");
 		athleteElement.setAttribute("name", athlete.getName());
-		athleteElement.setAttribute("dateOfBirth", athlete.getDateOfBirth());
+		athleteElement.setAttribute("dateOfBirth", athlete.getDateOfBirthAsString());
 		athleteElement.setAttribute("country", athlete.getCountry());
 
 		addElement(athleteElement, "place", placeInterval);

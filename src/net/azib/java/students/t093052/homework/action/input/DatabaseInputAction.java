@@ -9,7 +9,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -19,6 +21,7 @@ import java.util.Set;
  * This class represents the database input action.
  * */
 public class DatabaseInputAction extends AbstractInputAction {
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	private static final String DB_PROPS = "db.properties";
 	
 	private static final String SQL_QUERY = "select a.name, a.dob, " +
@@ -34,6 +37,11 @@ public class DatabaseInputAction extends AbstractInputAction {
 	
 	public DatabaseInputAction(String value) {
 		this.value = value;
+	}
+	
+	@Override
+	DateFormat getDateFormat() {
+		return DATE_FORMAT;
 	}
 	
 	@Override
@@ -55,7 +63,11 @@ public class DatabaseInputAction extends AbstractInputAction {
 			} catch (Exception npe) {
 				
 			}
-			throw new DBException("Database connection failed: " + e.toString(), e);
+			if (e instanceof RuntimeException) {
+				throw (RuntimeException) e;
+			} else {
+				throw new DBException("Database connection failed: " + e.toString(), e);
+			}
 		} finally {
 			try {
 				conn.close();

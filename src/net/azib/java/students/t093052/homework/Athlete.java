@@ -1,5 +1,7 @@
 package net.azib.java.students.t093052.homework;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -7,8 +9,10 @@ import java.util.Map;
  * Athlete class holds the data during the program
  * */
 public class Athlete {
+	private static final DateFormat DATE_FORMAT = DateFormat.getDateInstance(
+			DateFormat.MEDIUM);
 	private String name;
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	private String country;
 	private Map<CompetitionType, String> results = 
 		new LinkedHashMap<CompetitionType, String>();
@@ -29,14 +33,14 @@ public class Athlete {
 	/**
 	 * @return the birthday of the athlete
 	 * */
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 	/**
 	 * @param dateOfBirth the date of birth to set
 	 */
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth.trim();
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 	/**
 	 * @return the country of the athlete
@@ -75,10 +79,17 @@ public class Athlete {
 	 * */
 	public String[] getMainValues() {
 		return new String[] { asString(getPoints()), asString(getName()), 
-				asString(getDateOfBirth()), asString(getCountry())}; 
+			getDateOfBirthAsString(), asString(getCountry())}; 
 	}
 	
 	private String asString(Object value) {
 		return String.valueOf(value);
+	}
+	
+	/**
+	 * @return the birthday of the athlete as string
+	 * */
+	public String getDateOfBirthAsString() {
+		return dateOfBirth != null ? DATE_FORMAT.format(dateOfBirth) : "unknown";
 	}
 }
