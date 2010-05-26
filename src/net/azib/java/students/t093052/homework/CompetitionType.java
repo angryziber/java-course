@@ -55,6 +55,10 @@ public enum CompetitionType {
 		return (int) Math.abs(a * Math.pow(result, c));
 	}
 	
+	public String getValuePattern() {
+		return measure.getValuePattern();
+	}
+	
 	private boolean isTimeType() {
 		return timeType;
 	}

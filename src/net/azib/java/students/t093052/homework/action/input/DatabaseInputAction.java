@@ -55,15 +55,7 @@ public class DatabaseInputAction extends AbstractInputAction {
 			} catch (Exception npe) {
 				
 			}
-
-			if (e instanceof RuntimeException) {
-				throw (RuntimeException) e;
-			} else if (e instanceof PersistException) {
-				throw (PersistException) e;
-			} else {
-				throw new PersistException("Unable to persist data: "
-						+ e.toString(), e);
-			}
+			throw new DBException("Database connection failed: " + e.toString(), e);
 		} finally {
 			try {
 				conn.close();
@@ -71,12 +63,11 @@ public class DatabaseInputAction extends AbstractInputAction {
 				
 			}
 		}
-		
 		return athletes;
 	}
 
-	private ResultSet getResultSet(Connection conn) throws SQLException, 
-			PersistException, ParseException {
+	private ResultSet getResultSet(
+			Connection conn) throws SQLException, ParseException {
 		PreparedStatement statement;
 		
 		if (value.matches("\\d+")) {
@@ -90,7 +81,7 @@ public class DatabaseInputAction extends AbstractInputAction {
 		ResultSet resultSet = statement.executeQuery();
 		
 		if (resultSet == null) {
-			throw new PersistException("Cannot read data");
+			throw new DBException("Cannot read data");
 		}
 		return resultSet;
 	}
@@ -115,14 +106,14 @@ public class DatabaseInputAction extends AbstractInputAction {
 			props.getProperty("db.username"), props.getProperty("db.password"));
 	}
 	
-	private static class PersistException extends Exception {
+	private static class DBException extends RuntimeException {
 		private static final long serialVersionUID = 1L;
 
-		private PersistException(String message) {
+		private DBException(String message) {
 			super(message);
 		}
 
-		private PersistException(String message, Throwable cause) {
+		private DBException(String message, Throwable cause) {
 			super(message, cause);
 		}
 	}

@@ -1,6 +1,7 @@
 package net.azib.java.students.t093052.homework.action.input;
 
 import net.azib.java.students.t093052.homework.Athlete;
+import net.azib.java.students.t093052.homework.CompetitionType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,9 +24,7 @@ public class ConsoleInputAction extends AbstractInputStreamAction {
 	void addAthletes(Set<Athlete> athletes, Scanner scanner) throws Exception {
 		String line = null;
 		do {
-			System.out.println("Press \"ENTER\" to add next competitor " +
-				"or type \"OK\" if all of those are added...");
-			line = scanner.nextLine();
+			line = nextLine(scanner);
 
 			if (line != null && "OK".equals(line.toUpperCase())) {
 				return;
@@ -37,30 +36,36 @@ public class ConsoleInputAction extends AbstractInputStreamAction {
 		} while(true);
 	}
 
+	String nextLine(Scanner scanner) {
+		System.out.println("Press \"ENTER\" to add next competitor " +
+			"or type \"OK\" if all of those are added...");
+		return scanner.nextLine();
+	}
+	
 	private Athlete createNextAthlete(Scanner scanner) throws ParseException {
 		List<String> values = new ArrayList<String>();
 		
-		values.add(getValue("Athlete name: ", scanner, ".+"));
-		values.add(getValue("Date of birth: ", scanner, "\\d{1,2}\\.\\d{1,2}\\.\\d{4}"));
-		values.add(getValue("Country: ", scanner, "[A-Za-z]{2}"));
-		values.add(getValue("100m sprint: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("Long jump: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("Shot put: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("High jump: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("400m sprint: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("110m hurdles: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("Discus throw: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("Pole vault: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("Javelin throw: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
-		values.add(getValue("1500m race: ", scanner, "(\\d+:)?\\d+\\.\\d+"));
+		values.add(getValue("Athlete name", scanner, ".+"));
+		values.add(getValue("Date of birth", scanner, "\\d{1,2}\\.\\d{1,2}\\.\\d{4}"));
+		values.add(getValue("Country", scanner, "[A-Za-z]{2}"));
+		
+		CompetitionType[] competitionTypes = CompetitionType.values();
+		for (int i = 0; i < competitionTypes.length; i++) {
+			values.add(getValue(scanner, competitionTypes[i]));
+		}
 		
 		return createAthlete(values.toArray(new String[values.size()]));
 	}
 
-	private String getValue(String title, Scanner scanner, String pattern) {
+	String getValue(Scanner scanner, CompetitionType competitionType) {
+		return getValue(competitionType.getName(), scanner, 
+				competitionType.getValuePattern());
+	}
+	
+	String getValue(String title, Scanner scanner, String pattern) {
 		String line;
 		do {
-			System.out.println(title);
+			System.out.println(title + ": ");
 			line = scanner.nextLine();
 			
 			if (line.matches(pattern)) {

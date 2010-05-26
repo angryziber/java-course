@@ -75,11 +75,11 @@ public class DecathlonComputation {
 		outputAction.finishOutput();
 	}
 
-	private String calculatePlaceInterval(int place, int size) {
+	String calculatePlaceInterval(int place, int size) {
 		return size == 1 ? String.valueOf(place) : place + "-" + (place + size - 1);
 	}
 
-	private <T extends Action> T initAction(
+	<T extends Action> T initAction(
 			Iterator<String> argIterator, ActionType<T>[] values) throws Exception {
 		argCheck(argIterator);
 		ActionType<T> actionType = getActionTypeByName(argIterator.next(), values);
@@ -100,7 +100,7 @@ public class DecathlonComputation {
 		}
 	}
 
-	private <T extends ActionType<? extends Action>> T getActionTypeByName(
+	<T extends ActionType<? extends Action>> T getActionTypeByName(
 			String name, T[] values) {
 		for (T actionType : values) {
 			if (actionType.getName().equals(name)) {

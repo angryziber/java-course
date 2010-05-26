@@ -1,6 +1,7 @@
 package net.azib.java.students.t093052.homework.action.output;
 
 import net.azib.java.students.t093052.homework.Athlete;
+import net.azib.java.students.t093052.homework.CompetitionType;
 import net.azib.java.students.t093052.homework.DecathlonComputation;
 
 import java.io.File;
@@ -81,9 +82,9 @@ public class XmlOutputAction implements OutputAction {
 		athleteElement.appendChild(pointsElement);
 
 		Element resultsElement = document.createElement("results");
-		for (Entry<String, String> entry : athlete.getResults().entrySet()) {
+		for (Entry<CompetitionType, String> entry : athlete.getResults().entrySet()) {
 			Element resultElement = document.createElement(
-					entry.getKey().toLowerCase());
+					entry.getKey().getName().toLowerCase());
 			resultElement.setTextContent(entry.getValue());
 			resultsElement.appendChild(resultElement);
 		}

@@ -18,7 +18,7 @@ public abstract class AbstractInputAction implements InputAction {
 		
 		athlete.setName(data[0]);
 		athlete.setDateOfBirth(data[1] != null ? data[1] : "0000-00-00");
-		athlete.setCountry(data[2]);
+		athlete.setCountry(data[2].toUpperCase());
 		
 		for (int i = 3, j = 0; i < data.length && 
 				j < CompetitionType.values().length; i++, j++) {
