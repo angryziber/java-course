@@ -12,7 +12,7 @@ import javax.xml.transform.stream.StreamSource;
 /**
  * This class represents the html output action.
  * */
-public class HtmlOutputAction extends XmlOutputAction {
+public class HtmlOutputAction extends NodeOutputAction {
 	private static final String XSL_FILE = "athletes.xsl";
 	
 	public HtmlOutputAction(String filename) throws IOException {
