@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class Decathlon {
 
 	@SuppressWarnings("null")
+	//Real 43 on exit k2sk, mis hoolitseb selle eest, et programm ei j6uaks reani 50 kui outMethod on v22rtustamata.
+	//Oleks hea, kui SupressWarnings ei peaks kasutama(ulej22nud vead v6ivad m2rkamata j22da), kuid hetkel ma ei tea, kuidas koodi teistmoodi kirjutada.  
 	public static void main(String[] args) throws IOException, SQLException{
 		String outMethod=null;
 		Integer outParamNr=null;
