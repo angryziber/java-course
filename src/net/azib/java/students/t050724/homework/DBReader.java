@@ -1,7 +1,7 @@
 package net.azib.java.students.t050724.homework;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -67,7 +67,7 @@ public class DBReader {
 		Properties props = new Properties();
 
 		try {
-			FileInputStream in = new FileInputStream(supporter.setFilePath("db.properties"));
+			InputStream in = getClass().getResourceAsStream("db.properties");
 			props.load(in);
 			in.close();
 		}

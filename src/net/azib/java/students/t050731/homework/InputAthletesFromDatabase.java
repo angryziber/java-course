@@ -2,6 +2,7 @@ package net.azib.java.students.t050731.homework;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,7 +78,7 @@ public class InputAthletesFromDatabase {
 
 	private void getConnection() throws SQLException, IOException {
 		Properties p = new Properties();
-		FileInputStream in = new FileInputStream(helper.getFullPath("db.properties"));
+		InputStream in = getClass().getResourceAsStream("db.properties");
 		p.load(in);
 		in.close();
 
