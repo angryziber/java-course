@@ -1,4 +1,4 @@
-package net.azib.java.students.t100258.Homework;
+package net.azib.java.students.t100258.oldHomework;
 
 
 import java.io.BufferedReader;
@@ -33,7 +33,7 @@ public class InMySQL {
 	      return true;
 	      }
 	      /**
-	  	 * Input from Myscl db
+	  	 * Input from Mysql db
 	  	 *@param name Id of competition or competition name
 	  	 *@throws IOException, SQLException
 	  	 */     

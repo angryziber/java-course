@@ -1,28 +1,28 @@
-package net.azib.java.students.t100258.Homework;
+package net.azib.java.students.t100258.homework;
 
-import java.io.IOException;
+import net.azib.java.students.t100258.homework.Result;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /**
- * Console input class
+ * InConsole
  *
  * @author mihkel
  */
-public class InConsole {
+public class InConsole implements Input {
 	/**
 	 * Input from console
 	 *
-	 * 
+	 * @return Arraylist of Results
 	 */
-	public InConsole() throws IOException {
+	public ArrayList<Object> getResults() {
 		ArrayList <Object> results;
 		results= new ArrayList <Object>();
 		Scanner in = new Scanner(System.in);
 		
-String veel ="Y";
-		while (veel.equals("Y"))
+String more ="Y";
+		while (more.equals("Y"))
 		{
 			System.out.println ("Insert Name");
 			String tempname = in.nextLine();
@@ -54,16 +54,13 @@ String veel ="Y";
 			Result result1= new Result(tempname ,tempbirth ,tempcountry ,tempsprint_100 ,templong_jump ,tempshort_put ,temphigh_jump ,tempsprint_400 ,temphurdles ,tempdiscus_throw ,temppole_vault ,tempjevelin_throw ,temprace, tempsum, tempsum);
 			results.add(result1);
 			System.out.println ("Insert Y to inset more competitors, anything else to end inserting");
-			veel = in.nextLine();
+			more = in.nextLine();
 
 		}
 
 		in.close();
-		//System.out.println (((Result)results.get(0)).race); //test
-		new CalculateResults(results);
 		
-		
-
+		return results;
 	}
 
 }

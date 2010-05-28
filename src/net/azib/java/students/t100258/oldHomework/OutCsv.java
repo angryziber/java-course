@@ -1,4 +1,4 @@
-package net.azib.java.students.t100258.Homework;
+package net.azib.java.students.t100258.oldHomework;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

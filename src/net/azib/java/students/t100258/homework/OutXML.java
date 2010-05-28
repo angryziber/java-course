@@ -1,4 +1,4 @@
-package net.azib.java.students.t100258.Homework;
+package net.azib.java.students.t100258.homework;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,34 +6,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * class for xml output
+ * OutputXML
  *
  * @author mihkel
  */
-public class OutXml {
+public class OutXML implements OutputWith2Parameters {
 	/**
 	 * outputs results to xml file
 	 *
 	 * @param results Arraylist of Results
+	 * @param location location of output xml file(filename and extension included)
 	 * @throws IOExeption
 	 */
-	
-	public OutXml(ArrayList <Object> results) throws IOException  {
+	public void outputResults(ArrayList<Object> results, String location) throws IOException  {
 		System.setProperty("file.encoding", "UTF-8");
-
+		System.out.println("Output to xml");
 		int i=0;
 		Result row;
-		String xmlpath;
-		if(Decathlon.out_method.equals("-html"))
-		{
-		xmlpath = Decathlon.out_arg.substring(0, Decathlon.out_arg.length()-4)+"xml";
-		}
-		else{
-			xmlpath = Decathlon.out_arg;
-		}
-		FileWriter fstream = new FileWriter(xmlpath);
-        BufferedWriter out = new BufferedWriter(fstream);
-        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+	
+		FileWriter fileStream = new FileWriter(location);
+        BufferedWriter out = new BufferedWriter(fileStream);
+        try {
+			out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         out.newLine();
         out.write("<Results>");
         out.newLine();
@@ -51,11 +45,21 @@ public class OutXml {
 		    }
 		out.write("</Results>");
 	    out.newLine();
-		out.close();
-		if(Decathlon.out_method.equals("-html")){
-		new OutHTML(xmlpath);
+        }
+		catch (IOException e) {
+			System.err.println("Caught IOException on writing to xml file: " 
+                    +  e.getMessage());
 		}
-		else{System.out.println("Output to xml");}
+		
+		try {
+			out.close();
+		}
+		catch (IOException e) {
+			System.err.println("Caught IOException on closing xml file: " 
+                    +  e.getMessage());
+		}
+		
 	}
 	
+
 }

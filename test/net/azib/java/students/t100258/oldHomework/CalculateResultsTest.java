@@ -1,4 +1,4 @@
-package net.azib.java.students.t100258.Homework;
+package net.azib.java.students.t100258.oldHomework;
 
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import org.junit.Test;
 public class CalculateResultsTest {
 
 	/**
-	 * Test method for {@link net.azib.java.students.t100258.Homework.CalculateResults#CalculateResults(java.util.ArrayList)}.
+	 * Test method for {@link net.azib.java.students.t100258.oldHomework.CalculateResults#CalculateResults(java.util.ArrayList)}.
 	 */
 	@Test
 	public void testCalculateResults() {
