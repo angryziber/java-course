@@ -65,8 +65,13 @@ public class DecathlonPositioner {
 		int currentPlace = 1;
 		places.add(0,"1"); //first place is always there
 		for(int i = 1; i < results.size(); i++){
-			if(results.get(i).getPoints() != results.get(i-1).getPoints())
+			if(results.get(i).getPoints() != results.get(i-1).getPoints()) {
+				if(currentPlace == 2 && i > 2) {
+					for(int j = 1; j < i; j++)
+						places.add(j, "2-" + i);
+				}
 				currentPlace++;
+			}
 			places.add(i, ((Integer)currentPlace).toString());
 		}
 		
