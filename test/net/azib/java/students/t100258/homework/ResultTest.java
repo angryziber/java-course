@@ -2,7 +2,7 @@ package net.azib.java.students.t100258.homework;
 
 import static org.junit.Assert.assertEquals;
 
-import net.azib.java.students.t100258.oldHomework.Result;
+import net.azib.java.students.t100258.homework.Result;
 
 import org.junit.Test;
 
