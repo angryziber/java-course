@@ -26,7 +26,7 @@ public class HTMLResultWriterTest {
 		HTMLResultWriter uut = new HTMLResultWriter(testOutput);
 		uut.writeResults(prepareResults(), preparePlaces());
 		
-		assertEquals(expectedResult, testOutput.toString());
+		assertEquals(expectedResult, testOutput.toString().replaceAll("\r", ""));
 	}
 	
 	private List<String> preparePlaces() {

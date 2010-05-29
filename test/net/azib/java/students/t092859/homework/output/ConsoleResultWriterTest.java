@@ -45,7 +45,7 @@ public class ConsoleResultWriterTest {
 		
 		uut.writeResults(prepareResults(), preparePlaces());
 		
-		assertEquals(expectedConsoleOutput, outStream.toString());
+		assertEquals(expectedConsoleOutput, outStream.toString().replaceAll("\r", ""));
 		
 	}
 
