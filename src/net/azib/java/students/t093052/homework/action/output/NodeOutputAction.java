@@ -59,7 +59,7 @@ public abstract class NodeOutputAction extends AbstractOutputAction {
 	}
 	
 	@Override
-	void append(String placeInterval, Athlete athlete) throws IOException {
+	void append(String placeInterval, Athlete athlete) {
 		Element athleteElement = document.createElement("athlete");
 		athleteElement.setAttribute("name", athlete.getName());
 		athleteElement.setAttribute("dateOfBirth", athlete.getDateOfBirthAsString());
@@ -85,7 +85,7 @@ public abstract class NodeOutputAction extends AbstractOutputAction {
 	}
 
 	@Override
-	public void finishOutput() throws Exception {
+	public void finishOutput() throws IOException {
 		validateXml(document);
 		document.appendChild(rootElement);
 		createoutputFile();

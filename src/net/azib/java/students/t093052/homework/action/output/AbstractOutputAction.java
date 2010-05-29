@@ -18,7 +18,8 @@ public abstract class AbstractOutputAction implements OutputAction {
 	
 	abstract void append(String placeInterval, Athlete athlete) throws IOException;
 	
-	public AbstractOutputAction(OutputStream stream) throws UnsupportedEncodingException {
+	public AbstractOutputAction(
+			OutputStream stream) throws UnsupportedEncodingException {
 		this.writer = new BufferedWriter(new OutputStreamWriter(stream, "UTF-8"));
 	}
 	
@@ -27,14 +28,15 @@ public abstract class AbstractOutputAction implements OutputAction {
 	}
 
 	@Override
-	public void addToOutput(String placeInterval, List<Athlete> athletes) throws Exception {
+	public void addToOutput(String placeInterval, 
+			List<Athlete> athletes) throws IOException {
 		for (Athlete athlete : athletes) {
 			append(placeInterval, athlete);
 		}
 	}
 	
 	@Override
-	public void finishOutput() throws Exception {
+	public void finishOutput() throws IOException {
 		getWriter().close();
 	}
 }

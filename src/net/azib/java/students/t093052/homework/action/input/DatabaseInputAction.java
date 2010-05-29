@@ -45,7 +45,7 @@ public class DatabaseInputAction extends AbstractInputAction {
 	}
 	
 	@Override
-	public Set<Athlete> handleData() throws Exception {
+	public Set<Athlete> handleData() {
 		Set<Athlete> athletes = createAthleteSet();
 		
 		Connection conn = null;
@@ -66,7 +66,7 @@ public class DatabaseInputAction extends AbstractInputAction {
 			if (e instanceof RuntimeException) {
 				throw (RuntimeException) e;
 			} else {
-				throw new DBException("Database connection failed: " + e.toString(), e);
+				throw new DBException("Database connection failed", e);
 			}
 		} finally {
 			try {

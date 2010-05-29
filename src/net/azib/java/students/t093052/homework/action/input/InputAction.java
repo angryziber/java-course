@@ -13,5 +13,5 @@ public interface InputAction extends Action {
 	 * Creates the list of all competition's participants
 	 * @return the set of athletes
 	 * */
-	Set<Athlete> handleData() throws Exception;
+	Set<Athlete> handleData();
 }

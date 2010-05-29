@@ -88,7 +88,7 @@ public class AbstractInputActionTest {
 	private AbstractInputAction createAbstractInputAction() {
 		return new AbstractInputAction() {
 			@Override
-			public Set<Athlete> handleData() throws Exception {
+			public Set<Athlete> handleData() {
 				return null;
 			}
 

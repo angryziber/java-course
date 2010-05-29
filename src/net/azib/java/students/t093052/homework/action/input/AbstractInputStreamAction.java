@@ -30,16 +30,22 @@ public abstract class AbstractInputStreamAction extends AbstractInputAction {
 		return DATE_FORMAT;
 	}
 	
-	public Set<Athlete> handleData() throws Exception {
-		Scanner scanner = new Scanner(getInputStream());
-		
-		Set<Athlete> athletes = createAthleteSet();
-		
+	public Set<Athlete> handleData() throws InputDataException {
 		try {
-			addAthletes(athletes, scanner);
-		} finally {
-			scanner.close();
+			Scanner scanner = new Scanner(getInputStream());
+			
+			Set<Athlete> athletes = createAthleteSet();
+			
+			try {
+				addAthletes(athletes, scanner);
+			} finally {
+				scanner.close();
+			}
+			return athletes;
 		}
-		return athletes;
+		catch (Exception e) {
+			throw new InputDataException(
+					"Could not proceed reading data from input.", e);
+		}
 	}
 }
