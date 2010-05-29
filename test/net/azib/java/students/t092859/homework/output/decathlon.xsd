@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="decathlonresults" type="manyresults"/>
+	<xs:complexType name="manyresults">
+		<xs:sequence>
+			<xs:element name="result" type="resultType" minOccurs="0" maxOccurs="unbounded"/>			
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="resultType">
+		<xs:sequence>
+			<xs:element name="place" type="xs:string"/>
+			<xs:element name="score" type="xs:integer"/>
+			<xs:element name="athlete" type="athleteType"/>
+			<xs:element name="performance" type="performanceType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="athleteType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="dateofbirth" type="xs:string"/>
+			<xs:element name="country" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="performanceType">
+		<xs:sequence>
+			<xs:element name="event" type="EventType" minOccurs="10" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="EventType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
+
