@@ -32,8 +32,8 @@ public class ResultTest {
 		assertEquals("Pole Vault", 2.15f, result.pole_vault, 0.001);
 		assertEquals("Jevelin Throw", 32.67f, result.jevelin_throw, 0.001);
 		assertEquals("Race", "466.6", result.race);
-		assertEquals("Total", (Integer)0, result.sum);
-		assertEquals("Place", (Integer)0, result.place);
+		assertEquals("Total", 0, result.sum);
+		assertEquals("Place", 0, result.place);
 		
 	}
 
