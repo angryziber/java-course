@@ -23,12 +23,12 @@ public class DatabaseInputActionTest {
 		{"13.04", "4.53", "7.79", "1.55", "64.72", "18.74", "24.2", "2.4", "28.2", "410.76"}
 	};
 	
-	private static final String[][] ATHLETE_DATA_II = new String[][] {
-		{"József Fenyő", "3.04.1972", "HU"}
-	};
-	private static final String[][] ATHLETE_RESULTS_II = new String[][] {
-		{"10.94", "7.83", "12.48", "2.0", "49.72", "15.67", "38.3", "5.4", "55.84", "271.72"}
-	};
+//	private static final String[][] ATHLETE_DATA_II = new String[][] {
+//		{"József Fenyő", "3.04.1972", "HU"}
+//	};
+//	private static final String[][] ATHLETE_RESULTS_II = new String[][] {
+//		{"10.94", "7.83", "12.48", "2.0", "49.72", "15.67", "38.3", "5.4", "55.84", "271.72"}
+//	};
 	
 	private static final Connection getConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:hsqldb:mem:TestDB", "sa", "");
@@ -71,14 +71,11 @@ public class DatabaseInputActionTest {
 		conn.close();
 	}
 	
-	public DatabaseInputActionTest() throws SQLException {
-		prepare();
-	}
-	
 	@Test
 	public void testHandleData() throws Exception {
+		prepare();
 		testHandleData("2", ATHLETE_DATA_I, ATHLETE_RESULTS_I);
-		testHandleData("Training", ATHLETE_DATA_II, ATHLETE_RESULTS_II);
+//		testHandleData("Training", ATHLETE_DATA_II, ATHLETE_RESULTS_II);
 	}
 	
 	private void testHandleData(String value, String[][] personData, 
