@@ -71,10 +71,12 @@ public class DatabaseInputActionTest {
 		conn.close();
 	}
 	
+	public DatabaseInputActionTest() throws SQLException {
+		prepare();
+	}
+	
 	@Test
 	public void testHandleData() throws Exception {
-		prepare();
-		
 		testHandleData("2", ATHLETE_DATA_I, ATHLETE_RESULTS_I);
 		testHandleData("Training", ATHLETE_DATA_II, ATHLETE_RESULTS_II);
 	}
