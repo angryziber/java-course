@@ -37,8 +37,8 @@ public class DatabaseInputActionTest {
 	private void prepare() throws SQLException {
 		Connection conn = getConnection();
 		Statement stmt = conn.createStatement();
-		stmt.execute("create table athletes (id integer, name varchar, " +
-				"dob date, country_code varchar)");
+//		stmt.execute("create table athletes (id integer, name varchar, " +
+//				"dob date, country_code varchar)");
 		stmt.execute("insert into athletes values (1, 'Siim Susi', " +
 				"'1976-01-01', 'EE')");
 		stmt.execute("insert into athletes values (2, 'Beata Kana', " +
