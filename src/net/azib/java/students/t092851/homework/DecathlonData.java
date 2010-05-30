@@ -14,7 +14,7 @@ import java.util.ListIterator;
  */
 public class DecathlonData implements Iterable<Participant> {
 	
-	LinkedList<Participant> athletes = new LinkedList<Participant>();
+	private LinkedList<Participant> athletes = new LinkedList<Participant>();
 	
 	
 	/**

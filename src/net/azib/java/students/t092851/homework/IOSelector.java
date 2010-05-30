@@ -152,7 +152,7 @@ public class IOSelector {
 		if (iterator.hasNext())
 			outputMethod = iterator.next();
 		else {
-			System.out.println("-<output-method> is not specified.");
+			System.out.println("[input-parameter] or -<output-method> is not specified.");
 			return false;
 		}
 		
