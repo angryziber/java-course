@@ -46,8 +46,8 @@ public class DatabaseInputActionTest {
 		stmt.execute("insert into athletes values (3, 'József Fenyő', " +
 				"'1972-04-03', 'HU')");
 		
-		stmt.execute("create table competitions (id integer, country_code " +
-				"varchar, date date, name varchar, location varchar)");
+//		stmt.execute("create table competitions (id integer, country_code " +
+//				"varchar, date date, name varchar, location varchar)");
 		stmt.execute("insert into competitions values (1, 'EE', " +
 				"'2005-12-01', 'Training', 'Tallinn')");
 		stmt.execute("insert into competitions values (2, 'PL', " +
@@ -55,12 +55,12 @@ public class DatabaseInputActionTest {
 		stmt.execute("insert into competitions values (3, 'EE', " +
 				"'2005-12-01', 'Training', 'Tallinn2')");
 		
-		stmt.execute("create table results (id integer, athlete_id " +
-			"integer, competition_id integer, race_100m float, " +
-			"long_jump float, shot_put float, high_jump float, " +
-			"race_400m float, hurdles_110m float, " +
-			"discus_throw float, pole_vault float, javelin_throw float, " +
-			"race_1500m float)");
+//		stmt.execute("create table results (id integer, athlete_id " +
+//			"integer, competition_id integer, race_100m float, " +
+//			"long_jump float, shot_put float, high_jump float, " +
+//			"race_400m float, hurdles_110m float, " +
+//			"discus_throw float, pole_vault float, javelin_throw float, " +
+//			"race_1500m float)");
 		stmt.execute("insert into results values (1, 1, 2, 12.61, 5, 9.22, " +
 			"1.5, 59.39, 16.43, 21.6, 2.6, 35.81, 325.72)");
 		stmt.execute("insert into results values (2, 2, 2, 13.04, 4.53, 7.79, " +
