@@ -23,12 +23,12 @@ public class DatabaseInputActionTest {
 		{"13.04", "4.53", "7.79", "1.55", "64.72", "18.74", "24.2", "2.4", "28.2", "410.76"}
 	};
 	
-//	private static final String[][] ATHLETE_DATA_II = new String[][] {
-//		{"József Fenyő", "3.04.1972", "HU"}
-//	};
-//	private static final String[][] ATHLETE_RESULTS_II = new String[][] {
-//		{"10.94", "7.83", "12.48", "2.0", "49.72", "15.67", "38.3", "5.4", "55.84", "271.72"}
-//	};
+	private static final String[][] ATHLETE_DATA_II = new String[][] {
+		{"József Fenyő", "3.04.1972", "HU"}
+	};
+	private static final String[][] ATHLETE_RESULTS_II = new String[][] {
+		{"10.94", "7.83", "12.48", "2.0", "49.72", "15.67", "38.3", "5.4", "55.84", "271.72"}
+	};
 	
 	private static final Connection getConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:hsqldb:mem:TestDB", "sa", "");
@@ -37,8 +37,9 @@ public class DatabaseInputActionTest {
 	private void prepare() throws SQLException {
 		Connection conn = getConnection();
 		Statement stmt = conn.createStatement();
-//		stmt.execute("create table athletes (id integer, name varchar, " +
-//				"dob date, country_code varchar)");
+		stmt.execute("drop table if exists athletes");
+		stmt.execute("create table athletes (id integer, name varchar, " +
+				"dob date, country_code varchar)");
 		stmt.execute("insert into athletes values (1, 'Siim Susi', " +
 				"'1976-01-01', 'EE')");
 		stmt.execute("insert into athletes values (2, 'Beata Kana', " +
@@ -46,8 +47,9 @@ public class DatabaseInputActionTest {
 		stmt.execute("insert into athletes values (3, 'József Fenyő', " +
 				"'1972-04-03', 'HU')");
 		
-//		stmt.execute("create table competitions (id integer, country_code " +
-//				"varchar, date date, name varchar, location varchar)");
+		stmt.execute("drop table if exists competitions");
+		stmt.execute("create table competitions (id integer, country_code " +
+				"varchar, date date, name varchar, location varchar)");
 		stmt.execute("insert into competitions values (1, 'EE', " +
 				"'2005-12-01', 'Training', 'Tallinn')");
 		stmt.execute("insert into competitions values (2, 'PL', " +
@@ -55,12 +57,13 @@ public class DatabaseInputActionTest {
 		stmt.execute("insert into competitions values (3, 'EE', " +
 				"'2005-12-01', 'Training', 'Tallinn2')");
 		
-//		stmt.execute("create table results (id integer, athlete_id " +
-//			"integer, competition_id integer, race_100m float, " +
-//			"long_jump float, shot_put float, high_jump float, " +
-//			"race_400m float, hurdles_110m float, " +
-//			"discus_throw float, pole_vault float, javelin_throw float, " +
-//			"race_1500m float)");
+		stmt.execute("drop table if exists results");
+		stmt.execute("create table results (id integer, athlete_id " +
+			"integer, competition_id integer, race_100m float, " +
+			"long_jump float, shot_put float, high_jump float, " +
+			"race_400m float, hurdles_110m float, " +
+			"discus_throw float, pole_vault float, javelin_throw float, " +
+			"race_1500m float)");
 		stmt.execute("insert into results values (1, 1, 2, 12.61, 5, 9.22, " +
 			"1.5, 59.39, 16.43, 21.6, 2.6, 35.81, 325.72)");
 		stmt.execute("insert into results values (2, 2, 2, 13.04, 4.53, 7.79, " +
@@ -75,7 +78,7 @@ public class DatabaseInputActionTest {
 	public void testHandleData() throws Exception {
 		prepare();
 		testHandleData("2", ATHLETE_DATA_I, ATHLETE_RESULTS_I);
-//		testHandleData("Training", ATHLETE_DATA_II, ATHLETE_RESULTS_II);
+		testHandleData("Training", ATHLETE_DATA_II, ATHLETE_RESULTS_II);
 	}
 	
 	private void testHandleData(String value, String[][] personData, 
