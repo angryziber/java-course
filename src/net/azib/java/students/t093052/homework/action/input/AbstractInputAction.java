@@ -6,6 +6,7 @@ import net.azib.java.students.t093052.homework.CompetitionType;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -16,11 +17,11 @@ public abstract class AbstractInputAction implements InputAction {
 	
 	abstract DateFormat getDateFormat();
 	
-	Athlete createAthlete(String... data) throws ParseException {
+	Athlete createAthlete(String... data) {
 		Athlete athlete = new Athlete();
 		
 		athlete.setName(data[0]);
-		athlete.setDateOfBirth(data[1] != null ? getDateFormat().parse(data[1]) : null);
+		athlete.setDateOfBirth(convertToDate(data[1]));
 		athlete.setCountry(data[2].toUpperCase());
 		
 		for (int i = 3, j = 0; i < data.length && 
@@ -29,6 +30,14 @@ public abstract class AbstractInputAction implements InputAction {
 			athlete.addResult(type, data[i]);
 		}
 		return athlete;
+	}
+	
+	private Date convertToDate(String dateString) {
+		try {
+			return dateString != null ? getDateFormat().parse(dateString) : null;
+		} catch (ParseException e) {
+			throw new InputDataException("Date in invalid format", e);
+		}
 	}
 	
 	Set<Athlete> createAthleteSet() {

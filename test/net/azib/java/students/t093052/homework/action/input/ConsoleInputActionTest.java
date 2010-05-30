@@ -6,7 +6,6 @@ import net.azib.java.students.t093052.homework.CompetitionType;
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Scanner;
@@ -81,7 +80,7 @@ public class ConsoleInputActionTest {
 	private InputAction createConsoleInputAction() {
 		return new ConsoleInputAction() {
 			@Override
-			InputStream getInputStream() throws IOException {
+			InputStream getInputStream() {
 				return new ByteArrayInputStream(createData().getBytes());
 			}
 			

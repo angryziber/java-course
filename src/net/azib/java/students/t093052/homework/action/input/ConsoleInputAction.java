@@ -3,9 +3,7 @@ package net.azib.java.students.t093052.homework.action.input;
 import net.azib.java.students.t093052.homework.Athlete;
 import net.azib.java.students.t093052.homework.CompetitionType;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,12 +14,12 @@ import java.util.Set;
  * */
 public class ConsoleInputAction extends AbstractInputStreamAction {
 	@Override
-	InputStream getInputStream() throws IOException {
+	InputStream getInputStream() {
 		return System.in;
 	}
 
 	@Override
-	void addAthletes(Set<Athlete> athletes, Scanner scanner) throws Exception {
+	void addAthletes(Set<Athlete> athletes, Scanner scanner) {
 		String line = null;
 		do {
 			line = nextLine(scanner);
@@ -42,7 +40,7 @@ public class ConsoleInputAction extends AbstractInputStreamAction {
 		return scanner.nextLine();
 	}
 	
-	private Athlete createNextAthlete(Scanner scanner) throws ParseException {
+	private Athlete createNextAthlete(Scanner scanner) {
 		List<String> values = new ArrayList<String>();
 		
 		values.add(getValue("Athlete name", scanner, ".+"));

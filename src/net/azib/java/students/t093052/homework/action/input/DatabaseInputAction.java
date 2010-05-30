@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class DatabaseInputAction extends AbstractInputAction {
 	}
 
 	private ResultSet getResultSet(
-			Connection conn) throws SQLException, ParseException {
+			Connection conn) throws SQLException {
 		PreparedStatement statement;
 		
 		if (value.matches("\\d+")) {
@@ -110,7 +109,7 @@ public class DatabaseInputAction extends AbstractInputAction {
 		return list.toArray(new String[list.size()]);
 	}
 
-	private Connection openConnection() throws SQLException, IOException {
+	Connection openConnection() throws SQLException, IOException {
 		Properties props = new Properties();
 	    props.load(DecathlonComputation.class.getResourceAsStream(DB_PROPS));
 	    
