@@ -21,13 +21,13 @@ public abstract class StringOutputAction extends AbstractOutputAction {
 		append(placeInterval);
 		appendAll(athlete.getMainValues());
 		appendAll(athlete.getResults().values().toArray(
-				new String[athlete.getResults().size()]));
+				new Double[athlete.getResults().size()]));
 		getWriter().write(System.getProperty("line.separator"));
 	}
 	
-	private void appendAll(String[] values) throws IOException {
-		for (String value : values) {
-			append(value);
+	private void appendAll(Object[] values) throws IOException {
+		for (Object value : values) {
+			append(String.valueOf(value));
 		}
 	}
 }

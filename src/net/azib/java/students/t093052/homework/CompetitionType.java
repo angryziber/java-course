@@ -1,5 +1,8 @@
 package net.azib.java.students.t093052.homework;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Class which holds kinds of sport
  * */
@@ -45,8 +48,7 @@ public enum CompetitionType {
 	 * Calculates the points of each sport's kind
 	 * @return the count of points
 	 */
-	public int calculatePoints(String stringResult) {
-		Double result = convert(stringResult);
+	public int calculatePoints(Double result) {
 		if (isTimeType()) {
 			result = b - result;
 		} else {
@@ -63,7 +65,11 @@ public enum CompetitionType {
 		return timeType;
 	}
 	
-	private double convert(String stringResult) {
+	/**
+	 * Converts result of competition from String into Double
+	 * */
+	public Double convert(String stringResult) {
+		double value;
 		if (Measure.SECONDS.equals(measure)) {
 			double result = 0.0;
 			int index = stringResult.indexOf(DELIMITER);
@@ -71,9 +77,11 @@ public enum CompetitionType {
 				result = Integer.valueOf(stringResult.substring(0, index));
 				stringResult = stringResult.substring(1 + index);
 			}
-			return measure.convert(result) + Double.valueOf(stringResult);
+			value = measure.convert(result) + Double.valueOf(stringResult);
 		} else {
-			return measure.convert(Double.valueOf(stringResult));
+			value = measure.convert(Double.valueOf(stringResult));
 		}
+		return new BigDecimal(value).setScale(2, 
+				RoundingMode.HALF_UP).doubleValue();
 	}
 }

@@ -11,13 +11,16 @@ import org.junit.Test;
 public class CompetitionTypeTest {
 	@Test
 	public void calculatePoints() throws Exception {
-		assertEquals(1202, SPRINT_100M.calculatePoints("9.58"));
+		assertEquals(1202, SPRINT_100M.calculatePoints(
+				SPRINT_100M.convert("9.58")));
 		assertEquals("sprint100m", SPRINT_100M.getName());
 		
-		assertEquals(95, RACE_1500M.calculatePoints("6:50.76"));
+		assertEquals(95, RACE_1500M.calculatePoints(
+				RACE_1500M.convert("6:50.76")));
 		assertEquals("race1500m", RACE_1500M.getName());
 		
-		assertEquals(12908, HIGH_JUMP.calculatePoints("9.58"));
+		assertEquals(12908, HIGH_JUMP.calculatePoints(
+				HIGH_JUMP.convert("9.58")));
 		assertEquals("highJump", HIGH_JUMP.getName());
 	}
 }

@@ -28,7 +28,7 @@ public class AbstractInputActionTest {
 		AbstractInputAction abstractInputAction = createAbstractInputAction();
 		
 		String name = "Karabas Barabasov";
-		String dateOfBirth = "01.01.1976";
+		String dateOfBirth = "1.01.1976";
 		String country = "EE";
 		
 		Athlete athlete = abstractInputAction.createAthlete(name, 
@@ -36,7 +36,7 @@ public class AbstractInputActionTest {
 			RESULTS[4], RESULTS[5], RESULTS[6], RESULTS[7], RESULTS[8], RESULTS[9]);
 		
 		assertEquals(name, athlete.getName());
-		assertEquals(dateOfBirth, athlete.getDateOfBirth());
+		assertEquals(dateOfBirth, athlete.getDateOfBirthAsString());
 		assertEquals(country, athlete.getCountry());
 		
 		resultsCheck(athlete.getResults());
@@ -52,10 +52,11 @@ public class AbstractInputActionTest {
 		}
 	}
 	
-	private void resultsCheck(Map<CompetitionType, String> result) {
+	private void resultsCheck(Map<CompetitionType, Double> result) {
 		CompetitionType[] competitionTypes = CompetitionType.values();
 		for (int i = 0; i < competitionTypes.length; i++) {
-			assertEquals(RESULTS[i], result.get(competitionTypes[i]));
+			assertEquals(competitionTypes[i].convert(RESULTS[i]), 
+					result.get(competitionTypes[i]));
 		}
 	}
 	

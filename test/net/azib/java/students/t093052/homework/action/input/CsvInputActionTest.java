@@ -55,10 +55,12 @@ public class CsvInputActionTest {
 		};
 	}
 	
-	private void resultsCheck(String[] expected, Map<CompetitionType, String> results) {
+	private void resultsCheck(String[] expected, 
+			Map<CompetitionType, Double> results) {
 		CompetitionType[] competitionTypes = CompetitionType.values();
 		for (int i = 0; i < competitionTypes.length; i++) {
-			assertEquals(expected[i], results.get(competitionTypes[i]));
+			assertEquals(competitionTypes[i].convert(expected[i]), 
+					results.get(competitionTypes[i]));
 		}
 	}
 }

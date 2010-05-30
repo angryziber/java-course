@@ -69,9 +69,9 @@ public abstract class NodeOutputAction extends AbstractOutputAction {
 		addElement(athleteElement, "points", String.valueOf(athlete.getPoints()));
 
 		Element resultsElement = document.createElement("results");
-		for (Entry<CompetitionType, String> entry : athlete.getResults().entrySet()) {
+		for (Entry<CompetitionType, Double> entry : athlete.getResults().entrySet()) {
 			addElement(resultsElement, entry.getKey().getName().toLowerCase(), 
-					entry.getValue());
+					String.valueOf(entry.getValue()));
 		}
 		athleteElement.appendChild(resultsElement);
 		

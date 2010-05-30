@@ -14,8 +14,8 @@ public class Athlete {
 	private String name;
 	private Date dateOfBirth;
 	private String country;
-	private Map<CompetitionType, String> results = 
-		new LinkedHashMap<CompetitionType, String>();
+	private Map<CompetitionType, Double> results = 
+		new LinkedHashMap<CompetitionType, Double>();
 	private Double points = 0.0;
 	
 	/**
@@ -57,7 +57,7 @@ public class Athlete {
 	/**
 	 * @return a map of all event results for the athlete
 	 * */
-	public Map<CompetitionType, String> getResults() {
+	public Map<CompetitionType, Double> getResults() {
 		return results;
 	}
 	/**
@@ -65,8 +65,9 @@ public class Athlete {
 	 * @param result the result of the competition to set
 	 */
 	public void addResult(CompetitionType type, String result) {
-		this.results.put(type, result.trim());
-		points += type.calculatePoints(result);
+		double doubleResult = type.convert(result);
+		this.results.put(type, doubleResult);
+		points += type.calculatePoints(doubleResult);
 	}
 	/**
 	 * @return the points in the competition

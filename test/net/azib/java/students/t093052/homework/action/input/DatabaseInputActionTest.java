@@ -18,16 +18,16 @@ public class DatabaseInputActionTest {
 		{"Siim Susi", "1.01.1976", "EE"},
 		{"Beata Kana", "1.01.1980", "ZA"}
 	};
-	private static final String[][] ATHLETE_RESULTS_I = new String[][] {
-		{"12.61", "5.0", "9.22", "1.5", "59.39", "16.43", "21.6", "2.6", "35.81", "325.72"},
-		{"13.04", "4.53", "7.79", "1.55", "64.72", "18.74", "24.2", "2.4", "28.2", "410.76"}
+	private static final Double[][] ATHLETE_RESULTS_I = new Double[][] {
+		{12.61, 500.0, 9.22, 150.0, 59.39, 16.43, 21.6, 260.0, 35.81, 325.72},
+		{13.04, 453.0, 7.79, 155.0, 64.72, 18.74, 24.2, 240.0, 28.2, 410.76}
 	};
 	
 	private static final String[][] ATHLETE_DATA_II = new String[][] {
 		{"József Fenyő", "3.04.1972", "HU"}
 	};
-	private static final String[][] ATHLETE_RESULTS_II = new String[][] {
-		{"10.94", "7.83", "12.48", "2.0", "49.72", "15.67", "38.3", "5.4", "55.84", "271.72"}
+	private static final Double[][] ATHLETE_RESULTS_II = new Double[][] {
+		{10.94, 783.0, 12.48, 200.0, 49.72, 15.67, 38.3, 540.0, 55.84, 271.72}
 	};
 	
 	private static final Connection getConnection() throws SQLException {
@@ -82,7 +82,7 @@ public class DatabaseInputActionTest {
 	}
 	
 	private void testHandleData(String value, String[][] personData, 
-			String[][] results) throws SQLException, IOException {
+			Double[][] results) throws SQLException, IOException {
 		DatabaseInputAction inputAction = createDBInputAction(value);
 		
 		Set<Athlete> athletes = inputAction.handleData();
@@ -96,13 +96,13 @@ public class DatabaseInputActionTest {
 	}
 	
 	private void checkAthlete(int index, Athlete athlete, String[][] personData, 
-			String[][] results) {
+			Double[][] results) {
 		assertEquals(personData[index][0], athlete.getName());
 		assertEquals(personData[index][1], athlete.getDateOfBirthAsString());
 		assertEquals(personData[index][2], athlete.getCountry());
 		
 		int i = 0;
-		for (String value : athlete.getResults().values()) {
+		for (Double value : athlete.getResults().values()) {
 			assertEquals(results[index][i++], value);
 		}
 	}
