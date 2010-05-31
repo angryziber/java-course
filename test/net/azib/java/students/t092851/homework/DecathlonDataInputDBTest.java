@@ -29,8 +29,8 @@ public class DecathlonDataInputDBTest {
 	
 	@Test
 	public void testReadData() {
-		DecathlonData  outputData;
-		ClassUnderTest cut;
+		DecathlonData             outputData;
+		DecathlonDataInputDBLocal localDB;
 		
 		input1Data = new DecathlonData();
 		input2Data = new DecathlonData();
@@ -44,16 +44,16 @@ public class DecathlonDataInputDBTest {
 			
 			// Case1 - input data by competition name
 			{
-				cut = new ClassUnderTest("World Championship 2009");
-				outputData = cut.readData();
+				localDB = new DecathlonDataInputDBLocal("World Championship 2009");
+				outputData = localDB.readData();
 				assertFalse(outputData == null);
 				assertTrue(input1Data.equals(outputData));
 			}
 			
 			// Case2 - input data by competition id
 			{
-				cut = new ClassUnderTest("2");
-				outputData = cut.readData();
+				localDB = new DecathlonDataInputDBLocal("2");
+				outputData = localDB.readData();
 				assertFalse(outputData == null);
 				assertTrue(input2Data.equals(outputData));
 			}
@@ -159,13 +159,13 @@ public class DecathlonDataInputDBTest {
 	
 	
 	/**
-	 * ClassUnderTest - wrapped DecathlonDataInputDB for using temporary database
+	 * DecathlonDataInputDBLocal - wrapped DecathlonDataInputDB for using temporary database
 	 * 	which resides in tester memory only. This solution does not use
 	 *  real database connection for testing.
 	 */
-	static private class ClassUnderTest extends DecathlonDataInputDB {
+	private class DecathlonDataInputDBLocal extends DecathlonDataInputDB {
 
-		public ClassUnderTest(String competition) {
+		public DecathlonDataInputDBLocal(String competition) {
 			super(competition);
 		}
 		
