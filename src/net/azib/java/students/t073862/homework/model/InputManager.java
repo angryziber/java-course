@@ -17,6 +17,8 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import org.apache.commons.logging.Log; 
+import org.apache.commons.logging.LogFactory; 
 /**
  * InputData
  * This class handles input data parsing to ArrayList<Data>
@@ -25,6 +27,7 @@ import java.util.regex.Pattern;
  */
 public class InputManager {
 	
+	private static final Log logger = LogFactory.getLog(InputManager.class); 
 
 	private String[] races = { "race_100m", "long_jump", "shot_put", "high_jump", "race_400m", "hurdles_110m", "discus_throw", "pole_vault", "javelin_throw", "race_1500m" };
 
@@ -48,9 +51,8 @@ public class InputManager {
 				resultset = db.getLoadDataFromID().executeQuery();
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
-				System.err.println("SQL exceptions shouldn't happen");
-				System.exit(1);
+				logger.fatal(e);
+				
 			}
 
 		}
@@ -63,9 +65,7 @@ public class InputManager {
 				resultset = db.getLoadDataFromName().executeQuery();
 			}
 			catch (SQLException e1) {
-				e1.printStackTrace();
-				System.err.println("SQL exceptions shouldn't happen");
-				System.exit(1);
+				logger.fatal("Error in SQL",e);
 			}
 			
 		}
@@ -79,18 +79,16 @@ public class InputManager {
 				catch(Exception e) {
 					date = new Date(0);
 				}
-			    Float[] scoreData = new Float[races.length];
+			    Double[] scoreData = new Double[races.length];
 				for(int i = 0; i < races.length; i++) {
-					scoreData[i] = resultset.getFloat(races[i]);
+					scoreData[i] = resultset.getDouble(races[i]);
 				}
 
-				scores.add(new Score(resultset.getString("name"),date.toString() ,resultset.getString("country_code"),Util.calculateScores(scoreData),scoreData));
+				scores.add(new Score(resultset.getString("name"),date.toString() ,resultset.getString("country_code"),scoreData));
 			}
 		}
 		catch (SQLException e) {
-			System.out.println("SQL exceptions shouldn't happen");
-			//e.printStackTrace();
-			//System.exit(1);
+			logger.error("Error in SQL",e);
 		}
 		return scores.toArray(new Score[]{});
 	}
@@ -111,24 +109,21 @@ public class InputManager {
 		        String name = null;
 		        String iso = null;
 		        Date date = null;
-		        Float[] scoreData = new Float[races.length];
+		        Double[] scoreData = new Double[races.length];
 				
 		        while (tokenizer.hasMoreTokens()) {
 		        	if(i == 0) {
 		        		name = tokenizer.nextToken();
 		        		name = name.trim().trim();
 		        		name = name.substring(1,name.length()-1);
-		        		
-		        		System.out.println(name);
 		        	}
 		            else if(i == 1) {
 		            	try {
 		                	date = (Date)formatter2.parse(tokenizer.nextToken());
 		                }
 		                catch (ParseException e) {
-		                	e.printStackTrace();
-		                	System.out.println("Error in CSV file");
-		                	System.exit(1);
+		                	logger.fatal("Error in CSV file",e);
+		                
 		                }
 		            }
 		            else if(i == 2) {
@@ -137,12 +132,12 @@ public class InputManager {
 		            
 		            else {
 		                try {
-		                	Float fx = 0F;
+		                	Double fx = 0D;
 
 		                	if(i == 7 || i == 12) {
 		                		String token = tokenizer.nextToken().trim();
 		                		try {
-		                		fx = Float.parseFloat(token);
+		                		fx = Double.parseDouble(token);
 		                		}
 		                		catch(NumberFormatException e) {
 			    					fx = parseMinutesToSeconds(token);
@@ -152,34 +147,31 @@ public class InputManager {
 
 		                	}
 		                	else {
-		                		fx = Float.parseFloat(tokenizer.nextToken());
+		                		fx = Double.parseDouble(tokenizer.nextToken());
 		                	}
 			            	scoreData[i-3] = fx;
 		                }
 		                catch(NumberFormatException e) {
-		                	e.printStackTrace();
-		                	System.out.println("Error in CSV file");
-		                	System.exit(1);
+		                	logger.fatal("Error in CSV file",e);
+		                
 		                }
 		            
 		            }
 		        	i++;
 		        }
-		        scores.add(new Score(name,date.toString() ,iso ,Util.calculateScores(scoreData),scoreData));
+		        scores.add(new Score(name,date.toString() ,iso ,scoreData));
 			
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-        	System.out.println("Error in CSV file");
-        	System.exit(1);
+			logger.fatal("Error in CSV file",e);
 		}
 		return scores.toArray(new Score[]{});
 	}
 	
-	private float parseMinutesToSeconds(String s) throws NumberFormatException {
+	private Double parseMinutesToSeconds(String s) throws NumberFormatException {
 		String data[] = s.split(":");
-		return Integer.valueOf(data[0])*60+Float.valueOf(data[1]);
+		return Double.valueOf(data[0])*60+Float.valueOf(data[1]);
 	}
 	
 	/**
@@ -224,12 +216,12 @@ public class InputManager {
 			}
 			catch(InputMismatchException e) {	}
 		}
-		Float[] scoreData = new Float[races.length];
+		Double[] scoreData = new Double[races.length];
 	
 		for(int i = 0; i < races.length; i++) {
-			scoreData[i]  = Util.getFloat("Please enter results for: " + races[i]);
+			scoreData[i]  = Util.getDouble("Please enter results for: " + races[i]);
 		}
-		scores.add(new Score(name,date.toString() ,iso ,Util.calculateScores(scoreData),scoreData));
+		scores.add(new Score(name,date.toString() ,iso, scoreData));
 		return consoleActon(scores);
 	}
 }

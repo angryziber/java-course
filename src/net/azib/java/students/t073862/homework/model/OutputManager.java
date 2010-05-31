@@ -4,7 +4,10 @@ import net.azib.java.students.t073862.homework.Main;
 import net.azib.java.students.t073862.homework.util.Util;
 
 import java.io.File;
+import java.io.InputStream;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -13,6 +16,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -24,6 +29,8 @@ public class OutputManager {
 	
 	private StringTemplateGroup group = new StringTemplateGroup("Group Name",Main.class.getResource("").getFile().replace("%20", " "));
 	
+	private static final Log logger = LogFactory.getLog(OutputManager.class); 
+
 	
 	/**
 	 * Outputs to the console
@@ -63,7 +70,7 @@ public class OutputManager {
 	public void toHTML(Score[] scores, File f) {
 		this.toXML(scores, Util.getOutputFile("output.xml"));
 		try {
-			Document doc = Util.loadDocument("output.xml");
+			Document doc = this.loadDocument("output.xml");
 			
 			StreamSource xslSource = new StreamSource(Main.class.getResourceAsStream("output.xsl"));
 			Transformer template = TransformerFactory.newInstance().newTransformer(xslSource);
@@ -71,8 +78,15 @@ public class OutputManager {
 			template.transform(new DOMSource(doc), new StreamResult(f));
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			logger.error("Unable to parse to HTML", e);
 		}
+	}
+
+	private Document loadDocument(String string) throws Exception {
+		InputStream stream = Main.class.getResourceAsStream(string);
+		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		return builder.parse(stream);
+		
 	}
 	
 }

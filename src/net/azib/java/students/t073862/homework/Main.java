@@ -39,6 +39,10 @@ public class Main {
 		else if(input.equalsIgnoreCase("-csv")) {
 			scores = inputManager.loadInputFromCSV(new File(args[pointer++]));
 		}
+		else {
+			System.out.println("Invalid arguments");
+			System.exit(1);
+		}
 		Arrays.sort(scores);
 		OutputManager outputManager = new OutputManager();
 		String output = args[pointer++];
@@ -57,7 +61,10 @@ public class Main {
 			File f = Util.getOutputFile(args[pointer++]);
 			outputManager.toHTML(scores, f);
 		}
-		
+		else {
+			System.out.println("Invalid arguments");
+			System.exit(1);
+		}
 	}
 	
 	public static void main(String[] args) {

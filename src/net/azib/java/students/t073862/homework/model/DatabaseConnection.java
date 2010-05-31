@@ -15,11 +15,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 /**
  * Used to interact with the database.
  */
 public class DatabaseConnection {
+	private static final Log logger = LogFactory.getLog(DatabaseConnection.class); 
+
+	
 	/**
 	 * Loads database properties
 	 */
@@ -42,8 +48,7 @@ public class DatabaseConnection {
 			Class.forName(props.getProperty("driver"));
 		}
 		catch (ClassNotFoundException cnfe) {
-			cnfe.printStackTrace();
-			System.exit(1);
+			logger.fatal(cnfe);
 		}
 	}
 	private PreparedStatement loadDataFromID;
@@ -53,25 +58,21 @@ public class DatabaseConnection {
 	 */
 	public DatabaseConnection() {
 		if(props == null) {
-			System.out.println("Unable to load database properties");
-			System.exit(1);
+			logger.fatal(new Exception("Unable to load database properties"));
 		}
 		testForDriver();
 		
 		if(!createConnection()) {
-			new Exception("Unable to connect to DataBase").printStackTrace();
-			System.exit(1);
+			logger.fatal(new Exception("Unable to connect to DataBase"));
 		}
 		else {
-			System.out.println("Database connection achieved.");
+			logger.info("Database connection achieved");
 			try {
 				loadDataFromID = con.prepareStatement("SELECT a.*,r.* FROM competitions as c LEFT JOIN results as r ON c.id = r.competition_id LEFT JOIN athletes as a ON r.athlete_id = a.id WHERE c.id = ?");
 				loadDataFromName = con.prepareStatement("SELECT a.*,r.* FROM competitions as c LEFT JOIN results as r ON c.id = r.competition_id LEFT JOIN athletes as a ON r.athlete_id = a.id WHERE c.name = ?");
 			}
 			catch (SQLException e) {
-				System.out.println("Unable to initilize prepared statements");
-				e.printStackTrace();
-				System.exit(1);
+				logger.fatal("Unable to initilize prepared statements", e);
 			}
 			
 		}
@@ -84,7 +85,7 @@ public class DatabaseConnection {
 			return isConnected();
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			logger.fatal("Unable to create a connection", e);
 			return false;
 		}
 	}
@@ -100,7 +101,7 @@ public class DatabaseConnection {
 	}
 
 	/**
-	 * Closes the database conection.
+	 * Closes the database connection.
 	 *
 	 * @throws SQLException if there was an error when closing the connection
 	 */
