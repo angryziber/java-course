@@ -1,7 +1,7 @@
 package net.azib.java.students.t092851.homework;
 
 /**
- * DecathlonEvent
+ * DecathlonEvent - list of decathlon events, points calculation rules
  *
  * @author Lauri
  */
@@ -38,37 +38,61 @@ public enum DecathlonEvent {
         this.conversion = conversion;
         this.databaseHeader = databaseHeader;
     }
+
     
+	/**
+	 * @return number of points that corresponds to result
+	 */
     public long calcPoints(Double result) {
-    	long points;
+    	double points;
     	
     	if (result == null)
     		return 0;
     	
     	if (trackEvent)
-    		points = (long)(a * Math.pow(b - conversion * result, c));
+    		points = a * Math.pow(b - conversion * result, c);
     	else
-    		points = (long)(a * Math.pow(conversion * result - b, c));
-    		
-    	return points;
+    		points = a * Math.pow(conversion * result - b, c);
+    	
+    	return (long)points;
     }
+
     
+	/**
+	 * @return unique event index
+	 */
     public int getIndex() {
     	return index;
     }
+
     
+	/**
+	 * @return event name in human readable format
+	 */
     public String getName() {
     	return name;
     }
     
+    
+	/**
+	 * @return string that can be used as column header for database
+	 */
     public String getDatabaseHeader() {
     	return databaseHeader;
     }
     
+    
+	/**
+	 * @return units that are used for measuring the event results
+	 */
     public String getUnits() {
     	return units;
     }
     
+    
+	/**
+	 * @return number of decathlon events
+	 */
     static public int countEvents() {
     	return values().length;
     }

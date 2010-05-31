@@ -8,8 +8,9 @@ package net.azib.java.students.t092851.homework;
 public interface DecathlonDataInput {
 
 	/**
-	 * @return
-	 */
-	DecathlonData readData();
+	 * Reads decathlon competition data from implementation specific input 
+	 * @return decathlon competition data; in case of failure returns 'null'
+	 */	
+	public DecathlonData readData();
 
 }

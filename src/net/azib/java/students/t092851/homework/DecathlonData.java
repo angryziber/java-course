@@ -85,4 +85,21 @@ public class DecathlonData implements Iterable<Participant> {
 		return strBuild.toString();
 	}
 
+	
+	/**
+	 * @param obj object to compare with 'this'
+	 * @return true if all participants data in table is equal
+	 *  (including order of participants in table)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this)
+			return true;
+		
+		if ( !(obj instanceof DecathlonData) )
+			return false;
+
+		return ((DecathlonData)obj).athletes.equals(this.athletes);
+	}
+
 }

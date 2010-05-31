@@ -30,7 +30,7 @@ public class IOSelector {
 		CONSOLE  { @Override public DecathlonDataOutput getOutput(String parameter) { return new DecathlonDataOutputConsole(); } },
 		CSV      { @Override public DecathlonDataOutput getOutput(String parameter) { return new DecathlonDataOutputCSV(parameter); } },
 		XML      { @Override public DecathlonDataOutput getOutput(String parameter) { return new DecathlonDataOutputXML(parameter); } },
-		HTML     { @Override public DecathlonDataOutput getOutput(String parameter) { return new DecathlonDataOutputHTML("output.xml", "transform.xsl", parameter); } };
+		HTML     { @Override public DecathlonDataOutput getOutput(String parameter) { return new DecathlonDataOutputHTML(parameter); } };
 		
 		abstract public DecathlonDataOutput getOutput(String parameter); 
 	}

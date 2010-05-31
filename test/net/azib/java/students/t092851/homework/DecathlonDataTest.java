@@ -16,7 +16,7 @@ import org.junit.Test;
 public class DecathlonDataTest {
 	
 	private final ParticipantTest athleteFactory = new ParticipantTest();
-	static private final int max_count = 100; 
+	static private final int MAX_COUNT = 30; 
 	
 	
 	@Test
@@ -26,7 +26,7 @@ public class DecathlonDataTest {
 		int  counter = 0;
 		
 		// Add new participants to competition
-		for (int i = 0; i < max_count - 2; i ++)
+		for (int i = 0; i < MAX_COUNT - 2; i ++)
 			data.insert(athleteFactory.createParticipantRandom());
 		
 		// At least two athletes have equal number of points
@@ -41,7 +41,7 @@ public class DecathlonDataTest {
 		}
 		
 		// The same number of participants are in list as entered
-		assertTrue(max_count == counter);
+		assertTrue(MAX_COUNT == counter);
 	}
 	
 	
@@ -123,4 +123,5 @@ public class DecathlonDataTest {
 			assertTrue(iterator.next().getPlace().equals("1-4"));
 		}
 	}
+	
 }

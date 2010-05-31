@@ -16,15 +16,20 @@ import java.util.Scanner;
  */
 public class DecathlonDataInputConsole implements DecathlonDataInput {
 
+	
+	/**
+	 * Reads decathlon competition data from standard input
+	 * @return decathlon competition data; in case of failure returns 'null'
+	 */	
 	@Override
 	public DecathlonData readData() {
-		Scanner       scanner = new Scanner(System.in);
-		Participant   athlete = new Participant();
-		DecathlonData data    = new DecathlonData();
+		Scanner        scanner = new Scanner(System.in);
+		DecathlonData  data    = new DecathlonData();
+		BufferedReader input   = new BufferedReader(new InputStreamReader(System.in));
 		
 		while (true) {
 			try {
-				BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+				Participant athlete = new Participant();
 				
 				System.out.println("Starting to insert a new record.");
 				System.out.println("Please enter following fields.");

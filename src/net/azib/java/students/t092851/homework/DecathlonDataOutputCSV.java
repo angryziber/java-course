@@ -13,12 +13,20 @@ import java.text.SimpleDateFormat;
  * @author Lauri
  */
 public class DecathlonDataOutputCSV implements DecathlonDataOutput {
+	
 	private String fileName;
 	
+	/**
+	 * @param fileName output CSV file name
+	 */	
 	public DecathlonDataOutputCSV(String fileName) {
 		this.fileName = fileName;
 	}
 	
+	/**
+	 * @param data decathlon competition data to write into CSV file
+	 * @return true on success
+	 */	
 	@Override
 	public boolean writeData(DecathlonData data) {
 		BufferedWriter writer     = null;
@@ -34,7 +42,7 @@ public class DecathlonDataOutputCSV implements DecathlonDataOutput {
 			{
 				writer.write(String.valueOf(++rank) + ",");
 				writer.write(String.valueOf(athlete.getPoints()) + ",");
-				writer.write(athlete.getName() + ",");
+				writer.write("\"" + athlete.getName() + "\",");
 				writer.write(dateFormat.format(athlete.getBirthDate()) + ",");
 				writer.write(athlete.getCountry());
 				for (DecathlonEvent event : DecathlonEvent.values()) {

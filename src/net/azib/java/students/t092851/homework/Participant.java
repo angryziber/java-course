@@ -6,11 +6,12 @@ import java.util.Date;
 
 
 /**
- * Participant
+ * Participant - stores decathlon athlete data
  *
  * @author Lauri
  */
 public class Participant {
+	
 	private String    name;
 	private Date      birthDate;
 	private String    country;
@@ -19,63 +20,77 @@ public class Participant {
 	private long      points;
 	private String    place;
 	
+	
 	/**
-	 * @return the name
+	 * @return participant name
 	 */
 	public String getName() {
 		return name;
 	}
 
+	
 	/**
-	 * @param name the name to set
+	 * @param name participant name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	
 	/**
-	 * @return the date
+	 * @return participant date of birth
 	 */
 	public Date getBirthDate() {
 		return birthDate;
 	}
 
+	
 	/**
-	 * @param date the date to set
+	 * @param date participant date of birth to set
 	 */
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
+	
 	/**
-	 * @return the country
+	 * @return two-letter ISO country code
 	 */
 	public String getCountry() {
 		return country;
 	}
 
+	
 	/**
-	 * @param country the country to set
+	 * @param country two-letter ISO country code to set
 	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
+	
 	/**
-	 * @return the result
+	 * @param event specifies decathlon event
+	 * @return the result that corresponds to event
 	 */
 	public Double getResult(DecathlonEvent event) {
 		return results[event.getIndex()];
 	}
 
+	
 	/**
-	 * @param result the result to set
+	 * @param event specifies decathlon event
+	 * @param result decathlon event result to set
 	 */
 	public void setResult(DecathlonEvent event, Double result) {
 		this.results[event.getIndex()] = result;
 		resultChange = true;
 	}
 	
+	
+	/**
+	 * @return points calculated from results 
+	 */
 	public long getPoints() {
 		if (resultChange) {
 			calculatePoints();
@@ -84,12 +99,17 @@ public class Participant {
 		return points;
 	}
 
+	
 	private void calculatePoints() {
 		points = 0;
 		for (DecathlonEvent event : DecathlonEvent.values())
 			points += event.calcPoints(results[event.getIndex()]);
 	}
 
+	
+	/**
+	 * Default constructor
+	 */
 	public Participant() {
 		name      = "ANONYMUS";
 		birthDate = new Date();
@@ -99,17 +119,35 @@ public class Participant {
 		resultChange = true;
 	}
 	
+	
 	/**
-	 * @return
+	 * @return rank in competition
 	 */
 	public String getPlace() {
 		return place;
 	}
+
 	
+	/**
+	 * Sets place in competition
+	 * @param place rank to set
+	 */
 	public void setPlace(String place) {
 		this.place = place;
 	}
 	
+	
+	private String endPaddding(String s, char symbol, int length) {
+		StringBuilder strBuilder = new StringBuilder(s);
+		for (int i = s.length(); i < length; i++)
+			strBuilder.append(symbol);
+		return strBuilder.toString();
+	}
+	
+	
+	/**
+	 * @return data in string format 
+	 */
 	@Override
 	public String toString() {
 		StringBuilder strBuild   = new StringBuilder();
@@ -125,10 +163,38 @@ public class Participant {
 		return strBuild.toString();
 	}
 	
-	private String endPaddding(String s, char symbol, int length) {
-		StringBuilder strBuilder = new StringBuilder(s);
-		for (int i = s.length(); i < length; i++)
-			strBuilder.append(symbol);
-		return strBuilder.toString();
+	
+	/**
+	 * @param obj object to compare with 'this'
+	 * @return true if all strategic data (name, country, birth date, results) equals
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this)
+			return true;
+		
+		if ( !(obj instanceof Participant) )
+			return false;
+
+		Participant p          = (Participant)obj;
+		// Since dates may not be equal even if dates in string format
+		// are identical then dates are converted to strings before comparison
+		DateFormat  dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		String      dateStr1   = dateFormat.format(p.birthDate);
+		String      dateStr2   = dateFormat.format(this.birthDate);
+		
+		// Check that all "important" fields are the same
+		if (       p.name.equals(this.name)
+				&& p.country.equals(this.country)
+				&& dateStr1.equals(dateStr2) ) {
+			for (DecathlonEvent event : DecathlonEvent.values()) {
+				if (!p.results[event.getIndex()].equals(this.results[event.getIndex()]))
+					return false;
+			}
+			return true;
+		}
+		
+		return false;
 	}
+
 }

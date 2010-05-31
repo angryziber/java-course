@@ -11,6 +11,7 @@ import org.junit.Test;
  * @author Lauri
  */
 public class DecathlonEventTest {
+	
 	@Test
 	public void testCalcPoints() {
 		assertTrue(DecathlonEvent.EVENT_100_METERS.calcPoints(10.395)  == 1000);
@@ -25,6 +26,7 @@ public class DecathlonEventTest {
 		assertTrue(DecathlonEvent.EVENT_1500_METERS.calcPoints(233.79) == 1000);		
 	}
 	
+	
 	@Test
 	public void testGetIndex() {
 		int counter = 0;
@@ -36,9 +38,11 @@ public class DecathlonEventTest {
 		assertTrue(DecathlonEvent.countEvents() == counter);
 	}
 	
+	
 	@Test
 	public void testCountEvents() {
 		// Decathlon has always 10 events
 		assertTrue(DecathlonEvent.countEvents() == 10);
 	}
+	
 }

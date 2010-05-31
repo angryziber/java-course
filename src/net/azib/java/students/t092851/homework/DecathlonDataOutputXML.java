@@ -1,23 +1,17 @@
 package net.azib.java.students.t092851.homework;
 
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -30,19 +24,64 @@ import org.w3c.dom.Element;
  * @author Lauri
  */
 public class DecathlonDataOutputXML implements DecathlonDataOutput {
+	
 	private final String fileName;
 	
+	/**
+	 * @param fileName output XML file name, may be set to 'null' if
+	 * 		the goal is not to write a file
+	 */	
 	public DecathlonDataOutputXML(String fileName) {
 		this.fileName  = fileName;		
 	}
-
+	
+	
+	/**
+	 * @param data decathlon competition data to write into XML file
+	 * @return true on success
+	 */	
 	@Override
 	public boolean writeData(DecathlonData data) {
 		BufferedWriter writer     = null;
-		DateFormat     dateFormat = new SimpleDateFormat("dd.MM.yyyy");		
+		DOMSource      source     = getDOMSource(data);
+		
+		if (source == null)
+			return false;
+		
+		try
+		{
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
+			StreamResult result = new StreamResult(writer);
+			Transformer  transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.transform(source, result);	
+		}
+		catch (Exception e) {
+			System.out.println("Writing to XML file \"" + fileName + "\"failed: " + e.toString());
+			return false;
+		}
+		finally {
+			try {
+				if (writer != null)
+					writer.close();
+			} catch (IOException e) {
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	/**
+	 * @param data decathlon competition data to prepare into XML format
+	 * @return intermediate structured data in XML-like format; can be used for direct XSLT
+	 */	
+	public DOMSource getDOMSource(DecathlonData data) {
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		DOMSource  source;
 		
 		if (data == null)
-			return false;
+			return null;
 		
 		try
 		{
@@ -83,53 +122,13 @@ public class DecathlonDataOutputXML implements DecathlonDataOutput {
 				}
 			}
 			
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-	
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
+			source = new DOMSource(doc);
+		}
+		catch (Exception e) {
+			System.out.println("Constructing XML data failed: " + e.toString());
+			return null;
+		}
+		return source;
+	}
 
-			StreamResult result = new StreamResult(writer);
-			DOMSource source = new DOMSource(doc);
-			transformer.transform(source, result);	
-		}
-		catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		catch (TransformerFactoryConfigurationError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		finally {
-			try {
-				if (writer != null)
-					writer.close();
-			} catch (IOException e) {
-			}
-		}
-		
-		return true;
-	}	
 }

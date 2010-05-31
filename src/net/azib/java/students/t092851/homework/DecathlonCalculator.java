@@ -1,5 +1,7 @@
 package net.azib.java.students.t092851.homework;
 
+import java.util.Locale;
+
 
 /**
  * DecathlonCalculator
@@ -20,6 +22,9 @@ public class DecathlonCalculator {
 		IOSelector          io;
 		
 		try {
+			// In general all data is entered and displayed as in English
+			Locale.setDefault(new Locale("en"));
+			
 			System.out.println("Analyzing command line options...");
 			io = new IOSelector(args);
 			
@@ -49,8 +54,4 @@ public class DecathlonCalculator {
 		}
 	}
 	
-	public static void errorHandler(Exception exception, String message) {
-		System.out.println(message);
-//		exception.printStackTrace();	
-	}
 }

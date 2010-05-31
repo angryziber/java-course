@@ -19,14 +19,32 @@ import java.util.ResourceBundle;
  */
 public class DecathlonDataInputDB implements DecathlonDataInput {
 
-	private final String competition;
+	private final String  competition_name;
+	private final Integer competition_id;
 
 	
+	/**
+	 * @param competition competition name or ID number
+	 */
 	public DecathlonDataInputDB(String competition) {
-		this.competition = competition;
+		Integer competition_id;
+		
+		try {
+			competition_id = Integer.valueOf(competition);
+		}
+		catch (NumberFormatException e) {
+			competition_id = null;
+		}
+		
+		this.competition_id   = competition_id;
+		this.competition_name = competition;
 	}
+
 	
-	
+	/**
+	 * Reads decathlon competition data from database
+	 * @return decathlon competition data; in case of failure returns 'null'
+	 */
 	@Override
 	public DecathlonData readData() {
 		DecathlonData     data = new DecathlonData();
@@ -36,17 +54,29 @@ public class DecathlonDataInputDB implements DecathlonDataInput {
 		Participant       athlete;
 		
 		try {
-			ResourceBundle bundle = ResourceBundle.getBundle(DecathlonCalculator.class.getPackage().getName() + ".db");
-			con = DriverManager.getConnection(bundle.getString("connection"), "java", "java");
-			String sql = "SELECT athletes.*, results.* FROM athletes, competitions, results " +
-				"WHERE athletes.id = results.athlete_id " +
-				"and results.competition_id = competitions.id " +
-				"and (competitions.name = ? or competitions.id = ?)";
-			stmt = con.prepareStatement(sql);
-			stmt.setString(1, competition);
-			stmt.setString(2, competition);
+			
+			con = openConnection();
+			
+			if (competition_id == null) {
+				String sql = "SELECT athletes.*, results.* FROM athletes, competitions, results " +
+						"WHERE athletes.id = results.athlete_id " +
+						"and results.competition_id = competitions.id " +
+						"and competitions.name = ?";
+				stmt = con.prepareStatement(sql);
+				stmt.setString(1, competition_name);
+			}
+			else {
+				String sql = "SELECT athletes.*, results.* FROM athletes, competitions, results " +
+						"WHERE athletes.id = results.athlete_id " +
+						"and results.competition_id = competitions.id " +
+						"and (competitions.name = ? or competitions.id = ?)";
+				stmt = con.prepareStatement(sql);
+				stmt.setString(1, competition_name);
+				stmt.setInt(2, competition_id);				
+			}
+				
 			rs = stmt.executeQuery();
-						
+			
 			while (rs.next()) { 
 				athlete = new Participant();
 				athlete.setName(rs.getString("name"));
@@ -68,7 +98,7 @@ public class DecathlonDataInputDB implements DecathlonDataInput {
 			}
 		}
 		catch (SQLException e) {
-			DecathlonCalculator.errorHandler(e, "Database operation failed due to " + e.getCause());
+			System.out.println("Database operation failed: " + e.toString());
 			data = null;
 		}
 		finally {
@@ -87,5 +117,11 @@ public class DecathlonDataInputDB implements DecathlonDataInput {
 		}
 		return data;
 	}
-
+	
+	
+	protected Connection openConnection() throws SQLException {
+		ResourceBundle bundle = ResourceBundle.getBundle(DecathlonCalculator.class.getPackage().getName() + ".db");
+		return DriverManager.getConnection(bundle.getString("connection"), "java", "java");
+	}
+	
 }

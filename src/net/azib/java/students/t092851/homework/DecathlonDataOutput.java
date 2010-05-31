@@ -8,7 +8,9 @@ package net.azib.java.students.t092851.homework;
 public interface DecathlonDataOutput {
 
 	/**
-	 * @param data
+	 * @param data decathlon competition data to write into
+	 * 			 implementation specific output
+	 * @return true on success
 	 */
 	public boolean writeData(DecathlonData data);
 

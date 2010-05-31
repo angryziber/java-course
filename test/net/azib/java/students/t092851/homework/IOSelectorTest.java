@@ -11,6 +11,7 @@ import org.junit.Test;
  * @author Lauri
  */
 public class IOSelectorTest {
+	
 	@Test
 	public void testConfigureIO() {
 		checkIO(new String[] {"-console", "-console"}, DecathlonDataInputConsole.class, DecathlonDataOutputConsole.class);
@@ -24,6 +25,7 @@ public class IOSelectorTest {
 		checkIO(new String[] {"-csv", "-console"}, null, null);
 		checkIO(new String[] {"-console", "-console", "extra is OK"}, DecathlonDataInputConsole.class, DecathlonDataOutputConsole.class);
 	}
+	
 	
 	private void checkIO(String[] args, Class<?> expectedInput, Class<?> expectedOutput) {
 		IOSelector io = new IOSelector(args);
@@ -43,4 +45,5 @@ public class IOSelectorTest {
 			assertTrue(testOutput.getClass().equals(expectedOutput));
 		}
 	}
+	
 }

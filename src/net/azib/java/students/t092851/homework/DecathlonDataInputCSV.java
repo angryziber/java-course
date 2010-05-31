@@ -16,17 +16,28 @@ import java.util.Date;
  * @author Lauri
  */
 public class DecathlonDataInputCSV implements DecathlonDataInput {
-	private String fileName;
 	
+	private String fileName;
+
+	
+	/**
+	 * @param fileName input CSV file name
+	 */
 	public DecathlonDataInputCSV(String fileName) {
 		this.fileName = fileName;
 	}
+
 	
+	/**
+	 * Reads decathlon competition data from CSV file
+	 * @return decathlon competition data; in case of failure returns 'null'
+	 */	
 	@Override
 	public DecathlonData readData() {
 		BufferedReader reader = null;
 		String line;
 		Participant athlete;
+		String [] quoteSplit;
 		String [] rawFields;
 		DecathlonData data = new DecathlonData();
 		int column;
@@ -34,10 +45,20 @@ public class DecathlonDataInputCSV implements DecathlonDataInput {
 		try {
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
 			while ((line = reader.readLine()) != null) {
-				column = 0;
-				rawFields = line.split(",");
+				column = 1;
+				// Name field is surrounded by quotes, may contain comma 
+				quoteSplit = line.split("\"");
+				if (quoteSplit.length != 3) {
+					System.out.println("Not supported input file format. Name must be enclosed to quotes.");
+					return null;
+				}
+				rawFields = quoteSplit[2].split(",");
+				if (rawFields.length < 13) {
+					System.out.println("Not supported input file format. Data fields are missing.");
+					return null;
+				}
 				athlete = new Participant();
-				athlete.setName(rawFields[column++]);
+				athlete.setName(quoteSplit[1]);
 				athlete.setBirthDate(convertToDate(rawFields[column++]));
 				athlete.setCountry(rawFields[column++]);
 				for (DecathlonEvent event: DecathlonEvent.values())
@@ -46,16 +67,20 @@ public class DecathlonDataInputCSV implements DecathlonDataInput {
 			}
 		}
 		catch (FileNotFoundException e) {
-			System.out.println("File \"" + fileName + "\" not found! \n" + e);
+			System.out.println("File \"" + fileName + "\" not found: " + e);
 			data = null;
 		}
 		catch (IOException e) {
-			System.out.println("Problem with reading from \"" + fileName + "\" file!\\n" + e);
+			System.out.println("Problem with reading from \"" + fileName + "\" file: " + e);
 			data = null;
 		}
 		catch (ParseException e) {
-			System.out.println("Invalid date or unsupported date format in file \"" + fileName + "\" !\\n" + e);
+			System.out.println("Invalid date or unsupported date format in file \"" + fileName + "\": " + e);
 			data = null;
+		}
+		catch (NumberFormatException e) {
+			System.out.println("Invalid number format in file \"" + fileName + "\": " + e);
+			data = null;			
 		}
 		finally {
 			if (reader != null) {
@@ -69,6 +94,7 @@ public class DecathlonDataInputCSV implements DecathlonDataInput {
 		return data;
 	}
 	
+	
 	private double convertToDouble(String s) {
 		String [] timeSplit = s.split(":");
 		if (timeSplit.length == 1) {
@@ -76,6 +102,7 @@ public class DecathlonDataInputCSV implements DecathlonDataInput {
 		}
 		return Double.valueOf(timeSplit[0]) * 60 + Double.valueOf(timeSplit[1]);
 	}
+	
 	
 	private Date convertToDate(String s) throws ParseException {
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
