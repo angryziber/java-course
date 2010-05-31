@@ -28,9 +28,9 @@ import org.junit.Test;
  * @author Pets
  */
 public class Tests {
-	Float[] scoreData = new Float[] { 10.395F, 7.76F, 18.4F, 2.20F, 46.17F, 13.8F, 56.17F, 5.28F, 77.19F, 233.79F };
+	Double[] scoreData = new Double[] { 10.395D, 7.76D, 18.4D, 2.20D, 46.17D, 13.8D, 56.17D, 5.28D, 77.19D, 233.79D };
 	OutputManager outputManager = new OutputManager();
-	Score[] scores = { new Score("Peeter Tomberg", "18.06.1988", "ee", 9990, scoreData) };
+	Score[] scores = { new Score("Peeter Tomberg", "18.06.1988", "ee", scoreData) };
 
 	@Test
 	public void testToXML() {
@@ -53,16 +53,20 @@ public class Tests {
 
 	@Test
 	public void testScoreModel() {
-		Score s = new Score("Peeter Tomberg", "18.06.1988", "ee", 9990, scoreData);
+		Score s = new Score("Peeter Tomberg", "18.06.1988", "ee", scoreData);
 		Assert.assertEquals("Name getter returning the right result?" ,"Peeter Tomberg", s.getName());
 		Assert.assertEquals("Dob getter returning the right result?" ,"18.06.1988", s.getDob());
 		Assert.assertEquals("Iso getter returning the right result?" ,"ee", s.getIso());	
 		Assert.assertEquals("toString returning the right result?" ,"Peeter Tomberg(18.06.1988) from ee scored: 9990 " + Arrays.toString(scoreData), s.toString());	
 	}
-	@Test @Ignore("Test fails!")
+	@Test 
+	@Ignore("Test fails due to percision loss of 10 (FieldEvent: pole_vault scored: 998 (0.2797|100.0|1.35|5.28) | FieldEvent: high_jump scored: 992 (0.8465|75.0|1.42|2.2)")
+	/**
+	 * Can I trust http://en.wikipedia.org/wiki/Decathlon#Benchmarks ? Online calculators return the same result and I cannot find the cause of the percision loss 
+	 */
 	public void testScoreCalculation() {
 		
-		Assert.assertEquals("Do we lose precision somewhere? ",10000, Util.calculateScores(scoreData));
+		Assert.assertEquals("Do we lose precision somewhere? ",10000, scores[0].getScores() );
 	
 	}
 	@Test
