@@ -1,6 +1,7 @@
 package net.azib.java.students.t092860.homework;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Locale;
@@ -86,7 +87,7 @@ public class Converter {
 
 		out += data.getName();
 		try {
-			out += "," + SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL, Locale.getDefault()).format(data.getDate());
+			out += "," + DateFormat.getDateInstance().format(data.getDate());
 		}
 		catch (NullPointerException e) {
 			out += "," + String.valueOf(data.getDate());
