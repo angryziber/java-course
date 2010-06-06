@@ -1,7 +1,9 @@
 package net.azib.java.students.t092860.homework;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +20,7 @@ public class ConverterTest {
     @Before
     public void setUp() {
 		logger.setLevel(Level.OFF);
+		Locale.setDefault(Locale.UK);
     }
     
 	/**
@@ -77,8 +80,8 @@ public class ConverterTest {
 	public final void testAthleteToString() throws Exception {
 		Athlete athlete = TestData.GetAthlete();		
 		String result = Converter.athleteToString(athlete);		
-		String expected = "Name,reede, 20. Oktoober 2000,EE,90.00,20.45,20.45,20.45,90.00,90.00,20.45,20.45,20.45,90.00";
-		assertTrue(result.compareTo(expected) == 0);
+		String expected = "Name,20-Oct-2000,EE,90.00,20.45,20.45,20.45,90.00,90.00,20.45,20.45,20.45,90.00";
+		assertEquals(expected, result);
 	}
 
 }
