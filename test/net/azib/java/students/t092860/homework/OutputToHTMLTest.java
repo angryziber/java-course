@@ -1,8 +1,10 @@
 package net.azib.java.students.t092860.homework;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +21,7 @@ public class OutputToHTMLTest {
     @Before
     public void setUp() {
 		logger.setLevel(Level.OFF);
+		Locale.setDefault(Locale.UK);
     }
     
 	/**
@@ -40,12 +43,12 @@ public class OutputToHTMLTest {
 				"<th>Race 100m</th><th>Shot put</th><th>Long jump</th><th>Javelin throw</th>" +
 				"<th>Pole vault</th><th>High jump</th><th>Hurdles 100m</th><th>Race 400m</th>" +
 				"<th>Race 1500m</th><th>Discus throw</th></tr><tr><td>1</td><td>6000</td>" +
-				"<td>Name</td><td>reede, 20. Oktoober 2000</td><td>EE</td><td>90.00</td>" +
+				"<td>Name</td><td>Friday, 20 October 2000</td><td>EE</td><td>90.00</td>" +
 				"<td>20.45</td><td>20.45</td><td>20.45</td><td>20.45</td><td>20.45</td>" +
 				"<td>90.00</td><td>90.00</td><td>90.00</td><td>20.45</td></tr></table></body></html>";
 		
 		String result = outputMock.read();
-		assertTrue(result.compareTo(expected) == 0);
+		assertEquals(expected, result);
 	}
 
 }
