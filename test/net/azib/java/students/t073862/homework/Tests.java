@@ -32,7 +32,7 @@ public class Tests {
 	OutputManager outputManager = new OutputManager();
 	Score[] scores = { new Score("Peeter Tomberg", "18.06.1988", "ee", scoreData) };
 
-	@Test
+	@Test @Ignore
 	public void testToXML() {
 		File f = getOutputFile("output.test");
 		outputManager.toXML(scores, f);
