@@ -6,7 +6,7 @@
 		<echo>Currently used by the cruise control to ensure the repository is always healthy.</echo>
 	</target>
 	
-	<target name="cruise" description="for cruise control builds" depends="clean,compile,compile-tests,test"/>
+	<target name="hudson" description="for continous integration" depends="clean,compile,compile-tests,test"/>
 	
 	<target name="clean">
 		<delete dir="classes-src"/>
