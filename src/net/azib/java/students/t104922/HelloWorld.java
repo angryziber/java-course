@@ -9,6 +9,14 @@ package net.azib.java.students.t104922;
  */
 public class HelloWorld {
     public static void main(String[] args) {
+        int x = 5;
+        for (int i = 0; i < x; i++) {
+            printHello(i);
+        }
+    }
+
+    public static void printHello(int y) {
         System.out.println("Hello World!");
+        System.out.println(y);
     }
 }
