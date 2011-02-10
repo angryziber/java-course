@@ -9,7 +9,7 @@ public class HelloWorld {
         printHello();
 
         Date date = new Date();
-        System.out.println(date);
+        System.out.println(date.toString());
     }
 
     private static void printHello() {
