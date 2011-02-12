@@ -8,12 +8,11 @@ public class Fibonacci {
     private static BigInteger c;
 
     public static void main(String[] args) {
-        for(int i = 2; i <= 100; i++)
-        {
+        for(int i = 2; i <= 100; i++){
             c = a.add(b);
             a = b;
             b = c;
         }
-            System.out.println(c);
+            System.out.println("Hundredth Fibonacci number is " + c);
     }
 }
