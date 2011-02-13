@@ -36,8 +36,8 @@ public class Factorial {
      * @throws IllegalArgumentException
      */
     private void calculateFactorial(int factorialsIndex) throws IllegalArgumentException {
-        if (badArgumentIsGiven(factorialsIndex))
-            throw new IllegalArgumentException("It isn't possible to calculate factorial with negative index.");
+        if (!isFactorialsIndexValid(factorialsIndex))
+            throw new IllegalArgumentException("It isn't possible to calculate factorial's value with negative index.");
 
         if (factorialsIndex == 0) {
             factorialsValue = BigInteger.ZERO;
@@ -55,10 +55,10 @@ public class Factorial {
      * Check, is given number valid or not.
      *
      * @param factorialsIndex Factorials index.
-     * @return true if given number is not valid; false if it's valid.
+     * @return true if given number is valid; false if it isn't.
      */
-    private boolean badArgumentIsGiven(int factorialsIndex) {
-        return factorialsIndex < 0;
+    private boolean isFactorialsIndexValid(int factorialsIndex) {
+        return factorialsIndex >= 0;
     }
 
     /**
