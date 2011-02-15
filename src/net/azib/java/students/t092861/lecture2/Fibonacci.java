@@ -1,3 +1,5 @@
+package net.azib.java.students.t092861;
+
 import java.math.BigInteger;
 
 /**

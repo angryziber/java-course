@@ -1,3 +1,5 @@
+package net.azib.java.students.t092861;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
