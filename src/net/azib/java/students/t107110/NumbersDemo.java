@@ -18,7 +18,7 @@ public class NumbersDemo {
     /**
      * Application entry point
      * <p/>
-     * Prints F(100) Fibonacci number
+     * Prints F(100) Fibonacci number and 100! factorial
      * <p/>
      * Note: Arguments are ignored
      *
