@@ -1,15 +1,4 @@
-import sun.font.CreatedFontTracker;
-
-import java.math.BigInteger;
-import java.util.Scanner;
-
-/**
- * Created by IntelliJ IDEA.
- * User: Tom
- * Date: 11.02.11
- * Time: 1:13
- * To change this template use File | Settings | File Templates.
- */
+package net.azib.java.students.t103597.src;
 
 public class NumbersDemo {
     public static void main(String[] args){

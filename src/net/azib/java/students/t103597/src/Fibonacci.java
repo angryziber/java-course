@@ -1,12 +1,7 @@
+package net.azib.java.students.t103597.src;
+
 import java.math.BigInteger;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Tom
- * Date: 11.02.11
- * Time: 1:15
- * To change this template use File | Settings | File Templates.
- */
 public class Fibonacci {
     public void fib(){
 
