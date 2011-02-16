@@ -11,23 +11,23 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class Fibonacci {
-    public static void main(String[] args) {
+    public static void fibonacciComputation() {
         ArrayList<BigInteger> array = new ArrayList<BigInteger>();
         int i = 1;
         BigInteger a = new BigInteger("0");
         BigInteger b = new BigInteger("1");
-        array.add(i-1, b);
+        array.add(i - 1, b);
         array.add(i, a);
 
         do {
             a = array.get(i);
-            b = array.get(i-1);
+            b = array.get(i - 1);
             a = a.add(b);
-            array.add(i+1, a);
+            array.add(i + 1, a);
             i++;
             System.out.println(i + "number in array is: " + array.get(i));
         }
         while (array.size() <= 100);
 
-        }
     }
+}
