@@ -11,12 +11,16 @@ import java.math.BigInteger;
  */
 public class HelloFactorial {
 	public static void main(String[] args) {
-		BigInteger fNum = new BigInteger("1");
+		thingamajig();
+	}
 
+	public static BigInteger thingamajig() {
+
+		BigInteger fNum = new BigInteger("1");
 		for (int i = 1; i <= 100; i++) {
 			fNum = fNum.multiply(BigInteger.valueOf(i));
 		}
-
-		System.out.println("Ossaraks: " + fNum);
+		//System.out.println("Ossaraks: " + fNum);
+		return fNum;
 	}
 }

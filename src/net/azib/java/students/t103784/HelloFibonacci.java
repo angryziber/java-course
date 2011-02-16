@@ -12,6 +12,13 @@ import java.math.BigInteger;
 public class HelloFibonacci {
 
 	public static void main(String[] args) {
+
+		whatchamacallit();
+
+
+
+	}
+	public static BigInteger whatchamacallit() {
 		BigInteger fNum = new BigInteger("-1");
 		BigInteger fNum2 = new BigInteger("1");
 		BigInteger fSum = new BigInteger("0");
@@ -21,7 +28,9 @@ public class HelloFibonacci {
 			fNum = fNum2;
 			fNum2 = fSum;
 		}
-		System.out.println("Ossaraks: " + fSum);
+
+		//System.out.println("Ossaraks: " + fSum);
+		return fSum;
 	}
 
 
