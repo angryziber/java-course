@@ -2,6 +2,7 @@ package net.azib.java.lessons.basic;
 
 import java.math.BigInteger;
 
+@SuppressWarnings({"UnusedAssignment"})
 public class Methods {
     static class NumberHolder {
         int n;
