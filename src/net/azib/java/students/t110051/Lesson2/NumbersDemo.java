@@ -15,7 +15,7 @@ public class NumbersDemo {
         System.out.println("Faktoriaali arvutamine!");
         Factorial.Computation();
         System.out.println(" Fibonacci arvutamine!");
-        Fibonacci.fibonacciComputation();
+        Fibonacci.Computation();
 
 
     }

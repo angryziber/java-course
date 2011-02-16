@@ -32,7 +32,7 @@ public class Factorial {
                     sum = sum.multiply(array.get(counter));
                 }
                 counter = 1;
-                System.out.println("Factorial of " + array.get(index - 1) + " is " + sum);
+                System.out.println("Factorial of " + array.get(index - 1) + " is: " + sum);
 
                 sum = array.get(index - 1);
                 sum = sum.add(BigInteger.ONE);

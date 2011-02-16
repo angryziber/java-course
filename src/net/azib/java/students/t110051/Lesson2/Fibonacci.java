@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class Fibonacci {
-    public static void fibonacciComputation() {
+    public static void Computation() {
         ArrayList<BigInteger> array = new ArrayList<BigInteger>();
         int i = 1;
         BigInteger a = new BigInteger("0");
@@ -25,7 +25,7 @@ public class Fibonacci {
             a = a.add(b);
             array.add(i + 1, a);
             i++;
-            System.out.println(i + "number in array is: " + array.get(i));
+            System.out.println("Fibonacci number is: " + array.get(i));
         }
         while (array.size() <= 100);
 
