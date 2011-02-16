@@ -2,7 +2,7 @@ package net.azib.java.students.t103640;
 
 import java.math.BigInteger;
 
-public class FactFibCont {
+public class NumbersDemo {
     public static void main(String[] args) {
           Factorial facThe100 = new Factorial();
             FibonaciJunk fibThe100 = new FibonaciJunk();
