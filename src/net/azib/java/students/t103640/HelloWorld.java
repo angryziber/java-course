@@ -1,5 +1,8 @@
 package net.azib.java.students.t103640;
 
+import java.awt.*;
+
+
 /**
  * Created by IntelliJ IDEA.
  * User: Taavi  Sonets
@@ -8,11 +11,12 @@ package net.azib.java.students.t103640;
  */
 public class HelloWorld {
     public static void main(String[] args) {
-        waza();
+        new HelloWorld();
+    }
+    public HelloWorld(){
+
+        System.out.println("Zup world :) be safe");
     }
 
-    private static void waza() {
-        System.out.println("Zup Ya guys!");
-    }
 
 }
