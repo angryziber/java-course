@@ -1,18 +1,18 @@
 package net.azib.java.lessons.basic;
 
-public class PetOwner {
+public class StaticDemo {
     Dog personalDog;
     static Dog sharedDog;
 
     public static void main(String[] args) {
-        PetOwner.sharedDog = new Dog();
-        PetOwner.sharedDog.name = "Homeless";
+        StaticDemo.sharedDog = new Dog();
+        StaticDemo.sharedDog.name = "Homeless";
 
-        PetOwner owner1 = new PetOwner();
+        StaticDemo owner1 = new StaticDemo();
         owner1.personalDog = new Dog();
         owner1.personalDog.name = "Snoopy";
 
-        PetOwner owner2 = new PetOwner();
+        StaticDemo owner2 = new StaticDemo();
         owner2.personalDog = new Dog();
         owner2.personalDog.name = "Spoofy";
 
