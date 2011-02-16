@@ -5,37 +5,68 @@ import java.text.DecimalFormat;
 import java.text.Format;
 
 /**
- * Created by IntelliJ IDEA.
- * User: eddy
- * Date: 2011-02-16
- * Time: 10:58
- * To change this template use File | Settings | File Templates.
+ * Prints some Fibonacci number
+ *
+ * @author t107110
  */
 public class NumbersDemo {
-    static final Format format = new DecimalFormat("#,##0");
+    /**
+     * Integer number format separating thousand groups
+     */
+    private static final Format FORMAT = new DecimalFormat("#,##0");
 
+    /**
+     * Application entry point
+     * <p/>
+     * Prints F(100) Fibonacci number
+     * <p/>
+     * Note: Arguments are ignored
+     *
+     * @param args Ignored
+     */
     public static void main(final String[] args) {
-        final int N70 = 70;
-        final int N100 = 100;
+        // F(100) Fibonacci number
+        printFibonacci(100);
 
-        long start;
-        long stop;
+        // 100! factorial
+        printFactorial(100);
+    }
 
-//        start = System.nanoTime();
-//        final long FF70 = new FastFibonacci(N70).getValue();
-//        stop = System.nanoTime();
-//        System.out.println("F(" + N70 + "): " + format.format(FF70) + " (" + (stop - start) + " ns)");
+    /**
+     * Calculates a Fibonacci number specified by parameter n and measures the calculation time
+     *
+     * @param n Fibonacci sequence index
+     */
+    private static void printFibonacci(final int n) {
+        final long startTime = System.nanoTime();
+        final BigInteger fibonacci = new Fibonacci(n).getValue();
+        final long stopTime = System.nanoTime();
+        print("F(" + n + ")", fibonacci, startTime, stopTime);
+    }
 
-//        start = System.nanoTime();
-//        final BigInteger F70 = new Fibonacci(N70).getValue();
-//        stop = System.nanoTime();
-//        System.out.println("F(" + N70 + "): " + format.format(F70) + " (" + (stop - start) + " ns)");
+    /**
+     * Calculates the factorial of a number specified by parameter n and measures the calculation time
+     *
+     * @param n A number to calculate the factorial of
+     */
+    private static void printFactorial(final int n) {
+        final long startTime = System.nanoTime();
+        final BigInteger factorial = new Factorial(n).getValue();
+        final long stopTime = System.nanoTime();
+        print(n + "!", factorial, startTime, stopTime);
+    }
 
-        //System.out.println("F(" + N100 + "): " + format.format(new FastFibonacci(N100).getValue()));
-
-        start = System.nanoTime();
-        final BigInteger F100 = new Fibonacci(N100).getValue();
-        stop = System.nanoTime();
-        System.out.println("F(" + N100 + "): " + format.format(F100) + " (" + (stop - start) + " ns)");
+    /**
+     * Prints a calculated value together with its short description and time used for the value calculation
+     *
+     * @param description Printed value description
+     * @param value       Calculated value to print
+     * @param startTime   Time in nanoseconds when the value calculation has been started
+     * @param stopTime    Time in nanoseconds when the value calculation has completed
+     */
+    private static void print(final String description, final BigInteger value,
+                              final long startTime, final long stopTime) {
+        System.out.println(description + ": " + FORMAT.format(value) +
+                " (" + FORMAT.format(stopTime - startTime) + " ns)");
     }
 }

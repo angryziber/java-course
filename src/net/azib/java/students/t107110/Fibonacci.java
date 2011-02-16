@@ -3,7 +3,7 @@ package net.azib.java.students.t107110;
 import java.math.BigInteger;
 
 /**
- * Contains a Fibonacci number
+ * Calculates a Fibonacci number
  *
  * @author t107110
  */
@@ -12,6 +12,7 @@ public class Fibonacci {
      * F(0)
      */
     private static final BigInteger F0 = BigInteger.ZERO;
+
     /**
      * F(1)
      */
@@ -66,7 +67,7 @@ public class Fibonacci {
     }
 
     /**
-     * Gives the Fibonacci number
+     * Gives the calculated Fibonacci number
      *
      * @return the Fibonacci number
      */
