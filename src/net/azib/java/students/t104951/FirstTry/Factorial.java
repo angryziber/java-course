@@ -1,4 +1,4 @@
-package net.azib.java.students.t104951;
+package net.azib.java.students.t104951.FirstTry;
 
 /**
  * Created by IntelliJ IDEA.
