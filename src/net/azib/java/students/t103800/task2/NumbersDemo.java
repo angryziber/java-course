@@ -8,9 +8,10 @@ package net.azib.java.students.t103800.task2;
 public class NumbersDemo {
 
     public static void main(String[] args) {
+        // index 99 = 100th number, because indexing starts from 0.
         System.out.println("Lets generate a factorial and a fibonacci number:");
-        System.out.println("fibo(100) = " + Fibonacci.generate(100));
-        System.out.println("fact(100) = " + Factorial.generate(100));
+        System.out.println("fibo(99) = " + Fibonacci.generate(99));
+        System.out.println("fact(99) = " + Factorial.generate(99));
     }
 
 }
