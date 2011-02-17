@@ -13,12 +13,12 @@ public class factorial {
 		BigInteger chislo, summ;
 		chislo = BigInteger.ZERO;
 		summ = BigInteger.ONE;
-		for (i = 1; i <= 100; i++) {
+		for (i = 1; i <= 10000; i++) {
 			if (i == 1) {
 				chislo = BigInteger.ONE;
 			}
-			summ.multiply(chislo);
-			chislo.add(BigInteger.ONE);
+			summ = summ.multiply(chislo);
+			chislo = chislo.add(BigInteger.ONE);
 		}
 		System.out.print(summ);
 	}
