@@ -3,7 +3,7 @@ package net.azib.java.students.t103758;
 import java.math.BigInteger;
 
 public class Fibonacci {
-  public BigInteger launch(int count){
+  public BigInteger calculate(int count){
     BigInteger answer, fNumber, sNumber;
     
     fNumber = BigInteger.valueOf(1);

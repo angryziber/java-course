@@ -11,10 +11,10 @@ public class NumberDemo {
   public static void main (String[] args) {
     
     Fibonacci fibo = new Fibonacci();
-    System.out.println(thNumber + "th number in fibonacci sequence is " + fibo.launch(thNumber));
+    System.out.println(thNumber + "th number in fibonacci sequence is " + fibo.calculate(thNumber));
     
     Factorial faco = new Factorial();
-    System.out.print(thNumber + "th number in factorial sequence is " + faco.launch(thNumber));
+    System.out.print(thNumber + "th number in factorial sequence is " + faco.calculate(thNumber));
 
   }
 

@@ -3,7 +3,7 @@ package net.azib.java.students.t103758;
 import java.math.BigInteger;
 
 public class Factorial {
-  public BigInteger launch (int count){
+  public BigInteger calculate (int count){
     
     BigInteger bigCount = BigInteger.valueOf(count);
     BigInteger fNumber = BigInteger.ONE;
