@@ -1,4 +1,4 @@
-package net.azib.java.students.t104951.FirstTry;
+package net.azib.java.students.t104951.firstTry;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +12,7 @@ import java.math.BigInteger;
 public class Factorial {
     public BigInteger value;
 
-    public void Count(int a){
+    public void count(int a){
        for(value = BigInteger.valueOf( a ), a--;a > 0;a--)
            value = value.multiply(BigInteger.valueOf( a ));
    }

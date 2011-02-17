@@ -1,4 +1,4 @@
-package net.azib.java.students.t104951.FirstTry;
+package net.azib.java.students.t104951.firstTry;
 /**
  * Created by IntelliJ IDEA.
  * User: Lae
@@ -11,10 +11,10 @@ public class NumbersDemo {
         Fibonacci fibo = new Fibonacci();
         Factorial facto = new Factorial();
 
-        fibo.Count(100);
+        fibo.count(100);
         System.out.println(fibo.value);
 
-        facto.Count(100);
+        facto.count(100);
         System.out.println(facto.value);
     }
 }
