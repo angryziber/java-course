@@ -5,7 +5,7 @@ import java.math.BigInteger;
 //Need to use BigInteger
 
 public class Factorial {
-    public void fact(){
+    public void print100thsNumber(){
 
     BigInteger factnr = new BigInteger("1");
     BigInteger i = new BigInteger("100");

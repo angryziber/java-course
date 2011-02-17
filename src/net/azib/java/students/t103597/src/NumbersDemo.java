@@ -10,8 +10,8 @@ public class NumbersDemo {
         Fibonacci fibObject = new Fibonacci();
 
         // USES SPECIFIED OBJECTS FROM CHOSEN CLASSES
-        fibObject.fib();
-        factObject.fact();
+        fibObject.print100thsNumber();
+        factObject.print100thsNumber();
 
         // BRING VALUES AND OUTPUT RESULTS
 

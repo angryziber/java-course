@@ -11,7 +11,7 @@ public class NumbersDemo {
         // index 99 = 100th number, because indexing starts from 0.
         System.out.println("Lets generate a factorial and a fibonacci number:");
         System.out.println("fibo(99) = " + Fibonacci.generate(99));
-        System.out.println("fact(99) = " + Factorial.generate(99));
+        System.out.println("print100thsNumber(99) = " + Factorial.generate(99));
     }
 
 }

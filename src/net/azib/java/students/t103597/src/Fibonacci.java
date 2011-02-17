@@ -3,7 +3,7 @@ package net.azib.java.students.t103597.src;
 import java.math.BigInteger;
 
 public class Fibonacci {
-    public void fib(){
+    public void print100thsNumber(){
 
         int nr = 100;
         BigInteger x = new BigInteger("0");
