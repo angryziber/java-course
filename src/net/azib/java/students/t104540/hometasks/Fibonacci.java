@@ -1,7 +1,5 @@
 package net.azib.java.students.t104540.hometasks;
 
-import sun.nio.cs.ext.Big5;
-
 import java.math.BigInteger;
 
 /**
@@ -10,7 +8,7 @@ import java.math.BigInteger;
  * Time: 21:35
  */
 public class Fibonacci {
-    public BigInteger getFibonacciNumber(Integer index, Boolean startFromZero){
+    public BigInteger getFibonacciNumber(int index, boolean startFromZero){
         BigInteger lastFibonacciNumber = new BigInteger("0");
         BigInteger currentFibonacciNumber = new BigInteger("1");
 
