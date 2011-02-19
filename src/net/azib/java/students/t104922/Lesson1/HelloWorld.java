@@ -1,4 +1,4 @@
-package net.azib.java.students.t104922;
+package net.azib.java.students.t104922.Lesson1;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,8 +15,8 @@ public class HelloWorld {
         }
     }
 
-    public static void printHello(int y) {
+    public static void printHello(int i) {
         System.out.println("Hello World!");
-        System.out.println(y);
+        System.out.println(i);
     }
 }
