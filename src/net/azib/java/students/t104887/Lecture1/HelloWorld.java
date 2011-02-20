@@ -1,4 +1,5 @@
 package net.azib.java.students.t104887.Lecture1;
+import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,9 +8,15 @@ package net.azib.java.students.t104887.Lecture1;
  * Time: 20:11
  * To change this template use File | Settings | File Templates.
  */
-public class HelloWorld {
-	public static void main(String[] args) {
+public class HelloWorld
+{
+	public static void main(String[] args)
+	{
 		System.out.println("Hello World!");
+
+		Date date = new Date();
+
+		System.out.println(date);
 	}
 }
 
