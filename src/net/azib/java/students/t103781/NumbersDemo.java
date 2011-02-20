@@ -1,5 +1,7 @@
 package net.azib.java.students.t103781;
 
+import sun.security.util.BigInt;
+
 import java.math.BigInteger;
 
 /**
@@ -9,12 +11,7 @@ import java.math.BigInteger;
 public class NumbersDemo {
     public static void main(String[] args) {
 
-    FibonacciClass fib = new FibonacciClass();
-    BigInteger number = fib.Show100();
-    System.out.println("100th fibonacci number : " + number);
-
-    FactorialClass fact = new FactorialClass();
-    number = fact.fact100();
-        System.out.println("100th factorial number : " + number);
+    System.out.println("100th fibonacci number : " + FibonacciClass.getFibonacci(100));
+    System.out.println("factorial : " + FactorialClass.getFactorial(100));
     }
 }

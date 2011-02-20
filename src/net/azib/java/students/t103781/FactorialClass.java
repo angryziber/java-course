@@ -7,15 +7,13 @@ import java.math.BigInteger;
  * User: Robert Kullamaa 103781IASB21
  */
 public class FactorialClass {
-    public static BigInteger fact100(){
+    public static BigInteger getFactorial(int index){
 
-        BigInteger n1 = new BigInteger("100");
+        BigInteger n1 = new BigInteger("1");
         BigInteger answer = new BigInteger("1");
 
-        for(int i=1;i<100;i++){
-            int j=1;
-            answer = answer.multiply(n1);
-            n1 = n1.subtract(BigInteger.valueOf(j));
+        for(int i=1;i<index;i++){
+            answer = answer.multiply(n1.add(BigInteger.valueOf(i)));
         }
         return answer;
     }

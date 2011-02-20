@@ -5,7 +5,7 @@ import java.math.BigInteger;
  User: Robert Kullamaa 103781IASB21  */
 
 public class FibonacciClass {
-    public static BigInteger Show100(){
+    public static BigInteger getFibonacci(int index){
 
         BigInteger first= new BigInteger("1");
         BigInteger second= new BigInteger("1");
@@ -16,7 +16,7 @@ public class FibonacciClass {
             first=second;
             second=sum;
             counter++;
-        }while(counter<100);
+        }while(counter<index);
         return sum;
     }
 }
