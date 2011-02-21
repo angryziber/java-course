@@ -3,9 +3,10 @@ package net.azib.java.students.t104971.homework.athletics;
 import net.azib.java.students.t104971.homework.athletics.arithmetics.Calculator;
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
 import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
-import net.azib.java.students.t104971.homework.athletics.io.DataCollectorBuilder;
+import net.azib.java.students.t104971.homework.athletics.io.input.DataCollectorBuilder;
+import net.azib.java.students.t104971.homework.athletics.io.output.CSVWriter;
 import net.azib.java.students.t104971.homework.athletics.util.BrowserLaunch;
-import net.azib.java.students.t104971.homework.athletics.io.DataCollector;
+import net.azib.java.students.t104971.homework.athletics.io.input.DataCollector;
 import net.azib.java.students.t104971.homework.athletics.io.xml.XMLBuilder;
 import net.azib.java.students.t104971.homework.athletics.util.InputParametersValidator;
 import net.azib.java.students.t104971.homework.athletics.util.UserInputException;
@@ -40,9 +41,20 @@ public class Decathlon {
                 .getInputData(validator.inputMethod)
                 .calculate()
                 .sort();
+        decathlon.outputData(validator.outputMethod);
 
-        BrowserLaunch.openURL(decathlon.buildXML());
-        //decathlon.printAthletes();
+    }
+
+    private void outputData(String method) {
+        if ("-console".equals(method)) {
+            printAthletes();
+        } else if ("-xml".equals(method)) {
+            BrowserLaunch.openURL(buildXML());
+        } else if ("-html".equals(method)) {
+            BrowserLaunch.openURL(buildHTML());
+        } else if ("-csv".equals(method)) {
+            new CSVWriter(athletes).write();
+        }
     }
 
     public Decathlon printAthletes() {
@@ -73,7 +85,11 @@ public class Decathlon {
     }
 
     public String buildXML() {
-        return new XMLBuilder(athletes).getXML();
+        return new XMLBuilder(athletes).getResult(false);
+    }
+
+    public String buildHTML() {
+        return new XMLBuilder(athletes).getResult(true);
     }
 
     public List<Athlete> getAthletes() {

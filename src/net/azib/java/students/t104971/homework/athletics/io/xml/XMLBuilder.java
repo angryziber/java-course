@@ -16,10 +16,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.FileNotFoundException;
+import javax.xml.transform.stream.StreamSource;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,18 +29,20 @@ public class XMLBuilder {
 
     private static final String XML_VERSION = "1.0";
     private static final String XML_ENCODING = "UTF-8";
+
     private static final String xslFile = PropertiesLoader.getPagePath();
-    private static final String outputFile = xslFile.replace("page.xsl","outputData.xml");
+    private static String outputFileXML = PropertiesLoader.getXMLPath();
+    private static String outputFileHTML = outputFileXML.replace(".xml", ".html");
+
     private List<Athlete> athletes;
 
     public XMLBuilder(List<Athlete> athletes) {
         this.athletes = athletes;
-        writeXML(constructXML());
     }
 
-    public String getXML() {
-        writeXML(constructXML());
-        return outputFile;
+    public String getResult(boolean isHTML) {
+        writeXML(constructXML(), isHTML);
+        return isHTML ? outputFileHTML : outputFileXML;
     }
 
     public Document constructXML() {
@@ -106,14 +107,15 @@ public class XMLBuilder {
         return doc;
     }
 
-    public void writeXML(Document doc) {
+    public void writeXML(Document doc, boolean isHTML) {
         //Output the XML
         Transformer trans = null;
         try {
-            //set up a transformer
-            TransformerFactory transfac = TransformerFactory.newInstance();
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
-            trans = transfac.newTransformer();
+            trans = isHTML
+                    ? transformerFactory.newTransformer(new StreamSource(xslFile))
+                    : transformerFactory.newTransformer();
 
             trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
             trans.setOutputProperty(OutputKeys.METHOD, "xml");
@@ -121,24 +123,13 @@ public class XMLBuilder {
             trans.setOutputProperty(OutputKeys.INDENT, "yes");
             trans.setOutputProperty(OutputKeys.VERSION, XML_VERSION);
 
-            //create string from xml tree
             StringWriter sw = new StringWriter();
             StreamResult result = new StreamResult(sw);
             DOMSource source = new DOMSource(doc);
             trans.transform(source, result);
-            trans.transform(source, new StreamResult(new FileOutputStream(outputFile)));
-            //String xmlString = sw.toString();
+            trans.transform(source, new StreamResult(new FileOutputStream(isHTML ? outputFileHTML : outputFileXML)));
 
-            //System.out.println("Here's the xml:\n\n" + xmlString);
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

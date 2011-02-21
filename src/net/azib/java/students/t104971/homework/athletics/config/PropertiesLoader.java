@@ -27,4 +27,7 @@ public class PropertiesLoader {
         return getConfig().getString("page_xsl");
     }
 
+    public static String getXMLPath() {
+        return getConfig().getString("out_xml");
+    }
 }

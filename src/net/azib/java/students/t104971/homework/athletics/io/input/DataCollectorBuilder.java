@@ -1,9 +1,4 @@
-package net.azib.java.students.t104971.homework.athletics.io;
-
-import net.azib.java.students.t104971.homework.athletics.io.ConsoleDataCollector;
-import net.azib.java.students.t104971.homework.athletics.io.CsvDataCollector;
-import net.azib.java.students.t104971.homework.athletics.io.DataCollector;
-import net.azib.java.students.t104971.homework.athletics.io.DbDataCollector;
+package net.azib.java.students.t104971.homework.athletics.io.input;
 
 /**
  * @author Jaroslav Judin
