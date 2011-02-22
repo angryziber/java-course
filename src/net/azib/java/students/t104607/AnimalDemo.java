@@ -11,7 +11,10 @@ public class AnimalDemo {
 		animals.add(new Cat("Miisu",8));
 		animals.add(new Frog());
 
-		for (Animal animal:animals)
+		for (Animal animal:animals)  {
 			System.out.println(animal.toString());
+			if (animal instanceof Pet)
+				System.out.println("\t\t" + ((Pet)animal).makeSound());
+		}
 	}
 }
