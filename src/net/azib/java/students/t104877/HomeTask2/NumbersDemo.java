@@ -1,4 +1,4 @@
-package net.azib.java.students.t104877;
+package net.azib.java.students.t104877.HomeTask2;
 
 public class NumbersDemo {
     public static void main(String[] args) {
