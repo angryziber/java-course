@@ -3,6 +3,7 @@ package net.azib.java.students.t104971.homework.athletics.io.input;
 import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
 import net.azib.java.students.t104971.homework.athletics.dto.ResultType;
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
+import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 import net.azib.java.students.t104971.homework.athletics.util.InputRead;
 
 import java.io.*;
@@ -60,36 +61,13 @@ public class CsvDataCollector implements DataCollector {
                 athlete.setName(value);
                 break;
             case 1:
-                athlete.setDateBirth(parseDate(value));
+                athlete.setDateBirth(InputParser.parseDate(value));
                 break;
             case 2:
                 athlete.setCountry(value);
                 break;
             default:
-                athlete.addResult(ResultType.getCsvResultType(index), parseResult(value));
-        }
-    }
-
-    double parseResult(String value) {
-        try {
-            if (value.contains(":")) {
-                String[] time = value.split(":");
-                if (time.length == 2) {
-                    return Double.valueOf(time[0]) * 60 + Double.valueOf(time[1]);
-                }
-            }
-            return Double.valueOf(value);
-        } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
-
-    Date parseDate(String value) {
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            return format.parse(value);
-        } catch (ParseException e) {
-            return null;
+                athlete.addResult(ResultType.getCsvResultType(index), InputParser.parseResult(value));
         }
     }
 

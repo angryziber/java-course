@@ -5,7 +5,6 @@ import net.azib.java.students.t104971.homework.athletics.dto.Result;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
