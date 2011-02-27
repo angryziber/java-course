@@ -1,19 +1,28 @@
 package net.azib.java.students.t104971.homework.athletics.util;
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Jaroslav Judin
  */
 public class InputParametersValidator {
 
-    public String inputMethod;
-    public String inputParameter;
-    public String outputMethod;
-    public String outputParameter;
+    private String inputMethod;
+    private String inputParameter;
+    private String outputMethod;
+    private String outputParameter;
+
+    public boolean isValid(String... args) {
+        try {
+            validate(args);
+        } catch (UserInputException e) {
+            return false;
+        }
+        return true;
+    }
 
     public void validate(String... args) throws UserInputException {
         List<String> allowedInputMethods = Arrays.asList("-console", "-csv", "-db");
@@ -49,4 +58,20 @@ public class InputParametersValidator {
 
     }
 
+
+    public String getInputMethod() {
+        return inputMethod;
+    }
+
+    public String getInputParameter() {
+        return inputParameter;
+    }
+
+    public String getOutputMethod() {
+        return outputMethod;
+    }
+
+    public String getOutputParameter() {
+        return outputParameter;
+    }
 }

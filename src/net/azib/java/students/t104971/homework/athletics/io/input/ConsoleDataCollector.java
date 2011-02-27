@@ -13,11 +13,8 @@ import java.util.List;
  * @author Jaroslav Judin
  */
 public class ConsoleDataCollector implements DataCollector {
-    public Collection<Athlete> getAllAthletes() {
-        return null;
-    }
 
-    public Collection<Athlete> loadCompetitionResults(String competition) {
+    public Collection<Athlete> loadCompetitionResults(String parameter) {
         List<Athlete> athletes = new ArrayList<Athlete>();
         for (int i = 1; ; i++) {
             System.out.println("Enter data for " + i + " athlete");
@@ -57,11 +54,4 @@ public class ConsoleDataCollector implements DataCollector {
 
         return athlete;
     }
-
-
-    public static void main(String[] args) {
-        Collection<Athlete> athletes = new ConsoleDataCollector().loadCompetitionResults("");
-        System.out.println(athletes);
-    }
-
 }

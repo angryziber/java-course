@@ -10,6 +10,9 @@ public class BrowserLaunch {
     private static final String errMsg = "Error attempting to launch web browser";
 
     public static void openURL(String url) {
+        if (url == null) {
+            return;
+        }
         try {  //attempt to use Desktop library from JDK 1.6+ (even if on 1.5)
             Class<?> d = Class.forName("java.awt.Desktop");
             d.getDeclaredMethod("browse", new Class[]{java.net.URI.class}).invoke(

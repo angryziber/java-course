@@ -10,6 +10,5 @@ import java.util.List;
  */
 public interface DataCollector {
 
-    Collection<Athlete> getAllAthletes();
     Collection<Athlete> loadCompetitionResults(String competition);
 }

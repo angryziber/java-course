@@ -31,7 +31,7 @@ public class InputParser {
     public static Date parseDate(String value) {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         try {
-            String expression = "^[0-3]{1}[0-9]{1}\\.[0-1]{1}[0-9]{1}\\.[1,2]{1}[0,9]{1}[0-9]{2}$";
+            String expression = "^[0-3]?[0-9]{1}\\.[0-1]{1}[0-9]{1}\\.[1,2]{1}[0,9]{1}[0-9]{2}$";
             return Pattern.matches(expression, value) ? format.parse(value) : null;
         } catch (ParseException e) {
             return null;
@@ -40,6 +40,14 @@ public class InputParser {
 
     public static String parseCountry(String country) {
         return matchValue("^[A-Z]{2}$", country);
+    }
+
+    public static String formatDate(Date data) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").format(data);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private static String matchValue(String expression, String value) {

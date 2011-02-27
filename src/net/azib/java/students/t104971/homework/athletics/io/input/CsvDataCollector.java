@@ -20,17 +20,15 @@ public class CsvDataCollector implements DataCollector {
     public static final String CSV_FILE = PropertiesLoader.getCSVPath();
     public static final String VALUE_SEPARATOR = ",";
 
-    public Collection<Athlete> getAllAthletes() {
-        return null;
-    }
 
-
-    public Collection<Athlete> loadCompetitionResults(String competition) {
+    public Collection<Athlete> loadCompetitionResults(String csvFile) {
 
         List<Athlete> athletes = new ArrayList<Athlete>();
 
         InputRead input = new InputRead();
-        ArrayList<String> contents = input.getContents(new File(CSV_FILE));
+        File inputFile = new File(csvFile);
+        inputFile = inputFile.exists() ? inputFile : new File(CSV_FILE);
+        ArrayList<String> contents = input.getContents(inputFile);
 
         for (String line : contents) {
             athletes.add(getAthlete(line));

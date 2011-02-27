@@ -1,5 +1,6 @@
 package net.azib.java.students.t104971.homework.athletics.io.input;
 
+import com.mysql.jdbc.StringUtils;
 import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
 import net.azib.java.students.t104971.homework.athletics.dto.ResultType;
 import net.azib.java.students.t104971.homework.athletics.util.DbConnection;
@@ -17,24 +18,13 @@ import java.util.List;
  */
 public class DbDataCollector implements DataCollector {
 
-    Logger logger = Logger.getLogger(getClass());
-
-    public List<Athlete> getAllAthletes() {
-        List<Athlete> athletes = new ArrayList<Athlete>();
-        try {
-            Connection connection = DbConnection.getConnection();
-            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM athletes");
-            while (result.next()) {
-                athletes.add(parseResult(result));
-            }
-        } catch (SQLException e) {
-            logger.error("Cannot get connection", e);
-        }
-
-        return athletes;
-    }
+    private static String DEFAULT_COMPETITION = "2";
+    private Logger logger = Logger.getLogger(getClass());
 
     public List<Athlete> loadCompetitionResults(String competition) {
+        if (StringUtils.isEmptyOrWhitespaceOnly(competition)) {
+            competition = DEFAULT_COMPETITION;
+        }
         List<Athlete> athletes = new ArrayList<Athlete>();
         try {
             Connection connection = DbConnection.getConnection();
