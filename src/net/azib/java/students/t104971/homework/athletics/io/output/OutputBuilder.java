@@ -24,10 +24,8 @@ public class OutputBuilder {
             return new ConsoleWriter(athletes);
         } else if ("-xml".equals(method)) {
             return new XMLWriter(athletes);
-            //BrowserLaunch.openURL(buildXML(parameter));
         } else if ("-html".equals(method)) {
             return new HTMLWriter(athletes);
-            //BrowserLaunch.openURL(buildHTML(parameter));
         } else if ("-csv".equals(method)) {
             return new CSVWriter(athletes);
         }
