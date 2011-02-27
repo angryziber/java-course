@@ -1,7 +1,5 @@
 package net.azib.java.students.t104971.homework.athletics.dto;
 
-import java.math.BigDecimal;
-
 /**
  * @author Jaroslav Judin
  */
@@ -18,14 +16,25 @@ public enum ResultType {
             return "seconds";
         }
     },
-    LONG_JUMP(0.14354, 220, 1.4),
+    LONG_JUMP(0.14354, 220, 1.4) {
+        @Override
+        public int countScore(double result) {
+            return countJumpEvent(result);
+        }
+    },
     SHOT_PUT(51.39, 1.5, 1.05),
-    HIGH_JUMP(0.8465, 75, 1.42),
+    HIGH_JUMP(0.8465, 75, 1.42) {
+        @Override
+        public int countScore(double result) {
+            return countJumpEvent(result);
+        }
+    },
     RACE_400_METERS(1.53775, 82, 1.81) {
         @Override
         public int countScore(double result) {
             return countTrackEvent(result);
         }
+
         @Override
         public String getUnit() {
             return "seconds";
@@ -36,19 +45,26 @@ public enum ResultType {
         public int countScore(double result) {
             return countTrackEvent(result);
         }
+
         @Override
         public String getUnit() {
             return "seconds";
         }
     },
     DISCUS_THROW(12.91, 4, 1.1),
-    POLE_VAULT(0.2797, 100, 1.35),
+    POLE_VAULT(0.2797, 100, 1.35) {
+        @Override
+        public int countScore(double result) {
+            return countJumpEvent(result);
+        }
+    },
     JAVELIN_THROW(10.14, 7, 1.08),
     RACE_1500_METERS(0.03768, 480, 1.85) {
         @Override
         public int countScore(double result) {
             return countTrackEvent(result);
         }
+
         @Override
         public String getUnit() {
             return "seconds";
@@ -66,12 +82,21 @@ public enum ResultType {
     }
 
     /**
-     * counter for field events : Unit - m
+     * counter for trowing events : Unit - m
      *
      * @return
      */
     public int countScore(double result) {
         return (int) (parameter.getA() * Math.pow((result - parameter.getB()), parameter.getC()));
+    }
+
+    /**
+     * counter for jumping events : Unit - m
+     *
+     * @return
+     */
+    public int countJumpEvent(double result) {
+        return (int) (parameter.getA() * Math.pow((100 * result - parameter.getB()), parameter.getC()));
     }
 
     /**
@@ -81,10 +106,6 @@ public enum ResultType {
      */
     public int countTrackEvent(double result) {
         return (int) (parameter.getA() * Math.pow((parameter.getB() - result), parameter.getC()));
-    }
-
-    public static ResultType getCsvResultType(int i) {
-        return getResultType(i - 3);
     }
 
     public static ResultType getResultType(int i) {

@@ -65,7 +65,7 @@ public class CsvDataCollector implements DataCollector {
                 athlete.setCountry(value);
                 break;
             default:
-                athlete.addResult(ResultType.getCsvResultType(index), InputParser.parseResult(value));
+                athlete.addResult(ResultType.getResultType(index - 3), InputParser.parseResult(value));
         }
     }
 
