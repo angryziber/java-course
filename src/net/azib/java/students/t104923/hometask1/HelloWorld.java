@@ -1,4 +1,4 @@
-package net.azib.java.students.t104923.first;
+package net.azib.java.students.t104923.hometask1;
 
 public class HelloWorld {
     public static void main(String[] args) {
