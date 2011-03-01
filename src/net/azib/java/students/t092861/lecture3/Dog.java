@@ -19,7 +19,12 @@ public class Dog extends Pet {
 
 	@Override
 	public String toString() {
-		return super.toString() + " | " + getOwnersName();
+		if(hasOwner){
+			return super.toString() + " | Owner: " + getOwnersName();
+		}
+		else 
+			return super.toString();
+
 	}
 
 	@Override
