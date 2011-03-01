@@ -39,7 +39,6 @@ public abstract class Pet extends Animal {
 	@Override
 	public String toString() {
 		return getName() + " | " + getAge() + " | " + getColour() + " | "
-				+ getTaxonomy() + " | " + getStatus() + " | " + getHabitats()
-				+ " | " + getWeight() + " | " + getTransportCost();
+				+ super.toString();
 	}
 }
