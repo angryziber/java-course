@@ -11,6 +11,7 @@ public class Beaver extends Animal {
 
     public Beaver() {
         super(0);
+        treesCut = 0;
     }
 
     /**
@@ -36,7 +37,7 @@ public class Beaver extends Animal {
     }
 
     public void makeSound() {
-        System.out.println("OOOOOOuuugg!");
+        System.out.println("Oooouug!");
     }
 
     public String toString() {
