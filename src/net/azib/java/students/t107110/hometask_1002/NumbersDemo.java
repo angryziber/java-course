@@ -1,4 +1,7 @@
-package net.azib.java.students.t107110;
+package net.azib.java.students.t107110.hometask_1002;
+
+import net.azib.java.students.t107110.hometask_1002.Factorial;
+import net.azib.java.students.t107110.hometask_1002.Fibonacci;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
