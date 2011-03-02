@@ -9,11 +9,11 @@ package net.azib.java.students.t093759.hometasks.second;
  */
 public class Lion extends Animal {
 
-	private String moustache;
+	private String mustache;
 
 	public Lion(int ageInYears, int weightInKg, int countOfLimbs, String sound) {
 		super(ageInYears, weightInKg, countOfLimbs, sound);
-		moustache = "Long";
+		mustache = "Long";
 	}
 
 	@Override
@@ -29,6 +29,6 @@ public class Lion extends Animal {
 
 	@Override
 	public String toString() {
-		return super.toString() + " Lion also has " + moustache + " moustache.";
+		return super.toString() + " Lion also has " + mustache + " mustache.";
 	}
 }

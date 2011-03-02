@@ -9,16 +9,16 @@ package net.azib.java.students.t093759.hometasks.second;
  */
 public class Cat extends Pet {
 
-	private String moustache;
+	private String mustache;
 
 	public Cat(int ageInYears, int weightInKg, int countOfLimbs, String sound, String name) {
 		super(ageInYears, weightInKg, countOfLimbs, sound, name);
-		moustache = "short";
+		mustache = "short";
 	}
 
 	@Override
 	public void makeSound() {
-		System.out.println(getSound()+"..."+getSound()+"...");
+		System.out.println(getSound() + "..." + getSound() + "...");
 	}
 
 	@Override
@@ -28,6 +28,6 @@ public class Cat extends Pet {
 
 	@Override
 	public String toString() {
-		return super.toString()+" Cat also has " + moustache + " moustache.";
+		return super.toString() + " Cat also has " + mustache + " mustache.";
 	}
 }
