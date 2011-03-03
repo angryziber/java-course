@@ -1,3 +1,5 @@
+package net.azib.java.students.t092861.lecture1;
+
 /**
  * @author Stanislav / 092861
  *
