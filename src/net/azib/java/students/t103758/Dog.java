@@ -1,20 +1,17 @@
 package net.azib.java.students.t103758;
 
-public class Dog {
-    int numOfLegs;
-    String name = "Milo";
-    
-    public void bark(int numOfBarks) {
-  while(0 != numOfBarks){
+public class Dog extends Pet{
+    public Dog(String newName) {
+    super(newName);
+  }
+
+    public void makeSound() {
       System.out.println("woof! ");
-      numOfBarks--;
-      }
-  }
-    
-    public void sayName(){
-      System.out.println("Hi my name is " + this.name);
     }
-    public void reName (String newName){
-      this.name = newName;
+
+    @Override
+    public void wantsToTakeADump () {
+      System.out.println("Bark - bark! - Take me out side for a walk");      
     }
   }
+
