@@ -27,4 +27,18 @@ public class Dog extends Animal {
 	public String toString() {
         return "Dog named " + name;
     }
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Dog)) return false;
+
+		Dog dog = (Dog) o;
+		return name.equals(dog.name) && getAge() == dog.getAge();
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 * name.hashCode() + getAge();
+	}
 }

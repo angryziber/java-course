@@ -1,6 +1,8 @@
 package net.azib.java.lessons.basic;
 
-public abstract class Animal {
+import java.io.Serializable;
+
+public abstract class Animal implements Cloneable, Serializable {
 	private int age;
 
 	public int getAge() {
@@ -9,5 +11,15 @@ public abstract class Animal {
 
 	public void becomeOlder() {
 		age++;
+	}
+
+	@Override
+	public Animal clone() {
+		try {
+			return (Animal) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			return null;
+		}
 	}
 }
