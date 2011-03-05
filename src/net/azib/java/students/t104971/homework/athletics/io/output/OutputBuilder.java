@@ -1,6 +1,6 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
-import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.io.output.xml.HTMLWriter;
 import net.azib.java.students.t104971.homework.athletics.io.output.xml.XMLWriter;
 

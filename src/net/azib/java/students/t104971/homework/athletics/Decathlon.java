@@ -2,7 +2,7 @@ package net.azib.java.students.t104971.homework.athletics;
 
 import net.azib.java.students.t104971.homework.athletics.arithmetics.Calculator;
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
-import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.io.input.DataCollector;
 import net.azib.java.students.t104971.homework.athletics.io.input.DataCollectorBuilder;
 import net.azib.java.students.t104971.homework.athletics.io.output.OutputBuilder;

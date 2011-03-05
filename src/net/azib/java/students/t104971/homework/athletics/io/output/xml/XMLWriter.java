@@ -4,7 +4,7 @@
 package net.azib.java.students.t104971.homework.athletics.io.output.xml;
 
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
-import net.azib.java.students.t104971.homework.athletics.dto.*;
+import net.azib.java.students.t104971.homework.athletics.components.*;
 import net.azib.java.students.t104971.homework.athletics.io.output.OutputWriter;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;

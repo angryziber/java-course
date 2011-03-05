@@ -1,15 +1,14 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
-import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
-import net.azib.java.students.t104971.homework.athletics.dto.Result;
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.Result;
 import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 /**

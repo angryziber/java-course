@@ -1,8 +1,8 @@
 package net.azib.java.students.t104971.homework.athletics.io.input;
 
 import com.mysql.jdbc.StringUtils;
-import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
-import net.azib.java.students.t104971.homework.athletics.dto.ResultType;
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.ResultType;
 import net.azib.java.students.t104971.homework.athletics.util.DbConnection;
 import org.apache.log4j.Logger;
 

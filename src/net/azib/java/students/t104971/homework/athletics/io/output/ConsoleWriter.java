@@ -1,6 +1,6 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
-import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import org.apache.log4j.Logger;
 
 import java.util.Collection;

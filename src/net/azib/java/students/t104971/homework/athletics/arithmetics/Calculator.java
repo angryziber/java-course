@@ -1,8 +1,7 @@
 package net.azib.java.students.t104971.homework.athletics.arithmetics;
 
-import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
-import net.azib.java.students.t104971.homework.athletics.dto.Result;
-import net.azib.java.students.t104971.homework.athletics.dto.ResultType;
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.Result;
 
 import java.util.Collection;
 import java.util.Map;

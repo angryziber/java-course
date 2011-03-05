@@ -1,14 +1,12 @@
 package net.azib.java.students.t104971.homework.athletics.io.input;
 
-import net.azib.java.students.t104971.homework.athletics.dto.Athlete;
-import net.azib.java.students.t104971.homework.athletics.dto.ResultType;
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.ResultType;
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
 import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 import net.azib.java.students.t104971.homework.athletics.util.InputRead;
 
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 

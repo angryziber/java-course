@@ -3,7 +3,6 @@ package net.azib.java.students.t104971.homework.athletics.io.input;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
