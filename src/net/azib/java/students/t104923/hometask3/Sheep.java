@@ -2,13 +2,19 @@ package net.azib.java.students.t104923.hometask3;
 
 public class Sheep extends Pet {
 
-	public Sheep(String name)
+	public Sheep(String name, int age, int weight, String color)
 	{
-		super.name = name;
-	    System.out.println("This sheep's name is " + super.name);
+		setName(name);
+		setAge(age);
+		setWeight(weight);
+		setColor(color);
 	}
 
-	public void makeSound() {
-		System.out.println("Bleat!");
+	public String makeSound() {
+		return "Bleat!";
+	}
+
+	public String toString() {
+		return "A " + (getAge() > 1 ? getAge() + " years" : getAge() + " year") + " old " + getColor() + " sheep named " + getName() + " weights " + getWeight() + " kg.";
 	}
 }

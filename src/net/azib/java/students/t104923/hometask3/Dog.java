@@ -2,13 +2,19 @@ package net.azib.java.students.t104923.hometask3;
 
 public class Dog extends Pet {
 
-	public Dog(String name)
+	public Dog(String name, int age, int weight, String color)
 	{
-		super.name = name;
-	    System.out.println("This dog's name is " + super.name);
+		setName(name);
+		setAge(age);
+		setWeight(weight);
+		setColor(color);
 	}
 
-	public void makeSound() {
-		System.out.println("Bark!");
+	public String makeSound() {
+		return "Bark!";
+	}
+
+	public String toString() {
+		return "A " + (getAge() > 1 ? getAge() + " years" : getAge() + " year") + " old " + getColor() + " dog named " + getName() + " weights " + getWeight() + " kg.";
 	}
 }
