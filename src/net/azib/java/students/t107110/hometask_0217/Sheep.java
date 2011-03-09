@@ -1,4 +1,4 @@
-package net.azib.java.students.t107110.hometask_1702;
+package net.azib.java.students.t107110.hometask_0217;
 
 public class Sheep extends Pet {
 	private final int wool;
