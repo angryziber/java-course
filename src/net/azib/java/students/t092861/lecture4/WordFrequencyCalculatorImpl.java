@@ -62,5 +62,15 @@ public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 			Object key = iterator.next();
 			System.out.println(key + " - " + map.get(key));
 		}
+		System.out.println("\nSome of the system properties: ");
+		System.out.println("user.country - " + System.getProperty("user.country"));
+		System.out.println("sun.cpu.isalist - " + System.getProperty("sun.cpu.isalist"));
+		System.out.println("sun.jnu.encoding - " + System.getProperty("sun.jnu.encoding"));
+		
+		System.out.println("user.dir - " + System.getProperty("user.dir"));
+		System.out.println("user.home - " + System.getProperty("user.home"));
+		System.out.println("user.timezone - " + System.getProperty("user.timezone"));
+		
+		System.out.println("java.class.path - " + System.getProperty("java.class.path"));
 	}
 }
