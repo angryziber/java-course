@@ -11,8 +11,10 @@ public enum Planet {
     NEPTUNE (1.024e+26, 2.4746e7),
     PLUTO   (1.27e+22,  1.137e6);
 
-    private final double mass;   // in kilograms
-    private final double radius; // in meters
+	/** in kilograms */
+    private final double mass;
+	/** in meters */
+    private final double radius;
     
     Planet(double mass, double radius) {
         this.mass = mass;
@@ -22,7 +24,7 @@ public enum Planet {
     public double mass()   { return mass; }
     public double radius() { return radius; }
 
-    // universal gravitational constant  (m3 kg-1 s-2)
+    /** universal gravitational constant  (m3 kg-1 s-2) */
     public static final double G = 6.67300E-11;
 
     public double surfaceGravity() {
