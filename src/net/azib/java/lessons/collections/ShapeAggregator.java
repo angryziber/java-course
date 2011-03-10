@@ -37,7 +37,7 @@ public interface ShapeAggregator {
 	 * @return all contained Shapes in natural sorted order
 	 * The returned List is unmodifiable.
 	 */
-	public List<? extends Shape> sortedShapes();
+	public <T extends Shape> List<T> sortedShapes();
 	
 	/**
 	 * Copies all contained Shapes to the provided Collection

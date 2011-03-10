@@ -2,9 +2,10 @@ package net.azib.java.students.t092861.lecture4;
 
 import net.azib.java.lessons.collections.DuplicateRemover;
 
-import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Stanislav / 092861
@@ -16,7 +17,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 	@Override
 	public String[] removeDuplicateStrings(String... array) {
 		// this.arrayOne = array;
-		SortedSet<String> set = new TreeSet<String>(Arrays.asList(array));
+		SortedSet<String> set = new TreeSet<String>(asList(array));
 		arrayOne = (String[]) (set.toArray(new String[set.size()]));
 		return arrayOne;
 	}
