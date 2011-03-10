@@ -3,6 +3,7 @@ package net.azib.java.students.t103800.task4;
 import net.azib.java.lessons.collections.DuplicateRemover;
 
 import java.util.Arrays;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -23,7 +24,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
     }
 
     public String[] removeDuplicateStrings(String... array) {
-        TreeSet<String> set = new TreeSet<String>(Arrays.asList(array));
+        Set<String> set = new TreeSet<String>(Arrays.asList(array));
         String[] s = new String[set.size()];
         set.toArray(s);
         return s;

@@ -1,36 +1,31 @@
 package net.azib.java.students.t092861.lecture4;
+
+import net.azib.java.lessons.collections.WordFrequencyCalculator;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import net.azib.java.lessons.collections.WordFrequencyCalculator;
 
 /**
  * @author Stanislav / 092861
  * 
  */
 public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
-	String[] array;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seenet.azib.java.lessons.collections.WordFrequencyCalculator#
-	 * calculateFrequenciesOf(java.lang.String)
-	 */
 	@Override
 	public Map<String, Integer> calculateFrequenciesOf(String text) {
 		Map<String, Integer> map = new TreeMap<String, Integer>();
-		String newText = "";
+		StringBuilder builder = new StringBuilder();
 		char c = '.';
 
 		for (int i = 0; i < text.length(); i++) {
 			if (text.charAt(i) != c)
-				newText += text.charAt(i);
+				builder.append(text.charAt(i));
 		}
 
-		newText = newText.toLowerCase();
+		String newText = builder.toString().toLowerCase();
 
-		array = newText.split("\\s");
+		String[] array = newText.split("\\s");
 		// for (String element : array) {
 		// System.out.println(element);
 		// }

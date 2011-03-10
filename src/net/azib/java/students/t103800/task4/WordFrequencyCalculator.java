@@ -1,6 +1,7 @@
 package net.azib.java.students.t103800.task4;
 
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * User: Jaan Aigro
@@ -21,13 +22,14 @@ public class WordFrequencyCalculator implements net.azib.java.lessons.collection
 
     public Map<String, Integer> calculateFrequenciesOf(String text) {
         String[] array = text.split("\\s");
-        TreeSet<String> treeMap = new TreeSet<String>(Arrays.asList(array));
         Map<String, Integer> result = new TreeMap<String, Integer>();
 
-        for (String treeString : treeMap) {
-            int i = 0;
-            for (String arrayString : array) if (arrayString.equals(treeString)) i++;
-            result.put(treeString, i);
+        for (String treeString : array) {
+            int frequency = 0;
+	        // TODO: WTF?
+            for (String arrayString : array)
+	            if (arrayString.equals(treeString)) frequency++;
+            result.put(treeString, frequency);
         }
         return result;
     }

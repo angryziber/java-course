@@ -17,7 +17,7 @@ public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 		Map<String, Integer> map = new TreeMap<String, Integer>();
 		for (String s : text.split("\\s")) {
 			Integer freq = map.get(s);
-			map.put(s, (freq == null) ? 1 : freq + 1);
+			map.put(s, freq == null ? 1 : freq + 1);
 		}
 		return map;
 	}

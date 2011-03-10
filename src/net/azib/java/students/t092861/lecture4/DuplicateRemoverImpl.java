@@ -1,9 +1,10 @@
 package net.azib.java.students.t092861.lecture4;
 
+import net.azib.java.lessons.collections.DuplicateRemover;
+
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import net.azib.java.lessons.collections.DuplicateRemover;
 
 /**
  * @author Stanislav / 092861
@@ -12,13 +13,6 @@ import net.azib.java.lessons.collections.DuplicateRemover;
 public class DuplicateRemoverImpl implements DuplicateRemover {
 	String[] arrayOne;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * net.azib.java.lessons.collections.DuplicateRemover#removeDuplicateStrings
-	 * (java.lang.String[])
-	 */
 	@Override
 	public String[] removeDuplicateStrings(String... array) {
 		// this.arrayOne = array;

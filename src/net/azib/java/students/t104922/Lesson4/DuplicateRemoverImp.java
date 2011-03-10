@@ -3,13 +3,12 @@ import net.azib.java.lessons.collections.DuplicateRemover;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class DuplicateRemoverImp implements DuplicateRemover{
     public String[] removeDuplicateStrings(String... array) {
-        HashSet set = new HashSet(Arrays.asList(array));
-        String[] s = new String[set.size()];
-        set.toArray(s);
-        return s;
+        HashSet set = new LinkedHashSet(Arrays.asList(array));
+        return (String[]) set.toArray(new String[set.size()]);
     }
 
     public static void main(String[] args) {

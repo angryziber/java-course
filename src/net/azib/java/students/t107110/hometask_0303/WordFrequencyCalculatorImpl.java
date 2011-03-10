@@ -15,8 +15,8 @@ public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 	 */
 	@Override
 	public Map<String, Integer> calculateFrequenciesOf(final String text) {
-		final Map<String, Integer> wordMap = new TreeMap<String, Integer>();
-		for (final String word : text.split("\\s+")) {
+		Map<String, Integer> wordMap = new TreeMap<String, Integer>();
+		for (String word : text.split("\\s+")) {
 			if (wordMap.containsKey(word)) {
 				wordMap.put(word, wordMap.get(word) + 1);
 			} else {
