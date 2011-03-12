@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class NoDuplicateString implements DuplicateRemover {
+public class DuplicateRemoverImpl implements DuplicateRemover {
 
     public String[] removeDuplicateStrings(String[] array) {
         Set<String> noDupls = new LinkedHashSet<String>(Arrays.asList(array));
