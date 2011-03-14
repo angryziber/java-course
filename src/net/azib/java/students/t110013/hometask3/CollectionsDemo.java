@@ -16,7 +16,7 @@ public class CollectionsDemo {
 		System.out.println(Arrays.toString(processedString));
 
 		WordFrequencyCalculatorImpl wfc = new WordFrequencyCalculatorImpl();
-		Map wordsMap = wfc.calculateFrequenciesOf("the to be was go be was go to the no yes no yes maybe be the");
+		Map wordsMap = wfc.calculateFrequenciesOf("the to be was go be Was go To The no yes no yes maybe be the");
 		System.out.println(wordsMap);
 	}
 }
