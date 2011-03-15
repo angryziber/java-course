@@ -34,7 +34,7 @@ public class CollectionsHelper implements net.azib.java.lessons.collections.Dupl
 	public Map<String, Integer> calculateFrequenciesOf(String text) {
 		Map<String, Integer> wordsWithFrequencies = new TreeMap<String, Integer>();
 
-		for (String s : text.split(" ")) {
+		for (String s : text.split("\\s")) {
 			int countValue = 1;
 			if (wordsWithFrequencies.containsKey(s)) {
 				countValue = wordsWithFrequencies.get(s) + 1;
