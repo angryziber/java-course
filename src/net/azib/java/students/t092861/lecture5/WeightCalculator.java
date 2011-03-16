@@ -16,8 +16,7 @@ public class WeightCalculator {
 	public static void main(String[] args) {
 		double mass = MY_WEIGHT/G;
 		for (Planet curPlanet : Planet.values()) {
-			System.out.println("My weight on " + curPlanet + " is "
-					+ (int)curPlanet.surfaceWeight(mass) + " kg");
+			System.out.format("My weight on %s is %5.2f kg%n", curPlanet, curPlanet.surfaceWeight(mass));
 		}
 	}
 
