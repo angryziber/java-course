@@ -1,11 +1,11 @@
 package net.azib.java.students.t092861.lecture4;
 
-import net.azib.java.lessons.collections.DuplicateRemover;
-
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import static java.util.Arrays.asList;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+
+import net.azib.java.lessons.collections.DuplicateRemover;
 
 /**
  * @author Stanislav / 092861
@@ -17,7 +17,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 	@Override
 	public String[] removeDuplicateStrings(String... array) {
 		// this.arrayOne = array;
-		SortedSet<String> set = new TreeSet<String>(asList(array));
+		HashSet<String> set = new LinkedHashSet<String>(asList(array));
 		arrayOne = (String[]) (set.toArray(new String[set.size()]));
 		return arrayOne;
 	}
@@ -26,7 +26,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String[] array = new String[] { "A", "A", "B", "C", "C", "D", "F", "F",	"G", "A" };
+		String[] array = new String[] { "C", "C", "B", "A", "A", "D", "F", "F",	"G", "A" };
 		DuplicateRemoverImpl dri = new DuplicateRemoverImpl();
 		System.out.print("before: ");
 		dri.printArray(array);
