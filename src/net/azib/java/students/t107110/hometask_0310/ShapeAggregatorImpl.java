@@ -3,15 +3,12 @@ package net.azib.java.students.t107110.hometask_0310;
 import net.azib.java.lessons.collections.Shape;
 import net.azib.java.lessons.collections.ShapeAggregator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static java.util.Arrays.asList;
 
 public class ShapeAggregatorImpl implements ShapeAggregator {
-	private List<Shape> shapes = new ArrayList<Shape>();
+	private Collection<Shape> shapes = new TreeSet<Shape>();
 
 	@Override
 	public void addShapes(final Shape... shapes) {
@@ -25,31 +22,17 @@ public class ShapeAggregatorImpl implements ShapeAggregator {
 
 	@Override
 	public Shape min() {
-		Shape smallestShape = null;
-		for (Shape shape : shapes) {
-			if (smallestShape == null || smallestShape.area() > shape.area()) {
-				smallestShape = shape;
-			}
-		}
-		return smallestShape;
+		return Collections.min(shapes);
 	}
 
 	@Override
 	public Shape max() {
-		Shape biggestShape = null;
-		for (Shape shape : shapes) {
-			if (biggestShape == null || biggestShape.area() < shape.area()) {
-				biggestShape = shape;
-			}
-		}
-		return biggestShape;
+		return Collections.max(shapes);
 	}
 
 	@Override
 	public List<? extends Shape> sortedShapes() {
-		final List<Shape> sortedShapes = new ArrayList<Shape>(shapes);
-		Collections.sort(sortedShapes);
-		return Collections.unmodifiableList(sortedShapes);
+		return Collections.unmodifiableList(new LinkedList<Shape>(shapes));
 	}
 
 	@Override
