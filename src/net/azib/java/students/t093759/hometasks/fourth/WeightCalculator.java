@@ -2,7 +2,7 @@ package net.azib.java.students.t093759.hometasks.fourth;
 
 import net.azib.java.lessons.enums.Planet;
 
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 /**
@@ -18,7 +18,7 @@ public class WeightCalculator {
 	 * @return Weight of a person on all planets in our Solar system.
 	 */
 	public Map<Planet, Double> calculate(double weightOnPlanetEarthKg) {
-		Map<Planet, Double> weightOnPlanets = new LinkedHashMap<Planet, Double>();
+		Map<Planet, Double> weightOnPlanets = new EnumMap<Planet, Double>(Planet.class);
 
 		for (Planet planet : Planet.values()) {
 			weightOnPlanets.put(planet, planet.surfaceWeight(weightOnPlanetEarthKg / Planet.EARTH.surfaceGravity()));

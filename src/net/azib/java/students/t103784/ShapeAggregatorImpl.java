@@ -21,7 +21,7 @@ public class ShapeAggregatorImpl implements ShapeAggregator {
 
 	@Override
 	public void addShapes(Collection<? extends Shape> shapesCollection) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException("unimplemented yet");
 	}
 
 	@Override

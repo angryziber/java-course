@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  */
 public class WeightCalculator {
 
-    public void calculateWeight(double weight) {
+    public void printWeightOnAllPlanets(double weight) {
         weight /= Planet.EARTH.surfaceGravity();
         for (Planet planet : Planet.values()) {
             System.out.println("Planet '" + planet + "' -> human weight: "
@@ -18,7 +18,7 @@ public class WeightCalculator {
     }
 
     public static void main(String[] args) {
-        new WeightCalculator().calculateWeight(80);
+        new WeightCalculator().printWeightOnAllPlanets(80);
     }
 
 }

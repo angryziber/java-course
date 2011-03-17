@@ -4,19 +4,8 @@ import net.azib.java.lessons.enums.Planet;
 
 public class WeightCalculator {
     public static void main(String[] args) {
-          Planet[] planet = {
-                  Planet.MERCURY,
-                  Planet.VENUS,
-                  Planet.EARTH,
-                  Planet.MARS,
-                  Planet.JUPITER,
-                  Planet.SATURN,
-                  Planet.URANUS,
-                  Planet.NEPTUNE
-
-          };
-        double myGirlfriendsMass = 66;
-        for(int i = 0; i<planet.length; i++)
-        System.out.println("On planet " + planet[i] + " she weighs " + planet[i].surfaceWeight(myGirlfriendsMass) / 9.81 + " kg");
+	    double myGirlfriendsMass = 66;
+	    for (Planet planet : Planet.values())
+		    System.out.println("On planet " + planet + " she weighs " + planet.surfaceWeight(myGirlfriendsMass) / 9.81 + " kg");
     }
 }

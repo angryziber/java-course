@@ -3,8 +3,6 @@ package net.azib.java.students.t104607;
 
 import net.azib.java.lessons.collections.Shape;
 import net.azib.java.lessons.collections.ShapeAggregator;
-import java.util.Comparator;
-import java.util.Collections;
 
 import java.util.*;
 
@@ -27,29 +25,19 @@ public class ShapeAggregatorImpl implements ShapeAggregator{
 
 	@Override
 	public Shape min() {
-		return Collections.min(internalCollection,new Comparator<Shape>() {
-            public int compare(Shape o1, Shape o2) {
-            return o1.compareTo(o2);
-            }});
+		return Collections.min(internalCollection);
 	}
 
 	@Override
 	public Shape max() {
-		return Collections.max(internalCollection,new Comparator<Shape>() {
-            public int compare(Shape o1, Shape o2) {
-            return o1.compareTo(o2);
-            }});
+		return Collections.max(internalCollection);
 	}
 
 	@SuppressWarnings({"unchecked"})
 	@Override
 	public <T extends Shape> List<T> sortedShapes() {
-		final List<T> sortedShape = new LinkedList<T>();
-		sortedShape.addAll((Collection<? extends T>) internalCollection);
-		Collections.sort(sortedShape, new Comparator<Shape>() {
-            public int compare(Shape o1, Shape o2) {
-            return o1.compareTo(o2);
-            }});
+		final List<T> sortedShape = new LinkedList<T>((Collection<? extends T>) internalCollection);
+		Collections.sort(sortedShape);
 		return sortedShape;
 	}
 

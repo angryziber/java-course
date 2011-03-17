@@ -12,7 +12,7 @@ import net.azib.java.lessons.enums.Planet;
 public class WeightCalculator {
 
 	public static final int myWeight = 80;
-	public static final double g = 9.807;
+	public static final double g = Planet.EARTH.surfaceGravity();
 
 	public static void main(String[] args) {
 		for (Planet planet : Planet.values()) {

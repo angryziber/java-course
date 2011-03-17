@@ -25,28 +25,12 @@ public class ShapeAggregatorImpl implements ShapeAggregator {
 
 	@Override
 	public Shape min() {
-		Shape minShape = null;
-		for (Shape shape : shapeAggregator) {
-			if (minShape == null)
-				minShape = shape;
-			else if (shape.area() < minShape.area())
-				minShape = shape;
-		}
-
-		return minShape;
+		return Collections.min(shapeAggregator);
 	}
 
 	@Override
 	public Shape max() {
-		Shape maxShape = null;
-		for (Shape shape : shapeAggregator) {
-			if (maxShape == null)
-				maxShape = shape;
-			else if (shape.area() > maxShape.area())
-				maxShape = shape;
-		}
-
-		return maxShape;
+		return Collections.max(shapeAggregator);
 	}
 
 	@SuppressWarnings({"unchecked"})
