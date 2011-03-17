@@ -72,7 +72,7 @@ public class ShapeAggregatorImpl implements ShapeAggregator {
 
 		System.out.println("Sorting");
 		List<Shape> sortedShapes = aggregator.sortedShapes();
-		sortedShapes.add(new Circle(1));
+
 		for (Shape shape : sortedShapes) {
 			System.out.println(shape);
 		}
