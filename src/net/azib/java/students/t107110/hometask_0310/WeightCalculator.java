@@ -11,9 +11,9 @@ public class WeightCalculator {
 
 	public static void main(final String[] args) {
 		final double mass = 93.8;
-		for (Planet planet : Planet.values()) {
-			System.out.println("weight on " + planet + " is equivalent of " +
-					FORMAT.format(planet.surfaceWeight(mass) / EARTH_SURFACE_GRAVITY) + " kg");
+		for (final Planet planet : Planet.values()) {
+			final double weightOnPlanet = planet.surfaceWeight(mass) / EARTH_SURFACE_GRAVITY;
+			System.out.println("weight on " + planet + " is equivalent of " + FORMAT.format(weightOnPlanet) + " kg");
 		}
 	}
 }
