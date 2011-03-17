@@ -16,7 +16,7 @@ public class WeightCalculator {
 
           };
         double myGirlfriendsMass = 66;
-        for(int i = 0; i<8; i++)
+        for(int i = 0; i<planet.length; i++)
         System.out.println("On planet " + planet[i] + " she weighs " + planet[i].surfaceWeight(myGirlfriendsMass) / 9.81 + " kg");
     }
 }
