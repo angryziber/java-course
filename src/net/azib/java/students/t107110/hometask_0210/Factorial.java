@@ -3,51 +3,23 @@ package net.azib.java.students.t107110.hometask_0210;
 import java.math.BigInteger;
 
 /**
- * Calculates a factorial
- *
- * @author t107110
+ * @author Eduard Shustrov
  */
 public class Factorial {
-    /**
-     * 0!
-     */
-    private static final BigInteger F0 = BigInteger.ONE;
+	private static final BigInteger FACTORIAL_0 = BigInteger.ONE;
+	private final BigInteger value;
 
-    /**
-     * a factorial
-     */
-    private final BigInteger value;
+	public Factorial(final int n) {
+		if (n < 0) throw new IllegalArgumentException("Factorials of negative numbers are not supported");
 
-    /**
-     * Calculates the factorial of a number specified as parameter n
-     * <p/>
-     * Factorials are calculated in iterations using the definition n! = 1 ⋅ 2 ⋅ ... ⋅ n
-     * <p/>
-     * Note: The class objects are immutable
-     *
-     * @param n A number to calculate the factorial of
-     */
-    public Factorial(final int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException("Factorials of negative numbers are not supported");
-        }
+		BigInteger factorial = FACTORIAL_0;
+		for (int i = 1; i <= n; i++) {
+			factorial = factorial.multiply(BigInteger.valueOf(i));
+		}
+		value = factorial;
+	}
 
-        // initialized with 0!
-        BigInteger f = F0;
-        for (int i = 1; i <= n; i++) {
-            // i! = (i-1)! ⋅ i
-            f = f.multiply(BigInteger.valueOf(i));
-        }
-        // n! because here i = n and i! = n!
-        value = f;
-    }
-
-    /**
-     * Gives the calculated factorial
-     *
-     * @return the factorial
-     */
-    public BigInteger getValue() {
-        return value;
-    }
+	public BigInteger value() {
+		return value;
+	}
 }
