@@ -6,14 +6,14 @@ import java.text.DecimalFormat;
 import java.text.Format;
 
 public class WeightCalculator {
-	private static final double G = 9.8;
+	private static final double EARTH_SURFACE_GRAVITY = Planet.EARTH.surfaceGravity();
 	public static final Format FORMAT = new DecimalFormat("#,##0.0");
 
 	public static void main(final String[] args) {
-		final double weight = 93.8;
-		final double mass = weight / G;
+		final double mass = 93.8;
 		for (Planet planet : Planet.values()) {
-			System.out.println("weight on " + planet + " is " + FORMAT.format(planet.surfaceWeight(mass)) + " kg");
+			System.out.println("weight on " + planet + " is equivalent of " +
+					FORMAT.format(planet.surfaceWeight(mass) / EARTH_SURFACE_GRAVITY) + " kg");
 		}
 	}
 }
