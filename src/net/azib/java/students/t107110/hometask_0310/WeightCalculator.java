@@ -7,7 +7,7 @@ import java.text.Format;
 
 public class WeightCalculator {
 	private static final double EARTH_SURFACE_GRAVITY = Planet.EARTH.surfaceGravity();
-	public static final Format FORMAT = new DecimalFormat("#,##0.0");
+	private static final Format FORMAT = new DecimalFormat("#,##0.0");
 
 	public static void main(final String[] args) {
 		final double mass = 93.8;
