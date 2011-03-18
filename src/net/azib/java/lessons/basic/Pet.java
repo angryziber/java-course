@@ -7,7 +7,7 @@ public class Pet extends Animal {
 		this.name = name;
 	}
 
-	public Dog rename(String newName) {
+	public Pet rename(String newName) {
 		return new Dog(newName);
 	}
 
@@ -23,5 +23,9 @@ public class Pet extends Animal {
 	@Override
 	public int hashCode() {
 		return 31 * name.hashCode() + getAge();
+	}
+
+	public String getName() {
+		return name;
 	}
 }

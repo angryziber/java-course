@@ -9,7 +9,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class DuplicateRemoverImplTest {
     @Test
-    public void testRemoveDuplicateStrings() throws Exception {
+    public void removeDuplicateStrings() throws Exception {
         String[] strings = new DuplicateRemoverImpl().removeDuplicateStrings("FGH", "ABC", "ABC", "111", "FGH");
         assertEquals(3, strings.length);
         assertEquals("111", strings[0]);

@@ -2,10 +2,8 @@ package net.azib.java.students.t104971.collections;
 
 import org.junit.Test;
 
-import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -14,7 +12,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class WordFrequencyCalculatorImplTest {
     @Test
-    public void testCalculateFrequenciesOf() throws Exception {
+    public void calculateFrequenciesOf() throws Exception {
         Map<String, Integer> map = new WordFrequencyCalculatorImpl().calculateFrequenciesOf("asd asd qwe qwe 123 qwe qwe");
         Iterator<Map.Entry<String, Integer>> entries = map.entrySet().iterator();
         Map.Entry<String, Integer> entry;
