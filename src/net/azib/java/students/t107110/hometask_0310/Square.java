@@ -6,25 +6,18 @@ public class Square extends Shape {
 	private final double size;
 
 	public Square(final double size) {
+		if (size < 0) throw new IllegalArgumentException("square size can't be negative");
+
 		this.size = size;
 	}
 
 	@Override
 	public boolean equals(final Object other) {
-		if (this == other) {
-			return true;
-		}
-
-		if (!(other instanceof Square)) {
-			return false;
-		}
+		if (this == other) return true;
+		if (!(other instanceof Square)) return false;
 
 		final Square square = (Square) other;
-		if (Double.compare(square.size, size) != 0) {
-			return false;
-		}
-
-		return true;
+		return Double.compare(square.size, size) == 0;
 	}
 
 	@Override
@@ -35,7 +28,7 @@ public class Square extends Shape {
 
 	@Override
 	public String toString() {
-		return "Square{" + "size = " + size + ", area = " + area() + '}';
+		return "Square{" + "size=" + size + ",area=" + area() + '}';
 	}
 
 	@Override
