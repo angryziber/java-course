@@ -10,7 +10,7 @@ public class ShapeAggregatorImpl implements ShapeAggregator{
 	List<Shape> internalCollection;
 
 	public ShapeAggregatorImpl() {
-		internalCollection = new LinkedList<Shape>();
+		internalCollection = new ArrayList<Shape>();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class ShapeAggregatorImpl implements ShapeAggregator{
 	@SuppressWarnings({"unchecked"})
 	@Override
 	public <T extends Shape> List<T> sortedShapes() {
-		final List<T> sortedShape = new LinkedList<T>((Collection<? extends T>) internalCollection);
+		final List<T> sortedShape = new ArrayList<T>((Collection<? extends T>) internalCollection);
 		Collections.sort(sortedShape);
 		return sortedShape;
 	}
@@ -60,18 +60,5 @@ public class ShapeAggregatorImpl implements ShapeAggregator{
 		for (Shape shape : internalCollection)
 			sum = sum + shape.area();
 		return sum;
-	}
-
-	public static void main(String[] args) {
-	  	ShapeAggregatorImpl aggregator = new ShapeAggregatorImpl();
-		aggregator.addShapes(new Square(44),new Circle(33),new Circle(21), new Square(18));
-		System.out.println("\nOriginal array");
-		for (Shape shape : aggregator.internalCollection) {
-			System.out.println(shape.toString());
-		}
-		System.out.println("\nSorted array");
-		for (Shape shape : aggregator.sortedShapes()) {
-			System.out.println(shape.toString()+" area: "+shape.area());
-		}
 	}
 }
