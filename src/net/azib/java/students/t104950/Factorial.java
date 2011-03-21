@@ -1,5 +1,7 @@
 package net.azib.java.students.t104950;
 
+import java.math.BigInteger;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Priit
@@ -9,15 +11,19 @@ package net.azib.java.students.t104950;
  */
 public class Factorial {
 
-   public long Calculate(int n) {
+   public BigInteger Calculate(int n) {
 
-        long result,a;
+        BigInteger result,a,one;
         int count;
-        for (a = 1,  count = 0, result=0 ; count < n; count++) {
-            a=a*(a+1);
-            //result = (a+1) * a;
-           // a=result;
+	   one=BigInteger.ONE;
+        for (a =BigInteger.ONE,  count = 0, result=BigInteger.ONE ; count < n-1; count++) {
+            result=result.multiply(a.add(one));
+	        a=a.add(one);
+	        System.out.println(a);
+
         }
+
+
         return result;
     }
 }

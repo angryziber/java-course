@@ -1,5 +1,7 @@
 package net.azib.java.students.t104950;
 
+import java.math.BigInteger;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Priit
@@ -14,12 +16,12 @@ public class Fibonacci {
   // public long count;
     //int index;
 
-    public long Calculate(int index) {
+    public BigInteger Calculate(int index) {
 //mitmeni teha -> index
-        long result,a,b;
+       BigInteger result,a,b;
         int count;
-        for (a = 0, b = 1, count = 0, result = 0; count < index-1; count++) {
-            result = a + b;
+        for (a=BigInteger.ZERO, b=BigInteger.ONE, count = 0, result=BigInteger.ZERO; count < index-1; count++) {
+            result = a.add(b);
             a = b;
             b=result;
         }
