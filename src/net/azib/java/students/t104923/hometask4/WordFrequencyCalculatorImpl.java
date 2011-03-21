@@ -8,10 +8,12 @@ import java.util.Map;
 public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator{
 
 	public Map<String, Integer> calculateFrequenciesOf (String text) {
+		text = text.replaceAll("\\p{Punct}", "");
 		String[] stringArray = text.split("\\s");
 		Map<String, Integer> stringMap = new LinkedHashMap<String, Integer>();
 		for(String word: stringArray){
 			word = word.toLowerCase();
+			stringMap.get(word);
 			if(!stringMap.containsKey(word)){
 				stringMap.put(word, 1);
 			}
