@@ -2,19 +2,22 @@ package net.azib.java.students.t092861;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+
 import java.math.BigInteger;
+
+import junit.framework.TestCase;
 import net.azib.java.students.t092861.lecture2.Factorial;
+
 import org.junit.Test;
 
 /**
  * @author Stanislav / 092861
  * 
  */
-public class FactorialTest {
+public class FactorialTest extends TestCase{
 
 	@Test
-	public void indexesFromZeroToTwenty() {
+	public void testindexesFromZeroToTwenty() {
 		assertFactorialSequence("1, 1, 2, 6, 24, 120, 720, 5040, 40320, "
 				+ "362880, 3628800, 39916800, 479001600, 6227020800, "
 				+ "87178291200, 1307674368000, 20922789888000, 355687428096000, "
@@ -22,7 +25,7 @@ public class FactorialTest {
 	}
 
 	@Test
-	public void theSumIsAlwaysGreaterThanNull() {
+	public void testtheSumIsAlwaysGreaterThanNull() {
 		for (int i = 0; i < 10; i++) {
 			assertTrue(new Factorial().generate(i).intValue() > 0);
 		}
