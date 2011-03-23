@@ -3,6 +3,7 @@ package net.azib.java.students.t093759.hometasks.fifth;
 import net.azib.java.lessons.collections.WordFrequencyCalculator;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author dionis
@@ -11,6 +12,14 @@ import java.util.Map;
 public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 	@Override
 	public Map<String, Integer> calculateFrequenciesOf(String text) {
-		return null;
+		Map<String, Integer> wordsWithFrequencies = new TreeMap<String, Integer>();
+		for (String s : text.split("\\s")) {
+			int countValue = 1;
+			if (wordsWithFrequencies.containsKey(s)) {
+				countValue = wordsWithFrequencies.get(s) + 1;
+			}
+			wordsWithFrequencies.put(s, countValue);
+		}
+		return wordsWithFrequencies;
 	}
 }
