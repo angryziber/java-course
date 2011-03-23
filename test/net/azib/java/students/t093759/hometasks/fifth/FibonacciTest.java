@@ -25,6 +25,11 @@ public class FibonacciTest {
 		assertThat(new Fibonacci(1).getNumber(), is(BigInteger.ONE));
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeIndexForFibonacciNumber() {
+		new Fibonacci(-1);
+	}
+
 	@Test
 	public void firstFewFibonacciNumbers() {
 		Map<Integer, BigInteger> firstFewFibonacciNumbers = createFirstFewFibonacciNumberMap();

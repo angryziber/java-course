@@ -12,6 +12,7 @@ public class Fibonacci {
 	private Integer index;
 
 	public Fibonacci(int index) {
+		if (index < 0) throw new IllegalArgumentException();
 		calculateFibonacciNumber(index);
 		this.index = index;
 	}
