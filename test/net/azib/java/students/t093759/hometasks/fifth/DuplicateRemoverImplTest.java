@@ -22,7 +22,7 @@ public class DuplicateRemoverImplTest {
 	public void someDuplicatesShouldBeRemoved() {
 		String[] initialStrings = {"dog", "dog", "cat"};
 		String[] expectedStrings = {"dog", "cat"};
-		String[] stringsWithNoDuplicates = new DuplicateRemoverImpl().removeDuplicateStrings(initialStrings);
-		assertThat(stringsWithNoDuplicates, is(expectedStrings));
+		String[] stringsWithSomeDuplicatesRemoved = new DuplicateRemoverImpl().removeDuplicateStrings(initialStrings);
+		assertThat(stringsWithSomeDuplicatesRemoved, is(expectedStrings));
 	}
 }
