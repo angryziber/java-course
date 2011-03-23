@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -16,32 +16,42 @@ public class WordFrequencyCalculatorImplTest {
 	@Test
 	public void everyWordAppearsOnlyOnce() {
 		String text = "dog cat etc";
-		Map<String, Integer> wordsFrequencies = new TreeMap<String, Integer>();
-		wordsFrequencies.put("dog", 1);
-		wordsFrequencies.put("cat", 1);
-		wordsFrequencies.put("etc", 1);
+		Map<String, Integer> correctWordFrequencies = new TreeMap<String, Integer>();
+		correctWordFrequencies.put("dog", 1);
+		correctWordFrequencies.put("cat", 1);
+		correctWordFrequencies.put("etc", 1);
 
-		assertThat(new WordFrequencyCalculatorImpl().calculateFrequenciesOf(text), is(wordsFrequencies));
+		Map<String, Integer> wordFrequencies = new WordFrequencyCalculatorImpl().calculateFrequenciesOf(text);
+
+		assertThat(wordFrequencies, equalTo(correctWordFrequencies));
 	}
 
 	@Test
 	public void someWordsAppearsMoreThanOnce() {
 		String text = "dog cat dog";
-		Map<String, Integer> wordsFrequencies = new TreeMap<String, Integer>();
-		wordsFrequencies.put("dog", 2);
-		wordsFrequencies.put("cat", 1);
+		Map<String, Integer> correctWordFrequencies = new TreeMap<String, Integer>();
+		correctWordFrequencies.put("dog", 2);
+		correctWordFrequencies.put("cat", 1);
 
-		assertThat(new WordFrequencyCalculatorImpl().calculateFrequenciesOf(text), is(wordsFrequencies));
+		Map<String, Integer> wordFrequencies = new WordFrequencyCalculatorImpl().calculateFrequenciesOf(text);
+
+		assertThat(wordFrequencies, equalTo(correctWordFrequencies));
 	}
 
 	@Test
 	public void orderOfWordsIsInAlphabeticalOrder() {
 		String text = "dog cat dog";
 
-		String[] wordsInRightOrder = {"cat", "dog"};
+		String[] wordsInCorrectOrder = {"cat", "dog"};
 
 		Map<String, Integer> stringIntegerMap = new WordFrequencyCalculatorImpl().calculateFrequenciesOf(text);
 		String[] words = stringIntegerMap.keySet().toArray(new String[stringIntegerMap.size()]);
-		assertThat(words, is(wordsInRightOrder));
+
+		assertThat(words, equalTo(wordsInCorrectOrder));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void cantCountWordsFromNull() {
+		new WordFrequencyCalculatorImpl().calculateFrequenciesOf(null);
 	}
 }

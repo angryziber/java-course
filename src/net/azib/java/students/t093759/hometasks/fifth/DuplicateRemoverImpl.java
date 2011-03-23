@@ -13,6 +13,7 @@ import java.util.Set;
 public class DuplicateRemoverImpl implements DuplicateRemover {
 	@Override
 	public String[] removeDuplicateStrings(String... array) {
+		if (array == null) throw new IllegalArgumentException();
 		Set<String> noDuplicates = new LinkedHashSet<String>(Arrays.asList(array));
 		return noDuplicates.toArray(new String[noDuplicates.size()]);
 	}

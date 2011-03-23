@@ -12,6 +12,7 @@ import java.util.TreeMap;
 public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator {
 	@Override
 	public Map<String, Integer> calculateFrequenciesOf(String text) {
+		if (text == null) throw new IllegalArgumentException();
 		Map<String, Integer> wordsWithFrequencies = new TreeMap<String, Integer>();
 		for (String s : text.split("\\s")) {
 			int countValue = 1;

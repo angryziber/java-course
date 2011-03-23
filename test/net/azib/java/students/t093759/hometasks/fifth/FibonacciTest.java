@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -47,8 +48,10 @@ public class FibonacciTest {
 
 	@Test
 	public void fibonacciNumberShouldRememberIndex() {
-		for (int i = 0; i < 10; i++) {
-			assertThat(new Fibonacci(i).getIndex(), is(i));
+		Integer calculatedIndex;
+		for (int index = 0; index < 10; index++) {
+			calculatedIndex = new Fibonacci(index).getIndex();
+			assertThat(calculatedIndex, equalTo(index));
 		}
 	}
 

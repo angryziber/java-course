@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -17,11 +18,6 @@ public class FactorialTest {
 	@Test
 	public void firstFactorialValue() {
 		assertThat(new Factorial(0).getValue(), is(BigInteger.ONE));
-	}
-
-	@Test
-	public void secondFactorialValue() {
-		assertThat(new Factorial(1).getValue(), is(BigInteger.ONE));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -46,8 +42,10 @@ public class FactorialTest {
 
 	@Test
 	public void factorialValueShouldRememberIndex() {
-		for (int i = 0; i < 10; i++) {
-			assertThat(new Factorial(i).getIndex(), is(i));
+		int calculatedIndex;
+		for (int realIndex = 0; realIndex < 10; realIndex++) {
+			calculatedIndex = new Factorial(realIndex).getIndex();
+			assertThat(calculatedIndex, equalTo(realIndex));
 		}
 	}
 
