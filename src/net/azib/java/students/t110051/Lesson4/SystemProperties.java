@@ -15,7 +15,7 @@ public class SystemProperties {
 		Properties properties = System.getProperties();
 
 		for (Object name : properties.keySet()) {
-			System.out.println(name + " = " + properties.getProperty("name"));
+			System.out.println(name + " = " + properties);
 
 		}
 		}

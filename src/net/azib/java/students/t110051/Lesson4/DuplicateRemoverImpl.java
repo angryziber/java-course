@@ -29,7 +29,7 @@ public class DuplicateRemoverImpl implements DuplicateRemover{
 	}
 	@Override
 	public String[] removeDuplicateStrings(String... array) {
-		SortedSet<String> temp = new TreeSet<String> ();
+		LinkedHashSet<String> temp = new LinkedHashSet<String>();
 		for (String elem : array){
 			temp.add(elem);
 		}
