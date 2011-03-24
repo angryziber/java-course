@@ -1,6 +1,7 @@
 package net.azib.java.students.t103717;
 
 import net.azib.java.lessons.enums.Planet;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -12,8 +13,10 @@ import static org.junit.Assert.assertThat;
  * Date: 24.03.11
  */
 public class WeightCalculatorTest {
+	@Ignore
 	@Test
 	public void checkWeightOnEarth() {
+		//Todo fix-it
 		assertWeightCalc(Planet.EARTH, 10, 11); //should be fail, unfortunately runs perfectly.
 	}
 
