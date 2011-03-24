@@ -18,32 +18,32 @@ public class CircleTest {
 
 	@Test
 	public void circlesAreaIsOk() {
-		double sideLength = 1.0;
-		double correctArea = Math.PI * sideLength * sideLength;
-		assertThat(new Circle(sideLength).area(), is(correctArea));
+		double radius = 1.0;
+		double correctArea = Math.PI * radius * radius;
+		assertThat(new Circle(radius).area(), is(correctArea));
 	}
 
 	@Test
 	public void circlesStringRepresentationLookLikesSoAsItShouldBe() {
-		double sideLength = 1.0;
-		String correctStringRepresentation = "Square with side length " + sideLength + " and area " + new Square(sideLength).area();
-		assertThat(new Circle(sideLength).toString(), equalTo(correctStringRepresentation));
+		double radius = 1.0;
+		String correctStringRepresentation = "Circle with radius " + radius + " and area " + new Circle(radius).area();
+		assertThat(new Circle(radius).toString(), equalTo(correctStringRepresentation));
 	}
 
 	@Test
-	public void twoCirclesWithTheSameSideLengthHaveTheSameHashCode() {
-		double sideLength = 99.0;
-		Circle a = new Circle(sideLength);
-		Circle b = new Circle(sideLength);
+	public void twoCirclesWithTheSameRadiusHaveTheSameHashCode() {
+		double radius = 99.0;
+		Circle a = new Circle(radius);
+		Circle b = new Circle(radius);
 		assertThat(a, not(sameInstance(b)));
 		assertThat(a.hashCode(), equalTo(b.hashCode()));
 	}
 
 	@Test
-	public void twoCirclesWithTheSameSideLengthAreEqual() {
-		double sideLength = 99.0;
-		Circle a = new Circle(sideLength);
-		Circle b = new Circle(sideLength);
+	public void twoCirclesWithTheSameRadiusAreEqual() {
+		double radius = 99.0;
+		Circle a = new Circle(radius);
+		Circle b = new Circle(radius);
 		assertThat(a, not(sameInstance(b)));
 		assertThat(a, equalTo(b));
 	}
