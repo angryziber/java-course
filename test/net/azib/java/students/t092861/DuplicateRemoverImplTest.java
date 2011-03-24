@@ -3,11 +3,10 @@
  */
 package net.azib.java.students.t092861;
 
-import static org.junit.Assert.*;
-
 import net.azib.java.students.t092861.lecture4.DuplicateRemoverImpl;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * @author Stanislav / 092861
@@ -19,9 +18,9 @@ public class DuplicateRemoverImplTest {
 
 	@Test
 	public void removeDuplicateStringsFromArray() {
-		String[] actual = {"D", "B", "B", "Aa", "Ab", "A", "A"};
+		String[] input = {"D", "B", "B", "Aa", "Ab", "A", "A"};
 		String[] expected = {"D", "B", "Aa", "Ab", "A"};
-		assertArrayEquals(expected, dri.removeDuplicateStrings(actual));
+		assertArrayEquals(expected, dri.removeDuplicateStrings(input));
 	}
 	
 	@Test

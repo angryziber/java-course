@@ -14,9 +14,8 @@ public class DuplicateRemoverImplTest {
 	@Test
 	public void noDuplicatesWereRemovedBecauseThereWerentAny() {
 		String[] initialStrings = {"cat", "dog", "etc"};
-		String[] expectedStrings = initialStrings;
 		String[] stringsWithNoDuplicates = new DuplicateRemoverImpl().removeDuplicateStrings(initialStrings);
-		assertThat(stringsWithNoDuplicates, equalTo(expectedStrings));
+		assertThat(stringsWithNoDuplicates, equalTo(initialStrings));
 	}
 
 	@Test
@@ -29,6 +28,6 @@ public class DuplicateRemoverImplTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void cantRemoveDuplicatesFromNull() {
-		new DuplicateRemoverImpl().removeDuplicateStrings(null);
+		new DuplicateRemoverImpl().removeDuplicateStrings((String)null);
 	}
 }

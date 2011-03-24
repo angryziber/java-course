@@ -2,7 +2,7 @@ package net.azib.java.students.t104948.Lecture4;
 
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class DuplicateRemoverImplTest {
 	@Test

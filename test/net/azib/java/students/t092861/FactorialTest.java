@@ -1,14 +1,13 @@
 package net.azib.java.students.t092861;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import junit.framework.TestCase;
+import net.azib.java.students.t092861.lecture2.Factorial;
+import org.junit.Test;
 
 import java.math.BigInteger;
 
-import junit.framework.TestCase;
-import net.azib.java.students.t092861.lecture2.Factorial;
-
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Stanislav / 092861
@@ -25,7 +24,7 @@ public class FactorialTest extends TestCase{
 	}
 
 	@Test
-	public void testtheSumIsAlwaysGreaterThanNull() {
+	public void testtheSumIsAlwaysGreaterThanZero() {
 		for (int i = 0; i < 10; i++) {
 			assertTrue(new Factorial().generate(i).intValue() > 0);
 		}

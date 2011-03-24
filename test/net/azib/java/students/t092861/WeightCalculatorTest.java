@@ -1,9 +1,10 @@
 package net.azib.java.students.t092861;
 
-import static org.junit.Assert.*;
 import net.azib.java.lessons.enums.Planet;
 import net.azib.java.students.t092861.lecture5.WeightCalculator;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Stanislav / 092861
