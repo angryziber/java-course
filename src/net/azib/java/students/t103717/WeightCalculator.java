@@ -14,9 +14,13 @@ public class WeightCalculator {
 		double mass = 65;
 
 		for (Planet planet : Planet.values()) {
-			out.format("My planet is %s. I weight there %4.2f kg \n", planet, planet.surfaceWeight(mass) / 9.81);
+			out.format("My planet is %s. I weight there %4.2f kg \n", planet, WeightCalculator.calculate(planet, mass));
 
 		}
+	}
+
+	protected static double calculate(Planet planet, double mass) {
+		return planet.surfaceWeight(mass) / Planet.EARTH.surfaceGravity();
 	}
 
 }
