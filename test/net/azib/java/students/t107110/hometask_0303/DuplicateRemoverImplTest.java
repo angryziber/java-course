@@ -14,43 +14,39 @@ public class DuplicateRemoverImplTest {
 	@Test
 	public void nullStringList() {
 		final String[] nullList = null;
-		assertThat(uniqueStrings(nullList), are(strings(null)));
+		assertThat(uniqueStrings(nullList), are(null));
 	}
 
 	@Test
 	public void noStrings() {
-		assertThat(uniqueStrings(), are(strings()));
+		assertThat(uniqueStrings(), are());
 	}
 
 	@Test
 	public void oneString() {
-		assertThat(uniqueStrings("one"), are(strings("one")));
+		assertThat(uniqueStrings("one"), are("one"));
 	}
 
 	@Test
 	public void twoDifferentStrings() {
-		assertThat(uniqueStrings("one", "two"), are(strings("one", "two")));
+		assertThat(uniqueStrings("one", "two"), are("one", "two"));
 	}
 
 	@Test
 	public void twoSameStrings() {
-		assertThat(uniqueStrings("one", "one"), are(strings("one")));
+		assertThat(uniqueStrings("one", "one"), are("one"));
 	}
 
 	@Test
 	public void aFewStringsWithDuplicates() {
-		assertThat(uniqueStrings("one", "two", "one", "three", "two"), are(strings("one", "two", "three")));
+		assertThat(uniqueStrings("one", "two", "one", "three", "two"), are("one", "two", "three"));
 	}
 
 	private String[] uniqueStrings(final String... strings) {
 		return remover.removeDuplicateStrings(strings);
 	}
 
-	private static String[] strings(final String... strings) {
-		return strings;
-	}
-
-	private static <T> org.hamcrest.Matcher<T> are(T value) {
-		return is(value);
+	private static org.hamcrest.Matcher<String[]> are(final String... strings) {
+		return is(strings);
 	}
 }
