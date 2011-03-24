@@ -11,6 +11,7 @@ public class Square extends Shape {
 	private double sideLength;
 
 	public Square(double sideLength) {
+		if (sideLength < 0.0) throw new IllegalArgumentException();
 		this.sideLength = sideLength;
 	}
 
