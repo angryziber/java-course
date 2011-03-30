@@ -1,10 +1,8 @@
 package net.azib.java.students.t103640.chars;
 
-import java.util.Date;
-
 public class Person {
     String name;
-    Date birthday;
+    String birthday;
     String email;
     int phoneNumber;
 
@@ -16,11 +14,11 @@ public class Person {
         this.name = newName;
     }
 
-    public Date getBirthday(){
+    public String getBirthday(){
         return birthday;
     }
 
-    public void setBirthday(Date newBirthday){
+    public void setBirthday(String newBirthday){
         this.birthday = newBirthday;
     }
 

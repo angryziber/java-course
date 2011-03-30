@@ -2,7 +2,7 @@ package net.azib.java.students.t103640;
 
 import java.math.BigInteger;
 
-public class FibonaciJunk {
+public class Fibbonacci {
     public BigInteger bigFiba(int i){
               BigInteger habba1 = new BigInteger("1");
               BigInteger habba  = new BigInteger("0");
