@@ -11,6 +11,7 @@ public class DuplicateRemoverImplTest {
 		String[] stringArray = {"dog","cat","frog","dog"};
 		DuplicateRemoverImpl remover = new DuplicateRemoverImpl();
 		String[] result = remover.removeDuplicateStrings(stringArray);
-		assertEquals(3,result.length);
+		String[] arrayWithoutDuplicate = {"dog","cat","frog"};
+		assertArrayEquals(result,arrayWithoutDuplicate);
 	}
 }
