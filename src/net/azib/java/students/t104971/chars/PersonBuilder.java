@@ -4,30 +4,31 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static net.azib.java.students.t104971.chars.ConsoleInput.getLine;
 
 /**
  * @author Jaroslav Judin
  */
 public class PersonBuilder {
 
-    static Person createPerson() {
+    private ConsoleInput console = new ConsoleInput();
+
+    Person createPerson() {
         Person person = new Person();
         while (person.getName() == null) {
             System.out.println("Enter name: ");
-            person.setName(validateName(getLine()));
+            person.setName(validateName(console.getLine()));
         }
         while (person.getBirthDay() == null) {
             System.out.println("Enter birthday: ");
-            person.setBirthDay(validateDate(getLine()));
+            person.setBirthDay(validateDate(console.getLine()));
         }
         while (person.getEmail() == null) {
             System.out.println("Enter email: ");
-            person.setEmail(validateEmail(getLine()));
+            person.setEmail(validateEmail(console.getLine()));
         }
         while (person.getPhone() == null) {
             System.out.println("Enter phone: ");
-            person.setPhone(validatePhone(getLine()));
+            person.setPhone(validatePhone(console.getLine()));
         }
         return person;
     }

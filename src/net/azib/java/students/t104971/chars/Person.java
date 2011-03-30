@@ -49,7 +49,7 @@ public class Person {
     public String toString() {
         return "Person {" +
                 "\n\tname='" + name + '\'' +
-                "\n\tbirthDay=" + new SimpleDateFormat("dd.MM.yyyy").format(birthDay) +
+                "\n\tbirth=" + new SimpleDateFormat("dd.MM.yyyy").format(birthDay) +
                 "\n\temail='" + email + '\'' +
                 "\n\tphone='" + phone + '\'' +
                 "\n}";
