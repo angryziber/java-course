@@ -20,8 +20,13 @@ import java.util.regex.Pattern;
 public class Contacts {
 	private SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
 
-	public static final String[] FIELDS = new String[] { "Friends's name: ",
-			"Birthday: ", "E-mail: ", "Phone number: ", "Facebook: " };
+	public static enum Field {
+		NAME,
+		BIRTHDAY,
+		EMAIL,
+		PHONE,
+		FACEBOOK
+	}
 
 	private Friend newFriend;
 
@@ -44,26 +49,27 @@ public class Contacts {
 		while (true) {
 			newFriend = new Friend();
 			do {
-				System.out.print((index) + ": " + FIELDS[count]);
+				Field field = Field.values()[count];
+				System.out.print((index) + ": " + field.name() + ": ");
 				line = bReader.readLine();
 
-				if (FIELDS[count].contains("name")) {
+				if (field == Field.NAME) {
 					if (askName(line)) continue;
 				}
-				if (FIELDS[count].contains("Birthday")) {
+				if (field == Field.BIRTHDAY) {
 					if (askBirthday(line)) continue;
 				}
-				if (FIELDS[count].contains("mail")) {
+				if (field == Field.EMAIL) {
 					if (askEmail(line)) continue;
 				}
-				if (FIELDS[count].contains("number")) {
+				if (field == Field.PHONE) {
 					if (askPhoneNumber(line)) continue;
 				}
-				if (FIELDS[count].contains("Facebook")) {
+				if (field == Field.FACEBOOK) {
 					if (askFacebook(line)) continue;
 				}
 				count++;
-			} while (count != FIELDS.length);
+			} while (count != Field.values().length);
 
 			friends.add(newFriend);
 			System.out.print("\nWould you like to add another friend (y/n)?");
