@@ -6,7 +6,6 @@ public class SomePerson {
 
 	String name;
 	String birthDay;
-	//Date birthDay;
 	String phoneNumber;
 	String email;
 
