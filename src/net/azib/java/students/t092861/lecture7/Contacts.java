@@ -19,8 +19,11 @@ import java.util.regex.Pattern;
  */
 public class Contacts {
 	private SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
+
 	public static final String[] FIELDS = new String[] { "Friends's name: ",
 			"Birthday: ", "E-mail: ", "Phone number: ", "Facebook: " };
+
+	private Friend newFriend;
 
 	/**
 	 * @param args
@@ -38,67 +41,26 @@ public class Contacts {
 		InputStreamReader isReader = new InputStreamReader(System.in, "UTF8");
 		BufferedReader bReader = new BufferedReader(isReader);
 		String line;
-		Friend newFriend;
 		while (true) {
 			newFriend = new Friend();
 			do {
 				System.out.print((index) + ": " + FIELDS[count]);
 				line = bReader.readLine();
 
-				// inputting the name
 				if (FIELDS[count].contains("name")) {
-					if (!checkName(line)) {
-						System.out
-								.println("\nNames and surnames must start with capital letter.\n"
-										+ "Charecters ' and - are allowed.\n"
-										+ "Please enter new Firstname and Surname again.\n");
-						continue;
-					} else {
-						newFriend.setName(line);
-					}
+					if (askName(line)) continue;
 				}
-				// inputting the Birthday
 				if (FIELDS[count].contains("Birthday")) {
-					try {
-						newFriend.setBirthday(dateFormat.parse(line));
-					} catch (ParseException e) {
-						System.out.println("\nFormat " + dateFormat.toPattern() + " is allowed.\n"
-								+ "Please enter new Birthday.\n");
-						continue;
-					}
+					if (askBirthday(line)) continue;
 				}
-				// inputting the mail
 				if (FIELDS[count].contains("mail")) {
-					if (!checkMail(line)) {
-						System.out
-								.println("\nFormat name@hostname.domain is allowed.\n"
-										+ "Please enter new email address.\n");
-						continue;
-					} else {
-						newFriend.setEmail(line);
-					}
+					if (askEmail(line)) continue;
 				}
-				// inputting the phone number
 				if (FIELDS[count].contains("number")) {
-					if (!checkNumber(line)) {
-						System.out
-								.println("\nOnly digits and (+xxx) country code is allowed.\n"
-										+ "Please enter new phone number.\n");
-						continue;
-					} else {
-						newFriend.setPhoneNmber(line);
-					}
+					if (askPhoneNumber(line)) continue;
 				}
-				// inputting the Facebook
 				if (FIELDS[count].contains("Facebook")) {
-					if (!checkFacebook(line)) {
-						System.out
-								.println("\nOnly digits and \".\" is allowed\n"
-										+ "Please enter new phone number.\n");
-						continue;
-					} else {
-						newFriend.setFacebook(line);
-					}
+					if (askFacebook(line)) continue;
 				}
 				count++;
 			} while (count != FIELDS.length);
@@ -115,6 +77,66 @@ public class Contacts {
 			}
 		}
 		printAllContacts(friends);
+	}
+
+	private boolean askFacebook(String line) {
+		if (!checkFacebook(line)) {
+			System.out
+					.println("\nOnly digits and \".\" is allowed\n"
+							+ "Please enter new facebook username(?).\n");
+			return true;
+		} else {
+			newFriend.setFacebook(line);
+		}
+		return false;
+	}
+
+	private boolean askPhoneNumber(String line) {
+		if (!checkNumber(line)) {
+			System.out
+					.println("\nOnly digits and (+xxx) country code is allowed.\n"
+							+ "Please enter new phone number.\n");
+			return true;
+		} else {
+			newFriend.setPhoneNmber(line);
+		}
+		return false;
+	}
+
+	private boolean askEmail(String line) {
+		if (!checkMail(line)) {
+			System.out
+					.println("\nFormat name@hostname.domain is allowed.\n"
+							+ "Please enter new email address.\n");
+			return true;
+		} else {
+			newFriend.setEmail(line);
+		}
+		return false;
+	}
+
+	private boolean askBirthday(String line) {
+		try {
+			newFriend.setBirthday(dateFormat.parse(line));
+		} catch (ParseException e) {
+			System.out.println("\nFormat " + dateFormat.toPattern() + " is allowed.\n"
+					+ "Please enter new Birthday.\n");
+			return true;
+		}
+		return false;
+	}
+
+	private boolean askName(String line) {
+		if (!checkName(line)) {
+			System.out
+					.println("\nNames and surnames must start with capital letter.\n"
+							+ "Charecters ' and - are allowed.\n"
+							+ "Please enter new Firstname and Surname again.\n");
+			return true;
+		} else {
+			newFriend.setName(line);
+		}
+		return false;
 	}
 
 	public boolean checkName(String name) {
