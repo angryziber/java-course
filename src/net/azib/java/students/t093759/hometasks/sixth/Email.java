@@ -22,4 +22,26 @@ public class Email {
 	public String getEmail() {
 		return email;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Email email1 = (Email) o;
+
+		if (!email.equals(email1.email)) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return email.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return email;
+	}
 }

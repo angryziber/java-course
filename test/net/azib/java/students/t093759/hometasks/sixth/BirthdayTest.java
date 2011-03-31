@@ -49,6 +49,20 @@ public class BirthdayTest {
 		assertThat(new Birthday(currentDateFormatString).toString(), equalTo(localeDependentFormat));
 	}
 
+	@Test
+	public void stringRepresentationAndFormattedBirthdayDateAreTheSame() throws ParseException {
+		String currentDateFormatString = getCurrentYear() + "-" + getCurrentMonth() + "-" + getCurrentDayOfMonth();
+
+		Birthday birthday = new Birthday(currentDateFormatString);
+		assertThat(birthday.toString(), equalTo(birthday.getFormattedBirthdayDate()));
+	}
+
+	@Test
+	public void birthdaysWithTheSameDateAreEqual() {
+		String dateFormat = "1970-12-25";
+		assertThat(new Birthday(dateFormat), equalTo(new Birthday(dateFormat)));
+	}
+
 	private int getCurrentYear() {
 		return Calendar.getInstance().get(Calendar.YEAR);
 	}

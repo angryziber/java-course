@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
@@ -16,7 +17,11 @@ import static org.junit.Assert.*;
  */
 public class PhoneNumberTest {
 	String[] correctPhoneNumbers = {"123", "45678912", "123 4 5 6", "1234 567"};
-	String[] incorrectPhoneNumbers = {"abdaa123", "45678912.00", "123+4-5*6", "1234,567"};
+	String[] incorrectPhoneNumbers = {"abdaa123", "45678912.00", "123+4-5*6", "1234,567",
+			/*length should be at least two digits*/
+			"1",
+			/*length should be 30 or less digits*/
+			"1234567890123456789012345678901"};
 
 	@Test
 	public void phoneNumberShouldConsistOnlyOfDigits() {
@@ -48,6 +53,22 @@ public class PhoneNumberTest {
 			String formattedPhoneNumber = format.format(cleanedCorrectPhoneNumber(correctPhoneNumber));
 			assertThat(new PhoneNumber(correctPhoneNumber).toString(), is(formattedPhoneNumber));
 		}
+	}
+
+	@Test
+	public void stringRepresentationAndFormattedPhoneNumberAreTheSame() {
+		DecimalFormat format = new DecimalFormat();
+		setUpDecimalFormat(format);
+
+		for (String correctPhoneNumber : correctPhoneNumbers) {
+			PhoneNumber phoneNumber = new PhoneNumber(correctPhoneNumber);
+			assertThat(phoneNumber.toString(), is(phoneNumber.getFormattedPhoneNumber()));
+		}
+	}
+
+	@Test
+	public void phoneNumbersAreEqualIfTheyConsistOfTheSameDigitsInside() {
+		assertThat(new PhoneNumber("123"), equalTo(new PhoneNumber("12 3")));
 	}
 
 	private void setUpDecimalFormat(DecimalFormat format) {

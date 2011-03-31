@@ -13,9 +13,12 @@ import java.util.Date;
  */
 public class Birthday {
 	public static final String FORMAT = "yyyy-MM-dd";
-	DateFormat dateFormat = new SimpleDateFormat(FORMAT);
+	private DateFormat dateFormat = new SimpleDateFormat(FORMAT);
 	private final String formattedBirthdayDate;
 
+	public String getFormattedBirthdayDate() {
+		return formattedBirthdayDate;
+	}
 
 	public Birthday(String dateFormatString) {
 		Date parsedBirthdayDate = getParsedDateFrom(dateFormatString);
@@ -29,6 +32,23 @@ public class Birthday {
 	@Override
 	public String toString() {
 		return formattedBirthdayDate;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Birthday birthday = (Birthday) o;
+
+		if (!formattedBirthdayDate.equals(birthday.formattedBirthdayDate)) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return formattedBirthdayDate.hashCode();
 	}
 
 	private void checkThatBirthdayWasLessThan120YearsAgoFromToday(Date parsedBirthdayDate) {

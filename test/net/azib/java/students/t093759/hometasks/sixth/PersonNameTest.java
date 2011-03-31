@@ -50,4 +50,10 @@ public class PersonNameTest {
 			assertThat(personName.toString(), equalTo(personName.getName()));
 		}
 	}
+
+	@Test
+	public void equalityExample() {
+		String name = "Homer Simpson";
+		assertThat(new PersonName(name), equalTo(new PersonName(name)));
+	}
 }

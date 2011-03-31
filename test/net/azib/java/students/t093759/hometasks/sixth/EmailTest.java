@@ -43,4 +43,10 @@ public class EmailTest {
 			assertThat(correctEmail, equalTo(new Email(correctEmail).getEmail()));
 		}
 	}
+
+	@Test
+	public void emailsAreEqualsIfTheyAreTheSame() {
+		String email = "abc@somehost.com";
+		assertThat(new Email(email), equalTo(new Email(email)));
+	}
 }

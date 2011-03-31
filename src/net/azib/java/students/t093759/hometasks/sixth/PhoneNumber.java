@@ -10,7 +10,7 @@ import java.text.DecimalFormatSymbols;
  * @author dionis
  */
 public class PhoneNumber {
-	String formattedPhoneNumber;
+	private String formattedPhoneNumber;
 
 	public PhoneNumber(String phoneNumber) {
 		if (!isValid(phoneNumber)) {
@@ -26,6 +26,27 @@ public class PhoneNumber {
 
 	public static boolean isValid(String phoneNumber) {
 		return phoneNumber.replace(" ", "").matches("^\\d{2,30}$");
+	}
+
+	public String getFormattedPhoneNumber() {
+		return formattedPhoneNumber;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		PhoneNumber that = (PhoneNumber) o;
+
+		if (!formattedPhoneNumber.equals(that.formattedPhoneNumber)) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return formattedPhoneNumber.hashCode();
 	}
 
 	private String getFormattedPhoneNumber(String phoneNumber) {
