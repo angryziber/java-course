@@ -23,7 +23,7 @@ public class Contacts {
 	public static enum Field {
 		NAME {
 			@Override
-			public boolean ask(String line, Friend friend) {
+			public boolean parseAndStore(String line, Friend friend) {
 				if (!checkName(line)) {
 					System.out
 							.println("\nNames and surnames must start with capital letter.\n"
@@ -38,7 +38,7 @@ public class Contacts {
 		},
 		BIRTHDAY {
 			@Override
-			public boolean ask(String line, Friend friend) {
+			public boolean parseAndStore(String line, Friend friend) {
 				try {
 					friend.setBirthday(DATE_FORMAT.parse(line));
 				} catch (ParseException e) {
@@ -51,7 +51,7 @@ public class Contacts {
 		},
 		EMAIL {
 			@Override
-			public boolean ask(String line, Friend friend) {
+			public boolean parseAndStore(String line, Friend friend) {
 				if (!checkMail(line)) {
 					System.out
 							.println("\nFormat name@hostname.domain is allowed.\n"
@@ -65,7 +65,7 @@ public class Contacts {
 		},
 		PHONE {
 			@Override
-			public boolean ask(String line, Friend friend) {
+			public boolean parseAndStore(String line, Friend friend) {
 				if (!checkNumber(line)) {
 					System.out
 							.println("\nOnly digits and (+xxx) country code is allowed.\n"
@@ -79,7 +79,7 @@ public class Contacts {
 		},
 		FACEBOOK {
 			@Override
-			public boolean ask(String line, Friend friend) {
+			public boolean parseAndStore(String line, Friend friend) {
 				if (!checkFacebook(line)) {
 					System.out
 							.println("\nOnly digits and \".\" is allowed\n"
@@ -92,7 +92,7 @@ public class Contacts {
 			}
 		};
 
-		public abstract boolean ask(String line, Friend friend);
+		public abstract boolean parseAndStore(String line, Friend friend);
 	}
 
 	private Friend newFriend;
@@ -108,21 +108,21 @@ public class Contacts {
 	public void friendsDataInput() throws IOException {
 		ArrayList<Friend> friends = new ArrayList<Friend>();
 		int index = 1;
-		int count = 0;
 		System.out.println("Please enter you friend's data (enter 'stop' to quit): ");
 		InputStreamReader isReader = new InputStreamReader(System.in, "UTF8");
 		BufferedReader bReader = new BufferedReader(isReader);
 		String line;
 		while (true) {
 			newFriend = new Friend();
-			do {
-				Field field = Field.values()[count];
+			for (int i = 0; i < Field.values().length; i++) {
+				Field field = Field.values()[i];
 				System.out.print((index) + ": " + field.name() + ": ");
 				line = bReader.readLine();
 
-				if (field.ask(line, newFriend)) continue;
-				count++;
-			} while (count != Field.values().length);
+				boolean invalidInput = field.parseAndStore(line, newFriend);
+				if (invalidInput)
+					i--;
+			}
 
 			friends.add(newFriend);
 			System.out.print("\nWould you like to add another friend (y/n)?");
@@ -131,7 +131,6 @@ public class Contacts {
 				break;
 			} else {
 				System.out.println("");
-				count = 0;
 				index++;
 			}
 		}
@@ -176,8 +175,8 @@ public class Contacts {
 	public void printAllContacts(ArrayList<Friend> friends) {
 
 		System.out.println("\nHere are the results:");
-		System.out.printf(" %-21s|%11s |%20s |%17s |%17s\n", "Name",
-				"Birthday", "Email", "Tel.", "Facebook\n");
+		System.out.printf(" %-21s|%11s |%20s |%17s |%17s\n", Field.NAME,
+				Field.BIRTHDAY, Field.EMAIL, Field.PHONE, Field.FACEBOOK);
 		for (Friend friend : friends) {
 			System.out.printf(" %-21s|%11s |%20s |%17s |%17s\n", friend
 					.getName(), DATE_FORMAT
