@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 public class Factorial {
 
-	public static BigInteger Computation(int n) {
+	public BigInteger Computation(int n) {
 
 		BigInteger sum = new BigInteger("1");
 		BigInteger multiplier = new BigInteger("1");
@@ -22,4 +22,7 @@ public class Factorial {
 		}
 		return null;
 	}
+
+
+
 }

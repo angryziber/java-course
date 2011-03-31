@@ -14,9 +14,12 @@ public class Fibonacci {
 		array.add(i - 1, b);
 		array.add(i, a);
 
-		if (n <= 0) {
+		if (n < 0) {
 			throw new NumberFormatException();
-		} else {
+		} else if (n ==0 ){
+			return BigInteger.ZERO;
+		}
+		else {
 			do {
 				a = array.get(i);
 				b = array.get(i - 1);
