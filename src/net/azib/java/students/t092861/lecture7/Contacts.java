@@ -6,6 +6,8 @@ package net.azib.java.students.t092861.lecture7;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -16,42 +18,35 @@ import java.util.regex.Pattern;
  * 
  */
 public class Contacts {
-	public static final String[] INPUTDATA = new String[] { "Friends's name: ",
+	private SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
+	public static final String[] FIELDS = new String[] { "Friends's name: ",
 			"Birthday: ", "E-mail: ", "Phone number: ", "Facebook: " };
 
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Contacts contacts = new Contacts();
-		try {
-			contacts.frindsDataInput();
-		} catch (IOException e) {
-			System.out
-					.println("Error! I/O exception of some sort has occurred");
-			e.printStackTrace();
-		}
+		contacts.friendsDataInput();
 	}
 
-	public void frindsDataInput() throws IOException {
+	public void friendsDataInput() throws IOException {
 		ArrayList<Friend> friends = new ArrayList<Friend>();
 		int index = 1;
 		int count = 0;
-		boolean next = true;
-		System.out
-				.println("Please enter you friend's data (enter 'stop' to quit): ");
+		System.out.println("Please enter you friend's data (enter 'stop' to quit): ");
 		InputStreamReader isReader = new InputStreamReader(System.in, "UTF8");
 		BufferedReader bReader = new BufferedReader(isReader);
 		String line;
 		Friend newFriend;
-		while (next) {
+		while (true) {
 			newFriend = new Friend();
 			do {
-				System.out.print((index) + ": " + INPUTDATA[count]);
+				System.out.print((index) + ": " + FIELDS[count]);
 				line = bReader.readLine();
 
 				// inputting the name
-				if (INPUTDATA[count].contains("name")) {
+				if (FIELDS[count].contains("name")) {
 					if (!checkName(line)) {
 						System.out
 								.println("\nNames and surnames must start with capital letter.\n"
@@ -63,17 +58,17 @@ public class Contacts {
 					}
 				}
 				// inputting the Birthday
-				if (INPUTDATA[count].contains("Birthday")) {
-					if (!checkDate(line)) {
-						System.out.println("\nFormat dd.mm.yyyy is allowed.\n"
+				if (FIELDS[count].contains("Birthday")) {
+					try {
+						newFriend.setBirthday(dateFormat.parse(line));
+					} catch (ParseException e) {
+						System.out.println("\nFormat " + dateFormat.toPattern() + " is allowed.\n"
 								+ "Please enter new Birthday.\n");
 						continue;
-					} else {
-						newFriend.setBirthday(line);
 					}
 				}
 				// inputting the mail
-				if (INPUTDATA[count].contains("mail")) {
+				if (FIELDS[count].contains("mail")) {
 					if (!checkMail(line)) {
 						System.out
 								.println("\nFormat name@hostname.domain is allowed.\n"
@@ -84,7 +79,7 @@ public class Contacts {
 					}
 				}
 				// inputting the phone number
-				if (INPUTDATA[count].contains("number")) {
+				if (FIELDS[count].contains("number")) {
 					if (!checkNumber(line)) {
 						System.out
 								.println("\nOnly digits and (+xxx) country code is allowed.\n"
@@ -95,7 +90,7 @@ public class Contacts {
 					}
 				}
 				// inputting the Facebook
-				if (INPUTDATA[count].contains("Facebook")) {
+				if (FIELDS[count].contains("Facebook")) {
 					if (!checkFacebook(line)) {
 						System.out
 								.println("\nOnly digits and \".\" is allowed\n"
@@ -106,13 +101,13 @@ public class Contacts {
 					}
 				}
 				count++;
-			} while (count != INPUTDATA.length);
+			} while (count != FIELDS.length);
 
 			friends.add(newFriend);
 			System.out.print("\nWould you like to add another friend (y/n)?");
 			line = bReader.readLine();
-			if (line.equals("n")) {
-				next = false;
+			if (line.equalsIgnoreCase("n")) {
+				break;
 			} else {
 				System.out.println("");
 				count = 0;
@@ -127,14 +122,6 @@ public class Contacts {
 		String sSurName = "[A-Z]{1}[\\D\'-]*[\\p{Alnum}]+$";
 		String sName = sFirstName + " " + sSurName;
 		return matchThePattern(sName, name);
-	}
-
-	public boolean checkDate(String date) {
-		String day = "^\\d{1,2}";
-		String month = "\\d{1,2}";
-		String year = "\\d{2,4}$";
-		String sDate = day + "\\." + month + "\\." + year;
-		return matchThePattern(sDate, date);
 	}
 
 	public boolean checkMail(String mail) {
@@ -172,7 +159,7 @@ public class Contacts {
 				"Birthday", "Email", "Tel.", "Facebook\n");
 		for (Friend friend : friends) {
 			System.out.printf(" %-21s|%11s |%20s |%17s |%17s\n", friend
-					.getName(), new SimpleDateFormat("dd.MM.yyyy")
+					.getName(), dateFormat
 					.format(friend.getBirthday()), friend.getEmail(), friend
 					.getPhoneNmber(), friend.getFacebook());
 

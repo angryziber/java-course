@@ -3,8 +3,6 @@
  */
 package net.azib.java.students.t092861.lecture7;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -19,10 +17,9 @@ public class Friend {
 	String facebook;
 
 	public Friend() { // default constructor
-		// TODO Auto-generated constructor stub
 	}
 
-	public Friend(String name, String birthday, String email,
+	public Friend(String name, Date birthday, String email,
 			String phoneNmber, String facebook) {
 		this.name = name;
 		setBirthday(birthday);
@@ -43,15 +40,8 @@ public class Friend {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
-		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-		try {
-			this.birthday = format.parse(birthday);
-		} catch (ParseException e) {
-			System.out
-					.println("Error has been reached unexpectedly while parsing the data!");
-			e.printStackTrace();
-		}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getEmail() {

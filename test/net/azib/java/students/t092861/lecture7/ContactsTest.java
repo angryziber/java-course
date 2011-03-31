@@ -3,7 +3,10 @@ package net.azib.java.students.t092861.lecture7;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -37,22 +40,6 @@ public class ContactsTest {
 		assertFalse(new Contacts().checkName("Siim susi"));
 		assertFalse(new Contacts().checkName("siim Susi"));
 		assertFalse(new Contacts().checkName("siimSusi"));
-	}
-
-	@Test
-	public void testCheckDateIsValid() {
-		assertTrue(new Contacts().checkDate("22.02.2010"));
-		assertTrue(new Contacts().checkDate("22.02.10"));
-
-	}
-
-	@Test
-	public void testCheckDateIsInvalid() {
-		assertFalse(new Contacts().checkDate("22 Feb,10"));
-		assertFalse(new Contacts().checkDate("22 Feb,2010"));
-		assertFalse(new Contacts().checkDate("22/02/2010"));
-		assertFalse(new Contacts().checkDate("22,02,2010"));
-		assertFalse(new Contacts().checkDate("22-02-2010"));
 	}
 
 	@Test
@@ -118,16 +105,19 @@ public class ContactsTest {
 		assertFalse(new Contacts().checkFacebook("j.hn"));
 	}
 
-	// @Test
-	public void testPrintAllContacts() {
+	@Test @Ignore
+	public void testPrintAllContacts() throws ParseException {
 		ArrayList<Friend> friends = new ArrayList<Friend>();
-		friends.add(0, new Friend("Usain Bolt", "21.09.1986", "usain@hot.ee",
+		friends.add(0, new Friend("Usain Bolt", newDate("21.09.1986"), "usain@hot.ee",
 				"6463987", "usain.bolt"));
-		friends.add(1, new Friend("Mike Powell", "10.11.1963",
+		friends.add(1, new Friend("Mike Powell", newDate("10.11.1963"),
 				"mike@powell.ee", "6-123-456", "mike1963"));
-		friends.add(2, new Friend("Randy Barnes", "16.06.1966",
+		friends.add(2, new Friend("Randy Barnes", newDate("16.06.1966"),
 				"randy@barnes.com", "6-12-3456", "barnes"));
 		new Contacts().printAllContacts(friends);
 	}
 
+	Date newDate(String date) throws ParseException {
+		return new SimpleDateFormat("dd.MM.yyyy").parse(date);
+	}
 }
