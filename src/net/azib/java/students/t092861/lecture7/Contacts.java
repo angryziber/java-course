@@ -18,14 +18,81 @@ import java.util.regex.Pattern;
  * 
  */
 public class Contacts {
-	private SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
+	private static final SimpleDateFormat DATE_FORMAT = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
 
 	public static enum Field {
-		NAME,
-		BIRTHDAY,
-		EMAIL,
-		PHONE,
-		FACEBOOK
+		NAME {
+			@Override
+			public boolean ask(String line, Friend friend) {
+				if (!checkName(line)) {
+					System.out
+							.println("\nNames and surnames must start with capital letter.\n"
+									+ "Charecters ' and - are allowed.\n"
+									+ "Please enter new Firstname and Surname again.\n");
+					return true;
+				} else {
+					friend.setName(line);
+				}
+				return false;
+			}
+		},
+		BIRTHDAY {
+			@Override
+			public boolean ask(String line, Friend friend) {
+				try {
+					friend.setBirthday(DATE_FORMAT.parse(line));
+				} catch (ParseException e) {
+					System.out.println("\nFormat " + DATE_FORMAT.toPattern() + " is allowed.\n"
+							+ "Please enter new Birthday.\n");
+					return true;
+				}
+				return false;
+			}
+		},
+		EMAIL {
+			@Override
+			public boolean ask(String line, Friend friend) {
+				if (!checkMail(line)) {
+					System.out
+							.println("\nFormat name@hostname.domain is allowed.\n"
+									+ "Please enter new email address.\n");
+					return true;
+				} else {
+					friend.setEmail(line);
+				}
+				return false;
+			}
+		},
+		PHONE {
+			@Override
+			public boolean ask(String line, Friend friend) {
+				if (!checkNumber(line)) {
+					System.out
+							.println("\nOnly digits and (+xxx) country code is allowed.\n"
+									+ "Please enter new phone number.\n");
+					return true;
+				} else {
+					friend.setPhoneNmber(line);
+				}
+				return false;
+			}
+		},
+		FACEBOOK {
+			@Override
+			public boolean ask(String line, Friend friend) {
+				if (!checkFacebook(line)) {
+					System.out
+							.println("\nOnly digits and \".\" is allowed\n"
+									+ "Please enter new facebook username(?).\n");
+					return true;
+				} else {
+					friend.setFacebook(line);
+				}
+				return false;
+			}
+		};
+
+		public abstract boolean ask(String line, Friend friend);
 	}
 
 	private Friend newFriend;
@@ -53,21 +120,7 @@ public class Contacts {
 				System.out.print((index) + ": " + field.name() + ": ");
 				line = bReader.readLine();
 
-				if (field == Field.NAME) {
-					if (askName(line)) continue;
-				}
-				if (field == Field.BIRTHDAY) {
-					if (askBirthday(line)) continue;
-				}
-				if (field == Field.EMAIL) {
-					if (askEmail(line)) continue;
-				}
-				if (field == Field.PHONE) {
-					if (askPhoneNumber(line)) continue;
-				}
-				if (field == Field.FACEBOOK) {
-					if (askFacebook(line)) continue;
-				}
+				if (field.ask(line, newFriend)) continue;
 				count++;
 			} while (count != Field.values().length);
 
@@ -85,74 +138,14 @@ public class Contacts {
 		printAllContacts(friends);
 	}
 
-	private boolean askFacebook(String line) {
-		if (!checkFacebook(line)) {
-			System.out
-					.println("\nOnly digits and \".\" is allowed\n"
-							+ "Please enter new facebook username(?).\n");
-			return true;
-		} else {
-			newFriend.setFacebook(line);
-		}
-		return false;
-	}
-
-	private boolean askPhoneNumber(String line) {
-		if (!checkNumber(line)) {
-			System.out
-					.println("\nOnly digits and (+xxx) country code is allowed.\n"
-							+ "Please enter new phone number.\n");
-			return true;
-		} else {
-			newFriend.setPhoneNmber(line);
-		}
-		return false;
-	}
-
-	private boolean askEmail(String line) {
-		if (!checkMail(line)) {
-			System.out
-					.println("\nFormat name@hostname.domain is allowed.\n"
-							+ "Please enter new email address.\n");
-			return true;
-		} else {
-			newFriend.setEmail(line);
-		}
-		return false;
-	}
-
-	private boolean askBirthday(String line) {
-		try {
-			newFriend.setBirthday(dateFormat.parse(line));
-		} catch (ParseException e) {
-			System.out.println("\nFormat " + dateFormat.toPattern() + " is allowed.\n"
-					+ "Please enter new Birthday.\n");
-			return true;
-		}
-		return false;
-	}
-
-	private boolean askName(String line) {
-		if (!checkName(line)) {
-			System.out
-					.println("\nNames and surnames must start with capital letter.\n"
-							+ "Charecters ' and - are allowed.\n"
-							+ "Please enter new Firstname and Surname again.\n");
-			return true;
-		} else {
-			newFriend.setName(line);
-		}
-		return false;
-	}
-
-	public boolean checkName(String name) {
+	public static boolean checkName(String name) {
 		String sFirstName = "^[A-Z]{1}[\\D\'-]*[\\p{Alnum}]+";
 		String sSurName = "[A-Z]{1}[\\D\'-]*[\\p{Alnum}]+$";
 		String sName = sFirstName + " " + sSurName;
 		return matchThePattern(sName, name);
 	}
 
-	public boolean checkMail(String mail) {
+	public static boolean checkMail(String mail) {
 		String sName = "^(?!www\\.).*(?!WWW\\.).*[_A-Za-z0-9\\.-]+";
 		String sDomain = "[\\w\\.-]+(\\.[A-Za-z0-9]+)*"; // plus optional sub
 															// domain group
@@ -161,17 +154,17 @@ public class Contacts {
 		return matchThePattern(sEmail, mail);
 	}
 
-	public boolean checkNumber(String phone) {
+	public static boolean checkNumber(String phone) {
 		String sNumber = "^\\(?\\+?(\\d)+\\)?[- ]?(\\d)+[- ]?(\\d)+$";
 		return matchThePattern(sNumber, phone);
 	}
 
-	public boolean checkFacebook(String facebook) {
+	public static boolean checkFacebook(String facebook) {
 		String sFacebook = "^[A-Za-z0-9\\.]{5,}$";
 		return matchThePattern(sFacebook, facebook);
 	}
 
-	public boolean matchThePattern(String patt, String str) {
+	public static boolean matchThePattern(String patt, String str) {
 		Pattern pattern = Pattern.compile(patt);
 		Matcher matcher = pattern.matcher(str);
 		if (matcher.matches()) {
@@ -187,7 +180,7 @@ public class Contacts {
 				"Birthday", "Email", "Tel.", "Facebook\n");
 		for (Friend friend : friends) {
 			System.out.printf(" %-21s|%11s |%20s |%17s |%17s\n", friend
-					.getName(), dateFormat
+					.getName(), DATE_FORMAT
 					.format(friend.getBirthday()), friend.getEmail(), friend
 					.getPhoneNmber(), friend.getFacebook());
 
