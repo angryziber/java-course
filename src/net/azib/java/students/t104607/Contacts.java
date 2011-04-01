@@ -2,6 +2,7 @@ package net.azib.java.students.t104607;
 // @author 104607 IASM
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -16,7 +17,9 @@ public class Contacts {
 			contact.setName(scanner.next());
 		}
 		while (contact.getBirthday() == null) {
-			System.out.println("Enter birthday, for example today - " + DateFormat.getDateInstance(DateFormat.SHORT).format(new Date()));
+			//System.out.println("Enter birthday, for example today - " + DateFormat.getDateInstance(DateFormat.SHORT).format(new Date()));
+			SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
+			System.out.println("Enter birthday in format '" + dateFormat.toPattern() + "'");
 			contact.setBirthday(scanner.next());
 		}
 		while (contact.getEmail() == null) {
