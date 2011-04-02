@@ -19,6 +19,7 @@ public class InputParametersValidator {
         try {
             validate(args);
         } catch (UserInputException e) {
+            Logger.getLogger(getClass()).error(e);
             return false;
         }
         return true;
