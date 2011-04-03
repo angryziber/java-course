@@ -40,6 +40,9 @@ public class InputParametersValidator {
 
         if ("-console".equals(inputMethod)) {
             outputMethod = args[1];
+            if (!"-console".equals(outputMethod) && args.length < 3) {
+                throw new UserInputException("No parameters for output method " + outputMethod);
+            }
         } else if (args.length < 3) {
             throw new UserInputException("Output method doesn't specified");
         } else {
@@ -50,9 +53,9 @@ public class InputParametersValidator {
             throw new UserInputException(outputMethod + " output method doesn't exist");
         }
 
-        if (!"-console".equals(inputMethod)) {
+        if (!"-console".equals(inputMethod) && !"-console".equals(outputMethod)) {
             if (args.length < 4) {
-                throw new UserInputException("Output parameter doesn't specified for " + inputMethod);
+                throw new UserInputException("Output parameter doesn't specified for " + outputMethod);
             }
             outputParameter = args[3];
         }

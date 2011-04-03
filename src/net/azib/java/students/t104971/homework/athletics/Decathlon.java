@@ -44,7 +44,6 @@ public class Decathlon {
     }
 
     private Decathlon outputData(String method, String parameter) {
-
         OutputWriter writer = new OutputBuilder(athletes).getWriter(method);
         BrowserLaunch.openURL(writer.write(parameter));
         return this;
