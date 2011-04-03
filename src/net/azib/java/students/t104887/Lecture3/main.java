@@ -1,7 +1,5 @@
 package net.azib.java.students.t104887.Lecture3;
 
-import java.util.jar.Manifest;
-
 /**
  * Created by IntelliJ IDEA.
  * User: BJU
@@ -70,5 +68,17 @@ public class main
 		((Wolf)earth.getAnimal("Adolph")).eat(earth.getAnimal("Bernardyn"), earth, earth.getHuman("Oleg East"));
 
 		 earth.getHuman("Oleg East").getAnimals();
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 }
