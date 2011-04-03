@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static net.azib.java.students.t104971.homework.athletics.util.InputParser.formatDate;
+
 /**
  * @author Jaroslav Judin
  */
@@ -83,7 +85,7 @@ public class Athlete implements Comparable {
                 "totalScore=" + totalScore +
                 ", name= " + name +
                 ", country= " + country +
-                ", dateBirth=" + dateBirth +
+                ", dateBirth=" + formatDate(dateBirth) +
                 '}' + resultsString.toString();
     }
 }
