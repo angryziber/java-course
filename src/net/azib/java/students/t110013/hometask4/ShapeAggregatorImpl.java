@@ -6,20 +6,24 @@ import net.azib.java.lessons.collections.ShapeAggregator;
 import java.util.*;
 
 /**
- * Author: Vadim
- * Date: 23.03.11
- * Time: 17:10
+ * @author Vadim
  */
 public class ShapeAggregatorImpl implements ShapeAggregator {
 	private List<Shape> shapes = new ArrayList<Shape>();
 
 	@Override
 	public void addShapes(Shape... shapes) {
+		if (shapes == null)
+			throw new IllegalArgumentException("Adding null is not allowed!");
+
 		addShapes(Arrays.asList(shapes));
 	}
 
 	@Override
 	public void addShapes(Collection<? extends Shape> shapesCollection) {
+		if (shapesCollection == null)
+			throw new IllegalArgumentException("Adding null is not allowed!");
+
 		shapes.addAll(shapesCollection);
 	}
 

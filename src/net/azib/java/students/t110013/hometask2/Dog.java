@@ -1,12 +1,10 @@
 package net.azib.java.students.t110013.hometask2;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Vadim
- * Date: 24.02.11
- * Time: 15:25
+ * @author Vadim
  */
 public class Dog extends Pet {
+
 	public Dog(String name, int age) {
 		setName(name);
 		setAge(age);

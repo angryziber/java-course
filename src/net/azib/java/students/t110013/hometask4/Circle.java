@@ -3,14 +3,15 @@ package net.azib.java.students.t110013.hometask4;
 import net.azib.java.lessons.collections.Shape;
 
 /**
- * Author: Vadim
- * Date: 23.03.11
- * Time: 16:59
+ * @author Vadim
  */
 public class Circle extends Shape {
 	private double radius;
 
 	public Circle(double radius) {
+		if (radius < 0)
+			throw new IllegalArgumentException("Negative integers are not supported!");
+
 		this.radius = radius;
 	}
 
@@ -18,7 +19,7 @@ public class Circle extends Shape {
 	public boolean equals(Object o) {
 		if (o == this)
 			return true;
-		if (!(o instanceof Square))
+		if (!(o instanceof Circle))
 			return false;
 		return Double.compare(radius, ((Circle)o).radius) == 0;
 	}

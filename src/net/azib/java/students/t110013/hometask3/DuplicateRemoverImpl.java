@@ -7,14 +7,14 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Vadim
- * Date: 6.03.11
- * Time: 12:20
+ * @author Vadim
  */
 public class DuplicateRemoverImpl implements DuplicateRemover {
 
 	public String[] removeDuplicateStrings(String... array) {
+		if (array == null)
+			return null;
+
 		Set<String> c = new LinkedHashSet<String>(Arrays.asList(array));
 		return c.toArray(new String[c.size()]);
 	}

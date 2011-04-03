@@ -3,15 +3,16 @@ package net.azib.java.students.t110013.hometask4;
 import net.azib.java.lessons.collections.Shape;
 
 /**
- * Author: Vadim
- * Date: 23.03.11
- * Time: 13:31
+ * @author Vadim
  */
 public class Square extends Shape {
 	private double side;
 
-	public Square(double sideLength) {
-		this.side = sideLength;
+	public Square(double side) {
+		if (side < 0)
+			throw new IllegalArgumentException("Negative integers are not supported!");
+
+		this.side = side;
 	}
 
 	@Override

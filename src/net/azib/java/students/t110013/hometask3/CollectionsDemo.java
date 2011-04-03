@@ -4,12 +4,10 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Vadim
- * Date: 6.03.11
- * Time: 14:47
+ * @author Vadim
  */
 public class CollectionsDemo {
+
 	public static void main(String[] args) {
 		DuplicateRemoverImpl dr = new DuplicateRemoverImpl();
 		String[] processedString = dr.removeDuplicateStrings("a", "b", "c", "c", "b", "a", "c", "c", "b", "a", "v", "f");
