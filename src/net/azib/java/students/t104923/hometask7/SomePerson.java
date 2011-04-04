@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class SomePerson {
 
-	String name;
-	String birthDay;
-	String phoneNumber;
-	String email;
+	private String name;
+	private String birthDay;
+	private String phoneNumber;
+	private String email;
 
 	public String getName() {
         return name;
@@ -40,4 +40,14 @@ public class SomePerson {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+	@Override
+	public String toString() {
+		return "SomePerson{" +
+				"name='" + name + '\'' +
+				", birthDay='" + birthDay + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				", email='" + email + '\'' +
+				'}';
+	}
 }
