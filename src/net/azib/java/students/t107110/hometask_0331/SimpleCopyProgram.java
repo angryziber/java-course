@@ -15,9 +15,7 @@ public class SimpleCopyProgram implements DataCopier, FileCopier {
 		if (destinationStream == null) throw new IllegalArgumentException("no destination stream specified");
 
 		int dataByte;
-		while ((dataByte = sourceStream.read()) != -1) {
-			destinationStream.write(dataByte);
-		}
+		while ((dataByte = sourceStream.read()) != -1) destinationStream.write(dataByte);
 	}
 
 	@Override

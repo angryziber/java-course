@@ -18,9 +18,7 @@ public class BufferedCopyProgram implements DataCopier, FileCopier {
 		final OutputStream bufferedDestinationStream = new BufferedOutputStream(destinationStream);
 
 		int dataByte;
-		while ((dataByte = bufferedSourceStream.read()) != -1) {
-			bufferedDestinationStream.write(dataByte);
-		}
+		while ((dataByte = bufferedSourceStream.read()) != -1) bufferedDestinationStream.write(dataByte);
 		bufferedDestinationStream.flush();
 	}
 
