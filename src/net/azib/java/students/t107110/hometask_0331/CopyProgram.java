@@ -4,12 +4,13 @@ import net.azib.java.lessons.io.FileCopier;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * @author Eduard Shustrov
  */
 public class CopyProgram {
-	private enum CopyingMethod {
+	enum CopyingMethod {
 		SIMPLE {
 			@Override
 			public FileCopier getFileCopier() {
@@ -28,20 +29,21 @@ public class CopyProgram {
 
 	public static void main(final String[] args) throws IOException {
 		if (args == null || args.length != 3) {
-			System.out.println("Use: CopyProgram <source-file> <destination-file> <copying-method>");
+			System.err.println("Use: CopyProgram <source-file> <destination-file> <copying-method>");
 			return;
 		}
 
+		getFileCopier(args[2]).copy(new File(args[0]), new File(args[1]));
+	}
+
+	static FileCopier getFileCopier(final String copyingMethodName) {
 		final CopyingMethod copyingMethod;
 		try {
-			copyingMethod = CopyingMethod.valueOf(args[2].toUpperCase());
+			copyingMethod = CopyingMethod.valueOf(copyingMethodName.toUpperCase());
 		} catch (IllegalArgumentException e) {
-			System.out.println("Unknown copying method: " + args[2]);
-			System.out.println("Available copying methods:");
-			for (CopyingMethod availableCopyingMethod : CopyingMethod.values())
-				System.out.println(availableCopyingMethod.toString().toLowerCase());
-			return;
+			throw new IllegalArgumentException("Unknown copying method: " + copyingMethodName +
+					" (available methods: " + Arrays.toString(CopyingMethod.values()).toLowerCase() + ")");
 		}
-		copyingMethod.getFileCopier().copy(new File(args[0]), new File(args[1]));
+		return copyingMethod.getFileCopier();
 	}
 }
