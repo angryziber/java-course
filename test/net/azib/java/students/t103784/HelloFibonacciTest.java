@@ -18,14 +18,14 @@ public class HelloFibonacciTest {
 	@Test
     public void testFibonacci(){
 	int x = 10;
-        BigInteger[] factArray = {
+        BigInteger[] fiboArray = {
 				BigInteger.valueOf(0), BigInteger.valueOf(0), BigInteger.valueOf(1), BigInteger.valueOf(1),
                 BigInteger.valueOf(2), BigInteger.valueOf(3), BigInteger.valueOf(5),
                 BigInteger.valueOf(8), BigInteger.valueOf(13), BigInteger.valueOf(21),
 
         };
         for (int i = 0; i<x; i++){
-            assertEquals("Function failed", HelloFibonacci.whatchamacallit(i), factArray[i]);
+            assertEquals("Function failed", HelloFibonacci.whatchamacallit(i), fiboArray[i]);
             System.out.println("Test success for: "+ i + " fibonacci nr: "+ HelloFibonacci.whatchamacallit(i));
         }
     }
