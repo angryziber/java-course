@@ -13,17 +13,17 @@ public class HelloFibonacci {
 
 	public static void main(String[] args) {
 
-		whatchamacallit();
+		whatchamacallit(100);
 
 
 
 	}
-	public static BigInteger whatchamacallit() {
+	public static BigInteger whatchamacallit(int a) {
 		BigInteger fNum = new BigInteger("-1");
 		BigInteger fNum2 = new BigInteger("1");
 		BigInteger fSum = new BigInteger("0");
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < a; i++) {
 			fSum = fNum2.add(fNum);
 			fNum = fNum2;
 			fNum2 = fSum;

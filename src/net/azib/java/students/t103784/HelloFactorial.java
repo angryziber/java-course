@@ -11,13 +11,13 @@ import java.math.BigInteger;
  */
 public class HelloFactorial {
 	public static void main(String[] args) {
-		thingamajig();
+		thingamajig(100);
 	}
 
-	public static BigInteger thingamajig() {
+	public static BigInteger thingamajig(int a) {
 
 		BigInteger fNum = new BigInteger("1");
-		for (int i = 1; i <= 100; i++) {
+		for (int i = 1; i <= a; i++) {
 			fNum = fNum.multiply(BigInteger.valueOf(i));
 		}
 		//System.out.println("Ossaraks: " + fNum);

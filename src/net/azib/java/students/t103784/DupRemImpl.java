@@ -15,10 +15,12 @@ import java.util.Set;
  */
 public class DupRemImpl implements DuplicateRemover {
 	public static void main(String[] args) {
+		int a;
 		String[] strings = {"one", "one", "zero", "one", "two", "three", "four", "two"};
 		DupRemImpl dupRem = new DupRemImpl();
 		System.out.println("Strings: " + Arrays.toString(strings));
         System.out.println("After removing: " + Arrays.toString(dupRem.removeDuplicateStrings(strings)));
+		a = strings.length;
 
 	}
 

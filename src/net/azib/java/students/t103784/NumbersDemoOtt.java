@@ -9,8 +9,8 @@ package net.azib.java.students.t103784;
  */
 public class NumbersDemoOtt {
 	public static void main(String[] args) {
-		System.out.println("100th Factorial:" + HelloFactorial.thingamajig());
-		System.out.println("100th Fibonacci:" + HelloFibonacci.whatchamacallit());
+		System.out.println("100th Factorial:" + HelloFactorial.thingamajig(100));
+		System.out.println("100th Fibonacci:" + HelloFibonacci.whatchamacallit(100));
 	}
 
 
