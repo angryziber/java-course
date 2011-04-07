@@ -24,9 +24,12 @@ public abstract class AbstractCopyProgram implements DataCopier, FileCopier {
 
 		final InputStream sourceStream = new FileInputStream(sourceFile);
 		final OutputStream destinationStream = new FileOutputStream(destinationFile);
-		copy(sourceStream, destinationStream);
-		sourceStream.close();
-		destinationStream.close();
+		try {
+			copy(sourceStream, destinationStream);
+		} finally {
+			sourceStream.close();
+			destinationStream.close();
+		}
 	}
 
 	protected abstract void specificCopy(final InputStream sourceStream, final OutputStream destinationStream)
