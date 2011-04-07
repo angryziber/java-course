@@ -8,29 +8,14 @@ import java.io.*;
 /**
  * @author Eduard Shustrov
  */
-public class BufferedCopyProgram implements DataCopier, FileCopier {
+public class BufferedCopyProgram extends AbstractCopyProgram implements DataCopier, FileCopier {
 	@Override
-	public void copy(final InputStream sourceStream, final OutputStream destinationStream) throws IOException {
-		if (sourceStream == null) throw new IllegalArgumentException("no source stream specified");
-		if (destinationStream == null) throw new IllegalArgumentException("no destination stream specified");
-
+	protected void specificCopy(InputStream sourceStream, OutputStream destinationStream) throws IOException {
 		final InputStream bufferedSourceStream = new BufferedInputStream(sourceStream);
 		final OutputStream bufferedDestinationStream = new BufferedOutputStream(destinationStream);
 
 		int dataByte;
 		while ((dataByte = bufferedSourceStream.read()) != -1) bufferedDestinationStream.write(dataByte);
 		bufferedDestinationStream.flush();
-	}
-
-	@Override
-	public void copy(final File sourceFile, final File destinationFile) throws IOException {
-		if (sourceFile == null) throw new IllegalArgumentException("no source file specified");
-		if (destinationFile == null) throw new IllegalArgumentException("no destination file specified");
-
-		final InputStream sourceStream = new FileInputStream(sourceFile);
-		final OutputStream destinationStream = new FileOutputStream(destinationFile);
-		copy(sourceStream, destinationStream);
-		sourceStream.close();
-		destinationStream.close();
 	}
 }
