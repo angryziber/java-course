@@ -7,6 +7,10 @@ import java.io.*;
  *         4/7/11 12:18 PM
  */
 public class PerformanceTimer {
+	private static PrintWriter out = new PrintWriter(System.out, true);
+	private static PrintWriter err = new PrintWriter(System.err, true);
+
+
 	private static long measure(Runnable r) {
 		long start = System.currentTimeMillis();
 		r.run();
@@ -14,15 +18,15 @@ public class PerformanceTimer {
 	}
 
 	public static void main(String[] args) throws IOException {
-		final SimpleCopyProgram simpleCopyProgram = new SimpleCopyProgram();
-		final BufferedCopyProgram bufferedCopyProgram = new BufferedCopyProgram();
+		SimpleCopyProgram simpleCopyProgram = new SimpleCopyProgram();
+		BufferedCopyProgram bufferedCopyProgram = new BufferedCopyProgram();
 
-		System.out.println("Data copy:");
+		out.println("Data copy:");
 
 		measureAndDisplay(bufferedCopyProgram, new ByteArrayOutputStream(), 100000);
 		measureAndDisplay(simpleCopyProgram, new ByteArrayOutputStream(), 100000);
 
-		System.out.println("File copy:");
+		out.println("File copy:");
 		measureAndDisplay(bufferedCopyProgram, new File("build.xml"));
 		measureAndDisplay(simpleCopyProgram, new File("build.xml"));
 
@@ -36,13 +40,13 @@ public class PerformanceTimer {
 				try {
 					copyProgram.copy(new ByteArrayInputStream(new byte[countOfBytes]), outputStream);
 				} catch (IOException e) {
-					System.err.println(copyProgram.getClass().getSimpleName() + ": " + e.getMessage());
+					err.println(copyProgram.getClass().getSimpleName() + ": " + e.getMessage());
 				}
 			}
 		};
 		executionTime = measure(r);
-		System.out.printf("%-20s: %d ms", copyProgram.getClass().getSimpleName(),executionTime);
-		System.out.println();
+		out.printf("%-20s: %d ms", copyProgram.getClass().getSimpleName(), executionTime);
+		out.println();
 	}
 
 	private static void measureAndDisplay(final FileAndDataCopier copyProgram, final File src) throws IOException {
@@ -56,12 +60,12 @@ public class PerformanceTimer {
 				try {
 					copyProgram.copy(src, destTempFile);
 				} catch (IOException e) {
-					System.err.println(copyProgram.getClass().getSimpleName() + ": " + e.getMessage());
+					err.println(copyProgram.getClass().getSimpleName() + ": " + e.getMessage());
 				}
 			}
 		};
 		executionTime = measure(r);
-		System.out.printf("%-20s: %d ms", copyProgram.getClass().getSimpleName(),executionTime);
-		System.out.println();
+		out.printf("%-20s: %d ms", copyProgram.getClass().getSimpleName(), executionTime);
+		out.println();
 	}
 }
