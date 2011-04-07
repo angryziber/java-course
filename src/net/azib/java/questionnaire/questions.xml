@@ -100,7 +100,7 @@
 		<answer correct="true">Applet</answer>
 	</question>
 	<question>
-		<text>How server-side Java applications are called? (plural)</text>
+		<text>How provider-side Java applications are called? (plural)</text>
 		<answer correct="true">Servlet</answer>
 	</question>
 	<question>
