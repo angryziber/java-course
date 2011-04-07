@@ -33,8 +33,7 @@ public class PerformanceTimer {
 	}
 
 	private static void measureAndDisplay(final FileAndDataCopier copyProgram, final OutputStream outputStream, final int countOfBytes) {
-		long executionTime;
-		Runnable r = new Runnable() {
+		long executionTime = measure(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -43,18 +42,17 @@ public class PerformanceTimer {
 					err.println(copyProgram.getClass().getSimpleName() + ": " + e.getMessage());
 				}
 			}
-		};
-		executionTime = measure(r);
+		});
 		out.printf("%-20s: %d ms", copyProgram.getClass().getSimpleName(), executionTime);
 		out.println();
 	}
 
 	private static void measureAndDisplay(final FileAndDataCopier copyProgram, final File src) throws IOException {
-		long executionTime;
+
 		final File destTempFile;
 		destTempFile = File.createTempFile("destTempFile", null);
 		destTempFile.deleteOnExit();
-		Runnable r = new Runnable() {
+		long executionTime = measure(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -63,8 +61,7 @@ public class PerformanceTimer {
 					err.println(copyProgram.getClass().getSimpleName() + ": " + e.getMessage());
 				}
 			}
-		};
-		executionTime = measure(r);
+		});
 		out.printf("%-20s: %d ms", copyProgram.getClass().getSimpleName(), executionTime);
 		out.println();
 	}
