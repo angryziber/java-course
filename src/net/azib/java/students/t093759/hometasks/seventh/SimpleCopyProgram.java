@@ -9,9 +9,6 @@ import java.io.*;
 public class SimpleCopyProgram implements FileAndDataCopier {
 	@Override
 	public void copy(InputStream src, OutputStream dest) throws IOException {
-		if (src == null || dest == null) {
-			throw new IllegalArgumentException();
-		}
 		int oneByteAsInt;
 		while ((oneByteAsInt = src.read()) != -1) {
 			dest.write(oneByteAsInt);
@@ -21,16 +18,16 @@ public class SimpleCopyProgram implements FileAndDataCopier {
 
 	@Override
 	public void copy(File src, File dest) throws IOException {
-		if (src == null || dest == null) {
-			throw new IllegalArgumentException();
+		InputStream in = null;
+		OutputStream out = null;
+		try {
+			in = new FileInputStream(src);
+			out = new FileOutputStream(dest);
+			copy(in, out);
 		}
-		Reader reader = new FileReader(src);
-		Writer writer = new FileWriter(dest);
-		int oneByteAsInt;
-		while ((oneByteAsInt = reader.read()) != -1) {
-			writer.write(oneByteAsInt);
+		finally {
+			if (in != null) in.close();
+			if (out != null) out.close();
 		}
-		writer.close();
-		reader.close();
 	}
 }

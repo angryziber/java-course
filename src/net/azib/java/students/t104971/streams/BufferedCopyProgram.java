@@ -21,6 +21,7 @@ public class BufferedCopyProgram implements FileCopier, DataCopier {
     }
 
     public void bufferedCopy(Reader src, Writer dest) throws IOException {
+	    // todo: only text is supported
         BufferedReader fr = new BufferedReader(src);
         BufferedWriter fw = new BufferedWriter(dest);
         String line;

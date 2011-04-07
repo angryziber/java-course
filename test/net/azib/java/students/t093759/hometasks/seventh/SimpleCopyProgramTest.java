@@ -20,23 +20,23 @@ public class SimpleCopyProgramTest {
 		assertArrayEquals(buf, dest.toByteArray());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = RuntimeException.class)
 	public void sourceInputStreamShouldBeNotNull() throws IOException {
 		new SimpleCopyProgram().copy(null, new ByteArrayOutputStream());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = RuntimeException.class)
 	public void destinationInputStreamShouldBeNotNull() throws IOException {
 		new SimpleCopyProgram().copy(new ByteArrayInputStream(new byte[]{}), null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = RuntimeException.class)
 	public void sourceFileShouldBeNotNull() throws IOException {
 		File tempFile = createTempFile();
 		new SimpleCopyProgram().copy(null, tempFile);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = RuntimeException.class)
 	public void destinationFileShouldBeNotNull() throws IOException {
 		File tempFile = createTempFile();
 		new SimpleCopyProgram().copy(tempFile, null);

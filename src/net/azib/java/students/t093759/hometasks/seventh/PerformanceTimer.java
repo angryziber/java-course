@@ -9,6 +9,7 @@ import java.io.*;
 public class PerformanceTimer {
 	private static PrintWriter out = new PrintWriter(System.out, true);
 	private static PrintWriter err = new PrintWriter(System.err, true);
+	private static final File FILE = new File("lib/antlr.jar");
 
 
 	private static long measure(Runnable r) {
@@ -20,6 +21,7 @@ public class PerformanceTimer {
 	public static void main(String[] args) throws IOException {
 		SimpleCopyProgram simpleCopyProgram = new SimpleCopyProgram();
 		BufferedCopyProgram bufferedCopyProgram = new BufferedCopyProgram();
+		SimpleBufferedCopyProgram simpleBufferedCopyProgram = new SimpleBufferedCopyProgram();
 
 		out.println("Data copy:");
 
@@ -27,9 +29,9 @@ public class PerformanceTimer {
 		measureAndDisplay(simpleCopyProgram, new ByteArrayOutputStream(), 100000);
 
 		out.println("File copy:");
-		measureAndDisplay(bufferedCopyProgram, new File("build.xml"));
-		measureAndDisplay(simpleCopyProgram, new File("build.xml"));
-
+		measureAndDisplay(bufferedCopyProgram, FILE);
+		measureAndDisplay(simpleCopyProgram, FILE);
+		measureAndDisplay(simpleBufferedCopyProgram, FILE);
 	}
 
 	private static void measureAndDisplay(final FileAndDataCopier copyProgram, final OutputStream outputStream, final int countOfBytes) {
