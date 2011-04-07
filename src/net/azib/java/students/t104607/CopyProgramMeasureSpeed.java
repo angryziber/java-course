@@ -12,12 +12,14 @@ public class CopyProgramMeasureSpeed {
 
 		BufferedCopyProgram bufferedCopyProgram = new BufferedCopyProgram();
 		File fileBuffered = File.createTempFile("t104607.",".rnd");
+		fileBuffered.deleteOnExit();
 		long t = System.currentTimeMillis();
 		bufferedCopyProgram.copy(new ByteArrayInputStream(b),new FileOutputStream(fileBuffered));
 		System.out.println("BufferedCopyProgram: " + (System.currentTimeMillis() - t) + " ms");
 
 		SimpleCopyProgram simpleCopyProgram = new SimpleCopyProgram();
 		File fileSimple = File.createTempFile("t104607.",".rnd");
+		fileSimple.deleteOnExit();
 		t = System.currentTimeMillis();
 		simpleCopyProgram.copy(new ByteArrayInputStream(b),new FileOutputStream(fileSimple));
 		System.out.println("SimpleCopyProgram: " + (System.currentTimeMillis() - t) + " ms");
