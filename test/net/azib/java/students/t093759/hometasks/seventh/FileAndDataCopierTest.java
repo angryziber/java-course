@@ -46,16 +46,17 @@ public abstract class FileAndDataCopierTest {
 
 	@Test
 	public void fileCopyExample() throws IOException {
-		char[] sourceChars = {'a', 'b', 'q','a', 'b', 'q','a', 'b', 'q','a', 'b', 'q','a', 'b', 'q','a', 'b', 'q', };
-		char[] destChars = new char[sourceChars.length];
+		byte[] sourceBytes = {0, 1, 2, 3, 4,5,6,7,8,9,10 };
+		byte[] destBytes = new byte[sourceBytes.length];
 		File src= createTempFile();
 		File dest= createTempFile();
-		FileWriter writer = new FileWriter(src);
-		writer.write(sourceChars);
-		writer.close();
+		FileOutputStream outputStream = new FileOutputStream(src);
+		outputStream.write(sourceBytes);
+		outputStream.close();
 		getCopyProgram().copy(src, dest);
-		new FileReader(dest).read(destChars);
-		assertArrayEquals(sourceChars, destChars);
+		FileInputStream inputStream = new FileInputStream(dest);
+		inputStream.read(destBytes);
+		assertArrayEquals(sourceBytes, destBytes);
 	}
 
 	private File createTempFile() throws IOException {
