@@ -1,8 +1,5 @@
 package net.azib.java.students.t093759.hometasks.seventh;
 
-import net.azib.java.lessons.io.DataCopier;
-import net.azib.java.lessons.io.FileCopier;
-
 import java.io.*;
 import java.util.Arrays;
 
@@ -10,7 +7,7 @@ import java.util.Arrays;
  * @author dionis
  *         4/7/11 9:00 AM
  */
-public class BufferedCopyProgram implements DataCopier, FileCopier {
+public class BufferedCopyProgram implements FileAndDataCopier {
 	@Override
 	public void copy(InputStream src, OutputStream dest) throws IOException {
 		if (src == null || dest == null) {

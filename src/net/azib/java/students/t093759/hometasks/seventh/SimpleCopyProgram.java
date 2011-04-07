@@ -1,15 +1,12 @@
 package net.azib.java.students.t093759.hometasks.seventh;
 
-import net.azib.java.lessons.io.DataCopier;
-import net.azib.java.lessons.io.FileCopier;
-
 import java.io.*;
 
 /**
  * @author dionis
  *         4/7/11 9:00 AM
  */
-public class SimpleCopyProgram implements DataCopier, FileCopier {
+public class SimpleCopyProgram implements FileAndDataCopier {
 	@Override
 	public void copy(InputStream src, OutputStream dest) throws IOException {
 		if (src == null || dest == null) {
