@@ -1,9 +1,6 @@
 package net.azib.java.students.t103784;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URLDecoder;
@@ -34,6 +31,8 @@ public class FileReceiverServer {
 	}
 
 	void handle(Socket client) throws IOException, InterruptedException {
+
+
 		BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream(), "US-ASCII"));
 		String request = reader.readLine();
 		String fileName = request.replaceFirst("GET (.*?) HTTP/.*", "$1");

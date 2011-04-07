@@ -15,13 +15,15 @@ import java.io.OutputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class FileSender {
-	public boolean provide(String fileName, OutputStream out) throws IOException {
+	public static boolean provide(String fileName, OutputStream out) throws IOException {
 		File file = new File(fileName);
 		if (!file.exists()) return false;
 
 		FileInputStream in = new FileInputStream(file);
-		BufferedCopyProgram.copy(in, out);
+		IOUtils.copy(in, out);
 		in.close();
 		return true;
 	}
+
+
 }
