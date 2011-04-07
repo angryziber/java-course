@@ -1,5 +1,6 @@
 package net.azib.java.students.t093759.hometasks.seventh;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertArrayEquals;
  * @author dionis
  *         4/7/11 9:01 AM
  */
+@Ignore
 public abstract class FileAndDataCopierTest {
 	@Test
 	public void dataCopyExample() throws IOException {
