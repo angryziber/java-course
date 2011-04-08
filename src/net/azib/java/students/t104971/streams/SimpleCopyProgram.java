@@ -13,15 +13,25 @@ public class SimpleCopyProgram implements FileCopier, DataCopier {
 
     @Override
     public void copy(File src, File dest) throws IOException {
-        simpleCopy(new FileReader(src), new FileWriter(dest));
+        SimpleCopy(new FileInputStream(src), new FileOutputStream(dest));
     }
 
     @Override
     public void copy(InputStream src, OutputStream dest) throws IOException {
-        simpleCopy(new InputStreamReader(src), new OutputStreamWriter(dest));
+        SimpleCopy(src, dest);
     }
 
-    public void simpleCopy(Reader src, Writer dest) throws IOException {
+    static void SimpleCopy(InputStream src, OutputStream dest) throws IOException {
+        byte[] bytes = new byte[1024];
+        int len;
+        while ((len = src.read(bytes)) > 0) {
+            dest.write(bytes, 0, len);
+        }
+        src.close();
+        dest.close();
+    }
+
+    public void scannerCopy(Reader src, Writer dest) throws IOException {
         Scanner scanner = new Scanner(src).useDelimiter("\n");
         while (scanner.hasNext()) {
             dest.append(scanner.next()).append(System.getProperty("line.separator"));

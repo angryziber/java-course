@@ -12,16 +12,22 @@ public class BufferedCopyProgram implements FileCopier, DataCopier {
 
     @Override
     public void copy(File src, File dest) throws IOException {
-        bufferedCopy(new FileReader(src), new FileWriter(dest));
+        bufferedCopy(new FileInputStream(src), new FileOutputStream(dest));
     }
 
     @Override
     public void copy(InputStream src, OutputStream dest) throws IOException {
-        bufferedCopy(new InputStreamReader(src), new OutputStreamWriter(dest));
+        bufferedCopy(src, dest);
     }
 
-    public void bufferedCopy(Reader src, Writer dest) throws IOException {
-	    // todo: only text is supported
+    public void bufferedCopy(InputStream src, OutputStream dest) throws IOException {
+        BufferedInputStream inputStream = new BufferedInputStream(src);
+        BufferedOutputStream outputStream = new BufferedOutputStream(dest);
+
+        SimpleCopyProgram.SimpleCopy(inputStream, outputStream);
+    }
+
+    private void bufferedTextCopy(Reader src, Writer dest) throws IOException {
         BufferedReader fr = new BufferedReader(src);
         BufferedWriter fw = new BufferedWriter(dest);
         String line;
