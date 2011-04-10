@@ -18,7 +18,7 @@ public class SimpleBufferedCopyProgramTest {
 		File src = new File("build.xml");
 		File dest = File.createTempFile("temp", null);
 
-		new SimpleCopyProgram().copy(src, dest);
+		new SimpleBufferedCopyProgram().copy(src, dest);
 		assertThat(dest.length(), equalTo(src.length()));
 
 		dest.deleteOnExit();
