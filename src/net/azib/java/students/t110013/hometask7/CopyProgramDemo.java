@@ -12,7 +12,7 @@ public class CopyProgramDemo {
 
 	public static void main(String[] args) throws IOException {
 		File src = new File("build.xml");
-		File dest = File.createTempFile("dummy", null);
+		File dest = File.createTempFile("temp", null);
 
 		System.out.println("Simple file copy: " + measureTime(new SimpleCopyProgram(), src, dest) + " ms");
 		System.out.println("Simple buffered file copy: " + measureTime(new SimpleBufferedCopyProgram(), src, dest) + " ms");

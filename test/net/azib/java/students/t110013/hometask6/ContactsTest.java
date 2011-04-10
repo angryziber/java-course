@@ -32,6 +32,17 @@ public class ContactsTest {
 	}
 
 	@Test
+	public void validateDate() {
+		assertNull(contacts.validateDate("1986/12/28"));
+		assertNull(contacts.validateDate("12/28/1986"));
+		assertNull(contacts.validateDate("28-12-1986"));
+		assertNull(contacts.validateDate("1986-28-12"));
+
+		assertNotNull(contacts.validateDate("28.01.1986"));
+		assertNotNull(contacts.validateDate("28.12.86"));
+	}
+
+	@Test
 	public void validatePhone() {
 		assertNull(contacts.validatePhone("Aa333"));
 		assertNull(contacts.validatePhone("4444"));
