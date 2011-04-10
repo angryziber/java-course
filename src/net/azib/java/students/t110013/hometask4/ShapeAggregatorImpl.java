@@ -13,17 +13,11 @@ public class ShapeAggregatorImpl implements ShapeAggregator {
 
 	@Override
 	public void addShapes(Shape... shapes) {
-		if (shapes == null)
-			throw new IllegalArgumentException("Adding null is not allowed!");
-
 		addShapes(Arrays.asList(shapes));
 	}
 
 	@Override
 	public void addShapes(Collection<? extends Shape> shapesCollection) {
-		if (shapesCollection == null)
-			throw new IllegalArgumentException("Adding null is not allowed!");
-
 		shapes.addAll(shapesCollection);
 	}
 

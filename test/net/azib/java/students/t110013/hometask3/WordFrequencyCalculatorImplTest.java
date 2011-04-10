@@ -17,10 +17,9 @@ public class WordFrequencyCalculatorImplTest {
 	WordFrequencyCalculatorImpl wfc = new WordFrequencyCalculatorImpl();
 	Map<String, Integer> expectedMap = new TreeMap<String, Integer>();
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void nullArgument() {
-		expectedMap = null;
-		assertThat(wfc.calculateFrequenciesOf(null), is(expectedMap));
+		wfc.calculateFrequenciesOf(null);
 	}
 
 	@Test

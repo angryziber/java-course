@@ -13,9 +13,9 @@ public class DuplicateRemoverImplTest {
 	private DuplicateRemoverImpl dr = new DuplicateRemoverImpl();
 
 	@SuppressWarnings("NullArgumentToVariableArgMethod")
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void nullArgument() {
-		assertThat(dr.removeDuplicateStrings(null), returns(null));
+		dr.removeDuplicateStrings(null);
 	}
 
 	@Test

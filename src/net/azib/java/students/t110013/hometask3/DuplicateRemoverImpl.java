@@ -12,9 +12,6 @@ import java.util.Set;
 public class DuplicateRemoverImpl implements DuplicateRemover {
 
 	public String[] removeDuplicateStrings(String... array) {
-		if (array == null)
-			return null;
-
 		Set<String> c = new LinkedHashSet<String>(Arrays.asList(array));
 		return c.toArray(new String[c.size()]);
 	}

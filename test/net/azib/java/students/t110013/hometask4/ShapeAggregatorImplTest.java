@@ -37,12 +37,12 @@ public class ShapeAggregatorImplTest {
 	}
 
 	@SuppressWarnings("NullArgumentToVariableArgMethod")
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void addingNullArrayNotAllowed() {
 		addShapesArray(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void addingNullCollectionNotAllowed() {
 		addShapesCollection(null);
 	}
