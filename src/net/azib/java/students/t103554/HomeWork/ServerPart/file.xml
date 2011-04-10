@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<Players>
+	<player>
+		<playerName>Siim Susi</playerName>
+		<dateofbirth>01.01.1976</dateofbirth>
+		<State>EE</State>
+		<HundretMSprint>12.61</HundretMSprint>
+		<LongJump>5.00</LongJump>
+		<ShotPut>9.22</ShotPut>
+		<HighJump>1.50</HighJump>
+		<FourHundRSprint>59.39</FourHundRSprint>
+		<Hudles>16.43</Hudles>
+		<DiscusThrow>21.60</DiscusThrow>
+		<PoleVault>2.60</PoleVault>
+		<JavelinThrow>35.81</JavelinThrow>
+		<TousentFiveRace>5:25.72</TousentFiveRace>
+	</player>
+	<player>
+		<playerName>Василий Пупкин</playerName>
+		<dateofbirth>01.01.1976</dateofbirth>
+		<State>EE</State>
+		<HundretMSprint>01.01.1976</HundretMSprint>
+		<LongJump></LongJump>
+		<ShotPut></ShotPut>
+		<HighJump></HighJump>
+		<FourHundRSprint></FourHundRSprint>
+		<Hudles></Hudles>
+		<DiscusThrow></DiscusThrow>
+		<PoleVault></PoleVault>
+		<JavelinThrow></JavelinThrow>
+		<TousentFiveRace></TousentFiveRace>
+	</player>
+	<player>
+		<playerName>Siim Susi</playerName>
+		<dateofbirth>01.01.1976</dateofbirth>
+		<State>EE</State>
+		<HundretMSprint>01.01.1976</HundretMSprint>
+		<LongJump></LongJump>
+		<ShotPut></ShotPut>
+		<HighJump></HighJump>
+		<FourHundRSprint></FourHundRSprint>
+		<Hudles></Hudles>
+		<DiscusThrow></DiscusThrow>
+		<PoleVault></PoleVault>
+		<JavelinThrow></JavelinThrow>
+		<TousentFiveRace></TousentFiveRace>
+	</player>
+</Players>
