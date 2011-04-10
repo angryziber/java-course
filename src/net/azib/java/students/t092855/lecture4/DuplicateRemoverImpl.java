@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DuplicateRemoverImpl implements DuplicateRemover {
+
+	@Override
 	public String[] removeDuplicateStrings(String ... array) {
 		Set<String> s = new HashSet<String>();
 		for(String a : array)
