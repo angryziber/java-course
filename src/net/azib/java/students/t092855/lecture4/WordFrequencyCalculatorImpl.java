@@ -26,7 +26,7 @@ public class WordFrequencyCalculatorImpl implements WordFrequencyCalculator{
 	}
 
 	public static void main(String[] args) {
-		String text = "aaa bbb ccc ddd eee aaa bbb eee fff ggg ccc ddd";
+		String text = "bbb aaa ddd ccc ddd eee aaa bbb eee fff ggg ccc ddd";
 
 		Map textFrequencies = new WordFrequencyCalculatorImpl().calculateFrequenciesOf(text);
 		System.out.println(textFrequencies.toString());
