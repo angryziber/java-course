@@ -5,9 +5,15 @@ import net.azib.java.students.t104971.homework.athletics.components.ResultType;
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
 import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 import net.azib.java.students.t104971.homework.athletics.util.InputRead;
+import org.apache.log4j.Logger;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -15,18 +21,21 @@ import java.util.regex.Pattern;
  */
 public class CsvDataCollector implements DataCollector {
 
-    public static final String CSV_FILE = PropertiesLoader.getCSVPath();
     public static final String VALUE_SEPARATOR = ",";
+    private static final Logger LOG = Logger.getLogger(CsvDataCollector.class);
 
 
     public Collection<Athlete> loadCompetitionResults(String csvFile) {
 
         List<Athlete> athletes = new ArrayList<Athlete>();
-
-        InputRead input = new InputRead();
-        File inputFile = new File(csvFile);
-        inputFile = inputFile.exists() ? inputFile : new File(CSV_FILE);
-        ArrayList<String> contents = input.getContents(inputFile);
+        List<String> contents = Collections.emptyList();
+        File inputFile = new File("");
+        inputFile = inputFile.exists() ? inputFile : PropertiesLoader.getCSVFile();
+        try {
+            contents = new InputRead().getContents(new FileInputStream(inputFile));
+        } catch (FileNotFoundException e) {
+            LOG.error("Cannot find CSV file", e);
+        }
 
         for (String line : contents) {
             athletes.add(getAthlete(line));
@@ -45,7 +54,7 @@ public class CsvDataCollector implements DataCollector {
                 setAthleteAttribute(athlete, i, values[i]);
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            LOG.error("Cannot parse athlete's attributes", e);
         }
 
         return athlete;

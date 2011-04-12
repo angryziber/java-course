@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class BrowserLaunch {
 
-    private static final String[] browsers = {"google-chrome", "firefox", "opera",
-            "konqueror", "epiphany", "seamonkey", "galeon", "kazehakase", "mozilla"};
+    private static final String[] browsers = {"firefox", "mozilla", "opera", "google-chrome",
+            "konqueror", "epiphany", "seamonkey", "galeon", "kazehakase"};
     private static final String errMsg = "Error attempting to launch web browser";
 
     public static void openURL(String url) {

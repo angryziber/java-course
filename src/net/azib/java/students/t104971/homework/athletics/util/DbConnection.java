@@ -1,12 +1,10 @@
 package net.azib.java.students.t104971.homework.athletics.util;
 
-import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 /**
  * @author Jaroslav Judin
@@ -23,15 +21,10 @@ public class DbConnection {
 
     private Connection connect() {
         try {
-            ResourceBundle bundle = PropertiesLoader.getDbProperties();
-            Class.forName(bundle.getString("Driver"));
             connection = DriverManager.getConnection(
-                    bundle.getString("url"),
-                    bundle.getString("usr"),
-                    bundle.getString("pwd"));
-        } catch (ClassNotFoundException e) {
-            log.error("Cannot find driver class", e);
-            close();
+                    System.getProperty("url"),
+                    System.getProperty("usr"),
+                    System.getProperty("pwd"));
         } catch (SQLException e) {
             log.error("Cannot get db connection", e);
             close();

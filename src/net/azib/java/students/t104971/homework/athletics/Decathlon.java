@@ -60,7 +60,8 @@ public class Decathlon {
     }
 
     private static void initLogger() {
-        PropertyConfigurator.configure(PropertiesLoader.getLog4jPath());
+        PropertiesLoader.setProperties();
+        PropertyConfigurator.configure(System.getProperties());
     }
 
 }
