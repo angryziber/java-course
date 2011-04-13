@@ -12,7 +12,7 @@ import java.io.OutputStream;
  */
 public class SimpleCopyProgram extends AbstractCopyProgram implements DataCopier, FileCopier {
 	@Override
-	protected void specificCopy(InputStream sourceStream, OutputStream destinationStream) throws IOException {
+	public void copy(final InputStream sourceStream, final OutputStream destinationStream) throws IOException {
 		int dataByte;
 		while ((dataByte = sourceStream.read()) != -1) destinationStream.write(dataByte);
 	}

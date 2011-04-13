@@ -10,7 +10,7 @@ import java.io.*;
  */
 public class BufferedCopyProgram extends AbstractCopyProgram implements DataCopier, FileCopier {
 	@Override
-	protected void specificCopy(InputStream sourceStream, OutputStream destinationStream) throws IOException {
+	public void copy(InputStream sourceStream, OutputStream destinationStream) throws IOException {
 		final InputStream bufferedSourceStream = new BufferedInputStream(sourceStream);
 		final OutputStream bufferedDestinationStream = new BufferedOutputStream(destinationStream);
 
