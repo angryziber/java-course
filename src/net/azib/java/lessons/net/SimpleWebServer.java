@@ -10,7 +10,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
 
-public class SimpleWebServer {
+public class SimpleWebServer extends Thread {
 	private List<ContentProvider> providerChain = Arrays.asList(
 				new HelloWorldProvider(),
 				new InsecureFileProvider(),
@@ -18,20 +18,46 @@ public class SimpleWebServer {
 			);
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		new SimpleWebServer().start();
+		Thread server = new SimpleWebServer();
+		server.start();
+
+		Thread.sleep(5000);
+		server.interrupt();
 	}
 
-	public void start() throws IOException, InterruptedException {
-		ServerSocket server = new ServerSocket(8080);
-		while (true) {
-			Socket client = server.accept();
-			System.out.println("Accepted connection from " + client.getRemoteSocketAddress());
-			handle(client);
-			client.close();
+	@Override
+	public void run() {
+		ServerSocket server = null;
+		int port = 8080;
+		try {
+			server = new ServerSocket(port);
 		}
+		catch (IOException e) {
+			System.err.println("Failed to listen to port " + port);
+			return;
+		}
+
+		while (!Thread.interrupted()) {
+			try {
+				Socket client = server.accept();
+				System.out.println("Accepted connection from " + client.getRemoteSocketAddress());
+				handle(client);
+				client.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		try {
+			server.close();
+		}
+		catch (IOException e) {
+		}
+		System.err.println("Server terminated");
 	}
 
-	void handle(Socket client) throws IOException, InterruptedException {
+	void handle(Socket client) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream(), "US-ASCII"));
 		String request = reader.readLine();
 		String fileName = request.replaceFirst("GET (.*?) HTTP/.*", "$1");
