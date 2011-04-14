@@ -1,11 +1,13 @@
 package net.azib.java.students.t103784;
 
-import java.io.*;
+import org.apache.commons.io.IOUtils;
+
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URLDecoder;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,7 +23,7 @@ public class FileReceiverServer {
 	}
 
 	public void start() throws IOException, InterruptedException {
-		ServerSocket server = new ServerSocket(8080);
+		ServerSocket server = new ServerSocket(7865);
 		while (true) {
 			Socket client = server.accept();
 			System.out.println("Accepted connection from " + client.getRemoteSocketAddress());
@@ -31,18 +33,23 @@ public class FileReceiverServer {
 	}
 
 	void handle(Socket client) throws IOException, InterruptedException {
-
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream(), "US-ASCII"));
-		String request = reader.readLine();
-		String fileName = request.replaceFirst("GET (.*?) HTTP/.*", "$1");
-		fileName = URLDecoder.decode(fileName, "UTF-8");
-
-		while (!"".equals(reader.readLine()));
-		PrintStream out = new PrintStream(client.getOutputStream());
-		out.print("HTTP/1.1 200 OK\r\n");
-		out.print("Content-Type: text/html; charset=UTF-8\r\n");
-		out.print("\r\n");
-
+		FileOutputStream out = null;
+		try {
+			DataInputStream in = new DataInputStream(client.getInputStream());
+			int version = in.readInt();
+			if (version != 2) {
+				System.err.println("Unsupported protocol version " + version);
+				return;
+			}
+			String filename = in.readUTF();
+			File file = new File(System.getProperty("java.io.tmpdir"), filename);
+			out = new FileOutputStream(file);
+			IOUtils.copy(in, out);
+			System.out.println("Received file " + file + " (" + file.length() + " bytes)");
+		}
+		finally {
+			IOUtils.closeQuietly(out);
+			client.close();
+		}
 	}
 }
