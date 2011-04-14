@@ -10,7 +10,6 @@ import java.nio.Buffer;
 public class FileDownloaderProgram implements FileDownloader{
 	@Override
 	public void download(URL url, File destDir) throws IOException {
-		BufferedInputStream bufferedInputStream = new BufferedInputStream(url.openStream());
 		FileOutputStream fileOutputStream = new FileOutputStream(destDir);
 
 		BufferedCopyProgram bufferedCopyProgram = new BufferedCopyProgram();
