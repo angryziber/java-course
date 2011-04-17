@@ -19,8 +19,8 @@ public class FileDownloaderDemo {
 			new ApacheCommonsPoweredFileDownloaderImpl().download(url2, dir);
 
 			System.out.println("Downloaded files can be found in " + dir);
-
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			System.out.println("Something went wrong, probably files are no longer accessible.");
 		}
 	}
