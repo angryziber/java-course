@@ -1,7 +1,7 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
-import net.azib.java.students.t104971.homework.athletics.io.output.xml.HTMLWriter;
+import net.azib.java.students.t104971.homework.athletics.io.SourceType;
 import net.azib.java.students.t104971.homework.athletics.io.output.xml.XMLWriter;
 
 import java.util.List;
@@ -17,17 +17,20 @@ public class OutputBuilder {
         this.athletes = athletes;
     }
 
-    public OutputWriter getWriter(String method) {
-        if ("-console".equals(method)) {
-            return new ConsoleWriter(athletes);
-        } else if ("-xml".equals(method)) {
-            return new XMLWriter(athletes);
-        } else if ("-html".equals(method)) {
-            return new HTMLWriter(athletes);
-        } else if ("-csv".equals(method)) {
-            return new CSVWriter(athletes);
+    public OutputWriter getWriter(SourceType method) {
+        switch (method) {
+            case CONSOLE:
+                return new ConsoleWriter(athletes);
+            case XML:
+                return new XMLWriter(athletes);
+            case HTML:
+                return new XMLWriter(athletes);
+            case CSV:
+                return new CSVWriter(athletes);
+            default:
+                return null;
         }
-        return null;
+
     }
 
 }
