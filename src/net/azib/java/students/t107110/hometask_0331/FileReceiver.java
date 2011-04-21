@@ -27,6 +27,7 @@ public class FileReceiver implements Runnable {
 				saveToFile(socketStream, fileName);
 			} finally {
 				if (socketStream != null) socketStream.close();
+				if (socket != null) socket.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

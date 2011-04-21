@@ -28,14 +28,9 @@ public class FileReceiverServer {
 	private void listen() {
 		while (!Thread.interrupted()) {
 			try {
-				final Socket socket;
-				try {
-					socket = serverSocket.accept();
-				} catch (SocketTimeoutException ignored) {
-					continue;
-				}
+				final Socket socket = serverSocket.accept();
 				new Thread(new FileReceiver(socket)).start();
-				socket.close();
+			} catch (SocketTimeoutException ignored) {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
