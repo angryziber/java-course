@@ -1,6 +1,5 @@
 package net.azib.java.students.t110013.hometask9;
 
-import com.sun.corba.se.spi.activation.Server;
 import org.apache.commons.io.IOUtils;
 
 import java.io.DataInputStream;
@@ -22,12 +21,11 @@ public class FileReceiverServerMultithreaded {
 	public void go() throws IOException {
 		ServerSocket server = new ServerSocket(2700);
 
-		while (true) {
+		while (!Thread.interrupted()) {
 			Socket client = server.accept();
 			System.out.println("Accepted connection from " + client.getRemoteSocketAddress());
 
-			Thread thread = new Thread(new ClientHandler(client));
-			thread.start();
+			new Thread(new ClientHandler(client)).start();
 
 			System.out.println("End of loop.");
 		}

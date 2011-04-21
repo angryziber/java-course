@@ -22,6 +22,7 @@ public class FileReceiverServer {
 					System.err.println("Failed to listen port " + port);
 					System.exit(-1);
 				}
+
 				Socket client = null;
 				while (!Thread.interrupted()) {
 					try {
@@ -42,7 +43,5 @@ public class FileReceiverServer {
 		scanner.useDelimiter("\n");
 		System.out.println("type 'exit' to close program");
 		while (scanner.next().compareTo("exit") != 0);
-		listener.interrupt();
-		listener.join();
 	}
 }
