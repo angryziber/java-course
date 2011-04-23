@@ -16,17 +16,17 @@ public class DbInputProcessor extends AbstractInputProcessor<Connection> {
     private String sql = "SELECT " +
             " a.name,DATE_FORMAT(dob, '%d.%m.%Y') birthday,a.country_code,race_100m,long_jump,shot_put,high_jump," +
             " race_400m,hurdles_110m,discus_throw,pole_vault,javelin_throw,race_1500m" +
-            " FROM results r, athletes a, competitions c " +
-            "WHERE r.athlete_id = a.id AND c.id = r.competition_id AND year( dob ) >1900";
+            " FROM results r, athletes a, competitions c" +
+            " WHERE r.athlete_id = a.id AND c.id = r.competition_id AND year( dob ) >1900";
 
     public DbInputProcessor(Connection c, int competitionId) {
         super(c);
         sql = sql + " AND c.id = " + competitionId;
     }
 
-    public DbInputProcessor(Connection c,String competitionName) {
+    public DbInputProcessor(Connection c, String competitionName) {
         super(c);
-        sql = sql + " AND c.name = " + competitionName;
+        sql = sql + " AND c.name = '" + competitionName + "'";
     }
 
     public List<Athlete> readAthletes() {
@@ -50,7 +50,7 @@ public class DbInputProcessor extends AbstractInputProcessor<Connection> {
                         rs.getString("discus_throw"),
                         rs.getString("pole_vault"),
                         rs.getString("javelin_throw"),
-                        rs.getString("race_1500m")//todo is kept in seconds
+                        rs.getString("race_1500m")
                 )));
             }
         } catch (SQLException e) {

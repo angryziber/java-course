@@ -12,12 +12,15 @@ import java.util.Map;
 
 public class ResultCalculator {
 
-    List<Athlete> athletes;
+    private List<Athlete> athletes;
 
     public ResultCalculator(List<Athlete> athletes) {
         this.athletes = athletes;
     }
 
+    /**
+     *  Performs main actions to calculate athletes results and places, sorts by score descending
+     */
     public void calculate() {
         calculateResult();
         dividePlaces();

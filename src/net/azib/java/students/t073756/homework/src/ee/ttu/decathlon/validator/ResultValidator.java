@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 /**
  * Static constants generally for regexp validation are presented in this enum.
- * Name are
  */
 public enum ResultValidator implements Validator<String> {
     TIME_RESULT_VALIDATOR(TIME_RESULT_PATTERN),
@@ -36,6 +35,11 @@ public enum ResultValidator implements Validator<String> {
         this.pattern = pattern;
     }
 
+    /**
+     * Validates input String, generally using regexp.
+     * @param input - String for validation
+     * @return true if input string matches with expectations(regexp pattern and additional checks, if present)
+     */
     public boolean validate(String input) {
         return RegexpValidator.validate(input, pattern);
     }

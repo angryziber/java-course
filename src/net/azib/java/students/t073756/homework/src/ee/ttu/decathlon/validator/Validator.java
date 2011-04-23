@@ -3,7 +3,7 @@ package ee.ttu.decathlon.validator;
 import java.io.File;
 
 public interface Validator<T> {
-    String RESULT_PATTERN = "\\d{1,3}\\.\\d{2}";
+    String RESULT_PATTERN = "\\d{1,3}\\.\\d{1,2}";
     String TIME_RESULT_PATTERN = "(\\d{1,2}:)?" + RESULT_PATTERN;
     String NAME_PATTERN = "(\")?(\\(?\\p{IsL}+\\s?\\)?)+(\")?";
     String BIRTHDAY_PATTERN = "\\d{1,2}\\.\\d{2}.\\d{4}";
@@ -12,7 +12,7 @@ public interface Validator<T> {
     String FILE_PATH_PATTERN = "([a-zA-Z]:)?(" + File.separator + "?[a-zA-Z0-9_.-]+)+" + File.separator + "?";
 
     /**
-     * Main method for string input validation
+     * Main method for input validation
      *
      * @param input - String for validation
      * @return - is input String valid for processing

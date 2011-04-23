@@ -19,6 +19,7 @@ public class ResultValidatorTest {
         assertTrue(SIMPLE_RESULT_VALIDATOR.validate("1.11"));
         assertTrue(SIMPLE_RESULT_VALIDATOR.validate("11.11"));
         assertTrue(SIMPLE_RESULT_VALIDATOR.validate("111.11"));
+        assertTrue(SIMPLE_RESULT_VALIDATOR.validate("111.1"));
         assertFalse(SIMPLE_RESULT_VALIDATOR.validate("111.111"));
         assertFalse(SIMPLE_RESULT_VALIDATOR.validate("I.11"));
         assertFalse(SIMPLE_RESULT_VALIDATOR.validate("."));
