@@ -5,14 +5,19 @@ import ee.ttu.decathlon.DecathlonException;
 import ee.ttu.decathlon.Main;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class DbConnectionProvider {
     private static Connection connection;
 
     public static Connection getConnection() {
-        if (connection == null) {
-            connection = provideConnection();
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = provideConnection();
+            }
+        } catch (SQLException e) {
+            throw new DecathlonException("problems with DB connection");
         }
         return connection;
     }

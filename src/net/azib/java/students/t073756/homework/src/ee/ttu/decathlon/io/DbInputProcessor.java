@@ -21,21 +21,21 @@ public class DbInputProcessor extends AbstractInputProcessor<Connection> {
 
     public DbInputProcessor(Connection c, int competitionId) {
         super(c);
-        sql = sql + " AND c.id = " + competitionId;
+        sql += " AND c.id = " + competitionId;
     }
 
     public DbInputProcessor(Connection c, String competitionName) {
         super(c);
-        sql = sql + " AND c.name = '" + competitionName + "'";
+        sql += " AND c.name = '" + competitionName + "'";
     }
 
     public List<Athlete> readAthletes() {
         PreparedStatement preparedStatement;
         List<Athlete> athletes = new ArrayList<Athlete>();
-
+        ResultSet rs = null;
         try {
             preparedStatement = getSource().prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
+            rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 athletes.add(createAthlete(Arrays.asList(
                         rs.getString("name"),
@@ -55,6 +55,17 @@ public class DbInputProcessor extends AbstractInputProcessor<Connection> {
             }
         } catch (SQLException e) {
             throw new DecathlonException("Unable to load athletes from DB!");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                Connection c = getSource();
+                if (c != null) {
+                    c.close();
+                }
+            } catch (SQLException e) { //ignore
+            }
         }
         return athletes;
     }

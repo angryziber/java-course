@@ -12,8 +12,6 @@ import java.sql.Connection;
 import java.util.List;
 
 public class Controller {
-    public Controller() {
-    }
 
     public void doService(String[] args) {
         int argNumber = 0;
@@ -70,7 +68,7 @@ public class Controller {
         proceedWithCalculation(inputProcessor, outputProvider);
     }
 
-    public void proceedWithCalculation(InputProcessor inputProcessor, OutputProvider outputProvider) {
+    private void proceedWithCalculation(InputProcessor inputProcessor, OutputProvider outputProvider) {
         List<Athlete> athletes = inputProcessor.readAthletes();
         ResultCalculator calculator = new ResultCalculator(athletes);
         calculator.calculate();
