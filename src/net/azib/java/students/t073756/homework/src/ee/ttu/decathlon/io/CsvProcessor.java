@@ -20,7 +20,7 @@ public class CsvProcessor extends AbstractInputProcessor<File> {
         List<Athlete> athletes = new ArrayList<Athlete>();
 
         try {
-            for (String line : FileUtils.readLines(getSource(), "UTF-8")) {
+            for (String line : (List<String>)FileUtils.readLines(getSource(), "UTF-8")) {
                 CsvLine csvLine = new CsvLine(line);
 
                 new CsvLineValidator().validate(csvLine);
