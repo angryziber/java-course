@@ -2,10 +2,7 @@ package net.azib.java.students.t103784;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -23,33 +20,48 @@ public class FileReceiverServer {
 	}
 
 	public void start() throws IOException, InterruptedException {
-		ServerSocket server = new ServerSocket(7865);
+		ServerSocket server = new ServerSocket(1234);
 		while (true) {
 			Socket client = server.accept();
 			System.out.println("Accepted connection from " + client.getRemoteSocketAddress());
-			handle(client);
+			new Thread(new Handler(client)).start();
 			client.close();
 		}
 	}
 
-	void handle(Socket client) throws IOException, InterruptedException {
-		FileOutputStream out = null;
-		try {
-			DataInputStream in = new DataInputStream(client.getInputStream());
-			int version = in.readInt();
-			if (version != 2) {
-				System.err.println("Unsupported protocol version " + version);
-				return;
-			}
-			String filename = in.readUTF();
-			File file = new File(System.getProperty("java.io.tmpdir"), filename);
-			out = new FileOutputStream(file);
-			IOUtils.copy(in, out);
-			System.out.println("Received file " + file + " (" + file.length() + " bytes)");
+	public class Handler implements Runnable {
+		Socket client;
+
+
+		public Handler(Socket client) {
+			this.client = client;
 		}
-		finally {
-			IOUtils.closeQuietly(out);
-			client.close();
+
+		@Override
+		public void run() {
+
+			FileOutputStream out = null;
+			try {
+				DataInputStream in = new DataInputStream(client.getInputStream());
+				int version = in.readInt();
+				if (version != 2) {
+					System.err.println("Unsupported protocol version " + version);
+					return;
+				}
+				String filename = in.readUTF();
+				File file = new File(System.getProperty("java.io.tmpdir"), filename);
+				out = new FileOutputStream(file);
+				IOUtils.copy(in, out);
+				System.out.println("Received file " + file + " (" + file.length() + " bytes)");
+			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
+			} finally {
+				IOUtils.closeQuietly(out);
+				try {
+					client.close();
+				} catch (IOException e) {
+				}
+			}
 		}
 	}
 }

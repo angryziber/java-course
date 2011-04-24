@@ -16,6 +16,7 @@ public class FileSender {
 	private static final int VERSION = 2;
 
 	public static boolean provide(String fileName, OutputStream out) throws IOException {
+
 		File file = new File(fileName);
 		if (!file.exists()) return false;
 
@@ -27,7 +28,7 @@ public class FileSender {
 
 	public static void main(String[] args) throws IOException {
 		String filename = "build.xml"; // args[0]
-		Socket socket = new Socket("localhost", 7865);
+		Socket socket = new Socket("localhost", 1234);
 		DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 		out.writeInt(VERSION + 1);
 		out.writeUTF(filename);
