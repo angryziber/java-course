@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>$title$</title>
-		<style>
+		<style type="text/css">
 		body {
 			font-family: Arial, Helvetica, Serif;
 		}

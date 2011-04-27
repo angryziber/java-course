@@ -10,7 +10,7 @@ These answers will not affect any points or marks.
 	<input type="hidden" name="action" value="Questions"/>
 	<center>
 	<fieldset>
-		<legend>Question <b><script>document.write($index$+1)</script> of $total$</b></legend>
+		<legend>Question <b><script type="text/javascript">document.write($index$+1)</script> of $total$</b></legend>
 		<p class="question">$question.text$</p>
 		<table>
 			$if(question.choice)$
@@ -21,11 +21,11 @@ These answers will not affect any points or marks.
 					</tr>
 				}$
 			$else$
-				<td><input type="text" name="answer"/></td>
+				<tr><td><input type="text" name="answer"/></td></tr>
 			$endif$
-			<script>document.form.answer.focus();</script>
-			<input type="hidden" name="index" value="$index$"/>
 		</table>
+		<script type="text/javascript">document.form.answer.focus();</script>
+		<input type="hidden" name="index" value="$index$"/>
 		<p>
 			<input type="submit" name="submit" value="Next &raquo;"/>
 		</p>

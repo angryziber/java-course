@@ -18,8 +18,8 @@ Your username is <b>$username$</b>. Use the password that you have submitted.
 <ol>
 	$answers:{a|
 		<li><div class="$if(a.correct)$correct$else$wrong$endif$">$a.question.text$</div></li>	
-		Your answer: $a.answers; separator=", "$<br/>
-		Correct answer: $a.question.correct; separator=", "$<br/>
-		<br/>
+		Your answer: $a.answers; separator=", "$<br>
+		Correct answer: $a.question.correct; separator=", "$<br>
+		<br>
 	}$
 </ol>

@@ -21,7 +21,7 @@
 		<div class="note">
 			The data will be saved after the following questionnaire is completed.
 		</div>
-		<script>document.form.name.focus();</script>
+		<script type="text/javascript">document.form.name.focus();</script>
 	</fieldset>
 	</center>
 </form>
