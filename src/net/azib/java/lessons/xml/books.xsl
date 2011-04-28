@@ -5,9 +5,23 @@
 <xsl:template match="/bookstore">
 	<html>
 		<body>
-			<xsl:apply-templates/>
+			<table border="1">
+				<xsl:apply-templates select="book"/>
+			</table>
 		</body>
 	</html>
+</xsl:template>
+
+<xsl:template match="book">
+	<tr>
+	    <td><b><xsl:value-of select="title"/></b></td>
+	    <td>
+		    <xsl:for-each select="author">
+			    <xsl:value-of select="."/><br/>
+		    </xsl:for-each>
+	    </td>
+		<td><xsl:value-of select="price"/></td>
+	</tr>
 </xsl:template>
 
 </xsl:stylesheet>

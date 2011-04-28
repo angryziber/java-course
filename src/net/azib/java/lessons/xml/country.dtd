@@ -1,3 +1,4 @@
+<!ELEMENT countries (country*)>
 <!ELEMENT country (name, population, phone_code?)>
 <!ATTLIST country code CDATA #REQUIRED>
 <!ELEMENT name (#PCDATA)>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<countries>
+<countries xsi:noNamespaceSchemaLocation="country.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<country code="EE">
-	  <name>Estonia</name>
-	  <population>1350000</population>
-	  <phone_code>372</phone_code>
+		<name>Estonia</name>
+		<population>1350000</population>
+		<phone_code>372</phone_code>
 	</country>
 	<country code="LV">
-	  <name>Latvia</name>
-	  <population>2500000</population>
-	  <phone_code>371</phone_code>
+		<name>Latvia</name>
+		<population>2500000</population>
+		<phone_code>371</phone_code>
 	</country>
 </countries>
