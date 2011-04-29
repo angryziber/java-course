@@ -1,6 +1,5 @@
-package net.azib.java.students.t104971.homework.athletics.dto;
+package net.azib.java.students.t104971.homework.athletics.components;
 
-import net.azib.java.students.t104971.homework.athletics.components.ResultType;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
