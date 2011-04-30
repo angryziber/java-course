@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.w3.org/1999/XSL/Transform" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xs:import schemaLocation="page.xsd"/>
+    <xs:element name="stylesheet">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xsl:template"/>
+            </xs:sequence>
+            <xs:attribute name="version" use="required" type="xs:decimal"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="template">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="html"/>
+            </xs:sequence>
+            <xs:attribute name="match" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="for-each">
+        <xs:complexType>
+            <xs:choice minOccurs="0">
+                <xs:element ref="th"/>
+                <xs:sequence>
+                    <xs:element ref="tr"/>
+                    <xs:element ref="td"/>
+                </xs:sequence>
+            </xs:choice>
+            <xs:attribute name="select" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="choose">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xsl:when"/>
+                <xs:element ref="xsl:otherwise"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="when">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:NCName">
+                    <xs:attribute name="test" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="otherwise" type="xs:NCName"/>
+    <xs:element name="value-of">
+        <xs:complexType>
+            <xs:attribute name="select" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xs:import namespace="http://www.w3.org/1999/XSL/Transform" schemaLocation="xsl.xsd"/>
+    <xs:element name="html">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="body"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="body">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="h2"/>
+                <xs:element ref="table"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="h2" type="xs:string"/>
+    <xs:element name="table">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tr"/>
+                <xs:element ref="xsl:for-each"/>
+            </xs:sequence>
+            <xs:attribute name="border" use="required" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="tr">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element maxOccurs="unbounded" ref="th"/>
+                    <xs:element maxOccurs="unbounded" ref="td"/>
+                </xs:choice>
+                <xs:element ref="xsl:for-each"/>
+            </xs:sequence>
+            <xs:attribute name="bgcolor"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="th">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="xsl:value-of"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="td">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xsl:value-of"/>
+                <xs:element minOccurs="0" ref="xsl:choose"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
