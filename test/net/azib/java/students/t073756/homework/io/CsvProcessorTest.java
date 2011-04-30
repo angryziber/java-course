@@ -1,8 +1,8 @@
 package net.azib.java.students.t073756.homework.io;
 
+import net.azib.java.students.t073756.homework.Athlete;
 import net.azib.java.students.t073756.homework.DecathlonEvent;
 import net.azib.java.students.t073756.homework.DecathlonException;
-import net.azib.java.students.t073756.homework.beans.Athlete;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 

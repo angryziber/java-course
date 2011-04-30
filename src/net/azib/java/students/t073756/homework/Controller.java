@@ -1,6 +1,5 @@
 package net.azib.java.students.t073756.homework;
 
-import net.azib.java.students.t073756.homework.beans.Athlete;
 import net.azib.java.students.t073756.homework.calculator.ResultCalculator;
 import net.azib.java.students.t073756.homework.io.*;
 import net.azib.java.students.t073756.homework.validator.CommandLineArgumentValidator;
@@ -12,23 +11,33 @@ import java.sql.Connection;
 import java.util.List;
 
 public class Controller {
+    private int argNumber;
+    private InputProcessor inputProcessor;
+    private OutputProvider outputProvider;
+    private DecathlonException filePathException = new DecathlonException("second parameter must be a file path!");
 
     public void doService(String[] args) {
-        int argNumber = 0;
-        InputProcessor inputProcessor;
-        OutputProvider outputProvider;
+        validateArgumentsAmount(args);
 
-        String arg = args[argNumber];
-        if (CommandLineArgumentValidator.CONSOLE.validate(arg)) {
+        setInputProcessor(args);
+        setOutputProvider(args);
+
+        proceedWithCalculation(inputProcessor, outputProvider);
+    }
+
+    private void setInputProcessor(String[] args) {
+        String processorFlag = args[argNumber];
+
+        if (CommandLineArgumentValidator.CONSOLE.validate(processorFlag)) {
             inputProcessor = new ConsoleProcessor(new BufferedReader(new InputStreamReader(System.in)));
             argNumber++;
-        } else if (CommandLineArgumentValidator.CSV.validate(arg)) {
+        } else if (CommandLineArgumentValidator.CSV.validate(processorFlag)) {
             if (CommandLineArgumentValidator.FILE_PATH.validate(args[++argNumber])) {
                 inputProcessor = new CsvProcessor(new File(args[argNumber]));
             } else {
-                throw new DecathlonException(arg + "second parameter must be file path!");
+                throw filePathException;
             }
-        } else if (CommandLineArgumentValidator.DB_INPUT.validate(arg)) {
+        } else if (CommandLineArgumentValidator.DB_INPUT.validate(processorFlag)) {
             String secondArg = args[++argNumber];
             Connection c = DbConnectionProvider.getConnection();
             if (CommandLineArgumentValidator.COMPETITION_ID.validate(secondArg)) {
@@ -39,33 +48,33 @@ public class Controller {
         } else {
             throw new DecathlonException("please provide at least one input method!");
         }
+    }
 
-        arg = args[++argNumber];
-        if (CommandLineArgumentValidator.CONSOLE.validate(arg)) {
+    private void setOutputProvider(String[] args) {
+        String providerFlag = args[++argNumber];
+        if (CommandLineArgumentValidator.CONSOLE.validate(providerFlag)) {
             outputProvider = new ConsoleOutput();
-        } else if (CommandLineArgumentValidator.CSV.validate(arg)) {
+        } else if (CommandLineArgumentValidator.CSV.validate(providerFlag)) {
             if (CommandLineArgumentValidator.FILE_PATH.validate(args[++argNumber])) {
                 outputProvider = new CsvOutput(new File(args[argNumber]));
             } else {
-                throw new DecathlonException(arg + "second parameter must be file path!");
+                throw filePathException;
             }
-        } else if (CommandLineArgumentValidator.XML_OUTPUT.validate(arg)) {
+        } else if (CommandLineArgumentValidator.XML_OUTPUT.validate(providerFlag)) {
             if (CommandLineArgumentValidator.FILE_PATH.validate(args[++argNumber])) {
                 outputProvider = new XmlOutput(new File(args[argNumber]));
             } else {
-                throw new DecathlonException(arg + "second parameter must be file path!");
+                throw filePathException;
             }
-        } else if (CommandLineArgumentValidator.HTML_OUTPUT.validate(arg)) {
+        } else if (CommandLineArgumentValidator.HTML_OUTPUT.validate(providerFlag)) {
             if (CommandLineArgumentValidator.FILE_PATH.validate(args[++argNumber])) {
                 outputProvider = new HtmlOutput(new File(args[argNumber]));
             } else {
-                throw new DecathlonException(arg + "second parameter must be file path!");
+                throw filePathException;
             }
         } else {
             throw new DecathlonException("please provide at least one output method!");
         }
-
-        proceedWithCalculation(inputProcessor, outputProvider);
     }
 
     private void proceedWithCalculation(InputProcessor inputProcessor, OutputProvider outputProvider) {
@@ -73,5 +82,12 @@ public class Controller {
         ResultCalculator calculator = new ResultCalculator(athletes);
         calculator.calculate();
         outputProvider.writeAthletes(athletes);
+    }
+
+    void validateArgumentsAmount(String[] args) {
+        int argsNumber = args.length;
+        if (argsNumber < 2 && argsNumber > 4) {
+            throw new DecathlonException("wrong amount of arguments! there must be at least 2 and no more than 4 arguments!");
+        }
     }
 }

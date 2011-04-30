@@ -4,11 +4,11 @@ import java.util.regex.Pattern;
 
 public class RegexpValidator {
 
-    private RegexpValidator(){
+    private RegexpValidator() {
     }
 
     /**
-     * Regexp check, unicode aware
+     * Regexp check, unicode case folding aware
      *
      * @param input   - string under check
      * @param pattern - validation pattern

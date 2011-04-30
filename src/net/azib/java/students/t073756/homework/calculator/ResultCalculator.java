@@ -1,9 +1,9 @@
 package net.azib.java.students.t073756.homework.calculator;
 
+import net.azib.java.students.t073756.homework.Athlete;
 import net.azib.java.students.t073756.homework.DecathlonEvent;
-import net.azib.java.students.t073756.homework.beans.Athlete;
-import net.azib.java.students.t073756.homework.beans.Place;
-import net.azib.java.students.t073756.homework.beans.Result;
+import net.azib.java.students.t073756.homework.Place;
+import net.azib.java.students.t073756.homework.Result;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class ResultCalculator {
     }
 
     /**
-     *  Performs main actions to calculate athletes results and places, sorts by score descending
+     * Performs main actions to calculate athletes results and places, sorts by score descending
      */
     public void calculate() {
         calculateResult();

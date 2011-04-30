@@ -1,7 +1,7 @@
 package net.azib.java.students.t073756.homework.io;
 
+import net.azib.java.students.t073756.homework.Athlete;
 import net.azib.java.students.t073756.homework.DecathlonEvent;
-import net.azib.java.students.t073756.homework.beans.Athlete;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -38,7 +38,7 @@ public class AbstractInputProcessorTest {
         assertEquals(new SimpleDateFormat("dd.MM.yyyy").parse(i.next()), a.getDateOfBirth());
         assertEquals(i.next(), a.getCountry());
 
-        Map<DecathlonEvent,String> results = a.getResult().getResults();
+        Map<DecathlonEvent, String> results = a.getResult().getResults();
         assertEquals(i.next(), results.get(M_100));
         assertEquals(i.next(), results.get(LONG_JUMP));
         assertEquals(i.next(), results.get(SHOT_PUT));

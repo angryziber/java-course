@@ -1,4 +1,4 @@
-package net.azib.java.students.t073756.homework.beans;
+package net.azib.java.students.t073756.homework;
 
 import org.junit.Test;
 

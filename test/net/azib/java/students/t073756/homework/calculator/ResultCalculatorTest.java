@@ -1,8 +1,8 @@
 package net.azib.java.students.t073756.homework.calculator;
 
+import net.azib.java.students.t073756.homework.Athlete;
 import net.azib.java.students.t073756.homework.DecathlonEvent;
-import net.azib.java.students.t073756.homework.beans.Athlete;
-import net.azib.java.students.t073756.homework.beans.Result;
+import net.azib.java.students.t073756.homework.Result;
 import org.junit.Test;
 
 import java.util.Arrays;

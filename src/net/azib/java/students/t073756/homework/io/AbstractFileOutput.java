@@ -11,7 +11,7 @@ import java.io.IOException;
 public abstract class AbstractFileOutput implements OutputProvider {
     private File outputFile;
 
-    protected AbstractFileOutput(File outputFile) {
+    AbstractFileOutput(File outputFile) {
         this.outputFile = outputFile;
     }
 

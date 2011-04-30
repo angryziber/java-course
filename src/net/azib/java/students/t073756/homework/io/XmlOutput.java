@@ -1,9 +1,9 @@
 package net.azib.java.students.t073756.homework.io;
 
+import net.azib.java.students.t073756.homework.Athlete;
 import net.azib.java.students.t073756.homework.DecathlonEvent;
 import net.azib.java.students.t073756.homework.DecathlonException;
-import net.azib.java.students.t073756.homework.beans.Athlete;
-import net.azib.java.students.t073756.homework.beans.Result;
+import net.azib.java.students.t073756.homework.Result;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -75,7 +75,7 @@ public class XmlOutput extends AbstractFileOutput {
             StreamResult result = new StreamResult(sw);
             DOMSource source = new DOMSource(doc);
             t.transform(source, result);
-            return  sw.toString();
+            return sw.toString();
         } catch (TransformerException e) {
             throw new DecathlonException("unable to transform xml document to string");
         }

@@ -1,4 +1,4 @@
-package net.azib.java.students.t073756.homework.beans;
+package net.azib.java.students.t073756.homework;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +15,8 @@ public class CsvHolder {
 
     /**
      * Converts list of athlete data to csv string and saves it for future
-     * @param a Athlete for whom data is saved
+     *
+     * @param a           Athlete for whom data is saved
      * @param athleteData data which will be converted to csv string
      */
     public static void putCsvLine(Athlete a, List<String> athleteData) {
@@ -24,6 +25,7 @@ public class CsvHolder {
 
     /**
      * Retrieve csv string back from storage
+     *
      * @param a Athlete for whom data is searched
      * @return csv string with data about this Athlete results.
      */
@@ -31,9 +33,9 @@ public class CsvHolder {
         return csvCache.get(a);
     }
 
-    private static String convertToCsvLine(List<String> athleteData) {
+    static String convertToCsvLine(List<String> athleteData) {
         StringBuilder result = new StringBuilder();
-        for (String s : athleteData.subList(1, athleteData.size() - 1)) {
+        for (String s : athleteData.subList(1, athleteData.size())) {
             result.append(s).append(" ");
         }
         return athleteData.get(0) + "," + result.toString().trim().replaceAll(" ", ",");

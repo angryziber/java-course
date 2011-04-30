@@ -1,7 +1,7 @@
 package net.azib.java.students.t073756.homework.io;
 
+import net.azib.java.students.t073756.homework.Athlete;
 import net.azib.java.students.t073756.homework.DecathlonException;
-import net.azib.java.students.t073756.homework.beans.Athlete;
 import net.azib.java.students.t073756.homework.validator.CsvLineValidator;
 import org.apache.commons.io.FileUtils;
 
@@ -20,7 +20,7 @@ public class CsvProcessor extends AbstractInputProcessor<File> {
         List<Athlete> athletes = new ArrayList<Athlete>();
 
         try {
-            for (String line : (List<String>)FileUtils.readLines(getSource(), "UTF-8")) {
+            for (String line : FileUtils.readLines(getSource(), "UTF-8")) {
                 CsvLine csvLine = new CsvLine(line);
 
                 new CsvLineValidator().validate(csvLine);

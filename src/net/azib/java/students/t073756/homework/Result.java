@@ -1,6 +1,4 @@
-package net.azib.java.students.t073756.homework.beans;
-
-import net.azib.java.students.t073756.homework.DecathlonEvent;
+package net.azib.java.students.t073756.homework;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

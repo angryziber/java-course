@@ -1,7 +1,7 @@
 package net.azib.java.students.t073756.homework.io;
 
+import net.azib.java.students.t073756.homework.Athlete;
 import net.azib.java.students.t073756.homework.DecathlonException;
-import net.azib.java.students.t073756.homework.beans.Athlete;
 import net.azib.java.students.t073756.homework.validator.ResultValidator;
 
 import java.io.BufferedReader;
