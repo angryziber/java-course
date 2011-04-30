@@ -2,8 +2,8 @@ package net.azib.java.students.t092855;
 
 public class Cat extends Pet {
 
-	public Cat(int age, String sex, String name) {
-		super(age, sex, "mammal", name);
+	public Cat(int age, String gender, String name) {
+		super(age, gender, "mammal", name);
 	}
 
 	public String makeSound() {

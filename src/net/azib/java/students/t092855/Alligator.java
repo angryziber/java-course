@@ -3,8 +3,8 @@ package net.azib.java.students.t092855;
 public class Alligator extends Animal {
 	private int noOfTeeth;
 
-	public Alligator(int age, String sex) {
-		super(age, sex, "reptile");
+	public Alligator(int age, String gender) {
+		super(age, gender, "reptile");
 	}
 
 	public int getNoOfTeeth() {

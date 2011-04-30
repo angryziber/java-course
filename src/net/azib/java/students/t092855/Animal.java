@@ -3,12 +3,12 @@ package net.azib.java.students.t092855;
 
 public abstract class Animal {
 	private int age;
-	private String sex;
+	private String gender;
 	private String animalClass;
 
-	public Animal(int age, String sex, String animalClass){
+	public Animal(int age, String gender, String animalClass){
 		this.age = age;
-		this.sex = sex;
+		this.gender = gender;
 		this.animalClass = animalClass;
 	}
 
@@ -20,8 +20,8 @@ public abstract class Animal {
 		age++;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
 	public String getAnimalClass() {
@@ -29,7 +29,7 @@ public abstract class Animal {
 	}
 
 	public String toString() {
-		return "Animal class: " + animalClass + "; Age: " + age + "; Sex: " + sex + "; ";
+		return "Animal class: " + animalClass + "; Age: " + age + "; Gender: " + gender + "; ";
 	}
 
 }

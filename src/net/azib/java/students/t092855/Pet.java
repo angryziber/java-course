@@ -4,8 +4,8 @@ package net.azib.java.students.t092855;
 public abstract class Pet extends Animal{
 	private String name;
 
-	public Pet(int age, String sex, String animalClass, String name) {
-		super(age, sex, animalClass);
+	public Pet(int age, String gender, String animalClass, String name) {
+		super(age, gender, animalClass);
 		this.name = name;
 	}
 
