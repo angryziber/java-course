@@ -31,9 +31,7 @@ public class FactorialTest {
 	@Test
 	public void someBigNumberIsCorrect() {
 		assertEquals(new BigInteger("2432902008176640000"), new Factorial().getNumber(20));
-		System.out.println("Some big number is tested");
 	}
-
 
 	@Test @Ignore
 	public void thisIsIgnored() {
