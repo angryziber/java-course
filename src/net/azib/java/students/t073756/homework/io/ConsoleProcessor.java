@@ -6,10 +6,7 @@ import net.azib.java.students.t073756.homework.validator.ResultValidator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ConsoleProcessor extends AbstractInputProcessor<BufferedReader> {
 
@@ -17,23 +14,27 @@ public class ConsoleProcessor extends AbstractInputProcessor<BufferedReader> {
         super(source);
     }
 
-    private Map<String, ResultValidator> questionsWithRegexp = new LinkedHashMap<String, ResultValidator>();
+    final Map<String, ResultValidator> questionsWithRegexp;
 
-    {
-        questionsWithRegexp.put("Athlete name", ResultValidator.NAME_VALIDATOR);
-        questionsWithRegexp.put("Athlete birthday in format \"dd.MM.yyyy\" (d-day, M-month, y-year digits)", ResultValidator.BIRTHDAY_VALIDATOR);
-        questionsWithRegexp.put("Country (ISO 2-letter code)", ResultValidator.ISO2_COUNTRY_VALIDATOR);
-        questionsWithRegexp.put("100 m sprint (sec) in format ss.ms", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-        questionsWithRegexp.put("Long jump (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-        questionsWithRegexp.put("Shot put (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-        questionsWithRegexp.put("High jump (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-        questionsWithRegexp.put("400 m sprint in format min:sec.ms", ResultValidator.TIME_RESULT_VALIDATOR);
-        questionsWithRegexp.put("110 m hurdles in format sec.ms", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-        questionsWithRegexp.put("Discus throw in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-        questionsWithRegexp.put("Pole vault in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-        questionsWithRegexp.put("Javelin throw in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-        questionsWithRegexp.put("1500 m race in format min:sec.ms", ResultValidator.TIME_RESULT_VALIDATOR);
-    }
+	{
+		Map<String, ResultValidator> questionsValidators = new LinkedHashMap<String, ResultValidator>();
+
+		questionsValidators.put("Athlete name", ResultValidator.NAME_VALIDATOR);
+		questionsValidators.put("Athlete birthday in format \"dd.MM.yyyy\" (d-day, M-month, y-year digits)", ResultValidator.BIRTHDAY_VALIDATOR);
+		questionsValidators.put("Country (ISO 2-letter code)", ResultValidator.ISO2_COUNTRY_VALIDATOR);
+		questionsValidators.put("100 m sprint (sec) in format ss.ms", ResultValidator.SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Long jump (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Shot put (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("High jump (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("400 m sprint in format min:sec.ms", ResultValidator.TIME_RESULT_VALIDATOR);
+		questionsValidators.put("110 m hurdles in format sec.ms", ResultValidator.SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Discus throw in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Pole vault in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Javelin throw in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("1500 m race in format min:sec.ms", ResultValidator.TIME_RESULT_VALIDATOR);
+
+		questionsWithRegexp = Collections.unmodifiableMap(questionsValidators);
+	}
 
     public List<Athlete> readAthletes() {
         List<Athlete> athletes = new ArrayList<Athlete>();
@@ -42,29 +43,29 @@ public class ConsoleProcessor extends AbstractInputProcessor<BufferedReader> {
             for (Map.Entry<String, ResultValidator> questionEntry : questionsWithRegexp.entrySet()) {
                 String answer;
                 do {
-                    answer = askQuestion(questionEntry.getKey(), getSource());
+                    answer = askQuestion(questionEntry.getKey());
                 } while (!questionEntry.getValue().validate(answer));
                 athleteData.add(answer);
             }
             athletes.add(createAthlete(athleteData));
-        } while (askYesNoQuestion("Want to add one more athlete? (yes/no)", getSource()));
+        } while (askYesNoQuestion("Want to add one more athlete? (yes/no)"));
         return athletes;
     }
 
-    private String askQuestion(String question, BufferedReader source) {
+    String askQuestion(String question) {
         System.out.println(question);
         try {
-            return source.readLine();
+            return getSource().readLine();
         } catch (IOException e) {
-            throw new DecathlonException("");
+            throw new DecathlonException("Unable to receive input from console");
         }
     }
 
-    private boolean askYesNoQuestion(String question, BufferedReader source) {
+    private boolean askYesNoQuestion(String question) {
         String answer;
         do {
-            answer = askQuestion(question, source);
-        } while (!answer.equalsIgnoreCase("yes") && !answer.equalsIgnoreCase("no"));
+            answer = askQuestion(question);
+        } while (!"yes".equalsIgnoreCase(answer) && !"no".equalsIgnoreCase(answer));
         return answer.equals("yes");
     }
 }
