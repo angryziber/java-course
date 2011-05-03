@@ -16,7 +16,7 @@ public class FileReceiverServer {
 				int port = 16969;
 				try {
 					server = new ServerSocket(port);
-					server.setSoTimeout(100);
+					server.setSoTimeout(500);
 				}
 				catch (IOException e) {
 					System.err.println("Failed to listen port " + port);
@@ -37,11 +37,15 @@ public class FileReceiverServer {
 				}
 			}
 		};
-		listener.setDaemon(true);
+
 		listener.start();
+
 		Scanner scanner = new Scanner(System.in);
 		scanner.useDelimiter("\n");
 		System.out.println("type 'exit' to close program");
 		while (scanner.next().compareTo("exit") != 0);
+
+		listener.interrupt();
+		listener.join();
 	}
 }
