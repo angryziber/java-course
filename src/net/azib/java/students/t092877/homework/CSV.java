@@ -7,8 +7,8 @@ import java.util.List;
 
 public class CSV {
 
-//	public static List<Athlete> input(String source) {
-//
+	public static List<Athlete> input(String source) {
+
 //		try {
 //			BufferedReader in = new BufferedReader(new FileReader(source));
 //		} catch (FileNotFoundException e) {
@@ -21,9 +21,10 @@ public class CSV {
 //
 //
 //		return Utility.athletes;
-//	}
-//
-//	public static void output(List<Athlete> athletes, String path) {
-//
-//	}
+		return null;
+	}
+
+	public static void output(List<Athlete> athletes, String path) {
+
+	}
 }
