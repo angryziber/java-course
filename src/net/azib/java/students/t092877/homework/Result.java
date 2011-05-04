@@ -22,10 +22,6 @@ public class Result {
 		return value;
 	}
 
-	public String getOriginalValue() {
-		return Utility.convertToOriginalUnits(value, event.getType());
-	}
-
 	public void setValue(double value) {
 		this.value = value;
 	}
