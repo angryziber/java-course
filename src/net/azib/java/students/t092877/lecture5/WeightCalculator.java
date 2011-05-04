@@ -10,6 +10,6 @@ public class WeightCalculator {
 
 		for (Planet planet : Planet.values())
 			System.out.println("Object's weight on " + planet + " is " +
-					           Math.round(planet.surfaceWeight(testMassInKg) * 100) / 100.0 + " N");
+					           Math.round(planet.surfaceWeight(testMassInKg) * 100) / 100.0 + "N");
 	}
 }
