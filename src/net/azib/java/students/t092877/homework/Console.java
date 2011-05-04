@@ -10,7 +10,7 @@ public class Console {
 
 	public static List<Athlete> input() {
 
-		System.out.println("One by one enter names and the results of the participants");
+		System.out.println("One by one enter names and the results of participants");
 
 		String userChoise;
 		Athlete currentAthlete;
@@ -28,12 +28,12 @@ public class Console {
 
 			currentAthlete = Utility.athletes.get(Utility.athletes.size() - 1);
 
-			System.out.print("\nEnter the date of birth: ");
-			try {
-				currentAthlete.setDateOfBirth(in.readLine());
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+//			System.out.print("\nEnter the date of birth: ");
+//			try {
+//				currentAthlete.setDateOfBirth(in.readLine());
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
 
 			System.out.print("\nEnter 2-letter country code: ");
 			try {
@@ -42,7 +42,7 @@ public class Console {
 				e1.printStackTrace();
 			}
 
-			System.out.println("\nNow you could input individual event results for " + currentAthlete.getName());
+			System.out.println("\n\nNow you could input individual event results for " + currentAthlete.getName());
 			System.out.println("----------------------------------------------------------------------");
 
 			for (Event event : Event.values()) {
