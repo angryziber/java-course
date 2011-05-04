@@ -7,29 +7,4 @@ import java.util.List;
 
 public class Database {
 
-	public static List<Athlete> input(String name) {
-		return Utility.athletes;
-	}
-
-	public static void connectToDatabase(String name) {
-
-		Connection con = null;
-
-	    try {
-
-	      con = DriverManager.getConnection("jdbc:mysql:///test","java", "java");
-
-	      if(!con.isClosed())
-	        System.out.println("Successfully connected to " +
-	          "MySQL server");
-
-	    } catch(Exception e) {
-	      System.err.println("Exception: " + e.getMessage());
-	    } finally {
-	      try {
-	        if(con != null)
-	          con.close();
-	      } catch(SQLException e) {}
-	    }
-	}
 }
