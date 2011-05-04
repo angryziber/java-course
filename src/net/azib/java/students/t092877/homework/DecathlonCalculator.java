@@ -5,6 +5,8 @@ public class DecathlonCalculator {
 	public static void main(String[] args) {
 
 		//System.out.println(Utility.convertToOriginalUnits(269.58, "running"));
+		if (args.length == 0)
+			System.out.println("\nERROR: the command-line parameter list is empty");
 
 		for (int i = 0; i < args.length; i++) {
 
