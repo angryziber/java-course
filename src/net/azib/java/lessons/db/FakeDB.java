@@ -1,9 +1,6 @@
 package net.azib.java.lessons.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * FakeDB
@@ -12,17 +9,62 @@ import java.sql.Statement;
  */
 public class FakeDB {
 
-	public void prepare() throws SQLException {
-		Connection conn = openConnection();
-		Statement stmt = conn.createStatement();
-		stmt.execute("create table persons (id integer, name varchar, age integer, sex char)");
-		stmt.execute("insert into persons values (1, 'John Doe', 25, 'M')");
-		stmt.execute("insert into persons values (2, 'Jaan Tamm', 43, 'M')");
-		conn.close();
+	public static void prepare() throws SQLException {
+		Connection conn = null;
+		try {
+			conn = openConnection();
+			Statement stmt = conn.createStatement();
+			stmt.execute("create table persons (id integer, name varchar, age integer, sex char)");
+			stmt.execute("insert into persons values (2, 'Jaan Tamm', 43, 'M')");
+
+			conn.commit();
+		}
+		catch (SQLException e) {
+			// todo log also here
+			rollbackQuietly(conn);
+		}
+		finally {
+			if (conn != null)
+				conn.close();
+		}
+	}
+
+	private static void rollbackQuietly(Connection conn) {
+		try {
+			if (conn != null)
+				conn.rollback();
+		} catch (SQLException ignore) {}
 	}
 
 	static Connection openConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
 	}
 
+	public static void closeQuietly(Connection conn) {
+		try {
+			if (conn != null)
+				conn.close();
+		}
+		catch (SQLException ignore) {
+		}
+	}
+
+	public static void main(String[] args) throws SQLException {
+		prepare();
+		Connection conn = openConnection();
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery("select * from persons");
+		int columnCount = rs.getMetaData().getColumnCount();
+		for (int i = 1; i <= columnCount; i++) {
+			System.out.print(rs.getMetaData().getColumnName(i) + " ");
+		}
+		System.out.println();
+		while (rs.next()) {
+			for (int i = 1; i <= columnCount; i++) {
+				System.out.print(rs.getString(i) + " ");
+			}
+			System.out.println();
+		}
+		conn.close();
+	}
 }

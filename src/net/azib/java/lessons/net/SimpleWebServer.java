@@ -9,8 +9,12 @@ import java.net.Socket;
 import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SimpleWebServer extends Thread {
+	private final Logger LOG = Logger.getLogger(getClass().getName());
+
 	private List<ContentProvider> providerChain = Arrays.asList(
 				new HelloWorldProvider(),
 				new InsecureFileProvider(),
@@ -31,21 +35,23 @@ public class SimpleWebServer extends Thread {
 		int port = 8080;
 		try {
 			server = new ServerSocket(port);
+			LOG.config("Listening on port " + port);
 		}
 		catch (IOException e) {
-			System.err.println("Failed to listen to port " + port);
+			LOG.severe("Failed to listen to port " + port);
 			return;
 		}
 
 		while (!Thread.interrupted()) {
+			Socket client = null;
 			try {
-				Socket client = server.accept();
-				System.out.println("Accepted connection from " + client.getRemoteSocketAddress());
+				client = server.accept();
+				LOG.info("Accepted connection from " + client.getRemoteSocketAddress());
 				handle(client);
 				client.close();
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				LOG.log(Level.WARNING, "Request handling failed from " + client, e);
 			}
 		}
 
@@ -54,7 +60,7 @@ public class SimpleWebServer extends Thread {
 		}
 		catch (IOException e) {
 		}
-		System.err.println("Server terminated");
+		LOG.info("Server terminated");
 	}
 
 	void handle(Socket client) throws IOException {
