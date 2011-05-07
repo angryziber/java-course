@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
+import static net.azib.java.students.t073756.homework.validator.ResultValidator.*;
+
 public class ConsoleProcessor extends AbstractInputProcessor<BufferedReader> {
 
     public ConsoleProcessor(BufferedReader source) {
@@ -19,19 +21,19 @@ public class ConsoleProcessor extends AbstractInputProcessor<BufferedReader> {
 	{
 		Map<String, ResultValidator> questionsValidators = new LinkedHashMap<String, ResultValidator>();
 
-		questionsValidators.put("Athlete name", ResultValidator.NAME_VALIDATOR);
-		questionsValidators.put("Athlete birthday in format \"dd.MM.yyyy\" (d-day, M-month, y-year digits)", ResultValidator.BIRTHDAY_VALIDATOR);
-		questionsValidators.put("Country (ISO 2-letter code)", ResultValidator.ISO2_COUNTRY_VALIDATOR);
-		questionsValidators.put("100 m sprint (sec) in format ss.ms", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-		questionsValidators.put("Long jump (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-		questionsValidators.put("Shot put (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-		questionsValidators.put("High jump (m) in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-		questionsValidators.put("400 m sprint in format min:sec.ms", ResultValidator.TIME_RESULT_VALIDATOR);
-		questionsValidators.put("110 m hurdles in format sec.ms", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-		questionsValidators.put("Discus throw in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-		questionsValidators.put("Pole vault in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-		questionsValidators.put("Javelin throw in format m.sm", ResultValidator.SIMPLE_RESULT_VALIDATOR);
-		questionsValidators.put("1500 m race in format min:sec.ms", ResultValidator.TIME_RESULT_VALIDATOR);
+		questionsValidators.put("Athlete name", NAME_VALIDATOR);
+		questionsValidators.put("Athlete birthday in format \"dd.MM.yyyy\" (d-day, M-month, y-year digits)", BIRTHDAY_VALIDATOR);
+		questionsValidators.put("Country (ISO 2-letter code)", ISO2_COUNTRY_VALIDATOR);
+		questionsValidators.put("100 m sprint (sec) in format ss.ms", SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Long jump (m) in format m.sm", SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Shot put (m) in format m.sm", SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("High jump (m) in format m.sm", SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("400 m sprint in format min:sec.ms", TIME_RESULT_VALIDATOR);
+		questionsValidators.put("110 m hurdles in format sec.ms", SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Discus throw in format m.sm", SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Pole vault in format m.sm", SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("Javelin throw in format m.sm", SIMPLE_RESULT_VALIDATOR);
+		questionsValidators.put("1500 m race in format min:sec.ms", TIME_RESULT_VALIDATOR);
 
 		questionsWithRegexp = Collections.unmodifiableMap(questionsValidators);
 	}
