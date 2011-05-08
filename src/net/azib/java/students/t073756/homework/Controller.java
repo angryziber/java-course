@@ -25,7 +25,7 @@ public class Controller {
         proceedWithCalculation(inputProcessor, outputProvider);
     }
 
-    private void setInputProcessor(String[] args) {
+    void setInputProcessor(String[] args) {
         String processorFlag = args[argNumber];
 
         if (CommandLineArgumentValidator.CONSOLE.validate(processorFlag)) {
@@ -39,7 +39,7 @@ public class Controller {
             }
         } else if (CommandLineArgumentValidator.DB_INPUT.validate(processorFlag)) {
             String secondArg = args[++argNumber];
-            Connection c = DbConnectionProvider.getConnection();
+            Connection c = getConnection();
             if (CommandLineArgumentValidator.COMPETITION_ID.validate(secondArg)) {
                 inputProcessor = new DbInputProcessor(c, Integer.parseInt(secondArg));
             } else { //there is no restrictions for competition name :(
@@ -50,7 +50,7 @@ public class Controller {
         }
     }
 
-    private void setOutputProvider(String[] args) {
+	void setOutputProvider(String[] args) {
         String providerFlag = args[++argNumber];
         if (CommandLineArgumentValidator.CONSOLE.validate(providerFlag)) {
             outputProvider = new ConsoleOutput();
@@ -77,17 +77,29 @@ public class Controller {
         }
     }
 
-    private void proceedWithCalculation(InputProcessor inputProcessor, OutputProvider outputProvider) {
+	void validateArgumentsAmount(String[] args) {
+		int argsNumber = args.length;
+		if (argsNumber < 2 || argsNumber > 4) {
+			throw new DecathlonException("wrong amount of arguments! there must be at least 2 and no more than 4 arguments!");
+		}
+	}
+
+	InputProcessor getInputProcessor() {
+		return inputProcessor;
+	}
+
+	OutputProvider getOutputProvider() {
+		return outputProvider;
+	}
+
+	Connection getConnection() {
+		return DbConnectionProvider.provideConnection();
+	}
+
+	private void proceedWithCalculation(InputProcessor inputProcessor, OutputProvider outputProvider) {
         List<Athlete> athletes = inputProcessor.readAthletes();
         ResultCalculator calculator = new ResultCalculator(athletes);
         calculator.calculate();
         outputProvider.writeAthletes(athletes);
-    }
-
-    void validateArgumentsAmount(String[] args) {
-        int argsNumber = args.length;
-        if (argsNumber < 2 && argsNumber > 4) {
-            throw new DecathlonException("wrong amount of arguments! there must be at least 2 and no more than 4 arguments!");
-        }
     }
 }

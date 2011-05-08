@@ -1,6 +1,7 @@
 package net.azib.java.students.t073756.homework.io;
 
 import net.azib.java.students.t073756.homework.DecathlonException;
+import net.azib.java.students.t073756.homework.Main;
 import org.apache.commons.io.IOUtils;
 
 import javax.xml.transform.Transformer;
@@ -24,7 +25,7 @@ public class HtmlOutput extends XmlOutput {
         FileOutputStream out = null;
         try {
             Transformer t = TransformerFactory.newInstance()
-                    .newTransformer(new StreamSource(new File("res" + File.separator + "decathlon.xsl")));
+                    .newTransformer(new StreamSource(Main.class.getResourceAsStream("decathlon_xsl.xml")));
             out = new FileOutputStream(getOutputFile());
             t.transform(new DOMSource(getDocument()), new StreamResult(out));
         } catch (TransformerException e) {

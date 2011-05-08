@@ -1,40 +1,66 @@
 package net.azib.java.students.t073756.homework.io;
 
 import net.azib.java.students.t073756.homework.Athlete;
-import net.azib.java.students.t073756.homework.Place;
+import net.azib.java.students.t073756.homework.TestHelper;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
 
 public class ConsoleOutputTest {
-    private TestInputProcessor p = new TestInputProcessor(null);
+	private final StringBuffer result = new StringBuffer();
+	private String expectedOutput = "  5| 5000|Siim Susi      |01. 1.1976|EE|12.61   |5.00    |9.22    " +
+			"|1.50    |59.39   |16.43   |21.60   |2.60    |35.81   |5:25.72 |";
 
-    @Test
-    public void testOutput() throws Exception {
-        final String[] result = {null};
-	    System.setOut(new PrintStream(createTempFile()) {
-            @Override
-            public void println(String input) {
-                result[0] = input;
-            }
-        });
+	@Before
+	public void setUp() throws Exception {
+		PrintStream out = mockOut();
+		System.setOut(out);
+	}
 
-        Athlete a = p.readAthletes().get(0);
-        a.getResult().setOverallResult(5000);
-        a.getResult().setPlace(new Place(5));
+	@Test
+	public void testOutput() throws Exception {
+		new ConsoleOutput().writeAthletes(TestHelper.createAthleteList());
 
-        new ConsoleOutput().writeAthletes(Arrays.<Athlete>asList(a));
-        assertEquals("  5| 5000|Siim Susi      |01. 1.1976|EE|12.61   |5.00    |9.22    |1.50    |59.39   |16.43   |21.60   |2.60    |35.81   |5:25.72 |", result[0]);
-    }
+		assertEquals(expectedOutput, result.toString());
+	}
 
-	private File createTempFile() throws IOException {
-		File temp = File.createTempFile("temp", null);
-		temp.deleteOnExit();
-		return temp;
+	@Test
+	public void testLongAthleteName() throws Exception {
+		Athlete a = TestHelper.createAthlete();
+		a.setName("Siim Susi Siim Susi Siim Susi");
+
+		new ConsoleOutput().writeAthletes(Arrays.asList(a));
+
+		assertEquals("  5| 5000|Siim Susi Si...|01. 1.1976|EE|12.61   |5.00    |9.22    " +
+				"|1.50    |59.39   |16.43   |21.60   |2.60    |35.81   |5:25.72 |", result.toString());
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		result.delete(0, result.length());
+	}
+
+	private PrintStream mockOut() {
+		PrintStream out = mock(PrintStream.class);
+
+		doAnswer(new Answer() {
+			@Override
+			public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
+				result.append(invocationOnMock.getArguments()[0]);
+				return null;
+			}
+		}).when(out).println(anyString());
+
+		return out;
 	}
 }

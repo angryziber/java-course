@@ -5,25 +5,11 @@ import net.azib.java.students.t073756.homework.DecathlonException;
 import net.azib.java.students.t073756.homework.Main;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DbConnectionProvider {
-    private static Connection connection;
 
-    public static Connection getConnection() {
-        try {
-            if (connection == null || connection.isClosed()) {
-                connection = provideConnection();
-            }
-        } catch (SQLException e) {
-            throw new DecathlonException("problems with DB connection");
-        }
-        return connection;
-    }
-
-
-    private static Connection provideConnection() {
+    public static Connection provideConnection() {
         Properties p = new Properties();
         try {
             p.load(Main.class.getResourceAsStream("dbconnection.properties"));
