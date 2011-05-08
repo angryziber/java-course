@@ -1,14 +1,23 @@
 package net.azib.java.students.t107678.homework;
 
+import java.util.Collection;
 import java.util.Set;
 
 public class Record {
 
 
-    Participant participant;
-    Set<Event> events;
+    final private Participant participant;
+    final private Collection<Event> events;
 
-    public Record(Participant participant, Set<Event> events) {
+    public Participant getParticipant() {
+        return participant;
+    }
+
+    public Collection<Event> getEvents() {
+        return events;
+    }
+
+    public Record(Participant participant, Collection<Event> events) {
 
         this.participant=participant;
         this.events = events;
