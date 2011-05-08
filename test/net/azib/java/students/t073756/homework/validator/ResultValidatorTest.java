@@ -8,11 +8,6 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static net.azib.java.students.t073756.homework.validator.ResultValidator.*;
 
-/**
- * User: anton
- * Date: 4/2/11
- * Time: 7:03 PM
- */
 public class ResultValidatorTest {
     @Test
     public void testSimpleResultValidator() throws Exception {
@@ -60,6 +55,7 @@ public class ResultValidatorTest {
         assertTrue(ISO2_COUNTRY_VALIDATOR.validate("EE"));
         assertTrue(ISO2_COUNTRY_VALIDATOR.validate("ZZ"));
         assertTrue(ISO2_COUNTRY_VALIDATOR.validate("AA"));
+        assertFalse(ISO2_COUNTRY_VALIDATOR.validate("АА"));//russian
         assertFalse(ISO2_COUNTRY_VALIDATOR.validate("00"));
         assertFalse(ISO2_COUNTRY_VALIDATOR.validate("A1"));
         assertFalse(ISO2_COUNTRY_VALIDATOR.validate("EST"));

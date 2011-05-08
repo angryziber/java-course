@@ -42,6 +42,7 @@ public class CsvProcessorTest {
 
     private File createTestFile(String fileData) throws IOException {
         File csv = File.createTempFile("csv", null);
+	    csv.deleteOnExit();
         FileOutputStream output = new FileOutputStream(csv);
         IOUtils.write(fileData, output);
         output.close();

@@ -26,10 +26,6 @@ public class DbInputProcessorTest {
 		assertResult(processor.readAthletes());
 	}
 
-	private void fixSQL() {
-		processor.sql = processor.sql.replace("DATE_FORMAT(dob, '%d.%m.%Y')", "EXTRACT(DAY FROM dob) || '.' || EXTRACT(MONTH FROM dob) || '.' || EXTRACT(YEAR FROM dob)");
-	}
-
 	@Test
 	public void testReadAthletesByCompetitionName() throws Exception {
 		processor = new DbInputProcessor(TestDecathlonDB.openConnection(), "DECATHLON4BEER");
@@ -37,15 +33,19 @@ public class DbInputProcessorTest {
 		assertResult(processor.readAthletes());
 	}
 
+	@After
+	public void tearDown() throws Exception {
+		TestDecathlonDB.clean();
+	}
+
+	private void fixSQL() {
+		processor.setSql(processor.getSql().replace("DATE_FORMAT(dob, '%d.%m.%Y')", "EXTRACT(DAY FROM dob) || '.' || EXTRACT(MONTH FROM dob) || '.' || EXTRACT(YEAR FROM dob)"));
+	}
+
 	private void assertResult(List<Athlete> athletes) {
 		assertEquals(1, athletes.size());
 		Athlete a = athletes.iterator().next();
 		assertEquals("Siim Susi", a.getName());
 		assertEquals("325.72", a.getResult().getResults().get(DecathlonEvent.M_1500));
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		TestDecathlonDB.clean();
 	}
 }

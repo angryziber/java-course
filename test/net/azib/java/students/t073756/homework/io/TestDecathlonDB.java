@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 /**
  * Fake database for Decathlon competition. As an example is taken FakeDB class by Anton Keks.
- * Create tables and insert scripts is exported from 'production' DB and simplified.
+ * Create tables and insert scripts are exported from 'production' DB and simplified.
  *
  * @see net.azib.java.lessons.db.FakeDB
  */

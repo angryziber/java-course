@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DbInputProcessor extends AbstractInputProcessor<Connection> {
 
-    String sql = "SELECT " +
+    private String sql = "SELECT " +
             " a.name,DATE_FORMAT(dob, '%d.%m.%Y') birthday,a.country_code,race_100m,long_jump,shot_put,high_jump," +
             " race_400m,hurdles_110m,discus_throw,pole_vault,javelin_throw,race_1500m" +
             " FROM results r, athletes a, competitions c" +
@@ -69,4 +69,12 @@ public class DbInputProcessor extends AbstractInputProcessor<Connection> {
         }
         return athletes;
     }
+
+	String getSql() {
+		return sql;
+	}
+
+	void setSql(String sql) {
+		this.sql = sql;
+	}
 }
