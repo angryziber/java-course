@@ -5,18 +5,12 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import java.io.File;
-import java.sql.Connection;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
 
 public class ControllerTest {
-	private Controller c = new Controller() {
-		@Override
-		Connection getConnection() {
-			return null;
-		}
-	};
+	private Controller c = new Controller();
 
 	@Test
 	public void testDoService() throws Exception {
@@ -52,46 +46,46 @@ public class ControllerTest {
 
 	@Test
 	public void testCreateDBInput() throws Exception {
-		assertInput(DbInputProcessor.class, "-db", "1");
+		assertInput(DbInputProcessor.class, "-db", "1","-console");
 	}
 
 	@Test
 	public void testCreateCSVInput() throws Exception {
-		assertInput(CsvProcessor.class, "-csv", "home/csv.csv");
+		assertInput(CsvProcessor.class, "-csv", "home/csv.csv","-console");
 	}
 
 	@Test
 	public void testCreateConsoleInput() throws Exception {
-		assertInput(ConsoleProcessor.class, "-console");
+		assertInput(ConsoleProcessor.class, "-console","-console");
 	}
 
 	@Test
 	public void testCreateCsvOutput() throws Exception {
-		assertOutput(CsvOutput.class, null, "-csv", "home/csv.csv");
+		assertOutput(CsvOutput.class, "-console", "-csv", "home/csv.csv");
 	}
 
 	@Test
 	public void testCreateXMLOutput() throws Exception {
-		assertOutput(XmlOutput.class, null, "-xml", "home/xml.xml");
+		assertOutput(XmlOutput.class, "-console", "-xml", "home/xml.xml");
 	}
 
 	@Test
 	public void testCreateHTMLOutput() throws Exception {
-		assertOutput(HtmlOutput.class, null, "-html", "home/html.html");
+		assertOutput(HtmlOutput.class, "-console", "-html", "home/html.html");
 	}
 
 	@Test
 	public void testCreateConsoleOutput() throws Exception {
-		assertOutput(ConsoleOutput.class, null, "-console");
+		assertOutput(ConsoleOutput.class, "-console", "-console");
 	}
 
 	private void assertInput(Class expectedInput, String... args) {
-		c.setInputProcessor(args);
+		c.setIO(args);
 		assertEquals(expectedInput, c.getInputProcessor().getClass());
 	}
 
 	private void assertOutput(Class expectedOutput, String... args) {
-		c.setOutputProvider(args);
+		c.setIO(args);
 		assertEquals(expectedOutput, c.getOutputProvider().getClass());
 	}
 }

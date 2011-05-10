@@ -31,7 +31,6 @@ public class ResultCalculator {
             Result r = a.getResult();
             int total = 0;
 
-            r.getResults();
             for (Map.Entry<DecathlonEvent, String> e : r.getResults().entrySet()) {
                 total += e.getKey().calculateScore(e.getValue());
             }
