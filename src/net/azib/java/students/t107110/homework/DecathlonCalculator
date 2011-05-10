@@ -1,0 +1,17 @@
+#!/bin/bash
+
+readonly ENCODING='UTF-8'
+#readonly LANG='en'
+#readonly LANG='fr'
+readonly LANG='ru'
+
+readonly STUDENT='t107110'
+readonly MAIN_CLASS="net.azib.java.students.${STUDENT}.homework.DecathlonCalculator"
+
+readonly OUT_DIR="../../../../../../../out/production/java"
+readonly LIB_DIR="../../../../../../../lib"
+readonly STUDENT_HOMEWORK_DIR="${OUT_DIR}/net/azib/java/students/${STUDENT}/homework"
+
+readonly CLASSPATH="${STUDENT_HOMEWORK_DIR}:${OUT_DIR}:${LIB_DIR}/log4j.jar"
+
+java -D"file.encoding=${ENCODING}" -D"user.language=${LANG}" -classpath "${CLASSPATH}" "${MAIN_CLASS}" 
