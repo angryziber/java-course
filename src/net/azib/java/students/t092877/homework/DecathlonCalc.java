@@ -2,7 +2,7 @@ package net.azib.java.students.t092877.homework;
 
 import java.util.List;
 
-public class DecathlonCalculator {
+public class DecathlonCalc {
 
 	public static void main(String[] args) {
 
