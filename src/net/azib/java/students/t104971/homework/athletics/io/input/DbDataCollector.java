@@ -49,7 +49,6 @@ public class DbDataCollector implements DataCollector {
     private Athlete parseResult(ResultSet result) {
         Athlete athlete = new Athlete();
         try {
-            athlete.setId(result.getInt("athletes.id"));
             athlete.setName(result.getString("athletes.name"));
             athlete.setCountry(result.getString("athletes.country_code"));
 

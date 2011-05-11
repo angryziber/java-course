@@ -1,24 +1,25 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
-import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.components.Result;
+import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
 import net.azib.java.students.t104971.homework.athletics.util.InputParser;
+import net.azib.java.students.t104971.homework.athletics.util.PlaceHolderUtil;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Jaroslav Judin
  */
 public class CSVWriter implements OutputWriter {
 
-    private Collection<Athlete> athletes;
+    private List<Athlete> athletes;
 
-    public CSVWriter(Collection<Athlete> athletes) {
+    public CSVWriter(List<Athlete> athletes) {
         this.athletes = athletes;
     }
 
@@ -42,6 +43,10 @@ public class CSVWriter implements OutputWriter {
 
     private String createLine(Athlete athlete) {
         StringBuilder line = new StringBuilder()
+                .append(PlaceHolderUtil.getPlace(athlete, athletes))
+                .append(",")
+                .append(athlete.getTotalScore())
+                .append(",")
                 .append(athlete.getName())
                 .append(",")
                 .append(InputParser.formatDate(athlete.getDateBirth()))

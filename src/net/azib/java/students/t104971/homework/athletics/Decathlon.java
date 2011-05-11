@@ -40,7 +40,7 @@ public class Decathlon {
 
     private Decathlon getInputData(String method, String parameter) {
         DataCollector collector = DataCollectorBuilder.getCollector(parse(method));
-        athletes = (List<Athlete>) collector.loadCompetitionResults(parameter);
+        athletes = collector.loadCompetitionResults(parameter);
         return this;
     }
 

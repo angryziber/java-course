@@ -1,23 +1,25 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
+import net.azib.java.students.t104971.homework.athletics.util.PlaceHolderUtil;
 import org.apache.log4j.Logger;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Jaroslav Judin
  */
 public class ConsoleWriter implements OutputWriter {
-    private Collection<Athlete> athletes;
+    private List<Athlete> athletes;
     private Logger logger = Logger.getLogger(getClass());
 
-    public ConsoleWriter(Collection<Athlete> athletes) {
+    public ConsoleWriter(List<Athlete> athletes) {
         this.athletes = athletes;
     }
 
     public String write(String outFileName) {
         for (Athlete athlete : athletes) {
+            athlete.setPlace(PlaceHolderUtil.getPlace(athlete, athletes));
             logger.info(athlete);
         }
         return null;

@@ -2,6 +2,7 @@ package net.azib.java.students.t104971.homework.athletics.io.output.xml;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.components.Result;
+import net.azib.java.students.t104971.homework.athletics.util.PlaceHolderUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.ProcessingInstruction;
@@ -35,8 +36,7 @@ public class XMLBuilder {
             doc.appendChild(root);
 
 
-            for (int i = 0; i < athletes.size(); i++) {
-                Athlete man = athletes.get(i);
+            for (Athlete man : athletes) {
                 //create child element, add an attribute, and add to root
                 sportsman = doc.createElement("sportsman");
                 name = doc.createElement("name");
@@ -44,7 +44,8 @@ public class XMLBuilder {
                 sportsman.appendChild(name);
 
                 place = doc.createElement("place");
-                place.appendChild(doc.createTextNode(Integer.toString(i + 1)));
+
+                place.appendChild(doc.createTextNode(PlaceHolderUtil.getPlace(man, athletes)));
                 sportsman.appendChild(place);
 
                 totalScore = doc.createElement("totalscore");

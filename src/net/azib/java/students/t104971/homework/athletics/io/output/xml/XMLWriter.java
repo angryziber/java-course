@@ -3,13 +3,16 @@
  */
 package net.azib.java.students.t104971.homework.athletics.io.output.xml;
 
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
-import net.azib.java.students.t104971.homework.athletics.components.*;
 import net.azib.java.students.t104971.homework.athletics.io.output.OutputWriter;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.FileOutputStream;
@@ -66,7 +69,7 @@ public class XMLWriter implements OutputWriter {
     }
 
     private Document getDocument() {
-       return constructXML(xslFile, athletes);
+        return constructXML(xslFile, athletes);
     }
 
     public void setOutputFileName(String outputFileName) {

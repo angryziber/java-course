@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -25,7 +24,7 @@ public class CsvDataCollector implements DataCollector {
     private static final Logger LOG = Logger.getLogger(CsvDataCollector.class);
 
 
-    public Collection<Athlete> loadCompetitionResults(String csvFile) {
+    public List<Athlete> loadCompetitionResults(String csvFile) {
 
         List<Athlete> athletes = new ArrayList<Athlete>();
         List<String> contents = Collections.emptyList();

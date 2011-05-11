@@ -9,30 +9,16 @@ import static net.azib.java.students.t104971.homework.athletics.util.InputParser
 /**
  * @author Jaroslav Judin
  */
-public class Athlete implements Comparable {
-    private Integer id;
+public class Athlete implements Comparable<Athlete> {
     private String name;
     private Date dateBirth;
     private String country;
     private List<Result> results = new ArrayList<Result>();
     private int totalScore;
+    private String place;
 
-    public Athlete() {
-    }
-
-    public int compareTo(Object o) {
-        if (!(o instanceof Athlete)) {
-            return 0;
-        }
-        return ((Athlete) o).getTotalScore() - getTotalScore();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public int compareTo(Athlete o) {
+        return o.getTotalScore() - getTotalScore();
     }
 
     public String getName() {
@@ -71,6 +57,10 @@ public class Athlete implements Comparable {
         return results;
     }
 
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
     public void addResult(ResultType resultType, double result) {
         results.add(new Result(resultType, result));
     }
@@ -82,7 +72,8 @@ public class Athlete implements Comparable {
             resultsString.append("\n\t\t" + result);
         }
         return "Athlete{" +
-                "totalScore=" + totalScore +
+                " place=" + place +
+                ", totalScore=" + totalScore +
                 ", name= " + name +
                 ", country= " + country +
                 ", dateBirth=" + formatDate(dateBirth) +

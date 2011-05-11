@@ -5,7 +5,6 @@ import net.azib.java.students.t104971.homework.athletics.components.ResultType;
 import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  */
 public class ConsoleDataCollector implements DataCollector {
 
-    public Collection<Athlete> loadCompetitionResults(String parameter) {
+    public List<Athlete> loadCompetitionResults(String parameter) {
         List<Athlete> athletes = new ArrayList<Athlete>();
         for (int i = 1; ; i++) {
             System.out.println("Enter data for " + i + " athlete");
