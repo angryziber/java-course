@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Participant {
 
-    final private String name;
-    final private Date birthDate;
-    final private CountryCode country;
+    private String name;
+    private Date birthDate;
+//    final private CountryCode country;
 
-    public Participant(String name, Date birthDate, CountryCode country) {
-        this.name = name;
-        this.birthDate = birthDate;
-        this.country = country;
-    }
+//    public Participant(String name, Date birthDate, CountryCode country) {
+//        this.name = name;
+//        this.birthDate = birthDate;
+//        this.country = country;
+//    }
 
     public String getName() {
         return name;
@@ -22,7 +22,7 @@ public class Participant {
         return birthDate;
     }
 
-    public CountryCode getCountry() {
-        return country;
-    }
+//    public CountryCode getCountry() {
+//        return country;
+//    }
 }
