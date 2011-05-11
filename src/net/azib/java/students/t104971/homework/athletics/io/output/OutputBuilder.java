@@ -2,6 +2,7 @@ package net.azib.java.students.t104971.homework.athletics.io.output;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.io.SourceType;
+import net.azib.java.students.t104971.homework.athletics.io.output.xml.HTMLWriter;
 import net.azib.java.students.t104971.homework.athletics.io.output.xml.XMLWriter;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class OutputBuilder {
             case XML:
                 return new XMLWriter(athletes);
             case HTML:
-                return new XMLWriter(athletes);
+                return new HTMLWriter(athletes);
             case CSV:
                 return new CSVWriter(athletes);
             default:

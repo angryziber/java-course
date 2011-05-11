@@ -11,13 +11,13 @@ import java.io.InputStreamReader;
  */
 public class ConsoleInput {
 
-    private static BufferedReader console;
+    BufferedReader console;
 
-    static BufferedReader getConsole() {
+    BufferedReader getConsole() {
         return console == null ? console = new BufferedReader(new InputStreamReader(System.in)) : console;
     }
 
-    public static String getLine() {
+    public String getLine() {
         String currentLine = "";
         while ("".equalsIgnoreCase(currentLine)) {
             try {

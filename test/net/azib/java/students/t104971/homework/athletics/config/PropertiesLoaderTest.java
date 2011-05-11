@@ -1,5 +1,6 @@
 package net.azib.java.students.t104971.homework.athletics.config;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
@@ -9,11 +10,18 @@ import static junit.framework.Assert.assertTrue;
  */
 public class PropertiesLoaderTest {
 
-    @Test
-    public void testSetProperties() throws Exception {
-        int startPropertiesSize = System.getProperties().size();
+    @Before
+    public void setUp() throws Exception {
         PropertiesLoader.setProperties();
-        int finalPropertiesSize = System.getProperties().size();
-        assertTrue(finalPropertiesSize - startPropertiesSize > 0);
+    }
+
+    @Test
+    public void testGetCSVFile() throws Exception {
+      assertTrue(PropertiesLoader.getCSVFile().getAbsolutePath().endsWith("data-in.csv"));
+    }
+
+    @Test
+    public void testGetPagePath() throws Exception {
+      assertTrue(PropertiesLoader.getPagePath().endsWith("page.xsl"));
     }
 }

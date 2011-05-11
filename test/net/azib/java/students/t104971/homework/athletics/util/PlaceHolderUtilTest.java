@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static net.azib.java.students.t104971.homework.athletics.util.PlaceHolderUtil.getPlace;
 
 /**
  * @author Jaroslav Judin
@@ -24,7 +25,7 @@ public class PlaceHolderUtilTest {
         athletes.add(createAthlete(100));
         Collections.sort(athletes);
 
-        assertEquals("1-3", PlaceHolderUtil.getPlace(athlete, athletes));
+        assertEquals("1-3", getPlace(athlete, athletes));
 
     }
 
@@ -38,7 +39,7 @@ public class PlaceHolderUtilTest {
         athletes.add(createAthlete(110));
         Collections.sort(athletes);
 
-        assertEquals("2", PlaceHolderUtil.getPlace(athlete, athletes));
+        assertEquals("2", getPlace(athlete, athletes));
 
     }
 
