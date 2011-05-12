@@ -1,0 +1,250 @@
+<?xml  version="1.0" encoding="utf-8"?>
+
+<decathlon
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="decathlon.xsd">
+
+			<competition id="d10">
+				<name>DECATHLON4BEER</name>
+				<location>Tallinn</location>
+				<athletes>
+					<athlete>
+						<name>Erki Nool</name>
+						<date_of_birth>1972-05-19</date_of_birth>
+						<country_code>CZ</country_code>
+						<score>8610</score>
+						<place>3</place>
+						<results>
+							<event type="running">
+								<name>100m</name>
+								<result>
+									<value>10.62</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>long jump</name>
+								<result>
+									<value>8.07</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>shot put</name>
+								<result>
+									<value>16.57</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>high jump</name>
+								<result>
+									<value>2.00</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>400m</name>
+								<result>
+									<value>47.74</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>110m hurdles</name>
+								<result>
+									<value>13.80</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>discus throw</name>
+								<result>
+									<value>45.51</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>pole vault</name>
+								<result>
+									<value>5.00</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>javelin throw</name>
+								<result>
+									<value>68.53</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>1500m</name>
+								<result>
+									<value>235.13</value>
+									<units>seconds</units>
+								</result>
+							</event>
+						</results>
+					</athlete>
+					<athlete>
+						<name>Tomáš DVORÁK</name>
+						<date_of_birth>1972-05-19</date_of_birth>
+						<country_code>CZ</country_code>
+						<score>8902</score>
+						<place>1</place>
+						<results>
+							<event type="running">
+								<name>100m</name>
+								<result>
+									<value>10.62</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>long jump</name>
+								<result>
+									<value>8.07</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>shot put</name>
+								<result>
+									<value>16.57</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>high jump</name>
+								<result>
+									<value>2.00</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>400m</name>
+								<result>
+									<value>47.74</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>110m hurdles</name>
+								<result>
+									<value>13.80</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>discus throw</name>
+								<result>
+									<value>45.51</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>pole vault</name>
+								<result>
+									<value>5.00</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>javelin throw</name>
+								<result>
+									<value>68.53</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>1500m</name>
+								<result>
+									<value>235.13</value>
+									<units>seconds</units>
+								</result>
+							</event>
+						</results>
+					</athlete>
+					<athlete>
+						<name>Dean Macey</name>
+						<date_of_birth>1972-05-19</date_of_birth>
+						<country_code>CZ</country_code>
+						<score>8705</score>
+						<place>2</place>
+						<results>
+							<event type="running">
+								<name>100m</name>
+								<result>
+									<value>10.62</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>long jump</name>
+								<result>
+									<value>8.07</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>shot put</name>
+								<result>
+									<value>16.57</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>high jump</name>
+								<result>
+									<value>2.00</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>400m</name>
+								<result>
+									<value>47.74</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>110m hurdles</name>
+								<result>
+									<value>13.80</value>
+									<units>seconds</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>discus throw</name>
+								<result>
+									<value>45.51</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="jumping">
+								<name>pole vault</name>
+								<result>
+									<value>5.00</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="throwing">
+								<name>javelin throw</name>
+								<result>
+									<value>68.53</value>
+									<units>meters</units>
+								</result>
+							</event>
+							<event type="running">
+								<name>1500m</name>
+								<result>
+									<value>235.13</value>
+									<units>seconds</units>
+								</result>
+							</event>
+						</results>
+					</athlete>
+				</athletes>
+			</competition>
+</decathlon>
