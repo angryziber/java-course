@@ -18,4 +18,8 @@ public class MessageLoader {
 	public String getMessage(final String messageKey, final String... args) {
 		return new MessageFormat(messages.getString(messageKey)).format(args);
 	}
+
+	public IllegalArgumentException argumentException(final String message, final String... args) {
+		return new IllegalArgumentException(getMessage(message, args));
+	}
 }
