@@ -28,6 +28,7 @@ public class CalculatorApplication {
 	private JButton but_off;
 	private JPanel displayPanel;
 	private JPanel buttonsPanel;
+	private JButton but_clear;
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("CalculatorApplication");
@@ -201,6 +202,14 @@ public class CalculatorApplication {
 		gbc.gridy = 0;
 		gbc.fill = GridBagConstraints.BOTH;
 		buttonsPanel.add(but_off, gbc);
+		but_clear = new JButton();
+		but_clear.setFont(new Font("Casual", but_clear.getFont().getStyle(), 72));
+		but_clear.setText("C");
+		gbc = new GridBagConstraints();
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		buttonsPanel.add(but_clear, gbc);
 		displayPanel = new JPanel();
 		displayPanel.setLayout(new GridBagLayout());
 		displayPanel.setBackground(new Color(-13159));
