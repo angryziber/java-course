@@ -24,7 +24,7 @@ public class Record {
 
         assert participant!=null : "Participant must not be null";
         assert events!=null : "Events must not be null";
-        //TODO events size more than 10,;
+        //TODO events size not more than 10,;
 
     }
 
