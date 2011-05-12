@@ -14,14 +14,12 @@ public class CommandLineParser {
 	private static final String XML_METHOD = "-xml";
 	private static final String HTML_METHOD = "-html";
 
-	private final MessageLoader messages;
+	private static final MessageLoader MESSAGES = new MessageLoader(CommandLineParser.class);
 
 	private final ResultReader reader;
 	private final ResultWriter writer;
 
 	public CommandLineParser(final String... args) {
-		messages = new MessageLoader(getClass());
-
 		final Iterator<String> argIterator = asList(args).iterator();
 		reader = createReader(argIterator);
 		writer = createWriter(argIterator);
@@ -81,6 +79,6 @@ public class CommandLineParser {
 	}
 
 	private IllegalArgumentException exception(final String message, final String... args) {
-		return new IllegalArgumentException(messages.getMessage(message, args));
+		return new IllegalArgumentException(MESSAGES.getMessage(message, args));
 	}
 }

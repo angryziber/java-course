@@ -12,7 +12,6 @@ public class DecathlonCalculator {
 		try {
 			new CommandLineParser(args);
 		} catch (Exception e) {
-//			System.err.println(e.getMessage());
 			LOG.fatal(e.getMessage(), e);
 		}
 	}
