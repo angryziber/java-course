@@ -44,19 +44,19 @@ public class XMLWriter implements OutputWriter {
     public String write(String outputFileName) {
         setOutputFileName(outputFileName);
         try {
-            Transformer transformer = getTransformer();
+            Transformer t = getTransformer();
 
-            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-            transformer.setOutputProperty(OutputKeys.ENCODING, XML_ENCODING);
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.VERSION, XML_VERSION);
+            t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+            t.setOutputProperty(OutputKeys.METHOD, "xml");
+            t.setOutputProperty(OutputKeys.ENCODING, XML_ENCODING);
+            t.setOutputProperty(OutputKeys.INDENT, "yes");
+            t.setOutputProperty(OutputKeys.VERSION, XML_VERSION);
 
             StringWriter sw = new StringWriter();
             StreamResult result = new StreamResult(sw);
             DOMSource source = new DOMSource(getDocument());
-            transformer.transform(source, result);
-            transformer.transform(source, new StreamResult(new FileOutputStream(this.outputFileName)));
+            t.transform(source, result);
+            t.transform(source, new StreamResult(new FileOutputStream(this.outputFileName)));
 
         } catch (Exception e) {
             Logger.getLogger(getClass()).error(e);
