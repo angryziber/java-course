@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+
+#athletes {
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse:collapse;
+}
+
+h1 {
+	font-size: 24px;
+	font-style: italic;
+	font-weight: 500;
+	color: #333;
+}
+
+td.other {
+	text-align: center;
+}
+#athlete_name {
+	text-align: left;
+}
+
+#athletes td, #athletes th {
+	font-size:13px;
+	border:1px solid #98bf21;
+	padding: 3px 4px;
+}
+
+#athletes th {
+	text-align:center;
+	background-color:#A7C942;
+	color:#ffffff;
+}
+
+#athletes tr:hover td
+{
+	color: #339;
+	background: #eff2ff;
+}

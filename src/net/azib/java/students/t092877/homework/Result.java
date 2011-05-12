@@ -30,3 +30,4 @@ public class Result {
 		return event.getScore(value);
 	}
 }
+

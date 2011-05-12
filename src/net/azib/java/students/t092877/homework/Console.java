@@ -12,87 +12,112 @@ public class Console {
 
 		System.out.println("One by one enter names and the results of participants");
 
-		List<Athlete> athletes = new ArrayList<Athlete>();
-
-		String userChoise;
+		boolean anotherEntry;
+		String userInput;
 		Athlete currentAthlete;
+		List<Athlete> athletes = new ArrayList<Athlete>();
 
 		while (true) {
 			System.out.print("\nEnter the name of an athlete: ");
-			InputStreamReader istream = new InputStreamReader(System.in);
-			BufferedReader in = new BufferedReader(istream);
+			InputStreamReader instream = new InputStreamReader(System.in);
+			BufferedReader in = new BufferedReader(instream);
 
 			try {
-				athletes.add(new Athlete(in.readLine()));
+				userInput = in.readLine();
+				athletes.add(new Athlete(userInput));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 			currentAthlete = athletes.get(athletes.size() - 1);
 
-//			System.out.print("\nEnter the date of birth: ");
-//			try {
-//				currentAthlete.setDateOfBirth(in.readLine());
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}
+			System.out.print("Enter the date of birth: ");
+			try {
+				currentAthlete.setDateOfBirth(in.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 
 			System.out.print("Enter 2-letter country code: ");
 			try {
-				currentAthlete.setCountryCode(in.readLine());
+				userInput = in.readLine();
+				currentAthlete.setCountryCode(userInput);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 
 			System.out.println("\nNow you could input individual event results for " + currentAthlete.getName());
-			System.out.println("----------------------------------------------------------------------");
+			System.out.println("---------------------------------------------------------------------");
 
 			for (Event event : Event.values()) {
 				System.out.printf(">>> %s (%s): ", event.getName(), event.getUnits() );
-				try {
-					currentAthlete.getResults().add(new Result(event, Utils.convertToProperUnits(in.readLine(), event.getType())));
 
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
+				try {
+					userInput = in.readLine();
+					currentAthlete.getResults().add(new Result(event, Utils.convertToProperUnits(userInput, event.getType())));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 
-			System.out.print("\nAny other participants (yes/no)? ");
-			try {
-				userChoise = in.readLine().toLowerCase();
+			anotherEntry = determineUserResponse(in);
 
-				if (!(userChoise.equals("yes"))) {
-					Utils.sortAthletes(athletes);
-					break;
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-	        }
+			if (!anotherEntry) {
+				break;
+			}
 		}
-
 		return athletes;
 	}
 
+	private static boolean determineUserResponse(BufferedReader in) {
+
+		boolean anotherEntry = false;
+		String userResponse;
+
+		try {
+
+			while (true){
+
+				System.out.print("\nAny other participants (yes/no)? ");
+				userResponse = in.readLine().toLowerCase();
+
+				if (userResponse.equals("yes")) {
+					anotherEntry = true;
+					break;
+				}
+				else if (userResponse.equals("no")) {
+					anotherEntry = false;
+					break;
+				}
+				else
+					System.out.println("Please, only respond with \"yes\" or \"no\"!");
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return anotherEntry;
+	}
+
+
 	public static void printTableHeader() {
 		System.out.println();
-		System.out.println("------+------+------+-----------------------+-----+---------+--------+---------" +
-        				   "+---------+------------+------------+----------+-------------+---------+");
+		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
+				           "---------+---------+------------+------------+----------+-------------+---------+");
 		System.out.printf(
-				"%6s|%6s|%6s|%-23s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
+				"%6s|%6s|%6s|%-34s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
 						"Place", "Points", "Nation", "Athlete",
 						"100m", "long jump", "shot put", "high jump", "400m",
 						"110m hurdles", "discus throw", "pole vault", "javelin throw", "1500m");
 
 		System.out.printf(
-				"%6s|%6s|%6s|%-23s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
+				"%6s|%6s|%6s|%-34s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
 						"", "", "", "",
 						"(sec)", "(m)", "(m)", "(m)", "(min:sec)",
 						"(sec)", "(m)", "(m)", "(m)", "(min:sec)");
 
-		System.out.println("------+------+------+-----------------------+-----+---------+--------+---------" +
-		   				   "+---------+------------+------------+----------+-------------+---------+");
+		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
+        				   "---------+---------+------------+------------+----------+-------------+---------+");
 	}
 
 
@@ -108,7 +133,7 @@ public class Console {
 		}
 
 		System.out.printf(
-						"%6s|%6d|%6s|%-23s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
+						"%6s|%6d|%6s|%-34s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
 						athlete.getPlace(),
 						athlete.getTotalScore(),
 						athlete.getCountryCode(),
@@ -124,16 +149,17 @@ public class Console {
 						orignalUnits[8],
 						orignalUnits[9]);
 
-		System.out.println("------+------+------+-----------------------+-----+---------+--------+---------" +
-		                   "+---------+------------+------------+----------+-------------+---------+");
+		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
+        				   "---------+---------+------------+------------+----------+-------------+---------+");
 
 	}
 		public static void output(List<Athlete> athletes) {
 
+		Utils.sortAthletes(athletes);
 		printTableHeader();
+
 		for (Athlete athlete : athletes) {
 			printTableRow(athlete);
 		}
 	}
 }
-
