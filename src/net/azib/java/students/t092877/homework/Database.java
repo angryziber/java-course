@@ -62,7 +62,7 @@ public class Database {
 		    con = DriverManager.getConnection(url, username, password);
 
 		    if(!con.isClosed())
-		    	System.out.println("Successfully connected to the database - " + url);
+		    	System.out.println("\nSuccessfully connected to the database - " + url);
 
 	    } catch(Exception e) {
 	      System.err.println("Exception: " + e.getMessage());
