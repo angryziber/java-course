@@ -32,7 +32,7 @@ public class XMLWriter implements OutputWriter {
     private static final String XML_ENCODING = "UTF-8";
 
     static final String xslFile = PropertiesLoader.getPagePath();
-    static String outputFileXML = PropertiesLoader.getXMLPath();
+    static String outputFileXML = PropertiesLoader.getPagePath().replace("page.xsl", "data.out.xml");
 
     private List<Athlete> athletes;
     String outputFileName;

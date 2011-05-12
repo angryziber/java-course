@@ -20,10 +20,6 @@ public class PropertiesLoader {
         return new File(rootDirectory, System.getProperty("page_xsl")).getAbsolutePath();
     }
 
-    public static String getXMLPath() {
-        return new File(rootDirectory, System.getProperty("out_xml")).getAbsolutePath();
-    }
-
     public static void setProperties() {
         Properties p = new Properties();
         try {

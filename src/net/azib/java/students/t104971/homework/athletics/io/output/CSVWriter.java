@@ -26,7 +26,7 @@ public class CSVWriter implements OutputWriter {
     public String write(String outFileName) {
         try {
             if (outFileName.isEmpty()) {
-                outFileName = PropertiesLoader.getXMLPath().replace(".xml", ".csv");
+                outFileName = PropertiesLoader.getPagePath().replace("page.xsl", "data.out.csv");
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
             for (Athlete athlete : athletes) {
