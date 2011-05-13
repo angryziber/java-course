@@ -29,7 +29,7 @@ public class Record {
     }
 
 
-    public int getPoints(){
+    public int getTotalPoints(){
         int sum=0;
 
         for(Event e : events){

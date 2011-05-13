@@ -6,13 +6,13 @@ public class Participant {
 
     private String name;
     private Date birthDate;
-//    final private CountryCode country;
+    private CountryCode country;
 
-//    public Participant(String name, Date birthDate, CountryCode country) {
-//        this.name = name;
-//        this.birthDate = birthDate;
-//        this.country = country;
-//    }
+public Participant(String name, Date birthDate, CountryCode country) {
+       this.name = name;
+        this.birthDate = birthDate;
+        this.country = country;
+    }
 
     public String getName() {
         return name;
@@ -22,7 +22,7 @@ public class Participant {
         return birthDate;
     }
 
-//    public CountryCode getCountry() {
-//        return country;
-//    }
+    public CountryCode getCountry() {
+        return country;
+    }
 }
