@@ -2,6 +2,8 @@ package net.azib.java.students.t104607;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author 104607 IASM
@@ -20,7 +22,6 @@ public class CalculatorApplication {
 	private JButton but_9;
 	private JButton but_0;
 	private JButton but_div;
-	private JButton but_dot;
 	private JButton but_minus;
 	private JButton but_mult;
 	private JButton but_result;
@@ -29,6 +30,167 @@ public class CalculatorApplication {
 	private JPanel displayPanel;
 	private JPanel buttonsPanel;
 	private JButton but_clear;
+
+	int previousNumber = 0;
+	int currentNumber = 0;
+	boolean clearDisplay = true;
+	char operation = ' ';
+
+	public CalculatorApplication() {
+		but_off.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				System.exit(0);
+			}
+		});
+		but_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(1);
+			}
+		});
+		but_2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(2);
+			}
+		});
+		but_3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(3);
+			}
+		});
+		but_4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(4);
+			}
+		});
+		but_5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(5);
+			}
+		});
+		but_6.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(6);
+			}
+		});
+		but_7.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(7);
+			}
+		});
+		but_8.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(8);
+			}
+		});
+		but_9.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(9);
+			}
+		});
+		but_0.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				addNumber(0);
+			}
+		});
+		but_clear.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				display.setText(" 00000000");
+				previousNumber = 0;
+				operation = ' ';
+			}
+		});
+		but_plus.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				doOperation('+');
+			}
+		});
+		but_minus.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				doOperation('-');
+			}
+		});
+		but_mult.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				doOperation('*');
+			}
+		});
+		but_div.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				doOperation('/');
+			}
+		});
+		but_result.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				doOperation(' ');
+			}
+		});
+	}
+
+	void doOperation(char op) {
+		try {
+			currentNumber = new Integer(display.getText().trim());
+		} catch (NumberFormatException e) {
+			return;
+		}
+		if (!clearDisplay) {
+			switch (operation) {
+				case '+':
+					currentNumber = previousNumber + currentNumber;
+					break;
+				case '-':
+					currentNumber = previousNumber - currentNumber;
+					break;
+				case '*':
+					currentNumber = previousNumber * currentNumber;
+					break;
+				case '/':
+					currentNumber = previousNumber / currentNumber;
+					break;
+			}
+		}
+		if ((currentNumber > 99999999) | (currentNumber < -99999999)) {
+			display.setText("# error!");
+		} else {
+			clearDisplay = true;
+			operation = op;
+			display.setText(String.format("% 09d", currentNumber));
+		}
+		System.out.println(operation + " " + op + " " + previousNumber + " " + currentNumber);
+	}
+
+	void addNumber(int number) {
+		try {
+			currentNumber = new Integer(display.getText().trim());
+		} catch (NumberFormatException e) {
+			return;
+		}
+		if (clearDisplay) {
+			previousNumber = currentNumber;
+			currentNumber = 0;
+			clearDisplay = false;
+		}
+		if (currentNumber < 10000000) {
+			currentNumber = currentNumber * 10 + number;
+			display.setText(String.format("% 09d", currentNumber));
+		}
+	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("CalculatorApplication");
@@ -146,21 +308,15 @@ public class CalculatorApplication {
 		but_0 = new JButton();
 		but_0.setEnabled(true);
 		but_0.setFont(new Font("Casual", but_0.getFont().getStyle(), 72));
-		but_0.setHorizontalAlignment(10);
+		but_0.setHorizontalAlignment(0);
+		but_0.setHorizontalTextPosition(0);
 		but_0.setText("0");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 4;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.BOTH;
 		buttonsPanel.add(but_0, gbc);
-		but_dot = new JButton();
-		but_dot.setFont(new Font("Casual", but_dot.getFont().getStyle(), 72));
-		but_dot.setText(".");
-		gbc = new GridBagConstraints();
-		gbc.gridx = 2;
-		gbc.gridy = 4;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		buttonsPanel.add(but_dot, gbc);
 		but_minus = new JButton();
 		but_minus.setFont(new Font("Casual", but_minus.getFont().getStyle(), 72));
 		but_minus.setText("-");
@@ -224,7 +380,7 @@ public class CalculatorApplication {
 		display.setForeground(new Color(-16737895));
 		display.setHorizontalAlignment(0);
 		display.setHorizontalTextPosition(0);
-		display.setText("000000.00");
+		display.setText(" 00000000");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
