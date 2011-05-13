@@ -1,130 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="decathlon">
+	<xs:element name="competition">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="competition">
+				<xs:element name="name">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="20"/>
+							<xs:whiteSpace value="collapse"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="location">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="30"/>
+							<xs:whiteSpace value="collapse"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="date" type="xs:date"/>
+				<xs:element name="athletes">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="name">
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-										<xs:maxLength value="20"/>
-										<xs:whiteSpace value="collapse"/>
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:element>
-							<xs:element name="location">
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-										<xs:maxLength value="30"/>
-										<xs:whiteSpace value="collapse"/>
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:element>
-							<xs:element name="athletes">
+							<xs:element name="athlete" minOccurs="0" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="athlete" minOccurs="0" maxOccurs="unbounded">
+										<xs:element name="name">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="35"/>
+													<xs:whiteSpace value="collapse"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="date_of_birth" type="xs:date"/>
+										<xs:element name="country_code">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[A-Z][A-Z]"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="score" type="xs:positiveInteger"/>
+										<xs:element name="place">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[1-9]+[0-9]*[-]?[1-9]?[1-9]*"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="results">
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element name="name">
-														<xs:simpleType>
-															<xs:restriction base="xs:string">
-																<xs:maxLength value="35"/>
-																<xs:whiteSpace value="collapse"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-													<xs:element name="date_of_birth" type="xs:date"/>
-													<xs:element name="country_code">
-														<xs:simpleType>
-															<xs:restriction base="xs:string">
-																<xs:pattern value="[A-Z][A-Z]"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-													<xs:element name="score" type="xs:positiveInteger"/>
-													<xs:element name="place">
-														<xs:simpleType>
-															<xs:restriction base="xs:string">
-																<xs:pattern value="[1-9]+[0-9]*[-]?[1-9]?[1-9]*"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-													<xs:element name="results">
+													<xs:element name="event" minOccurs="10" maxOccurs="10">
 														<xs:complexType>
 															<xs:sequence>
-																<xs:element name="event" minOccurs="10" maxOccurs="10">
+																<xs:element name="name">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="100m"/>
+																			<xs:enumeration value="long jump"/>
+																			<xs:enumeration value="shot put"/>
+																			<xs:enumeration value="high jump"/>
+																			<xs:enumeration value="400m"/>
+																			<xs:enumeration value="110m hurdles"/>
+																			<xs:enumeration value="discus throw"/>
+																			<xs:enumeration value="pole vault"/>
+																			<xs:enumeration value="javelin throw"/>
+																			<xs:enumeration value="1500m"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="result">
 																	<xs:complexType>
 																		<xs:sequence>
-																			<xs:element name="name">
+																			<xs:element name="value">
 																				<xs:simpleType>
-																					<xs:restriction base="xs:string">
-																						<xs:enumeration value="100m"/>
-																						<xs:enumeration value="long jump"/>
-																						<xs:enumeration value="shot put"/>
-																						<xs:enumeration value="high jump"/>
-																						<xs:enumeration value="400m"/>
-																						<xs:enumeration value="110m hurdles"/>
-																						<xs:enumeration value="discus throw"/>
-																						<xs:enumeration value="pole vault"/>
-																						<xs:enumeration value="javelin throw"/>
-																						<xs:enumeration value="1500m"/>
+																					<xs:restriction base="xs:decimal">
+																						<xs:fractionDigits value="2"/>
 																					</xs:restriction>
 																				</xs:simpleType>
 																			</xs:element>
-																			<xs:element name="result">
-																				<xs:complexType>
-																					<xs:sequence>
-																						<xs:element name="value">
-																							<xs:simpleType>
-																								<xs:restriction base="xs:decimal">
-																									<xs:fractionDigits value="2"/>
-																								</xs:restriction>
-																							</xs:simpleType>
-																						</xs:element>
-																						<xs:element name="units">
-																							<xs:simpleType>
-																								<xs:restriction base="xs:string">
-																									<xs:enumeration value="seconds"/>
-																									<xs:enumeration value="meters"/>
-																								</xs:restriction>
-																							</xs:simpleType>
-																						</xs:element>
-																					</xs:sequence>
-																				</xs:complexType>
+																			<xs:element name="units">
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:enumeration value="seconds"/>
+																						<xs:enumeration value="meters"/>
+																					</xs:restriction>
+																				</xs:simpleType>
 																			</xs:element>
 																		</xs:sequence>
-																		<xs:attribute name="type" use="required">
-																			<xs:simpleType>
-																				<xs:restriction base="xs:string">
-																					<xs:enumeration value="running"/>
-																					<xs:enumeration value="jumping"/>
-																					<xs:enumeration value="throwing"/>
-																				</xs:restriction>
-																			</xs:simpleType>
-																		</xs:attribute>
 																	</xs:complexType>
 																</xs:element>
 															</xs:sequence>
+															<xs:attribute name="type" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="running"/>
+																		<xs:enumeration value="jumping"/>
+																		<xs:enumeration value="throwing"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
 														</xs:complexType>
-														<xs:unique name="unique_event">
-															<xs:selector xpath="event"/>
-															<xs:field xpath="name"/>
-														</xs:unique>
 													</xs:element>
 												</xs:sequence>
 											</xs:complexType>
+											<xs:unique name="unique_event">
+												<xs:selector xpath="event"/>
+												<xs:field xpath="name"/>
+											</xs:unique>
 										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
-						<xs:attribute name="id" type="xs:string"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
+			<xs:attribute name="id" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

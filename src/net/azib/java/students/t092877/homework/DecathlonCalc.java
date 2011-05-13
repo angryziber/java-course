@@ -1,60 +1,62 @@
 package net.azib.java.students.t092877.homework;
 
 import java.io.File;
-import java.util.List;
 
 public class DecathlonCalc {
 
 	public static void main(String[] args) {
 
-		List<Athlete> athletes = null;
-		
+		boolean outputToHtml = false;
+		Competition decathlon = new Competition();
+
 		if (args.length == 0)
 			System.out.println("\nERROR: the command-line parameter list is empty");
 
 		for (int i = 0; i < args.length; i++) {
 
-			if (args[i].equals("-console")) { // console read and write
-				
+			if (args[i].equals("-console")) {
+
 				if (i == 0) {
-					athletes = Console.input();
-				} else 
-					Console.output(athletes);
-				
-			} else if (args[i].equals("-csv")) { // csv read and write
-				
+					decathlon.setAthletesList(Console.input(decathlon));
+				} else
+					Console.output(decathlon.getAthletesList());
+
+			} else if (args[i].equals("-csv")) {
+
 				if (i == 0) {
 					String srcPath = args[++i];
-					athletes = CSV.input(new File(srcPath));
-					
+					decathlon.setAthletesList(Csv.input(decathlon, new File(srcPath)));
+
 				} else {
-					
+
 					String dstPath = args[++i];
-					CSV.output(athletes, new File(dstPath));
+					Csv.output(decathlon.getAthletesList(), new File(dstPath));
 				}
-				
-			} else if (args[i].equals("-db")) { // db read
-				
+
+			} else if (args[i].equals("-db")) {
+
 				if (i == 0) {
 					String userInput = args[++i];
-					athletes = Database.input(userInput);
+					decathlon.setAthletesList(Database.input(decathlon, userInput));
 				}
-				
-			} else if (args[i].equals("-xml")) { // xml write
-				
+
+			} else if (args[i].equals("-xml")) {
+
 				String dstPath = args[++i];
-				XML.output(athletes, new File(dstPath));
+				outputToHtml = false;
+				Xml.output(decathlon.getAthletesList(), new File(dstPath), outputToHtml);
 				System.out.println("\nOutput to XML hasn't been implemented yet");
-				
-			} else if (args[i].equals("-html")) { // html write
-				
+
+			} else if (args[i].equals("-html")) {
+
 				String dstPath = args[++i];
-				HTML.output(athletes, new File(dstPath));
+				outputToHtml = true;
+				Xml.output(decathlon.getAthletesList(), new File(dstPath), outputToHtml);
 				System.out.println("\nOutput to HTML hasn't been implemented yet");
-				
+
 			} else {
-				
-				System.out.println("\nInvalid command-line parameter: " + args[i]);
+
+				System.out.println("\n>>> ERROR: Invalid command-line parameter: " + args[i]);
 				break;
 			}
 		}

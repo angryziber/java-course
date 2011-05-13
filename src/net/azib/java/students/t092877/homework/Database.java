@@ -18,12 +18,12 @@ public class Database {
 	static Connection con = null;
 
 
-	public static List<Athlete> input(String input) {
+	public static List<Athlete> input(Competition decathlon, String input) {
+
+		List<Athlete> athletes = decathlon.getAthletesList();
 
 		Properties propslist = loadProperties();
 		connectToDatabase(propslist);
-
-		List<Athlete> athletes = new ArrayList<Athlete>();
 
 		// NB! NEED to recode this part to take new regex pattern into account
 		if (input.matches("[1-9]+"))
@@ -62,7 +62,7 @@ public class Database {
 		    con = DriverManager.getConnection(url, username, password);
 
 		    if(!con.isClosed())
-		    	System.out.println("\nSuccessfully connected to the database - " + url);
+		    	System.out.println("Successfully connected to the database - " + url);
 
 	    } catch(Exception e) {
 	      System.err.println("Exception: " + e.getMessage());

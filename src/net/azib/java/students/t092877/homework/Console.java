@@ -3,19 +3,18 @@ package net.azib.java.students.t092877.homework;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Console {
 
-	public static List<Athlete> input() {
+	public static List<Athlete> input(Competition decathlon) {
 
 		System.out.println("One by one enter names and the results of participants");
 
 		boolean anotherEntry;
 		String userInput;
 		Athlete currentAthlete;
-		List<Athlete> athletes = new ArrayList<Athlete>();
+		List<Athlete> athletes = decathlon.getAthletesList();
 
 		while (true) {
 			System.out.print("\nEnter the name of an athlete: ");
@@ -69,6 +68,7 @@ public class Console {
 		return athletes;
 	}
 
+
 	private static boolean determineUserResponse(BufferedReader in) {
 
 		boolean anotherEntry = false;
@@ -100,7 +100,19 @@ public class Console {
 	}
 
 
+	public static void output(List<Athlete> athletes) {
+
+		Utils.sortAthletes(athletes);
+		printTableHeader();
+
+		for (Athlete athlete : athletes) {
+			printTableRow(athlete);
+		}
+	}
+
+
 	public static void printTableHeader() {
+
 		System.out.println();
 		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
 				           "---------+---------+------------+------------+----------+-------------+---------+");
@@ -121,7 +133,7 @@ public class Console {
 	}
 
 
-		public static void printTableRow(Athlete athlete) {
+	public static void printTableRow(Athlete athlete) {
 
 		List<Result> results = athlete.getResults();
 		String[] orignalUnits = new String[10];
@@ -151,15 +163,5 @@ public class Console {
 
 		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
         				   "---------+---------+------------+------------+----------+-------------+---------+");
-
-	}
-		public static void output(List<Athlete> athletes) {
-
-		Utils.sortAthletes(athletes);
-		printTableHeader();
-
-		for (Athlete athlete : athletes) {
-			printTableRow(athlete);
-		}
 	}
 }
