@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0">
+
+
+
+<xs:element name ="CompetitionResults">
+   <xs:complexType>
+      <xs:sequence>
+        <xs:element name="athlete" type="athleteType" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+
+<xs:complexType name="athleteType">
+  <xs:sequence>
+    <xs:element name="place" type="xs:integer"/>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="birthday" type="birthdayType"/>
+    <xs:element name="country" type="xs:string"/>
+    
+    <xs:element name="athlete_results" >
+      <xs:complexType>
+        <xs:sequence>
+           <xs:element name="sprint_100" type="xs:float" minOccurs="1" maxOccurs="unbounded"/>
+           <xs:element name="long_jump" type="xs:float" minOccurs="1" maxOccurs="unbounded"/>
+           <xs:element name="short_put" type="xs:float" minOccurs="1" maxOccurs="unbounded"/>
+           <xs:element name="high_jump" type="xs:float" minOccurs="1" maxOccurs="unbounded"/>
+           <xs:element name="sprint_400" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+           <xs:element name="discus_throw" type="xs:float" minOccurs="1" maxOccurs="unbounded"/>
+           <xs:element name="pole_vault" type="xs:float" minOccurs="1" maxOccurs="unbounded"/>
+           <xs:element name="javelin_throw" type="xs:float" minOccurs="1" maxOccurs="unbounded"/>
+           <xs:element name="race_1500" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="score" type="xs:float"/>
+    
+  </xs:sequence>
+</xs:complexType>
+
+    <xs:simpleType name="birthdayType">
+    	<xs:restriction base="xs:string">
+    		<xs:pattern value="\d{2}[\.]\d{2}[\.]\d{4}"></xs:pattern>
+    	</xs:restriction>
+    </xs:simpleType>
+</xs:schema>
+           
+
