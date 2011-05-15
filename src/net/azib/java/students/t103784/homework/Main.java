@@ -8,4 +8,5 @@ package net.azib.java.students.t103784.homework;
  * To change this template use File | Settings | File Templates.
  */
 public class Main {
+	Input input = new Input();
 }
