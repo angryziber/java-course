@@ -196,9 +196,9 @@ public class IOxml extends AbstractIO {
 
 			// write the content into xml file
 			File file = null;
-			if(temp==null){
+			if (temp == null) {
 				file = getOutputFile(getParameters());
-			}else{
+			} else {
 				file = temp;
 			}
 			
@@ -208,12 +208,13 @@ public class IOxml extends AbstractIO {
 			StreamResult result = new StreamResult(file);
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(source, result);
-			
+
 			Schema schema = loadSchema(Const.PACKAGE + "XMLSchema.xsd");
-			
+
 			validateXML(schema, file.getPath());
-			out.println("\nSuccessful XML output to " + "\"" + file.getName() + "\"" + " file!");
-		}catch (TransformerConfigurationException e) {
+			out.println("\nSuccessful XML output to " + "\"" + file.getName()
+					+ "\"" + " file!");
+		} catch (TransformerConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TransformerException e) {

@@ -62,25 +62,31 @@ public class IOcsv extends AbstractIO {
 				lineNumber++;
 			}
 			out.println("\nSuccessful input from " + "\"" + getParameters()+ "\"" + " file!\n");
+			
 		} catch (FileNotFoundException en) {
 			out.println("\nExeption " + en.getMessage()
 					+ ". Please check the file " + getParameters()
 					+ " location!");
+			
 		} catch (UnsupportedEncodingException e) {
 			out.println("\nCouldn't read file as UTF-8");
 			// therefore reading it as non-UTF-8 encoding
 			readerIn = new InputStreamReader(streamIn);
+			
 		} catch (ArrayIndexOutOfBoundsException e) {
 			out.println("\nError! File" + getParameters()+ " structure in line " + lineNumber + " is incorrect\n");
+
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			out.println("\nError!I/O error occured");
 			e.printStackTrace();
+
 		} finally {
 			if (bufReader != null) {
 				try {
 					bufReader.close();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+
+				} catch (IOException e) {
+					out.println("\nError! Cannot close the file!");
 					e.printStackTrace();
 				}
 			}
@@ -90,12 +96,13 @@ public class IOcsv extends AbstractIO {
 
 	@Override
 	void output(ArrayList<Athlete> athletes) {
+		Writer wOut = null;
 		ArrayList<Athlete> results = arrangeInOrder(athletes);
 		Iterator<Athlete> itr = results.iterator();		
 		try {
 			File file = getOutputFile(getParameters());
 			
-			Writer wOut = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+			wOut = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 			
 			while (itr.hasNext()) {
 				Athlete item = itr.next();
@@ -114,18 +121,30 @@ public class IOcsv extends AbstractIO {
 						+ item.getJavelinThrow() + ","
 						+ this.convertTimeToString(item.getSprint1500()) + ","
 						+ item.getScore()+"\n");
-//						out.newLine();
+//						wOut.newLine();
 			}
-			wOut.flush(); // forces any buffered output bytes to be written out
-			wOut.close();
+			
+			// forces any buffered output bytes to be written out
+			wOut.flush(); 
 			out.println("Successful CSV output to " + getParameters() + " file!");
+			
 		} catch (FileNotFoundException en) {
 			out.println("\nERROR! The file " + getParameters() + " was not found ");
-//			en.printStackTrace();
+			en.printStackTrace();
+			
 		} catch (IOException e) {
+			out.println("\nERROR! I/O eror of some sort has occurred!");
 			e.printStackTrace();
+			
+		} finally {
+			try {
+				wOut.close();
+				
+			} catch (IOException e) {
+				out.println("\nERROR! Cannot close the file!");
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	@Override

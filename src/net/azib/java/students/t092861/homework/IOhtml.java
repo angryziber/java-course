@@ -65,14 +65,12 @@ public class IOhtml extends AbstractIO {
 			out.println("Successful HTML output to " + "\""	+ getParameters() + "\"" + " file!");
 			
 		} catch (FileNotFoundException e) {
+			
 			e.printStackTrace();
-			// TODO Auto-generated catch block
 		} catch (TransformerException e) {
 			e.printStackTrace();
-			// TODO Auto-generated catch block
 		} catch (IOException e) {
 			e.printStackTrace();
-			// TODO Auto-generated catch block
 		}
 	}
 

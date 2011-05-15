@@ -100,28 +100,33 @@ public class IOdb extends AbstractIO {
 			}
 
 			rs.close();
-			out.println("\nSuccessful input from " + "\"" + url + "\""
-					+ " database!\n");
+			out.println("\nSuccessful input from " + "\"" + url + "\""	+ " database!\n");
+			
 		} catch (ArrayIndexOutOfBoundsException e) {
-			out.println("Error! Some data from " + "\"" + url + "\""
-					+ " is unreadable\n");
+			out.println("Error! Some data from " + "\"" + url + "\"" + " is unreadable\n");
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			out.println("Error! Database access error");
 			e.printStackTrace();
+			
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
+			out.println("Error! Cannot create an instance of a class");
 			e.printStackTrace();
+			
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			out.println("Error! Method does not have access to the definition of the specified class");
 			e.printStackTrace();
+			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			out.println("Error! Cannot load in a class through its string name");
 			e.printStackTrace();
+			
 		} finally {
 			try {
 				conn.close();
+				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				out.println("Error! Cannot close connection");
 			}
 		}
 		return athletes;
