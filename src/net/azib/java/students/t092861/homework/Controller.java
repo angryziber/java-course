@@ -11,18 +11,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Handles user actions, inputs and outputs
+ * Handles user actions, inputs and outputs.
  * 
  * @author Stanislav / 092861
  * 
  */
 public class Controller {
 
+	/**
+	 * Current athlete instance.
+	 */
 	private Athlete athlete;
+	
+	/**
+	 * Used for validating the file/console input.
+	 */
 	private boolean invalidInput;
 
 	/**
-	 * Processes the data from file or console
+	 * Processes the data from file or console.
 	 * 
 	 * @param data
 	 *            as ArrayList<String>. Each elements of the list consist of 13
@@ -42,11 +49,12 @@ public class Controller {
 			ControllerInput.Field field = ControllerInput.Field.values()[iter];
 			invalidInput = field.parseAndStore(item, athlete);
 			if (invalidInput) {
-				if(field==ControllerInput.Field.NAME){
+				if (field == ControllerInput.Field.NAME) {
 					athlete.setName("Unreadable Name");
 					iter++;
-				} else
-				throw new ArrayIndexOutOfBoundsException();
+				} else {
+					throw new ArrayIndexOutOfBoundsException();
+				}
 			} else {
 				iter++;
 			}
@@ -57,9 +65,10 @@ public class Controller {
 	}
 
 	/**
-	 * Checks name validity
+	 * Checks name validity.
 	 * 
 	 * @param name
+	 *            value to check
 	 * @return true of validation is passed
 	 */
 	public boolean checkName(String name) {
@@ -78,9 +87,10 @@ public class Controller {
 	}
 
 	/**
-	 * Checks country code validity
+	 * Checks country code validity.
 	 * 
 	 * @param countryCode
+	 *            value to check
 	 * @return true of validation is passed
 	 */
 	public boolean checkCountry(String countryCode) {
@@ -89,9 +99,10 @@ public class Controller {
 	}
 
 	/**
-	 * Checks time value validity
+	 * Checks time value validity.
 	 * 
 	 * @param time
+	 *            value to check
 	 * @return true of validation is passed
 	 */
 	public float checkTime(String time) {
@@ -105,9 +116,10 @@ public class Controller {
 	}
 
 	/**
-	 * Checks meters value validity
+	 * Checks meters value validity.
 	 * 
 	 * @param meters
+	 *            value to check
 	 * @return true of validation is passed
 	 */
 	public boolean checkMeters(String meters) {
@@ -116,9 +128,13 @@ public class Controller {
 	}
 
 	/**
+	 * Used for matching the String with pattern.
+	 * 
 	 * @param patt
+	 *            to validate against
 	 * @param str
-	 * @return true of validation is passed
+	 *            value to check
+	 * @return true of matches the pattern
 	 */
 	private static boolean matchesThePattern(String patt, String str) {
 		Pattern pattern = Pattern.compile(patt);
@@ -130,7 +146,7 @@ public class Controller {
 	}
 
 	/**
-	 * Parsing String to time in seconds
+	 * Parsing String to time in seconds.
 	 * 
 	 * @param str
 	 *            string to parse
@@ -156,16 +172,23 @@ public class Controller {
 		return min + sec + msec;
 	}
 
+	/**
+	 * Used for removing the quotes from name.
+	 * 
+	 * @param name
+	 *            to process
+	 * @return name without the quotes
+	 */
 	public String removeQuotes(String name) {
 		return name.replaceAll("\"", "");
 	}
 
-
 	/**
-	 * Calculate points for athlete
+	 * Calculate points for athlete.
 	 * 
 	 * @param a
-	 * @return
+	 *            - athlete for whom calculating the points
+	 * @return number of point as int
 	 */
 	public int calculatePoints(Athlete a) {
 		int points = 0;

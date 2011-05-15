@@ -1,5 +1,8 @@
 package net.azib.java.students.t092861.homework;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Defined constants class.
  * 
@@ -7,6 +10,12 @@ package net.azib.java.students.t092861.homework;
  * 
  */
 public class Const {
+	
+	/**
+	 * Completely numeric date format, such as 12.13.52 or 3:30pm.
+	 */
+	public static final SimpleDateFormat DATE_FORMAT = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
+	
 	/**
 	 * File.separator system property return the correct file separator for each
 	 * different platform (Windows = \), (Linux = /).
@@ -22,23 +31,23 @@ public class Const {
 					"Const", "");
 
 	/**
-	 * command line parameter for console.
+	 * Command line parameter for console.
 	 */
 	public static final String CONSOLE = "-console";
 	/**
-	 * command line parameter for csv.
+	 * Command line parameter for csv.
 	 */
 	public static final String CSV = "-csv";
 	/**
-	 * command line parameter for db.
+	 * Command line parameter for db.
 	 */
 	public static final String DB = "-db";
 	/**
-	 * command line parameter for xml.
+	 * Command line parameter for xml.
 	 */
 	public static final String XML = "-xml";
 	/**
-	 * command line parameter for html.
+	 * Command line parameter for html.
 	 */
 	public static final String HTML = "-html";
 

@@ -30,9 +30,13 @@ import java.util.ArrayList;
 public class DecathlonCalculator {
 
 	/**
-	 *  
+	 * Array list of all athletes.
 	 */
 	private ArrayList<Athlete> athletes = new ArrayList<Athlete>();
+
+	/**
+	 * Controller instance.
+	 */
 	private Controller ctrl;
 
 	/**
@@ -42,10 +46,17 @@ public class DecathlonCalculator {
 	 */
 	public static void main(String[] args) {
 		DecathlonCalculator calculator = new DecathlonCalculator();
-		calculator.doComputation(args);
+		calculator.processParameters(args);
 	}
 
-	public ArrayList<Athlete> doComputation(String[] args) {
+	/**
+	 * Analyzes program arguments and calls for appropriate method.
+	 * 
+	 * @param args
+	 *            to be analized
+	 * @return ArrayList of all athletes
+	 */
+	public ArrayList<Athlete> processParameters(String[] args) {
 		ctrl = new Controller();
 		for (int i = 0; i < args.length; i++) {
 			// console read and write
@@ -59,24 +70,24 @@ public class DecathlonCalculator {
 				// csv read and write
 			} else if (args[i].equals(Const.CSV)) {
 				if (i == 0) {
-					athletes = new IOcsv(args[++i],ctrl).input();
+					athletes = new IOcsv(args[++i], ctrl).input();
 				} else if (athletes != null) {
-					new IOcsv(args[++i],ctrl).output(athletes);
+					new IOcsv(args[++i], ctrl).output(athletes);
 				}
 
 			} else if (args[i].equals(Const.DB)) {
 				if (i == 0) {
 					// db read
-					athletes = new IOdb(args[++i],ctrl).input();
+					athletes = new IOdb(args[++i], ctrl).input();
 				}
 
 			} else if (args[i].equals(Const.XML) && athletes != null) {
 				// xml write
-				new IOxml(args[++i],ctrl).output(athletes);
+				new IOxml(args[++i], ctrl).output(athletes);
 
 			} else if (args[i].equals(Const.HTML) && athletes != null) {
 				// html write
-				new IOhtml(args[++i],ctrl).output(athletes);
+				new IOhtml(args[++i], ctrl).output(athletes);
 
 			} else {
 				System.out

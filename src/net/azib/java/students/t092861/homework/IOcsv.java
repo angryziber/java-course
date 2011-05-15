@@ -26,6 +26,14 @@ public class IOcsv extends AbstractIO {
 	 */
 	public String param = "";
 
+	/**
+	 * Default constructor.
+	 * 
+	 * @param param
+	 *            - parameters of the input/output
+	 * @param ctrl
+	 *            - controller
+	 */
 	public IOcsv(String param, Controller ctrl) {
 		super(ctrl);
 		this.param = param;
@@ -43,7 +51,7 @@ public class IOcsv extends AbstractIO {
 			// trying to read as utf-8
 			readerIn = new InputStreamReader(streamIn, "UTF8");
 			bufReader = new BufferedReader(readerIn);
-			
+
 			// current line
 			String curLine = null;
 			// Read input file line by line
@@ -53,15 +61,17 @@ public class IOcsv extends AbstractIO {
 				athletes.add(ctrl.readData(inputData));
 				lineNumber++;
 			}
-			out.println("\nSuccessful input from " + "\"" + getParameters() + "\"" + " file!\n");
+			out.println("\nSuccessful input from " + "\"" + getParameters()+ "\"" + " file!\n");
 		} catch (FileNotFoundException en) {
-			out.println("\nExeption " + en.getMessage() + ". Please check the file " + getParameters() + " location!");
+			out.println("\nExeption " + en.getMessage()
+					+ ". Please check the file " + getParameters()
+					+ " location!");
 		} catch (UnsupportedEncodingException e) {
 			out.println("\nCouldn't read file as UTF-8");
 			// therefore reading it as non-UTF-8 encoding
 			readerIn = new InputStreamReader(streamIn);
 		} catch (ArrayIndexOutOfBoundsException e) {
-			out.println("\nError! File" + getParameters() + " structure in line " + lineNumber + " is incorrect\n");
+			out.println("\nError! File" + getParameters()+ " structure in line " + lineNumber + " is incorrect\n");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,7 +113,7 @@ public class IOcsv extends AbstractIO {
 						+ item.getJavelinThrow() + ","
 						+ this.convertTimeToString(item.getSprint1500()) + ","
 						+ item.getScore()+"\n");
-//				out.newLine();
+//						out.newLine();
 			}
 			wOut.flush(); // forces any buffered output bytes to be written out
 			wOut.close();

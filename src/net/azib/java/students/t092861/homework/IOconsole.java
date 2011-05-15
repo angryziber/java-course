@@ -12,7 +12,14 @@ import java.util.Iterator;
  */
 public class IOconsole extends AbstractIO {
 	
+	/**
+	 * Current athlete instance.
+	 */
 	private Athlete athlete;
+	
+	/**
+	 * Used for validating the input from file/console.
+	 */
 	private boolean invalidInput;
 	
 	/**
@@ -20,6 +27,10 @@ public class IOconsole extends AbstractIO {
 	 */
 	public String parameters = "";
 
+	/**
+	 * Default constructor.
+	 * @param ctrl - controller
+	 */
 	public IOconsole(Controller ctrl) {
 		super(ctrl);
 	}
@@ -61,7 +72,8 @@ public class IOconsole extends AbstractIO {
 				}
 			}
 		} catch (IOException e) {
-			out.println("\nError while reading the input line. Please check your data!");
+			out
+					.println("\nError while reading the input line. Please check your data!");
 			iterator--;
 		}
 		return athletes;
@@ -103,7 +115,7 @@ public class IOconsole extends AbstractIO {
 	}
 
 	/**
-	 * Prints the header of the output table
+	 * Prints the header of the output table.
 	 */
 	private void printTableHeader() {
 		out.println("Here are the results:");

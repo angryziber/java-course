@@ -23,13 +23,22 @@ public class IOdb extends AbstractIO {
 	 * File name or the path to the file.
 	 */
 	public String param = "";
-	
-	private String nameOrId = "";
 
 	private static Properties cProps;
 
+	/**
+	 * Url of the database.
+	 */
 	private static String url;
 	
+	/**
+	 * Default constructor.
+	 * 
+	 * @param param
+	 *            - parameters of the input/output
+	 * @param ctrl
+	 *            - controller
+	 */
 	public IOdb(String param, Controller ctrl) {
 		super(ctrl);
 		this.param = param;
@@ -45,18 +54,16 @@ public class IOdb extends AbstractIO {
 			in = new FileInputStream(Const.PACKAGE + "db.properties");
 			cProps.load(in);
 			in.close();
-		}
-		catch (FileNotFoundException e1) {
+		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
-		
+
 		String driver = "com.mysql.jdbc.Driver";
 		try {
 			Class.forName(driver).newInstance();
@@ -119,17 +126,6 @@ public class IOdb extends AbstractIO {
 	@Override
 	void output(ArrayList<Athlete> athletes) {
 		// TODO Auto-generated method stub
-	}
-	
-	/**
-	 * @return the nameOrId
-	 */
-	public String getNameOrId() {
-		return nameOrId;
-	}
-
-	void ShowingInDB(String nameOrId) {
-		this.nameOrId = nameOrId;
 	}
 
 	@Override

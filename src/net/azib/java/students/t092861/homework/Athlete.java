@@ -13,79 +13,34 @@ import java.util.Date;
  */
 public class Athlete {
 
-	/**
-	 * 
-	 */
 	private String name;
 	
-	/**
-	 * 
-	 */
 	private Date birthday;
 	
-	/**
-	 * 
-	 */
 	private String country;
 	
-	/**
-	 * 
-	 */
 	private float sprint100;
 	
-	/**
-	 * 
-	 */
 	private float longJump;
 	
-	/**
-	 * 
-	 */
 	private float shortPut;
 	
-	/**
-	 * 
-	 */
 	private float highJump;
 	
-	/**
-	 * 
-	 */
 	private float sprint400;
 	
-	/**
-	 * 
-	 */
 	private float hurdles;
 	
-	/**
-	 * 
-	 */
 	private float discusThrow;
 	
-	/**
-	 * 
-	 */
 	private float poleVault;
 	
-	/**
-	 * 
-	 */
 	private float javelinThrow;
 	
-	/**
-	 * 
-	 */
 	private float sprint1500;
 	
-	/**
-	 * 
-	 */
 	private int score;
 	
-	/**
-	 * 
-	 */
 	private int place;
 
 	public String getName() {

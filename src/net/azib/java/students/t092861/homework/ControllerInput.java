@@ -4,49 +4,55 @@
 package net.azib.java.students.t092861.homework;
 
 import java.io.PrintStream;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
- * Used to process the user requests and input data from files
+ * Used to process the user requests and input data from files.
  * 
  * @author Stanislav / 092861
  * 
  */
 public class ControllerInput {
 
-	private static final SimpleDateFormat DATE_FORMAT = (SimpleDateFormat) DateFormat
-			.getDateInstance(DateFormat.SHORT);
+	/**
+	* System.out local variable. 
+	*/
 	private static PrintStream out = System.out;
+	
+	/**
+	 * Controller instance.
+	 */
 	private static Controller ctrl;
 
-
+	/**
+	 * @author Stanislav / 092861
+	 *
+	 */
 	public static enum Field {
 		NAME {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (!ctrl.checkName(line)) {
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (!ctrl.checkName(value)) {
 					out
-							.println(line
+							.println(value
 									+ "\nNames and surnames must start with capital letter.\n"
 									+ "Charecters ' and - are allowed.\n"
 									+ "Please check Firstname and Surname.\n");
 					return true;
 				} else {
-					line = ctrl.removeQuotes(line);
-					athlete.setName(line);
+					value = ctrl.removeQuotes(value);
+					athlete.setName(value);
 				}
 				return false;
 			}
 		},
 		BIRTHDAY {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
+			public boolean parseAndStore(String value, Athlete athlete) {
 				try {
-					athlete.setBirthday(DATE_FORMAT.parse(line));
+					athlete.setBirthday(Const.DATE_FORMAT.parse(value));
 				} catch (ParseException e) {
-					out.println(line + "\nFormat " + DATE_FORMAT.toPattern()
+					out.println(value + "\nFormat " + Const.DATE_FORMAT.toPattern()
 							+ " is allowed.\n" + "Please check Birthday.\n");
 					return true;
 				}
@@ -55,13 +61,13 @@ public class ControllerInput {
 		},
 		COUNTRY {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (!ctrl.checkCountry(line)) {
-					out.println(line + "\nFormat XX is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (!ctrl.checkCountry(value)) {
+					out.println(value + "\nFormat XX is allowed.\n"
 							+ "Please check country code.\n");
 					return true;
 				} else {
-					athlete.setCountry(line);
+					athlete.setCountry(value);
 				}
 				return false;
 			}
@@ -69,13 +75,13 @@ public class ControllerInput {
 
 		SPRINT_100 {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (ctrl.checkTime(line) == -1) {
-					out.println(line + "\nFormat (sec) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (ctrl.checkTime(value) == -1) {
+					out.println(value + "\nFormat (sec) is allowed.\n"
 							+ "Please check 100 m sprint results.\n");
 					return true;
 				} else {
-					float time = ctrl.checkTime(line);
+					float time = ctrl.checkTime(value);
 					athlete.setSprint100(time);
 				}
 				return false;
@@ -84,14 +90,14 @@ public class ControllerInput {
 
 		LONG_JUMP {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (!ctrl.checkMeters(line)) {
-					out.println(line + "\nFormat (m) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (!ctrl.checkMeters(value)) {
+					out.println(value + "\nFormat (m) is allowed.\n"
 							+ "Please check Long jump results.\n");
 					return true;
 				} else {
 					athlete
-							.setLongJump(Float.valueOf(line.trim())
+							.setLongJump(Float.valueOf(value.trim())
 									.floatValue());
 				}
 				return false;
@@ -100,14 +106,14 @@ public class ControllerInput {
 
 		SHOT_PUT {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (!ctrl.checkMeters(line)) {
-					out.println(line + "\nFormat (m) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (!ctrl.checkMeters(value)) {
+					out.println(value + "\nFormat (m) is allowed.\n"
 							+ "Please check Shot put results.\n");
 					return true;
 				} else {
 					athlete
-							.setShortPut(Float.valueOf(line.trim())
+							.setShortPut(Float.valueOf(value.trim())
 									.floatValue());
 				}
 				return false;
@@ -116,14 +122,14 @@ public class ControllerInput {
 
 		HIGH_JUMP {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (!ctrl.checkMeters(line)) {
-					out.println(line + "\nFormat (m) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (!ctrl.checkMeters(value)) {
+					out.println(value + "\nFormat (m) is allowed.\n"
 							+ "Please check High jump results.\n");
 					return true;
 				} else {
 					athlete
-							.setHighJump(Float.valueOf(line.trim())
+							.setHighJump(Float.valueOf(value.trim())
 									.floatValue());
 				}
 				return false;
@@ -132,13 +138,13 @@ public class ControllerInput {
 
 		SPRINT_400 {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (ctrl.checkTime(line) == -1) {
-					out.println(line + "\nFormat (min:sec) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (ctrl.checkTime(value) == -1) {
+					out.println(value + "\nFormat (min:sec) is allowed.\n"
 							+ "Please check 400 m sprint results.\n");
 					return true;
 				} else {
-					float time = ctrl.checkTime(line);
+					float time = ctrl.checkTime(value);
 					athlete.setSprint400(time);
 				}
 				return false;
@@ -147,13 +153,13 @@ public class ControllerInput {
 
 		HURDLES {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (ctrl.checkTime(line) == -1) {
-					out.println(line + "\nFormat (sec) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (ctrl.checkTime(value) == -1) {
+					out.println(value + "\nFormat (sec) is allowed.\n"
 							+ "Please check 110 m hurdles results.\n");
 					return true;
 				} else {
-					float time = ctrl.checkTime(line);
+					float time = ctrl.checkTime(value);
 					athlete.setHurdles(time);
 				}
 				return false;
@@ -162,13 +168,13 @@ public class ControllerInput {
 
 		DISCUS_THROW {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (!ctrl.checkMeters(line)) {
-					out.println(line + "\nFormat (m) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (!ctrl.checkMeters(value)) {
+					out.println(value + "\nFormat (m) is allowed.\n"
 							+ "Please check Discus throw results.\n");
 					return true;
 				} else {
-					athlete.setDiscusThrow(Float.valueOf(line.trim())
+					athlete.setDiscusThrow(Float.valueOf(value.trim())
 							.floatValue());
 				}
 				return false;
@@ -177,13 +183,13 @@ public class ControllerInput {
 
 		POLE_VAULT {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (!ctrl.checkMeters(line)) {
-					out.println(line + "\nFormat (m) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (!ctrl.checkMeters(value)) {
+					out.println(value + "\nFormat (m) is allowed.\n"
 							+ "Please check Pole vault results.\n");
 					return true;
 				} else {
-					athlete.setPoleVault(Float.valueOf(line.trim())
+					athlete.setPoleVault(Float.valueOf(value.trim())
 							.floatValue());
 				}
 				return false;
@@ -192,13 +198,13 @@ public class ControllerInput {
 
 		JAVELIN_THROW {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (!ctrl.checkMeters(line)) {
-					out.println(line + "\nFormat (m) is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (!ctrl.checkMeters(value)) {
+					out.println(value + "\nFormat (m) is allowed.\n"
 							+ "Please check Javelin throw results.\n");
 					return true;
 				} else {
-					athlete.setJavelinThrow(Float.valueOf(line.trim())
+					athlete.setJavelinThrow(Float.valueOf(value.trim())
 							.floatValue());
 				}
 				return false;
@@ -207,22 +213,33 @@ public class ControllerInput {
 
 		RACE1500 {
 			@Override
-			public boolean parseAndStore(String line, Athlete athlete) {
-				if (ctrl.checkTime(line) == -1) {
-					out.println(line + "\nFormat (min:sec)  is allowed.\n"
+			public boolean parseAndStore(String value, Athlete athlete) {
+				if (ctrl.checkTime(value) == -1) {
+					out.println(value + "\nFormat (min:sec)  is allowed.\n"
 							+ "Please check 1500 m race results.\n");
 					return true;
 				} else {
-					float time = ctrl.checkTime(line);
+					float time = ctrl.checkTime(value);
 					athlete.setSprint1500(time);
 				}
 				return false;
 			}
 		};
 
-		public abstract boolean parseAndStore(String line, Athlete friend);
+		/**
+		 * Parses the value from file or console and stores in the model.
+		 * @param value to be checked and stored
+		 * @param athlete 
+		 * @return true if validation was not passed 
+		 */
+		public abstract boolean parseAndStore(String value, Athlete athlete);
 	}
 
+	/**
+	 * Sets controller instance.
+	 * 
+	 * @param ctrl
+	 */
 	public static void setController(Controller ctrl) {
 		ControllerInput.ctrl = ctrl;
 	}
