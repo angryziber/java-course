@@ -77,7 +77,7 @@ public class IOcsv extends AbstractIO {
 			out.println("\nError! File" + getParameters()+ " structure in line " + lineNumber + " is incorrect\n");
 
 		} catch (IOException e) {
-			out.println("\nError!I/O error occured");
+			out.println("\nError! I/O error occured");
 			e.printStackTrace();
 
 		} finally {

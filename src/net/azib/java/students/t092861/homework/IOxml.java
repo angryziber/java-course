@@ -110,7 +110,7 @@ public class IOxml extends AbstractIO {
 				Element athlete = doc.createElement("athlete");
 				root.appendChild(athlete);
 
-				// Name element
+				// Place element
 				Element place = doc.createElement("place");
 				Text placeText = doc.createTextNode(String
 						.valueOf(a.getPlace()));
@@ -201,7 +201,7 @@ public class IOxml extends AbstractIO {
 			} else {
 				file = temp;
 			}
-			
+
 			TransformerFactory tFactory = TransformerFactory.newInstance();
 			Transformer transformer = tFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
@@ -220,11 +220,11 @@ public class IOxml extends AbstractIO {
 			e.printStackTrace();
 			
 		} catch (TransformerException e) {
-			out.println("\nError! .");
+			out.println("\nError occured during the transformation process .");
 			e.printStackTrace();
 			
 		} catch (ParserConfigurationException e) {
-			out.println("\nError occured during the transformation process.");
+			out.println("\nError! Serious configuration error.");
 			e.printStackTrace();
 			
 		} catch (IllegalArgumentException e) {
@@ -249,8 +249,7 @@ public class IOxml extends AbstractIO {
 			validator.setErrorHandler(new MyErrorHandler());
 
 			// preparing the XML file as a SAX source
-			SAXSource source = new SAXSource(new InputSource(
-					new java.io.FileInputStream(xmlName)));
+			SAXSource source = new SAXSource(new InputSource(new java.io.FileInputStream(xmlName)));
 
 			// validating the SAX source against the schema
 			validator.validate(source);

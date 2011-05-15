@@ -79,11 +79,7 @@ public class Controller {
 		String surName = "[\\p{Lu}]{1}[\\p{L}]*[\'-]?[\\p{L}\\s]+$";
 
 		String pattern = firstName + " " + surName;
-		if (matchesThePattern(pattern, name)) {
-			return true;
-		} else {
-			return false;
-		}
+		return matchesThePattern(pattern, name);
 	}
 
 	/**

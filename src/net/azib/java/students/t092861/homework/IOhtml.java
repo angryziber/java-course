@@ -61,15 +61,19 @@ public class IOhtml extends AbstractIO {
 			// Check if directory exist
 			File file = getOutputFile(getParameters());
 			transformer.transform(new StreamSource(temp), new StreamResult(new FileOutputStream(file)));
-
+			
 			out.println("Successful HTML output to " + "\""	+ getParameters() + "\"" + " file!");
 			
 		} catch (FileNotFoundException e) {
+			out.println("\nError! Attempt to open the file denoted by a specified pathname has failed.");
+			e.printStackTrace();
 			
-			e.printStackTrace();
 		} catch (TransformerException e) {
+			out.println("\nError occured during the transformation process.");
 			e.printStackTrace();
+			
 		} catch (IOException e) {
+			out.println("\nError! I/O exception of some sort has occurred.");
 			e.printStackTrace();
 		}
 	}

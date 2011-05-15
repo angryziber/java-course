@@ -11,17 +11,17 @@ import java.util.Iterator;
  * 
  */
 public class IOconsole extends AbstractIO {
-	
+
 	/**
 	 * Current athlete instance.
 	 */
 	private Athlete athlete;
-	
+
 	/**
 	 * Used for validating the input from file/console.
 	 */
 	private boolean invalidInput;
-	
+
 	/**
 	 * File name or the path to the file.
 	 */
@@ -29,7 +29,9 @@ public class IOconsole extends AbstractIO {
 
 	/**
 	 * Default constructor.
-	 * @param ctrl - controller
+	 * 
+	 * @param ctrl
+	 *            - controller
 	 */
 	public IOconsole(Controller ctrl) {
 		super(ctrl);
@@ -66,6 +68,7 @@ public class IOconsole extends AbstractIO {
 				line = reader.readLine();
 				if (line.equalsIgnoreCase("n")) {
 					break;
+					
 				} else {
 					out.println("");
 					index++;
