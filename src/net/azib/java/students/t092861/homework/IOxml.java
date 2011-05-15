@@ -214,20 +214,25 @@ public class IOxml extends AbstractIO {
 			validateXML(schema, file.getPath());
 			out.println("\nSuccessful XML output to " + "\"" + file.getName()
 					+ "\"" + " file!");
+			
 		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
+			out.println("\nError! Serious configuration error.");
 			e.printStackTrace();
+			
 		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
+			out.println("\nError! .");
 			e.printStackTrace();
+			
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
+			out.println("\nError occured during the transformation process.");
 			e.printStackTrace();
+			
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
+			out.println("\nError! Method has been passed an illegal or inappropriate argument.");
 			e.printStackTrace();
+			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			out.println("\nError! Attempt to open the file denoted by a specified pathname has failed.");
 			e.printStackTrace();
 		}
 	}
