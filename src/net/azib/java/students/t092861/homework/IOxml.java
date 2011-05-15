@@ -34,30 +34,47 @@ import org.xml.sax.SAXParseException;
  * 
  */
 public class IOxml extends AbstractIO {
-	
+
+	/**
+	 * Used for counting the xml validation errors.
+	 */
 	public static int errorCount = 0;
-	
+
 	/**
 	 * File name or the path to the file.
 	 */
 	public String param = "";
-	
-	private File temp=null;
 
 	/**
-	 * Default constructor
+	 * Temporary file.
+	 */
+	private File temp = null;
+
+	/**
+	 * Default constructor.
+	 * 
+	 * @param param
+	 *            - parameters of the input/output
+	 * @param ctrl
+	 *            - controller
 	 */
 	public IOxml(String param, Controller ctrl) {
 		super(ctrl);
 		this.param = param;
 	}
 
-
+	/**
+	 * Overridden constructor.
+	 * 
+	 * @param temp
+	 *            - temporary output file
+	 * @param ctrl
+	 *            - controller
+	 */
 	public IOxml(File temp, Controller ctrl) {
 		super(ctrl);
 		this.temp = temp;
 	}
-
 
 	@Override
 	ArrayList<Athlete> input() {
@@ -231,7 +248,6 @@ public class IOxml extends AbstractIO {
 
 			// validating the SAX source against the schema
 			validator.validate(source);
-//			out.println();
 			if (errorCount > 0) {
 				out.println("Failed with errors: " + errorCount);
 			} else {

@@ -24,7 +24,10 @@ public class IOdb extends AbstractIO {
 	 */
 	public String param = "";
 
-	private static Properties cProps;
+	/**
+	 * Property list.
+	 */
+	private static Properties props;
 
 	/**
 	 * Url of the database.
@@ -47,12 +50,12 @@ public class IOdb extends AbstractIO {
 	@Override
 	ArrayList<Athlete> input() {
 		ArrayList<Athlete> athletes = new ArrayList<Athlete>();
-		cProps = new Properties();
+		props = new Properties();
 		FileInputStream in;
 
 		try {
 			in = new FileInputStream(Const.PACKAGE + "db.properties");
-			cProps.load(in);
+			props.load(in);
 			in.close();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -67,7 +70,7 @@ public class IOdb extends AbstractIO {
 		String driver = "com.mysql.jdbc.Driver";
 		try {
 			Class.forName(driver).newInstance();
-			conn = openConnection();		
+			conn = openConnection();
 			st = (Statement) conn.createStatement();
 			rs = st
 					.executeQuery("SELECT A.*, R.*, C.* FROM athletes A, results R, competitions C WHERE (C.name = '"
@@ -75,8 +78,7 @@ public class IOdb extends AbstractIO {
 							+ "' OR C.id = '"
 							+ getParameters()
 							+ "') AND C.id = R.competition_id AND A.id=R.athlete_id");
-			while (rs.next())
-			{
+			while (rs.next()) {
 				inputData = new ArrayList<String>();
 				inputData.add(rs.getString("name"));
 				
@@ -96,29 +98,40 @@ public class IOdb extends AbstractIO {
 				inputData.add(rs.getString("race_1500m"));
 				athletes.add(ctrl.readData(inputData));
 			}
-			
+
 			rs.close();
-			out.println("\nSuccessful input from " + "\"" + url + "\"" + " database!\n");
-		}catch (ArrayIndexOutOfBoundsException e) {
-			out.println("Error! Some data from " + "\"" + url + "\"" + " is unreadable\n");
-		}
-		catch (Exception e) {
+			out.println("\nSuccessful input from " + "\"" + url + "\""
+					+ " database!\n");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			out.println("Error! Some data from " + "\"" + url + "\""
+					+ " is unreadable\n");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 			try {
 				conn.close();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 			}
 		}
 		return athletes;
 	}
 	
 	static Connection openConnection() throws SQLException {
-		url = "jdbc:mysql://" + cProps.getProperty("server") + ":" + cProps.getProperty("port.default") + "/";
-		String dbName = cProps.getProperty("database");
-		String userName = cProps.getProperty("user");
-		String password = cProps.getProperty("password");
+		url = "jdbc:mysql://" + props.getProperty("server") + ":" + props.getProperty("port.default") + "/";
+		String dbName = props.getProperty("database");
+		String userName = props.getProperty("user");
+		String password = props.getProperty("password");
 		out.println("Connected to database");		
 		return (Connection) DriverManager.getConnection(url + dbName, userName, password);
 	}

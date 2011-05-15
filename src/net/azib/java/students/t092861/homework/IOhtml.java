@@ -23,6 +23,14 @@ public class IOhtml extends AbstractIO {
 	 */
 	public String param = "";
 
+	/**
+	 * Default constructor.
+	 * 
+	 * @param param
+	 *            - parameters of the input/output
+	 * @param ctrl
+	 *            - controller
+	 */
 	public IOhtml(String param, Controller ctrl) {
 		super(ctrl);
 		this.param = param;
@@ -58,10 +66,13 @@ public class IOhtml extends AbstractIO {
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			// TODO Auto-generated catch block
 		} catch (TransformerException e) {
 			e.printStackTrace();
+			// TODO Auto-generated catch block
 		} catch (IOException e) {
 			e.printStackTrace();
+			// TODO Auto-generated catch block
 		}
 	}
 
