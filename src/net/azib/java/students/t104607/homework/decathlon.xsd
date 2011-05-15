@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+        schemaLocation="http://www.w3.org/2001/xml.xsd" />
+
+
+
+  <xs:element name="decathlon">
+    <xs:complexType>
+      <xs:sequence>
+	    <xs:element name="athlete" maxOccurs="unbounded">
+		  <xs:complexType>
+			<xs:sequence>
+			  <xs:element name="name" type="xs:string" />
+			  <xs:element name="country" type="xs:string" />
+			  <xs:element name="birthday">
+				<xs:simpleType>
+				  <xs:restriction base="xs:string">
+				     <xs:pattern value="\d{2}.\d{2}.\d{4}" />
+				  </xs:restriction>
+				</xs:simpleType>
+			  </xs:element>
+			  <xs:element name="event">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="result" type="xs:double" />
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" />
+				</xs:complexType>
+			  </xs:element>
+			</xs:sequence>
+		  </xs:complexType>
+	    </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
