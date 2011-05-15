@@ -24,7 +24,7 @@ public abstract class AbstractIO {
 	 */
 	public Controller ctrl;
 	/**
-	 * Data structure. Each element consists of 13 comma separated values.
+	 * Holds the input data from file/console. Each element consists of 13 comma separated values.
 	 */
 	public ArrayList<String> inputData;
 	
@@ -207,8 +207,7 @@ public abstract class AbstractIO {
 		df.setDecimalFormatSymbols(dfs);
 		String fraction = df.format(Float.valueOf(time % 60));
 
-		return (time > 60 ? Integer.valueOf(time.intValue() / 60) + ":" : "")
-				+ fraction;
+		return (time > 60 ? Integer.valueOf(time.intValue() / 60) + ":" : "") + fraction;
 	}
 
 	/**

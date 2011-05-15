@@ -97,8 +97,7 @@ public class ControllerInput {
 					return true;
 				} else {
 					athlete
-							.setLongJump(Float.valueOf(value.trim())
-									.floatValue());
+							.setLongJump(Float.valueOf(value.trim()).floatValue());
 				}
 				return false;
 			}
