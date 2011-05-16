@@ -36,3 +36,4 @@ public class Competition {
 		this.athletesList = athletesList;
 	}
 }
+

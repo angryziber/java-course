@@ -8,6 +8,7 @@ public class Athlete implements Comparable<Athlete> {
 	private String dateOfBirth;
 	private String countryCode;
 	private String place;
+
 	private List<Result> results = new ArrayList<Result>();
 
 	Athlete(String name) {

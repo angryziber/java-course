@@ -91,14 +91,14 @@ public enum Event {
 		}
 		
 		public String getUnits() {
-			return "minutes:seconds";
+			return "seconds";
 		}
-		
+
 		public int getScore(double rawResult) {
 			return getScoreForTrackEvent(rawResult);
 		}
 	},
-	
+
 	HURDLES_ON_110_METERS (5.74352, 28.5, 1.92) {
 
 		public String getName() {
@@ -108,16 +108,16 @@ public enum Event {
 		public String getType() {
 			return "running";
 		}
-		
+
 		public String getUnits() {
 			return "seconds";
 		}
-		
+
 		public int getScore(double rawResult) {
 			return getScoreForTrackEvent(rawResult);
 		}
-	}, 
-	
+	},
+
 	DISCUS_THROW (12.91, 4, 1.1) {
 
 		public String getName() {
@@ -127,16 +127,16 @@ public enum Event {
 		public String getType() {
 			return "throwing";
 		}
-		
+
 		public String getUnits() {
 			return "meters";
 		}
-		
+
 		public int getScore(double rawResult) {
 			return getScoreForNonTrackEvent(rawResult);
 		}
 	},
-	
+
 	POLE_VAULT (0.2797, 100, 1.35) {
 
 		public String getName() {
@@ -146,18 +146,18 @@ public enum Event {
 		public String getType() {
 			return "jumping";
 		}
-		
+
 		public String getUnits() {
 			return "meters";
 		}
-		
+
 		public int getScore(double rawResult) {
 			return getScoreForNonTrackEvent(rawResult);
 		}
 	},
-	
+
 	JAVELIN_THROW (10.14, 7, 1.08) {
-		
+
 		public String getName() {
 			return "javelin throw";
 		}
@@ -165,17 +165,17 @@ public enum Event {
 		public String getType() {
 			return "throwing";
 		}
-		
+
 		public String getUnits() {
 			return "meters";
 		}
-		
+
 		public int getScore(double rawResult) {
 			return getScoreForNonTrackEvent(rawResult);
 		}
-		
+
 	},
-	
+
 	RACE_ON_1500_METERS (0.03768, 480, 1.85) {
 
 		public String getName() {
@@ -185,9 +185,9 @@ public enum Event {
 		public String getType() {
 			return "running";
 		}
-		
+
 		public String getUnits() {
-			return "minutes:seconds";
+			return "seconds";
 		}
 		
 		public int getScore(double rawResult) {

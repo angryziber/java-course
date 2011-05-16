@@ -30,7 +30,7 @@ public class Console {
 
 			currentAthlete = athletes.get(athletes.size() - 1);
 
-			System.out.print("Enter the date of birth: ");
+			System.out.print("Enter the date of birth (yyyy-MM-dd): ");
 			try {
 				currentAthlete.setDateOfBirth(in.readLine());
 			} catch (IOException e1) {
@@ -100,8 +100,9 @@ public class Console {
 	}
 
 
-	public static void output(List<Athlete> athletes) {
+	public static void output(Competition decathlon) {
 
+		List<Athlete> athletes = decathlon.getAthletesList();
 		Utils.sortAthletes(athletes);
 		printTableHeader();
 
@@ -165,3 +166,4 @@ public class Console {
         				   "---------+---------+------------+------------+----------+-------------+---------+");
 	}
 }
+

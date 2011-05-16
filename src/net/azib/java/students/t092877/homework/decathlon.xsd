@@ -6,7 +6,7 @@
 				<xs:element name="name">
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
-							<xs:maxLength value="20"/>
+							<xs:maxLength value="40"/>
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
@@ -14,7 +14,7 @@
 				<xs:element name="location">
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
-							<xs:maxLength value="30"/>
+							<xs:maxLength value="40"/>
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
@@ -29,7 +29,7 @@
 										<xs:element name="name">
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:maxLength value="35"/>
+													<xs:maxLength value="40"/>
 													<xs:whiteSpace value="collapse"/>
 												</xs:restriction>
 											</xs:simpleType>
@@ -38,7 +38,7 @@
 										<xs:element name="country_code">
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:pattern value="[A-Z][A-Z]"/>
+													<xs:pattern value="[A-Z]{2}"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -123,3 +123,4 @@
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
+

@@ -17,7 +17,7 @@
 					<col class="emphasis"/>
 				</colgroup>
 					<tbody>
-						<tr>
+						<tr>	
 							<th scope="col">place</th>
 							<th scope="col">points</th>
 							<th scope="col">nation</th>
@@ -40,7 +40,7 @@
 								<td class="other"><xsl:value-of select="score"/></td>
 								<td class="other"><xsl:value-of select="country_code"/></td>
 								<td id="athlete_name"><xsl:value-of select="name"/></td>
-
+								
 								<xsl:for-each select="descendant::result">
 									<td class="other"><xsl:value-of select="value"/></td>
 								</xsl:for-each>

@@ -26,11 +26,12 @@ public class Database {
 		connectToDatabase(propslist);
 
 		// NB! NEED to recode this part to take new regex pattern into account
-		if (input.matches("[1-9]+"))
-			athletes = getResults(Integer.valueOf(input), null);
+		if (input.matches("[1-9][0-9]*"))
+			athletes = getResults(Integer.valueOf(input), null, decathlon);
 		else {
-			athletes = getResults(null, input);
+			athletes = getResults(null, input, decathlon);
 		}
+
 		return athletes;
 	}
 
@@ -75,7 +76,7 @@ public class Database {
 	}
 
 
-	private static ArrayList<Athlete> getResults(Integer id, String name) {
+	private static ArrayList<Athlete> getResults(Integer id, String name, Competition decathlon) {
 
 		String idQuery;
 		if(id == null) {
@@ -84,7 +85,35 @@ public class Database {
 			idQuery = id.toString();
 		}
 
-		ResultSet rs = null;
+		ResultSet rs1 = null;
+
+		try {
+
+			Statement st1 = con.createStatement();
+			rs1 = st1.executeQuery("SELECT competitions.name," +
+										  "competitions.location," +
+										  "competitions.date " +
+								   "FROM competitions " +
+								   "WHERE competitions.id IN (" + idQuery + ");");
+
+			while (rs1.next()) {
+
+				decathlon.setName(rs1.getString("name"));
+				decathlon.setLocation(rs1.getString("location"));
+
+				DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+				Date comp = rs1.getDate("date");
+				String compDate = df1.format(comp);
+
+				decathlon.setDate(compDate);
+			}
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+
+		ResultSet rs2 = null;
 
 		ArrayList<Athlete> athletes = new ArrayList<Athlete>();
 		ArrayList<Result> results;
@@ -92,8 +121,8 @@ public class Database {
 
 		try {
 
-			Statement st = con.createStatement();
-			rs = st.executeQuery("SELECT results.id," +
+			Statement st2 = con.createStatement();
+			rs2 = st2.executeQuery("SELECT results.id," +
 										"athletes.name athlete_name," +
 										"athletes.dob date_of_birth," +
 										"athletes.country_code," +
@@ -112,21 +141,21 @@ public class Database {
 								 "WHERE athletes.id = results.athlete_id " +
 								 "AND results.competition_id IN (" + idQuery + ");");
 
-			while (rs.next()) {
+			while (rs2.next()) {
 
-				DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-				Date date = rs.getDate("date_of_birth");
-				String dateOfBirth = df.format(date);
+//				DateFormat df2 = new SimpleDateFormat("dd.MM.yyyy");
+//				Date born = rs2.getDate("date_of_birth");
+//				String dateOfBirth = df2.format(born);
 
-				athlete = new Athlete(rs.getString("athlete_name"),
-									  dateOfBirth,
-									  rs.getString("country_code"));
+				athlete = new Athlete(rs2.getString("athlete_name"),
+									  rs2.getDate("date_of_birth").toString(),
+									  rs2.getString("country_code"));
 
 				results = new ArrayList<Result>();
 
 				int i = 5;
 				for (Event event : Event.values()) {
-					results.add(new Result(event, Utils.convertToProperUnits(String.valueOf(rs.getDouble(i)), event.getType())));
+					results.add(new Result(event, Utils.convertToProperUnits(String.valueOf(rs2.getDouble(i)), event.getType())));
 					i++;
 				}
 

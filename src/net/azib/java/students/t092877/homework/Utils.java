@@ -4,16 +4,27 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
 public class Utils{
-	
+
 	public static void sortAthletes(List<Athlete> athletes) {
-		
+
+		if (athletes == null) {;
+			return;
+		}
+
 		Collections.sort(athletes);
 		HashMap<String, int[]> placeRanges = new HashMap<String, int[]>();
-		
+
 		int place = 1;
 		int[] range;
-		
+
 		// set place intervals for corresponding athlete
 
 		for (Athlete athlete : athletes) {
@@ -86,6 +97,16 @@ public class Utils{
 		}
 		else
 			originalUnits = String.valueOf(value);
-		return originalUnits;	
+		return originalUnits;
+	}
+
+	public static String setDateFormat(Date initialFormatDate) {
+
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = initialFormatDate;
+		String newFormatDate = df.format(d);
+
+		return newFormatDate;
 	}
 }
+

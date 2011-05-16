@@ -19,7 +19,7 @@ public class DecathlonCalc {
 				if (i == 0) {
 					decathlon.setAthletesList(Console.input(decathlon));
 				} else
-					Console.output(decathlon.getAthletesList());
+					Console.output(decathlon);
 
 			} else if (args[i].equals("-csv")) {
 
@@ -30,7 +30,7 @@ public class DecathlonCalc {
 				} else {
 
 					String dstPath = args[++i];
-					Csv.output(decathlon.getAthletesList(), new File(dstPath));
+					Csv.output(decathlon, new File(dstPath));
 				}
 
 			} else if (args[i].equals("-db")) {
@@ -44,15 +44,13 @@ public class DecathlonCalc {
 
 				String dstPath = args[++i];
 				outputToHtml = false;
-				Xml.output(decathlon.getAthletesList(), new File(dstPath), outputToHtml);
-				System.out.println("\nOutput to XML hasn't been implemented yet");
+				Xml.output(decathlon, new File(dstPath), outputToHtml);
 
 			} else if (args[i].equals("-html")) {
 
 				String dstPath = args[++i];
 				outputToHtml = true;
-				Xml.output(decathlon.getAthletesList(), new File(dstPath), outputToHtml);
-				System.out.println("\nOutput to HTML hasn't been implemented yet");
+				Xml.output(decathlon, new File(dstPath), outputToHtml);
 
 			} else {
 
