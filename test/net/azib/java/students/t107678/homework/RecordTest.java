@@ -22,7 +22,7 @@ public class RecordTest {
 
         Record rec = new Record(mockParticipant, events);
 
-        assertEquals(rec.getPoints(), 20);
+        assertEquals(20,rec.getTotalPoints());
 
     }
 }

@@ -9,7 +9,7 @@ public class CSVReaderTest {
 //        Record record = new CSVReader.CSVLineParser().parseLine(line);
 //        assertEquals(record.getParticipant().getName(),"Beata Kana");
 //        assertEquals(record.getParticipant().getBirthDate(),new Date(82, 1, 29));
-//        assertEquals(record.getParticipant().getCountry(), new CountryCode("ZA"));
+//        assertEquals(record.getParticipant().getCountryCode(), new CountryCode("ZA"));
 //
 //    }
 }
