@@ -2,39 +2,45 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-        schemaLocation="http://www.w3.org/2001/xml.xsd" />
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
 
-
-
-  <xs:element name="decathlon">
-    <xs:complexType>
-      <xs:sequence>
-	    <xs:element name="athlete" maxOccurs="unbounded">
-		  <xs:complexType>
+	<xs:element name="decathlon">
+		<xs:complexType>
 			<xs:sequence>
-			  <xs:element name="name" type="xs:string" />
-			  <xs:element name="country" type="xs:string" />
-			  <xs:element name="birthday">
-				<xs:simpleType>
-				  <xs:restriction base="xs:string">
-				     <xs:pattern value="\d{2}.\d{2}.\d{4}" />
-				  </xs:restriction>
-				</xs:simpleType>
-			  </xs:element>
-			  <xs:element name="event">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="result" type="xs:double" />
-					</xs:sequence>
-					<xs:attribute name="name" type="xs:string" />
-				</xs:complexType>
-			  </xs:element>
+				<xs:element name="athlete" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="position" type="xs:string" />
+							<xs:element name="score" type="xs:integer" />
+							<xs:element name="name" type="xs:string" />
+							<xs:element name="country" type="xs:string" />
+							<xs:element name="birthday">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:length value="10" />
+										<xs:pattern value="((0?[1-9])|([1-2][0-9])|(3[0-1])).((0?[1-9])|(1[0-2])).[0-9]{4}" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="event" maxOccurs="10" minOccurs="10">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="sports" type="xs:string" />
+										<xs:element name="result">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="(\d?:)?(\d{1}|\d{2})(.(\d{1}|\d{2}))?" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
 			</xs:sequence>
-		  </xs:complexType>
-	    </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+		</xs:complexType>
+	</xs:element>
 
 </xs:schema>

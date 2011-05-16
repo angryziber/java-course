@@ -25,7 +25,7 @@ public class Athlete implements Comparable<Athlete>{
 	private double race1500m;
 
 	private String position;
-	private DecimalFormat df = new DecimalFormat("#.##");
+	private DecimalFormat df = new DecimalFormat("#.00");
 	private DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
 	private double min2sec(String min) {

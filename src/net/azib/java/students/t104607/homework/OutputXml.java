@@ -1,87 +1,102 @@
 package net.azib.java.students.t104607.homework;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.*;
 import java.util.List;
+import java.util.Properties;
 /*
 http://www.w3schools.com/schema/schema_example.asp
 http://java.sun.com/developer/technicalArticles/xml/validationxpath/
+http://www.brainbell.com/tutorials/XML/Working_With_Simple_Types.htm
+http://www.edankert.com/validate.html
  */
 
 /**
  * @author 104607 IASM
  */
 public class OutputXml {
-	public void save(OutputStream outputStream, List<Athlete> athletes) throws IOException, TransformerException, ParserConfigurationException {
+	private Document xml;
+	private Element root;
+	private Element record;
+	private Element element;
+
+	private void createXML() throws ParserConfigurationException {
+		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = builderFactory.newDocumentBuilder();
+        xml = docBuilder.newDocument();
+		root = xml.createElement("decathlon");
+        xml.appendChild(root);
+	}
+
+	private void addElement(String name, String value) {
+		element = xml.createElement(name);
+		element.setTextContent(value);
+		record.appendChild(element);
+	}
+
+	private void addEventElement(String sports, String result) {
+		element = xml.createElement("event");
+		Element event = xml.createElement("sports");
+		event.setTextContent(sports);
+		element.appendChild(event);
+		event = xml.createElement("result");
+		event.setTextContent(result);
+		element.appendChild(event);
+		record.appendChild(element);
+	}
+
+	public void save(OutputStream outputStream, List<Athlete> athletes) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outputStream));
 
-		DocumentBuilderFactory dbfac = DocumentBuilderFactory.newInstance();
+		createXML();
 
-        DocumentBuilder docBuilder = dbfac.newDocumentBuilder();
-        Document xml = docBuilder.newDocument();
-		Element root = xml.createElement("decathlon");
-        xml.appendChild(root);
 		for (Athlete athlete : athletes) {
-			Element record = xml.createElement("athlete");
-			//athlete.setTextContent("Siim Susi");
-	        //athlete.setAttribute("name", "Siim Susi");
-			//athlete.setAttribute("country", "EE");
-			//athlete.setAttribute("bday", "1976-01-01");
-			Element element = xml.createElement("name");
-			element.setTextContent(athlete.getName());
-			record.appendChild(element);
-			element = xml.createElement("country");
-			element.setTextContent(athlete.getCountry());
-			record.appendChild(element);
-			element = xml.createElement("birthday");
-			element.setTextContent(athlete.getBirthday());
-			record.appendChild(element);
-			element = xml.createElement("event");
-			//element.setTextContent("sprint_100m");
-			element.setAttribute("name", "sprint_100m");
-			Element event = xml.createElement("result");
-			event.setTextContent(athlete.getSprint100m());
-			element.appendChild(event);
-			record.appendChild(element);
+			record = xml.createElement("athlete");
+
+			addElement("position",athlete.getPosition());
+			addElement("score",Integer.toString(athlete.getScore()));
+			addElement("name",athlete.getName());
+			addElement("country",athlete.getCountry());
+			addElement("birthday",athlete.getBirthday());
+
+			addEventElement("sprint_100m",athlete.getSprint100m());
+			addEventElement("long_jump",athlete.getLongJump());
+			addEventElement("shot_put",athlete.getShotPut());
+			addEventElement("high_jump",athlete.getHighJump());
+			addEventElement("sprint_400m",athlete.getSprint400m());
+			addEventElement("hurdles_110m",athlete.getHurdles110m());
+			addEventElement("discus_throw",athlete.getDiscusThrow());
+			addEventElement("pole_vault",athlete.getPoleVault());
+			addEventElement("javelin_throw",athlete.getJavelinThrow());
+			addEventElement("race_1500m",athlete.getRace1500m());
+
 			root.appendChild(record);
 		}
-		//Text text = xml.createTextNode("Filler, ... I could have had a foo!");
-        //athlete.appendChild(text);
-		//root.appendChild(athlete);
-		//Comment comment = xml.createComment("Just a thought");
-		//root.appendChild(comment);
 
 		xml.setXmlStandalone(true);
-		Transformer serializer = TransformerFactory.newInstance().newTransformer();
-		serializer.setOutputProperty(OutputKeys. OMIT_XML_DECLARATION, "yes");
-        serializer.setOutputProperty(OutputKeys.INDENT, "yes");
-		serializer.transform(new DOMSource(xml), new StreamResult(out));
-
-		try {
-			System.out.println("\nStarting validate !!!");
-			long t = System.currentTimeMillis();
-			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema schema = factory.newSchema(OutputXml.class.getResource("decathlon.xsd"));
-			Validator validator = schema.newValidator();
-			validator.validate(new DOMSource(xml));
-			System.out.println("Output is validated !!!");
-			System.out.println("Processing time: " + (System.currentTimeMillis() - t) + "ms");
-		} catch (SAXException e) {
-			e.printStackTrace();
-		}
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		//transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "decathlon.dtd");
+		transformer.transform(new DOMSource(xml), new StreamResult(out));
 
 		out.close();
 	}

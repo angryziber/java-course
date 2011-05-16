@@ -61,8 +61,8 @@ public class Decathlon {
 				//new OutputCsv().save(System.out, athletes);
 			} else if (args[i].compareToIgnoreCase("-xml") == 0) {
 				i++;
-				//new OutputXml().save(new FileOutputStream(args[i]), athletes);
-				new OutputXml().save(System.out, athletes);
+				new OutputXml().save(new FileOutputStream(args[i]), athletes);
+				//new OutputXml().save(System.out, athletes);
 			} else if (args[i].compareToIgnoreCase("-html") == 0) {
 				i++;
 				new OutputHtml(args[i]);
@@ -77,7 +77,7 @@ public class Decathlon {
 
 	public static void main(String[] args) throws IOException, SQLException, ParseException, TransformerException, ParserConfigurationException, SAXException {
 		System.out.println("HomeWork from 104607 IASM !\n");
-		if (CommandLine(args) == false) {
+		if (!CommandLine(args)) {
 			System.out.println("Use program:\n" +
 					"\tDecathlon -<input-method> [input-parameters] -<output-method> [output-parameters]");
 		}
