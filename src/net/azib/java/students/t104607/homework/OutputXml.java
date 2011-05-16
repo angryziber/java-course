@@ -1,33 +1,16 @@
 package net.azib.java.students.t104607.homework;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
-import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
 import java.io.*;
 import java.util.List;
-import java.util.Properties;
-/*
-http://www.w3schools.com/schema/schema_example.asp
-http://java.sun.com/developer/technicalArticles/xml/validationxpath/
-http://www.brainbell.com/tutorials/XML/Working_With_Simple_Types.htm
-http://www.edankert.com/validate.html
- */
 
 /**
  * @author 104607 IASM
