@@ -44,13 +44,13 @@ public class DecathlonCalc {
 
 				String dstPath = args[++i];
 				outputToHtml = false;
-				Xml.output(decathlon, new File(dstPath), outputToHtml);
+				XMLWriter.output(decathlon, new File(dstPath), outputToHtml);
 
 			} else if (args[i].equals("-html")) {
 
 				String dstPath = args[++i];
 				outputToHtml = true;
-				Xml.output(decathlon, new File(dstPath), outputToHtml);
+				XMLWriter.output(decathlon, new File(dstPath), outputToHtml);
 
 			} else {
 
