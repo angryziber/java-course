@@ -24,8 +24,9 @@ public class Athlete {
 	Double poleVault;
 	Double javelin;
 	Double race;
-	Integer score;
-	Integer place;
+	double[] performance = {0,0,0,0,0,0,0,0,0,0};
+	int score;
+	int place;
 
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
