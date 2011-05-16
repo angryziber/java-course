@@ -51,7 +51,9 @@ public class IOcsv extends AbstractIO {
 			// trying to read as utf-8
 			readerIn = new InputStreamReader(streamIn, "UTF8");
 			bufReader = new BufferedReader(readerIn);
-
+			
+			
+			
 			// current line
 			String curLine = null;
 			// Read input file line by line
@@ -69,7 +71,7 @@ public class IOcsv extends AbstractIO {
 					+ " location!");
 			
 		} catch (UnsupportedEncodingException e) {
-			out.println("\nCouldn't read file as UTF-8");
+			out.println("\nCouldn't read file as UTF8");
 			// therefore reading it as non-UTF-8 encoding
 			readerIn = new InputStreamReader(streamIn);
 			
@@ -96,17 +98,18 @@ public class IOcsv extends AbstractIO {
 
 	@Override
 	void output(ArrayList<Athlete> athletes) {
-		Writer wOut = null;
-		ArrayList<Athlete> results = arrangeInOrder(athletes);
+		
+		Writer writer = null;
+		ArrayList<Athlete> results = ctrl.arrangeInOrder(athletes);
 		Iterator<Athlete> itr = results.iterator();		
 		try {
 			File file = getOutputFile(getParameters());
 			
-			wOut = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF8"));
 			
 			while (itr.hasNext()) {
 				Athlete item = itr.next();
-				wOut.write(item.getPlace() + ":"
+				writer.write(item.getPlace() + ":"
 						+ item.getName() + ","
 						+ this.convertDateDMY(item.getBirthday()) + ","
 						+ item.getCountry() + ","
@@ -120,12 +123,12 @@ public class IOcsv extends AbstractIO {
 						+ item.getPoleVault() + ","
 						+ item.getJavelinThrow() + ","
 						+ this.convertTimeToString(item.getSprint1500()) + ","
-						+ item.getScore()+"\n");
-//						wOut.newLine();
+						+ item.getScore());
+						((BufferedWriter) writer).newLine();
 			}
 			
 			// forces any buffered output bytes to be written out
-			wOut.flush(); 
+			writer.flush(); 
 			out.println("Successful CSV output to " + getParameters() + " file!");
 			
 		} catch (FileNotFoundException en) {
@@ -138,7 +141,7 @@ public class IOcsv extends AbstractIO {
 			
 		} finally {
 			try {
-				wOut.close();
+				writer.close();
 				
 			} catch (IOException e) {
 				out.println("\nERROR! Cannot close the file!");

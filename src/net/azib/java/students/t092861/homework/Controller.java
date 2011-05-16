@@ -6,6 +6,8 @@ package net.azib.java.students.t092861.homework;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -177,6 +179,42 @@ public class Controller {
 	 */
 	public String removeQuotes(String name) {
 		return name.replaceAll("\"", "");
+	}
+	
+	/**
+	 * Arranging the athletes in descending order of the total score (ascending
+	 * order of their places).
+	 * 
+	 * @param athletes
+	 *            - non arranged list.
+	 * @return ascending ordered list.
+	 */
+	public ArrayList<Athlete> arrangeInOrder(ArrayList<Athlete> athletes) {
+		// modified merge sort of athlete scores
+		Collections.sort(athletes, new Comparator<Athlete>() {
+			@Override
+			public int compare(Athlete a, Athlete b) {
+				return (a.getScore() < b.getScore() ? 1 : (a.getScore() > b.getScore() ? -1 : 0));
+			}
+		});
+
+		int athletePoints = 0, athletePlace = 0;
+		// setting athletes places
+		for (Athlete athlete : athletes) {
+			if (athletePlace == 0) {
+				athletePlace = 1;
+				athletePoints = athlete.getScore();
+				athlete.setPlace(athletePlace);
+
+				//if competitors have same points they share the same place
+			} else if (athlete.getScore() != athletePoints) {
+				athletePlace++;
+			}
+			
+			athletePoints = athlete.getScore();
+			athlete.setPlace(athletePlace);
+		}
+		return athletes;
 	}
 
 	/**

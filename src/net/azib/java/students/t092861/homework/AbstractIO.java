@@ -65,45 +65,6 @@ public abstract class AbstractIO {
 	public abstract String getParameters();
 
 	/**
-	 * Arranging the athletes in descending order of the total score (ascending
-	 * order of their places).
-	 * 
-	 * @param athletes
-	 *            - non arranged list.
-	 * @return ascending ordered list.
-	 */
-	public ArrayList<Athlete> arrangeInOrder(ArrayList<Athlete> athletes) {
-		// modified merge sort
-		Collections.sort(athletes, new Comparator<Athlete>() {
-			@Override
-			public int compare(Athlete a, Athlete b) {
-				if (a.getScore() < b.getScore()) {
-					return 1; // greater than
-				} else if (a.getScore() > b.getScore()) {
-					return -1; // less than
-				} else {
-					return 0; // equal to
-				}
-			}
-		});
-		int athletePoints = 0, athletePlace = 0;
-
-		for (Athlete athlete : athletes) {
-			if (athletePlace == 0) {
-				athletePlace = 1;
-				athletePoints = athlete.getScore();
-				athlete.setPlace(athletePlace);
-
-			} else if (athlete.getScore() != athletePoints) {
-				athletePlace++;
-			}
-			athletePoints = athlete.getScore();
-			athlete.setPlace(athletePlace);
-		}
-		return athletes;
-	}
-
-	/**
 	 * Processes the parameters. Checks if the output directory exits. Creates
 	 * one if not.
 	 * 

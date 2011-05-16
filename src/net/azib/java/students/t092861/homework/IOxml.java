@@ -102,7 +102,7 @@ public class IOxml extends AbstractIO {
 			
 			Element root = doc.createElement("CompetitionResults");
 			doc.appendChild(root);
-			this.arrangeInOrder(athletes);
+			ctrl.arrangeInOrder(athletes);
 
 			for (Athlete a : athletes) {
 

@@ -3,6 +3,7 @@ package net.azib.java.students.t092861.homework;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -27,6 +28,8 @@ public class IOconsole extends AbstractIO {
 	 */
 	public String parameters = "";
 
+	private BufferedReader reader;
+
 	/**
 	 * Default constructor.
 	 * 
@@ -36,12 +39,12 @@ public class IOconsole extends AbstractIO {
 	public IOconsole(Controller ctrl) {
 		super(ctrl);
 	}
-
-	@Override
-	ArrayList<Athlete> input() {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				System.in));
+	
+	public ArrayList<Athlete> consoleInput(Reader r){
+		
+		reader = new BufferedReader(r);
 		ArrayList<Athlete> athletes = new ArrayList<Athlete>();
+		
 		int index = 1;
 		String line;
 		int iterator = 0;
@@ -64,6 +67,7 @@ public class IOconsole extends AbstractIO {
 				int points = ctrl.calculatePoints(athlete);
 				athlete.setScore(points);
 				athletes.add(athlete);
+				
 				out.print("\nWould you like to add another athlet (y/n)?");
 				line = reader.readLine();
 				if (line.equalsIgnoreCase("n")) {
@@ -83,9 +87,15 @@ public class IOconsole extends AbstractIO {
 	}
 
 	@Override
+	ArrayList<Athlete> input() {
+//		reader = new BufferedReader(new InputStreamReader(System.in));
+		return consoleInput(new InputStreamReader(System.in));
+	}
+
+	@Override
 	void output(ArrayList<Athlete> athletes) {
 		printTableHeader();
-		Iterator<Athlete> itr = arrangeInOrder(athletes).iterator();
+		Iterator<Athlete> itr = ctrl.arrangeInOrder(athletes).iterator();
 		String name = null;
 		while (itr.hasNext()) {
 			Athlete item = itr.next();
