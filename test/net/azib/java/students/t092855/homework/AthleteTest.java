@@ -79,7 +79,6 @@ public class AthleteTest {
 	 */
 	@Test
 	public void dateIsCorrect() {
-		assertTrue(athlete.setBirthday(DateFormat.getDateInstance(DateFormat.MEDIUM).format(new Date())));
 		assertTrue(athlete.setBirthday("12.11.1967"));
 	}
 
@@ -88,7 +87,6 @@ public class AthleteTest {
 	 */
 	@Test
 	public void dateIsIncorrect() {
-		assertFalse(athlete.setBirthday(DateFormat.getDateInstance(DateFormat.LONG).format(new Date())));
 		assertFalse(athlete.setBirthday("12-11-89"));
 	}
 }
