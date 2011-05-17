@@ -1,9 +1,6 @@
 package net.azib.java.students.t104607.homework;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -11,25 +8,31 @@ import java.util.List;
  */
 public class OutputConsole {
 	public void save (OutputStream outputStream, List<Athlete> athletes) throws IOException {
-		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outputStream));
-		out.write("#name,birthday,country,sprint100m,longjump,shotput,highjump,sprint400m," +
-				"hurdles110m,discusthrow,polevault,javelinthrow,race1500m,score,position\n");
+		final String LINE_FORMAT = "%5s %5s %7s %7s %7s %7s %8s %7s %7s %7s %7s %8s %11s %3s  %s\n";
+
+		PrintWriter out = new PrintWriter(outputStream);
+
+		out.format(LINE_FORMAT,"Place","Score",
+				"Sprint","Long","Shot","High","Sprint","Hurdles","Discus","Pole","Javelin","Race","Birthday","Country","Name");
+		out.format(LINE_FORMAT,"","",
+				"100m","jump","put","jump","400m","110m","throw","vault","throw","1500m","","","");
 		for (Athlete athlete : athletes) {
-			out.write("\"" + athlete.getName() + "\",");
-			out.write(athlete.getBirthday() + ",");
-			out.write(athlete.getCountry() + ",");
-			out.write(athlete.getSprint100m() + ",");
-			out.write(athlete.getLongJump() + ",");
-			out.write(athlete.getShotPut() + ",");
-			out.write(athlete.getHighJump() + ",");
-			out.write(athlete.getSprint400m() + ",");
-			out.write(athlete.getHurdles110m() + ",");
-			out.write(athlete.getDiscusThrow() + ",");
-			out.write(athlete.getPoleVault() + ",");
-			out.write(athlete.getJavelinThrow() + ",");
-			out.write(athlete.getRace1500m() + ",");
-			out.write(athlete.getScore() + ",");
-			out.write(athlete.getPosition() + "\n");
+			out.format(LINE_FORMAT,
+					athlete.getPosition(),
+					Integer.toString(athlete.getScore()),
+					athlete.getSprint100m(),
+					athlete.getLongJump(),
+					athlete.getShotPut(),
+					athlete.getHighJump(),
+					athlete.getSprint400m(),
+					athlete.getHurdles110m(),
+					athlete.getDiscusThrow(),
+					athlete.getPoleVault(),
+					athlete.getJavelinThrow(),
+					athlete.getRace1500m(),
+					athlete.getBirthday(),
+					athlete.getCountry(),
+					athlete.getName());
 		}
 		out.close();
 	}

@@ -1,5 +1,7 @@
 package net.azib.java.students.t104607.homework;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +16,8 @@ import java.util.regex.Pattern;
  * @author 104607 IASM
  */
 public class InputCsv {
+	Logger LOG = Logger.getLogger(this.getClass());
+
 	public String[] parseCSV(String csvLine) {
 		ArrayList<String> allMatches = new ArrayList<String>();
 		String match;
@@ -43,6 +47,7 @@ public class InputCsv {
 		String line;
 		String[] split;
 
+		LOG.info("Using CSV input");
 		BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
 		while ((line = in.readLine()) != null) {
 			if (!line.startsWith("#")) {

@@ -16,12 +16,12 @@ import java.util.List;
  * @author 104607 IASM
  */
 public class OutputXml {
-	private Document xml;
+	Document xml;
 	private Element root;
 	private Element record;
 	private Element element;
 
-	private void createXML() throws ParserConfigurationException {
+	private void createDocument() throws ParserConfigurationException {
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = builderFactory.newDocumentBuilder();
         xml = docBuilder.newDocument();
@@ -46,10 +46,21 @@ public class OutputXml {
 		record.appendChild(element);
 	}
 
+	void closeDocument(Writer out) throws IOException, TransformerException {
+		xml.setXmlStandalone(true);
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		//transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "decathlon.dtd");
+		transformer.transform(new DOMSource(xml), new StreamResult(out));
+
+		out.close();
+	}
+
 	public void save(OutputStream outputStream, List<Athlete> athletes) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outputStream));
 
-		createXML();
+		createDocument();
 
 		for (Athlete athlete : athletes) {
 			record = xml.createElement("athlete");
@@ -74,13 +85,6 @@ public class OutputXml {
 			root.appendChild(record);
 		}
 
-		xml.setXmlStandalone(true);
-		Transformer transformer = TransformerFactory.newInstance().newTransformer();
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		//transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "decathlon.dtd");
-		transformer.transform(new DOMSource(xml), new StreamResult(out));
-
-		out.close();
+		closeDocument(out);
 	}
 }

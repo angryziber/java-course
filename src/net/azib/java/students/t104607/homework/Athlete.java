@@ -42,7 +42,7 @@ public class Athlete implements Comparable<Athlete>{
 			return df.format(sec);
 		} else {
 			Integer minutes = (int) sec / 60;
-			DecimalFormat df = new DecimalFormat("00.##");  // we need extra 0 here
+			DecimalFormat df = new DecimalFormat("00.00");  // we need extra 0 here
 			return minutes.toString() + ":" + df.format(sec - (60*minutes));
 		}
 	}

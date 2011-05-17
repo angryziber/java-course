@@ -1,18 +1,15 @@
 package net.azib.java.students.t104607.homework;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
 import java.util.List;
-
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -21,6 +18,8 @@ import static junit.framework.Assert.assertEquals;
 public class InputDbTest {
 	@Before
 	public void setUp() throws Exception {
+		PropertyConfigurator.configure(InputDb.class.getResource("log4j.disable.properties"));
+
 		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:TestDB", "sa", "");
 		Statement stmt = conn.createStatement();
 		stmt.execute("create table athletes (id integer, name varchar, dob date, country_code varchar)");
@@ -35,7 +34,7 @@ public class InputDbTest {
 	}
 
 	@Test
-	public void testLoad () throws IOException, SQLException {
+	public void testLoad () throws Exception {
 		String props = "url=jdbc:hsqldb:mem:TestDB\nuser=sa\npassword=";
 		//new InputDb("Test", IOUtils.toInputStream(props));
 		List<Athlete> athleteList = new InputDb().load("Training", new ByteArrayInputStream(props.getBytes()));
