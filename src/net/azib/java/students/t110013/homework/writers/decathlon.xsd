@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="decathlon" type="decathlonType"/>
+  <xs:complexType name="athleteType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="born"/>
+      <xs:element type="xs:string" name="country"/>
+      <xs:element type="xs:string" name="place"/>
+      <xs:element type="xs:string" name="points"/>
+      <xs:element type="eventsType" name="events"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="decathlonType">
+    <xs:sequence>
+      <xs:element type="athleteType" name="athlete" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eventType">
+    <xs:sequence>
+      <xs:element name="name">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="100m sprint"/>
+            <xs:enumeration value="Long jump"/>
+            <xs:enumeration value="Shot put"/>
+            <xs:enumeration value="High jump"/>
+            <xs:enumeration value="400m sprint"/>
+            <xs:enumeration value="110m hurdles"/>
+            <xs:enumeration value="Discus throw"/>
+            <xs:enumeration value="Pole vault"/>
+            <xs:enumeration value="Javelin throw"/>
+            <xs:enumeration value="1500m race"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="result"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eventsType">
+    <xs:sequence>
+      <xs:element type="eventType" name="event" maxOccurs="10" minOccurs="10"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

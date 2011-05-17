@@ -1,0 +1,12 @@
+<!ELEMENT decathlon (athlete*)>
+<!ELEMENT athlete (name, born, country, place, points, events)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT born (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT place (#PCDATA)>
+<!ELEMENT points (#PCDATA)>
+<!ELEMENT events (event, event, event, event, event, event, event, event, event, event)>
+<!ELEMENT event (name, result)>
+<!ELEMENT result (#PCDATA)>
+
+
