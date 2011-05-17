@@ -2,8 +2,6 @@ package net.azib.java.students.t104607.homework;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import sun.security.krb5.internal.LoginOptions;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Collections;
