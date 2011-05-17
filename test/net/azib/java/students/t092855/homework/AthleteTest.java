@@ -82,8 +82,8 @@ public class AthleteTest {
 	 */
 	@Test
 	public void dateIsCorrect() throws ParseException {
-		final SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.MEDIUM);
-		Date date = new SimpleDateFormat("dd.mm.yyyy").parse("12.11.1967");
+		SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.MEDIUM);
+		Date date = new SimpleDateFormat("dd.MM.yyyy").parse("12.11.1967");
 		String dateString = dateFormat.format(date);
 		assertTrue(athlete.setBirthday(dateString));
 	}

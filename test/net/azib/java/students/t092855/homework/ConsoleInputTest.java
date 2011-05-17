@@ -3,6 +3,10 @@ package net.azib.java.students.t092855.homework;
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
 
@@ -34,12 +38,16 @@ public class ConsoleInputTest {
 	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleInput#getData()}
 	 */
 	@Test
-	public void athleteAddingWorks() {
+	public void athleteAddingWorks() throws ParseException {
+		SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.MEDIUM);
+		Date date = new SimpleDateFormat("dd.MM.yyyy").parse("23.04.1987");
+		String dateString = dateFormat.format(date);
+
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		String inputString  = "y" + System.getProperty("line.separator") +
 				"Siim Piim" + System.getProperty("line.separator") +
 				"EE" +  System.getProperty("line.separator") +
-				"23.04.1987" + System.getProperty("line.separator") +
+				dateString + System.getProperty("line.separator") +
 				"9.4" + System.getProperty("line.separator") +
 				"5.67" + System.getProperty("line.separator") +
 				"13.2" + System.getProperty("line.separator") +

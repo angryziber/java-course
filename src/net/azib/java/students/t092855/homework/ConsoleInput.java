@@ -2,6 +2,8 @@ package net.azib.java.students.t092855.homework;
 
 
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 /**
@@ -101,7 +103,8 @@ public class ConsoleInput implements InputStrategy {
 	private void getAthleteBirthday(Scanner scanner, Athlete athlete) {
 		while(athlete.getBirthday() == null)
 		{
-			output.println("Please enter athlete's date of birth:");
+			output.println("Please enter athlete's date of birth (in format: " +
+					((SimpleDateFormat)DateFormat.getDateInstance(DateFormat.MEDIUM)).toPattern() + "):");
 			String s = scanner.next();
 			athlete.setBirthday(s);
 		}
