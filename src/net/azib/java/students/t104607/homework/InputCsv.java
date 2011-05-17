@@ -1,5 +1,6 @@
 package net.azib.java.students.t104607.homework;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -42,23 +43,32 @@ public class InputCsv {
 	    }
 	}
 
-	public List<Athlete> load(InputStream inputStream) throws IOException, ParseException {
+	public List<Athlete> load(InputStream inputStream) {
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		String line;
 		String[] split;
-
 		LOG.info("Using CSV input");
-		BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
-		while ((line = in.readLine()) != null) {
-			if (!line.startsWith("#")) {
-				split = parseCSV(line);
-				Athlete athlete = new Athlete(split[0],split[1],split[2],split[3],split[4],
-						split[5],split[6],split[7],split[8],split[9],split[10],split[11],split[12]);
-				athletes.add(athlete);
-			}
-		}
-		in.close();
 
+		BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+		try  {
+			while ((line = in.readLine()) != null) {
+				if (!line.startsWith("#")) {
+					split = parseCSV(line);
+					try{
+						Athlete athlete = new Athlete(split[0],split[1],split[2],split[3],split[4],
+							split[5],split[6],split[7],split[8],split[9],split[10],split[11],split[12]);
+						athletes.add(athlete);
+					} catch (ParseException e) {
+						LOG.error("Parse CSV line",e);
+					}
+				}
+			}
+		} catch (IOException e) {
+			LOG.error("Read CVS line",e);
+		} finally {
+			IOUtils.closeQuietly(in);
+		}
+		LOG.debug("Got " + athletes.size() + " record");
 		return athletes;
 	}
 }

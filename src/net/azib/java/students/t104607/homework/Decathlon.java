@@ -2,8 +2,8 @@ package net.azib.java.students.t104607.homework;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
+import java.io.*;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Decathlon {
 
-	static boolean commandLine (String[] args) throws Exception {
+	static boolean commandLine (String[] args) {
 		int i = 0;
 		List<Athlete> athletes = null;
 		Integer previousPoint = 0;
@@ -26,7 +26,13 @@ public class Decathlon {
 				athletes = new InputConsole().load(System.in, System.out);
 			} else if (args[i].compareToIgnoreCase("-csv") == 0) {
 				i++;
-				athletes = new InputCsv().load(new FileInputStream(args[i]));
+				try {
+					InputStream inputStream = new FileInputStream(args[i]);
+					athletes = new InputCsv().load(inputStream);
+				} catch (IOException e) {
+					LOG.error("Open input stream", e);
+					return true;
+				}
 			} else if (args[i].compareToIgnoreCase("-db") == 0) {
 				i++;
 				athletes = new InputDb().load(args[i],Decathlon.class.getResourceAsStream("db.properties"));
@@ -56,15 +62,31 @@ public class Decathlon {
 				new OutputConsole().save(System.out, athletes);
 			} else if (args[i].compareToIgnoreCase("-csv") == 0) {
 				i++;
-				new OutputCsv().save(new FileOutputStream(args[i]), athletes);
+				try {
+					OutputStream outputStream = new FileOutputStream(args[i]);
+					new OutputCsv().save(outputStream, athletes);
+				} catch (FileNotFoundException e) {
+					LOG.error("Open output stream", e);
+				}
 				//new OutputCsv().save(System.out, athletes);
 			} else if (args[i].compareToIgnoreCase("-xml") == 0) {
 				i++;
-				new OutputXml().save(new FileOutputStream(args[i]), athletes);
+				try {
+					OutputStream outputStream = new FileOutputStream(args[i]);
+					new OutputXml().save(outputStream, athletes);
+				} catch (FileNotFoundException e) {
+					LOG.error("Open output stream", e);
+				}
 				//new OutputXml().save(System.out, athletes);
 			} else if (args[i].compareToIgnoreCase("-html") == 0) {
 				i++;
-				new OutputHtml().save(new FileOutputStream(args[i]), athletes);
+				try {
+					OutputStream outputStream = new FileOutputStream(args[i]);
+					new OutputHtml().save(outputStream, athletes);
+				} catch (FileNotFoundException e) {
+					LOG.error("Open output stream", e);
+				}
+				//new OutputHtml().save(System.out, athletes);
 			} else {
 				LOG.error("No output definition");
 				return false;
@@ -76,7 +98,7 @@ public class Decathlon {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		Logger LOG = Logger.getLogger(Decathlon.class.getName());
 		PropertyConfigurator.configure(Decathlon.class.getResource("log4j.properties"));
 		LOG.info("Starting");

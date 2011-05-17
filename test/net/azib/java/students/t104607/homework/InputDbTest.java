@@ -1,6 +1,5 @@
 package net.azib.java.students.t104607.homework;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,5 +1,7 @@
 package net.azib.java.students.t104607.homework;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.util.List;
 
@@ -7,8 +9,11 @@ import java.util.List;
  * @author 104607 IASM
  */
 public class OutputConsole {
-	public void save (OutputStream outputStream, List<Athlete> athletes) throws IOException {
+	Logger LOG = Logger.getLogger(this.getClass());
+
+	public void save (OutputStream outputStream, List<Athlete> athletes) {
 		final String LINE_FORMAT = "%5s %5s %7s %7s %7s %7s %8s %7s %7s %7s %7s %8s %11s %3s  %s\n";
+		LOG.info("Using console output");
 
 		PrintWriter out = new PrintWriter(outputStream);
 
