@@ -4,8 +4,16 @@ import net.azib.java.students.t104948.Lion;
 
 import static java.lang.Math.pow;
 
-public class LongJumpEvent implements Event{
+/** Jumping and throwing event
+ *
+ */
+public class LongJumpEvent implements Event {
 
+    /**
+     * Constructor takes raw performance
+     *
+     * @param performance raw performance for this particular event
+     */
     public LongJumpEvent(double performance) {
         this.performance = performance;
     }
@@ -15,21 +23,33 @@ public class LongJumpEvent implements Event{
     double C = 1.4;
     double performance;
 
+    /**
+     * @return total number of point according to event specific formula
+     */
     @Override
     public int getPoints() {
         return (int) (A * pow(performance - B, C));
     }
 
+    /**
+     * @return raw performance of event
+     */
     @Override
     public double getPerformance() {
         return performance;
     }
 
+    /**
+     * @return event (Decathlon discipline) name
+     */
     @Override
     public String getEventName() {
         return "LongJump";
     }
 
+    /**
+     * @return units used to measure event performance
+     */
     @Override
     public String getEventUnits() {
         return "m";

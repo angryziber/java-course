@@ -17,6 +17,10 @@ public class DataBaseConnector {
         con.close();
     }
 
+    /** This method uses Driver Manager to establish connection with database
+     *
+     * @return connection upon success, otherwise null
+     */
     protected Connection getConnection() {
         try {
             Class.forName(dbClass);
@@ -40,6 +44,11 @@ public class DataBaseConnector {
         }
     }
 
+    /**
+     *
+     * @param query
+     * @return Desired data (that we asked in our statement) from data base
+     */
     protected ResultSet executeSelect(String query) {
         try {
             Class.forName(dbClass);

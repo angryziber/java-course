@@ -12,12 +12,21 @@ public class CSVWriter implements Writer {
     final private PrintWriter writer;
     final static String COMA_FIELD = ",";
 
-
+    /** Constructor takes filename and created appropriate writer for further CSV writing
+     *
+     * @param fileName name of file where user wants to store results
+     * @throws IOException
+     */
     public CSVWriter(String fileName) throws IOException {
         this.writer = new PrintWriter(new FileWriter(fileName));
     }
 
 
+    /**  This method will print out final results only for singe Participant
+     *
+     * @param place Participant place
+     * @param record Single Participant record data
+     */
     @Override
     public void writeNext(int place, Record record) {
 
@@ -33,6 +42,10 @@ public class CSVWriter implements Writer {
         writer.println(output);
     }
 
+    /** This method will print out final competition results for all Participants
+     *
+     * @param resultsComputation instance which contains relevant Decathlon computation results
+     */
     @Override
     public void writeOutput(ResultsComputation resultsComputation) {
 

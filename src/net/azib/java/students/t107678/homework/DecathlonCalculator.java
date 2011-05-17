@@ -5,6 +5,12 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Main point in HomeWork project; Initial logic is provided here
+ *
+ * @author Radomir Sebek
+ * @version 1.0 Build during May 2011
+ */
 public class DecathlonCalculator {
 
     final static String CONSOLE = "-console";
@@ -15,11 +21,14 @@ public class DecathlonCalculator {
     final static String HTML = "-html";
 
 
+    /**
+     * @param args Arguments provided by  user; Will be checked for logical combinations
+     */
     public static void main(String[] args) throws IOException, RecordFormatException, SQLException {
 
         ValidationOfProgramArgs validationOfProgramArgs = new ValidationOfProgramArgs();
 
-        if (validationOfProgramArgs.validateProgramArguments(args)==false) {
+        if (validationOfProgramArgs.validateProgramArguments(args) == false) {
             System.exit(1);
         }
 

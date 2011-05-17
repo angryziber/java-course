@@ -4,6 +4,9 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/** Provides initial logic for all readers in project
+ *
+ */
 public interface Reader{
 
     public Record getNext() throws IOException, RecordFormatException, SQLException;

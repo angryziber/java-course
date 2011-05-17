@@ -15,6 +15,11 @@ public class ConsoleWriter implements Writer {
         writer = out;
     }
 
+    /** This method will print out final results only for singe Participant
+     *
+     * @param place achieved place according to results
+     * @param record Participant record
+     */
     @Override
     public void writeNext(int place, Record record) {
 
@@ -33,7 +38,10 @@ public class ConsoleWriter implements Writer {
         System.out.println("___________________________________________________________________");
     }
 
-
+    /** This method will print out final competition results for all Participants
+     *
+     * @param resultsComputation instance which contains relevant Decathlon computation results
+     */
     @Override
     public void writeOutput(ResultsComputation resultsComputation) {
 

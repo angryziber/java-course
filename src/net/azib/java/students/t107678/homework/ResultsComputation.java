@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Central logic for loading raw results from various input reader and performing SINGLE competition  results
+ */
 public class ResultsComputation {
 
     ArrayList<Record> records;
@@ -13,10 +16,17 @@ public class ResultsComputation {
     InputStreamReader inputStreamReader = new InputStreamReader(System.in);
     BufferedReader inputDataReader = new BufferedReader(inputStreamReader);
 
+    /**
+     * Declaration of all Participant records in single collection
+     */
     public ResultsComputation() {
         records = new ArrayList<Record>();
     }
 
+    /** Loading raw results from CSVReader
+     *
+     * @param reader instance of input CSV reader
+     */
     public void readRecords(CSVReader reader) throws RecordFormatException, IOException {
 
         Record record;
@@ -26,6 +36,10 @@ public class ResultsComputation {
 
     }
 
+    /** Loading raw results from ConsoleReader; Small interaction with user in order to terminate of continue input
+     *
+     * @param reader instance of ConsoleReader
+     */
     public void readRecords(ConsoleReader reader) throws RecordFormatException, IOException {
         String answer = "";
         Record record;
@@ -40,6 +54,10 @@ public class ResultsComputation {
 
     }
 
+    /** Logic for loading raw results from DataBaseReader
+     *
+     * @param reader
+     */
     public void readRecords(DataBaseReader reader) throws RecordFormatException, IOException, SQLException {
         Record record;
         while ((record = reader.getNext()) != null) {
@@ -47,9 +65,11 @@ public class ResultsComputation {
         }
 
 
-
     }
 
+    /** CPU of program; Sorting algorithm implementation
+     *
+     */
     public void computeRecordsResults() {   //bubble sort
 
         Record tempRecord;
@@ -71,6 +91,10 @@ public class ResultsComputation {
 
     }
 
+    /** Allows us to take final Records of competition
+     *
+     * @return Collection of Record type data (all participants are represented here)
+     */
     public ArrayList<Record> getRecords() {
         return this.records;
     }

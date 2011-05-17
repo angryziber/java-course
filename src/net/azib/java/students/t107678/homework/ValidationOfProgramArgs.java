@@ -1,6 +1,9 @@
 package net.azib.java.students.t107678.homework;
 
 
+/** Program input arguments provided by user will be checked for logical combination validity
+ *
+ */
 public class ValidationOfProgramArgs {
 
     static final String warningMessage = "INVALID ATTEMPT! PLEASE CHECK AGAIN PROGRAM INPUT ARGUMENTS AND TRY AGAIN!";
@@ -12,7 +15,11 @@ public class ValidationOfProgramArgs {
     final static String XML = "-xml";
     final static String HTML = "-html";
 
-
+    /**
+     *
+     * @param inputParameters represents a user input
+     * @return false is input is not according to specifications, otherwise true
+     */
     public boolean validateProgramArguments(String[] inputParameters) {
 
         int mistakeIndicator = 0;

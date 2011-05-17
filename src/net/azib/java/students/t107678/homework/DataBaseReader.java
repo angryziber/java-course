@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-public class DataBaseReader implements Reader{
+public class DataBaseReader implements Reader {
 
     DataBaseConnector connector;
     ResultSet set;
@@ -16,15 +16,22 @@ public class DataBaseReader implements Reader{
             "where a.id=r.athlete_id and r.competition_id=";
 
 
-    public DataBaseReader(DataBaseConnector connector,String competitionId) {
+    /** Normal scenario constructor
+     * @param connector     instance of DataBaseConnector
+     * @param competitionId number of competition from database provided by user
+     */
+    public DataBaseReader(DataBaseConnector connector, String competitionId) {
         this.connector = connector;
-        this.set = connector.executeSelect(statement+competitionId);
+        this.set = connector.executeSelect(statement + competitionId);
     }
 
 
+    /** This method "manually" assembles single Participant Record taken from one instance of ResultSet
+     * @return Single Participant Record data
+     */
     @Override
     public Record getNext() throws IOException, RecordFormatException, SQLException {
-        if (set.next()){
+        if (set.next()) {
 
             Collection<Event> participantResults = new ArrayList(10);
 
@@ -53,9 +60,9 @@ public class DataBaseReader implements Reader{
             ThousandFiveHundredMetersEvent thousandFiveHundredMetersEvent = new ThousandFiveHundredMetersEvent(set.getDouble(13));
             participantResults.add(thousandFiveHundredMetersEvent);
 
-            Participant participant = new Participant(name, birthDate,countryCode);
+            Participant participant = new Participant(name, birthDate, countryCode);
 
-            return new Record(participant,participantResults);
+            return new Record(participant, participantResults);
 
         }
         return null;

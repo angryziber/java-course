@@ -8,11 +8,19 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Provides logic for parsing of one input line
+ */
 public class LineParser {
     final private static int RECORD_MEMBER_COUNT = 13;
     private static final String REGEX = ":";
 
-
+    /**
+     *
+     * @param line represents one soma separated line from input sourse
+     * @return Record for singe participant
+     * @throws RecordFormatException Input string should contain 13 coma separated values
+     */
     public Record parseLine(String line) throws RecordFormatException {
         String[] parts = line.split(",");
 

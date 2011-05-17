@@ -13,9 +13,17 @@ public class ConsoleReader implements Reader {
     InputStreamReader inputStreamReader = new InputStreamReader(System.in);
     BufferedReader reader = new BufferedReader(inputStreamReader);
 
+    /**
+     * default constructor
+     */
     public ConsoleReader() {
     }
 
+    /** Empty input strings should not be inputed
+     *
+     * @return nonempty string value inputed by used
+     * @throws IOException
+     */
     public String returnIfNotEmpty() throws IOException {
         String value = "";
         do {
@@ -24,6 +32,11 @@ public class ConsoleReader implements Reader {
         return value;
     }
 
+    /** Concatenates part by part participant data into one line
+     *
+     * @return String which represents complete participant Decathlon data
+     * @throws IOException
+     */
     public String readRecordManualy() throws IOException {
 
         String recordRawData = "";
@@ -60,7 +73,12 @@ public class ConsoleReader implements Reader {
         return recordRawData;
     }
 
-
+    /**
+     *
+     * @return Participant record
+     * @throws IOException
+     * @throws RecordFormatException
+     */
     @Override
     public Record getNext() throws IOException, RecordFormatException {
         String answer = "";
