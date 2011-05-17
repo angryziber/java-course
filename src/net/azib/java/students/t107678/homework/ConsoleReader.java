@@ -29,31 +29,33 @@ public class ConsoleReader implements Reader {
         String recordRawData = "";
         System.out.println("Please enter participant Name: ");
         recordRawData = recordRawData + DOUBLE_QUOTE + returnIfNotEmpty() + DOUBLE_QUOTE + COMA_FIELD;
-        System.out.println("Please enter participant BirthDate");
+        System.out.println("Please enter participant BirthDate [dd.MM.yyyy]: ");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant CountryCode");
+        System.out.println("Please enter participant CountryCode [ISO 2-letter code]: ");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from 100mEvent");
+        System.out.println("Please enter participant performance from 100m SprintEvent [sec]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from LongJumpEvent");
+        System.out.println("Please enter participant performance from LongJumpEvent [m]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from ShotPutEvent");
+        System.out.println("Please enter participant performance from ShotPutEvent [m]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from HighJumpEvent");
+        System.out.println("Please enter participant performance from HighJumpEvent [m]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from 400mEvent");
+        System.out.println("Please enter participant performance from 400mEvent [min:sec]");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from 110mHurdlesEvent");
+        System.out.println("Please enter participant performance from 110mHurdlesEvent [sec]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from DiscusThrowEvent");
+        System.out.println("Please enter participant performance from DiscusThrowEvent [m]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from PoleVaultEvent");
+        System.out.println("Please enter participant performance from PoleVaultEvent [m]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from JavelinThrowEvent");
+        System.out.println("Please enter participant performance from JavelinThrowEvent [m]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
-        System.out.println("Please enter participant performance from 1500mRaceEvent");
+        System.out.println("Please enter participant performance from 1500mRaceEvent [min:sec]:");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
         System.out.println("Record successfully enter !");
+
+        //validate entered record ! return to beginning if not ok
 
         return recordRawData;
     }

@@ -38,5 +38,4 @@ public class Record {
         return sum;
     }
 
-
 }
