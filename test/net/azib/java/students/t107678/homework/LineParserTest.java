@@ -8,20 +8,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import static org.junit.Assert.assertEquals;
+
 public class LineParserTest {
 
-    String line = "\"Василий Пупкин\",21.10.1980,UA,13.43,4.35,8.64,1.50,1:06.06,19.05,24.89,2.20,33.48,6:51.01";
 
-    @Test @Ignore
+
+    @Test
     public void testParseLine() throws Exception {
 
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         Date date = format.parse("21.10.1980");
-        Collection<Event> eventCollections = new ArrayList<Event>(10);
+        ArrayList<Event> eventCollections = new ArrayList<Event>(10);
 
         HundredMetersEvent hundredMetersEvent = new HundredMetersEvent(13.43);
         eventCollections.add(hundredMetersEvent);
-        LongJumpEvent longJumpEvent = new LongJumpEvent(4.53);
+        LongJumpEvent longJumpEvent = new LongJumpEvent(4.35);
         eventCollections.add(longJumpEvent);
         ShotPutEvent shotPutEvent = new ShotPutEvent(8.64);
         eventCollections.add(shotPutEvent);
@@ -42,6 +44,18 @@ public class LineParserTest {
 
         Participant participant = new Participant("Василий Пупкин",date,new CountryCode("ua"));
         Record  record = new Record(participant,eventCollections);
+
+        String line = "\"Василий Пупкин\",21.10.1980,UA,13.43,4.35,8.64,1.50,1:06.06,19.05,24.89,2.20,33.48,6:51.01";
+
+        LineParser lineParser = new LineParser();
+        Record lineParserCreatedRecord = lineParser.parseLine(line);
+
+        assertEquals(record.getParticipant().getName(),lineParserCreatedRecord.getParticipant().getName());
+        assertEquals(record.getParticipant().getBirthDate(),lineParserCreatedRecord.getParticipant().getBirthDate());
+        assertEquals(record.getParticipant().getCountry(),lineParserCreatedRecord.getParticipant().getCountry());
+        assertEquals(record.getEvents().size(), lineParserCreatedRecord.getEvents().size());
+        assertEquals(record.getTotalPoints(),lineParserCreatedRecord.getTotalPoints());
+        ;
 
     }
 }
