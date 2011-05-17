@@ -1,7 +1,5 @@
 package net.azib.java.students.t103784.homework;
 
-import java.util.Date;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Ott Madis Ozolit
@@ -11,22 +9,10 @@ import java.util.Date;
  */
 public class Athlete {
 
-    String name;
-	String birthDate;
-	String country;
-	Double hundredMeters;
-	Double longJump;
-	Double shotPut;
-	Double highJump;
-	Double fourHundredMeters;
-	Double hurdles;
-	Double discus;
-	Double poleVault;
-	Double javelin;
-	Double race;
+    String name, birthDate, country;
+	Double hundredMeters, longJump, shotPut, highJump, fourHundredMeters, hurdles, discus, poleVault, javelin, race;
 	double[] performance = {0,0,0,0,0,0,0,0,0,0};
-	int score;
-	int place;
+	int score, place;
 
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
