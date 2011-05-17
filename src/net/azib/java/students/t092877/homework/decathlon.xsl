@@ -10,7 +10,10 @@
 			</head>
 			<body>
 				<h1>
-					<b>Competition</b>: <xsl:value-of select="/competition/name"/> / <xsl:value-of select="/competition/location"/>
+					<b>Competition</b>:
+					<xsl:value-of select="/competition/name"/> /
+					<xsl:value-of select="/competition/location"/> /
+					<xsl:value-of select="/competition/date"/>
 				</h1>
 				<table id="athletes">
 				<colgroup>

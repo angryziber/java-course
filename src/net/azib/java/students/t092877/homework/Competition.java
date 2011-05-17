@@ -35,5 +35,12 @@ public class Competition {
 	public void setAthletesList(List<Athlete> athletesList) {
 		this.athletesList = athletesList;
 	}
+
+	public String toString() {
+		return "\"" + getName().toUpperCase()
+		            + "\" / " + getLocation()
+		            + " / " + getDate();
+	}
 }
+
 
