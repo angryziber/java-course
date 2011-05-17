@@ -46,7 +46,32 @@ public class DecathlonCalculator {
 	 */
 	public static void main(String[] args) {
 		DecathlonCalculator calculator = new DecathlonCalculator();
-		calculator.processParameters(args);
+		if (calculator.checkParameters(args)) {
+			calculator.processParameters(args);
+		}
+	}
+
+	public boolean checkParameters(String[] args) {
+		int i = 0;
+
+		while (i < args.length && args[i].startsWith("-")) {
+			String arg = args[i++];
+
+			if (arg.equals(Const.CSV) || arg.equals(Const.XML) || arg.equals(Const.HTML) || arg.equals(Const.DB)) {
+				if (i < args.length) {
+					String outfile = args[i++];
+					//filename should not start with "-" or have whitespace
+					if(outfile.startsWith("-") || outfile.matches("\\s*")){
+						System.err.println(Const.CMD_ERROR);
+						return false;
+					}
+				} else {
+					System.err.println(Const.CMD_ERROR);
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -58,6 +83,7 @@ public class DecathlonCalculator {
 	 */
 	public ArrayList<Athlete> processParameters(String[] args) {
 		ctrl = new Controller();
+
 		for (int i = 0; i < args.length; i++) {
 			// console read and write
 			if (args[i].equals(Const.CONSOLE)) {

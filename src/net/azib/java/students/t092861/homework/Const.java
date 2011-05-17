@@ -16,6 +16,8 @@ public class Const {
 	 */
 	public static final SimpleDateFormat DATE_FORMAT = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
 	
+	public static final String CMD_ERROR = "\nError! Not enought IO parameters. \nUsage: <program> -<input-method> [input-parameters] -<output-method> [output-parameters]";
+	
 	/**
 	 * File.separator system property return the correct file separator for each
 	 * different platform (Windows = \), (Linux = /).

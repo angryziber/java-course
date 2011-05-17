@@ -125,7 +125,6 @@ public class IOxml extends AbstractIO {
 
 				// Birthday element
 				Element birtday = doc.createElement("birthday");
-//				birtday.setAttribute("date", this.convertDateToString(a.getBirthday()));
 				Text birtdayText = doc.createTextNode(this.convertDateToString(a.getBirthday()));
 				birtday.appendChild(birtdayText);
 				athlete.appendChild(birtday);
