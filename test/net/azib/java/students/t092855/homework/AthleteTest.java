@@ -3,6 +3,8 @@ package net.azib.java.students.t092855.homework;
 import org.junit.Test;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.assertFalse;
@@ -76,10 +78,14 @@ public class AthleteTest {
 
 	/**
 	 * Unit test for {@link net.azib.java.students.t092855.homework.Athlete#setBirthday(String)}
+	 * @throws java.text.ParseException if parsing fails
 	 */
 	@Test
-	public void dateIsCorrect() {
-		assertTrue(athlete.setBirthday("12.11.1967"));
+	public void dateIsCorrect() throws ParseException {
+		final SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.MEDIUM);
+		Date date = new SimpleDateFormat("dd.mm.yyyy").parse("12.11.1967");
+		String dateString = dateFormat.format(date);
+		assertTrue(athlete.setBirthday(dateString));
 	}
 
 	/**
