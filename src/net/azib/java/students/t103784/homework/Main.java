@@ -1,63 +1,73 @@
 package net.azib.java.students.t103784.homework;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Ott Madis Ozolit
- * Date: 14.05.11
- * Time: 15:45
- * To change this template use File | Settings | File Templates.
- */
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 public class Main {
 
-	//List<Athlete> contestants = new ArrayList<Athlete>();
-
-
-	public static void main(String[] args) throws IOException {
-
-
-
-
-		InputStream inputType = System.in;
-		boolean inputtingAthletes = true;
-		Athlete athlete;
-		Input input;
-		Scanner scanner = new Scanner(inputType);
+	public static void main(String[] args) throws IOException {		
+	
+		Input input;		
+		List<Athlete> contestants = null;
 		String filename = "J:\\Projects\\src\\net\\azib\\java\\students\\t103784\\homework\\sample.csv";
-		int junn = 0;
 		BufferedReader reader = null;
-
 		input = new Input();
-		while (inputtingAthletes) {
-
-
-			if (junn == 0) {
-				reader = new BufferedReader(new InputStreamReader(System.in));
-			} else {
-				reader = new BufferedReader(new FileReader(filename));
+		Output output = new Output();
+		
+		if (args.length > 0 && args[0].equals("-console")) {
+			contestants = input.readAthleteFromConsole();						
+		} 
+		else if (args.length > 0 && args[0].equals("-csv")){
+			if (args.length > 1) {
+				try {
+					reader = new BufferedReader(new FileReader(filename));
+					contestants = input.readAthleteFromCSV(reader);
+				}
+				catch (Exception e) {
+					System.out.println("You have specified CSV input, but no CSV file found");					
+				}
 			}
-			//scanner.useDelimiter(scanner.nextLine());
-			athlete = new Athlete();
-			input.scanAthlete(athlete, reader);
-			input.addAthlete(athlete);
-			System.out.print("Add athletes? ");
-			new ScoreCalculator(athlete);
-			System.out.println("\n Teh score be: " + athlete.score + "\n");
-			inputtingAthletes = scanner.nextLine().toLowerCase().startsWith("y");
-
-
+			
+			else {
+				System.out.println("You have specified CSV input, but no CSV file specified");
+				return;
+			}
 		}
-
+		else if (args.length > 0 && args[0].equals("-db")){
+			//reader = new BufferedReader(reader);
+		}
+		else {
+			System.out.println("No input selected");
+			return;
+		}
+		int j=0;
 		for (int i = 0; i < input.contestants.size(); i++) {
-			athlete = input.contestants.get(i);
-			System.out.println("\nFinal: " + Arrays.toString(athlete.performance));
+			System.out.println("\nFinal: " + Arrays.toString(new double[]{input.contestants.get(i).getPerformance(j)}));
         }
+		
+		if (args.length > 1 && args[1].equals("-console")){
+			output.outputToConsole(contestants);
+		}
+		else if (args.length > 1 && args[1].equals("-csv")){}
+		else if (args.length > 1 && args[1].equals("-xml")){
+			try {
+				output.outputToXML(contestants);
+			} catch (ParserConfigurationException e) {
+
+				e.printStackTrace();
+			} catch (TransformerException e) {
+
+				e.printStackTrace();
+			}
+		}
+		else if	(args.length > 1 && args[1].equals("-html")){}
+		else {System.out.println("No output selected");return;}
 
 	}
-
-
-
 }

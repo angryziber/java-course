@@ -1,18 +1,20 @@
 package net.azib.java.students.t103784.homework;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Ott Madis Ozolit
- * Date: 15.05.11
- * Time: 9:38
- * To change this template use File | Settings | File Templates.
- */
 public class Athlete {
 
-    String name, birthDate, country;
-	Double hundredMeters, longJump, shotPut, highJump, fourHundredMeters, hurdles, discus, poleVault, javelin, race;
-	double[] performance = {0,0,0,0,0,0,0,0,0,0};
-	int score, place;
+    private String name, birthDate, country;
+	private Double hundredMeters, longJump, shotPut, highJump, fourHundredMeters, hurdles, discus, poleVault, javelin, race;
+	private double[] performance = {0,0,0,0,0,0,0,0,0,0};
+	private int score, place;
+
+	public int getScore() {return score;}
+	public void setScore(int score) {this.score = score;}
+
+	public int getPlace() {return place;}
+	public void setPlace(int place) {this.place = place;}
+
+	public double getPerformance(int i) {return performance[i];}
+	public void setPerformance(int i, Double performance) {this.performance[i] = performance;}
 
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
