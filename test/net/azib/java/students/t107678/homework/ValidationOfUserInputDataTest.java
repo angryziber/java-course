@@ -7,17 +7,19 @@ import static org.junit.Assert.assertEquals;
 
 public class ValidationOfUserInputDataTest {
 
-    ValidationOfUserInputData validationOfUserInputData = new ValidationOfUserInputData();
 
-    @Test
-    @Ignore
+    @Test @Ignore
     public void testValidateName() throws Exception {
+
 
     }
 
     @Test
-    @Ignore
     public void testValidateBirthDate() throws Exception {
+        String input1 = "15.05.1988";
+
+        assertEquals(true,ValidationOfUserInputData.validateBirthDate(input1));
+
 
     }
 
@@ -29,11 +31,11 @@ public class ValidationOfUserInputDataTest {
         String input4 = "EESTI";
         String input5 = "e";
 
-        assertEquals(true, validationOfUserInputData.validateCountryCode(input1));
-        assertEquals(false, validationOfUserInputData.validateCountryCode(input2));
-        assertEquals(true, validationOfUserInputData.validateCountryCode(input3));
-        assertEquals(false, validationOfUserInputData.validateCountryCode(input4));
-        assertEquals(false, validationOfUserInputData.validateCountryCode(input5));
+        assertEquals(true, ValidationOfUserInputData.validateCountryCode(input1));
+        assertEquals(false, ValidationOfUserInputData.validateCountryCode(input2));
+        assertEquals(true, ValidationOfUserInputData.validateCountryCode(input3));
+        assertEquals(false, ValidationOfUserInputData.validateCountryCode(input4));
+        assertEquals(false, ValidationOfUserInputData.validateCountryCode(input5));
     }
 
     @Test
@@ -45,12 +47,12 @@ public class ValidationOfUserInputDataTest {
         String input5 = "10:32";
         String input6 = "10.32 ";
 
-        assertEquals(true, validationOfUserInputData.validateMetersOrSecondsEvent(input1));
-        assertEquals(true, validationOfUserInputData.validateMetersOrSecondsEvent(input2));
-        assertEquals(true, validationOfUserInputData.validateMetersOrSecondsEvent(input3));
-        assertEquals(true, validationOfUserInputData.validateMetersOrSecondsEvent(input4));
-        assertEquals(false, validationOfUserInputData.validateMetersOrSecondsEvent(input5));
-        assertEquals(false, validationOfUserInputData.validateMetersOrSecondsEvent(input6));
+        assertEquals(true, ValidationOfUserInputData.validateMetersOrSecondsEvent(input1));
+        assertEquals(true, ValidationOfUserInputData.validateMetersOrSecondsEvent(input2));
+        assertEquals(true, ValidationOfUserInputData.validateMetersOrSecondsEvent(input3));
+        assertEquals(true, ValidationOfUserInputData.validateMetersOrSecondsEvent(input4));
+        assertEquals(false, ValidationOfUserInputData.validateMetersOrSecondsEvent(input5));
+        assertEquals(false, ValidationOfUserInputData.validateMetersOrSecondsEvent(input6));
 
     }
 
@@ -63,12 +65,12 @@ public class ValidationOfUserInputDataTest {
         String input5 = "0:32";
         String input6 = "0:32.0 ";     //space will not be allowed !
 
-        assertEquals(true,validationOfUserInputData.validateMinColonSecEvent(input1));
-        assertEquals(false,validationOfUserInputData.validateMinColonSecEvent(input2));
-        assertEquals(false,validationOfUserInputData.validateMinColonSecEvent(input3));
-        assertEquals(true,validationOfUserInputData.validateMinColonSecEvent(input4));
-        assertEquals(true,validationOfUserInputData.validateMinColonSecEvent(input5));
-        assertEquals(false,validationOfUserInputData.validateMinColonSecEvent(input6));
+        assertEquals(true,ValidationOfUserInputData.validateMinColonSecEvent(input1));
+        assertEquals(false,ValidationOfUserInputData.validateMinColonSecEvent(input2));
+        assertEquals(false,ValidationOfUserInputData.validateMinColonSecEvent(input3));
+        assertEquals(true,ValidationOfUserInputData.validateMinColonSecEvent(input4));
+        assertEquals(true,ValidationOfUserInputData.validateMinColonSecEvent(input5));
+        assertEquals(false,ValidationOfUserInputData.validateMinColonSecEvent(input6));
 
 
     }

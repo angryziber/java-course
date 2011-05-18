@@ -22,7 +22,7 @@ public class DataBaseReader implements Reader {
      */
     public DataBaseReader(DataBaseConnector connector, String competitionId) {
         this.connector = connector;
-        this.set = connector.executeSelect(statement + competitionId);
+        this.set = connector.executeSelect(statement + competitionId);      //TODO implement posibility of connection with competition_name
     }
 
 

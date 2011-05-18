@@ -47,8 +47,6 @@ public class ConsoleReader implements Reader {
         String tempMetersOrSecEvent = "";
         String tempMinColonSecEvent = "";
 
-        ValidationOfUserInputData validationOfUserInputData = new ValidationOfUserInputData();
-
         String recordRawData = "";
         System.out.println("Please enter participant Name: ");
         recordRawData = recordRawData + DOUBLE_QUOTE + returnIfNotEmpty() + DOUBLE_QUOTE + COMA_FIELD;
@@ -58,67 +56,67 @@ public class ConsoleReader implements Reader {
         do {
             tempCountryCode = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateCountryCode(tempCountryCode) == false);
+        } while (ValidationOfUserInputData.validateCountryCode(tempCountryCode) == false);
         recordRawData = recordRawData + tempCountryCode + COMA_FIELD;
         System.out.println("Please enter participant performance from 100m SprintEvent [sec]:");
         do {
             tempMetersOrSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
         recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from LongJumpEvent [m]:");
         do {
             tempMetersOrSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
         recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from ShotPutEvent [m]:");
         do {
             tempMetersOrSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
         recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from HighJumpEvent [m]:");
         do {
             tempMetersOrSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
         recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from 400mEvent [min:sec]");
         do {
             tempMinColonSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMinColonSecEvent(tempMinColonSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMinColonSecEvent(tempMinColonSecEvent) == false);
         recordRawData = recordRawData + tempMinColonSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from 110mHurdlesEvent [sec]:");
         do {
             tempMetersOrSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
         recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from DiscusThrowEvent [m]:");
         do {
             tempMetersOrSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
         recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from PoleVaultEvent [m]:");
         do {
             tempMetersOrSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
         recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from JavelinThrowEvent [m]:");
         do {
             tempMetersOrSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
         recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from 1500mRaceEvent [min:sec]:");
         do {
             tempMinColonSecEvent = returnIfNotEmpty();
 
-        } while (validationOfUserInputData.validateMinColonSecEvent(tempMinColonSecEvent) == false);
+        } while (ValidationOfUserInputData.validateMinColonSecEvent(tempMinColonSecEvent) == false);
         recordRawData = recordRawData + tempMinColonSecEvent + COMA_FIELD;
 
         System.out.println("Record successfully enter !");
