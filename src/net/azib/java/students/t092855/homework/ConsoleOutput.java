@@ -29,10 +29,11 @@ public class ConsoleOutput implements OutputStrategy {
 	@Override
 	public void writeOutput(Competition competition) {
 		Athlete athlete;
-		System.out.println("Here are the points");
 
-		if(competition.getCompetitors().isEmpty())
+		if(competition.getCompetitors().isEmpty()) {
 			return;
+		}
+		System.out.println("Here are the points");
 
 		Iterator<Athlete> iterator = competition.getCompetitors().iterator();
 

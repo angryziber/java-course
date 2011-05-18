@@ -36,7 +36,7 @@ public class ConsoleInput implements InputStrategy {
 	 * @return competition data
 	 */
 	@Override
-	public Competition getData() {
+	public Competition getData(String... arg) {
 		Competition competition = new Competition();
 
 		input.useDelimiter(System.getProperty("line.separator"));

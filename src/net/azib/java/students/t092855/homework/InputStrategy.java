@@ -10,7 +10,8 @@ public interface InputStrategy {
 	/**
 	 * Gets data from source and puts it into a {@link Competition}
 	 *
+	 * @param arg String arguments when needed e.g. file name
 	 * @return competition data
 	 */
-	public Competition getData();
+	public Competition getData(String... arg);
 }

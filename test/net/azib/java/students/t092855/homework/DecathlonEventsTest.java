@@ -11,9 +11,9 @@ import static org.junit.Assert.assertEquals;
  * @author t092855
  */
 public class DecathlonEventsTest {
-	private double[] testResults = {9.58, 8.22, 23.12, 2.45, 43.18, 12.87, 74.08, 6.14, 98.48, 206.00};
-	private int[] testPoints = {1202, 1117, 1295, 1244, 1156, 1126, 1383, 1277, 1331, 1218};
-	private DecathlonEvents decathlonEvents = new DecathlonEvents(testResults);
+	private final double[] testResults = {9.58, 8.22, 23.12, 2.45, 43.18, 12.87, 74.08, 6.14, 98.48, 206.00};
+	private final int[] testPoints = {1202, 1117, 1295, 1244, 1156, 1126, 1383, 1277, 1331, 1218};
+	private final DecathlonEvents decathlonEvents = new DecathlonEvents(testResults);
 
 	/**
 	 * Unit test for {@link net.azib.java.students.t092855.homework.DecathlonEvents#getDecathlonResults()}

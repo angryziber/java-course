@@ -25,6 +25,7 @@ public class AthleteTest {
 	@Test
 	public void namesAreCorrect() {
 		assertTrue(athlete.setName("Siim Piim"));
+		assertTrue(athlete.setName("  Jim   Beam   "));
 		assertTrue(athlete.setName("Karl Filipp Tamm"));
 		assertTrue(athlete.setName("Karl-Filipp Tamme-Tõru"));
 		assertTrue(athlete.setName("Jamie O'Connell"));

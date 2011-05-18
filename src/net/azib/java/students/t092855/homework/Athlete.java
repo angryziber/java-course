@@ -57,6 +57,7 @@ public class Athlete {
 		String n2 = "[\\p{Lu}]{1}\'?[- \\p{L}]+$";
 		n1 = n1 + " " + n2;
 
+		name = name.trim();
 		if (name.matches(n1)) {
 			this.name = name;
 			return true;

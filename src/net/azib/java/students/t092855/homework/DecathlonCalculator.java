@@ -21,6 +21,9 @@ public class DecathlonCalculator {
 		inputStrategy = new ConsoleInput();
 		competition = inputStrategy.getData();
 
+//		inputStrategy = new CSVInput();
+//		competition = inputStrategy.getData("decathlon_data.csv");
+
 		// todo choose output strategy from parameters and use it
 		outputStrategy = new ConsoleOutput();
 		outputStrategy.writeOutput(competition);

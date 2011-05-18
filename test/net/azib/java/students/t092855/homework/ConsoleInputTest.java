@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class ConsoleInputTest {
 
 	/**
-	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleInput#getData()}
+	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleInput#getData(String...)} ()}
 	 */
 	@Test
 	public void athleteAddingStopWorks() {
@@ -35,7 +35,8 @@ public class ConsoleInputTest {
 	}
 
 	/**
-	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleInput#getData()}
+	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleInput#getData(String...)}
+	 * @throws java.text.ParseException if parsing date fails
 	 */
 	@Test
 	public void athleteAddingWorks() throws ParseException {
@@ -63,6 +64,9 @@ public class ConsoleInputTest {
 
 		Competition competition = new ConsoleInput(input, new PrintStream(outputStream)).getData();
 		Athlete athlete = competition.getCompetitors().iterator().next();
+		assertEquals("Siim Piim", athlete.getName());
+		assertEquals("EE", athlete.getCountry());
+		assertEquals(dateString, dateFormat.format(athlete.getBirthday()));
 		assertEquals(9727, athlete.getAthleteEvents().getTotalPoints());
 		assertEquals(9.4, athlete.getAthleteEvents().getDecathlonResults()[0], 0.0);
 		assertEquals(5.67, athlete.getAthleteEvents().getDecathlonResults()[1], 0.0);
