@@ -3,9 +3,11 @@ package net.azib.java.students.t093759.homework;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static net.azib.java.students.t093759.homework.Athlete.Builder.ONE_DAY_IN_SECONDS;
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -13,6 +15,20 @@ import static org.junit.Assert.assertThat;
  *         5/15/11 11:55 AM
  */
 public class AthleteTest {
+	private static final String NAME = "Siim Susi";
+	private static final Calendar DATE_OF_BIRTH = new GregorianCalendar(1976, 1, 1);
+	private static final String COUNTRY_ISO_2_LETTER_CODE = "EE";
+	private static final Double ONE_HUNDRED_METER_SPRINT_TIME_IN_SECONDS = 12.61;
+	private static final Double LONG_JUMP_LENGTH_IN_METERS = 5.00;
+	private static final Double SHOT_PUT_LENGTH_IN_METERS = 9.22;
+	private static final Double HIGH_JUMP_HEIGHT_IN_METERS = 1.50;
+	private static final Double FOUR_HUNDRED_METER_SPRINT_TIME_IN_SECONDS = 59.39;
+	private static final Double ONE_HUNDRED_TEN_METER_HURDLES_TIME_IN_SECONDS = 16.43;
+	private static final Double DISCUS_THROW_LENGTH_IN_METERS = 21.60;
+	private static final Double POLE_VAULT_HEIGHT_IN_METERS = 2.60;
+	private static final Double JAVELIN_THROW_LENGTH_IN_METERS = 35.81;
+	private static final Double THOUSAND_FIVE_HUNDRED_METER_RACE_TIME_IN_SECONDS = 5 * 60 + 25.72;
+
 	@Test
 	public void oneDayInSeconds() {
 		assertThat(ONE_DAY_IN_SECONDS, equalTo(24.0 * 60.0 * 60.0));
@@ -50,93 +66,250 @@ public class AthleteTest {
 		new Athlete.Builder().setCountryISO2LetterCode("WTF");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void fourHundredMeterSprintTimeLengthShouldBeZeroOrMore() {
-		new Athlete.Builder().setFourHundredMeterSprint(-1.0);
+	@Test
+	public void countryISO2LettersInLowerCaseAreAlsoAccepted() {
+		new Athlete.Builder().setCountryISO2LetterCode("et");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void fourHundredMeterSprintTimeLengthShouldBeLessThan24Hours() {
-		new Athlete.Builder().setFourHundredMeterSprint(ONE_DAY_IN_SECONDS);
+	public void fourHundredMeterSprintTimeShouldBeZeroSecondsOrMore() {
+		new Athlete.Builder().setFourHundredMeterSprintTime(-1.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void oneHundredMeterSprintInSecondsShouldBeZeroOrMore() {
-		new Athlete.Builder().setOneHundredMeterSprint(-1.0);
+	public void fourHundredMeterSprintTimeShouldBeLessThan24Hours() {
+		new Athlete.Builder().setFourHundredMeterSprintTime(ONE_DAY_IN_SECONDS);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void oneHundredMeterSprintTimeLengthShouldBeLessThan24Hours() {
-		new Athlete.Builder().setOneHundredMeterSprint(ONE_DAY_IN_SECONDS);
+	public void oneHundredMeterSprintTimeShouldBeZeroSecondsOrMore() {
+		new Athlete.Builder().setOneHundredMeterSprintTime(-1.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void longJumpShouldBeZeroOrMoreMetersLength() {
-		new Athlete.Builder().setLongJump(-1.0);
+	public void oneHundredMeterSprintTimeShouldBeLessThan24Hours() {
+		new Athlete.Builder().setOneHundredMeterSprintTime(ONE_DAY_IN_SECONDS);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void longJumpShouldBeLessThan20MetersLength() {
-		new Athlete.Builder().setLongJump(20.0);
+	public void longJumpLengthShouldBeZeroOrMoreMeters() {
+		new Athlete.Builder().setLongJumpLength(-1.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shotPutShouldBeZeroOrMoreMetersLength() {
-		new Athlete.Builder().setShotPut(-1.0);
+	public void longJumpLengthShouldBeLessThan20Meters() {
+		new Athlete.Builder().setLongJumpLength(20.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shotPutShouldBeLessThan40MetersLength() {
-		new Athlete.Builder().setShotPut(40.0);
+	public void shotPutLengthShouldBeZeroOrMoreMeters() {
+		new Athlete.Builder().setShotPutLength(-1.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void oneHundredTenMeterHurdlesShouldBeZeroSecondsOrMore() {
-		new Athlete.Builder().setOneHundredMeterHurdles(-1.0);
+	public void shotPutLengthShouldBeLessThan40Meters() {
+		new Athlete.Builder().setShotPutLength(40.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void oneHundredTenMeterHurdlesShouldBeLessThan24Hours() {
-		new Athlete.Builder().setOneHundredMeterHurdles(ONE_DAY_IN_SECONDS);
+	public void oneHundredTenMeterHurdlesTimeShouldBeZeroSecondsOrMore() {
+		new Athlete.Builder().setOneHundredTenMeterHurdlesTime(-1.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void discusThrowShouldBeZeroOrMoreMeters() {
-		new Athlete.Builder().setDiscusThrow(-1.0);
+	public void oneHundredTenMeterHurdlesTomeShouldBeLessThan24Hours() {
+		new Athlete.Builder().setOneHundredTenMeterHurdlesTime(ONE_DAY_IN_SECONDS);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void discusThrowShouldBeLessThan200Meter() {
-		new Athlete.Builder().setDiscusThrow(200.0);
+	public void discusThrowLengthShouldBeZeroOrMoreMeters() {
+		new Athlete.Builder().setDiscusThrowLength(-1.0);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void discusThrowLengthShouldBeLessThan200Meter() {
+		new Athlete.Builder().setDiscusThrowLength(200.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void poleVaultHeightShouldBeZeroOrMoreMeters() {
-		new Athlete.Builder().setPoleVault(-1.0);
+		new Athlete.Builder().setPoleVaultHeight(-1.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void poleVaultHeightShouldBeLessThan20Meter() {
-		new Athlete.Builder().setPoleVault(20.0);
+	public void poleVaultHeightLengthShouldBeLessThan20Meter() {
+		new Athlete.Builder().setPoleVaultHeight(20.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void javelinThrowShouldBeZeroOrMoreMeter() {
-		new Athlete.Builder().setJavelinThrow(-1.0);
+	public void javelinThrowLengthShouldBeZeroOrMoreMeter() {
+		new Athlete.Builder().setJavelinThrowLength(-1.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void javelinThrowShouldBeLessThan150Meter() {
-		new Athlete.Builder().setJavelinThrow(150.0);
+	public void javelinThrowLengthShouldBeLessThan150Meter() {
+		new Athlete.Builder().setJavelinThrowLength(150.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void thousandFiveHundredMeterRaceTimeShouldBeZeroSecondsOrMore() {
-		new Athlete.Builder().setThousandFiveHundredMeterRace(-1.0);
+		new Athlete.Builder().setThousandFiveHundredMeterRaceTime(-1.0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void thousandFiveHundredMeterRaceTimeShouldBeLessThan24Hours() {
-		new Athlete.Builder().setThousandFiveHundredMeterRace(ONE_DAY_IN_SECONDS);
+		new Athlete.Builder().setThousandFiveHundredMeterRaceTime(ONE_DAY_IN_SECONDS);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void highJumpHeightShouldBeZeroOrMoreMeters() {
+		new Athlete.Builder().setHighJumpHeight(-1.0);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void highJumpHeightShouldBeLessThan5Meters() {
+		new Athlete.Builder().setHighJumpHeight(5.0);
+	}
+
+	@Test
+	public void athleteObjectShouldBeCreatedUsingHisBuilder() {
+		assertThat(newSampleAthlete(), is(instanceOf(Athlete.class)));
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void nameIsNecessary() {
+		new Athlete.Builder().build();
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void birthdayIsNecessary() {
+		new Athlete.Builder().name("Siim susi").build();
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void countryISO2LetterCodeIsNecessary() {
+		new Athlete.Builder().name("Siim susi").setDateOfBirth(new GregorianCalendar(1976, 1, 1)).build();
+	}
+
+	@Test
+	public void athletesAreEqualIfAllTheDataIsTheSame() {
+		Athlete athleteA = newSampleAthlete();
+		Athlete athleteB = newSampleAthlete();
+		assertFalse(athleteA == athleteB);
+		assertThat(athleteA, is(athleteB));
+	}
+
+	@Test
+	public void hashCodeOfTowAthletesIsEqualIfTwoAthletesAreEqual() {
+		Athlete athleteA = newSampleAthlete();
+		Athlete athleteB = newSampleAthlete();
+		assertFalse(athleteA == athleteB);
+		assertThat(athleteA, is(athleteB));
+		assertThat(athleteA.hashCode(), equalTo(athleteB.hashCode()));
+	}
+
+	@Test
+	public void athleteIsCloneable() {
+		Athlete athleteA = newSampleAthlete();
+		Athlete athleteClone = (Athlete) athleteA.clone();
+		assertFalse(athleteA == athleteClone);
+		assertThat(athleteA, is(athleteClone));
+	}
+
+	@Test
+	public void itIsPossibleToUseSomeAthleteAsAPrototypeForABuilder() {
+		Athlete prototypeAthlete = newSampleAthlete();
+		Athlete builtAthlete = new Athlete.Builder(prototypeAthlete).build();
+		assertFalse(prototypeAthlete == builtAthlete);
+		assertThat(prototypeAthlete, is(builtAthlete));
+	}
+
+	@Test
+	public void athleteNameIsAvailableViaGetter() {
+		assertThat(newSampleAthlete().getName(), equalTo(NAME));
+	}
+
+	@Test
+	public void athletesBirthdayIsAvailableViaGetter() {
+		assertThat(newSampleAthlete().getDateOfBirth(), equalTo(DATE_OF_BIRTH));
+	}
+
+	@Test
+	public void athletesBirthdayIsClonedEveryTimeItIsCalled() {
+		Athlete athlete = newSampleAthlete();
+		assertFalse(athlete.getDateOfBirth() == athlete.getDateOfBirth());
+	}
+
+	@Test
+	public void countryISO2LetterCodeIsAvailableViaGetter() {
+		assertThat(newSampleAthlete().getCountryISO2LetterCode(), equalTo(COUNTRY_ISO_2_LETTER_CODE));
+	}
+
+	@Test
+	public void oneHundredMeterSprintInSecondsIsAvailableViaGetter() {
+		assertThat(newSampleAthlete().getOneHundredMeterSprintInSeconds(), equalTo(ONE_HUNDRED_METER_SPRINT_TIME_IN_SECONDS));
+	}
+
+	@Test
+	public void longJumpInMeterAvailableViaGetter() {
+		assertThat(newSampleAthlete().getLongJumpInMeters(), equalTo(LONG_JUMP_LENGTH_IN_METERS));
+	}
+
+	@Test
+	public void shotPutInMeterAvailableViaGetter() {
+		assertThat(newSampleAthlete().getShotPutInMeters(), equalTo(SHOT_PUT_LENGTH_IN_METERS));
+	}
+
+	@Test
+	public void highJumpInMetersAvailableViaGetter() {
+		assertThat(newSampleAthlete().getHighJumpInMeters(), equalTo(HIGH_JUMP_HEIGHT_IN_METERS));
+	}
+
+	@Test
+	public void fourHundredMeterSprintInSecondsAvailableViaGetter() {
+		assertThat(newSampleAthlete().getFourHundredMeterSprintInSeconds(), equalTo(FOUR_HUNDRED_METER_SPRINT_TIME_IN_SECONDS));
+	}
+
+	@Test
+	public void oneHundredTenMeterHurdlesInSecondsAvailableViaGetter() {
+		assertThat(newSampleAthlete().getOneHundredTenMeterHurdlesInSeconds(), equalTo(ONE_HUNDRED_TEN_METER_HURDLES_TIME_IN_SECONDS));
+	}
+
+	@Test
+	public void discusThrowInMetersAvailableViaGetter() {
+		assertThat(newSampleAthlete().getDiscusThrowInMeters(), equalTo(DISCUS_THROW_LENGTH_IN_METERS));
+	}
+
+	@Test
+	public void poleVaultInMetersAvailableViaGetter() {
+		assertThat(newSampleAthlete().getPoleVaultInMeters(), equalTo(POLE_VAULT_HEIGHT_IN_METERS));
+	}
+
+	@Test
+	public void javelinThrowInMeterAvailableViaGetter() {
+		assertThat(newSampleAthlete().getJavelinThrowInMeter(), equalTo(JAVELIN_THROW_LENGTH_IN_METERS));
+	}
+
+	@Test
+	public void thousandFiveHundredMeterRaceInSecondsAvailableViaGetter() {
+		assertThat(newSampleAthlete().getThousandFiveHundredMeterRaceInSeconds(), equalTo(THOUSAND_FIVE_HUNDRED_METER_RACE_TIME_IN_SECONDS));
+	}
+
+	private static Athlete newSampleAthlete() {
+		return new Athlete.Builder()
+				.name(NAME)
+				.setDateOfBirth(DATE_OF_BIRTH)
+				.setCountryISO2LetterCode(COUNTRY_ISO_2_LETTER_CODE)
+				.setOneHundredMeterSprintTime(ONE_HUNDRED_METER_SPRINT_TIME_IN_SECONDS)
+				.setLongJumpLength(LONG_JUMP_LENGTH_IN_METERS)
+				.setShotPutLength(SHOT_PUT_LENGTH_IN_METERS)
+				.setHighJumpHeight(HIGH_JUMP_HEIGHT_IN_METERS)
+				.setFourHundredMeterSprintTime(FOUR_HUNDRED_METER_SPRINT_TIME_IN_SECONDS)
+				.setOneHundredTenMeterHurdlesTime(ONE_HUNDRED_TEN_METER_HURDLES_TIME_IN_SECONDS)
+				.setDiscusThrowLength(DISCUS_THROW_LENGTH_IN_METERS)
+				.setPoleVaultHeight(POLE_VAULT_HEIGHT_IN_METERS)
+				.setJavelinThrowLength(JAVELIN_THROW_LENGTH_IN_METERS)
+				.setThousandFiveHundredMeterRaceTime(THOUSAND_FIVE_HUNDRED_METER_RACE_TIME_IN_SECONDS)
+				.build();
 	}
 }
