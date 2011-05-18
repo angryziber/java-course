@@ -44,7 +44,6 @@ public class OutputXmlTest {
 
 	@Test
 	public void validateWithXSD() throws Exception {
-		// This method takes 25 second !!!
 		Validator validator = new Validator(new InputStreamReader(inputStream));
 		validator.useXMLSchema(true);
 		validator.setJAXP12SchemaSource(OutputXml.class.getResourceAsStream("decathlon.xsd"));
