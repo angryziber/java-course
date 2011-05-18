@@ -83,7 +83,6 @@ public class ValidationOfProgramArgs {
         }
 
         if (mistakeIndicator != 0) {
-            System.out.println(mistakeIndicator);
             System.out.println(warningMessage);
             return false;
         } else return true;

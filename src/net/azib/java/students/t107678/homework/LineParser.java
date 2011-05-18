@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class LineParser {
     final private static int RECORD_MEMBER_COUNT = 13;
-    private static final String REGEX = ":";
+    private static final String COLON = ":";
 
     /**
      *
@@ -61,7 +61,7 @@ public class LineParser {
 
         // need to transform min:sec to double
 
-        String[] FirstMinAndSecString = parts[7].split(REGEX);
+        String[] FirstMinAndSecString = parts[7].split(COLON);
 
         Double FirstMinAndSecDouble = Double.parseDouble(FirstMinAndSecString[0]) * 60.0 + Double.parseDouble(FirstMinAndSecString[1]);
 
@@ -80,7 +80,7 @@ public class LineParser {
         JavelinThrowEvent javelinThrowEvent = new JavelinThrowEvent(Double.parseDouble(parts[11]));
         participantResults.add(javelinThrowEvent);
 
-        String[] SecondMinAndSecString = parts[12].split(REGEX);
+        String[] SecondMinAndSecString = parts[12].split(COLON);
         Double SecondMinAndSecDouble = Double.parseDouble(SecondMinAndSecString[0]) * 60 + Double.parseDouble(SecondMinAndSecString[1]);
 
         ThousandFiveHundredMetersEvent thousandFiveHundredMetersEvent = new ThousandFiveHundredMetersEvent(SecondMinAndSecDouble);

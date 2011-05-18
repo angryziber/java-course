@@ -19,7 +19,8 @@ public class ConsoleReader implements Reader {
     public ConsoleReader() {
     }
 
-    /** Empty input strings should not be inputed
+    /**
+     * Empty input strings should not be inputed
      *
      * @return nonempty string value inputed by used
      * @throws IOException
@@ -32,12 +33,21 @@ public class ConsoleReader implements Reader {
         return value;
     }
 
-    /** Concatenates part by part participant data into one line
+    /**
+     * Concatenates part by part participant data into one line
      *
      * @return String which represents complete participant Decathlon data
      * @throws IOException
      */
     public String readRecordManualy() throws IOException {
+
+        String tempName = "";
+        String tempBirthDate = "";
+        String tempCountryCode = "";
+        String tempMetersOrSecEvent = "";
+        String tempMinColonSecEvent = "";
+
+        ValidationOfUserInputData validationOfUserInputData = new ValidationOfUserInputData();
 
         String recordRawData = "";
         System.out.println("Please enter participant Name: ");
@@ -45,36 +55,79 @@ public class ConsoleReader implements Reader {
         System.out.println("Please enter participant BirthDate [dd.MM.yyyy]: ");
         recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
         System.out.println("Please enter participant CountryCode [ISO 2-letter code]: ");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempCountryCode = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateCountryCode(tempCountryCode) == false);
+        recordRawData = recordRawData + tempCountryCode + COMA_FIELD;
         System.out.println("Please enter participant performance from 100m SprintEvent [sec]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMetersOrSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from LongJumpEvent [m]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMetersOrSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from ShotPutEvent [m]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMetersOrSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from HighJumpEvent [m]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMetersOrSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from 400mEvent [min:sec]");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMinColonSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMinColonSecEvent(tempMinColonSecEvent) == false);
+        recordRawData = recordRawData + tempMinColonSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from 110mHurdlesEvent [sec]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMetersOrSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from DiscusThrowEvent [m]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMetersOrSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from PoleVaultEvent [m]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMetersOrSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from JavelinThrowEvent [m]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMetersOrSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMetersOrSecondsEvent(tempMetersOrSecEvent) == false);
+        recordRawData = recordRawData + tempMetersOrSecEvent + COMA_FIELD;
         System.out.println("Please enter participant performance from 1500mRaceEvent [min:sec]:");
-        recordRawData = recordRawData + returnIfNotEmpty() + COMA_FIELD;
+        do {
+            tempMinColonSecEvent = returnIfNotEmpty();
+
+        } while (validationOfUserInputData.validateMinColonSecEvent(tempMinColonSecEvent) == false);
+        recordRawData = recordRawData + tempMinColonSecEvent + COMA_FIELD;
+
         System.out.println("Record successfully enter !");
 
-        //validate entered record ! return to beginning if not ok
 
         return recordRawData;
     }
 
     /**
-     *
      * @return Participant record
      * @throws IOException
      * @throws RecordFormatException
@@ -84,7 +137,7 @@ public class ConsoleReader implements Reader {
         String answer = "";
         String line = "";
 
-            line = readRecordManualy();
+        line = readRecordManualy();
 
 
         if (line == null) {

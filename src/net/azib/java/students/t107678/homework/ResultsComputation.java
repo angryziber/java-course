@@ -23,7 +23,8 @@ public class ResultsComputation {
         records = new ArrayList<Record>();
     }
 
-    /** Loading raw results from CSVReader
+    /**
+     * Loading raw results from CSVReader
      *
      * @param reader instance of input CSV reader
      */
@@ -36,7 +37,8 @@ public class ResultsComputation {
 
     }
 
-    /** Loading raw results from ConsoleReader; Small interaction with user in order to terminate of continue input
+    /**
+     * Loading raw results from ConsoleReader; Small interaction with user in order to terminate of continue inputting data
      *
      * @param reader instance of ConsoleReader
      */
@@ -48,13 +50,16 @@ public class ResultsComputation {
                 records.add(record);
             }
             System.out.println("Do You want to enter new Record [Y/N]?");
-            answer = inputDataReader.readLine();
+            do {
+                answer = inputDataReader.readLine();
+            } while (answer.trim().compareToIgnoreCase("N") != 0 & answer.trim().compareToIgnoreCase("Y") != 0);
         } while (answer.trim().toUpperCase().compareTo("N") != 0);
 
 
     }
 
-    /** Logic for loading raw results from DataBaseReader
+    /**
+     * Logic for loading raw results from DataBaseReader
      *
      * @param reader
      */
@@ -67,8 +72,8 @@ public class ResultsComputation {
 
     }
 
-    /** CPU of program; Sorting algorithm implementation
-     *
+    /**
+     * CPU of program; Sorting algorithm implementation
      */
     public void computeRecordsResults() {   //bubble sort
 
@@ -91,7 +96,8 @@ public class ResultsComputation {
 
     }
 
-    /** Allows us to take final Records of competition
+    /**
+     * Allows us to take final Records of competition
      *
      * @return Collection of Record type data (all participants are represented here)
      */
