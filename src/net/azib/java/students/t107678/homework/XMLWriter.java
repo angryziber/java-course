@@ -15,7 +15,7 @@ public class XMLWriter implements Writer {
     }
 
     @Override
-    public void writeNext(int place, Record record) {
+    public void writeNext(Place place, Record record) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

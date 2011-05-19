@@ -39,14 +39,14 @@ public class DataBaseReader implements Reader {
 
             Collection<Event> participantResults = new ArrayList(10);
 
-            if (!ValidationOfUserInputData.validateName(set.getString(1))) {
-                throw new RecordFormatException("Invalid name of participant");
-            }
+//            if (!ValidationOfUserInputData.validateName(set.getString(1))) {
+//                throw new RecordFormatException("Invalid name of participant");
+//            }
             String name = set.getString(1);
 
-            if(!ValidationOfUserInputData.validateBirthDate(set.getString(2))){
-                throw new RecordFormatException("Invalid birth date");
-            }
+//            if(!ValidationOfUserInputData.validateBirthDate(set.getString(2))){
+//                throw new RecordFormatException("Invalid birth date");
+//            }
             Date birthDate = set.getDate(2);
 
             if(!ValidationOfUserInputData.validateCountryCode(set.getString(3))){

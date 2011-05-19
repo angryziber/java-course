@@ -13,7 +13,7 @@ public interface Writer {
      * @param  place Participant's final place in competition
      * @param record Participant's Record
      */
-    public abstract void writeNext(int place, Record record);
+    public abstract void writeNext(Place place, Record record);
 
     /** Logic for outputting all Participants final data
      *
