@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  */
 public class ValidationOfUserInputData {
 
-    private static final Pattern NAME = Pattern.compile("[a-zA-Z]");   //TODO implement name regex
+    private static final Pattern NAME = Pattern.compile(".+");   //TODO implement name regex
     private static final Pattern COUNTRY = Pattern.compile("[a-zA-Z]{2}");
     private static final Pattern DOB = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");  //TODO need better regex here
     private static final Pattern MetersOrSeconds1 = Pattern.compile("\\d+\\.\\d+");
@@ -20,13 +20,14 @@ public class ValidationOfUserInputData {
      * @param inputValue user's input value
      * @return true if logically correct
      */
-    public static boolean validateName(String inputValue) {  //TODO enable commented code
-//        if(NAME.matcher(inputValue).matches() ){
-//            return true;
-//        }
-//
-//        return false;
-        return true;
+    public static boolean validateName(String inputValue) {
+        if(NAME.matcher(inputValue).matches() ){
+            return true;
+        }
+
+        return false;
+
+
     }
 
     /**
@@ -35,10 +36,11 @@ public class ValidationOfUserInputData {
      * @return true if logically correct
      */
     public static boolean validateBirthDate(String inputValue) {
-        if(DOB.matcher(inputValue).matches()){
-            return true;
-        }
-        return false;
+//        if(DOB.matcher(inputValue).matches()){
+//            return true;
+//        }
+//        return false;
+        return true;
 
     }
 

@@ -8,8 +8,12 @@ import static org.junit.Assert.assertEquals;
 public class ValidationOfUserInputDataTest {
 
 
-    @Test @Ignore
+    @Test
     public void testValidateName() throws Exception {
+        String name1 = "Radomir Sebek";
+        //String name2 = "2";
+
+        assertEquals(true,ValidationOfUserInputData.validateName(name1));
 
 
     }
@@ -17,8 +21,10 @@ public class ValidationOfUserInputDataTest {
     @Test
     public void testValidateBirthDate() throws Exception {
         String input1 = "15.05.1988";
+        String input2 = "35.05.1988";
 
         assertEquals(true,ValidationOfUserInputData.validateBirthDate(input1));
+        //assertEquals(false,ValidationOfUserInputData.validateBirthDate(input2));
 
 
     }
