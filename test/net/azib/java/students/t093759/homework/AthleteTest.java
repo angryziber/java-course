@@ -172,27 +172,17 @@ public class AthleteTest {
 	}
 
 	@Test
-	public void athleteObjectShouldBeCreatedUsingHisBuilder() {
+	public void athleteObjectShouldBeCreatedUsingHisBuilder() throws CloneNotSupportedException {
 		assertThat(newSampleAthlete(), is(instanceOf(Athlete.class)));
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void nameIsNecessary() {
+	public void allFieldsAreNecessary() throws CloneNotSupportedException {
 		new Athlete.Builder().build();
 	}
 
-	@Test(expected = IllegalStateException.class)
-	public void birthdayIsNecessary() {
-		new Athlete.Builder().name("Siim susi").build();
-	}
-
-	@Test(expected = IllegalStateException.class)
-	public void countryISO2LetterCodeIsNecessary() {
-		new Athlete.Builder().name("Siim susi").setDateOfBirth(new GregorianCalendar(1976, 1, 1)).build();
-	}
-
 	@Test
-	public void athletesAreEqualIfAllTheDataIsTheSame() {
+	public void athletesAreEqualIfAllTheDataIsTheSame() throws CloneNotSupportedException {
 		Athlete athleteA = newSampleAthlete();
 		Athlete athleteB = newSampleAthlete();
 		assertFalse(athleteA == athleteB);
@@ -200,7 +190,7 @@ public class AthleteTest {
 	}
 
 	@Test
-	public void hashCodeOfTowAthletesIsEqualIfTwoAthletesAreEqual() {
+	public void hashCodeOfTowAthletesIsEqualIfTwoAthletesAreEqual() throws CloneNotSupportedException {
 		Athlete athleteA = newSampleAthlete();
 		Athlete athleteB = newSampleAthlete();
 		assertFalse(athleteA == athleteB);
@@ -209,7 +199,7 @@ public class AthleteTest {
 	}
 
 	@Test
-	public void athleteIsCloneable() {
+	public void athleteIsCloneable() throws CloneNotSupportedException {
 		Athlete athleteA = newSampleAthlete();
 		Athlete athleteClone = (Athlete) athleteA.clone();
 		assertFalse(athleteA == athleteClone);
@@ -217,85 +207,14 @@ public class AthleteTest {
 	}
 
 	@Test
-	public void itIsPossibleToUseSomeAthleteAsAPrototypeForABuilder() {
+	public void itIsPossibleToUseSomeAthleteAsAPrototypeForABuilder() throws CloneNotSupportedException {
 		Athlete prototypeAthlete = newSampleAthlete();
 		Athlete builtAthlete = new Athlete.Builder(prototypeAthlete).build();
 		assertFalse(prototypeAthlete == builtAthlete);
 		assertThat(prototypeAthlete, is(builtAthlete));
 	}
 
-	@Test
-	public void athleteNameIsAvailableViaGetter() {
-		assertThat(newSampleAthlete().getName(), equalTo(NAME));
-	}
-
-	@Test
-	public void athletesBirthdayIsAvailableViaGetter() {
-		assertThat(newSampleAthlete().getDateOfBirth(), equalTo(DATE_OF_BIRTH));
-	}
-
-	@Test
-	public void athletesBirthdayIsClonedEveryTimeItIsCalled() {
-		Athlete athlete = newSampleAthlete();
-		assertFalse(athlete.getDateOfBirth() == athlete.getDateOfBirth());
-	}
-
-	@Test
-	public void countryISO2LetterCodeIsAvailableViaGetter() {
-		assertThat(newSampleAthlete().getCountryISO2LetterCode(), equalTo(COUNTRY_ISO_2_LETTER_CODE));
-	}
-
-	@Test
-	public void oneHundredMeterSprintInSecondsIsAvailableViaGetter() {
-		assertThat(newSampleAthlete().getOneHundredMeterSprintInSeconds(), equalTo(ONE_HUNDRED_METER_SPRINT_TIME_IN_SECONDS));
-	}
-
-	@Test
-	public void longJumpInMeterAvailableViaGetter() {
-		assertThat(newSampleAthlete().getLongJumpInMeters(), equalTo(LONG_JUMP_LENGTH_IN_METERS));
-	}
-
-	@Test
-	public void shotPutInMeterAvailableViaGetter() {
-		assertThat(newSampleAthlete().getShotPutInMeters(), equalTo(SHOT_PUT_LENGTH_IN_METERS));
-	}
-
-	@Test
-	public void highJumpInMetersAvailableViaGetter() {
-		assertThat(newSampleAthlete().getHighJumpInMeters(), equalTo(HIGH_JUMP_HEIGHT_IN_METERS));
-	}
-
-	@Test
-	public void fourHundredMeterSprintInSecondsAvailableViaGetter() {
-		assertThat(newSampleAthlete().getFourHundredMeterSprintInSeconds(), equalTo(FOUR_HUNDRED_METER_SPRINT_TIME_IN_SECONDS));
-	}
-
-	@Test
-	public void oneHundredTenMeterHurdlesInSecondsAvailableViaGetter() {
-		assertThat(newSampleAthlete().getOneHundredTenMeterHurdlesInSeconds(), equalTo(ONE_HUNDRED_TEN_METER_HURDLES_TIME_IN_SECONDS));
-	}
-
-	@Test
-	public void discusThrowInMetersAvailableViaGetter() {
-		assertThat(newSampleAthlete().getDiscusThrowInMeters(), equalTo(DISCUS_THROW_LENGTH_IN_METERS));
-	}
-
-	@Test
-	public void poleVaultInMetersAvailableViaGetter() {
-		assertThat(newSampleAthlete().getPoleVaultInMeters(), equalTo(POLE_VAULT_HEIGHT_IN_METERS));
-	}
-
-	@Test
-	public void javelinThrowInMeterAvailableViaGetter() {
-		assertThat(newSampleAthlete().getJavelinThrowInMeter(), equalTo(JAVELIN_THROW_LENGTH_IN_METERS));
-	}
-
-	@Test
-	public void thousandFiveHundredMeterRaceInSecondsAvailableViaGetter() {
-		assertThat(newSampleAthlete().getThousandFiveHundredMeterRaceInSeconds(), equalTo(THOUSAND_FIVE_HUNDRED_METER_RACE_TIME_IN_SECONDS));
-	}
-
-	private static Athlete newSampleAthlete() {
+	private static Athlete newSampleAthlete() throws CloneNotSupportedException {
 		return new Athlete.Builder()
 				.name(NAME)
 				.setDateOfBirth(DATE_OF_BIRTH)

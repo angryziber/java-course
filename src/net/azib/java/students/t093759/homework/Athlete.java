@@ -30,6 +30,11 @@ public class Athlete implements Cloneable {
 		return name;
 	}
 
+	/**
+	 * You will get a clone from dateOfBirth.
+	 *
+	 * @return Cloned date of birth.
+	 */
 	public Calendar getDateOfBirth() {
 		return (Calendar) dateOfBirth.clone();
 	}
@@ -79,12 +84,8 @@ public class Athlete implements Cloneable {
 	}
 
 	@Override
-	protected Object clone() {
-		try {
-			return super.clone();
-		} catch (CloneNotSupportedException e) {
-			return null;
-		}
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 	@Override
@@ -96,27 +97,17 @@ public class Athlete implements Cloneable {
 
 		if (!countryISO2LetterCode.equals(athlete.countryISO2LetterCode)) return false;
 		if (!dateOfBirth.equals(athlete.dateOfBirth)) return false;
-		if (discusThrowInMeters != null ? !discusThrowInMeters.equals(athlete.discusThrowInMeters) : athlete.discusThrowInMeters != null)
-			return false;
-		if (fourHundredMeterSprintInSeconds != null ? !fourHundredMeterSprintInSeconds.equals(athlete.fourHundredMeterSprintInSeconds) : athlete.fourHundredMeterSprintInSeconds != null)
-			return false;
-		if (highJumpInMeters != null ? !highJumpInMeters.equals(athlete.highJumpInMeters) : athlete.highJumpInMeters != null)
-			return false;
-		if (javelinThrowInMeter != null ? !javelinThrowInMeter.equals(athlete.javelinThrowInMeter) : athlete.javelinThrowInMeter != null)
-			return false;
-		if (longJumpInMeters != null ? !longJumpInMeters.equals(athlete.longJumpInMeters) : athlete.longJumpInMeters != null)
-			return false;
+		if (!discusThrowInMeters.equals(athlete.discusThrowInMeters)) return false;
+		if (!fourHundredMeterSprintInSeconds.equals(athlete.fourHundredMeterSprintInSeconds)) return false;
+		if (!highJumpInMeters.equals(athlete.highJumpInMeters)) return false;
+		if (!javelinThrowInMeter.equals(athlete.javelinThrowInMeter)) return false;
+		if (!longJumpInMeters.equals(athlete.longJumpInMeters)) return false;
 		if (!name.equals(athlete.name)) return false;
-		if (oneHundredMeterSprintInSeconds != null ? !oneHundredMeterSprintInSeconds.equals(athlete.oneHundredMeterSprintInSeconds) : athlete.oneHundredMeterSprintInSeconds != null)
-			return false;
-		if (oneHundredTenMeterHurdlesInSeconds != null ? !oneHundredTenMeterHurdlesInSeconds.equals(athlete.oneHundredTenMeterHurdlesInSeconds) : athlete.oneHundredTenMeterHurdlesInSeconds != null)
-			return false;
-		if (poleVaultInMeters != null ? !poleVaultInMeters.equals(athlete.poleVaultInMeters) : athlete.poleVaultInMeters != null)
-			return false;
-		if (shotPutInMeters != null ? !shotPutInMeters.equals(athlete.shotPutInMeters) : athlete.shotPutInMeters != null)
-			return false;
-		if (thousandFiveHundredMeterRaceInSeconds != null ? !thousandFiveHundredMeterRaceInSeconds.equals(athlete.thousandFiveHundredMeterRaceInSeconds) : athlete.thousandFiveHundredMeterRaceInSeconds != null)
-			return false;
+		if (!oneHundredMeterSprintInSeconds.equals(athlete.oneHundredMeterSprintInSeconds)) return false;
+		if (!oneHundredTenMeterHurdlesInSeconds.equals(athlete.oneHundredTenMeterHurdlesInSeconds)) return false;
+		if (!poleVaultInMeters.equals(athlete.poleVaultInMeters)) return false;
+		if (!shotPutInMeters.equals(athlete.shotPutInMeters)) return false;
+		if (!thousandFiveHundredMeterRaceInSeconds.equals(athlete.thousandFiveHundredMeterRaceInSeconds)) return false;
 
 		return true;
 	}
@@ -126,16 +117,16 @@ public class Athlete implements Cloneable {
 		int result = name.hashCode();
 		result = 31 * result + dateOfBirth.hashCode();
 		result = 31 * result + countryISO2LetterCode.hashCode();
-		result = 31 * result + (oneHundredMeterSprintInSeconds != null ? oneHundredMeterSprintInSeconds.hashCode() : 0);
-		result = 31 * result + (longJumpInMeters != null ? longJumpInMeters.hashCode() : 0);
-		result = 31 * result + (shotPutInMeters != null ? shotPutInMeters.hashCode() : 0);
-		result = 31 * result + (highJumpInMeters != null ? highJumpInMeters.hashCode() : 0);
-		result = 31 * result + (fourHundredMeterSprintInSeconds != null ? fourHundredMeterSprintInSeconds.hashCode() : 0);
-		result = 31 * result + (oneHundredTenMeterHurdlesInSeconds != null ? oneHundredTenMeterHurdlesInSeconds.hashCode() : 0);
-		result = 31 * result + (discusThrowInMeters != null ? discusThrowInMeters.hashCode() : 0);
-		result = 31 * result + (poleVaultInMeters != null ? poleVaultInMeters.hashCode() : 0);
-		result = 31 * result + (javelinThrowInMeter != null ? javelinThrowInMeter.hashCode() : 0);
-		result = 31 * result + (thousandFiveHundredMeterRaceInSeconds != null ? thousandFiveHundredMeterRaceInSeconds.hashCode() : 0);
+		result = 31 * result + oneHundredMeterSprintInSeconds.hashCode();
+		result = 31 * result + longJumpInMeters.hashCode();
+		result = 31 * result + shotPutInMeters.hashCode();
+		result = 31 * result + highJumpInMeters.hashCode();
+		result = 31 * result + fourHundredMeterSprintInSeconds.hashCode();
+		result = 31 * result + oneHundredTenMeterHurdlesInSeconds.hashCode();
+		result = 31 * result + discusThrowInMeters.hashCode();
+		result = 31 * result + poleVaultInMeters.hashCode();
+		result = 31 * result + javelinThrowInMeter.hashCode();
+		result = 31 * result + thousandFiveHundredMeterRaceInSeconds.hashCode();
 		return result;
 	}
 
@@ -144,7 +135,7 @@ public class Athlete implements Cloneable {
 
 		public final static double ONE_DAY_IN_SECONDS = 24.0 * 60.0 * 60.0;
 
-		public Builder(Athlete prototypeAthlete) {
+		public Builder(Athlete prototypeAthlete) throws CloneNotSupportedException {
 			athlete = (Athlete) prototypeAthlete.clone();
 		}
 
@@ -254,13 +245,22 @@ public class Athlete implements Cloneable {
 			return this;
 		}
 
-		public Athlete build() {
-			if (athlete.name == null) throw new IllegalStateException("Athlete's name should be set.");
-			if (athlete.dateOfBirth == null)
-				throw new IllegalStateException("Athlete's date of birthday should be set.");
-			if (athlete.countryISO2LetterCode == null)
-				throw new IllegalStateException("Athlete's country ISO 2 letter code should be set.");
+		public Athlete build() throws CloneNotSupportedException {
+			if (allFieldsAreNotNull())
+				throw new IllegalStateException("All fields should be set.");
+
 			return (Athlete) athlete.clone();
+		}
+
+		private boolean allFieldsAreNotNull() {
+			return !(athlete.countryISO2LetterCode != null
+					&& athlete.dateOfBirth != null && athlete.discusThrowInMeters != null
+					&& athlete.fourHundredMeterSprintInSeconds != null && athlete.highJumpInMeters != null
+					&& athlete.javelinThrowInMeter != null && athlete.longJumpInMeters != null
+					&& athlete.name != null && athlete.oneHundredMeterSprintInSeconds != null
+					&& athlete.oneHundredTenMeterHurdlesInSeconds != null && athlete.poleVaultInMeters != null
+					&& athlete.shotPutInMeters != null && athlete.thousandFiveHundredMeterRaceInSeconds != null
+			);
 		}
 	}
 }
