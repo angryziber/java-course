@@ -130,6 +130,16 @@ public class Athlete implements Cloneable {
 		return result;
 	}
 
+	private boolean allFieldsAreNotNull() {
+		return !(countryISO2LetterCode != null
+				&& dateOfBirth != null && discusThrowInMeters != null
+				&& fourHundredMeterSprintInSeconds != null && highJumpInMeters != null
+				&& javelinThrowInMeter != null && longJumpInMeters != null
+				&& name != null && oneHundredMeterSprintInSeconds != null
+				&& oneHundredTenMeterHurdlesInSeconds != null && poleVaultInMeters != null
+				&& shotPutInMeters != null && thousandFiveHundredMeterRaceInSeconds != null);
+	}
+
 	public static class Builder {
 		private Athlete athlete;
 
@@ -246,21 +256,10 @@ public class Athlete implements Cloneable {
 		}
 
 		public Athlete build() throws CloneNotSupportedException {
-			if (allFieldsAreNotNull())
+			if (athlete.allFieldsAreNotNull())
 				throw new IllegalStateException("All fields should be set.");
 
 			return (Athlete) athlete.clone();
-		}
-
-		private boolean allFieldsAreNotNull() {
-			return !(athlete.countryISO2LetterCode != null
-					&& athlete.dateOfBirth != null && athlete.discusThrowInMeters != null
-					&& athlete.fourHundredMeterSprintInSeconds != null && athlete.highJumpInMeters != null
-					&& athlete.javelinThrowInMeter != null && athlete.longJumpInMeters != null
-					&& athlete.name != null && athlete.oneHundredMeterSprintInSeconds != null
-					&& athlete.oneHundredTenMeterHurdlesInSeconds != null && athlete.poleVaultInMeters != null
-					&& athlete.shotPutInMeters != null && athlete.thousandFiveHundredMeterRaceInSeconds != null
-			);
 		}
 	}
 }
