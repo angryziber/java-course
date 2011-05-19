@@ -7,11 +7,19 @@ import java.io.*;
 import java.util.List;
 
 /**
+ * This class is to output the competition results in CSV format
+ *
  * @author 104607 IASM
  */
 public class OutputCsv {
 	Logger LOG = Logger.getLogger(this.getClass());
 
+	/**
+     * Show the competition results in CSV format
+     * <p>
+     * @param outputStream stream to output the competition results
+     * @param athletes list with athletes results
+	 */
 	public void save(OutputStream outputStream, List<Athlete> athletes) {
 		LOG.info("Using CSV output");
 

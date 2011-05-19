@@ -8,6 +8,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * This program -
+ * <li>Load raw results of athletes who has participated in competitions</li>
+ * <li>Compute decathlon scores according to the formula</li>
+ * <li>Save the correctly ordered results with scores</li>
+ * <br>
+ * Use format:<br>
+ * &nbsp;&nbsp;&nbsp;<i>Decathlon</i> -&lt;input-method&gt; [input-parameters] -&lt;output-method&gt; [output-parameters]
+ *
  * @author 104607 IASM
  */
 public class Decathlon {
@@ -68,7 +76,6 @@ public class Decathlon {
 				} catch (FileNotFoundException e) {
 					LOG.error("Open output stream", e);
 				}
-				//new OutputCsv().save(System.out, athletes);
 			} else if (args[i].compareToIgnoreCase("-xml") == 0) {
 				i++;
 				try {
@@ -77,7 +84,6 @@ public class Decathlon {
 				} catch (FileNotFoundException e) {
 					LOG.error("Open output stream", e);
 				}
-				//new OutputXml().save(System.out, athletes);
 			} else if (args[i].compareToIgnoreCase("-html") == 0) {
 				i++;
 				try {
@@ -86,7 +92,6 @@ public class Decathlon {
 				} catch (FileNotFoundException e) {
 					LOG.error("Open output stream", e);
 				}
-				//new OutputHtml().save(System.out, athletes);
 			} else {
 				LOG.error("No output definition");
 				return false;
@@ -98,6 +103,11 @@ public class Decathlon {
 		}
 	}
 
+	/**
+     * main method of decathlon computing program
+	 * <p>
+     * @param args comman line arguments
+	 */
 	public static void main(String[] args) {
 		Logger LOG = Logger.getLogger(Decathlon.class.getName());
 		PropertyConfigurator.configure(Decathlon.class.getResource("log4j.properties"));

@@ -14,6 +14,8 @@ import java.io.*;
 import java.util.List;
 
 /**
+ * This class is to output the competition results in XML format
+ *
  * @author 104607 IASM
  */
 public class OutputXml {
@@ -58,10 +60,16 @@ public class OutputXml {
 		transformer.transform(new DOMSource(xml), new StreamResult(out));
 	}
 
-	public void logInfo() {
+	void logInfo() {
 		LOG.info("Using XML output");
 	}
 
+	/**
+     * Show the competition results
+     * <p>
+     * @param outputStream stream to output the competition results
+     * @param athletes list with athletes results
+	 */
 	public void save(OutputStream outputStream, List<Athlete> athletes) {
 		logInfo();
 

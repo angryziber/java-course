@@ -14,12 +14,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * This class is for loading raw results of athletes from CSV formatted input
+ *
  * @author 104607 IASM
  */
 public class InputCsv {
 	Logger LOG = Logger.getLogger(this.getClass());
 
-	public String[] parseCSV(String csvLine) {
+	private String[] parseCSV(String csvLine) {
 		ArrayList<String> allMatches = new ArrayList<String>();
 		String match;
 		Pattern csvPattern = Pattern.compile("\"([^\"]*)\"|(?<=,|^)([^,]*)(?:,|$)");
@@ -43,6 +45,12 @@ public class InputCsv {
 	    }
 	}
 
+	/**
+     * Load raw results of athletes from CSV formatted input
+     * <p>
+     * @param inputStream stream with CVS formatted data
+     * @return list with athletes results
+	 */
 	public List<Athlete> load(InputStream inputStream) {
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		String line;

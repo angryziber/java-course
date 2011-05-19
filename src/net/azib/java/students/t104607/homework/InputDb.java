@@ -9,11 +9,20 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * This class is for loading raw results of athletes from database
+ *
  * @author 104607 IASM
  */
 public class InputDb {
 	Logger LOG = Logger.getLogger(this.getClass());
 
+	/**
+     * Load raw results of athletes from database
+     * <p>
+     * @param competition competition id or name
+     * @param propsStream properties with database connection options
+     * @return list with athletes results
+	 */
 	public List<Athlete> load(String competition, InputStream propsStream) {
 		String  url, user, password;
 		int id = 0;
@@ -68,6 +77,7 @@ public class InputDb {
 			LOG.error("Problem with properties", e);
 		}
 
+		LOG.debug("Got " + athletes.size() + " record");
 		return athletes;
 	}
 }

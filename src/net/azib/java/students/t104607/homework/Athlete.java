@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * This class is to keep the race results
+ *
  * @author 104607 IASM
  */
 public class Athlete implements Comparable<Athlete>{
@@ -83,66 +85,130 @@ public class Athlete implements Comparable<Athlete>{
 		this.race1500m = min2sec(race1500m);
 	}
 
+	/**
+	 * the athlete's name
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * the athlete's birthday
+	 * @return birthday
+	 */
 	public String getBirthday() {
 		return dateFormat.format(birthday);
 	}
 
+	/**
+	 * country (ISO 2-letter code)
+	 * @return country
+	 */
 	public String getCountry() {
 		return country;
 	}
 
+	/**
+	 * 100 metres sprint
+	 * @return result
+	 */
 	public String getSprint100m() {
 		return sec2min(sprint100m);
 	}
 
+	/**
+	 * long jump
+	 * @return result
+	 */
 	public String getLongJump() {
 		return df.format(longJump);
 	}
 
+	/**
+	 * shot put
+	 * @return result
+	 */
 	public String getShotPut() {
 		return df.format(shotPut);
 	}
 
+	/**
+	 * high jump
+	 * @return result
+	 */
 	public String getHighJump() {
 		return df.format(highJump);
 	}
 
+	/**
+	 * 400 metres sprint
+	 * @return result
+	 */
 	public String getSprint400m() {
 		return sec2min(sprint400m);
 	}
 
+	/**
+	 * 110 metres hurdles
+	 * @return result
+	 */
 	public String getHurdles110m() {
 		return sec2min(hurdles110m);
 	}
 
+	/**
+	 * discus throw
+	 * @return result
+	 */
 	public String getDiscusThrow() {
 		return df.format(discusThrow);
 	}
 
+	/**
+	 * pole vault
+	 * @return result
+	 */
 	public String getPoleVault() {
 		return df.format(poleVault);
 	}
 
+	/**
+	 * javelin throw
+	 * @return result
+	 */
 	public String getJavelinThrow() {
 		return df.format(javelinThrow);
 	}
 
+	/**
+	 * 1500 metres run
+	 * @return result
+	 */
 	public String getRace1500m() {
 		return sec2min(race1500m);
 	}
 
+	/**
+	 * the athlete's position
+	 * @return position
+	 */
 	public String getPosition() {
 		return position;
 	}
 
+	/**
+	 * set the athlete's position
+	 * @param position position value
+	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 
+	/**
+	 * calculate scores
+	 * @return score
+	 */
 	public int getScore() {
 		return Points.SPRINT100M.getPoints(sprint100m) +
 				Points.LONGJUMP.getPoints(longJump) +
@@ -157,6 +223,11 @@ public class Athlete implements Comparable<Athlete>{
 
 	}
 
+	/**
+	 * compare the two athletes
+	 * @param athlete second athlete
+	 * @return the difference of points
+	 */
 	@Override
 	public int compareTo(Athlete athlete) {
 		return this.getScore() - athlete.getScore();

@@ -13,11 +13,20 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * This class is for loading raw results of athletes from console
+ *
  * @author 104607 IASM
  */
 public class InputConsole {
 	Logger LOG = Logger.getLogger(this.getClass());
 
+	/**
+     * Load raw results of athletes from console
+     * <p>
+     * @param inputStream stream for reading data, ex. <i>System.in</i>
+     * @param outputStream stream to display messages, ex. <i>System.out</i>
+     * @return list with athletes results
+	 */
 	public List<Athlete> load (InputStream inputStream, OutputStream outputStream) {
 		String[][] a = {
 				//{"Enter athlete name (ex. 'John Smith') : ","[A-Z][a-z]+\\s[A-Z][a-z]+",null},
@@ -67,6 +76,8 @@ public class InputConsole {
 		} catch (IOException e) {
 			LOG.error("Console input problem with output stream", e);
 		}
+
+		LOG.debug("Got " + athletes.size() + " record");
 		return athletes;
 	}
 }

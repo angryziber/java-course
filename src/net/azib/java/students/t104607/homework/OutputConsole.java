@@ -6,11 +6,19 @@ import java.io.*;
 import java.util.List;
 
 /**
+ * This class is to show the competition results on console
+ *
  * @author 104607 IASM
  */
 public class OutputConsole {
 	Logger LOG = Logger.getLogger(this.getClass());
 
+	/**
+     * Show the competition results on console
+     * <p>
+     * @param outputStream stream to show the competition results, ex. <i>System.out</i>
+     * @param athletes list with athletes results
+	 */
 	public void save (OutputStream outputStream, List<Athlete> athletes) {
 		final String LINE_FORMAT = "%5s %5s %7s %7s %7s %7s %8s %7s %7s %7s %7s %8s %11s %3s  %s\n";
 		LOG.info("Using console output");

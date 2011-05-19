@@ -10,11 +10,13 @@ import java.io.InputStream;
 import java.io.Writer;
 
 /**
+ * This class is to output the competition results in HTML format
+ *
  * @author 104607 IASM
  */
 public class OutputHtml extends OutputXml{
 	@Override
-	public void logInfo() {
+	void logInfo() {
 		LOG.info("Using HTML output");
 	}
 
