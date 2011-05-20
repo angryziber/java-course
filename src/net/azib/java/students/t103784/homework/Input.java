@@ -267,23 +267,6 @@ public class Input {
 		name = new String (nameUTF, "UTF-8");
 		return name;
 		//since limiting names is a bad idea I'll just convert them to UTF-8 instead.
-		/*if (name.contains("\"")) {
-			String[] nameSplit = name.split("\"");
-			if (nameSplit[1].matches("(\\p{L}(\\p{L}+\\s?)){2,3}")) {
-				return nameSplit[1];
-			}
-			else {
-				return null;
-			}
-		}
-		else {
-			if (name.matches("(\\p{L}(\\p{L}+\\s?)){2,3}")) {
-				return name;
-			}
-			else {
-				return null;
-			}
-		}*/
 	}
 
 	private String checkDate(String birthDate) throws ParseException {
