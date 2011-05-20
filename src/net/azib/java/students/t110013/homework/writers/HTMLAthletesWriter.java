@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
- * //TODO class description
+ * Extends XMLAthletesWriter by providing a method to transform the built XML document into HTML file and write it to the
+ * specified file.
  * @author Vadim
  */
 public class HTMLAthletesWriter extends XMLAthletesWriter implements AthletesWriter {
@@ -34,8 +35,8 @@ public class HTMLAthletesWriter extends XMLAthletesWriter implements AthletesWri
     }
 
 	/**
-	 * //TODO method description
-	 * @param athletes A
+	 * Writes Athletes' data to the specified HTML file.
+	 * @param athletes a List of athletes to be written
 	 */
     @Override
     public void writeAthletes(List<Athlete> athletes) {

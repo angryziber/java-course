@@ -13,7 +13,7 @@ import static net.azib.java.students.t110013.homework.model.AthleteUtils.*;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
- * //TODO class description
+ * Provides methods to read and build Athletes from the specified CSV file.
  * @author Vadim
  */
 public class CSVAthletesReader implements AthletesReader {
@@ -29,8 +29,8 @@ public class CSVAthletesReader implements AthletesReader {
     }
 
 	/**
-	 * //TODO method description
-	 * @return A
+	 * Returns a list of Athletes build from the specified CSV file.
+	 * @return a list of Athletes
 	 */
     public List<Athlete> getAthletes() {
         List<String[]> inputStringArrays = readCSV(filename);

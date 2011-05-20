@@ -1,7 +1,8 @@
 package net.azib.java.students.t110013.homework.model;
 
 /**
- * //TODO class description
+ * Stores data about decathlon events along their special parameter values (a, b, c) used in calculation of event scores.
+ * Each decathlon event is able to calculate an appropriate score from a performance result.
  * @author Vadim
  */
 public enum Decathlon {
@@ -83,25 +84,26 @@ public enum Decathlon {
     }
 
 	/**
-	 * //TODO method description
-	 * @return  A
+	 * Returns the index of this event in the order of decathlon events.
+	 * @return an index of the event
 	 */
     public int getIndex() {
         return index;
     }
 
 	/**
-	 * //TODO method description
-	 * @return  A
+	 * Returns the name of this decathlon event in a format ready for pretty-printing.
+	 * @return a String representation of the name
 	 */
     public String getName() {
         return name;
     }
 
 	/**
-	 * //TODO method description
-	 * @param result  A
-	 * @return  A
+	 * An abstract method for calculation of the event score. Decathlon events override this method in order to provide
+	 * one convenient way to calculate a correct score depending on the event type.
+	 * @param result a double value representing a performance result
+	 * @return an int value of the score
 	 */
     public abstract int calculateEventScore(double result);
 

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * //TODO class description
+ * Provides methods to write Athletes' data to the specified CSV file.
  * @author Vadim
  */
 public class CSVAthletesWriter implements AthletesWriter {
@@ -25,8 +25,8 @@ public class CSVAthletesWriter implements AthletesWriter {
     }
 
 	/**
-	 * //TODO method description
-	 * @param athletes  A
+	 * Writes Athletes' data to the specified CSV file.
+	 * @param athletes a List of athletes to be written
 	 */
     public void writeAthletes(List<Athlete> athletes) {
         writeCSV(filename, athletes);

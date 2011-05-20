@@ -6,7 +6,7 @@ import net.azib.java.students.t110013.homework.model.Decathlon;
 import java.util.List;
 
 /**
- * //TODO class description
+ * Provides methods to print out Athletes data to the standard output, i.e. console.
  * @author Vadim
  */
 public class ConsoleAthletesWriter implements AthletesWriter {
@@ -15,8 +15,8 @@ public class ConsoleAthletesWriter implements AthletesWriter {
 	}
 
 	/**
-	 * //TODO method description
-	 * @param athletes A
+	 * Prints out Athletes data to the standard output, i.e. console.
+	 * @param athletes a List of athletes to be printed out
 	 */
 	public void writeAthletes(List<Athlete> athletes) {
         StringBuilder sb = new StringBuilder();

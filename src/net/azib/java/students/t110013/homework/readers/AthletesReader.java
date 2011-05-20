@@ -5,14 +5,14 @@ import net.azib.java.students.t110013.homework.model.Athlete;
 import java.util.List;
 
 /**
- * //TODO class description
+ * An interface for different AthletesReader implementations. Specifies only one method, which is called from
+ * the model of application.
  * @author Vadim
  */
 public interface AthletesReader {
 
 	/**
-	 * //TODO method description
-	 * Returns a list of Athletes
+	 * Returns a list of Athletes build from the specified source.
 	 * @see Athlete
 	 * @return a list of Athletes
 	 */

@@ -12,7 +12,7 @@ import static net.azib.java.students.t110013.homework.model.AthleteUtils.validat
 import static net.azib.java.students.t110013.homework.model.Decathlon.*;
 
 /**
- * //TODO class description
+ * Provides methods to read and build Athletes related to the specified competition in the database.
  * @author Vadim
  */
 public class DBAthletesReader implements AthletesReader {
@@ -32,8 +32,8 @@ public class DBAthletesReader implements AthletesReader {
     }
 
 	/**
-	 * //TODO method description
-	 * @return A
+	 * Returns a list of Athletes build using database data related to specified competition.
+	 * @return a list of Athletes
 	 */
     public List<Athlete> getAthletes() {
         List<Athlete> athletes = new ArrayList<Athlete>();

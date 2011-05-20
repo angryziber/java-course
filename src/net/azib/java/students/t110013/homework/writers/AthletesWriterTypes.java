@@ -1,7 +1,8 @@
 package net.azib.java.students.t110013.homework.writers;
 
 /**
- * //TODO class description
+ * Registers all output methods and appropriate AthletesWriter implementations. Each output method is able to instantiate
+ * a correct AthletesWriter implementation.
  * @author Vadim
  */
 public enum AthletesWriterTypes {
@@ -39,23 +40,24 @@ public enum AthletesWriterTypes {
     }
 
 	/**
-	 * //TODO method description
-	 * @param parameter A
-	 * @return A
+	 * An abstract method intended to provide one convenient way to instantiate different AthletesWriter
+	 * implementations.
+	 * @param parameter a String specifying output method destination
+	 * @return a new instance of an appropriate AthletesWriter implementation
 	 */
     public abstract AthletesWriter newInstance(String parameter);
 
 	/**
-	 * //TODO method description
-	 * @return A
+	 * Returns the name of this output method. Intended to be used to validate output method arguments.
+	 * @return a String representation of the output method name
 	 */
     public String getName() {
         return name;
     }
 
 	/**
-	 * //TODO method description
-	 * @return A
+	 * Indicates whether this output method should have specifying parameters or not.
+	 * @return true if this output method should have specifying parameters, false if should not
 	 */
     public boolean isParametrizable() {
         return parametrizable;

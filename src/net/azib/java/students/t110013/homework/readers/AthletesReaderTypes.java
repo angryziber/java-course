@@ -1,7 +1,8 @@
 package net.azib.java.students.t110013.homework.readers;
 
 /**
- * //TODO class description
+ * Registers all input methods and appropriate AthletesReader implementations. Each input method is able to instantiate
+ * a correct AthletesReader implementation.
  * @author Vadim
  */
 public enum AthletesReaderTypes {
@@ -33,23 +34,24 @@ public enum AthletesReaderTypes {
     }
 
 	/**
-	 * //TODO method description
-	 * @param parameter A
-	 * @return A
+	 * An abstract method intended to provide one convenient way to instantiate different AthletesReader
+	 * implementations.
+	 * @param parameter a String specifying input method source
+	 * @return a new instance of an appropriate AthletesReader implementation
 	 */
     public abstract AthletesReader newInstance(String parameter);
 
 	/**
-	 * //TODO method description
-	 * @return A
+	 * Returns the name of this input method. Intended to be used to validate input method arguments.
+	 * @return a String representation of the input method name
 	 */
     public String getName() {
         return name;
     }
 
 	/**
-	 * //TODO method description
-	 * @return A
+	 * Indicates whether this input method should have specifying parameters or not.
+	 * @return true if this input method should have specifying parameters, false if should not
 	 */
     public boolean isParametrizable() {
         return parametrizable;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * The main class of the application. Provides the main logic.
+ * The principal class of the application. Defines the main logic.
  * @author Vadim
  */
 public class Application {

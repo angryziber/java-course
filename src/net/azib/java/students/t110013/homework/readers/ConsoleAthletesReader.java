@@ -13,7 +13,7 @@ import java.util.Scanner;
 import static net.azib.java.students.t110013.homework.model.AthleteUtils.*;
 
 /**
- * //TODO class description
+ * Provides methods to read and build Athletes from the standard input, i.e. console.
  * @author Vadim
  */
 public class ConsoleAthletesReader implements AthletesReader {
@@ -24,8 +24,8 @@ public class ConsoleAthletesReader implements AthletesReader {
 	}
 
 	/**
-	 *
-	 * @return A
+	 * Returns a list of Athletes build from the standard input, i.e., interactively entered using the keyboard.
+	 * @return a list of Athletes
 	 */
 	public List<Athlete> getAthletes() {
         Scanner scanner = new Scanner(System.in, UTF8_CHARSET);

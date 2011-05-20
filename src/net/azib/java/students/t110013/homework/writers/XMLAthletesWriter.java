@@ -24,7 +24,8 @@ import java.util.logging.Logger;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
- * //TODO class description
+ * Provides methods to build, validate and write an XML containing structured Athletes' data. The validation is done
+ * against the XML schema.
  * @author Vadim
  */
 public class XMLAthletesWriter implements AthletesWriter {
@@ -38,8 +39,8 @@ public class XMLAthletesWriter implements AthletesWriter {
     }
 
 	/**
-	 * //TODO method description
-	 * @param athletes A
+	 * Writes Athletes' data to the specified XML file.
+	 * @param athletes a List of athletes to be written
 	 */
     public void writeAthletes(List<Athlete> athletes) {
         writeXML(filename, athletes);
