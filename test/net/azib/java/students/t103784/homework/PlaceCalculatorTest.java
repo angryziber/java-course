@@ -6,7 +6,7 @@ import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class PlaceCalculatorTest {
+public class PlaceCalculatorTest extends PlaceCalculator{
 	@org.junit.Test
     public void testPlace() {
 		List<Athlete> contestants = new ArrayList<Athlete>();
@@ -31,7 +31,7 @@ public class PlaceCalculatorTest {
 				ScoreCalculator.calculate(athlete);
 				contestants.add(athlete);
 		}
-		PlaceCalculator.calculatePlace(contestants);
+		calculatePlace(contestants);
 		String[] properPlaces = new String[contestants.size()];
 		properPlaces[0] = "1 - 2";
 		properPlaces[1] = "1 - 2";

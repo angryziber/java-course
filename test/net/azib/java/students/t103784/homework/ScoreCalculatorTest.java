@@ -6,7 +6,7 @@ import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class ScoreCalculatorTest {
+public class ScoreCalculatorTest extends ScoreCalculator{
 
 	@org.junit.Test
     public void testScore() {
@@ -20,7 +20,7 @@ public class ScoreCalculatorTest {
 				double perf = 20;
 				athlete.setPerformance(i, perf);
 			}
-			ScoreCalculator.calculate(athlete);
+			calculate(athlete);
 			contestants.add(athlete);
 		}
 		for (u = 0; u < 3; u++) {
@@ -29,7 +29,7 @@ public class ScoreCalculatorTest {
 					double perf = 10;
 					athlete.setPerformance(i, perf);
 				}
-				ScoreCalculator.calculate(athlete);
+				calculate(athlete);
 				contestants.add(athlete);
 		}
 		PlaceCalculator.calculatePlace(contestants);

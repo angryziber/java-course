@@ -1,6 +1,5 @@
 package net.azib.java.students.t103784.homework;
 
-import net.azib.java.lessons.db.PersonException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class Input {
 	SimpleDateFormat format = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
 	int tokenNumber = 0;
 
-	public List<Athlete> readAthleteFromDB() throws SQLException, PersonException, ParseException {
+	public List<Athlete> readAthleteFromDB() throws SQLException, ParseException {
 		int i = 0;
 		Connection conn = DriverManager.getConnection("jdbc:mysql://java.azib.net:3306/decathlon", "java", "java");
 		conn.setAutoCommit(false);

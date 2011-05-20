@@ -73,8 +73,6 @@ public class Main {
 				contestants = input.readAthleteFromDB();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} catch (PersonException e) {
-				e.printStackTrace();
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
