@@ -15,11 +15,11 @@ public class AthleteUtils {
     private static final Logger LOG = Logger.getLogger(AthleteUtils.class.getName());
 
     public static String validateName(String string) {
-        if (string.matches("([\\p{L}\\s-().]{2,}){3,}"))
+        if (string.matches("([\\p{L}\\s\\.\\-\\(\\)]{2,}){3,}"))
             return string;
         else {
             LOG.severe("Athlete's name is invalid.\n" +
-                    "First and last name are expected.\n" +
+                    "Full name is expected.\n" +
                     "Valid characters: unicode letters, dots, parenthesis and dashes.\n");
             throw new IllegalArgumentException();
         }

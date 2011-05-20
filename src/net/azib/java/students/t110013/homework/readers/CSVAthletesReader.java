@@ -23,7 +23,7 @@ public class CSVAthletesReader implements AthletesReader {
     private static final Logger LOG = Logger.getLogger(CSVAthletesReader.class.getName());
     private String filename;
 
-    public CSVAthletesReader(String filename) {
+    CSVAthletesReader(String filename) {
         this.filename = filename;
     }
 

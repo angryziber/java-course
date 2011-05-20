@@ -27,7 +27,7 @@ public class HTMLAthletesWriter extends XMLAthletesWriter implements AthletesWri
     private static final Logger LOG = Logger.getLogger(HTMLAthletesWriter.class.getName());
     private String filename;
 
-    public HTMLAthletesWriter(String filename) {
+    HTMLAthletesWriter(String filename) {
         super(filename);
         this.filename = filename;
     }

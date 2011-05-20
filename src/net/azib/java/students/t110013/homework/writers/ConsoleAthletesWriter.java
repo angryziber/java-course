@@ -10,7 +10,10 @@ import java.util.List;
  */
 public class ConsoleAthletesWriter implements AthletesWriter {
 
-    public void writeAthletes(List<Athlete> athletes) {
+	ConsoleAthletesWriter() {
+	}
+
+	public void writeAthletes(List<Athlete> athletes) {
         StringBuilder sb = new StringBuilder();
 
         for (Athlete a : athletes) {

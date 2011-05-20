@@ -19,7 +19,7 @@ public class CSVAthletesWriter implements AthletesWriter {
     private static final Logger LOG = Logger.getLogger(CSVAthletesWriter.class.getName());
     private String filename;
 
-    public CSVAthletesWriter(String filename) {
+    CSVAthletesWriter(String filename) {
         this.filename = filename;
     }
 

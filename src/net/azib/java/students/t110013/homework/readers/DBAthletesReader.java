@@ -26,7 +26,7 @@ public class DBAthletesReader implements AthletesReader {
     private static final Logger LOG = Logger.getLogger(DBAthletesReader.class.getName());
     private String competitionID;
 
-    public DBAthletesReader(String competitionID) {
+    DBAthletesReader(String competitionID) {
         this.competitionID = competitionID;
     }
 
@@ -87,12 +87,12 @@ public class DBAthletesReader implements AthletesReader {
             } while (rs.next());
         }
 
-        displayCompetitionIDNotFoundMessage(id, competitions);
+        displayFoundCompetitionsMessage("The specified competition ID " + id + " cannot be found.\n", competitions);
         throw new IllegalArgumentException();
     }
 
-    void displayCompetitionIDNotFoundMessage(int id, List<Integer> competitions) {
-        StringBuilder sb = new StringBuilder("The specified competition ID " + id + " cannot be found.\n");
+    void displayFoundCompetitionsMessage(String message, List<Integer> competitions) {
+        StringBuilder sb = new StringBuilder(message);
 
         sb.append("Following competition IDs were found in the database: ");
         for (int i = 0; i < competitions.size()-1; ++i) {

@@ -32,10 +32,11 @@ public class XMLAthletesWriter implements AthletesWriter {
     private static final Logger LOG = Logger.getLogger(XMLAthletesWriter.class.getName());
     private String filename;
 
-    public XMLAthletesWriter(String filename) {
+    XMLAthletesWriter(String filename) {
         this.filename = filename;
     }
 
+	@Override
     public void writeAthletes(List<Athlete> athletes) {
         writeXML(filename, athletes);
     }

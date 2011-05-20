@@ -19,7 +19,10 @@ public class ConsoleAthletesReader implements AthletesReader {
     private static final String UTF8_CHARSET = "UTF-8";
     private static final SimpleDateFormat CONSOLE_DATE_FORMAT = (SimpleDateFormat) DateFormat.getDateInstance();
 
-    public List<Athlete> getAthletes() {
+	ConsoleAthletesReader() {
+	}
+
+	public List<Athlete> getAthletes() {
         Scanner scanner = new Scanner(System.in, UTF8_CHARSET);
         List<Athlete> athletes = new ArrayList<Athlete>();
 
