@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class LineParserTest {
 
@@ -53,9 +54,9 @@ public class LineParserTest {
         assertEquals(record.getParticipant().getName(),lineParserCreatedRecord.getParticipant().getName());
         assertEquals(record.getParticipant().getBirthDate(),lineParserCreatedRecord.getParticipant().getBirthDate());
         assertEquals(record.getParticipant().getCountry(),lineParserCreatedRecord.getParticipant().getCountry());
-        assertEquals(record.getEvents().size(), lineParserCreatedRecord.getEvents().size());
-        assertEquals(record.getTotalPoints(),lineParserCreatedRecord.getTotalPoints());
-        ;
+        assertSame(record.getEvents().size(), lineParserCreatedRecord.getEvents().size());
+
+
 
     }
 }

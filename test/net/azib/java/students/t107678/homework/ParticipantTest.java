@@ -29,9 +29,16 @@ public class ParticipantTest {
     Participant participant = new Participant("Radomir Sebek", date, new CountryCode("me"));
 
     @Test
-    public void testGetName() throws Exception {
+    public void getCorrectName() throws Exception {
 
         assertEquals("Radomir Sebek", participant.getName());
+
+    }
+
+    @Test
+    public void getIncorrectName() throws Exception {
+
+        assertNotSame("Radomir Šebek", participant.getName());
 
     }
 
@@ -49,10 +56,20 @@ public class ParticipantTest {
     }
 
     @Test
-    public void testGetCountry() throws Exception {
+    public void getCorrectCountry() throws Exception {
 
         CountryCode countryCode = new CountryCode("ME");
         assertEquals(countryCode, participant.getCountry());
 
     }
+
+    @Test
+    public void getIncorrectCountry() throws Exception {
+
+        CountryCode countryCode = new CountryCode("EE");
+        assertNotSame(countryCode, participant.getCountry());
+
+    }
+
+
 }

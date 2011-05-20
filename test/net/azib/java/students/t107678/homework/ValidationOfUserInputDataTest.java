@@ -4,6 +4,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ValidationOfUserInputDataTest {
 
@@ -13,70 +15,98 @@ public class ValidationOfUserInputDataTest {
         String name1 = "Radomir Sebek";
         //String name2 = "2";
 
-        assertEquals(true,ValidationOfUserInputData.validateName(name1));
+        assertTrue(ValidationOfUserInputData.validateName(name1));
 
 
     }
 
     @Test
-    public void testValidateBirthDate() throws Exception {
+    public void validateCorrectBirthDate() throws Exception {
         String input1 = "15.05.1988";
+        assertTrue(ValidationOfUserInputData.validateBirthDate(input1));
+
+
+    }
+
+    @Test
+    public void validateIncorrectBirthDate() throws Exception {
+
         String input2 = "35.05.1988";
 
-        assertEquals(true,ValidationOfUserInputData.validateBirthDate(input1));
-        //assertEquals(false,ValidationOfUserInputData.validateBirthDate(input2));
+        //assertFalse(ValidationOfUserInputData.validateBirthDate(input2));
 
 
     }
 
     @Test
-    public void testValidateCountryCode() throws Exception {
+    public void validateCorrectCountryCode() throws Exception {
         String input1 = "me";
-        String input2 = "mne";
         String input3 = "ee";
+
+        assertTrue(ValidationOfUserInputData.validateCountryCode(input1));
+        assertTrue(ValidationOfUserInputData.validateCountryCode(input3));
+
+
+    }
+
+    @Test
+    public void validateIncorrectCountryCode() throws Exception {
+        String input2 = "mne";
         String input4 = "EESTI";
         String input5 = "e";
 
-        assertEquals(true, ValidationOfUserInputData.validateCountryCode(input1));
-        assertEquals(false, ValidationOfUserInputData.validateCountryCode(input2));
-        assertEquals(true, ValidationOfUserInputData.validateCountryCode(input3));
-        assertEquals(false, ValidationOfUserInputData.validateCountryCode(input4));
-        assertEquals(false, ValidationOfUserInputData.validateCountryCode(input5));
+        assertFalse(ValidationOfUserInputData.validateCountryCode(input2));
+        assertFalse(ValidationOfUserInputData.validateCountryCode(input4));
+        assertFalse(ValidationOfUserInputData.validateCountryCode(input5));
     }
 
     @Test
-    public void testValidateMetersOrSecondsEvent() throws Exception {
+    public void validateCorrectMetersOrSecondsEvent() throws Exception {
         String input1 = "12.32";
         String input2 = "12";
-        String input3 = "0.32";
         String input4 = "00.32";
-        String input5 = "10:32";
-        String input6 = "10.32 ";
 
-        assertEquals(true, ValidationOfUserInputData.validateMetersOrSecondsEvent(input1));
-        assertEquals(true, ValidationOfUserInputData.validateMetersOrSecondsEvent(input2));
-        assertEquals(true, ValidationOfUserInputData.validateMetersOrSecondsEvent(input3));
-        assertEquals(true, ValidationOfUserInputData.validateMetersOrSecondsEvent(input4));
-        assertEquals(false, ValidationOfUserInputData.validateMetersOrSecondsEvent(input5));
-        assertEquals(false, ValidationOfUserInputData.validateMetersOrSecondsEvent(input6));
+        assertTrue(ValidationOfUserInputData.validateMetersOrSecondsEvent(input1));
+        assertTrue(ValidationOfUserInputData.validateMetersOrSecondsEvent(input2));
+        assertTrue(ValidationOfUserInputData.validateMetersOrSecondsEvent(input4));
+
 
     }
 
     @Test
-    public void testValidateMinColonSecEvent() throws Exception {
+    public void validateIncorrectMetersOrSecondsEvent() throws Exception {
+        String input3 = "0. 32";
+        String input5 = "10:32";
+        String input6 = "10.32 ";
+        assertFalse(ValidationOfUserInputData.validateMetersOrSecondsEvent(input3));
+        assertFalse(ValidationOfUserInputData.validateMetersOrSecondsEvent(input5));
+        assertFalse(ValidationOfUserInputData.validateMetersOrSecondsEvent(input6));
+
+    }
+
+    @Test
+    public void validateCorrectMinColonSecEvent() throws Exception {
         String input1 = "12:32";
-        String input2 = "12.32";
-        String input3 = "12:32:32";
         String input4 = "00:32.01";
         String input5 = "0:32";
-        String input6 = "0:32.0 ";     //space will not be allowed !
 
-        assertEquals(true,ValidationOfUserInputData.validateMinColonSecEvent(input1));
-        assertEquals(false,ValidationOfUserInputData.validateMinColonSecEvent(input2));
-        assertEquals(false,ValidationOfUserInputData.validateMinColonSecEvent(input3));
-        assertEquals(true,ValidationOfUserInputData.validateMinColonSecEvent(input4));
-        assertEquals(true,ValidationOfUserInputData.validateMinColonSecEvent(input5));
-        assertEquals(false,ValidationOfUserInputData.validateMinColonSecEvent(input6));
+        assertTrue(ValidationOfUserInputData.validateMinColonSecEvent(input1));
+        assertTrue(ValidationOfUserInputData.validateMinColonSecEvent(input4));
+        assertTrue(ValidationOfUserInputData.validateMinColonSecEvent(input5));
+
+
+    }
+
+    @Test
+    public void validateIncorrectMinColonSecEvent() throws Exception {
+
+        String input2 = "12.32";
+        String input3 = "12:32:32";
+        String input5 = "0: 32";
+
+        assertFalse(ValidationOfUserInputData.validateMinColonSecEvent(input2));
+        assertFalse(ValidationOfUserInputData.validateMinColonSecEvent(input3));
+        assertFalse(ValidationOfUserInputData.validateMinColonSecEvent(input5));
 
 
     }

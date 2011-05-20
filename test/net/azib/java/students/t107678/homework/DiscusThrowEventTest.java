@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 
 public class DiscusThrowEventTest {
@@ -14,29 +15,40 @@ public class DiscusThrowEventTest {
 
 
     @Test
-    public void testGetPerformance() throws Exception {
+    public void getCorrectPerformance() throws Exception {
 
         assertEquals(12.0, discusThrowEvent.getPerformance(), 0);
 
     }
 
     @Test
-    public void testGetPoints() throws Exception {
+    public void getIncorrectPerformance() throws Exception {
 
-        assertEquals(127,discusThrowEvent.getPoints());
+        assertNotSame(13.0, discusThrowEvent.getPerformance());
 
     }
 
     @Test
-    public void testGetEventName() throws Exception {
+    public void getPoints() throws Exception {
 
-        assertEquals(discusThrowEvent.getEventName(),"DiscusThrow");
+        assertEquals(127,discusThrowEvent.getPoints());
+        assertNotSame(128,discusThrowEvent.getPoints());
+
+    }
+
+    @Test
+    public void getEventName() throws Exception {
+
+        assertEquals("DiscusThrow",discusThrowEvent.getEventName());
+        assertNotSame("DiscusThrow1", discusThrowEvent.getEventName());
+
 
     }
 
     @Test
     public void testGetEventUnits() throws Exception {
-        assertEquals(discusThrowEvent.getEventUnits(),"m");
+        assertEquals("m",discusThrowEvent.getEventUnits());
+        assertNotSame("meters",discusThrowEvent.getEventUnits());
 
     }
 }
