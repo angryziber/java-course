@@ -99,6 +99,8 @@ public class ControllerTest {
 		assertFalse(new Controller().checkMeters("4:55.01"));
 	}
 	
+	
+	
 	@Test
 	public void testArrangeInOrder() {
 		ArrayList<Athlete> athletes = new ArrayList<Athlete>();
@@ -130,7 +132,7 @@ public class ControllerTest {
 	}
 	
 	@Test
-	public void testcalculatePoints() throws ParseException {
+	public void testCalculatePoints() throws ParseException {
 		Athlete a;
 		Controller ctrl = new Controller();
 		
