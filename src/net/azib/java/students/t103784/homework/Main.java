@@ -1,6 +1,5 @@
 package net.azib.java.students.t103784.homework;
 
-import net.azib.java.lessons.db.PersonException;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
@@ -18,27 +17,31 @@ import javax.xml.transform.TransformerException;
 public class Main {
 	static String inputMethod = null, inputParameter = null, outputMethod = null, outputParameter = null;
 
-	public static void main(String[] args) throws IOException {
-
-		for (String s: args) {
-			if (s.contains("-")) {
-				if (inputMethod == null) {
-					inputMethod = s;
+	public static String[] setParameters(String[] args){
+			for (String s: args) {
+				if (s.contains("-")) {
+					if (inputMethod == null) {
+						inputMethod = s;
+					}
+					else {
+						outputMethod = s;
+					}
 				}
 				else {
-					outputMethod = s;
+					if (inputParameter == null && s.equals(args[1])) {
+						inputParameter = s;
+					}
+					else {
+						outputParameter = s;
+					}
 				}
 			}
-			else {
-				if (inputParameter == null && outputParameter != null) {
-					inputParameter = s;
-				}
-				else {
-					outputParameter = s;
-				}
-			}
+		return args;
 		}
 
+	public static void main(String[] args) throws IOException {
+
+		setParameters(args);
 		List<Athlete> contestants = null;
 		BufferedReader reader;
 		Input input = new Input();

@@ -45,7 +45,7 @@ public class Output {
 			}
 			else {
 				out = new PrintStream((new FileOutputStream
-						("sampleOutput.csv")));
+						("src\\net\\azib\\java\\students\\t103784\\homework\\tmp\\sampleOutput.csv")));
 			}
 			for (Athlete athlete : contestants) {
 				out.print(athlete.getPlace() + ",");
@@ -55,6 +55,7 @@ public class Output {
 				out.print(athlete.getCountry() + ",");
 				for (int i = 0; i < 10; i++) {
 					out.print(athlete.getPerformance(i) + ",");
+					if(i==9)out.print(athlete.getPerformance(i));
 				}
 				out.print(System.getProperty("line.separator"));
 			}

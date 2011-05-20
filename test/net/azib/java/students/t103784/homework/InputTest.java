@@ -7,16 +7,17 @@ import java.io.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-public class InputTest extends Input{
+public class InputTest extends Input {
 	@org.junit.Test
 	public void testConsoleInput () {
 		InputStream in = null;
 		try {
-			in = new FileInputStream(("src\\net\\azib\\java\\students\\t103784\\homework\\consoleTest.txt"));
+			in = new FileInputStream(("src\\net\\azib\\java\\students\\t103784\\homework\\tests\\consoleTest.txt"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Console input failed (no such test file)\n");
 		}
 		System.setIn(in);
+
 		try {
 			readAthleteFromConsole();
 		} catch (IOException e) {
@@ -29,7 +30,7 @@ public class InputTest extends Input{
 	public void testCSVInput () {
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader("src\\net\\azib\\java\\students\\t103784\\homework\\CSVTest.csv"));
+			reader = new BufferedReader(new FileReader("src\\net\\azib\\java\\students\\t103784\\homework\\tests\\CSVTest.csv"));
 		} catch (FileNotFoundException e) {
 			System.out.println("CSV input failed (no such test file)\n");
 		}

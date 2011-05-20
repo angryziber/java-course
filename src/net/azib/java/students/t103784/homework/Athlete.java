@@ -1,7 +1,6 @@
 package net.azib.java.students.t103784.homework;
 
 public class Athlete {
-
 	private String name, birthDate, country, place;
 	private String[] events = {"100 meter dash(s): ", "Long jump(m): ", "Shot Put(m): ", "High jump(m): ", "400 meter race(s): ", "110 meter hurdles(s): ", "Discus throw(m): ", "Pole vault(m): ", "Javelin throw(m): ", "1500 meter race(s): "};
 	private double[] performance = {0,0,0,0,0,0,0,0,0,0};

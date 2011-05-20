@@ -6,23 +6,27 @@ import java.util.Comparator;
 import java.util.List;
 
 public class PlaceCalculator {
-	static int lastAssigned = 0;
-    static int currentFirst = 0;
-    static int counter = 1;
+	static int lastAssigned;
+    static int currentFirst;
+    static int counter;
 	static List<Integer> scores = new ArrayList<Integer>();
 
 	public static void calculatePlace(List<Athlete> contestants) {
+
 		Collections.sort(contestants, new PlaceCalculator.sortByScore());
+		lastAssigned = 0;
+		currentFirst = 0;
+		counter = 1;
 		for (int o = 0; o < contestants.size(); o++) {
 			scores.add(o, contestants.get(o).getScore());
 		}
 		scores.add(-1);
-		for(int i=1;i< scores.size();i++) {
+		for(int i = 1; i < scores.size(); i++) {
             if(scores.get(i).equals(scores.get(i - 1))) {
                 counter++;
             }
             else {
-                if(counter == 1) {
+                if(counter == 1 && lastAssigned != contestants.size()) {
                     contestants.get(currentFirst).setPlace(String.valueOf(lastAssigned+1));
                     lastAssigned++;
                     currentFirst++;
