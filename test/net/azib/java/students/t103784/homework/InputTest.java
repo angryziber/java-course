@@ -8,21 +8,20 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 /**
- * @author      Ott Madis Ozolit <karuott321@hotmail.com>
- * @version     1.6
- * @since       2011.0520
- *
+ * @author Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version 1.6
+ * @since 2011.0520
  */
 public class InputTest extends Input {
 
 	/**
 	 * Tests whether the console input works.
-	 *
+	 * <p/>
 	 * By feeding some preset valid data into the system using
 	 * an input stream, I check if the input works properly.
 	 */
 	@org.junit.Test
-	public void testConsoleInput () {
+	public void testConsoleInput() {
 		InputStream in = null;
 		try {
 			in = new FileInputStream(("src\\net\\azib\\java\\students\\t103784\\homework\\tests\\consoleTest.txt"));
@@ -42,12 +41,12 @@ public class InputTest extends Input {
 
 	/**
 	 * Tests whether the CSV input works.
-	 *
+	 * <p/>
 	 * By feeding some preset valid data into the system using
 	 * a reader, I check if the input works properly.
 	 */
 	@org.junit.Test
-	public void testCSVInput () {
+	public void testCSVInput() {
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader("src\\net\\azib\\java\\students\\t103784\\homework\\tests\\CSVTest.csv"));
@@ -59,12 +58,12 @@ public class InputTest extends Input {
 
 	/**
 	 * Tests whether the database input works.
-	 *
+	 * <p/>
 	 * By feeding some preset valid data into the system using
 	 * a database, I check if the input works properly.
 	 */
 	@org.junit.Test
-	public void testDBInput () {
+	public void testDBInput() {
 		try {
 			parameter = "1";
 			readAthleteFromDB();

@@ -7,20 +7,19 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * @author      Ott Madis Ozolit <karuott321@hotmail.com>
- * @version     1.6
- * @since       2011.0520
- *
+ * @author Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version 1.6
+ * @since 2011.0520
  */
-public class ScoreCalculatorTest extends ScoreCalculator{
+public class ScoreCalculatorTest extends ScoreCalculator {
 	/**
 	 * Tests if athletes' scores are calculated properly.
-	 *
+	 * <p/>
 	 * Calculates some athletes' scores and checks
 	 * if the calculations were done properly.
 	 */
 	@org.junit.Test
-    public void testScore() {
+	public void testScore() {
 		List<Athlete> contestants = new ArrayList<Athlete>();
 		Athlete athlete;
 		int o;
@@ -35,13 +34,13 @@ public class ScoreCalculatorTest extends ScoreCalculator{
 			contestants.add(athlete);
 		}
 		for (u = 0; u < 3; u++) {
-				athlete = new Athlete();
-				for (int i = 0; i < 10; i++) {
-					double perf = 10;
-					athlete.setPerformance(i, perf);
-				}
-				calculate(athlete);
-				contestants.add(athlete);
+			athlete = new Athlete();
+			for (int i = 0; i < 10; i++) {
+				double perf = 10;
+				athlete.setPerformance(i, perf);
+			}
+			calculate(athlete);
+			contestants.add(athlete);
 		}
 		int[] properScores = new int[contestants.size()];
 		int[] testableScores = new int[contestants.size()];

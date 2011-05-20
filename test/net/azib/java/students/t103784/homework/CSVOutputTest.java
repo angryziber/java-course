@@ -4,21 +4,20 @@ import java.io.*;
 import java.util.List;
 
 /**
- * @author      Ott Madis Ozolit <karuott321@hotmail.com>
- * @version     1.6
- * @since       2011.0520
- *
+ * @author Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version 1.6
+ * @since 2011.0520
  */
 public class CSVOutputTest extends Output {
 
 	/**
 	 * Tests whether the CSV output works.
-	 *
+	 * <p/>
 	 * By feeding some preset valid data into the system using
 	 * a reader, I check if the output can get the data from the input properly.
 	 */
 	@org.junit.Test
-	public void testOutputs () {
+	public void testOutputs() {
 		List<Athlete> contestants;
 		MockInput input = new MockInput();
 		BufferedReader reader = null;

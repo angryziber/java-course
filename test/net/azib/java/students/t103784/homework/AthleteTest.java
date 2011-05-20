@@ -7,15 +7,14 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * @author      Ott Madis Ozolit <karuott321@hotmail.com>
- * @version     1.6
- * @since       2011.0520
- *
+ * @author Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version 1.6
+ * @since 2011.0520
  */
 public class AthleteTest extends Athlete {
 	/**
 	 * Tests if the athlete class is acting properly.
-	 *
+	 * <p/>
 	 * Fills an athlete up with information and checks
 	 * if its getters and setters are working properly.
 	 */
@@ -24,7 +23,7 @@ public class AthleteTest extends Athlete {
 		String name = "Juhan Mihkel";
 		String birthDate = "1.2.1980";
 		String country = "US";
-		double[] performance = {10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0};
+		double[] performance = {10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0};
 		int score = 28224;
 		String place = "1";
 

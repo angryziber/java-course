@@ -7,21 +7,20 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * @author      Ott Madis Ozolit <karuott321@hotmail.com>
- * @version     1.6
- * @since       2011.0520
- *
+ * @author Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version 1.6
+ * @since 2011.0520
  */
-public class PlaceCalculatorTest extends PlaceCalculator{
+public class PlaceCalculatorTest extends PlaceCalculator {
 
 	/**
 	 * Tests if the places of athletes are assigned properly.
-	 *
+	 * <p/>
 	 * Calculates some scores of some athletes
 	 * and then tries to assign them the proper places.
 	 */
 	@org.junit.Test
-    public void testPlace() {
+	public void testPlace() {
 		List<Athlete> contestants = new ArrayList<Athlete>();
 		Athlete athlete;
 		int o;
@@ -36,13 +35,13 @@ public class PlaceCalculatorTest extends PlaceCalculator{
 			contestants.add(athlete);
 		}
 		for (u = 0; u < 3; u++) {
-				athlete = new Athlete();
-				for (int i = 0; i < 10; i++) {
-					double perf = 10;
-					athlete.setPerformance(i, perf);
-				}
-				MockScoreCalculator.calculate(athlete);
-				contestants.add(athlete);
+			athlete = new Athlete();
+			for (int i = 0; i < 10; i++) {
+				double perf = 10;
+				athlete.setPerformance(i, perf);
+			}
+			MockScoreCalculator.calculate(athlete);
+			contestants.add(athlete);
 		}
 		calculatePlace(contestants);
 		String[] properPlaces = new String[contestants.size()];
