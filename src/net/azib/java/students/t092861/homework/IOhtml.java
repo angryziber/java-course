@@ -43,11 +43,12 @@ public class IOhtml extends AbstractIO {
 	}
 
 	@Override
-	void output(ArrayList<Athlete> athletes) {
+	File output(ArrayList<Athlete> athletes) {
+		File temp = null;
 		try {
 
 			// Create temp file.
-			File temp = File.createTempFile("temp", ".xml");
+			temp = File.createTempFile("temp", ".xml");
 			out.println("Creating temp file " + temp.getPath());
 			// Delete temp file when program exits.
 			temp.deleteOnExit();
@@ -76,6 +77,7 @@ public class IOhtml extends AbstractIO {
 			out.println("\nError! I/O exception of some sort has occurred.");
 			e.printStackTrace();
 		}
+		return temp;
 	}
 
 	@Override

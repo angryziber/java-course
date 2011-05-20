@@ -51,9 +51,7 @@ public class IOcsv extends AbstractIO {
 			// trying to read as utf-8
 			readerIn = new InputStreamReader(streamIn, "UTF8");
 			bufReader = new BufferedReader(readerIn);
-			
-			
-			
+
 			// current line
 			String curLine = null;
 			// Read input file line by line
@@ -66,12 +64,12 @@ public class IOcsv extends AbstractIO {
 			out.println("\nSuccessful input from " + "\"" + getParameters()+ "\"" + " file!\n");
 			
 		} catch (FileNotFoundException en) {
-			out.println("\nExeption " + en.getMessage()
+			out.println("\nnError " + en.getMessage()
 					+ ". Please check the file " + getParameters()
 					+ " location!");
 			
 		} catch (UnsupportedEncodingException e) {
-			out.println("\nCouldn't read file as UTF8");
+			out.println("\nError! Couldn't read file as UTF8");
 			// therefore reading it as non-UTF-8 encoding
 			readerIn = new InputStreamReader(streamIn);
 			
@@ -97,13 +95,13 @@ public class IOcsv extends AbstractIO {
 	}
 
 	@Override
-	void output(ArrayList<Athlete> athletes) {
+	File output(ArrayList<Athlete> athletes) {
 		
 		Writer writer = null;
 		ArrayList<Athlete> results = ctrl.arrangeInOrder(athletes);
 		Iterator<Athlete> itr = results.iterator();		
+		File file = getOutputFile(getParameters());
 		try {
-			File file = getOutputFile(getParameters());
 			
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF8"));
 			
@@ -148,6 +146,7 @@ public class IOcsv extends AbstractIO {
 				e.printStackTrace();
 			}
 		}
+		return file;
 	}
 
 	@Override

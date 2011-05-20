@@ -39,6 +39,10 @@ public abstract class AbstractIO {
 	public AbstractIO(Controller ctrl) {
 		this.ctrl = ctrl;
 	}
+	
+	public AbstractIO() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * Reads the data from the input source (console, csv or db). 
@@ -53,7 +57,7 @@ public abstract class AbstractIO {
 	 * @param athletes
 	 *            ArrayList of type Athletes
 	 */
-	abstract void output(ArrayList<Athlete> athletes);
+	abstract File output(ArrayList<Athlete> athletes);
 	
 	/**
 	 * Gets the IO parameters.

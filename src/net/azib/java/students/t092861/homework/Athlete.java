@@ -152,6 +152,7 @@ public class Athlete {
 
 	@Override
 	public String toString() {
-		return getPlace() + " " + getName() + " " + getScore();
+		String date = new IOconsole().convertDateDMY(getBirthday());
+		return "\"" + getName() + "\"" + "," + date  + "," + getCountry();
 	}
 }

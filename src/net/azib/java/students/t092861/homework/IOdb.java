@@ -1,5 +1,6 @@
 package net.azib.java.students.t092861.homework;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -142,8 +143,8 @@ public class IOdb extends AbstractIO {
 	}
 
 	@Override
-	void output(ArrayList<Athlete> athletes) {
-		// TODO Auto-generated method stub
+	File output(ArrayList<Athlete> athletes) {
+		return null;
 	}
 
 	@Override

@@ -83,7 +83,8 @@ public class IOxml extends AbstractIO {
 	}
 
 	@Override
-	void output(ArrayList<Athlete> athletes){
+	File output(ArrayList<Athlete> athletes){
+		File file = null;
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
@@ -194,7 +195,6 @@ public class IOxml extends AbstractIO {
 			}
 
 			// write the content into xml file
-			File file = null;
 			if (temp == null) {
 				file = getOutputFile(getParameters());
 			} else {
@@ -234,6 +234,7 @@ public class IOxml extends AbstractIO {
 			out.println("\nError! Attempt to open the file denoted by a specified pathname has failed.");
 			e.printStackTrace();
 		}
+		return file;
 	}
 	
 	public void validateXML(Schema schema, String xmlName) {

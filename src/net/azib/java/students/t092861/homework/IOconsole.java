@@ -1,6 +1,7 @@
 package net.azib.java.students.t092861.homework;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -38,6 +39,10 @@ public class IOconsole extends AbstractIO {
 	 */
 	public IOconsole(Controller ctrl) {
 		super(ctrl);
+	}
+	
+	public IOconsole() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	public ArrayList<Athlete> consoleInput(Reader r){
@@ -93,7 +98,7 @@ public class IOconsole extends AbstractIO {
 	}
 
 	@Override
-	void output(ArrayList<Athlete> athletes) {
+	File output(ArrayList<Athlete> athletes) {
 		printTableHeader();
 		Iterator<Athlete> itr = ctrl.arrangeInOrder(athletes).iterator();
 		String name = null;
@@ -125,6 +130,7 @@ public class IOconsole extends AbstractIO {
 							this.convertTimeToString(item.getSprint1500()), 
 							item.getScore());
 		}
+		return null;
 	}
 
 	/**
