@@ -1,25 +1,40 @@
 package net.azib.java.students.t107678.homework;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.*;
 
-public class HTMLWriter implements Writer{
+public class HTMLWriter implements Writer {
 
-    final private PrintWriter writer;
+	String fileName;
 
-    public HTMLWriter(String fileName) throws IOException {
-        this.writer = new PrintWriter(new FileWriter(fileName));
-    }
+	public HTMLWriter(String fileName) throws IOException {
+		this.fileName = fileName;
+	}
 
 
-    @Override
-    public void writeNext(Place place, Record record) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+	@Override
+	public void writeNext(Place place, Record record) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
 
-    @Override
-    public void writeOutput(ResultsComputation resultsComputation) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+	@Override
+	public void writeOutput(ResultsComputation resultsComputation) throws TransformerException, IOException, ParserConfigurationException {
+
+		XMLWriter xmlWriter = new XMLWriter("src/net/azib/java/students/t107678/homework/tempXMLforHTML");
+		xmlWriter.writeOutput(resultsComputation);
+
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+
+		Transformer transformer = transformerFactory.newTransformer(new StreamSource("src/net/azib/java/students/t107678/homework/athletes.xsl"));
+		transformer.transform(new StreamSource("src/net/azib/java/students/t107678/homework/tempXMLforHTML"), new StreamResult(new FileOutputStream(fileName)));
+
+
+	}
+
 }
+

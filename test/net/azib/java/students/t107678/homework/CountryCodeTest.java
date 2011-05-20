@@ -12,14 +12,14 @@ public class CountryCodeTest {
 
 
     @Test
-    public void testGetValue() throws Exception {
+    public void getCorrectValue() throws Exception {
 
         assertEquals("ME",countryCode.getValue());
 
     }
 
     @Test
-    public void testIncorrectCountryCode() throws Exception{
+    public void getIncorrectCountryCode() throws Exception{
 
         CountryCode countryCode1 = new CountryCode("ee");
         assertNotSame(countryCode1, countryCode);

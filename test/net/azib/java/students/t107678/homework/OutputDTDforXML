@@ -1,0 +1,74 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT competition (athlete)+>
+<!ATTLIST competition
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT athlete (place,score,name,dob,country_code,HundredMeters,LongJump,ShotPut,HighJump,FourHundredMeters,
+                   OneHundredTenHurdlese,DiscusThrow,PoleVault,JavelinThrow,ThousandFiveHundredMeters)>
+<!ATTLIST athlete
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT place (#PCDATA)>
+<!ATTLIST place
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT score (#PCDATA)>
+<!ATTLIST score
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT name (#PCDATA)>
+<!ATTLIST name
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT dob (#PCDATA)>
+<!ATTLIST dob
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT country_code (#PCDATA)>
+<!ATTLIST country_code
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT HundredMeters (performance)>
+<!ATTLIST HundredMeters
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT LongJump (performance)>
+<!ATTLIST LongJump
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT ShotPut (performance)>
+<!ATTLIST ShotPut
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT HighJump (performance)>
+<!ATTLIST HighJump
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT FourHundredMeters (performance)>
+<!ATTLIST FourHundredMeters
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT OneHundredTenHurdlese (performance)>
+<!ATTLIST OneHundredTenHurdlese
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT DiscusThrow (performance)>
+<!ATTLIST DiscusThrow
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT PoleVault (performance)>
+<!ATTLIST PoleVault
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT JavelinThrow (performance)>
+<!ATTLIST JavelinThrow
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT ThousandFiveHundredMeters (performance)>
+<!ATTLIST ThousandFiveHundredMeters
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT performance (#PCDATA)>
+<!ATTLIST performance
+    xmlns CDATA #FIXED ''>

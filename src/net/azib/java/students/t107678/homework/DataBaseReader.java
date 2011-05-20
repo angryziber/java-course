@@ -24,7 +24,7 @@ public class DataBaseReader implements Reader {
      */
     public DataBaseReader(DataBaseConnector connector, String competitionId) {
         this.connector = connector;
-        this.set = connector.executeSelect(statement + competitionId);      //TODO implement posibility of connection with competition_name
+        this.set = connector.executeSelect(statement + competitionId);      //TODO implement possibility of connection with competition_name
     }
 
 
@@ -39,9 +39,9 @@ public class DataBaseReader implements Reader {
 
             Collection<Event> participantResults = new ArrayList(10);
 
-//            if (!ValidationOfUserInputData.validateName(set.getString(1))) {
-//                throw new RecordFormatException("Invalid name of participant");
-//            }
+            if (!ValidationOfUserInputData.validateName(set.getString(1))) {
+                throw new RecordFormatException("Invalid name of participant");
+            }
             String name = set.getString(1);
 
 //            if(!ValidationOfUserInputData.validateBirthDate(set.getString(2))){

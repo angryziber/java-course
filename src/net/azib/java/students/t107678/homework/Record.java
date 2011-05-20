@@ -9,7 +9,7 @@ public class Record {
     final private Participant participant;
     final private Collection<Event> events;
 
-    /** Method allows us to retrive wantad personal data about Participant
+    /** Method allows us to extract wanted personal data about Participant
      *
      * @return All personal Participant data
      */
@@ -37,7 +37,6 @@ public class Record {
 
         assert participant!=null : "Participant must not be null";
         assert events!=null : "Events must not be null";
-        //TODO events size not more than 10,;
 
     }
 

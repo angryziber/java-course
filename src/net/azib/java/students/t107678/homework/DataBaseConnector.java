@@ -31,7 +31,7 @@ public class DataBaseConnector {
         }
     }
 
-    protected int executeUpdateInsert(String query) {
+    protected int executeUpdateInsert(String query) {               // will not use this probably
         try {
             Class.forName(dbClass);
             Connection con = DriverManager.getConnection(dbUrl, USER, PASSWORD);

@@ -1,6 +1,10 @@
 package net.azib.java.students.t107678.homework;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.Closeable;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /** Provides initial logic for all writers in project
@@ -19,5 +23,5 @@ public interface Writer {
      *
      * @param resultsComputation instance of ResultComputation with competition final results
      */
-    public void writeOutput(ResultsComputation resultsComputation);
+    public void writeOutput(ResultsComputation resultsComputation) throws ParserConfigurationException, TransformerException, IOException;
 }
