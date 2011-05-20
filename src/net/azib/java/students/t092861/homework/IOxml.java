@@ -83,7 +83,7 @@ public class IOxml extends AbstractIO {
 	}
 
 	@Override
-	File output(ArrayList<Athlete> athletes){
+	File output(ArrayList<Athlete> athletes) {
 		File file = null;
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory
