@@ -1,6 +1,5 @@
 package net.azib.java.students.t103784.homework;
 
-import com.sun.mail.imap.Rights;
 import net.azib.java.lessons.db.PersonException;
 
 import java.io.BufferedReader;
@@ -136,8 +135,6 @@ public class Input {
 		while (inputtingAthletes) {
 			Athlete athlete = new Athlete();
 
-
-
 			while (athlete.getName() == null) {
 	            System.out.print("Full name (Name Surname): ");
 	            athlete.setName(checkName(reader.readLine()));
@@ -159,111 +156,100 @@ public class Input {
 	            athlete.setCountry(checkCountry(reader.readLine()));
 	        }
 
-			while (athlete.getHundredMeters() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("100m (seconds.milliseconds): ");
 	            try {
 		            athlete.setPerformance(i, checkIsNumber(reader.readLine()));
-					athlete.setHundredMeters(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 			}
+			i++;
 
-			while (athlete.getLongJump() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("Long jump (meters.centimeters): ");
 	            try {
 		            athlete.setPerformance(i, checkIsNumber(reader.readLine()));
-					athlete.setLongJump(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 	        }
+			i++;
 
-			while (athlete.getShotPut() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("Shot put (meters.centimeters): ");
 	            try {
 		            athlete.setPerformance(i, checkIsNumber(reader.readLine()));
-					athlete.setShotPut(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 	        }
+			i++;
 
-			while (athlete.getHighJump() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("High jump (meters.centimeters): ");
 	            try {
 		            athlete.setPerformance(i, checkIsNumber(reader.readLine()));
-					athlete.setHighJump(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 	        }
+			i++;
 
-			while (athlete.getFourHundredMeters() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("400m (minutes:seconds.milliseconds): ");
 	            try {
 		            athlete.setPerformance(i, checkMinSec(reader.readLine()));
-					athlete.setFourHundredMeters(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 	        }
+			i++;
 
-			while (athlete.getHurdles() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("110m hurdles (seconds.milliseconds): ");
 	            try {
 		            athlete.setPerformance(i, checkIsNumber(reader.readLine()));
-					athlete.setHurdles(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 	        }
+			i++;
 
-			while (athlete.getDiscus() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("Discus throw (meters.centimeters): ");
 	            try {
 		            athlete.setPerformance(i, checkIsNumber(reader.readLine()));
-					athlete.setDiscus(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 	        }
+			i++;
 
-			while (athlete.getPoleVault() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("Pole vault (meters.centimeters): ");
 	            try {
 		            athlete.setPerformance(i, checkIsNumber(reader.readLine()));
-					athlete.setPoleVault(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 	        }
+			i++;
 
-			while (athlete.getJavelin() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("Javelin throw (meters.centimeters): ");
 	            try {
 		            athlete.setPerformance(i, checkIsNumber(reader.readLine()));
-					athlete.setJavelin(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
 	        }
+			i++;
 
-			while (athlete.getRace() == null) {
+			while (athlete.getPerformance(i) == 0.0) {
 	            System.out.print("1500m race (minutes:seconds.milliseconds): ");
 	            try {
 		            athlete.setPerformance(i, checkMinSec(reader.readLine()));
-					athlete.setRace(athlete.getPerformance(i));
-		            i++;
 				} catch (NumberFormatException e) {
 					System.out.println("Error in input. Try again.");
 				}
@@ -328,7 +314,7 @@ public class Input {
 	private Double checkIsNumber(String stringInput) {
 		if (stringInput == null || Double.valueOf(stringInput) == null) {
 			System.out.println("Error in input. Try again.");
-			return null;
+			return 0.0;
 		}
 		else {
 			return Double.valueOf(stringInput);
@@ -337,7 +323,7 @@ public class Input {
 
     private Double checkMinSec(String time) {
 	    String[] timeSplit;
-	    if (time.matches("^([0-9][1-9]|[0-9])[:]([0-5][0-9]|[0-9])[. ]([0-9][0-9][0-9]|[0-9][0-9]|[0-9])")){
+	    if (time.matches("^([0-9][0-9]|[0-9])[:]([0-5][0-9]|[0-9])[. ]([0-9][0-9][0-9]|[0-9][0-9]|[0-9])")){
 		    timeSplit = time.split(":");
        		return (double)Integer.parseInt(timeSplit[0])*60 + Double.parseDouble(timeSplit[1]);
 	    }

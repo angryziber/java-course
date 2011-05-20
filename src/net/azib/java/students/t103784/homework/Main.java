@@ -30,7 +30,7 @@ public class Main {
 				}
 			}
 			else {
-				if (inputParameter == null) {
+				if (inputParameter == null && outputParameter != null) {
 					inputParameter = s;
 				}
 				else {
@@ -39,11 +39,9 @@ public class Main {
 			}
 		}
 
-		Input input;		
 		List<Athlete> contestants = null;
-
 		BufferedReader reader;
-		input = new Input();
+		Input input = new Input();
 		Output output = new Output();
 		
 		if (inputMethod != null && inputMethod.equals("-console")) {
