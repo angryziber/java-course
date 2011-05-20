@@ -2,17 +2,19 @@ package net.azib.java.students.t092877.homework;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WriteToCsvFile implements Strategy {
+class CsvFileOutputStrategy implements Strategy {
 
 	private File pathname;
 
-	public WriteToCsvFile(File pathname) {
+	public CsvFileOutputStrategy(File pathname) {
 		this.pathname = pathname;
 	}
 
@@ -21,17 +23,16 @@ public class WriteToCsvFile implements Strategy {
 	public void execute(Competition competition) {
 
 		List<Athlete> athletes = competition.getAthletesList();
+
 		if (athletes == null) {
 
-			System.out.println("\n>>> ACTION: output to csv-file terminated...");
-			System.out.println("The input file provided has invalid format or empty.");
-			System.out.println("As a result, the output to specified CSV-file was terminated");
-			System.out.println("Before continuing operation, please, ensure the validity of input data.");
-			return;
+			System.err.println("\n>>> ERROR: output to file terminated...");
+			System.err.println("The input file provided has invalid format or empty.");
+			System.exit(1);
 		}
 
 		Utils.sortAthletes(athletes);
-		List<String> athleteDataAsStrOutput = new ArrayList<String>();
+		List<String> athleteDataAsStr = new ArrayList<String>();
 
 		for (Athlete athlete : athletes) {
 
@@ -40,7 +41,7 @@ public class WriteToCsvFile implements Strategy {
 			line.append(athlete.getPlace() + ",");
 			line.append(athlete.getTotalScore() + ",");
 			line.append("\"" + athlete.getName() + "\",");
-			line.append(athlete.getDateOfBirth() + ",");
+			line.append(Utils.convertToDotSeparetedDayMonthYearFormat(athlete.getDateOfBirth()) + ",");
 			line.append(athlete.getCountryCode());
 
 			List<Result> results = athlete.getResults();
@@ -54,21 +55,32 @@ public class WriteToCsvFile implements Strategy {
 				i++;
 			}
 
-			athleteDataAsStrOutput.add(line.toString());
+			athleteDataAsStr.add(line.toString());
 		}
 
 		try {
+
 			BufferedWriter fout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pathname), "utf-8"));
 
-			for (String line : athleteDataAsStrOutput) {
+			for (String line : athleteDataAsStr) {
 				fout.write(line);
 				fout.newLine();
 				fout.flush();
 			}
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
+			System.err.println("\n>>> ERROR: the directory you are trying to save the file to doesn't exist");
+			System.exit(1);
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("\n>>> ERROR: unsupported encoding");
 			e.printStackTrace();
+			System.exit(1);
+		} catch (IOException e) {
+			System.err.println("\n ERROR: writing the file");
+			e.printStackTrace();
+			System.exit(1);
 		}
 
-		System.out.printf("\nResults for decahtlon competition %s were saved to %s", competition, pathname.getAbsolutePath());
+		System.out.printf("\nThe file with results for decathlon competition %s was saved to %s",
+				              competition, pathname.getAbsolutePath());
 	}
 }

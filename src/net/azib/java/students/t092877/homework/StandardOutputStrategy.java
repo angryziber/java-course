@@ -2,12 +2,20 @@ package net.azib.java.students.t092877.homework;
 
 import java.util.List;
 
-public class WriteToStandardOutput implements Strategy {
+class StandardOutputStrategy implements Strategy {
 
 	@Override
 	public void execute(Competition competition) {
 
 		List<Athlete> athletes = competition.getAthletesList();
+
+		if (athletes == null) {
+
+			System.err.println("\n>>> ERROR: output to console terminated...");
+			System.err.println("The input file provided has invalid format or empty.");
+			System.exit(1);
+		}
+
 		Utils.sortAthletes(athletes);
 
 		System.out.println("\nResults for decathlon competition " + competition);
@@ -43,34 +51,32 @@ public class WriteToStandardOutput implements Strategy {
 	private void printTableRow(Athlete athlete) {
 
 		List<Result> results = athlete.getResults();
-		String[] orignalUnits = new String[10];
+		String[] originalUnits = new String[10];
 		Result result;
 
 		for (int i = 0; i < results.size(); i++) {
 			result = results.get(i);
-			orignalUnits[i] = Utils.convertToOriginalUnits(result.getValue(), result.getEvent().getType());
+			originalUnits[i] = Utils.convertToOriginalUnits(result.getValue(), result.getEvent().getType());
 		}
 
 		System.out.printf(
-						"%6s|%6d|%6s|%-34s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
+						"%6s|%6d|%-6s|%-34s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
 						athlete.getPlace(),
 						athlete.getTotalScore(),
 						athlete.getCountryCode(),
 						athlete.getName(),
-						orignalUnits[0],
-						orignalUnits[1],
-						orignalUnits[2],
-						orignalUnits[3],
-						orignalUnits[4],
-						orignalUnits[5],
-						orignalUnits[6],
-						orignalUnits[7],
-						orignalUnits[8],
-						orignalUnits[9]);
+						originalUnits[0],
+						originalUnits[1],
+						originalUnits[2],
+						originalUnits[3],
+						originalUnits[4],
+						originalUnits[5],
+						originalUnits[6],
+						originalUnits[7],
+						originalUnits[8],
+						originalUnits[9]);
 
 		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
         				   "---------+---------+------------+------------+----------+-------------+---------+");
 	}
 }
-
-

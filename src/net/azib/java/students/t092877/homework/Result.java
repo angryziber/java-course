@@ -1,6 +1,6 @@
 package net.azib.java.students.t092877.homework;
 
-public class Result {
+class Result {
 
 	private Event event;
 	private double value;

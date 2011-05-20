@@ -1,87 +1,140 @@
 package net.azib.java.students.t092877.homework;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class DecathlonCalc {
+class DecathlonCalc {
+
+	public static final String VALIDATION_PATTERN = "(^(-console\\s+)((-console)\\s*$|(-csv\\s+[\\w/\\\\:]+.csv)\\s*$|(-xml\\s+[\\w/\\\\:]+.xml)\\s*$|(-html\\s+[\\w/\\\\:]+.(html|htm))\\s*$))|" +
+													"(^(-csv\\s+)([\\w/\\\\:]+.csv\\s+)((-console)\\s*$|(-csv\\s+[\\w/\\\\:]+.csv)\\s*$|(-xml\\s+[\\w/\\\\:]+.xml)\\s*$|(-html\\s+[\\w/\\\\:]+.(html|htm))\\s*$))|" +
+													"(^(-db\\s+)(([1-9][0-9]+|\\w+)\\s+)((-console)\\s*$|(-csv\\s+[\\w/\\\\:]+.csv)\\s*$|(-xml\\s+[\\w/\\\\:]+.xml)\\s*$|(-html\\s+[\\w/\\\\:]+.(html|htm))\\s*$))";
+
+	private static final Pattern READ_FROM_CONSOLE = Pattern.compile("^(-console\\s+)");
+	private static final Pattern READ_FROM_CSV_FILE = Pattern.compile("^(-csv\\s+)([\\w/\\\\:]+.csv\\s+)");
+	private static final Pattern READ_FROM_DATABASE = Pattern.compile("^(-db\\s+)(([1-9][0-9]+|\\w+)\\s+)");
+	private static final Pattern WRITE_TO_CONSOLE = Pattern.compile("(-console)\\s*$");
+	private static final Pattern WRITE_TO_CSV_FILE = Pattern.compile("(-csv\\s+[\\w/\\\\:]+.csv)\\s*$");
+	private static final Pattern WRITE_TO_XML_FILE = Pattern.compile("(-xml\\s+[\\w/\\\\:]+.xml)\\s*$");
+	private static final Pattern WRITE_TO_HTML_FILE = Pattern.compile("(-html\\s+[\\w/\\\\:]+.(html|htm))\\s*$");
+
+
 
 	public static void main(String[] args) {
 
-		boolean htmlTransformSelected = false;
-		Competition competition = null;
+		Competition competition;
 
-		if (args.length == 0)
-			System.err.println("\n>>> ERROR: the command-line parameter list is empty");
-		else {
+		if (validateCommandLineInput(getCommandLineInput(args))) {
+
 			competition = new Competition();
-		}
+			read(competition, args);
+			write(competition, args);
 
-		Mode mode = null;
+		} else if (args.length == 0) {
 
-		try {
-			for (int i = 0; i < args.length; i++) {
+			System.err.println("\n>>> ERROR: the commandline parameter list is emply.");
 
-				if (args[i].equals(Strategy.CONSOLE)) {
+		} else {
 
-					if (i == 0) {
-
-						mode = new Mode(new ReadFromStandardInput());
-						mode.executeStrategy(competition);
-
-					} else {
-
-						mode = new Mode(new WriteToStandardOutput());
-						mode.executeStrategy(competition);
-					}
-
-				} else if (args[i].equals(Strategy.CSV_FILE)) {
-
-					if (i == 0) {
-
-						String srcPath = args[++i];
-						mode = new Mode(new ReadFromCsvFile(new File(srcPath)));
-						mode.executeStrategy(competition);
-
-					} else {
-
-						String dstPath = args[++i];
-						mode = new Mode(new WriteToCsvFile(new File(dstPath)));
-						mode.executeStrategy(competition);
-					}
-
-				} else if (args[i].equals(Strategy.INPUT_FROM_DATABASE)) {
-
-					if (i == 0) {
-
-						String parameter = args[++i];
-						mode = new Mode(new ReadFromDatabase(parameter));
-						mode.executeStrategy(competition);
-					}
-
-				} else if (args[i].equals(Strategy.OUTPUT_TO_XML)) {
-
-					String dstPath = args[++i];
-					htmlTransformSelected = false;
-					mode = new Mode(new WriteToXmlFile(new File(dstPath), htmlTransformSelected));
-					mode.executeStrategy(competition);
-
-				} else if (args[i].equals(Strategy.OUTPUT_TO_HTML)) {
-
-					String dstPath = args[++i];
-					htmlTransformSelected = true;
-					mode = new Mode(new WriteToXmlFile(new File(dstPath), htmlTransformSelected));
-					mode.executeStrategy(competition);
-
-				} else {
-
-					System.err.println("\n>>> ERROR: invalid command-line parameter: " + args[i]);
-					break;
-				}
-			}
-
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.err.println("\n>>> ERROR: parameter value for the specified operation mode is missing");
+			System.err.println("\n>>> ERROR: the commandline input is incorrectly specified.");
+			System.err.println(">>> Provided commandline parameters: " + getCommandLineInput(args));
 		}
 
 		System.out.println("\nThank you, come again!");
+	}
+
+
+	private static void read(Competition competition, String[] args) {
+
+		String mode = "read";
+		String commandLineInput = getCommandLineInput(args);
+
+		if (READ_FROM_CONSOLE.matcher(commandLineInput).find()) {
+
+			setContext(new StandardInputStrategy(), competition);
+
+		} else if (READ_FROM_CSV_FILE.matcher(commandLineInput).find()) {
+
+			setContext(new CsvFileInputStrategy(new File(getParameterValue(args, mode))), competition);
+
+		} else if (READ_FROM_DATABASE.matcher(commandLineInput).find()) {
+
+			setContext(new DatabaseInputStrategy(getParameterValue(args, mode)), competition);
+		}
+	}
+
+
+	private static void write(Competition competition, String[] args) {
+
+		String mode = "write";
+		boolean htmlTransform = false;
+		String commandLineInput = getCommandLineInput(args);
+
+		if (WRITE_TO_CONSOLE.matcher(commandLineInput).find()) {
+
+			setContext(new StandardOutputStrategy(), competition);
+
+		} else if (WRITE_TO_CSV_FILE.matcher(commandLineInput).find()) {
+
+			setContext(new CsvFileOutputStrategy(new File(getParameterValue(args, mode))), competition);
+
+		} else if (WRITE_TO_XML_FILE.matcher(commandLineInput).find()) {
+
+			htmlTransform = false;
+			setContext(new XmlFileOutputStrategy(new File(getParameterValue(args, mode)), htmlTransform), competition);
+
+		} else if (WRITE_TO_HTML_FILE.matcher(commandLineInput).find()) {
+
+			htmlTransform = true;
+			setContext(new XmlFileOutputStrategy(new File(getParameterValue(args, mode)), htmlTransform), competition);
+		}
+	}
+
+
+	private static void setContext(Strategy strategy, Competition competition) {
+
+		Context context;
+
+		context = new Context(strategy);
+		context.executeStrategy(competition);
+	}
+
+
+	private static String getParameterValue(String[] args, String mode) {
+
+		String parameter = null;
+
+		if (mode.equals("read")) {
+			parameter = args[1];
+
+		} else if (mode.equals("write")) {
+
+			if (args.length == 3)
+				parameter = args[2];
+			else if (args.length == 4)
+				parameter = args[3];
+		}
+		return parameter;
+	}
+
+
+	private static String getCommandLineInput(String[] args) {
+
+		StringBuilder command = new StringBuilder();
+		String sep = " ";
+
+		for (String str : args)
+			command.append(str).append(sep);
+
+		return command.toString();
+	}
+
+
+	private static boolean validateCommandLineInput(String str) {
+
+		Pattern p = Pattern.compile(VALIDATION_PATTERN);
+		Matcher m = p.matcher(str);
+		return m.matches();
+
 	}
 }

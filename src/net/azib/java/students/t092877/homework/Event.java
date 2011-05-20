@@ -1,6 +1,6 @@
 package net.azib.java.students.t092877.homework;
 
-public enum Event {
+enum Event {
 	
 	SPRINT_ON_100_METERS (25.4347, 18, 1.81) {
 
@@ -91,7 +91,7 @@ public enum Event {
 		}
 		
 		public String getUnits() {
-			return "seconds";
+			return "minutes:seconds";
 		}
 
 		public int getScore(double rawResult) {
@@ -187,7 +187,7 @@ public enum Event {
 		}
 
 		public String getUnits() {
-			return "seconds";
+			return "minutes:seconds";
 		}
 		
 		public int getScore(double rawResult) {

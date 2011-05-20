@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
@@ -16,6 +17,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 
+import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -25,54 +27,15 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 
 
-public class WriteToXmlFile implements Strategy {
+class XmlFileOutputStrategy implements Strategy {
 
-	private String xmlFilePath;
-	private String htmlFilePath;
-	private boolean htmlTransformSelected;
+	private File filepath;
+	private boolean htmlTransform;
 
-	public WriteToXmlFile(File pathname, boolean htmlTransform) {
+	public XmlFileOutputStrategy(File filepath, boolean htmlTransform) {
 
-		if (htmlTransform) {
-
-			this.setHtmlFilePath(pathname.getAbsolutePath());
-			this.setXmlFilePath(pathname.getAbsolutePath().replaceAll("(.html|.htm)", ".xml"));
-
-		} else {
-
-			this.setXmlFilePath(pathname.getAbsolutePath());
-		}
-
-		this.setHtmlTransformSelected(htmlTransform);
-	}
-
-
-	public void setHtmlFilePath(String htmlFilePath) {
-		this.htmlFilePath = htmlFilePath;
-	}
-
-
-	public String getHtmlFilePath() {
-		return htmlFilePath;
-	}
-
-
-	public void setXmlFilePath(String xmlFilePath) {
-		this.xmlFilePath = xmlFilePath;
-	}
-
-
-	public String getXmlFilePath() {
-		return xmlFilePath;
-	}
-
-
-	public void setHtmlTransformSelected(boolean htmlTransformSelected) {
-		this.htmlTransformSelected = htmlTransformSelected;
-	}
-
-	public boolean isHtmlTransformSelected() {
-		return htmlTransformSelected;
+		this.filepath = filepath;
+		this.htmlTransform = htmlTransform;
 	}
 
 
@@ -81,6 +44,14 @@ public class WriteToXmlFile implements Strategy {
 
 		Document doc = null;
 		List<Athlete> athletes = competition.getAthletesList();
+
+		if (athletes == null) {
+
+			System.err.println("\n>>> ERROR: output to file terminated...");
+			System.err.println("The input file provided has invalid format or empty.");
+			System.exit(1);
+		}
+
 		Utils.sortAthletes(athletes);
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -95,29 +66,35 @@ public class WriteToXmlFile implements Strategy {
 			System.exit(1);
 		}
 
-		if (!isHtmlTransformSelected()) {
+		File xmlFilepath;
 
-			constructXmlTree(competition, doc);
-			serializeXmlTreeToFile(new File(getXmlFilePath()), doc);
-			System.out.printf("\nResults for decathlon competition %s were saved to %s",
-					competition, getXmlFilePath());
-		} else  {
+		if (htmlTransform) {
 
-			constructXmlTree(competition, doc);
-			serializeXmlTreeToFile(new File(getXmlFilePath()), doc);
-			transformToHtmlFile(new File(getXmlFilePath()), new File(getHtmlFilePath()));
-			System.out.printf("\nResults for decathlon competition %s were saved to %s",
-					competition, getHtmlFilePath());
+			xmlFilepath = new File(filepath.getAbsolutePath().replaceAll("\\.\\w{3,4}", ".xml"));
+		} else
+			xmlFilepath = filepath;
+
+		buildDocumentObjectModel(competition, doc);
+		serializeDocumentObjectModel(xmlFilepath, doc);
+		copyAdditionalFiles(getPathname(filepath), htmlTransform);
+
+		if (htmlTransform){
+
+			transformToHtmlFormat(xmlFilepath);
+			xmlFilepath.delete();
+			//System.out.println(xmlFilepath.delete());
+
 		}
+
+		System.out.printf("\nThe file with results for decathlon competition %s was saved to %s\n",
+					competition, filepath);
 	}
 
 	// DOM Magic
-	private void constructXmlTree(Competition comp, Document doc) {
-
-		//System.out.println("Constructing XML tree...");
+	private void buildDocumentObjectModel(Competition comp, Document doc) {
 
 		Element rootEl = doc.createElement("competition");
-		rootEl.setAttribute("xsi:noNamespaceSchemaLocation", "decathlon.xsd");
+		rootEl.setAttribute("xsi:noNamespaceSchemaLocation", "schema.xsd");
 		rootEl.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		doc.appendChild(rootEl);
 
@@ -153,6 +130,7 @@ public class WriteToXmlFile implements Strategy {
 			athleteEl.appendChild(anameEl);
 
 			Element bornEl = doc.createElement("date_of_birth");
+
 			Text bornText = doc.createTextNode(athlete.getDateOfBirth());
 			bornEl.appendChild(bornText);
 			athleteEl.appendChild(bornEl);
@@ -195,7 +173,7 @@ public class WriteToXmlFile implements Strategy {
 				eventEl.appendChild(eventResultEl);
 
 				Element eventResultValueEl = doc.createElement("value");
-				Text eventResultValueText;
+				Text eventResultValueText = null;
 
 				if (!result.getEvent().getName().equals("1500m") && !result.getEvent().getName().equals("400m")) {
 					eventResultValueText = doc.createTextNode(Utils.convertToOriginalUnits(result.getValue(), result.getEvent().getType()));
@@ -207,7 +185,14 @@ public class WriteToXmlFile implements Strategy {
 				eventResultEl.appendChild(eventResultValueEl);
 
 				Element eventResultUnitsEl = doc.createElement("units");
-				Text eventResultUnitsText = doc.createTextNode(result.getEvent().getUnits());
+				Text eventResultUnitsText = null;
+
+				if (!result.getEvent().getName().equals("1500m") && !result.getEvent().getName().equals("400m")) {
+					eventResultUnitsText = doc.createTextNode(result.getEvent().getUnits());
+				} else {
+					eventResultUnitsText = doc.createTextNode("seconds");
+				}
+
 				eventResultUnitsEl.appendChild(eventResultUnitsText);
 				eventResultEl.appendChild(eventResultUnitsEl);
 			}
@@ -215,7 +200,34 @@ public class WriteToXmlFile implements Strategy {
 	}
 
 
-	private void serializeXmlTreeToFile(File pathname, Document doc) {
+	private void copyAdditionalFiles(String pathname, Boolean htmlTransform) {
+
+		String filename;
+
+		if (htmlTransform)
+			filename = "stylesheet.css";
+		else
+			filename = "schema.xsd";
+
+		InputStream instream = XmlFileOutputStrategy.class.getResourceAsStream(filename);
+
+		try {
+			FileUtils.copyInputStreamToFile(instream, new File(pathname + filename));
+		} catch (IOException e) {
+			System.err.println("\n>>> ERROR: unable to copy file");
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+
+
+	private String getPathname(File filepath) {
+
+		return filepath.getAbsolutePath().replaceAll("\\w*\\.[\\w]{3,4}", "");
+	}
+
+
+	private void serializeDocumentObjectModel(File filename, Document doc) {
 
 		try {
 
@@ -223,38 +235,41 @@ public class WriteToXmlFile implements Strategy {
 			format.setIndenting(true);
 
 			XMLSerializer serializer;
-			serializer = new XMLSerializer(new FileOutputStream(pathname), format);
+			serializer = new XMLSerializer(new FileOutputStream(filename), format);
 			serializer.serialize(doc);
 
-		} catch(IOException ie) {
-			System.err.println("\n>>> ERROR: saving operation unsuccessful");
-		    ie.printStackTrace();
+		} catch(IOException e) {
+			System.err.println("\n>>> ERROR: serialization operation unsuccessful");
+		    e.printStackTrace();
+		    System.exit(1);
 		}
 	}
 
 
-	private void transformToHtmlFile(File xmlFilePath, File htmlFilePath) {
-
-		System.out.println("\nTransforming XML-file to HTML-format...");
+	private void transformToHtmlFormat(File xml) {
 
 		try {
 
 			    TransformerFactory tf = TransformerFactory.newInstance();
-			    Transformer transformer = tf.newTransformer(new javax.xml.transform.stream.StreamSource("decathlon.xsl"));
+			    Transformer transformer = tf.newTransformer(new javax.xml.transform.stream.StreamSource
+			    		             (XmlFileOutputStrategy.class.getResourceAsStream("stylesheet.xsl")));
 
-			    transformer.transform(new javax.xml.transform.stream.StreamSource(xmlFilePath),
+			    transformer.transform(new javax.xml.transform.stream.StreamSource(xml),
 			    					  new javax.xml.transform.stream.StreamResult(new OutputStreamWriter
-			    							                                     (new FileOutputStream(htmlFilePath), "utf-8")));
+			    							                                     (new FileOutputStream(filepath), "utf-8")));
 
 		} catch (TransformerException e) {
 			System.err.println("\n>>> ERROR: transformer configuration failed");
 			e.printStackTrace( );
+			System.exit(1);
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("\n>>> ERROR: unsupported encoding");
 			e.printStackTrace();
+			System.exit(1);
 		} catch (FileNotFoundException e) {
 			System.err.println("\n>>> ERROR: file not found");
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 }

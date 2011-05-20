@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Competition {
+class Competition {
 
 	private String name;
 	private String location;

@@ -1,10 +1,10 @@
 package net.azib.java.students.t092877.homework;
 
-class Mode {
+class Context {
 
 	private Strategy strategy;
 
-	public Mode(Strategy strategy) {
+	public Context(Strategy strategy) {
 		this.strategy = strategy;
 	}
 

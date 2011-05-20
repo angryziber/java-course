@@ -4,15 +4,15 @@
 	<xsl:template match="/">
 		<html>
 			<head>
-				<title>The results of decathlon competiton</title>
+				<title>The results of decathlon competition</title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-				<link rel="stylesheet" type="text/css" href="styles.css" />
+				<link rel="stylesheet" type="text/css" href="stylesheet.css" />
 			</head>
 			<body>
 				<h1>
-					<b>Competition</b>:
-					<xsl:value-of select="/competition/name"/> /
-					<xsl:value-of select="/competition/location"/> /
+					<b>Competition</b>: 
+					<xsl:value-of select="/competition/name"/> / 
+					<xsl:value-of select="/competition/location"/> / 
 					<xsl:value-of select="/competition/date"/>
 				</h1>
 				<table id="athletes">

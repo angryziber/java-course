@@ -2,7 +2,7 @@ package net.azib.java.students.t092877.homework;
 
 import java.util.*;
 
-public class Athlete implements Comparable<Athlete> {
+class Athlete implements Comparable<Athlete> {
 
 	private String name;
 	private String dateOfBirth;
