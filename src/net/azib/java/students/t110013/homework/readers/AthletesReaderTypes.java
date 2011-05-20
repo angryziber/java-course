@@ -1,6 +1,7 @@
 package net.azib.java.students.t110013.homework.readers;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public enum AthletesReaderTypes {
@@ -31,12 +32,25 @@ public enum AthletesReaderTypes {
         this.parametrizable = parametrizable;
     }
 
+	/**
+	 * //TODO method description
+	 * @param parameter A
+	 * @return A
+	 */
     public abstract AthletesReader newInstance(String parameter);
 
+	/**
+	 * //TODO method description
+	 * @return A
+	 */
     public String getName() {
         return name;
     }
 
+	/**
+	 * //TODO method description
+	 * @return A
+	 */
     public boolean isParametrizable() {
         return parametrizable;
     }

@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public class HTMLAthletesWriter extends XMLAthletesWriter implements AthletesWriter {
@@ -32,6 +33,10 @@ public class HTMLAthletesWriter extends XMLAthletesWriter implements AthletesWri
         this.filename = filename;
     }
 
+	/**
+	 * //TODO method description
+	 * @param athletes A
+	 */
     @Override
     public void writeAthletes(List<Athlete> athletes) {
         writeHTML(filename, athletes);

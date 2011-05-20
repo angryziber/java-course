@@ -10,11 +10,20 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
+ * The main class of the application. Provides the main logic.
  * @author Vadim
  */
 public class Application {
 	private static final Logger LOG = Logger.getLogger(Application.class.getName());
 
+	/**
+	 * The primary method of the application, defines the flow of execution. In case of success scenario the execution
+	 * starts and ends in this method. Retrieves Athletes' data from the input, calculates their total scores, sorts
+	 * them, calculates places and passes all the data to the output.
+	 * Usage: program -input-method [input-parameters] -output-method [output-parameters].
+	 * Example: -console -xml results.xml
+	 * @param args input and output method and their parameters
+	 */
 	public void run(String[] args) {
 		validateNumberOfArguments(args);
 

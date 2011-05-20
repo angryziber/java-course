@@ -1,6 +1,7 @@
 package net.azib.java.students.t110013.homework.model;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public enum Decathlon {
@@ -81,14 +82,27 @@ public enum Decathlon {
         this.c = c;
     }
 
+	/**
+	 * //TODO method description
+	 * @return  A
+	 */
     public int getIndex() {
         return index;
     }
 
+	/**
+	 * //TODO method description
+	 * @return  A
+	 */
     public String getName() {
         return name;
     }
 
+	/**
+	 * //TODO method description
+	 * @param result  A
+	 * @return  A
+	 */
     public abstract int calculateEventScore(double result);
 
     int calculateTrackEventScore(double result) {

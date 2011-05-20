@@ -6,8 +6,6 @@ package net.azib.java.students.t110013.homework.model;
 
 import org.junit.Test;
 
-import java.util.Date;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;

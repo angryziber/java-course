@@ -5,6 +5,8 @@ import net.azib.java.students.t110013.homework.model.Athlete;
 import java.util.List;
 
 /**
+ * //TODO class description
+ * An interface for athlete
  * @author Vadim
  */
 public interface AthletesWriter {

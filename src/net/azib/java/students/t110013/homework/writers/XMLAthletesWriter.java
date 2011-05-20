@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public class XMLAthletesWriter implements AthletesWriter {
@@ -36,7 +37,10 @@ public class XMLAthletesWriter implements AthletesWriter {
         this.filename = filename;
     }
 
-	@Override
+	/**
+	 * //TODO method description
+	 * @param athletes A
+	 */
     public void writeAthletes(List<Athlete> athletes) {
         writeXML(filename, athletes);
     }

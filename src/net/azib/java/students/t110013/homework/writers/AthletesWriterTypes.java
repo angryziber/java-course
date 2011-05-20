@@ -1,6 +1,7 @@
 package net.azib.java.students.t110013.homework.writers;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public enum AthletesWriterTypes {
@@ -37,12 +38,25 @@ public enum AthletesWriterTypes {
         this.parametrizable = parametrizable;
     }
 
+	/**
+	 * //TODO method description
+	 * @param parameter A
+	 * @return A
+	 */
     public abstract AthletesWriter newInstance(String parameter);
 
+	/**
+	 * //TODO method description
+	 * @return A
+	 */
     public String getName() {
         return name;
     }
 
+	/**
+	 * //TODO method description
+	 * @return A
+	 */
     public boolean isParametrizable() {
         return parametrizable;
     }

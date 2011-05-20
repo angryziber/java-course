@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public class CSVAthletesWriter implements AthletesWriter {
@@ -23,6 +24,10 @@ public class CSVAthletesWriter implements AthletesWriter {
         this.filename = filename;
     }
 
+	/**
+	 * //TODO method description
+	 * @param athletes  A
+	 */
     public void writeAthletes(List<Athlete> athletes) {
         writeCSV(filename, athletes);
     }
@@ -50,7 +55,7 @@ public class CSVAthletesWriter implements AthletesWriter {
         }
     }
 
-    public String createCSVLine(Athlete athlete, String delimiter) {
+    String createCSVLine(Athlete athlete, String delimiter) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("\"").append(athlete.getName()).append("\"").append(delimiter);

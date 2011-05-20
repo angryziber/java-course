@@ -13,6 +13,7 @@ import static net.azib.java.students.t110013.homework.model.AthleteUtils.*;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public class CSVAthletesReader implements AthletesReader {
@@ -27,6 +28,10 @@ public class CSVAthletesReader implements AthletesReader {
         this.filename = filename;
     }
 
+	/**
+	 * //TODO method description
+	 * @return A
+	 */
     public List<Athlete> getAthletes() {
         List<String[]> inputStringArrays = readCSV(filename);
 

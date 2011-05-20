@@ -13,6 +13,7 @@ import java.util.Scanner;
 import static net.azib.java.students.t110013.homework.model.AthleteUtils.*;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public class ConsoleAthletesReader implements AthletesReader {
@@ -22,6 +23,10 @@ public class ConsoleAthletesReader implements AthletesReader {
 	ConsoleAthletesReader() {
 	}
 
+	/**
+	 *
+	 * @return A
+	 */
 	public List<Athlete> getAthletes() {
         Scanner scanner = new Scanner(System.in, UTF8_CHARSET);
         List<Athlete> athletes = new ArrayList<Athlete>();

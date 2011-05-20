@@ -6,6 +6,7 @@ import net.azib.java.students.t110013.homework.model.Decathlon;
 import java.util.List;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public class ConsoleAthletesWriter implements AthletesWriter {
@@ -13,6 +14,10 @@ public class ConsoleAthletesWriter implements AthletesWriter {
 	ConsoleAthletesWriter() {
 	}
 
+	/**
+	 * //TODO method description
+	 * @param athletes A
+	 */
 	public void writeAthletes(List<Athlete> athletes) {
         StringBuilder sb = new StringBuilder();
 

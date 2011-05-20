@@ -8,12 +8,21 @@ import java.util.logging.Logger;
 import static java.lang.Double.parseDouble;
 
 /**
+ * An utility class with static methods. Used by different AthleteReader implementations to parse and validate raw
+ * Athletes' data from various sources.
  * @author Vadim
  */
 public class AthleteUtils {
     private static final int SECONDS_IN_MINUTE = 60;
     private static final Logger LOG = Logger.getLogger(AthleteUtils.class.getName());
 
+	/**
+	 * An utility method used to validate an unicode name of an Athlete. Contains a simple regular expression that
+	 * defines legal characters. The legal characters are: unicode letters, parenthesis, dash and dot.
+	 * @param string a unicode name
+	 * @return the parameter String in the unchanged form
+	 * @throws IllegalArgumentException if string does not match regular expression
+	 */
     public static String validateName(String string) {
         if (string.matches("([\\p{L}\\s\\.\\-\\(\\)]{2,}){3,}"))
             return string;
@@ -25,6 +34,14 @@ public class AthleteUtils {
         }
     }
 
+	/**
+	 * An utility method used to parse and validate a date of birth of an Athlete. Uses provided SimpleDateFormat to correctly
+	 * parse the date from different sources.
+	 * @param string a String representation of the date to be parsed
+	 * @param dateFormat a SimpleDateFormat instance that will be used to parse and validate the parameter String
+	 * @return a Date instance corresponding to the date in the parameter string
+	 * @throws IllegalArgumentException if string cannot be parsed to date
+	 */
     public static Date validateAndParseDate(String string, SimpleDateFormat dateFormat) {
         try {
             return dateFormat.parse(string);
@@ -36,6 +53,13 @@ public class AthleteUtils {
         }
     }
 
+	/**
+	 * An utility method used to validate a country of an Athlete. The country is validated against the ISO 2-letter code.
+	 * A simple regular expression is used.
+	 * @param string a country code
+	 * @return the parameter String in the unchanged form
+	 * @throws IllegalArgumentException if string does not match regular expression
+	 */
     public static String validateCountry(String string) {
         if (string.matches("[A-Z][A-Z]"))
             return string;
@@ -46,6 +70,13 @@ public class AthleteUtils {
         }
     }
 
+	/**
+	 * An utility method used to parse and validate a performance result of an Athlete. The performance result is
+	 * expected to be either a distance in meters or time in mm:ss.SSS or sss.SSS format.
+	 * @param string a performance result
+	 * @return a double value representing the performance result
+	 * @throws IllegalArgumentException if string cannot be parsed to double
+	 */
     public static double validateAndParsePerformanceResult(String string) {
         String[] resultValues = string.split("[\\.:]");
 

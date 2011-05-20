@@ -172,7 +172,7 @@ public class ApplicationTest {
 	private void prepareAthlete(Athlete athlete, double... results) {
 		int i = 0;
 		for (double result : results) {
-			when(athlete1.getPerformanceResult(i++)).thenReturn(result);
+			when(athlete.getPerformanceResult(i++)).thenReturn(result);
 		}
 	}
 }

@@ -12,6 +12,7 @@ import static net.azib.java.students.t110013.homework.model.AthleteUtils.validat
 import static net.azib.java.students.t110013.homework.model.Decathlon.*;
 
 /**
+ * //TODO class description
  * @author Vadim
  */
 public class DBAthletesReader implements AthletesReader {
@@ -30,6 +31,10 @@ public class DBAthletesReader implements AthletesReader {
         this.competitionID = competitionID;
     }
 
+	/**
+	 * //TODO method description
+	 * @return A
+	 */
     public List<Athlete> getAthletes() {
         List<Athlete> athletes = new ArrayList<Athlete>();
         Connection connection = null;
