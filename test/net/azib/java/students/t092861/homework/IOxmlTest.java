@@ -30,7 +30,6 @@ public class IOxmlTest {
 			"Siim Susi,01.01.1976,EE,12.61,5.00,9.22,1.50,59.39,16.43,21.60,2.60,35.81,5:25.72",
 			"José Mañana Peréz,3.04.1972,ES,13.75,4.84,10.12,1.50,1:08.44,19.18,30.85,2.80,33.88,6:22.75 ",
 			};
-	private NodeList nameNode;
 
 	@Before
 	public void createTestOutputData() {
@@ -73,7 +72,7 @@ public class IOxmlTest {
 					
 					NodeList nameElmntLst = fstElmnt.getElementsByTagName("name");
 					Element nameElmnt = (Element) nameElmntLst.item(0);
-					nameNode = nameElmnt.getChildNodes();
+					NodeList nameNode = nameElmnt.getChildNodes();
 					if(((Node) nameNode.item(0)).getNodeValue().toString().equals(name)){
 						return true;
 					}
