@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -61,17 +62,23 @@ public class InputDb {
 				ResultSet result = statement.executeQuery(sql);
 
 				while (result.next()) {
-					Athlete athlete = new Athlete(result.getString(1),result.getDate(2),result.getString(3),
+					try {
+						Athlete athlete = new Athlete(result.getString(1),result.getDate(2),result.getString(3),
 							result.getFloat(4),result.getFloat(5),result.getFloat(6),result.getFloat(7),result.getFloat(8),
 							result.getFloat(9),result.getFloat(10),result.getFloat(11),result.getFloat(12),result.getFloat(13));
-					athletes.add(athlete);
+						athletes.add(athlete);
+					} catch (ParseException e) {
+						LOG.error("Parsing database record",e);
+					}
 				}
 			} catch (SQLException e) {
 				LOG.error("Problem with database", e);
 			} finally {
 				try {
 					conn.close();
-				} catch (SQLException e) {}
+				} catch (SQLException e) {
+					LOG.error("Problem with database", e);
+				}
 			}
 		} catch (IOException e) {
 			LOG.error("Problem with properties", e);

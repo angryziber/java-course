@@ -2,7 +2,6 @@ package net.azib.java.students.t104607.homework;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,7 +66,9 @@ public class InputCsv {
 							split[5],split[6],split[7],split[8],split[9],split[10],split[11],split[12]);
 						athletes.add(athlete);
 					} catch (ParseException e) {
-						LOG.error("Parse CSV line",e);
+						LOG.error("Parsing CSV line",e);
+					} catch (NumberFormatException e) {
+						LOG.error("Parsing CSV line",e);
 					}
 				}
 			}

@@ -1,7 +1,6 @@
 package net.azib.java.students.t104607.homework;
 
 import org.apache.log4j.Logger;
-
 import java.io.*;
 import java.util.List;
 
@@ -12,18 +11,16 @@ import java.util.List;
  */
 public class OutputConsole {
 	Logger LOG = Logger.getLogger(this.getClass());
+	PrintWriter out = new PrintWriter(System.out);
 
 	/**
      * Show the competition results on console
      * <p>
-     * @param outputStream stream to show the competition results, ex. <i>System.out</i>
      * @param athletes list with athletes results
 	 */
-	public void save (OutputStream outputStream, List<Athlete> athletes) {
+	public void save (List<Athlete> athletes) {
 		final String LINE_FORMAT = "%5s %5s %7s %7s %7s %7s %8s %7s %7s %7s %7s %8s %11s %3s  %s\n";
 		LOG.info("Using console output");
-
-		PrintWriter out = new PrintWriter(outputStream);
 
 		out.format(LINE_FORMAT,"Place","Score",
 				"Sprint","Long","Shot","High","Sprint","Hurdles","Discus","Pole","Javelin","Race","Birthday","Country","Name");

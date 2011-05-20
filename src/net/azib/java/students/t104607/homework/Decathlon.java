@@ -2,7 +2,6 @@ package net.azib.java.students.t104607.homework;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-
 import java.io.*;
 import java.util.Collections;
 import java.util.List;
@@ -19,19 +18,37 @@ import java.util.List;
  * @author 104607 IASM
  */
 public class Decathlon {
+	static Logger LOG = Logger.getLogger(Decathlon.class.getName());
+	static List<Athlete> athletes = null;
 
-	static boolean commandLine (String[] args) {
-		int i = 0;
-		List<Athlete> athletes = null;
+	static void orderResults() {
 		Integer previousPoint = 0;
 		Integer previousPlace = 0;
 		Integer currentPlace = 1;
 		String placeText;
-		Logger LOG = Logger.getLogger(Decathlon.class.getName());
+
+		Collections.sort(athletes, Collections.reverseOrder());
+		for (Athlete athlete : athletes) {
+			if (athlete.getScore() == previousPoint)	{
+				placeText = previousPlace.toString() + "-" + currentPlace.toString();
+				for (int j = previousPlace-1; j<currentPlace; j++) {
+					athletes.get(j).setPosition(placeText);
+				}
+			} else {
+				previousPlace = currentPlace;
+				athlete.setPosition(currentPlace.toString());
+			}
+			currentPlace++;
+			previousPoint = athlete.getScore();
+		}
+	}
+
+	static boolean parseCommandLine (String[] args) {
+		int i = 0;
 
 		try {
 			if (args[i].compareToIgnoreCase("-console") == 0) {
-				athletes = new InputConsole().load(System.in, System.out);
+				athletes = new InputConsole().load();
 			} else if (args[i].compareToIgnoreCase("-csv") == 0) {
 				i++;
 				try {
@@ -51,23 +68,10 @@ public class Decathlon {
 
 			i++;
 
-			Collections.sort(athletes, Collections.reverseOrder());
-			for (Athlete athlete : athletes) {
-				if (athlete.getScore() == previousPoint)	{
-					placeText = previousPlace.toString() + "-" + currentPlace.toString();
-					for (int j = previousPlace-1; j<currentPlace; j++) {
-						athletes.get(j).setPosition(placeText);
-					}
-				} else {
-					previousPlace = currentPlace;
-					athlete.setPosition(currentPlace.toString());
-				}
-				currentPlace++;
-				previousPoint = athlete.getScore();
-			}
+			orderResults();
 
 			if (args[i].compareToIgnoreCase("-console") == 0) {
-				new OutputConsole().save(System.out, athletes);
+				new OutputConsole().save(athletes);
 			} else if (args[i].compareToIgnoreCase("-csv") == 0) {
 				i++;
 				try {
@@ -106,14 +110,13 @@ public class Decathlon {
 	/**
      * main method of decathlon computing program
 	 * <p>
-     * @param args comman line arguments
+     * @param args command line arguments
 	 */
 	public static void main(String[] args) {
-		Logger LOG = Logger.getLogger(Decathlon.class.getName());
 		PropertyConfigurator.configure(Decathlon.class.getResource("log4j.properties"));
 		LOG.info("Starting");
 
-		if (!commandLine(args)) {
+		if (!parseCommandLine(args)) {
 			System.out.println("\nUse program:\n" +
 					"\tDecathlon -<input-method> [input-parameters] -<output-method> [output-parameters]");
 		}

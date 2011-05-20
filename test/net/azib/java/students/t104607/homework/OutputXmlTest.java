@@ -29,9 +29,10 @@ public class OutputXmlTest {
 
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
 		athletes.add(new Athlete("I.Murumüts",dateFormat.parse("19.06.1980"),"EE",
 				9.58, 8.95, 23.12, 2.45, 43.18, 12.87, 74.08, 6.14, 98.48, 206.0));
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		new OutputXml().save(outputStream, athletes);
 		inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 	}
