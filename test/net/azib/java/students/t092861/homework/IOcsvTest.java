@@ -40,7 +40,7 @@ public class IOcsvTest {
 	public void testInputResultArraySize() throws IOException{
 		IOcsv csv = new IOcsv(file, new Controller());
 		ArrayList<Athlete> list = csv.input();
-		assertEquals("Arrays not the same length", getNumberOfLinesInFile(file), list.size());
+		assertEquals("Arrays are not the same length", getNumberOfLinesInFile(file), list.size());
 	}
 	
 	private int getNumberOfLinesInFile(String file)  throws IOException {
@@ -72,12 +72,12 @@ public class IOcsvTest {
 	}
 
 	private void compare(Athlete athlete, String[] array2) {
-	    Object[] array = athlete.toString().split(",");
-	    for (int i = 0; i < array.length; i++){
-	    	assertEquals(array2[i], (String) array[i]);
-	    }
-	  }
-	
+		Object[] array = athlete.toString().split(",");
+		for (int i = 0; i < array.length; i++) {
+			assertEquals(array2[i], (String) array[i]);
+		}
+	}
+
     @Before
     public void createTestOutputData() throws IOException {
     	
@@ -90,8 +90,12 @@ public class IOcsvTest {
     }
 
 	@Test
-	public void testOutputFileExists() throws IOException {
+	public void testCsvOutputFileExists() throws IOException {
 		assertThat(f.exists(), is(true));
+	}
+	
+	@Test
+	public void testCsvOutputResultsCount() throws IOException {
 		assertThat(getNumberOfLinesInFile(f.getName()), is(lines.length));
 	}
 
