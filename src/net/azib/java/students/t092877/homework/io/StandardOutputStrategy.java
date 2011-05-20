@@ -1,9 +1,26 @@
-package net.azib.java.students.t092877.homework;
+package net.azib.java.students.t092877.homework.io;
+
+import net.azib.java.students.t092877.homework.util.Utils;
+import net.azib.java.students.t092877.homework.model.Athlete;
+import net.azib.java.students.t092877.homework.model.Competition;
+import net.azib.java.students.t092877.homework.model.Result;
 
 import java.util.List;
 
-class StandardOutputStrategy implements Strategy {
+/**
+ * StandardOutputStrategy.java
+ * Purpose: provides implementation for console output
+ *
+ * @author Artjom Kruglenkov / 092877
+ * @version 1.0 20.05.2011
+ */
+public class StandardOutputStrategy implements Strategy {
 
+	/**
+	 * Executes the implementation for console output.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	@Override
 	public void execute(Competition competition) {
 
@@ -26,6 +43,10 @@ class StandardOutputStrategy implements Strategy {
 		}
 	}
 
+
+	/**
+	 * Outputs to console the header of table with decathlon competition results.
+	 */
 	private void printTableHeader() {
 
 		System.out.println();
@@ -48,6 +69,11 @@ class StandardOutputStrategy implements Strategy {
 	}
 
 
+	/**
+	 * Outputs to console the single row with specified athlete's results.
+	 *
+	 * @param athlete the specified athlete
+	 */
 	private void printTableRow(Athlete athlete) {
 
 		List<Result> results = athlete.getResults();

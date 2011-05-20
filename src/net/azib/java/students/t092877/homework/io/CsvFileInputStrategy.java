@@ -1,4 +1,10 @@
-package net.azib.java.students.t092877.homework;
+package net.azib.java.students.t092877.homework.io;
+import net.azib.java.students.t092877.homework.util.Utils;
+import net.azib.java.students.t092877.homework.model.Athlete;
+import net.azib.java.students.t092877.homework.model.Competition;
+import net.azib.java.students.t092877.homework.model.Event;
+import net.azib.java.students.t092877.homework.model.Result;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,14 +16,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class CsvFileInputStrategy implements Strategy {
+
+/**
+ * CsvFileInputStrategy.java
+ * Purpose: provides implementation for csv-file input
+ *
+ * @author Artjom Kruglenkov / 092877
+ * @version 1.0 20.05.2011
+ */
+public class CsvFileInputStrategy implements Strategy {
 
 	private File pathname;
 
+	/**
+	 * Creates a new CsvFileInputStrategy instance from File pathname.
+	 *
+	 * @param pathname the pathname for csv-file input
+	 */
 	public CsvFileInputStrategy(File pathname) {
 		this.pathname = pathname;
 	}
 
+	/**
+	 * Executes the implementation for csv-file input.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	@Override
 	public void execute(Competition competition) {
 
@@ -25,7 +49,11 @@ class CsvFileInputStrategy implements Strategy {
 
 	}
 
-
+	/**
+	 * Gets decathlon competition data from csv-file and sets it for specified Competition instance.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	private void getCompetitionData(Competition competition) {
 
 		InputStreamReader instream = new InputStreamReader(System.in);
@@ -54,7 +82,11 @@ class CsvFileInputStrategy implements Strategy {
 	}
 
 
-
+	/**
+	 * Gets athletes data from csv-file and sets it for specified Competition instance.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	private void getAthletesDataFromCsvFile(Competition competition) {
 
 		List<Athlete> athletes = competition.getAthletesList();

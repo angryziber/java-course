@@ -1,4 +1,4 @@
-package net.azib.java.students.t092877.homework;
+package net.azib.java.students.t092877.homework.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,6 +17,10 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 
+import net.azib.java.students.t092877.homework.util.Utils;
+import net.azib.java.students.t092877.homework.model.Athlete;
+import net.azib.java.students.t092877.homework.model.Competition;
+import net.azib.java.students.t092877.homework.model.Result;
 import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -26,12 +30,24 @@ import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 
-
-class XmlFileOutputStrategy implements Strategy {
+/**
+ * XmlFileOutputStrategy.java
+ * Purpose: provides implementation for xml-file output
+ *
+ * @author Artjom Kruglenkov / 092877
+ * @version 1.0 20.05.2011
+ */
+public class XmlFileOutputStrategy implements Strategy {
 
 	private File filepath;
 	private boolean htmlTransform;
 
+	/**
+	 * Creates a new XmlFileOutputStrategy instance from File pathname and boolean flag htmlTransform.
+	 *
+	 * @param filepath the specified file pathname
+	 * @param htmlTransform a flag for HTML-transformation
+	 */
 	public XmlFileOutputStrategy(File filepath, boolean htmlTransform) {
 
 		this.filepath = filepath;
@@ -39,6 +55,11 @@ class XmlFileOutputStrategy implements Strategy {
 	}
 
 
+	/**
+	 * Executes the implementation for xml-file output.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	@Override
 	public void execute(Competition competition) {
 
@@ -90,9 +111,16 @@ class XmlFileOutputStrategy implements Strategy {
 					competition, filepath);
 	}
 
-	// DOM Magic
+
+	/**
+	 * Builds a document object model.
+	 *
+	 * @param comp an instance of decathlon competition
+	 * @param doc an instance of document object model
+	 */
 	private void buildDocumentObjectModel(Competition comp, Document doc) {
 
+		// DOM Magic
 		Element rootEl = doc.createElement("competition");
 		rootEl.setAttribute("xsi:noNamespaceSchemaLocation", "schema.xsd");
 		rootEl.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -200,6 +228,12 @@ class XmlFileOutputStrategy implements Strategy {
 	}
 
 
+	/**
+	 * Copies such files as schemas and stylesheets to output-file destination directory.
+	 *
+	 * @param pathname the absolute path to destination directory, excluding the file name
+	 * @param htmlTransform a flag for HTML-transformation
+	 */
 	private void copyAdditionalFiles(String pathname, Boolean htmlTransform) {
 
 		String filename;
@@ -220,13 +254,23 @@ class XmlFileOutputStrategy implements Strategy {
 		}
 	}
 
-
+	/**
+	 * Returns an absolute path to destination directory, excluding the file name.
+	 *
+	 * @param filepath the full pathname to destination directory
+	 * @returna an absolute path to destination directory without a file name
+	 */
 	private String getPathname(File filepath) {
 
 		return filepath.getAbsolutePath().replaceAll("\\w*\\.[\\w]{3,4}", "");
 	}
 
-
+	/**
+	 * Serializes document object model to file.
+	 *
+	 * @param filename the output file pathname
+	 * @param doc an instance of document object model
+	 */
 	private void serializeDocumentObjectModel(File filename, Document doc) {
 
 		try {
@@ -245,7 +289,11 @@ class XmlFileOutputStrategy implements Strategy {
 		}
 	}
 
-
+	/**
+	 * Transforms xml-file with specified xsl-stylesheet to html format.
+	 *
+	 * @param xml xml-file pathname
+	 */
 	private void transformToHtmlFormat(File xml) {
 
 		try {
@@ -256,7 +304,7 @@ class XmlFileOutputStrategy implements Strategy {
 
 			    transformer.transform(new javax.xml.transform.stream.StreamSource(xml),
 			    					  new javax.xml.transform.stream.StreamResult(new OutputStreamWriter
-			    							                                     (new FileOutputStream(filepath), "utf-8")));
+			    							                              (new FileOutputStream(filepath), "utf-8")));
 
 		} catch (TransformerException e) {
 			System.err.println("\n>>> ERROR: transformer configuration failed");

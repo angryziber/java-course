@@ -1,4 +1,10 @@
-package net.azib.java.students.t092877.homework;
+package net.azib.java.students.t092877.homework.io;
+
+import net.azib.java.students.t092877.homework.util.Utils;
+import net.azib.java.students.t092877.homework.model.Athlete;
+import net.azib.java.students.t092877.homework.model.Competition;
+import net.azib.java.students.t092877.homework.model.Event;
+import net.azib.java.students.t092877.homework.model.Result;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,10 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-class DatabaseInputStrategy implements Strategy {
+/**
+ * DatabaseInputStrategy.java
+ * Purpose: provides implementation for database input
+ *
+ * @author Artjom Kruglenkov / 092877
+ * @version 1.0 20.05.2011
+ */
+public class DatabaseInputStrategy implements Strategy {
 
 	private String dbQueryId;
 
+	/**
+	 * Creates a new DatabaseInputStrategy instance from provided parameter string.
+	 *
+	 * @param parameter a competition id or competition name
+	 */
 	public DatabaseInputStrategy(String parameter) {
 
 		if (parameter.matches("[1-9][0-9]*")) {
@@ -24,6 +42,11 @@ class DatabaseInputStrategy implements Strategy {
 	}
 
 
+	/**
+	 * Executes the implementation for database input.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	@Override
 	public void execute(Competition competition) {
 
@@ -43,6 +66,12 @@ class DatabaseInputStrategy implements Strategy {
 	}
 
 
+	/**
+	 * Loads the file with db.properties.
+	 *
+	 * @return db.properties object
+	 * @throws NullPointerException if the db.properties file doesn't exist or empty
+	 */
 	private Properties loadProperties() throws NullPointerException {
 
 		Properties props = new Properties();
@@ -56,7 +85,12 @@ class DatabaseInputStrategy implements Strategy {
 		return props;
 	}
 
-
+	/**
+	 * Establishes a connection to database.
+	 *
+	 * @param propslist the db.properties
+	 * @return the database connection
+	 */
 	private Connection establishConnection(Properties propslist) {
 
 		String driver = propslist.getProperty("db.driver");
@@ -86,7 +120,13 @@ class DatabaseInputStrategy implements Strategy {
 	    return con;
 	}
 
-
+	/**
+	 * Returns result set with decathlon competition data.
+	 *
+	 * @param con the database connection
+	 * @param dbQueryId the database query
+	 * @return result set with decathlon competition data
+	 */
 	private ResultSet getCompetitionInfo(Connection con, String dbQueryId) {
 
 		ResultSet competitionRs = null;
@@ -109,7 +149,13 @@ class DatabaseInputStrategy implements Strategy {
 		return competitionRs;
 	}
 
-
+	/**
+	 * Returns result set with athletes data.
+	 *
+	 * @param con the database connection
+	 * @param dbQueryId the database query
+	 * @return result set with athletes data
+	 */
 	private ResultSet getAthletesData(Connection con, String dbQueryId) {
 
 		ResultSet athletesRs = null;
@@ -144,6 +190,13 @@ class DatabaseInputStrategy implements Strategy {
 		return athletesRs;
 	}
 
+	/**
+	 * Sets the data for specified Competition instance with athletes and competition result sets.
+	 *
+	 * @param comp an instance of decathlon competition
+	 * @param compRs result set with decathlon competition data
+	 * @param athRs  result set with athletes data
+	 */
 	private void setDecathlonEventData(Competition comp, ResultSet compRs, ResultSet athRs) {
 
 		List<Athlete> athletes = comp.getAthletesList();

@@ -1,13 +1,27 @@
-package net.azib.java.students.t092877.homework;
+package net.azib.java.students.t092877.homework.util;
+
+import net.azib.java.students.t092877.homework.model.Athlete;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class Utils {
+/**
+ * Utils.java
+ * Purpose: contains several useful methods for athletes list sorting and values format conversion
+ *
+ * @author Artjom Kruglenkov / 092877
+ * @version 1.0 20.05.2011
+ */
+public class Utils {
 
-	static void sortAthletes(List<Athlete> athletes) {
+	/**
+	 * Sorts athletes in descending order based on their total score and sets each athlete's place in the competition.
+	 *
+	 * @param athletes a list of athletes
+	 */
+	public static void sortAthletes(List<Athlete> athletes) {
 
 		if (athletes == null)
 			return;
@@ -18,7 +32,7 @@ class Utils {
 		int place = 1;
 		int[] range;
 
-		// set place intervals for corresponding athlete
+		// set places interval for corresponding athlete
 
 		for (Athlete athlete : athletes) {
 
@@ -51,14 +65,23 @@ class Utils {
 	}
 
 
-	static double convertToProperUnits(String input, String type) {
+	/**
+	 * Converts result value from original format to internal representation.
+	 *
+	 * @param value the result value in the provided format
+	 * @param type the type of an event
+	 * @return the result value in its internal format
+	 */
+	public static double convertToProperUnits(String value, String type) {
 
 		double properUnits = 0;
-		String[] originalUnits = input.split(":");
+		String[] originalUnits = value.split(":");
 
+		// athlete's performance measured in centimeters for jumping events
 		if (type.equals("jumping"))	{
 			properUnits = Double.parseDouble(originalUnits[0]) * 100;
 
+		// athlete's performance measured in seconds for running events
 		} else if (type.equals("running")) {
 
 			if (originalUnits.length == 2)
@@ -66,13 +89,21 @@ class Utils {
 
 			else
 				properUnits = Double.parseDouble(originalUnits[0]);
+		// athlete's performance measured in meters for throwing events
 		} else
 			properUnits = Double.parseDouble(originalUnits[0]);
 		return properUnits;
 	}
 
 
-	static String convertToOriginalUnits(double value, String type) {
+	/**
+	 * Converts result value from internal representation to original format.
+	 *
+	 * @param value the result value in its internal format
+	 * @param type the type of an event
+	 * @return the result value in its original format
+	 */
+	public static String convertToOriginalUnits(double value, String type) {
 
 		String originalUnits = "";
 
@@ -93,7 +124,13 @@ class Utils {
 	}
 
 
-	static String convertToDashSeparatedYearMonthDayFormat(String originalDate) {
+	/**
+	 * Converts date in dd.MM.yyyy format to date in yyyy-MM-dd format.
+	 *
+	 * @param originalDate date in dd.MM.yyyy format
+	 * @return date in yyyy-MM-dd format
+	 */
+	public static String convertToDashSeparatedYearMonthDayFormat(String originalDate) {
 
 		StringBuilder newDate = new StringBuilder();
 		String[] date = originalDate.split("[-/.]");
@@ -116,7 +153,13 @@ class Utils {
 	}
 
 
-	static String convertToDotSeparetedDayMonthYearFormat(String originalDate) {
+	/**
+	 * Converts date in yyyy-MM-dd format to date in dd.MM.yyyy format.
+	 *
+	 * @param originalDate date in yyyy-MM-dd format
+	 * @return date in dd.MM.yyyy format
+	 */
+	public static String convertToDotSeparetedDayMonthYearFormat(String originalDate) {
 
 		StringBuilder newDate = new StringBuilder();
 		String[] date = originalDate.split("[- /.]");

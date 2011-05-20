@@ -1,13 +1,30 @@
-package net.azib.java.students.t092877.homework;
+package net.azib.java.students.t092877.homework.io;
+
+import net.azib.java.students.t092877.homework.util.Utils;
+import net.azib.java.students.t092877.homework.model.Athlete;
+import net.azib.java.students.t092877.homework.model.Competition;
+import net.azib.java.students.t092877.homework.model.Event;
+import net.azib.java.students.t092877.homework.model.Result;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
+/**
+ * StandardInputStrategy.java
+ * Purpose: provides implementation for interactive input
+ *
+ * @author Artjom Kruglenkov / 092877
+ * @version 1.0 20.05.2011
+ */
+public class StandardInputStrategy implements Strategy {
 
-class StandardInputStrategy implements Strategy {
-
+	/**
+	 * Executes the implementation for interactive input.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	@Override
 	public void execute(Competition competition) {
 
@@ -17,6 +34,12 @@ class StandardInputStrategy implements Strategy {
 		getCompetitionData(competition, in);
 	}
 
+	/**
+	 * Gets decathlon competition data from user input and sets it for specified Competition instance.
+	 *
+	 * @param competition an instance of decathlon competition
+	 * @param in a BufferedReader for user input
+	 */
 	private void getCompetitionData(Competition competition, BufferedReader in) {
 
 		System.out.println("\nNOTICE: before you could start inputting competition results,");
@@ -42,7 +65,12 @@ class StandardInputStrategy implements Strategy {
 	}
 
 
-
+	/**
+	 * Gets athletes data from user input and sets it for specified Competition instance.
+	 *
+	 * @param competition an instance of decathlon competition
+	 * @param in a BufferedReader for user input
+	 */
 	private void getAthletesDataFromUserInput(Competition competition, BufferedReader in) {
 
 		List<Athlete> athletes = competition.getAthletesList();
@@ -88,7 +116,12 @@ class StandardInputStrategy implements Strategy {
 	}
 
 
-
+	/**
+	 * Tests whether there is another athlete entry to add.
+	 *
+	 * @param in a BufferedReader for user input
+	 * @return true if there is another athlete entry; false otherwise
+	 */
 	private static boolean isThereAnotherEntry(BufferedReader in) {
 
 		boolean anotherEntry = false;

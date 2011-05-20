@@ -1,4 +1,10 @@
-package net.azib.java.students.t092877.homework;
+package net.azib.java.students.t092877.homework.io;
+
+import net.azib.java.students.t092877.homework.util.Utils;
+import net.azib.java.students.t092877.homework.model.Athlete;
+import net.azib.java.students.t092877.homework.model.Competition;
+import net.azib.java.students.t092877.homework.model.Event;
+import net.azib.java.students.t092877.homework.model.Result;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,15 +16,31 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-class CsvFileOutputStrategy implements Strategy {
+/**
+ * CsvFileOutputStrategy.java
+ * Purpose: provides implementation for csv-file output
+ *
+ * @author Artjom Kruglenkov / 092877
+ * @version 1.0 20.05.2011
+ */
+public class CsvFileOutputStrategy implements Strategy {
 
 	private File pathname;
 
+	/**
+	 * Creates a new CsvFileOutputStrategy instance from File pathname.
+	 *
+	 * @param pathname the pathname for csv-file output
+	 */
 	public CsvFileOutputStrategy(File pathname) {
 		this.pathname = pathname;
 	}
 
-
+	/**
+	 * Executes the implementation for csv-file output.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	@Override
 	public void execute(Competition competition) {
 
