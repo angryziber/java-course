@@ -66,7 +66,6 @@ public class Output {
 
 	public void outputToHTML(List<Athlete> contestants) throws TransformerException,
 			IOException, SAXException, ParserConfigurationException {
-		//PlaceCalculator.calculatePlace(contestants);
 		outputToXML(contestants);
 		try {
 			TransformerFactory tFactory = TransformerFactory.
@@ -74,8 +73,6 @@ public class Output {
 			Transformer transformer = tFactory.
 					newTransformer(new javax.xml.transform.stream.StreamSource
 							("src\\net\\azib\\java\\students\\t103784\\homework\\decathlonHTML.xsl"));
-			//transformer.setOutputProperty
-				//	(OutputKeys.ENCODING, "UTF-8");
 			if (parameter != null && parameter.contains(".html")) {
 				transformer.transform
 					(new javax.xml.transform.

@@ -13,10 +13,8 @@ public class PlaceCalculator {
 
 	public static void calculatePlace(List<Athlete> contestants) {
 		Collections.sort(contestants, new PlaceCalculator.sortByScore());
-		int o = 0;
-		for (Athlete athlete : contestants) {
+		for (int o = 0; o < contestants.size(); o++) {
 			scores.add(o, contestants.get(o).getScore());
-			o++;
 		}
 		scores.add(-1);
 		for(int i=1;i< scores.size();i++) {
