@@ -4,8 +4,20 @@ package net.azib.java.students.t103784.homework;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 public class MainTest extends Main {
 
+	/**
+	 * Tests the main method with console arguments.
+	 *
+	 * Checks if the main method can properly handle and
+	 * assign the arguments entered by the user.
+	 */
 	@org.junit.Test
 	public void testMain () {
 

@@ -14,11 +14,26 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-
+/**
+ * This class is used to output the athletes and their results.
+ *
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 public class Output {
 	String parameter = Main.outputParameter;
 
-
+/**
+ * Outputs athletes to console.
+ *
+ * Goes through the list of athletes supplied and
+ * prints all of their data into the console.
+ * Also calculates the athletes' places before printing the list.
+ *
+ * @param contestants The list of athletes supplied.
+ */
 	public void outputToConsole(List<Athlete> contestants) {
 		PlaceCalculator.calculatePlace(contestants);
 		for (Athlete athlete : contestants) {
@@ -34,8 +49,19 @@ public class Output {
 
 	}
 
+/**
+ * Outputs athletes to a .csv file.
+ *
+ * Goes through the list of athletes supplied and
+ * prints all of their data into a .csv file, each
+ * athlete on a separate line, with values separated
+ * with a comma, and place and score are the first values.
+ * Also calculates the athletes' places before printing the list.
+ *
+ * @param contestants The list of athletes supplied.
+ * @throws java.io.FileNotFoundException Is thrown when the output file is undefined.
+ */
 	public void outputToCSV(List<Athlete> contestants) throws FileNotFoundException {
-
 		try {
 			PlaceCalculator.calculatePlace(contestants);
 			PrintStream out;
@@ -65,6 +91,21 @@ public class Output {
 
 	}
 
+/**
+ * Outputs athletes to a .html file.
+ *
+ * Goes through the list of athletes supplied and
+ * prints all of their data into a .xml file, which
+ * is then converted to a .html file using a pre-defined
+ * .xsl stylesheet file.
+ * Also calculates the athletes' places before printing the list.
+ *
+ * @param contestants The list of athletes supplied.
+ * @throws java.io.FileNotFoundException Is thrown when the output file is undefined.
+ * @throws javax.xml.parsers.ParserConfigurationException Is thrown when the parsing configuration is amiss.
+ * @throws javax.xml.transform.TransformerException Is thrown when the transformer gets and invalid value somewhere.
+ * @throws org.xml.sax.SAXException Is thrown when the SAX parser gets an error somewhere.
+ */
 	public void outputToHTML(List<Athlete> contestants) throws TransformerException,
 			IOException, SAXException, ParserConfigurationException {
 		outputToXML(contestants);
@@ -96,6 +137,22 @@ public class Output {
 		}
 	}
 
+/**
+ * Outputs athletes to a .xml file.
+ *
+ * Goes through the list of athletes supplied and
+ * prints all of their data into a .xml file.
+ * Each athlete is a child of the root element and each of the
+ * athlete's results is a child of the athlete element.
+ * DOM is used to build the .xml file.
+ * Also calculates the athletes' places before printing the list.
+ *
+ * @param contestants The list of athletes supplied.
+ * @throws java.io.FileNotFoundException Is thrown when the output file is undefined.
+ * @throws javax.xml.parsers.ParserConfigurationException Is thrown when the parsing configuration is amiss.
+ * @throws javax.xml.transform.TransformerException Is thrown when the transformer gets and invalid value somewhere.
+ * @throws org.xml.sax.SAXException Is thrown when the SAX parser gets an error somewhere.
+ */
 	public void outputToXML(List<Athlete> contestants) throws IOException,
 			ParserConfigurationException, TransformerException, SAXException {
 		PlaceCalculator.calculatePlace(contestants);

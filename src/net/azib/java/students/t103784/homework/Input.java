@@ -11,13 +11,32 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * This class is used to input the athletes and their results.
+ *
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 public class Input {
 
 	String parameter = Main.inputParameter;
 	List<Athlete> contestants = new ArrayList<Athlete>();
 	SimpleDateFormat format = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
-	int tokenNumber = 0;
 
+/**
+ * Reads in athletes from a database.
+ *
+ * Opens a connection to a database, executes an SQL query
+ * which returns the required combined table to fill
+ * a list of athletes with their data.
+ * Also calculates each athlete's score once one is read in.
+ *
+ * @return Returns the list of athletes that is read in from the database.
+ * @throws java.sql.SQLException Is thrown when a SQL statement is invalid.
+ * @throws java.text.ParseException Is thrown when a parse error occurs.
+ */
 	public List<Athlete> readAthleteFromDB() throws SQLException, ParseException {
 		int i = 0;
 		Connection conn = DriverManager.getConnection("jdbc:mysql://java.azib.net:3306/decathlon", "java", "java");
@@ -88,6 +107,20 @@ public class Input {
 		return contestants;
 	}
 
+/**
+ * Reads in athletes from a .csv file.
+ *
+ * The method is given a parameter (a reader) which also holds the
+ * input file and its path. The file is processed with a tokenizer,
+ * which separates entries using comma as a delimiter to properly assign values
+ * to the athlete. During the reading, information is also validated to prevent
+ * mistakes. The reading continues till there are no more lines left in the
+ * file. After that, the list of athletes is returned.
+ * Also calculates each athlete's score once one is read in.
+ *
+ * @param  reader A buffered reader which is reading in data from a pre-set or default .csv file.
+ * @return Returns the list of athletes that is read in from the .csv file.
+ */
 	public List<Athlete> readAthleteFromCSV(BufferedReader reader) {
 		try	{
 			String line;
@@ -98,22 +131,16 @@ public class Input {
 				tokenizer = new StringTokenizer(line.trim(), ",");
 				while(tokenizer.hasMoreTokens()) {
 					athlete.setName(checkName(tokenizer.nextToken().trim()));
-					tokenNumber++;
 					athlete.setBirthDate(checkDate(tokenizer.nextToken().trim()));
-					tokenNumber++;
 					athlete.setCountry(checkCountry(tokenizer.nextToken().trim()));
-					tokenNumber++;
 					for (int c = 0; c < 10; c++) {
 						if (c == 4 || c == 9) {
 							athlete.setPerformance(c, checkMinSec(tokenizer.nextToken().trim()));
-							tokenNumber++;
 						}
 						else {
 							athlete.setPerformance(c, checkIsNumber(String.valueOf(Double.parseDouble(tokenizer.nextToken().trim()))));
-							tokenNumber++;
 						}
 					}
-					tokenNumber = 0;
 					ScoreCalculator.calculate(athlete);
 					contestants.add(athlete);
 				}
@@ -124,7 +151,19 @@ public class Input {
 		}
 		return contestants;
 	}
-
+/**
+ * Reads in athletes from the console.
+ *
+ * The user must enter athlete data as required, the input will be validated
+ * and information will be asked until the user gets the input right.
+ * When the user finishes entering an athlete he/she can choose to enter
+ * more or stop entering, after which a list filled with athletes is returned.
+ * Also calculates each athlete's score once one is read in.
+ *
+ * @return Returns the list of athletes that is read in from console.
+ * @throws java.io.IOException Is thrown when a reading error occurs.
+ * @throws java.text.ParseException Is thrown when a parse error occurs.
+ */
 	public List<Athlete> readAthleteFromConsole() throws IOException, ParseException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
 
@@ -261,14 +300,28 @@ public class Input {
         }
 		return contestants;
 	}
-
+/**
+ * Checks athlete name validity.
+ *
+ * Since limiting names is a bad idea I'll just convert them to UTF-8 instead.
+ *
+ * @param name The string that is being checked.
+ * @return Returns the same string.
+ * @throws java.io.UnsupportedEncodingException Is thrown when input data is in unsupported encoding.
+ */
 	private String checkName(String name) throws UnsupportedEncodingException {
 		byte[] nameUTF = name.getBytes("UTF-8");
 		name = new String (nameUTF, "UTF-8");
 		return name;
-		//since limiting names is a bad idea I'll just convert them to UTF-8 instead.
 	}
-
+/**
+ * Checks athlete birth date validity.
+ *
+ *
+ * @return Returns the same string.
+ * @param birthDate Holds the athlete's date of birth.
+ * @throws java.text.ParseException Is thrown when the date is in wrong format.
+ */
 	private String checkDate(String birthDate) throws ParseException {
         format.setLenient(false);
 		try {
@@ -278,12 +331,15 @@ public class Input {
         catch (ParseException e) {
             return null;
         }
-        catch (IllegalArgumentException e) {
-            return null;
-        }
-
     }
-
+/**
+ * Checks athlete's country code validity.
+ *
+ * Goes through a list ISO 2-letter country codes and checks for a match.
+ *
+ * @return Returns the same string.
+ * @param country Holds the athlete's country.
+ */
 	private String checkCountry(String country) {
 		String[] countries = Locale.getISOCountries();
 			for (int i = 0; i < Locale.getISOCountries().length; i++) {
@@ -292,7 +348,15 @@ public class Input {
 			}
 		return null;
 	}
-
+/**
+ * Checks athlete's performance validity.
+ *
+ * Checks if the input the user gave is actually a number.
+ * If not, the user must try again.
+ *
+ * @return Returns the same string.
+ * @param stringInput Holds the athlete's performance.
+ */
 	private Double checkIsNumber(String stringInput) {
 		if (stringInput == null || Double.valueOf(stringInput) == null) {
 			System.out.println("Error in input. Try again.");
@@ -302,7 +366,17 @@ public class Input {
 			return Double.valueOf(stringInput);
 		}
 	}
-
+/**
+ * Checks athlete's performance validity.
+ *
+ * Checks if the input the user gave is actually a number.
+ * If not, the user must try again.
+ * Is used when there is a track event which performance
+ * time can be over a minute.
+ *
+ * @return Returns the same string.
+ * @param time Holds the athlete's performance.
+ */
     private Double checkMinSec(String time) {
 	    String[] timeSplit;
 	    if (time.matches("^([0-9][0-9]|[0-9])[:]([0-5][0-9]|[0-9])[. ]([0-9][0-9][0-9]|[0-9][0-9]|[0-9])")){

@@ -8,11 +8,24 @@ import javax.xml.transform.TransformerException;
 import java.io.*;
 import java.util.List;
 
+/**
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 public class HTMLOutputTest extends Output {
+
+	/**
+	 * Tests whether the HTML output works.
+	 *
+	 * By feeding some preset valid data into the system using
+	 * a reader, I check if the output can get the data from the input properly.
+	 */
 	@org.junit.Test
 	public void testXMLOutput () {
 		List<Athlete> contestants;
-		Input input = new Input();
+		MockInput input = new MockInput();
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader("src\\net\\azib\\java\\students\\t103784\\homework\\tests\\CSVTest.csv"));
@@ -31,5 +44,9 @@ public class HTMLOutputTest extends Output {
 		} catch (SAXException e) {
 			System.out.println("Test output failed (SAXException)");
 		}
+	}
+
+	class MockInput extends Input {
+
 	}
 }

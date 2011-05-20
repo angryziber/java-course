@@ -5,12 +5,30 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * This class is used to calculate the place of the athletes.
+ *
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 public class PlaceCalculator {
 	static int lastAssigned;
     static int currentFirst;
     static int counter;
 	static List<Integer> scores = new ArrayList<Integer>();
 
+/**
+ * Calculates the athlete's place.
+ *
+ * Sorts the list of athletes according to score,
+ * goes through the list and assigns the place
+ * accordingly. If there are athletes with the same score,
+ * they share places, e.g. 2-4.
+ *
+ * @param  contestants The list of athletes supplied.
+ */
 	public static void calculatePlace(List<Athlete> contestants) {
 
 		Collections.sort(contestants, new PlaceCalculator.sortByScore());
@@ -45,8 +63,22 @@ public class PlaceCalculator {
         }
 	}
 
+/**
+ * This class is used to compare the athlete's scores.
+ *
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 	private static class sortByScore implements Comparator<Athlete> {
-   		@Override
+	/** Compares the scores of two athletes, checks if they are equal.
+	 *
+ 	 * @param o1 Athlete 1.
+	 * @param o2 Athlete 1+1.
+	 * @return Returns the difference between the scores of the athletes.
+	 */
+		@Override
 		public int compare(Athlete o1, Athlete o2) {
 			   if (o1.getScore() == o2.getScore()) {
 			   }

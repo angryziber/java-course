@@ -7,7 +7,20 @@ import java.io.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+/**
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 public class InputTest extends Input {
+
+	/**
+	 * Tests whether the console input works.
+	 *
+	 * By feeding some preset valid data into the system using
+	 * an input stream, I check if the input works properly.
+	 */
 	@org.junit.Test
 	public void testConsoleInput () {
 		InputStream in = null;
@@ -26,6 +39,13 @@ public class InputTest extends Input {
 			System.out.println("Console input failed (ParseException)\n");
 		}
 	}
+
+	/**
+	 * Tests whether the CSV input works.
+	 *
+	 * By feeding some preset valid data into the system using
+	 * a reader, I check if the input works properly.
+	 */
 	@org.junit.Test
 	public void testCSVInput () {
 		BufferedReader reader = null;
@@ -36,6 +56,13 @@ public class InputTest extends Input {
 		}
 		readAthleteFromCSV(reader);
 	}
+
+	/**
+	 * Tests whether the database input works.
+	 *
+	 * By feeding some preset valid data into the system using
+	 * a database, I check if the input works properly.
+	 */
 	@org.junit.Test
 	public void testDBInput () {
 		try {

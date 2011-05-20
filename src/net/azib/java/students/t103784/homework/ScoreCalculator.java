@@ -1,5 +1,13 @@
 package net.azib.java.students.t103784.homework;
 
+/**
+ * This class is used to calculate the scores of the athletes.
+ *
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 public class ScoreCalculator {
 
 	private static double[][] parameters = {
@@ -15,6 +23,15 @@ public class ScoreCalculator {
 							{0.03768, 480, 1.85}
 	};
 
+	/**
+	 * Calculates the score of an athlete.
+	 *
+	 * Reads in all of the performance values of the athlete,
+	 * then uses the corresponding formula to calculate the score
+	 * of the performance (checks for if it is a track, jump or throwing event).
+	 *
+	 * @param athlete The athlete whose score is being calculated.
+	 */
 	public static void calculate(Athlete athlete) {
 
 		int j = 0;

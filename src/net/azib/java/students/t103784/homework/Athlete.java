@@ -1,5 +1,18 @@
 package net.azib.java.students.t103784.homework;
 
+/**
+ * Each instance of this class holds the full data of an athlete who is
+ * competing at a decathlon. The athlete has a name, date of birth,
+ * country of origin, the performance in the events as an array,
+ * a score and a place.
+ * Manipulating values of an athlete is done by getters and setters.
+ *
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+
+ */
 public class Athlete {
 	private String name, birthDate, country, place;
 	private String[] events = {"100 meter dash(s): ", "Long jump(m): ", "Shot Put(m): ", "High jump(m): ", "400 meter race(s): ", "110 meter hurdles(s): ", "Discus throw(m): ", "Pole vault(m): ", "Javelin throw(m): ", "1500 meter race(s): "};

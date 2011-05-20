@@ -6,7 +6,19 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class AthleteTest extends Athlete{
+/**
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
+public class AthleteTest extends Athlete {
+	/**
+	 * Tests if the athlete class is acting properly.
+	 *
+	 * Fills an athlete up with information and checks
+	 * if its getters and setters are working properly.
+	 */
 	@org.junit.Test
 	public void testAthlete() {
 		String name = "Juhan Mihkel";
@@ -22,10 +34,10 @@ public class AthleteTest extends Athlete{
 		for (int i = 0; i < 10; i++) {
 			setPerformance(i, performance[i]);
 		}
-		ScoreCalculator.calculate(this);
+		MockScoreCalculator.calculate(this);
 		List<Athlete> contestants = new ArrayList<Athlete>();
 		contestants.add(this);
-		PlaceCalculator.calculatePlace(contestants);
+		MockPlaceCalculator.calculatePlace(contestants);
 
 		assertArrayEquals("Name failed", name.getBytes(), getName().getBytes());
 		assertArrayEquals("Date of Birth failed", birthDate.getBytes(), getBirthDate().getBytes());
@@ -35,5 +47,13 @@ public class AthleteTest extends Athlete{
 		}
 		assertEquals("Score failed", score, getScore());
 		assertArrayEquals("Place failed", place.getBytes(), getPlace().getBytes());
+	}
+
+	class MockPlaceCalculator extends PlaceCalculator {
+
+	}
+
+	class MockScoreCalculator extends ScoreCalculator {
+
 	}
 }

@@ -6,8 +6,19 @@ import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ *
+ */
 public class ScoreCalculatorTest extends ScoreCalculator{
-
+	/**
+	 * Tests if athletes' scores are calculated properly.
+	 *
+	 * Calculates some athletes' scores and checks
+	 * if the calculations were done properly.
+	 */
 	@org.junit.Test
     public void testScore() {
 		List<Athlete> contestants = new ArrayList<Athlete>();
@@ -32,7 +43,6 @@ public class ScoreCalculatorTest extends ScoreCalculator{
 				calculate(athlete);
 				contestants.add(athlete);
 		}
-		PlaceCalculator.calculatePlace(contestants);
 		int[] properScores = new int[contestants.size()];
 		int[] testableScores = new int[contestants.size()];
 		properScores[0] = 59361;

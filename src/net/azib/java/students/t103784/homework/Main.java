@@ -14,9 +14,26 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 
+/**
+ * The main class.
+ *
+ * @author      Ott Madis Ozolit <karuott321@hotmail.com>
+ * @version     1.6
+ * @since       2011.0520
+ */
 public class Main {
 	static String inputMethod = null, inputParameter = null, outputMethod = null, outputParameter = null;
 
+/**
+ * Assigns console arguments to custom parameters.
+ *
+ * Reads in the arguments given and iterates them,
+ * assigning each argument to a corresponding
+ * parameter.
+ *
+ * @param  args The array of arguments.
+ * @return Returns the same array.
+ */
 	public static String[] setParameters(String[] args){
 			for (String s: args) {
 				if (s.contains("-")) {
@@ -38,7 +55,21 @@ public class Main {
 			}
 		return args;
 		}
-
+/**
+ * The main method
+ *
+ * Takes in the input/output arguments and
+ * uses them to specify the input/output methods,
+ * reads in athlete data, processes it
+ * to calculate each athlete's score
+ * and place and finally outputs the data.
+ * If no input or output method is selected,
+ * the program will terminate.
+ *
+ * @param  args Array of console arguments set by user.
+ * @throws java.io.IOException Is thrown when
+ * a reading error occurs.
+ */
 	public static void main(String[] args) throws IOException {
 
 		setParameters(args);
