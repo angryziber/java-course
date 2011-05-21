@@ -8,7 +8,7 @@ import static net.azib.java.students.t107110.homework.DecathlonException.decathl
 /**
  * @author Eduard Shustrov
  */
-public class Result {
+public class Result implements Comparable<Result> {
 	private static final DateFormat DATE_FORMAT = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
 
 	private static enum Competition {
@@ -97,6 +97,12 @@ public class Result {
 				"race1500m=" + race1500m + ", " +
 				"points=" + points +
 				'}';
+	}
+
+	@Override
+	public int compareTo(Result other) {
+		if (points != other.points) return points < other.points ? 1 : -1;
+		return athleteName.compareTo(other.athleteName);
 	}
 
 	public String getAthleteName() {

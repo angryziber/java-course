@@ -231,6 +231,21 @@ public class ResultTest {
 		assertThat(result.getPoints(), is(points));
 	}
 
+	@Test
+	public void equalResults() throws DecathlonException {
+		final Result result = createResult();
+		final Result sameResult = createResult();
+		assertThat(result.compareTo(sameResult), is(0));
+	}
+
+	@Test
+	public void differentResults() throws DecathlonException {
+		final Result result = createResult();
+		sprint100m += 1;
+		final Result smallerResult = createResult();
+		assertThat(result.compareTo(smallerResult), is(-1));
+	}
+
 	private Result createResult() throws DecathlonException {
 		return new Result(name, birthDay, country, sprint100m, longJump, shotPut, highJump, sprint400m,
 				hurdles110m, discusThrow, poleVault, javelinThrow, race1500m);
