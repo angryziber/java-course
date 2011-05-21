@@ -11,6 +11,11 @@ import net.azib.java.students.t092877.homework.model.Competition;
  */
 public interface Strategy {
 
+	/**
+	 * Executes the implementation of strategy.
+	 *
+	 * @param competition an instance of decathlon competition
+	 */
 	public void execute(Competition competition);
 
 }

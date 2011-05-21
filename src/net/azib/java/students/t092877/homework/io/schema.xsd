@@ -6,7 +6,7 @@
 				<xs:element name="name">
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
-							<xs:maxLength value="40"/>
+							<xs:maxLength value="35"/>
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
@@ -14,7 +14,7 @@
 				<xs:element name="location">
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
-							<xs:maxLength value="40"/>
+							<xs:maxLength value="35"/>
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
@@ -29,7 +29,7 @@
 										<xs:element name="name">
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:maxLength value="40"/>
+													<xs:maxLength value="35"/>
 													<xs:whiteSpace value="collapse"/>
 												</xs:restriction>
 											</xs:simpleType>

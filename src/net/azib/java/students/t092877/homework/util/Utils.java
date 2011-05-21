@@ -12,7 +12,7 @@ import java.util.Map;
  * Purpose: contains several useful methods for athletes list sorting and values format conversion
  *
  * @author Artjom Kruglenkov / 092877
- * @version 1.0 20.05.2011
+ * @version 1.1 20.05.2011
  */
 public class Utils {
 
@@ -23,8 +23,10 @@ public class Utils {
 	 */
 	public static void sortAthletes(List<Athlete> athletes) {
 
-		if (athletes == null)
-			return;
+		if (athletes == null) {
+			System.err.println("\n>>> ERROR: the list provided for sorting is empty");
+			System.exit(1);
+		}
 
 		Collections.sort(athletes);
 		Map<String, int[]> placeRanges = new HashMap<String, int[]>();
@@ -133,7 +135,7 @@ public class Utils {
 	public static String convertToDashSeparatedYearMonthDayFormat(String originalDate) {
 
 		StringBuilder newDate = new StringBuilder();
-		String[] date = originalDate.split("[-/.]");
+		String[] date = originalDate.split("[.]");
 
 		for (int i = 0; i < date.length; i++) {
 
@@ -162,7 +164,7 @@ public class Utils {
 	public static String convertToDotSeparetedDayMonthYearFormat(String originalDate) {
 
 		StringBuilder newDate = new StringBuilder();
-		String[] date = originalDate.split("[- /.]");
+		String[] date = originalDate.split("[-]");
 
 		for (int i = 0; i < date.length; i++) {
 
@@ -181,4 +183,3 @@ public class Utils {
 		return newDate.toString();
 	}
 }
-

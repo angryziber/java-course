@@ -12,14 +12,12 @@ import java.util.List;
  * Purpose: provides implementation for console output
  *
  * @author Artjom Kruglenkov / 092877
- * @version 1.0 20.05.2011
+ * @version 1.1 20.05.2011
  */
 public class StandardOutputStrategy implements Strategy {
 
 	/**
-	 * Executes the implementation for console output.
-	 *
-	 * @param competition an instance of decathlon competition
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void execute(Competition competition) {
@@ -50,21 +48,21 @@ public class StandardOutputStrategy implements Strategy {
 	private void printTableHeader() {
 
 		System.out.println();
-		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
+		System.out.println("------+------+------+-----------------------------------+-----+---------+--------+" +
 				           "---------+---------+------------+------------+----------+-------------+---------+");
 		System.out.printf(
-				"%6s|%6s|%6s|%-34s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
+				"%6s|%6s|%6s|%-35s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
 						"Place", "Points", "Nation", "Athlete",
 						"100m", "long jump", "shot put", "high jump", "400m",
 						"110m hurdles", "discus throw", "pole vault", "javelin throw", "1500m");
 
 		System.out.printf(
-				"%6s|%6s|%6s|%-34s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
+				"%6s|%6s|%6s|%-35s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
 						"", "", "", "",
 						"(sec)", "(m)", "(m)", "(m)", "(min:sec)",
 						"(sec)", "(m)", "(m)", "(m)", "(min:sec)");
 
-		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
+		System.out.println("------+------+------+-----------------------------------+-----+---------+--------+" +
         				   "---------+---------+------------+------------+----------+-------------+---------+");
 	}
 
@@ -86,7 +84,7 @@ public class StandardOutputStrategy implements Strategy {
 		}
 
 		System.out.printf(
-						"%6s|%6d|%-6s|%-34s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
+						"%6s|%6d|%-6s|%-35s|%5s|%9s|%8s|%9s|%9s|%12s|%12s|%10s|%13s|%9s|\n",
 						athlete.getPlace(),
 						athlete.getTotalScore(),
 						athlete.getCountryCode(),
@@ -102,7 +100,7 @@ public class StandardOutputStrategy implements Strategy {
 						originalUnits[8],
 						originalUnits[9]);
 
-		System.out.println("------+------+------+----------------------------------+-----+---------+--------+" +
+		System.out.println("------+------+------+-----------------------------------+-----+---------+--------+" +
         				   "---------+---------+------------+------------+----------+-------------+---------+");
 	}
 }

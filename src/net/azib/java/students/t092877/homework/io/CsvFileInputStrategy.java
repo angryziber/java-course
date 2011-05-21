@@ -22,9 +22,9 @@ import java.util.List;
  * Purpose: provides implementation for csv-file input
  *
  * @author Artjom Kruglenkov / 092877
- * @version 1.0 20.05.2011
+ * @version 1.1 20.05.2011
  */
-public class CsvFileInputStrategy implements Strategy {
+public class CsvFileInputStrategy extends StandardInputStrategy implements Strategy {
 
 	private File pathname;
 
@@ -38,80 +38,51 @@ public class CsvFileInputStrategy implements Strategy {
 	}
 
 	/**
-	 * Executes the implementation for csv-file input.
-	 *
-	 * @param competition an instance of decathlon competition
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void execute(Competition competition) {
 
-		getCompetitionData(competition);
-
-	}
-
-	/**
-	 * Gets decathlon competition data from csv-file and sets it for specified Competition instance.
-	 *
-	 * @param competition an instance of decathlon competition
-	 */
-	private void getCompetitionData(Competition competition) {
-
 		InputStreamReader instream = new InputStreamReader(System.in);
 		BufferedReader in = new BufferedReader(instream);
 
-		System.out.println("\nNOTICE: before the program starts processing competition results,");
-		System.out.println("please, provide some data about the event itself.");
-
 		try {
+			getCompetitionData(competition, in);
 
-			System.out.print("\n>>> Enter the name of competition: ");
-			competition.setName(in.readLine());
+			in = new BufferedReader(new InputStreamReader(new FileInputStream(pathname), "utf-8"));
+			getAthletesDataFromCsvFile(competition, in);
 
-			System.out.print(">>> Enter the location where it took place: ");
-			competition.setLocation(in.readLine());
-
-			System.out.print(">>> Enter the date (yyyy-mm-dd): ");
-			competition.setDate(in.readLine());
-
+		} catch (FileNotFoundException e) {
+			System.err.println("\n>>> ERROR: specified directory doesn't exit!");
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("\n>>> ERROR: unsupported file encoding. Make sure that your file is in UTF-8 encoding!");
+			e.printStackTrace();
 		} catch (IOException e) {
 			System.err.println("\n>>> ERROR: while reading user input");
 			e.printStackTrace();
 		}
-
-		getAthletesDataFromCsvFile(competition);
 	}
-
 
 	/**
 	 * Gets athletes data from csv-file and sets it for specified Competition instance.
 	 *
 	 * @param competition an instance of decathlon competition
+	 * @param in an instance of BufferedReader for user input
 	 */
-	private void getAthletesDataFromCsvFile(Competition competition) {
+	private void getAthletesDataFromCsvFile(Competition competition, BufferedReader in) {
 
 		List<Athlete> athletes = competition.getAthletesList();
 		List<String> athleteDataAsStr = new ArrayList<String>();
 
 		try {
+			String line = in.readLine();
 
-			BufferedReader fin = new BufferedReader(new InputStreamReader(new FileInputStream(pathname), "utf-8"));
-
-			try {
-				String line = fin.readLine();
-
-				while(line != null) {
-					athleteDataAsStr.add(line);
-					line = fin.readLine();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			while(line != null) {
+				athleteDataAsStr.add(line);
+				line = in.readLine();
 			}
-
-		} catch (FileNotFoundException e) {
-			System.err.println("\n>>> ERROR: specified file is missing!");
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			System.err.println("\n>>> ERROR: unsupported file encoding. Make sure that your file is in UTF-8 encoding!");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
