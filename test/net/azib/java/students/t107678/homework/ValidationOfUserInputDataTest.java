@@ -22,20 +22,14 @@ public class ValidationOfUserInputDataTest {
     @Test
     public void validateCorrectBirthDate() throws Exception {
         String input1 = "15.05.1988";
+	    String input2 = "15/05/1988";
+
         assertTrue(ValidationOfUserInputData.validateBirthDate(input1));
+	    assertTrue(ValidationOfUserInputData.validateBirthDate(input2));
 
 
     }
 
-    @Test @Ignore
-    public void validateIncorrectBirthDate() throws Exception {
-
-        String input2 = "358.05.1988";
-
-        assertFalse(ValidationOfUserInputData.validateBirthDate(input2));
-
-
-    }
 
     @Test
     public void validateCorrectCountryCode() throws Exception {
