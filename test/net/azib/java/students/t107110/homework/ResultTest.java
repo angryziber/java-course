@@ -46,193 +46,193 @@ public class ResultTest {
 	}
 
 	@Test
-	public void correctResult() {
+	public void correctResult() throws DecathlonException {
 		createResult();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnEmptyName() {
+	@Test(expected = DecathlonException.class)
+	public void failOnEmptyName() throws DecathlonException {
 		name = " ";
 		createResult();
 	}
 
 	@Test
-	public void nameIsNormalized() {
+	public void nameIsNormalized() throws DecathlonException {
 		name = " Name  Surname  ";
 		final Result result = createResult();
-		assertThat(result.getName(), is("Name Surname"));
+		assertThat(result.getAthleteName(), is("Name Surname"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoBirthday() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoBirthday() throws DecathlonException {
 		birthDay = null;
 		createResult();
 	}
 
 	@Test
-	public void nameIsUnmodified() {
+	public void nameIsUnmodified() throws DecathlonException {
 		birthDay = new Date();
 		final Result result = createResult();
-		assertThat(result.getBirthDay(), is(birthDay));
+		assertThat(result.getBirthday(), is(birthDay));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnEmptyCountry() {
+	@Test(expected = DecathlonException.class)
+	public void failOnEmptyCountry() throws DecathlonException {
 		country = " ";
 		createResult();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnIllegalCountry() {
+	@Test(expected = DecathlonException.class)
+	public void failOnIllegalCountry() throws DecathlonException {
 		country = "XXX";
 		createResult();
 	}
 
 	@Test
-	public void countryIsNormalized() {
+	public void countryIsNormalized() throws DecathlonException {
 		country = " eE  ";
 		final Result result = createResult();
 		assertThat(result.getCountry(), is("EE"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoSprint100mResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoSprint100mResult() throws DecathlonException {
 		sprint100m = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void sprint100mResultIsUnmodified() {
+	public void sprint100mResultIsUnmodified() throws DecathlonException {
 		sprint100m = 3.3;
 		final Result result = createResult();
 		assertThat(result.getSprint100m(), is(sprint100m));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoLongJumpResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoLongJumpResult() throws DecathlonException {
 		longJump = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void longJumpResultIsUnmodified() {
+	public void longJumpResultIsUnmodified() throws DecathlonException {
 		longJump = 3.3;
 		final Result result = createResult();
 		assertThat(result.getLongJump(), is(longJump));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoShotPutResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoShotPutResult() throws DecathlonException {
 		shotPut = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void shotPutResultIsUnmodified() {
+	public void shotPutResultIsUnmodified() throws DecathlonException {
 		shotPut = 3.3;
 		final Result result = createResult();
 		assertThat(result.getShotPut(), is(shotPut));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoHighJumpResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoHighJumpResult() throws DecathlonException {
 		highJump = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void highJumpResultIsUnmodified() {
+	public void highJumpResultIsUnmodified() throws DecathlonException {
 		highJump = 3.3;
 		final Result result = createResult();
 		assertThat(result.getHighJump(), is(highJump));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoSprint400mResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoSprint400mResult() throws DecathlonException {
 		sprint400m = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void sprint400mResultIsUnmodified() {
+	public void sprint400mResultIsUnmodified() throws DecathlonException {
 		sprint400m = 3.3;
 		final Result result = createResult();
 		assertThat(result.getSprint400m(), is(sprint400m));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoHurdles110mResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoHurdles110mResult() throws DecathlonException {
 		hurdles110m = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void hurdles110mResultIsUnmodified() {
+	public void hurdles110mResultIsUnmodified() throws DecathlonException {
 		hurdles110m = 3.3;
 		final Result result = createResult();
 		assertThat(result.getHurdles110m(), is(hurdles110m));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoDiscusThrowResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoDiscusThrowResult() throws DecathlonException {
 		discusThrow = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void discusThrowResultIsUnmodified() {
+	public void discusThrowResultIsUnmodified() throws DecathlonException {
 		discusThrow = 3.3;
 		final Result result = createResult();
 		assertThat(result.getDiscusThrow(), is(discusThrow));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoPoleVaultResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoPoleVaultResult() throws DecathlonException {
 		poleVault = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void poleVaultResultIsUnmodified() {
+	public void poleVaultResultIsUnmodified() throws DecathlonException {
 		poleVault = 3.3;
 		final Result result = createResult();
 		assertThat(result.getPoleVault(), is(poleVault));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoJavelinThrowResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoJavelinThrowResult() throws DecathlonException {
 		javelinThrow = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void javelinThrowResultIsUnmodified() {
+	public void javelinThrowResultIsUnmodified() throws DecathlonException {
 		javelinThrow = 3.3;
 		final Result result = createResult();
 		assertThat(result.getJavelinThrow(), is(javelinThrow));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failOnNoRace1500mResult() {
+	@Test(expected = DecathlonException.class)
+	public void failOnNoRace1500mResult() throws DecathlonException {
 		race1500m = 0.0;
 		createResult();
 	}
 
 	@Test
-	public void race1500mResultIsUnmodified() {
+	public void race1500mResultIsUnmodified() throws DecathlonException {
 		race1500m = 3.3;
 		final Result result = createResult();
 		assertThat(result.getRace1500m(), is(race1500m));
 	}
 
 	@Test
-	public void pointsCalculation() {
+	public void pointsCalculation() throws DecathlonException {
 		final Result result = createResult();
 		assertThat(result.getPoints(), is(points));
 	}
 
-	private Result createResult() {
-		return new Result(name, birthDay, country, sprint100m, longJump, shotPut, highJump, sprint400m, hurdles110m,
-				discusThrow, poleVault, javelinThrow, race1500m);
+	private Result createResult() throws DecathlonException {
+		return new Result(name, birthDay, country, sprint100m, longJump, shotPut, highJump, sprint400m,
+				hurdles110m, discusThrow, poleVault, javelinThrow, race1500m);
 	}
 }

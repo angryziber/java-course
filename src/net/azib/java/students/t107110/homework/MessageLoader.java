@@ -1,25 +1,30 @@
 package net.azib.java.students.t107110.homework;
 
+import org.apache.log4j.PatternLayout;
+
 import java.text.MessageFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
  * @author Eduard Shustrov
  */
 public class MessageLoader {
-	private static final String FILE_NAME_SUFFIX = "Messages";
+	private static final String MESSAGE_BASE = "Messages";
+	private static final String MESSAGE_PACKAGE = MessageLoader.class.getCanonicalName().replaceAll("\\.[^.]*$", "");
+	private static final ResourceBundle MESSAGES = ResourceBundle.getBundle(MESSAGE_PACKAGE + "." + MESSAGE_BASE);
+	private static final ResourceBundle ENGLISH_MESSAGES =
+			ResourceBundle.getBundle(MESSAGE_PACKAGE + "." + MESSAGE_BASE, Locale.ROOT);
 
-	private final ResourceBundle messages;
-
-	public MessageLoader(final Class<?> messageClass) {
-		messages = ResourceBundle.getBundle(messageClass.getCanonicalName() + FILE_NAME_SUFFIX);
+	public static String getLocalizedMessage(final Message messageID, final String... args) {
+		return getMessage(MESSAGES, messageID, args);
 	}
 
-	public String getMessage(final String messageKey, final String... args) {
-		return new MessageFormat(messages.getString(messageKey)).format(args);
+	public static String getEnglishMessage(final Message messageID, final String... args) {
+		return getMessage(ENGLISH_MESSAGES, messageID, args);
 	}
 
-	public IllegalArgumentException argumentException(final String message, final String... args) {
-		return new IllegalArgumentException(getMessage(message, args));
+	private static String getMessage(final ResourceBundle bundle, final Message messageID, final String[] args) {
+		return new MessageFormat(bundle.getString(messageID.name())).format(args);
 	}
 }

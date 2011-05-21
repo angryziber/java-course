@@ -1,60 +1,37 @@
 package net.azib.java.students.t107110.homework;
 
 import java.text.DateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+import static net.azib.java.students.t107110.homework.DecathlonException.decathlonException;
 
 /**
  * @author Eduard Shustrov
  */
 public class Result {
-	private static final MessageLoader MESSAGES = new MessageLoader(Result.class);
-	private static final DateFormat DATE_FORMAT = DateFormat.getDateInstance(DateFormat.SHORT);
+	private static final DateFormat DATE_FORMAT = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
 
-	private static final String NO_NAME_ID = "no_name";
-	private static final String NO_BIRTHDAY_ID = "no_birthday";
-	private static final String NO_COUNTRY_ID = "no_country";
-	private static final String NOT_ISO2_COUNTRY_ID = "not_iso2_country";
-	private static final String NO_SPRINT_100M_RESULT_ID = "no_sprint_100m";
-	private static final String NO_LONG_JUMP_RESULT_ID = "no_long_jump";
-	private static final String NO_SHOT_PUT_RESULT_ID = "no_shot_put";
-	private static final String NO_HIGH_JUMP_RESULT_ID = "no_high_jump";
-	private static final String NO_SPRINT_400M_RESULT_ID = "no_sprint_400m";
-	private static final String NO_HURDLES_110M_RESULT_ID = "no_hurdles_110m";
-	private static final String NO_DISCUS_THROW_RESULT_ID = "no_discus_throw";
-	private static final String NO_POLE_VAULT_RESULT_ID = "no_pole_vault";
-	private static final String NO_JAVELIN_THROW_RESULT_ID = "no_javelin_throw";
-	private static final String NO_RACE_1500M_RESULT_ID = "no_race_1500m";
+	private static enum Competition {
+		SPRINT_100M, LONG_JUMP, SHOT_PUT, HIGH_JUMP, SPRINT_400M,
+		HURDLES_110M, DISCUS_THROW, POLE_VAULT, JAVELIN_THROW, RACE_1500M
+	}
 
-	private static final String SPRINT_100M_KEY = "sprint_100m";
-	private static final String LONG_JUMP_KEY = "long_jump";
-	private static final String SHOT_PUT_KEY = "shot_put";
-	private static final String HIGH_JUMP_KEY = "high_jump";
-	private static final String SPRINT_400M_KEY = "sprint_400m";
-	private static final String HURDLES_110M_KEY = "hurdles_110m";
-	private static final String DISCUS_THROW_KEY = "discus_throw";
-	private static final String POLE_VAULT_KEY = "pole_vault";
-	private static final String JAVELIN_THROW_KEY = "javelin_throw";
-	private static final String RACE_1500M_KEY = "race_1500m";
-
-	private static final Map<String, Coefficient> COEFFICIENT_MAP =
-			Collections.unmodifiableMap(new HashMap<String, Coefficient>() {{
-				put(SPRINT_100M_KEY, new Coefficient(25.4347, 18.0, 1.81));
-				put(LONG_JUMP_KEY, new Coefficient(0.14354, 220.0, 1.4));
-				put(SHOT_PUT_KEY, new Coefficient(51.39, 1.5, 1.05));
-				put(HIGH_JUMP_KEY, new Coefficient(0.8465, 75.0, 1.42));
-				put(SPRINT_400M_KEY, new Coefficient(1.53775, 82.0, 1.81));
-				put(HURDLES_110M_KEY, new Coefficient(5.74352, 28.5, 1.92));
-				put(DISCUS_THROW_KEY, new Coefficient(12.91, 4.0, 1.1));
-				put(POLE_VAULT_KEY, new Coefficient(0.2797, 100.0, 1.35));
-				put(JAVELIN_THROW_KEY, new Coefficient(10.14, 7.0, 1.08));
-				put(RACE_1500M_KEY, new Coefficient(0.03768, 480.0, 1.85));
+	private static final Map<Competition, Coefficient> COEFFICIENT_MAP =
+			Collections.unmodifiableMap(new EnumMap<Competition, Coefficient>(Competition.class) {{
+				put(Competition.SPRINT_100M, new Coefficient(25.4347, 18.0, 1.81));
+				put(Competition.LONG_JUMP, new Coefficient(0.14354, 220.0, 1.4));
+				put(Competition.SHOT_PUT, new Coefficient(51.39, 1.5, 1.05));
+				put(Competition.HIGH_JUMP, new Coefficient(0.8465, 75.0, 1.42));
+				put(Competition.SPRINT_400M, new Coefficient(1.53775, 82.0, 1.81));
+				put(Competition.HURDLES_110M, new Coefficient(5.74352, 28.5, 1.92));
+				put(Competition.DISCUS_THROW, new Coefficient(12.91, 4.0, 1.1));
+				put(Competition.POLE_VAULT, new Coefficient(0.2797, 100.0, 1.35));
+				put(Competition.JAVELIN_THROW, new Coefficient(10.14, 7.0, 1.08));
+				put(Competition.RACE_1500M, new Coefficient(0.03768, 480.0, 1.85));
 			}});
 
-	private final String name;
-	private final Date birthDay;
+	private final String athleteName;
+	private final Date birthday;
 	private final String country;
 	private final double sprint100m;
 	private final double longJump;
@@ -80,12 +57,12 @@ public class Result {
 		}
 	}
 
-	public Result(final String name, final Date birthDay, final String country,
+	public Result(final String athleteName, final Date birthday, final String country,
 	              final double sprint100m, final double longJump, final double shotPut, final double highJump,
 	              final double sprint400m, final double hurdles110m, final double discusThrow,
-	              final double poleVault, final double javelinThrow, final double race1500m) {
-		this.name = normalizeString(name);
-		this.birthDay = birthDay;
+	              final double poleVault, final double javelinThrow, final double race1500m) throws DecathlonException {
+		this.athleteName = normalizeString(athleteName);
+		this.birthday = birthday;
 		this.country = normalizeCountry(country);
 		this.sprint100m = sprint100m;
 		this.longJump = longJump;
@@ -105,8 +82,8 @@ public class Result {
 	@Override
 	public String toString() {
 		return "Result{" +
-				"name='" + name + "', " +
-				"birthDay=" + (birthDay == null ? birthDay : DATE_FORMAT.format(birthDay)) + ", " +
+				"athleteName='" + athleteName + "', " +
+				"birthday='" + (birthday == null ? birthday : DATE_FORMAT.format(birthday)) + "', " +
 				"country='" + country + "', " +
 				"sprint100m=" + sprint100m + ", " +
 				"longJump=" + longJump + ", " +
@@ -117,16 +94,17 @@ public class Result {
 				"discusThrow=" + discusThrow + ", " +
 				"poleVault=" + poleVault + ", " +
 				"javelinThrow=" + javelinThrow + ", " +
-				"race1500m=" + race1500m +
+				"race1500m=" + race1500m + ", " +
+				"points=" + points +
 				'}';
 	}
 
-	public String getName() {
-		return name;
+	public String getAthleteName() {
+		return athleteName;
 	}
 
-	public Date getBirthDay() {
-		return birthDay;
+	public Date getBirthday() {
+		return birthday;
 	}
 
 	public String getCountry() {
@@ -185,59 +163,64 @@ public class Result {
 		return normalizeString(country).toUpperCase();
 	}
 
-	private void checkProperties() {
-		checkStringNotEmpty(name, NO_NAME_ID);
+	private void checkProperties() throws DecathlonException {
+		checkStringNotEmpty(athleteName, Message.NO_ATHLETE_NAME);
 		checkDate();
 		checkCountry();
-		checkNumberNotZero(sprint100m, NO_SPRINT_100M_RESULT_ID);
-		checkNumberNotZero(longJump, NO_LONG_JUMP_RESULT_ID);
-		checkNumberNotZero(shotPut, NO_SHOT_PUT_RESULT_ID);
-		checkNumberNotZero(highJump, NO_HIGH_JUMP_RESULT_ID);
-		checkNumberNotZero(sprint400m, NO_SPRINT_400M_RESULT_ID);
-		checkNumberNotZero(hurdles110m, NO_HURDLES_110M_RESULT_ID);
-		checkNumberNotZero(discusThrow, NO_DISCUS_THROW_RESULT_ID);
-		checkNumberNotZero(poleVault, NO_POLE_VAULT_RESULT_ID);
-		checkNumberNotZero(javelinThrow, NO_JAVELIN_THROW_RESULT_ID);
-		checkNumberNotZero(race1500m, NO_RACE_1500M_RESULT_ID);
+		checkNumberNotZero(sprint100m, Message.NO_SPRINT_100M);
+		checkNumberNotZero(longJump, Message.NO_LONG_JUMP);
+		checkNumberNotZero(shotPut, Message.NO_SHOT_PUT);
+		checkNumberNotZero(highJump, Message.NO_HIGH_JUMP);
+		checkNumberNotZero(sprint400m, Message.NO_SPRINT_400M);
+		checkNumberNotZero(hurdles110m, Message.NO_HURDLES_110M);
+		checkNumberNotZero(discusThrow, Message.NO_DISCUS_THROW);
+		checkNumberNotZero(poleVault, Message.NO_POLE_VAULT);
+		checkNumberNotZero(javelinThrow, Message.NO_JAVELIN_THROW);
+		checkNumberNotZero(race1500m, Message.NO_RACE_1500M);
 	}
 
-	private void checkStringNotEmpty(final String string, final String errorMessageID) {
-		if (string.isEmpty()) throw MESSAGES.argumentException(errorMessageID, toString());
+	private void checkStringNotEmpty(final String string, final Message errorMessageID) throws DecathlonException {
+		if (string.isEmpty()) throw decathlonException(errorMessageID, toString());
 	}
 
-	private void checkDate() {
-		if (birthDay == null) throw MESSAGES.argumentException(NO_BIRTHDAY_ID, toString());
+	private void checkDate() throws DecathlonException {
+		if (birthday == null) throw decathlonException(Message.NO_BIRTHDAY, toString());
 	}
 
-	private void checkCountry() {
-		checkStringNotEmpty(country, NO_COUNTRY_ID);
-		if (country.length() != 2) throw MESSAGES.argumentException(NOT_ISO2_COUNTRY_ID, toString());
+	private void checkCountry() throws DecathlonException {
+		checkStringNotEmpty(country, Message.NO_COUNTRY);
+		if (country.length() != 2) throw decathlonException(Message.NOT_ISO2_COUNTRY, toString());
 	}
 
-	private void checkNumberNotZero(final double number, final String errorMessageID) {
-		if (number == 0.0) throw MESSAGES.argumentException(errorMessageID, toString());
+	private void checkNumberNotZero(final double number, final Message errorMessageID) throws DecathlonException {
+		if (number == 0.0) throw decathlonException(errorMessageID, toString());
 	}
 
 	private int calculatePoints() {
-		return runningPoints(SPRINT_100M_KEY, sprint100m) + jumpingPoints(LONG_JUMP_KEY, longJump) +
-				throwingPoints(SHOT_PUT_KEY, shotPut) + jumpingPoints(HIGH_JUMP_KEY, highJump) +
-				runningPoints(SPRINT_400M_KEY, sprint400m) + runningPoints(HURDLES_110M_KEY, hurdles110m) +
-				throwingPoints(DISCUS_THROW_KEY, discusThrow) + jumpingPoints(POLE_VAULT_KEY, poleVault) +
-				throwingPoints(JAVELIN_THROW_KEY, javelinThrow) + runningPoints(RACE_1500M_KEY, race1500m);
+		return runningPoints(Competition.SPRINT_100M, sprint100m) +
+				jumpingPoints(Competition.LONG_JUMP, longJump) +
+				throwingPoints(Competition.SHOT_PUT, shotPut) +
+				jumpingPoints(Competition.HIGH_JUMP, highJump) +
+				runningPoints(Competition.SPRINT_400M, sprint400m) +
+				runningPoints(Competition.HURDLES_110M, hurdles110m) +
+				throwingPoints(Competition.DISCUS_THROW, discusThrow) +
+				jumpingPoints(Competition.POLE_VAULT, poleVault) +
+				throwingPoints(Competition.JAVELIN_THROW, javelinThrow) +
+				runningPoints(Competition.RACE_1500M, race1500m);
 	}
 
-	private int runningPoints(final String key, final double result) {
-		final Coefficient coefficient = COEFFICIENT_MAP.get(key);
+	private int runningPoints(final Competition competition, final double result) {
+		final Coefficient coefficient = COEFFICIENT_MAP.get(competition);
 		return points(coefficient, coefficient.b - result);
 	}
 
-	private int throwingPoints(final String key, final double result) {
-		final Coefficient coefficient = COEFFICIENT_MAP.get(key);
+	private int throwingPoints(final Competition competition, final double result) {
+		final Coefficient coefficient = COEFFICIENT_MAP.get(competition);
 		return points(coefficient, result - coefficient.b);
 	}
 
-	private int jumpingPoints(final String key, final double result) {
-		final Coefficient coefficient = COEFFICIENT_MAP.get(key);
+	private int jumpingPoints(final Competition competition, final double result) {
+		final Coefficient coefficient = COEFFICIENT_MAP.get(competition);
 		return points(coefficient, 100.0 * result - coefficient.b);
 	}
 

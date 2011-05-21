@@ -3,7 +3,7 @@ package net.azib.java.students.t107110.homework;
 import java.util.Date;
 
 public class ResultBuilder {
-	private String name;
+	private String athleteName;
 	private Date birthDay;
 	private String country;
 	private double sprint100m;
@@ -17,8 +17,8 @@ public class ResultBuilder {
 	private double javelinThrow;
 	private double race1500m;
 
-	public ResultBuilder setName(String name) {
-		this.name = name;
+	public ResultBuilder setAthleteName(String name) {
+		this.athleteName = name;
 		return this;
 	}
 
@@ -82,8 +82,8 @@ public class ResultBuilder {
 		return this;
 	}
 
-	public Result getResult() {
-		return new Result(name, birthDay, country, sprint100m, longJump, shotPut, highJump, sprint400m, hurdles110m,
+	public Result getResult() throws DecathlonException {
+		return new Result(athleteName, birthDay, country, sprint100m, longJump, shotPut, highJump, sprint400m, hurdles110m,
 				discusThrow, poleVault, javelinThrow, race1500m);
 	}
 }
