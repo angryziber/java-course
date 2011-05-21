@@ -24,14 +24,15 @@ public class ConsoleInputTest {
 	@Test
 	public void athleteAddingStopWorks() {
 		String inputString = "n" + System.getProperty("line.separator");
-		Scanner input = new Scanner(inputString);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-		new ConsoleInput(input, new PrintStream(outputStream)).getData();
+		ConsoleInput consoleInput =  new ConsoleInput();
+		consoleInput.input = new Scanner(inputString);
+		consoleInput.output = new PrintStream(outputStream);
+		consoleInput.getData();
 
 		assertEquals("Do you want to add an athlete? (y/n)" + System.getProperty("line.separator") +
 				"Athlete adding completed." + System.getProperty("line.separator"), outputStream.toString());
-
 	}
 
 	/**
@@ -60,9 +61,12 @@ public class ConsoleInputTest {
 				"79.80" + System.getProperty("line.separator") +
 				"3:58.07" + System.getProperty("line.separator") +
 				"n" + System.getProperty("line.separator");
-		Scanner input = new Scanner(inputString);
 
-		Competition competition = new ConsoleInput(input, new PrintStream(outputStream)).getData();
+		ConsoleInput consoleInput =  new ConsoleInput();
+		consoleInput.input = new Scanner(inputString);
+		consoleInput.output = new PrintStream(outputStream);
+		Competition competition = consoleInput.getData();
+
 		Athlete athlete = competition.getCompetitors().iterator().next();
 		assertEquals("Siim Piim", athlete.getName());
 		assertEquals("EE", athlete.getCountry());

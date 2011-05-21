@@ -11,6 +11,7 @@ public interface OutputStrategy {
 	 * Writes {@link Competition} data to output.
 	 *
 	 * @param competition data
+	 * @param args if needed e.g. file name
 	 */
-	public void writeOutput(Competition competition);
+	public void writeOutput(Competition competition, String... args);
 }

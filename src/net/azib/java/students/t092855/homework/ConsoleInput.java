@@ -13,8 +13,8 @@ import java.util.Scanner;
  * @author t092855
  */
 public class ConsoleInput implements InputStrategy {
-	private final Scanner input;
-	private final PrintStream output;
+	Scanner input;
+	PrintStream output;
 
 	/**
 	 * Default constructor for ConsoleInput.
@@ -23,11 +23,6 @@ public class ConsoleInput implements InputStrategy {
 	public ConsoleInput() {
 		input = new Scanner(System.in);
 		output = new PrintStream(System.out);
-	}
-
-	public ConsoleInput(Scanner input, PrintStream output) {
-		this.input = input;
-		this.output = output;
 	}
 
 	/**

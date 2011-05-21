@@ -3,8 +3,20 @@ package net.azib.java.students.t092855.homework;
 
 import java.io.*;
 
+/**
+ * CSV input strategy.
+ * Gets decathlon data from CSV file.
+ *
+ * @author t092855
+ */
 public class CSVInput implements InputStrategy {
 
+	/**
+	 * Get decathlon competition data from CSV.
+	 * CSV file should be in UTF-8 encoding without BOM. Element separator should be ",".
+	 *
+	 * @return competition data
+	 */
 	@Override
 	public Competition getData(String... arg) {
 		Competition competition = new Competition();
@@ -44,6 +56,11 @@ public class CSVInput implements InputStrategy {
 		return competition;
 	}
 
+	/**
+	 * Parses one line in CSV format and creates an athlete
+	 * @param line line in CSV format. Separator: ","
+	 * @return athlete, null if parsing fails.
+	 */
 	Athlete parseLine(String line) {
 		String[] elements = line.split(",");
 

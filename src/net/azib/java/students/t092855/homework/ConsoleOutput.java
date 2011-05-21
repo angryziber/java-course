@@ -11,7 +11,7 @@ import java.util.Iterator;
  * @author t092855
  */
 public class ConsoleOutput implements OutputStrategy {
-	private final PrintStream output;
+	 PrintStream output;
 
 	/**
 	 * Default constructor for console output.
@@ -25,15 +25,16 @@ public class ConsoleOutput implements OutputStrategy {
 	 * Outputs decathlon competition data to console
 	 *
 	 * @param competition decathlon competition data
+	 * @param args competition data
 	 */
 	@Override
-	public void writeOutput(Competition competition) {
+	public void writeOutput(Competition competition, String... args) {
 		Athlete athlete;
 
 		if(competition.getCompetitors().isEmpty()) {
 			return;
 		}
-		System.out.println("Here are the points");
+		output.println("Here are the points");
 
 		Iterator<Athlete> iterator = competition.getCompetitors().iterator();
 
@@ -43,7 +44,6 @@ public class ConsoleOutput implements OutputStrategy {
 				printAthleteData(competition.getAthletePlace(athlete), athlete);
 		}  while (iterator.hasNext());
 	}
-
 
 	private void printAthleteData (String place, Athlete athlete) {
 		StringBuilder stringBuilder = new StringBuilder();

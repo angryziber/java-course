@@ -2,7 +2,7 @@ package net.azib.java.students.t092855.homework;
 
 /**
  * Error enumeration.
- * Contains the errors and error messages.
+ * Contains errors and error messages for Decathlon Calculator.
  *
  * @author t092855
  */
@@ -13,7 +13,10 @@ public enum Error {
 	ERROR_FILE_CLOSING_FAILED("Error: file closing failed."),
 	ERROR_FILE_READ("Error: file reading failed."),
 	ERROR_CSV_READ_LINE_FAILED("Error: CSV data reading failed."),
-	ERROR_RESULT_MISSING("Error: CSV data error, probable cause: result missing");
+	ERROR_RESULT_MISSING("Error: CSV data error, probable cause: result missing."),
+	ERROR_OUT_FILE_NO_NAME("Error: output file name is empty."),
+	ERROR_CSV_FILE("Error: can't create output file."),
+	ERROR_CSV_FILE_WRITE("Error: can't write to output file.");
 
 	private final String errorText;
 
@@ -21,6 +24,10 @@ public enum Error {
 		this.errorText = s;
 	}
 
+	/**
+	 * Gets error text
+	 * @return error text
+	 */
 	public String getErrorText() {
 		return errorText;
 	}

@@ -27,5 +27,8 @@ public class DecathlonCalculator {
 		// todo choose output strategy from parameters and use it
 		outputStrategy = new ConsoleOutput();
 		outputStrategy.writeOutput(competition);
+
+//		outputStrategy = new CSVOutput();
+//		outputStrategy.writeOutput(competition, "decathlon_out.csv");
 	}
 }
