@@ -3,6 +3,9 @@ package net.azib.java.students.t107678.homework;
 import java.util.Collection;
 import java.util.Set;
 
+/** represents record for one participant, his personal data and his performance from 10 events
+ *
+ */
 public class Record {
 
 

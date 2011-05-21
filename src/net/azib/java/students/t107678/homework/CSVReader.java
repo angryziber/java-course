@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/** Logic for reading data from file
+ *
+ */
 public class CSVReader implements Reader {
 
     final private BufferedReader reader;

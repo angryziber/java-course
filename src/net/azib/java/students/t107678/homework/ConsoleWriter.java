@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static java.lang.System.*;
 
+/** Logic for writing output to console in more less friendly way
+ *
+ */
 public class ConsoleWriter implements Writer {
 
 	final private PrintStream writer;

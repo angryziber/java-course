@@ -1,7 +1,7 @@
 package net.azib.java.students.t107678.homework;
 
-/**
- *     Represents logic for final place (position in Competition) that participant took
+/**   Represents logic for final place (position in Competition) that participant took
+ *
  */
 public class Place {
 

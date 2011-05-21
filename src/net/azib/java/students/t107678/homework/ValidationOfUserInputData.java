@@ -15,7 +15,7 @@ public class ValidationOfUserInputData {
     private static final Pattern MCS1 = Pattern.compile("\\d+:\\d+\\.\\d+");  //MCS stands for MinutesColonSeconds
     private static final Pattern MCS2 = Pattern.compile("\\d+:\\d+");
 
-    /**
+    /** Logic for validating a name
      *
      * @param inputValue user's input value
      * @return true if logically correct
@@ -30,7 +30,7 @@ public class ValidationOfUserInputData {
 
     }
 
-    /**
+    /** vLogic for validating a birth date
      *
      * @param inputValue user's input value
      * @return true if logically correct
@@ -44,7 +44,7 @@ public class ValidationOfUserInputData {
 
     }
 
-    /**
+    /** Logic for validating a country code
      *
      * @param inputValue user's input value
      * @return true if logically correct
@@ -58,7 +58,7 @@ public class ValidationOfUserInputData {
 
     }
 
-    /**
+    /** Logic for validating a input of 8 meters or second events
      *
      * @param inputValue user's input value
      * @return true if logically correct
@@ -71,7 +71,7 @@ public class ValidationOfUserInputData {
         return false;
     }
 
-    /**
+    /** Logic for validating a 2 minutes colon seconds events
      *
      * @param inputValue user's input value
      * @return true if logically correct

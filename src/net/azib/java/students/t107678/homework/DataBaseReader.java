@@ -1,7 +1,5 @@
 package net.azib.java.students.t107678.homework;
 
-import com.sun.jmx.mbeanserver.Introspector;
-
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +11,7 @@ public class DataBaseReader implements Reader {
 
 	DataBaseConnector connector;
 	ResultSet set;
-	static final String statement = "select a.name, a.dob, a.country_code, r.race_100m, r.long_jump,r.shot_put,r.high_jump,r.race_400m," +
+	static final String statementById = "select a.name, a.dob, a.country_code, r.race_100m, r.long_jump,r.shot_put,r.high_jump,r.race_400m," +
 			" r.hurdles_110m, r.discus_throw, r.pole_vault, r.javelin_throw, r.race_1500m from athletes a, results r " +
 			"where a.id=r.athlete_id and r.competition_id=";
 
@@ -35,14 +33,14 @@ public class DataBaseReader implements Reader {
 	 * Normal scenario constructor
 	 *
 	 * @param connector     instance of DataBaseConnector
-	 * @param competitionId number of competition from database provided by user
+	 * @param competition number of competition from database provided by user
 	 */
-	public DataBaseReader(DataBaseConnector connector, String competitionId) {
+	public DataBaseReader(DataBaseConnector connector, String competition) {
 		this.connector = connector;
-		if (isParameterInt(competitionId))
-			this.set = connector.executeSelect(statement + competitionId);      //TODO implement possibility of connection with competition_name
+		if (isParameterInt(competition))
+			this.set = connector.executeSelect(statementById + competition);
 		else
-			this.set = connector.executeSelect(statementByName + competitionId+"\'");      //TODO implement possibility of connection with competition_name
+			this.set = connector.executeSelect(statementByName + competition +"\'");
 
 	}
 

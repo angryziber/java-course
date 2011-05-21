@@ -17,6 +17,9 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/** Logic for making XML files
+ *
+ */
 public class XMLWriter implements Writer {
 
 	DocumentBuilderFactory fact;
@@ -40,6 +43,10 @@ public class XMLWriter implements Writer {
 		return field;
 	}
 
+	/**
+	 * @param place  Participant's final place in competition
+	 * @param record Participant's Record
+	 */
 	@Override
 	public void writeNext(Place place, Record record) {
 
@@ -77,7 +84,9 @@ public class XMLWriter implements Writer {
 
 	}
 
-
+	/**
+	 * @param resultsComputation instance of ResultComputation with competition final results
+	 */
 	@Override
 	public void writeOutput(ResultsComputation resultsComputation) throws ParserConfigurationException, TransformerException {
 

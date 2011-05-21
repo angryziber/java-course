@@ -3,6 +3,7 @@ package net.azib.java.students.t107678.homework;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 public class PlaceTest {
 
@@ -25,4 +26,9 @@ public class PlaceTest {
         assertEquals("10-15",placeTenToFifteenth.getFinalPlace());
 
     }
+
+	@Test
+	public void getIncorrectPlace() throws Exception {
+		assertNotSame("2",placeTwoToFour.getFinalPlace());
+	}
 }

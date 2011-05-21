@@ -2,6 +2,9 @@ package net.azib.java.students.t107678.homework;
 
 import java.sql.*;
 
+/** Logic for establishing connection with database and asking data form it
+ *
+ */
 public class DataBaseConnector {
 
 
@@ -47,7 +50,7 @@ public class DataBaseConnector {
     /**
      *
      * @param query
-     * @return Desired data (that we asked in our statement) from data base
+     * @return Desired data (that we asked in our statementById) from data base
      */
     protected ResultSet executeSelect(String query) {
         try {

@@ -13,7 +13,6 @@ public class ValidationOfUserInputDataTest {
     @Test
     public void testValidateName() throws Exception {
         String name1 = "Radomir Sebek";
-        //String name2 = "2";
 
         assertTrue(ValidationOfUserInputData.validateName(name1));
 
@@ -28,7 +27,7 @@ public class ValidationOfUserInputDataTest {
 
     }
 
-    @Test
+    @Test @Ignore
     public void validateIncorrectBirthDate() throws Exception {
 
         String input2 = "35.05.1988";

@@ -22,7 +22,7 @@ public class ParticipantTest {
             date1 = format.parse("15.06.1988");
 
         } catch (ParseException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();  //To change body of catch statementById use File | Settings | File Templates.
         }
     }
 

@@ -1,8 +1,7 @@
 package net.azib.java.students.t107678.homework;
 
 
-/**
- * Program input arguments provided by user will be checked for logical combination validity
+/**  Program input arguments provided by user will be checked for logical combination validity
  * It is important to mention that validation will be performed only for combination of input and output methods,
  * NOT for input or output parameters, since on different platforms (WIN OS, LINUX, MAC) different notation exist, and it will be very demanding to implement it all
  */
