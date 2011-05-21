@@ -5,46 +5,48 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ResultsComputationTest {
 
-		ResultsComputation resultsComputation = new ResultsComputation();
+	ResultsComputation resultsComputation = new ResultsComputation();
 
 	@Test
-	public void testComputeRecordsResults() throws Exception {
+	public void testComputeRecordsResultsAndGetRecords() throws Exception {
 
 		Participant mockParticipantOne = mock(Participant.class);
+		when(mockParticipantOne.getName()).thenReturn("First Participant");
 		Event e1 = mock(Event.class);
 		Collection<Event> events = new ArrayList<Event>();
 		events.add(e1);
-		when(e1.getPoints()).thenReturn(20);
-        Record recOne = new Record(mockParticipantOne, events);
+		Record recOne = new Record(mockParticipantOne, events);
+		when(recOne.getTotalPoints()).thenReturn(100);
 
 		Participant mockParticipantTwo = mock(Participant.class);
+		when(mockParticipantTwo.getName()).thenReturn("Second Participant");
 		Event e2 = mock(Event.class);
 		events.add(e2);
-		when(e2.getPoints()).thenReturn(40);
-        Record recTwo = new Record(mockParticipantOne, events);
+		Record recTwo = new Record(mockParticipantTwo, events);
+		when(recTwo.getTotalPoints()).thenReturn(50);
 
 		ArrayList records = new ArrayList<Record>();
 		records.add(recOne);
 		records.add(recTwo);
 
-		// TODO check state before
-
-
+		resultsComputation.records = records;
 		resultsComputation.computeRecordsResults();
 
-		// TODO check state in order after
 
+		assertTrue(resultsComputation.getRecords().get(0).getEvents().contains(e1));
+		assertTrue(resultsComputation.getRecords().get(0).getEvents().contains(e2));
 
-
-	}
-
-	@Test
-	public void testGetRecords() throws Exception {
+		assertEquals("First Participant",resultsComputation.getRecords().get(0).getParticipant().getName());
+		assertEquals("Second Participant",resultsComputation.getRecords().get(1).getParticipant().getName());
 
 	}
+
+
 }

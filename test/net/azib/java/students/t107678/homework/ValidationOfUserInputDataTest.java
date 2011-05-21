@@ -30,9 +30,9 @@ public class ValidationOfUserInputDataTest {
     @Test @Ignore
     public void validateIncorrectBirthDate() throws Exception {
 
-        String input2 = "35.05.1988";
+        String input2 = "358.05.1988";
 
-        //assertFalse(ValidationOfUserInputData.validateBirthDate(input2));
+        assertFalse(ValidationOfUserInputData.validateBirthDate(input2));
 
 
     }
