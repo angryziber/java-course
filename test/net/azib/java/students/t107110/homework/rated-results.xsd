@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="rated-results" type="RatedResultsType"/>
+
+	<xs:complexType name="RatedResultsType">
+		<xs:sequence>
+			<xs:element name="result" type="ResultType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResultType">
+		<xs:sequence>
+			<xs:element name="event" type="EventType" minOccurs="10" maxOccurs="10"/>
+		</xs:sequence>
+		<xs:attribute name="place" type="PlaceType" use="required"/>
+		<xs:attribute name="points" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="athlete" type="xs:token" use="required"/>
+		<xs:attribute name="birthday" type="xs:date" use="required"/>
+		<xs:attribute name="country" type="CountryType" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="EventType">
+		<xs:attribute name="name" type="xs:token" use="required"/>
+		<xs:attribute name="type" type="TypeType" use="required"/>
+		<xs:attribute name="result" type="EventResultType" use="required"/>
+	</xs:complexType>
+
+	<xs:simpleType name="PlaceType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[1-9][0-9]*(-[1-9][0-9]*)?"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CountryType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TypeType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="distance"/>
+			<xs:enumeration value="time"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="EventResultType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="([1-9][0-9]*|[0-9])(:[0-9]{2})?\.[0-9]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
