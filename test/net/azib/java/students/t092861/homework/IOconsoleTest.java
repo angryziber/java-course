@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class IOconsoleTest {
@@ -37,6 +38,7 @@ public class IOconsoleTest {
 	}
 
 	@Test
+	@Ignore
 	public void testConsoleOutput() {
 		String[] lines = 
 		{
