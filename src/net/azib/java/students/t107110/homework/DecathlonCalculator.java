@@ -20,7 +20,7 @@ public class DecathlonCalculator {
 		results = rateResults(readResults(reader));
 	}
 
-	public void save(final ResultWriter writer) throws IOException {
+	public void save(final ResultWriter writer) throws DecathlonException {
 		try {
 			for (final Map.Entry<Result, String> result : results.entrySet())
 				writer.write(result.getValue(), result.getKey());

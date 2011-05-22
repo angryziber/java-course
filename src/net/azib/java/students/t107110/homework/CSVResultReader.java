@@ -5,9 +5,10 @@ package net.azib.java.students.t107110.homework;
 import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,13 +27,13 @@ public class CSVResultReader implements ResultReader {
 
 	private final BufferedReader reader;
 
-	public CSVResultReader(final String fileName) throws IOException {
-		reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
+	public CSVResultReader(final InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
 	}
 
 	@Override
-	public Result read() throws IOException, DecathlonException {
-		final String line = reader.readLine();
+	public Result read() throws DecathlonException {
+		final String line = readLine();
 		if (line == null) return null;
 
 		final Iterator<String> iterator = asList(line.split(",")).iterator();
@@ -60,6 +61,19 @@ public class CSVResultReader implements ResultReader {
 		return builder.getResult();
 	}
 
+	@Override
+	public void close() {
+		IOUtils.closeQuietly(reader);
+	}
+
+	private String readLine() throws DecathlonException {
+		try {
+			return reader.readLine();
+		} catch (IOException e) {
+			throw decathlonException(e, Message.CANNOT_READ);
+		}
+	}
+
 	private static String removeSurroundingQuotes(String string) {
 		return string.replaceFirst("^\\s*\"(.*?)\"\\s*$", "$1");
 	}
@@ -73,23 +87,18 @@ public class CSVResultReader implements ResultReader {
 	}
 
 	private static double parseTime(String string) {
-		return getMinutes(string) * 60.0 + getSeconds(string);
+		return parseMinutes(string) * 60.0 + parseSeconds(string);
 	}
 
-	private static double getMinutes(final String string) {
+	private static double parseMinutes(final String string) {
 		int index = string.indexOf(':');
 		if (index < 0) return 0.0;
 		return Double.parseDouble(string.substring(0, index));
 	}
 
-	private static double getSeconds(final String string) {
+	private static double parseSeconds(final String string) {
 		int index = string.indexOf(':');
 		if (index < 0) return Double.parseDouble(string);
 		return Double.parseDouble(string.substring(index + 1));
-	}
-
-	@Override
-	public void close() {
-		IOUtils.closeQuietly(reader);
 	}
 }

@@ -3,8 +3,11 @@ package net.azib.java.students.t107110.homework;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -28,7 +31,7 @@ public class ResultTest {
 	private int points;
 
 	@Before
-	public void setCorrentResult() {
+	public void prepare() {
 		name = "Some Athlete";
 		birthDay = new Date();
 		country = "EU";
@@ -70,7 +73,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void nameIsUnmodified() throws DecathlonException {
+	public void birthdayIsNotChanged() throws DecathlonException {
 		birthDay = new Date();
 		final Result result = createResult();
 		assertThat(result.getBirthday(), is(birthDay));
@@ -102,7 +105,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void sprint100mResultIsUnmodified() throws DecathlonException {
+	public void sprint100mResultIsNotChanged() throws DecathlonException {
 		sprint100m = 3.3;
 		final Result result = createResult();
 		assertThat(result.getSprint100m(), is(sprint100m));
@@ -115,7 +118,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void longJumpResultIsUnmodified() throws DecathlonException {
+	public void longJumpResultIsNotChanged() throws DecathlonException {
 		longJump = 3.3;
 		final Result result = createResult();
 		assertThat(result.getLongJump(), is(longJump));
@@ -128,7 +131,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void shotPutResultIsUnmodified() throws DecathlonException {
+	public void shotPutResultIsNotChanged() throws DecathlonException {
 		shotPut = 3.3;
 		final Result result = createResult();
 		assertThat(result.getShotPut(), is(shotPut));
@@ -141,7 +144,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void highJumpResultIsUnmodified() throws DecathlonException {
+	public void highJumpResultIsNotChanged() throws DecathlonException {
 		highJump = 3.3;
 		final Result result = createResult();
 		assertThat(result.getHighJump(), is(highJump));
@@ -154,7 +157,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void sprint400mResultIsUnmodified() throws DecathlonException {
+	public void sprint400mResultIsNotChanged() throws DecathlonException {
 		sprint400m = 3.3;
 		final Result result = createResult();
 		assertThat(result.getSprint400m(), is(sprint400m));
@@ -167,7 +170,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void hurdles110mResultIsUnmodified() throws DecathlonException {
+	public void hurdles110mResultIsNotChanged() throws DecathlonException {
 		hurdles110m = 3.3;
 		final Result result = createResult();
 		assertThat(result.getHurdles110m(), is(hurdles110m));
@@ -180,7 +183,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void discusThrowResultIsUnmodified() throws DecathlonException {
+	public void discusThrowResultIsNotChanged() throws DecathlonException {
 		discusThrow = 3.3;
 		final Result result = createResult();
 		assertThat(result.getDiscusThrow(), is(discusThrow));
@@ -193,7 +196,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void poleVaultResultIsUnmodified() throws DecathlonException {
+	public void poleVaultResultIsNotChanged() throws DecathlonException {
 		poleVault = 3.3;
 		final Result result = createResult();
 		assertThat(result.getPoleVault(), is(poleVault));
@@ -206,7 +209,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void javelinThrowResultIsUnmodified() throws DecathlonException {
+	public void javelinThrowResultIsNotChanged() throws DecathlonException {
 		javelinThrow = 3.3;
 		final Result result = createResult();
 		assertThat(result.getJavelinThrow(), is(javelinThrow));
@@ -219,7 +222,7 @@ public class ResultTest {
 	}
 
 	@Test
-	public void race1500mResultIsUnmodified() throws DecathlonException {
+	public void race1500mResultIsNotChanged() throws DecathlonException {
 		race1500m = 3.3;
 		final Result result = createResult();
 		assertThat(result.getRace1500m(), is(race1500m));
@@ -239,11 +242,25 @@ public class ResultTest {
 	}
 
 	@Test
-	public void differentResults() throws DecathlonException {
+	public void compareOnPoints() throws DecathlonException {
 		final Result result = createResult();
 		sprint100m += 1;
 		final Result smallerResult = createResult();
-		assertThat(result.compareTo(smallerResult), is(-1));
+
+		final List<Result> list = asList(smallerResult, result);
+		Collections.sort(list);
+		assertThat(list, is(asList(result, smallerResult)));
+	}
+
+	@Test
+	public void equalPointsCompareOnAthleteNames() throws DecathlonException {
+		final Result result = createResult();
+		name += " Jr.";
+		final Result biggerResult = createResult();
+
+		final List<Result> list = asList(biggerResult, result);
+		Collections.sort(list);
+		assertThat(list, is(asList(result, biggerResult)));
 	}
 
 	private Result createResult() throws DecathlonException {

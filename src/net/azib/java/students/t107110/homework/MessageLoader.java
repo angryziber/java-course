@@ -1,7 +1,5 @@
 package net.azib.java.students.t107110.homework;
 
-import org.apache.log4j.PatternLayout;
-
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;

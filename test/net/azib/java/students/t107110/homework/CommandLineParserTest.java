@@ -38,6 +38,11 @@ public class CommandLineParserTest {
 		new CommandLineParser("-console", "-console", "-console");
 	}
 
+	@Test(expected = DecathlonException.class)
+	public void failOnMissingFile() throws IOException, DecathlonException {
+		new CommandLineParser("-csv", "$", "-console");
+	}
+
 	@Test
 	public void checkConsoleInputAndOutput() throws IOException, DecathlonException {
 		final CommandLineParser parser = new CommandLineParser("-console", "-console");
@@ -60,6 +65,11 @@ public class CommandLineParserTest {
 		assertThat(parser.getReader(), is(instanceOf(DBResultReader.class)));
 	}
 
+	@Test(expected = DecathlonException.class)
+	public void failOnUnsupportedInputMethod() throws IOException, DecathlonException {
+		new CommandLineParser("-xml", "-console");
+	}
+
 	@Test
 	public void checkXMLOutput() throws IOException, DecathlonException {
 		final CommandLineParser parser = new CommandLineParser("-console", "-xml", "output.xml");
@@ -69,6 +79,11 @@ public class CommandLineParserTest {
 	@Test
 	public void checkHTMLOutput() throws IOException, DecathlonException {
 		final CommandLineParser parser = new CommandLineParser("-console", "-html", "output.html");
-		assertThat(parser.getWriter(), is(instanceOf(HTMLResultWriter.class)));
+		assertThat(parser.getWriter(), is(instanceOf(XMLResultWriter.class)));
+	}
+
+	@Test(expected = DecathlonException.class)
+	public void failOnUnsupportedOutputMethod() throws IOException, DecathlonException {
+		new CommandLineParser("-console", "-db");
 	}
 }
