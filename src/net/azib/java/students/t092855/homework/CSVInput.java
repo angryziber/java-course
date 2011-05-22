@@ -72,11 +72,10 @@ public class CSVInput implements InputStrategy {
 		if(!athlete.setCountry(elements[2].trim()))
 			return null;
 
-		int i = 0;
 		int j = 3;
 		double[] results = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
-		for(DecathlonEvent event : DecathlonEvent.values()) {
+		for(int i = 0; i < results.length; i++) {
 			double temp;
 			try {
 				temp = DecathlonEvents.validateAndConvertResult(elements[j].trim());
@@ -89,7 +88,7 @@ public class CSVInput implements InputStrategy {
 				return null;
 			}
 			else {
-				results[i++] = temp;
+				results[i] = temp;
 				j++;
 			}
 		}

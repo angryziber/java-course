@@ -47,10 +47,10 @@ public class Athlete {
 	/**
 	 * Set athlete name
 	 *
-	 * @param name must comply with pattern: forename surname, start with a capital letter, no numbers allowed,
+	 * @param name should comply with pattern: forename surname, start with a capital letter, no numbers allowed,
 	 * many forenames and surnames are allowed. E.g. Siim Piim, Karl-Filipp Tamm
 	 *
-	 * @return true if name complies with pattern and name is set, else false
+	 * @return true if name complies with pattern, else false
 	 */
 	public boolean setName(String name) {
 		String n1 = "^[\\p{Lu}]{1}\'?[- \\p{L}]+";
@@ -58,14 +58,8 @@ public class Athlete {
 		n1 = n1 + " " + n2;
 
 		name = name.trim();
-		if (name.matches(n1)) {
-			this.name = name;
-			return true;
-		}
-		else {
-			this.name = null;
-			return false;
-		}
+		this.name = name;
+		return name.matches(n1);
 	}
 
 	/**
@@ -80,7 +74,7 @@ public class Athlete {
 	/**
 	 * Set athlete birthday
 	 *
-	 * @param birthday must comply with DateFormat.MEDIUM pattern
+	 * @param birthday should comply with DateFormat.MEDIUM pattern
 	 *
 	 * @return true if pattern was correct and date was set, else false
 	 */
@@ -89,7 +83,6 @@ public class Athlete {
 		try {
 			this.birthday = dateFormat.parse(birthday);
 		} catch (ParseException e) {
-			this.birthday = null;
 			return false;
 		}
 		return true;
@@ -107,19 +100,14 @@ public class Athlete {
 	/**
 	 * Set country code
 	 *
-	 * @param country must comply to country pattern: two capital letters, e.g. EE
+	 * @param country should comply with country pattern: two capital letters, e.g. EE
 	 *
-	 * @return true, if country code complies with pattern and is set, else false
+	 * @return true, if country code complies with pattern, else false
 	 */
 	public boolean setCountry(String country) {
 		String c = "^[A-Z]{2}$";
-		if (country.matches(c)) {
-			this.country = country;
-			return true;
-		}
-		else {
-			this.country = null;
-			return false;
-		}
+
+		this.country = country;
+		return country.matches(c);
 	}
 }

@@ -78,30 +78,33 @@ public class ConsoleInput implements InputStrategy {
 	}
 
 	private void getAthleteName(Scanner scanner, Athlete athlete) {
-		while(athlete.getName() == null)
+		while(true)
 		{
 			output.println("Please enter athlete's name:");
 			String s = scanner.next();
-			athlete.setName(s);
+			if(athlete.setName(s))
+				break;
 		}
 	}
 
 	private void getAthleteCountry(Scanner scanner, Athlete athlete) {
-		while(athlete.getCountry() == null)
+		while(true)
 		{
 			output.println("Please enter athlete's origin:");
 			String s = scanner.next();
-			athlete.setCountry(s);
+			if (athlete.setCountry(s))
+				break;
 		}
 	}
 
 	private void getAthleteBirthday(Scanner scanner, Athlete athlete) {
-		while(athlete.getBirthday() == null)
+		while(true)
 		{
 			output.println("Please enter athlete's date of birth (in format: " +
 					((SimpleDateFormat)DateFormat.getDateInstance(DateFormat.MEDIUM)).toPattern() + "):");
 			String s = scanner.next();
-			athlete.setBirthday(s);
+			if (athlete.setBirthday(s))
+				break;
 		}
 	}
 
