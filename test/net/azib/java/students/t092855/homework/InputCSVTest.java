@@ -2,25 +2,22 @@ package net.azib.java.students.t092855.homework;
 
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * CSVInputTest
+ * InputCSVTest
  *
  * @author t092855
  */
-public class CSVInputTest {
+public class InputCSVTest {
 	/**
-	 * Unit test for {@link net.azib.java.students.t092855.homework.CSVInput#parseLine(String)}
+	 * Unit test for {@link InputCSV#parseLine(String)}
 	 * @throws java.text.ParseException if parsing date fails
 	 */
 	@Test
@@ -30,7 +27,7 @@ public class CSVInputTest {
 		Date date = new SimpleDateFormat("dd.MM.yyyy").parse("3.04.1972");
 		String dateString = dateFormat.format(date);
 
-		Athlete athlete = new CSVInput().parseLine(line);
+		Athlete athlete = new InputCSV().parseLine(line);
 		assertNotNull(athlete);
 		assertEquals("José Mañana Perez", athlete.getName());
 		assertEquals(dateString, dateFormat.format(athlete.getBirthday()));

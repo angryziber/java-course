@@ -12,14 +12,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * CSVOutputTest
+ * OutputCSVTest
  *
  * @author t092855
  */
-public class CSVOutputTest {
+public class OutputCSVTest {
 
 	/**
-	 * Unit test for {@link CSVOutput#formatLineCSV(String, Athlete)}
+	 * Unit test for {@link OutputCSV#formatLineCSV(String, Athlete)}
 	 * @throws java.text.ParseException if date parsing fails
 	 */
 	@Test
@@ -39,7 +39,7 @@ public class CSVOutputTest {
 		when(athlete.getName()).thenReturn("Siim Piim");
 		when(athlete.getAthleteEvents()).thenReturn(decathlonEvents);
 
-		String actualString = new CSVOutput().formatLineCSV("1", athlete);
+		String actualString = new OutputCSV().formatLineCSV("1", athlete);
 		String expectedString = "1,3751,\"Siim Piim\"," +
 				dateString + "," +
 				"EE," +
@@ -49,7 +49,7 @@ public class CSVOutputTest {
 	}
 
 	/**
-	 * Unit test for {@link CSVOutput#formatLineCSV(String, Athlete)}
+	 * Unit test for {@link OutputCSV#formatLineCSV(String, Athlete)}
 	 * @throws java.text.ParseException if date parsing fails
 	 */
 	@Test
@@ -65,7 +65,7 @@ public class CSVOutputTest {
 		athlete.setCountry("EE");
 		athlete.setDecathlonEvent(new DecathlonEvents(results));
 
-		String actualString = new CSVOutput().formatLineCSV("1", athlete);
+		String actualString = new OutputCSV().formatLineCSV("1", athlete);
 		String expectedString = "1,3751,\"Siim Piim\"," +
 				dateString + "," +
 				"EE," +

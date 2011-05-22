@@ -9,7 +9,7 @@ import java.io.*;
  *
  * @author t092855
  */
-public class CSVInput implements InputStrategy {
+public class InputCSV implements InputStrategy {
 
 	/**
 	 * Get decathlon competition data from CSV.

@@ -10,14 +10,14 @@ import java.util.Iterator;
  *
  * @author t092855
  */
-public class ConsoleOutput implements OutputStrategy {
+public class OutputConsole implements OutputStrategy {
 	 PrintStream output;
 
 	/**
 	 * Default constructor for console output.
 	 * Uses System.out for data output.
 	 */
-	public ConsoleOutput() {
+	public OutputConsole() {
 		this.output = System.out;
 	}
 

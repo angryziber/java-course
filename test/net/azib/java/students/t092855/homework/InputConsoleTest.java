@@ -11,32 +11,32 @@ import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
 
 /**
- * ConsoleInputTest
- * Unit tests for {@link net.azib.java.students.t092855.homework.ConsoleInput}
+ * InputConsoleTest
+ * Unit tests for {@link InputConsole}
  *
  * @author t092855
  */
-public class ConsoleInputTest {
+public class InputConsoleTest {
 
 	/**
-	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleInput#getData(String...)} ()}
+	 * Unit test for {@link InputConsole#getData(String...)} ()}
 	 */
 	@Test
 	public void athleteAddingStopWorks() {
 		String inputString = "n" + System.getProperty("line.separator");
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-		ConsoleInput consoleInput =  new ConsoleInput();
-		consoleInput.input = new Scanner(inputString);
-		consoleInput.output = new PrintStream(outputStream);
-		consoleInput.getData();
+		InputConsole inputConsole =  new InputConsole();
+		inputConsole.input = new Scanner(inputString);
+		inputConsole.output = new PrintStream(outputStream);
+		inputConsole.getData();
 
 		assertEquals("Do you want to add an athlete? (y/n)" + System.getProperty("line.separator") +
 				"Athlete adding completed." + System.getProperty("line.separator"), outputStream.toString());
 	}
 
 	/**
-	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleInput#getData(String...)}
+	 * Unit test for {@link InputConsole#getData(String...)}
 	 * @throws java.text.ParseException if parsing date fails
 	 */
 	@Test
@@ -62,10 +62,10 @@ public class ConsoleInputTest {
 				"3:58.07" + System.getProperty("line.separator") +
 				"n" + System.getProperty("line.separator");
 
-		ConsoleInput consoleInput =  new ConsoleInput();
-		consoleInput.input = new Scanner(inputString);
-		consoleInput.output = new PrintStream(outputStream);
-		Competition competition = consoleInput.getData();
+		InputConsole inputConsole =  new InputConsole();
+		inputConsole.input = new Scanner(inputString);
+		inputConsole.output = new PrintStream(outputStream);
+		Competition competition = inputConsole.getData();
 
 		Athlete athlete = competition.getCompetitors().iterator().next();
 		assertEquals("Siim Piim", athlete.getName());

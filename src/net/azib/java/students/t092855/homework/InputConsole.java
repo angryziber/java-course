@@ -12,15 +12,15 @@ import java.util.Scanner;
  *
  * @author t092855
  */
-public class ConsoleInput implements InputStrategy {
+public class InputConsole implements InputStrategy {
 	Scanner input;
 	PrintStream output;
 
 	/**
-	 * Default constructor for ConsoleInput.
+	 * Default constructor for InputConsole.
 	 * Uses System.in for data input and System.out for data output
 	 */
-	public ConsoleInput() {
+	public InputConsole() {
 		input = new Scanner(System.in);
 		output = new PrintStream(System.out);
 	}

@@ -10,7 +10,7 @@ import java.util.Iterator;
  *
  * @author t092855
  */
-public class CSVOutput implements OutputStrategy{
+public class OutputCSV implements OutputStrategy{
 
 	/**
 	 * Writes competition data to CSV file. The file is in UTF-8 encoding without BOM.

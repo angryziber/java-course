@@ -18,20 +18,20 @@ public class DecathlonCalculator {
 		Competition competition;
 
 		// todo choose input strategy from parameters and use it to create athlete list
-		inputStrategy = new ConsoleInput();
+		inputStrategy = new InputConsole();
 		competition = inputStrategy.getData();
 
-//		inputStrategy = new CSVInput();
+//		inputStrategy = new InputCSV();
 //		competition = inputStrategy.getData("decathlon_data.csv");
 
 //		inputStrategy = new InputDB();
 //		competition = inputStrategy.getData("DECATHLON4BEER");
 
 		// todo choose output strategy from parameters and use it
-		outputStrategy = new ConsoleOutput();
+		outputStrategy = new OutputConsole();
 		outputStrategy.writeOutput(competition);
 
-//		outputStrategy = new CSVOutput();
+//		outputStrategy = new OutputCSV();
 //		outputStrategy.writeOutput(competition, "decathlon_out.csv");
 	}
 }

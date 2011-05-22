@@ -16,11 +16,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * ConsoleOutputTest
+ * OutputConsoleTest
  *
  * @author t092855
  */
-public class ConsoleOutputTest {
+public class OutputConsoleTest {
 	private final String LS = System.getProperty("line.separator");
 	private final double[] testResults1 = {9.58, 8.22, 23.12, 2.45, 43.18, 12.87, 74.08, 6.14, 98.48, 206.00};
 	private final double[] testResults2 = {10.45, 8.22, 23.12, 2.45, 43.18, 12.87, 74.08, 6.14, 98.48, 206.00};
@@ -28,14 +28,14 @@ public class ConsoleOutputTest {
 	private final int testPoints2 = 987 + 1117 + 1295 + 1244 + 1156 + 1126 + 1383 + 1277 + 1331 + 1218;
 
 	/**
-	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleOutput#writeOutput(Competition, String...)}
+	 * Unit test for {@link OutputConsole#writeOutput(Competition, String...)}
 	 * @throws java.text.ParseException date parsing fails
 	 */
 	@Test
 	public void outputIsWrittenCorrectlyWithMocking() throws ParseException {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		ConsoleOutput consoleOutput = new ConsoleOutput();
-		consoleOutput.output = new PrintStream(outputStream);
+		OutputConsole outputConsole = new OutputConsole();
+		outputConsole.output = new PrintStream(outputStream);
 
 		DecathlonEvents decathlonEvents1 = mock(DecathlonEvents.class);
 		when(decathlonEvents1.getTotalPoints()).thenReturn(testPoints1);
@@ -81,7 +81,7 @@ public class ConsoleOutputTest {
 		when(competition.getAthletePlace(athlete2)).thenReturn("1-2");
 		when(competition.getAthletePlace(athlete3)).thenReturn("3");
 
-		consoleOutput.writeOutput(competition);
+		outputConsole.writeOutput(competition);
 
 		String expectedOutput = "Here are the points" + LS;
 		expectedOutput += "1-2 " + testPoints1 + " Jim Beam " + formatBirthday("01.01.1795") + " US " +
@@ -94,14 +94,14 @@ public class ConsoleOutputTest {
 	}
 
 	/**
-	 * Unit test for {@link net.azib.java.students.t092855.homework.ConsoleOutput#writeOutput(Competition, String...)}
+	 * Unit test for {@link OutputConsole#writeOutput(Competition, String...)}
 	 * @throws java.text.ParseException date parsing fails
 	 */
 	@Test
 	public void outputIsWrittenCorrectly() throws ParseException {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		ConsoleOutput consoleOutput = new ConsoleOutput();
-		consoleOutput.output = new PrintStream(outputStream);
+		OutputConsole outputConsole = new OutputConsole();
+		outputConsole.output = new PrintStream(outputStream);
 
 		Competition competition = new Competition();
 
@@ -123,7 +123,7 @@ public class ConsoleOutputTest {
 				new DecathlonEvents(testResults2));
 		competition.addAthlete(athlete);
 
-		consoleOutput.writeOutput(competition);
+		outputConsole.writeOutput(competition);
 
 		String expectedOutput = "Here are the points" + LS;
 		expectedOutput += "1-2 " + testPoints1 + " Jim Beam " + formatBirthday("01.01.1795") + " US " +
