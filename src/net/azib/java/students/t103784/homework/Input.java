@@ -1,15 +1,15 @@
 package net.azib.java.students.t103784.homework;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
 /**
  * This class is used to input the athletes and their results.
@@ -35,15 +35,29 @@ public class Input {
 	 * @return Returns the list of athletes that is read in from the database.
 	 * @throws java.sql.SQLException    Is thrown when a SQL statement is invalid.
 	 * @throws java.text.ParseException Is thrown when a parse error occurs.
+	 * @throws java.io.IOException      Is thrown when there is something wrong with the properties file (e.g. not found).
 	 */
-	public List<Athlete> readAthleteFromDB() throws SQLException, ParseException {
+	public List<Athlete> readAthleteFromDB() throws SQLException, ParseException, IOException {
 		int i = 0;
-		Connection conn = DriverManager.getConnection("jdbc:mysql://java.azib.net:3306/decathlon", "java", "java");
+		BufferedReader reader = new BufferedReader(new FileReader("src\\net\\azib\\java\\students\\t103784\\homework\\db.properties"));
+		String connAddress = reader.readLine();
+		String connUserPass = reader.readLine();
+		Connection conn = DriverManager.getConnection(connAddress, connUserPass, connUserPass);
 		conn.setAutoCommit(false);
 		try {
 			Statement statement = conn.createStatement();
 			ResultSet rs;
-			if (parameter.matches("\\d+")) {
+			if (parameter == null) {
+				parameter = String.valueOf(1);
+				rs = statement.executeQuery(
+						"SELECT a. * , r. * \n" +
+								"FROM athletes a, results r\n" +
+								"WHERE a.id = r.athlete_id\n" +
+								"AND r.competition_id =" + parameter + "\n" +
+								"ORDER BY a.id ASC"
+				);
+
+			} else if (parameter.matches("\\d+")) {
 				rs = statement.executeQuery(
 						"SELECT a. * , r. * \n" +
 								"FROM athletes a, results r\n" +

@@ -1,8 +1,6 @@
 package net.azib.java.students.t103784.homework;
 
 
-import net.azib.java.lessons.db.PersonException;
-
 import java.io.*;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -71,6 +69,8 @@ public class InputTest extends Input {
 			System.out.println("DB input failed (SQL error)");
 		} catch (ParseException e) {
 			System.out.println("DB input failed (Parse error)");
+		} catch (IOException e) {
+			System.out.println("DB input failed (IO error)");
 		}
 	}
 }
