@@ -9,13 +9,15 @@ public class Fibonacci {
 		BigInteger f0 = BigInteger.ZERO;
 		BigInteger f1 = BigInteger.ONE;
 
-		if (N == 1)
+		if (N == 0)
+			return null;
+		else if (N == 1)
 			return f0;
 		else if (N == 2)
 			return f1;
 		else {
 
-			for (int i = 2; i <= N; i++) {
+			for (int i = 2; i < N; i++) {
 
 				BigInteger fi = f0.add(f1);
 
