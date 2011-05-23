@@ -14,6 +14,7 @@ import static net.azib.java.students.t107110.homework.DecathlonException.decathl
  */
 public class CommandLineParser {
 	private static final String XSLT_TEMPLATE = "rated-results.xslt";
+	private static final String DB_PROPERTIES = "db.properties";
 
 	private static enum Method {CONSOLE, CSV, DB, XML, HTML}
 
@@ -44,8 +45,9 @@ public class CommandLineParser {
 					assertNext(argIterator, Message.NO_INPUT_FILE);
 					return new CSVResultReader(new FileInputStream(argIterator.next()));
 				case DB:
-					assertNext(argIterator, Message.NO_EVENT);
-					return new DBResultReader(argIterator.next());
+					assertNext(argIterator, Message.NO_COMPETITION);
+					final InputStream properties = getClass().getResourceAsStream(DB_PROPERTIES);
+					return new DBResultReader(properties, argIterator.next());
 				default:
 					throw decathlonException(Message.INPUT_NOT_SUPPORTED);
 			}
@@ -64,6 +66,7 @@ public class CommandLineParser {
 					return new CSVResultWriter(new FileOutputStream(argIterator.next()));
 				case XML:
 					assertNext(argIterator, Message.NO_OUTPUT_FILE);
+
 					return new XMLResultWriter(new FileOutputStream(argIterator.next()));
 				case HTML:
 					assertNext(argIterator, Message.NO_OUTPUT_FILE);

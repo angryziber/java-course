@@ -9,7 +9,7 @@ import static net.azib.java.students.t107110.homework.DecathlonException.decathl
  * @author Eduard Shustrov
  */
 public class Result implements Comparable<Result> {
-	private static final DateFormat DATE_FORMAT = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
+	private static final DateFormat DATE_FORMAT = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ROOT);
 
 	private static enum Competition {
 		SPRINT_100M, LONG_JUMP, SHOT_PUT, HIGH_JUMP, SPRINT_400M,
@@ -83,7 +83,7 @@ public class Result implements Comparable<Result> {
 	public String toString() {
 		return "Result{" +
 				"athleteName='" + athleteName + "', " +
-				"birthday='" + (birthday == null ? birthday : DATE_FORMAT.format(birthday)) + "', " +
+				"birthday='" + (birthday == null ? "" : DATE_FORMAT.format(birthday)) + "', " +
 				"country='" + country + "', " +
 				"sprint100m=" + sprint100m + ", " +
 				"longJump=" + longJump + ", " +
@@ -162,6 +162,7 @@ public class Result implements Comparable<Result> {
 	}
 
 	private String normalizeString(final String string) {
+		if (string == null) return "";
 		return string.trim().replaceAll("\\s+", " ");
 	}
 

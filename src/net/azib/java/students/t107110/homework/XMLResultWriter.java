@@ -75,7 +75,7 @@ public class XMLResultWriter implements ResultWriter {
 
 		@Override
 		public String toString() {
-			return toTitleText(super.toString());
+			return toNameToken(super.toString());
 		}
 	}
 
@@ -196,23 +196,5 @@ public class XMLResultWriter implements ResultWriter {
 
 	private static String toNameToken(final String tag) {
 		return tag.toLowerCase().replace("_", "-");
-	}
-
-	private static String toTitleText(final String tag) {
-		return capitalizeWords(tag.replace("_", " "));
-	}
-
-	private static String capitalizeWords(final String text) {
-		final StringBuilder builder = new StringBuilder(text);
-		boolean space = true;
-		for (int i = 0; i < builder.length(); i++) {
-			final char character = builder.charAt(i);
-			if (!Character.isWhitespace(character)) {
-				if (space) builder.setCharAt(i, Character.toUpperCase(character));
-				else builder.setCharAt(i, Character.toLowerCase(character));
-				space = false;
-			} else space = true;
-		}
-		return builder.toString();
 	}
 }
