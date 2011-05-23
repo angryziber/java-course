@@ -22,12 +22,12 @@ public class FactorialTest {
 	@Test
 	public void testFirstTwentyElements() {
 
-		String factorialSequenceStr = "1 2 6 24 120 720 5040 40320 362880 3628800 " +
+		String factorialSequenceAsStr = "1 2 6 24 120 720 5040 40320 362880 3628800 " +
 									"39916800 479001600 6227020800 87178291200 " +
 									"1307674368000 20922789888000 355687428096000 " +
 									"6402373705728000 121645100408832000 2432902008176640000";
 
-		String[] factorialSequenceElements = factorialSequenceStr.split("\\s+");
+		String[] factorialSequenceElements = factorialSequenceAsStr.split("\\s+");
 		BigInteger[] elements = new BigInteger[20];
 
 		for (int i = 0; i < factorialSequenceElements.length; i++) {
