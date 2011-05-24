@@ -1,17 +1,13 @@
 package net.azib.java.students.t092877.homework;
 
-import java.awt.print.Book;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class DecathlonCalcTest {
@@ -23,7 +19,7 @@ public class DecathlonCalcTest {
 		decathlonCalc = new DecathlonCalc();
 	}
 
-	@Ignore
+	@Test
 	public void testGetCommandLineInputAsStr() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
 		Object[] args = new String[] {"-db", "2", "-html", "decathlon.htm"};
@@ -31,7 +27,7 @@ public class DecathlonCalcTest {
 		Method method = DecathlonCalc.class.getDeclaredMethod("getCommandLineInputAsStr", String[].class);
 		method.setAccessible(true);
 
-		String commandLineInput = (String)method.invoke(decathlonCalc, args);
+		String commandLineInput = (String)method.invoke(decathlonCalc, (Object)args);
 		assertThat(commandLineInput, is("-db 2 -html decathlon.htm "));
 	}
 
