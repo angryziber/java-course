@@ -212,7 +212,7 @@ public class StandardInputStrategy implements Strategy {
 				return true;
 			} else {
 				System.out.println("\n*** Invalid string format!");
-				System.out.println("*** The input string length can't be longer than 40 characters.");
+				System.out.println("*** The input string length can't be longer than 35 characters.");
 				System.out.println("*** Try again.\n");
 				return false;
 			}
