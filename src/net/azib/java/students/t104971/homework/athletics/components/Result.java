@@ -9,9 +9,6 @@ public class Result {
     private int score;
     private double result;
 
-    public Result() {
-    }
-
     public Result(ResultType type, double result) {
         this.type = type;
         this.result = result;

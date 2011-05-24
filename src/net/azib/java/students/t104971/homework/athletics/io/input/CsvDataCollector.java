@@ -28,7 +28,7 @@ public class CsvDataCollector implements DataCollector {
 
         List<Athlete> athletes = new ArrayList<Athlete>();
         List<String> contents = Collections.emptyList();
-        File inputFile = new File("");
+        File inputFile = new File(csvFile);
         inputFile = inputFile.exists() ? inputFile : PropertiesLoader.getCSVFile();
         try {
             contents = new InputRead().getContents(new FileInputStream(inputFile));

@@ -3,9 +3,9 @@ package net.azib.java.students.t104971.homework.athletics;
 import net.azib.java.students.t104971.homework.athletics.arithmetics.Calculator;
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
+import net.azib.java.students.t104971.homework.athletics.io.OutputType;
+import net.azib.java.students.t104971.homework.athletics.io.SourceType;
 import net.azib.java.students.t104971.homework.athletics.io.input.DataCollector;
-import net.azib.java.students.t104971.homework.athletics.io.input.DataCollectorBuilder;
-import net.azib.java.students.t104971.homework.athletics.io.output.OutputBuilder;
 import net.azib.java.students.t104971.homework.athletics.io.output.OutputWriter;
 import net.azib.java.students.t104971.homework.athletics.util.BrowserLaunch;
 import net.azib.java.students.t104971.homework.athletics.util.InputParametersValidator;
@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
-
-import static net.azib.java.students.t104971.homework.athletics.io.SourceType.parse;
 
 /**
  * @author Jaroslav Judin
@@ -39,13 +37,13 @@ public class Decathlon {
     }
 
     private Decathlon getInputData(String method, String parameter) {
-        DataCollector collector = DataCollectorBuilder.getCollector(parse(method));
+        DataCollector collector = SourceType.valueOf(method.toUpperCase().replace("-","")).getCollector();
         athletes = collector.loadCompetitionResults(parameter);
         return this;
     }
 
     private Decathlon outputData(String method, String parameter) {
-        OutputWriter writer = new OutputBuilder(athletes).getWriter(parse(method));
+        OutputWriter writer = OutputType.valueOf(method.toUpperCase().replace("-", "")).getWriter(athletes);
         BrowserLaunch.openURL(writer.write(parameter));
         return this;
     }
