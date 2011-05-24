@@ -12,7 +12,7 @@ import java.util.Map;
  * Purpose: contains several useful methods for athletes list sorting and values format conversion
  *
  * @author Artjom Kruglenkov / 092877
- * @version 1.1 20.05.2011
+ * @version 1.2 24.05.2011
  */
 public class Utils {
 
@@ -29,40 +29,48 @@ public class Utils {
 		}
 
 		Collections.sort(athletes);
-		Map<String, int[]> placeRanges = new HashMap<String, int[]>();
+		Map<String, int[]> spans = new HashMap<String, int[]>();
 
-		int place = 1;
-		int[] range;
-
-		// set places interval for corresponding athlete
+		int spanToken = 1;
 
 		for (Athlete athlete : athletes) {
 
-			range = placeRanges.get(Integer.toString(athlete.getTotalScore()));
-
-			if (range == null){
-				placeRanges.put(Integer.toString(athlete.getTotalScore()), new int[]{ place, place });
-			} else {
-				range[1] = place;
-			}
-			place++;
+			setSpan(spans, athlete, spanToken);
+			spanToken++;
 		}
 
-		// set place achieved by athlete in the competition
-
 		for (Athlete athlete : athletes) {
 
-			range = placeRanges.get(Integer.toString(athlete.getTotalScore()));
+			String place = getSpan(spans, athlete);
+			athlete.setPlace(place);
+		}
+	}
 
-			if(range == null) {
-				throw new RuntimeException("No entry in the list...");
-			}
 
-			if (range[0] == range[1]) {
-				athlete.setPlace(Integer.toString(range[0]));
-			} else {
-				athlete.setPlace(range[0] + "-" + range[1]);
-			}
+	public static void setSpan(Map<String, int[]> spans, Athlete athlete, int spanToken) {
+
+		int[] span = spans.get(Integer.toString(athlete.getTotalScore()));
+
+		if (span == null){
+			spans.put(Integer.toString(athlete.getTotalScore()), new int[]{spanToken, spanToken});
+		} else {
+			span[1] = spanToken;
+		}
+	}
+
+
+	public static String getSpan(Map<String, int[]> spans, Athlete athlete) {
+
+		int[] span = spans.get(Integer.toString(athlete.getTotalScore()));
+
+		if(span == null) {
+			throw new RuntimeException("No entry in the list...");
+		}
+
+		if (span[0] == span[1]) {
+			return Integer.toString(span[0]);
+		} else {
+			return span[0] + "-" + span[1];
 		}
 	}
 
@@ -76,25 +84,25 @@ public class Utils {
 	 */
 	public static double convertToProperUnits(String value, String type) {
 
-		double properUnits = 0;
-		String[] originalUnits = value.split(":");
+		double properValue = 0;
+		String[] originalValue = value.split(":");
 
 		// athlete's performance measured in centimeters for jumping events
 		if (type.equals("jumping"))	{
-			properUnits = Double.parseDouble(originalUnits[0]) * 100;
+			properValue = Double.parseDouble(originalValue[0]) * 100;
 
 		// athlete's performance measured in seconds for running events
 		} else if (type.equals("running")) {
 
-			if (originalUnits.length == 2)
-				properUnits = Double.parseDouble(originalUnits[0]) * 60 + Double.parseDouble(originalUnits[1]);
+			if (originalValue.length == 2)
+				properValue = Double.parseDouble(originalValue[0]) * 60 + Double.parseDouble(originalValue[1]);
 
 			else
-				properUnits = Double.parseDouble(originalUnits[0]);
+				properValue = Double.parseDouble(originalValue[0]);
 		// athlete's performance measured in meters for throwing events
 		} else
-			properUnits = Double.parseDouble(originalUnits[0]);
-		return properUnits;
+			properValue = Double.parseDouble(originalValue[0]);
+		return properValue;
 	}
 
 

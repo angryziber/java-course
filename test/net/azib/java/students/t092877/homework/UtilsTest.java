@@ -114,7 +114,7 @@ public class UtilsTest {
 	}
 
 	/**
-	 * Tests converstion from yyyy-mm-dd format to dd.mm.yyyy format
+	 * Tests conversion from yyyy-mm-dd format to dd.mm.yyyy format
 	 */
 	@Test
 	public void testConvertToDotSeparatedDayMonthYearFormat() {
