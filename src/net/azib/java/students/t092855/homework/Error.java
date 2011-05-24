@@ -24,7 +24,8 @@ public enum Error {
 	ERROR_DB_CLOSE("Error: can't close database."),
 	ERROR_DB_ATHLETE_NOT_FOUND("Error: can't find specified athlete in database."),
 	ERROR_DB_ATHLETE_PARSING_FAILED("Error: athlete parsing failed from database."),
-	ERROR_DB_ATHLETE_RESULTS_PARSING_FAILED("Error: athlete results parsing failed from database.");
+	ERROR_DB_ATHLETE_RESULTS_PARSING_FAILED("Error: athlete results parsing failed from database."),
+	ERROR_XML_CREATION_FAILED("Error: XML creation failed.");
 
 	private final String errorText;
 

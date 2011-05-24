@@ -30,5 +30,6 @@ public class ErrorTest {
 		assertEquals("Error: can't find specified athlete in database.", Error.ERROR_DB_ATHLETE_NOT_FOUND.getErrorText());
 		assertEquals("Error: athlete parsing failed from database.", Error.ERROR_DB_ATHLETE_PARSING_FAILED.getErrorText());
 		assertEquals("Error: athlete results parsing failed from database.", Error.ERROR_DB_ATHLETE_RESULTS_PARSING_FAILED.getErrorText());
+		assertEquals("Error: XML creation failed.", Error.ERROR_XML_CREATION_FAILED.getErrorText());
 	}
 }

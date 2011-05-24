@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.util.Iterator;
 
 /**
- * CSV Output. <br>
+ * Decathlon CSV Output. <br>
  *     For outputting decathlon data to CSV file.
  *
  * @author t092855

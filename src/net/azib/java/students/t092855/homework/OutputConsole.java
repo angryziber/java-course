@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.util.Iterator;
 
 /**
- * Console output.
+ * Decathlon console output. <br>
  * For outputting decathlon data to console.
  *
  * @author t092855

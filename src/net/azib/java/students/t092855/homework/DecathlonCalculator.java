@@ -31,6 +31,9 @@ public class DecathlonCalculator {
 		outputStrategy = new OutputConsole();
 		outputStrategy.writeOutput(competition);
 
+//		outputStrategy = new OutputXML();
+//		outputStrategy.writeOutput(competition, "decathlon.xml");
+
 //		outputStrategy = new OutputCSV();
 //		outputStrategy.writeOutput(competition, "decathlon_out.csv");
 	}
