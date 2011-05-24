@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
  * User: Artjom Kruglenkov
  * Date: 24.05.2011
  */
-public class TestAthlete {
+public class AthleteTest {
 
 	/**
 	 * Tests total score computation

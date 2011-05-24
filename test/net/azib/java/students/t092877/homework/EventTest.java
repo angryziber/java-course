@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * User: Artjom Kruglenkov
  * Date: 24.05.2011
  */
-public class TestEvent {
+public class EventTest {
 
 	/**
 	 * Tests score computation for a track event
