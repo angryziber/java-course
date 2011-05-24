@@ -36,5 +36,8 @@ public class DecathlonCalculator {
 
 //		outputStrategy = new OutputCSV();
 //		outputStrategy.writeOutput(competition, "decathlon_out.csv");
+
+//		outputStrategy = new OutputHTML();
+//		outputStrategy.writeOutput(competition, "decathlon.html");
 	}
 }

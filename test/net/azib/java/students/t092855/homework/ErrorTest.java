@@ -31,5 +31,7 @@ public class ErrorTest {
 		assertEquals("Error: athlete parsing failed from database.", Error.ERROR_DB_ATHLETE_PARSING_FAILED.getErrorText());
 		assertEquals("Error: athlete results parsing failed from database.", Error.ERROR_DB_ATHLETE_RESULTS_PARSING_FAILED.getErrorText());
 		assertEquals("Error: XML creation failed.", Error.ERROR_XML_CREATION_FAILED.getErrorText());
+		assertEquals("Error: HTML creation failed.", Error.ERROR_HTML_CREATION_FAILED.getErrorText());
+		assertEquals("Error: XSL file closing failed.", Error.ERROR_XSL_CLOSING_FAILED.getErrorText());
 	}
 }
