@@ -22,13 +22,13 @@ public class DecathlonCalcTest {
 	@Test
 	public void testGetCommandLineInputAsStr() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-		Object[] args = new String[] {"-db", "2", "-html", "decathlon.htm"};
+		String[] args = new String[] {"-db", "2", "-html", "decathlon.htm"};
 
 		Method method = DecathlonCalc.class.getDeclaredMethod("getCommandLineInputAsStr", String[].class);
 		method.setAccessible(true);
 
 		String commandLineInput = (String)method.invoke(decathlonCalc, (Object)args);
-		assertThat(commandLineInput, is("-db 2 -html decathlon.htm "));
+		assertThat(commandLineInput, is("-db 2 -html decathlon.htm"));
 	}
 
 	@Test
@@ -46,5 +46,23 @@ public class DecathlonCalcTest {
 		isValid = (Boolean)method.invoke(decathlonCalc, invalidCommand);
 		assertFalse(isValid);
 
+	}
+
+	@Test
+	public void testGetParameterValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+		String[] args = new String[] {"-db", "2", "-html", "decathlon.htm"};
+		String modeRead = "read";
+		String modeWrite = "write";
+
+
+		Method method = DecathlonCalc.class.getDeclaredMethod("getParameterValue", String[].class, String.class);
+		method.setAccessible(true);
+
+		String parameter = (String)method.invoke(decathlonCalc, (Object)args, modeRead);
+		assertEquals("2", parameter);
+
+		parameter = (String)method.invoke(decathlonCalc, (Object)args, modeWrite);
+		assertEquals("decathlon.htm", parameter);
 	}
 }

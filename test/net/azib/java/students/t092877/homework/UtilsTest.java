@@ -55,7 +55,7 @@ public class UtilsTest {
 			spanToken++;
 		}
 
-		assertEquals("1", getSpan(spans, at1));
+		assertEquals("1",   getSpan(spans, at1));
 		assertEquals("2-3", getSpan(spans, at2));
 		assertEquals("2-3", getSpan(spans, at3));
 		assertEquals("4-5", getSpan(spans, at4));

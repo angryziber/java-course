@@ -171,7 +171,7 @@ public class DecathlonCalc {
 		for (String str : args)
 			command.append(str).append(sep);
 
-		return command.toString();
+		return command.toString().trim();
 	}
 
 	/**
