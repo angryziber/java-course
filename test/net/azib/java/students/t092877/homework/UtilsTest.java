@@ -78,7 +78,7 @@ public class UtilsTest {
 		String throwLength = "68.53";
 
 		assertThat(275.13, is(convertToProperUnits(runningTime, "running")));
-		assertThat(807., is(convertToProperUnits(jumpLength, "jumping")));
+		assertThat(807.0, is(convertToProperUnits(jumpLength, "jumping")));
 		assertThat(68.53, is(convertToProperUnits(throwLength, "throwing")));
 	}
 
