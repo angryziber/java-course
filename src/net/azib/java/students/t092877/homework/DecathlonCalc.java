@@ -23,15 +23,15 @@ public class DecathlonCalc {
 													"(^(-db\\s+)(([1-9][0-9]+|\\w+)\\s+)((-console)\\s*$|(-csv\\s+[\\w/\\\\:]+.csv)\\s*$|(-xml\\s+[\\w/\\\\:]+.xml)\\s*$|(-html\\s+[\\w/\\\\:]+.(html|htm))\\s*$))";
 
 	// patterns to determine an input mode
-	private static final Pattern READ_FROM_CONSOLE = Pattern.compile("^(-console\\s+)");
-	private static final Pattern READ_FROM_CSV_FILE = Pattern.compile("^(-csv\\s+)([\\w/\\\\:]+.csv\\s+)");
-	private static final Pattern READ_FROM_DATABASE = Pattern.compile("^(-db\\s+)(([1-9][0-9]+|\\w+)\\s+)");
+	public static final Pattern READ_FROM_CONSOLE = Pattern.compile("^(-console\\s+)");
+	public static final Pattern READ_FROM_CSV_FILE = Pattern.compile("^(-csv\\s+)([\\w/\\\\:]+.csv\\s+)");
+	public static final Pattern READ_FROM_DATABASE = Pattern.compile("^(-db\\s+)(([1-9][0-9]+|\\w+)\\s+)");
 
 	// patterns to determine an output mode
-	private static final Pattern WRITE_TO_CONSOLE = Pattern.compile("(-console)\\s*$");
-	private static final Pattern WRITE_TO_CSV_FILE = Pattern.compile("(-csv\\s+[\\w/\\\\:]+.csv)\\s*$");
-	private static final Pattern WRITE_TO_XML_FILE = Pattern.compile("(-xml\\s+[\\w/\\\\:]+.xml)\\s*$");
-	private static final Pattern WRITE_TO_HTML_FILE = Pattern.compile("(-html\\s+[\\w/\\\\:]+.(html|htm))\\s*$");
+	public static final Pattern WRITE_TO_CONSOLE = Pattern.compile("(-console)\\s*$");
+	public static final Pattern WRITE_TO_CSV_FILE = Pattern.compile("(-csv\\s+[\\w/\\\\:]+.csv)\\s*$");
+	public static final Pattern WRITE_TO_XML_FILE = Pattern.compile("(-xml\\s+[\\w/\\\\:]+.xml)\\s*$");
+	public static final Pattern WRITE_TO_HTML_FILE = Pattern.compile("(-html\\s+[\\w/\\\\:]+.(html|htm))\\s*$");
 
 
 	/**
@@ -43,7 +43,7 @@ public class DecathlonCalc {
 
 		Competition competition;
 
-		if (validateCommandLineInput(getCommandLineInput(args))) {
+		if (validateCommandLineInput(getCommandLineInputAsStr(args))) {
 
 			competition = new Competition();
 			read(competition, args);
@@ -56,7 +56,7 @@ public class DecathlonCalc {
 		} else {
 
 			System.err.println("\n>>> ERROR: the commandline input is incorrectly specified.");
-			System.err.println(">>> Provided commandline parameters: " + getCommandLineInput(args));
+			System.err.println(">>> Provided commandline parameters: " + getCommandLineInputAsStr(args));
 		}
 
 		System.out.println("\nThank you, come again!");
@@ -71,7 +71,7 @@ public class DecathlonCalc {
 	private static void read(Competition competition, String[] args) {
 
 		String mode = "read";
-		String commandLineInput = getCommandLineInput(args);
+		String commandLineInput = getCommandLineInputAsStr(args);
 
 		if (READ_FROM_CONSOLE.matcher(commandLineInput).find()) {
 
@@ -97,7 +97,7 @@ public class DecathlonCalc {
 
 		String mode = "write";
 		boolean htmlTransform = false;
-		String commandLineInput = getCommandLineInput(args);
+		String commandLineInput = getCommandLineInputAsStr(args);
 
 		if (WRITE_TO_CONSOLE.matcher(commandLineInput).find()) {
 
@@ -163,7 +163,7 @@ public class DecathlonCalc {
 	 * @param args an array of commandline parameters
 	 * @return a single string of commandline input
 	 */
-	private static String getCommandLineInput(String[] args) {
+	private static String getCommandLineInputAsStr(String[] args) {
 
 		StringBuilder command = new StringBuilder();
 		String sep = " ";
