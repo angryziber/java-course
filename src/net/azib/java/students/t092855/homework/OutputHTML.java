@@ -38,7 +38,6 @@ public class OutputHTML implements OutputStrategy {
 			transformer.transform(source, new StreamResult(new FileOutputStream(new File(args[0]))));
 		} catch (Exception e) {
 			System.out.println(Error.ERROR_HTML_CREATION_FAILED.getErrorText());
-			e.printStackTrace();
 		}
 		finally {
 			try {

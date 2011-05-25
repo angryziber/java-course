@@ -48,7 +48,6 @@ public class OutputXML implements OutputStrategy {
 			transformer.transform(source, result);
 		} catch (Exception e) {
 			System.out.println(Error.ERROR_XML_CREATION_FAILED.getErrorText());
-			e.printStackTrace();
 		}
 	}
 

@@ -13,31 +13,83 @@ public class DecathlonCalculator {
 	 * @param args todo
 	 */
 	public static void main(String[] args) {
+		new DecathlonCalculator().parseCommandLineArguments(args);
+	}
+
+	private void parseCommandLineArguments(String[] args) {
+		int argumentIndex = 0;
+
+		InputMode inputMode = InputMode.INPUT_MODE_NONE;
+		OutputMode outputMode = OutputMode.OUTPUT_MODE_NONE;
+		try {
+			inputMode = inputMode.parseInputMode(args[argumentIndex++]);
+
+			if (inputMode == InputMode.INPUT_MODE_CSV || inputMode == InputMode.INPUT_MODE_DB) {
+				if (!inputMode.parseAndSetInputParameter(args[argumentIndex++])) {
+					System.out.println(Error.ERROR_INPUT_PARAMETERS_INCORRECT.getErrorText());
+					return;
+				}
+			}
+
+			outputMode = outputMode.parseOutputMode(args[argumentIndex++]);
+			if (outputMode == OutputMode.OUTPUT_MODE_CSV ||
+					outputMode == OutputMode.OUTPUT_MODE_XML ||
+					outputMode == OutputMode.OUTPUT_MODE_HTML) {
+				if (!outputMode.parseAndSetOutputParameter(args[argumentIndex])) {
+					System.out.println(Error.ERROR_OUTPUT_PARAMETERS_INCORRECT.getErrorText());
+					return;
+				}
+			}
+		}
+		catch (Exception e) {
+			System.out.println(Error.ERROR_IO_PARAMETERS_INCORRECT.getErrorText());
+			return;
+		}
+
 		InputStrategy inputStrategy;
 		OutputStrategy outputStrategy;
 		Competition competition;
 
-		// todo choose input strategy from parameters and use it to create athlete list
-		inputStrategy = new InputConsole();
-		competition = inputStrategy.getData();
+		inputStrategy = chooseInputStrategy(inputMode);
+		outputStrategy = chooseOutputStrategy(outputMode);
+		if (inputStrategy == null || outputStrategy == null)
+			return;
 
-//		inputStrategy = new InputCSV();
-//		competition = inputStrategy.getData("decathlon_data.csv");
+		competition = inputStrategy.getData(inputMode.getInputParameter());
+		outputStrategy.writeOutput(competition, outputMode.getOutputParameter());
 
-//		inputStrategy = new InputDB();
-//		competition = inputStrategy.getData("DECATHLON4BEER");
+		System.out.println("Data processing completed.");
+	}
 
-		// todo choose output strategy from parameters and use it
-		outputStrategy = new OutputConsole();
-		outputStrategy.writeOutput(competition);
+	private InputStrategy chooseInputStrategy(InputMode inputMode) {
+		switch (inputMode) {
+			case INPUT_MODE_CONSOLE:
+				return new InputConsole();
+			case INPUT_MODE_CSV:
+				return new InputCSV();
+			case INPUT_MODE_DB:
+				return new InputDB();
+			case INPUT_MODE_NONE:
+			default:
+				System.out.println(Error.ERROR_INPUT_PARAMETERS_INCORRECT.getErrorText());
+				return null;
+		}
+	}
 
-//		outputStrategy = new OutputXML();
-//		outputStrategy.writeOutput(competition, "decathlon.xml");
-
-//		outputStrategy = new OutputCSV();
-//		outputStrategy.writeOutput(competition, "decathlon_out.csv");
-
-//		outputStrategy = new OutputHTML();
-//		outputStrategy.writeOutput(competition, "decathlon.html");
+	private OutputStrategy chooseOutputStrategy(OutputMode outputMode) {
+		switch (outputMode) {
+			case OUTPUT_MODE_CONSOLE:
+				return new OutputConsole();
+			case OUTPUT_MODE_CSV:
+				return new OutputCSV();
+			case OUTPUT_MODE_XML:
+				return new OutputXML();
+			case OUTPUT_MODE_HTML:
+				return new OutputHTML();
+			case OUTPUT_MODE_NONE:
+			default:
+				System.out.println(Error.ERROR_OUTPUT_PARAMETERS_INCORRECT.getErrorText());
+				return null;
+		}
 	}
 }

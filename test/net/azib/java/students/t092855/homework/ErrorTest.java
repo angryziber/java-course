@@ -33,5 +33,8 @@ public class ErrorTest {
 		assertEquals("Error: XML creation failed.", Error.ERROR_XML_CREATION_FAILED.getErrorText());
 		assertEquals("Error: HTML creation failed.", Error.ERROR_HTML_CREATION_FAILED.getErrorText());
 		assertEquals("Error: XSL file closing failed.", Error.ERROR_XSL_CLOSING_FAILED.getErrorText());
+		assertEquals("Error: input parameters are incorrect.", Error.ERROR_INPUT_PARAMETERS_INCORRECT.getErrorText());
+		assertEquals("Error: output parameters are incorrect.", Error.ERROR_OUTPUT_PARAMETERS_INCORRECT.getErrorText());
+		assertEquals("Error: input/output parameters are incorrect.", Error.ERROR_IO_PARAMETERS_INCORRECT.getErrorText());
 	}
 }

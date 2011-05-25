@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class InputConsoleTest {
 
 	/**
-	 * Unit test for {@link InputConsole#getData(String...)} ()}
+	 * Unit test for {@link InputConsole#getData(String...)}
 	 */
 	@Test
 	public void athleteAddingStopWorks() {

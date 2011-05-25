@@ -68,7 +68,6 @@ public class InputDB implements InputStrategy {
 			}
 		} catch (SQLException e) {
 			System.out.println(Error.ERROR_DB_CONNECTION.getErrorText());
-			e.printStackTrace();
 		}
 		finally {
 			if(conn != null)
@@ -116,7 +115,6 @@ public class InputDB implements InputStrategy {
 			props.load(in);
 		} catch (FileNotFoundException e) {
 			System.out.println(Error.ERROR_DB_PROPERTIES_FILE_NOT_FOUND.getErrorText());
-			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println(Error.ERROR_DB_PROPERTIES_READ.getErrorText());
 		}

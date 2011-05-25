@@ -27,7 +27,10 @@ public enum Error {
 	ERROR_DB_ATHLETE_RESULTS_PARSING_FAILED("Error: athlete results parsing failed from database."),
 	ERROR_XML_CREATION_FAILED("Error: XML creation failed."),
 	ERROR_HTML_CREATION_FAILED("Error: HTML creation failed."),
-	ERROR_XSL_CLOSING_FAILED("Error: XSL file closing failed.");
+	ERROR_XSL_CLOSING_FAILED("Error: XSL file closing failed."),
+	ERROR_INPUT_PARAMETERS_INCORRECT("Error: input parameters are incorrect."),
+	ERROR_OUTPUT_PARAMETERS_INCORRECT("Error: output parameters are incorrect."),
+	ERROR_IO_PARAMETERS_INCORRECT("Error: input/output parameters are incorrect.");
 
 	private final String errorText;
 
