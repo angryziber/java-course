@@ -1,0 +1,17 @@
+<!ELEMENT athletes (athlete*)>
+<!ELEMENT athlete (Place, Name, Score, BirthDay, Country, HundredMeterSprint, LongJump, ShotPut, HighJump, FourHundredMeterRace, HTMHurdles, DiscusThrow, PoleVault, JavelinThrow, KndHRace)>
+<!ELEMENT Place (#PCDATA)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT Score (#PCDATA)>
+<!ELEMENT BirthDay (#PCDATA)>
+<!ELEMENT Country (#PCDATA)>
+<!ELEMENT HundredMeterSprint (#PCDATA)>
+<!ELEMENT LongJump (#PCDATA)>
+<!ELEMENT ShotPut (#PCDATA)>
+<!ELEMENT HighJump (#PCDATA)>
+<!ELEMENT FourHundredMeterRace (#PCDATA)>
+<!ELEMENT HTMHurdles (#PCDATA)>
+<!ELEMENT DiscusThrow (#PCDATA)>
+<!ELEMENT PoleVault (#PCDATA)>
+<!ELEMENT JavelinThrow (#PCDATA)>
+<!ELEMENT KndHRace (#PCDATA)>
