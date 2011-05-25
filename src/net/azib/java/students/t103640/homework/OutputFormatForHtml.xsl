@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:output method="html" indent="yes"/>
+<xsl:output method="html" encoding="UTF-16" indent="yes"/>
 
 <xsl:template match="/Athletes">
 	<html>
@@ -14,6 +14,8 @@
 
 <xsl:template match="Athlete">
 	<tr>
+	    <td><b><xsl:value-of select="Place"/></b></td>
+	    <td><b><xsl:value-of select="Score"/></b></td>
 	    <td><b><xsl:value-of select="Name"/></b></td>
         <td><xsl:value-of select="BirthDay"/></td>
         <td><xsl:value-of select="Country"/></td>

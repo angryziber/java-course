@@ -20,22 +20,22 @@ public class DataToHTMLWriter {
         dtx.writeDataToXml(athletes, "outputForHtml.xml");
 
         try {
-            // OutputForHTML.xml should be outputed to .homework directory
+
             StreamSource source = new StreamSource(new CoustomUtilities().getAbsolutePath("OutputForHtml.xml"));
             StreamResult result = new StreamResult(new FileOutputStream(path));
 
-	        InputStream xsl = getClass().getResourceAsStream("OutputForHtml.xsl");
+	        InputStream xsl = getClass().getResourceAsStream("OutputFormatForHtml.xsl");
             Transformer trans = TransformerFactory.newInstance().newTransformer(new StreamSource(xsl));
             trans.transform(source, result);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+	        System.out.println("Could not open the file");
         } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
+	        System.out.println("Something with xsl failed");
         } catch (TransformerException e) {
-            e.printStackTrace();
+	        System.out.println("Could not transform to HTML");
         } catch (IOException e) {
-            e.printStackTrace();
+	        System.out.println("InputOutput Exception" + e.getMessage());
         }
     }
 
