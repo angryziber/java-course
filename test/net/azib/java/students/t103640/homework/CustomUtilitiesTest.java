@@ -7,8 +7,13 @@ import java.io.File;
 import static junit.framework.Assert.assertEquals;
 
 public class CustomUtilitiesTest {
+	/**
+	 * This test contains tests of various methods that are defined in CustomUtilities class.
+	 * If any of those would fail, then the probability of whole program malfunctioning is very high.
+	 */
 	    CustomUtilities cu = new CustomUtilities();
 	@Test
+
 	public void setStringToDoubleInSecondsTest() throws Exception {
 		  assertEquals(83.0, cu.setStringToDoubleInSeconds("1:23"));
 		  assertEquals(59.0, cu.setStringToDoubleInSeconds("59"));

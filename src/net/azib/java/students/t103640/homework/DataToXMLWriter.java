@@ -25,6 +25,7 @@ public class DataToXMLWriter {
     public void writeDataToXml(ArrayList<Athlete> athletes, String outputParam) {
         String filePath = new CustomUtilities().getAbsolutePath(outputParam);
 
+
         try {
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 
@@ -53,6 +54,12 @@ public class DataToXMLWriter {
 
     }
 
+	/**
+	 * A method to create xml document
+	 * @param doc takes in a xml document as input parameter
+	 * @param athletesSource ; an array list, that contains data to be written in  a document
+	 * @return an xml document, that is ready to be written out
+	 */
     protected Document createDocument(Document doc, ArrayList<Athlete> athletesSource) {
         Element athletes = doc.createElement("Athletes");
         doc.appendChild(athletes);
@@ -73,7 +80,7 @@ public class DataToXMLWriter {
 
             Element score = doc.createElement("Score");
             athlete.appendChild(score);
-            score.appendChild(doc.createTextNode(Double.toString(athleteFromSource.getScore())));
+            score.appendChild(doc.createTextNode(Integer.toString(athleteFromSource.getScore())));
 
             Element bday = doc.createElement("BirthDay");
             athlete.appendChild(bday);

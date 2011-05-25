@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 public class ScoreCalcTest {
-
+	/**
+	 * Tests if the scoreCalculator works. Validates data by using data from the Wikipedia page
+	 * that was given with the assignment.
+	 */
 	@Test
 	public void testEventScoreCalc(){
 	 assertEquals(1000, Events.HUNDREDSPRINT.eventScore(10.395));

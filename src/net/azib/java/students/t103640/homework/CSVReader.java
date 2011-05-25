@@ -77,7 +77,7 @@ public class CSVReader{
 
     }
 
-    private ArrayList<String> readInData(String path) {
+    protected ArrayList<String> readInData(String path) {
          ArrayList<String> dataFromFile = new ArrayList<String>();
         String lineOfData;
         BufferedReader buffReader = null;

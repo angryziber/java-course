@@ -11,6 +11,11 @@ import static org.junit.Assert.assertTrue;
 
 public class DBReaderTest {
 
+	/**
+	 * Tests if data is valid in db.properties class and if it is being read correctly
+	 * @throws SQLException when something goes wrong with properties
+	 */
+
 	@Test
 	public void DBPropertiesTest() throws SQLException {
         assertTrue(new File(DBReader.class.getResource("db.properties").getPath()).exists());

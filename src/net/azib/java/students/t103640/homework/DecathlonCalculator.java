@@ -7,7 +7,7 @@ public class DecathlonCalculator {
 	  * This program calculates the score and place of athletes and returns them in descending order
 	  * @param args: inputMethod, inputParam, outputMethod, outputParam
 	  *     These are the given parameters that control the input-output of the program
-	  * @author Taavi Sonets
+	  * @author Taavi Sonets 103640 IATB21
 	  */
     public static void main(String[] args) {
 
