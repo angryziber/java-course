@@ -6,13 +6,7 @@ import net.azib.java.students.t092877.homework.model.Competition;
 import net.azib.java.students.t092877.homework.model.Event;
 import net.azib.java.students.t092877.homework.model.Result;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +15,7 @@ import java.util.List;
  * Purpose: provides implementation for csv-file output
  *
  * @author Artjom Kruglenkov / 092877
- * @version 1.0 20.05.2011
+ * @version 1.1 25.05.2011
  */
 public class CsvFileOutputStrategy implements Strategy {
 
@@ -35,6 +29,8 @@ public class CsvFileOutputStrategy implements Strategy {
 	public CsvFileOutputStrategy(File pathname) {
 		this.pathname = pathname;
 	}
+
+	public CsvFileOutputStrategy() {}
 
 	/**
 	 * Executes the implementation for csv-file output.
@@ -58,37 +54,19 @@ public class CsvFileOutputStrategy implements Strategy {
 
 		for (Athlete athlete : athletes) {
 
-			StringBuilder line = new StringBuilder();
-
-			line.append(athlete.getPlace() + ",");
-			line.append(athlete.getTotalScore() + ",");
-			line.append("\"" + athlete.getName() + "\",");
-			line.append(Utils.convertToDotSeparetedDayMonthYearFormat(athlete.getDateOfBirth()) + ",");
-			line.append(athlete.getCountryCode());
-
-			List<Result> results = athlete.getResults();
-
-			int i = 0;
-			for (Event event : Event.values()) {
-
-				Result currentEventResult = results.get(i);
-				String value = Utils.convertToOriginalUnits(currentEventResult.getValue(), event.getType());
-				line.append("," + value);
-				i++;
-			}
-
-			athleteDataAsStr.add(line.toString());
+			String line = getAthleteDataAsStr(athlete);
+			athleteDataAsStr.add(line);
 		}
+
+		Writer fout = null;
 
 		try {
 
-			BufferedWriter fout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pathname), "utf-8"));
+			fout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pathname), "utf-8"));
 
-			for (String line : athleteDataAsStr) {
-				fout.write(line);
-				fout.newLine();
-				fout.flush();
-			}
+			for (String str : athleteDataAsStr)
+				writeToFile(fout, str);
+
 		} catch (FileNotFoundException e) {
 			System.err.println("\n>>> ERROR: the directory you are trying to save the file to doesn't exist");
 			System.exit(1);
@@ -103,6 +81,41 @@ public class CsvFileOutputStrategy implements Strategy {
 		}
 
 		System.out.printf("\nThe file with results for decathlon competition %s was saved to %s",
-				              competition, pathname.getAbsolutePath());
+				              competition, pathname.getAbsolutePath() + "\n");
+	}
+
+
+	private void writeToFile(Writer fout, String line) throws IOException {
+
+		fout.write(line, 0, line.length());
+		//fout.newLine();
+		fout.flush();
+	}
+
+
+	private String getAthleteDataAsStr(Athlete athlete) {
+
+		StringBuilder line = new StringBuilder();
+
+		line.append(athlete.getPlace() + ",");
+		line.append(athlete.getTotalScore() + ",");
+		line.append("\"" + athlete.getName() + "\",");
+		line.append(Utils.convertToDotSeparetedDayMonthYearFormat(athlete.getDateOfBirth()) + ",");
+		line.append(athlete.getCountryCode());
+
+		List<Result> results = athlete.getResults();
+
+		int i = 0;
+		for (Event event : Event.values()) {
+
+			Result currentEventResult = results.get(i);
+			String value = Utils.convertToOriginalUnits(currentEventResult.getValue(), event.getType());
+			line.append("," + value);
+			i++;
+		}
+
+		line.append(System.getProperty("line.separator"));
+
+		return line.toString();
 	}
 }

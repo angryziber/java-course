@@ -37,88 +37,41 @@ public class CsvFileInputStrategy extends StandardInputStrategy implements Strat
 		this.pathname = pathname;
 	}
 
+	public CsvFileInputStrategy() {}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void execute(Competition competition) {
 
+		List<Athlete> athletes = competition.getAthletesList();
+
 		InputStreamReader instream = new InputStreamReader(System.in);
 		BufferedReader in = new BufferedReader(instream);
 
 		try {
+
 			getCompetitionData(competition, in);
 
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(pathname), "utf-8"));
-			getAthletesDataFromCsvFile(competition, in);
+			List<String> athletesDataAsStr = readFromFile(in);
+
+			for (String line : athletesDataAsStr)
+				athletes.add(getAthleteData(line));
 
 		} catch (FileNotFoundException e) {
 			System.err.println("\n>>> ERROR: specified directory doesn't exit!");
-			competition.setAthletesList(null);
 			e.printStackTrace();
+			competition.setAthletesList(null);
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("\n>>> ERROR: unsupported file encoding. Make sure that your file is in UTF-8 encoding!");
-			competition.setAthletesList(null);
 			e.printStackTrace();
+			competition.setAthletesList(null);
 		} catch (IOException e) {
 			System.err.println("\n>>> ERROR: while reading user input");
+			e.printStackTrace();
 			competition.setAthletesList(null);
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Gets athletes data from csv-file and sets it for specified Competition instance.
-	 *
-	 * @param competition an instance of decathlon competition
-	 * @param in an instance of BufferedReader for user input
-	 */
-	private void getAthletesDataFromCsvFile(Competition competition, BufferedReader in) {
-
-		List<Athlete> athletes = competition.getAthletesList();
-		List<String> athleteDataAsStr = new ArrayList<String>();
-
-		try {
-			String line = in.readLine();
-
-			while(line != null) {
-				athleteDataAsStr.add(line);
-				line = in.readLine();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
-
-			String[] elements;
-			for (String line : athleteDataAsStr) {
-
-				elements = line.split(",");
-				String name = elements[0].replace("\"", "");
-				String dateOfBirth = Utils.convertToDashSeparatedYearMonthDayFormat(elements[1]);
-				String countryCode = elements[2];
-
-				Athlete athlete = new Athlete(name, dateOfBirth, countryCode);
-
-				String[] resultsAsStr = Arrays.copyOfRange(elements, 3, elements.length);
-				List<Result> results = new ArrayList<Result>();
-
-				int i = 0;
-				for (Event event : Event.values()) {
-
-					double value = Utils.convertToProperUnits(resultsAsStr[i], event.getType());
-					Result result = new Result(event, value);
-					results.add(result);
-					i++;
-				}
-
-				athlete.setResults(results);
-				athletes.add(athlete);
-			}
-
-			System.out.println("\nProcessing file - " + pathname + "...");
-
 		} catch (NumberFormatException e) {
 			System.err.println("\n>>> ERROR: impossible to read from csv-file");
 			//e.printStackTrace();
@@ -128,5 +81,46 @@ public class CsvFileInputStrategy extends StandardInputStrategy implements Strat
 			//e.printStackTrace();
 			competition.setAthletesList(null);
 		}
+
+		System.out.println("\nProcessing file - " + pathname + "...");
+	}
+
+
+	private Athlete getAthleteData(String line) {
+
+		String[] tokens = line.split(",");
+		String name = tokens[0].replace("\"", "");
+		String dateOfBirth = Utils.convertToDashSeparatedYearMonthDayFormat(tokens[1]);
+		String countryCode = tokens[2];
+
+		Athlete athlete = new Athlete(name, dateOfBirth, countryCode);
+
+		String[] resultsAsStr = Arrays.copyOfRange(tokens, 3, tokens.length);
+		List<Result> results = new ArrayList<Result>();
+
+		int i = 0;
+		for (Event event : Event.values()) {
+
+			double value = Utils.convertToProperUnits(resultsAsStr[i], event.getType());
+			Result result = new Result(event, value);
+			results.add(result);
+			i++;
+		}
+
+		athlete.setResults(results);
+		return athlete;
+	}
+
+
+	private List<String> readFromFile(BufferedReader in) throws IOException {
+
+		List<String> athletesDataAsStr = new ArrayList<String>();
+
+		String line = in.readLine();
+		while(line != null) {
+			athletesDataAsStr.add(line);
+			line = in.readLine();
+		}
+		return athletesDataAsStr;
 	}
 }

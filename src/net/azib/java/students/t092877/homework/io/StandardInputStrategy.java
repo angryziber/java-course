@@ -186,7 +186,7 @@ public class StandardInputStrategy implements Strategy {
 	 *
 	 * @author Artjom Kruglenkov / 092877
 	 */
-	interface Validator {
+	public interface Validator {
 
 		/**
 		 * Tests whether specified string value validates against a pattern.
@@ -202,7 +202,7 @@ public class StandardInputStrategy implements Strategy {
 	 *
 	 * @author Artjom Kruglenkov / 092877
 	 */
-	class StringValidator implements Validator {
+	public class StringValidator implements Validator {
 
 		/**
 		 * {@inheritDoc}
@@ -225,7 +225,7 @@ public class StandardInputStrategy implements Strategy {
 	 *
 	 * @author Artjom Kruglenkov / 092877
 	 */
-	class DateValidator implements Validator {
+	public class DateValidator implements Validator {
 
 		/**
 		 * {@inheritDoc}
@@ -250,7 +250,7 @@ public class StandardInputStrategy implements Strategy {
 	 *
 	 * @author Artjom Kruglenkov / 092877
 	 */
-	class CountryCodeValidator implements Validator {
+	public class CountryCodeValidator implements Validator {
 
 		/**
 		 * {@inheritDoc}
@@ -275,7 +275,7 @@ public class StandardInputStrategy implements Strategy {
 	 *
 	 * @author Artjom
 	 */
-	class ResultValueValidator implements Validator {
+	public class ResultValueValidator implements Validator {
 
 		/**
 		 * {@inheritDoc}
