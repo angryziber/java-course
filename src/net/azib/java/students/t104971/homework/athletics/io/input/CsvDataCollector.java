@@ -2,7 +2,6 @@ package net.azib.java.students.t104971.homework.athletics.io.input;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.components.ResultType;
-import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
 import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 import net.azib.java.students.t104971.homework.athletics.util.InputRead;
 import org.apache.log4j.Logger;
@@ -29,7 +28,6 @@ public class CsvDataCollector implements DataCollector {
         List<Athlete> athletes = new ArrayList<Athlete>();
         List<String> contents = Collections.emptyList();
         File inputFile = new File(csvFile);
-        inputFile = inputFile.exists() ? inputFile : PropertiesLoader.getCSVFile();
         try {
             contents = new InputRead().getContents(new FileInputStream(inputFile));
         } catch (FileNotFoundException e) {
