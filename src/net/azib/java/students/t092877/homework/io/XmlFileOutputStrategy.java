@@ -103,8 +103,6 @@ public class XmlFileOutputStrategy implements Strategy {
 
 			transformToHtmlFormat(xmlFilepath);
 			xmlFilepath.delete();
-			//System.out.println(xmlFilepath.delete());
-
 		}
 
 		System.out.printf("\nThe file with results for decathlon competition %s was saved to %s\n",

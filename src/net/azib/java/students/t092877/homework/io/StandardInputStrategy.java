@@ -34,6 +34,7 @@ public class StandardInputStrategy implements Strategy {
 			getAthletesDataFromUserInput(competition, in);
 		} catch (IOException e) {
 			System.err.println("\n>>> ERROR: while reading user input");
+			competition.setAthletesList(null);
 			e.printStackTrace();
 		}
 	}

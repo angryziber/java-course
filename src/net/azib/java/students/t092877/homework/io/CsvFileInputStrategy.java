@@ -54,12 +54,15 @@ public class CsvFileInputStrategy extends StandardInputStrategy implements Strat
 
 		} catch (FileNotFoundException e) {
 			System.err.println("\n>>> ERROR: specified directory doesn't exit!");
+			competition.setAthletesList(null);
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("\n>>> ERROR: unsupported file encoding. Make sure that your file is in UTF-8 encoding!");
+			competition.setAthletesList(null);
 			e.printStackTrace();
 		} catch (IOException e) {
 			System.err.println("\n>>> ERROR: while reading user input");
+			competition.setAthletesList(null);
 			e.printStackTrace();
 		}
 	}
