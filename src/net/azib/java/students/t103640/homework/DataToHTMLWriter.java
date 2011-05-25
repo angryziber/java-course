@@ -9,6 +9,7 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class DataToHTMLWriter {
@@ -23,8 +24,8 @@ public class DataToHTMLWriter {
             StreamSource source = new StreamSource(new CoustomUtilities().getAbsolutePath("OutputForHtml.xml"));
             StreamResult result = new StreamResult(new FileOutputStream(path));
 
-
-            Transformer trans = TransformerFactory.newInstance().newTransformer(new StreamSource("OutputForHtml.xsl"));
+	        InputStream xsl = getClass().getResourceAsStream("OutputForHtml.xsl");
+            Transformer trans = TransformerFactory.newInstance().newTransformer(new StreamSource(xsl));
             trans.transform(source, result);
 
         } catch (FileNotFoundException e) {

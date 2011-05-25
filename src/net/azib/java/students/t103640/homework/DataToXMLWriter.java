@@ -43,7 +43,7 @@ public class DataToXMLWriter {
 
         trans.setOutputProperty(OutputKeys.METHOD, "xml");
         trans.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-        trans.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, new CoustomUtilities().getAbsolutePath("XMLValidation.dtd"));
+	    trans.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, getClass().getResource("XMLValidation.dtd").getPath());
 
        trans.transform(new DOMSource(document), new StreamResult(file));
 
