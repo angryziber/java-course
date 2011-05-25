@@ -3,7 +3,9 @@ package net.azib.java.students.t103640.homework;
 import java.util.Date;
 
 public class Athlete implements Comparable<Athlete>{
-
+	/**
+	 * This is a class for storing data about one athelte with its getters and setters.
+	 */
     private String name;
     private Date birthday;
     private String country;

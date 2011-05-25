@@ -21,10 +21,19 @@ public enum Events {
         this.trackOrThrow = t;
     }
 
+	/**
+	 * This method calculates the given event score.
+	 * @param result in the given event
+	 * @return score in the given event
+	 */
     public int eventScore(double result){
         return (int) (A * Math.pow((trackOrThrow *(result - B)), C));
     }
 
+	/**
+	 * This method returns the  ordinal of next event
+	 * @return next events data
+	 */
     	public Events next() {
 		return values()[(ordinal() + 1) % values().length];
 	}

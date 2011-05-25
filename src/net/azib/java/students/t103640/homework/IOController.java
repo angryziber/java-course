@@ -1,7 +1,11 @@
 package net.azib.java.students.t103640.homework;
 
 public class IOController {
-    private static String inputMethod;
+	/**
+	 * This is a class for input output methods and parameters storage, with
+	 * according getters and setters
+	 */
+	private static String inputMethod;
     private static String inputParam;
     private static String outputTo;
     private static String outputParam;

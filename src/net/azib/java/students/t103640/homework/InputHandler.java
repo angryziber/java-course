@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 public class InputHandler extends IOController {
 
-
+	/**
+	 * This method decides where to read data in from. This method does not have any parameters as it belongs to
+	 * a class that extends IOController and all its public methods.
+	 *
+	 * @return ArrayList this class returns an ArrayList of athletes of witch it has read in. Basically it returns
+	 *          data from given input
+	 */
     public ArrayList<Athlete> readIn() {
      ArrayList<Athlete> athletes = null;
 

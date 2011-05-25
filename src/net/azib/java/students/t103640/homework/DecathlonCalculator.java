@@ -3,12 +3,12 @@ package net.azib.java.students.t103640.homework;
 import java.util.ArrayList;
 
 public class DecathlonCalculator {
-    /*  PLEASE don´t grade this project yet, as it is not complete, I only need to update it, to be sure, that it will
-        be safe for the time I format C my computer. If everything goes as planned, then you will not even see this
-        message, as I plan to commit my final version this evening.
-
-        Thank You
-     */
+	 /**This program is designed to read in given decathlon data from console, database or cvs format.
+	  * This program calculates the score and place of athletes and returns them in descending order
+	  * @param args: inputMethod, inputParam, outputMethod, outputParam
+	  *     These are the given parameters that control the input-output of the program
+	  * @author Taavi Sonets
+	  */
     public static void main(String[] args) {
 
         argumentHandler(args);
@@ -19,14 +19,13 @@ public class DecathlonCalculator {
 
         OutputHandler oh = new OutputHandler();
         oh.writeOut(scoreCalc.calculateScore(inputData));
-
-
-
-
-
     }
 
-
+	/**
+	 * This method is for handling given arguments correctly. If the input method is chosen to be "console" then
+	 * program will decide, that the next given argument will be output method.
+	 * @param args: inputMethod, inputParam, outputMethod, outputParam
+	 */
     private static void argumentHandler(String[] args) {
         IOController.setInputMethod(args[0]);
 

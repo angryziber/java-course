@@ -17,9 +17,13 @@ import java.util.ArrayList;
 
 public class DataToXMLWriter {
 
-
+	/**
+	 *  This method creates a XML file and outputs given data there. It also validates the XML file.
+	 * @param athletes the data that has been given for outputting
+	 * @param outputParam the filename or path of xml file
+	 */
     public void writeDataToXml(ArrayList<Athlete> athletes, String outputParam) {
-        String filePath = new CoustomUtilities().getAbsolutePath(outputParam);
+        String filePath = new CustomUtilities().getAbsolutePath(outputParam);
 
         try {
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();

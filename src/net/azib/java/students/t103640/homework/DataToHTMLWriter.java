@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class DataToHTMLWriter {
     public void writeDataToHTML(ArrayList<Athlete> athletes, String outputParam) {
-        String path = new CoustomUtilities().getAbsolutePath(outputParam);
+        String path = new CustomUtilities().getAbsolutePath(outputParam);
 
         DataToXMLWriter dtx = new DataToXMLWriter();
         dtx.writeDataToXml(athletes, "outputForHtml.xml");
 
         try {
 
-            StreamSource source = new StreamSource(new CoustomUtilities().getAbsolutePath("OutputForHtml.xml"));
+            StreamSource source = new StreamSource(new CustomUtilities().getAbsolutePath("OutputForHtml.xml"));
             StreamResult result = new StreamResult(new FileOutputStream(path));
 
 	        InputStream xsl = getClass().getResourceAsStream("OutputFormatForHtml.xsl");

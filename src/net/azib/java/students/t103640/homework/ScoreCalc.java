@@ -4,23 +4,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ScoreCalc {
+	final int inCentimeters = 100;
+
+	/**
+	 * This method calculates the score of every athlete by using Enum Events and it also calculates the places
+	 * of athltes.
+	 * @param inputData - ArrayList of athletes whom score must be calculated
+	 * @return  - ArrayList of athltes with scores and places
+	 */
 
     public ArrayList<Athlete> calculateScore(ArrayList<Athlete> inputData) {
-        for (Athlete athlete : inputData) {
-            int score = 0;
+
+	    for (Athlete athlete : inputData) {
 
             Events currentEvent = Events.HUNDREDSPRINT;
 
-            score = currentEvent.eventScore(athlete.getHundredMSprint());
+           int score = currentEvent.eventScore(athlete.getHundredMSprint());
 
             currentEvent = currentEvent.next();
-            score += currentEvent.eventScore(athlete.getLongJump());
+            score += currentEvent.eventScore(athlete.getLongJump()* inCentimeters);
 
             currentEvent = currentEvent.next();
             score += currentEvent.eventScore(athlete.getShotPut());
 
             currentEvent = currentEvent.next();
-            score += currentEvent.eventScore(athlete.getHighJump());
+            score += currentEvent.eventScore(athlete.getHighJump()* inCentimeters);
 
             currentEvent = currentEvent.next();
             score += currentEvent.eventScore(athlete.getFourHundredMSprint());
@@ -32,7 +40,7 @@ public class ScoreCalc {
             score += currentEvent.eventScore(athlete.getDiscusThrow());
 
             currentEvent = currentEvent.next();
-            score += currentEvent.eventScore(athlete.getPoleVault());
+            score += currentEvent.eventScore(athlete.getPoleVault()* inCentimeters);
 
             currentEvent = currentEvent.next();
             score += currentEvent.eventScore(athlete.getJavelinThrow());
@@ -50,44 +58,47 @@ public class ScoreCalc {
         return inputData;
     }
 
-   private ArrayList<Athlete> getPlaces(ArrayList<Athlete> athletes) {
+	 protected ArrayList<Athlete> getPlaces(ArrayList<Athlete> athletes) {
 
 		Collections.sort(athletes, Collections.reverseOrder());
 
-		ArrayList<Integer> difScores = new ArrayList<Integer>();
+		ArrayList<Integer> scoresThatDiffer = new ArrayList<Integer>();
 
-		for (Athlete ath : athletes) {
+		for (Athlete athlete : athletes) {
 
-			if (!difScores.contains(ath.getScore())) {
-				difScores.add(ath.getScore());
+			if (!scoresThatDiffer.contains(athlete.getScore())) {
+				scoresThatDiffer.add(athlete.getScore());
 			}
 
 		}
 
 		ArrayList<Integer> scoreCount = new ArrayList<Integer>();
 
-       for (Integer difScore : difScores) {
+       for (Integer d : scoresThatDiffer) {
            scoreCount.add(0);
        }
 
 		for (Athlete ath : athletes) {
 
-			if (difScores.contains(ath.getScore())) {
-				scoreCount.set(difScores.indexOf(ath.getScore()), scoreCount.get(difScores.indexOf(ath.getScore())) + 1);
+			if (scoresThatDiffer.contains(ath.getScore())) {
+				scoreCount.set(scoresThatDiffer.indexOf(ath.getScore()), scoreCount.get(scoresThatDiffer.indexOf(ath.getScore())) + 1);
 			}
 		}
 
 		int a = 0;
-		for (int i = 0; i < difScores.size(); i++) {
+		for (int i = 0; i < scoresThatDiffer.size(); i++) {
+
 			String place = (a + 1) + "-" + (a + scoreCount.get(i));
 			int tempBound = a + scoreCount.get(i);
 
             for (int position = a; position < tempBound; position++) {
-				if (scoreCount.get(i) > 1) {
+
+					if (scoreCount.get(i) > 1) {
 					athletes.get(position).setPlace(place);
-				}
-				else
+					}
+					else
 					athletes.get(position).setPlace(Integer.valueOf(position + 1).toString());
+
 				a++;
 			}
 		}

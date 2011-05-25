@@ -8,8 +8,12 @@ import java.util.Scanner;
 
 public class ConsoleReader {
 
-   private CoustomUtilities validator = new CoustomUtilities();
+   private CustomUtilities validator = new CustomUtilities();
 
+	/**
+	 * This method gets data from the console, transforms it to an ArrayList of athletes and returns it.
+	 * @return athletes
+	 */
     public ArrayList<Athlete> getConsoleData(){
         ArrayList<Athlete> athletes = new ArrayList<Athlete>();
         Scanner input = new Scanner(System.in);
@@ -108,12 +112,12 @@ public class ConsoleReader {
 
 
 
-    public double setStringToDoubleInMinutes(Scanner input) {
+    private double setStringToDoubleInMinutes(Scanner input) {
 
 
         while(true){
           try{
-            return validator.setStringToDoubleInMinutes(input.nextLine().trim());
+            return validator.setStringToDoubleInSeconds(input.nextLine().trim());
 
           } catch (Exception e){
               System.out.println("Insert correct result! I.e min:sec");

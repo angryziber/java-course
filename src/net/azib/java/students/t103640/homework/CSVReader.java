@@ -5,17 +5,24 @@ import java.util.ArrayList;
 
 public class CSVReader{
 
-
+	/**
+	 * This method takes in given path or name of the csv file as a parameter, converts it to path and try-s to read in
+	 * all data given in that specific cvs file. This method uses other methods to validate the data that has been read
+	 * in.
+	 * @param path (file name or file path)
+	 * @return  athletes (array list of athletes, that has been read in from csv file)
+	 */
 
     public ArrayList<Athlete> getCSVData(String path) {
-        CoustomUtilities validator = new CoustomUtilities();
+        CustomUtilities validator = new CustomUtilities();
 
         ArrayList<Athlete> athletes = new ArrayList<Athlete>();
         String absPath;
         absPath = validator.getAbsolutePath(path);
         ArrayList<String> data = new ArrayList<String>(readInData(absPath));
         String[] splittedData;
-        boolean allDataCopyed = false;
+        boolean allDataCopyed;
+
         for (String line : data) {
                Athlete athlete = new Athlete();
                 splittedData = line.split(",");
@@ -35,7 +42,7 @@ public class CSVReader{
 
                     athlete.setHighJump(setStringToDouble(splittedData[6]));
 
-                    athlete.setFourHundredMSprint(setStringToMins(splittedData[7]));
+                    athlete.setFourHundredMSprint(setStringToSec(splittedData[7]));
 
                     athlete.setHundredAndTenHurdles(setStringToDouble(splittedData[8]));
 
@@ -45,7 +52,7 @@ public class CSVReader{
 
                     athlete.setJavelinThrow(setStringToDouble(splittedData[11]));
 
-                    athlete.setKilometerAndHalfRace(setStringToMins(splittedData[12]));
+                    athlete.setKilometerAndHalfRace(setStringToSec(splittedData[12]));
 
 
 
@@ -59,14 +66,13 @@ public class CSVReader{
         return athletes;
     }
 
-    private double setStringToMins(String s) throws Exception {
-        CoustomUtilities valid = new CoustomUtilities();
-        return valid.setStringToDoubleInMinutes(s);
+    private double setStringToSec(String s) throws Exception {
+        CustomUtilities valid = new CustomUtilities();
+        return valid.setStringToDoubleInSeconds(s);
 
     }
 
     private double setStringToDouble(String s) {
-
                 return Double.parseDouble(s);
 
     }

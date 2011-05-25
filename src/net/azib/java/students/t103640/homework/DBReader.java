@@ -9,11 +9,15 @@ import java.util.Date;
 import java.util.Properties;
 
 public class DBReader {
-    Connection conn = null;
-    PreparedStatement stmnt = null;
+     Connection conn = null;
 
-
-    public ArrayList<Athlete> getDBData(String inputParam) {
+	/**
+	 * This method returns the data from database. It connects to a database using properties from a file db.properties.
+	 *
+	 * @param inputParam the ID or Name of the competition
+	 * @return data that has been read from database
+	 */
+	public ArrayList<Athlete> getDBData(String inputParam) {
 
         ArrayList<Athlete> athletes = new ArrayList<Athlete>();
 
@@ -79,7 +83,7 @@ public class DBReader {
     }
 
     private String addCountry(String country_code) {
-        CoustomUtilities validator = new CoustomUtilities();
+        CustomUtilities validator = new CustomUtilities();
         try {
             return validator.checkISOCountry(country_code);
         } catch (Exception e) {
@@ -89,7 +93,7 @@ public class DBReader {
     }
 
     private Date addDate(Date dob) {
-        CoustomUtilities validator = new CoustomUtilities();
+        CustomUtilities validator = new CustomUtilities();
         try {
             return validator.parseDbDate(dob);
         } catch (ParseException e) {
@@ -103,14 +107,16 @@ public class DBReader {
         ResultSet rs = null;
         int id;
 
-        try{
+	    PreparedStatement stmnt;
+
+	    try{
             id = Integer.parseInt(inputParam);
 
             stmnt = conn.prepareStatement("SELECT a.*,r.* FROM competitions as c LEFT JOIN results as r " +
                     "ON c.id = r.competition_id LEFT JOIN athletes as a ON r.athlete_id = a.id WHERE c.id = ?");
 
             stmnt.setInt(1, id);
-            return  rs = stmnt.executeQuery();
+            return  stmnt.executeQuery();
 
 
         }catch (NumberFormatException e){
@@ -122,7 +128,7 @@ public class DBReader {
                 ResultSet ids = stmnt.executeQuery();
 
                 if(ids.next()){
-                    return rs = extractData(String.valueOf(ids.getInt("id")));
+                    return extractData(String.valueOf(ids.getInt("id")));
                 }
             } catch (SQLException e1) {
 
@@ -154,7 +160,7 @@ public class DBReader {
 
     }
 
-    private Properties getProperties() {
+    protected Properties getProperties() {
         Properties properties = new Properties();
         InputStream stream = null;
 

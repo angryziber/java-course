@@ -3,7 +3,11 @@ package net.azib.java.students.t103640.homework;
 import java.util.ArrayList;
 
 public class OutputHandler extends IOController{
-
+	/**
+	 * This method outputs the given data. It decides where to input by extending IOController.
+	 *
+	 * @param athletes - data to output
+	 */
     public void writeOut(ArrayList<Athlete> athletes) {
 
         if(getOutputMethod().equals("-console")) {
