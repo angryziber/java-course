@@ -58,7 +58,7 @@ public class Decathlon {
         return this;
     }
 
-    private static void initLogger() {
+    public static void initLogger() {
         PropertiesLoader.setProperties();
         PropertyConfigurator.configure(System.getProperties());
     }
