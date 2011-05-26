@@ -27,6 +27,7 @@ public class DecathlonCalculator {
 			if (inputMode == InputMode.INPUT_MODE_CSV || inputMode == InputMode.INPUT_MODE_DB) {
 				if (!inputMode.parseAndSetInputParameter(args[argumentIndex++])) {
 					System.out.println(Error.ERROR_INPUT_PARAMETERS_INCORRECT.getErrorText());
+					printUsageText();
 					return;
 				}
 			}
@@ -37,12 +38,14 @@ public class DecathlonCalculator {
 					outputMode == OutputMode.OUTPUT_MODE_HTML) {
 				if (!outputMode.parseAndSetOutputParameter(args[argumentIndex])) {
 					System.out.println(Error.ERROR_OUTPUT_PARAMETERS_INCORRECT.getErrorText());
+					printUsageText();
 					return;
 				}
 			}
 		}
 		catch (Exception e) {
 			System.out.println(Error.ERROR_IO_PARAMETERS_INCORRECT.getErrorText());
+			printUsageText();
 			return;
 		}
 
@@ -72,6 +75,7 @@ public class DecathlonCalculator {
 			case INPUT_MODE_NONE:
 			default:
 				System.out.println(Error.ERROR_INPUT_PARAMETERS_INCORRECT.getErrorText());
+				printUsageText();
 				return null;
 		}
 	}
@@ -89,7 +93,32 @@ public class DecathlonCalculator {
 			case OUTPUT_MODE_NONE:
 			default:
 				System.out.println(Error.ERROR_OUTPUT_PARAMETERS_INCORRECT.getErrorText());
+				printUsageText();
 				return null;
 		}
+	}
+
+	private void printUsageText() {
+		System.out.println("Usage:");
+		System.out.println("DecathlonCalculator -<input-method> [input-parameters]" +
+		" -<output-method> [output-parameters]");
+		System.out.println("Where:");
+		System.out.println("-<input-method>:");
+		System.out.println("-console");
+		System.out.println("-csv");
+		System.out.println("-db");
+		System.out.println("[input-parameters]:");
+		System.out.println("file name or path for -csv or competition ID or competition name for -db");
+	   	System.out.println("-<output-method>:");
+		System.out.println("-console");
+		System.out.println("-csv");
+		System.out.println("-xml");
+		System.out.println("-html");
+		System.out.println("[output-parameters]:");
+		System.out.println("file name or path");
+		System.out.println("Examples:");
+		System.out.println("DecathlonCalculator -console -xml results.xml");
+		System.out.println("DecathlonCalculator -db 2 -html /tmp/results.html");
+		System.out.println("DecathlonCalculator -csv my_input.csv -console");
 	}
 }

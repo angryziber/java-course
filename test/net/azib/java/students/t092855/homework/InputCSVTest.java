@@ -1,5 +1,6 @@
 package net.azib.java.students.t092855.homework;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.text.DateFormat;
@@ -16,22 +17,41 @@ import static org.junit.Assert.assertNotNull;
  * @author t092855
  */
 public class InputCSVTest {
+	private Athlete athlete;
+
+	@Before
+	public void parseCSVToMakeAnAthlete() throws ParseException {
+		String line = "\"José Mañana Perez\",3.04.1972,ES,13.75,4.84,10.12,1.50,1:08.44,19.18,30.85,2.80,33.88,6:22.75 ";
+		athlete = new InputCSV().parseLine(line);
+	}
+
+	/**
+	 * Unit test for {@link InputCSV#parseLine(String)}
+	 */
+	@Test
+	public void parseCSVAthleteIsCorrect() {
+		assertNotNull(athlete);
+		assertEquals("José Mañana Perez", athlete.getName());
+		assertEquals("ES", athlete.getCountry());
+	}
+
 	/**
 	 * Unit test for {@link InputCSV#parseLine(String)}
 	 * @throws java.text.ParseException if parsing date fails
 	 */
 	@Test
-	public void parseCSVWorks() throws ParseException {
-		String line = "\"José Mañana Perez\",3.04.1972,ES,13.75,4.84,10.12,1.50,1:08.44,19.18,30.85,2.80,33.88,6:22.75 ";
+	public void parseCSVAthleteBirthdayIsCorrect() throws ParseException {
 		SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.MEDIUM);
 		Date date = new SimpleDateFormat("dd.MM.yyyy").parse("3.04.1972");
 		String dateString = dateFormat.format(date);
-
-		Athlete athlete = new InputCSV().parseLine(line);
-		assertNotNull(athlete);
-		assertEquals("José Mañana Perez", athlete.getName());
 		assertEquals(dateString, dateFormat.format(athlete.getBirthday()));
-		assertEquals("ES", athlete.getCountry());
+	}
+
+	/**
+	 * Unit test for {@link InputCSV#parseLine(String)}
+	 */
+	@Test
+	public void parseCSVAthleteResultsAreCorrect() {
 		assertEquals(3494, athlete.getAthleteEvents().getTotalPoints());
 		assertEquals(13.75, athlete.getAthleteEvents().getDecathlonResults()[0], 0.0);
 		assertEquals(4.84, athlete.getAthleteEvents().getDecathlonResults()[1], 0.0);
