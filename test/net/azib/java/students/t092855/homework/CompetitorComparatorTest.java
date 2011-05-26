@@ -2,6 +2,10 @@ package net.azib.java.students.t092855.homework;
 
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -31,5 +35,30 @@ public class CompetitorComparatorTest {
 
 		CompetitorComparator comparator = new CompetitorComparator();
 		assertEquals(1, comparator.compare(athlete1, athlete2));
+		assertEquals(-1, comparator.compare(athlete2, athlete1));
+	}
+
+	/**
+	 * Unit test for {@link CompetitorComparator#compare(Athlete, Athlete)}
+	 * @throws java.text.ParseException if date parsing fails
+	 */
+	@Test
+	public void CompetitionComparatorEqualAthletes() throws ParseException {
+		DecathlonEvents decathlonEvents1 = mock(DecathlonEvents.class);
+		when(decathlonEvents1.getTotalPoints()).thenReturn(6525);
+		Athlete athlete1 = mock(Athlete.class);
+		when(athlete1.getAthleteEvents()).thenReturn(decathlonEvents1);
+		when(athlete1.getName()).thenReturn("Siim Piim");
+		when(athlete1.getCountry()).thenReturn("EE");
+		Date date = new SimpleDateFormat("dd.MM.yyyy").parse("12.11.1967");
+		when(athlete1.getBirthday()).thenReturn(date);
+
+		Athlete athlete2 = mock(Athlete.class);
+		when(athlete2.getAthleteEvents()).thenReturn(decathlonEvents1);
+		when(athlete2.getName()).thenReturn("Siim Piim");
+		when(athlete2.getCountry()).thenReturn("EE");
+		when(athlete2.getBirthday()).thenReturn(date);
+
+		assertEquals(0, new CompetitorComparator().compare(athlete1, athlete2));
 	}
 }

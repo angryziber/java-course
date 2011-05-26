@@ -6,8 +6,7 @@
 	<html>
 		<body>
 			<head>
-				<meta hppt-equiv="content-type" content="text/html; charset=UTF-8"/>
-					<title>Decathlon competition results</title>
+				<title>Decathlon competition results</title>
 			</head>
 			<table border="1">
 				<tr>

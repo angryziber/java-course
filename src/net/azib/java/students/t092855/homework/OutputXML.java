@@ -59,6 +59,8 @@ public class OutputXML implements OutputStrategy {
 		Document decathlonDocument = documentBuilder.newDocument();
 
 		Element decathlonCompetition = decathlonDocument.createElement("decathlonCompetition");
+		decathlonCompetition.setAttribute("xsi:noNameSpaceSchemaLocation", "decathlon.xsd");
+		decathlonCompetition.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		decathlonDocument.appendChild(decathlonCompetition);
 
 		Node pi = decathlonDocument.createProcessingInstruction
