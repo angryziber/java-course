@@ -10,13 +10,21 @@ public class DecathlonCalculator {
 	/**
 	 * The program starts to run from this method.
 	 *
-	 * @param args todo
+	 * @param args input method with parameters: <br>
+	 *                                          -console <br>
+	 *                                          -csv [filename or path] <br>
+	 *                                          -db [competition ID or name] <br>
+	 *             output method with parameters: <br>
+	 *                                           -console <br>
+	 *                                           -csv [filename or path] <br>
+	 *                                           -xml [filename or path] <br>
+	 *                                           -html [filename or path] <br>
 	 */
 	public static void main(String[] args) {
-		new DecathlonCalculator().parseCommandLineArguments(args);
+		new DecathlonCalculator().parseCommandLineArgumentsAndProcessData(args);
 	}
 
-	private void parseCommandLineArguments(String[] args) {
+	private void parseCommandLineArgumentsAndProcessData(String[] args) {
 		int argumentIndex = 0;
 
 		InputMode inputMode = InputMode.INPUT_MODE_NONE;
