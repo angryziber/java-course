@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class XMLBuilder {
 
-    public static Document constructXML(String xslFile, List<Athlete> athletes) {
+    public Document constructXML(String xslFile, List<Athlete> athletes) {
 
         Document doc = null;
         Element root, sportsman, name, place, totalScore, part, event, point;

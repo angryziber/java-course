@@ -1,14 +1,19 @@
-package net.azib.java.students.t104971.homework.athletics.io.input;
+package net.azib.java.students.t104971.homework.athletics.io;
+
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.ResultType;
+import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestDB {
 
-
-    static void prepare() throws SQLException {
+    public static void prepare() throws SQLException {
         Connection conn = null;
         try {
             conn = openConnection();
@@ -36,25 +41,6 @@ public class TestDB {
         }
     }
 
-    static void clean() {
-        Connection conn = null;
-        try {
-            conn = openConnection();
-            Statement statement = conn.createStatement();
-
-            statement.execute("DROP TABLE athletes");
-            statement.execute("DROP TABLE competitions");
-            statement.execute("DROP TABLE results");
-
-            conn.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            rollbackQuietly(conn);
-        } finally {
-            closeQuietly(conn);
-        }
-    }
-
     private static void rollbackQuietly(Connection conn) {
         try {
             if (conn != null)
@@ -63,7 +49,7 @@ public class TestDB {
         }
     }
 
-    static Connection openConnection() throws SQLException {
+    public static Connection openConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:mem:DemoDB", "sa", "");
     }
 
@@ -73,5 +59,19 @@ public class TestDB {
                 conn.close();
         } catch (SQLException ignore) {
         }
+    }
+
+    public static List<Athlete> getTestAthletes() {
+        List<Athlete> athletes = new ArrayList<Athlete>();
+
+        Athlete athlete = new Athlete();
+        athlete.setName("Jaak Tepandi");
+        athlete.setCountry("EE");
+        athlete.setDateBirth(InputParser.parseDate("01.01.1976"));
+        for (ResultType type : ResultType.values()) {
+           athlete.addResult(type, 5d);
+        }
+        athletes.add(athlete);
+        return athletes;
     }
 }

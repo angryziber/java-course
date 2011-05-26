@@ -12,9 +12,10 @@ import java.util.List;
  */
 public class ConsoleDataCollector implements DataCollector {
 
+    private ConsoleInput console = new ConsoleInput();
+
     public List<Athlete> loadCompetitionResults(String parameter) {
         List<Athlete> athletes = new ArrayList<Athlete>();
-        ConsoleInput console = new ConsoleInput();
         for (int i = 1; ; i++) {
             System.out.println("Enter data for " + i + " athlete");
             athletes.add(createAthlete());
@@ -26,7 +27,6 @@ public class ConsoleDataCollector implements DataCollector {
 
     private Athlete createAthlete() {
         Athlete athlete = new Athlete();
-        ConsoleInput console = new ConsoleInput();
         while (athlete.getName() == null) {
             System.out.println("Enter the name: ");
             athlete.setName(InputParser.parseName(console.getLine()));
@@ -52,5 +52,9 @@ public class ConsoleDataCollector implements DataCollector {
         }
 
         return athlete;
+    }
+
+    public void setConsole(ConsoleInput console) {
+        this.console = console;
     }
 }

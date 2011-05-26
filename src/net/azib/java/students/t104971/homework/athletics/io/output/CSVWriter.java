@@ -2,7 +2,6 @@ package net.azib.java.students.t104971.homework.athletics.io.output;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.components.Result;
-import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
 import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 import net.azib.java.students.t104971.homework.athletics.util.PlaceHolderUtil;
 import org.apache.log4j.Logger;
@@ -25,9 +24,6 @@ public class CSVWriter implements OutputWriter {
 
     public String write(String outFileName) {
         try {
-            if (outFileName.isEmpty()) {
-                outFileName = PropertiesLoader.getPagePath().replace("page.xsl", "data.out.csv");
-            }
             BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
             for (Athlete athlete : athletes) {
                 writer.write(createLine(athlete));

@@ -18,10 +18,12 @@ public class ConsoleWriter implements OutputWriter {
     }
 
     public String write(String outFileName) {
+        StringBuilder result = new StringBuilder();
         for (Athlete athlete : athletes) {
             athlete.setPlace(PlaceHolderUtil.getPlace(athlete, athletes));
+            result.append(athlete);
             logger.info(athlete);
         }
-        return null;
+        return result.toString();
     }
 }

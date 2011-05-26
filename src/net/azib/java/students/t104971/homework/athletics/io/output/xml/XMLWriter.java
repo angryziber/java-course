@@ -19,8 +19,6 @@ import java.io.FileOutputStream;
 import java.io.StringWriter;
 import java.util.List;
 
-import static net.azib.java.students.t104971.homework.athletics.io.output.xml.XMLBuilder.constructXML;
-
 /**
  * @author Jaroslav Judin
  *         May 27, 2010
@@ -69,7 +67,7 @@ public class XMLWriter implements OutputWriter {
     }
 
     private Document getDocument() {
-        return constructXML(xslFile, athletes);
+        return new XMLBuilder().constructXML(xslFile, athletes);
     }
 
     public void setOutputFileName(String outputFileName) {

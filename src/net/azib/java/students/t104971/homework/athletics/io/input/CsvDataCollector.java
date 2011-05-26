@@ -46,12 +46,8 @@ public class CsvDataCollector implements DataCollector {
         String[] values = Pattern.compile(VALUE_SEPARATOR).split(line);
 
         Athlete athlete = new Athlete();
-        try {
-            for (int i = 0; i < values.length; i++) {
-                setAthleteAttribute(athlete, i, values[i]);
-            }
-        } catch (NumberFormatException e) {
-            LOG.error("Cannot parse athlete's attributes", e);
+        for (int i = 0; i < values.length; i++) {
+            setAthleteAttribute(athlete, i, values[i]);
         }
 
         return athlete;

@@ -7,7 +7,6 @@ import net.azib.java.students.t104971.homework.athletics.io.OutputType;
 import net.azib.java.students.t104971.homework.athletics.io.SourceType;
 import net.azib.java.students.t104971.homework.athletics.io.input.DataCollector;
 import net.azib.java.students.t104971.homework.athletics.io.output.OutputWriter;
-import net.azib.java.students.t104971.homework.athletics.util.BrowserLaunch;
 import net.azib.java.students.t104971.homework.athletics.util.InputParametersValidator;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -44,7 +43,7 @@ public class Decathlon {
 
     private Decathlon outputData(String method, String parameter) {
         OutputWriter writer = OutputType.valueOf(method.toUpperCase().replace("-", "")).getWriter(athletes);
-        BrowserLaunch.openURL(writer.write(parameter));
+        writer.write(parameter);
         return this;
     }
 

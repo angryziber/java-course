@@ -69,7 +69,7 @@ public class Athlete implements Comparable<Athlete> {
     public String toString() {
         StringBuilder resultsString = new StringBuilder();
         for (Result result : getResults()) {
-            resultsString.append("\n\t\t" + result);
+            resultsString.append("\n\t\t").append(result);
         }
         return "Athlete{" +
                 " place=" + place +
