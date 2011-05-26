@@ -2,6 +2,10 @@ package net.azib.java.students.t092855.homework;
 
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * CSV input strategy.
@@ -67,7 +71,14 @@ public class InputCSV implements InputStrategy {
 		Athlete athlete = new Athlete();
 		if(!athlete.setName(elements[0].replace('\"', ' ')))
 			return null;
-		if(!athlete.setBirthday(elements[1].trim()))
+		Date date;
+		try {
+			date = new SimpleDateFormat("dd.MM.yyyy").parse(elements[1].trim());
+		} catch (ParseException e) {
+			return null;
+		}
+		SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.MEDIUM);
+		if(!athlete.setBirthday(dateFormat.format(date)))
 			return null;
 		if(!athlete.setCountry(elements[2].trim()))
 			return null;
