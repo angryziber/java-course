@@ -4,6 +4,7 @@ import net.azib.java.students.t073756.homework.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,16 +27,10 @@ abstract class AbstractInputProcessor<T> implements InputProcessor {
         a.setResult(new Result());
 
         Map<DecathlonEvent, String> results = a.getResult().getResults();
-        results.put(DecathlonEvent.M_100, athleteData.get(3));
-        results.put(DecathlonEvent.LONG_JUMP, athleteData.get(4));
-        results.put(DecathlonEvent.SHOT_PUT, athleteData.get(5));
-        results.put(DecathlonEvent.HIGH_JUMP, athleteData.get(6));
-        results.put(DecathlonEvent.M_400, athleteData.get(7));
-        results.put(DecathlonEvent.HURDLES_110, athleteData.get(8));
-        results.put(DecathlonEvent.DISCUS_THROW, athleteData.get(9));
-        results.put(DecathlonEvent.POLE_VAULT, athleteData.get(10));
-        results.put(DecathlonEvent.JAVELIN_THROW, athleteData.get(11));
-        results.put(DecathlonEvent.M_1500, athleteData.get(12));
+	    Iterator<String> i = athleteData.iterator();
+	    for (DecathlonEvent event : DecathlonEvent.values()) {
+		    results.put(event, i.next());
+	    }
 
         CsvHolder.putCsvLine(a, athleteData);
         return a;
