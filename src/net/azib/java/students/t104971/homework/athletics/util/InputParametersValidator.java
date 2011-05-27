@@ -20,6 +20,7 @@ public class InputParametersValidator {
             validate(args);
         } catch (UserInputException e) {
             Logger.getLogger(getClass()).error(e);
+            System.out.println(e.getMessage());
             return false;
         }
         return true;

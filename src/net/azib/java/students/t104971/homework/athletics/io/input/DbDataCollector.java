@@ -1,7 +1,6 @@
 package net.azib.java.students.t104971.homework.athletics.io.input;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
-import net.azib.java.students.t104971.homework.athletics.components.ResultType;
 import net.azib.java.students.t104971.homework.athletics.util.DbConnection;
 import org.apache.log4j.Logger;
 
@@ -11,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.azib.java.students.t104971.homework.athletics.components.ResultType.*;
 
 /**
  * @author Jaroslav Judin
@@ -38,6 +39,7 @@ public class DbDataCollector implements DataCollector {
             }
         } catch (SQLException e) {
             logger.error("Cannot get connection", e);
+            System.out.println("Cannot get connection");
         }
 
         return athletes;
@@ -49,20 +51,21 @@ public class DbDataCollector implements DataCollector {
             athlete.setName(result.getString("name"));
             athlete.setCountry(result.getString("country_code"));
 
-            athlete.addResult(ResultType.RACE_100_METERS, result.getDouble("race_100m"));
-            athlete.addResult(ResultType.LONG_JUMP, result.getDouble("long_jump"));
-            athlete.addResult(ResultType.SHOT_PUT, result.getDouble("shot_put"));
-            athlete.addResult(ResultType.HIGH_JUMP, result.getDouble("high_jump"));
-            athlete.addResult(ResultType.RACE_400_METERS, result.getDouble("race_400m"));
-            athlete.addResult(ResultType.RACE_110_METERS_HURDLES, result.getDouble("hurdles_110m"));
-            athlete.addResult(ResultType.DISCUS_THROW, result.getDouble("discus_throw"));
-            athlete.addResult(ResultType.POLE_VAULT, result.getDouble("pole_vault"));
-            athlete.addResult(ResultType.JAVELIN_THROW, result.getDouble("javelin_throw"));
-            athlete.addResult(ResultType.RACE_1500_METERS, result.getDouble("race_1500m"));
+            athlete.addResult(RACE_100_METERS, result.getDouble("race_100m"));
+            athlete.addResult(LONG_JUMP, result.getDouble("long_jump"));
+            athlete.addResult(SHOT_PUT, result.getDouble("shot_put"));
+            athlete.addResult(HIGH_JUMP, result.getDouble("high_jump"));
+            athlete.addResult(RACE_400_METERS, result.getDouble("race_400m"));
+            athlete.addResult(RACE_110_METERS_HURDLES, result.getDouble("hurdles_110m"));
+            athlete.addResult(DISCUS_THROW, result.getDouble("discus_throw"));
+            athlete.addResult(POLE_VAULT, result.getDouble("pole_vault"));
+            athlete.addResult(JAVELIN_THROW, result.getDouble("javelin_throw"));
+            athlete.addResult(RACE_1500_METERS, result.getDouble("race_1500m"));
 
             athlete.setDateBirth(result.getDate("dob"));
         } catch (SQLException e) {
             logger.error("Cannot get Date form db", e);
+            System.out.println("Cannot get Date form db");
         }
         return athlete;
     }

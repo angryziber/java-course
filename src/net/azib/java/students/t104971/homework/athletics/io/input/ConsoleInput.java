@@ -26,7 +26,7 @@ public class ConsoleInput {
                 Logger.getLogger(ConsoleInput.class).error(e);
             }
             if ("".equals(currentLine)) {
-                System.out.println("The input cannot be empty!\n");
+                System.err.println("The input cannot be empty!\n");
             }
         }
         return currentLine;

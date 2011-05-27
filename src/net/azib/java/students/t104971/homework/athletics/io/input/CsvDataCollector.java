@@ -33,6 +33,7 @@ public class CsvDataCollector implements DataCollector {
             contents = new InputRead().getContents(new FileInputStream(inputFile));
         } catch (FileNotFoundException e) {
             LOG.error("Cannot find CSV file", e);
+            System.err.println("Cannot find CSV file");
         }
 
         for (String line : contents) {

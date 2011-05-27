@@ -22,7 +22,7 @@ public class ConsoleWriter implements OutputWriter {
         for (Athlete athlete : athletes) {
             athlete.setPlace(PlaceHolderUtil.getPlace(athlete, athletes));
             result.append(athlete);
-            logger.info(athlete);
+            System.out.println(athlete);
         }
         return result.toString();
     }

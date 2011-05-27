@@ -13,8 +13,6 @@ import java.util.List;
  */
 public class HTMLWriter extends XMLWriter {
 
-    private static String outputFileHTML = outputFileXML.replace(".xml", ".html");
-
     public HTMLWriter(List<Athlete> athletes) {
         super(athletes);
     }
@@ -22,10 +20,5 @@ public class HTMLWriter extends XMLWriter {
     @Override
     public Transformer getTransformer() throws TransformerConfigurationException {
         return TransformerFactory.newInstance().newTransformer(new StreamSource(xslFile));
-    }
-
-    @Override
-    public void setOutputFileName(String outputFileName) {
-        super.outputFileName = outputFileName.isEmpty() ? outputFileHTML : outputFileName;
     }
 }

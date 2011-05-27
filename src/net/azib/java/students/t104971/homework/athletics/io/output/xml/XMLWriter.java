@@ -30,7 +30,6 @@ public class XMLWriter implements OutputWriter {
     private static final String XML_ENCODING = "UTF-8";
 
     static final String xslFile = PropertiesLoader.getPagePath();
-    static String outputFileXML = PropertiesLoader.getPagePath().replace("page.xsl", "data.out.xml");
 
     private List<Athlete> athletes;
     String outputFileName;
@@ -71,6 +70,6 @@ public class XMLWriter implements OutputWriter {
     }
 
     public void setOutputFileName(String outputFileName) {
-        this.outputFileName = outputFileName.isEmpty() ? outputFileXML : outputFileName;
+        this.outputFileName = outputFileName;
     }
 }

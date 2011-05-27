@@ -5,15 +5,10 @@ package net.azib.java.students.t104971.homework.athletics.components;
  */
 public enum ResultType {
 
-    RACE_100_METERS(25.4347, 18, 1.81) {
+    RACE_100_METERS(25.4347, 18, 1.81, "seconds") {
         @Override
         public int countScore(double result) {
             return countTrackEvent(result);
-        }
-
-        @Override
-        public String getUnit() {
-            return "seconds";
         }
     },
     LONG_JUMP(0.14354, 220, 1.4) {
@@ -29,26 +24,16 @@ public enum ResultType {
             return countJumpEvent(result);
         }
     },
-    RACE_400_METERS(1.53775, 82, 1.81) {
+    RACE_400_METERS(1.53775, 82, 1.81, "seconds") {
         @Override
         public int countScore(double result) {
             return countTrackEvent(result);
-        }
-
-        @Override
-        public String getUnit() {
-            return "seconds";
         }
     },
-    RACE_110_METERS_HURDLES(5.74352, 28.5, 1.92) {
+    RACE_110_METERS_HURDLES(5.74352, 28.5, 1.92, "seconds") {
         @Override
         public int countScore(double result) {
             return countTrackEvent(result);
-        }
-
-        @Override
-        public String getUnit() {
-            return "seconds";
         }
     },
     DISCUS_THROW(12.91, 4, 1.1),
@@ -59,26 +44,33 @@ public enum ResultType {
         }
     },
     JAVELIN_THROW(10.14, 7, 1.08),
-    RACE_1500_METERS(0.03768, 480, 1.85) {
+    RACE_1500_METERS(0.03768, 480, 1.85, "seconds") {
         @Override
         public int countScore(double result) {
             return countTrackEvent(result);
         }
-
-        @Override
-        public String getUnit() {
-            return "seconds";
-        }
     };
 
-    private Parameter parameter;
+    /**
+     * static parameters
+     */
+    private double a, b, c;
+
+    private String unit = "meters";
 
     ResultType(double a, double b, double c) {
-        parameter = new Parameter(a, b, c);
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    ResultType(double a, double b, double c, String unit) {
+        this(a, b, c);
+        this.unit = unit;
     }
 
     public String getUnit() {
-        return "meters";
+        return unit;
     }
 
     /**
@@ -88,7 +80,7 @@ public enum ResultType {
      * @return - score
      */
     public int countScore(double result) {
-        return (int) (parameter.getA() * Math.pow((result - parameter.getB()), parameter.getC()));
+        return (int) (a * Math.pow((result - b), c));
     }
 
     /**
@@ -98,7 +90,7 @@ public enum ResultType {
      * @return - score
      */
     public int countJumpEvent(double result) {
-        return (int) (parameter.getA() * Math.pow((100 * result - parameter.getB()), parameter.getC()));
+        return (int) (a * Math.pow((100 * result - b), c));
     }
 
     /**
@@ -108,6 +100,6 @@ public enum ResultType {
      * @return -score
      */
     public int countTrackEvent(double result) {
-        return (int) (parameter.getA() * Math.pow((parameter.getB() - result), parameter.getC()));
+        return (int) (a * Math.pow((b - result), c));
     }
 }
