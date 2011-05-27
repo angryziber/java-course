@@ -84,7 +84,8 @@ public enum ResultType {
     /**
      * counter for trowing events : Unit - m
      *
-     * @return
+     * @param result - points
+     * @return - score
      */
     public int countScore(double result) {
         return (int) (parameter.getA() * Math.pow((result - parameter.getB()), parameter.getC()));
@@ -93,7 +94,8 @@ public enum ResultType {
     /**
      * counter for jumping events : Unit - m
      *
-     * @return
+     * @param result - points
+     * @return - score
      */
     public int countJumpEvent(double result) {
         return (int) (parameter.getA() * Math.pow((100 * result - parameter.getB()), parameter.getC()));
@@ -102,36 +104,10 @@ public enum ResultType {
     /**
      * counter for track events : Unit - sec
      *
-     * @return
+     * @param result - points
+     * @return -score
      */
     public int countTrackEvent(double result) {
         return (int) (parameter.getA() * Math.pow((parameter.getB() - result), parameter.getC()));
-    }
-
-    public static ResultType getResultType(int i) {
-        switch (i) {
-            case 0:
-                return RACE_100_METERS;
-            case 1:
-                return LONG_JUMP;
-            case 2:
-                return SHOT_PUT;
-            case 3:
-                return HIGH_JUMP;
-            case 4:
-                return RACE_400_METERS;
-            case 5:
-                return RACE_110_METERS_HURDLES;
-            case 6:
-                return DISCUS_THROW;
-            case 7:
-                return POLE_VAULT;
-            case 8:
-                return JAVELIN_THROW;
-            case 9:
-                return RACE_1500_METERS;
-            default:
-                return null;
-        }
     }
 }

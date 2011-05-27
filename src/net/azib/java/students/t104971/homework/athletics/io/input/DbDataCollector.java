@@ -24,7 +24,7 @@ public class DbDataCollector implements DataCollector {
     public List<Athlete> loadCompetitionResults(String competition) {
         List<Athlete> athletes = new ArrayList<Athlete>();
         try {
-            setConnection(DbConnection.getConnection());
+            setConnection(new DbConnection().connect());
             PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM results "
                             + "LEFT JOIN athletes ON results.athlete_id=athletes.id "

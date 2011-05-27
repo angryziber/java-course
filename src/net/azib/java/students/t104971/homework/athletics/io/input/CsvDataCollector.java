@@ -1,7 +1,6 @@
 package net.azib.java.students.t104971.homework.athletics.io.input;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
-import net.azib.java.students.t104971.homework.athletics.components.ResultType;
 import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 import net.azib.java.students.t104971.homework.athletics.util.InputRead;
 import org.apache.log4j.Logger;
@@ -13,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import static net.azib.java.students.t104971.homework.athletics.components.ResultType.*;
 
 /**
  * @author Jaroslav Judin
@@ -54,18 +55,47 @@ public class CsvDataCollector implements DataCollector {
     }
 
     void setAthleteAttribute(Athlete athlete, int index, String value) {
+        double result = index > 2 ? InputParser.parseResult(value) : 0;
+
         switch (index) {
             case 0:
                 athlete.setName(value);
-                break;
+                return;
             case 1:
                 athlete.setDateBirth(InputParser.parseDate(value));
-                break;
+                return;
             case 2:
                 athlete.setCountry(value);
-                break;
-            default:
-                athlete.addResult(ResultType.getResultType(index - 3), InputParser.parseResult(value));
+                return;
+            case 3:
+                athlete.addResult(RACE_100_METERS, result);
+                return;
+            case 4:
+                athlete.addResult(LONG_JUMP, result);
+                return;
+            case 5:
+                athlete.addResult(SHOT_PUT, result);
+                return;
+            case 6:
+                athlete.addResult(HIGH_JUMP, result);
+                return;
+            case 7:
+                athlete.addResult(RACE_400_METERS, result);
+                return;
+            case 8:
+                athlete.addResult(RACE_110_METERS_HURDLES, result);
+                return;
+            case 9:
+                athlete.addResult(DISCUS_THROW, result);
+                return;
+            case 10:
+                athlete.addResult(POLE_VAULT, result);
+                return;
+            case 11:
+                athlete.addResult(JAVELIN_THROW, result);
+                return;
+            case 12:
+                athlete.addResult(RACE_1500_METERS, result);
         }
     }
 

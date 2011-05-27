@@ -12,14 +12,9 @@ import java.sql.SQLException;
 public class DbConnection {
 
     private Logger log = Logger.getLogger(getClass());
-    private static Connection connection;
+    private Connection connection;
 
-
-    public static Connection getConnection() {
-        return connection != null ? connection : new DbConnection().connect();
-    }
-
-    private Connection connect() {
+    public Connection connect() {
         try {
             connection = DriverManager.getConnection(
                     System.getProperty("url"),
@@ -32,7 +27,7 @@ public class DbConnection {
         return connection;
     }
 
-    private void close() {
+    void close() {
         if (connection != null) {
             try {
                 connection.close();
