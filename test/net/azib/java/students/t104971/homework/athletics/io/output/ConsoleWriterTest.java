@@ -1,6 +1,5 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
-import net.azib.java.students.t104971.homework.athletics.io.TestDB;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -8,10 +7,10 @@ import static junit.framework.Assert.assertEquals;
 /**
  * @author Jaroslav Judin
  */
-public class ConsoleWriterTest {
+public class ConsoleWriterTest extends CommonOutputTestCase {
     @Test
     public void testWrite() throws Exception {
-        ConsoleWriter writer = new ConsoleWriter(TestDB.getTestAthletes());
+        ConsoleWriter writer = new ConsoleWriter(getTestAthletes());
         String storedLine = writer.write(null);
         assertEquals("Athlete{ place=1, totalScore=0, name= Jaak Tepandi, country= EE, dateBirth=01.01.1976}\n" +
                 "\t\tResult{type=RACE_100_METERS, result=5.0, score=2640}\n" +

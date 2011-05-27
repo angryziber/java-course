@@ -1,8 +1,7 @@
 package net.azib.java.students.t104971.homework.athletics.io.output.xml;
 
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
-import net.azib.java.students.t104971.homework.athletics.io.TestDB;
-import net.azib.java.students.t104971.homework.athletics.io.output.CommonOutputTest;
+import net.azib.java.students.t104971.homework.athletics.io.output.CommonOutputTestCase;
 import net.azib.java.students.t104971.homework.athletics.io.output.OutputWriter;
 import org.junit.Test;
 
@@ -11,11 +10,11 @@ import static junit.framework.Assert.assertEquals;
 /**
  * @author Jaroslav Judin
  */
-public class XMLWriterTest extends CommonOutputTest {
+public class XMLWriterTest extends CommonOutputTestCase {
 
     @Test
     public void testWrite() throws Exception {
-        OutputWriter xmlWriter = new XMLWriter(TestDB.getTestAthletes());
+        OutputWriter xmlWriter = new XMLWriter(getTestAthletes());
 
         String content = readCreatedFile(xmlWriter.write("tmpXmlFile.xml"));
 

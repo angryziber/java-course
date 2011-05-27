@@ -1,7 +1,6 @@
 package net.azib.java.students.t104971.homework.athletics.io.output.xml;
 
-import net.azib.java.students.t104971.homework.athletics.io.TestDB;
-import net.azib.java.students.t104971.homework.athletics.io.output.CommonOutputTest;
+import net.azib.java.students.t104971.homework.athletics.io.output.CommonOutputTestCase;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -9,11 +8,11 @@ import static junit.framework.Assert.assertEquals;
 /**
  * @author Jaroslav Judin
  */
-public class HTMLWriterTest extends CommonOutputTest {
+public class HTMLWriterTest extends CommonOutputTestCase {
 
     @Test
     public void testWrite() throws Exception {
-        HTMLWriter htmlWriter = new HTMLWriter(TestDB.getTestAthletes());
+        HTMLWriter htmlWriter = new HTMLWriter(getTestAthletes());
 
         String content = readCreatedFile(htmlWriter.write("tmpHtmlFile.html"));
 

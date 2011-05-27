@@ -1,15 +1,9 @@
 package net.azib.java.students.t104971.homework.athletics.io;
 
-import net.azib.java.students.t104971.homework.athletics.components.Athlete;
-import net.azib.java.students.t104971.homework.athletics.components.ResultType;
-import net.azib.java.students.t104971.homework.athletics.util.InputParser;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestDB {
 
@@ -59,19 +53,5 @@ public class TestDB {
                 conn.close();
         } catch (SQLException ignore) {
         }
-    }
-
-    public static List<Athlete> getTestAthletes() {
-        List<Athlete> athletes = new ArrayList<Athlete>();
-
-        Athlete athlete = new Athlete();
-        athlete.setName("Jaak Tepandi");
-        athlete.setCountry("EE");
-        athlete.setDateBirth(InputParser.parseDate("01.01.1976"));
-        for (ResultType type : ResultType.values()) {
-           athlete.addResult(type, 5d);
-        }
-        athletes.add(athlete);
-        return athletes;
     }
 }

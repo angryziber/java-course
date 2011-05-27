@@ -1,17 +1,22 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
+import net.azib.java.students.t104971.homework.athletics.components.Athlete;
+import net.azib.java.students.t104971.homework.athletics.components.ResultType;
 import net.azib.java.students.t104971.homework.athletics.config.PropertiesLoader;
+import net.azib.java.students.t104971.homework.athletics.util.InputParser;
 import org.junit.Before;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Jaroslav Judin
  */
-public class CommonOutputTest {
+public class CommonOutputTestCase {
 
     @Before
     public void setUp() throws Exception {
@@ -29,5 +34,19 @@ public class CommonOutputTest {
             content.append(line).append(System.getProperty("line.separator"));
         }
         return content.toString();
+    }
+
+    public static List<Athlete> getTestAthletes() {
+        List<Athlete> athletes = new ArrayList<Athlete>();
+
+        Athlete athlete = new Athlete();
+        athlete.setName("Jaak Tepandi");
+        athlete.setCountry("EE");
+        athlete.setDateBirth(InputParser.parseDate("01.01.1976"));
+        for (ResultType type : ResultType.values()) {
+           athlete.addResult(type, 5d);
+        }
+        athletes.add(athlete);
+        return athletes;
     }
 }

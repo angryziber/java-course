@@ -1,6 +1,5 @@
 package net.azib.java.students.t104971.homework.athletics.io.output;
 
-import net.azib.java.students.t104971.homework.athletics.io.TestDB;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -8,10 +7,10 @@ import static junit.framework.Assert.assertEquals;
 /**
  * @author Jaroslav Judin
  */
-public class CSVWriterTest extends CommonOutputTest {
+public class CSVWriterTest extends CommonOutputTestCase {
     @Test
     public void testWrite() throws Exception {
-        CSVWriter csvWriter = new CSVWriter(TestDB.getTestAthletes());
+        CSVWriter csvWriter = new CSVWriter(getTestAthletes());
 
         String content = readCreatedFile(csvWriter.write("tmpCsvFile.csv"));
 
