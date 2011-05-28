@@ -1,19 +1,18 @@
 package net.azib.java.students.t104971.homework.athletics.util;
 
+import net.azib.java.students.t104971.homework.athletics.io.OutputType;
+import net.azib.java.students.t104971.homework.athletics.io.SourceType;
 import org.apache.log4j.Logger;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Jaroslav Judin
  */
 public class InputParametersValidator {
 
-    private String inputMethod;
-    private String inputParameter;
-    private String outputMethod;
-    private String outputParameter;
+    private SourceType source;
+    private OutputType result;
+    private String sourceValue;
+    private String resultValue;
 
     public boolean isValid(String... args) {
         try {
@@ -27,56 +26,58 @@ public class InputParametersValidator {
     }
 
     public void validate(String... args) throws UserInputException {
-        List<String> allowedInputMethods = Arrays.asList("-console", "-csv", "-db");
-        List<String> allowedOutputMethods = Arrays.asList("-console", "-csv", "-xml", "-html");
-
         if (args.length < 2) {
-            throw new UserInputException("Please, specify input(" + allowedInputMethods + ") and output(" + allowedOutputMethods + ") methods");
+            throw new UserInputException("Please, specify input and output methods");
         }
 
-        inputMethod = args[0];
-        if (!allowedInputMethods.contains(inputMethod)) {
-            throw new UserInputException(inputMethod + " input method doesn't exist");
-        }
-
-        if ("-console".equals(inputMethod)) {
-            outputMethod = args[1];
-            if (!"-console".equals(outputMethod) && args.length < 3) {
-                throw new UserInputException("No parameters for output method " + outputMethod);
+        try {
+            source = SourceType.valueOf(getTypeName(args[0]));
+            if (source.equals(SourceType.CONSOLE)) {
+                result = OutputType.valueOf(getTypeName(args[1]));
+                if (!result.equals(OutputType.CONSOLE) && args.length > 2) {
+                    resultValue = args[2];
+                }
+                if (result.equals(OutputType.CONSOLE)) {
+                    return;
+                }
             }
-        } else if (args.length < 3) {
-            throw new UserInputException("Output method doesn't specified");
-        } else {
-            inputParameter = args[1];
-            outputMethod = args[2];
-        }
-        if (!allowedOutputMethods.contains(outputMethod)) {
-            throw new UserInputException(outputMethod + " output method doesn't exist");
-        }
+            sourceValue = args[1];
 
-        if (!"-console".equals(inputMethod) && !"-console".equals(outputMethod)) {
-            if (args.length < 4) {
-                throw new UserInputException("Output parameter doesn't specified for " + outputMethod);
+            if (args.length < 3) {
+                throw new UserInputException("Please, specify value for output type");
             }
-            outputParameter = args[3];
+            result = OutputType.valueOf(getTypeName(args[2]));
+
+            if (!result.equals(OutputType.CONSOLE)) {
+                if (args.length > 3) {
+                    resultValue = args[3];
+                } else {
+                    throw new UserInputException("Please, specify value for output type");
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            throw new UserInputException("input or output type doesn't exist");
         }
-
     }
 
-
-    public String getInputMethod() {
-        return inputMethod;
+    public SourceType getSource() {
+        return source;
     }
 
-    public String getInputParameter() {
-        return inputParameter;
+    public OutputType getResult() {
+        return result;
     }
 
-    public String getOutputMethod() {
-        return outputMethod;
+    public String getSourceValue() {
+        return sourceValue;
     }
 
-    public String getOutputParameter() {
-        return outputParameter;
+    public String getResultValue() {
+        return resultValue;
     }
+
+    private static String getTypeName(String arg) {
+        return arg.toUpperCase().replace("-", "");
+    }
+
 }

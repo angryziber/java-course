@@ -28,22 +28,22 @@ public class Decathlon {
         InputParametersValidator validator = new InputParametersValidator();
         if (validator.isValid(args)) {
             new Decathlon()
-                    .getInputData(validator.getInputMethod(), validator.getInputParameter())
+                    .getInputData(validator.getSource(), validator.getSourceValue())
                     .calculate()
                     .sort()
-                    .outputData(validator.getOutputMethod(), validator.getOutputParameter());
+                    .outputData(validator.getResult(), validator.getResultValue());
         }
     }
 
-    private Decathlon getInputData(String method, String parameter) {
-        DataCollector collector = SourceType.valueOf(method.toUpperCase().replace("-","")).getCollector();
-        athletes = collector.loadCompetitionResults(parameter);
+    private Decathlon getInputData(SourceType source, String sourceValue) {
+        DataCollector collector = source.getCollector();
+        athletes = collector.loadCompetitionResults(sourceValue);
         return this;
     }
 
-    private Decathlon outputData(String method, String parameter) {
-        OutputWriter writer = OutputType.valueOf(method.toUpperCase().replace("-", "")).getWriter(athletes);
-        writer.write(parameter);
+    private Decathlon outputData(OutputType output, String resultValue) {
+        OutputWriter writer = output.getWriter(athletes);
+        writer.write(resultValue);
         return this;
     }
 

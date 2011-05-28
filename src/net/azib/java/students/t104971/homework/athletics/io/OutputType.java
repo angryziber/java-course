@@ -20,7 +20,7 @@ public enum OutputType {
             return new XMLWriter(athletes);
         }
     },
-    CSV{
+    CSV {
         @Override
         public OutputWriter getWriter(List<Athlete> athletes) {
             return new CSVWriter(athletes);
