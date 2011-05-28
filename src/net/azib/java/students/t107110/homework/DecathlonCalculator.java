@@ -3,10 +3,7 @@ package net.azib.java.students.t107110.homework;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author Eduard Shustrov
@@ -16,7 +13,7 @@ public class DecathlonCalculator {
 
 	private final Map<Result, String> results;
 
-	public DecathlonCalculator(final ResultReader reader) throws DecathlonException, IOException {
+	public DecathlonCalculator(final ResultReader reader) throws DecathlonException {
 		results = rateResults(readResults(reader));
 	}
 
@@ -40,23 +37,43 @@ public class DecathlonCalculator {
 		}
 	}
 
-	private static Map<Result, String> readResults(final ResultReader reader) throws DecathlonException, IOException {
-		Result result;
-		final Map<Result, String> results = new TreeMap<Result, String>();
+	private static Collection<Result> readResults(final ResultReader reader) throws DecathlonException {
+		final Collection<Result> results = new LinkedList<Result>();
 		try {
-			while ((result = reader.read()) != null) results.put(result, null);
+			Result result;
+			while ((result = reader.read()) != null) results.add(result);
 		} finally {
 			reader.close();
 		}
 		return results;
 	}
 
-	private static Map<Result, String> rateResults(final Map<Result, String> results)
-			throws DecathlonException, IOException {
-		int place = 1;
-		for (final Result result : results.keySet()) {
-			results.put(result, Integer.toString(place++));
+	private static Map<Result, String> rateResults(final Collection<Result> readResults) throws DecathlonException {
+		if (readResults.isEmpty()) return Collections.emptyMap();
+
+		final Map<Result, String> results = new LinkedHashMap<Result, String>(readResults.size());
+		final List<Result> resultsToRate = new ArrayList<Result>(readResults);
+		Collections.sort(resultsToRate);
+		for (int current = 0; current < resultsToRate.size(); ) {
+			final int lastWithSamePoints = getLastIndexWithSamePoints(resultsToRate, current);
+			final String place = indexToPlace(current, lastWithSamePoints);
+			do results.put(resultsToRate.get(current), place); while (current++ != lastWithSamePoints);
 		}
 		return Collections.unmodifiableMap(results);
+	}
+
+	private static int getLastIndexWithSamePoints(final List<Result> sortedResults, final int currentIndex) {
+		final int points = sortedResults.get(currentIndex).getPoints();
+		final int last = sortedResults.size() - 1;
+		for (int tested = currentIndex; tested < last; tested++)
+			if (sortedResults.get(tested + 1).getPoints() != points) return tested;
+		return last;
+	}
+
+	private static String indexToPlace(final int startPlace, final int endPlace) {
+		final StringBuilder place = new StringBuilder();
+		place.append(startPlace + 1);
+		if (startPlace != endPlace) place.append('-').append(endPlace + 1);
+		return place.toString();
 	}
 }
