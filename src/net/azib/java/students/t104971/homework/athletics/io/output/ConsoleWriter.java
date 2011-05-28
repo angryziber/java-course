@@ -2,7 +2,6 @@ package net.azib.java.students.t104971.homework.athletics.io.output;
 
 import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.util.PlaceHolderUtil;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -11,7 +10,6 @@ import java.util.List;
  */
 public class ConsoleWriter implements OutputWriter {
     private List<Athlete> athletes;
-    private Logger logger = Logger.getLogger(getClass());
 
     public ConsoleWriter(List<Athlete> athletes) {
         this.athletes = athletes;

@@ -4,7 +4,6 @@ import net.azib.java.students.t104971.homework.athletics.components.Athlete;
 import net.azib.java.students.t104971.homework.athletics.components.Result;
 
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * @author Jaroslav Judin

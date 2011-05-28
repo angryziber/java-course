@@ -29,14 +29,14 @@ public class CommonOutputTestCase {
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
         StringBuilder content = new StringBuilder();
-        String line = null;
+        String line;
         while ((line = reader.readLine()) != null) {
             content.append(line).append(System.getProperty("line.separator"));
         }
         return content.toString();
     }
 
-    public static List<Athlete> getTestAthletes() {
+    public List<Athlete> getTestAthletes() {
         List<Athlete> athletes = new ArrayList<Athlete>();
 
         Athlete athlete = new Athlete();
