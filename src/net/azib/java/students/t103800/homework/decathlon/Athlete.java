@@ -58,9 +58,8 @@ public class Athlete {
 	 * @param name name.
 	 */
 	public void setName(String name) {
-		if(name.startsWith("\"") && name.endsWith("\"")) {
-			this.name = name.substring(1, name.length() - 1);
-		}else this.name = name;
+		if(name.contains("\"")) name = name.replace("\"", "");
+		this.name = name;
 	}
 
 	/**

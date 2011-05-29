@@ -122,7 +122,7 @@ public class Exporter {
 					fileOutStream.print(place + "-" + (place + entry.getValue().size() - 1));
 				}else fileOutStream.print(place);
 
-				fileOutStream.println("," + athlete.getAsCSVString());
+				fileOutStream.println("," + athlete.calculatePoints() + "," + athlete.getAsCSVString());
 			}
 			place += entry.getValue().size();
 		}
@@ -137,7 +137,7 @@ public class Exporter {
 	 */
 	public void exportAsXML(Athlete[] athletes, PrintStream fileOutStream) throws ExporterException {
 		try {
-			File dtdFile = new File(Exporter.class.getName().concat("") + DTD_FOR_XML);
+			File dtdFile = new File(Exporter.class.getResource(DTD_FOR_XML).getPath());
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, dtdFile.getPath());
 			transformer.transform(generateDataSource(athletes), new StreamResult(fileOutStream));

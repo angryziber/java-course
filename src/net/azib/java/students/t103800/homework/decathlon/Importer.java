@@ -99,7 +99,7 @@ public class Importer {
 	 */
 	public Athlete[] getDataFromCSVFile(InputStream fileStream) throws ImporterException {
 		ArrayList<Athlete> athleteList = new ArrayList<Athlete>();
-		BufferedReader csvReader;
+		BufferedReader csvReader = null;
 		String line;
 		StringTokenizer tokens;
 		Athlete athlete;
@@ -111,7 +111,7 @@ public class Importer {
 				tokens = new StringTokenizer(line, ",");
 				athlete = new Athlete();
 
-				athlete.setName(tokens.nextToken());
+				athlete.setName(tokens.nextToken().trim());
 				athlete.setBirthDate(tokens.nextToken());
 				athlete.setCountryCode(tokens.nextToken());
 				for(Athlete.Event event : Athlete.Event.values()) athlete.setResult(event, tokens.nextToken());
@@ -124,11 +124,11 @@ public class Importer {
 			throw new ImporterException("IOError: " + e.getMessage());
 		} catch (CountryCodeException e) {
 			throw new ImporterException("Parsing error: " + e.getMessage());
+		} finally {
+			try {
+				if(csvReader != null) csvReader.close();
+			} catch (IOException ignored) {}
 		}
-
-		try {
-			csvReader.close();
-		} catch (IOException ignored) {}
 
 		Athlete[] athletes = new Athlete[athleteList.size()];
 		athleteList.toArray(athletes);
