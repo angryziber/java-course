@@ -1,5 +1,7 @@
 package net.azib.java.students.t107110.homework;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -81,6 +83,8 @@ public class DBResultReader implements ResultReader {
 			properties.load(propertiesStream);
 		} catch (IOException e) {
 			throw decathlonException(e, Message.CANNOT_LOAD_PROPERTIES);
+		} finally {
+			IOUtils.closeQuietly(propertiesStream);
 		}
 		return properties;
 	}
