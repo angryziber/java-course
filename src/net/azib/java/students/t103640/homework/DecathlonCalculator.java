@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DecathlonCalculator {
 	 /**This program is designed to read in given decathlon data from console, database or cvs format.
-	  * This program calculates the score and place of athletes and returns them in descending order
+	  * This program calculates the score and the places of athletes and returns them in descending order
 	  * @param args: inputMethod, inputParam, outputMethod, outputParam
 	  *     These are the given parameters that control the input-output of the program
 	  * @author Taavi Sonets 103640 IATB21
