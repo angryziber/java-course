@@ -33,7 +33,7 @@ public class IOconsoleTest {
 		athletes = new IOconsole(new Controller()).consoleInput(new StringReader(input));
 		assertEquals("Siim Susi", athletes.get(0).getName());
 		assertEquals("ES", athletes.get(1).getCountry());
-		assertEquals(6379, athletes.get(2).getScore());
+		assertEquals(6378, athletes.get(2).getScore());
 		assertEquals(Const.DATE_FORMAT.parse("11.05.1960"), athletes.get(3).getBirthday());
 	}
 

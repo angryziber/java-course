@@ -18,7 +18,7 @@ import org.junit.Test;
 
 public class IOcsvTest {
 	
-	private String file = "\\inputs\\input.csv";
+	private String file = "input.csv";
 	private String outFile = "outputTest.csv";
 	private File f;
 
