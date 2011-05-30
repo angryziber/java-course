@@ -30,7 +30,7 @@ public class Athlete implements Cloneable {
 		return name;
 	}
 
-	//TODO add compute methodPointsMethod
+	//TODO add computePoints methodPointsMethod
 
 	/**
 	 * You will get a cloned object of dateOfBirth.
@@ -145,6 +145,10 @@ public class Athlete implements Cloneable {
 	@Override
 	public String toString() {
 		return name + ", " + countryISO2LetterCode;
+	}
+
+	public int computePoints() {
+		return 0;
 	}
 
 	/**

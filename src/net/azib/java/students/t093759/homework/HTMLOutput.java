@@ -6,9 +6,9 @@ import java.util.Collection;
 
 /**
  * @author dionis
- *         5/30/114:52 AM
+ *         5/30/114:53 AM
  */
-public class ConsoleSaver implements AthletesSaver {
+public class HTMLOutput implements AthletesOutput {
 	@Override
 	public void save(Collection<Athlete> athletes, Object... additionalParameters) {
 		throw new NotImplementedException();

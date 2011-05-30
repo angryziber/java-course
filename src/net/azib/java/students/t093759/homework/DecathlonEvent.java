@@ -6,15 +6,23 @@ package net.azib.java.students.t093759.homework;
  */
 public enum DecathlonEvent {
 	ONE_HUNDRED_METER_SPRINT {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.RUNNING;
+		}
+
+		@Override
+		double a() {
 			return 25.4347;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 18.0;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.81;
 		}
 
@@ -24,15 +32,23 @@ public enum DecathlonEvent {
 		}
 	},
 	LONG_JUMP {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.JUMPING;
+		}
+
+		@Override
+		double a() {
 			return 0.14354;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 220;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.4;
 		}
 
@@ -42,15 +58,23 @@ public enum DecathlonEvent {
 		}
 	},
 	SHOT_PUT {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.THROWING;
+		}
+
+		@Override
+		double a() {
 			return 51.39;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 1.5;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.05;
 		}
 
@@ -60,15 +84,23 @@ public enum DecathlonEvent {
 		}
 	},
 	HIGH_JUMP {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.JUMPING;
+		}
+
+		@Override
+		double a() {
 			return 0.8465;
 		}
 
-		public double b() {
-			return 75;
+		@Override
+		double b() {
+			return 75.0;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.42;
 		}
 
@@ -78,15 +110,23 @@ public enum DecathlonEvent {
 		}
 	},
 	FOUR_HUNDRED_METER_SPRINT {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.RUNNING;
+		}
+
+		@Override
+		double a() {
 			return 1.53775;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 82;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.81;
 		}
 
@@ -96,15 +136,23 @@ public enum DecathlonEvent {
 		}
 	},
 	ONE_HUNDRED_TEN_METER_HURDLES {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.RUNNING;
+		}
+
+		@Override
+		double a() {
 			return 5.74352;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 28.5;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.92;
 		}
 
@@ -114,15 +162,23 @@ public enum DecathlonEvent {
 		}
 	},
 	DISCUS_THROW {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.THROWING;
+		}
+
+		@Override
+		double a() {
 			return 12.91;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 4;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.1;
 		}
 
@@ -132,15 +188,23 @@ public enum DecathlonEvent {
 		}
 	},
 	POLE_VAULT {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.JUMPING;
+		}
+
+		@Override
+		double a() {
 			return 0.2797;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 100;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.35;
 		}
 
@@ -150,15 +214,23 @@ public enum DecathlonEvent {
 		}
 	},
 	JAVELIN_THROW {
-		public double a() {
+		@Override
+		Type typeOfEvent() {
+			return Type.THROWING;
+		}
+
+		@Override
+		double a() {
 			return 10.14;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 7;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.08;
 		}
 
@@ -167,22 +239,73 @@ public enum DecathlonEvent {
 			return "Javelin throw";
 		}
 	},
-	THOUSAND_FIVE_HUNDRED_METER_RACE {
-		public double a() {
+	THOUSAND_FIVE_HUNDRED_METER_SPRINT {
+		@Override
+		Type typeOfEvent() {
+			return Type.RUNNING;
+		}
+
+		@Override
+		double a() {
 			return 0.03768;
 		}
 
-		public double b() {
+		@Override
+		double b() {
 			return 480;
 		}
 
-		public double c() {
+		@Override
+		double c() {
 			return 1.85;
 		}
 
 		@Override
 		public String toString() {
-			return "1500 m race";
+			return "1500 m sprint";
 		}
+	};
+
+
+	abstract double a();
+
+	abstract double b();
+
+	abstract double c();
+
+	/**
+	 * Compute points for particular type of event.
+	 *
+	 * @param p parameter
+	 * @return computed result.
+	 */
+	public double compute(double p) {
+		return typeOfEvent().compute(a(), b(), c(), p);
+	}
+
+	abstract Type typeOfEvent();
+
+	private static enum Type {
+		RUNNING {
+			@Override
+			int compute(double a, double b, double c, double p) {
+
+				return (int) (a * Math.pow((b - p), c));
+			}
+		},
+		THROWING {
+			@Override
+			int compute(double a, double b, double c, double p) {
+				return (int) (a * Math.pow((p - b), c));
+			}
+		},
+		JUMPING {
+			@Override
+			int compute(double a, double b, double c, double p) {
+				return THROWING.compute(a,b,c,p);
+			}
+		};
+
+		abstract int compute(double a, double b, double c, double p);
 	}
 }

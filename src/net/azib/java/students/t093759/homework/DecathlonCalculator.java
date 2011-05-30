@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 public class DecathlonCalculator {
 	AthletesLoader athleteLoader;
-	AthletesSaver athleteSaver;
+	AthletesOutput athleteSaver;
 
 	public static void main(String[] args) {
 		new DecathlonCalculator().handleRequest(args);
@@ -134,8 +134,8 @@ public class DecathlonCalculator {
 
 	private static enum OutputMethod {
 		CONSOLE {
-			ConsoleSaver createAthleteSaver() {
-				return new ConsoleSaver();
+			ConsoleOutput createAthleteSaver() {
+				return new ConsoleOutput();
 			}
 
 			@Override
@@ -145,8 +145,8 @@ public class DecathlonCalculator {
 
 		},
 		CSV {
-			AthletesSaver createAthleteSaver() {
-				return new CSVSaver();
+			AthletesOutput createAthleteSaver() {
+				return new CSVOutput();
 			}
 
 			@Override
@@ -156,8 +156,8 @@ public class DecathlonCalculator {
 
 		},
 		XML {
-			AthletesSaver createAthleteSaver() {
-				return new XMLSaver();
+			AthletesOutput createAthleteSaver() {
+				return new XMLOutput();
 			}
 
 			@Override
@@ -167,8 +167,8 @@ public class DecathlonCalculator {
 
 		},
 		HTML {
-			AthletesSaver createAthleteSaver() {
-				return new HTMLSaver();
+			AthletesOutput createAthleteSaver() {
+				return new HTMLOutput();
 			}
 
 			@Override
@@ -178,7 +178,7 @@ public class DecathlonCalculator {
 
 		};
 
-		abstract AthletesSaver createAthleteSaver();
+		abstract AthletesOutput createAthleteSaver();
 
 		abstract String getParameter(int currentIndex, String[] fromParameters);
 

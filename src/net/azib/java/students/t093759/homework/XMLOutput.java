@@ -6,9 +6,9 @@ import java.util.Collection;
 
 /**
  * @author dionis
- *         5/30/114:53 AM
+ *         5/30/114:55 AM
  */
-public class HTMLSaver implements AthletesSaver {
+public class XMLOutput implements AthletesOutput {
 	@Override
 	public void save(Collection<Athlete> athletes, Object... additionalParameters) {
 		throw new NotImplementedException();

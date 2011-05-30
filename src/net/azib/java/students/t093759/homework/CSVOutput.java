@@ -8,7 +8,7 @@ import java.util.Collection;
  * @author dionis
  *         5/30/114:56 AM
  */
-public class CSVSaver implements AthletesSaver {
+public class CSVOutput implements AthletesOutput {
 	@Override
 	public void save(Collection<Athlete> athletes, Object... additionalParameters) {
 		throw new NotImplementedException();
