@@ -77,6 +77,7 @@ public class Controller {
 		if (name.contains("\"")) {
 			name = removeQuotes(name);
 		}
+		
 		String firstName = "^[\\p{Lu}]{1}[\\p{L}]*[\'-]?[\\p{L}\\s]+";
 		String surName = "[\\p{Lu}]{1}[\\p{L}]*[\'-]?[\\p{L}\\s]+$";
 

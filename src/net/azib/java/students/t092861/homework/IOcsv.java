@@ -64,7 +64,7 @@ public class IOcsv extends AbstractIO {
 			out.println("\nSuccessful input from " + "\"" + getParameters()+ "\"" + " file!\n");
 			
 		} catch (FileNotFoundException en) {
-			out.println("\nnError " + en.getMessage()
+			out.println("\nError " + en.getMessage()
 					+ ". Please check the file " + getParameters()
 					+ " location!");
 			

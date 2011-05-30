@@ -14,7 +14,8 @@ public class Const {
 	/**
 	 * Completely numeric date format, such as 12.13.52 or 3:30pm.
 	 */
-	public static final SimpleDateFormat DATE_FORMAT = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yy");
+		/*(SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);*/
 	
 	public static final String CMD_ERROR = "\nError! Not enought IO parameters. \nUsage: <program> -<input-method> [input-parameters] -<output-method> [output-parameters]";
 	
@@ -27,10 +28,12 @@ public class Const {
 	/**
 	 * Students package directory.
 	 */
-	public static final String PACKAGE = "src"
+	/*public static final String PACKAGE = Const.SEPARATOR + "src"
 			+ Const.SEPARATOR
 			+ (Const.class.getName().replace(".", Const.SEPARATOR)).replace(
-					"Const", "");
+					"Const", "");*/
+	
+	public static final String PACKAGE = System.getProperty("user.dir") + SEPARATOR;
 
 	/**
 	 * Command line parameter for console.
