@@ -1,10 +1,7 @@
 package net.azib.java.students.t093759.homework;
 
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.sql.SQLOutput;
 import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Decathlon calculator provides functionality for
@@ -14,6 +11,9 @@ import java.util.Arrays;
  *         5/29/117:53 PM
  */
 public class DecathlonCalculator {
+	AthletesLoader athleteLoader;
+	AthletesSaver athleteSaver;
+
 	public static void main(String[] args) {
 		new DecathlonCalculator().handleRequest(args);
 	}
@@ -23,55 +23,177 @@ public class DecathlonCalculator {
 			printHelpMessage();
 			return;
 		}
-		AthleteLoader athleteLoader;
 		int currentIndexOfParam = 0;
-		System.out.println("Params:"+ Arrays.asList(parameters));
-		final String inputMethod = parameters[currentIndexOfParam++].trim().toLowerCase();
-		if (inputMethod.equals("-console")) {
-			System.out.println("Console input.");
-			athleteLoader = new ConsoleLoader();
-			System.out.println(athleteLoader.load(null,11));
-		} else if (inputMethod.equals("-csv")) {
-			System.out.println("Comma separated output set.");
-			System.out.println("source: "+parameters[currentIndexOfParam++]);
-		} else if (inputMethod.equals("-db")) {
-			System.out.println("Database:");
-			System.out.println("source: "+parameters[currentIndexOfParam++]);
-		} else {
-			System.out.println("Bad input source:"+inputMethod);
+
+		System.out.println("Params:" + Arrays.asList(parameters));
+
+		InputMethod inputMethod = InputMethod.getInstanceFor(parameters[currentIndexOfParam]);
+		athleteLoader = inputMethod.createAthleteLoader();
+		Collection<Athlete> athletes = null;
+		try {
+			athletes = athleteLoader.load(inputMethod.getParameter(currentIndexOfParam, parameters));
+		} catch (Exception e) {
+			System.out.println(inputMethod);
 		}
-		final String outputMethod = parameters[currentIndexOfParam++].trim().toLowerCase();
-		if (outputMethod.equals("-console")) {
-			System.out.println("Console output.");
-		} else if (outputMethod.equals("-csv")) {
-			System.out.println("Comma separated output set.");
-			System.out.println("output: "+parameters[currentIndexOfParam++]);
-		} else if (outputMethod.equals("-xml")) {
-			System.out.println("XML:");
-			System.out.println("output: "+parameters[currentIndexOfParam++]);
-		}else if (outputMethod.equals("-html")) {
-			System.out.println("HTML:");
-			System.out.println("output: "+parameters[currentIndexOfParam++]);
-		}
-		else {
-			System.out.println("Bad output source");
+		currentIndexOfParam = inputMethod.getNextInputMethodArgumentsIndex(currentIndexOfParam);
+
+		OutputMethod outputMethod = OutputMethod.getInstanceFor(parameters[currentIndexOfParam]);
+		athleteSaver = outputMethod.createAthleteSaver();
+		try {
+			athleteSaver.save(athletes, outputMethod.getParameter(currentIndexOfParam, parameters));
+		} catch (Exception e) {
+			System.out.println(outputMethod);
 		}
 	}
 
 	private void printHelpMessage() {
+		final String newLine = System.getProperty("line.separator");
 		System.out.println("usage: <program> -<input-method> [input-parameters] -<output-method> [output-parameters]");
-		System.out.println("where\n" +
-				"<program> is your main class, e.g. java net.azib.java.students.txxxxxx.homework.DecathlonCalculator\n" +
-				"<input-method> is the name of the input method preceded by dash (-): -console, -csv, -db\n" +
-				"[input-parameters] are optional parameters depending on the specified input method:\n" +
-				"-console - no parameters\n" +
-				"-csv - input file name or path\n" +
-				"-db - competition id or name - both should work (DB connection string must be read from db.properties in the same package as the main class)\n" +
-				"<output-method> is the name of the output method preceded by dash (-): -conole, -csv, -xml, -html\n" +
-				"[output-parameters] are optional parameters depending on the specified output method:\n" +
-				"-conole - no parameters\n" +
-				"-csv - output file name or path\n" +
-				"-xml - output file name or path\n" +
-				"-html - output file name or path");
+		System.out.println(new StringBuilder().append("where").append(newLine)
+				.append("\t<program> is your main class, e.g. java net.azib.java.students.txxxxxx.homework.DecathlonCalculator").append(newLine)
+				.append("\t<input-method> is the name of the input method preceded by dash (-): -console, -csv, -db").append(newLine)
+				.append("\t[input-parameters] are optional parameters depending on the specified input method:").append(newLine)
+				.append("\t-console - no parameters").append(newLine)
+				.append("\t-csv - input file name or path").append(newLine)
+				.append("\t-db - competition id or name - both should work (DB connection string must be read from ")
+				.append("db.properties in the same package as the main class)").append(newLine)
+				.append("\t<output-method> is the name of the output method preceded by dash (-): -conole, -csv, -xml, -html").append(newLine)
+				.append("\t[output-parameters] are optional parameters depending on the specified output method:").append(newLine)
+				.append("\t-conole - no parameters").append(newLine)
+				.append("\t-csv - output file name or path").append(newLine)
+				.append("\t-xml - output file name or path").append(newLine)
+				.append("\t-html - output file name or path").toString());
+	}
+
+	private static enum InputMethod {
+		CONSOLE {
+			AthletesLoader createAthleteLoader() {
+				return new ConsoleLoader();
+			}
+
+			@Override
+			String getParameter(int currentIndex, String[] from) {
+				return "";
+			}
+
+			@Override
+			int getNextInputMethodArgumentsIndex(int currentIndex) {
+				return ++currentIndex;
+			}
+		},
+		CSV {
+			AthletesLoader createAthleteLoader() {
+				return new CSVLoader();
+			}
+
+			@Override
+			String getParameter(int currentIndex, String[] from) {
+				return from[++currentIndex];
+			}
+
+			@Override
+			int getNextInputMethodArgumentsIndex(int currentIndex) {
+				return currentIndex + 2;
+			}
+		},
+		DB {
+			AthletesLoader createAthleteLoader() {
+				return new DataBaseLoader();
+			}
+
+			@Override
+			String getParameter(int currentIndex, String[] from) {
+				return from[++currentIndex];
+			}
+
+			@Override
+			int getNextInputMethodArgumentsIndex(int currentIndex) {
+				return currentIndex + 2;
+			}
+		};
+
+		abstract AthletesLoader createAthleteLoader();
+
+		abstract String getParameter(int currentIndex, String[] fromParameters);
+
+		abstract int getNextInputMethodArgumentsIndex(int currentIndex);
+
+		private static InputMethod getInstanceFor(String inputMethodString) {
+			inputMethodString = inputMethodString.trim().toLowerCase();
+			if (inputMethodString.equals("-console"))
+				return CONSOLE;
+			else if (inputMethodString.equals("-csv"))
+				return CSV;
+			else if (inputMethodString.equals("-db"))
+				return DB;
+			else
+				throw new UnsupportedOperationException();
+		}
+	}
+
+
+	private static enum OutputMethod {
+		CONSOLE {
+			ConsoleSaver createAthleteSaver() {
+				return new ConsoleSaver();
+			}
+
+			@Override
+			String getParameter(int currentIndex, String[] from) {
+				return "";
+			}
+
+		},
+		CSV {
+			AthletesSaver createAthleteSaver() {
+				return new CSVSaver();
+			}
+
+			@Override
+			String getParameter(int currentIndex, String[] from) {
+				return from[++currentIndex];
+			}
+
+		},
+		XML {
+			AthletesSaver createAthleteSaver() {
+				return new XMLSaver();
+			}
+
+			@Override
+			String getParameter(int currentIndex, String[] from) {
+				return from[++currentIndex];
+			}
+
+		},
+		HTML {
+			AthletesSaver createAthleteSaver() {
+				return new HTMLSaver();
+			}
+
+			@Override
+			String getParameter(int currentIndex, String[] from) {
+				return from[++currentIndex];
+			}
+
+		};
+
+		abstract AthletesSaver createAthleteSaver();
+
+		abstract String getParameter(int currentIndex, String[] fromParameters);
+
+		private static OutputMethod getInstanceFor(String outputMethodString) {
+			outputMethodString = outputMethodString.trim().toLowerCase();
+			if (outputMethodString.equals("-console"))
+				return CONSOLE;
+			else if (outputMethodString.equals("-csv"))
+				return CSV;
+			else if (outputMethodString.equals("-xml"))
+				return XML;
+			else if (outputMethodString.equals("-html"))
+				return HTML;
+			else
+				throw new UnsupportedOperationException();
+		}
 	}
 }

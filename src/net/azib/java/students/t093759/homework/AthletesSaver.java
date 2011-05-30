@@ -6,7 +6,7 @@ import java.util.Collection;
  * @author dionis
  *         5/29/1110:23 PM
  */
-public interface AthleteSaver {
+public interface AthletesSaver {
 	/**
 	 * Save collection of athletes.
 	 * @param athletes Athletes to be saved.

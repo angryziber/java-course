@@ -17,7 +17,7 @@ import static java.lang.Double.valueOf;
  * @author dionis
  *         5/29/119:56 PM
  */
-public class ConsoleLoader implements AthleteLoader {
+public class ConsoleLoader implements AthletesLoader {
 	/**
 	 * When this constant will appear in input, athlete won't.
 	 */

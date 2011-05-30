@@ -30,6 +30,8 @@ public class Athlete implements Cloneable {
 		return name;
 	}
 
+	//TODO add compute methodPointsMethod
+
 	/**
 	 * You will get a cloned object of dateOfBirth.
 	 *

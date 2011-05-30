@@ -6,7 +6,7 @@ import java.util.Collection;
  * @author dionis
  *         5/29/1110:07 PM
  */
-public interface AthleteLoader {
+public interface AthletesLoader {
 	/**
 	 * Load collection of athletes and return them.
 	 *
