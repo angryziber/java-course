@@ -31,7 +31,7 @@ public class Athlete implements Cloneable {
 	}
 
 	/**
-	 * You will get a clone from dateOfBirth.
+	 * You will get a cloned object of dateOfBirth.
 	 *
 	 * @return Cloned date of birth.
 	 */
@@ -140,6 +140,14 @@ public class Athlete implements Cloneable {
 				&& shotPutInMeters != null && thousandFiveHundredMeterRaceInSeconds != null);
 	}
 
+	@Override
+	public String toString() {
+		return name + ", " + countryISO2LetterCode;
+	}
+
+	/**
+	 * Builder will help you to create object of Athlete without worry that some fields are not initialized.
+	 */
 	public static class Builder {
 		private Athlete athlete;
 
@@ -187,14 +195,14 @@ public class Athlete implements Cloneable {
 
 		public Builder setFourHundredMeterSprintTime(double timeInSeconds) {
 			if (timeInSeconds < 0.0 || timeInSeconds >= ONE_DAY_IN_SECONDS)
-				throw new IllegalArgumentException("400 meter sprint time length should be 0 or more seconds and less than 24 hours.");//TODO move to messages
+				throw new IllegalArgumentException("400 meter sprint time length should be 0 or more seconds and less than 24 hours in seconds.");//TODO move to messages
 			athlete.fourHundredMeterSprintInSeconds = timeInSeconds;
 			return this;
 		}
 
 		public Builder setOneHundredMeterSprintTime(double timeInSeconds) {
 			if (timeInSeconds < 0.0 || timeInSeconds >= ONE_DAY_IN_SECONDS)
-				throw new IllegalArgumentException("100 meter sprint time length should be 0 or more seconds and less than 24 hours.");//TODO move to messages
+				throw new IllegalArgumentException("100 meter sprint time length should be 0 or more seconds and less than 24 hours in seconds.");//TODO move to messages
 			athlete.oneHundredMeterSprintInSeconds = timeInSeconds;
 			return this;
 		}
@@ -215,7 +223,7 @@ public class Athlete implements Cloneable {
 
 		public Builder setOneHundredTenMeterHurdlesTime(double timeInSeconds) {
 			if (timeInSeconds < 0.0 || timeInSeconds >= ONE_DAY_IN_SECONDS)
-				throw new IllegalArgumentException("110 m hurdles should be 0 or more seconds and less than 24 hours.");//TODO move to messages
+				throw new IllegalArgumentException("110 m hurdles should be 0 or more seconds and less than 24 hours in seconds.");//TODO move to messages
 			athlete.oneHundredTenMeterHurdlesInSeconds = timeInSeconds;
 			return this;
 		}
@@ -243,14 +251,14 @@ public class Athlete implements Cloneable {
 
 		public Builder setThousandFiveHundredMeterRaceTime(double timeInSeconds) {
 			if (timeInSeconds < 0.0 || timeInSeconds >= ONE_DAY_IN_SECONDS)
-				throw new IllegalArgumentException("1500 m race time should be 0 or more seconds and less than 24 hours.");//TODO move to messages
+				throw new IllegalArgumentException("1500 m race time should be 0 or more seconds and less than 24 hours in seconds.");//TODO move to messages
 			athlete.thousandFiveHundredMeterRaceInSeconds = timeInSeconds;
 			return this;
 		}
 
 		public Builder setHighJumpHeight(double heightInMeters) {
 			if (heightInMeters < 0.0 || heightInMeters >= 5.0)
-				throw new IllegalArgumentException("High jump should be zero or more meter in height and less than 20 meter in height.");//TODO move to messages
+				throw new IllegalArgumentException("High jump should be zero or more meter in height and less than 5 meter in height.");//TODO move to messages
 			athlete.highJumpInMeters = heightInMeters;
 			return this;
 		}

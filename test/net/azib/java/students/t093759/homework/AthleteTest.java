@@ -214,6 +214,11 @@ public class AthleteTest {
 		assertThat(prototypeAthlete, is(builtAthlete));
 	}
 
+	@Test
+	public void stringRepresentationOfAthleteIsJustHisNameAndCountry() throws CloneNotSupportedException {
+		assertThat(newSampleAthlete().toString(), equalTo(NAME + ", " + COUNTRY_ISO_2_LETTER_CODE));
+	}
+
 	private static Athlete newSampleAthlete() throws CloneNotSupportedException {
 		return new Athlete.Builder()
 				.name(NAME)
