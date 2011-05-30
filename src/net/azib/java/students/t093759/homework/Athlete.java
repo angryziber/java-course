@@ -30,8 +30,6 @@ public class Athlete implements Cloneable {
 		return name;
 	}
 
-	//TODO add computePoints methodPointsMethod
-
 	/**
 	 * You will get a cloned object of dateOfBirth.
 	 *
@@ -45,44 +43,36 @@ public class Athlete implements Cloneable {
 		return countryISO2LetterCode;
 	}
 
-	public Double getOneHundredMeterSprintInSeconds() {
-		return oneHundredMeterSprintInSeconds;
-	}
-
-	public Double getLongJumpInMeters() {
-		return longJumpInMeters;
-	}
-
-	public Double getShotPutInMeters() {
-		return shotPutInMeters;
-	}
-
-	public Double getHighJumpInMeters() {
-		return highJumpInMeters;
-	}
-
-	public Double getFourHundredMeterSprintInSeconds() {
-		return fourHundredMeterSprintInSeconds;
-	}
-
-	public Double getOneHundredTenMeterHurdlesInSeconds() {
-		return oneHundredTenMeterHurdlesInSeconds;
-	}
-
-	public Double getDiscusThrowInMeters() {
-		return discusThrowInMeters;
-	}
-
-	public Double getPoleVaultInMeters() {
-		return poleVaultInMeters;
-	}
-
-	public Double getJavelinThrowInMeter() {
-		return javelinThrowInMeter;
-	}
-
-	public Double getThousandFiveHundredMeterRaceInSeconds() {
-		return thousandFiveHundredMeterRaceInSeconds;
+	/**
+	 * Get some results according to decathlon event.
+	 * @param event
+	 * @return
+	 */
+	public double get(DecathlonEvent event) {
+		switch (event){
+			case DISCUS_THROW:
+				return discusThrowInMeters;
+			case FOUR_HUNDRED_METER_SPRINT:
+				return fourHundredMeterSprintInSeconds;
+			case HIGH_JUMP:
+				return highJumpInMeters;
+			case JAVELIN_THROW:
+				return javelinThrowInMeter;
+			case LONG_JUMP:
+				return longJumpInMeters;
+			case ONE_HUNDRED_METER_SPRINT:
+				return oneHundredMeterSprintInSeconds;
+			case ONE_HUNDRED_TEN_METER_HURDLES:
+				return oneHundredTenMeterHurdlesInSeconds;
+			case POLE_VAULT:
+				return poleVaultInMeters;
+			case SHOT_PUT:
+				return shotPutInMeters;
+			case THOUSAND_FIVE_HUNDRED_METER_SPRINT:
+				return thousandFiveHundredMeterRaceInSeconds;
+			default:
+				throw new UnsupportedOperationException();
+		}
 	}
 
 	@Override
@@ -147,8 +137,18 @@ public class Athlete implements Cloneable {
 		return name + ", " + countryISO2LetterCode;
 	}
 
-	public int computePoints() {
-		return 0;
+	/**
+	 * Compute points.
+	 * @return
+	 */
+	public double computePoints() {
+		double sum = 0.0;
+		for (DecathlonEvent event : DecathlonEvent.values()) {
+			double result = get(event);
+			if(event.typeOfEvent()==DecathlonEvent.Type.JUMPING) result*=100.0;//because we have results in m,
+			// but they're measured in centimeters.
+		}
+		return sum;
 	}
 
 	/**

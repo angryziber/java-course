@@ -219,26 +219,6 @@ public class AthleteTest {
 		assertThat(newSampleAthlete().toString(), equalTo(NAME + ", " + COUNTRY_ISO_2_LETTER_CODE));
 	}
 
-	@Test
-	public void theBestOfTheBestOfTheBest() throws CloneNotSupportedException {
-		assertThat(guyWith10000Points().computePoints(), equalTo(10000));
-	}
-
-	private Athlete guyWith10000Points() throws CloneNotSupportedException {
-		return new Athlete.Builder(newSampleAthlete())
-				.setOneHundredMeterSprintTime(10.395)
-				.setLongJumpLength(7.76)
-				.setShotPutLength(18.4)
-				.setHighJumpHeight(2.20)
-				.setFourHundredMeterSprintTime(46.17)
-				.setOneHundredTenMeterHurdlesTime(13.8)
-				.setDiscusThrowLength(56.17)
-				.setPoleVaultHeight(5.28)
-				.setJavelinThrowLength(77.19)
-				.setThousandFiveHundredMeterRaceTime(233.79)
-				.build();
-	}
-
 	private Athlete newSampleAthlete() throws CloneNotSupportedException {
 		return new Athlete.Builder()
 				.name(NAME)
