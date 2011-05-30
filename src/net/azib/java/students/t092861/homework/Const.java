@@ -24,16 +24,16 @@ public class Const {
 	 * different platform (Windows = \), (Linux = /).
 	 */
 	public static final String SEPARATOR = System.getProperty("file.separator");
+	
+	public static final String USER_DIR = System.getProperty("user.dir") + SEPARATOR;
 
 	/**
 	 * Students package directory.
 	 */
-	/*public static final String PACKAGE = Const.SEPARATOR + "src"
+	public static final String PACKAGE = USER_DIR + "src"
 			+ Const.SEPARATOR
 			+ (Const.class.getName().replace(".", Const.SEPARATOR)).replace(
-					"Const", "");*/
-	
-	public static final String PACKAGE = System.getProperty("user.dir") + SEPARATOR;
+					"Const", "");
 
 	/**
 	 * Command line parameter for console.
