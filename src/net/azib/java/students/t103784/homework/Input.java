@@ -39,7 +39,7 @@ public class Input {
 	 */
 	public List<Athlete> readAthleteFromDB() throws SQLException, ParseException, IOException {
 		int i = 0;
-		BufferedReader reader = new BufferedReader(new FileReader("src\\net\\azib\\java\\students\\t103784\\homework\\db.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("src/net/azib/java/students/t103784/homework/db.properties"));
 		String connAddress = reader.readLine();
 		String connUserPass = reader.readLine();
 		Connection conn = DriverManager.getConnection(connAddress, connUserPass, connUserPass);
@@ -141,7 +141,7 @@ public class Input {
 				tokenizer = new StringTokenizer(line.trim(), ",");
 				while (tokenizer.hasMoreTokens()) {
 					athlete.setName(checkName(tokenizer.nextToken().trim()));
-					athlete.setBirthDate(checkDate(tokenizer.nextToken().trim()));
+					athlete.setBirthDate(tokenizer.nextToken().trim());
 					athlete.setCountry(checkCountry(tokenizer.nextToken().trim()));
 					for (int c = 0; c < 10; c++) {
 						if (c == 4 || c == 9) {

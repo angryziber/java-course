@@ -2,6 +2,9 @@ package net.azib.java.students.t103784.homework;
 
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,10 +12,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 
 /**
  * The main class.
@@ -88,7 +87,7 @@ public class Main {
 				if (inputParameter != null) {
 					file = new File(inputParameter);
 				} else {
-					file = new File("src\\net\\azib\\java\\students\\t103784\\homework\\tmp\\sample.csv");
+					file = new File("src/net/azib/java/students/t103784/homework/tmp/sample.csv");
 				}
 				reader = new BufferedReader(new FileReader(file));
 				contestants = input.readAthleteFromCSV(reader);

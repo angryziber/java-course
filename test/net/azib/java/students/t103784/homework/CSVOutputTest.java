@@ -1,6 +1,8 @@
 package net.azib.java.students.t103784.homework;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.List;
 
 /**
@@ -22,7 +24,7 @@ public class CSVOutputTest extends Output {
 		MockInput input = new MockInput();
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader("src\\net\\azib\\java\\students\\t103784\\homework\\tests\\CSVTest.csv"));
+			reader = new BufferedReader(new FileReader("src/net/azib/java/students/t103784/homework/tests/CSVTest.csv"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Test input failed (no such test file)");
 		}

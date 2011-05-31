@@ -43,7 +43,7 @@ public class PlaceCalculatorTest extends PlaceCalculator {
 			MockScoreCalculator.calculate(athlete);
 			contestants.add(athlete);
 		}
-		calculatePlace(contestants);
+		MockPlaceCalculator.calculatePlace(contestants);
 		String[] properPlaces = new String[contestants.size()];
 		properPlaces[0] = "1 - 2";
 		properPlaces[1] = "1 - 2";
@@ -58,6 +58,10 @@ public class PlaceCalculatorTest extends PlaceCalculator {
 	}
 
 	class MockScoreCalculator extends ScoreCalculator {
+
+	}
+
+	class MockPlaceCalculator extends PlaceCalculator {
 
 	}
 }

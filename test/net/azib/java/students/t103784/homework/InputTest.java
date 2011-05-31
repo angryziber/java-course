@@ -22,7 +22,7 @@ public class InputTest extends Input {
 	public void testConsoleInput() {
 		InputStream in = null;
 		try {
-			in = new FileInputStream(("src\\net\\azib\\java\\students\\t103784\\homework\\tests\\consoleTest.txt"));
+			in = new FileInputStream(("src/net/azib/java/students/t103784/homework/tests/consoleTest.txt"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Console input failed (no such test file)\n");
 		}
@@ -47,7 +47,7 @@ public class InputTest extends Input {
 	public void testCSVInput() {
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader("src\\net\\azib\\java\\students\\t103784\\homework\\tests\\CSVTest.csv"));
+			reader = new BufferedReader(new FileReader("src/net/azib/java/students/t103784/homework/tests/CSVTest.csv"));
 		} catch (FileNotFoundException e) {
 			System.out.println("CSV input failed (no such test file)\n");
 		}

@@ -1,18 +1,23 @@
 package net.azib.java.students.t103784.homework;
 
-import java.io.*;
-import java.util.List;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.List;
 
 /**
  * This class is used to output the athletes and their results.
@@ -69,7 +74,7 @@ public class Output {
 						(parameter)));
 			} else {
 				out = new PrintStream((new FileOutputStream
-						("src\\net\\azib\\java\\students\\t103784\\homework\\tmp\\sampleOutput.csv")));
+						("src/net/azib/java/students/t103784/homework/tmp/sampleOutput.csv")));
 			}
 			for (Athlete athlete : contestants) {
 				out.print(athlete.getPlace() + ",");
@@ -114,11 +119,11 @@ public class Output {
 					newInstance();
 			Transformer transformer = tFactory.
 					newTransformer(new javax.xml.transform.stream.StreamSource
-							("src\\net\\azib\\java\\students\\t103784\\homework\\decathlonHTML.xsl"));
+							("src/net/azib/java/students/t103784/homework/decathlonHTML.xsl"));
 			if (parameter != null && parameter.contains(".html")) {
 				transformer.transform
 						(new javax.xml.transform.
-								stream.StreamSource("src\\net\\azib\\java\\students\\t103784\\homework\\tmp\\temp.xml"),
+								stream.StreamSource("src/net/azib/java/students/t103784/homework/tmp/temp.xml"),
 								new javax.xml.transform.
 										stream.StreamResult(new FileOutputStream
 										(parameter)));
@@ -126,10 +131,10 @@ public class Output {
 			} else {
 				transformer.transform
 						(new javax.xml.transform.
-								stream.StreamSource("src\\net\\azib\\java\\students\\t103784\\homework\\tmp\\temp.xml"),
+								stream.StreamSource("src/net/azib/java/students/t103784/homework/tmp/temp.xml"),
 								new javax.xml.transform.
 										stream.StreamResult(new FileOutputStream
-										("src\\net\\azib\\java\\students\\t103784\\homework\\tmp\\temp.html")));
+										("src/net/azib/java/students/t103784/homework/tmp/temp.html")));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -273,9 +278,10 @@ public class Output {
 		if (parameter != null && parameter.contains(".xml")) {
 			transformer.transform
 					(new DOMSource(results), new StreamResult(parameter));
+			System.out.println();
 		} else {
 			transformer.transform
-					(new DOMSource(results), new StreamResult("src\\net\\azib\\java\\students\\t103784\\homework\\tmp\\temp.xml"));
+					(new DOMSource(results), new StreamResult("src/net/azib/java/students/t103784/homework/tmp/temp.xml"));
 		}
 	}
 }
