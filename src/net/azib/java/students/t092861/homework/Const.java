@@ -27,13 +27,10 @@ public class Const {
 	
 	public static final String USER_DIR = System.getProperty("user.dir") + SEPARATOR;
 
-	/**
-	 * Students package directory.
-	 */
-	public static final String PACKAGE = USER_DIR + "src"
-			+ Const.SEPARATOR
-			+ (Const.class.getName().replace(".", Const.SEPARATOR)).replace(
-					"Const", "");
+//	/**
+//	 * Students package directory.
+//	 */
+//	public static final String PACKAGE = USER_DIR;
 
 	/**
 	 * Command line parameter for console.

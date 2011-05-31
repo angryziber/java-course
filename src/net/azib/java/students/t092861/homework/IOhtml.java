@@ -57,7 +57,7 @@ public class IOhtml extends AbstractIO {
 			IOxml xml = new IOxml(temp, ctrl);
 			xml.output(athletes);
 			TransformerFactory tFactory = TransformerFactory.newInstance();
-			Transformer transformer = tFactory.newTransformer(new StreamSource(Const.PACKAGE + "/XSLTransform.xsl"));
+			Transformer transformer = tFactory.newTransformer(new StreamSource(Const.USER_DIR + "/XSLTransform.xsl"));
 			
 			// Check if directory exist
 			File file = getOutputFile(getParameters());

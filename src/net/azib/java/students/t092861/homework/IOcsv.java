@@ -47,7 +47,7 @@ public class IOcsv extends AbstractIO {
 		BufferedReader bufReader = null;
 		int lineNumber = 0;
 		try {
-			streamIn = new FileInputStream(Const.PACKAGE + getParameters());
+			streamIn = new FileInputStream(Const.USER_DIR + getParameters());
 			// trying to read as utf-8
 			readerIn = new InputStreamReader(streamIn, "UTF8");
 			bufReader = new BufferedReader(readerIn);
@@ -65,7 +65,7 @@ public class IOcsv extends AbstractIO {
 			
 		} catch (FileNotFoundException en) {
 			out.println("\nError " + en.getMessage()
-					+ ". Please check the file " + getParameters()
+					+ ". \nPlease check the file " + getParameters()
 					+ " location!");
 			
 		} catch (UnsupportedEncodingException e) {
@@ -84,7 +84,6 @@ public class IOcsv extends AbstractIO {
 			if (bufReader != null) {
 				try {
 					bufReader.close();
-
 				} catch (IOException e) {
 					out.println("\nError! Cannot close the file!");
 					e.printStackTrace();

@@ -79,10 +79,10 @@ public abstract class AbstractIO {
 		String dir = getDirectory(outputParameters);
 		String filename = getFilename(outputParameters);
 		if (!dir.equals(getParameters())) {
-			createDirectory(Const.PACKAGE + dir);
-			file = new File(Const.PACKAGE + dir + filename);
+			createDirectory(Const.USER_DIR + dir);
+			file = new File(Const.USER_DIR + dir + filename);
 		} else {
-			file = new File(Const.PACKAGE + filename);
+			file = new File(Const.USER_DIR + filename);
 		}
 		return file;
 	}
@@ -113,7 +113,7 @@ public abstract class AbstractIO {
 	 */
 	private String getDirectory(String path) {
 		if (path.contains(Const.SEPARATOR)) {
-			return path.substring(1, path.lastIndexOf(Const.SEPARATOR) + 1);
+			return path.substring(0, path.lastIndexOf(Const.SEPARATOR) + 1);
 		} else {
 			return path;
 		}

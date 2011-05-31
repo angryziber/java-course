@@ -55,11 +55,11 @@ public class IOdb extends AbstractIO {
 		FileInputStream in;
 
 		try {
-			in = new FileInputStream(Const.PACKAGE + "db.properties");
+			in = new FileInputStream(Const.USER_DIR + "db.properties");
 			props.load(in);
 			in.close();
 		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
+			System.out.println("db.properties (No such file or directory)");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -107,20 +107,16 @@ public class IOdb extends AbstractIO {
 			out.println("Error! Some data from " + "\"" + url + "\"" + " is unreadable\n");
 			
 		} catch (SQLException e) {
-			out.println("Error! Database access error");
-			e.printStackTrace();
+			out.println("Error! Database access error " + e.toString());
 			
 		} catch (InstantiationException e) {
-			out.println("Error! Cannot create an instance of a class");
-			e.printStackTrace();
+			out.println("Error! Cannot create an instance of a class "  + e.toString());
 			
 		} catch (IllegalAccessException e) {
-			out.println("Error! Method does not have access to the definition of the specified class");
-			e.printStackTrace();
+			out.println("Error! Method does not have access to the definition of the specified class "  + e.toString());
 			
 		} catch (ClassNotFoundException e) {
-			out.println("Error! Cannot load in a class through its string name");
-			e.printStackTrace();
+			out.println("Error! Cannot load in a class through its string name " + e.toString());
 			
 		} finally {
 			try {

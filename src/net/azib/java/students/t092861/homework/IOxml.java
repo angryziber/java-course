@@ -95,7 +95,7 @@ public class IOxml extends AbstractIO {
 					"http://www.w3.org/2001/XMLSchema");
 
 			factory.setAttribute("http://java.sun.com/xml/jaxp/properties/schemaSource", new InputSource(
-					new FileInputStream(Const.PACKAGE + "XMLSchema.xsd")));
+					new FileInputStream(Const.USER_DIR + "XMLSchema.xsd")));
 			DocumentBuilder builder = factory.newDocumentBuilder();
 
 			// Root element
@@ -208,7 +208,7 @@ public class IOxml extends AbstractIO {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(source, result);
 
-			Schema schema = loadSchema(Const.PACKAGE + "XMLSchema.xsd");
+			Schema schema = loadSchema(Const.USER_DIR + "XMLSchema.xsd");
 
 			validateXML(schema, file.getPath());
 			out.println("\nSuccessful XML output to " + "\"" + file.getName()
