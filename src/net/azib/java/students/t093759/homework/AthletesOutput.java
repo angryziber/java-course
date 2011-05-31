@@ -12,5 +12,5 @@ public interface AthletesOutput {
 	 * @param athletes Athletes to be saved.
 	 * @param additionalParameters Some additional parameters that could be needed for persistence.
 	 */
-	void save(Collection<Athlete> athletes, Object... additionalParameters);
+	void output(Collection<Athlete> athletes, Object... additionalParameters);
 }

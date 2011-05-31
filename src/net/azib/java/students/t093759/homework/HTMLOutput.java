@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 public class HTMLOutput implements AthletesOutput {
 	@Override
-	public void save(Collection<Athlete> athletes, Object... additionalParameters) {
+	public void output(Collection<Athlete> athletes, Object... additionalParameters) {
 		throw new NotImplementedException();
 	}
 }

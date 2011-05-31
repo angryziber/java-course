@@ -8,7 +8,7 @@ import java.util.Locale;
  * @author dionis
  *         5/15/11 11:51 AM
  */
-public class Athlete implements Cloneable {
+public class Athlete implements Cloneable, Comparable<Athlete> {
 	private String name;
 	private Calendar dateOfBirth;
 	private String countryISO2LetterCode;
@@ -45,11 +45,12 @@ public class Athlete implements Cloneable {
 
 	/**
 	 * Get some results according to decathlon event.
-	 * @param event
-	 * @return
+	 *
+	 * @param event Some decathlon event.
+	 * @return result of one of decathlon event.
 	 */
 	public double get(DecathlonEvent event) {
-		switch (event){
+		switch (event) {
 			case DISCUS_THROW:
 				return discusThrowInMeters;
 			case FOUR_HUNDRED_METER_SPRINT:
@@ -81,6 +82,7 @@ public class Athlete implements Cloneable {
 	}
 
 	@Override
+	@SuppressWarnings({"RedundantIfStatement"})//Reason:I'm afraid to change generated code by intellij idea.
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
@@ -139,16 +141,25 @@ public class Athlete implements Cloneable {
 
 	/**
 	 * Compute points.
-	 * @return
+	 *
+	 * @return computed points.
 	 */
 	public double computePoints() {
 		double sum = 0.0;
 		for (DecathlonEvent event : DecathlonEvent.values()) {
 			double result = get(event);
-			if(event.typeOfEvent()==DecathlonEvent.Type.JUMPING) result*=100.0;//because we have results in m,
-			// but they're measured in centimeters.
+			if (event.typeOfEvent() == DecathlonEvent.Type.JUMPING) result *= 100.0;//because we have results in meter,
+			// but they should be measured in centimeters.
+			sum += result;
 		}
 		return sum;
+	}
+
+	@Override
+	public int compareTo(Athlete o) {
+		if (this.computePoints() > o.computePoints()) return -1;
+		else if (this.computePoints() < o.computePoints()) return 1;
+		else return 0;
 	}
 
 	/**

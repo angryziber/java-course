@@ -40,7 +40,7 @@ public class DecathlonCalculator {
 		OutputMethod outputMethod = OutputMethod.getInstanceFor(parameters[currentIndexOfParam]);
 		athleteSaver = outputMethod.createAthleteSaver();
 		try {
-			athleteSaver.save(athletes, outputMethod.getParameter(currentIndexOfParam, parameters));
+			athleteSaver.output(athletes, outputMethod.getParameter(currentIndexOfParam, parameters));
 		} catch (Exception e) {
 			System.out.println(outputMethod);
 		}
