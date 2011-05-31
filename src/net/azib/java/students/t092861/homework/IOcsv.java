@@ -129,20 +129,15 @@ public class IOcsv extends AbstractIO {
 			out.println("Successful CSV output to " + getParameters() + " file!");
 			
 		} catch (FileNotFoundException en) {
-			out.println("\nERROR! The file " + getParameters() + " was not found ");
-			en.printStackTrace();
-			
+			out.println("\nERROR! The file " + getParameters() + " was not found " + en.toString());
 		} catch (IOException e) {
-			out.println("\nERROR! I/O eror of some sort has occurred!");
-			e.printStackTrace();
-			
+			out.println("\nERROR! I/O eror of some sort has occurred! "  + e.toString());
 		} finally {
 			try {
 				writer.close();
 				
 			} catch (IOException e) {
-				out.println("\nERROR! Cannot close the file!");
-				e.printStackTrace();
+				out.println("\nERROR! Cannot close the file! "  + e.toString());
 			}
 		}
 		return file;
