@@ -53,7 +53,10 @@ public class DecathlonCalculator {
 
 	public boolean checkParameters(String[] args) {
 		int i = 0;
-
+		if (args.length == 0) {
+			System.err.println(Const.CMD_ERROR);
+			System.exit(0);
+		}
 		while (i < args.length && args[i].startsWith("-")) {
 			String arg = args[i++];
 
