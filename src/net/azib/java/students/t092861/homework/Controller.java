@@ -200,18 +200,21 @@ public class Controller {
 		});
 
 		int athletePoints = 0, athletePlace = 0;
+		int samePlaceCaount = 0;
 		// setting athletes places
 		for (Athlete athlete : athletes) {
 			if (athletePlace == 0) {
 				athletePlace = 1;
 				athletePoints = athlete.getScore();
 				athlete.setPlace(athletePlace);
-
-				//if competitors have same points they share the same place
-			} else if (athlete.getScore() != athletePoints) {
-				athletePlace++;
+				// if competitors have same points they share the same place
+			} else if (athlete.getScore() == athletePoints) {
+				//counting the same results
+				samePlaceCaount++;
+			} else if (athlete.getScore() != athletePoints)	{
+				athletePlace += samePlaceCaount + 1;
+				samePlaceCaount=0;
 			}
-			
 			athletePoints = athlete.getScore();
 			athlete.setPlace(athletePlace);
 		}
