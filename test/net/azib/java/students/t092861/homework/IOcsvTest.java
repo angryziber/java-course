@@ -19,7 +19,7 @@ import org.junit.Test;
 public class IOcsvTest {
 	
 	private String file = "input.csv";
-	private String outFile = "outputTest.csv";
+	private String outFile = "/outputTest/outputTest.csv";
 	private File f;
 
 	private String[] lines = {
@@ -44,7 +44,7 @@ public class IOcsvTest {
 	}
 	
 	private int getNumberOfLinesInFile(String file)  throws IOException {
-		BufferedReader in = new BufferedReader(new FileReader(Const.PACKAGE + file));
+		BufferedReader in = new BufferedReader(new FileReader(Const.USER_DIR + file));
 		int numberOfAthletes = 0;
 		String s = null;
 		while ((s = in.readLine()) != null) {
@@ -56,7 +56,7 @@ public class IOcsvTest {
 	
 	@Test
 	public void testInputResultsCorrect() throws IOException {
-		BufferedReader in = new BufferedReader(new FileReader(Const.PACKAGE + file));
+		BufferedReader in = new BufferedReader(new FileReader(Const.USER_DIR + file));
 		
 		IOcsv csv = new IOcsv(file, new Controller());
 		ArrayList<Athlete> list = csv.input();

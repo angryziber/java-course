@@ -9,12 +9,12 @@ public class DecathlonCalculatorTest {
 	
 	String[] array = {	
 			"-csv /inputs/input.csv -console",		
-			"-csv /inputs/input.csv -csv /outputs1/output1.csv",
-			"-csv /inputs/input.csv -xml /outputs1/output1.xml",
-			"-csv /inputs/input.csv -html /outputs1/output1.html",
-			"-csv /inputs/input.csv -csv /outputs2/output2.csv",
-			"-csv /inputs/input.csv -xml output2.xml",
-			"-csv /inputs/input.csv -html output2.html",
+//			"-csv /inputs/input.csv -csv /outputs1/output1.csv",
+//			"-csv /inputs/input.csv -xml /outputs1/output1.xml",
+//			"-csv /inputs/input.csv -html /outputs1/output1.html",
+//			"-csv /inputs/input.csv -csv /outputs2/output2.csv",
+//			"-csv /inputs/input.csv -xml output2.xml",
+//			"-csv /inputs/input.csv -html output2.html",
 //			"-console -console",
 //			"-console -csv /outputsTest/output3.csv",
 //			"-console -xml /outputsTest/output3.xml",
@@ -23,12 +23,12 @@ public class DecathlonCalculatorTest {
 //			"-console -xml outputTest4.xml",
 //			"-console -html outputTest4.html",
 			"-db 1 -console",
-			"-db 2 -csv /outputs5/output5.csv",
-			"-db 1 -xml /outputs5/output5.xml",
-			"-db Training -html /outputs5/output5.html",
-			"-db DECATHLON4BEER -csv output6.csv",
-			"-db Training -xml output6.xml",
-			"-db 1 -html output6.html"
+//			"-db 2 -csv /outputs5/output5.csv",
+//			"-db 1 -xml /outputs5/output5.xml",
+//			"-db Training -html /outputs5/output5.html",
+//			"-db DECATHLON4BEER -csv output6.csv",
+//			"-db Training -xml output6.xml",
+//			"-db 1 -html output6.html"
 	};
 	
 	@Test
@@ -69,7 +69,6 @@ public class DecathlonCalculatorTest {
 	}
 
 	@Test
-	@Ignore
 	public void testProcessParameters() {
 		String[] line;
 		for (int i = 0; i < array.length; i++) {
