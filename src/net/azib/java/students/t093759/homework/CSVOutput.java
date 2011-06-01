@@ -1,5 +1,12 @@
 package net.azib.java.students.t093759.homework;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -8,6 +15,7 @@ import static net.azib.java.students.t093759.homework.DecathlonEvent.*;
 
 /**
  * Provides functionality to sort and save data in some file in CSV format.
+ *
  * @author dionis
  *         5/30/114:56 AM
  */
@@ -17,8 +25,7 @@ public class CSVOutput implements AthletesOutput {
 	private static final NumericDataRepresentHelper NUMERIC_DATA_REPRESENT_HELPER = NumericDataRepresentHelper.getInstance();
 
 	/**
-	 *
-	 * @param athletes Athletes to be saved.
+	 * @param athletes             Athletes to be saved.
 	 * @param additionalParameters Only one parameter accepted - name of file, where to save info.
 	 */
 	@Override
@@ -29,7 +36,15 @@ public class CSVOutput implements AthletesOutput {
 			throw new IllegalArgumentException("Parameter should be string!");//TODO localize
 
 		String result = buildStringForAllAthletes(athletes);
-		System.out.println(result);
+
+		try {
+			File tempFile = null;
+			tempFile = new File((String) additionalParameters[0]);
+			FileUtils.write(tempFile, result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+		}
 	}
 
 	String buildStringForAllAthletes(Collection<Athlete> athletes) {
