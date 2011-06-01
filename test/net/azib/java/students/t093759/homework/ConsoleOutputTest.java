@@ -2,6 +2,8 @@ package net.azib.java.students.t093759.homework;
 
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -24,10 +26,20 @@ public class ConsoleOutputTest extends AthleteOutputTest {
 
 	@Test
 	public void builtStringExample() {
+		ConsoleOutput consoleOutput = new ConsoleOutput();
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		consoleOutput.out = new PrintStream(out);
+		List<Athlete> athletes = setUpMockedAthletes();
+		assertThat(athletes.size(), is(2));
+		consoleOutput.output(athletes);
+		assertThat(out.toString(), is(someBasicOutputString()));
+	}
+
+	@Test
+	public void consoleOutputExample() {
 		List<Athlete> athletes = setUpMockedAthletes();
 		assertThat(athletes.size(), is(2));
 		String result = new ConsoleOutput().buildStringForAllAthletes(athletes);
-		assertThat(result, is(someBasicOutputString()));
 	}
 
 	String someBasicOutputString() {

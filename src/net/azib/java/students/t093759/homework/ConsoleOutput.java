@@ -1,5 +1,6 @@
 package net.azib.java.students.t093759.homework;
 
+import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -14,13 +15,16 @@ import static net.azib.java.students.t093759.homework.DecathlonEvent.*;
 public class ConsoleOutput implements AthletesOutput {
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("d.MM.yyyy");
 	private static final NumericDataRepresentHelper NUMERIC_DATA_REPRESENT_HELPER = NumericDataRepresentHelper.getInstance();
+	PrintStream out = System.out;
 
+	/**
+	 * @param athletes             Athletes to be displayed.
+	 * @param additionalParameters All parameters are ignored.
+	 */
 	@Override
 	public void output(List<Athlete> athletes, Object... additionalParameters) {
-		if (additionalParameters.length != 1)
-			throw new IllegalArgumentException("Only one parameter should be given.");//TODO localize
-		if (!(additionalParameters[0] instanceof String))
-			throw new IllegalArgumentException("Parameter should be string!");//TODO localize
+		out.print(buildStringForAllAthletes(athletes));
+		out.flush();
 	}
 
 	String buildStringForAllAthletes(List<Athlete> athletes) {
@@ -34,12 +38,12 @@ public class ConsoleOutput implements AthletesOutput {
 			else
 				stringBuilder.append(System.getProperty("line.separator"));
 
-			buildOnePersonsDataForRepresentation(stringBuilder, athlete,counter++);
+			buildOnePersonsDataForRepresentation(stringBuilder, athlete, counter++);
 		}
 		return stringBuilder.toString();
 	}
 
-	private void buildOnePersonsDataForRepresentation(StringBuilder stringBuilder, Athlete athlete,int place) {
+	private void buildOnePersonsDataForRepresentation(StringBuilder stringBuilder, Athlete athlete, int place) {
 		stringBuilder.append(place).append(',')
 				.append(NUMERIC_DATA_REPRESENT_HELPER.representPoints(athlete.computePoints())).append(',')
 				.append('"').append(athlete.getName()).append('"').append(',')

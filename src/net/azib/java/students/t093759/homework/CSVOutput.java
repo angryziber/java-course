@@ -44,8 +44,7 @@ public class CSVOutput implements AthletesOutput {
 			tempFile = new File((String) additionalParameters[0]);
 			FileUtils.write(tempFile, result);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		} finally {
+			System.err.println(e.getMessage());
 		}
 	}
 
