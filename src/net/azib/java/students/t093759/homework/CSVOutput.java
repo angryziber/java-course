@@ -37,18 +37,16 @@ public class CSVOutput implements AthletesOutput {
 		if (!(additionalParameters[0] instanceof String))
 			throw new IllegalArgumentException("Parameter should be string!");//TODO localize
 
-		String result = buildStringForAllAthletes(athletes);
-
 		try {
 			File tempFile = null;
 			tempFile = new File((String) additionalParameters[0]);
-			FileUtils.write(tempFile, result);
+			FileUtils.write(tempFile, buildStringForAllAthletes(athletes));
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
 
-	String buildStringForAllAthletes(List<Athlete> athletes) {
+	private String buildStringForAllAthletes(List<Athlete> athletes) {
 		Collections.sort(athletes);
 		StringBuilder stringBuilder = new StringBuilder(8000);
 		boolean isFirstLine = true;

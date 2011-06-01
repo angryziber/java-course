@@ -1,6 +1,7 @@
 package net.azib.java.students.t093759.homework;
 
-import java.io.PrintStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -9,13 +10,15 @@ import java.util.List;
 import static net.azib.java.students.t093759.homework.DecathlonEvent.*;
 
 /**
+ * This class should be used if you want to output a List of athletes on a Standard output stream.
+ *
  * @author dionis
  *         5/30/114:52 AM
  */
 public class ConsoleOutput implements AthletesOutput {
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("d.MM.yyyy");
 	private static final NumericDataRepresentHelper NUMERIC_DATA_REPRESENT_HELPER = NumericDataRepresentHelper.getInstance();
-	PrintStream out = System.out;
+	OutputStream out = System.out;
 
 	/**
 	 * @param athletes             Athletes to be displayed.
@@ -23,11 +26,15 @@ public class ConsoleOutput implements AthletesOutput {
 	 */
 	@Override
 	public void output(List<Athlete> athletes, Object... additionalParameters) {
-		out.print(buildStringForAllAthletes(athletes));
-		out.flush();
+		try {
+			out.write(buildStringForAllAthletes(athletes).getBytes());
+			out.flush();
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
-	String buildStringForAllAthletes(List<Athlete> athletes) {
+	private String buildStringForAllAthletes(List<Athlete> athletes) {
 		Collections.sort(athletes);
 		StringBuilder stringBuilder = new StringBuilder(8000);
 		boolean isFirstLine = true;

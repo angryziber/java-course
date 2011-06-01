@@ -1,0 +1,16 @@
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT countryISO2LetterCode (#PCDATA)>
+<!ELEMENT dateOfBirth (#PCDATA)>
+<!ELEMENT oneHundredMeterSprint (#PCDATA)>
+<!ELEMENT longJump (#PCDATA)>
+<!ELEMENT shotPut (#PCDATA)>
+<!ELEMENT highJump (#PCDATA)>
+<!ELEMENT fourHundredMeterSprint (#PCDATA)>
+<!ELEMENT oneHundredTenMeterHurdles (#PCDATA)>
+<!ELEMENT discusThrow (#PCDATA)>
+<!ELEMENT poleVault (#PCDATA)>
+<!ELEMENT javelinThrow (#PCDATA)>
+<!ELEMENT thousandFiveHundredMeterSpring (#PCDATA )>
+<!ELEMENT athlete (name, countryISO2LetterCode, dateOfBirth, oneHundredMeterSprint, longJump, shotPut, highJump,
+fourHundredMeterSprint, oneHundredTenMeterHurdles, discusThrow, poleVault, javelinThrow, thousandFiveHundredMeterSpring)>
+<!ELEMENT decathlon (athlete*)>

@@ -3,7 +3,6 @@ package net.azib.java.students.t093759.homework;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -14,32 +13,15 @@ import static org.junit.Assert.assertThat;
  *         6/1/114:10 PM
  */
 public class ConsoleOutputTest extends AthleteOutputTest {
-	@Test(expected = IllegalArgumentException.class)
-	public void exactlyOneAdditionalParamShouldBeProvided() {
-		new ConsoleOutput().output(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void additionalParamShouldBeString() {
-		new ConsoleOutput().output(null, 12);
-	}
 
 	@Test
-	public void builtStringExample() {
+	public void outputExample() {
 		ConsoleOutput consoleOutput = new ConsoleOutput();
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		consoleOutput.out = new PrintStream(out);
+		consoleOutput.out = new ByteArrayOutputStream();
 		List<Athlete> athletes = setUpMockedAthletes();
 		assertThat(athletes.size(), is(2));
 		consoleOutput.output(athletes);
-		assertThat(out.toString(), is(someBasicOutputString()));
-	}
-
-	@Test
-	public void consoleOutputExample() {
-		List<Athlete> athletes = setUpMockedAthletes();
-		assertThat(athletes.size(), is(2));
-		String result = new ConsoleOutput().buildStringForAllAthletes(athletes);
+		assertThat(consoleOutput.out.toString(), is(someBasicOutputString()));
 	}
 
 	String someBasicOutputString() {

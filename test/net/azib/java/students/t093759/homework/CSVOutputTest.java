@@ -30,14 +30,6 @@ public class CSVOutputTest extends AthleteOutputTest{
 	}
 
 	@Test
-	public void builtStringExample() {
-		List<Athlete> athletes = setUpMockedAthletes();
-		assertThat(athletes.size(), is(2));
-		String result = new CSVOutput().buildStringForAllAthletes(athletes);
-		assertThat(result, is(someBasicOutputString()));
-	}
-
-	@Test
 	public void csvExample() throws IOException {
 		List<Athlete> athletes = setUpMockedAthletes();
 		assertThat(athletes.size(), is(2));
