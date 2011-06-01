@@ -2,6 +2,7 @@ package net.azib.java.students.t093759.homework;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Decathlon calculator provides functionality for
@@ -29,7 +30,7 @@ public class DecathlonCalculator {
 
 		InputMethod inputMethod = InputMethod.getInstanceFor(parameters[currentIndexOfParam]);
 		athleteLoader = inputMethod.createAthleteLoader();
-		Collection<Athlete> athletes = null;
+		List<Athlete> athletes = null;
 		try {
 			athletes = athleteLoader.load(inputMethod.getParameter(currentIndexOfParam, parameters));
 		} catch (Exception e) {

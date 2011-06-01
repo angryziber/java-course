@@ -31,7 +31,7 @@ public class CSVOutputTest {
 
 	@Test
 	public void builtStringExample() {
-		Collection<Athlete> athletes = setUpMockedAthletes();
+		List<Athlete> athletes = setUpMockedAthletes();
 		assertThat(athletes.size(), is(2));
 		String result = new CSVOutput().buildStringForAllAthletes(athletes);
 		assertThat(result, is(someBasicOutputString()));
@@ -39,7 +39,7 @@ public class CSVOutputTest {
 
 	@Test
 	public void csvExample() throws IOException {
-		Collection<Athlete> athletes = setUpMockedAthletes();
+		List<Athlete> athletes = setUpMockedAthletes();
 		assertThat(athletes.size(), is(2));
 		File tempFile = tempFile();
 
@@ -53,7 +53,7 @@ public class CSVOutputTest {
 				"\"Василий Пупкин\",21.10.1980,UA,13.43,4.35,8.64,1.50,1:06.06,19.05,24.89,2.20,33.48,6:51.01";
 	}
 
-	private Collection<Athlete> setUpMockedAthletes() {
+	private List<Athlete> setUpMockedAthletes() {
 		List<Athlete> athletes = new ArrayList<Athlete>();
 		Athlete athlete0 = mockedVasyaPupkin();
 		Athlete athlete1 = mockedJoseMananaPerez();
@@ -63,7 +63,7 @@ public class CSVOutputTest {
 		when(athlete0.compareTo(athlete0)).thenCallRealMethod();
 		athletes.add(athlete0);
 		athletes.add(athlete1);
-		Collections.sort(athletes);
+
 		return athletes;
 	}
 

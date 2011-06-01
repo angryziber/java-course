@@ -1,6 +1,7 @@
 package net.azib.java.students.t093759.homework;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author dionis
@@ -8,10 +9,10 @@ import java.util.Collection;
  */
 public interface AthletesLoader {
 	/**
-	 * Load collection of athletes and return them.
+	 * Load list of athletes and return them.
 	 *
 	 * @param additionalParams Some additional parameters could be passed if necessary.
-	 * @return Collection of loaded athletes or empty collection.
+	 * @return List of loaded athletes or empty collection.
 	 */
-	Collection<Athlete> load(Object... additionalParams);
+	List<Athlete> load(Object... additionalParams);
 }

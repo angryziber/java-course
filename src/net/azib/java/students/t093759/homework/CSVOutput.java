@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static net.azib.java.students.t093759.homework.DecathlonEvent.*;
 
@@ -29,7 +31,7 @@ public class CSVOutput implements AthletesOutput {
 	 * @param additionalParameters Only one parameter accepted - name of file, where to save info.
 	 */
 	@Override
-	public void output(Collection<Athlete> athletes, Object... additionalParameters) {
+	public void output(List<Athlete> athletes, Object... additionalParameters) {
 		if (additionalParameters.length != 1)
 			throw new IllegalArgumentException("Only one parameter should be given.");//TODO localize
 		if (!(additionalParameters[0] instanceof String))
@@ -47,7 +49,8 @@ public class CSVOutput implements AthletesOutput {
 		}
 	}
 
-	String buildStringForAllAthletes(Collection<Athlete> athletes) {
+	String buildStringForAllAthletes(List<Athlete> athletes) {
+		Collections.sort(athletes);
 		StringBuilder stringBuilder = new StringBuilder(8000);
 		boolean isFirstLine = true;
 		for (Athlete athlete : athletes) {

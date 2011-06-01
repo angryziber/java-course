@@ -23,7 +23,7 @@ public class ConsoleLoader implements AthletesLoader {
 	 */
 	private static final String ATHLETE_STOP_LOADING_CONDITION = "stop";
 	private static final String ATHLETE_SKIP_LOADING_CONDITION = "skip";
-	private Collection<Athlete> athletes = new HashSet<Athlete>();
+	private List<Athlete> athletes = new LinkedList<Athlete>();
 	InputStream in = System.in;
 	final static SimpleDateFormat MIN_SEC_MILLI_FORMAT = new SimpleDateFormat("mm:ss.SSS");
 	final static SimpleDateFormat SEC_MILLI_FORMAT = new SimpleDateFormat("ss.SSS");
@@ -32,7 +32,7 @@ public class ConsoleLoader implements AthletesLoader {
 	 * @param additionalParams Parameters are ignored.
 	 */
 	@Override
-	public Collection<Athlete> load(Object... additionalParams) {
+	public List<Athlete> load(Object... additionalParams) {
 		while (true) {
 			System.out.println("To stop loading athletes please enter " + ATHLETE_STOP_LOADING_CONDITION + "\n" //TODO new line from system properties
 					+ "To skip loading athletes please enter " + ATHLETE_SKIP_LOADING_CONDITION);//Todo localize it!
@@ -46,9 +46,9 @@ public class ConsoleLoader implements AthletesLoader {
 
 
 		if (athletes.isEmpty())
-			return Collections.emptySet();
+			return Collections.emptyList();
 		else
-			return Collections.unmodifiableCollection(athletes);
+			return Collections.unmodifiableList(athletes);
 	}
 
 	private Athlete loadAthlete() throws StopLoadingAthletesException, SkipLoadingAthleteException {
