@@ -35,6 +35,7 @@ public class DecathlonCalculator {
 			athletes = athleteLoader.load(inputMethod.getParameter(currentIndexOfParam, parameters));
 		} catch (Exception e) {
 			System.out.println(inputMethod);
+			e.printStackTrace();
 		}
 		currentIndexOfParam = inputMethod.getNextInputMethodArgumentsIndex(currentIndexOfParam);
 
@@ -44,6 +45,7 @@ public class DecathlonCalculator {
 			athleteSaver.output(athletes, outputMethod.getParameter(currentIndexOfParam, parameters));
 		} catch (Exception e) {
 			System.out.println(outputMethod);
+			e.printStackTrace();
 		}
 	}
 

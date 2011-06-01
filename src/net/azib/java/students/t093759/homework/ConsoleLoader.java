@@ -48,7 +48,7 @@ public class ConsoleLoader implements AthletesLoader {
 		if (athletes.isEmpty())
 			return Collections.emptyList();
 		else
-			return Collections.unmodifiableList(athletes);
+			return athletes;
 	}
 
 	private Athlete loadAthlete() throws StopLoadingAthletesException, SkipLoadingAthleteException {
