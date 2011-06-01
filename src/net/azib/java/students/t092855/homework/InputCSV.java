@@ -84,7 +84,7 @@ public class InputCSV implements InputStrategy {
 			return null;
 
 		int j = 3;
-		double[] results = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		double[] results = new double[10];
 
 		for(int i = 0; i < results.length; i++) {
 			double temp;

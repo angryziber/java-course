@@ -8,7 +8,7 @@ package net.azib.java.students.t092855.homework;
  */
 public class DecathlonEvents {
 	private int totalPoints = 0;
-	private final double[] decathlonResults = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+	private double[] decathlonResults = new double[10];
 
 	/**
 	 * DecathlonEvents constructor
@@ -21,8 +21,7 @@ public class DecathlonEvents {
 	}
 
 	private void setDecathlonResultsAndCalculatePoints(double[] results) {
-
-		System.arraycopy(results, 0, decathlonResults, 0, decathlonResults.length);
+		decathlonResults = results;
 		totalPoints = calculateTotalPoints();
 	}
 

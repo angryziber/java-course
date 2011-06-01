@@ -51,7 +51,7 @@ public class InputConsole implements InputStrategy {
 	}
 
 	private void getAthleteResults(Scanner scanner, Athlete athlete) {
-		double[] results = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		double[] results = new double[10];
 		int i = 0;
 
 		for(DecathlonEvent events : DecathlonEvent.values()) {

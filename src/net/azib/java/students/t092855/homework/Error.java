@@ -35,7 +35,7 @@ public enum Error {
 	private final String errorText;
 
 	Error(String s) {
-		this.errorText = s;
+		this.errorText = "Error: " + s;
 	}
 
 	/**

@@ -11,7 +11,6 @@ import static java.lang.Math.pow;
  * @author t092855
  */
 public enum DecathlonEvent {
-	// last parameter specifies event type: true - track event. false - jump or throw event
 	EVENT_100M(25.4347, 18.0, 1.81, "100 m"),
    	EVENT_LONG_JUMP(0.14354, 220.0, 1.4, "Long jump"),
 	EVENT_SHOT_PUT(51.39, 1.5, 1.05, "Shot put"),
