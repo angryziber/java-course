@@ -27,4 +27,9 @@ public class NumericDataRepresentHelperTest {
 	public void metersRepresentationExample() {
 		assertThat(getInstance().representMeters(4.72), equalTo("4.72"));
 	}
+
+	@Test
+	public void pointsRepresentationExample() {
+		assertThat(getInstance().representPoints(4.70), equalTo("4.7"));
+	}
 }

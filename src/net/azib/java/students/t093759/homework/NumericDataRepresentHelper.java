@@ -10,8 +10,12 @@ import java.text.DecimalFormat;
  */
 public class NumericDataRepresentHelper {
 	private static NumericDataRepresentHelper instance;
-	private static final DecimalFormat decimalSecondsFormat = new DecimalFormat("00.00");
-	private static final DecimalFormat decimalMeterFormat = new DecimalFormat("0.00");
+	private final DecimalFormat decimalSecondsFormat = new DecimalFormat("00.00");
+	private final DecimalFormat decimalMeterFormat = new DecimalFormat("0.00");
+	private final DecimalFormat decimalPointsFormat = new DecimalFormat("0.0");
+
+	private NumericDataRepresentHelper() {
+	}
 
 	public static NumericDataRepresentHelper getInstance() {
 		if (instance == null)
@@ -48,5 +52,15 @@ public class NumericDataRepresentHelper {
 	 */
 	public String representMeters(double meters) {
 		return decimalMeterFormat.format(meters);
+	}
+
+	/**
+	 * Represent points using strict format.
+	 *
+	 * @param meters Meters.
+	 * @return Formatted string in "format meters.centimeters".
+	 */
+	public String representPoints(double meters) {
+		return decimalPointsFormat.format(meters);
 	}
 }
