@@ -21,12 +21,11 @@ public class DecathlonEventTest {
 		}
 	}
 
-	@Ignore
 	//I have trouble with precision. Don't know how to implement algorithm of computation correctly.
 	// It's possible to use BigDecimal's pow(n) function only when n is integer value.
 	@Test
 	public void resultsForNineHundredComputeExample() {
-		for (Map.Entry<DecathlonEvent, Double> entry : mapWithBenchmarkFor1000PointsForEvent().entrySet()) {
+		for (Map.Entry<DecathlonEvent, Double> entry : mapWithBenchmarkFor900PointsForEvent().entrySet()) {
 			assertEquals(900, entry.getKey().compute(entry.getValue()), 10);
 		}
 	}
