@@ -288,23 +288,23 @@ public enum DecathlonEvent {
 	static enum Type {
 		RUNNING {
 			@Override
-			double compute(double a, double b, double c, double p) {
-				return Math.pow(b - p, c) * a;
+			int compute(double a, double b, double c, double p) {
+				return (int) Math.round(Math.pow(b - p, c) * a);
 			}
 		},
 		THROWING {
 			@Override
-			double compute(double a, double b, double c, double p) {
+			int compute(double a, double b, double c, double p) {
 				return RUNNING.compute(a, p, c, b);
 			}
 		},
 		JUMPING {
 			@Override
-			double compute(double a, double b, double c, double p) {
+			int compute(double a, double b, double c, double p) {
 				return THROWING.compute(a, b, c, p);
 			}
 		};
 
-		abstract double compute(double a, double b, double c, double p);
+		abstract int compute(double a, double b, double c, double p);
 	}
 }

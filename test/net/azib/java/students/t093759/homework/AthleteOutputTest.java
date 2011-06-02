@@ -44,7 +44,7 @@ public abstract class AthleteOutputTest {
 		when(athlete.get(DecathlonEvent.POLE_VAULT)).thenReturn(2.20);
 		when(athlete.get(DecathlonEvent.JAVELIN_THROW)).thenReturn(33.48);
 		when(athlete.get(DecathlonEvent.THOUSAND_FIVE_HUNDRED_METER_SPRINT)).thenReturn(411.01);
-		when(athlete.computePoints()).thenReturn(100.0);//NB! not real points
+		when(athlete.computePoints()).thenReturn(100);//NB! not real points
 		return athlete;
 	}
 
@@ -63,7 +63,7 @@ public abstract class AthleteOutputTest {
 		when(athlete.get(DecathlonEvent.POLE_VAULT)).thenReturn(2.80);
 		when(athlete.get(DecathlonEvent.JAVELIN_THROW)).thenReturn(33.88);
 		when(athlete.get(DecathlonEvent.THOUSAND_FIVE_HUNDRED_METER_SPRINT)).thenReturn(382.75);
-		when(athlete.computePoints()).thenReturn(200.0);//NB! not real points
+		when(athlete.computePoints()).thenReturn(200);//NB! not real points
 		return athlete;
 	}
 

@@ -87,11 +87,11 @@ public class CSVLoader implements AthletesLoader {
 		builder.setOneHundredTenMeterHurdlesTime(parseSecondsAndMillisFromString(string));
 	}
 
-	double parseMinutesAndSecondsAndMillisFromString(String source) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
+	private double parseMinutesAndSecondsAndMillisFromString(String source) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
 		return parseSomeDateIntoDoubleAccordingTo(MIN_SEC_MILLI_FORMAT, source);
 	}
 
-	double parseSecondsAndMillisFromString(String source) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
+	private double parseSecondsAndMillisFromString(String source) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
 		return parseSomeDateIntoDoubleAccordingTo(SEC_MILLI_FORMAT, source);
 	}
 
@@ -145,17 +145,7 @@ public class CSVLoader implements AthletesLoader {
 		builder.name(string.replaceAll("\"", ""));
 	}
 
-	double getDoubleFromString(String string) throws Exception {
-		try {
-			return valueOf(string);
-		} catch (Exception e) {
-			exceptionInnerHandler(e);
-			throw new Exception();
-		}
-	}
-
-	private void exceptionInnerHandler(Exception e) throws Exception {
-		if (e instanceof StopLoadingAthletesException) throw new StopLoadingAthletesException();
-		else if (e instanceof SkipLoadingAthleteException) throw new SkipLoadingAthleteException();
+	private double getDoubleFromString(String string) throws Exception {
+		return valueOf(string);
 	}
 }

@@ -1,6 +1,5 @@
 package net.azib.java.students.t093759.homework;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

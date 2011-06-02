@@ -144,11 +144,11 @@ public class Athlete implements Cloneable, Comparable<Athlete> {
 	 *
 	 * @return computed points.
 	 */
-	public double computePoints() {
-		double sum = 0.0;
+	public int computePoints() {
+		int sum = 0;
 		for (DecathlonEvent event : DecathlonEvent.values()) {
 			double result = get(event);
-			if (event.typeOfEvent() == DecathlonEvent.Type.JUMPING) result *= 100.0;//because we have results in meter,
+			if (event.typeOfEvent() == DecathlonEvent.Type.JUMPING) result *= 100;//because we have results in meter,
 			// but they should be measured in centimeters.
 			sum += result;
 		}

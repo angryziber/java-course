@@ -44,19 +44,23 @@ public class CSVOutput implements AthletesOutput {
 		Collections.sort(athletes);
 		StringBuilder stringBuilder = new StringBuilder(8000);
 		boolean isFirstLine = true;
+		int counter = 1;
 		for (Athlete athlete : athletes) {
 			if (isFirstLine)
 				isFirstLine = false;
 			else
 				stringBuilder.append(System.getProperty("line.separator"));
 
-			buildOnePersonsDataForRepresentation(stringBuilder, athlete);
+			buildOnePersonsDataForRepresentation(stringBuilder, athlete,counter++);
 		}
 		return stringBuilder.toString();
 	}
 
-	private void buildOnePersonsDataForRepresentation(StringBuilder stringBuilder, Athlete athlete) {
-		stringBuilder.append('"').append(athlete.getName()).append('"').append(',')
+	private void buildOnePersonsDataForRepresentation(StringBuilder stringBuilder, Athlete athlete, int place) {
+		stringBuilder
+				.append(place).append(',')
+				.append(NUMERIC_DATA_REPRESENT_HELPER.representPoints(athlete.computePoints())).append(',')
+				.append('"').append(athlete.getName()).append('"').append(',')
 				.append(DATE_FORMAT.format(athlete.getDateOfBirth().getTime())).append(',')
 				.append(athlete.getCountryISO2LetterCode()).append(',')
 				.append(NUMERIC_DATA_REPRESENT_HELPER.representSeconds(athlete.get(ONE_HUNDRED_METER_SPRINT))).append(',')

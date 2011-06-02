@@ -1,7 +1,6 @@
 package net.azib.java.students.t093759.homework;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -34,8 +33,7 @@ public class DecathlonCalculator {
 		try {
 			athletes = athleteLoader.load(inputMethod.getParameter(currentIndexOfParam, parameters));
 		} catch (Exception e) {
-			System.out.println(inputMethod);
-			e.printStackTrace();
+			System.err.println("Exception in " + inputMethod);
 		}
 		currentIndexOfParam = inputMethod.getNextInputMethodArgumentsIndex(currentIndexOfParam);
 
@@ -44,8 +42,7 @@ public class DecathlonCalculator {
 		try {
 			athleteSaver.output(athletes, outputMethod.getParameter(currentIndexOfParam, parameters));
 		} catch (Exception e) {
-			System.out.println(outputMethod);
-			e.printStackTrace();
+			System.err.println("Exception in " + outputMethod);
 		}
 	}
 

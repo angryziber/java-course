@@ -25,7 +25,6 @@ public class ConsoleLoader implements AthletesLoader {
 	 */
 	private static final String ATHLETE_STOP_LOADING_CONDITION = "stop";
 	private static final String ATHLETE_SKIP_LOADING_CONDITION = "skip";
-	private List<Athlete> athletes = new ArrayList<Athlete>(100);
 	InputStream in = System.in;
 	final static SimpleDateFormat MIN_SEC_MILLI_FORMAT = new SimpleDateFormat("mm:ss.SSS");
 	final static SimpleDateFormat SEC_MILLI_FORMAT = new SimpleDateFormat("ss.SSS");
@@ -35,6 +34,7 @@ public class ConsoleLoader implements AthletesLoader {
 	 */
 	@Override
 	public List<Athlete> load(Object... additionalParams) {
+		List<Athlete> athletes = new ArrayList<Athlete>(100);
 		while (true) {
 			System.out.println("To stop loading athletes please enter " + ATHLETE_STOP_LOADING_CONDITION + IOUtils.LINE_SEPARATOR
 					+ "To skip loading athletes please enter " + ATHLETE_SKIP_LOADING_CONDITION);
@@ -46,11 +46,7 @@ public class ConsoleLoader implements AthletesLoader {
 			}
 		}
 
-
-		if (athletes.isEmpty())
-			return Collections.emptyList();
-		else
-			return athletes;
+		return athletes;
 	}
 
 	private Athlete loadAthlete() throws StopLoadingAthletesException, SkipLoadingAthleteException {
