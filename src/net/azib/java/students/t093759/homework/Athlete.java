@@ -181,7 +181,7 @@ public class Athlete implements Cloneable, Comparable<Athlete> {
 		public Builder name(String name) {
 			for (char c : name.toCharArray()) {
 				if (!Character.isLetter(c) && !Character.isSpaceChar(c))
-					throw new IllegalArgumentException("Name should consist only from characters and spaces.");//TODO move to messages
+					throw new IllegalArgumentException("Name should consist only from characters and spaces.");
 			}
 			athlete.name = name;
 			return this;
@@ -205,77 +205,77 @@ public class Athlete implements Cloneable, Comparable<Athlete> {
 		public Builder setCountryISO2LetterCode(String countryISO2LetterCode) {
 			countryISO2LetterCode = countryISO2LetterCode.toUpperCase();
 			if (!Arrays.asList(Locale.getISOCountries()).contains(countryISO2LetterCode))
-				throw new IllegalArgumentException("It's not a country ISO2 letter code.");//TODO move to messages
+				throw new IllegalArgumentException("It's not a country ISO2 letter code.");
 			athlete.countryISO2LetterCode = countryISO2LetterCode;
 			return this;
 		}
 
 		public Builder setFourHundredMeterSprintTime(double timeInSeconds) {
 			if (timeInSeconds < 0.0 || timeInSeconds >= ONE_DAY_IN_SECONDS)
-				throw new IllegalArgumentException("400 meter sprint time length should be 0 or more seconds and less than 24 hours in seconds.");//TODO move to messages
+				throw new IllegalArgumentException("400 meter sprint time length should be 0 or more seconds and less than 24 hours in seconds.");
 			athlete.fourHundredMeterSprintInSeconds = timeInSeconds;
 			return this;
 		}
 
 		public Builder setOneHundredMeterSprintTime(double timeInSeconds) {
 			if (timeInSeconds < 0.0 || timeInSeconds >= ONE_DAY_IN_SECONDS)
-				throw new IllegalArgumentException("100 meter sprint time length should be 0 or more seconds and less than 24 hours in seconds.");//TODO move to messages
+				throw new IllegalArgumentException("100 meter sprint time length should be 0 or more seconds and less than 24 hours in seconds.");
 			athlete.oneHundredMeterSprintInSeconds = timeInSeconds;
 			return this;
 		}
 
 		public Builder setLongJumpLength(double lengthInMeter) {
 			if (lengthInMeter < 0.0 || lengthInMeter >= 20.0)
-				throw new IllegalArgumentException("Long jump should be 0 or more meters and less than 20 meters in length.");//TODO move to messages
+				throw new IllegalArgumentException("Long jump should be 0 or more meters and less than 20 meters in length.");
 			athlete.longJumpInMeters = lengthInMeter;
 			return this;
 		}
 
 		public Builder setShotPutLength(double lengthInMeter) {
 			if (lengthInMeter < 0.0 || lengthInMeter >= 40.0)
-				throw new IllegalArgumentException("Shot put should be 0 or more meters and less than 20 meters in length.");//TODO move to messages
+				throw new IllegalArgumentException("Shot put should be 0 or more meters and less than 20 meters in length.");
 			athlete.shotPutInMeters = lengthInMeter;
 			return this;
 		}
 
 		public Builder setOneHundredTenMeterHurdlesTime(double timeInSeconds) {
 			if (timeInSeconds < 0.0 || timeInSeconds >= ONE_DAY_IN_SECONDS)
-				throw new IllegalArgumentException("110 m hurdles should be 0 or more seconds and less than 24 hours in seconds.");//TODO move to messages
+				throw new IllegalArgumentException("110 m hurdles should be 0 or more seconds and less than 24 hours in seconds.");
 			athlete.oneHundredTenMeterHurdlesInSeconds = timeInSeconds;
 			return this;
 		}
 
 		public Builder setDiscusThrowLength(double lengthInMeters) {
 			if (lengthInMeters < 0.0 || lengthInMeters >= 200.0)
-				throw new IllegalArgumentException("Discus throw should be zero or more meter length and less than 200 meter length.");//TODO move to messages
+				throw new IllegalArgumentException("Discus throw should be zero or more meter length and less than 200 meter length.");
 			athlete.discusThrowInMeters = lengthInMeters;
 			return this;
 		}
 
 		public Builder setPoleVaultHeight(double heightInMeters) {
 			if (heightInMeters < 0.0 || heightInMeters >= 20.0)
-				throw new IllegalArgumentException("Pole vault should be zero or more meter in height and less than 20 meter in height.");//TODO move to messages
+				throw new IllegalArgumentException("Pole vault should be zero or more meter in height and less than 20 meter in height.");
 			athlete.poleVaultInMeters = heightInMeters;
 			return this;
 		}
 
 		public Builder setJavelinThrowLength(double lengthInMeters) {
 			if (lengthInMeters < 0.0 || lengthInMeters >= 150.0)
-				throw new IllegalArgumentException("Javelin throw should be zero or more meter length and less than 150 meter length.");//TODO move to messages
+				throw new IllegalArgumentException("Javelin throw should be zero or more meter length and less than 150 meter length.");
 			athlete.javelinThrowInMeter = lengthInMeters;
 			return this;
 		}
 
 		public Builder setThousandFiveHundredMeterRaceTime(double timeInSeconds) {
 			if (timeInSeconds < 0.0 || timeInSeconds >= ONE_DAY_IN_SECONDS)
-				throw new IllegalArgumentException("1500 m race time should be 0 or more seconds and less than 24 hours in seconds.");//TODO move to messages
+				throw new IllegalArgumentException("1500 m race time should be 0 or more seconds and less than 24 hours in seconds.");
 			athlete.thousandFiveHundredMeterRaceInSeconds = timeInSeconds;
 			return this;
 		}
 
 		public Builder setHighJumpHeight(double heightInMeters) {
 			if (heightInMeters < 0.0 || heightInMeters >= 5.0)
-				throw new IllegalArgumentException("High jump should be zero or more meter in height and less than 5 meter in height.");//TODO move to messages
+				throw new IllegalArgumentException("High jump should be zero or more meter in height and less than 5 meter in height.");
 			athlete.highJumpInMeters = heightInMeters;
 			return this;
 		}

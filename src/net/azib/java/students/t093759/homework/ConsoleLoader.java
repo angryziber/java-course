@@ -1,5 +1,7 @@
 package net.azib.java.students.t093759.homework;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +25,7 @@ public class ConsoleLoader implements AthletesLoader {
 	 */
 	private static final String ATHLETE_STOP_LOADING_CONDITION = "stop";
 	private static final String ATHLETE_SKIP_LOADING_CONDITION = "skip";
-	private List<Athlete> athletes = new LinkedList<Athlete>();
+	private List<Athlete> athletes = new ArrayList<Athlete>(100);
 	InputStream in = System.in;
 	final static SimpleDateFormat MIN_SEC_MILLI_FORMAT = new SimpleDateFormat("mm:ss.SSS");
 	final static SimpleDateFormat SEC_MILLI_FORMAT = new SimpleDateFormat("ss.SSS");
@@ -34,8 +36,8 @@ public class ConsoleLoader implements AthletesLoader {
 	@Override
 	public List<Athlete> load(Object... additionalParams) {
 		while (true) {
-			System.out.println("To stop loading athletes please enter " + ATHLETE_STOP_LOADING_CONDITION + "\n" //TODO new line from system properties
-					+ "To skip loading athletes please enter " + ATHLETE_SKIP_LOADING_CONDITION);//Todo localize it!
+			System.out.println("To stop loading athletes please enter " + ATHLETE_STOP_LOADING_CONDITION + IOUtils.LINE_SEPARATOR
+					+ "To skip loading athletes please enter " + ATHLETE_SKIP_LOADING_CONDITION);
 			try {
 				athletes.add(loadAthlete());
 			} catch (StopLoadingAthletesException e) {
@@ -59,8 +61,7 @@ public class ConsoleLoader implements AthletesLoader {
 		try {
 			return builder.build();
 		} catch (CloneNotSupportedException e) {
-			//TODO log it, it shouldn't be happening
-			throw new RuntimeException();
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 
@@ -82,7 +83,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadThousandFiveHundredMeterRaceTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("1500 m race time s in format '" + MIN_SEC_MILLI_FORMAT.toPattern() + "': ");//Todo localize it
+			System.out.print("1500 m race time s in format '" + MIN_SEC_MILLI_FORMAT.toPattern() + "': ");
 			builder.setThousandFiveHundredMeterRaceTime(parseMinutesAndSecondsAndMillisFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -93,7 +94,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadShotPutLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("shot put length m: ");//Todo localize it
+			System.out.print("shot put length m: ");
 			builder.setShotPutLength(getDoubleFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -104,7 +105,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadPoleVaultHeightUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("pole vault height m: ");//Todo localize it
+			System.out.print("pole vault height m: ");
 			builder.setPoleVaultHeight(getDoubleFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -115,7 +116,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadOneHundredTenMeterHurdlesTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("110 m hurdles time s in format '" + SEC_MILLI_FORMAT.toPattern() + "': ");//Todo localize it
+			System.out.print("110 m hurdles time s in format '" + SEC_MILLI_FORMAT.toPattern() + "': ");
 			builder.setOneHundredTenMeterHurdlesTime(parseSecondsAndMillisFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -142,7 +143,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadOneHundredMeterSprintTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("100 m spring time s in format '" + SEC_MILLI_FORMAT.toPattern() + "': ");//Todo localize it
+			System.out.print("100 m spring time s in format '" + SEC_MILLI_FORMAT.toPattern() + "': ");
 			builder.setOneHundredMeterSprintTime(parseSecondsAndMillisFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -153,7 +154,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadLongJumpLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("long jump length: ");//Todo localize it
+			System.out.print("long jump length: ");
 			builder.setLongJumpLength(getDoubleFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -164,7 +165,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadJavelinThrowLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Javelin throw length m: ");//Todo localize it
+			System.out.print("Javelin throw length m: ");
 			builder.setJavelinThrowLength(getDoubleFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -175,7 +176,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadHighJumpHeightUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("High jump length m: ");//Todo localize it
+			System.out.print("High jump length m: ");
 			builder.setHighJumpHeight(getDoubleFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -186,7 +187,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadFourHundredMeterSprintTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("400 meter sprint time s in format '" + MIN_SEC_MILLI_FORMAT.toPattern() + "': ");//Todo localize it
+			System.out.print("400 meter sprint time s in format '" + MIN_SEC_MILLI_FORMAT.toPattern() + "': ");
 			builder.setFourHundredMeterSprintTime(parseMinutesAndSecondsAndMillisFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -197,7 +198,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadDiscusThrowLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Discus throw length m: ");//Todo localize it
+			System.out.print("Discus throw length m: ");
 			builder.setDiscusThrowLength(getDoubleFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -209,9 +210,9 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadDateOfBirthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			final String localizedPattern = ((SimpleDateFormat) DateFormat.getDateInstance()).toLocalizedPattern();
-			System.out.print("Load date using " + Locale.getDefault() + " format '" + localizedPattern + "': ");//Todo localize it
+			System.out.print("Load date using " + Locale.getDefault() + " format '" + localizedPattern + "': ");
 			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(new SimpleDateFormat(localizedPattern).parse(getStringFromInputStream())); //TODO check WTF I've done with localized pattern
+			calendar.setTime(new SimpleDateFormat(localizedPattern).parse(getStringFromInputStream()));
 			builder.setDateOfBirth(calendar);
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -222,7 +223,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadCountryISO2LetterCodeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Country ISO2 letter code: ");//Todo localize it
+			System.out.print("Country ISO2 letter code: ");
 			builder.setCountryISO2LetterCode(getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -233,7 +234,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadNameUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Name: ");//Todo localize it
+			System.out.print("Name: ");
 			builder.name(getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);

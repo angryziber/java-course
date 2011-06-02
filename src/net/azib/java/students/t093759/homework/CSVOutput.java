@@ -1,15 +1,10 @@
 package net.azib.java.students.t093759.homework;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
-import java.io.Closeable;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,14 +28,13 @@ public class CSVOutput implements AthletesOutput {
 	@Override
 	public void output(List<Athlete> athletes, Object... additionalParameters) {
 		if (additionalParameters.length != 1)
-			throw new IllegalArgumentException("Only one parameter should be given.");//TODO localize
+			throw new IllegalArgumentException("Only one parameter should be given.");
 		if (!(additionalParameters[0] instanceof String))
-			throw new IllegalArgumentException("Parameter should be string!");//TODO localize
+			throw new IllegalArgumentException("Parameter should be string!");
 
 		try {
-			File tempFile = null;
-			tempFile = new File((String) additionalParameters[0]);
-			FileUtils.write(tempFile, buildStringForAllAthletes(athletes));
+			File file = new File((String) additionalParameters[0]);
+			FileUtils.write(file, buildStringForAllAthletes(athletes));
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

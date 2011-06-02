@@ -1,7 +1,5 @@
 package net.azib.java.students.t093759.homework;
 
-import java.math.BigDecimal;
-
 /**
  * @author dionis
  *         5/30/113:24 AM
@@ -289,7 +287,6 @@ public enum DecathlonEvent {
 
 	static enum Type {
 		RUNNING {
-
 			@Override
 			double compute(double a, double b, double c, double p) {
 				return Math.pow(b - p, c) * a;

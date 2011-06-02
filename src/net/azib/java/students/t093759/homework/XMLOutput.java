@@ -1,9 +1,6 @@
 package net.azib.java.students.t093759.homework;
 
-import org.hibernate.dialect.Oracle10gDialect;
-import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -33,9 +30,9 @@ public class XMLOutput implements AthletesOutput {
 	@Override
 	public void output(List<Athlete> athletes, Object... additionalParameters) {
 		if (additionalParameters.length != 1)
-			throw new IllegalArgumentException("Only one parameter should be given.");//TODO localize
+			throw new IllegalArgumentException("Only one parameter should be given.");
 		if (!(additionalParameters[0] instanceof String))
-			throw new IllegalArgumentException("Parameter should be string!");//TODO localize
+			throw new IllegalArgumentException("Parameter should be string!");
 		try {
 			outputXmlForAllAthletes(athletes, (String) additionalParameters[0]);
 		} catch (Exception e) {

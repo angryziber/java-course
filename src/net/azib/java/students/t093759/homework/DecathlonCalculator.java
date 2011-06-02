@@ -59,7 +59,7 @@ public class DecathlonCalculator {
 				.append("\t-console - no parameters").append(newLine)
 				.append("\t-csv - input file name or path").append(newLine)
 				.append("\t-db - competition id or name - both should work (DB connection string must be read from ")
-				.append("db.properties in the same package as the main class)").append(newLine)
+				.append("\tdb.properties in the same package as the main class)").append(newLine)
 				.append("\t<output-method> is the name of the output method preceded by dash (-): -conole, -csv, -xml, -html").append(newLine)
 				.append("\t[output-parameters] are optional parameters depending on the specified output method:").append(newLine)
 				.append("\t-conole - no parameters").append(newLine)
