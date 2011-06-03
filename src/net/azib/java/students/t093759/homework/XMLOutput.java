@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -44,24 +45,27 @@ public class XMLOutput implements AthletesOutput {
 		Collections.sort(athletes);
 
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-
 		Document doc = builder.newDocument();
 
 		Element decathlon = doc.createElement("decathlon");
-
 		doc.appendChild(decathlon);
-
+		int place = 0;
 		for (Athlete athlete : athletes) {
-			decathlon.appendChild(getAthleteTagFilledWithDate(doc, athlete));
+			decathlon.appendChild(getAthleteTagFilledWithDate(doc, athlete, ++place));
 		}
 
+		transform(fileName, doc);
+	}
+
+	void transform(String fileName, Document doc) throws TransformerException {
 		Transformer serializer = TransformerFactory.newInstance().newTransformer();
 		serializer.transform(new DOMSource(doc), new StreamResult(new File(fileName)));
 	}
 
-	private Element getAthleteTagFilledWithDate(Document doc, Athlete athlete) {
+	private Element getAthleteTagFilledWithDate(Document doc, Athlete athlete, int place) {
 		Element athleteTag = doc.createElement("athlete");
-
+		createAndAppendPlace(doc, athlete, athleteTag, place);
+		createAndAppendPoints(doc, athlete, athleteTag);
 		createAndAppendNameElement(doc, athlete, athleteTag);
 		createAndAppendCountryISO2LetterCode(doc, athlete, athleteTag);
 		createAndAppendDateOfBirth(doc, athlete, athleteTag);
@@ -74,15 +78,27 @@ public class XMLOutput implements AthletesOutput {
 		createAndAppendDicusThrow(doc, athlete, athleteTag);
 		createAndAppendPoleVault(doc, athlete, athleteTag);
 		createAndAppendJavelinThrow(doc, athlete, athleteTag);
-		createAndAppendThousandFiveHundredMeterSpring(doc, athlete, athleteTag);
+		createAndAppendthousandFiveHundredMeterRace(doc, athlete, athleteTag);
 
 		return athleteTag;
 	}
 
-	private void createAndAppendThousandFiveHundredMeterSpring(Document doc, Athlete athlete, Element athleteTag) {
-		Element thousandFiveHundredMeterSpring = doc.createElement("thousandFiveHundredMeterSpring");
-		thousandFiveHundredMeterSpring.appendChild(doc.createTextNode(NUMERIC_DATA_REPRESENT_HELPER.representMinuteAndSeconds(athlete.get(THOUSAND_FIVE_HUNDRED_METER_SPRINT))));
-		athleteTag.appendChild(thousandFiveHundredMeterSpring);
+	private void createAndAppendPlace(Document doc, Athlete athlete, Element athleteTag, int place) {
+		Element thousandFiveHundredMeterRace = doc.createElement("place");
+		thousandFiveHundredMeterRace.appendChild(doc.createTextNode(String.valueOf(place)));
+		athleteTag.appendChild(thousandFiveHundredMeterRace);
+	}
+
+	private void createAndAppendPoints(Document doc, Athlete athlete, Element athleteTag) {
+		Element thousandFiveHundredMeterRace = doc.createElement("points");
+		thousandFiveHundredMeterRace.appendChild(doc.createTextNode(NUMERIC_DATA_REPRESENT_HELPER.representPoints(athlete.computePoints())));
+		athleteTag.appendChild(thousandFiveHundredMeterRace);
+	}
+
+	private void createAndAppendthousandFiveHundredMeterRace(Document doc, Athlete athlete, Element athleteTag) {
+		Element thousandFiveHundredMeterRace = doc.createElement("thousandFiveHundredMeterRace");
+		thousandFiveHundredMeterRace.appendChild(doc.createTextNode(NUMERIC_DATA_REPRESENT_HELPER.representMinuteAndSeconds(athlete.get(THOUSAND_FIVE_HUNDRED_METER_SPRINT))));
+		athleteTag.appendChild(thousandFiveHundredMeterRace);
 	}
 
 	private void createAndAppendJavelinThrow(Document doc, Athlete athlete, Element athleteTag) {

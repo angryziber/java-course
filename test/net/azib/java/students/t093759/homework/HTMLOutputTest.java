@@ -14,36 +14,26 @@ import static org.junit.Assert.assertThat;
 
 /**
  * @author dionis
- *         6/1/118:20 PM
+ *         6/3/11 2:45 PM
  */
-public class XMLOutputTest extends AthleteOutputTest {
-	@Test(expected = IllegalArgumentException.class)
-	public void exactlyOneAdditionalParamShouldBeProvided() {
-		new XMLOutput().output(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void additionalParamShouldBeString() {
-		new XMLOutput().output(null, 12);
-	}
-
+public class HTMLOutputTest extends AthleteOutputTest {
 	@Test
-	public void xmlExample() throws IOException, SAXException {
+	public void htmlExample() throws IOException, SAXException {
 		List<Athlete> athletes = setUpMockedAthletes();
 		assertThat(athletes.size(), is(2));
 		File tempFile = tempFile();
 
-		new XMLOutput().output(athletes, tempFile.getCanonicalPath());
+		new HTMLOutput().output(athletes, tempFile.getCanonicalPath());
+		System.out.println(FileUtils.readFileToString(tempFile));
 		assertXMLEqual(someBasicOutputString(), manyLinesTrimmedAndGluedIntoOne(FileUtils.readFileToString(tempFile)));
 	}
 
 	@Override
 	String someBasicOutputString() {
 		try {
-			return manyLinesTrimmedAndGluedIntoOne(loadFile(getClass(), "output.xml"));
+			return manyLinesTrimmedAndGluedIntoOne(loadFile(getClass(), "output.html"));
 		} catch (IOException e) {
 			throw new RuntimeException();
 		}
 	}
-
 }

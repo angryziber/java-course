@@ -1,8 +1,15 @@
 package net.azib.java.students.t093759.homework;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.w3c.dom.Document;
 
-import java.util.List;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * This class should be used to output a list of athletes as html data.
@@ -10,11 +17,12 @@ import java.util.List;
  * @author dionis
  *         5/30/114:55 AM
  */
-public class HTMLOutput implements AthletesOutput {
-
+public class HTMLOutput extends XMLOutput implements AthletesOutput {
 
 	@Override
-	public void output(List<Athlete> athletes, Object... additionalParameters) {
-		throw new NotImplementedException();
+	void transform(String fileName, Document doc) throws TransformerException {
+		InputStream xsl = getClass().getResourceAsStream("result.xsl");
+		Transformer serializer = TransformerFactory.newInstance().newTransformer(new StreamSource(xsl));
+		serializer.transform(new DOMSource(doc), new StreamResult(new File(fileName)));
 	}
 }

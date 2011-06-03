@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<decathlon>
+	<athlete>
+		<place>1</place>
+		<points>200.0</points>
+		<name>José Mañana Perez</name>
+		<countryISO2LetterCode>ES</countryISO2LetterCode>
+		<dateOfBirth>3.04.1972</dateOfBirth>
+		<oneHundredMeterSprint>13.75</oneHundredMeterSprint>
+		<longJump>4.84</longJump>
+		<shotPut>10.12</shotPut>
+		<highJump>1.50</highJump>
+		<fourHundredMeterSprint>1:08.44</fourHundredMeterSprint>
+		<oneHundredTenMeterHurdles>19.18</oneHundredTenMeterHurdles>
+		<discusThrow>30.85</discusThrow>
+		<poleVault>2.80</poleVault>
+		<javelinThrow>33.88</javelinThrow>
+		<thousandFiveHundredMeterRace>6:22.75</thousandFiveHundredMeterRace>
+	</athlete>
+	<athlete>
+		<place>2</place>
+		<points>100.0</points>
+		<name>Василий Пупкин</name>
+		<countryISO2LetterCode>UA</countryISO2LetterCode>
+		<dateOfBirth>21.10.1980</dateOfBirth>
+		<oneHundredMeterSprint>13.43</oneHundredMeterSprint>
+		<longJump>4.35</longJump>
+		<shotPut>8.64</shotPut>
+		<highJump>1.50</highJump>
+		<fourHundredMeterSprint>1:06.06</fourHundredMeterSprint>
+		<oneHundredTenMeterHurdles>19.05</oneHundredTenMeterHurdles>
+		<discusThrow>24.89</discusThrow>
+		<poleVault>2.20</poleVault>
+		<javelinThrow>33.48</javelinThrow>
+		<thousandFiveHundredMeterRace>6:51.01</thousandFiveHundredMeterRace>
+	</athlete>
+</decathlon>

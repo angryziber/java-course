@@ -1,7 +1,10 @@
 package net.azib.java.students.t093759.homework;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Ignore;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -68,4 +71,22 @@ public abstract class AthleteOutputTest {
 	}
 
 	abstract String someBasicOutputString();
+
+	File tempFile() throws IOException {
+		File temp = File.createTempFile("temp", ".tmp");
+		temp.deleteOnExit();
+		return temp;
+	}
+
+	String loadFile(Class clazz, String fileName) throws IOException {
+		return FileUtils.readFileToString(new File(clazz.getResource(fileName).getFile()), "UTF-8");
+	}
+
+	public String manyLinesTrimmedAndGluedIntoOne(String s) throws IOException {
+		StringBuilder builder = new StringBuilder(8000);
+		for (String line : loadFile(getClass(), "output.xml").split("\n")) {
+			builder.append(line.trim());
+		}
+		return builder.toString();
+	}
 }
