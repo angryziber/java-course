@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT athletes (athlete*)>
+<!ELEMENT athlete (name, country, date_of_birth,
+sprint_100, long_jump, shot_put,
+high_jump, sprint_400, hurdles_110,
+discus_throw, pole_vault, javelin_throw, race_1500)>
+<!ATTLIST athlete score CDATA #REQUIRED>
+<!ATTLIST athlete place CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT date_of_birth (#PCDATA)>
+<!ELEMENT sprint_100 (#PCDATA)>
+<!ELEMENT long_jump (#PCDATA)>
+<!ELEMENT shot_put (#PCDATA)>
+<!ELEMENT high_jump (#PCDATA)>
+<!ELEMENT sprint_400 (#PCDATA)>
+<!ELEMENT hurdles_110 (#PCDATA)>
+<!ELEMENT discus_throw (#PCDATA)>
+<!ELEMENT pole_vault (#PCDATA)>
+<!ELEMENT javelin_throw (#PCDATA)>
+<!ELEMENT race_1500 (#PCDATA)>
