@@ -3,6 +3,7 @@
  */
 package net.azib.java.students.t092861.homework;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -156,21 +157,21 @@ public class Controller {
 	private float convertStringToSeconds(String str) {
 		DecimalFormat nf = (DecimalFormat) NumberFormat.getInstance();
 		nf.setParseBigDecimal(true);
-		float min = 0, sec = 0, msec = 0;
+		BigDecimal bMin = new BigDecimal(0), bSec = new BigDecimal(0), bMSec = new BigDecimal(0);
 		try {
 			if (str.contains(":")) {// convert 5:25.72 to 325.72
-				min = (nf.parse(str.substring(0, str.lastIndexOf(":"))).floatValue()) * 60;
-				sec = nf.parse(str.substring(str.lastIndexOf(":") + 1)).floatValue();
-				msec = nf.parse(str.substring(str.lastIndexOf(".") + 1)).floatValue() / 100;
+				
+				bMin = new BigDecimal(str.substring(0, str.lastIndexOf(":"))).multiply(new BigDecimal(60));
+				bSec = new BigDecimal(str.substring(str.lastIndexOf(":") + 1));
 
 			} else { // convert 25.72 to 25.72
-				sec = (nf.parse(str.substring(0, str.lastIndexOf("."))).floatValue());
-				msec = nf.parse(str.substring(str.lastIndexOf(".") + 1)).floatValue() / 100;
+				bMSec = new BigDecimal(str);
 			}
 		} catch (Exception e) {
 			return -1;
 		}
-		return min + sec + msec;
+		BigDecimal sum = bMin.add(bSec).add(bMSec);
+		return sum.floatValue();
 	}
 
 	/**
