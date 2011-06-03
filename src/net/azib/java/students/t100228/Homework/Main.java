@@ -48,6 +48,7 @@ public class Main {
 		}
 		catch (Exception ex)
 		{
+			ex.printStackTrace();
 			System.out.println("Could not fetch results from the input stream.");
 			return;
 		}

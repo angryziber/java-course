@@ -16,20 +16,12 @@ public class DbResultsFetcherTest {
 	 * Test for the method {@link DbResultsFetcher#fetchResults(ArrayList, String)}
 	 */
 	@Test
-	public void fetchResults()
-	{
+	public void fetchResults() throws Exception {
 		DbResultsFetcher fetcher = new DbResultsFetcher();
 
 		ArrayList<Record> listRecords = new ArrayList<Record>();
 
-		try
-		{
-			fetcher.fetchResults(listRecords, "1");
-		}
-		catch (Exception ex)
-		{
-			fail("Exception thrown");
-		}
+		fetcher.fetchResults(listRecords, "1");
 		assertEquals(false, listRecords.isEmpty());
 	}
 }

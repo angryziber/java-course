@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -18,8 +19,7 @@ public class HtmlResultsManagerTest {
 	 * Test for the method {@link HtmlResultsManager#outputResults(String, ArrayList)}
 	 */
 	@Test
-	public void outputResults()
-	{
+	public void outputResults() throws IOException {
 		Record record = new Record("Siim Susi", 0, "01.01.1976", "EE", 12.61F, 5.00F, 9.22F, 1.5F, "59.39", 16.43F,
 						21.60F, 2.60F, 35.81F, "5:25.72");
 
@@ -29,36 +29,29 @@ public class HtmlResultsManagerTest {
 
 		records.add(record);
 
-		try
+		File fileTmp = new File("test.html");
+		fileTmp.deleteOnExit();
+
+		HtmlResultsManager manager = new HtmlResultsManager();
+		manager.outputResults(fileTmp.getAbsolutePath(), records);
+
+		FileReader fr = new FileReader(fileTmp.getAbsolutePath());
+		BufferedReader br = new BufferedReader(fr);
+
+		String line = br.readLine();
+
+		boolean substringFound = false;
+
+		while(line != null)
 		{
-			File fileTmp = new File("test.html");
-			fileTmp.deleteOnExit();
-
-			HtmlResultsManager manager = new HtmlResultsManager();
-			manager.outputResults(fileTmp.getAbsolutePath(), records);
-
-			FileReader fr = new FileReader(fileTmp.getAbsolutePath());
-			BufferedReader br = new BufferedReader(fr);
-
-			String line = br.readLine();
-
-			boolean substringFound = false;
-
-			while(line != null)
+			if(line.indexOf("Siim Susi") > 0)
 			{
-				if(line.indexOf("Siim Susi") > 0)
-				{
-					substringFound = true;
-					break;
-				}
-				line = br.readLine();
+				substringFound = true;
+				break;
 			}
+			line = br.readLine();
+		}
 
-			assertEquals(true, substringFound);
-		}
-		catch(Exception ex)
-		{
-			fail("Exception occurred!");
-		}
+		assertEquals(true, substringFound);
 	}
 }

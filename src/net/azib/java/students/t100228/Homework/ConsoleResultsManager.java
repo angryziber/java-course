@@ -103,6 +103,7 @@ public class ConsoleResultsManager {
 					record.getOneHundredTenResult() + "," + record.getDiscusResult() + "," +
 					record.getPoleVaultResult() + "," + record.getJavelinResult() + "," +
 					record.getThousandFiveHundredResult());
+			wr.write("\n");
 		}
 		wr.flush();
 	}
