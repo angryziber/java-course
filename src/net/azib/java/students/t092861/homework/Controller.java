@@ -8,7 +8,9 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -183,6 +185,17 @@ public class Controller {
 	}
 	
 	/**
+	 * Used for inserting the quotes to the name.
+	 * 
+	 * @param name
+	 *            to process
+	 * @return name with the quotes
+	 */
+	public String indertQuotes(String name) {
+		return "\"" + name + "\"";
+	}
+	
+	/**
 	 * Arranging the athletes in descending order of the total score (ascending
 	 * order of their places).
 	 * 
@@ -195,28 +208,46 @@ public class Controller {
 		Collections.sort(athletes, new Comparator<Athlete>() {
 			@Override
 			public int compare(Athlete a, Athlete b) {
-				return (a.getScore() < b.getScore() ? 1 : (a.getScore() > b.getScore() ? -1 : 0));
+				return (a.getScore() < b.getScore() ? 1 : (a.getScore() > b	.getScore() ? -1 : 0));
 			}
 		});
-
-		int athletePoints = 0, athletePlace = 0;
-		int samePlaceCaount = 0;
+		
 		// setting athletes places
-		for (Athlete athlete : athletes) {
-			if (athletePlace == 0) {
-				athletePlace = 1;
-				athletePoints = athlete.getScore();
-				athlete.setPlace(athletePlace);
-				// if competitors have same points they share the same place
-			} else if (athlete.getScore() == athletePoints) {
-				//counting the same results
-				samePlaceCaount++;
-			} else if (athlete.getScore() != athletePoints)	{
-				athletePlace += samePlaceCaount + 1;
-				samePlaceCaount=0;
+		String place = "1";
+		int start = 0, count = 0;
+		athletes.get(0).setPlace(place);
+		for (int i = 1; i < athletes.size(); i++) {
+			if(athletes.get(i).getScore() == athletes.get(i-1).getScore()){
+				count++;
 			}
-			athletePoints = athlete.getScore();
-			athlete.setPlace(athletePlace);
+			if(athletes.get(i).getScore() != athletes.get(i-1).getScore()){
+				place = String.valueOf(Integer.valueOf(place) + count + 1);
+				count = 0;
+			}
+			athletes.get(i).setPlace(place);
+		}
+		
+		count = 0;
+		for (int i = 1; i < athletes.size(); i++) {
+			if(athletes.get(i).getPlace() == athletes.get(i-1).getPlace()){
+				if(start == 0){
+					start = i;
+				}
+				count++;
+				if (i!=athletes.size()-1) {
+					continue;
+				}
+			}
+			if (count>0) insertSpacesInSamePlaces(athletes, start, start + count);
+			count = start = 0;
+		}
+		return athletes;
+	}
+
+	private ArrayList<Athlete> insertSpacesInSamePlaces(ArrayList<Athlete> a, int start, int end) {
+		ArrayList<Athlete> athletes = a; 
+		for (int i = start-1; i < end; i++) {
+			athletes.get(i).setPlace(start+"-"+(end));
 		}
 		return athletes;
 	}

@@ -106,8 +106,9 @@ public class IOcsv extends AbstractIO {
 			
 			while (itr.hasNext()) {
 				Athlete item = itr.next();
-				writer.write(item.getPlace() + ":"
-						+ item.getName() + ","
+				writer.write(item.getPlace() + ","
+						+ item.getScore()  + ","
+						+ ctrl.indertQuotes(item.getName()) + ","
 						+ this.convertDateDMY(item.getBirthday()) + ","
 						+ item.getCountry() + ","
 						+ item.getSprint100() + ","
@@ -119,8 +120,7 @@ public class IOcsv extends AbstractIO {
 						+ item.getDiscusThrow() + ","
 						+ item.getPoleVault() + ","
 						+ item.getJavelinThrow() + ","
-						+ this.convertTimeToString(item.getSprint1500()) + ","
-						+ item.getScore());
+						+ this.convertTimeToString(item.getSprint1500()) + ",");
 						((BufferedWriter) writer).newLine();
 			}
 			

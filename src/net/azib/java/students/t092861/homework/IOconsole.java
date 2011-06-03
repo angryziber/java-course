@@ -113,7 +113,7 @@ public class IOconsole extends AbstractIO {
 			}
 			out
 					.printf(
-							" %3s| %-21s|%10s |%5s |%6s |%6s |%6s |%6s |%8s |%6s |%6s |%6s |%8s |%8s |%6s\n",
+							" %5s| %-21s|%10s |%5s |%6s |%6s |%6s |%6s |%8s |%6s |%6s |%6s |%8s |%8s |%6s\n",
 							item.getPlace(), 
 							name, 
 							this.convertDateDMY(item.getBirthday()), 
@@ -140,12 +140,12 @@ public class IOconsole extends AbstractIO {
 		out.println("Here are the results:");
 		out
 				.printf(
-						" %3s| %-21s|%10s |%5s |%6s |%6s |%6s |%6s |%8s |%6s |%6s |%6s |%8s |%8s |%6s\n",
+						" %5s| %-21s|%10s |%5s |%6s |%6s |%6s |%6s |%8s |%6s |%6s |%6s |%8s |%8s |%6s\n",
 						"No", "Name", "Birthday", "Code", "100", "LJ", "SP",
 						"HJ", "400", "110H", "DT", "PV", "JT", "1500m", "Score");
 		out.println("----------------------------------------------------"
 				+ "-----------------------------------------------------"
-				+ "---------------------------------");
+				+ "------------------------------------");
 	}
 
 	@Override
