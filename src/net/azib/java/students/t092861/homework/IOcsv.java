@@ -47,7 +47,7 @@ public class IOcsv extends AbstractIO {
 		BufferedReader bufReader = null;
 		int lineNumber = 0;
 		try {
-			streamIn = new FileInputStream("." + getParameters());
+			streamIn = new FileInputStream(Const.USER_DIR + getParameters());
 			// trying to read as utf-8
 			readerIn = new InputStreamReader(streamIn, "UTF8");
 			bufReader = new BufferedReader(readerIn);

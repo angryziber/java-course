@@ -25,7 +25,7 @@ public class Const {
 	 */
 	public static final String SEPARATOR = System.getProperty("file.separator");
 	
-//	public static final String USER_DIR = System.getProperty("user.dir") + SEPARATOR;
+	public static final String USER_DIR = System.getProperty("user.dir") + SEPARATOR;
 
 //	/**
 //	 * Students package directory.

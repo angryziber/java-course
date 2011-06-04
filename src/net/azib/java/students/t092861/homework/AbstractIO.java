@@ -82,7 +82,7 @@ public abstract class AbstractIO {
 			createDirectory("." + dir);
 			file = new File("." + dir + filename);
 		} else {
-			file = new File("." + filename);
+			file = new File(filename);
 		}
 		return file;
 	}
