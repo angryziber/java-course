@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-import static java.lang.Double.valueOf;
+import static net.azib.java.students.t093759.homework.AthleteDataLoaderHelper.MIN_SEC_MILLI_FORMAT;
+import static net.azib.java.students.t093759.homework.AthleteDataLoaderHelper.SEC_MILLI_FORMAT;
 
 /**
  * Athlete loader utility class .
@@ -26,8 +28,9 @@ public class ConsoleLoader implements AthletesLoader {
 	private static final String ATHLETE_STOP_LOADING_CONDITION = "stop";
 	private static final String ATHLETE_SKIP_LOADING_CONDITION = "skip";
 	InputStream in = System.in;
-	final static SimpleDateFormat MIN_SEC_MILLI_FORMAT = new SimpleDateFormat("mm:ss.SSS");
-	final static SimpleDateFormat SEC_MILLI_FORMAT = new SimpleDateFormat("ss.SSS");
+	private static final AthleteDataLoaderHelper ATHLETE_DATA_LOADER_HELPER = AthleteDataLoaderHelper.getInstance();
+	String localizedPatternOfDateOfBirth = ((SimpleDateFormat) DateFormat.getDateInstance()).toLocalizedPattern();
+	private BufferedReader bufferedReader;
 
 	/**
 	 * @param additionalParams Parameters are ignored.
@@ -35,6 +38,7 @@ public class ConsoleLoader implements AthletesLoader {
 	@Override
 	public List<Athlete> load(Object... additionalParams) {
 		List<Athlete> athletes = new ArrayList<Athlete>(100);
+		bufferedReader = new BufferedReader(new InputStreamReader(in));
 		while (true) {
 			System.out.println("To stop loading athletes please enter " + ATHLETE_STOP_LOADING_CONDITION + IOUtils.LINE_SEPARATOR
 					+ "To skip loading athletes please enter " + ATHLETE_SKIP_LOADING_CONDITION);
@@ -63,24 +67,25 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadAllAthleteFieldsUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		loadNameUsing(builder);
-		loadCountryISO2LetterCodeUsing(builder);
 		loadDateOfBirthUsing(builder);
-		loadDiscusThrowLengthUsing(builder);
-		loadFourHundredMeterSprintTimeUsing(builder);
-		loadHighJumpHeightUsing(builder);
-		loadJavelinThrowLengthUsing(builder);
-		loadLongJumpLengthUsing(builder);
+		loadCountryISO2LetterCodeUsing(builder);
 		loadOneHundredMeterSprintTimeUsing(builder);
-		loadOneHundredTenMeterHurdlesTimeUsing(builder);
-		loadPoleVaultHeightUsing(builder);
+		loadLongJumpLengthUsing(builder);
 		loadShotPutLengthUsing(builder);
+		loadHighJumpHeightUsing(builder);
+		loadFourHundredMeterSprintTimeUsing(builder);
+		loadOneHundredTenMeterHurdlesTimeUsing(builder);
+		loadDiscusThrowLengthUsing(builder);
+		loadPoleVaultHeightUsing(builder);
+		loadJavelinThrowLengthUsing(builder);
 		loadThousandFiveHundredMeterRaceTimeUsing(builder);
 	}
 
 	private void loadThousandFiveHundredMeterRaceTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("1500 m race time s in format '" + MIN_SEC_MILLI_FORMAT.toPattern() + "': ");
-			builder.setThousandFiveHundredMeterRaceTime(parseMinutesAndSecondsAndMillisFromInputStream());
+//			builder.setThousandFiveHundredMeterRaceTime(parseMinutesAndSecondsAndMillisFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadThousandFiveHundredMeterRaceTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -91,7 +96,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadShotPutLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("shot put length m: ");
-			builder.setShotPutLength(getDoubleFromInputStream());
+//			builder.setShotPutLength(getDoubleFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadShotPutLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -102,7 +108,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadPoleVaultHeightUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("pole vault height m: ");
-			builder.setPoleVaultHeight(getDoubleFromInputStream());
+//			builder.setPoleVaultHeight(getDoubleFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadPoleVaultHeightUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -113,7 +120,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadOneHundredTenMeterHurdlesTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("110 m hurdles time s in format '" + SEC_MILLI_FORMAT.toPattern() + "': ");
-			builder.setOneHundredTenMeterHurdlesTime(parseSecondsAndMillisFromInputStream());
+//			builder.setOneHundredTenMeterHurdlesTime(parseSecondsAndMillisFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadOneHundredTenMeterHurdlesTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -121,26 +129,27 @@ public class ConsoleLoader implements AthletesLoader {
 		}
 	}
 
-	double parseMinutesAndSecondsAndMillisFromInputStream() throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-		return parseSomeDateIntoDoubleAccordingTo(MIN_SEC_MILLI_FORMAT);
-	}
+//	double parseMinutesAndSecondsAndMillisFromInputStream() throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
+//		return parseSomeDateIntoDoubleAccordingTo(MIN_SEC_MILLI_FORMAT);
+//	}
+//
+//	double parseSecondsAndMillisFromInputStream() throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
+//		return parseSomeDateIntoDoubleAccordingTo(SEC_MILLI_FORMAT);
+//	}
 
-	double parseSecondsAndMillisFromInputStream() throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-		return parseSomeDateIntoDoubleAccordingTo(SEC_MILLI_FORMAT);
-	}
-
-	private double parseSomeDateIntoDoubleAccordingTo(SimpleDateFormat format) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-		Calendar calendar = new GregorianCalendar();
-		final String resultToParse = getStringFromInputStream();
-		calendar.setTime(format.parse(resultToParse));
-		double divisor = Math.pow(10, resultToParse.split("\\.")[1].trim().length());
-		return calendar.get(Calendar.MINUTE) * 60 + calendar.get(Calendar.SECOND) + calendar.get(Calendar.MILLISECOND) / divisor;
-	}
+//	private double parseSomeDateIntoDoubleAccordingTo(SimpleDateFormat format) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
+//		Calendar calendar = new GregorianCalendar();
+//		final String resultToParse = getStringFromInputStream();
+//		calendar.setTime(format.parse(resultToParse));
+//		double divisor = Math.pow(10, resultToParse.split("\\.")[1].trim().length());
+//		return calendar.get(Calendar.MINUTE) * 60 + calendar.get(Calendar.SECOND) + calendar.get(Calendar.MILLISECOND) / divisor;
+//	}
 
 	private void loadOneHundredMeterSprintTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("100 m spring time s in format '" + SEC_MILLI_FORMAT.toPattern() + "': ");
-			builder.setOneHundredMeterSprintTime(parseSecondsAndMillisFromInputStream());
+//			builder.setOneHundredMeterSprintTime(parseSecondsAndMillisFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadOneHundredMeterSprintTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -151,7 +160,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadLongJumpLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("long jump length: ");
-			builder.setLongJumpLength(getDoubleFromInputStream());
+//			builder.setLongJumpLength(getDoubleFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadLongJumpLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -162,7 +172,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadJavelinThrowLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("Javelin throw length m: ");
-			builder.setJavelinThrowLength(getDoubleFromInputStream());
+//			builder.setJavelinThrowLength(getDoubleFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadJavelinThrowLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -173,7 +184,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadHighJumpHeightUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("High jump length m: ");
-			builder.setHighJumpHeight(getDoubleFromInputStream());
+//			builder.setHighJumpHeight(getDoubleFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadHighJumpHeightUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -184,7 +196,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadFourHundredMeterSprintTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("400 meter sprint time s in format '" + MIN_SEC_MILLI_FORMAT.toPattern() + "': ");
-			builder.setFourHundredMeterSprintTime(parseMinutesAndSecondsAndMillisFromInputStream());
+//			builder.setFourHundredMeterSprintTime(parseMinutesAndSecondsAndMillisFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadFourHundredMeterSprintTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -195,7 +208,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadDiscusThrowLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("Discus throw length m: ");
-			builder.setDiscusThrowLength(getDoubleFromInputStream());
+//			builder.setDiscusThrowLength(getDoubleFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadDiscusThrowLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -205,11 +219,11 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadDateOfBirthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			final String localizedPattern = ((SimpleDateFormat) DateFormat.getDateInstance()).toLocalizedPattern();
-			System.out.print("Load date using " + Locale.getDefault() + " format '" + localizedPattern + "': ");
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(new SimpleDateFormat(localizedPattern).parse(getStringFromInputStream()));
-			builder.setDateOfBirth(calendar);
+			System.out.print("Load date using " + Locale.getDefault() + " format '" + localizedPatternOfDateOfBirth + "': ");
+//			Calendar calendar = Calendar.getInstance();
+//			calendar.setTime(new SimpleDateFormat(localizedPatternOfDateOfBirth).parse(getStringFromInputStream()));
+//			builder.setDateOfBirth(calendar);
+			ATHLETE_DATA_LOADER_HELPER.loadDateOfBirthUsing(builder, getStringFromInputStream(), localizedPatternOfDateOfBirth);
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -220,7 +234,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadCountryISO2LetterCodeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("Country ISO2 letter code: ");
-			builder.setCountryISO2LetterCode(getStringFromInputStream());
+//			builder.setCountryISO2LetterCode(getStringFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadCountryISO2LetterCodeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -231,7 +246,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private void loadNameUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
 			System.out.print("Name: ");
-			builder.name(getStringFromInputStream());
+//			builder.name(getStringFromInputStream());
+			ATHLETE_DATA_LOADER_HELPER.loadNameUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
 			System.err.println(e.getMessage());
@@ -240,29 +256,28 @@ public class ConsoleLoader implements AthletesLoader {
 	}
 
 	String getStringFromInputStream() throws StopLoadingAthletesException, SkipLoadingAthleteException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
 		String readString = "";
 		try {
-			readString = reader.readLine().trim();
+			readString = bufferedReader.readLine().trim();
 			if (readString.toLowerCase().equals(ATHLETE_STOP_LOADING_CONDITION))
 				throw new StopLoadingAthletesException();
 			if (readString.toLowerCase().equals(ATHLETE_SKIP_LOADING_CONDITION))
 				throw new SkipLoadingAthleteException();
 		} catch (IOException e) {
 			System.err.println("I don't know why, but read error appeared.");//
+			throw new RuntimeException(e.getMessage(), e.getCause());
 		}
 		return readString;
 	}
 
-	double getDoubleFromInputStream() throws Exception {
-		try {
-			return valueOf(getStringFromInputStream());
-		} catch (Exception e) {
-			exceptionInnerHandler(e);
-			throw new Exception();
-		}
-	}
+//	double getDoubleFromInputStream() throws Exception {
+//		try {
+//			return valueOf(getStringFromInputStream());
+//		} catch (Exception e) {
+//			exceptionInnerHandler(e);
+//			throw new Exception();
+//		}
+//	}
 
 	private void exceptionInnerHandler(Exception e) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		if (e instanceof StopLoadingAthletesException) throw new StopLoadingAthletesException();

@@ -74,7 +74,7 @@ public class DataBaseLoaderTest {
 		assertTrue(dbLoader.dbProperties.containsKey("db.user"));
 		assertTrue(dbLoader.dbProperties.containsKey("db.password"));
 		assertTrue(dbLoader.dbProperties.containsKey("db.name"));
-		assertTrue(dbLoader.dbProperties.containsKey("db.server"));
+		assertTrue(dbLoader.dbProperties.containsKey("db.host"));
 		assertTrue(dbLoader.dbProperties.containsKey("db.port"));
 	}
 

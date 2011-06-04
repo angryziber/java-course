@@ -22,7 +22,7 @@ public class CSVLoaderTest {
 
 	@Test
 	public void inputExample() {
-		String file = getClass().getResource("example.csv").getFile();
+		String file = getClass().getResource("input.csv").getFile();
 		assertThat(new CSVLoader().load(file).size(), equalTo(4));
 	}
 }

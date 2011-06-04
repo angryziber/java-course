@@ -14,9 +14,9 @@ import static java.lang.Double.valueOf;
  *         6/4/11 7:17 PM
  */
 public class AthleteDataLoaderHelper {
-	private static final SimpleDateFormat MIN_SEC_MILLI_FORMAT = new SimpleDateFormat("mm:ss.SSS");
-	private static final SimpleDateFormat SEC_MILLI_FORMAT = new SimpleDateFormat("ss.SSS");
-	private static final String DEFAULT_DATE_OF_BIRTH_FORMAT = "d.MM.yyyy";
+	public static final SimpleDateFormat MIN_SEC_MILLI_FORMAT = new SimpleDateFormat("mm:ss.SSS");
+	public static final SimpleDateFormat SEC_MILLI_FORMAT = new SimpleDateFormat("ss.SSS");
+	public static final String DEFAULT_DATE_OF_BIRTH_FORMAT = "d.MM.yyyy";
 
 	private static AthleteDataLoaderHelper instance;
 
@@ -252,7 +252,7 @@ public class AthleteDataLoaderHelper {
 		builder.name(string.replaceAll("\"", ""));
 	}
 
-	private double getDoubleFromString(String string) throws Exception {
+	private double getDoubleFromString(String string) {
 		return valueOf(string);
 	}
 
@@ -268,6 +268,14 @@ public class AthleteDataLoaderHelper {
 	}
 
 	private double parseMinutesAndSecondsAndMillisFromString(String source) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-		return parseSomeDateIntoDoubleAccordingTo(MIN_SEC_MILLI_FORMAT, source);
+		try {
+			return parseSomeDateIntoDoubleAccordingTo(MIN_SEC_MILLI_FORMAT, source);
+		} catch (Exception e) {
+			try {
+				return parseSecondsAndMillisFromString(source);
+			} catch (Exception ex) {
+				return getDoubleFromString(source);
+			}
+		}
 	}
 }

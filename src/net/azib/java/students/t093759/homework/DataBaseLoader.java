@@ -1,10 +1,7 @@
 package net.azib.java.students.t093759.homework;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PropertyResourceBundle;
@@ -37,8 +34,9 @@ public class DataBaseLoader implements AthletesLoader {
 	public List<Athlete> load(Object... additionalParams) {
 		if (additionalParams.length < 1) throw new IllegalArgumentException("One parameter should be");
 		if (!(additionalParams[0] instanceof String)) throw new IllegalArgumentException("One parameter should be");
-		if (connection == null) {//Todo Don't forget to add loading for connection opening
+		if (connection == null) {
 			connectionIsCreatedByMe = true;
+			openMySQLConnection();
 		}
 
 		List<Athlete> athletes = new ArrayList<Athlete>(100);
@@ -49,15 +47,26 @@ public class DataBaseLoader implements AthletesLoader {
 		return athletes;
 	}
 
+	private void openMySQLConnection() {
+		try {
+			String host = dbProperties.getString("db.host");
+			int port = Integer.valueOf(dbProperties.getString("db.port"));
+			String database = dbProperties.getString("db.name");
+			String user = dbProperties.getString("db.user");
+			String password = dbProperties.getString("db.password");
+			connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, user, password);
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new RuntimeException(e.getMessage(), e.getCause());
+		}
+	}
+
 	private void tryToLoadAthletesForCompetition(List<Athlete> athletes, String competitionIdOrName) {
 		try {
 			int id = getIdOfCompetition(competitionIdOrName);
 			if (id == -1) throw new NoSuchCompetitionException();
 
 			loadDataForAllAthletesFromCompetition(athletes, id);
-
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
 		} catch (NoSuchCompetitionException e) {
 			System.err.println("No such competition");
 		} catch (Exception e) {

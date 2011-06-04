@@ -4,6 +4,9 @@
 
 	<xsl:template match="/decathlon">
 		<html>
+			<head>
+				<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+			</head>
 			<body>
 				<table border="1">
 					<tr>
@@ -25,21 +28,51 @@
 					</tr>
 					<xsl:for-each select="athlete">
 						<tr>
-							<td><xsl:value-of select="place"/></td>
-							<td><xsl:value-of select="points"/></td>
-							<td><xsl:value-of select="name"/></td>
-							<td><xsl:value-of select="countryISO2LetterCode"/></td>
-							<td><xsl:value-of select="dateOfBirth"/></td>
-							<td><xsl:value-of select="oneHundredMeterSprint"/></td>
-							<td><xsl:value-of select="longJump"/></td>
-							<td><xsl:value-of select="shotPut"/></td>
-							<td><xsl:value-of select="highJump"/></td>
-							<td><xsl:value-of select="fourHundredMeterSprint"/></td>
-							<td><xsl:value-of select="oneHundredTenMeterHurdles"/></td>
-							<td><xsl:value-of select="discusThrow"/></td>
-							<td><xsl:value-of select="poleVault"/></td>
-							<td><xsl:value-of select="javelinThrow"/></td>
-							<td><xsl:value-of select="thousandFiveHundredMeterRace"/></td>
+							<td>
+								<xsl:value-of select="place"/>
+							</td>
+							<td>
+								<xsl:value-of select="points"/>
+							</td>
+							<td>
+								<xsl:value-of select="name"/>
+							</td>
+							<td>
+								<xsl:value-of select="countryISO2LetterCode"/>
+							</td>
+							<td>
+								<xsl:value-of select="dateOfBirth"/>
+							</td>
+							<td>
+								<xsl:value-of select="oneHundredMeterSprint"/>
+							</td>
+							<td>
+								<xsl:value-of select="longJump"/>
+							</td>
+							<td>
+								<xsl:value-of select="shotPut"/>
+							</td>
+							<td>
+								<xsl:value-of select="highJump"/>
+							</td>
+							<td>
+								<xsl:value-of select="fourHundredMeterSprint"/>
+							</td>
+							<td>
+								<xsl:value-of select="oneHundredTenMeterHurdles"/>
+							</td>
+							<td>
+								<xsl:value-of select="discusThrow"/>
+							</td>
+							<td>
+								<xsl:value-of select="poleVault"/>
+							</td>
+							<td>
+								<xsl:value-of select="javelinThrow"/>
+							</td>
+							<td>
+								<xsl:value-of select="thousandFiveHundredMeterRace"/>
+							</td>
 						</tr>
 					</xsl:for-each>
 				</table>
