@@ -3,6 +3,7 @@ package net.azib.java.students.t092861.homework;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.xml.XMLConstants;
@@ -268,7 +269,7 @@ public class IOxml extends AbstractIO {
 		try {
 			String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
 			SchemaFactory factory = SchemaFactory.newInstance(language);
-			schema = factory.newSchema(new File(name));
+			schema = factory.newSchema(IOxml.class.getResource(name));
 		} catch (Exception e) {
 			out.println(e.toString());
 		}
