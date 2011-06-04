@@ -25,7 +25,7 @@ public class HTMLOutputTest extends Output {
 	 * a reader, I check if the output can get the data from the input properly.
 	 */
 	@org.junit.Test
-	public void testXMLOutput() {
+	public void testHTMLOutput() {
 		List<Athlete> contestants;
 		MockInput input = new MockInput();
 		BufferedReader reader = null;

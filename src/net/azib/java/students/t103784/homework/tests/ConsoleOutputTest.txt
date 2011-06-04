@@ -1,4 +1,89 @@
-Full name (Name Surname): Date of Birth (dd/MM/yy): Country (2-digits, eg. EE): 100m (seconds.milliseconds): Long jump (meters.centimeters): Shot put (meters.centimeters): High jump (meters.centimeters): 400m (minutes:seconds.milliseconds): 110m hurdles (seconds.milliseconds): Discus throw (meters.centimeters): Pole vault (meters.centimeters): Javelin throw (meters.centimeters): 1500m race (minutes:seconds.milliseconds): Add more athletes (y/n)? Test success for athlete 0 : 59361
+Name: Ültimäte Äthlétö
+Date of Birth: 11.06.1991
+Country: EE
+100 meter dash(s): 10.395
+Long jump(m): 7.76
+Shot Put(m): 18.4
+High jump(m): 2.2
+400 meter race(s): 46.17
+110 meter hurdles(s): 13.8
+Discus throw(m): 56.17
+Pole vault(m): 5.28
+Javelin throw(m): 77.19
+1500 meter race(s): 233.79
+Score: 9990
+Place: 1
+
+Name: ﻿"Siim Susi"
+Date of Birth: 01.01.1976
+Country: EE
+100 meter dash(s): 12.61
+Long jump(m): 5.0
+Shot Put(m): 9.22
+High jump(m): 1.5
+400 meter race(s): 59.39
+110 meter hurdles(s): 16.43
+Discus throw(m): 21.6
+Pole vault(m): 2.6
+Javelin throw(m): 35.81
+1500 meter race(s): 325.72
+Score: 4234
+Place: 2
+
+Name: "José Mañana Perez"
+Date of Birth: 3.04.1972
+Country: ES
+100 meter dash(s): 13.75
+Long jump(m): 4.84
+Shot Put(m): 10.12
+High jump(m): 1.5
+400 meter race(s): 68.44
+110 meter hurdles(s): 19.18
+Discus throw(m): 30.85
+Pole vault(m): 2.8
+Javelin throw(m): 33.88
+1500 meter race(s): 382.75
+Score: 3494
+Place: 3
+
+Name: "Beata Kana"
+Date of Birth: 28.02.1982
+Country: ZA
+100 meter dash(s): 13.04
+Long jump(m): 4.53
+Shot Put(m): 7.79
+High jump(m): 1.55
+400 meter race(s): 64.72
+110 meter hurdles(s): 18.74
+Discus throw(m): 24.2
+Pole vault(m): 2.4
+Javelin throw(m): 28.2
+1500 meter race(s): 410.76
+Score: 3199
+Place: 4
+
+Name: "Василий Пупкин"
+Date of Birth: 21.10.1980
+Country: UA
+100 meter dash(s): 13.43
+Long jump(m): 4.35
+Shot Put(m): 8.64
+High jump(m): 1.5
+400 meter race(s): 66.06
+110 meter hurdles(s): 19.05
+Discus throw(m): 24.89
+Pole vault(m): 2.2
+Javelin throw(m): 33.48
+1500 meter race(s): 411.01
+Score: 3099
+Place: 5
+
+Full name (Name Surname): Date of Birth (d.MM.yy): Country (2-digits, eg. EE): 100m (seconds.milliseconds): Long jump (meters.centimeters): Shot put (meters.centimeters): High jump (meters.centimeters): 400m (minutes:seconds.milliseconds): 110m hurdles (seconds.milliseconds): Discus throw (meters.centimeters): Pole vault (meters.centimeters): Javelin throw (meters.centimeters): 1500m race (minutes:seconds.milliseconds): Add more athletes (y/n)? Test success for athlete 0 : 1 - 2
+Test success for athlete 1 : 1 - 2
+Test success for athlete 2 : 3 - 5
+Test success for athlete 3 : 3 - 5
+Test success for athlete 4 : 3 - 5
+Test success for athlete 0 : 59361
 Test success for athlete 1 : 59361
 Test success for athlete 2 : 28224
 Test success for athlete 3 : 28224

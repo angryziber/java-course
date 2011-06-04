@@ -29,11 +29,12 @@ public class PlaceCalculator {
 	 * @param contestants The list of athletes supplied.
 	 */
 	public static void calculatePlace(List<Athlete> contestants) {
-
+		scores.clear();
 		Collections.sort(contestants, new PlaceCalculator.sortByScore());
 		lastAssigned = 0;
 		currentFirst = 0;
 		counter = 1;
+
 		for (int o = 0; o < contestants.size(); o++) {
 			scores.add(o, contestants.get(o).getScore());
 		}

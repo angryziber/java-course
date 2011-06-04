@@ -62,6 +62,8 @@ public class Main {
 	 * and place and finally outputs the data.
 	 * If no input or output method is selected,
 	 * the program will terminate.
+	 * If no optional parameters are specified,
+	 * defaults ones will be used.
 	 *
 	 * @param args Array of console arguments set by user.
 	 * @throws java.io.IOException Is thrown when

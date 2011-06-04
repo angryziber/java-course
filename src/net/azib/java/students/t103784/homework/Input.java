@@ -22,7 +22,6 @@ public class Input {
 
 	String parameter = Main.inputParameter;
 	List<Athlete> contestants = new ArrayList<Athlete>();
-	SimpleDateFormat format = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
 
 	/**
 	 * Reads in athletes from a database.
@@ -175,7 +174,8 @@ public class Input {
 	 */
 	public List<Athlete> readAthleteFromConsole() throws IOException, ParseException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
-
+		Locale.setDefault(new Locale("et"));
+		SimpleDateFormat format = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
 		int i = 0;
 		boolean inputtingAthletes = true;
 
@@ -333,6 +333,7 @@ public class Input {
 	 * @throws java.text.ParseException Is thrown when the date is in wrong format.
 	 */
 	private String checkDate(String birthDate) throws ParseException {
+		SimpleDateFormat format = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT);
 		format.setLenient(false);
 		try {
 			format.parse(birthDate);

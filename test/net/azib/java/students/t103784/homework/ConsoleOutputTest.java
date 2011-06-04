@@ -17,12 +17,12 @@ public class ConsoleOutputTest extends Output {
 	 * a reader, I check if the output can get the data from the input properly.
 	 */
 	@org.junit.Test
-	public void testOutputs() {
+	public void testConsoleOutput() {
 		List<Athlete> contestants;
 		MockInput input = new MockInput();
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader("src/net/azib/java/students/t103784/homework/tests/CSVTest2.csv"));
+			reader = new BufferedReader(new FileReader("src/net/azib/java/students/t103784/homework/tests/CSVTest.csv"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Test input failed (no such test file)");
 		}
@@ -33,6 +33,7 @@ public class ConsoleOutputTest extends Output {
 			System.out.println("Test output failed (IOException)");
 		}
 		outputToConsole(contestants);
+
 	}
 
 	class MockInput extends Input {

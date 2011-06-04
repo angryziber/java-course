@@ -19,7 +19,7 @@ public class CSVOutputTest extends Output {
 	 * a reader, I check if the output can get the data from the input properly.
 	 */
 	@org.junit.Test
-	public void testOutputs() {
+	public void testCSVOutput() {
 		List<Athlete> contestants;
 		MockInput input = new MockInput();
 		BufferedReader reader = null;
