@@ -2,9 +2,7 @@ package net.azib.java.students.t093759.homework;
 
 import org.junit.Test;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * @author dionis
@@ -12,9 +10,72 @@ import java.sql.Statement;
  */
 public class DataBaseLoaderTest {
 
+	@Test(expected = IllegalArgumentException.class)
+	public void thereShouldBeOneParameter() {
+		new DataBaseLoader().load();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void parameterShouldBeAString() {
+		new DataBaseLoader().load(112);
+	}
+
+	@Test
+	public void badArgument() {
+		
+	}
+
+	@Test
+	public void playingWithDB() throws SQLException {
+		DataBaseLoader dataBaseLoader = new DataBaseLoader();
+		setUpFakeDB(dataBaseLoader);
+		dataBaseLoader.connection = openConnection();
+		String sql = "SELECT a.name, a.dob, a.country_code, " +
+				"r.race_100m, r.long_jump, r.shot_put, r.high_jump, r.race_400m, r.hurdles_110m, r.discus_throw," +
+				"r.pole_vault, r.javelin_throw, r.race_1500m " +
+				"FROM athletes as a " +
+				"INNER JOIN results as r" +
+				" ON r.athlete_id=a.id" +
+				" INNER JOIN competitions" +
+				"  ON competitions.id=?";
+		PreparedStatement preparedStatement = dataBaseLoader.connection.prepareStatement(sql);
+		String value = "DECATHLON4BEER";
+		int id = -1;
+		try {
+			id = Integer.parseInt(value);
+		} catch (NumberFormatException e) {
+			PreparedStatement prepStat = dataBaseLoader.connection.prepareStatement("SELECT id FROM competitions WHERE name LIKE ? LIMIT 1");
+			prepStat.setString(1, value);
+			System.out.println(prepStat);
+			ResultSet resultSet = prepStat.executeQuery();
+
+			if (resultSet.next())
+				id = resultSet.getInt(1);
+		}
+		System.out.println(id);
+		preparedStatement.setInt(1, id);
+		ResultSet rs = preparedStatement.executeQuery();
+		ResultSetMetaData rsm = rs.getMetaData();
+		int columnCount = rsm.getColumnCount();
+		for (int i = 1; i <= columnCount; i++) {
+			String columnName = rsm.getColumnName(i);
+			System.out.print("| " + columnName + " ");
+		}
+		System.out.println("|");
+		while (rs.next()) {
+			for (int i = 1; i <= columnCount; i++) {
+				String columnContent = rs.getString(i);
+				System.out.print("| " + columnContent + " ");
+			}
+			System.out.println("|");
+		}
+
+		closeConnectionAt(dataBaseLoader);
+	}
+
 	public void setUpFakeDB(DataBaseLoader dataBaseLoader) {
 		try {
-			dataBaseLoader.connection = DriverManager.getConnection("jdbc:hsqldb:mem:decathlon", "sa", "");
+			dataBaseLoader.connection = openConnection();
 			Statement statement = dataBaseLoader.connection.createStatement();
 
 			createAthletesTable(statement);
@@ -29,24 +90,30 @@ public class DataBaseLoaderTest {
 			dataBaseLoader.connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				dataBaseLoader.connection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			rollbackAt(dataBaseLoader);
 		} finally {
-			try {
-				dataBaseLoader.connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnectionAt(dataBaseLoader);
 		}
 	}
 
-	@Test
-	public void playingWithDB() {
-		DataBaseLoader dataBaseLoader = new DataBaseLoader();
-		setUpFakeDB(dataBaseLoader);
+	private Connection openConnection() throws SQLException {
+		return DriverManager.getConnection("jdbc:hsqldb:mem:decathlon", "sa", "");
+	}
+
+	private void closeConnectionAt(DataBaseLoader dataBaseLoader) {
+		try {
+			dataBaseLoader.connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void rollbackAt(DataBaseLoader dataBaseLoader) {
+		try {
+			dataBaseLoader.connection.rollback();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	private void fillResultsTable(Statement statement) throws SQLException {
@@ -75,7 +142,7 @@ public class DataBaseLoaderTest {
 				"(20, 41, 2, 13.75, 4.84, 10.12, 1.5, 68.44, 19.18, 30.85, 2.8, 33.88, 382.75)",
 				"(21, 42, 2, 13.43, 4.35, 8.64, 1.5, 66.06, 19.05, 24.89, 2.2, 33.48, 411.01)"
 		};
-		executeInsertUsing(insertPart,results,statement);
+		executeInsertUsing(insertPart, results, statement);
 	}
 
 	private void createResultsTable(Statement statement) throws SQLException {

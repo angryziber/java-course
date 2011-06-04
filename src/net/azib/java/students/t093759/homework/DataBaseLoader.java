@@ -1,8 +1,7 @@
 package net.azib.java.students.t093759.homework;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,8 +10,13 @@ import java.util.List;
  */
 public class DataBaseLoader implements AthletesLoader {
 	Connection connection;
+
 	@Override
 	public List<Athlete> load(Object... additionalParams) {
-		throw new NotImplementedException();
+		if (additionalParams.length < 1) throw new IllegalArgumentException("One parameter should be");
+		if (!(additionalParams[0] instanceof String)) throw new IllegalArgumentException("One parameter should be");
+
+		List<Athlete> athletes = new ArrayList<Athlete>(100);
+		return athletes;
 	}
 }
