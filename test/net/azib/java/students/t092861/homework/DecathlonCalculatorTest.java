@@ -66,5 +66,13 @@ public class DecathlonCalculatorTest {
 			assertFalse(new DecathlonCalculator().checkParameters(line));
 		}
 	}
+	
+	public void processParameters(){
+		String[] line;
+		for (int i = 0; i < array.length; i++) {
+			line = array[i].split(" ");
+			new DecathlonCalculator().processParameters(line);
+		}
+	}
 
 }
