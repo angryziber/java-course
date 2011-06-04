@@ -8,6 +8,8 @@ import java.util.GregorianCalendar;
 import static java.lang.Double.valueOf;
 
 /**
+ * Helper(utility) class for athlete data loading.
+ *
  * @author dionis
  *         6/4/11 7:17 PM
  */
@@ -241,6 +243,7 @@ public class AthleteDataLoaderHelper {
 
 	/**
 	 * Load athletes name.
+	 *
 	 * @param builder Athlete builder instance where result will be put.
 	 * @param string  String to parse from. If string contains symbol " (double quote) it will be removed.
 	 * @throws Exception Exception will be thrown if it's unable to parse athletes name.

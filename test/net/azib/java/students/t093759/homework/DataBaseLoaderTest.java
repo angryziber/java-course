@@ -241,9 +241,7 @@ public class DataBaseLoaderTest {
 	private static void executeInsertUsing(String insertPart, String[] valuesPart, Statement statement) throws SQLException {
 		for (String values : valuesPart) {
 			String sql = insertPart + values;
-			//System.out.print(sql + " : ");
-			boolean execute = statement.execute(sql);
-//			System.out.println(execute);
+			statement.execute(sql);
 		}
 	}
 
