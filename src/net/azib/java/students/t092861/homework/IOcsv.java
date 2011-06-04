@@ -76,16 +76,13 @@ public class IOcsv extends AbstractIO {
 			out.println("\nError! File " + getParameters()+ " structure in line " + lineNumber + " is incorrect\n");
 
 		} catch (IOException e) {
-			out.println("\nError! I/O error occured");
-			e.printStackTrace();
-
+			out.println("\nError! I/O error occured " + e.toString());
 		} finally {
 			if (bufReader != null) {
 				try {
 					bufReader.close();
 				} catch (IOException e) {
-					out.println("\nError! Cannot close the file!");
-					e.printStackTrace();
+					out.println("\nError! Cannot close the file! "  + e.toString());
 				}
 			}
 		}
@@ -128,12 +125,7 @@ public class IOcsv extends AbstractIO {
 			out.println("Successful CSV output to " + getParameters() + " file!");
 			
 		} catch (FileNotFoundException en) {
-			try {
-				out.println("\nERROR! The file " + file.getCanonicalPath() + " was not found " + en.toString());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			out.println("\nERROR! The file " + file.getName() + " was not found " + en.toString());
 		} catch (IOException e) {
 			out.println("\nERROR! I/O eror of some sort has occurred! "  + e.toString());
 		} finally {

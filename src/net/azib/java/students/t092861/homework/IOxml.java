@@ -216,21 +216,13 @@ public class IOxml extends AbstractIO {
 					+ "\"" + " file!");
 			
 		} catch (TransformerConfigurationException e) {
-			out.println("\nError! Serious configuration error.");
-			e.printStackTrace();
-			
+			out.println("\nError! Serious configuration error. " + e.toString());
 		} catch (TransformerException e) {
-			out.println("\nError occured during the transformation process .");
-			e.printStackTrace();
-			
+			out.println("\nError occured during the transformation process. "  + e.toString());
 		} catch (ParserConfigurationException e) {
-			out.println("\nError! Serious configuration error.");
-			e.printStackTrace();
-			
+			out.println("\nError! Serious configuration error. "  + e.toString());
 		} catch (IllegalArgumentException e) {
-			out.println("\nError! Method has been passed an illegal or inappropriate argument.");
-			e.printStackTrace();
-			
+			out.println("\nError! Method has been passed an illegal or inappropriate argument. "  + e.toString());
 		}
 		return file;
 	}

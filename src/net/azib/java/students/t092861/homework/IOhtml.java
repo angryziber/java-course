@@ -67,16 +67,13 @@ public class IOhtml extends AbstractIO {
 			out.println("Successful HTML output to " + "\""	+ getParameters() + "\"" + " file!");
 			
 		} catch (FileNotFoundException e) {
-			out.println("\nError! Attempt to open the file denoted by a specified pathname has failed.");
-			e.printStackTrace();
+			out.println("\nError! Attempt to open the file denoted by a specified pathname has failed. "  + e.toString());
 			
 		} catch (TransformerException e) {
-			out.println("\nError occured during the transformation process.");
-			e.printStackTrace();
+			out.println("\nError occured during the transformation process. "  + e.toString());
 			
 		} catch (IOException e) {
-			out.println("\nError! I/O exception of some sort has occurred.");
-			e.printStackTrace();
+			out.println("\nError! I/O exception of some sort has occurred. "  + e.toString());
 		}
 		return temp;
 	}
