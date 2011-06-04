@@ -133,5 +133,8 @@ public class IOcsvTest {
 		if (f.exists()) {
 			f.deleteOnExit();
 		}
+		if (f_in.exists()) {
+			f_in.deleteOnExit();
+		}
 	}
 }
