@@ -21,7 +21,7 @@ public class HTMLOutput extends XMLOutput implements AthletesOutput {
 
 	@Override
 	void transform(String fileName, Document doc) throws TransformerException {
-		InputStream xsl = getClass().getResourceAsStream("result.xsl");
+		InputStream xsl = getClass().getResourceAsStream("output.xsl");
 		Transformer serializer = TransformerFactory.newInstance().newTransformer(new StreamSource(xsl));
 		serializer.transform(new DOMSource(doc), new StreamResult(new File(fileName)));
 	}

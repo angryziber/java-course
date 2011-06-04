@@ -41,7 +41,7 @@ public class AthleteTest {
 
 	@Test
 	public void goodNamesExamples() {
-		String[] names = {"József Fenyő", "Василий Пупкин", "Mąrtęn Kołobrźeg", "José Mañana Perez"};
+		String[] names = {"József Fenyő", "Василий Пупкин", "Mąrtęn Kołobrźeg", "José Mañana Perez", "宗弘金子 (Munehiro Kaneko)"};
 		for (String name : names) {
 			new Athlete.Builder().name(name);
 		}

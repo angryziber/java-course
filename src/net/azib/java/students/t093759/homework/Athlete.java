@@ -180,8 +180,8 @@ public class Athlete implements Cloneable, Comparable<Athlete> {
 
 		public Builder name(String name) {
 			for (char c : name.toCharArray()) {
-				if (!Character.isLetter(c) && !Character.isSpaceChar(c))
-					throw new IllegalArgumentException("Name should consist only from characters and spaces.");
+				if (!Character.isLetter(c) && !Character.isSpaceChar(c) && c!='('&&c!=')')
+					throw new IllegalArgumentException("Name should consist only from characters, spaces and brackets.");
 			}
 			athlete.name = name;
 			return this;

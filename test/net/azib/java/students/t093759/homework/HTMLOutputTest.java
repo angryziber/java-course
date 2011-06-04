@@ -24,7 +24,6 @@ public class HTMLOutputTest extends AthleteOutputTest {
 		File tempFile = tempFile();
 
 		new HTMLOutput().output(athletes, tempFile.getCanonicalPath());
-		System.out.println(FileUtils.readFileToString(tempFile));
 		assertXMLEqual(someBasicOutputString(), manyLinesTrimmedAndGluedIntoOne(FileUtils.readFileToString(tempFile)));
 	}
 
