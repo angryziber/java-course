@@ -1,14 +1,47 @@
 package net.azib.java.students.t093759.homework;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.*;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author dionis
  *         6/4/11 2:09 AM
  */
 public class DataBaseLoaderTest {
+	private static Connection connection;
+
+	static {
+		setUpDataBase();
+	}
+
+	private static void setUpDataBase() {
+		try {
+			connection = openConnection();
+			Statement statement = connection.createStatement();
+
+			createAthletesTable(statement);
+			fillAthletesTable(statement);
+
+			createCompetitionsTable(statement);
+			fillCompetitionsTable(statement);
+
+			createResultsTable(statement);
+			fillResultsTable(statement);
+
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback();
+		} finally {
+			//closeConnection();
+		}
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void thereShouldBeOneParameter() {
@@ -21,37 +54,74 @@ public class DataBaseLoaderTest {
 	}
 
 	@Test
-	public void badArgument() {
-		
+	public void nonExistingCompetitionId() {
+		DataBaseLoader dataBaseLoader = new DataBaseLoader();
+		setUpFakeDBFor(dataBaseLoader);
+		assertTrue(dataBaseLoader.load("-1").isEmpty());
 	}
 
 	@Test
+	public void nonExistingCompetitionName() {
+		DataBaseLoader dataBaseLoader = new DataBaseLoader();
+		setUpFakeDBFor(dataBaseLoader);
+		assertTrue(dataBaseLoader.load("CompetitionOfTheUniverse").isEmpty());
+	}
+
+	@Test
+	public void definitionOfPropertiesThatAreNecessaryForDatabase() {
+		DataBaseLoader dbLoader = new DataBaseLoader();
+
+		assertTrue(dbLoader.dbProperties.containsKey("db.user"));
+		assertTrue(dbLoader.dbProperties.containsKey("db.password"));
+		assertTrue(dbLoader.dbProperties.containsKey("db.name"));
+		assertTrue(dbLoader.dbProperties.containsKey("db.server"));
+		assertTrue(dbLoader.dbProperties.containsKey("db.port"));
+	}
+
+	@Test
+	public void loadAthletesFromDecathlonForBeerUsingCompetitionName() {
+		DataBaseLoader dataBaseLoader = new DataBaseLoader();
+		setUpFakeDBFor(dataBaseLoader);
+
+		assertThat(dataBaseLoader.load("DECATHLON4BEER").size(), is(19));
+	}
+
+	@Test
+	public void loadAthletesFromDecathlonForBeerUsingCompetitionId() {
+		DataBaseLoader dataBaseLoader = new DataBaseLoader();
+		setUpFakeDBFor(dataBaseLoader);
+
+		assertThat(dataBaseLoader.load("2").size(), is(19));
+	}
+
+	@Test
+	public void ifThereAreCompetitionsWithTheSameNameOnlyFirstOfThemWillBeUsed() {
+		DataBaseLoader dataBaseLoader = new DataBaseLoader();
+		setUpFakeDBFor(dataBaseLoader);
+
+		assertThat(dataBaseLoader.load("1").size(), is(2));
+		assertThat(dataBaseLoader.load("3").size(), is(1));
+		assertThat(dataBaseLoader.load("Training").size(), is(2));
+	}
+
+	@Ignore
+	@Test
 	public void playingWithDB() throws SQLException {
 		DataBaseLoader dataBaseLoader = new DataBaseLoader();
-		setUpFakeDB(dataBaseLoader);
+		setUpFakeDBFor(dataBaseLoader);
 		dataBaseLoader.connection = openConnection();
-		String sql = "SELECT a.name, a.dob, a.country_code, " +
+		String sql = "SELECT c.id, a.name, a.dob, a.country_code, " +
 				"r.race_100m, r.long_jump, r.shot_put, r.high_jump, r.race_400m, r.hurdles_110m, r.discus_throw," +
 				"r.pole_vault, r.javelin_throw, r.race_1500m " +
 				"FROM athletes as a " +
 				"INNER JOIN results as r" +
 				" ON r.athlete_id=a.id" +
-				" INNER JOIN competitions" +
-				"  ON competitions.id=?";
+				" INNER JOIN competitions as c" +
+				"  ON c.id=? AND r.competition_id=c.id";
 		PreparedStatement preparedStatement = dataBaseLoader.connection.prepareStatement(sql);
-		String value = "DECATHLON4BEER";
-		int id = -1;
-		try {
-			id = Integer.parseInt(value);
-		} catch (NumberFormatException e) {
-			PreparedStatement prepStat = dataBaseLoader.connection.prepareStatement("SELECT id FROM competitions WHERE name LIKE ? LIMIT 1");
-			prepStat.setString(1, value);
-			System.out.println(prepStat);
-			ResultSet resultSet = prepStat.executeQuery();
 
-			if (resultSet.next())
-				id = resultSet.getInt(1);
-		}
+		int id = 2;
+
 		System.out.println(id);
 		preparedStatement.setInt(1, id);
 		ResultSet rs = preparedStatement.executeQuery();
@@ -70,53 +140,34 @@ public class DataBaseLoaderTest {
 			System.out.println("|");
 		}
 
-		closeConnectionAt(dataBaseLoader);
+		closeConnection();
 	}
 
-	public void setUpFakeDB(DataBaseLoader dataBaseLoader) {
-		try {
-			dataBaseLoader.connection = openConnection();
-			Statement statement = dataBaseLoader.connection.createStatement();
-
-			createAthletesTable(statement);
-			fillAthletesTable(statement);
-
-			createCompetitionsTable(statement);
-			fillCompetitionsTable(statement);
-
-			createResultsTable(statement);
-			fillResultsTable(statement);
-
-			dataBaseLoader.connection.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			rollbackAt(dataBaseLoader);
-		} finally {
-			closeConnectionAt(dataBaseLoader);
-		}
+	public void setUpFakeDBFor(DataBaseLoader dataBaseLoader) {
+		dataBaseLoader.connection = connection;
 	}
 
-	private Connection openConnection() throws SQLException {
+	private static Connection openConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:hsqldb:mem:decathlon", "sa", "");
 	}
 
-	private void closeConnectionAt(DataBaseLoader dataBaseLoader) {
+	private static void closeConnection() {
 		try {
-			dataBaseLoader.connection.close();
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void rollbackAt(DataBaseLoader dataBaseLoader) {
+	private static void rollback() {
 		try {
-			dataBaseLoader.connection.rollback();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+			connection.rollback();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
-	private void fillResultsTable(Statement statement) throws SQLException {
+	private static void fillResultsTable(Statement statement) throws SQLException {
 		String insertPart = "INSERT INTO results (id, athlete_id, competition_id, race_100m, long_jump, shot_put, " +
 				"high_jump, race_400m, hurdles_110m, discus_throw, pole_vault, javelin_throw, race_1500m) VALUES ";
 		String[] results = {
@@ -140,12 +191,13 @@ public class DataBaseLoaderTest {
 				"(18, 39, 2, 12.61, 5, 9.22, 1.5, 59.39, 16.43, 21.6, 2.6, 35.81, 325.72)",
 				"(19, 40, 2, 13.04, 4.53, 7.79, 1.55, 64.72, 18.74, 24.2, 2.4, 28.2, 410.76)",
 				"(20, 41, 2, 13.75, 4.84, 10.12, 1.5, 68.44, 19.18, 30.85, 2.8, 33.88, 382.75)",
-				"(21, 42, 2, 13.43, 4.35, 8.64, 1.5, 66.06, 19.05, 24.89, 2.2, 33.48, 411.01)"
+				"(21, 42, 2, 13.43, 4.35, 8.64, 1.5, 66.06, 19.05, 24.89, 2.2, 33.48, 411.01)",
+				"(22, 8, 3, 10.94, 7.83, 12.48, 2, 49.72, 15.67, 38.3, 5.4, 55.84, 271.72)",
 		};
 		executeInsertUsing(insertPart, results, statement);
 	}
 
-	private void createResultsTable(Statement statement) throws SQLException {
+	private static void createResultsTable(Statement statement) throws SQLException {
 		String sql = "CREATE TABLE results (" +
 				"  id int NOT NULL PRIMARY KEY," +
 				"  athlete_id int NOT NULL ," +
@@ -165,7 +217,7 @@ public class DataBaseLoaderTest {
 		statement.execute(sql);
 	}
 
-	private void fillCompetitionsTable(Statement statement) throws SQLException {
+	private static void fillCompetitionsTable(Statement statement) throws SQLException {
 		String insertPart = "INSERT INTO competitions (id, country_code, date, name, location) VALUES ";
 		String[] competitions = {
 				"(1, 'EE', '2005-12-01', 'Training', 'Tallinn')",
@@ -175,7 +227,7 @@ public class DataBaseLoaderTest {
 		executeInsertUsing(insertPart, competitions, statement);
 	}
 
-	private void createCompetitionsTable(Statement statement) throws SQLException {
+	private static void createCompetitionsTable(Statement statement) throws SQLException {
 		String sql = "CREATE TABLE competitions (" +
 				"  id int NOT NULL PRIMARY KEY," +
 				"  country_code varchar NOT NULL," +
@@ -186,15 +238,16 @@ public class DataBaseLoaderTest {
 		statement.execute(sql);
 	}
 
-	private void executeInsertUsing(String insertPart, String[] valuesPart, Statement statement) throws SQLException {
+	private static void executeInsertUsing(String insertPart, String[] valuesPart, Statement statement) throws SQLException {
 		for (String values : valuesPart) {
 			String sql = insertPart + values;
-			System.out.print(sql + " : ");
-			System.out.println(statement.execute(sql));
+			//System.out.print(sql + " : ");
+			boolean execute = statement.execute(sql);
+//			System.out.println(execute);
 		}
 	}
 
-	private void fillAthletesTable(Statement statement) throws SQLException {
+	private static void fillAthletesTable(Statement statement) throws SQLException {
 		String insertPart = "INSERT INTO athletes (id, name, dob, country_code) VALUES ";
 		String[] athletes = {
 				"(1, 'Siim Susi', '1976-01-01', 'EE');",
@@ -244,7 +297,7 @@ public class DataBaseLoaderTest {
 		executeInsertUsing(insertPart, athletes, statement);
 	}
 
-	private void createAthletesTable(Statement statement) throws SQLException {
+	private static void createAthletesTable(Statement statement) throws SQLException {
 		String sql = "CREATE TABLE athletes (" +
 				"  id int NOT NULL PRIMARY KEY," +
 				"  name varchar NOT NULL," +

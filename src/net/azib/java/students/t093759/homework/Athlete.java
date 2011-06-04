@@ -1,8 +1,6 @@
 package net.azib.java.students.t093759.homework;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * @author dionis
@@ -166,6 +164,14 @@ public class Athlete implements Cloneable, Comparable<Athlete> {
 	 * Builder will help you to create object of Athlete without worry that some fields are not initialized.
 	 */
 	public static class Builder {
+		private static final Set<Character> ALLOWED_CHARACTERS = new HashSet<Character>(3);
+
+		static {
+			ALLOWED_CHARACTERS.add('(');
+			ALLOWED_CHARACTERS.add(')');
+			ALLOWED_CHARACTERS.add('-');
+		}
+
 		private Athlete athlete;
 
 		public final static double ONE_DAY_IN_SECONDS = 24.0 * 60.0 * 60.0;
@@ -180,7 +186,7 @@ public class Athlete implements Cloneable, Comparable<Athlete> {
 
 		public Builder name(String name) {
 			for (char c : name.toCharArray()) {
-				if (!Character.isLetter(c) && !Character.isSpaceChar(c) && c!='('&&c!=')')
+				if (!Character.isLetter(c) && !Character.isSpaceChar(c) && !ALLOWED_CHARACTERS.contains(c))
 					throw new IllegalArgumentException("Name should consist only from characters, spaces and brackets.");
 			}
 			athlete.name = name;

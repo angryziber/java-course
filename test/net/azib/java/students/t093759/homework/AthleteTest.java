@@ -41,10 +41,36 @@ public class AthleteTest {
 
 	@Test
 	public void goodNamesExamples() {
-		String[] names = {"József Fenyő", "Василий Пупкин", "Mąrtęn Kołobrźeg", "José Mañana Perez", "宗弘金子 (Munehiro Kaneko)"};
+		String[] names = goodNames();
 		for (String name : names) {
-			new Athlete.Builder().name(name);
+			try {
+				new Athlete.Builder().name(name);
+			} catch (IllegalArgumentException e) {
+				throw new IllegalArgumentException(name + ":" + e.getMessage(), e.getCause());
+			}
 		}
+	}
+
+	private String[] goodNames() {
+		return new String[]{
+				"Siim Susi",
+				"Beata Kana",
+				"József Fenyő",
+				"Василий Пупкин",
+				"José Maria González Desperado",
+				"Mąrtęn Kołobrźeg",
+				"Janis Litoměřice",
+				"Erki Nool",
+				"Marat Zuckermann",
+				"宗弘金子 (Munehiro Kaneko)",
+				"Mumbalele-Nsowu Mensah-Bonsu Pops",
+				"Tomáš Dvořák",
+				"Barry Gibb",
+				"Robin Gibb",
+				"Maurice Gibb",
+				"José Mañana Perez",
+
+		};
 	}
 
 	@Test(expected = IllegalArgumentException.class)

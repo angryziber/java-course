@@ -3,22 +3,15 @@ package net.azib.java.students.t093759.homework;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import static java.lang.Double.valueOf;
 
 /**
  * @author dionis
  *         5/30/113:57 AM
  */
 public class CSVLoader implements AthletesLoader {
-	final static SimpleDateFormat MIN_SEC_MILLI_FORMAT = new SimpleDateFormat("mm:ss.SSS");
-	final static SimpleDateFormat SEC_MILLI_FORMAT = new SimpleDateFormat("ss.SSS");
+	private static final AthleteDataLoaderHelper ATHLETE_DATA_LOADER_HELPER_INSTANCE = AthleteDataLoaderHelper.getInstance();
 
 	/**
 	 * @param additionalParams Filename with results in .csv.
@@ -56,96 +49,18 @@ public class CSVLoader implements AthletesLoader {
 	private void loadAllAthleteFieldsUsing(Athlete.Builder builder, String lineWithAthleteData) throws Exception {
 		String[] str = lineWithAthleteData.split(",");
 		int i = 0;
-		loadNameUsing(builder, str[i++]);
-		loadDateOfBirthUsing(builder, str[i++]);
-		loadCountryISO2LetterCodeUsing(builder, str[i++]);
-		loadOneHundredMeterSprintTimeUsing(builder, str[i++]);
-		loadLongJumpLengthUsing(builder, str[i++]);
-		loadShotPutLengthUsing(builder, str[i++]);
-		loadHighJumpHeightUsing(builder, str[i++]);
-		loadFourHundredMeterSprintTimeUsing(builder, str[i++]);
-		loadOneHundredTenMeterHurdlesTimeUsing(builder, str[i++]);
-		loadDiscusThrowLengthUsing(builder, str[i++]);
-		loadPoleVaultHeightUsing(builder, str[i++]);
-		loadJavelinThrowLengthUsing(builder, str[i++]);
-		loadThousandFiveHundredMeterRaceTimeUsing(builder, str[i]);
-	}
-
-	private void loadThousandFiveHundredMeterRaceTimeUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setThousandFiveHundredMeterRaceTime(parseMinutesAndSecondsAndMillisFromString(string));
-	}
-
-	private void loadShotPutLengthUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setShotPutLength(getDoubleFromString(string));
-	}
-
-	private void loadPoleVaultHeightUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setPoleVaultHeight(getDoubleFromString(string));
-	}
-
-	private void loadOneHundredTenMeterHurdlesTimeUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setOneHundredTenMeterHurdlesTime(parseSecondsAndMillisFromString(string));
-	}
-
-	private double parseMinutesAndSecondsAndMillisFromString(String source) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-		return parseSomeDateIntoDoubleAccordingTo(MIN_SEC_MILLI_FORMAT, source);
-	}
-
-	private double parseSecondsAndMillisFromString(String source) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-		return parseSomeDateIntoDoubleAccordingTo(SEC_MILLI_FORMAT, source);
-	}
-
-	private double parseSomeDateIntoDoubleAccordingTo(SimpleDateFormat format, String source) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(format.parse(source));
-		double divisor = Math.pow(10, source.split("\\.")[1].trim().length());
-		return calendar.get(Calendar.MINUTE) * 60 + calendar.get(Calendar.SECOND) + calendar.get(Calendar.MILLISECOND) / divisor;
-	}
-
-	private void loadOneHundredMeterSprintTimeUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setOneHundredMeterSprintTime(parseSecondsAndMillisFromString(string));
-	}
-
-	private void loadLongJumpLengthUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setLongJumpLength(getDoubleFromString(string));
-	}
-
-	private void loadJavelinThrowLengthUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setJavelinThrowLength(getDoubleFromString(string));
-	}
-
-	private void loadHighJumpHeightUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setHighJumpHeight(getDoubleFromString(string));
-	}
-
-	private void loadFourHundredMeterSprintTimeUsing(Athlete.Builder builder, String string) throws Exception {
-		try {
-			builder.setFourHundredMeterSprintTime(parseMinutesAndSecondsAndMillisFromString(string));
-		} catch (ParseException e) {
-			builder.setFourHundredMeterSprintTime(parseSecondsAndMillisFromString(string));
-		}
-	}
-
-	private void loadDiscusThrowLengthUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setDiscusThrowLength(getDoubleFromString(string));
-	}
-
-	private void loadDateOfBirthUsing(Athlete.Builder builder, String string) throws Exception {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new SimpleDateFormat("d.MM.yyyy").parse(string));
-		builder.setDateOfBirth(calendar);
-
-	}
-
-	private void loadCountryISO2LetterCodeUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.setCountryISO2LetterCode(string);
-	}
-
-	private void loadNameUsing(Athlete.Builder builder, String string) throws Exception {
-		builder.name(string.replaceAll("\"", ""));
-	}
-
-	private double getDoubleFromString(String string) throws Exception {
-		return valueOf(string);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadNameUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadDateOfBirthUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadCountryISO2LetterCodeUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadOneHundredMeterSprintTimeUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadLongJumpLengthUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadShotPutLengthUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadHighJumpHeightUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadFourHundredMeterSprintTimeUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadOneHundredTenMeterHurdlesTimeUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadDiscusThrowLengthUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadPoleVaultHeightUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadJavelinThrowLengthUsing(builder, str[i++]);
+		ATHLETE_DATA_LOADER_HELPER_INSTANCE.loadThousandFiveHundredMeterRaceTimeUsing(builder, str[i]);
 	}
 }
