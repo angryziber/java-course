@@ -14,7 +14,8 @@
 
 <xs:complexType name="athleteType">
   <xs:sequence>
-    <xs:element name="place" type="xs:integer"/>
+    <xs:element name="place" type="xs:string"/>
+    <xs:element name="score" type="xs:float"/>
     <xs:element name="name" type="xs:string"/>
     <xs:element name="birthday" type="birthdayType"/>
     <xs:element name="country" type="xs:string"/>
@@ -34,8 +35,6 @@
         </xs:sequence>
       </xs:complexType>
     </xs:element>
-    
-    <xs:element name="score" type="xs:float"/>
     
   </xs:sequence>
 </xs:complexType>

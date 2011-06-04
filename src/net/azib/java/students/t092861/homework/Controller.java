@@ -216,7 +216,9 @@ public class Controller {
 		// setting athletes places
 		String place = "1";
 		int start = 0, count = 0;
-		athletes.get(0).setPlace(place);
+		if (athletes.size() > 0) {
+			athletes.get(0).setPlace(place);
+		}
 		for (int i = 1; i < athletes.size(); i++) {
 			if(athletes.get(i).getScore() == athletes.get(i-1).getScore()){
 				count++;

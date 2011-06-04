@@ -52,12 +52,9 @@ public class IOdb extends AbstractIO {
 	ArrayList<Athlete> input() {
 		ArrayList<Athlete> athletes = new ArrayList<Athlete>();
 		props = new Properties();
-		FileInputStream in;
 
 		try {
-			in = new FileInputStream(Const.USER_DIR + "db.properties");
-			props.load(in);
-			in.close();
+			props.load(IOdb.class.getResourceAsStream("db.properties"));
 		} catch (FileNotFoundException e1) {
 			System.out.println("db.properties (No such file or directory)");
 		} catch (IOException e) {

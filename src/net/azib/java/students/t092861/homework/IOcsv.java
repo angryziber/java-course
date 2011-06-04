@@ -47,7 +47,7 @@ public class IOcsv extends AbstractIO {
 		BufferedReader bufReader = null;
 		int lineNumber = 0;
 		try {
-			streamIn = new FileInputStream(Const.USER_DIR + getParameters());
+			streamIn = new FileInputStream("." + getParameters());
 			// trying to read as utf-8
 			readerIn = new InputStreamReader(streamIn, "UTF8");
 			bufReader = new BufferedReader(readerIn);
@@ -67,14 +67,13 @@ public class IOcsv extends AbstractIO {
 			out.println("\nError " + en.getMessage()
 					+ ". \nPlease check the file " + getParameters()
 					+ " location!");
-			
 		} catch (UnsupportedEncodingException e) {
 			out.println("\nError! Couldn't read file as UTF8");
 			// therefore reading it as non-UTF-8 encoding
 			readerIn = new InputStreamReader(streamIn);
 			
 		} catch (ArrayIndexOutOfBoundsException e) {
-			out.println("\nError! File" + getParameters()+ " structure in line " + lineNumber + " is incorrect\n");
+			out.println("\nError! File " + getParameters()+ " structure in line " + lineNumber + " is incorrect\n");
 
 		} catch (IOException e) {
 			out.println("\nError! I/O error occured");
@@ -95,15 +94,15 @@ public class IOcsv extends AbstractIO {
 
 	@Override
 	File output(ArrayList<Athlete> athletes) {
-		
+		if(athletes.size() == 0){
+			return null;
+		}
 		Writer writer = null;
 		ArrayList<Athlete> results = ctrl.arrangeInOrder(athletes);
 		Iterator<Athlete> itr = results.iterator();		
 		File file = getOutputFile(getParameters());
 		try {
-			
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF8"));
-			
 			while (itr.hasNext()) {
 				Athlete item = itr.next();
 				writer.write(item.getPlace() + ","
@@ -129,13 +128,17 @@ public class IOcsv extends AbstractIO {
 			out.println("Successful CSV output to " + getParameters() + " file!");
 			
 		} catch (FileNotFoundException en) {
-			out.println("\nERROR! The file " + getParameters() + " was not found " + en.toString());
+			try {
+				out.println("\nERROR! The file " + file.getCanonicalPath() + " was not found " + en.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			out.println("\nERROR! I/O eror of some sort has occurred! "  + e.toString());
 		} finally {
 			try {
 				writer.close();
-				
 			} catch (IOException e) {
 				out.println("\nERROR! Cannot close the file! "  + e.toString());
 			}

@@ -79,10 +79,10 @@ public abstract class AbstractIO {
 		String dir = getDirectory(outputParameters);
 		String filename = getFilename(outputParameters);
 		if (!dir.equals(getParameters())) {
-			createDirectory(Const.USER_DIR + dir);
-			file = new File(Const.USER_DIR + dir + filename);
+			createDirectory("." + dir);
+			file = new File("." + dir + filename);
 		} else {
-			file = new File(Const.USER_DIR + filename);
+			file = new File("." + filename);
 		}
 		return file;
 	}
@@ -95,12 +95,12 @@ public abstract class AbstractIO {
 	 * @return the filename as string if it exist.
 	 */
 	private String getFilename(String path) {
+		String str = path.replace('/', File.separatorChar).replace('\\', File.separatorChar);
 		// if parameter contains a separation slash / or \
-		if (path.contains(Const.SEPARATOR)) {
-			return path.substring(path.lastIndexOf(Const.SEPARATOR) + 1, path
-					.length());
+		if (str.contains(Const.SEPARATOR)) {
+			return str.substring(str.lastIndexOf(Const.SEPARATOR) + 1, str.length());
 		} else {
-			return path;
+			return str;
 		}
 	}
 
@@ -112,10 +112,11 @@ public abstract class AbstractIO {
 	 * @return the path as string if it exist.
 	 */
 	private String getDirectory(String path) {
-		if (path.contains(Const.SEPARATOR)) {
-			return path.substring(0, path.lastIndexOf(Const.SEPARATOR) + 1);
+		String str = path.replace('/', File.separatorChar).replace('\\', File.separatorChar);
+		if (str.contains(Const.SEPARATOR)) {
+			return str.substring(0, str.lastIndexOf(Const.SEPARATOR) + 1);
 		} else {
-			return path;
+			return str;
 		}
 	}
 

@@ -99,6 +99,9 @@ public class IOconsole extends AbstractIO {
 
 	@Override
 	File output(ArrayList<Athlete> athletes) {
+		if(athletes.size() == 0){
+			return null;
+		}
 		printTableHeader();
 		Iterator<Athlete> itr = ctrl.arrangeInOrder(athletes).iterator();
 		String name = null;

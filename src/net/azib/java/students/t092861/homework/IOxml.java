@@ -90,12 +90,12 @@ public class IOxml extends AbstractIO {
 					.newInstance();
 			
 			factory.setValidating(true);
-			factory.setNamespaceAware(true);
+			factory.setNamespaceAware(false);
 			factory.setAttribute("http://java.sun.com/xml/jaxp/properties/schemaLanguage",
 					"http://www.w3.org/2001/XMLSchema");
 
 			factory.setAttribute("http://java.sun.com/xml/jaxp/properties/schemaSource", new InputSource(
-					new FileInputStream(Const.USER_DIR + "XMLSchema.xsd")));
+					IOxml.class.getResourceAsStream("XMLSchema.xsd")));
 			DocumentBuilder builder = factory.newDocumentBuilder();
 
 			// Root element
@@ -117,6 +117,12 @@ public class IOxml extends AbstractIO {
 						.valueOf(a.getPlace()));
 				place.appendChild(placeText);
 				athlete.appendChild(place);
+				
+				// Score element
+				Element score = doc.createElement("score");
+				Text scoreText = doc.createTextNode(Integer.toString(a.getScore()));
+				score.appendChild(scoreText);
+				athlete.appendChild(score);
 
 				// Name element
 				Element name = doc.createElement("name");
@@ -186,12 +192,6 @@ public class IOxml extends AbstractIO {
 
 				athlete.appendChild(athleteResults);
 				/*     ********** Athletes's results element end ********** */
-
-				// Score element
-				Element score = doc.createElement("score");
-				Text scoreText = doc.createTextNode(Integer.toString(a.getScore()));
-				score.appendChild(scoreText);
-				athlete.appendChild(score);
 			}
 
 			// write the content into xml file
@@ -208,7 +208,7 @@ public class IOxml extends AbstractIO {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(source, result);
 
-			Schema schema = loadSchema(Const.USER_DIR + "XMLSchema.xsd");
+			Schema schema = loadSchema("XMLSchema.xsd");
 
 			validateXML(schema, file.getPath());
 			out.println("\nSuccessful XML output to " + "\"" + file.getName()
@@ -230,9 +230,6 @@ public class IOxml extends AbstractIO {
 			out.println("\nError! Method has been passed an illegal or inappropriate argument.");
 			e.printStackTrace();
 			
-		} catch (FileNotFoundException e) {
-			out.println("\nError! Attempt to open the file denoted by a specified pathname has failed.");
-			e.printStackTrace();
 		}
 		return file;
 	}
