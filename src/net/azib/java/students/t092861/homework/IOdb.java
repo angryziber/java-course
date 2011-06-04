@@ -56,9 +56,9 @@ public class IOdb extends AbstractIO {
 		try {
 			props.load(IOdb.class.getResourceAsStream("db.properties"));
 		} catch (FileNotFoundException e1) {
-			System.out.println("db.properties (No such file or directory)");
+			System.err.println("db.properties (No such file or directory)");
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("I/O exception of some sort has occurred");
 		}
 
 		Connection conn = null;
@@ -101,26 +101,26 @@ public class IOdb extends AbstractIO {
 			out.println("\nSuccessful input from " + "\"" + url + "\""	+ " database!\n");
 			
 		} catch (ArrayIndexOutOfBoundsException e) {
-			out.println("Error! Some data from " + "\"" + url + "\"" + " is unreadable\n");
+			System.err.println("Error! Some data from " + "\"" + url + "\"" + " is unreadable\n");
 			
 		} catch (SQLException e) {
-			out.println("Error! Database access error " + e.toString());
+			System.err.println("Error! Database access error " + e.toString());
 			
 		} catch (InstantiationException e) {
-			out.println("Error! Cannot create an instance of a class "  + e.toString());
+			System.err.println("Error! Cannot create an instance of a class "  + e.toString());
 			
 		} catch (IllegalAccessException e) {
-			out.println("Error! Method does not have access to the definition of the specified class "  + e.toString());
+			System.err.println("Error! Method does not have access to the definition of the specified class "  + e.toString());
 			
 		} catch (ClassNotFoundException e) {
-			out.println("Error! Cannot load in a class through its string name " + e.toString());
+			System.err.println("Error! Cannot load in a class through its string name " + e.toString());
 			
 		} finally {
 			try {
 				conn.close();
 				
 			} catch (Exception e) {
-				out.println("Error! Cannot close connection");
+				System.err.println("Error! Cannot close connection");
 			}
 		}
 		return athletes;
