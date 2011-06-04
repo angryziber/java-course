@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static net.azib.java.students.t093759.homework.DecathlonEvent.*;
 
@@ -18,6 +19,7 @@ import static net.azib.java.students.t093759.homework.DecathlonEvent.*;
 public class ConsoleOutput implements AthletesOutput {
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("d.MM.yyyy");
 	private static final NumericDataRepresentHelper NUMERIC_DATA_REPRESENT_HELPER = NumericDataRepresentHelper.getInstance();
+	private static final AthletePlaceComputeHelper ATHLETE_PLACE_COMPUTE_HELPER = AthletePlaceComputeHelper.getInstance();
 	OutputStream out = System.out;
 
 	/**
@@ -38,20 +40,20 @@ public class ConsoleOutput implements AthletesOutput {
 		Collections.sort(athletes);
 		StringBuilder stringBuilder = new StringBuilder(8000);
 		boolean isFirstLine = true;
-		int counter = 1;
+		Map<Athlete, String> places = ATHLETE_PLACE_COMPUTE_HELPER.computePlacesFor(athletes);
 		for (Athlete athlete : athletes) {
 			if (isFirstLine)
 				isFirstLine = false;
 			else
 				stringBuilder.append(System.getProperty("line.separator"));
 
-			buildOnePersonsDataForRepresentation(stringBuilder, athlete, counter++);
+			buildOnePersonsDataForRepresentation(stringBuilder, athlete, places);
 		}
 		return stringBuilder.toString();
 	}
 
-	private void buildOnePersonsDataForRepresentation(StringBuilder stringBuilder, Athlete athlete, int place) {
-		stringBuilder.append(place).append(',')
+	private void buildOnePersonsDataForRepresentation(StringBuilder stringBuilder, Athlete athlete, Map<Athlete, String> places) {
+		stringBuilder.append(places.get(athlete)).append(',')
 				.append(NUMERIC_DATA_REPRESENT_HELPER.representPoints(athlete.computePoints())).append(',')
 				.append('"').append(athlete.getName()).append('"').append(',')
 				.append(DATE_FORMAT.format(athlete.getDateOfBirth().getTime())).append(',')

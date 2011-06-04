@@ -25,9 +25,10 @@ public class ConsoleOutputTest extends AthleteOutputTest {
 		assertThat(consoleOutput.out.toString(), is(someBasicOutputString()));
 	}
 
+	@Override
 	String someBasicOutputString() {
 		try {
-			return loadFile(getClass(),"output.console");
+			return loadFile(getClass(), "output.console");
 		} catch (IOException e) {
 			throw new RuntimeException();
 		}
