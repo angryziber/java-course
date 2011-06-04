@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static net.azib.java.students.t093759.homework.DecathlonEvent.*;
 
@@ -27,6 +28,7 @@ import static net.azib.java.students.t093759.homework.DecathlonEvent.*;
 public class XMLOutput implements AthletesOutput {
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("d.MM.yyyy");
 	private static final NumericDataRepresentHelper NUMERIC_DATA_REPRESENT_HELPER = NumericDataRepresentHelper.getInstance();
+	private static final AthletePlaceComputeHelper ATHLETE_PLACE_COMPUTE_HELPER = AthletePlaceComputeHelper.getInstance();
 
 	@Override
 	public void output(List<Athlete> athletes, Object... additionalParameters) {
@@ -49,9 +51,10 @@ public class XMLOutput implements AthletesOutput {
 
 		Element decathlon = doc.createElement("decathlon");
 		doc.appendChild(decathlon);
-		int place = 0;
+		Map<Athlete, String> places = ATHLETE_PLACE_COMPUTE_HELPER.computePlacesFor(athletes);
+
 		for (Athlete athlete : athletes) {
-			decathlon.appendChild(getAthleteTagFilledWithDate(doc, athlete, ++place));
+			decathlon.appendChild(getAthleteTagFilledWithDate(doc, athlete, places));
 		}
 
 		transform(fileName, doc);
@@ -62,9 +65,9 @@ public class XMLOutput implements AthletesOutput {
 		serializer.transform(new DOMSource(doc), new StreamResult(new File(fileName)));
 	}
 
-	private Element getAthleteTagFilledWithDate(Document doc, Athlete athlete, int place) {
+	private Element getAthleteTagFilledWithDate(Document doc, Athlete athlete, Map<Athlete, String> places) {
 		Element athleteTag = doc.createElement("athlete");
-		createAndAppendPlace(doc, athlete, athleteTag, place);
+		createAndAppendPlace(doc, athlete, athleteTag, places);
 		createAndAppendPoints(doc, athlete, athleteTag);
 		createAndAppendNameElement(doc, athlete, athleteTag);
 		createAndAppendCountryISO2LetterCode(doc, athlete, athleteTag);
@@ -83,9 +86,9 @@ public class XMLOutput implements AthletesOutput {
 		return athleteTag;
 	}
 
-	private void createAndAppendPlace(Document doc, Athlete athlete, Element athleteTag, int place) {
+	private void createAndAppendPlace(Document doc, Athlete athlete, Element athleteTag, Map<Athlete, String> places) {
 		Element thousandFiveHundredMeterRace = doc.createElement("place");
-		thousandFiveHundredMeterRace.appendChild(doc.createTextNode(String.valueOf(place)));
+		thousandFiveHundredMeterRace.appendChild(doc.createTextNode(String.valueOf(places.get(athlete))));
 		athleteTag.appendChild(thousandFiveHundredMeterRace);
 	}
 
