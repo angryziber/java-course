@@ -1,0 +1,14 @@
+usage: <program> -<input-method> [input-parameters] -<output-method> [output-parameters]
+where
+	<program> is your main class, e.g. java net.azib.java.students.txxxxxx.homework.DecathlonCalculator
+	<input-method> is the name of the input method preceded by dash (-): -console, -csv, -db
+	[input-parameters] are optional parameters depending on the specified input method:
+	-console - no parameters
+	-csv - input file name or path
+	-db - competition id or name - both should work (DB connection string must be read from 	db.properties in the same package as the main class)
+	<output-method> is the name of the output method preceded by dash (-): -conole, -csv, -xml, -html
+	[output-parameters] are optional parameters depending on the specified output method:
+	-conole - no parameters
+	-csv - output file name or path
+	-xml - output file name or path
+	-html - output file name or path

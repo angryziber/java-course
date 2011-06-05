@@ -1,7 +1,13 @@
 package net.azib.java.students.t093759.homework;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import static org.apache.commons.io.FileUtils.readLines;
 
 /**
  * Decathlon calculator provides functionality for
@@ -19,106 +25,72 @@ public class DecathlonCalculator {
 	}
 
 	void handleRequest(String[] parameters) {
-		if (parameters.length < 2 || parameters.length > 4) {
-			printHelpMessage();
+		Map<String, List<String>> params = CLIParamsParser.getInstance().parse(parameters);
+		if (notEnoughOrTooMuchParameters(params)) {
+			System.out.println(helpMessage());
 			return;
 		}
-		int currentIndexOfParam = 0;
 
 		System.out.println("Params:" + Arrays.asList(parameters));
-
-		InputMethod inputMethod = InputMethod.getInstanceFor(parameters[currentIndexOfParam]);
+		Iterator<Map.Entry<String, List<String>>> iterator = params.entrySet().iterator();
+		Map.Entry<String, List<String>> inputMethodEntry = iterator.next();
+		InputMethod inputMethod = InputMethod.getInstanceFor(inputMethodEntry.getKey());
 		athleteLoader = inputMethod.createAthleteLoader();
 		List<Athlete> athletes = null;
 		try {
-			athletes = athleteLoader.load(inputMethod.getParameter(currentIndexOfParam, parameters));
+			athletes = athleteLoader.load(inputMethodEntry.getValue());
 		} catch (Exception e) {
 			System.err.println("Exception in " + inputMethod);
 		}
-		currentIndexOfParam = inputMethod.getNextInputMethodArgumentsIndex(currentIndexOfParam);
 
-		OutputMethod outputMethod = OutputMethod.getInstanceFor(parameters[currentIndexOfParam]);
+		Map.Entry<String, List<String>> outputMethodEntry = iterator.next();
+		OutputMethod outputMethod = OutputMethod.getInstanceFor(outputMethodEntry.getKey());
 		athleteSaver = outputMethod.createAthleteSaver();
 		try {
-			athleteSaver.output(athletes, outputMethod.getParameter(currentIndexOfParam, parameters));
+			athleteSaver.output(athletes, outputMethodEntry.getValue());
 		} catch (Exception e) {
 			System.err.println("Exception in " + outputMethod);
 		}
 	}
 
-	private void printHelpMessage() {
-		final String newLine = System.getProperty("line.separator");
-		System.out.println("usage: <program> -<input-method> [input-parameters] -<output-method> [output-parameters]");
-		System.out.println(new StringBuilder().append("where").append(newLine)
-				.append("\t<program> is your main class, e.g. java net.azib.java.students.txxxxxx.homework.DecathlonCalculator").append(newLine)
-				.append("\t<input-method> is the name of the input method preceded by dash (-): -console, -csv, -db").append(newLine)
-				.append("\t[input-parameters] are optional parameters depending on the specified input method:").append(newLine)
-				.append("\t-console - no parameters").append(newLine)
-				.append("\t-csv - input file name or path").append(newLine)
-				.append("\t-db - competition id or name - both should work (DB connection string must be read from ")
-				.append("\tdb.properties in the same package as the main class)").append(newLine)
-				.append("\t<output-method> is the name of the output method preceded by dash (-): -conole, -csv, -xml, -html").append(newLine)
-				.append("\t[output-parameters] are optional parameters depending on the specified output method:").append(newLine)
-				.append("\t-conole - no parameters").append(newLine)
-				.append("\t-csv - output file name or path").append(newLine)
-				.append("\t-xml - output file name or path").append(newLine)
-				.append("\t-html - output file name or path").toString());
+	boolean notEnoughOrTooMuchParameters(Map<String, List<String>> parameters) {
+		return parameters.size() != 2;
 	}
 
-	private static enum InputMethod {
+	String helpMessage() {
+		final String newLine = System.getProperty("line.separator");
+		StringBuilder builder = new StringBuilder(8000);
+		try {
+			for (String line : readLines(new File(getClass().getResource("help.txt").getFile()), "UTF-8")) {
+				builder.append(line).append(newLine);
+			}
+			;
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+		return builder.toString();
+	}
+
+	static enum InputMethod {
 		CONSOLE {
 			AthletesLoader createAthleteLoader() {
 				return new ConsoleLoader();
-			}
-
-			@Override
-			String getParameter(int currentIndex, String[] from) {
-				return "";
-			}
-
-			@Override
-			int getNextInputMethodArgumentsIndex(int currentIndex) {
-				return ++currentIndex;
 			}
 		},
 		CSV {
 			AthletesLoader createAthleteLoader() {
 				return new CSVLoader();
 			}
-
-			@Override
-			String getParameter(int currentIndex, String[] from) {
-				return from[++currentIndex];
-			}
-
-			@Override
-			int getNextInputMethodArgumentsIndex(int currentIndex) {
-				return currentIndex + 2;
-			}
 		},
 		DB {
 			AthletesLoader createAthleteLoader() {
 				return new DataBaseLoader();
 			}
-
-			@Override
-			String getParameter(int currentIndex, String[] from) {
-				return from[++currentIndex];
-			}
-
-			@Override
-			int getNextInputMethodArgumentsIndex(int currentIndex) {
-				return currentIndex + 2;
-			}
 		};
 
 		abstract AthletesLoader createAthleteLoader();
 
-		abstract String getParameter(int currentIndex, String[] fromParameters);
-
-		abstract int getNextInputMethodArgumentsIndex(int currentIndex);
-
-		private static InputMethod getInstanceFor(String inputMethodString) {
+		static InputMethod getInstanceFor(String inputMethodString) {
 			inputMethodString = inputMethodString.trim().toLowerCase();
 			if (inputMethodString.equals("-console"))
 				return CONSOLE;
@@ -131,58 +103,31 @@ public class DecathlonCalculator {
 		}
 	}
 
-
-	private static enum OutputMethod {
+	static enum OutputMethod {
 		CONSOLE {
 			ConsoleOutput createAthleteSaver() {
 				return new ConsoleOutput();
 			}
-
-			@Override
-			String getParameter(int currentIndex, String[] from) {
-				return "";
-			}
-
 		},
 		CSV {
 			AthletesOutput createAthleteSaver() {
 				return new CSVOutput();
 			}
-
-			@Override
-			String getParameter(int currentIndex, String[] from) {
-				return from[++currentIndex];
-			}
-
 		},
 		XML {
 			AthletesOutput createAthleteSaver() {
 				return new XMLOutput();
 			}
-
-			@Override
-			String getParameter(int currentIndex, String[] from) {
-				return from[++currentIndex];
-			}
-
 		},
 		HTML {
 			AthletesOutput createAthleteSaver() {
 				return new HTMLOutput();
 			}
-
-			@Override
-			String getParameter(int currentIndex, String[] from) {
-				return from[++currentIndex];
-			}
-
 		};
 
 		abstract AthletesOutput createAthleteSaver();
 
-		abstract String getParameter(int currentIndex, String[] fromParameters);
-
-		private static OutputMethod getInstanceFor(String outputMethodString) {
+		static OutputMethod getInstanceFor(String outputMethodString) {
 			outputMethodString = outputMethodString.trim().toLowerCase();
 			if (outputMethodString.equals("-console"))
 				return CONSOLE;
