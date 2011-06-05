@@ -144,8 +144,8 @@ public class DataBaseLoader implements AthletesLoader {
 	private void closeQuietly() {
 		try {
 			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();//Todo log
+		} catch (SQLException ignore) {
+
 		}
 	}
 }
