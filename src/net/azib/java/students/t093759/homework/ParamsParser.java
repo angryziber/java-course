@@ -1,9 +1,8 @@
 package net.azib.java.students.t093759.homework;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Helper class for parsing CLI params.
@@ -12,40 +11,43 @@ import java.util.Map;
  *         6/5/11 3:59 AM
  */
 public class ParamsParser {
-	private static ParamsParser instance;
-
-	private ParamsParser() {
+	/**
+	 * Get unmodifiable list of keys.
+	 * @return
+	 */
+	public List<String> getKeys() {
+		return Collections.unmodifiableList(keys);
 	}
 
-	public static ParamsParser getInstance() {
-		if (instance == null) {
-			instance = new ParamsParser();
-		}
-		return instance;
+	/**
+	 * Get unmodifiable list of values.
+	 * @return
+	 */
+	public List<List<String>> getValues() {
+		return Collections.unmodifiableList(values);
 	}
+
+	List<String> keys = new ArrayList<String>();
+	List<List<String>> values = new ArrayList<List<String>>();
 
 	/**
 	 * Parse params from given string and return map with key-values pairs.
 	 *
 	 * @param params Params to parse from.
-	 * @return Map with string as a key ('-' sign is kept) and values (String-list).
 	 */
-	public Map<String, List<String>> parse(String... params) {
-		Map<String, List<String>> results = new LinkedHashMap<String, List<String>>();
-		if (params.length == 0) return results;
-		String lastKey = null;
+	public ParamsParser(String... params) {
+		if (params.length == 0) return;
+		int lastKeyIndex = -1;
 		for (String param : params) {
 			if (param.startsWith("-")) {
-				if (!results.containsKey(param)) {
-					results.put(param, new ArrayList<String>());
-				}
-				lastKey = param;
+				keys.add(param);
+				values.add(new ArrayList<String>());
+				lastKeyIndex++;
 			} else {
-				if (lastKey != null) {
-					results.get(lastKey).add(param);
+				if (lastKeyIndex != -1) {
+					values.get(lastKeyIndex).add(param);
 				}
 			}
 		}
-		return results;
 	}
 }

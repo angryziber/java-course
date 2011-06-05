@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Athlete class.
+ *
  * @author dionis
  *         5/15/11 11:51 AM
  */
@@ -188,7 +189,7 @@ public class Athlete implements Cloneable, Comparable<Athlete> {
 		public Builder name(String name) {
 			for (char c : name.toCharArray()) {
 				if (!Character.isLetter(c) && !Character.isSpaceChar(c) && !ALLOWED_CHARACTERS.contains(c))
-					throw new IllegalArgumentException("Name should consist only from characters, spaces and brackets.");
+					throw new IllegalArgumentException("Name should consist only from characters, spaces and " + ALLOWED_CHARACTERS + ".");
 			}
 			athlete.name = name;
 			return this;

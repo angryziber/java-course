@@ -3,9 +3,7 @@ package net.azib.java.students.t093759.homework;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import static org.apache.commons.io.FileUtils.readLines;
 
@@ -25,38 +23,37 @@ public class DecathlonCalculator {
 	}
 
 	void handleRequest(String[] parameters) {
-		Map<String, List<String>> params = ParamsParser.getInstance().parse(parameters);
-		if (notEnoughOrTooMuchParameters(params)) {
+		ParamsParser paramsParser = new ParamsParser(parameters);
+		if (notEnoughOrTooMuchParameters(paramsParser)) {
 			System.out.println(helpMessage());
 			return;
 		}
 
 		System.out.println("Params:" + Arrays.asList(parameters));
-		Iterator<Map.Entry<String, List<String>>> iterator = params.entrySet().iterator();
-		Map.Entry<String, List<String>> inputMethodEntry = iterator.next();
-		InputMethod inputMethod = InputMethod.getInstanceFor(inputMethodEntry.getKey());
-		athleteLoader = inputMethod.createAthleteLoader();
+		int paramCounter = 0;
 		List<Athlete> athletes = null;
 		try {
-			List<String> param = inputMethodEntry.getValue();
-			athletes = athleteLoader.load((Object[])param.toArray(new String[param.size()]));
+			InputMethod inputMethod = InputMethod.getInstanceFor(paramsParser.getKeys().get(paramCounter));
+			athleteLoader = inputMethod.createAthleteLoader();
+			List<String> param = paramsParser.getValues().get(paramCounter++);
+			athletes = athleteLoader.load((Object[]) param.toArray(new String[param.size()]));
 		} catch (Exception e) {
-			System.err.println("Exception in " + inputMethod);
+			System.err.println(e.getMessage());
 		}
 
-		Map.Entry<String, List<String>> outputMethodEntry = iterator.next();
-		OutputMethod outputMethod = OutputMethod.getInstanceFor(outputMethodEntry.getKey());
-		athleteSaver = outputMethod.createAthleteSaver();
+
 		try {
-			List<String> param = outputMethodEntry.getValue();
-			athleteSaver.output(athletes, (Object[])param.toArray(new String[param.size()]));
+			OutputMethod outputMethod = OutputMethod.getInstanceFor(paramsParser.getKeys().get(paramCounter));
+			athleteSaver = outputMethod.createAthleteSaver();
+			List<String> param = paramsParser.getValues().get(paramCounter);
+			athleteSaver.output(athletes, (Object[]) param.toArray(new String[param.size()]));
 		} catch (Exception e) {
-			System.err.println("Exception in " + outputMethod);
+			System.err.println(e.getMessage());
 		}
 	}
 
-	boolean notEnoughOrTooMuchParameters(Map<String, List<String>> parameters) {
-		return parameters.size() != 2;
+	boolean notEnoughOrTooMuchParameters(ParamsParser parameters) {
+		return parameters.getKeys().size() != 2;
 	}
 
 	String helpMessage() {
@@ -130,7 +127,7 @@ public class DecathlonCalculator {
 
 		static OutputMethod getInstanceFor(String outputMethodString) {
 			outputMethodString = outputMethodString.trim().toLowerCase();
-			if (outputMethodString.equals("-conole"))
+			if (outputMethodString.equals("-console"))
 				return CONSOLE;
 			else if (outputMethodString.equals("-csv"))
 				return CSV;

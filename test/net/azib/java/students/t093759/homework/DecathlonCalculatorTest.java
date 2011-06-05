@@ -2,7 +2,9 @@ package net.azib.java.students.t093759.homework;
 
 import org.junit.Test;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static net.azib.java.students.t093759.homework.DecathlonCalculator.InputMethod;
 import static net.azib.java.students.t093759.homework.DecathlonCalculator.OutputMethod;
@@ -22,15 +24,16 @@ public class DecathlonCalculatorTest {
 
 	@Test
 	public void badLengthOfParametersExamples() {
-		Map zeroLengthMap = mock(Map.class);
-		when(zeroLengthMap.size()).thenReturn(0);
-		Map oneElementMap = mock(Map.class);
-		when(oneElementMap.size()).thenReturn(1);
-		Map threeElementMap = mock(Map.class);
-		when(threeElementMap.size()).thenReturn(3);
-		assertTrue(decathlonCalculator.notEnoughOrTooMuchParameters(zeroLengthMap));
-		assertTrue(decathlonCalculator.notEnoughOrTooMuchParameters(oneElementMap));
-		assertTrue(decathlonCalculator.notEnoughOrTooMuchParameters(threeElementMap));
+		ParamsParser zeroLengthParser = mock(ParamsParser.class);
+		when(zeroLengthParser.getKeys()).thenReturn(Collections.<String>emptyList());
+		ParamsParser oneElementParser = mock(ParamsParser.class);
+		when(oneElementParser.getKeys()).thenReturn(Collections.singletonList(new String()));
+		ParamsParser threeElementParser = mock(ParamsParser.class);
+		List<String> threeElementList = Arrays.asList("", "", "");
+		when(threeElementParser.getKeys()).thenReturn(threeElementList);
+		assertTrue(decathlonCalculator.notEnoughOrTooMuchParameters(zeroLengthParser));
+		assertTrue(decathlonCalculator.notEnoughOrTooMuchParameters(oneElementParser));
+		assertTrue(decathlonCalculator.notEnoughOrTooMuchParameters(threeElementParser));
 	}
 
 	@Test
@@ -54,7 +57,7 @@ public class DecathlonCalculatorTest {
 
 	@Test
 	public void supportedOutputMethodCLIParamExample() {
-		for (String command : new String[]{"-conole", "-csv", "-xml", "-html"}) {
+		for (String command : new String[]{"-console", "-csv", "-xml", "-html"}) {
 			assertThat(OutputMethod.getInstanceFor(command).createAthleteSaver(), is(instanceOf(AthletesOutput.class)));
 		}
 	}
