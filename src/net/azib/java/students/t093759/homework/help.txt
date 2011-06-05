@@ -8,7 +8,7 @@ where
 	-db - competition id or name - both should work (DB connection string must be read from 	db.properties in the same package as the main class)
 	<output-method> is the name of the output method preceded by dash (-): -conole, -csv, -xml, -html
 	[output-parameters] are optional parameters depending on the specified output method:
-	-conole - no parameters
+	-console - no parameters
 	-csv - output file name or path
 	-xml - output file name or path
 	-html - output file name or path
