@@ -3,6 +3,7 @@ package net.azib.java.students.t093759.homework;
 import java.util.*;
 
 /**
+ * Athlete class.
  * @author dionis
  *         5/15/11 11:51 AM
  */

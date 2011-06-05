@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class provides functionality for
+ * Class provides functionality for computing athletes place in a list.
  *
  * @author dionis
  *         6/4/11 9:14 PM

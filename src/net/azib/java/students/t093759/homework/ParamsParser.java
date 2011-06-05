@@ -6,20 +6,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Helper class for parsing CLI params.
+ * Helper class for parsing params.
  *
  * @author dionis
  *         6/5/11 3:59 AM
  */
-public class CLIParamsParser {
-	private static CLIParamsParser instance;
+public class ParamsParser {
+	private static ParamsParser instance;
 
-	private CLIParamsParser() {
+	private ParamsParser() {
 	}
 
-	public static CLIParamsParser getInstance() {
+	public static ParamsParser getInstance() {
 		if (instance == null) {
-			instance = new CLIParamsParser();
+			instance = new ParamsParser();
 		}
 		return instance;
 	}

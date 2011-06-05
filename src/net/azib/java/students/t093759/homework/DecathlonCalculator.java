@@ -25,7 +25,7 @@ public class DecathlonCalculator {
 	}
 
 	void handleRequest(String[] parameters) {
-		Map<String, List<String>> params = CLIParamsParser.getInstance().parse(parameters);
+		Map<String, List<String>> params = ParamsParser.getInstance().parse(parameters);
 		if (notEnoughOrTooMuchParameters(params)) {
 			System.out.println(helpMessage());
 			return;
@@ -64,7 +64,6 @@ public class DecathlonCalculator {
 			for (String line : readLines(new File(getClass().getResource("help.txt").getFile()), "UTF-8")) {
 				builder.append(line).append(newLine);
 			}
-			;
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}

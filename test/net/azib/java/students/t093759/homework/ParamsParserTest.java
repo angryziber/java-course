@@ -14,15 +14,15 @@ import static org.junit.Assert.assertTrue;
  * @author dionis
  *         6/5/11 4:02 AM
  */
-public class CLIParamsParserTest {
+public class ParamsParserTest {
 	@Test
 	public void paramsParserIsSingleton() {
-		assertTrue(CLIParamsParser.getInstance() == CLIParamsParser.getInstance());
+		assertTrue(ParamsParser.getInstance() == ParamsParser.getInstance());
 	}
 
 	@Test
 	public void duplicateKeysWillBeIgnoredAndTheirParamWillBeAppendedToExistingKey() {
-		Map<String, List<String>> parsedKeys = CLIParamsParser.getInstance().parse("-key1", "-key2", "-key1", "-key3");
+		Map<String, List<String>> parsedKeys = ParamsParser.getInstance().parse("-key1", "-key2", "-key1", "-key3");
 		assertThat(parsedKeys.size(), is(3));
 		assertTrue(parsedKeys.containsKey("-key1"));
 		assertTrue(parsedKeys.containsKey("-key2"));
@@ -31,7 +31,7 @@ public class CLIParamsParserTest {
 
 	@Test
 	public void keyOrderIsTheSame() {
-		Map<String, List<String>> parsedKeys = CLIParamsParser.getInstance().parse("-key2", "-key1", "-key3");
+		Map<String, List<String>> parsedKeys = ParamsParser.getInstance().parse("-key2", "-key1", "-key3");
 		assertThat(parsedKeys.size(), is(3));
 		List<String> keys = new ArrayList<String>();
 		for (String key : parsedKeys.keySet()) {
@@ -44,12 +44,12 @@ public class CLIParamsParserTest {
 
 	@Test
 	public void keysStartWithMinusSignAndIfNoKeyIsProvidedThenAllOtherShouldBeIgnored() {
-		assertThat(CLIParamsParser.getInstance().parse("a","b","c").size(),is(0));
+		assertThat(ParamsParser.getInstance().parse("a","b","c").size(),is(0));
 	}
 
 	@Test
 	public void noParamsMeansNoParams() {
-		assertTrue(CLIParamsParser.getInstance().parse().isEmpty());
+		assertTrue(ParamsParser.getInstance().parse().isEmpty());
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class CLIParamsParserTest {
 		expected.put("-key1", new ArrayList<String>(Arrays.asList("param1", "param2")));
 		expected.put("-key2", new ArrayList<String>(Arrays.asList("param3", "param4", "param5")));
 		expected.put("-key3", new ArrayList<String>(Arrays.asList("param6", "param7")));
-		assertMapEquals(expected, CLIParamsParser.getInstance().parse("-key1", "param1", "param2", "-key2",
+		assertMapEquals(expected, ParamsParser.getInstance().parse("-key1", "param1", "param2", "-key2",
 				"param3", "param4", "param5", "-key3", "param6", "param7"));
 	}
 
