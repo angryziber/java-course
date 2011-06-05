@@ -1,11 +1,13 @@
 package net.azib.java.students.t093759.homework;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -108,59 +110,12 @@ public class DataBaseLoaderTest {
 		assertThat(dataBaseLoader.load("Training").size(), is(2));
 	}
 
-	@Ignore
-	@Test
-	public void playingWithDB() throws SQLException {
-		DataBaseLoader dataBaseLoader = new DataBaseLoader();
-		setUpFakeDBFor(dataBaseLoader);
-		dataBaseLoader.connection = openConnection();
-		String sql = "SELECT c.id, a.name, a.dob, a.country_code, " +
-				"r.race_100m, r.long_jump, r.shot_put, r.high_jump, r.race_400m, r.hurdles_110m, r.discus_throw," +
-				"r.pole_vault, r.javelin_throw, r.race_1500m " +
-				"FROM athletes as a " +
-				"INNER JOIN results as r" +
-				" ON r.athlete_id=a.id" +
-				" INNER JOIN competitions as c" +
-				"  ON c.id=? AND r.competition_id=c.id";
-		PreparedStatement preparedStatement = dataBaseLoader.connection.prepareStatement(sql);
-
-		int id = 2;
-
-		System.out.println(id);
-		preparedStatement.setInt(1, id);
-		ResultSet rs = preparedStatement.executeQuery();
-		ResultSetMetaData rsm = rs.getMetaData();
-		int columnCount = rsm.getColumnCount();
-		for (int i = 1; i <= columnCount; i++) {
-			String columnName = rsm.getColumnName(i);
-			System.out.print("| " + columnName + " ");
-		}
-		System.out.println("|");
-		while (rs.next()) {
-			for (int i = 1; i <= columnCount; i++) {
-				String columnContent = rs.getString(i);
-				System.out.print("| " + columnContent + " ");
-			}
-			System.out.println("|");
-		}
-
-		closeConnection();
-	}
-
 	public void setUpFakeDBFor(DataBaseLoader dataBaseLoader) {
 		dataBaseLoader.connection = connection;
 	}
 
 	private static Connection openConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:hsqldb:mem:decathlon", "sa", "");
-	}
-
-	private static void closeConnection() {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	private static void rollback() {

@@ -1,6 +1,5 @@
 package net.azib.java.students.t093759.homework;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.EnumMap;
