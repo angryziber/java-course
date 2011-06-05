@@ -38,7 +38,8 @@ public class DecathlonCalculator {
 		athleteLoader = inputMethod.createAthleteLoader();
 		List<Athlete> athletes = null;
 		try {
-			athletes = athleteLoader.load(inputMethodEntry.getValue());
+			List<String> param = inputMethodEntry.getValue();
+			athletes = athleteLoader.load((Object[])param.toArray(new String[param.size()]));
 		} catch (Exception e) {
 			System.err.println("Exception in " + inputMethod);
 		}
@@ -47,7 +48,8 @@ public class DecathlonCalculator {
 		OutputMethod outputMethod = OutputMethod.getInstanceFor(outputMethodEntry.getKey());
 		athleteSaver = outputMethod.createAthleteSaver();
 		try {
-			athleteSaver.output(athletes, outputMethodEntry.getValue());
+			List<String> param = outputMethodEntry.getValue();
+			athleteSaver.output(athletes, (Object[])param.toArray(new String[param.size()]));
 		} catch (Exception e) {
 			System.err.println("Exception in " + outputMethod);
 		}
