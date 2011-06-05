@@ -54,7 +54,7 @@ public class DecathlonCalculatorTest {
 
 	@Test
 	public void supportedOutputMethodCLIParamExample() {
-		for (String command : new String[]{"-console", "-csv", "-xml", "-html"}) {
+		for (String command : new String[]{"-conole", "-csv", "-xml", "-html"}) {
 			assertThat(OutputMethod.getInstanceFor(command).createAthleteSaver(), is(instanceOf(AthletesOutput.class)));
 		}
 	}

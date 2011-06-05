@@ -130,7 +130,7 @@ public class DecathlonCalculator {
 
 		static OutputMethod getInstanceFor(String outputMethodString) {
 			outputMethodString = outputMethodString.trim().toLowerCase();
-			if (outputMethodString.equals("-console"))
+			if (outputMethodString.equals("-conole"))
 				return CONSOLE;
 			else if (outputMethodString.equals("-csv"))
 				return CSV;

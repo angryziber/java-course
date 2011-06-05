@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Helper class for parsing params.
+ * Helper class for parsing CLI params.
  *
  * @author dionis
  *         6/5/11 3:59 AM

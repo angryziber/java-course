@@ -4,7 +4,6 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.text.DateFormat;
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +30,7 @@ public class ConsoleLoader implements AthletesLoader {
 	private BufferedReader bufferedReader;
 	PrintStream err = System.err;
 	PrintStream out = System.out;
+	String decimalFormatStringExample = "sss";
 
 	/**
 	 * @param additionalParams Parameters are ignored.
@@ -94,7 +94,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadShotPutLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("Shot put length m. "+distanceFormatAdvice());
+			out.print("Shot put length m. " + distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadShotPutLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -105,7 +105,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadPoleVaultHeightUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("Pole vault height m. "+distanceFormatAdvice());
+			out.print("Pole vault height m. " + distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadPoleVaultHeightUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -116,7 +116,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadOneHundredTenMeterHurdlesTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("110 m hurdles time s. "  + timeFormatAdvice());
+			out.print("110 m hurdles time s. " + timeFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadOneHundredTenMeterHurdlesTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -127,7 +127,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadOneHundredMeterSprintTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("100 m spring time s. "  + timeFormatAdvice());
+			out.print("100 m spring time s. " + timeFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadOneHundredMeterSprintTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -138,7 +138,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadLongJumpLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("Long jump length m. "+distanceFormatAdvice());
+			out.print("Long jump length m. " + distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadLongJumpLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -149,7 +149,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadJavelinThrowLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("Javelin throw length m. "+distanceFormatAdvice());
+			out.print("Javelin throw length m. " + distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadJavelinThrowLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -160,7 +160,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadHighJumpHeightUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("High jump length m. "+distanceFormatAdvice());
+			out.print("High jump length m. " + distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadHighJumpHeightUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -171,7 +171,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadFourHundredMeterSprintTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("400 meter sprint time s. " +  timeFormatAdvice());
+			out.print("400 meter sprint time s. " + timeFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadFourHundredMeterSprintTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -182,7 +182,7 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadDiscusThrowLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			out.print("Discus throw length m. "+distanceFormatAdvice());
+			out.print("Discus throw length m. " + distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadDiscusThrowLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
@@ -245,10 +245,10 @@ public class ConsoleLoader implements AthletesLoader {
 	}
 
 	private String timeFormatAdvice() {
-		return MessageFormat.format("Use format: {0} or {1}or sss.ss", MIN_SEC_MILLI_FORMAT.toPattern(), SEC_MILLI_FORMAT.toPattern());
+		return String.format("Use format: \'%s\' or \'%s\' or \'%s\': ", MIN_SEC_MILLI_FORMAT.toPattern(), SEC_MILLI_FORMAT.toPattern(), decimalFormatStringExample);
 	}
 
 	private String distanceFormatAdvice() {
-		return "Use format: meter or meter.cm";
+		return "Use format 'meter' or 'meter.cm': ";
 	}
 }
