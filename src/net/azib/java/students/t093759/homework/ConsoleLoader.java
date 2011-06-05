@@ -2,11 +2,9 @@ package net.azib.java.students.t093759.homework;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +29,8 @@ public class ConsoleLoader implements AthletesLoader {
 	private static final AthleteDataLoaderHelper ATHLETE_DATA_LOADER_HELPER = AthleteDataLoaderHelper.getInstance();
 	String localizedPatternOfDateOfBirth = ((SimpleDateFormat) DateFormat.getDateInstance()).toLocalizedPattern();
 	private BufferedReader bufferedReader;
+	PrintStream err = System.err;
+	PrintStream out = System.out;
 
 	/**
 	 * @param additionalParams Parameters are ignored.
@@ -40,7 +40,7 @@ public class ConsoleLoader implements AthletesLoader {
 		List<Athlete> athletes = new ArrayList<Athlete>(100);
 		bufferedReader = new BufferedReader(new InputStreamReader(in));
 		while (true) {
-			System.out.println("To stop loading athletes please enter " + ATHLETE_STOP_LOADING_CONDITION + IOUtils.LINE_SEPARATOR
+			out.println("To stop loading athletes please enter " + ATHLETE_STOP_LOADING_CONDITION + IOUtils.LINE_SEPARATOR
 					+ "To skip loading athletes please enter " + ATHLETE_SKIP_LOADING_CONDITION);
 			try {
 				athletes.add(loadAthlete());
@@ -83,180 +83,149 @@ public class ConsoleLoader implements AthletesLoader {
 
 	private void loadThousandFiveHundredMeterRaceTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("1500 m race time s in format '" + MIN_SEC_MILLI_FORMAT.toPattern() + "': ");
-//			builder.setThousandFiveHundredMeterRaceTime(parseMinutesAndSecondsAndMillisFromInputStream());
+			out.print("1500 m race time s. " + timeFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadThousandFiveHundredMeterRaceTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadThousandFiveHundredMeterRaceTimeUsing(builder);
 		}
 	}
 
 	private void loadShotPutLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("shot put length m: ");
-//			builder.setShotPutLength(getDoubleFromInputStream());
+			out.print("Shot put length m. "+distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadShotPutLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadShotPutLengthUsing(builder);
 		}
 	}
 
 	private void loadPoleVaultHeightUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("pole vault height m: ");
-//			builder.setPoleVaultHeight(getDoubleFromInputStream());
+			out.print("Pole vault height m. "+distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadPoleVaultHeightUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadPoleVaultHeightUsing(builder);
 		}
 	}
 
 	private void loadOneHundredTenMeterHurdlesTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("110 m hurdles time s in format '" + SEC_MILLI_FORMAT.toPattern() + "': ");
-//			builder.setOneHundredTenMeterHurdlesTime(parseSecondsAndMillisFromInputStream());
+			out.print("110 m hurdles time s. "  + timeFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadOneHundredTenMeterHurdlesTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadOneHundredTenMeterHurdlesTimeUsing(builder);
 		}
 	}
 
-//	double parseMinutesAndSecondsAndMillisFromInputStream() throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-//		return parseSomeDateIntoDoubleAccordingTo(MIN_SEC_MILLI_FORMAT);
-//	}
-//
-//	double parseSecondsAndMillisFromInputStream() throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-//		return parseSomeDateIntoDoubleAccordingTo(SEC_MILLI_FORMAT);
-//	}
-
-//	private double parseSomeDateIntoDoubleAccordingTo(SimpleDateFormat format) throws ParseException, StopLoadingAthletesException, SkipLoadingAthleteException {
-//		Calendar calendar = new GregorianCalendar();
-//		final String resultToParse = getStringFromInputStream();
-//		calendar.setTime(format.parse(resultToParse));
-//		double divisor = Math.pow(10, resultToParse.split("\\.")[1].trim().length());
-//		return calendar.get(Calendar.MINUTE) * 60 + calendar.get(Calendar.SECOND) + calendar.get(Calendar.MILLISECOND) / divisor;
-//	}
-
 	private void loadOneHundredMeterSprintTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("100 m spring time s in format '" + SEC_MILLI_FORMAT.toPattern() + "': ");
-//			builder.setOneHundredMeterSprintTime(parseSecondsAndMillisFromInputStream());
+			out.print("100 m spring time s. "  + timeFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadOneHundredMeterSprintTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadOneHundredMeterSprintTimeUsing(builder);
 		}
 	}
 
 	private void loadLongJumpLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("long jump length: ");
-//			builder.setLongJumpLength(getDoubleFromInputStream());
+			out.print("Long jump length m. "+distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadLongJumpLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadLongJumpLengthUsing(builder);
 		}
 	}
 
 	private void loadJavelinThrowLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Javelin throw length m: ");
-//			builder.setJavelinThrowLength(getDoubleFromInputStream());
+			out.print("Javelin throw length m. "+distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadJavelinThrowLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadJavelinThrowLengthUsing(builder);
 		}
 	}
 
 	private void loadHighJumpHeightUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("High jump length m: ");
-//			builder.setHighJumpHeight(getDoubleFromInputStream());
+			out.print("High jump length m. "+distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadHighJumpHeightUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadHighJumpHeightUsing(builder);
 		}
 	}
 
 	private void loadFourHundredMeterSprintTimeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("400 meter sprint time s in format '" + MIN_SEC_MILLI_FORMAT.toPattern() + "': ");
-//			builder.setFourHundredMeterSprintTime(parseMinutesAndSecondsAndMillisFromInputStream());
+			out.print("400 meter sprint time s. " +  timeFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadFourHundredMeterSprintTimeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadFourHundredMeterSprintTimeUsing(builder);
 		}
 	}
 
 	private void loadDiscusThrowLengthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Discus throw length m: ");
-//			builder.setDiscusThrowLength(getDoubleFromInputStream());
+			out.print("Discus throw length m. "+distanceFormatAdvice());
 			ATHLETE_DATA_LOADER_HELPER.loadDiscusThrowLengthUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadDiscusThrowLengthUsing(builder);
 		}
 	}
 
 	private void loadDateOfBirthUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Load date using " + Locale.getDefault() + " format '" + localizedPatternOfDateOfBirth + "': ");
-//			Calendar calendar = Calendar.getInstance();
-//			calendar.setTime(new SimpleDateFormat(localizedPatternOfDateOfBirth).parse(getStringFromInputStream()));
-//			builder.setDateOfBirth(calendar);
+			out.print("Load date using " + Locale.getDefault() + " format '" + localizedPatternOfDateOfBirth + "': ");
 			ATHLETE_DATA_LOADER_HELPER.loadDateOfBirthUsing(builder, getStringFromInputStream(), localizedPatternOfDateOfBirth);
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadDateOfBirthUsing(builder);
 		}
 	}
 
 	private void loadCountryISO2LetterCodeUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Country ISO2 letter code: ");
-//			builder.setCountryISO2LetterCode(getStringFromInputStream());
+			out.print("Country ISO2 letter code. (Two letter code): ");
 			ATHLETE_DATA_LOADER_HELPER.loadCountryISO2LetterCodeUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadCountryISO2LetterCodeUsing(builder);
 		}
 	}
 
 	private void loadNameUsing(Athlete.Builder builder) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		try {
-			System.out.print("Name: ");
-//			builder.name(getStringFromInputStream());
+			out.print("Name: ");
 			ATHLETE_DATA_LOADER_HELPER.loadNameUsing(builder, getStringFromInputStream());
 		} catch (Exception e) {
 			exceptionInnerHandler(e);
-			System.err.println(e.getMessage());
+			err.println(e.getMessage());
 			loadNameUsing(builder);
 		}
 	}
 
-	String getStringFromInputStream() throws StopLoadingAthletesException, SkipLoadingAthleteException {
-		String readString = "";
+	private String getStringFromInputStream() throws StopLoadingAthletesException, SkipLoadingAthleteException {
+		String readString;
 		try {
 			readString = bufferedReader.readLine().trim();
 			if (readString.toLowerCase().equals(ATHLETE_STOP_LOADING_CONDITION))
@@ -264,23 +233,22 @@ public class ConsoleLoader implements AthletesLoader {
 			if (readString.toLowerCase().equals(ATHLETE_SKIP_LOADING_CONDITION))
 				throw new SkipLoadingAthleteException();
 		} catch (IOException e) {
-			System.err.println("I don't know why, but read error appeared.");//
+			err.println("Sorry, I don't know why, but read error appeared.");
 			throw new RuntimeException(e.getMessage(), e.getCause());
 		}
 		return readString;
 	}
 
-//	double getDoubleFromInputStream() throws Exception {
-//		try {
-//			return valueOf(getStringFromInputStream());
-//		} catch (Exception e) {
-//			exceptionInnerHandler(e);
-//			throw new Exception();
-//		}
-//	}
-
 	private void exceptionInnerHandler(Exception e) throws StopLoadingAthletesException, SkipLoadingAthleteException {
 		if (e instanceof StopLoadingAthletesException) throw new StopLoadingAthletesException();
 		else if (e instanceof SkipLoadingAthleteException) throw new SkipLoadingAthleteException();
+	}
+
+	private String timeFormatAdvice() {
+		return MessageFormat.format("Use format: {0} or {1}or sss.ss", MIN_SEC_MILLI_FORMAT.toPattern(), SEC_MILLI_FORMAT.toPattern());
+	}
+
+	private String distanceFormatAdvice() {
+		return "Use format: meter or meter.cm";
 	}
 }

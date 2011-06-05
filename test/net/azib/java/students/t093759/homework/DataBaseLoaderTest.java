@@ -3,6 +3,8 @@ package net.azib.java.students.t093759.homework;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.sql.*;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -57,6 +59,7 @@ public class DataBaseLoaderTest {
 	public void nonExistingCompetitionId() {
 		DataBaseLoader dataBaseLoader = new DataBaseLoader();
 		setUpFakeDBFor(dataBaseLoader);
+		dataBaseLoader.err = new PrintStream(new ByteArrayOutputStream());
 		assertTrue(dataBaseLoader.load("-1").isEmpty());
 	}
 
@@ -64,6 +67,7 @@ public class DataBaseLoaderTest {
 	public void nonExistingCompetitionName() {
 		DataBaseLoader dataBaseLoader = new DataBaseLoader();
 		setUpFakeDBFor(dataBaseLoader);
+		dataBaseLoader.err = new PrintStream(new ByteArrayOutputStream());
 		assertTrue(dataBaseLoader.load("CompetitionOfTheUniverse").isEmpty());
 	}
 

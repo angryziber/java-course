@@ -1,6 +1,7 @@
 package net.azib.java.students.t093759.homework;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class DataBaseLoader implements AthletesLoader {
 	ResourceBundle dbProperties;
 	private boolean connectionIsCreatedByMe;
 	private static final AthleteDataLoaderHelper ATHLETE_DATA_LOADER_HELPER_INSTANCE = AthleteDataLoaderHelper.getInstance();
+	PrintStream err = System.err;
 
 	public DataBaseLoader() {
 		loadDbProperties();
@@ -68,7 +70,7 @@ public class DataBaseLoader implements AthletesLoader {
 
 			loadDataForAllAthletesFromCompetition(athletes, id);
 		} catch (NoSuchCompetitionException e) {
-			System.err.println("No such competition");
+			err.println("No such competition");
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
