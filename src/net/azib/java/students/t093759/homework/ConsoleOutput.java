@@ -44,7 +44,7 @@ public class ConsoleOutput implements AthletesOutput {
 		boolean isFirstLine = true;
 		Map<Athlete, String> places = ATHLETE_PLACE_COMPUTE_HELPER.computePlacesFor(athletes);
 		int maxLengthOfName = findMaxLengthOfNameIn(athletes);
-		appendHeader(stringBuilder, maxLengthOfName);
+		appendHeaderTo(stringBuilder, maxLengthOfName);
 		for (Athlete athlete : athletes) {
 			if (isFirstLine)
 				isFirstLine = false;
@@ -58,7 +58,7 @@ public class ConsoleOutput implements AthletesOutput {
 		return stringBuilder.toString();
 	}
 
-	private void appendHeader(StringBuilder stringBuilder, int maxLengthOfName) {
+	private void appendHeaderTo(StringBuilder stringBuilder, int maxLengthOfName) {
 		appendLineSeparatorTo(stringBuilder, maxLengthOfName);
 		stringBuilder.append("|Place").append("|Points|")
 				.append(String.format("%-" + maxLengthOfName + "s", "Name"))
@@ -127,22 +127,24 @@ public class ConsoleOutput implements AthletesOutput {
 	}
 
 	private void buildOnePersonsDataForRepresentation(StringBuilder stringBuilder, Athlete athlete, Map<Athlete, String> places, int maxLengthOfName) {
-		stringBuilder.append('|').append(String.format("%-5s", places.get(athlete))).append('|')
-				.append(String.format("%6s", NUMERIC_DATA_REPRESENT_HELPER.representPoints(athlete.computePoints()))).append('|')
-				.append(String.format("%-" + maxLengthOfName + "s", athlete.getName())).append('|')
-				.append(String.format("%10s", DATE_FORMAT.format(athlete.getDateOfBirth().getTime()))).append('|')
-				.append(String.format("%7s", athlete.getCountryISO2LetterCode())).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representSeconds(athlete.get(ONE_HUNDRED_METER_SPRINT)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(LONG_JUMP)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(SHOT_PUT)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(HIGH_JUMP)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representMinuteAndSeconds(athlete.get(FOUR_HUNDRED_METER_SPRINT)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representSeconds(athlete.get(ONE_HUNDRED_TEN_METER_HURDLES)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(DISCUS_THROW)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(POLE_VAULT)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(JAVELIN_THROW)))).append('|')
-				.append(String.format("%8s", NUMERIC_DATA_REPRESENT_HELPER.representMinuteAndSeconds(athlete.get(THOUSAND_FIVE_HUNDRED_METER_SPRINT))))
-		.append('|')
-		;
+		stringBuilder.append(
+				String.format("|%-5s|%6s|%-" + maxLengthOfName + "s|%10s|%7s|%8s|%8s|%8s|%8s|%8s|%8s|%8s|%8s|%8s|%8s|",
+						places.get(athlete),
+						NUMERIC_DATA_REPRESENT_HELPER.representPoints(athlete.computePoints()),
+						athlete.getName(),
+						DATE_FORMAT.format(athlete.getDateOfBirth().getTime()),
+						athlete.getCountryISO2LetterCode(),
+						NUMERIC_DATA_REPRESENT_HELPER.representSeconds(athlete.get(ONE_HUNDRED_METER_SPRINT)),
+						NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(LONG_JUMP)),
+						NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(SHOT_PUT)),
+						NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(HIGH_JUMP)),
+						NUMERIC_DATA_REPRESENT_HELPER.representMinuteAndSeconds(athlete.get(FOUR_HUNDRED_METER_SPRINT)),
+						NUMERIC_DATA_REPRESENT_HELPER.representSeconds(athlete.get(ONE_HUNDRED_TEN_METER_HURDLES)),
+						NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(DISCUS_THROW)),
+						NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(POLE_VAULT)),
+						NUMERIC_DATA_REPRESENT_HELPER.representMeters(athlete.get(JAVELIN_THROW)),
+						NUMERIC_DATA_REPRESENT_HELPER.representMinuteAndSeconds(athlete.get(THOUSAND_FIVE_HUNDRED_METER_SPRINT))
+				)
+		);
 	}
 }
