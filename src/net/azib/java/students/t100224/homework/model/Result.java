@@ -143,7 +143,7 @@ public class Result implements Comparable<Result> {
 
 	@Override
 	public int compareTo(Result result) {
-		return new Integer(getTotalScore()).compareTo(result.getTotalScore());
+		return -new Integer(getTotalScore()).compareTo(result.getTotalScore());
 	}
 
 }

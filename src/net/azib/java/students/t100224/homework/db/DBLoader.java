@@ -1,42 +1,48 @@
 package net.azib.java.students.t100224.homework.db;
 
+import net.azib.java.students.t100224.homework.interfaces.IResultsLoader;
 import net.azib.java.students.t100224.homework.model.Athlete;
 import net.azib.java.students.t100224.homework.model.Result;
+import org.apache.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
-public class DBReader {
+public class DBLoader implements IResultsLoader {
 
-	private String query;
+	private final Logger LOG = Logger.getLogger(getClass().getName());
 
-	public DBReader(String competition) {
-
+	@Override
+	public List<Result> loadResults(String competition) {
+		String query;
 		try {
 			int competitionID = Integer.parseInt(competition);
 			query = "SELECT a.name, a.dob, a.country_code, "
 					+ "r.* FROM results r INNER JOIN "
 					+ "athletes a ON r.athlete_id = a.id "
 					+ "WHERE r.competition_id = " + competitionID + ";";
+			LOG.info(query);
 		} catch (NumberFormatException e) {
-			query = "SELECT * FROM results ";
-			e.printStackTrace();
+			query = "SELECT athletes.name, athletes.dob, athletes.country_code, results. *"
+					+ "FROM athletes, results, competitions"
+					+ "WHERE results.competition_id = competitions.id"
+					+ "AND athletes.id = results.athlete_id"
+					+ "AND competitions.name LIKE ' " + competition + "'; ";
+			LOG.info(query);
 		}
-	}
-
-	public ArrayList<Result> loadResults() {
 
 		DBConnection dbconnection = new DBConnection();
 
-		ArrayList<Result> results = new ArrayList<Result>();
+		List<Result> results = new ArrayList<Result>();
 		Athlete athlete;
 		Result result;
 		try {
-			Statement statement = dbconnection.getConnection().createStatement();
+			Statement statement = dbconnection.getConnection()
+					.createStatement();
 			ResultSet rs = statement.executeQuery(query);
-			System.out.println(query);
 			while (rs.next()) {
 
 				athlete = new Athlete();
@@ -61,8 +67,12 @@ public class DBReader {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage());
+		} finally {
+			dbconnection.close();
 		}
+
 		return results;
 	}
+
 }

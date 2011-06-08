@@ -1,5 +1,7 @@
 package net.azib.java.students.t100224.homework.db;
 
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,6 +9,7 @@ import java.util.ResourceBundle;
 
 public class DBConnection {
 
+	private final Logger LOG = Logger.getLogger(getClass().getName());
 	private Connection connection;
 
 	public DBConnection() {
@@ -18,7 +21,7 @@ public class DBConnection {
 			connection = DriverManager.getConnection(url, user, password);
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 	}
 
@@ -30,7 +33,7 @@ public class DBConnection {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 	}
 }

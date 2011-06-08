@@ -1,66 +1,29 @@
 package net.azib.java.students.t100224.homework.xml;
 
 import net.azib.java.students.t100224.homework.model.Result;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
-public class XMLWriter {
-	/**
-	 * Create new XML document using Document Object Model tree
-	 * @param xmlFile - name or path of new xml file
-	 * @param results
-	 * @throws TransformerException
-	 * @throws ParserConfigurationException
-	 */
-	public void createXML(String xmlFile, ArrayList<Result> results)
-			throws TransformerException, ParserConfigurationException {
+public class DOMTreeLoader {
 
-		DOMSource source = createDOMTree(results);
-		Transformer transformer = TransformerFactory.newInstance()
-				.newTransformer();
-		transformer.transform(source, new StreamResult(new File(xmlFile)));
-	}
+	private final Logger LOG = Logger.getLogger(getClass().getName());
 
-	/**
-	 * Create new HTML document using Document Object Model tree
-	 * @param htmlFile - name or path of new html file
-	 * @param results
-	 * @throws TransformerException
-	 * @throws ParserConfigurationException
-	 */
-	public void createHTML(String htmlFile, ArrayList<Result> results)
-			throws TransformerException, ParserConfigurationException {
+	public DOMSource createDOMTree(List<Result> results) {
+		DocumentBuilder builder = null;
+		try {
+			builder = DocumentBuilderFactory.newInstance()
+					.newDocumentBuilder();
 
-		DOMSource source = createDOMTree(results);
-		Transformer transformer = TransformerFactory.newInstance()
-				.newTransformer(new StreamSource("athletes.xsl"));
-		transformer.transform(source, new StreamResult(htmlFile));
-
-	}
-
-	/**
-	 * Build a new Document Object Model tree
-	 * @param results - ArrayList of Result
-	 * @return Document Object Model tree
-	 * @throws ParserConfigurationException
-	 */
-	private DOMSource createDOMTree(ArrayList<Result> results)
-			throws ParserConfigurationException {
-
-		DocumentBuilder builder = DocumentBuilderFactory.newInstance()
-				.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			LOG.error(e.getMessage());
+		}
 		Document document = builder.newDocument();
 
 		Element root = document.createElement("athletes");
@@ -68,32 +31,25 @@ public class XMLWriter {
 
 		for (Result result : results) {
 
-			// athlete element
 			Element athlete = document.createElement("athlete");
 			root.appendChild(athlete);
-			athlete.setAttribute("scores",
-					Integer.toString(result.getTotalScore()));
-			athlete.setAttribute("place",
-					Integer.toString(results.indexOf(result)));
+			athlete.setAttribute("scores", Integer.toString(result.getTotalScore()));
+			athlete.setAttribute("place", Integer.toString(results.indexOf(result)) + 1);
 
 			Element name = document.createElement("name");
-			name.appendChild(document.createTextNode(result.getAthlete()
-					.getName()));
+			name.appendChild(document.createTextNode(result.getAthlete().getName()));
 			athlete.appendChild(name);
 
 			Element country = document.createElement("country");
-			country.appendChild(document.createTextNode(result.getAthlete()
-					.getCountry()));
+			country.appendChild(document.createTextNode(result.getAthlete().getCountry()));
 			athlete.appendChild(country);
 
 			Element dateOfBirth = document.createElement("date_of_birth");
-			dateOfBirth.appendChild(document.createTextNode(result.getAthlete()
-					.getDateOfBirth().toString()));
+			dateOfBirth.appendChild(document.createTextNode(result.getAthlete().getDateOfBirth().toString()));
 			athlete.appendChild(dateOfBirth);
 
 			Element sprint100m = document.createElement("sprint_100");
-			sprint100m.appendChild(document.createTextNode(Float
-					.toString(result.getSprint100())));
+			sprint100m.appendChild(document.createTextNode(Float.toString(result.getSprint100())));
 			athlete.appendChild(sprint100m);
 
 			Element longJump = document.createElement("long_jump");
@@ -135,4 +91,5 @@ public class XMLWriter {
 
 		return new DOMSource(document);
 	}
+
 }
