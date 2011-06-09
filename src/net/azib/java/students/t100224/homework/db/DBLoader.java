@@ -14,9 +14,14 @@ import java.util.List;
 public class DBLoader implements IResultsLoader {
 
 	private final Logger LOG = Logger.getLogger(getClass().getName());
+	private String competition;
+
+	public DBLoader(String competition) {
+		this.competition = competition;
+	}
 
 	@Override
-	public List<Result> loadResults(String competition) {
+	public List<Result> loadResults() {
 		String query;
 		try {
 			int competitionID = Integer.parseInt(competition);
@@ -27,10 +32,10 @@ public class DBLoader implements IResultsLoader {
 			LOG.info(query);
 		} catch (NumberFormatException e) {
 			query = "SELECT athletes.name, athletes.dob, athletes.country_code, results. *"
-					+ "FROM athletes, results, competitions"
-					+ "WHERE results.competition_id = competitions.id"
-					+ "AND athletes.id = results.athlete_id"
-					+ "AND competitions.name LIKE ' " + competition + "'; ";
+					+ " FROM athletes, results, competitions"
+					+ " WHERE results.competition_id = competitions.id"
+					+ " AND athletes.id = results.athlete_id"
+					+ " AND competitions.name LIKE '" + competition + "'; ";
 			LOG.info(query);
 		}
 

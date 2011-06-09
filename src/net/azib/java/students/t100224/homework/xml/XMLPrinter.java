@@ -15,9 +15,19 @@ import java.util.List;
 public class XMLPrinter implements IResultsPrinter {
 
 	private final Logger LOG = Logger.getLogger(getClass().getName());
+	private String filename;
 
+	public XMLPrinter(String filename) {
+		this.filename = filename;
+	}
+
+	/**
+	 * Prints all calculated results of athletes to XML file using a Document Object Model tree
+	 *
+	 * @param results - Array list of athletes and their decathlon results
+	 */
 	@Override
-	public void printResults(String filename, List<Result> results) {
+	public void printResults(List<Result> results) {
 		DOMTreeLoader dom = new DOMTreeLoader();
 		DOMSource source = dom.createDOMTree(results);
 		try {

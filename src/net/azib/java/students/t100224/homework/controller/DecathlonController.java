@@ -3,11 +3,11 @@ package net.azib.java.students.t100224.homework.controller;
 import net.azib.java.students.t100224.homework.db.DBLoader;
 import net.azib.java.students.t100224.homework.interfaces.IResultsLoader;
 import net.azib.java.students.t100224.homework.interfaces.IResultsPrinter;
-import net.azib.java.students.t100224.homework.io.IOProcessor;
+import net.azib.java.students.t100224.homework.io.ConsoleIO;
+import net.azib.java.students.t100224.homework.io.CsvIO;
 import net.azib.java.students.t100224.homework.model.Result;
 import net.azib.java.students.t100224.homework.xml.HTMLPrinter;
 import net.azib.java.students.t100224.homework.xml.XMLPrinter;
-import org.apache.log4j.Logger;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,38 +15,36 @@ import java.util.List;
 
 public class DecathlonController {
 
-	private final Logger LOG = Logger.getLogger(getClass().getName());
-
-	private IResultsLoader loader;
-	private IResultsPrinter printer;
+	public IResultsLoader loader;
+	public IResultsPrinter printer;
 
 	private List<Result> results;
 
 	public DecathlonController(String[] args) {
 		if (args[0].equals("-console")) {
-			// TODO loader = new ...
+			loader = new ConsoleIO();
 
-			if (args[1].equals("-console")) //TODO printer = new ...
-			if (args[1].equals("-csv")) printer = new IOProcessor();
-			if (args[1].equals("-xml")) printer = new XMLPrinter();
-			if (args[1].equals("-html")) printer = new HTMLPrinter();
+			if (args[1].equals("-console")) printer = new ConsoleIO();
+			if (args[1].equals("-csv")) printer = new CsvIO(args[2]);
+			if (args[1].equals("-xml")) printer = new XMLPrinter(args[2]);
+			if (args[1].equals("-html")) printer = new HTMLPrinter(args[2]);
 
 		} else {
-			if (args[0].equals("-csv")) loader = new IOProcessor();
-			if (args[0].equals("-db")) loader = new DBLoader();
-			if (args[2].equals("-console")) //TODO printer = new ...
-			if (args[2].equals("-csv")) printer = new IOProcessor();
-			if (args[2].equals("-xml")) printer = new XMLPrinter();
-			if (args[2].equals("-html")) printer = new HTMLPrinter();
+			if (args[0].equals("-csv")) loader = new CsvIO(args[1]);
+			if (args[0].equals("-db")) loader = new DBLoader(args[1]);
+			if (args[2].equals("-console")) printer = new ConsoleIO();
+			if (args[2].equals("-csv")) printer = new CsvIO(args[3]);
+			if (args[2].equals("-xml")) printer = new XMLPrinter(args[3]);
+			if (args[2].equals("-html")) printer = new HTMLPrinter(args[3]);
 		}
 
 	}
 
 	public void getDecathlonResults() {
-		results = loader.loadResults("");
+		results = loader.loadResults();
 		calculateScores();
 		sortResults();
-		printer.printResults("", results);
+		printer.printResults(results);
 	}
 
 	private void calculateScores() {

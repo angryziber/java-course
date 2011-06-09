@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class XMLValidator {
 	/**
-	 * Validate an XML file using the declared DTD
+	 * Validates an XML file using the declared DTD
 	 *
 	 * @param filename - an XML file that is has to be validated
 	 * @return true - if file has a correct structure, otherwise - false

@@ -1,11 +1,14 @@
 package net.azib.java.students.t100224.homework.db;
 
+import net.azib.java.students.t100224.homework.DecathlonMain;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.Properties;
 
 public class DBConnection {
 
@@ -13,11 +16,19 @@ public class DBConnection {
 	private Connection connection;
 
 	public DBConnection() {
-		ResourceBundle bundle = ResourceBundle.getBundle("db");
+
+		URL resUrl = DecathlonMain.class.getResource("db.properties");
+		Properties properties = new Properties();
 		try {
-			String url = bundle.getString("url");
-			String user = bundle.getString("user");
-			String password = bundle.getString("password");
+			properties.load(resUrl.openStream());
+		} catch (IOException e) {
+			LOG.error(e.getMessage());
+		}
+
+		try {
+			String url = properties.getProperty("url");
+			String user = properties.getProperty("user");
+			String password = properties.getProperty("password");
 			connection = DriverManager.getConnection(url, user, password);
 
 		} catch (SQLException e) {
