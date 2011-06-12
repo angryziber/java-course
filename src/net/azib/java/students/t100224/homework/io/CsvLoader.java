@@ -1,8 +1,7 @@
 package net.azib.java.students.t100224.homework.io;
 
-import net.azib.java.students.t100224.homework.interfaces.IResultsLoader;
-import net.azib.java.students.t100224.homework.interfaces.IResultsPrinter;
 import net.azib.java.students.t100224.homework.model.Athlete;
+import net.azib.java.students.t100224.homework.model.Decathlon;
 import net.azib.java.students.t100224.homework.model.Result;
 import org.apache.log4j.Logger;
 
@@ -13,19 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-public class CsvIO implements IResultsLoader, IResultsPrinter {
+public class CsvLoader implements ResultsLoader, ResultsPrinter {
 
 	private static final Logger LOG = Logger.getLogger("IO");
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
-	private String filename;
-
-	public CsvIO(String filename) {
-		this.filename = filename;
-	}
-
 	@Override
-	public List<Result> loadResults() {
+	public List<Result> loadResults(String filename) {
 		List<Result> results = new ArrayList<Result>();
 		try {
 			Scanner scanner = new Scanner(new File(filename))
@@ -41,7 +34,7 @@ public class CsvIO implements IResultsLoader, IResultsPrinter {
 	}
 
 	@Override
-	public void printResults(List<Result> results) {
+	public void printResults(List<Result> results, String filename) {
 		Writer fileWriter;
 		PrintWriter out;
 		try {
@@ -49,22 +42,7 @@ public class CsvIO implements IResultsLoader, IResultsPrinter {
 			out = new PrintWriter(fileWriter);
 
 			for (Result result : results) {
-				out.printf("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s \n",
-						results.indexOf(result) + 1,
-						result.getTotalScore(),
-						result.getAthlete().getName(),
-						result.getAthlete().getDateOfBirth(),
-						result.getAthlete().getCountry(),
-						result.getSprint100(),
-						result.getLongJump(),
-						result.getShotPut(),
-						result.getHighJump(),
-						result.getSprint400(),
-						result.getHurdles110(),
-						result.getDiscusThrow(),
-						result.getPoleVault(),
-						result.getJavelinThrow(),
-						result.getRace1500());
+				//TODO
 			}
 			out.close();
 		} catch (IOException e) {
@@ -75,38 +53,23 @@ public class CsvIO implements IResultsLoader, IResultsPrinter {
 	public static Result readLine(String line) {
 		Result result = new Result();
 		Athlete athlete = new Athlete();
+		Map<String, Float> performances = new HashMap<String, Float>();
 		//	String TIME_FORMAT = "([0-9]{1,2}\\:)*[0-5][0-9]\\.[0-9][0-9]";
 		String time;
 		Scanner lineScanner = new Scanner(line).useDelimiter(", *");
 		lineScanner.useLocale(Locale.US); //used the "Locale.US" to make sure that the PERIOD is used as decimal separator.
-		athlete.setName(lineScanner.next());
+
 		try {
+			athlete.setName(lineScanner.next());
 			athlete.setDateOfBirth(DATE_FORMAT.parse(lineScanner.next()));
+			athlete.setCountry(lineScanner.next());
+			for (int i = 0; i < Decathlon.Event.values().length; i++) {
+				performances.put(Decathlon.Event.values()[i].name(), lineScanner.nextFloat());
+			}
+
 		} catch (ParseException e) {
 			LOG.error("Invalid date format");
 		}
-		athlete.setCountry(lineScanner.next());
-		try {
-			result.setSprint100(lineScanner.nextFloat());
-			result.setLongJump(lineScanner.nextFloat());
-			result.setShotPut(lineScanner.nextFloat());
-			result.setHighJump(lineScanner.nextFloat());
-
-			time = lineScanner.next();
-			result.setSprint400(convertToSeconds(time));
-
-			result.setHurdles110(lineScanner.nextFloat());
-			result.setDiscusThrow(lineScanner.nextFloat());
-			result.setPoleVault(lineScanner.nextFloat());
-			result.setJavelinThrow(lineScanner.nextFloat());
-
-			time = lineScanner.next();
-			result.setRace1500(convertToSeconds(time));
-
-		} catch (InputMismatchException e) {
-			e.printStackTrace();
-		}
-
 		result.setAthlete(athlete);
 		return result;
 	}
