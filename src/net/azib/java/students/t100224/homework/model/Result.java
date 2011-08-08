@@ -35,7 +35,6 @@ public class Result implements Comparable<Result> {
 		this.athlete = athlete;
 	}
 
-	@Override
 	public int compareTo(Result result) {
 		return -new Integer(getTotalScore()).compareTo(result.getTotalScore());
 	}
