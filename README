@@ -1,0 +1,14 @@
+This repository contains code written by tutor and students during the 
+IAG0040 Java and OOP course by Anton Keks in Tallinn Technical University (TTÜ).
+
+The code was moved from Subversion to Git after a server crash where svn was hosted.
+
+Master branch contains code from the 2011. Other years have their corresponding branches.
+
+The goal of the course is to teach:
+* Java programming language & libraries
+* Principles of proper software design
+* Agile software development methods (esp. XP practices)
+* Working on real-world software projects
+
+Take a look at the net.azib.java.lessons packages under src/ and test/.
